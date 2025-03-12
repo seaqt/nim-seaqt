@@ -12,15 +12,6 @@
 #include <QUntypedPropertyData>
 #include <qproperty.h>
 #include "gen_qproperty.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPropertyBindingSourceLocation* QPropertyBindingSourceLocation_new() {
 	return new QPropertyBindingSourceLocation();
 }

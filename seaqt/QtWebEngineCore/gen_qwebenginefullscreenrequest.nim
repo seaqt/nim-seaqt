@@ -44,26 +44,26 @@ export
 type cQWebEngineFullScreenRequest*{.exportc: "QWebEngineFullScreenRequest", incompleteStruct.} = object
 
 proc fcQWebEngineFullScreenRequest_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineFullScreenRequest_operatorAssign".}
-proc fcQWebEngineFullScreenRequest_reject(self: pointer, ): void {.importc: "QWebEngineFullScreenRequest_reject".}
-proc fcQWebEngineFullScreenRequest_accept(self: pointer, ): void {.importc: "QWebEngineFullScreenRequest_accept".}
-proc fcQWebEngineFullScreenRequest_toggleOn(self: pointer, ): bool {.importc: "QWebEngineFullScreenRequest_toggleOn".}
-proc fcQWebEngineFullScreenRequest_origin(self: pointer, ): pointer {.importc: "QWebEngineFullScreenRequest_origin".}
+proc fcQWebEngineFullScreenRequest_reject(self: pointer): void {.importc: "QWebEngineFullScreenRequest_reject".}
+proc fcQWebEngineFullScreenRequest_accept(self: pointer): void {.importc: "QWebEngineFullScreenRequest_accept".}
+proc fcQWebEngineFullScreenRequest_toggleOn(self: pointer): bool {.importc: "QWebEngineFullScreenRequest_toggleOn".}
+proc fcQWebEngineFullScreenRequest_origin(self: pointer): pointer {.importc: "QWebEngineFullScreenRequest_origin".}
 proc fcQWebEngineFullScreenRequest_new(other: pointer): ptr cQWebEngineFullScreenRequest {.importc: "QWebEngineFullScreenRequest_new".}
 proc fcQWebEngineFullScreenRequest_staticMetaObject(): pointer {.importc: "QWebEngineFullScreenRequest_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, other: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
   fcQWebEngineFullScreenRequest_operatorAssign(self.h, other.h)
 
-proc reject*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, ): void =
+proc reject*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
   fcQWebEngineFullScreenRequest_reject(self.h)
 
-proc accept*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, ): void =
+proc accept*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
   fcQWebEngineFullScreenRequest_accept(self.h)
 
-proc toggleOn*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, ): bool =
+proc toggleOn*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): bool =
   fcQWebEngineFullScreenRequest_toggleOn(self.h)
 
-proc origin*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, ): gen_qurl_types.QUrl =
+proc origin*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineFullScreenRequest_origin(self.h), owned: true)
 
 proc create*(T: type gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest,

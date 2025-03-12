@@ -28,6 +28,7 @@ QTextBoundaryFinder* QTextBoundaryFinder_new3(int type, struct miqt_string strin
 QTextBoundaryFinder* QTextBoundaryFinder_new4(int type, QChar* chars, ptrdiff_t length);
 QTextBoundaryFinder* QTextBoundaryFinder_new5(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer);
 QTextBoundaryFinder* QTextBoundaryFinder_new6(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize);
+
 void QTextBoundaryFinder_operatorAssign(QTextBoundaryFinder* self, QTextBoundaryFinder* other);
 bool QTextBoundaryFinder_isValid(const QTextBoundaryFinder* self);
 int QTextBoundaryFinder_type(const QTextBoundaryFinder* self);
@@ -40,6 +41,7 @@ ptrdiff_t QTextBoundaryFinder_toNextBoundary(QTextBoundaryFinder* self);
 ptrdiff_t QTextBoundaryFinder_toPreviousBoundary(QTextBoundaryFinder* self);
 bool QTextBoundaryFinder_isAtBoundary(const QTextBoundaryFinder* self);
 int QTextBoundaryFinder_boundaryReasons(const QTextBoundaryFinder* self);
+
 void QTextBoundaryFinder_delete(QTextBoundaryFinder* self);
 
 #ifdef __cplusplus

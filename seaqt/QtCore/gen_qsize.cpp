@@ -4,15 +4,6 @@
 #include <QSizeF>
 #include <qsize.h>
 #include "gen_qsize.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSize* QSize_new() {
 	return new QSize();
 }

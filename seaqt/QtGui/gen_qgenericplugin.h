@@ -32,22 +32,29 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QGenericPlugin_VTable {
-	void (*destructor)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self);
-	QMetaObject* (*metaObject)(struct QGenericPlugin_VTable* vtbl, const QGenericPlugin* self);
-	void* (*metacast)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, const char* param1);
-	int (*metacall)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, int param1, int param2, void** param3);
-	QObject* (*create)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, struct miqt_string name, struct miqt_string spec);
-	bool (*event)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QEvent* event);
-	bool (*eventFilter)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QTimerEvent* event);
-	void (*childEvent)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QChildEvent* event);
-	void (*customEvent)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QEvent* event);
-	void (*connectNotify)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QGenericPlugin_VTable* vtbl, QGenericPlugin* self, QMetaMethod* signal);
-};
-QGenericPlugin* QGenericPlugin_new(struct QGenericPlugin_VTable* vtbl);
-QGenericPlugin* QGenericPlugin_new2(struct QGenericPlugin_VTable* vtbl, QObject* parent);
+typedef struct VirtualQGenericPlugin VirtualQGenericPlugin;
+typedef struct QGenericPlugin_VTable{
+	void (*destructor)(VirtualQGenericPlugin* self);
+	QMetaObject* (*metaObject)(const VirtualQGenericPlugin* self);
+	void* (*metacast)(VirtualQGenericPlugin* self, const char* param1);
+	int (*metacall)(VirtualQGenericPlugin* self, int param1, int param2, void** param3);
+	QObject* (*create)(VirtualQGenericPlugin* self, struct miqt_string name, struct miqt_string spec);
+	bool (*event)(VirtualQGenericPlugin* self, QEvent* event);
+	bool (*eventFilter)(VirtualQGenericPlugin* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQGenericPlugin* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQGenericPlugin* self, QChildEvent* event);
+	void (*customEvent)(VirtualQGenericPlugin* self, QEvent* event);
+	void (*connectNotify)(VirtualQGenericPlugin* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQGenericPlugin* self, QMetaMethod* signal);
+}QGenericPlugin_VTable;
+
+const QGenericPlugin_VTable* QGenericPlugin_vtbl(const VirtualQGenericPlugin* self);
+void* QGenericPlugin_vdata(const VirtualQGenericPlugin* self);
+void QGenericPlugin_setVdata(VirtualQGenericPlugin* self, void* vdata);
+
+VirtualQGenericPlugin* QGenericPlugin_new(const QGenericPlugin_VTable* vtbl, void* vdata);
+VirtualQGenericPlugin* QGenericPlugin_new2(const QGenericPlugin_VTable* vtbl, void* vdata, QObject* parent);
+
 void QGenericPlugin_virtbase(QGenericPlugin* src, QObject** outptr_QObject);
 QMetaObject* QGenericPlugin_metaObject(const QGenericPlugin* self);
 void* QGenericPlugin_metacast(QGenericPlugin* self, const char* param1);
@@ -56,21 +63,24 @@ struct miqt_string QGenericPlugin_tr(const char* s);
 QObject* QGenericPlugin_create(QGenericPlugin* self, struct miqt_string name, struct miqt_string spec);
 struct miqt_string QGenericPlugin_tr2(const char* s, const char* c);
 struct miqt_string QGenericPlugin_tr3(const char* s, const char* c, int n);
-QMetaObject* QGenericPlugin_virtualbase_metaObject(const void* self);
-void* QGenericPlugin_virtualbase_metacast(void* self, const char* param1);
-int QGenericPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-QObject* QGenericPlugin_virtualbase_create(void* self, struct miqt_string name, struct miqt_string spec);
-bool QGenericPlugin_virtualbase_event(void* self, QEvent* event);
-bool QGenericPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QGenericPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QGenericPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
-void QGenericPlugin_virtualbase_customEvent(void* self, QEvent* event);
-void QGenericPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QGenericPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QGenericPlugin_protectedbase_sender(const void* self);
-int QGenericPlugin_protectedbase_senderSignalIndex(const void* self);
-int QGenericPlugin_protectedbase_receivers(const void* self, const char* signal);
-bool QGenericPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QGenericPlugin_virtualbase_metaObject(const VirtualQGenericPlugin* self);
+void* QGenericPlugin_virtualbase_metacast(VirtualQGenericPlugin* self, const char* param1);
+int QGenericPlugin_virtualbase_metacall(VirtualQGenericPlugin* self, int param1, int param2, void** param3);
+QObject* QGenericPlugin_virtualbase_create(VirtualQGenericPlugin* self, struct miqt_string name, struct miqt_string spec);
+bool QGenericPlugin_virtualbase_event(VirtualQGenericPlugin* self, QEvent* event);
+bool QGenericPlugin_virtualbase_eventFilter(VirtualQGenericPlugin* self, QObject* watched, QEvent* event);
+void QGenericPlugin_virtualbase_timerEvent(VirtualQGenericPlugin* self, QTimerEvent* event);
+void QGenericPlugin_virtualbase_childEvent(VirtualQGenericPlugin* self, QChildEvent* event);
+void QGenericPlugin_virtualbase_customEvent(VirtualQGenericPlugin* self, QEvent* event);
+void QGenericPlugin_virtualbase_connectNotify(VirtualQGenericPlugin* self, QMetaMethod* signal);
+void QGenericPlugin_virtualbase_disconnectNotify(VirtualQGenericPlugin* self, QMetaMethod* signal);
+
+QObject* QGenericPlugin_protectedbase_sender(const VirtualQGenericPlugin* self);
+int QGenericPlugin_protectedbase_senderSignalIndex(const VirtualQGenericPlugin* self);
+int QGenericPlugin_protectedbase_receivers(const VirtualQGenericPlugin* self, const char* signal);
+bool QGenericPlugin_protectedbase_isSignalConnected(const VirtualQGenericPlugin* self, QMetaMethod* signal);
+
 const QMetaObject* QGenericPlugin_staticMetaObject();
 void QGenericPlugin_delete(QGenericPlugin* self);
 

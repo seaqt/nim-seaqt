@@ -39,39 +39,32 @@
 #include <QWidget>
 #include <qdial.h>
 #include "gen_qdial.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDial final : public QDial {
-	struct QDial_VTable* vtbl;
+	const QDial_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDial_VTable* QDial_vtbl(const VirtualQDial* self);
+	friend void* QDial_vdata(const VirtualQDial* self);
+	friend void QDial_setVdata(VirtualQDial* self, void* vdata);
 
-	VirtualQDial(struct QDial_VTable* vtbl, QWidget* parent): QDial(parent), vtbl(vtbl) {};
-	VirtualQDial(struct QDial_VTable* vtbl): QDial(), vtbl(vtbl) {};
+	VirtualQDial(const QDial_VTable* vtbl, void* vdata, QWidget* parent): QDial(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDial(const QDial_VTable* vtbl, void* vdata): QDial(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDial() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDial::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDial_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDial_virtualbase_metaObject(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDial::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDial_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDial_virtualbase_metacast(VirtualQDial* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDial::qt_metacall(param1, param2, param3);
@@ -97,46 +89,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDial_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDial_virtualbase_metacall(VirtualQDial* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QDial::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDial_virtualbase_sizeHint(const void* self);
+	friend QSize* QDial_virtualbase_sizeHint(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QDial::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDial_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QDial_virtualbase_minimumSizeHint(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QDial::event(e);
@@ -144,14 +133,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDial_virtualbase_event(void* self, QEvent* e);
+	friend bool QDial_virtualbase_event(VirtualQDial* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* re) override {
 		if (vtbl->resizeEvent == 0) {
 			QDial::resizeEvent(re);
@@ -160,13 +148,12 @@ public:
 
 		QResizeEvent* sigval1 = re;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_resizeEvent(void* self, QResizeEvent* re);
+	friend void QDial_virtualbase_resizeEvent(VirtualQDial* self, QResizeEvent* re);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* pe) override {
 		if (vtbl->paintEvent == 0) {
 			QDial::paintEvent(pe);
@@ -175,13 +162,12 @@ public:
 
 		QPaintEvent* sigval1 = pe;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_paintEvent(void* self, QPaintEvent* pe);
+	friend void QDial_virtualbase_paintEvent(VirtualQDial* self, QPaintEvent* pe);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* me) override {
 		if (vtbl->mousePressEvent == 0) {
 			QDial::mousePressEvent(me);
@@ -190,13 +176,12 @@ public:
 
 		QMouseEvent* sigval1 = me;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_mousePressEvent(void* self, QMouseEvent* me);
+	friend void QDial_virtualbase_mousePressEvent(VirtualQDial* self, QMouseEvent* me);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* me) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QDial::mouseReleaseEvent(me);
@@ -205,13 +190,12 @@ public:
 
 		QMouseEvent* sigval1 = me;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* me);
+	friend void QDial_virtualbase_mouseReleaseEvent(VirtualQDial* self, QMouseEvent* me);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* me) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QDial::mouseMoveEvent(me);
@@ -220,13 +204,12 @@ public:
 
 		QMouseEvent* sigval1 = me;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_mouseMoveEvent(void* self, QMouseEvent* me);
+	friend void QDial_virtualbase_mouseMoveEvent(VirtualQDial* self, QMouseEvent* me);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sliderChange(QAbstractSlider::SliderChange change) override {
 		if (vtbl->sliderChange == 0) {
 			QDial::sliderChange(change);
@@ -236,13 +219,12 @@ public:
 		QAbstractSlider::SliderChange change_ret = change;
 		int sigval1 = static_cast<int>(change_ret);
 
-		vtbl->sliderChange(vtbl, this, sigval1);
+		vtbl->sliderChange(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_sliderChange(void* self, int change);
+	friend void QDial_virtualbase_sliderChange(VirtualQDial* self, int change);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionSlider* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QDial::initStyleOption(option);
@@ -251,13 +233,12 @@ public:
 
 		QStyleOptionSlider* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_initStyleOption(const void* self, QStyleOptionSlider* option);
+	friend void QDial_virtualbase_initStyleOption(const VirtualQDial* self, QStyleOptionSlider* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* ev) override {
 		if (vtbl->keyPressEvent == 0) {
 			QDial::keyPressEvent(ev);
@@ -266,13 +247,12 @@ public:
 
 		QKeyEvent* sigval1 = ev;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_keyPressEvent(void* self, QKeyEvent* ev);
+	friend void QDial_virtualbase_keyPressEvent(VirtualQDial* self, QKeyEvent* ev);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QDial::timerEvent(param1);
@@ -281,13 +261,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QDial_virtualbase_timerEvent(VirtualQDial* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QDial::wheelEvent(e);
@@ -296,13 +275,12 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QDial_virtualbase_wheelEvent(VirtualQDial* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QDial::changeEvent(e);
@@ -311,27 +289,25 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QDial_virtualbase_changeEvent(VirtualQDial* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QDial::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDial_virtualbase_devType(const void* self);
+	friend int QDial_virtualbase_devType(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QDial::setVisible(visible);
@@ -340,13 +316,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_setVisible(void* self, bool visible);
+	friend void QDial_virtualbase_setVisible(VirtualQDial* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QDial::heightForWidth(param1);
@@ -354,42 +329,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDial_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QDial_virtualbase_heightForWidth(const VirtualQDial* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QDial::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QDial_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QDial_virtualbase_hasHeightForWidth(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QDial::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QDial_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QDial_virtualbase_paintEngine(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QDial::mouseDoubleClickEvent(event);
@@ -398,13 +370,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QDial_virtualbase_mouseDoubleClickEvent(VirtualQDial* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QDial::keyReleaseEvent(event);
@@ -413,13 +384,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QDial_virtualbase_keyReleaseEvent(VirtualQDial* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QDial::focusInEvent(event);
@@ -428,13 +398,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QDial_virtualbase_focusInEvent(VirtualQDial* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QDial::focusOutEvent(event);
@@ -443,13 +412,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QDial_virtualbase_focusOutEvent(VirtualQDial* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QDial::enterEvent(event);
@@ -458,13 +426,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QDial_virtualbase_enterEvent(VirtualQDial* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QDial::leaveEvent(event);
@@ -473,13 +440,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QDial_virtualbase_leaveEvent(VirtualQDial* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QDial::moveEvent(event);
@@ -488,13 +454,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QDial_virtualbase_moveEvent(VirtualQDial* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QDial::closeEvent(event);
@@ -503,13 +468,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QDial_virtualbase_closeEvent(VirtualQDial* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QDial::contextMenuEvent(event);
@@ -518,13 +482,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QDial_virtualbase_contextMenuEvent(VirtualQDial* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QDial::tabletEvent(event);
@@ -533,13 +496,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QDial_virtualbase_tabletEvent(VirtualQDial* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QDial::actionEvent(event);
@@ -548,13 +510,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QDial_virtualbase_actionEvent(VirtualQDial* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QDial::dragEnterEvent(event);
@@ -563,13 +524,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QDial_virtualbase_dragEnterEvent(VirtualQDial* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QDial::dragMoveEvent(event);
@@ -578,13 +538,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QDial_virtualbase_dragMoveEvent(VirtualQDial* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QDial::dragLeaveEvent(event);
@@ -593,13 +552,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QDial_virtualbase_dragLeaveEvent(VirtualQDial* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QDial::dropEvent(event);
@@ -608,13 +566,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QDial_virtualbase_dropEvent(VirtualQDial* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QDial::showEvent(event);
@@ -623,13 +580,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QDial_virtualbase_showEvent(VirtualQDial* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QDial::hideEvent(event);
@@ -638,13 +594,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QDial_virtualbase_hideEvent(VirtualQDial* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QDial::nativeEvent(eventType, message, result);
@@ -660,14 +615,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QDial_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QDial_virtualbase_nativeEvent(VirtualQDial* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QDial::metric(param1);
@@ -676,14 +630,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDial_virtualbase_metric(const void* self, int param1);
+	friend int QDial_virtualbase_metric(const VirtualQDial* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QDial::initPainter(painter);
@@ -692,13 +645,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QDial_virtualbase_initPainter(const VirtualQDial* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QDial::redirected(offset);
@@ -706,28 +658,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QDial_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QDial_virtualbase_redirected(const VirtualQDial* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QDial::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QDial_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QDial_virtualbase_sharedPainter(const VirtualQDial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QDial::inputMethodEvent(param1);
@@ -736,13 +686,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QDial_virtualbase_inputMethodEvent(VirtualQDial* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QDial::inputMethodQuery(param1);
@@ -751,16 +700,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QDial_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QDial_virtualbase_inputMethodQuery(const VirtualQDial* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QDial::focusNextPrevChild(next);
@@ -768,14 +716,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDial_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QDial_virtualbase_focusNextPrevChild(VirtualQDial* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDial::eventFilter(watched, event);
@@ -784,14 +731,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDial_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDial_virtualbase_eventFilter(VirtualQDial* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDial::childEvent(event);
@@ -800,13 +746,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDial_virtualbase_childEvent(VirtualQDial* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDial::customEvent(event);
@@ -815,13 +760,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDial_virtualbase_customEvent(VirtualQDial* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDial::connectNotify(signal);
@@ -832,13 +776,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDial_virtualbase_connectNotify(VirtualQDial* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDial::disconnectNotify(signal);
@@ -849,32 +792,32 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDial_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDial_virtualbase_disconnectNotify(VirtualQDial* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDial_protectedbase_setRepeatAction(void* self, int action);
-	friend int QDial_protectedbase_repeatAction(const void* self);
-	friend void QDial_protectedbase_updateMicroFocus(void* self);
-	friend void QDial_protectedbase_create(void* self);
-	friend void QDial_protectedbase_destroy(void* self);
-	friend bool QDial_protectedbase_focusNextChild(void* self);
-	friend bool QDial_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QDial_protectedbase_sender(const void* self);
-	friend int QDial_protectedbase_senderSignalIndex(const void* self);
-	friend int QDial_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDial_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QDial_protectedbase_setRepeatAction(VirtualQDial* self, int action);
+	friend int QDial_protectedbase_repeatAction(const VirtualQDial* self);
+	friend void QDial_protectedbase_updateMicroFocus(VirtualQDial* self);
+	friend void QDial_protectedbase_create(VirtualQDial* self);
+	friend void QDial_protectedbase_destroy(VirtualQDial* self);
+	friend bool QDial_protectedbase_focusNextChild(VirtualQDial* self);
+	friend bool QDial_protectedbase_focusPreviousChild(VirtualQDial* self);
+	friend QObject* QDial_protectedbase_sender(const VirtualQDial* self);
+	friend int QDial_protectedbase_senderSignalIndex(const VirtualQDial* self);
+	friend int QDial_protectedbase_receivers(const VirtualQDial* self, const char* signal);
+	friend bool QDial_protectedbase_isSignalConnected(const VirtualQDial* self, QMetaMethod* signal);
 };
 
-QDial* QDial_new(struct QDial_VTable* vtbl, QWidget* parent) {
-	return new VirtualQDial(vtbl, parent);
+VirtualQDial* QDial_new(const QDial_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQDial(vtbl, vdata, parent);
 }
 
-QDial* QDial_new2(struct QDial_VTable* vtbl) {
-	return new VirtualQDial(vtbl);
+VirtualQDial* QDial_new2(const QDial_VTable* vtbl, void* vdata) {
+	return new VirtualQDial(vtbl, vdata);
 }
 
 void QDial_virtbase(QDial* src, QAbstractSlider** outptr_QAbstractSlider) {
@@ -963,396 +906,316 @@ struct miqt_string QDial_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QDial_virtualbase_metaObject(const void* self) {
+QMetaObject* QDial_virtualbase_metaObject(const VirtualQDial* self) {
 
-	return (QMetaObject*) ( (const VirtualQDial*)(self) )->QDial::metaObject();
-
+	return (QMetaObject*) self->QDial::metaObject();
 }
 
-void* QDial_virtualbase_metacast(void* self, const char* param1) {
+void* QDial_virtualbase_metacast(VirtualQDial* self, const char* param1) {
 
-	return ( (VirtualQDial*)(self) )->QDial::qt_metacast(param1);
-
+	return self->QDial::qt_metacast(param1);
 }
 
-int QDial_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDial_virtualbase_metacall(VirtualQDial* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDial*)(self) )->QDial::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDial::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QDial_virtualbase_sizeHint(const void* self) {
+QSize* QDial_virtualbase_sizeHint(const VirtualQDial* self) {
 
-	return new QSize(( (const VirtualQDial*)(self) )->QDial::sizeHint());
-
+	return new QSize(self->QDial::sizeHint());
 }
 
-QSize* QDial_virtualbase_minimumSizeHint(const void* self) {
+QSize* QDial_virtualbase_minimumSizeHint(const VirtualQDial* self) {
 
-	return new QSize(( (const VirtualQDial*)(self) )->QDial::minimumSizeHint());
-
+	return new QSize(self->QDial::minimumSizeHint());
 }
 
-bool QDial_virtualbase_event(void* self, QEvent* e) {
+bool QDial_virtualbase_event(VirtualQDial* self, QEvent* e) {
 
-	return ( (VirtualQDial*)(self) )->QDial::event(e);
-
+	return self->QDial::event(e);
 }
 
-void QDial_virtualbase_resizeEvent(void* self, QResizeEvent* re) {
+void QDial_virtualbase_resizeEvent(VirtualQDial* self, QResizeEvent* re) {
 
-	( (VirtualQDial*)(self) )->QDial::resizeEvent(re);
-
+	self->QDial::resizeEvent(re);
 }
 
-void QDial_virtualbase_paintEvent(void* self, QPaintEvent* pe) {
+void QDial_virtualbase_paintEvent(VirtualQDial* self, QPaintEvent* pe) {
 
-	( (VirtualQDial*)(self) )->QDial::paintEvent(pe);
-
+	self->QDial::paintEvent(pe);
 }
 
-void QDial_virtualbase_mousePressEvent(void* self, QMouseEvent* me) {
+void QDial_virtualbase_mousePressEvent(VirtualQDial* self, QMouseEvent* me) {
 
-	( (VirtualQDial*)(self) )->QDial::mousePressEvent(me);
-
+	self->QDial::mousePressEvent(me);
 }
 
-void QDial_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* me) {
+void QDial_virtualbase_mouseReleaseEvent(VirtualQDial* self, QMouseEvent* me) {
 
-	( (VirtualQDial*)(self) )->QDial::mouseReleaseEvent(me);
-
+	self->QDial::mouseReleaseEvent(me);
 }
 
-void QDial_virtualbase_mouseMoveEvent(void* self, QMouseEvent* me) {
+void QDial_virtualbase_mouseMoveEvent(VirtualQDial* self, QMouseEvent* me) {
 
-	( (VirtualQDial*)(self) )->QDial::mouseMoveEvent(me);
-
+	self->QDial::mouseMoveEvent(me);
 }
 
-void QDial_virtualbase_sliderChange(void* self, int change) {
+void QDial_virtualbase_sliderChange(VirtualQDial* self, int change) {
 
-	( (VirtualQDial*)(self) )->QDial::sliderChange(static_cast<VirtualQDial::SliderChange>(change));
-
+	self->QDial::sliderChange(static_cast<VirtualQDial::SliderChange>(change));
 }
 
-void QDial_virtualbase_initStyleOption(const void* self, QStyleOptionSlider* option) {
+void QDial_virtualbase_initStyleOption(const VirtualQDial* self, QStyleOptionSlider* option) {
 
-	( (const VirtualQDial*)(self) )->QDial::initStyleOption(option);
-
+	self->QDial::initStyleOption(option);
 }
 
-void QDial_virtualbase_keyPressEvent(void* self, QKeyEvent* ev) {
+void QDial_virtualbase_keyPressEvent(VirtualQDial* self, QKeyEvent* ev) {
 
-	( (VirtualQDial*)(self) )->QDial::keyPressEvent(ev);
-
+	self->QDial::keyPressEvent(ev);
 }
 
-void QDial_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QDial_virtualbase_timerEvent(VirtualQDial* self, QTimerEvent* param1) {
 
-	( (VirtualQDial*)(self) )->QDial::timerEvent(param1);
-
+	self->QDial::timerEvent(param1);
 }
 
-void QDial_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QDial_virtualbase_wheelEvent(VirtualQDial* self, QWheelEvent* e) {
 
-	( (VirtualQDial*)(self) )->QDial::wheelEvent(e);
-
+	self->QDial::wheelEvent(e);
 }
 
-void QDial_virtualbase_changeEvent(void* self, QEvent* e) {
+void QDial_virtualbase_changeEvent(VirtualQDial* self, QEvent* e) {
 
-	( (VirtualQDial*)(self) )->QDial::changeEvent(e);
-
+	self->QDial::changeEvent(e);
 }
 
-int QDial_virtualbase_devType(const void* self) {
+int QDial_virtualbase_devType(const VirtualQDial* self) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::devType();
-
+	return self->QDial::devType();
 }
 
-void QDial_virtualbase_setVisible(void* self, bool visible) {
+void QDial_virtualbase_setVisible(VirtualQDial* self, bool visible) {
 
-	( (VirtualQDial*)(self) )->QDial::setVisible(visible);
-
+	self->QDial::setVisible(visible);
 }
 
-int QDial_virtualbase_heightForWidth(const void* self, int param1) {
+int QDial_virtualbase_heightForWidth(const VirtualQDial* self, int param1) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::heightForWidth(static_cast<int>(param1));
-
+	return self->QDial::heightForWidth(static_cast<int>(param1));
 }
 
-bool QDial_virtualbase_hasHeightForWidth(const void* self) {
+bool QDial_virtualbase_hasHeightForWidth(const VirtualQDial* self) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::hasHeightForWidth();
-
+	return self->QDial::hasHeightForWidth();
 }
 
-QPaintEngine* QDial_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QDial_virtualbase_paintEngine(const VirtualQDial* self) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::paintEngine();
-
+	return self->QDial::paintEngine();
 }
 
-void QDial_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QDial_virtualbase_mouseDoubleClickEvent(VirtualQDial* self, QMouseEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::mouseDoubleClickEvent(event);
-
+	self->QDial::mouseDoubleClickEvent(event);
 }
 
-void QDial_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QDial_virtualbase_keyReleaseEvent(VirtualQDial* self, QKeyEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::keyReleaseEvent(event);
-
+	self->QDial::keyReleaseEvent(event);
 }
 
-void QDial_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QDial_virtualbase_focusInEvent(VirtualQDial* self, QFocusEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::focusInEvent(event);
-
+	self->QDial::focusInEvent(event);
 }
 
-void QDial_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QDial_virtualbase_focusOutEvent(VirtualQDial* self, QFocusEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::focusOutEvent(event);
-
+	self->QDial::focusOutEvent(event);
 }
 
-void QDial_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QDial_virtualbase_enterEvent(VirtualQDial* self, QEnterEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::enterEvent(event);
-
+	self->QDial::enterEvent(event);
 }
 
-void QDial_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QDial_virtualbase_leaveEvent(VirtualQDial* self, QEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::leaveEvent(event);
-
+	self->QDial::leaveEvent(event);
 }
 
-void QDial_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QDial_virtualbase_moveEvent(VirtualQDial* self, QMoveEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::moveEvent(event);
-
+	self->QDial::moveEvent(event);
 }
 
-void QDial_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QDial_virtualbase_closeEvent(VirtualQDial* self, QCloseEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::closeEvent(event);
-
+	self->QDial::closeEvent(event);
 }
 
-void QDial_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QDial_virtualbase_contextMenuEvent(VirtualQDial* self, QContextMenuEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::contextMenuEvent(event);
-
+	self->QDial::contextMenuEvent(event);
 }
 
-void QDial_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QDial_virtualbase_tabletEvent(VirtualQDial* self, QTabletEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::tabletEvent(event);
-
+	self->QDial::tabletEvent(event);
 }
 
-void QDial_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QDial_virtualbase_actionEvent(VirtualQDial* self, QActionEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::actionEvent(event);
-
+	self->QDial::actionEvent(event);
 }
 
-void QDial_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QDial_virtualbase_dragEnterEvent(VirtualQDial* self, QDragEnterEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::dragEnterEvent(event);
-
+	self->QDial::dragEnterEvent(event);
 }
 
-void QDial_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QDial_virtualbase_dragMoveEvent(VirtualQDial* self, QDragMoveEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::dragMoveEvent(event);
-
+	self->QDial::dragMoveEvent(event);
 }
 
-void QDial_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QDial_virtualbase_dragLeaveEvent(VirtualQDial* self, QDragLeaveEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::dragLeaveEvent(event);
-
+	self->QDial::dragLeaveEvent(event);
 }
 
-void QDial_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QDial_virtualbase_dropEvent(VirtualQDial* self, QDropEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::dropEvent(event);
-
+	self->QDial::dropEvent(event);
 }
 
-void QDial_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QDial_virtualbase_showEvent(VirtualQDial* self, QShowEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::showEvent(event);
-
+	self->QDial::showEvent(event);
 }
 
-void QDial_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QDial_virtualbase_hideEvent(VirtualQDial* self, QHideEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::hideEvent(event);
-
+	self->QDial::hideEvent(event);
 }
 
-bool QDial_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QDial_virtualbase_nativeEvent(VirtualQDial* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQDial*)(self) )->QDial::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QDial::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QDial_virtualbase_metric(const void* self, int param1) {
+int QDial_virtualbase_metric(const VirtualQDial* self, int param1) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::metric(static_cast<VirtualQDial::PaintDeviceMetric>(param1));
-
+	return self->QDial::metric(static_cast<VirtualQDial::PaintDeviceMetric>(param1));
 }
 
-void QDial_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QDial_virtualbase_initPainter(const VirtualQDial* self, QPainter* painter) {
 
-	( (const VirtualQDial*)(self) )->QDial::initPainter(painter);
-
+	self->QDial::initPainter(painter);
 }
 
-QPaintDevice* QDial_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QDial_virtualbase_redirected(const VirtualQDial* self, QPoint* offset) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::redirected(offset);
-
+	return self->QDial::redirected(offset);
 }
 
-QPainter* QDial_virtualbase_sharedPainter(const void* self) {
+QPainter* QDial_virtualbase_sharedPainter(const VirtualQDial* self) {
 
-	return ( (const VirtualQDial*)(self) )->QDial::sharedPainter();
-
+	return self->QDial::sharedPainter();
 }
 
-void QDial_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QDial_virtualbase_inputMethodEvent(VirtualQDial* self, QInputMethodEvent* param1) {
 
-	( (VirtualQDial*)(self) )->QDial::inputMethodEvent(param1);
-
+	self->QDial::inputMethodEvent(param1);
 }
 
-QVariant* QDial_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QDial_virtualbase_inputMethodQuery(const VirtualQDial* self, int param1) {
 
-	return new QVariant(( (const VirtualQDial*)(self) )->QDial::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QDial::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QDial_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QDial_virtualbase_focusNextPrevChild(VirtualQDial* self, bool next) {
 
-	return ( (VirtualQDial*)(self) )->QDial::focusNextPrevChild(next);
-
+	return self->QDial::focusNextPrevChild(next);
 }
 
-bool QDial_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDial_virtualbase_eventFilter(VirtualQDial* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDial*)(self) )->QDial::eventFilter(watched, event);
-
+	return self->QDial::eventFilter(watched, event);
 }
 
-void QDial_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDial_virtualbase_childEvent(VirtualQDial* self, QChildEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::childEvent(event);
-
+	self->QDial::childEvent(event);
 }
 
-void QDial_virtualbase_customEvent(void* self, QEvent* event) {
+void QDial_virtualbase_customEvent(VirtualQDial* self, QEvent* event) {
 
-	( (VirtualQDial*)(self) )->QDial::customEvent(event);
-
+	self->QDial::customEvent(event);
 }
 
-void QDial_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDial_virtualbase_connectNotify(VirtualQDial* self, QMetaMethod* signal) {
 
-	( (VirtualQDial*)(self) )->QDial::connectNotify(*signal);
-
+	self->QDial::connectNotify(*signal);
 }
 
-void QDial_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDial_virtualbase_disconnectNotify(VirtualQDial* self, QMetaMethod* signal) {
 
-	( (VirtualQDial*)(self) )->QDial::disconnectNotify(*signal);
-
+	self->QDial::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDial_staticMetaObject() { return &QDial::staticMetaObject; }
-void QDial_protectedbase_setRepeatAction(void* self, int action) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	self_cast->setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
 
+const QDial_VTable* QDial_vtbl(const VirtualQDial* self) { return self->vtbl; }
+void* QDial_vdata(const VirtualQDial* self) { return self->vdata; }
+void QDial_setVdata(VirtualQDial* self, void* vdata) { self->vdata = vdata; }
+
+void QDial_protectedbase_setRepeatAction(VirtualQDial* self, int action) {
+	self->setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
 }
 
-int QDial_protectedbase_repeatAction(const void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	VirtualQDial::SliderAction _ret = self_cast->repeatAction();
+int QDial_protectedbase_repeatAction(const VirtualQDial* self) {
+	VirtualQDial::SliderAction _ret = self->repeatAction();
 	return static_cast<int>(_ret);
-
 }
 
-void QDial_protectedbase_updateMicroFocus(void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QDial_protectedbase_updateMicroFocus(VirtualQDial* self) {
+	self->updateMicroFocus();
 }
 
-void QDial_protectedbase_create(void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	self_cast->create();
-
+void QDial_protectedbase_create(VirtualQDial* self) {
+	self->create();
 }
 
-void QDial_protectedbase_destroy(void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	self_cast->destroy();
-
+void QDial_protectedbase_destroy(VirtualQDial* self) {
+	self->destroy();
 }
 
-bool QDial_protectedbase_focusNextChild(void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QDial_protectedbase_focusNextChild(VirtualQDial* self) {
+	return self->focusNextChild();
 }
 
-bool QDial_protectedbase_focusPreviousChild(void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QDial_protectedbase_focusPreviousChild(VirtualQDial* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QDial_protectedbase_sender(const void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QDial_protectedbase_sender(const VirtualQDial* self) {
+	return self->sender();
 }
 
-int QDial_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDial_protectedbase_senderSignalIndex(const VirtualQDial* self) {
+	return self->senderSignalIndex();
 }
 
-int QDial_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDial_protectedbase_receivers(const VirtualQDial* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDial_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDial_protectedbase_isSignalConnected(const VirtualQDial* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDial_delete(QDial* self) {

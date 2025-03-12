@@ -13,39 +13,32 @@
 #include <QTimerEvent>
 #include <qtcpserver.h>
 #include "gen_qtcpserver.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQTcpServer final : public QTcpServer {
-	struct QTcpServer_VTable* vtbl;
+	const QTcpServer_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTcpServer_VTable* QTcpServer_vtbl(const VirtualQTcpServer* self);
+	friend void* QTcpServer_vdata(const VirtualQTcpServer* self);
+	friend void QTcpServer_setVdata(VirtualQTcpServer* self, void* vdata);
 
-	VirtualQTcpServer(struct QTcpServer_VTable* vtbl): QTcpServer(), vtbl(vtbl) {};
-	VirtualQTcpServer(struct QTcpServer_VTable* vtbl, QObject* parent): QTcpServer(parent), vtbl(vtbl) {};
+	VirtualQTcpServer(const QTcpServer_VTable* vtbl, void* vdata): QTcpServer(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTcpServer(const QTcpServer_VTable* vtbl, void* vdata, QObject* parent): QTcpServer(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTcpServer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTcpServer() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTcpServer::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTcpServer_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTcpServer_virtualbase_metaObject(const VirtualQTcpServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTcpServer::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTcpServer_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTcpServer_virtualbase_metacast(VirtualQTcpServer* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTcpServer::qt_metacall(param1, param2, param3);
@@ -71,42 +63,39 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTcpServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTcpServer_virtualbase_metacall(VirtualQTcpServer* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasPendingConnections() const override {
 		if (vtbl->hasPendingConnections == 0) {
 			return QTcpServer::hasPendingConnections();
 		}
 
 
-		bool callback_return_value = vtbl->hasPendingConnections(vtbl, this);
+		bool callback_return_value = vtbl->hasPendingConnections(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpServer_virtualbase_hasPendingConnections(const void* self);
+	friend bool QTcpServer_virtualbase_hasPendingConnections(const VirtualQTcpServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QTcpSocket* nextPendingConnection() override {
 		if (vtbl->nextPendingConnection == 0) {
 			return QTcpServer::nextPendingConnection();
 		}
 
 
-		QTcpSocket* callback_return_value = vtbl->nextPendingConnection(vtbl, this);
+		QTcpSocket* callback_return_value = vtbl->nextPendingConnection(this);
 
 		return callback_return_value;
 	}
 
-	friend QTcpSocket* QTcpServer_virtualbase_nextPendingConnection(void* self);
+	friend QTcpSocket* QTcpServer_virtualbase_nextPendingConnection(VirtualQTcpServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void incomingConnection(qintptr handle) override {
 		if (vtbl->incomingConnection == 0) {
 			QTcpServer::incomingConnection(handle);
@@ -116,13 +105,12 @@ public:
 		qintptr handle_ret = handle;
 		intptr_t sigval1 = (intptr_t)(handle_ret);
 
-		vtbl->incomingConnection(vtbl, this, sigval1);
+		vtbl->incomingConnection(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_incomingConnection(void* self, intptr_t handle);
+	friend void QTcpServer_virtualbase_incomingConnection(VirtualQTcpServer* self, intptr_t handle);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTcpServer::event(event);
@@ -130,14 +118,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpServer_virtualbase_event(void* self, QEvent* event);
+	friend bool QTcpServer_virtualbase_event(VirtualQTcpServer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTcpServer::eventFilter(watched, event);
@@ -146,14 +133,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTcpServer_virtualbase_eventFilter(VirtualQTcpServer* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTcpServer::timerEvent(event);
@@ -162,13 +148,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTcpServer_virtualbase_timerEvent(VirtualQTcpServer* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTcpServer::childEvent(event);
@@ -177,13 +162,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTcpServer_virtualbase_childEvent(VirtualQTcpServer* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTcpServer::customEvent(event);
@@ -192,13 +176,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTcpServer_virtualbase_customEvent(VirtualQTcpServer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTcpServer::connectNotify(signal);
@@ -209,13 +192,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTcpServer_virtualbase_connectNotify(VirtualQTcpServer* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTcpServer::disconnectNotify(signal);
@@ -226,26 +208,26 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTcpServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTcpServer_virtualbase_disconnectNotify(VirtualQTcpServer* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTcpServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket);
-	friend QObject* QTcpServer_protectedbase_sender(const void* self);
-	friend int QTcpServer_protectedbase_senderSignalIndex(const void* self);
-	friend int QTcpServer_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTcpServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QTcpServer_protectedbase_addPendingConnection(VirtualQTcpServer* self, QTcpSocket* socket);
+	friend QObject* QTcpServer_protectedbase_sender(const VirtualQTcpServer* self);
+	friend int QTcpServer_protectedbase_senderSignalIndex(const VirtualQTcpServer* self);
+	friend int QTcpServer_protectedbase_receivers(const VirtualQTcpServer* self, const char* signal);
+	friend bool QTcpServer_protectedbase_isSignalConnected(const VirtualQTcpServer* self, QMetaMethod* signal);
 };
 
-QTcpServer* QTcpServer_new(struct QTcpServer_VTable* vtbl) {
-	return new VirtualQTcpServer(vtbl);
+VirtualQTcpServer* QTcpServer_new(const QTcpServer_VTable* vtbl, void* vdata) {
+	return new VirtualQTcpServer(vtbl, vdata);
 }
 
-QTcpServer* QTcpServer_new2(struct QTcpServer_VTable* vtbl, QObject* parent) {
-	return new VirtualQTcpServer(vtbl, parent);
+VirtualQTcpServer* QTcpServer_new2(const QTcpServer_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQTcpServer(vtbl, vdata, parent);
 }
 
 void QTcpServer_virtbase(QTcpServer* src, QObject** outptr_QObject) {
@@ -369,7 +351,7 @@ void QTcpServer_newConnection(QTcpServer* self) {
 	self->newConnection();
 }
 
-void QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QTcpServer_connect_newConnection(VirtualQTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -384,7 +366,7 @@ void QTcpServer_acceptError(QTcpServer* self, int socketError) {
 	self->acceptError(static_cast<QAbstractSocket::SocketError>(socketError));
 }
 
-void QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTcpServer_connect_acceptError(VirtualQTcpServer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -435,118 +417,95 @@ bool QTcpServer_waitForNewConnection2(QTcpServer* self, int msec, bool* timedOut
 	return self->waitForNewConnection(static_cast<int>(msec), timedOut);
 }
 
-QMetaObject* QTcpServer_virtualbase_metaObject(const void* self) {
+QMetaObject* QTcpServer_virtualbase_metaObject(const VirtualQTcpServer* self) {
 
-	return (QMetaObject*) ( (const VirtualQTcpServer*)(self) )->QTcpServer::metaObject();
-
+	return (QMetaObject*) self->QTcpServer::metaObject();
 }
 
-void* QTcpServer_virtualbase_metacast(void* self, const char* param1) {
+void* QTcpServer_virtualbase_metacast(VirtualQTcpServer* self, const char* param1) {
 
-	return ( (VirtualQTcpServer*)(self) )->QTcpServer::qt_metacast(param1);
-
+	return self->QTcpServer::qt_metacast(param1);
 }
 
-int QTcpServer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTcpServer_virtualbase_metacall(VirtualQTcpServer* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTcpServer*)(self) )->QTcpServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTcpServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QTcpServer_virtualbase_hasPendingConnections(const void* self) {
+bool QTcpServer_virtualbase_hasPendingConnections(const VirtualQTcpServer* self) {
 
-	return ( (const VirtualQTcpServer*)(self) )->QTcpServer::hasPendingConnections();
-
+	return self->QTcpServer::hasPendingConnections();
 }
 
-QTcpSocket* QTcpServer_virtualbase_nextPendingConnection(void* self) {
+QTcpSocket* QTcpServer_virtualbase_nextPendingConnection(VirtualQTcpServer* self) {
 
-	return ( (VirtualQTcpServer*)(self) )->QTcpServer::nextPendingConnection();
-
+	return self->QTcpServer::nextPendingConnection();
 }
 
-void QTcpServer_virtualbase_incomingConnection(void* self, intptr_t handle) {
+void QTcpServer_virtualbase_incomingConnection(VirtualQTcpServer* self, intptr_t handle) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::incomingConnection((qintptr)(handle));
-
+	self->QTcpServer::incomingConnection((qintptr)(handle));
 }
 
-bool QTcpServer_virtualbase_event(void* self, QEvent* event) {
+bool QTcpServer_virtualbase_event(VirtualQTcpServer* self, QEvent* event) {
 
-	return ( (VirtualQTcpServer*)(self) )->QTcpServer::event(event);
-
+	return self->QTcpServer::event(event);
 }
 
-bool QTcpServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTcpServer_virtualbase_eventFilter(VirtualQTcpServer* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTcpServer*)(self) )->QTcpServer::eventFilter(watched, event);
-
+	return self->QTcpServer::eventFilter(watched, event);
 }
 
-void QTcpServer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTcpServer_virtualbase_timerEvent(VirtualQTcpServer* self, QTimerEvent* event) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::timerEvent(event);
-
+	self->QTcpServer::timerEvent(event);
 }
 
-void QTcpServer_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTcpServer_virtualbase_childEvent(VirtualQTcpServer* self, QChildEvent* event) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::childEvent(event);
-
+	self->QTcpServer::childEvent(event);
 }
 
-void QTcpServer_virtualbase_customEvent(void* self, QEvent* event) {
+void QTcpServer_virtualbase_customEvent(VirtualQTcpServer* self, QEvent* event) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::customEvent(event);
-
+	self->QTcpServer::customEvent(event);
 }
 
-void QTcpServer_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTcpServer_virtualbase_connectNotify(VirtualQTcpServer* self, QMetaMethod* signal) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::connectNotify(*signal);
-
+	self->QTcpServer::connectNotify(*signal);
 }
 
-void QTcpServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTcpServer_virtualbase_disconnectNotify(VirtualQTcpServer* self, QMetaMethod* signal) {
 
-	( (VirtualQTcpServer*)(self) )->QTcpServer::disconnectNotify(*signal);
-
+	self->QTcpServer::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTcpServer_staticMetaObject() { return &QTcpServer::staticMetaObject; }
-void QTcpServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket) {
-	VirtualQTcpServer* self_cast = static_cast<VirtualQTcpServer*>( (QTcpServer*)(self) );
-	
-	self_cast->addPendingConnection(socket);
 
+const QTcpServer_VTable* QTcpServer_vtbl(const VirtualQTcpServer* self) { return self->vtbl; }
+void* QTcpServer_vdata(const VirtualQTcpServer* self) { return self->vdata; }
+void QTcpServer_setVdata(VirtualQTcpServer* self, void* vdata) { self->vdata = vdata; }
+
+void QTcpServer_protectedbase_addPendingConnection(VirtualQTcpServer* self, QTcpSocket* socket) {
+	self->addPendingConnection(socket);
 }
 
-QObject* QTcpServer_protectedbase_sender(const void* self) {
-	VirtualQTcpServer* self_cast = static_cast<VirtualQTcpServer*>( (QTcpServer*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QTcpServer_protectedbase_sender(const VirtualQTcpServer* self) {
+	return self->sender();
 }
 
-int QTcpServer_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTcpServer* self_cast = static_cast<VirtualQTcpServer*>( (QTcpServer*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTcpServer_protectedbase_senderSignalIndex(const VirtualQTcpServer* self) {
+	return self->senderSignalIndex();
 }
 
-int QTcpServer_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTcpServer* self_cast = static_cast<VirtualQTcpServer*>( (QTcpServer*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTcpServer_protectedbase_receivers(const VirtualQTcpServer* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTcpServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTcpServer* self_cast = static_cast<VirtualQTcpServer*>( (QTcpServer*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTcpServer_protectedbase_isSignalConnected(const VirtualQTcpServer* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTcpServer_delete(QTcpServer* self) {

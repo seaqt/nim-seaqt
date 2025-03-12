@@ -4,15 +4,6 @@
 #include <QSystemSemaphore>
 #include <qsystemsemaphore.h>
 #include "gen_qsystemsemaphore.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSystemSemaphore* QSystemSemaphore_new(struct miqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new QSystemSemaphore(key_QString);

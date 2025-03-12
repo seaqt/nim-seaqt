@@ -68,30 +68,37 @@ typedef struct QTextObjectInterface QTextObjectInterface;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QAbstractTextDocumentLayout_VTable {
-	void (*destructor)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self);
-	QMetaObject* (*metaObject)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self);
-	void* (*metacast)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, const char* param1);
-	int (*metacall)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, int param1, int param2, void** param3);
-	void (*draw)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);
-	int (*hitTest)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self, QPointF* point, int accuracy);
-	int (*pageCount)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self);
-	QSizeF* (*documentSize)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self);
-	QRectF* (*frameBoundingRect)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self, QTextFrame* frame);
-	QRectF* (*blockBoundingRect)(struct QAbstractTextDocumentLayout_VTable* vtbl, const QAbstractTextDocumentLayout* self, QTextBlock* block);
-	void (*documentChanged)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, int from, int charsRemoved, int charsAdded);
-	void (*resizeInlineObject)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
-	void (*positionInlineObject)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
-	void (*drawInlineObject)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
-	bool (*event)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QEvent* event);
-	bool (*eventFilter)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QTimerEvent* event);
-	void (*childEvent)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QChildEvent* event);
-	void (*customEvent)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QEvent* event);
-	void (*connectNotify)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QAbstractTextDocumentLayout_VTable* vtbl, QAbstractTextDocumentLayout* self, QMetaMethod* signal);
-};
-QAbstractTextDocumentLayout* QAbstractTextDocumentLayout_new(struct QAbstractTextDocumentLayout_VTable* vtbl, QTextDocument* doc);
+typedef struct VirtualQAbstractTextDocumentLayout VirtualQAbstractTextDocumentLayout;
+typedef struct QAbstractTextDocumentLayout_VTable{
+	void (*destructor)(VirtualQAbstractTextDocumentLayout* self);
+	QMetaObject* (*metaObject)(const VirtualQAbstractTextDocumentLayout* self);
+	void* (*metacast)(VirtualQAbstractTextDocumentLayout* self, const char* param1);
+	int (*metacall)(VirtualQAbstractTextDocumentLayout* self, int param1, int param2, void** param3);
+	void (*draw)(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);
+	int (*hitTest)(const VirtualQAbstractTextDocumentLayout* self, QPointF* point, int accuracy);
+	int (*pageCount)(const VirtualQAbstractTextDocumentLayout* self);
+	QSizeF* (*documentSize)(const VirtualQAbstractTextDocumentLayout* self);
+	QRectF* (*frameBoundingRect)(const VirtualQAbstractTextDocumentLayout* self, QTextFrame* frame);
+	QRectF* (*blockBoundingRect)(const VirtualQAbstractTextDocumentLayout* self, QTextBlock* block);
+	void (*documentChanged)(VirtualQAbstractTextDocumentLayout* self, int from, int charsRemoved, int charsAdded);
+	void (*resizeInlineObject)(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	void (*positionInlineObject)(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	void (*drawInlineObject)(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
+	bool (*event)(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
+	bool (*eventFilter)(VirtualQAbstractTextDocumentLayout* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQAbstractTextDocumentLayout* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQAbstractTextDocumentLayout* self, QChildEvent* event);
+	void (*customEvent)(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
+	void (*connectNotify)(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
+}QAbstractTextDocumentLayout_VTable;
+
+const QAbstractTextDocumentLayout_VTable* QAbstractTextDocumentLayout_vtbl(const VirtualQAbstractTextDocumentLayout* self);
+void* QAbstractTextDocumentLayout_vdata(const VirtualQAbstractTextDocumentLayout* self);
+void QAbstractTextDocumentLayout_setVdata(VirtualQAbstractTextDocumentLayout* self, void* vdata);
+
+VirtualQAbstractTextDocumentLayout* QAbstractTextDocumentLayout_new(const QAbstractTextDocumentLayout_VTable* vtbl, void* vdata, QTextDocument* doc);
+
 void QAbstractTextDocumentLayout_virtbase(QAbstractTextDocumentLayout* src, QObject** outptr_QObject);
 QMetaObject* QAbstractTextDocumentLayout_metaObject(const QAbstractTextDocumentLayout* self);
 void* QAbstractTextDocumentLayout_metacast(QAbstractTextDocumentLayout* self, const char* param1);
@@ -114,13 +121,13 @@ void QAbstractTextDocumentLayout_registerHandler(QAbstractTextDocumentLayout* se
 void QAbstractTextDocumentLayout_unregisterHandler(QAbstractTextDocumentLayout* self, int objectType);
 QTextObjectInterface* QAbstractTextDocumentLayout_handlerForObject(const QAbstractTextDocumentLayout* self, int objectType);
 void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self);
-void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAbstractTextDocumentLayout_connect_update(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAbstractTextDocumentLayout_updateBlock(QAbstractTextDocumentLayout* self, QTextBlock* block);
-void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t));
+void QAbstractTextDocumentLayout_connect_updateBlock(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t));
 void QAbstractTextDocumentLayout_documentSizeChanged(QAbstractTextDocumentLayout* self, QSizeF* newSize);
-void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t));
+void QAbstractTextDocumentLayout_connect_documentSizeChanged(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t));
 void QAbstractTextDocumentLayout_pageCountChanged(QAbstractTextDocumentLayout* self, int newPages);
-void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QAbstractTextDocumentLayout_connect_pageCountChanged(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QAbstractTextDocumentLayout_documentChanged(QAbstractTextDocumentLayout* self, int from, int charsRemoved, int charsAdded);
 void QAbstractTextDocumentLayout_resizeInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 void QAbstractTextDocumentLayout_positionInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
@@ -129,48 +136,56 @@ struct miqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c)
 struct miqt_string QAbstractTextDocumentLayout_tr3(const char* s, const char* c, int n);
 void QAbstractTextDocumentLayout_unregisterHandler2(QAbstractTextDocumentLayout* self, int objectType, QObject* component);
 void QAbstractTextDocumentLayout_update1(QAbstractTextDocumentLayout* self, QRectF* param1);
-void QAbstractTextDocumentLayout_connect_update1(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t));
-QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const void* self);
-void* QAbstractTextDocumentLayout_virtualbase_metacast(void* self, const char* param1);
-int QAbstractTextDocumentLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-void QAbstractTextDocumentLayout_virtualbase_draw(void* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);
-int QAbstractTextDocumentLayout_virtualbase_hitTest(const void* self, QPointF* point, int accuracy);
-int QAbstractTextDocumentLayout_virtualbase_pageCount(const void* self);
-QSizeF* QAbstractTextDocumentLayout_virtualbase_documentSize(const void* self);
-QRectF* QAbstractTextDocumentLayout_virtualbase_frameBoundingRect(const void* self, QTextFrame* frame);
-QRectF* QAbstractTextDocumentLayout_virtualbase_blockBoundingRect(const void* self, QTextBlock* block);
-void QAbstractTextDocumentLayout_virtualbase_documentChanged(void* self, int from, int charsRemoved, int charsAdded);
-void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
-void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
-void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
-bool QAbstractTextDocumentLayout_virtualbase_event(void* self, QEvent* event);
-bool QAbstractTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QAbstractTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event);
-void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event);
-void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-int QAbstractTextDocumentLayout_protectedbase_formatIndex(void* self, int pos);
-QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(void* self, int pos);
-QObject* QAbstractTextDocumentLayout_protectedbase_sender(const void* self);
-int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const void* self);
-int QAbstractTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal);
-bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QAbstractTextDocumentLayout_connect_update1(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t));
+
+QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const VirtualQAbstractTextDocumentLayout* self);
+void* QAbstractTextDocumentLayout_virtualbase_metacast(VirtualQAbstractTextDocumentLayout* self, const char* param1);
+int QAbstractTextDocumentLayout_virtualbase_metacall(VirtualQAbstractTextDocumentLayout* self, int param1, int param2, void** param3);
+void QAbstractTextDocumentLayout_virtualbase_draw(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);
+int QAbstractTextDocumentLayout_virtualbase_hitTest(const VirtualQAbstractTextDocumentLayout* self, QPointF* point, int accuracy);
+int QAbstractTextDocumentLayout_virtualbase_pageCount(const VirtualQAbstractTextDocumentLayout* self);
+QSizeF* QAbstractTextDocumentLayout_virtualbase_documentSize(const VirtualQAbstractTextDocumentLayout* self);
+QRectF* QAbstractTextDocumentLayout_virtualbase_frameBoundingRect(const VirtualQAbstractTextDocumentLayout* self, QTextFrame* frame);
+QRectF* QAbstractTextDocumentLayout_virtualbase_blockBoundingRect(const VirtualQAbstractTextDocumentLayout* self, QTextBlock* block);
+void QAbstractTextDocumentLayout_virtualbase_documentChanged(VirtualQAbstractTextDocumentLayout* self, int from, int charsRemoved, int charsAdded);
+void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
+bool QAbstractTextDocumentLayout_virtualbase_event(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
+bool QAbstractTextDocumentLayout_virtualbase_eventFilter(VirtualQAbstractTextDocumentLayout* self, QObject* watched, QEvent* event);
+void QAbstractTextDocumentLayout_virtualbase_timerEvent(VirtualQAbstractTextDocumentLayout* self, QTimerEvent* event);
+void QAbstractTextDocumentLayout_virtualbase_childEvent(VirtualQAbstractTextDocumentLayout* self, QChildEvent* event);
+void QAbstractTextDocumentLayout_virtualbase_customEvent(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
+void QAbstractTextDocumentLayout_virtualbase_connectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
+void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
+
+int QAbstractTextDocumentLayout_protectedbase_formatIndex(VirtualQAbstractTextDocumentLayout* self, int pos);
+QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(VirtualQAbstractTextDocumentLayout* self, int pos);
+QObject* QAbstractTextDocumentLayout_protectedbase_sender(const VirtualQAbstractTextDocumentLayout* self);
+int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQAbstractTextDocumentLayout* self);
+int QAbstractTextDocumentLayout_protectedbase_receivers(const VirtualQAbstractTextDocumentLayout* self, const char* signal);
+bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
+
 const QMetaObject* QAbstractTextDocumentLayout_staticMetaObject();
 void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self);
 
 QSizeF* QTextObjectInterface_intrinsicSize(QTextObjectInterface* self, QTextDocument* doc, int posInDocument, QTextFormat* format);
 void QTextObjectInterface_drawObject(QTextObjectInterface* self, QPainter* painter, QRectF* rect, QTextDocument* doc, int posInDocument, QTextFormat* format);
 void QTextObjectInterface_operatorAssign(QTextObjectInterface* self, QTextObjectInterface* param1);
+
 void QTextObjectInterface_delete(QTextObjectInterface* self);
 
 QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* param1);
+
 void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* param1);
+
 void QAbstractTextDocumentLayout__Selection_delete(QAbstractTextDocumentLayout__Selection* self);
 
 QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new();
 QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new2(QAbstractTextDocumentLayout__PaintContext* param1);
+
 void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* param1);
+
 void QAbstractTextDocumentLayout__PaintContext_delete(QAbstractTextDocumentLayout__PaintContext* self);
 
 #ifdef __cplusplus

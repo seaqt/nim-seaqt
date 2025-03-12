@@ -3,15 +3,6 @@
 #include <QPointF>
 #include <qeasingcurve.h>
 #include "gen_qeasingcurve.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QEasingCurve* QEasingCurve_new() {
 	return new QEasingCurve();
 }
@@ -103,6 +94,7 @@ double QEasingCurve_valueForProgress(const QEasingCurve* self, double progress) 
 }
 
 const QMetaObject* QEasingCurve_staticMetaObject() { return &QEasingCurve::staticMetaObject; }
+
 void QEasingCurve_delete(QEasingCurve* self) {
 	delete self;
 }

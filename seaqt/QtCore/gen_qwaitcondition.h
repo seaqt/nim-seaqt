@@ -27,6 +27,7 @@ typedef struct QWaitCondition QWaitCondition;
 #endif
 
 QWaitCondition* QWaitCondition_new();
+
 bool QWaitCondition_wait(QWaitCondition* self, QMutex* lockedMutex);
 bool QWaitCondition_wait2(QWaitCondition* self, QMutex* lockedMutex, unsigned long time);
 bool QWaitCondition_waitWithLockedReadWriteLock(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock);
@@ -37,6 +38,7 @@ void QWaitCondition_notifyOne(QWaitCondition* self);
 void QWaitCondition_notifyAll(QWaitCondition* self);
 bool QWaitCondition_wait22(QWaitCondition* self, QMutex* lockedMutex, QDeadlineTimer* deadline);
 bool QWaitCondition_wait23(QWaitCondition* self, QReadWriteLock* lockedReadWriteLock, QDeadlineTimer* deadline);
+
 void QWaitCondition_delete(QWaitCondition* self);
 
 #ifdef __cplusplus

@@ -6,15 +6,6 @@
 #include <QVideoFrameFormat>
 #include <qvideoframeformat.h>
 #include "gen_qvideoframeformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVideoFrameFormat* QVideoFrameFormat_new() {
 	return new QVideoFrameFormat();
 }

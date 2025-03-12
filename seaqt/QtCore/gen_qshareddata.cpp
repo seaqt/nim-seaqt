@@ -1,15 +1,6 @@
 #include <QSharedData>
 #include <qshareddata.h>
 #include "gen_qshareddata.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSharedData* QSharedData_new() {
 	return new QSharedData();
 }

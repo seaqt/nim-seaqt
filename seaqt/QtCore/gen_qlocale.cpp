@@ -9,15 +9,6 @@
 #include <QTime>
 #include <qlocale.h>
 #include "gen_qlocale.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QLocale* QLocale_new() {
 	return new QLocale();
 }
@@ -1371,6 +1362,7 @@ struct miqt_string QLocale_quoteString2(const QLocale* self, struct miqt_string 
 }
 
 const QMetaObject* QLocale_staticMetaObject() { return &QLocale::staticMetaObject; }
+
 void QLocale_delete(QLocale* self) {
 	delete self;
 }

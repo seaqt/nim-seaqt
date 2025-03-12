@@ -39,41 +39,34 @@
 #include <QWidget>
 #include <qfontdialog.h>
 #include "gen_qfontdialog.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQFontDialog final : public QFontDialog {
-	struct QFontDialog_VTable* vtbl;
+	const QFontDialog_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFontDialog_VTable* QFontDialog_vtbl(const VirtualQFontDialog* self);
+	friend void* QFontDialog_vdata(const VirtualQFontDialog* self);
+	friend void QFontDialog_setVdata(VirtualQFontDialog* self, void* vdata);
 
-	VirtualQFontDialog(struct QFontDialog_VTable* vtbl, QWidget* parent): QFontDialog(parent), vtbl(vtbl) {};
-	VirtualQFontDialog(struct QFontDialog_VTable* vtbl): QFontDialog(), vtbl(vtbl) {};
-	VirtualQFontDialog(struct QFontDialog_VTable* vtbl, const QFont& initial): QFontDialog(initial), vtbl(vtbl) {};
-	VirtualQFontDialog(struct QFontDialog_VTable* vtbl, const QFont& initial, QWidget* parent): QFontDialog(initial, parent), vtbl(vtbl) {};
+	VirtualQFontDialog(const QFontDialog_VTable* vtbl, void* vdata, QWidget* parent): QFontDialog(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFontDialog(const QFontDialog_VTable* vtbl, void* vdata): QFontDialog(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFontDialog(const QFontDialog_VTable* vtbl, void* vdata, const QFont& initial): QFontDialog(initial), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFontDialog(const QFontDialog_VTable* vtbl, void* vdata, const QFont& initial, QWidget* parent): QFontDialog(initial, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFontDialog() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFontDialog() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QFontDialog::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QFontDialog_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QFontDialog_virtualbase_metaObject(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QFontDialog::qt_metacast(param1);
@@ -81,14 +74,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QFontDialog_virtualbase_metacast(void* self, const char* param1);
+	friend void* QFontDialog_virtualbase_metacast(VirtualQFontDialog* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QFontDialog::qt_metacall(param1, param2, param3);
@@ -99,14 +91,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QFontDialog_virtualbase_metacall(VirtualQFontDialog* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QFontDialog::setVisible(visible);
@@ -115,13 +106,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_setVisible(void* self, bool visible);
+	friend void QFontDialog_virtualbase_setVisible(VirtualQFontDialog* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QFontDialog::changeEvent(event);
@@ -130,13 +120,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QFontDialog_virtualbase_changeEvent(VirtualQFontDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int result) override {
 		if (vtbl->done == 0) {
 			QFontDialog::done(result);
@@ -145,13 +134,12 @@ public:
 
 		int sigval1 = result;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_done(void* self, int result);
+	friend void QFontDialog_virtualbase_done(VirtualQFontDialog* self, int result);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QFontDialog::eventFilter(object, event);
@@ -160,46 +148,43 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontDialog_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QFontDialog_virtualbase_eventFilter(VirtualQFontDialog* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QFontDialog::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QFontDialog_virtualbase_sizeHint(const void* self);
+	friend QSize* QFontDialog_virtualbase_sizeHint(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QFontDialog::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QFontDialog_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QFontDialog_virtualbase_minimumSizeHint(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QFontDialog::open();
@@ -207,27 +192,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QFontDialog_virtualbase_open(void* self);
+	friend void QFontDialog_virtualbase_open(VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QFontDialog::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontDialog_virtualbase_exec(void* self);
+	friend int QFontDialog_virtualbase_exec(VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QFontDialog::accept();
@@ -235,13 +218,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QFontDialog_virtualbase_accept(void* self);
+	friend void QFontDialog_virtualbase_accept(VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QFontDialog::reject();
@@ -249,13 +231,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QFontDialog_virtualbase_reject(void* self);
+	friend void QFontDialog_virtualbase_reject(VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QFontDialog::keyPressEvent(param1);
@@ -264,13 +245,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QFontDialog_virtualbase_keyPressEvent(VirtualQFontDialog* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QFontDialog::closeEvent(param1);
@@ -279,13 +259,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QFontDialog_virtualbase_closeEvent(VirtualQFontDialog* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QFontDialog::showEvent(param1);
@@ -294,13 +273,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QFontDialog_virtualbase_showEvent(VirtualQFontDialog* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QFontDialog::resizeEvent(param1);
@@ -309,13 +287,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QFontDialog_virtualbase_resizeEvent(VirtualQFontDialog* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QFontDialog::contextMenuEvent(param1);
@@ -324,27 +301,25 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QFontDialog_virtualbase_contextMenuEvent(VirtualQFontDialog* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QFontDialog::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontDialog_virtualbase_devType(const void* self);
+	friend int QFontDialog_virtualbase_devType(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QFontDialog::heightForWidth(param1);
@@ -352,42 +327,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontDialog_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QFontDialog_virtualbase_heightForWidth(const VirtualQFontDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QFontDialog::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontDialog_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QFontDialog_virtualbase_hasHeightForWidth(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QFontDialog::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QFontDialog_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QFontDialog_virtualbase_paintEngine(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QFontDialog::event(event);
@@ -395,14 +367,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontDialog_virtualbase_event(void* self, QEvent* event);
+	friend bool QFontDialog_virtualbase_event(VirtualQFontDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QFontDialog::mousePressEvent(event);
@@ -411,13 +382,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QFontDialog_virtualbase_mousePressEvent(VirtualQFontDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QFontDialog::mouseReleaseEvent(event);
@@ -426,13 +396,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QFontDialog_virtualbase_mouseReleaseEvent(VirtualQFontDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QFontDialog::mouseDoubleClickEvent(event);
@@ -441,13 +410,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QFontDialog_virtualbase_mouseDoubleClickEvent(VirtualQFontDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QFontDialog::mouseMoveEvent(event);
@@ -456,13 +424,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QFontDialog_virtualbase_mouseMoveEvent(VirtualQFontDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QFontDialog::wheelEvent(event);
@@ -471,13 +438,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QFontDialog_virtualbase_wheelEvent(VirtualQFontDialog* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QFontDialog::keyReleaseEvent(event);
@@ -486,13 +452,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QFontDialog_virtualbase_keyReleaseEvent(VirtualQFontDialog* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QFontDialog::focusInEvent(event);
@@ -501,13 +466,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QFontDialog_virtualbase_focusInEvent(VirtualQFontDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QFontDialog::focusOutEvent(event);
@@ -516,13 +480,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QFontDialog_virtualbase_focusOutEvent(VirtualQFontDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QFontDialog::enterEvent(event);
@@ -531,13 +494,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QFontDialog_virtualbase_enterEvent(VirtualQFontDialog* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QFontDialog::leaveEvent(event);
@@ -546,13 +508,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QFontDialog_virtualbase_leaveEvent(VirtualQFontDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QFontDialog::paintEvent(event);
@@ -561,13 +522,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QFontDialog_virtualbase_paintEvent(VirtualQFontDialog* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QFontDialog::moveEvent(event);
@@ -576,13 +536,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QFontDialog_virtualbase_moveEvent(VirtualQFontDialog* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QFontDialog::tabletEvent(event);
@@ -591,13 +550,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QFontDialog_virtualbase_tabletEvent(VirtualQFontDialog* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QFontDialog::actionEvent(event);
@@ -606,13 +564,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QFontDialog_virtualbase_actionEvent(VirtualQFontDialog* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QFontDialog::dragEnterEvent(event);
@@ -621,13 +578,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QFontDialog_virtualbase_dragEnterEvent(VirtualQFontDialog* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QFontDialog::dragMoveEvent(event);
@@ -636,13 +592,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QFontDialog_virtualbase_dragMoveEvent(VirtualQFontDialog* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QFontDialog::dragLeaveEvent(event);
@@ -651,13 +606,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QFontDialog_virtualbase_dragLeaveEvent(VirtualQFontDialog* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QFontDialog::dropEvent(event);
@@ -666,13 +620,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QFontDialog_virtualbase_dropEvent(VirtualQFontDialog* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QFontDialog::hideEvent(event);
@@ -681,13 +634,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QFontDialog_virtualbase_hideEvent(VirtualQFontDialog* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QFontDialog::nativeEvent(eventType, message, result);
@@ -703,14 +655,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QFontDialog_virtualbase_nativeEvent(VirtualQFontDialog* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QFontDialog::metric(param1);
@@ -719,14 +670,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontDialog_virtualbase_metric(const void* self, int param1);
+	friend int QFontDialog_virtualbase_metric(const VirtualQFontDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QFontDialog::initPainter(painter);
@@ -735,13 +685,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QFontDialog_virtualbase_initPainter(const VirtualQFontDialog* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QFontDialog::redirected(offset);
@@ -749,28 +698,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QFontDialog_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QFontDialog_virtualbase_redirected(const VirtualQFontDialog* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QFontDialog::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QFontDialog_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QFontDialog_virtualbase_sharedPainter(const VirtualQFontDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QFontDialog::inputMethodEvent(param1);
@@ -779,13 +726,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QFontDialog_virtualbase_inputMethodEvent(VirtualQFontDialog* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QFontDialog::inputMethodQuery(param1);
@@ -794,16 +740,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QFontDialog_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QFontDialog_virtualbase_inputMethodQuery(const VirtualQFontDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QFontDialog::focusNextPrevChild(next);
@@ -811,14 +756,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontDialog_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QFontDialog_virtualbase_focusNextPrevChild(VirtualQFontDialog* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QFontDialog::timerEvent(event);
@@ -827,13 +771,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QFontDialog_virtualbase_timerEvent(VirtualQFontDialog* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QFontDialog::childEvent(event);
@@ -842,13 +785,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QFontDialog_virtualbase_childEvent(VirtualQFontDialog* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QFontDialog::customEvent(event);
@@ -857,13 +799,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QFontDialog_virtualbase_customEvent(VirtualQFontDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QFontDialog::connectNotify(signal);
@@ -874,13 +815,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QFontDialog_virtualbase_connectNotify(VirtualQFontDialog* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QFontDialog::disconnectNotify(signal);
@@ -891,39 +831,39 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QFontDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QFontDialog_virtualbase_disconnectNotify(VirtualQFontDialog* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QFontDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QFontDialog_protectedbase_updateMicroFocus(void* self);
-	friend void QFontDialog_protectedbase_create(void* self);
-	friend void QFontDialog_protectedbase_destroy(void* self);
-	friend bool QFontDialog_protectedbase_focusNextChild(void* self);
-	friend bool QFontDialog_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QFontDialog_protectedbase_sender(const void* self);
-	friend int QFontDialog_protectedbase_senderSignalIndex(const void* self);
-	friend int QFontDialog_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QFontDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QFontDialog_protectedbase_adjustPosition(VirtualQFontDialog* self, QWidget* param1);
+	friend void QFontDialog_protectedbase_updateMicroFocus(VirtualQFontDialog* self);
+	friend void QFontDialog_protectedbase_create(VirtualQFontDialog* self);
+	friend void QFontDialog_protectedbase_destroy(VirtualQFontDialog* self);
+	friend bool QFontDialog_protectedbase_focusNextChild(VirtualQFontDialog* self);
+	friend bool QFontDialog_protectedbase_focusPreviousChild(VirtualQFontDialog* self);
+	friend QObject* QFontDialog_protectedbase_sender(const VirtualQFontDialog* self);
+	friend int QFontDialog_protectedbase_senderSignalIndex(const VirtualQFontDialog* self);
+	friend int QFontDialog_protectedbase_receivers(const VirtualQFontDialog* self, const char* signal);
+	friend bool QFontDialog_protectedbase_isSignalConnected(const VirtualQFontDialog* self, QMetaMethod* signal);
 };
 
-QFontDialog* QFontDialog_new(struct QFontDialog_VTable* vtbl, QWidget* parent) {
-	return new VirtualQFontDialog(vtbl, parent);
+VirtualQFontDialog* QFontDialog_new(const QFontDialog_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQFontDialog(vtbl, vdata, parent);
 }
 
-QFontDialog* QFontDialog_new2(struct QFontDialog_VTable* vtbl) {
-	return new VirtualQFontDialog(vtbl);
+VirtualQFontDialog* QFontDialog_new2(const QFontDialog_VTable* vtbl, void* vdata) {
+	return new VirtualQFontDialog(vtbl, vdata);
 }
 
-QFontDialog* QFontDialog_new3(struct QFontDialog_VTable* vtbl, QFont* initial) {
-	return new VirtualQFontDialog(vtbl, *initial);
+VirtualQFontDialog* QFontDialog_new3(const QFontDialog_VTable* vtbl, void* vdata, QFont* initial) {
+	return new VirtualQFontDialog(vtbl, vdata, *initial);
 }
 
-QFontDialog* QFontDialog_new4(struct QFontDialog_VTable* vtbl, QFont* initial, QWidget* parent) {
-	return new VirtualQFontDialog(vtbl, *initial, parent);
+VirtualQFontDialog* QFontDialog_new4(const QFontDialog_VTable* vtbl, void* vdata, QFont* initial, QWidget* parent) {
+	return new VirtualQFontDialog(vtbl, vdata, *initial, parent);
 }
 
 void QFontDialog_virtbase(QFontDialog* src, QDialog** outptr_QDialog) {
@@ -998,7 +938,7 @@ void QFontDialog_currentFontChanged(QFontDialog* self, QFont* font) {
 	self->currentFontChanged(*font);
 }
 
-void QFontDialog_connect_currentFontChanged(QFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+void QFontDialog_connect_currentFontChanged(VirtualQFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QFont*);
@@ -1016,7 +956,7 @@ void QFontDialog_fontSelected(QFontDialog* self, QFont* font) {
 	self->fontSelected(*font);
 }
 
-void QFontDialog_connect_fontSelected(QFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+void QFontDialog_connect_fontSelected(VirtualQFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QFont*);
@@ -1074,406 +1014,326 @@ QFont* QFontDialog_getFont5(bool* ok, QFont* initial, QWidget* parent, struct mi
 	return new QFont(QFontDialog::getFont(ok, *initial, parent, title_QString, static_cast<QFontDialog::FontDialogOptions>(options)));
 }
 
-QMetaObject* QFontDialog_virtualbase_metaObject(const void* self) {
+QMetaObject* QFontDialog_virtualbase_metaObject(const VirtualQFontDialog* self) {
 
-	return (QMetaObject*) ( (const VirtualQFontDialog*)(self) )->QFontDialog::metaObject();
-
+	return (QMetaObject*) self->QFontDialog::metaObject();
 }
 
-void* QFontDialog_virtualbase_metacast(void* self, const char* param1) {
+void* QFontDialog_virtualbase_metacast(VirtualQFontDialog* self, const char* param1) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::qt_metacast(param1);
-
+	return self->QFontDialog::qt_metacast(param1);
 }
 
-int QFontDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QFontDialog_virtualbase_metacall(VirtualQFontDialog* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QFontDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QFontDialog_virtualbase_setVisible(void* self, bool visible) {
+void QFontDialog_virtualbase_setVisible(VirtualQFontDialog* self, bool visible) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::setVisible(visible);
-
+	self->QFontDialog::setVisible(visible);
 }
 
-void QFontDialog_virtualbase_changeEvent(void* self, QEvent* event) {
+void QFontDialog_virtualbase_changeEvent(VirtualQFontDialog* self, QEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::changeEvent(event);
-
+	self->QFontDialog::changeEvent(event);
 }
 
-void QFontDialog_virtualbase_done(void* self, int result) {
+void QFontDialog_virtualbase_done(VirtualQFontDialog* self, int result) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::done(static_cast<int>(result));
-
+	self->QFontDialog::done(static_cast<int>(result));
 }
 
-bool QFontDialog_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QFontDialog_virtualbase_eventFilter(VirtualQFontDialog* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::eventFilter(object, event);
-
+	return self->QFontDialog::eventFilter(object, event);
 }
 
-QSize* QFontDialog_virtualbase_sizeHint(const void* self) {
+QSize* QFontDialog_virtualbase_sizeHint(const VirtualQFontDialog* self) {
 
-	return new QSize(( (const VirtualQFontDialog*)(self) )->QFontDialog::sizeHint());
-
+	return new QSize(self->QFontDialog::sizeHint());
 }
 
-QSize* QFontDialog_virtualbase_minimumSizeHint(const void* self) {
+QSize* QFontDialog_virtualbase_minimumSizeHint(const VirtualQFontDialog* self) {
 
-	return new QSize(( (const VirtualQFontDialog*)(self) )->QFontDialog::minimumSizeHint());
-
+	return new QSize(self->QFontDialog::minimumSizeHint());
 }
 
-void QFontDialog_virtualbase_open(void* self) {
+void QFontDialog_virtualbase_open(VirtualQFontDialog* self) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::open();
-
+	self->QFontDialog::open();
 }
 
-int QFontDialog_virtualbase_exec(void* self) {
+int QFontDialog_virtualbase_exec(VirtualQFontDialog* self) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::exec();
-
+	return self->QFontDialog::exec();
 }
 
-void QFontDialog_virtualbase_accept(void* self) {
+void QFontDialog_virtualbase_accept(VirtualQFontDialog* self) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::accept();
-
+	self->QFontDialog::accept();
 }
 
-void QFontDialog_virtualbase_reject(void* self) {
+void QFontDialog_virtualbase_reject(VirtualQFontDialog* self) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::reject();
-
+	self->QFontDialog::reject();
 }
 
-void QFontDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QFontDialog_virtualbase_keyPressEvent(VirtualQFontDialog* self, QKeyEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::keyPressEvent(param1);
-
+	self->QFontDialog::keyPressEvent(param1);
 }
 
-void QFontDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QFontDialog_virtualbase_closeEvent(VirtualQFontDialog* self, QCloseEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::closeEvent(param1);
-
+	self->QFontDialog::closeEvent(param1);
 }
 
-void QFontDialog_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QFontDialog_virtualbase_showEvent(VirtualQFontDialog* self, QShowEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::showEvent(param1);
-
+	self->QFontDialog::showEvent(param1);
 }
 
-void QFontDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QFontDialog_virtualbase_resizeEvent(VirtualQFontDialog* self, QResizeEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::resizeEvent(param1);
-
+	self->QFontDialog::resizeEvent(param1);
 }
 
-void QFontDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QFontDialog_virtualbase_contextMenuEvent(VirtualQFontDialog* self, QContextMenuEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::contextMenuEvent(param1);
-
+	self->QFontDialog::contextMenuEvent(param1);
 }
 
-int QFontDialog_virtualbase_devType(const void* self) {
+int QFontDialog_virtualbase_devType(const VirtualQFontDialog* self) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::devType();
-
+	return self->QFontDialog::devType();
 }
 
-int QFontDialog_virtualbase_heightForWidth(const void* self, int param1) {
+int QFontDialog_virtualbase_heightForWidth(const VirtualQFontDialog* self, int param1) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::heightForWidth(static_cast<int>(param1));
-
+	return self->QFontDialog::heightForWidth(static_cast<int>(param1));
 }
 
-bool QFontDialog_virtualbase_hasHeightForWidth(const void* self) {
+bool QFontDialog_virtualbase_hasHeightForWidth(const VirtualQFontDialog* self) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::hasHeightForWidth();
-
+	return self->QFontDialog::hasHeightForWidth();
 }
 
-QPaintEngine* QFontDialog_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QFontDialog_virtualbase_paintEngine(const VirtualQFontDialog* self) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::paintEngine();
-
+	return self->QFontDialog::paintEngine();
 }
 
-bool QFontDialog_virtualbase_event(void* self, QEvent* event) {
+bool QFontDialog_virtualbase_event(VirtualQFontDialog* self, QEvent* event) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::event(event);
-
+	return self->QFontDialog::event(event);
 }
 
-void QFontDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QFontDialog_virtualbase_mousePressEvent(VirtualQFontDialog* self, QMouseEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::mousePressEvent(event);
-
+	self->QFontDialog::mousePressEvent(event);
 }
 
-void QFontDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QFontDialog_virtualbase_mouseReleaseEvent(VirtualQFontDialog* self, QMouseEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::mouseReleaseEvent(event);
-
+	self->QFontDialog::mouseReleaseEvent(event);
 }
 
-void QFontDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QFontDialog_virtualbase_mouseDoubleClickEvent(VirtualQFontDialog* self, QMouseEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::mouseDoubleClickEvent(event);
-
+	self->QFontDialog::mouseDoubleClickEvent(event);
 }
 
-void QFontDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QFontDialog_virtualbase_mouseMoveEvent(VirtualQFontDialog* self, QMouseEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::mouseMoveEvent(event);
-
+	self->QFontDialog::mouseMoveEvent(event);
 }
 
-void QFontDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QFontDialog_virtualbase_wheelEvent(VirtualQFontDialog* self, QWheelEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::wheelEvent(event);
-
+	self->QFontDialog::wheelEvent(event);
 }
 
-void QFontDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QFontDialog_virtualbase_keyReleaseEvent(VirtualQFontDialog* self, QKeyEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::keyReleaseEvent(event);
-
+	self->QFontDialog::keyReleaseEvent(event);
 }
 
-void QFontDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QFontDialog_virtualbase_focusInEvent(VirtualQFontDialog* self, QFocusEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::focusInEvent(event);
-
+	self->QFontDialog::focusInEvent(event);
 }
 
-void QFontDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QFontDialog_virtualbase_focusOutEvent(VirtualQFontDialog* self, QFocusEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::focusOutEvent(event);
-
+	self->QFontDialog::focusOutEvent(event);
 }
 
-void QFontDialog_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QFontDialog_virtualbase_enterEvent(VirtualQFontDialog* self, QEnterEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::enterEvent(event);
-
+	self->QFontDialog::enterEvent(event);
 }
 
-void QFontDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QFontDialog_virtualbase_leaveEvent(VirtualQFontDialog* self, QEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::leaveEvent(event);
-
+	self->QFontDialog::leaveEvent(event);
 }
 
-void QFontDialog_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QFontDialog_virtualbase_paintEvent(VirtualQFontDialog* self, QPaintEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::paintEvent(event);
-
+	self->QFontDialog::paintEvent(event);
 }
 
-void QFontDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QFontDialog_virtualbase_moveEvent(VirtualQFontDialog* self, QMoveEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::moveEvent(event);
-
+	self->QFontDialog::moveEvent(event);
 }
 
-void QFontDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QFontDialog_virtualbase_tabletEvent(VirtualQFontDialog* self, QTabletEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::tabletEvent(event);
-
+	self->QFontDialog::tabletEvent(event);
 }
 
-void QFontDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QFontDialog_virtualbase_actionEvent(VirtualQFontDialog* self, QActionEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::actionEvent(event);
-
+	self->QFontDialog::actionEvent(event);
 }
 
-void QFontDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QFontDialog_virtualbase_dragEnterEvent(VirtualQFontDialog* self, QDragEnterEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::dragEnterEvent(event);
-
+	self->QFontDialog::dragEnterEvent(event);
 }
 
-void QFontDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QFontDialog_virtualbase_dragMoveEvent(VirtualQFontDialog* self, QDragMoveEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::dragMoveEvent(event);
-
+	self->QFontDialog::dragMoveEvent(event);
 }
 
-void QFontDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QFontDialog_virtualbase_dragLeaveEvent(VirtualQFontDialog* self, QDragLeaveEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::dragLeaveEvent(event);
-
+	self->QFontDialog::dragLeaveEvent(event);
 }
 
-void QFontDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QFontDialog_virtualbase_dropEvent(VirtualQFontDialog* self, QDropEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::dropEvent(event);
-
+	self->QFontDialog::dropEvent(event);
 }
 
-void QFontDialog_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QFontDialog_virtualbase_hideEvent(VirtualQFontDialog* self, QHideEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::hideEvent(event);
-
+	self->QFontDialog::hideEvent(event);
 }
 
-bool QFontDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QFontDialog_virtualbase_nativeEvent(VirtualQFontDialog* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QFontDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QFontDialog_virtualbase_metric(const void* self, int param1) {
+int QFontDialog_virtualbase_metric(const VirtualQFontDialog* self, int param1) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::metric(static_cast<VirtualQFontDialog::PaintDeviceMetric>(param1));
-
+	return self->QFontDialog::metric(static_cast<VirtualQFontDialog::PaintDeviceMetric>(param1));
 }
 
-void QFontDialog_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QFontDialog_virtualbase_initPainter(const VirtualQFontDialog* self, QPainter* painter) {
 
-	( (const VirtualQFontDialog*)(self) )->QFontDialog::initPainter(painter);
-
+	self->QFontDialog::initPainter(painter);
 }
 
-QPaintDevice* QFontDialog_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QFontDialog_virtualbase_redirected(const VirtualQFontDialog* self, QPoint* offset) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::redirected(offset);
-
+	return self->QFontDialog::redirected(offset);
 }
 
-QPainter* QFontDialog_virtualbase_sharedPainter(const void* self) {
+QPainter* QFontDialog_virtualbase_sharedPainter(const VirtualQFontDialog* self) {
 
-	return ( (const VirtualQFontDialog*)(self) )->QFontDialog::sharedPainter();
-
+	return self->QFontDialog::sharedPainter();
 }
 
-void QFontDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QFontDialog_virtualbase_inputMethodEvent(VirtualQFontDialog* self, QInputMethodEvent* param1) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::inputMethodEvent(param1);
-
+	self->QFontDialog::inputMethodEvent(param1);
 }
 
-QVariant* QFontDialog_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QFontDialog_virtualbase_inputMethodQuery(const VirtualQFontDialog* self, int param1) {
 
-	return new QVariant(( (const VirtualQFontDialog*)(self) )->QFontDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QFontDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QFontDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QFontDialog_virtualbase_focusNextPrevChild(VirtualQFontDialog* self, bool next) {
 
-	return ( (VirtualQFontDialog*)(self) )->QFontDialog::focusNextPrevChild(next);
-
+	return self->QFontDialog::focusNextPrevChild(next);
 }
 
-void QFontDialog_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QFontDialog_virtualbase_timerEvent(VirtualQFontDialog* self, QTimerEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::timerEvent(event);
-
+	self->QFontDialog::timerEvent(event);
 }
 
-void QFontDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QFontDialog_virtualbase_childEvent(VirtualQFontDialog* self, QChildEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::childEvent(event);
-
+	self->QFontDialog::childEvent(event);
 }
 
-void QFontDialog_virtualbase_customEvent(void* self, QEvent* event) {
+void QFontDialog_virtualbase_customEvent(VirtualQFontDialog* self, QEvent* event) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::customEvent(event);
-
+	self->QFontDialog::customEvent(event);
 }
 
-void QFontDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QFontDialog_virtualbase_connectNotify(VirtualQFontDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::connectNotify(*signal);
-
+	self->QFontDialog::connectNotify(*signal);
 }
 
-void QFontDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QFontDialog_virtualbase_disconnectNotify(VirtualQFontDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQFontDialog*)(self) )->QFontDialog::disconnectNotify(*signal);
-
+	self->QFontDialog::disconnectNotify(*signal);
 }
 
 const QMetaObject* QFontDialog_staticMetaObject() { return &QFontDialog::staticMetaObject; }
-void QFontDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	self_cast->adjustPosition(param1);
 
+const QFontDialog_VTable* QFontDialog_vtbl(const VirtualQFontDialog* self) { return self->vtbl; }
+void* QFontDialog_vdata(const VirtualQFontDialog* self) { return self->vdata; }
+void QFontDialog_setVdata(VirtualQFontDialog* self, void* vdata) { self->vdata = vdata; }
+
+void QFontDialog_protectedbase_adjustPosition(VirtualQFontDialog* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QFontDialog_protectedbase_updateMicroFocus(void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QFontDialog_protectedbase_updateMicroFocus(VirtualQFontDialog* self) {
+	self->updateMicroFocus();
 }
 
-void QFontDialog_protectedbase_create(void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	self_cast->create();
-
+void QFontDialog_protectedbase_create(VirtualQFontDialog* self) {
+	self->create();
 }
 
-void QFontDialog_protectedbase_destroy(void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	self_cast->destroy();
-
+void QFontDialog_protectedbase_destroy(VirtualQFontDialog* self) {
+	self->destroy();
 }
 
-bool QFontDialog_protectedbase_focusNextChild(void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QFontDialog_protectedbase_focusNextChild(VirtualQFontDialog* self) {
+	return self->focusNextChild();
 }
 
-bool QFontDialog_protectedbase_focusPreviousChild(void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QFontDialog_protectedbase_focusPreviousChild(VirtualQFontDialog* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QFontDialog_protectedbase_sender(const void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QFontDialog_protectedbase_sender(const VirtualQFontDialog* self) {
+	return self->sender();
 }
 
-int QFontDialog_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QFontDialog_protectedbase_senderSignalIndex(const VirtualQFontDialog* self) {
+	return self->senderSignalIndex();
 }
 
-int QFontDialog_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QFontDialog_protectedbase_receivers(const VirtualQFontDialog* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QFontDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QFontDialog_protectedbase_isSignalConnected(const VirtualQFontDialog* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QFontDialog_delete(QFontDialog* self) {

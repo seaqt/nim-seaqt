@@ -30,15 +30,6 @@
 #include <QWidget>
 #include <qstyleoption.h>
 #include "gen_qstyleoption.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStyleOption* QStyleOption_new() {
 	return new QStyleOption();
 }

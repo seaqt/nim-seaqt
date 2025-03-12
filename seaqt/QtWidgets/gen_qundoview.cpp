@@ -55,43 +55,36 @@
 #include <QWidget>
 #include <qundoview.h>
 #include "gen_qundoview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQUndoView final : public QUndoView {
-	struct QUndoView_VTable* vtbl;
+	const QUndoView_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QUndoView_VTable* QUndoView_vtbl(const VirtualQUndoView* self);
+	friend void* QUndoView_vdata(const VirtualQUndoView* self);
+	friend void QUndoView_setVdata(VirtualQUndoView* self, void* vdata);
 
-	VirtualQUndoView(struct QUndoView_VTable* vtbl, QWidget* parent): QUndoView(parent), vtbl(vtbl) {};
-	VirtualQUndoView(struct QUndoView_VTable* vtbl): QUndoView(), vtbl(vtbl) {};
-	VirtualQUndoView(struct QUndoView_VTable* vtbl, QUndoStack* stack): QUndoView(stack), vtbl(vtbl) {};
-	VirtualQUndoView(struct QUndoView_VTable* vtbl, QUndoGroup* group): QUndoView(group), vtbl(vtbl) {};
-	VirtualQUndoView(struct QUndoView_VTable* vtbl, QUndoStack* stack, QWidget* parent): QUndoView(stack, parent), vtbl(vtbl) {};
-	VirtualQUndoView(struct QUndoView_VTable* vtbl, QUndoGroup* group, QWidget* parent): QUndoView(group, parent), vtbl(vtbl) {};
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata, QWidget* parent): QUndoView(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata): QUndoView(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata, QUndoStack* stack): QUndoView(stack), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata, QUndoGroup* group): QUndoView(group), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata, QUndoStack* stack, QWidget* parent): QUndoView(stack, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoView(const QUndoView_VTable* vtbl, void* vdata, QUndoGroup* group, QWidget* parent): QUndoView(group, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQUndoView() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQUndoView() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QUndoView::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QUndoView_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QUndoView_virtualbase_metaObject(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QUndoView::qt_metacast(param1);
@@ -99,14 +92,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QUndoView_virtualbase_metacast(void* self, const char* param1);
+	friend void* QUndoView_virtualbase_metacast(VirtualQUndoView* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QUndoView::qt_metacall(param1, param2, param3);
@@ -117,14 +109,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QUndoView_virtualbase_metacall(VirtualQUndoView* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect visualRect(const QModelIndex& index) const override {
 		if (vtbl->visualRect == 0) {
 			return QUndoView::visualRect(index);
@@ -134,16 +125,15 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QRect* callback_return_value = vtbl->visualRect(vtbl, this, sigval1);
+		QRect* callback_return_value = vtbl->visualRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QUndoView_virtualbase_visualRect(const void* self, QModelIndex* index);
+	friend QRect* QUndoView_virtualbase_visualRect(const VirtualQUndoView* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHint hint) override {
 		if (vtbl->scrollTo == 0) {
 			QUndoView::scrollTo(index, hint);
@@ -156,13 +146,12 @@ public:
 		QAbstractItemView::ScrollHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->scrollTo(vtbl, this, sigval1, sigval2);
+		vtbl->scrollTo(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_scrollTo(void* self, QModelIndex* index, int hint);
+	friend void QUndoView_virtualbase_scrollTo(VirtualQUndoView* self, QModelIndex* index, int hint);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex indexAt(const QPoint& p) const override {
 		if (vtbl->indexAt == 0) {
 			return QUndoView::indexAt(p);
@@ -172,16 +161,15 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&p_ret);
 
-		QModelIndex* callback_return_value = vtbl->indexAt(vtbl, this, sigval1);
+		QModelIndex* callback_return_value = vtbl->indexAt(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QUndoView_virtualbase_indexAt(const void* self, QPoint* p);
+	friend QModelIndex* QUndoView_virtualbase_indexAt(const VirtualQUndoView* self, QPoint* p);
 
-	// Subclass to allow providing a Go implementation
 	virtual void doItemsLayout() override {
 		if (vtbl->doItemsLayout == 0) {
 			QUndoView::doItemsLayout();
@@ -189,13 +177,12 @@ public:
 		}
 
 
-		vtbl->doItemsLayout(vtbl, this);
+		vtbl->doItemsLayout(this);
 
 	}
 
-	friend void QUndoView_virtualbase_doItemsLayout(void* self);
+	friend void QUndoView_virtualbase_doItemsLayout(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
 		if (vtbl->reset == 0) {
 			QUndoView::reset();
@@ -203,13 +190,12 @@ public:
 		}
 
 
-		vtbl->reset(vtbl, this);
+		vtbl->reset(this);
 
 	}
 
-	friend void QUndoView_virtualbase_reset(void* self);
+	friend void QUndoView_virtualbase_reset(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setRootIndex(const QModelIndex& index) override {
 		if (vtbl->setRootIndex == 0) {
 			QUndoView::setRootIndex(index);
@@ -220,13 +206,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->setRootIndex(vtbl, this, sigval1);
+		vtbl->setRootIndex(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_setRootIndex(void* self, QModelIndex* index);
+	friend void QUndoView_virtualbase_setRootIndex(VirtualQUndoView* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QUndoView::event(e);
@@ -234,14 +219,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_event(void* self, QEvent* e);
+	friend bool QUndoView_virtualbase_event(VirtualQUndoView* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
 		if (vtbl->scrollContentsBy == 0) {
 			QUndoView::scrollContentsBy(dx, dy);
@@ -251,13 +235,12 @@ public:
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
+		vtbl->scrollContentsBy(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_scrollContentsBy(void* self, int dx, int dy);
+	friend void QUndoView_virtualbase_scrollContentsBy(VirtualQUndoView* self, int dx, int dy);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QList<int>& roles) override {
 		if (vtbl->dataChanged == 0) {
 			QUndoView::dataChanged(topLeft, bottomRight, roles);
@@ -281,13 +264,12 @@ public:
 		roles_out.data = static_cast<void*>(roles_arr);
 		struct miqt_array /* of int */  sigval3 = roles_out;
 
-		vtbl->dataChanged(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->dataChanged(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QUndoView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
+	friend void QUndoView_virtualbase_dataChanged(VirtualQUndoView* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsInserted(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsInserted == 0) {
 			QUndoView::rowsInserted(parent, start, end);
@@ -300,13 +282,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsInserted(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsInserted(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QUndoView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end);
+	friend void QUndoView_virtualbase_rowsInserted(VirtualQUndoView* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsAboutToBeRemoved(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsAboutToBeRemoved == 0) {
 			QUndoView::rowsAboutToBeRemoved(parent, start, end);
@@ -319,13 +300,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsAboutToBeRemoved(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsAboutToBeRemoved(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QUndoView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end);
+	friend void QUndoView_virtualbase_rowsAboutToBeRemoved(VirtualQUndoView* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QUndoView::mouseMoveEvent(e);
@@ -334,13 +314,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
+	friend void QUndoView_virtualbase_mouseMoveEvent(VirtualQUndoView* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QUndoView::mouseReleaseEvent(e);
@@ -349,13 +328,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QUndoView_virtualbase_mouseReleaseEvent(VirtualQUndoView* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QUndoView::wheelEvent(e);
@@ -364,13 +342,12 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QUndoView_virtualbase_wheelEvent(VirtualQUndoView* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QUndoView::timerEvent(e);
@@ -379,13 +356,12 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QUndoView_virtualbase_timerEvent(VirtualQUndoView* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
 		if (vtbl->resizeEvent == 0) {
 			QUndoView::resizeEvent(e);
@@ -394,13 +370,12 @@ public:
 
 		QResizeEvent* sigval1 = e;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_resizeEvent(void* self, QResizeEvent* e);
+	friend void QUndoView_virtualbase_resizeEvent(VirtualQUndoView* self, QResizeEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* e) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QUndoView::dragMoveEvent(e);
@@ -409,13 +384,12 @@ public:
 
 		QDragMoveEvent* sigval1 = e;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e);
+	friend void QUndoView_virtualbase_dragMoveEvent(VirtualQUndoView* self, QDragMoveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* e) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QUndoView::dragLeaveEvent(e);
@@ -424,13 +398,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = e;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e);
+	friend void QUndoView_virtualbase_dragLeaveEvent(VirtualQUndoView* self, QDragLeaveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* e) override {
 		if (vtbl->dropEvent == 0) {
 			QUndoView::dropEvent(e);
@@ -439,13 +412,12 @@ public:
 
 		QDropEvent* sigval1 = e;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_dropEvent(void* self, QDropEvent* e);
+	friend void QUndoView_virtualbase_dropEvent(VirtualQUndoView* self, QDropEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void startDrag(Qt::DropActions supportedActions) override {
 		if (vtbl->startDrag == 0) {
 			QUndoView::startDrag(supportedActions);
@@ -455,13 +427,12 @@ public:
 		Qt::DropActions supportedActions_ret = supportedActions;
 		int sigval1 = static_cast<int>(supportedActions_ret);
 
-		vtbl->startDrag(vtbl, this, sigval1);
+		vtbl->startDrag(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_startDrag(void* self, int supportedActions);
+	friend void QUndoView_virtualbase_startDrag(VirtualQUndoView* self, int supportedActions);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initViewItemOption(QStyleOptionViewItem* option) const override {
 		if (vtbl->initViewItemOption == 0) {
 			QUndoView::initViewItemOption(option);
@@ -470,13 +441,12 @@ public:
 
 		QStyleOptionViewItem* sigval1 = option;
 
-		vtbl->initViewItemOption(vtbl, this, sigval1);
+		vtbl->initViewItemOption(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_initViewItemOption(const void* self, QStyleOptionViewItem* option);
+	friend void QUndoView_virtualbase_initViewItemOption(const VirtualQUndoView* self, QStyleOptionViewItem* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			QUndoView::paintEvent(e);
@@ -485,41 +455,38 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_paintEvent(void* self, QPaintEvent* e);
+	friend void QUndoView_virtualbase_paintEvent(VirtualQUndoView* self, QPaintEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int horizontalOffset() const override {
 		if (vtbl->horizontalOffset == 0) {
 			return QUndoView::horizontalOffset();
 		}
 
 
-		int callback_return_value = vtbl->horizontalOffset(vtbl, this);
+		int callback_return_value = vtbl->horizontalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_horizontalOffset(const void* self);
+	friend int QUndoView_virtualbase_horizontalOffset(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int verticalOffset() const override {
 		if (vtbl->verticalOffset == 0) {
 			return QUndoView::verticalOffset();
 		}
 
 
-		int callback_return_value = vtbl->verticalOffset(vtbl, this);
+		int callback_return_value = vtbl->verticalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_verticalOffset(const void* self);
+	friend int QUndoView_virtualbase_verticalOffset(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override {
 		if (vtbl->moveCursor == 0) {
 			return QUndoView::moveCursor(cursorAction, modifiers);
@@ -530,16 +497,15 @@ public:
 		Qt::KeyboardModifiers modifiers_ret = modifiers;
 		int sigval2 = static_cast<int>(modifiers_ret);
 
-		QModelIndex* callback_return_value = vtbl->moveCursor(vtbl, this, sigval1, sigval2);
+		QModelIndex* callback_return_value = vtbl->moveCursor(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QUndoView_virtualbase_moveCursor(void* self, int cursorAction, int modifiers);
+	friend QModelIndex* QUndoView_virtualbase_moveCursor(VirtualQUndoView* self, int cursorAction, int modifiers);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->setSelection == 0) {
 			QUndoView::setSelection(rect, command);
@@ -552,13 +518,12 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->setSelection(vtbl, this, sigval1, sigval2);
+		vtbl->setSelection(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_setSelection(void* self, QRect* rect, int command);
+	friend void QUndoView_virtualbase_setSelection(VirtualQUndoView* self, QRect* rect, int command);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRegion visualRegionForSelection(const QItemSelection& selection) const override {
 		if (vtbl->visualRegionForSelection == 0) {
 			return QUndoView::visualRegionForSelection(selection);
@@ -568,23 +533,22 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
-		QRegion* callback_return_value = vtbl->visualRegionForSelection(vtbl, this, sigval1);
+		QRegion* callback_return_value = vtbl->visualRegionForSelection(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRegion* QUndoView_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection);
+	friend QRegion* QUndoView_virtualbase_visualRegionForSelection(const VirtualQUndoView* self, QItemSelection* selection);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList selectedIndexes() const override {
 		if (vtbl->selectedIndexes == 0) {
 			return QUndoView::selectedIndexes();
 		}
 
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(vtbl, this);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(this);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -596,9 +560,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of QModelIndex* */  QUndoView_virtualbase_selectedIndexes(const void* self);
+	friend struct miqt_array /* of QModelIndex* */  QUndoView_virtualbase_selectedIndexes(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometries() override {
 		if (vtbl->updateGeometries == 0) {
 			QUndoView::updateGeometries();
@@ -606,13 +569,12 @@ public:
 		}
 
 
-		vtbl->updateGeometries(vtbl, this);
+		vtbl->updateGeometries(this);
 
 	}
 
-	friend void QUndoView_virtualbase_updateGeometries(void* self);
+	friend void QUndoView_virtualbase_updateGeometries(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isIndexHidden(const QModelIndex& index) const override {
 		if (vtbl->isIndexHidden == 0) {
 			return QUndoView::isIndexHidden(index);
@@ -622,14 +584,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		bool callback_return_value = vtbl->isIndexHidden(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isIndexHidden(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_isIndexHidden(const void* self, QModelIndex* index);
+	friend bool QUndoView_virtualbase_isIndexHidden(const VirtualQUndoView* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override {
 		if (vtbl->selectionChanged == 0) {
 			QUndoView::selectionChanged(selected, deselected);
@@ -643,13 +604,12 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
 
-		vtbl->selectionChanged(vtbl, this, sigval1, sigval2);
+		vtbl->selectionChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected);
+	friend void QUndoView_virtualbase_selectionChanged(VirtualQUndoView* self, QItemSelection* selected, QItemSelection* deselected);
 
-	// Subclass to allow providing a Go implementation
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous) override {
 		if (vtbl->currentChanged == 0) {
 			QUndoView::currentChanged(current, previous);
@@ -663,29 +623,27 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
 
-		vtbl->currentChanged(vtbl, this, sigval1, sigval2);
+		vtbl->currentChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous);
+	friend void QUndoView_virtualbase_currentChanged(VirtualQUndoView* self, QModelIndex* current, QModelIndex* previous);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
 		if (vtbl->viewportSizeHint == 0) {
 			return QUndoView::viewportSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->viewportSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QUndoView_virtualbase_viewportSizeHint(const void* self);
+	friend QSize* QUndoView_virtualbase_viewportSizeHint(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setModel(QAbstractItemModel* model) override {
 		if (vtbl->setModel == 0) {
 			QUndoView::setModel(model);
@@ -694,13 +652,12 @@ public:
 
 		QAbstractItemModel* sigval1 = model;
 
-		vtbl->setModel(vtbl, this, sigval1);
+		vtbl->setModel(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_setModel(void* self, QAbstractItemModel* model);
+	friend void QUndoView_virtualbase_setModel(VirtualQUndoView* self, QAbstractItemModel* model);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelectionModel(QItemSelectionModel* selectionModel) override {
 		if (vtbl->setSelectionModel == 0) {
 			QUndoView::setSelectionModel(selectionModel);
@@ -709,13 +666,12 @@ public:
 
 		QItemSelectionModel* sigval1 = selectionModel;
 
-		vtbl->setSelectionModel(vtbl, this, sigval1);
+		vtbl->setSelectionModel(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
+	friend void QUndoView_virtualbase_setSelectionModel(VirtualQUndoView* self, QItemSelectionModel* selectionModel);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyboardSearch(const QString& search) override {
 		if (vtbl->keyboardSearch == 0) {
 			QUndoView::keyboardSearch(search);
@@ -731,13 +687,12 @@ public:
 		memcpy(search_ms.data, search_b.data(), search_ms.len);
 		struct miqt_string sigval1 = search_ms;
 
-		vtbl->keyboardSearch(vtbl, this, sigval1);
+		vtbl->keyboardSearch(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_keyboardSearch(void* self, struct miqt_string search);
+	friend void QUndoView_virtualbase_keyboardSearch(VirtualQUndoView* self, struct miqt_string search);
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForRow(int row) const override {
 		if (vtbl->sizeHintForRow == 0) {
 			return QUndoView::sizeHintForRow(row);
@@ -745,14 +700,13 @@ public:
 
 		int sigval1 = row;
 
-		int callback_return_value = vtbl->sizeHintForRow(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForRow(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_sizeHintForRow(const void* self, int row);
+	friend int QUndoView_virtualbase_sizeHintForRow(const VirtualQUndoView* self, int row);
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForColumn(int column) const override {
 		if (vtbl->sizeHintForColumn == 0) {
 			return QUndoView::sizeHintForColumn(column);
@@ -760,14 +714,13 @@ public:
 
 		int sigval1 = column;
 
-		int callback_return_value = vtbl->sizeHintForColumn(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForColumn(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_sizeHintForColumn(const void* self, int column);
+	friend int QUndoView_virtualbase_sizeHintForColumn(const VirtualQUndoView* self, int column);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractItemDelegate* itemDelegateForIndex(const QModelIndex& index) const override {
 		if (vtbl->itemDelegateForIndex == 0) {
 			return QUndoView::itemDelegateForIndex(index);
@@ -777,14 +730,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QAbstractItemDelegate* callback_return_value = vtbl->itemDelegateForIndex(vtbl, this, sigval1);
+		QAbstractItemDelegate* callback_return_value = vtbl->itemDelegateForIndex(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QAbstractItemDelegate* QUndoView_virtualbase_itemDelegateForIndex(const void* self, QModelIndex* index);
+	friend QAbstractItemDelegate* QUndoView_virtualbase_itemDelegateForIndex(const VirtualQUndoView* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QUndoView::inputMethodQuery(query);
@@ -793,16 +745,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QUndoView_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QUndoView_virtualbase_inputMethodQuery(const VirtualQUndoView* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectAll() override {
 		if (vtbl->selectAll == 0) {
 			QUndoView::selectAll();
@@ -810,13 +761,12 @@ public:
 		}
 
 
-		vtbl->selectAll(vtbl, this);
+		vtbl->selectAll(this);
 
 	}
 
-	friend void QUndoView_virtualbase_selectAll(void* self);
+	friend void QUndoView_virtualbase_selectAll(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorData() override {
 		if (vtbl->updateEditorData == 0) {
 			QUndoView::updateEditorData();
@@ -824,13 +774,12 @@ public:
 		}
 
 
-		vtbl->updateEditorData(vtbl, this);
+		vtbl->updateEditorData(this);
 
 	}
 
-	friend void QUndoView_virtualbase_updateEditorData(void* self);
+	friend void QUndoView_virtualbase_updateEditorData(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorGeometries() override {
 		if (vtbl->updateEditorGeometries == 0) {
 			QUndoView::updateEditorGeometries();
@@ -838,13 +787,12 @@ public:
 		}
 
 
-		vtbl->updateEditorGeometries(vtbl, this);
+		vtbl->updateEditorGeometries(this);
 
 	}
 
-	friend void QUndoView_virtualbase_updateEditorGeometries(void* self);
+	friend void QUndoView_virtualbase_updateEditorGeometries(VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarAction(int action) override {
 		if (vtbl->verticalScrollbarAction == 0) {
 			QUndoView::verticalScrollbarAction(action);
@@ -853,13 +801,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->verticalScrollbarAction(vtbl, this, sigval1);
+		vtbl->verticalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_verticalScrollbarAction(void* self, int action);
+	friend void QUndoView_virtualbase_verticalScrollbarAction(VirtualQUndoView* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarAction(int action) override {
 		if (vtbl->horizontalScrollbarAction == 0) {
 			QUndoView::horizontalScrollbarAction(action);
@@ -868,13 +815,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->horizontalScrollbarAction(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_horizontalScrollbarAction(void* self, int action);
+	friend void QUndoView_virtualbase_horizontalScrollbarAction(VirtualQUndoView* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarValueChanged(int value) override {
 		if (vtbl->verticalScrollbarValueChanged == 0) {
 			QUndoView::verticalScrollbarValueChanged(value);
@@ -883,13 +829,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->verticalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->verticalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_verticalScrollbarValueChanged(void* self, int value);
+	friend void QUndoView_virtualbase_verticalScrollbarValueChanged(VirtualQUndoView* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarValueChanged(int value) override {
 		if (vtbl->horizontalScrollbarValueChanged == 0) {
 			QUndoView::horizontalScrollbarValueChanged(value);
@@ -898,13 +843,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->horizontalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_horizontalScrollbarValueChanged(void* self, int value);
+	friend void QUndoView_virtualbase_horizontalScrollbarValueChanged(VirtualQUndoView* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) override {
 		if (vtbl->closeEditor == 0) {
 			QUndoView::closeEditor(editor, hint);
@@ -915,13 +859,12 @@ public:
 		QAbstractItemDelegate::EndEditHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->closeEditor(vtbl, this, sigval1, sigval2);
+		vtbl->closeEditor(this, sigval1, sigval2);
 
 	}
 
-	friend void QUndoView_virtualbase_closeEditor(void* self, QWidget* editor, int hint);
+	friend void QUndoView_virtualbase_closeEditor(VirtualQUndoView* self, QWidget* editor, int hint);
 
-	// Subclass to allow providing a Go implementation
 	virtual void commitData(QWidget* editor) override {
 		if (vtbl->commitData == 0) {
 			QUndoView::commitData(editor);
@@ -930,13 +873,12 @@ public:
 
 		QWidget* sigval1 = editor;
 
-		vtbl->commitData(vtbl, this, sigval1);
+		vtbl->commitData(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_commitData(void* self, QWidget* editor);
+	friend void QUndoView_virtualbase_commitData(VirtualQUndoView* self, QWidget* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual void editorDestroyed(QObject* editor) override {
 		if (vtbl->editorDestroyed == 0) {
 			QUndoView::editorDestroyed(editor);
@@ -945,13 +887,12 @@ public:
 
 		QObject* sigval1 = editor;
 
-		vtbl->editorDestroyed(vtbl, this, sigval1);
+		vtbl->editorDestroyed(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_editorDestroyed(void* self, QObject* editor);
+	friend void QUndoView_virtualbase_editorDestroyed(VirtualQUndoView* self, QObject* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
 		if (vtbl->edit2 == 0) {
 			return QUndoView::edit(index, trigger, event);
@@ -964,14 +905,13 @@ public:
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
 
-		bool callback_return_value = vtbl->edit2(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QUndoView_virtualbase_edit2(VirtualQUndoView* self, QModelIndex* index, int trigger, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
 			return QUndoView::selectionCommand(index, event);
@@ -982,14 +922,13 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QEvent* sigval2 = (QEvent*) event;
 
-		int callback_return_value = vtbl->selectionCommand(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->selectionCommand(this, sigval1, sigval2);
 
 		return static_cast<QItemSelectionModel::SelectionFlags>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event);
+	friend int QUndoView_virtualbase_selectionCommand(const VirtualQUndoView* self, QModelIndex* index, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QUndoView::focusNextPrevChild(next);
@@ -997,14 +936,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QUndoView_virtualbase_focusNextPrevChild(VirtualQUndoView* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
 		if (vtbl->viewportEvent == 0) {
 			return QUndoView::viewportEvent(event);
@@ -1012,14 +950,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_viewportEvent(void* self, QEvent* event);
+	friend bool QUndoView_virtualbase_viewportEvent(VirtualQUndoView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QUndoView::mousePressEvent(event);
@@ -1028,13 +965,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QUndoView_virtualbase_mousePressEvent(VirtualQUndoView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QUndoView::mouseDoubleClickEvent(event);
@@ -1043,13 +979,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QUndoView_virtualbase_mouseDoubleClickEvent(VirtualQUndoView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QUndoView::dragEnterEvent(event);
@@ -1058,13 +993,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QUndoView_virtualbase_dragEnterEvent(VirtualQUndoView* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QUndoView::focusInEvent(event);
@@ -1073,13 +1007,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QUndoView_virtualbase_focusInEvent(VirtualQUndoView* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QUndoView::focusOutEvent(event);
@@ -1088,13 +1021,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QUndoView_virtualbase_focusOutEvent(VirtualQUndoView* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QUndoView::keyPressEvent(event);
@@ -1103,13 +1035,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QUndoView_virtualbase_keyPressEvent(VirtualQUndoView* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QUndoView::inputMethodEvent(event);
@@ -1118,13 +1049,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QUndoView_virtualbase_inputMethodEvent(VirtualQUndoView* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QUndoView::eventFilter(object, event);
@@ -1133,46 +1063,43 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QUndoView_virtualbase_eventFilter(VirtualQUndoView* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QUndoView::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QUndoView_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QUndoView_virtualbase_minimumSizeHint(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QUndoView::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QUndoView_virtualbase_sizeHint(const void* self);
+	friend QSize* QUndoView_virtualbase_sizeHint(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
 		if (vtbl->setupViewport == 0) {
 			QUndoView::setupViewport(viewport);
@@ -1181,13 +1108,12 @@ public:
 
 		QWidget* sigval1 = viewport;
 
-		vtbl->setupViewport(vtbl, this, sigval1);
+		vtbl->setupViewport(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_setupViewport(void* self, QWidget* viewport);
+	friend void QUndoView_virtualbase_setupViewport(VirtualQUndoView* self, QWidget* viewport);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QUndoView::contextMenuEvent(param1);
@@ -1196,13 +1122,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QUndoView_virtualbase_contextMenuEvent(VirtualQUndoView* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QUndoView::changeEvent(param1);
@@ -1211,13 +1136,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QUndoView_virtualbase_changeEvent(VirtualQUndoView* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QUndoView::initStyleOption(option);
@@ -1226,27 +1150,25 @@ public:
 
 		QStyleOptionFrame* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QUndoView_virtualbase_initStyleOption(const VirtualQUndoView* self, QStyleOptionFrame* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QUndoView::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_devType(const void* self);
+	friend int QUndoView_virtualbase_devType(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QUndoView::setVisible(visible);
@@ -1255,13 +1177,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_setVisible(void* self, bool visible);
+	friend void QUndoView_virtualbase_setVisible(VirtualQUndoView* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QUndoView::heightForWidth(param1);
@@ -1269,42 +1190,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QUndoView_virtualbase_heightForWidth(const VirtualQUndoView* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QUndoView::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QUndoView_virtualbase_hasHeightForWidth(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QUndoView::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QUndoView_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QUndoView_virtualbase_paintEngine(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QUndoView::keyReleaseEvent(event);
@@ -1313,13 +1231,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QUndoView_virtualbase_keyReleaseEvent(VirtualQUndoView* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QUndoView::enterEvent(event);
@@ -1328,13 +1245,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QUndoView_virtualbase_enterEvent(VirtualQUndoView* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QUndoView::leaveEvent(event);
@@ -1343,13 +1259,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QUndoView_virtualbase_leaveEvent(VirtualQUndoView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QUndoView::moveEvent(event);
@@ -1358,13 +1273,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QUndoView_virtualbase_moveEvent(VirtualQUndoView* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QUndoView::closeEvent(event);
@@ -1373,13 +1287,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QUndoView_virtualbase_closeEvent(VirtualQUndoView* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QUndoView::tabletEvent(event);
@@ -1388,13 +1301,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QUndoView_virtualbase_tabletEvent(VirtualQUndoView* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QUndoView::actionEvent(event);
@@ -1403,13 +1315,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QUndoView_virtualbase_actionEvent(VirtualQUndoView* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QUndoView::showEvent(event);
@@ -1418,13 +1329,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QUndoView_virtualbase_showEvent(VirtualQUndoView* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QUndoView::hideEvent(event);
@@ -1433,13 +1343,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QUndoView_virtualbase_hideEvent(VirtualQUndoView* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QUndoView::nativeEvent(eventType, message, result);
@@ -1455,14 +1364,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QUndoView_virtualbase_nativeEvent(VirtualQUndoView* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QUndoView::metric(param1);
@@ -1471,14 +1379,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoView_virtualbase_metric(const void* self, int param1);
+	friend int QUndoView_virtualbase_metric(const VirtualQUndoView* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QUndoView::initPainter(painter);
@@ -1487,13 +1394,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QUndoView_virtualbase_initPainter(const VirtualQUndoView* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QUndoView::redirected(offset);
@@ -1501,28 +1407,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QUndoView_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QUndoView_virtualbase_redirected(const VirtualQUndoView* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QUndoView::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QUndoView_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QUndoView_virtualbase_sharedPainter(const VirtualQUndoView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QUndoView::childEvent(event);
@@ -1531,13 +1435,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QUndoView_virtualbase_childEvent(VirtualQUndoView* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QUndoView::customEvent(event);
@@ -1546,13 +1449,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QUndoView_virtualbase_customEvent(VirtualQUndoView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QUndoView::connectNotify(signal);
@@ -1563,13 +1465,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QUndoView_virtualbase_connectNotify(VirtualQUndoView* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QUndoView::disconnectNotify(signal);
@@ -1580,64 +1481,64 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QUndoView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QUndoView_virtualbase_disconnectNotify(VirtualQUndoView* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QUndoView_protectedbase_resizeContents(void* self, int width, int height);
-	friend QSize* QUndoView_protectedbase_contentsSize(const void* self);
-	friend QRect* QUndoView_protectedbase_rectForIndex(const void* self, QModelIndex* index);
-	friend void QUndoView_protectedbase_setPositionForIndex(void* self, QPoint* position, QModelIndex* index);
-	friend int QUndoView_protectedbase_state(const void* self);
-	friend void QUndoView_protectedbase_setState(void* self, int state);
-	friend void QUndoView_protectedbase_scheduleDelayedItemsLayout(void* self);
-	friend void QUndoView_protectedbase_executeDelayedItemsLayout(void* self);
-	friend void QUndoView_protectedbase_setDirtyRegion(void* self, QRegion* region);
-	friend void QUndoView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy);
-	friend QPoint* QUndoView_protectedbase_dirtyRegionOffset(const void* self);
-	friend void QUndoView_protectedbase_startAutoScroll(void* self);
-	friend void QUndoView_protectedbase_stopAutoScroll(void* self);
-	friend void QUndoView_protectedbase_doAutoScroll(void* self);
-	friend int QUndoView_protectedbase_dropIndicatorPosition(const void* self);
-	friend void QUndoView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
-	friend QMargins* QUndoView_protectedbase_viewportMargins(const void* self);
-	friend void QUndoView_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QUndoView_protectedbase_updateMicroFocus(void* self);
-	friend void QUndoView_protectedbase_create(void* self);
-	friend void QUndoView_protectedbase_destroy(void* self);
-	friend bool QUndoView_protectedbase_focusNextChild(void* self);
-	friend bool QUndoView_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QUndoView_protectedbase_sender(const void* self);
-	friend int QUndoView_protectedbase_senderSignalIndex(const void* self);
-	friend int QUndoView_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QUndoView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QUndoView_protectedbase_resizeContents(VirtualQUndoView* self, int width, int height);
+	friend QSize* QUndoView_protectedbase_contentsSize(const VirtualQUndoView* self);
+	friend QRect* QUndoView_protectedbase_rectForIndex(const VirtualQUndoView* self, QModelIndex* index);
+	friend void QUndoView_protectedbase_setPositionForIndex(VirtualQUndoView* self, QPoint* position, QModelIndex* index);
+	friend int QUndoView_protectedbase_state(const VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_setState(VirtualQUndoView* self, int state);
+	friend void QUndoView_protectedbase_scheduleDelayedItemsLayout(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_executeDelayedItemsLayout(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_setDirtyRegion(VirtualQUndoView* self, QRegion* region);
+	friend void QUndoView_protectedbase_scrollDirtyRegion(VirtualQUndoView* self, int dx, int dy);
+	friend QPoint* QUndoView_protectedbase_dirtyRegionOffset(const VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_startAutoScroll(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_stopAutoScroll(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_doAutoScroll(VirtualQUndoView* self);
+	friend int QUndoView_protectedbase_dropIndicatorPosition(const VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_setViewportMargins(VirtualQUndoView* self, int left, int top, int right, int bottom);
+	friend QMargins* QUndoView_protectedbase_viewportMargins(const VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_drawFrame(VirtualQUndoView* self, QPainter* param1);
+	friend void QUndoView_protectedbase_updateMicroFocus(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_create(VirtualQUndoView* self);
+	friend void QUndoView_protectedbase_destroy(VirtualQUndoView* self);
+	friend bool QUndoView_protectedbase_focusNextChild(VirtualQUndoView* self);
+	friend bool QUndoView_protectedbase_focusPreviousChild(VirtualQUndoView* self);
+	friend QObject* QUndoView_protectedbase_sender(const VirtualQUndoView* self);
+	friend int QUndoView_protectedbase_senderSignalIndex(const VirtualQUndoView* self);
+	friend int QUndoView_protectedbase_receivers(const VirtualQUndoView* self, const char* signal);
+	friend bool QUndoView_protectedbase_isSignalConnected(const VirtualQUndoView* self, QMetaMethod* signal);
 };
 
-QUndoView* QUndoView_new(struct QUndoView_VTable* vtbl, QWidget* parent) {
-	return new VirtualQUndoView(vtbl, parent);
+VirtualQUndoView* QUndoView_new(const QUndoView_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQUndoView(vtbl, vdata, parent);
 }
 
-QUndoView* QUndoView_new2(struct QUndoView_VTable* vtbl) {
-	return new VirtualQUndoView(vtbl);
+VirtualQUndoView* QUndoView_new2(const QUndoView_VTable* vtbl, void* vdata) {
+	return new VirtualQUndoView(vtbl, vdata);
 }
 
-QUndoView* QUndoView_new3(struct QUndoView_VTable* vtbl, QUndoStack* stack) {
-	return new VirtualQUndoView(vtbl, stack);
+VirtualQUndoView* QUndoView_new3(const QUndoView_VTable* vtbl, void* vdata, QUndoStack* stack) {
+	return new VirtualQUndoView(vtbl, vdata, stack);
 }
 
-QUndoView* QUndoView_new4(struct QUndoView_VTable* vtbl, QUndoGroup* group) {
-	return new VirtualQUndoView(vtbl, group);
+VirtualQUndoView* QUndoView_new4(const QUndoView_VTable* vtbl, void* vdata, QUndoGroup* group) {
+	return new VirtualQUndoView(vtbl, vdata, group);
 }
 
-QUndoView* QUndoView_new5(struct QUndoView_VTable* vtbl, QUndoStack* stack, QWidget* parent) {
-	return new VirtualQUndoView(vtbl, stack, parent);
+VirtualQUndoView* QUndoView_new5(const QUndoView_VTable* vtbl, void* vdata, QUndoStack* stack, QWidget* parent) {
+	return new VirtualQUndoView(vtbl, vdata, stack, parent);
 }
 
-QUndoView* QUndoView_new6(struct QUndoView_VTable* vtbl, QUndoGroup* group, QWidget* parent) {
-	return new VirtualQUndoView(vtbl, group, parent);
+VirtualQUndoView* QUndoView_new6(const QUndoView_VTable* vtbl, void* vdata, QUndoGroup* group, QWidget* parent) {
+	return new VirtualQUndoView(vtbl, vdata, group, parent);
 }
 
 void QUndoView_virtbase(QUndoView* src, QListView** outptr_QListView) {
@@ -1729,73 +1630,62 @@ struct miqt_string QUndoView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QUndoView_virtualbase_metaObject(const void* self) {
+QMetaObject* QUndoView_virtualbase_metaObject(const VirtualQUndoView* self) {
 
-	return (QMetaObject*) ( (const VirtualQUndoView*)(self) )->QUndoView::metaObject();
-
+	return (QMetaObject*) self->QUndoView::metaObject();
 }
 
-void* QUndoView_virtualbase_metacast(void* self, const char* param1) {
+void* QUndoView_virtualbase_metacast(VirtualQUndoView* self, const char* param1) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::qt_metacast(param1);
-
+	return self->QUndoView::qt_metacast(param1);
 }
 
-int QUndoView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QUndoView_virtualbase_metacall(VirtualQUndoView* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QUndoView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRect* QUndoView_virtualbase_visualRect(const void* self, QModelIndex* index) {
+QRect* QUndoView_virtualbase_visualRect(const VirtualQUndoView* self, QModelIndex* index) {
 
-	return new QRect(( (const VirtualQUndoView*)(self) )->QUndoView::visualRect(*index));
-
+	return new QRect(self->QUndoView::visualRect(*index));
 }
 
-void QUndoView_virtualbase_scrollTo(void* self, QModelIndex* index, int hint) {
+void QUndoView_virtualbase_scrollTo(VirtualQUndoView* self, QModelIndex* index, int hint) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::scrollTo(*index, static_cast<VirtualQUndoView::ScrollHint>(hint));
-
+	self->QUndoView::scrollTo(*index, static_cast<VirtualQUndoView::ScrollHint>(hint));
 }
 
-QModelIndex* QUndoView_virtualbase_indexAt(const void* self, QPoint* p) {
+QModelIndex* QUndoView_virtualbase_indexAt(const VirtualQUndoView* self, QPoint* p) {
 
-	return new QModelIndex(( (const VirtualQUndoView*)(self) )->QUndoView::indexAt(*p));
-
+	return new QModelIndex(self->QUndoView::indexAt(*p));
 }
 
-void QUndoView_virtualbase_doItemsLayout(void* self) {
+void QUndoView_virtualbase_doItemsLayout(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::doItemsLayout();
-
+	self->QUndoView::doItemsLayout();
 }
 
-void QUndoView_virtualbase_reset(void* self) {
+void QUndoView_virtualbase_reset(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::reset();
-
+	self->QUndoView::reset();
 }
 
-void QUndoView_virtualbase_setRootIndex(void* self, QModelIndex* index) {
+void QUndoView_virtualbase_setRootIndex(VirtualQUndoView* self, QModelIndex* index) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setRootIndex(*index);
-
+	self->QUndoView::setRootIndex(*index);
 }
 
-bool QUndoView_virtualbase_event(void* self, QEvent* e) {
+bool QUndoView_virtualbase_event(VirtualQUndoView* self, QEvent* e) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::event(e);
-
+	return self->QUndoView::event(e);
 }
 
-void QUndoView_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
+void QUndoView_virtualbase_scrollContentsBy(VirtualQUndoView* self, int dx, int dy) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
-
+	self->QUndoView::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QUndoView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
+void QUndoView_virtualbase_dataChanged(VirtualQUndoView* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
 	QList<int> roles_QList;
 	roles_QList.reserve(roles.len);
 	int* roles_arr = static_cast<int*>(roles.data);
@@ -1803,121 +1693,102 @@ void QUndoView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelI
 		roles_QList.push_back(static_cast<int>(roles_arr[i]));
 	}
 
-	( (VirtualQUndoView*)(self) )->QUndoView::dataChanged(*topLeft, *bottomRight, roles_QList);
-
+	self->QUndoView::dataChanged(*topLeft, *bottomRight, roles_QList);
 }
 
-void QUndoView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end) {
+void QUndoView_virtualbase_rowsInserted(VirtualQUndoView* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QUndoView::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QUndoView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end) {
+void QUndoView_virtualbase_rowsAboutToBeRemoved(VirtualQUndoView* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QUndoView::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QUndoView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
+void QUndoView_virtualbase_mouseMoveEvent(VirtualQUndoView* self, QMouseEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::mouseMoveEvent(e);
-
+	self->QUndoView::mouseMoveEvent(e);
 }
 
-void QUndoView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QUndoView_virtualbase_mouseReleaseEvent(VirtualQUndoView* self, QMouseEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::mouseReleaseEvent(e);
-
+	self->QUndoView::mouseReleaseEvent(e);
 }
 
-void QUndoView_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QUndoView_virtualbase_wheelEvent(VirtualQUndoView* self, QWheelEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::wheelEvent(e);
-
+	self->QUndoView::wheelEvent(e);
 }
 
-void QUndoView_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QUndoView_virtualbase_timerEvent(VirtualQUndoView* self, QTimerEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::timerEvent(e);
-
+	self->QUndoView::timerEvent(e);
 }
 
-void QUndoView_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
+void QUndoView_virtualbase_resizeEvent(VirtualQUndoView* self, QResizeEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::resizeEvent(e);
-
+	self->QUndoView::resizeEvent(e);
 }
 
-void QUndoView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e) {
+void QUndoView_virtualbase_dragMoveEvent(VirtualQUndoView* self, QDragMoveEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::dragMoveEvent(e);
-
+	self->QUndoView::dragMoveEvent(e);
 }
 
-void QUndoView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e) {
+void QUndoView_virtualbase_dragLeaveEvent(VirtualQUndoView* self, QDragLeaveEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::dragLeaveEvent(e);
-
+	self->QUndoView::dragLeaveEvent(e);
 }
 
-void QUndoView_virtualbase_dropEvent(void* self, QDropEvent* e) {
+void QUndoView_virtualbase_dropEvent(VirtualQUndoView* self, QDropEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::dropEvent(e);
-
+	self->QUndoView::dropEvent(e);
 }
 
-void QUndoView_virtualbase_startDrag(void* self, int supportedActions) {
+void QUndoView_virtualbase_startDrag(VirtualQUndoView* self, int supportedActions) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::startDrag(static_cast<Qt::DropActions>(supportedActions));
-
+	self->QUndoView::startDrag(static_cast<Qt::DropActions>(supportedActions));
 }
 
-void QUndoView_virtualbase_initViewItemOption(const void* self, QStyleOptionViewItem* option) {
+void QUndoView_virtualbase_initViewItemOption(const VirtualQUndoView* self, QStyleOptionViewItem* option) {
 
-	( (const VirtualQUndoView*)(self) )->QUndoView::initViewItemOption(option);
-
+	self->QUndoView::initViewItemOption(option);
 }
 
-void QUndoView_virtualbase_paintEvent(void* self, QPaintEvent* e) {
+void QUndoView_virtualbase_paintEvent(VirtualQUndoView* self, QPaintEvent* e) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::paintEvent(e);
-
+	self->QUndoView::paintEvent(e);
 }
 
-int QUndoView_virtualbase_horizontalOffset(const void* self) {
+int QUndoView_virtualbase_horizontalOffset(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::horizontalOffset();
-
+	return self->QUndoView::horizontalOffset();
 }
 
-int QUndoView_virtualbase_verticalOffset(const void* self) {
+int QUndoView_virtualbase_verticalOffset(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::verticalOffset();
-
+	return self->QUndoView::verticalOffset();
 }
 
-QModelIndex* QUndoView_virtualbase_moveCursor(void* self, int cursorAction, int modifiers) {
+QModelIndex* QUndoView_virtualbase_moveCursor(VirtualQUndoView* self, int cursorAction, int modifiers) {
 
-	return new QModelIndex(( (VirtualQUndoView*)(self) )->QUndoView::moveCursor(static_cast<VirtualQUndoView::CursorAction>(cursorAction), static_cast<Qt::KeyboardModifiers>(modifiers)));
-
+	return new QModelIndex(self->QUndoView::moveCursor(static_cast<VirtualQUndoView::CursorAction>(cursorAction), static_cast<Qt::KeyboardModifiers>(modifiers)));
 }
 
-void QUndoView_virtualbase_setSelection(void* self, QRect* rect, int command) {
+void QUndoView_virtualbase_setSelection(VirtualQUndoView* self, QRect* rect, int command) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setSelection(*rect, static_cast<QItemSelectionModel::SelectionFlags>(command));
-
+	self->QUndoView::setSelection(*rect, static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-QRegion* QUndoView_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection) {
+QRegion* QUndoView_virtualbase_visualRegionForSelection(const VirtualQUndoView* self, QItemSelection* selection) {
 
-	return new QRegion(( (const VirtualQUndoView*)(self) )->QUndoView::visualRegionForSelection(*selection));
-
+	return new QRegion(self->QUndoView::visualRegionForSelection(*selection));
 }
 
-struct miqt_array /* of QModelIndex* */  QUndoView_virtualbase_selectedIndexes(const void* self) {
+struct miqt_array /* of QModelIndex* */  QUndoView_virtualbase_selectedIndexes(const VirtualQUndoView* self) {
 
-	QModelIndexList _ret = ( (const VirtualQUndoView*)(self) )->QUndoView::selectedIndexes();
+	QModelIndexList _ret = self->QUndoView::selectedIndexes();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1927,580 +1798,440 @@ struct miqt_array /* of QModelIndex* */  QUndoView_virtualbase_selectedIndexes(c
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-void QUndoView_virtualbase_updateGeometries(void* self) {
+void QUndoView_virtualbase_updateGeometries(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::updateGeometries();
-
+	self->QUndoView::updateGeometries();
 }
 
-bool QUndoView_virtualbase_isIndexHidden(const void* self, QModelIndex* index) {
+bool QUndoView_virtualbase_isIndexHidden(const VirtualQUndoView* self, QModelIndex* index) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::isIndexHidden(*index);
-
+	return self->QUndoView::isIndexHidden(*index);
 }
 
-void QUndoView_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected) {
+void QUndoView_virtualbase_selectionChanged(VirtualQUndoView* self, QItemSelection* selected, QItemSelection* deselected) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::selectionChanged(*selected, *deselected);
-
+	self->QUndoView::selectionChanged(*selected, *deselected);
 }
 
-void QUndoView_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous) {
+void QUndoView_virtualbase_currentChanged(VirtualQUndoView* self, QModelIndex* current, QModelIndex* previous) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::currentChanged(*current, *previous);
-
+	self->QUndoView::currentChanged(*current, *previous);
 }
 
-QSize* QUndoView_virtualbase_viewportSizeHint(const void* self) {
+QSize* QUndoView_virtualbase_viewportSizeHint(const VirtualQUndoView* self) {
 
-	return new QSize(( (const VirtualQUndoView*)(self) )->QUndoView::viewportSizeHint());
-
+	return new QSize(self->QUndoView::viewportSizeHint());
 }
 
-void QUndoView_virtualbase_setModel(void* self, QAbstractItemModel* model) {
+void QUndoView_virtualbase_setModel(VirtualQUndoView* self, QAbstractItemModel* model) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setModel(model);
-
+	self->QUndoView::setModel(model);
 }
 
-void QUndoView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel) {
+void QUndoView_virtualbase_setSelectionModel(VirtualQUndoView* self, QItemSelectionModel* selectionModel) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setSelectionModel(selectionModel);
-
+	self->QUndoView::setSelectionModel(selectionModel);
 }
 
-void QUndoView_virtualbase_keyboardSearch(void* self, struct miqt_string search) {
+void QUndoView_virtualbase_keyboardSearch(VirtualQUndoView* self, struct miqt_string search) {
 	QString search_QString = QString::fromUtf8(search.data, search.len);
 
-	( (VirtualQUndoView*)(self) )->QUndoView::keyboardSearch(search_QString);
-
+	self->QUndoView::keyboardSearch(search_QString);
 }
 
-int QUndoView_virtualbase_sizeHintForRow(const void* self, int row) {
+int QUndoView_virtualbase_sizeHintForRow(const VirtualQUndoView* self, int row) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::sizeHintForRow(static_cast<int>(row));
-
+	return self->QUndoView::sizeHintForRow(static_cast<int>(row));
 }
 
-int QUndoView_virtualbase_sizeHintForColumn(const void* self, int column) {
+int QUndoView_virtualbase_sizeHintForColumn(const VirtualQUndoView* self, int column) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::sizeHintForColumn(static_cast<int>(column));
-
+	return self->QUndoView::sizeHintForColumn(static_cast<int>(column));
 }
 
-QAbstractItemDelegate* QUndoView_virtualbase_itemDelegateForIndex(const void* self, QModelIndex* index) {
+QAbstractItemDelegate* QUndoView_virtualbase_itemDelegateForIndex(const VirtualQUndoView* self, QModelIndex* index) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::itemDelegateForIndex(*index);
-
+	return self->QUndoView::itemDelegateForIndex(*index);
 }
 
-QVariant* QUndoView_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QUndoView_virtualbase_inputMethodQuery(const VirtualQUndoView* self, int query) {
 
-	return new QVariant(( (const VirtualQUndoView*)(self) )->QUndoView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QUndoView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-void QUndoView_virtualbase_selectAll(void* self) {
+void QUndoView_virtualbase_selectAll(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::selectAll();
-
+	self->QUndoView::selectAll();
 }
 
-void QUndoView_virtualbase_updateEditorData(void* self) {
+void QUndoView_virtualbase_updateEditorData(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::updateEditorData();
-
+	self->QUndoView::updateEditorData();
 }
 
-void QUndoView_virtualbase_updateEditorGeometries(void* self) {
+void QUndoView_virtualbase_updateEditorGeometries(VirtualQUndoView* self) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::updateEditorGeometries();
-
+	self->QUndoView::updateEditorGeometries();
 }
 
-void QUndoView_virtualbase_verticalScrollbarAction(void* self, int action) {
+void QUndoView_virtualbase_verticalScrollbarAction(VirtualQUndoView* self, int action) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::verticalScrollbarAction(static_cast<int>(action));
-
+	self->QUndoView::verticalScrollbarAction(static_cast<int>(action));
 }
 
-void QUndoView_virtualbase_horizontalScrollbarAction(void* self, int action) {
+void QUndoView_virtualbase_horizontalScrollbarAction(VirtualQUndoView* self, int action) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::horizontalScrollbarAction(static_cast<int>(action));
-
+	self->QUndoView::horizontalScrollbarAction(static_cast<int>(action));
 }
 
-void QUndoView_virtualbase_verticalScrollbarValueChanged(void* self, int value) {
+void QUndoView_virtualbase_verticalScrollbarValueChanged(VirtualQUndoView* self, int value) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::verticalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QUndoView::verticalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QUndoView_virtualbase_horizontalScrollbarValueChanged(void* self, int value) {
+void QUndoView_virtualbase_horizontalScrollbarValueChanged(VirtualQUndoView* self, int value) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::horizontalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QUndoView::horizontalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QUndoView_virtualbase_closeEditor(void* self, QWidget* editor, int hint) {
+void QUndoView_virtualbase_closeEditor(VirtualQUndoView* self, QWidget* editor, int hint) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
-
+	self->QUndoView::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QUndoView_virtualbase_commitData(void* self, QWidget* editor) {
+void QUndoView_virtualbase_commitData(VirtualQUndoView* self, QWidget* editor) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::commitData(editor);
-
+	self->QUndoView::commitData(editor);
 }
 
-void QUndoView_virtualbase_editorDestroyed(void* self, QObject* editor) {
+void QUndoView_virtualbase_editorDestroyed(VirtualQUndoView* self, QObject* editor) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::editorDestroyed(editor);
-
+	self->QUndoView::editorDestroyed(editor);
 }
 
-bool QUndoView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QUndoView_virtualbase_edit2(VirtualQUndoView* self, QModelIndex* index, int trigger, QEvent* event) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::edit(*index, static_cast<VirtualQUndoView::EditTrigger>(trigger), event);
-
+	return self->QUndoView::edit(*index, static_cast<VirtualQUndoView::EditTrigger>(trigger), event);
 }
 
-int QUndoView_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event) {
+int QUndoView_virtualbase_selectionCommand(const VirtualQUndoView* self, QModelIndex* index, QEvent* event) {
 
-	QItemSelectionModel::SelectionFlags _ret = ( (const VirtualQUndoView*)(self) )->QUndoView::selectionCommand(*index, event);
+	QItemSelectionModel::SelectionFlags _ret = self->QUndoView::selectionCommand(*index, event);
 	return static_cast<int>(_ret);
-
 }
 
-bool QUndoView_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QUndoView_virtualbase_focusNextPrevChild(VirtualQUndoView* self, bool next) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::focusNextPrevChild(next);
-
+	return self->QUndoView::focusNextPrevChild(next);
 }
 
-bool QUndoView_virtualbase_viewportEvent(void* self, QEvent* event) {
+bool QUndoView_virtualbase_viewportEvent(VirtualQUndoView* self, QEvent* event) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::viewportEvent(event);
-
+	return self->QUndoView::viewportEvent(event);
 }
 
-void QUndoView_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QUndoView_virtualbase_mousePressEvent(VirtualQUndoView* self, QMouseEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::mousePressEvent(event);
-
+	self->QUndoView::mousePressEvent(event);
 }
 
-void QUndoView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QUndoView_virtualbase_mouseDoubleClickEvent(VirtualQUndoView* self, QMouseEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::mouseDoubleClickEvent(event);
-
+	self->QUndoView::mouseDoubleClickEvent(event);
 }
 
-void QUndoView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QUndoView_virtualbase_dragEnterEvent(VirtualQUndoView* self, QDragEnterEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::dragEnterEvent(event);
-
+	self->QUndoView::dragEnterEvent(event);
 }
 
-void QUndoView_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QUndoView_virtualbase_focusInEvent(VirtualQUndoView* self, QFocusEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::focusInEvent(event);
-
+	self->QUndoView::focusInEvent(event);
 }
 
-void QUndoView_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QUndoView_virtualbase_focusOutEvent(VirtualQUndoView* self, QFocusEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::focusOutEvent(event);
-
+	self->QUndoView::focusOutEvent(event);
 }
 
-void QUndoView_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QUndoView_virtualbase_keyPressEvent(VirtualQUndoView* self, QKeyEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::keyPressEvent(event);
-
+	self->QUndoView::keyPressEvent(event);
 }
 
-void QUndoView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QUndoView_virtualbase_inputMethodEvent(VirtualQUndoView* self, QInputMethodEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::inputMethodEvent(event);
-
+	self->QUndoView::inputMethodEvent(event);
 }
 
-bool QUndoView_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QUndoView_virtualbase_eventFilter(VirtualQUndoView* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::eventFilter(object, event);
-
+	return self->QUndoView::eventFilter(object, event);
 }
 
-QSize* QUndoView_virtualbase_minimumSizeHint(const void* self) {
+QSize* QUndoView_virtualbase_minimumSizeHint(const VirtualQUndoView* self) {
 
-	return new QSize(( (const VirtualQUndoView*)(self) )->QUndoView::minimumSizeHint());
-
+	return new QSize(self->QUndoView::minimumSizeHint());
 }
 
-QSize* QUndoView_virtualbase_sizeHint(const void* self) {
+QSize* QUndoView_virtualbase_sizeHint(const VirtualQUndoView* self) {
 
-	return new QSize(( (const VirtualQUndoView*)(self) )->QUndoView::sizeHint());
-
+	return new QSize(self->QUndoView::sizeHint());
 }
 
-void QUndoView_virtualbase_setupViewport(void* self, QWidget* viewport) {
+void QUndoView_virtualbase_setupViewport(VirtualQUndoView* self, QWidget* viewport) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setupViewport(viewport);
-
+	self->QUndoView::setupViewport(viewport);
 }
 
-void QUndoView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QUndoView_virtualbase_contextMenuEvent(VirtualQUndoView* self, QContextMenuEvent* param1) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::contextMenuEvent(param1);
-
+	self->QUndoView::contextMenuEvent(param1);
 }
 
-void QUndoView_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QUndoView_virtualbase_changeEvent(VirtualQUndoView* self, QEvent* param1) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::changeEvent(param1);
-
+	self->QUndoView::changeEvent(param1);
 }
 
-void QUndoView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+void QUndoView_virtualbase_initStyleOption(const VirtualQUndoView* self, QStyleOptionFrame* option) {
 
-	( (const VirtualQUndoView*)(self) )->QUndoView::initStyleOption(option);
-
+	self->QUndoView::initStyleOption(option);
 }
 
-int QUndoView_virtualbase_devType(const void* self) {
+int QUndoView_virtualbase_devType(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::devType();
-
+	return self->QUndoView::devType();
 }
 
-void QUndoView_virtualbase_setVisible(void* self, bool visible) {
+void QUndoView_virtualbase_setVisible(VirtualQUndoView* self, bool visible) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::setVisible(visible);
-
+	self->QUndoView::setVisible(visible);
 }
 
-int QUndoView_virtualbase_heightForWidth(const void* self, int param1) {
+int QUndoView_virtualbase_heightForWidth(const VirtualQUndoView* self, int param1) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::heightForWidth(static_cast<int>(param1));
-
+	return self->QUndoView::heightForWidth(static_cast<int>(param1));
 }
 
-bool QUndoView_virtualbase_hasHeightForWidth(const void* self) {
+bool QUndoView_virtualbase_hasHeightForWidth(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::hasHeightForWidth();
-
+	return self->QUndoView::hasHeightForWidth();
 }
 
-QPaintEngine* QUndoView_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QUndoView_virtualbase_paintEngine(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::paintEngine();
-
+	return self->QUndoView::paintEngine();
 }
 
-void QUndoView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QUndoView_virtualbase_keyReleaseEvent(VirtualQUndoView* self, QKeyEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::keyReleaseEvent(event);
-
+	self->QUndoView::keyReleaseEvent(event);
 }
 
-void QUndoView_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QUndoView_virtualbase_enterEvent(VirtualQUndoView* self, QEnterEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::enterEvent(event);
-
+	self->QUndoView::enterEvent(event);
 }
 
-void QUndoView_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QUndoView_virtualbase_leaveEvent(VirtualQUndoView* self, QEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::leaveEvent(event);
-
+	self->QUndoView::leaveEvent(event);
 }
 
-void QUndoView_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QUndoView_virtualbase_moveEvent(VirtualQUndoView* self, QMoveEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::moveEvent(event);
-
+	self->QUndoView::moveEvent(event);
 }
 
-void QUndoView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QUndoView_virtualbase_closeEvent(VirtualQUndoView* self, QCloseEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::closeEvent(event);
-
+	self->QUndoView::closeEvent(event);
 }
 
-void QUndoView_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QUndoView_virtualbase_tabletEvent(VirtualQUndoView* self, QTabletEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::tabletEvent(event);
-
+	self->QUndoView::tabletEvent(event);
 }
 
-void QUndoView_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QUndoView_virtualbase_actionEvent(VirtualQUndoView* self, QActionEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::actionEvent(event);
-
+	self->QUndoView::actionEvent(event);
 }
 
-void QUndoView_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QUndoView_virtualbase_showEvent(VirtualQUndoView* self, QShowEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::showEvent(event);
-
+	self->QUndoView::showEvent(event);
 }
 
-void QUndoView_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QUndoView_virtualbase_hideEvent(VirtualQUndoView* self, QHideEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::hideEvent(event);
-
+	self->QUndoView::hideEvent(event);
 }
 
-bool QUndoView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QUndoView_virtualbase_nativeEvent(VirtualQUndoView* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQUndoView*)(self) )->QUndoView::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QUndoView::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QUndoView_virtualbase_metric(const void* self, int param1) {
+int QUndoView_virtualbase_metric(const VirtualQUndoView* self, int param1) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::metric(static_cast<VirtualQUndoView::PaintDeviceMetric>(param1));
-
+	return self->QUndoView::metric(static_cast<VirtualQUndoView::PaintDeviceMetric>(param1));
 }
 
-void QUndoView_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QUndoView_virtualbase_initPainter(const VirtualQUndoView* self, QPainter* painter) {
 
-	( (const VirtualQUndoView*)(self) )->QUndoView::initPainter(painter);
-
+	self->QUndoView::initPainter(painter);
 }
 
-QPaintDevice* QUndoView_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QUndoView_virtualbase_redirected(const VirtualQUndoView* self, QPoint* offset) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::redirected(offset);
-
+	return self->QUndoView::redirected(offset);
 }
 
-QPainter* QUndoView_virtualbase_sharedPainter(const void* self) {
+QPainter* QUndoView_virtualbase_sharedPainter(const VirtualQUndoView* self) {
 
-	return ( (const VirtualQUndoView*)(self) )->QUndoView::sharedPainter();
-
+	return self->QUndoView::sharedPainter();
 }
 
-void QUndoView_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QUndoView_virtualbase_childEvent(VirtualQUndoView* self, QChildEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::childEvent(event);
-
+	self->QUndoView::childEvent(event);
 }
 
-void QUndoView_virtualbase_customEvent(void* self, QEvent* event) {
+void QUndoView_virtualbase_customEvent(VirtualQUndoView* self, QEvent* event) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::customEvent(event);
-
+	self->QUndoView::customEvent(event);
 }
 
-void QUndoView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QUndoView_virtualbase_connectNotify(VirtualQUndoView* self, QMetaMethod* signal) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::connectNotify(*signal);
-
+	self->QUndoView::connectNotify(*signal);
 }
 
-void QUndoView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QUndoView_virtualbase_disconnectNotify(VirtualQUndoView* self, QMetaMethod* signal) {
 
-	( (VirtualQUndoView*)(self) )->QUndoView::disconnectNotify(*signal);
-
+	self->QUndoView::disconnectNotify(*signal);
 }
 
 const QMetaObject* QUndoView_staticMetaObject() { return &QUndoView::staticMetaObject; }
-void QUndoView_protectedbase_resizeContents(void* self, int width, int height) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->resizeContents(static_cast<int>(width), static_cast<int>(height));
 
+const QUndoView_VTable* QUndoView_vtbl(const VirtualQUndoView* self) { return self->vtbl; }
+void* QUndoView_vdata(const VirtualQUndoView* self) { return self->vdata; }
+void QUndoView_setVdata(VirtualQUndoView* self, void* vdata) { self->vdata = vdata; }
+
+void QUndoView_protectedbase_resizeContents(VirtualQUndoView* self, int width, int height) {
+	self->resizeContents(static_cast<int>(width), static_cast<int>(height));
 }
 
-QSize* QUndoView_protectedbase_contentsSize(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return new QSize(self_cast->contentsSize());
-
+QSize* QUndoView_protectedbase_contentsSize(const VirtualQUndoView* self) {
+	return new QSize(self->contentsSize());
 }
 
-QRect* QUndoView_protectedbase_rectForIndex(const void* self, QModelIndex* index) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return new QRect(self_cast->rectForIndex(*index));
-
+QRect* QUndoView_protectedbase_rectForIndex(const VirtualQUndoView* self, QModelIndex* index) {
+	return new QRect(self->rectForIndex(*index));
 }
 
-void QUndoView_protectedbase_setPositionForIndex(void* self, QPoint* position, QModelIndex* index) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->setPositionForIndex(*position, *index);
-
+void QUndoView_protectedbase_setPositionForIndex(VirtualQUndoView* self, QPoint* position, QModelIndex* index) {
+	self->setPositionForIndex(*position, *index);
 }
 
-int QUndoView_protectedbase_state(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	VirtualQUndoView::State _ret = self_cast->state();
+int QUndoView_protectedbase_state(const VirtualQUndoView* self) {
+	VirtualQUndoView::State _ret = self->state();
 	return static_cast<int>(_ret);
-
 }
 
-void QUndoView_protectedbase_setState(void* self, int state) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->setState(static_cast<VirtualQUndoView::State>(state));
-
+void QUndoView_protectedbase_setState(VirtualQUndoView* self, int state) {
+	self->setState(static_cast<VirtualQUndoView::State>(state));
 }
 
-void QUndoView_protectedbase_scheduleDelayedItemsLayout(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->scheduleDelayedItemsLayout();
-
+void QUndoView_protectedbase_scheduleDelayedItemsLayout(VirtualQUndoView* self) {
+	self->scheduleDelayedItemsLayout();
 }
 
-void QUndoView_protectedbase_executeDelayedItemsLayout(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->executeDelayedItemsLayout();
-
+void QUndoView_protectedbase_executeDelayedItemsLayout(VirtualQUndoView* self) {
+	self->executeDelayedItemsLayout();
 }
 
-void QUndoView_protectedbase_setDirtyRegion(void* self, QRegion* region) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->setDirtyRegion(*region);
-
+void QUndoView_protectedbase_setDirtyRegion(VirtualQUndoView* self, QRegion* region) {
+	self->setDirtyRegion(*region);
 }
 
-void QUndoView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
-
+void QUndoView_protectedbase_scrollDirtyRegion(VirtualQUndoView* self, int dx, int dy) {
+	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-QPoint* QUndoView_protectedbase_dirtyRegionOffset(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return new QPoint(self_cast->dirtyRegionOffset());
-
+QPoint* QUndoView_protectedbase_dirtyRegionOffset(const VirtualQUndoView* self) {
+	return new QPoint(self->dirtyRegionOffset());
 }
 
-void QUndoView_protectedbase_startAutoScroll(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->startAutoScroll();
-
+void QUndoView_protectedbase_startAutoScroll(VirtualQUndoView* self) {
+	self->startAutoScroll();
 }
 
-void QUndoView_protectedbase_stopAutoScroll(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->stopAutoScroll();
-
+void QUndoView_protectedbase_stopAutoScroll(VirtualQUndoView* self) {
+	self->stopAutoScroll();
 }
 
-void QUndoView_protectedbase_doAutoScroll(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->doAutoScroll();
-
+void QUndoView_protectedbase_doAutoScroll(VirtualQUndoView* self) {
+	self->doAutoScroll();
 }
 
-int QUndoView_protectedbase_dropIndicatorPosition(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	VirtualQUndoView::DropIndicatorPosition _ret = self_cast->dropIndicatorPosition();
+int QUndoView_protectedbase_dropIndicatorPosition(const VirtualQUndoView* self) {
+	VirtualQUndoView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
 	return static_cast<int>(_ret);
-
 }
 
-void QUndoView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
-
+void QUndoView_protectedbase_setViewportMargins(VirtualQUndoView* self, int left, int top, int right, int bottom) {
+	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QUndoView_protectedbase_viewportMargins(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return new QMargins(self_cast->viewportMargins());
-
+QMargins* QUndoView_protectedbase_viewportMargins(const VirtualQUndoView* self) {
+	return new QMargins(self->viewportMargins());
 }
 
-void QUndoView_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->drawFrame(param1);
-
+void QUndoView_protectedbase_drawFrame(VirtualQUndoView* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QUndoView_protectedbase_updateMicroFocus(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QUndoView_protectedbase_updateMicroFocus(VirtualQUndoView* self) {
+	self->updateMicroFocus();
 }
 
-void QUndoView_protectedbase_create(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->create();
-
+void QUndoView_protectedbase_create(VirtualQUndoView* self) {
+	self->create();
 }
 
-void QUndoView_protectedbase_destroy(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	self_cast->destroy();
-
+void QUndoView_protectedbase_destroy(VirtualQUndoView* self) {
+	self->destroy();
 }
 
-bool QUndoView_protectedbase_focusNextChild(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QUndoView_protectedbase_focusNextChild(VirtualQUndoView* self) {
+	return self->focusNextChild();
 }
 
-bool QUndoView_protectedbase_focusPreviousChild(void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QUndoView_protectedbase_focusPreviousChild(VirtualQUndoView* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QUndoView_protectedbase_sender(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QUndoView_protectedbase_sender(const VirtualQUndoView* self) {
+	return self->sender();
 }
 
-int QUndoView_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QUndoView_protectedbase_senderSignalIndex(const VirtualQUndoView* self) {
+	return self->senderSignalIndex();
 }
 
-int QUndoView_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QUndoView_protectedbase_receivers(const VirtualQUndoView* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QUndoView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQUndoView* self_cast = static_cast<VirtualQUndoView*>( (QUndoView*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QUndoView_protectedbase_isSignalConnected(const VirtualQUndoView* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QUndoView_delete(QUndoView* self) {

@@ -7,15 +7,6 @@
 #include <QVersionNumber>
 #include <qversionnumber.h>
 #include "gen_qversionnumber.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVersionNumber* QVersionNumber_new() {
 	return new QVersionNumber();
 }

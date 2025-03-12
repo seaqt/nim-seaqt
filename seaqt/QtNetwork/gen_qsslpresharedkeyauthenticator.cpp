@@ -2,15 +2,6 @@
 #include <QSslPreSharedKeyAuthenticator>
 #include <qsslpresharedkeyauthenticator.h>
 #include "gen_qsslpresharedkeyauthenticator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new() {
 	return new QSslPreSharedKeyAuthenticator();
 }

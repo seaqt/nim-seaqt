@@ -13,58 +13,50 @@
 #include <QVariant>
 #include <qbitmap.h>
 #include "gen_qbitmap.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQBitmap final : public QBitmap {
-	struct QBitmap_VTable* vtbl;
+	const QBitmap_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QBitmap_VTable* QBitmap_vtbl(const VirtualQBitmap* self);
+	friend void* QBitmap_vdata(const VirtualQBitmap* self);
+	friend void QBitmap_setVdata(VirtualQBitmap* self, void* vdata);
 
-	VirtualQBitmap(struct QBitmap_VTable* vtbl): QBitmap(), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, const QPixmap& param1): QBitmap(param1), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, int w, int h): QBitmap(w, h), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, const QSize& param1): QBitmap(param1), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, const QString& fileName): QBitmap(fileName), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, const QBitmap& param1): QBitmap(param1), vtbl(vtbl) {};
-	VirtualQBitmap(struct QBitmap_VTable* vtbl, const QString& fileName, const char* format): QBitmap(fileName, format), vtbl(vtbl) {};
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata): QBitmap(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, const QPixmap& param1): QBitmap(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, int w, int h): QBitmap(w, h), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, const QSize& param1): QBitmap(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, const QString& fileName): QBitmap(fileName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, const QBitmap& param1): QBitmap(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, void* vdata, const QString& fileName, const char* format): QBitmap(fileName, format), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQBitmap() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQBitmap() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QBitmap::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QBitmap_virtualbase_devType(const void* self);
+	friend int QBitmap_virtualbase_devType(const VirtualQBitmap* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QBitmap::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QBitmap_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QBitmap_virtualbase_paintEngine(const VirtualQBitmap* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QBitmap::metric(param1);
@@ -73,14 +65,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QBitmap_virtualbase_metric(const void* self, int param1);
+	friend int QBitmap_virtualbase_metric(const VirtualQBitmap* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QBitmap::initPainter(painter);
@@ -89,13 +80,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QBitmap_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QBitmap_virtualbase_initPainter(const VirtualQBitmap* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QBitmap::redirected(offset);
@@ -103,57 +93,56 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QBitmap_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QBitmap_virtualbase_redirected(const VirtualQBitmap* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QBitmap::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QBitmap_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QBitmap_virtualbase_sharedPainter(const VirtualQBitmap* self);
 
 };
 
-QBitmap* QBitmap_new(struct QBitmap_VTable* vtbl) {
-	return new VirtualQBitmap(vtbl);
+VirtualQBitmap* QBitmap_new(const QBitmap_VTable* vtbl, void* vdata) {
+	return new VirtualQBitmap(vtbl, vdata);
 }
 
-QBitmap* QBitmap_new2(struct QBitmap_VTable* vtbl, QPixmap* param1) {
-	return new VirtualQBitmap(vtbl, *param1);
+VirtualQBitmap* QBitmap_new2(const QBitmap_VTable* vtbl, void* vdata, QPixmap* param1) {
+	return new VirtualQBitmap(vtbl, vdata, *param1);
 }
 
-QBitmap* QBitmap_new3(struct QBitmap_VTable* vtbl, int w, int h) {
-	return new VirtualQBitmap(vtbl, static_cast<int>(w), static_cast<int>(h));
+VirtualQBitmap* QBitmap_new3(const QBitmap_VTable* vtbl, void* vdata, int w, int h) {
+	return new VirtualQBitmap(vtbl, vdata, static_cast<int>(w), static_cast<int>(h));
 }
 
-QBitmap* QBitmap_new4(struct QBitmap_VTable* vtbl, QSize* param1) {
-	return new VirtualQBitmap(vtbl, *param1);
+VirtualQBitmap* QBitmap_new4(const QBitmap_VTable* vtbl, void* vdata, QSize* param1) {
+	return new VirtualQBitmap(vtbl, vdata, *param1);
 }
 
-QBitmap* QBitmap_new5(struct QBitmap_VTable* vtbl, struct miqt_string fileName) {
+VirtualQBitmap* QBitmap_new5(const QBitmap_VTable* vtbl, void* vdata, struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQBitmap(vtbl, fileName_QString);
+	return new VirtualQBitmap(vtbl, vdata, fileName_QString);
 }
 
-QBitmap* QBitmap_new6(struct QBitmap_VTable* vtbl, QBitmap* param1) {
-	return new VirtualQBitmap(vtbl, *param1);
+VirtualQBitmap* QBitmap_new6(const QBitmap_VTable* vtbl, void* vdata, QBitmap* param1) {
+	return new VirtualQBitmap(vtbl, vdata, *param1);
 }
 
-QBitmap* QBitmap_new7(struct QBitmap_VTable* vtbl, struct miqt_string fileName, const char* format) {
+VirtualQBitmap* QBitmap_new7(const QBitmap_VTable* vtbl, void* vdata, struct miqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQBitmap(vtbl, fileName_QString, format);
+	return new VirtualQBitmap(vtbl, vdata, fileName_QString, format);
 }
 
 void QBitmap_virtbase(QBitmap* src, QPixmap** outptr_QPixmap) {
@@ -204,41 +193,39 @@ QBitmap* QBitmap_fromData3(QSize* size, const unsigned char* bits, int monoForma
 	return new QBitmap(QBitmap::fromData(*size, static_cast<const uchar*>(bits), static_cast<QImage::Format>(monoFormat)));
 }
 
-int QBitmap_virtualbase_devType(const void* self) {
+int QBitmap_virtualbase_devType(const VirtualQBitmap* self) {
 
-	return ( (const VirtualQBitmap*)(self) )->QBitmap::devType();
-
+	return self->QBitmap::devType();
 }
 
-QPaintEngine* QBitmap_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QBitmap_virtualbase_paintEngine(const VirtualQBitmap* self) {
 
-	return ( (const VirtualQBitmap*)(self) )->QBitmap::paintEngine();
-
+	return self->QBitmap::paintEngine();
 }
 
-int QBitmap_virtualbase_metric(const void* self, int param1) {
+int QBitmap_virtualbase_metric(const VirtualQBitmap* self, int param1) {
 
-	return ( (const VirtualQBitmap*)(self) )->QBitmap::metric(static_cast<VirtualQBitmap::PaintDeviceMetric>(param1));
-
+	return self->QBitmap::metric(static_cast<VirtualQBitmap::PaintDeviceMetric>(param1));
 }
 
-void QBitmap_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QBitmap_virtualbase_initPainter(const VirtualQBitmap* self, QPainter* painter) {
 
-	( (const VirtualQBitmap*)(self) )->QBitmap::initPainter(painter);
-
+	self->QBitmap::initPainter(painter);
 }
 
-QPaintDevice* QBitmap_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QBitmap_virtualbase_redirected(const VirtualQBitmap* self, QPoint* offset) {
 
-	return ( (const VirtualQBitmap*)(self) )->QBitmap::redirected(offset);
-
+	return self->QBitmap::redirected(offset);
 }
 
-QPainter* QBitmap_virtualbase_sharedPainter(const void* self) {
+QPainter* QBitmap_virtualbase_sharedPainter(const VirtualQBitmap* self) {
 
-	return ( (const VirtualQBitmap*)(self) )->QBitmap::sharedPainter();
-
+	return self->QBitmap::sharedPainter();
 }
+
+const QBitmap_VTable* QBitmap_vtbl(const VirtualQBitmap* self) { return self->vtbl; }
+void* QBitmap_vdata(const VirtualQBitmap* self) { return self->vdata; }
+void QBitmap_setVdata(VirtualQBitmap* self, void* vdata) { self->vdata = vdata; }
 
 void QBitmap_delete(QBitmap* self) {
 	delete self;

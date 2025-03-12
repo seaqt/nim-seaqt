@@ -28,6 +28,7 @@ QRegularExpression* QRegularExpression_new();
 QRegularExpression* QRegularExpression_new2(struct miqt_string pattern);
 QRegularExpression* QRegularExpression_new3(QRegularExpression* re);
 QRegularExpression* QRegularExpression_new4(struct miqt_string pattern, int options);
+
 int QRegularExpression_patternOptions(const QRegularExpression* self);
 void QRegularExpression_setPatternOptions(QRegularExpression* self, int options);
 void QRegularExpression_operatorAssign(QRegularExpression* self, QRegularExpression* re);
@@ -54,10 +55,12 @@ QRegularExpressionMatchIterator* QRegularExpression_globalMatch2(const QRegularE
 QRegularExpressionMatchIterator* QRegularExpression_globalMatch3(const QRegularExpression* self, struct miqt_string subject, ptrdiff_t offset, int matchType);
 QRegularExpressionMatchIterator* QRegularExpression_globalMatch4(const QRegularExpression* self, struct miqt_string subject, ptrdiff_t offset, int matchType, int matchOptions);
 struct miqt_string QRegularExpression_wildcardToRegularExpression2(struct miqt_string str, int options);
+
 void QRegularExpression_delete(QRegularExpression* self);
 
 QRegularExpressionMatch* QRegularExpressionMatch_new();
 QRegularExpressionMatch* QRegularExpressionMatch_new2(QRegularExpressionMatch* match);
+
 void QRegularExpressionMatch_operatorAssign(QRegularExpressionMatch* self, QRegularExpressionMatch* match);
 void QRegularExpressionMatch_swap(QRegularExpressionMatch* self, QRegularExpressionMatch* other);
 QRegularExpression* QRegularExpressionMatch_regularExpression(const QRegularExpressionMatch* self);
@@ -82,10 +85,12 @@ struct miqt_string QRegularExpressionMatch_captured1(const QRegularExpressionMat
 ptrdiff_t QRegularExpressionMatch_capturedStart1(const QRegularExpressionMatch* self, int nth);
 ptrdiff_t QRegularExpressionMatch_capturedLength1(const QRegularExpressionMatch* self, int nth);
 ptrdiff_t QRegularExpressionMatch_capturedEnd1(const QRegularExpressionMatch* self, int nth);
+
 void QRegularExpressionMatch_delete(QRegularExpressionMatch* self);
 
 QRegularExpressionMatchIterator* QRegularExpressionMatchIterator_new();
 QRegularExpressionMatchIterator* QRegularExpressionMatchIterator_new2(QRegularExpressionMatchIterator* iterator);
+
 void QRegularExpressionMatchIterator_operatorAssign(QRegularExpressionMatchIterator* self, QRegularExpressionMatchIterator* iterator);
 void QRegularExpressionMatchIterator_swap(QRegularExpressionMatchIterator* self, QRegularExpressionMatchIterator* other);
 bool QRegularExpressionMatchIterator_isValid(const QRegularExpressionMatchIterator* self);
@@ -95,6 +100,7 @@ QRegularExpressionMatch* QRegularExpressionMatchIterator_peekNext(const QRegular
 QRegularExpression* QRegularExpressionMatchIterator_regularExpression(const QRegularExpressionMatchIterator* self);
 int QRegularExpressionMatchIterator_matchType(const QRegularExpressionMatchIterator* self);
 int QRegularExpressionMatchIterator_matchOptions(const QRegularExpressionMatchIterator* self);
+
 void QRegularExpressionMatchIterator_delete(QRegularExpressionMatchIterator* self);
 
 #ifdef __cplusplus

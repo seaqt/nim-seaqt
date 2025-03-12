@@ -41,15 +41,15 @@ proc fcQSslCipher_operatorAssign(self: pointer, other: pointer): void {.importc:
 proc fcQSslCipher_swap(self: pointer, other: pointer): void {.importc: "QSslCipher_swap".}
 proc fcQSslCipher_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCipher_operatorEqual".}
 proc fcQSslCipher_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslCipher_operatorNotEqual".}
-proc fcQSslCipher_isNull(self: pointer, ): bool {.importc: "QSslCipher_isNull".}
-proc fcQSslCipher_name(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_name".}
-proc fcQSslCipher_supportedBits(self: pointer, ): cint {.importc: "QSslCipher_supportedBits".}
-proc fcQSslCipher_usedBits(self: pointer, ): cint {.importc: "QSslCipher_usedBits".}
-proc fcQSslCipher_keyExchangeMethod(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_keyExchangeMethod".}
-proc fcQSslCipher_authenticationMethod(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_authenticationMethod".}
-proc fcQSslCipher_encryptionMethod(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_encryptionMethod".}
-proc fcQSslCipher_protocolString(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_protocolString".}
-proc fcQSslCipher_protocol(self: pointer, ): cint {.importc: "QSslCipher_protocol".}
+proc fcQSslCipher_isNull(self: pointer): bool {.importc: "QSslCipher_isNull".}
+proc fcQSslCipher_name(self: pointer): struct_miqt_string {.importc: "QSslCipher_name".}
+proc fcQSslCipher_supportedBits(self: pointer): cint {.importc: "QSslCipher_supportedBits".}
+proc fcQSslCipher_usedBits(self: pointer): cint {.importc: "QSslCipher_usedBits".}
+proc fcQSslCipher_keyExchangeMethod(self: pointer): struct_miqt_string {.importc: "QSslCipher_keyExchangeMethod".}
+proc fcQSslCipher_authenticationMethod(self: pointer): struct_miqt_string {.importc: "QSslCipher_authenticationMethod".}
+proc fcQSslCipher_encryptionMethod(self: pointer): struct_miqt_string {.importc: "QSslCipher_encryptionMethod".}
+proc fcQSslCipher_protocolString(self: pointer): struct_miqt_string {.importc: "QSslCipher_protocolString".}
+proc fcQSslCipher_protocol(self: pointer): cint {.importc: "QSslCipher_protocol".}
 proc fcQSslCipher_new(): ptr cQSslCipher {.importc: "QSslCipher_new".}
 proc fcQSslCipher_new2(name: struct_miqt_string): ptr cQSslCipher {.importc: "QSslCipher_new2".}
 proc fcQSslCipher_new3(name: struct_miqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new3".}
@@ -67,46 +67,46 @@ proc operatorEqual*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher
 proc operatorNotEqual*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): bool =
   fcQSslCipher_operatorNotEqual(self.h, other.h)
 
-proc isNull*(self: gen_qsslcipher_types.QSslCipher, ): bool =
+proc isNull*(self: gen_qsslcipher_types.QSslCipher): bool =
   fcQSslCipher_isNull(self.h)
 
-proc name*(self: gen_qsslcipher_types.QSslCipher, ): string =
+proc name*(self: gen_qsslcipher_types.QSslCipher): string =
   let v_ms = fcQSslCipher_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc supportedBits*(self: gen_qsslcipher_types.QSslCipher, ): cint =
+proc supportedBits*(self: gen_qsslcipher_types.QSslCipher): cint =
   fcQSslCipher_supportedBits(self.h)
 
-proc usedBits*(self: gen_qsslcipher_types.QSslCipher, ): cint =
+proc usedBits*(self: gen_qsslcipher_types.QSslCipher): cint =
   fcQSslCipher_usedBits(self.h)
 
-proc keyExchangeMethod*(self: gen_qsslcipher_types.QSslCipher, ): string =
+proc keyExchangeMethod*(self: gen_qsslcipher_types.QSslCipher): string =
   let v_ms = fcQSslCipher_keyExchangeMethod(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc authenticationMethod*(self: gen_qsslcipher_types.QSslCipher, ): string =
+proc authenticationMethod*(self: gen_qsslcipher_types.QSslCipher): string =
   let v_ms = fcQSslCipher_authenticationMethod(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc encryptionMethod*(self: gen_qsslcipher_types.QSslCipher, ): string =
+proc encryptionMethod*(self: gen_qsslcipher_types.QSslCipher): string =
   let v_ms = fcQSslCipher_encryptionMethod(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc protocolString*(self: gen_qsslcipher_types.QSslCipher, ): string =
+proc protocolString*(self: gen_qsslcipher_types.QSslCipher): string =
   let v_ms = fcQSslCipher_protocolString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc protocol*(self: gen_qsslcipher_types.QSslCipher, ): cint =
+proc protocol*(self: gen_qsslcipher_types.QSslCipher): cint =
   cint(fcQSslCipher_protocol(self.h))
 
 proc create*(T: type gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =

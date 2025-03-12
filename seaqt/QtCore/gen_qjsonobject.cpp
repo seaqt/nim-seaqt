@@ -12,15 +12,6 @@
 #include <QVariant>
 #include <qjsonobject.h>
 #include "gen_qjsonobject.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJsonObject* QJsonObject_new() {
 	return new QJsonObject();
 }
@@ -244,15 +235,15 @@ void QJsonObject_delete(QJsonObject* self) {
 }
 
 QJsonObject__iterator* QJsonObject__iterator_new() {
-	return new QJsonObject::iterator();
+	return new QJsonObject__iterator();
 }
 
 QJsonObject__iterator* QJsonObject__iterator_new2(QJsonObject* obj, ptrdiff_t index) {
-	return new QJsonObject::iterator(obj, (qsizetype)(index));
+	return new QJsonObject__iterator(obj, (qsizetype)(index));
 }
 
 QJsonObject__iterator* QJsonObject__iterator_new3(QJsonObject__iterator* other) {
-	return new QJsonObject::iterator(*other);
+	return new QJsonObject__iterator(*other);
 }
 
 void QJsonObject__iterator_operatorAssign(QJsonObject__iterator* self, QJsonObject__iterator* other) {
@@ -388,19 +379,19 @@ void QJsonObject__iterator_delete(QJsonObject__iterator* self) {
 }
 
 QJsonObject__const_iterator* QJsonObject__const_iterator_new() {
-	return new QJsonObject::const_iterator();
+	return new QJsonObject__const_iterator();
 }
 
 QJsonObject__const_iterator* QJsonObject__const_iterator_new2(QJsonObject* obj, ptrdiff_t index) {
-	return new QJsonObject::const_iterator(obj, (qsizetype)(index));
+	return new QJsonObject__const_iterator(obj, (qsizetype)(index));
 }
 
 QJsonObject__const_iterator* QJsonObject__const_iterator_new3(QJsonObject__iterator* other) {
-	return new QJsonObject::const_iterator(*other);
+	return new QJsonObject__const_iterator(*other);
 }
 
 QJsonObject__const_iterator* QJsonObject__const_iterator_new4(QJsonObject__const_iterator* other) {
-	return new QJsonObject::const_iterator(*other);
+	return new QJsonObject__const_iterator(*other);
 }
 
 void QJsonObject__const_iterator_operatorAssign(QJsonObject__const_iterator* self, QJsonObject__const_iterator* other) {

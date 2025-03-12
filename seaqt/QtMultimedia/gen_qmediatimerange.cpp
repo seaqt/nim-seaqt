@@ -3,15 +3,6 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QMediaTimeRange__Interval
 #include <qmediatimerange.h>
 #include "gen_qmediatimerange.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaTimeRange* QMediaTimeRange_new() {
 	return new QMediaTimeRange();
 }
@@ -136,15 +127,15 @@ void QMediaTimeRange_delete(QMediaTimeRange* self) {
 }
 
 QMediaTimeRange__Interval* QMediaTimeRange__Interval_new() {
-	return new QMediaTimeRange::Interval();
+	return new QMediaTimeRange__Interval();
 }
 
 QMediaTimeRange__Interval* QMediaTimeRange__Interval_new2(long long start, long long end) {
-	return new QMediaTimeRange::Interval(static_cast<qint64>(start), static_cast<qint64>(end));
+	return new QMediaTimeRange__Interval(static_cast<qint64>(start), static_cast<qint64>(end));
 }
 
 QMediaTimeRange__Interval* QMediaTimeRange__Interval_new3(QMediaTimeRange__Interval* param1) {
-	return new QMediaTimeRange::Interval(*param1);
+	return new QMediaTimeRange__Interval(*param1);
 }
 
 long long QMediaTimeRange__Interval_start(const QMediaTimeRange__Interval* self) {

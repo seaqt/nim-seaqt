@@ -50,6 +50,7 @@ void QWebEngineNotification_closed(QWebEngineNotification* self);
 void QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QWebEngineNotification_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineNotification_tr3(const char* s, const char* c, int n);
+
 const QMetaObject* QWebEngineNotification_staticMetaObject();
 void QWebEngineNotification_delete(QWebEngineNotification* self);
 

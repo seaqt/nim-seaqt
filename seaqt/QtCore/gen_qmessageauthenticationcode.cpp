@@ -3,15 +3,6 @@
 #include <QMessageAuthenticationCode>
 #include <qmessageauthenticationcode.h>
 #include "gen_qmessageauthenticationcode.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMessageAuthenticationCode* QMessageAuthenticationCode_new(int method) {
 	return new QMessageAuthenticationCode(static_cast<QCryptographicHash::Algorithm>(method));
 }

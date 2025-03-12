@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qsslerror.h>
 #include "gen_qsslerror.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslError* QSslError_new() {
 	return new QSslError();
 }
@@ -67,6 +58,7 @@ QSslCertificate* QSslError_certificate(const QSslError* self) {
 }
 
 const QMetaObject* QSslError_staticMetaObject() { return &QSslError::staticMetaObject; }
+
 void QSslError_delete(QSslError* self) {
 	delete self;
 }

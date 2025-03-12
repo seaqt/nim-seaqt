@@ -5,15 +5,6 @@
 #include <QWebEngineScript>
 #include <qwebenginescript.h>
 #include "gen_qwebenginescript.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineScript* QWebEngineScript_new() {
 	return new QWebEngineScript();
 }
@@ -105,6 +96,7 @@ void QWebEngineScript_swap(QWebEngineScript* self, QWebEngineScript* other) {
 }
 
 const QMetaObject* QWebEngineScript_staticMetaObject() { return &QWebEngineScript::staticMetaObject; }
+
 void QWebEngineScript_delete(QWebEngineScript* self) {
 	delete self;
 }

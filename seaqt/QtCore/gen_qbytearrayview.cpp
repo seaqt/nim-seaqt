@@ -2,15 +2,6 @@
 #include <QByteArrayView>
 #include <qbytearrayview.h>
 #include "gen_qbytearrayview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QByteArrayView* QByteArrayView_new() {
 	return new QByteArrayView();
 }

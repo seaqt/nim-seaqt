@@ -65,26 +65,26 @@ export
 
 type cQWebEngineNavigationRequest*{.exportc: "QWebEngineNavigationRequest", incompleteStruct.} = object
 
-proc fcQWebEngineNavigationRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_metaObject".}
+proc fcQWebEngineNavigationRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_metaObject".}
 proc fcQWebEngineNavigationRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNavigationRequest_metacast".}
 proc fcQWebEngineNavigationRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNavigationRequest_metacall".}
 proc fcQWebEngineNavigationRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr".}
-proc fcQWebEngineNavigationRequest_url(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_url".}
-proc fcQWebEngineNavigationRequest_isMainFrame(self: pointer, ): bool {.importc: "QWebEngineNavigationRequest_isMainFrame".}
-proc fcQWebEngineNavigationRequest_navigationType(self: pointer, ): cint {.importc: "QWebEngineNavigationRequest_navigationType".}
-proc fcQWebEngineNavigationRequest_accept(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_accept".}
-proc fcQWebEngineNavigationRequest_reject(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_reject".}
-proc fcQWebEngineNavigationRequest_actionChanged(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_actionChanged".}
+proc fcQWebEngineNavigationRequest_url(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_url".}
+proc fcQWebEngineNavigationRequest_isMainFrame(self: pointer): bool {.importc: "QWebEngineNavigationRequest_isMainFrame".}
+proc fcQWebEngineNavigationRequest_navigationType(self: pointer): cint {.importc: "QWebEngineNavigationRequest_navigationType".}
+proc fcQWebEngineNavigationRequest_accept(self: pointer): void {.importc: "QWebEngineNavigationRequest_accept".}
+proc fcQWebEngineNavigationRequest_reject(self: pointer): void {.importc: "QWebEngineNavigationRequest_reject".}
+proc fcQWebEngineNavigationRequest_actionChanged(self: pointer): void {.importc: "QWebEngineNavigationRequest_actionChanged".}
 proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
 proc fcQWebEngineNavigationRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr2".}
 proc fcQWebEngineNavigationRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr3".}
-proc fcQWebEngineNavigationRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_protectedbase_sender".}
-proc fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNavigationRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNavigationRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_protectedbase_sender".}
+proc fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNavigationRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNavigationRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNavigationRequest_protectedbase_receivers".}
 proc fcQWebEngineNavigationRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNavigationRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNavigationRequest_staticMetaObject(): pointer {.importc: "QWebEngineNavigationRequest_staticMetaObject".}
 
-proc metaObject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, param1: cstring): pointer =
@@ -99,30 +99,30 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   c_free(v_ms.data)
   vx_ret
 
-proc url*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineNavigationRequest_url(self.h), owned: true)
 
-proc isMainFrame*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): bool =
+proc isMainFrame*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): bool =
   fcQWebEngineNavigationRequest_isMainFrame(self.h)
 
-proc navigationType*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): cint =
+proc navigationType*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): cint =
   cint(fcQWebEngineNavigationRequest_navigationType(self.h))
 
-proc accept*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): void =
+proc accept*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): void =
   fcQWebEngineNavigationRequest_accept(self.h)
 
-proc reject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): void =
+proc reject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): void =
   fcQWebEngineNavigationRequest_reject(self.h)
 
-proc actionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): void =
+proc actionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): void =
   fcQWebEngineNavigationRequest_actionChanged(self.h)
 
 type QWebEngineNavigationRequestactionChangedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged(slot: int) {.cdecl.} =
+proc cQWebEngineNavigationRequest_slot_callback_actionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged_release(slot: int) {.cdecl.} =
+proc cQWebEngineNavigationRequest_slot_callback_actionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -130,7 +130,7 @@ proc onactionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavi
   var tmp = new QWebEngineNavigationRequestactionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged, miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged_release)
+  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), cQWebEngineNavigationRequest_slot_callback_actionChanged, cQWebEngineNavigationRequest_slot_callback_actionChanged_release)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineNavigationRequest_tr2(s, c)
@@ -144,10 +144,10 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineNavigationRequest_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): cint =
+proc senderSignalIndex*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): cint =
   fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, signal: cstring): cint =

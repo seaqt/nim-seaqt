@@ -1,38 +1,32 @@
 #include <QRunnable>
 #include <qrunnable.h>
 #include "gen_qrunnable.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQRunnable final : public QRunnable {
-	struct QRunnable_VTable* vtbl;
+	const QRunnable_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QRunnable_VTable* QRunnable_vtbl(const VirtualQRunnable* self);
+	friend void* QRunnable_vdata(const VirtualQRunnable* self);
+	friend void QRunnable_setVdata(VirtualQRunnable* self, void* vdata);
 
-	VirtualQRunnable(struct QRunnable_VTable* vtbl): QRunnable(), vtbl(vtbl) {};
+	VirtualQRunnable(const QRunnable_VTable* vtbl, void* vdata): QRunnable(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQRunnable() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQRunnable() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void run() override {
 		if (vtbl->run == 0) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 
-		vtbl->run(vtbl, this);
+		vtbl->run(this);
 
 	}
 
 };
 
-QRunnable* QRunnable_new(struct QRunnable_VTable* vtbl) {
-	return new VirtualQRunnable(vtbl);
+VirtualQRunnable* QRunnable_new(const QRunnable_VTable* vtbl, void* vdata) {
+	return new VirtualQRunnable(vtbl, vdata);
 }
 
 void QRunnable_run(QRunnable* self) {
@@ -46,6 +40,10 @@ bool QRunnable_autoDelete(const QRunnable* self) {
 void QRunnable_setAutoDelete(QRunnable* self, bool autoDelete) {
 	self->setAutoDelete(autoDelete);
 }
+
+const QRunnable_VTable* QRunnable_vtbl(const VirtualQRunnable* self) { return self->vtbl; }
+void* QRunnable_vdata(const VirtualQRunnable* self) { return self->vdata; }
+void QRunnable_setVdata(VirtualQRunnable* self, void* vdata) { self->vdata = vdata; }
 
 void QRunnable_delete(QRunnable* self) {
 	delete self;

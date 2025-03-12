@@ -41,25 +41,25 @@ proc fcQRgba64_fromRgba64(c: culonglong): pointer {.importc: "QRgba64_fromRgba64
 proc fcQRgba64_fromRgba642(red: cushort, green: cushort, blue: cushort, alpha: cushort): pointer {.importc: "QRgba64_fromRgba642".}
 proc fcQRgba64_fromRgba(red: uint8, green: uint8, blue: uint8, alpha: uint8): pointer {.importc: "QRgba64_fromRgba".}
 proc fcQRgba64_fromArgb32(rgb: cuint): pointer {.importc: "QRgba64_fromArgb32".}
-proc fcQRgba64_isOpaque(self: pointer, ): bool {.importc: "QRgba64_isOpaque".}
-proc fcQRgba64_isTransparent(self: pointer, ): bool {.importc: "QRgba64_isTransparent".}
-proc fcQRgba64_red(self: pointer, ): cushort {.importc: "QRgba64_red".}
-proc fcQRgba64_green(self: pointer, ): cushort {.importc: "QRgba64_green".}
-proc fcQRgba64_blue(self: pointer, ): cushort {.importc: "QRgba64_blue".}
-proc fcQRgba64_alpha(self: pointer, ): cushort {.importc: "QRgba64_alpha".}
+proc fcQRgba64_isOpaque(self: pointer): bool {.importc: "QRgba64_isOpaque".}
+proc fcQRgba64_isTransparent(self: pointer): bool {.importc: "QRgba64_isTransparent".}
+proc fcQRgba64_red(self: pointer): cushort {.importc: "QRgba64_red".}
+proc fcQRgba64_green(self: pointer): cushort {.importc: "QRgba64_green".}
+proc fcQRgba64_blue(self: pointer): cushort {.importc: "QRgba64_blue".}
+proc fcQRgba64_alpha(self: pointer): cushort {.importc: "QRgba64_alpha".}
 proc fcQRgba64_setRed(self: pointer, x_red: cushort): void {.importc: "QRgba64_setRed".}
 proc fcQRgba64_setGreen(self: pointer, x_green: cushort): void {.importc: "QRgba64_setGreen".}
 proc fcQRgba64_setBlue(self: pointer, x_blue: cushort): void {.importc: "QRgba64_setBlue".}
 proc fcQRgba64_setAlpha(self: pointer, x_alpha: cushort): void {.importc: "QRgba64_setAlpha".}
-proc fcQRgba64_red8(self: pointer, ): uint8 {.importc: "QRgba64_red8".}
-proc fcQRgba64_green8(self: pointer, ): uint8 {.importc: "QRgba64_green8".}
-proc fcQRgba64_blue8(self: pointer, ): uint8 {.importc: "QRgba64_blue8".}
-proc fcQRgba64_alpha8(self: pointer, ): uint8 {.importc: "QRgba64_alpha8".}
-proc fcQRgba64_toArgb32(self: pointer, ): cuint {.importc: "QRgba64_toArgb32".}
-proc fcQRgba64_toRgb16(self: pointer, ): cushort {.importc: "QRgba64_toRgb16".}
-proc fcQRgba64_premultiplied(self: pointer, ): pointer {.importc: "QRgba64_premultiplied".}
-proc fcQRgba64_unpremultiplied(self: pointer, ): pointer {.importc: "QRgba64_unpremultiplied".}
-proc fcQRgba64_ToUnsignedLongLong(self: pointer, ): culonglong {.importc: "QRgba64_ToUnsignedLongLong".}
+proc fcQRgba64_red8(self: pointer): uint8 {.importc: "QRgba64_red8".}
+proc fcQRgba64_green8(self: pointer): uint8 {.importc: "QRgba64_green8".}
+proc fcQRgba64_blue8(self: pointer): uint8 {.importc: "QRgba64_blue8".}
+proc fcQRgba64_alpha8(self: pointer): uint8 {.importc: "QRgba64_alpha8".}
+proc fcQRgba64_toArgb32(self: pointer): cuint {.importc: "QRgba64_toArgb32".}
+proc fcQRgba64_toRgb16(self: pointer): cushort {.importc: "QRgba64_toRgb16".}
+proc fcQRgba64_premultiplied(self: pointer): pointer {.importc: "QRgba64_premultiplied".}
+proc fcQRgba64_unpremultiplied(self: pointer): pointer {.importc: "QRgba64_unpremultiplied".}
+proc fcQRgba64_ToUnsignedLongLong(self: pointer): culonglong {.importc: "QRgba64_ToUnsignedLongLong".}
 proc fcQRgba64_operatorAssign(self: pointer, x_rgba: culonglong): void {.importc: "QRgba64_operatorAssign".}
 proc fcQRgba64_new(): ptr cQRgba64 {.importc: "QRgba64_new".}
 proc fcQRgba64_new2(param1: pointer): ptr cQRgba64 {.importc: "QRgba64_new2".}
@@ -76,22 +76,22 @@ proc fromRgba*(_: type gen_qrgba64_types.QRgba64, red: uint8, green: uint8, blue
 proc fromArgb32*(_: type gen_qrgba64_types.QRgba64, rgb: cuint): gen_qrgba64_types.QRgba64 =
   gen_qrgba64_types.QRgba64(h: fcQRgba64_fromArgb32(rgb), owned: true)
 
-proc isOpaque*(self: gen_qrgba64_types.QRgba64, ): bool =
+proc isOpaque*(self: gen_qrgba64_types.QRgba64): bool =
   fcQRgba64_isOpaque(self.h)
 
-proc isTransparent*(self: gen_qrgba64_types.QRgba64, ): bool =
+proc isTransparent*(self: gen_qrgba64_types.QRgba64): bool =
   fcQRgba64_isTransparent(self.h)
 
-proc red*(self: gen_qrgba64_types.QRgba64, ): cushort =
+proc red*(self: gen_qrgba64_types.QRgba64): cushort =
   fcQRgba64_red(self.h)
 
-proc green*(self: gen_qrgba64_types.QRgba64, ): cushort =
+proc green*(self: gen_qrgba64_types.QRgba64): cushort =
   fcQRgba64_green(self.h)
 
-proc blue*(self: gen_qrgba64_types.QRgba64, ): cushort =
+proc blue*(self: gen_qrgba64_types.QRgba64): cushort =
   fcQRgba64_blue(self.h)
 
-proc alpha*(self: gen_qrgba64_types.QRgba64, ): cushort =
+proc alpha*(self: gen_qrgba64_types.QRgba64): cushort =
   fcQRgba64_alpha(self.h)
 
 proc setRed*(self: gen_qrgba64_types.QRgba64, x_red: cushort): void =
@@ -106,31 +106,31 @@ proc setBlue*(self: gen_qrgba64_types.QRgba64, x_blue: cushort): void =
 proc setAlpha*(self: gen_qrgba64_types.QRgba64, x_alpha: cushort): void =
   fcQRgba64_setAlpha(self.h, x_alpha)
 
-proc red8*(self: gen_qrgba64_types.QRgba64, ): uint8 =
+proc red8*(self: gen_qrgba64_types.QRgba64): uint8 =
   fcQRgba64_red8(self.h)
 
-proc green8*(self: gen_qrgba64_types.QRgba64, ): uint8 =
+proc green8*(self: gen_qrgba64_types.QRgba64): uint8 =
   fcQRgba64_green8(self.h)
 
-proc blue8*(self: gen_qrgba64_types.QRgba64, ): uint8 =
+proc blue8*(self: gen_qrgba64_types.QRgba64): uint8 =
   fcQRgba64_blue8(self.h)
 
-proc alpha8*(self: gen_qrgba64_types.QRgba64, ): uint8 =
+proc alpha8*(self: gen_qrgba64_types.QRgba64): uint8 =
   fcQRgba64_alpha8(self.h)
 
-proc toArgb32*(self: gen_qrgba64_types.QRgba64, ): cuint =
+proc toArgb32*(self: gen_qrgba64_types.QRgba64): cuint =
   fcQRgba64_toArgb32(self.h)
 
-proc toRgb16*(self: gen_qrgba64_types.QRgba64, ): cushort =
+proc toRgb16*(self: gen_qrgba64_types.QRgba64): cushort =
   fcQRgba64_toRgb16(self.h)
 
-proc premultiplied*(self: gen_qrgba64_types.QRgba64, ): gen_qrgba64_types.QRgba64 =
+proc premultiplied*(self: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
   gen_qrgba64_types.QRgba64(h: fcQRgba64_premultiplied(self.h), owned: true)
 
-proc unpremultiplied*(self: gen_qrgba64_types.QRgba64, ): gen_qrgba64_types.QRgba64 =
+proc unpremultiplied*(self: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
   gen_qrgba64_types.QRgba64(h: fcQRgba64_unpremultiplied(self.h), owned: true)
 
-proc ToUnsignedLongLong*(self: gen_qrgba64_types.QRgba64, ): culonglong =
+proc ToUnsignedLongLong*(self: gen_qrgba64_types.QRgba64): culonglong =
   fcQRgba64_ToUnsignedLongLong(self.h)
 
 proc operatorAssign*(self: gen_qrgba64_types.QRgba64, x_rgba: culonglong): void =

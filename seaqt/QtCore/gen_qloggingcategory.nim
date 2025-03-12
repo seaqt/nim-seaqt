@@ -37,39 +37,39 @@ export gen_qloggingcategory_types
 
 type cQLoggingCategory*{.exportc: "QLoggingCategory", incompleteStruct.} = object
 
-proc fcQLoggingCategory_isDebugEnabled(self: pointer, ): bool {.importc: "QLoggingCategory_isDebugEnabled".}
-proc fcQLoggingCategory_isInfoEnabled(self: pointer, ): bool {.importc: "QLoggingCategory_isInfoEnabled".}
-proc fcQLoggingCategory_isWarningEnabled(self: pointer, ): bool {.importc: "QLoggingCategory_isWarningEnabled".}
-proc fcQLoggingCategory_isCriticalEnabled(self: pointer, ): bool {.importc: "QLoggingCategory_isCriticalEnabled".}
-proc fcQLoggingCategory_categoryName(self: pointer, ): cstring {.importc: "QLoggingCategory_categoryName".}
-proc fcQLoggingCategory_operatorCall(self: pointer, ): pointer {.importc: "QLoggingCategory_operatorCall".}
-proc fcQLoggingCategory_operatorCall2(self: pointer, ): pointer {.importc: "QLoggingCategory_operatorCall2".}
+proc fcQLoggingCategory_isDebugEnabled(self: pointer): bool {.importc: "QLoggingCategory_isDebugEnabled".}
+proc fcQLoggingCategory_isInfoEnabled(self: pointer): bool {.importc: "QLoggingCategory_isInfoEnabled".}
+proc fcQLoggingCategory_isWarningEnabled(self: pointer): bool {.importc: "QLoggingCategory_isWarningEnabled".}
+proc fcQLoggingCategory_isCriticalEnabled(self: pointer): bool {.importc: "QLoggingCategory_isCriticalEnabled".}
+proc fcQLoggingCategory_categoryName(self: pointer): cstring {.importc: "QLoggingCategory_categoryName".}
+proc fcQLoggingCategory_operatorCall(self: pointer): pointer {.importc: "QLoggingCategory_operatorCall".}
+proc fcQLoggingCategory_operatorCall2(self: pointer): pointer {.importc: "QLoggingCategory_operatorCall2".}
 proc fcQLoggingCategory_defaultCategory(): pointer {.importc: "QLoggingCategory_defaultCategory".}
 proc fcQLoggingCategory_setFilterRules(rules: struct_miqt_string): void {.importc: "QLoggingCategory_setFilterRules".}
 proc fcQLoggingCategory_new(category: cstring): ptr cQLoggingCategory {.importc: "QLoggingCategory_new".}
 
-proc isDebugEnabled*(self: gen_qloggingcategory_types.QLoggingCategory, ): bool =
+proc isDebugEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isDebugEnabled(self.h)
 
-proc isInfoEnabled*(self: gen_qloggingcategory_types.QLoggingCategory, ): bool =
+proc isInfoEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isInfoEnabled(self.h)
 
-proc isWarningEnabled*(self: gen_qloggingcategory_types.QLoggingCategory, ): bool =
+proc isWarningEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isWarningEnabled(self.h)
 
-proc isCriticalEnabled*(self: gen_qloggingcategory_types.QLoggingCategory, ): bool =
+proc isCriticalEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isCriticalEnabled(self.h)
 
-proc categoryName*(self: gen_qloggingcategory_types.QLoggingCategory, ): cstring =
+proc categoryName*(self: gen_qloggingcategory_types.QLoggingCategory): cstring =
   (fcQLoggingCategory_categoryName(self.h))
 
-proc operatorCall*(self: gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
+proc operatorCall*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h), owned: false)
 
-proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
+proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h), owned: false)
 
-proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
+proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory(), owned: false)
 
 proc setFilterRules*(_: type gen_qloggingcategory_types.QLoggingCategory, rules: string): void =

@@ -67,45 +67,45 @@ export
 type cQWebEngineCertificateError*{.exportc: "QWebEngineCertificateError", incompleteStruct.} = object
 
 proc fcQWebEngineCertificateError_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineCertificateError_operatorAssign".}
-proc fcQWebEngineCertificateError_typeX(self: pointer, ): cint {.importc: "QWebEngineCertificateError_type".}
-proc fcQWebEngineCertificateError_url(self: pointer, ): pointer {.importc: "QWebEngineCertificateError_url".}
-proc fcQWebEngineCertificateError_isOverridable(self: pointer, ): bool {.importc: "QWebEngineCertificateError_isOverridable".}
-proc fcQWebEngineCertificateError_description(self: pointer, ): struct_miqt_string {.importc: "QWebEngineCertificateError_description".}
-proc fcQWebEngineCertificateError_deferX(self: pointer, ): void {.importc: "QWebEngineCertificateError_defer".}
-proc fcQWebEngineCertificateError_rejectCertificate(self: pointer, ): void {.importc: "QWebEngineCertificateError_rejectCertificate".}
-proc fcQWebEngineCertificateError_acceptCertificate(self: pointer, ): void {.importc: "QWebEngineCertificateError_acceptCertificate".}
-proc fcQWebEngineCertificateError_certificateChain(self: pointer, ): struct_miqt_array {.importc: "QWebEngineCertificateError_certificateChain".}
+proc fcQWebEngineCertificateError_typeX(self: pointer): cint {.importc: "QWebEngineCertificateError_type".}
+proc fcQWebEngineCertificateError_url(self: pointer): pointer {.importc: "QWebEngineCertificateError_url".}
+proc fcQWebEngineCertificateError_isOverridable(self: pointer): bool {.importc: "QWebEngineCertificateError_isOverridable".}
+proc fcQWebEngineCertificateError_description(self: pointer): struct_miqt_string {.importc: "QWebEngineCertificateError_description".}
+proc fcQWebEngineCertificateError_deferX(self: pointer): void {.importc: "QWebEngineCertificateError_defer".}
+proc fcQWebEngineCertificateError_rejectCertificate(self: pointer): void {.importc: "QWebEngineCertificateError_rejectCertificate".}
+proc fcQWebEngineCertificateError_acceptCertificate(self: pointer): void {.importc: "QWebEngineCertificateError_acceptCertificate".}
+proc fcQWebEngineCertificateError_certificateChain(self: pointer): struct_miqt_array {.importc: "QWebEngineCertificateError_certificateChain".}
 proc fcQWebEngineCertificateError_new(other: pointer): ptr cQWebEngineCertificateError {.importc: "QWebEngineCertificateError_new".}
 proc fcQWebEngineCertificateError_staticMetaObject(): pointer {.importc: "QWebEngineCertificateError_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, other: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
   fcQWebEngineCertificateError_operatorAssign(self.h, other.h)
 
-proc typeX*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): cint =
+proc typeX*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): cint =
   cint(fcQWebEngineCertificateError_typeX(self.h))
 
-proc url*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineCertificateError_url(self.h), owned: true)
 
-proc isOverridable*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): bool =
+proc isOverridable*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): bool =
   fcQWebEngineCertificateError_isOverridable(self.h)
 
-proc description*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): string =
+proc description*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): string =
   let v_ms = fcQWebEngineCertificateError_description(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc deferX*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): void =
+proc deferX*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
   fcQWebEngineCertificateError_deferX(self.h)
 
-proc rejectCertificate*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): void =
+proc rejectCertificate*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
   fcQWebEngineCertificateError_rejectCertificate(self.h)
 
-proc acceptCertificate*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): void =
+proc acceptCertificate*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): void =
   fcQWebEngineCertificateError_acceptCertificate(self.h)
 
-proc certificateChain*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError, ): seq[gen_qsslcertificate_types.QSslCertificate] =
+proc certificateChain*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError): seq[gen_qsslcertificate_types.QSslCertificate] =
   var v_ma = fcQWebEngineCertificateError_certificateChain(self.h)
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)

@@ -8,15 +8,6 @@
 #include <QTransform>
 #include <qstatictext.h>
 #include "gen_qstatictext.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStaticText* QStaticText_new() {
 	return new QStaticText();
 }

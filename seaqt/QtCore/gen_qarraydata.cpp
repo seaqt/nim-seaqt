@@ -2,15 +2,6 @@
 #include <QPair>
 #include <qarraydata.h>
 #include "gen_qarraydata.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 ptrdiff_t QArrayData_allocatedCapacity(QArrayData* self) {
 	qsizetype _ret = self->allocatedCapacity();
 	return static_cast<ptrdiff_t>(_ret);

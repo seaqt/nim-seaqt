@@ -58,52 +58,54 @@ export
 
 type cQAudioEngine*{.exportc: "QAudioEngine", incompleteStruct.} = object
 
-proc fcQAudioEngine_metaObject(self: pointer, ): pointer {.importc: "QAudioEngine_metaObject".}
+proc fcQAudioEngine_metaObject(self: pointer): pointer {.importc: "QAudioEngine_metaObject".}
 proc fcQAudioEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioEngine_metacast".}
 proc fcQAudioEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioEngine_metacall".}
 proc fcQAudioEngine_tr(s: cstring): struct_miqt_string {.importc: "QAudioEngine_tr".}
 proc fcQAudioEngine_setOutputMode(self: pointer, mode: cint): void {.importc: "QAudioEngine_setOutputMode".}
-proc fcQAudioEngine_outputMode(self: pointer, ): cint {.importc: "QAudioEngine_outputMode".}
-proc fcQAudioEngine_sampleRate(self: pointer, ): cint {.importc: "QAudioEngine_sampleRate".}
+proc fcQAudioEngine_outputMode(self: pointer): cint {.importc: "QAudioEngine_outputMode".}
+proc fcQAudioEngine_sampleRate(self: pointer): cint {.importc: "QAudioEngine_sampleRate".}
 proc fcQAudioEngine_setOutputDevice(self: pointer, device: pointer): void {.importc: "QAudioEngine_setOutputDevice".}
-proc fcQAudioEngine_outputDevice(self: pointer, ): pointer {.importc: "QAudioEngine_outputDevice".}
+proc fcQAudioEngine_outputDevice(self: pointer): pointer {.importc: "QAudioEngine_outputDevice".}
 proc fcQAudioEngine_setMasterVolume(self: pointer, volume: float32): void {.importc: "QAudioEngine_setMasterVolume".}
-proc fcQAudioEngine_masterVolume(self: pointer, ): float32 {.importc: "QAudioEngine_masterVolume".}
+proc fcQAudioEngine_masterVolume(self: pointer): float32 {.importc: "QAudioEngine_masterVolume".}
 proc fcQAudioEngine_setPaused(self: pointer, paused: bool): void {.importc: "QAudioEngine_setPaused".}
-proc fcQAudioEngine_paused(self: pointer, ): bool {.importc: "QAudioEngine_paused".}
+proc fcQAudioEngine_paused(self: pointer): bool {.importc: "QAudioEngine_paused".}
 proc fcQAudioEngine_setRoomEffectsEnabled(self: pointer, enabled: bool): void {.importc: "QAudioEngine_setRoomEffectsEnabled".}
-proc fcQAudioEngine_roomEffectsEnabled(self: pointer, ): bool {.importc: "QAudioEngine_roomEffectsEnabled".}
+proc fcQAudioEngine_roomEffectsEnabled(self: pointer): bool {.importc: "QAudioEngine_roomEffectsEnabled".}
 proc fcQAudioEngine_setDistanceScale(self: pointer, scale: float32): void {.importc: "QAudioEngine_setDistanceScale".}
-proc fcQAudioEngine_distanceScale(self: pointer, ): float32 {.importc: "QAudioEngine_distanceScale".}
-proc fcQAudioEngine_outputModeChanged(self: pointer, ): void {.importc: "QAudioEngine_outputModeChanged".}
+proc fcQAudioEngine_distanceScale(self: pointer): float32 {.importc: "QAudioEngine_distanceScale".}
+proc fcQAudioEngine_outputModeChanged(self: pointer): void {.importc: "QAudioEngine_outputModeChanged".}
 proc fcQAudioEngine_connect_outputModeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_outputModeChanged".}
-proc fcQAudioEngine_outputDeviceChanged(self: pointer, ): void {.importc: "QAudioEngine_outputDeviceChanged".}
+proc fcQAudioEngine_outputDeviceChanged(self: pointer): void {.importc: "QAudioEngine_outputDeviceChanged".}
 proc fcQAudioEngine_connect_outputDeviceChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_outputDeviceChanged".}
-proc fcQAudioEngine_masterVolumeChanged(self: pointer, ): void {.importc: "QAudioEngine_masterVolumeChanged".}
+proc fcQAudioEngine_masterVolumeChanged(self: pointer): void {.importc: "QAudioEngine_masterVolumeChanged".}
 proc fcQAudioEngine_connect_masterVolumeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_masterVolumeChanged".}
-proc fcQAudioEngine_pausedChanged(self: pointer, ): void {.importc: "QAudioEngine_pausedChanged".}
+proc fcQAudioEngine_pausedChanged(self: pointer): void {.importc: "QAudioEngine_pausedChanged".}
 proc fcQAudioEngine_connect_pausedChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_pausedChanged".}
-proc fcQAudioEngine_distanceScaleChanged(self: pointer, ): void {.importc: "QAudioEngine_distanceScaleChanged".}
+proc fcQAudioEngine_distanceScaleChanged(self: pointer): void {.importc: "QAudioEngine_distanceScaleChanged".}
 proc fcQAudioEngine_connect_distanceScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_distanceScaleChanged".}
-proc fcQAudioEngine_start(self: pointer, ): void {.importc: "QAudioEngine_start".}
-proc fcQAudioEngine_stop(self: pointer, ): void {.importc: "QAudioEngine_stop".}
-proc fcQAudioEngine_pause(self: pointer, ): void {.importc: "QAudioEngine_pause".}
-proc fcQAudioEngine_resume(self: pointer, ): void {.importc: "QAudioEngine_resume".}
+proc fcQAudioEngine_start(self: pointer): void {.importc: "QAudioEngine_start".}
+proc fcQAudioEngine_stop(self: pointer): void {.importc: "QAudioEngine_stop".}
+proc fcQAudioEngine_pause(self: pointer): void {.importc: "QAudioEngine_pause".}
+proc fcQAudioEngine_resume(self: pointer): void {.importc: "QAudioEngine_resume".}
 proc fcQAudioEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioEngine_tr2".}
 proc fcQAudioEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioEngine_tr3".}
+proc fcQAudioEngine_vtbl(self: pointer): pointer {.importc: "QAudioEngine_vtbl".}
+proc fcQAudioEngine_vdata(self: pointer): pointer {.importc: "QAudioEngine_vdata".}
 type cQAudioEngineVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAudioEngineVTable, self: ptr cQAudioEngine) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAudioEngine_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAudioEngine_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAudioEngine_virtualbase_metaObject(self: pointer): pointer {.importc: "QAudioEngine_virtualbase_metaObject".}
 proc fcQAudioEngine_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioEngine_virtualbase_metacast".}
 proc fcQAudioEngine_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioEngine_virtualbase_metacall".}
 proc fcQAudioEngine_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QAudioEngine_virtualbase_event".}
@@ -113,17 +115,17 @@ proc fcQAudioEngine_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQAudioEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioEngine_virtualbase_customEvent".}
 proc fcQAudioEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioEngine_virtualbase_connectNotify".}
 proc fcQAudioEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioEngine_virtualbase_disconnectNotify".}
-proc fcQAudioEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioEngine_protectedbase_sender".}
-proc fcQAudioEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioEngine_protectedbase_senderSignalIndex".}
+proc fcQAudioEngine_protectedbase_sender(self: pointer): pointer {.importc: "QAudioEngine_protectedbase_sender".}
+proc fcQAudioEngine_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAudioEngine_protectedbase_senderSignalIndex".}
 proc fcQAudioEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioEngine_protectedbase_receivers".}
 proc fcQAudioEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioEngine_protectedbase_isSignalConnected".}
-proc fcQAudioEngine_new(vtbl: pointer, ): ptr cQAudioEngine {.importc: "QAudioEngine_new".}
-proc fcQAudioEngine_new2(vtbl: pointer, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new2".}
-proc fcQAudioEngine_new3(vtbl: pointer, sampleRate: cint): ptr cQAudioEngine {.importc: "QAudioEngine_new3".}
-proc fcQAudioEngine_new4(vtbl: pointer, sampleRate: cint, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new4".}
+proc fcQAudioEngine_new(vtbl, vdata: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new".}
+proc fcQAudioEngine_new2(vtbl, vdata: pointer, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new2".}
+proc fcQAudioEngine_new3(vtbl, vdata: pointer, sampleRate: cint): ptr cQAudioEngine {.importc: "QAudioEngine_new3".}
+proc fcQAudioEngine_new4(vtbl, vdata: pointer, sampleRate: cint, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new4".}
 proc fcQAudioEngine_staticMetaObject(): pointer {.importc: "QAudioEngine_staticMetaObject".}
 
-proc metaObject*(self: gen_qaudioengine_types.QAudioEngine, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qaudioengine_types.QAudioEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEngine_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudioengine_types.QAudioEngine, param1: cstring): pointer =
@@ -141,51 +143,51 @@ proc tr*(_: type gen_qaudioengine_types.QAudioEngine, s: cstring): string =
 proc setOutputMode*(self: gen_qaudioengine_types.QAudioEngine, mode: cint): void =
   fcQAudioEngine_setOutputMode(self.h, cint(mode))
 
-proc outputMode*(self: gen_qaudioengine_types.QAudioEngine, ): cint =
+proc outputMode*(self: gen_qaudioengine_types.QAudioEngine): cint =
   cint(fcQAudioEngine_outputMode(self.h))
 
-proc sampleRate*(self: gen_qaudioengine_types.QAudioEngine, ): cint =
+proc sampleRate*(self: gen_qaudioengine_types.QAudioEngine): cint =
   fcQAudioEngine_sampleRate(self.h)
 
 proc setOutputDevice*(self: gen_qaudioengine_types.QAudioEngine, device: gen_qaudiodevice_types.QAudioDevice): void =
   fcQAudioEngine_setOutputDevice(self.h, device.h)
 
-proc outputDevice*(self: gen_qaudioengine_types.QAudioEngine, ): gen_qaudiodevice_types.QAudioDevice =
+proc outputDevice*(self: gen_qaudioengine_types.QAudioEngine): gen_qaudiodevice_types.QAudioDevice =
   gen_qaudiodevice_types.QAudioDevice(h: fcQAudioEngine_outputDevice(self.h), owned: true)
 
 proc setMasterVolume*(self: gen_qaudioengine_types.QAudioEngine, volume: float32): void =
   fcQAudioEngine_setMasterVolume(self.h, volume)
 
-proc masterVolume*(self: gen_qaudioengine_types.QAudioEngine, ): float32 =
+proc masterVolume*(self: gen_qaudioengine_types.QAudioEngine): float32 =
   fcQAudioEngine_masterVolume(self.h)
 
 proc setPaused*(self: gen_qaudioengine_types.QAudioEngine, paused: bool): void =
   fcQAudioEngine_setPaused(self.h, paused)
 
-proc paused*(self: gen_qaudioengine_types.QAudioEngine, ): bool =
+proc paused*(self: gen_qaudioengine_types.QAudioEngine): bool =
   fcQAudioEngine_paused(self.h)
 
 proc setRoomEffectsEnabled*(self: gen_qaudioengine_types.QAudioEngine, enabled: bool): void =
   fcQAudioEngine_setRoomEffectsEnabled(self.h, enabled)
 
-proc roomEffectsEnabled*(self: gen_qaudioengine_types.QAudioEngine, ): bool =
+proc roomEffectsEnabled*(self: gen_qaudioengine_types.QAudioEngine): bool =
   fcQAudioEngine_roomEffectsEnabled(self.h)
 
 proc setDistanceScale*(self: gen_qaudioengine_types.QAudioEngine, scale: float32): void =
   fcQAudioEngine_setDistanceScale(self.h, scale)
 
-proc distanceScale*(self: gen_qaudioengine_types.QAudioEngine, ): float32 =
+proc distanceScale*(self: gen_qaudioengine_types.QAudioEngine): float32 =
   fcQAudioEngine_distanceScale(self.h)
 
-proc outputModeChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc outputModeChanged*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_outputModeChanged(self.h)
 
 type QAudioEngineoutputModeChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_outputModeChanged(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_outputModeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEngineoutputModeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAudioEngine_outputModeChanged_release(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_outputModeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioEngineoutputModeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -193,17 +195,17 @@ proc onoutputModeChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudi
   var tmp = new QAudioEngineoutputModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_outputModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_outputModeChanged, miqt_exec_callback_cQAudioEngine_outputModeChanged_release)
+  fcQAudioEngine_connect_outputModeChanged(self.h, cast[int](addr tmp[]), cQAudioEngine_slot_callback_outputModeChanged, cQAudioEngine_slot_callback_outputModeChanged_release)
 
-proc outputDeviceChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc outputDeviceChanged*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_outputDeviceChanged(self.h)
 
 type QAudioEngineoutputDeviceChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_outputDeviceChanged(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_outputDeviceChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEngineoutputDeviceChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAudioEngine_outputDeviceChanged_release(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_outputDeviceChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioEngineoutputDeviceChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -211,17 +213,17 @@ proc onoutputDeviceChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAu
   var tmp = new QAudioEngineoutputDeviceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_outputDeviceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_outputDeviceChanged, miqt_exec_callback_cQAudioEngine_outputDeviceChanged_release)
+  fcQAudioEngine_connect_outputDeviceChanged(self.h, cast[int](addr tmp[]), cQAudioEngine_slot_callback_outputDeviceChanged, cQAudioEngine_slot_callback_outputDeviceChanged_release)
 
-proc masterVolumeChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc masterVolumeChanged*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_masterVolumeChanged(self.h)
 
 type QAudioEnginemasterVolumeChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_masterVolumeChanged(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_masterVolumeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginemasterVolumeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAudioEngine_masterVolumeChanged_release(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_masterVolumeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioEnginemasterVolumeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -229,17 +231,17 @@ proc onmasterVolumeChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAu
   var tmp = new QAudioEnginemasterVolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_masterVolumeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_masterVolumeChanged, miqt_exec_callback_cQAudioEngine_masterVolumeChanged_release)
+  fcQAudioEngine_connect_masterVolumeChanged(self.h, cast[int](addr tmp[]), cQAudioEngine_slot_callback_masterVolumeChanged, cQAudioEngine_slot_callback_masterVolumeChanged_release)
 
-proc pausedChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc pausedChanged*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_pausedChanged(self.h)
 
 type QAudioEnginepausedChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_pausedChanged(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_pausedChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginepausedChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAudioEngine_pausedChanged_release(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_pausedChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioEnginepausedChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -247,17 +249,17 @@ proc onpausedChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEng
   var tmp = new QAudioEnginepausedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_pausedChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_pausedChanged, miqt_exec_callback_cQAudioEngine_pausedChanged_release)
+  fcQAudioEngine_connect_pausedChanged(self.h, cast[int](addr tmp[]), cQAudioEngine_slot_callback_pausedChanged, cQAudioEngine_slot_callback_pausedChanged_release)
 
-proc distanceScaleChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc distanceScaleChanged*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_distanceScaleChanged(self.h)
 
 type QAudioEnginedistanceScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_distanceScaleChanged(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_distanceScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginedistanceScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAudioEngine_distanceScaleChanged_release(slot: int) {.cdecl.} =
+proc cQAudioEngine_slot_callback_distanceScaleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioEnginedistanceScaleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -265,18 +267,18 @@ proc ondistanceScaleChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QA
   var tmp = new QAudioEnginedistanceScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_distanceScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_distanceScaleChanged, miqt_exec_callback_cQAudioEngine_distanceScaleChanged_release)
+  fcQAudioEngine_connect_distanceScaleChanged(self.h, cast[int](addr tmp[]), cQAudioEngine_slot_callback_distanceScaleChanged, cQAudioEngine_slot_callback_distanceScaleChanged_release)
 
-proc start*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc start*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_start(self.h)
 
-proc stop*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc stop*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_stop(self.h)
 
-proc pause*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc pause*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_pause(self.h)
 
-proc resume*(self: gen_qaudioengine_types.QAudioEngine, ): void =
+proc resume*(self: gen_qaudioengine_types.QAudioEngine): void =
   fcQAudioEngine_resume(self.h)
 
 proc tr*(_: type gen_qaudioengine_types.QAudioEngine, s: cstring, c: cstring): string =
@@ -313,11 +315,11 @@ type QAudioEngineVTable* {.inheritable, pure.} = object
   customEvent*: QAudioEnginecustomEventProc
   connectNotify*: QAudioEngineconnectNotifyProc
   disconnectNotify*: QAudioEnginedisconnectNotifyProc
-proc QAudioEnginemetaObject*(self: gen_qaudioengine_types.QAudioEngine, ): gen_qobjectdefs_types.QMetaObject =
+proc QAudioEnginemetaObject*(self: gen_qaudioengine_types.QAudioEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEngine_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAudioEngine_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -328,8 +330,8 @@ proc miqt_exec_callback_cQAudioEngine_metaObject(vtbl: pointer, self: pointer): 
 proc QAudioEnginemetacast*(self: gen_qaudioengine_types.QAudioEngine, param1: cstring): pointer =
   fcQAudioEngine_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAudioEngine_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -338,8 +340,8 @@ proc miqt_exec_callback_cQAudioEngine_metacast(vtbl: pointer, self: pointer, par
 proc QAudioEnginemetacall*(self: gen_qaudioengine_types.QAudioEngine, param1: cint, param2: cint, param3: pointer): cint =
   fcQAudioEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAudioEngine_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -350,8 +352,8 @@ proc miqt_exec_callback_cQAudioEngine_metacall(vtbl: pointer, self: pointer, par
 proc QAudioEngineevent*(self: gen_qaudioengine_types.QAudioEngine, event: gen_qcoreevent_types.QEvent): bool =
   fcQAudioEngine_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQAudioEngine_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -360,8 +362,8 @@ proc miqt_exec_callback_cQAudioEngine_event(vtbl: pointer, self: pointer, event:
 proc QAudioEngineeventFilter*(self: gen_qaudioengine_types.QAudioEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAudioEngine_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAudioEngine_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -371,8 +373,8 @@ proc miqt_exec_callback_cQAudioEngine_eventFilter(vtbl: pointer, self: pointer, 
 proc QAudioEnginetimerEvent*(self: gen_qaudioengine_types.QAudioEngine, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQAudioEngine_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAudioEngine_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -380,8 +382,8 @@ proc miqt_exec_callback_cQAudioEngine_timerEvent(vtbl: pointer, self: pointer, e
 proc QAudioEnginechildEvent*(self: gen_qaudioengine_types.QAudioEngine, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAudioEngine_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAudioEngine_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -389,8 +391,8 @@ proc miqt_exec_callback_cQAudioEngine_childEvent(vtbl: pointer, self: pointer, e
 proc QAudioEnginecustomEvent*(self: gen_qaudioengine_types.QAudioEngine, event: gen_qcoreevent_types.QEvent): void =
   fcQAudioEngine_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAudioEngine_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -398,8 +400,8 @@ proc miqt_exec_callback_cQAudioEngine_customEvent(vtbl: pointer, self: pointer, 
 proc QAudioEngineconnectNotify*(self: gen_qaudioengine_types.QAudioEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAudioEngine_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAudioEngine_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -407,19 +409,19 @@ proc miqt_exec_callback_cQAudioEngine_connectNotify(vtbl: pointer, self: pointer
 proc QAudioEnginedisconnectNotify*(self: gen_qaudioengine_types.QAudioEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAudioEngine_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAudioEngine_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAudioEngineVTable](vtbl)
+proc cQAudioEngine_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAudioEngineVTable](fcQAudioEngine_vdata(self))
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAudioEngine* {.inheritable.} = ref object of QAudioEngine
   vtbl*: cQAudioEngineVTable
-method metaObject*(self: VirtualQAudioEngine, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAudioEngine): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAudioEnginemetaObject(self[])
-proc miqt_exec_method_cQAudioEngine_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAudioEngine_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -427,78 +429,78 @@ proc miqt_exec_method_cQAudioEngine_metaObject(vtbl: pointer, inst: pointer): po
 
 method metacast*(self: VirtualQAudioEngine, param1: cstring): pointer {.base.} =
   QAudioEnginemetacast(self[], param1)
-proc miqt_exec_method_cQAudioEngine_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAudioEngine, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAudioEnginemetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAudioEngine_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQAudioEngine, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAudioEngineevent(self[], event)
-proc miqt_exec_method_cQAudioEngine_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAudioEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAudioEngineeventFilter(self[], watched, event)
-proc miqt_exec_method_cQAudioEngine_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQAudioEngine, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAudioEnginetimerEvent(self[], event)
-proc miqt_exec_method_cQAudioEngine_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAudioEngine, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAudioEnginechildEvent(self[], event)
-proc miqt_exec_method_cQAudioEngine_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAudioEngine, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAudioEnginecustomEvent(self[], event)
-proc miqt_exec_method_cQAudioEngine_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAudioEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAudioEngineconnectNotify(self[], signal)
-proc miqt_exec_method_cQAudioEngine_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAudioEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAudioEnginedisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAudioEngine_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAudioEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
+proc cQAudioEngine_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAudioEngine](fcQAudioEngine_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qaudioengine_types.QAudioEngine, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qaudioengine_types.QAudioEngine): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAudioEngine_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qaudioengine_types.QAudioEngine, ): cint =
+proc senderSignalIndex*(self: gen_qaudioengine_types.QAudioEngine): cint =
   fcQAudioEngine_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qaudioengine_types.QAudioEngine, signal: cstring): cint =
@@ -511,207 +513,163 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     vtbl: ref QAudioEngineVTable = nil): gen_qaudioengine_types.QAudioEngine =
   let vtbl = if vtbl == nil: new QAudioEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ref QAudioEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAudioEngineVTable](fcQAudioEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioEngine_metaObject
+    vtbl[].vtbl.metaObject = cQAudioEngine_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioEngine_metacast
+    vtbl[].vtbl.metacast = cQAudioEngine_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioEngine_metacall
+    vtbl[].vtbl.metacall = cQAudioEngine_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAudioEngine_event
+    vtbl[].vtbl.event = cQAudioEngine_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioEngine_eventFilter
+    vtbl[].vtbl.eventFilter = cQAudioEngine_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioEngine_timerEvent
+    vtbl[].vtbl.timerEvent = cQAudioEngine_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioEngine_childEvent
+    vtbl[].vtbl.childEvent = cQAudioEngine_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioEngine_customEvent
+    vtbl[].vtbl.customEvent = cQAudioEngine_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioEngine_connectNotify
+    vtbl[].vtbl.connectNotify = cQAudioEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioEngine_disconnectNotify
-  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAudioEngine_vtable_callback_disconnectNotify
+  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAudioEngineVTable = nil): gen_qaudioengine_types.QAudioEngine =
   let vtbl = if vtbl == nil: new QAudioEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ref QAudioEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAudioEngineVTable](fcQAudioEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioEngine_metaObject
+    vtbl[].vtbl.metaObject = cQAudioEngine_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioEngine_metacast
+    vtbl[].vtbl.metacast = cQAudioEngine_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioEngine_metacall
+    vtbl[].vtbl.metacall = cQAudioEngine_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAudioEngine_event
+    vtbl[].vtbl.event = cQAudioEngine_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioEngine_eventFilter
+    vtbl[].vtbl.eventFilter = cQAudioEngine_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioEngine_timerEvent
+    vtbl[].vtbl.timerEvent = cQAudioEngine_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioEngine_childEvent
+    vtbl[].vtbl.childEvent = cQAudioEngine_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioEngine_customEvent
+    vtbl[].vtbl.customEvent = cQAudioEngine_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioEngine_connectNotify
+    vtbl[].vtbl.connectNotify = cQAudioEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioEngine_disconnectNotify
-  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAudioEngine_vtable_callback_disconnectNotify
+  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint,
     vtbl: ref QAudioEngineVTable = nil): gen_qaudioengine_types.QAudioEngine =
   let vtbl = if vtbl == nil: new QAudioEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ref QAudioEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAudioEngineVTable](fcQAudioEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioEngine_metaObject
+    vtbl[].vtbl.metaObject = cQAudioEngine_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioEngine_metacast
+    vtbl[].vtbl.metacast = cQAudioEngine_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioEngine_metacall
+    vtbl[].vtbl.metacall = cQAudioEngine_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAudioEngine_event
+    vtbl[].vtbl.event = cQAudioEngine_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioEngine_eventFilter
+    vtbl[].vtbl.eventFilter = cQAudioEngine_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioEngine_timerEvent
+    vtbl[].vtbl.timerEvent = cQAudioEngine_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioEngine_childEvent
+    vtbl[].vtbl.childEvent = cQAudioEngine_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioEngine_customEvent
+    vtbl[].vtbl.customEvent = cQAudioEngine_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioEngine_connectNotify
+    vtbl[].vtbl.connectNotify = cQAudioEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioEngine_disconnectNotify
-  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new3(addr(vtbl[].vtbl), sampleRate), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAudioEngine_vtable_callback_disconnectNotify
+  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new3(addr(vtbl[].vtbl), addr(vtbl[]), sampleRate), owned: true)
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QAudioEngineVTable = nil): gen_qaudioengine_types.QAudioEngine =
   let vtbl = if vtbl == nil: new QAudioEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ref QAudioEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAudioEngineVTable](fcQAudioEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioEngine_metaObject
+    vtbl[].vtbl.metaObject = cQAudioEngine_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioEngine_metacast
+    vtbl[].vtbl.metacast = cQAudioEngine_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioEngine_metacall
+    vtbl[].vtbl.metacall = cQAudioEngine_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAudioEngine_event
+    vtbl[].vtbl.event = cQAudioEngine_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioEngine_eventFilter
+    vtbl[].vtbl.eventFilter = cQAudioEngine_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioEngine_timerEvent
+    vtbl[].vtbl.timerEvent = cQAudioEngine_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioEngine_childEvent
+    vtbl[].vtbl.childEvent = cQAudioEngine_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioEngine_customEvent
+    vtbl[].vtbl.customEvent = cQAudioEngine_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioEngine_connectNotify
+    vtbl[].vtbl.connectNotify = cQAudioEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioEngine_disconnectNotify
-  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new4(addr(vtbl[].vtbl), sampleRate, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAudioEngine_vtable_callback_disconnectNotify
+  gen_qaudioengine_types.QAudioEngine(h: fcQAudioEngine_new4(addr(vtbl[].vtbl), addr(vtbl[]), sampleRate, parent.h), owned: true)
 
+const cQAudioEngine_mvtbl = cQAudioEngineVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAudioEngine()[])](self.fcQAudioEngine_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAudioEngine_method_callback_metaObject,
+  metacast: cQAudioEngine_method_callback_metacast,
+  metacall: cQAudioEngine_method_callback_metacall,
+  event: cQAudioEngine_method_callback_event,
+  eventFilter: cQAudioEngine_method_callback_eventFilter,
+  timerEvent: cQAudioEngine_method_callback_timerEvent,
+  childEvent: cQAudioEngine_method_callback_childEvent,
+  customEvent: cQAudioEngine_method_callback_customEvent,
+  connectNotify: cQAudioEngine_method_callback_connectNotify,
+  disconnectNotify: cQAudioEngine_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
-    vtbl: VirtualQAudioEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAudioEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioEngine_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioEngine_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioEngine_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQAudioEngine_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioEngine_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioEngine_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioEngine_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioEngine_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioEngine_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioEngine_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAudioEngine_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAudioEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAudioEngine_new(addr(cQAudioEngine_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAudioEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAudioEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioEngine_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioEngine_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioEngine_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQAudioEngine_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioEngine_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioEngine_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioEngine_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioEngine_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioEngine_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioEngine_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAudioEngine_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAudioEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAudioEngine_new2(addr(cQAudioEngine_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint,
-    vtbl: VirtualQAudioEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAudioEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioEngine_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioEngine_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioEngine_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQAudioEngine_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioEngine_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioEngine_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioEngine_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioEngine_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioEngine_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioEngine_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAudioEngine_new3(addr(vtbl[].vtbl), sampleRate)
-  vtbl[].owned = true
+    inst: VirtualQAudioEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAudioEngine_new3(addr(cQAudioEngine_mvtbl), addr(inst[]), sampleRate)
+  inst[].owned = true
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     sampleRate: cint, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAudioEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioEngineVTable, _: ptr cQAudioEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAudioEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioEngine_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioEngine_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioEngine_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQAudioEngine_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioEngine_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioEngine_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioEngine_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioEngine_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioEngine_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioEngine_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAudioEngine_new4(addr(vtbl[].vtbl), sampleRate, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAudioEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAudioEngine_new4(addr(cQAudioEngine_mvtbl), addr(inst[]), sampleRate, parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudioengine_types.QAudioEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEngine_staticMetaObject())

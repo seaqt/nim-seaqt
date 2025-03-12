@@ -84,7 +84,7 @@ export
 
 type cQTabWidget*{.exportc: "QTabWidget", incompleteStruct.} = object
 
-proc fcQTabWidget_metaObject(self: pointer, ): pointer {.importc: "QTabWidget_metaObject".}
+proc fcQTabWidget_metaObject(self: pointer): pointer {.importc: "QTabWidget_metaObject".}
 proc fcQTabWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabWidget_metacast".}
 proc fcQTabWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabWidget_metacall".}
 proc fcQTabWidget_tr(s: cstring): struct_miqt_string {.importc: "QTabWidget_tr".}
@@ -105,37 +105,37 @@ proc fcQTabWidget_setTabToolTip(self: pointer, index: cint, tip: struct_miqt_str
 proc fcQTabWidget_tabToolTip(self: pointer, index: cint): struct_miqt_string {.importc: "QTabWidget_tabToolTip".}
 proc fcQTabWidget_setTabWhatsThis(self: pointer, index: cint, text: struct_miqt_string): void {.importc: "QTabWidget_setTabWhatsThis".}
 proc fcQTabWidget_tabWhatsThis(self: pointer, index: cint): struct_miqt_string {.importc: "QTabWidget_tabWhatsThis".}
-proc fcQTabWidget_currentIndex(self: pointer, ): cint {.importc: "QTabWidget_currentIndex".}
-proc fcQTabWidget_currentWidget(self: pointer, ): pointer {.importc: "QTabWidget_currentWidget".}
+proc fcQTabWidget_currentIndex(self: pointer): cint {.importc: "QTabWidget_currentIndex".}
+proc fcQTabWidget_currentWidget(self: pointer): pointer {.importc: "QTabWidget_currentWidget".}
 proc fcQTabWidget_widget(self: pointer, index: cint): pointer {.importc: "QTabWidget_widget".}
 proc fcQTabWidget_indexOf(self: pointer, widget: pointer): cint {.importc: "QTabWidget_indexOf".}
-proc fcQTabWidget_count(self: pointer, ): cint {.importc: "QTabWidget_count".}
-proc fcQTabWidget_tabPosition(self: pointer, ): cint {.importc: "QTabWidget_tabPosition".}
+proc fcQTabWidget_count(self: pointer): cint {.importc: "QTabWidget_count".}
+proc fcQTabWidget_tabPosition(self: pointer): cint {.importc: "QTabWidget_tabPosition".}
 proc fcQTabWidget_setTabPosition(self: pointer, position: cint): void {.importc: "QTabWidget_setTabPosition".}
-proc fcQTabWidget_tabsClosable(self: pointer, ): bool {.importc: "QTabWidget_tabsClosable".}
+proc fcQTabWidget_tabsClosable(self: pointer): bool {.importc: "QTabWidget_tabsClosable".}
 proc fcQTabWidget_setTabsClosable(self: pointer, closeable: bool): void {.importc: "QTabWidget_setTabsClosable".}
-proc fcQTabWidget_isMovable(self: pointer, ): bool {.importc: "QTabWidget_isMovable".}
+proc fcQTabWidget_isMovable(self: pointer): bool {.importc: "QTabWidget_isMovable".}
 proc fcQTabWidget_setMovable(self: pointer, movable: bool): void {.importc: "QTabWidget_setMovable".}
-proc fcQTabWidget_tabShape(self: pointer, ): cint {.importc: "QTabWidget_tabShape".}
+proc fcQTabWidget_tabShape(self: pointer): cint {.importc: "QTabWidget_tabShape".}
 proc fcQTabWidget_setTabShape(self: pointer, s: cint): void {.importc: "QTabWidget_setTabShape".}
-proc fcQTabWidget_sizeHint(self: pointer, ): pointer {.importc: "QTabWidget_sizeHint".}
-proc fcQTabWidget_minimumSizeHint(self: pointer, ): pointer {.importc: "QTabWidget_minimumSizeHint".}
+proc fcQTabWidget_sizeHint(self: pointer): pointer {.importc: "QTabWidget_sizeHint".}
+proc fcQTabWidget_minimumSizeHint(self: pointer): pointer {.importc: "QTabWidget_minimumSizeHint".}
 proc fcQTabWidget_heightForWidth(self: pointer, width: cint): cint {.importc: "QTabWidget_heightForWidth".}
-proc fcQTabWidget_hasHeightForWidth(self: pointer, ): bool {.importc: "QTabWidget_hasHeightForWidth".}
+proc fcQTabWidget_hasHeightForWidth(self: pointer): bool {.importc: "QTabWidget_hasHeightForWidth".}
 proc fcQTabWidget_setCornerWidget(self: pointer, w: pointer): void {.importc: "QTabWidget_setCornerWidget".}
-proc fcQTabWidget_cornerWidget(self: pointer, ): pointer {.importc: "QTabWidget_cornerWidget".}
-proc fcQTabWidget_elideMode(self: pointer, ): cint {.importc: "QTabWidget_elideMode".}
+proc fcQTabWidget_cornerWidget(self: pointer): pointer {.importc: "QTabWidget_cornerWidget".}
+proc fcQTabWidget_elideMode(self: pointer): cint {.importc: "QTabWidget_elideMode".}
 proc fcQTabWidget_setElideMode(self: pointer, mode: cint): void {.importc: "QTabWidget_setElideMode".}
-proc fcQTabWidget_iconSize(self: pointer, ): pointer {.importc: "QTabWidget_iconSize".}
+proc fcQTabWidget_iconSize(self: pointer): pointer {.importc: "QTabWidget_iconSize".}
 proc fcQTabWidget_setIconSize(self: pointer, size: pointer): void {.importc: "QTabWidget_setIconSize".}
-proc fcQTabWidget_usesScrollButtons(self: pointer, ): bool {.importc: "QTabWidget_usesScrollButtons".}
+proc fcQTabWidget_usesScrollButtons(self: pointer): bool {.importc: "QTabWidget_usesScrollButtons".}
 proc fcQTabWidget_setUsesScrollButtons(self: pointer, useButtons: bool): void {.importc: "QTabWidget_setUsesScrollButtons".}
-proc fcQTabWidget_documentMode(self: pointer, ): bool {.importc: "QTabWidget_documentMode".}
+proc fcQTabWidget_documentMode(self: pointer): bool {.importc: "QTabWidget_documentMode".}
 proc fcQTabWidget_setDocumentMode(self: pointer, set: bool): void {.importc: "QTabWidget_setDocumentMode".}
-proc fcQTabWidget_tabBarAutoHide(self: pointer, ): bool {.importc: "QTabWidget_tabBarAutoHide".}
+proc fcQTabWidget_tabBarAutoHide(self: pointer): bool {.importc: "QTabWidget_tabBarAutoHide".}
 proc fcQTabWidget_setTabBarAutoHide(self: pointer, enabled: bool): void {.importc: "QTabWidget_setTabBarAutoHide".}
-proc fcQTabWidget_clear(self: pointer, ): void {.importc: "QTabWidget_clear".}
-proc fcQTabWidget_tabBar(self: pointer, ): pointer {.importc: "QTabWidget_tabBar".}
+proc fcQTabWidget_clear(self: pointer): void {.importc: "QTabWidget_clear".}
+proc fcQTabWidget_tabBar(self: pointer): pointer {.importc: "QTabWidget_tabBar".}
 proc fcQTabWidget_setCurrentIndex(self: pointer, index: cint): void {.importc: "QTabWidget_setCurrentIndex".}
 proc fcQTabWidget_setCurrentWidget(self: pointer, widget: pointer): void {.importc: "QTabWidget_setCurrentWidget".}
 proc fcQTabWidget_currentChanged(self: pointer, index: cint): void {.importc: "QTabWidget_currentChanged".}
@@ -150,68 +150,70 @@ proc fcQTabWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QT
 proc fcQTabWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTabWidget_tr3".}
 proc fcQTabWidget_setCornerWidget2(self: pointer, w: pointer, corner: cint): void {.importc: "QTabWidget_setCornerWidget2".}
 proc fcQTabWidget_cornerWidget1(self: pointer, corner: cint): pointer {.importc: "QTabWidget_cornerWidget1".}
+proc fcQTabWidget_vtbl(self: pointer): pointer {.importc: "QTabWidget_vtbl".}
+proc fcQTabWidget_vdata(self: pointer): pointer {.importc: "QTabWidget_vdata".}
 type cQTabWidgetVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQTabWidgetVTable, self: ptr cQTabWidget) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, width: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  tabInserted*: proc(vtbl, self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
-  tabRemoved*: proc(vtbl, self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  initStyleOption*: proc(vtbl, self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQTabWidget_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QTabWidget_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, width: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  tabInserted*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
+  tabRemoved*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  initStyleOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQTabWidget_virtualbase_metaObject(self: pointer): pointer {.importc: "QTabWidget_virtualbase_metaObject".}
 proc fcQTabWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabWidget_virtualbase_metacast".}
 proc fcQTabWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabWidget_virtualbase_metacall".}
-proc fcQTabWidget_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QTabWidget_virtualbase_sizeHint".}
-proc fcQTabWidget_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QTabWidget_virtualbase_minimumSizeHint".}
+proc fcQTabWidget_virtualbase_sizeHint(self: pointer): pointer {.importc: "QTabWidget_virtualbase_sizeHint".}
+proc fcQTabWidget_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QTabWidget_virtualbase_minimumSizeHint".}
 proc fcQTabWidget_virtualbase_heightForWidth(self: pointer, width: cint): cint {.importc: "QTabWidget_virtualbase_heightForWidth".}
-proc fcQTabWidget_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QTabWidget_virtualbase_hasHeightForWidth".}
+proc fcQTabWidget_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QTabWidget_virtualbase_hasHeightForWidth".}
 proc fcQTabWidget_virtualbase_tabInserted(self: pointer, index: cint): void {.importc: "QTabWidget_virtualbase_tabInserted".}
 proc fcQTabWidget_virtualbase_tabRemoved(self: pointer, index: cint): void {.importc: "QTabWidget_virtualbase_tabRemoved".}
 proc fcQTabWidget_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_showEvent".}
@@ -221,9 +223,9 @@ proc fcQTabWidget_virtualbase_paintEvent(self: pointer, param1: pointer): void {
 proc fcQTabWidget_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_changeEvent".}
 proc fcQTabWidget_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QTabWidget_virtualbase_event".}
 proc fcQTabWidget_virtualbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QTabWidget_virtualbase_initStyleOption".}
-proc fcQTabWidget_virtualbase_devType(self: pointer, ): cint {.importc: "QTabWidget_virtualbase_devType".}
+proc fcQTabWidget_virtualbase_devType(self: pointer): cint {.importc: "QTabWidget_virtualbase_devType".}
 proc fcQTabWidget_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QTabWidget_virtualbase_setVisible".}
-proc fcQTabWidget_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QTabWidget_virtualbase_paintEngine".}
+proc fcQTabWidget_virtualbase_paintEngine(self: pointer): pointer {.importc: "QTabWidget_virtualbase_paintEngine".}
 proc fcQTabWidget_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mousePressEvent".}
 proc fcQTabWidget_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mouseReleaseEvent".}
 proc fcQTabWidget_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QTabWidget_virtualbase_mouseDoubleClickEvent".}
@@ -248,7 +250,7 @@ proc fcQTabWidget_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_
 proc fcQTabWidget_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QTabWidget_virtualbase_metric".}
 proc fcQTabWidget_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QTabWidget_virtualbase_initPainter".}
 proc fcQTabWidget_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QTabWidget_virtualbase_redirected".}
-proc fcQTabWidget_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QTabWidget_virtualbase_sharedPainter".}
+proc fcQTabWidget_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QTabWidget_virtualbase_sharedPainter".}
 proc fcQTabWidget_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QTabWidget_virtualbase_inputMethodEvent".}
 proc fcQTabWidget_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QTabWidget_virtualbase_inputMethodQuery".}
 proc fcQTabWidget_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTabWidget_virtualbase_focusNextPrevChild".}
@@ -259,20 +261,20 @@ proc fcQTabWidget_virtualbase_customEvent(self: pointer, event: pointer): void {
 proc fcQTabWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTabWidget_virtualbase_connectNotify".}
 proc fcQTabWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTabWidget_virtualbase_disconnectNotify".}
 proc fcQTabWidget_protectedbase_setTabBar(self: pointer, tabBar: pointer): void {.importc: "QTabWidget_protectedbase_setTabBar".}
-proc fcQTabWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTabWidget_protectedbase_updateMicroFocus".}
-proc fcQTabWidget_protectedbase_create(self: pointer, ): void {.importc: "QTabWidget_protectedbase_create".}
-proc fcQTabWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QTabWidget_protectedbase_destroy".}
-proc fcQTabWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTabWidget_protectedbase_focusNextChild".}
-proc fcQTabWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTabWidget_protectedbase_focusPreviousChild".}
-proc fcQTabWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QTabWidget_protectedbase_sender".}
-proc fcQTabWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTabWidget_protectedbase_senderSignalIndex".}
+proc fcQTabWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QTabWidget_protectedbase_updateMicroFocus".}
+proc fcQTabWidget_protectedbase_create(self: pointer): void {.importc: "QTabWidget_protectedbase_create".}
+proc fcQTabWidget_protectedbase_destroy(self: pointer): void {.importc: "QTabWidget_protectedbase_destroy".}
+proc fcQTabWidget_protectedbase_focusNextChild(self: pointer): bool {.importc: "QTabWidget_protectedbase_focusNextChild".}
+proc fcQTabWidget_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QTabWidget_protectedbase_focusPreviousChild".}
+proc fcQTabWidget_protectedbase_sender(self: pointer): pointer {.importc: "QTabWidget_protectedbase_sender".}
+proc fcQTabWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTabWidget_protectedbase_senderSignalIndex".}
 proc fcQTabWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTabWidget_protectedbase_receivers".}
 proc fcQTabWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTabWidget_protectedbase_isSignalConnected".}
-proc fcQTabWidget_new(vtbl: pointer, parent: pointer): ptr cQTabWidget {.importc: "QTabWidget_new".}
-proc fcQTabWidget_new2(vtbl: pointer, ): ptr cQTabWidget {.importc: "QTabWidget_new2".}
+proc fcQTabWidget_new(vtbl, vdata: pointer, parent: pointer): ptr cQTabWidget {.importc: "QTabWidget_new".}
+proc fcQTabWidget_new2(vtbl, vdata: pointer): ptr cQTabWidget {.importc: "QTabWidget_new2".}
 proc fcQTabWidget_staticMetaObject(): pointer {.importc: "QTabWidget_staticMetaObject".}
 
-proc metaObject*(self: gen_qtabwidget_types.QTabWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtabwidget_types.QTabWidget, param1: cstring): pointer =
@@ -347,10 +349,10 @@ proc tabWhatsThis*(self: gen_qtabwidget_types.QTabWidget, index: cint): string =
   c_free(v_ms.data)
   vx_ret
 
-proc currentIndex*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc currentIndex*(self: gen_qtabwidget_types.QTabWidget): cint =
   fcQTabWidget_currentIndex(self.h)
 
-proc currentWidget*(self: gen_qtabwidget_types.QTabWidget, ): gen_qwidget_types.QWidget =
+proc currentWidget*(self: gen_qtabwidget_types.QTabWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQTabWidget_currentWidget(self.h), owned: false)
 
 proc widget*(self: gen_qtabwidget_types.QTabWidget, index: cint): gen_qwidget_types.QWidget =
@@ -359,85 +361,85 @@ proc widget*(self: gen_qtabwidget_types.QTabWidget, index: cint): gen_qwidget_ty
 proc indexOf*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget): cint =
   fcQTabWidget_indexOf(self.h, widget.h)
 
-proc count*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc count*(self: gen_qtabwidget_types.QTabWidget): cint =
   fcQTabWidget_count(self.h)
 
-proc tabPosition*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc tabPosition*(self: gen_qtabwidget_types.QTabWidget): cint =
   cint(fcQTabWidget_tabPosition(self.h))
 
 proc setTabPosition*(self: gen_qtabwidget_types.QTabWidget, position: cint): void =
   fcQTabWidget_setTabPosition(self.h, cint(position))
 
-proc tabsClosable*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc tabsClosable*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_tabsClosable(self.h)
 
 proc setTabsClosable*(self: gen_qtabwidget_types.QTabWidget, closeable: bool): void =
   fcQTabWidget_setTabsClosable(self.h, closeable)
 
-proc isMovable*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc isMovable*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_isMovable(self.h)
 
 proc setMovable*(self: gen_qtabwidget_types.QTabWidget, movable: bool): void =
   fcQTabWidget_setMovable(self.h, movable)
 
-proc tabShape*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc tabShape*(self: gen_qtabwidget_types.QTabWidget): cint =
   cint(fcQTabWidget_tabShape(self.h))
 
 proc setTabShape*(self: gen_qtabwidget_types.QTabWidget, s: cint): void =
   fcQTabWidget_setTabShape(self.h, cint(s))
 
-proc sizeHint*(self: gen_qtabwidget_types.QTabWidget, ): gen_qsize_types.QSize =
+proc sizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQTabWidget_sizeHint(self.h), owned: true)
 
-proc minimumSizeHint*(self: gen_qtabwidget_types.QTabWidget, ): gen_qsize_types.QSize =
+proc minimumSizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQTabWidget_minimumSizeHint(self.h), owned: true)
 
 proc heightForWidth*(self: gen_qtabwidget_types.QTabWidget, width: cint): cint =
   fcQTabWidget_heightForWidth(self.h, width)
 
-proc hasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc hasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_hasHeightForWidth(self.h)
 
 proc setCornerWidget*(self: gen_qtabwidget_types.QTabWidget, w: gen_qwidget_types.QWidget): void =
   fcQTabWidget_setCornerWidget(self.h, w.h)
 
-proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget, ): gen_qwidget_types.QWidget =
+proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidget(self.h), owned: false)
 
-proc elideMode*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc elideMode*(self: gen_qtabwidget_types.QTabWidget): cint =
   cint(fcQTabWidget_elideMode(self.h))
 
 proc setElideMode*(self: gen_qtabwidget_types.QTabWidget, mode: cint): void =
   fcQTabWidget_setElideMode(self.h, cint(mode))
 
-proc iconSize*(self: gen_qtabwidget_types.QTabWidget, ): gen_qsize_types.QSize =
+proc iconSize*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQTabWidget_iconSize(self.h), owned: true)
 
 proc setIconSize*(self: gen_qtabwidget_types.QTabWidget, size: gen_qsize_types.QSize): void =
   fcQTabWidget_setIconSize(self.h, size.h)
 
-proc usesScrollButtons*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc usesScrollButtons*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_usesScrollButtons(self.h)
 
 proc setUsesScrollButtons*(self: gen_qtabwidget_types.QTabWidget, useButtons: bool): void =
   fcQTabWidget_setUsesScrollButtons(self.h, useButtons)
 
-proc documentMode*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc documentMode*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_documentMode(self.h)
 
 proc setDocumentMode*(self: gen_qtabwidget_types.QTabWidget, set: bool): void =
   fcQTabWidget_setDocumentMode(self.h, set)
 
-proc tabBarAutoHide*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc tabBarAutoHide*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_tabBarAutoHide(self.h)
 
 proc setTabBarAutoHide*(self: gen_qtabwidget_types.QTabWidget, enabled: bool): void =
   fcQTabWidget_setTabBarAutoHide(self.h, enabled)
 
-proc clear*(self: gen_qtabwidget_types.QTabWidget, ): void =
+proc clear*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_clear(self.h)
 
-proc tabBar*(self: gen_qtabwidget_types.QTabWidget, ): gen_qtabbar_types.QTabBar =
+proc tabBar*(self: gen_qtabwidget_types.QTabWidget): gen_qtabbar_types.QTabBar =
   gen_qtabbar_types.QTabBar(h: fcQTabWidget_tabBar(self.h), owned: false)
 
 proc setCurrentIndex*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
@@ -450,13 +452,13 @@ proc currentChanged*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_currentChanged(self.h, index)
 
 type QTabWidgetcurrentChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_currentChanged(slot: int, index: cint) {.cdecl.} =
+proc cQTabWidget_slot_callback_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgetcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQTabWidget_currentChanged_release(slot: int) {.cdecl.} =
+proc cQTabWidget_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTabWidgetcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -464,19 +466,19 @@ proc oncurrentChanged*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgetcu
   var tmp = new QTabWidgetcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_currentChanged, miqt_exec_callback_cQTabWidget_currentChanged_release)
+  fcQTabWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), cQTabWidget_slot_callback_currentChanged, cQTabWidget_slot_callback_currentChanged_release)
 
 proc tabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabCloseRequested(self.h, index)
 
 type QTabWidgettabCloseRequestedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabCloseRequested(slot: int, index: cint) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabCloseRequested(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQTabWidget_tabCloseRequested_release(slot: int) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabCloseRequested_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -484,19 +486,19 @@ proc ontabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidge
   var tmp = new QTabWidgettabCloseRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabCloseRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabCloseRequested, miqt_exec_callback_cQTabWidget_tabCloseRequested_release)
+  fcQTabWidget_connect_tabCloseRequested(self.h, cast[int](addr tmp[]), cQTabWidget_slot_callback_tabCloseRequested, cQTabWidget_slot_callback_tabCloseRequested_release)
 
 proc tabBarClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabBarClicked(self.h, index)
 
 type QTabWidgettabBarClickedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabBarClicked(slot: int, index: cint) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabBarClicked(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabBarClickedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQTabWidget_tabBarClicked_release(slot: int) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabBarClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTabWidgettabBarClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -504,19 +506,19 @@ proc ontabBarClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettab
   var tmp = new QTabWidgettabBarClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabBarClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabBarClicked, miqt_exec_callback_cQTabWidget_tabBarClicked_release)
+  fcQTabWidget_connect_tabBarClicked(self.h, cast[int](addr tmp[]), cQTabWidget_slot_callback_tabBarClicked, cQTabWidget_slot_callback_tabBarClicked_release)
 
 proc tabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabBarDoubleClicked(self.h, index)
 
 type QTabWidgettabBarDoubleClickedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabBarDoubleClicked(slot: int, index: cint) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabBarDoubleClicked(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQTabWidget_tabBarDoubleClicked_release(slot: int) {.cdecl.} =
+proc cQTabWidget_slot_callback_tabBarDoubleClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -524,7 +526,7 @@ proc ontabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWid
   var tmp = new QTabWidgettabBarDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabBarDoubleClicked, miqt_exec_callback_cQTabWidget_tabBarDoubleClicked_release)
+  fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), cQTabWidget_slot_callback_tabBarDoubleClicked, cQTabWidget_slot_callback_tabBarDoubleClicked_release)
 
 proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
   let v_ms = fcQTabWidget_tr2(s, c)
@@ -652,11 +654,11 @@ type QTabWidgetVTable* {.inheritable, pure.} = object
   customEvent*: QTabWidgetcustomEventProc
   connectNotify*: QTabWidgetconnectNotifyProc
   disconnectNotify*: QTabWidgetdisconnectNotifyProc
-proc QTabWidgetmetaObject*(self: gen_qtabwidget_types.QTabWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc QTabWidgetmetaObject*(self: gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQTabWidget_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -667,8 +669,8 @@ proc miqt_exec_callback_cQTabWidget_metaObject(vtbl: pointer, self: pointer): po
 proc QTabWidgetmetacast*(self: gen_qtabwidget_types.QTabWidget, param1: cstring): pointer =
   fcQTabWidget_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQTabWidget_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -677,8 +679,8 @@ proc miqt_exec_callback_cQTabWidget_metacast(vtbl: pointer, self: pointer, param
 proc QTabWidgetmetacall*(self: gen_qtabwidget_types.QTabWidget, param1: cint, param2: cint, param3: pointer): cint =
   fcQTabWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQTabWidget_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -686,11 +688,11 @@ proc miqt_exec_callback_cQTabWidget_metacall(vtbl: pointer, self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTabWidgetsizeHint*(self: gen_qtabwidget_types.QTabWidget, ): gen_qsize_types.QSize =
+proc QTabWidgetsizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQTabWidget_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQTabWidget_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -698,11 +700,11 @@ proc miqt_exec_callback_cQTabWidget_sizeHint(vtbl: pointer, self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTabWidgetminimumSizeHint*(self: gen_qtabwidget_types.QTabWidget, ): gen_qsize_types.QSize =
+proc QTabWidgetminimumSizeHint*(self: gen_qtabwidget_types.QTabWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQTabWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQTabWidget_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -713,18 +715,18 @@ proc miqt_exec_callback_cQTabWidget_minimumSizeHint(vtbl: pointer, self: pointer
 proc QTabWidgetheightForWidth*(self: gen_qtabwidget_types.QTabWidget, width: cint): cint =
   fcQTabWidget_virtualbase_heightForWidth(self.h, width)
 
-proc miqt_exec_callback_cQTabWidget_heightForWidth(vtbl: pointer, self: pointer, width: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = width
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QTabWidgethasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc QTabWidgethasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQTabWidget_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
@@ -732,8 +734,8 @@ proc miqt_exec_callback_cQTabWidget_hasHeightForWidth(vtbl: pointer, self: point
 proc QTabWidgettabInserted*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_virtualbase_tabInserted(self.h, index)
 
-proc miqt_exec_callback_cQTabWidget_tabInserted(vtbl: pointer, self: pointer, index: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_tabInserted(self: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = index
   vtbl[].tabInserted(self, slotval1)
@@ -741,8 +743,8 @@ proc miqt_exec_callback_cQTabWidget_tabInserted(vtbl: pointer, self: pointer, in
 proc QTabWidgettabRemoved*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_virtualbase_tabRemoved(self.h, index)
 
-proc miqt_exec_callback_cQTabWidget_tabRemoved(vtbl: pointer, self: pointer, index: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_tabRemoved(self: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = index
   vtbl[].tabRemoved(self, slotval1)
@@ -750,8 +752,8 @@ proc miqt_exec_callback_cQTabWidget_tabRemoved(vtbl: pointer, self: pointer, ind
 proc QTabWidgetshowEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QShowEvent): void =
   fcQTabWidget_virtualbase_showEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_showEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -759,8 +761,8 @@ proc miqt_exec_callback_cQTabWidget_showEvent(vtbl: pointer, self: pointer, para
 proc QTabWidgetresizeEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QResizeEvent): void =
   fcQTabWidget_virtualbase_resizeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_resizeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -768,8 +770,8 @@ proc miqt_exec_callback_cQTabWidget_resizeEvent(vtbl: pointer, self: pointer, pa
 proc QTabWidgetkeyPressEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QKeyEvent): void =
   fcQTabWidget_virtualbase_keyPressEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -777,8 +779,8 @@ proc miqt_exec_callback_cQTabWidget_keyPressEvent(vtbl: pointer, self: pointer, 
 proc QTabWidgetpaintEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QPaintEvent): void =
   fcQTabWidget_virtualbase_paintEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -786,8 +788,8 @@ proc miqt_exec_callback_cQTabWidget_paintEvent(vtbl: pointer, self: pointer, par
 proc QTabWidgetchangeEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qcoreevent_types.QEvent): void =
   fcQTabWidget_virtualbase_changeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -795,8 +797,8 @@ proc miqt_exec_callback_cQTabWidget_changeEvent(vtbl: pointer, self: pointer, pa
 proc QTabWidgetevent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qcoreevent_types.QEvent): bool =
   fcQTabWidget_virtualbase_event(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -805,17 +807,17 @@ proc miqt_exec_callback_cQTabWidget_event(vtbl: pointer, self: pointer, param1: 
 proc QTabWidgetinitStyleOption*(self: gen_qtabwidget_types.QTabWidget, option: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): void =
   fcQTabWidget_virtualbase_initStyleOption(self.h, option.h)
 
-proc miqt_exec_callback_cQTabWidget_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QTabWidgetdevType*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc QTabWidgetdevType*(self: gen_qtabwidget_types.QTabWidget): cint =
   fcQTabWidget_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQTabWidget_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -823,17 +825,17 @@ proc miqt_exec_callback_cQTabWidget_devType(vtbl: pointer, self: pointer): cint 
 proc QTabWidgetsetVisible*(self: gen_qtabwidget_types.QTabWidget, visible: bool): void =
   fcQTabWidget_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQTabWidget_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QTabWidgetpaintEngine*(self: gen_qtabwidget_types.QTabWidget, ): gen_qpaintengine_types.QPaintEngine =
+proc QTabWidgetpaintEngine*(self: gen_qtabwidget_types.QTabWidget): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQTabWidget_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQTabWidget_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -844,8 +846,8 @@ proc miqt_exec_callback_cQTabWidget_paintEngine(vtbl: pointer, self: pointer): p
 proc QTabWidgetmousePressEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQTabWidget_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -853,8 +855,8 @@ proc miqt_exec_callback_cQTabWidget_mousePressEvent(vtbl: pointer, self: pointer
 proc QTabWidgetmouseReleaseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQTabWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -862,8 +864,8 @@ proc miqt_exec_callback_cQTabWidget_mouseReleaseEvent(vtbl: pointer, self: point
 proc QTabWidgetmouseDoubleClickEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQTabWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -871,8 +873,8 @@ proc miqt_exec_callback_cQTabWidget_mouseDoubleClickEvent(vtbl: pointer, self: p
 proc QTabWidgetmouseMoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQTabWidget_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -880,8 +882,8 @@ proc miqt_exec_callback_cQTabWidget_mouseMoveEvent(vtbl: pointer, self: pointer,
 proc QTabWidgetwheelEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QWheelEvent): void =
   fcQTabWidget_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -889,8 +891,8 @@ proc miqt_exec_callback_cQTabWidget_wheelEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetkeyReleaseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QKeyEvent): void =
   fcQTabWidget_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -898,8 +900,8 @@ proc miqt_exec_callback_cQTabWidget_keyReleaseEvent(vtbl: pointer, self: pointer
 proc QTabWidgetfocusInEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQTabWidget_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -907,8 +909,8 @@ proc miqt_exec_callback_cQTabWidget_focusInEvent(vtbl: pointer, self: pointer, e
 proc QTabWidgetfocusOutEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQTabWidget_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -916,8 +918,8 @@ proc miqt_exec_callback_cQTabWidget_focusOutEvent(vtbl: pointer, self: pointer, 
 proc QTabWidgetenterEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QEnterEvent): void =
   fcQTabWidget_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -925,8 +927,8 @@ proc miqt_exec_callback_cQTabWidget_enterEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetleaveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQTabWidget_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -934,8 +936,8 @@ proc miqt_exec_callback_cQTabWidget_leaveEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetmoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QMoveEvent): void =
   fcQTabWidget_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -943,8 +945,8 @@ proc miqt_exec_callback_cQTabWidget_moveEvent(vtbl: pointer, self: pointer, even
 proc QTabWidgetcloseEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QCloseEvent): void =
   fcQTabWidget_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -952,8 +954,8 @@ proc miqt_exec_callback_cQTabWidget_closeEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetcontextMenuEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QContextMenuEvent): void =
   fcQTabWidget_virtualbase_contextMenuEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -961,8 +963,8 @@ proc miqt_exec_callback_cQTabWidget_contextMenuEvent(vtbl: pointer, self: pointe
 proc QTabWidgettabletEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QTabletEvent): void =
   fcQTabWidget_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -970,8 +972,8 @@ proc miqt_exec_callback_cQTabWidget_tabletEvent(vtbl: pointer, self: pointer, ev
 proc QTabWidgetactionEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QActionEvent): void =
   fcQTabWidget_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -979,8 +981,8 @@ proc miqt_exec_callback_cQTabWidget_actionEvent(vtbl: pointer, self: pointer, ev
 proc QTabWidgetdragEnterEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragEnterEvent): void =
   fcQTabWidget_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -988,8 +990,8 @@ proc miqt_exec_callback_cQTabWidget_dragEnterEvent(vtbl: pointer, self: pointer,
 proc QTabWidgetdragMoveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragMoveEvent): void =
   fcQTabWidget_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -997,8 +999,8 @@ proc miqt_exec_callback_cQTabWidget_dragMoveEvent(vtbl: pointer, self: pointer, 
 proc QTabWidgetdragLeaveEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQTabWidget_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -1006,8 +1008,8 @@ proc miqt_exec_callback_cQTabWidget_dragLeaveEvent(vtbl: pointer, self: pointer,
 proc QTabWidgetdropEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QDropEvent): void =
   fcQTabWidget_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -1015,8 +1017,8 @@ proc miqt_exec_callback_cQTabWidget_dropEvent(vtbl: pointer, self: pointer, even
 proc QTabWidgethideEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qevent_types.QHideEvent): void =
   fcQTabWidget_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -1024,8 +1026,8 @@ proc miqt_exec_callback_cQTabWidget_hideEvent(vtbl: pointer, self: pointer, even
 proc QTabWidgetnativeEvent*(self: gen_qtabwidget_types.QTabWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQTabWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQTabWidget_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -1039,8 +1041,8 @@ proc miqt_exec_callback_cQTabWidget_nativeEvent(vtbl: pointer, self: pointer, ev
 proc QTabWidgetmetric*(self: gen_qtabwidget_types.QTabWidget, param1: cint): cint =
   fcQTabWidget_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQTabWidget_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -1049,8 +1051,8 @@ proc miqt_exec_callback_cQTabWidget_metric(vtbl: pointer, self: pointer, param1:
 proc QTabWidgetinitPainter*(self: gen_qtabwidget_types.QTabWidget, painter: gen_qpainter_types.QPainter): void =
   fcQTabWidget_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQTabWidget_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -1058,8 +1060,8 @@ proc miqt_exec_callback_cQTabWidget_initPainter(vtbl: pointer, self: pointer, pa
 proc QTabWidgetredirected*(self: gen_qtabwidget_types.QTabWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQTabWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQTabWidget_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -1068,11 +1070,11 @@ proc miqt_exec_callback_cQTabWidget_redirected(vtbl: pointer, self: pointer, off
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTabWidgetsharedPainter*(self: gen_qtabwidget_types.QTabWidget, ): gen_qpainter_types.QPainter =
+proc QTabWidgetsharedPainter*(self: gen_qtabwidget_types.QTabWidget): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQTabWidget_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQTabWidget_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -1083,8 +1085,8 @@ proc miqt_exec_callback_cQTabWidget_sharedPainter(vtbl: pointer, self: pointer):
 proc QTabWidgetinputMethodEvent*(self: gen_qtabwidget_types.QTabWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQTabWidget_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQTabWidget_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -1092,8 +1094,8 @@ proc miqt_exec_callback_cQTabWidget_inputMethodEvent(vtbl: pointer, self: pointe
 proc QTabWidgetinputMethodQuery*(self: gen_qtabwidget_types.QTabWidget, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQTabWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQTabWidget_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -1105,8 +1107,8 @@ proc miqt_exec_callback_cQTabWidget_inputMethodQuery(vtbl: pointer, self: pointe
 proc QTabWidgetfocusNextPrevChild*(self: gen_qtabwidget_types.QTabWidget, next: bool): bool =
   fcQTabWidget_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQTabWidget_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -1115,8 +1117,8 @@ proc miqt_exec_callback_cQTabWidget_focusNextPrevChild(vtbl: pointer, self: poin
 proc QTabWidgeteventFilter*(self: gen_qtabwidget_types.QTabWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQTabWidget_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1126,8 +1128,8 @@ proc miqt_exec_callback_cQTabWidget_eventFilter(vtbl: pointer, self: pointer, wa
 proc QTabWidgettimerEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQTabWidget_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1135,8 +1137,8 @@ proc miqt_exec_callback_cQTabWidget_timerEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetchildEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QChildEvent): void =
   fcQTabWidget_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1144,8 +1146,8 @@ proc miqt_exec_callback_cQTabWidget_childEvent(vtbl: pointer, self: pointer, eve
 proc QTabWidgetcustomEvent*(self: gen_qtabwidget_types.QTabWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQTabWidget_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQTabWidget_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1153,8 +1155,8 @@ proc miqt_exec_callback_cQTabWidget_customEvent(vtbl: pointer, self: pointer, ev
 proc QTabWidgetconnectNotify*(self: gen_qtabwidget_types.QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQTabWidget_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQTabWidget_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1162,19 +1164,19 @@ proc miqt_exec_callback_cQTabWidget_connectNotify(vtbl: pointer, self: pointer, 
 proc QTabWidgetdisconnectNotify*(self: gen_qtabwidget_types.QTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQTabWidget_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQTabWidget_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QTabWidgetVTable](vtbl)
+proc cQTabWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTabWidgetVTable](fcQTabWidget_vdata(self))
   let self = QTabWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTabWidget* {.inheritable.} = ref object of QTabWidget
   vtbl*: cQTabWidgetVTable
-method metaObject*(self: VirtualQTabWidget, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQTabWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTabWidgetmetaObject(self[])
-proc miqt_exec_method_cQTabWidget_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQTabWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1182,37 +1184,37 @@ proc miqt_exec_method_cQTabWidget_metaObject(vtbl: pointer, inst: pointer): poin
 
 method metacast*(self: VirtualQTabWidget, param1: cstring): pointer {.base.} =
   QTabWidgetmetacast(self[], param1)
-proc miqt_exec_method_cQTabWidget_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQTabWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QTabWidgetmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQTabWidget_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQTabWidget, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQTabWidget): gen_qsize_types.QSize {.base.} =
   QTabWidgetsizeHint(self[])
-proc miqt_exec_method_cQTabWidget_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQTabWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQTabWidget, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQTabWidget): gen_qsize_types.QSize {.base.} =
   QTabWidgetminimumSizeHint(self[])
-proc miqt_exec_method_cQTabWidget_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQTabWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1220,102 +1222,102 @@ proc miqt_exec_method_cQTabWidget_minimumSizeHint(vtbl: pointer, inst: pointer):
 
 method heightForWidth*(self: VirtualQTabWidget, width: cint): cint {.base.} =
   QTabWidgetheightForWidth(self[], width)
-proc miqt_exec_method_cQTabWidget_heightForWidth(vtbl: pointer, inst: pointer, width: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = width
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQTabWidget, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQTabWidget): bool {.base.} =
   QTabWidgethasHeightForWidth(self[])
-proc miqt_exec_method_cQTabWidget_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQTabWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
 method tabInserted*(self: VirtualQTabWidget, index: cint): void {.base.} =
   QTabWidgettabInserted(self[], index)
-proc miqt_exec_method_cQTabWidget_tabInserted(vtbl: pointer, inst: pointer, index: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_tabInserted(self: pointer, index: cint): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = index
-  vtbl.tabInserted(slotval1)
+  inst.tabInserted(slotval1)
 
 method tabRemoved*(self: VirtualQTabWidget, index: cint): void {.base.} =
   QTabWidgettabRemoved(self[], index)
-proc miqt_exec_method_cQTabWidget_tabRemoved(vtbl: pointer, inst: pointer, index: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_tabRemoved(self: pointer, index: cint): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = index
-  vtbl.tabRemoved(slotval1)
+  inst.tabRemoved(slotval1)
 
 method showEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QShowEvent): void {.base.} =
   QTabWidgetshowEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_showEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method resizeEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QResizeEvent): void {.base.} =
   QTabWidgetresizeEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_resizeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QTabWidgetkeyPressEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method paintEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QPaintEvent): void {.base.} =
   QTabWidgetpaintEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_paintEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method changeEvent*(self: VirtualQTabWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QTabWidgetchangeEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method event*(self: VirtualQTabWidget, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QTabWidgetevent(self[], param1)
-proc miqt_exec_method_cQTabWidget_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method initStyleOption*(self: VirtualQTabWidget, option: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): void {.base.} =
   QTabWidgetinitStyleOption(self[], option)
-proc miqt_exec_method_cQTabWidget_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: option, owned: false)
-  vtbl.initStyleOption(slotval1)
+  inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQTabWidget, ): cint {.base.} =
+method devType*(self: VirtualQTabWidget): cint {.base.} =
   QTabWidgetdevType(self[])
-proc miqt_exec_method_cQTabWidget_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQTabWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method setVisible*(self: VirtualQTabWidget, visible: bool): void {.base.} =
   QTabWidgetsetVisible(self[], visible)
-proc miqt_exec_method_cQTabWidget_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
-method paintEngine*(self: VirtualQTabWidget, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQTabWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
   QTabWidgetpaintEngine(self[])
-proc miqt_exec_method_cQTabWidget_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQTabWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1323,188 +1325,188 @@ proc miqt_exec_method_cQTabWidget_paintEngine(vtbl: pointer, inst: pointer): poi
 
 method mousePressEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QTabWidgetmousePressEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QTabWidgetmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QTabWidgetmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QTabWidgetmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QTabWidgetwheelEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QTabWidgetkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QTabWidgetfocusInEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QTabWidgetfocusOutEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QTabWidgetenterEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QTabWidgetleaveEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QTabWidgetmoveEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method closeEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QTabWidgetcloseEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QTabWidgetcontextMenuEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QTabWidgettabletEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
   QTabWidgetactionEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QTabWidgetdragEnterEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QTabWidgetdragMoveEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QTabWidgetdragLeaveEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
   QTabWidgetdropEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method hideEvent*(self: VirtualQTabWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
   QTabWidgethideEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQTabWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QTabWidgetnativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQTabWidget_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQTabWidget, param1: cint): cint {.base.} =
   QTabWidgetmetric(self[], param1)
-proc miqt_exec_method_cQTabWidget_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQTabWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
   QTabWidgetinitPainter(self[], painter)
-proc miqt_exec_method_cQTabWidget_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQTabWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QTabWidgetredirected(self[], offset)
-proc miqt_exec_method_cQTabWidget_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQTabWidget, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQTabWidget): gen_qpainter_types.QPainter {.base.} =
   QTabWidgetsharedPainter(self[])
-proc miqt_exec_method_cQTabWidget_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQTabWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1512,17 +1514,17 @@ proc miqt_exec_method_cQTabWidget_sharedPainter(vtbl: pointer, inst: pointer): p
 
 method inputMethodEvent*(self: VirtualQTabWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QTabWidgetinputMethodEvent(self[], param1)
-proc miqt_exec_method_cQTabWidget_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQTabWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QTabWidgetinputMethodQuery(self[], param1)
-proc miqt_exec_method_cQTabWidget_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1530,78 +1532,78 @@ proc miqt_exec_method_cQTabWidget_inputMethodQuery(vtbl: pointer, inst: pointer,
 
 method focusNextPrevChild*(self: VirtualQTabWidget, next: bool): bool {.base.} =
   QTabWidgetfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQTabWidget_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQTabWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QTabWidgeteventFilter(self[], watched, event)
-proc miqt_exec_method_cQTabWidget_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QTabWidgettimerEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QTabWidgetchildEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQTabWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QTabWidgetcustomEvent(self[], event)
-proc miqt_exec_method_cQTabWidget_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTabWidgetconnectNotify(self[], signal)
-proc miqt_exec_method_cQTabWidget_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQTabWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QTabWidgetdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQTabWidget_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQTabWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
+proc cQTabWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQTabWidget](fcQTabWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc setTabBar*(self: gen_qtabwidget_types.QTabWidget, tabBar: gen_qtabbar_types.QTabBar): void =
   fcQTabWidget_protectedbase_setTabBar(self.h, tabBar.h)
 
-proc updateMicroFocus*(self: gen_qtabwidget_types.QTabWidget, ): void =
+proc updateMicroFocus*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtabwidget_types.QTabWidget, ): void =
+proc create*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qtabwidget_types.QTabWidget, ): void =
+proc destroy*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc focusNextChild*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qtabwidget_types.QTabWidget, ): bool =
+proc focusPreviousChild*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qtabwidget_types.QTabWidget, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qtabwidget_types.QTabWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQTabWidget_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qtabwidget_types.QTabWidget, ): cint =
+proc senderSignalIndex*(self: gen_qtabwidget_types.QTabWidget): cint =
   fcQTabWidget_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qtabwidget_types.QTabWidget, signal: cstring): cint =
@@ -1615,360 +1617,303 @@ proc create*(T: type gen_qtabwidget_types.QTabWidget,
     vtbl: ref QTabWidgetVTable = nil): gen_qtabwidget_types.QTabWidget =
   let vtbl = if vtbl == nil: new QTabWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTabWidgetVTable, _: ptr cQTabWidget) {.cdecl.} =
-    let vtbl = cast[ref QTabWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QTabWidgetVTable](fcQTabWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQTabWidget_metaObject
+    vtbl[].vtbl.metaObject = cQTabWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQTabWidget_metacast
+    vtbl[].vtbl.metacast = cQTabWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQTabWidget_metacall
+    vtbl[].vtbl.metacall = cQTabWidget_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTabWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQTabWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTabWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQTabWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTabWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQTabWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTabWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQTabWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].tabInserted):
-    vtbl[].vtbl.tabInserted = miqt_exec_callback_cQTabWidget_tabInserted
+    vtbl[].vtbl.tabInserted = cQTabWidget_vtable_callback_tabInserted
   if not isNil(vtbl[].tabRemoved):
-    vtbl[].vtbl.tabRemoved = miqt_exec_callback_cQTabWidget_tabRemoved
+    vtbl[].vtbl.tabRemoved = cQTabWidget_vtable_callback_tabRemoved
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQTabWidget_showEvent
+    vtbl[].vtbl.showEvent = cQTabWidget_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTabWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQTabWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTabWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQTabWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTabWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQTabWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTabWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQTabWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQTabWidget_event
+    vtbl[].vtbl.event = cQTabWidget_vtable_callback_event
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQTabWidget_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQTabWidget_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQTabWidget_devType
+    vtbl[].vtbl.devType = cQTabWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQTabWidget_setVisible
+    vtbl[].vtbl.setVisible = cQTabWidget_vtable_callback_setVisible
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTabWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQTabWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTabWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQTabWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTabWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQTabWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTabWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQTabWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTabWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQTabWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTabWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQTabWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTabWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQTabWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTabWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQTabWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTabWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQTabWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTabWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQTabWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTabWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQTabWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTabWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQTabWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTabWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQTabWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTabWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQTabWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTabWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQTabWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTabWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQTabWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTabWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQTabWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTabWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQTabWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTabWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQTabWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTabWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQTabWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTabWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQTabWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTabWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQTabWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQTabWidget_metric
+    vtbl[].vtbl.metric = cQTabWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQTabWidget_initPainter
+    vtbl[].vtbl.initPainter = cQTabWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQTabWidget_redirected
+    vtbl[].vtbl.redirected = cQTabWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTabWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQTabWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTabWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQTabWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTabWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQTabWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTabWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQTabWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTabWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQTabWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTabWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQTabWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQTabWidget_childEvent
+    vtbl[].vtbl.childEvent = cQTabWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQTabWidget_customEvent
+    vtbl[].vtbl.customEvent = cQTabWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTabWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQTabWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTabWidget_disconnectNotify
-  gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQTabWidget_vtable_callback_disconnectNotify
+  gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qtabwidget_types.QTabWidget,
     vtbl: ref QTabWidgetVTable = nil): gen_qtabwidget_types.QTabWidget =
   let vtbl = if vtbl == nil: new QTabWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTabWidgetVTable, _: ptr cQTabWidget) {.cdecl.} =
-    let vtbl = cast[ref QTabWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QTabWidgetVTable](fcQTabWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQTabWidget_metaObject
+    vtbl[].vtbl.metaObject = cQTabWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQTabWidget_metacast
+    vtbl[].vtbl.metacast = cQTabWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQTabWidget_metacall
+    vtbl[].vtbl.metacall = cQTabWidget_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTabWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQTabWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTabWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQTabWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTabWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQTabWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTabWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQTabWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].tabInserted):
-    vtbl[].vtbl.tabInserted = miqt_exec_callback_cQTabWidget_tabInserted
+    vtbl[].vtbl.tabInserted = cQTabWidget_vtable_callback_tabInserted
   if not isNil(vtbl[].tabRemoved):
-    vtbl[].vtbl.tabRemoved = miqt_exec_callback_cQTabWidget_tabRemoved
+    vtbl[].vtbl.tabRemoved = cQTabWidget_vtable_callback_tabRemoved
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQTabWidget_showEvent
+    vtbl[].vtbl.showEvent = cQTabWidget_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTabWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQTabWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTabWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQTabWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTabWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQTabWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTabWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQTabWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQTabWidget_event
+    vtbl[].vtbl.event = cQTabWidget_vtable_callback_event
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQTabWidget_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQTabWidget_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQTabWidget_devType
+    vtbl[].vtbl.devType = cQTabWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQTabWidget_setVisible
+    vtbl[].vtbl.setVisible = cQTabWidget_vtable_callback_setVisible
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTabWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQTabWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTabWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQTabWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTabWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQTabWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTabWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQTabWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTabWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQTabWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTabWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQTabWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTabWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQTabWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTabWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQTabWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTabWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQTabWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTabWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQTabWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTabWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQTabWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTabWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQTabWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTabWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQTabWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTabWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQTabWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTabWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQTabWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTabWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQTabWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTabWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQTabWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTabWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQTabWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTabWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQTabWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTabWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQTabWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTabWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQTabWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTabWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQTabWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQTabWidget_metric
+    vtbl[].vtbl.metric = cQTabWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQTabWidget_initPainter
+    vtbl[].vtbl.initPainter = cQTabWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQTabWidget_redirected
+    vtbl[].vtbl.redirected = cQTabWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTabWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQTabWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTabWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQTabWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTabWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQTabWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTabWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQTabWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTabWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQTabWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTabWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQTabWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQTabWidget_childEvent
+    vtbl[].vtbl.childEvent = cQTabWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQTabWidget_customEvent
+    vtbl[].vtbl.customEvent = cQTabWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTabWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQTabWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTabWidget_disconnectNotify
-  gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQTabWidget_vtable_callback_disconnectNotify
+  gen_qtabwidget_types.QTabWidget(h: fcQTabWidget_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQTabWidget_mvtbl = cQTabWidgetVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQTabWidget()[])](self.fcQTabWidget_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQTabWidget_method_callback_metaObject,
+  metacast: cQTabWidget_method_callback_metacast,
+  metacall: cQTabWidget_method_callback_metacall,
+  sizeHint: cQTabWidget_method_callback_sizeHint,
+  minimumSizeHint: cQTabWidget_method_callback_minimumSizeHint,
+  heightForWidth: cQTabWidget_method_callback_heightForWidth,
+  hasHeightForWidth: cQTabWidget_method_callback_hasHeightForWidth,
+  tabInserted: cQTabWidget_method_callback_tabInserted,
+  tabRemoved: cQTabWidget_method_callback_tabRemoved,
+  showEvent: cQTabWidget_method_callback_showEvent,
+  resizeEvent: cQTabWidget_method_callback_resizeEvent,
+  keyPressEvent: cQTabWidget_method_callback_keyPressEvent,
+  paintEvent: cQTabWidget_method_callback_paintEvent,
+  changeEvent: cQTabWidget_method_callback_changeEvent,
+  event: cQTabWidget_method_callback_event,
+  initStyleOption: cQTabWidget_method_callback_initStyleOption,
+  devType: cQTabWidget_method_callback_devType,
+  setVisible: cQTabWidget_method_callback_setVisible,
+  paintEngine: cQTabWidget_method_callback_paintEngine,
+  mousePressEvent: cQTabWidget_method_callback_mousePressEvent,
+  mouseReleaseEvent: cQTabWidget_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQTabWidget_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: cQTabWidget_method_callback_mouseMoveEvent,
+  wheelEvent: cQTabWidget_method_callback_wheelEvent,
+  keyReleaseEvent: cQTabWidget_method_callback_keyReleaseEvent,
+  focusInEvent: cQTabWidget_method_callback_focusInEvent,
+  focusOutEvent: cQTabWidget_method_callback_focusOutEvent,
+  enterEvent: cQTabWidget_method_callback_enterEvent,
+  leaveEvent: cQTabWidget_method_callback_leaveEvent,
+  moveEvent: cQTabWidget_method_callback_moveEvent,
+  closeEvent: cQTabWidget_method_callback_closeEvent,
+  contextMenuEvent: cQTabWidget_method_callback_contextMenuEvent,
+  tabletEvent: cQTabWidget_method_callback_tabletEvent,
+  actionEvent: cQTabWidget_method_callback_actionEvent,
+  dragEnterEvent: cQTabWidget_method_callback_dragEnterEvent,
+  dragMoveEvent: cQTabWidget_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQTabWidget_method_callback_dragLeaveEvent,
+  dropEvent: cQTabWidget_method_callback_dropEvent,
+  hideEvent: cQTabWidget_method_callback_hideEvent,
+  nativeEvent: cQTabWidget_method_callback_nativeEvent,
+  metric: cQTabWidget_method_callback_metric,
+  initPainter: cQTabWidget_method_callback_initPainter,
+  redirected: cQTabWidget_method_callback_redirected,
+  sharedPainter: cQTabWidget_method_callback_sharedPainter,
+  inputMethodEvent: cQTabWidget_method_callback_inputMethodEvent,
+  inputMethodQuery: cQTabWidget_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQTabWidget_method_callback_focusNextPrevChild,
+  eventFilter: cQTabWidget_method_callback_eventFilter,
+  timerEvent: cQTabWidget_method_callback_timerEvent,
+  childEvent: cQTabWidget_method_callback_childEvent,
+  customEvent: cQTabWidget_method_callback_customEvent,
+  connectNotify: cQTabWidget_method_callback_connectNotify,
+  disconnectNotify: cQTabWidget_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qtabwidget_types.QTabWidget,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQTabWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTabWidgetVTable, _: ptr cQTabWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQTabWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQTabWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQTabWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQTabWidget_metacall
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTabWidget_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTabWidget_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTabWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTabWidget_hasHeightForWidth
-  vtbl[].vtbl.tabInserted = miqt_exec_method_cQTabWidget_tabInserted
-  vtbl[].vtbl.tabRemoved = miqt_exec_method_cQTabWidget_tabRemoved
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQTabWidget_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTabWidget_resizeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTabWidget_keyPressEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTabWidget_paintEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTabWidget_changeEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQTabWidget_event
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQTabWidget_initStyleOption
-  vtbl[].vtbl.devType = miqt_exec_method_cQTabWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQTabWidget_setVisible
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTabWidget_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTabWidget_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTabWidget_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTabWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTabWidget_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTabWidget_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTabWidget_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTabWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTabWidget_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTabWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTabWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTabWidget_moveEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTabWidget_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTabWidget_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTabWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTabWidget_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTabWidget_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTabWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTabWidget_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTabWidget_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTabWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTabWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQTabWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQTabWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQTabWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTabWidget_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTabWidget_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTabWidget_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTabWidget_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTabWidget_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTabWidget_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQTabWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQTabWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTabWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTabWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQTabWidget_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQTabWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQTabWidget_new(addr(cQTabWidget_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qtabwidget_types.QTabWidget,
-    vtbl: VirtualQTabWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTabWidgetVTable, _: ptr cQTabWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQTabWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTabWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQTabWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQTabWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQTabWidget_metacall
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTabWidget_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTabWidget_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTabWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTabWidget_hasHeightForWidth
-  vtbl[].vtbl.tabInserted = miqt_exec_method_cQTabWidget_tabInserted
-  vtbl[].vtbl.tabRemoved = miqt_exec_method_cQTabWidget_tabRemoved
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQTabWidget_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTabWidget_resizeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTabWidget_keyPressEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTabWidget_paintEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTabWidget_changeEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQTabWidget_event
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQTabWidget_initStyleOption
-  vtbl[].vtbl.devType = miqt_exec_method_cQTabWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQTabWidget_setVisible
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTabWidget_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTabWidget_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTabWidget_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTabWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTabWidget_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTabWidget_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTabWidget_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTabWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTabWidget_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTabWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTabWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTabWidget_moveEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTabWidget_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTabWidget_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTabWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTabWidget_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTabWidget_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTabWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTabWidget_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTabWidget_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTabWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTabWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQTabWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQTabWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQTabWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTabWidget_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTabWidget_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTabWidget_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTabWidget_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTabWidget_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTabWidget_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQTabWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQTabWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTabWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTabWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQTabWidget_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQTabWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQTabWidget_new2(addr(cQTabWidget_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTabWidget_staticMetaObject())

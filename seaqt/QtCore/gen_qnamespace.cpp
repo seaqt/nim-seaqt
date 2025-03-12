@@ -3,21 +3,12 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_Disambiguated_t
 #include <qnamespace.h>
 #include "gen_qnamespace.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 Disambiguated_t* Disambiguated_t_new() {
-	return new Qt::Disambiguated_t();
+	return new Disambiguated_t();
 }
 
 Disambiguated_t* Disambiguated_t_new2(Disambiguated_t* param1) {
-	return new Qt::Disambiguated_t(*param1);
+	return new Disambiguated_t(*param1);
 }
 
 void Disambiguated_t_delete(Disambiguated_t* self) {

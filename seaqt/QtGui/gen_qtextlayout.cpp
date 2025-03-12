@@ -18,15 +18,6 @@
 #include <QTextOption>
 #include <qtextlayout.h>
 #include "gen_qtextlayout.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextInlineObject* QTextInlineObject_new() {
 	return new QTextInlineObject();
 }
@@ -551,7 +542,7 @@ void QTextLine_delete(QTextLine* self) {
 }
 
 QTextLayout__FormatRange* QTextLayout__FormatRange_new(QTextLayout__FormatRange* param1) {
-	return new QTextLayout::FormatRange(*param1);
+	return new QTextLayout__FormatRange(*param1);
 }
 
 void QTextLayout__FormatRange_operatorAssign(QTextLayout__FormatRange* self, QTextLayout__FormatRange* param1) {

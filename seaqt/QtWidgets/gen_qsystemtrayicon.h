@@ -38,23 +38,30 @@ typedef struct QSystemTrayIcon QSystemTrayIcon;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QSystemTrayIcon_VTable {
-	void (*destructor)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self);
-	QMetaObject* (*metaObject)(struct QSystemTrayIcon_VTable* vtbl, const QSystemTrayIcon* self);
-	void* (*metacast)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, const char* param1);
-	int (*metacall)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, int param1, int param2, void** param3);
-	bool (*event)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QEvent* event);
-	bool (*eventFilter)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QTimerEvent* event);
-	void (*childEvent)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QChildEvent* event);
-	void (*customEvent)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QEvent* event);
-	void (*connectNotify)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QSystemTrayIcon_VTable* vtbl, QSystemTrayIcon* self, QMetaMethod* signal);
-};
-QSystemTrayIcon* QSystemTrayIcon_new(struct QSystemTrayIcon_VTable* vtbl);
-QSystemTrayIcon* QSystemTrayIcon_new2(struct QSystemTrayIcon_VTable* vtbl, QIcon* icon);
-QSystemTrayIcon* QSystemTrayIcon_new3(struct QSystemTrayIcon_VTable* vtbl, QObject* parent);
-QSystemTrayIcon* QSystemTrayIcon_new4(struct QSystemTrayIcon_VTable* vtbl, QIcon* icon, QObject* parent);
+typedef struct VirtualQSystemTrayIcon VirtualQSystemTrayIcon;
+typedef struct QSystemTrayIcon_VTable{
+	void (*destructor)(VirtualQSystemTrayIcon* self);
+	QMetaObject* (*metaObject)(const VirtualQSystemTrayIcon* self);
+	void* (*metacast)(VirtualQSystemTrayIcon* self, const char* param1);
+	int (*metacall)(VirtualQSystemTrayIcon* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQSystemTrayIcon* self, QEvent* event);
+	bool (*eventFilter)(VirtualQSystemTrayIcon* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSystemTrayIcon* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQSystemTrayIcon* self, QChildEvent* event);
+	void (*customEvent)(VirtualQSystemTrayIcon* self, QEvent* event);
+	void (*connectNotify)(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
+}QSystemTrayIcon_VTable;
+
+const QSystemTrayIcon_VTable* QSystemTrayIcon_vtbl(const VirtualQSystemTrayIcon* self);
+void* QSystemTrayIcon_vdata(const VirtualQSystemTrayIcon* self);
+void QSystemTrayIcon_setVdata(VirtualQSystemTrayIcon* self, void* vdata);
+
+VirtualQSystemTrayIcon* QSystemTrayIcon_new(const QSystemTrayIcon_VTable* vtbl, void* vdata);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new2(const QSystemTrayIcon_VTable* vtbl, void* vdata, QIcon* icon);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new3(const QSystemTrayIcon_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new4(const QSystemTrayIcon_VTable* vtbl, void* vdata, QIcon* icon, QObject* parent);
+
 void QSystemTrayIcon_virtbase(QSystemTrayIcon* src, QObject** outptr_QObject);
 QMetaObject* QSystemTrayIcon_metaObject(const QSystemTrayIcon* self);
 void* QSystemTrayIcon_metacast(QSystemTrayIcon* self, const char* param1);
@@ -76,29 +83,32 @@ void QSystemTrayIcon_hide(QSystemTrayIcon* self);
 void QSystemTrayIcon_showMessage(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, QIcon* icon);
 void QSystemTrayIcon_showMessage2(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg);
 void QSystemTrayIcon_activated(QSystemTrayIcon* self, int reason);
-void QSystemTrayIcon_connect_activated(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QSystemTrayIcon_connect_activated(VirtualQSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QSystemTrayIcon_messageClicked(QSystemTrayIcon* self);
-void QSystemTrayIcon_connect_messageClicked(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QSystemTrayIcon_connect_messageClicked(VirtualQSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 bool QSystemTrayIcon_event(QSystemTrayIcon* self, QEvent* event);
 struct miqt_string QSystemTrayIcon_tr2(const char* s, const char* c);
 struct miqt_string QSystemTrayIcon_tr3(const char* s, const char* c, int n);
 void QSystemTrayIcon_showMessage4(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, QIcon* icon, int msecs);
 void QSystemTrayIcon_showMessage3(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, int icon);
 void QSystemTrayIcon_showMessage42(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, int icon, int msecs);
-QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const void* self);
-void* QSystemTrayIcon_virtualbase_metacast(void* self, const char* param1);
-int QSystemTrayIcon_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event);
-bool QSystemTrayIcon_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QSystemTrayIcon_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QSystemTrayIcon_virtualbase_childEvent(void* self, QChildEvent* event);
-void QSystemTrayIcon_virtualbase_customEvent(void* self, QEvent* event);
-void QSystemTrayIcon_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QSystemTrayIcon_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QSystemTrayIcon_protectedbase_sender(const void* self);
-int QSystemTrayIcon_protectedbase_senderSignalIndex(const void* self);
-int QSystemTrayIcon_protectedbase_receivers(const void* self, const char* signal);
-bool QSystemTrayIcon_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const VirtualQSystemTrayIcon* self);
+void* QSystemTrayIcon_virtualbase_metacast(VirtualQSystemTrayIcon* self, const char* param1);
+int QSystemTrayIcon_virtualbase_metacall(VirtualQSystemTrayIcon* self, int param1, int param2, void** param3);
+bool QSystemTrayIcon_virtualbase_event(VirtualQSystemTrayIcon* self, QEvent* event);
+bool QSystemTrayIcon_virtualbase_eventFilter(VirtualQSystemTrayIcon* self, QObject* watched, QEvent* event);
+void QSystemTrayIcon_virtualbase_timerEvent(VirtualQSystemTrayIcon* self, QTimerEvent* event);
+void QSystemTrayIcon_virtualbase_childEvent(VirtualQSystemTrayIcon* self, QChildEvent* event);
+void QSystemTrayIcon_virtualbase_customEvent(VirtualQSystemTrayIcon* self, QEvent* event);
+void QSystemTrayIcon_virtualbase_connectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
+void QSystemTrayIcon_virtualbase_disconnectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
+
+QObject* QSystemTrayIcon_protectedbase_sender(const VirtualQSystemTrayIcon* self);
+int QSystemTrayIcon_protectedbase_senderSignalIndex(const VirtualQSystemTrayIcon* self);
+int QSystemTrayIcon_protectedbase_receivers(const VirtualQSystemTrayIcon* self, const char* signal);
+bool QSystemTrayIcon_protectedbase_isSignalConnected(const VirtualQSystemTrayIcon* self, QMetaMethod* signal);
+
 const QMetaObject* QSystemTrayIcon_staticMetaObject();
 void QSystemTrayIcon_delete(QSystemTrayIcon* self);
 

@@ -42,6 +42,7 @@ QVector2D* QVector2D_new5(QPointF* point);
 QVector2D* QVector2D_new6(QVector3D* vector);
 QVector2D* QVector2D_new7(QVector4D* vector);
 QVector2D* QVector2D_new8(QVector2D* param1);
+
 bool QVector2D_isNull(const QVector2D* self);
 float QVector2D_x(const QVector2D* self);
 float QVector2D_y(const QVector2D* self);
@@ -66,6 +67,7 @@ QVector4D* QVector2D_toVector4D(const QVector2D* self);
 QPoint* QVector2D_toPoint(const QVector2D* self);
 QPointF* QVector2D_toPointF(const QVector2D* self);
 QVariant* QVector2D_ToQVariant(const QVector2D* self);
+
 void QVector2D_delete(QVector2D* self);
 
 QVector3D* QVector3D_new();
@@ -77,6 +79,7 @@ QVector3D* QVector3D_new6(QVector2D* vector);
 QVector3D* QVector3D_new7(QVector2D* vector, float zpos);
 QVector3D* QVector3D_new8(QVector4D* vector);
 QVector3D* QVector3D_new9(QVector3D* param1);
+
 bool QVector3D_isNull(const QVector3D* self);
 float QVector3D_x(const QVector3D* self);
 float QVector3D_y(const QVector3D* self);
@@ -110,6 +113,7 @@ QVector4D* QVector3D_toVector4D(const QVector3D* self);
 QPoint* QVector3D_toPoint(const QVector3D* self);
 QPointF* QVector3D_toPointF(const QVector3D* self);
 QVariant* QVector3D_ToQVariant(const QVector3D* self);
+
 void QVector3D_delete(QVector3D* self);
 
 QVector4D* QVector4D_new();
@@ -122,6 +126,7 @@ QVector4D* QVector4D_new7(QVector2D* vector, float zpos, float wpos);
 QVector4D* QVector4D_new8(QVector3D* vector);
 QVector4D* QVector4D_new9(QVector3D* vector, float wpos);
 QVector4D* QVector4D_new10(QVector4D* param1);
+
 bool QVector4D_isNull(const QVector4D* self);
 float QVector4D_x(const QVector4D* self);
 float QVector4D_y(const QVector4D* self);
@@ -150,6 +155,7 @@ QVector3D* QVector4D_toVector3DAffine(const QVector4D* self);
 QPoint* QVector4D_toPoint(const QVector4D* self);
 QPointF* QVector4D_toPointF(const QVector4D* self);
 QVariant* QVector4D_ToQVariant(const QVector4D* self);
+
 void QVector4D_delete(QVector4D* self);
 
 #ifdef __cplusplus

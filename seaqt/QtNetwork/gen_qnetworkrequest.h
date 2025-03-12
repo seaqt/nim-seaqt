@@ -33,6 +33,7 @@ typedef struct QVariant QVariant;
 QNetworkRequest* QNetworkRequest_new();
 QNetworkRequest* QNetworkRequest_new2(QUrl* url);
 QNetworkRequest* QNetworkRequest_new3(QNetworkRequest* other);
+
 void QNetworkRequest_operatorAssign(QNetworkRequest* self, QNetworkRequest* other);
 void QNetworkRequest_swap(QNetworkRequest* self, QNetworkRequest* other);
 bool QNetworkRequest_operatorEqual(const QNetworkRequest* self, QNetworkRequest* other);
@@ -65,6 +66,7 @@ int QNetworkRequest_transferTimeout(const QNetworkRequest* self);
 void QNetworkRequest_setTransferTimeout(QNetworkRequest* self);
 QVariant* QNetworkRequest_attribute2(const QNetworkRequest* self, int code, QVariant* defaultValue);
 void QNetworkRequest_setTransferTimeout1(QNetworkRequest* self, int timeout);
+
 void QNetworkRequest_delete(QNetworkRequest* self);
 
 #ifdef __cplusplus

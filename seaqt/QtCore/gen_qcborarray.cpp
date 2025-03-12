@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qcborarray.h>
 #include "gen_qcborarray.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCborArray* QCborArray_new() {
 	return new QCborArray();
 }
@@ -253,11 +244,11 @@ void QCborArray_delete(QCborArray* self) {
 }
 
 QCborArray__Iterator* QCborArray__Iterator_new() {
-	return new QCborArray::Iterator();
+	return new QCborArray__Iterator();
 }
 
 QCborArray__Iterator* QCborArray__Iterator_new2(QCborArray__Iterator* param1) {
-	return new QCborArray::Iterator(*param1);
+	return new QCborArray__Iterator(*param1);
 }
 
 void QCborArray__Iterator_operatorAssign(QCborArray__Iterator* self, QCborArray__Iterator* other) {
@@ -378,11 +369,11 @@ void QCborArray__Iterator_delete(QCborArray__Iterator* self) {
 }
 
 QCborArray__ConstIterator* QCborArray__ConstIterator_new() {
-	return new QCborArray::ConstIterator();
+	return new QCborArray__ConstIterator();
 }
 
 QCborArray__ConstIterator* QCborArray__ConstIterator_new2(QCborArray__ConstIterator* param1) {
-	return new QCborArray::ConstIterator(*param1);
+	return new QCborArray__ConstIterator(*param1);
 }
 
 void QCborArray__ConstIterator_operatorAssign(QCborArray__ConstIterator* self, QCborArray__ConstIterator* other) {

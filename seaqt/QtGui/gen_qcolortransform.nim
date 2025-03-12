@@ -45,7 +45,7 @@ type cQColorTransform*{.exportc: "QColorTransform", incompleteStruct.} = object
 
 proc fcQColorTransform_operatorAssign(self: pointer, other: pointer): void {.importc: "QColorTransform_operatorAssign".}
 proc fcQColorTransform_swap(self: pointer, other: pointer): void {.importc: "QColorTransform_swap".}
-proc fcQColorTransform_isIdentity(self: pointer, ): bool {.importc: "QColorTransform_isIdentity".}
+proc fcQColorTransform_isIdentity(self: pointer): bool {.importc: "QColorTransform_isIdentity".}
 proc fcQColorTransform_map(self: pointer, argb: cuint): cuint {.importc: "QColorTransform_map".}
 proc fcQColorTransform_mapWithRgba64(self: pointer, rgba64: pointer): pointer {.importc: "QColorTransform_mapWithRgba64".}
 proc fcQColorTransform_mapWithColor(self: pointer, color: pointer): pointer {.importc: "QColorTransform_mapWithColor".}
@@ -58,7 +58,7 @@ proc operatorAssign*(self: gen_qcolortransform_types.QColorTransform, other: gen
 proc swap*(self: gen_qcolortransform_types.QColorTransform, other: gen_qcolortransform_types.QColorTransform): void =
   fcQColorTransform_swap(self.h, other.h)
 
-proc isIdentity*(self: gen_qcolortransform_types.QColorTransform, ): bool =
+proc isIdentity*(self: gen_qcolortransform_types.QColorTransform): bool =
   fcQColorTransform_isIdentity(self.h)
 
 proc map*(self: gen_qcolortransform_types.QColorTransform, argb: cuint): cuint =

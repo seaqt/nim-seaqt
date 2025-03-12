@@ -6,15 +6,6 @@
 #include <QVersionNumber>
 #include <qlibraryinfo.h>
 #include "gen_qlibraryinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 const char* QLibraryInfo_build() {
 	return (const char*) QLibraryInfo::build();
 }

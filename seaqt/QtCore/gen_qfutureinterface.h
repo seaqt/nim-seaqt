@@ -29,6 +29,7 @@ typedef struct QThreadPool QThreadPool;
 QFutureInterfaceBase* QFutureInterfaceBase_new();
 QFutureInterfaceBase* QFutureInterfaceBase_new2(QFutureInterfaceBase* other);
 QFutureInterfaceBase* QFutureInterfaceBase_new3(int initialState);
+
 void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* other);
 void QFutureInterfaceBase_reportStarted(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_reportFinished(QFutureInterfaceBase* self);
@@ -80,6 +81,7 @@ bool QFutureInterfaceBase_operatorEqual(const QFutureInterfaceBase* self, QFutur
 bool QFutureInterfaceBase_operatorNotEqual(const QFutureInterfaceBase* self, QFutureInterfaceBase* other);
 void QFutureInterfaceBase_swap(QFutureInterfaceBase* self, QFutureInterfaceBase* other);
 bool QFutureInterfaceBase_isChainCanceled(const QFutureInterfaceBase* self);
+
 void QFutureInterfaceBase_delete(QFutureInterfaceBase* self);
 
 #ifdef __cplusplus

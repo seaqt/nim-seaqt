@@ -6,15 +6,6 @@
 #include <QVector2D>
 #include <qeventpoint.h>
 #include "gen_qeventpoint.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QEventPoint* QEventPoint_new() {
 	return new QEventPoint();
 }
@@ -219,6 +210,7 @@ void QEventPoint_setAccepted1(QEventPoint* self, bool accepted) {
 }
 
 const QMetaObject* QEventPoint_staticMetaObject() { return &QEventPoint::staticMetaObject; }
+
 void QEventPoint_delete(QEventPoint* self) {
 	delete self;
 }

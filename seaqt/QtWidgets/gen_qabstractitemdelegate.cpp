@@ -19,39 +19,32 @@
 #include <QWidget>
 #include <qabstractitemdelegate.h>
 #include "gen_qabstractitemdelegate.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractItemDelegate final : public QAbstractItemDelegate {
-	struct QAbstractItemDelegate_VTable* vtbl;
+	const QAbstractItemDelegate_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractItemDelegate_VTable* QAbstractItemDelegate_vtbl(const VirtualQAbstractItemDelegate* self);
+	friend void* QAbstractItemDelegate_vdata(const VirtualQAbstractItemDelegate* self);
+	friend void QAbstractItemDelegate_setVdata(VirtualQAbstractItemDelegate* self, void* vdata);
 
-	VirtualQAbstractItemDelegate(struct QAbstractItemDelegate_VTable* vtbl): QAbstractItemDelegate(), vtbl(vtbl) {};
-	VirtualQAbstractItemDelegate(struct QAbstractItemDelegate_VTable* vtbl, QObject* parent): QAbstractItemDelegate(parent), vtbl(vtbl) {};
+	VirtualQAbstractItemDelegate(const QAbstractItemDelegate_VTable* vtbl, void* vdata): QAbstractItemDelegate(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractItemDelegate(const QAbstractItemDelegate_VTable* vtbl, void* vdata, QObject* parent): QAbstractItemDelegate(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractItemDelegate() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractItemDelegate() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractItemDelegate::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const VirtualQAbstractItemDelegate* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractItemDelegate::qt_metacast(param1);
@@ -59,14 +52,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractItemDelegate_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractItemDelegate_virtualbase_metacast(VirtualQAbstractItemDelegate* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractItemDelegate::qt_metacall(param1, param2, param3);
@@ -77,14 +69,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemDelegate_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractItemDelegate_virtualbase_metacall(VirtualQAbstractItemDelegate* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override {
 		if (vtbl->paint == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -98,11 +89,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override {
 		if (vtbl->sizeHint == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
@@ -115,14 +105,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&index_ret);
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		QSize* callback_return_value = vtbl->sizeHint(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override {
 		if (vtbl->createEditor == 0) {
 			return QAbstractItemDelegate::createEditor(parent, option, index);
@@ -136,14 +125,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&index_ret);
 
-		QWidget* callback_return_value = vtbl->createEditor(vtbl, this, sigval1, sigval2, sigval3);
+		QWidget* callback_return_value = vtbl->createEditor(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QAbstractItemDelegate_virtualbase_createEditor(const void* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);
+	friend QWidget* QAbstractItemDelegate_virtualbase_createEditor(const VirtualQAbstractItemDelegate* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void destroyEditor(QWidget* editor, const QModelIndex& index) const override {
 		if (vtbl->destroyEditor == 0) {
 			QAbstractItemDelegate::destroyEditor(editor, index);
@@ -155,13 +143,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->destroyEditor(vtbl, this, sigval1, sigval2);
+		vtbl->destroyEditor(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_destroyEditor(const void* self, QWidget* editor, QModelIndex* index);
+	friend void QAbstractItemDelegate_virtualbase_destroyEditor(const VirtualQAbstractItemDelegate* self, QWidget* editor, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setEditorData(QWidget* editor, const QModelIndex& index) const override {
 		if (vtbl->setEditorData == 0) {
 			QAbstractItemDelegate::setEditorData(editor, index);
@@ -173,13 +160,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->setEditorData(vtbl, this, sigval1, sigval2);
+		vtbl->setEditorData(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_setEditorData(const void* self, QWidget* editor, QModelIndex* index);
+	friend void QAbstractItemDelegate_virtualbase_setEditorData(const VirtualQAbstractItemDelegate* self, QWidget* editor, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override {
 		if (vtbl->setModelData == 0) {
 			QAbstractItemDelegate::setModelData(editor, model, index);
@@ -192,13 +178,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->setModelData(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->setModelData(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_setModelData(const void* self, QWidget* editor, QAbstractItemModel* model, QModelIndex* index);
+	friend void QAbstractItemDelegate_virtualbase_setModelData(const VirtualQAbstractItemDelegate* self, QWidget* editor, QAbstractItemModel* model, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override {
 		if (vtbl->updateEditorGeometry == 0) {
 			QAbstractItemDelegate::updateEditorGeometry(editor, option, index);
@@ -213,13 +198,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->updateEditorGeometry(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->updateEditorGeometry(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_updateEditorGeometry(const void* self, QWidget* editor, QStyleOptionViewItem* option, QModelIndex* index);
+	friend void QAbstractItemDelegate_virtualbase_updateEditorGeometry(const VirtualQAbstractItemDelegate* self, QWidget* editor, QStyleOptionViewItem* option, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index) override {
 		if (vtbl->editorEvent == 0) {
 			return QAbstractItemDelegate::editorEvent(event, model, option, index);
@@ -234,14 +218,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&index_ret);
 
-		bool callback_return_value = vtbl->editorEvent(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->editorEvent(this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemDelegate_virtualbase_editorEvent(void* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index);
+	friend bool QAbstractItemDelegate_virtualbase_editorEvent(VirtualQAbstractItemDelegate* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index) override {
 		if (vtbl->helpEvent == 0) {
 			return QAbstractItemDelegate::helpEvent(event, view, option, index);
@@ -256,21 +239,20 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&index_ret);
 
-		bool callback_return_value = vtbl->helpEvent(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->helpEvent(this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemDelegate_virtualbase_helpEvent(void* self, QHelpEvent* event, QAbstractItemView* view, QStyleOptionViewItem* option, QModelIndex* index);
+	friend bool QAbstractItemDelegate_virtualbase_helpEvent(VirtualQAbstractItemDelegate* self, QHelpEvent* event, QAbstractItemView* view, QStyleOptionViewItem* option, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<int> paintingRoles() const override {
 		if (vtbl->paintingRoles == 0) {
 			return QAbstractItemDelegate::paintingRoles();
 		}
 
 
-		struct miqt_array /* of int */  callback_return_value = vtbl->paintingRoles(vtbl, this);
+		struct miqt_array /* of int */  callback_return_value = vtbl->paintingRoles(this);
 		QList<int> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -282,9 +264,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of int */  QAbstractItemDelegate_virtualbase_paintingRoles(const void* self);
+	friend struct miqt_array /* of int */  QAbstractItemDelegate_virtualbase_paintingRoles(const VirtualQAbstractItemDelegate* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAbstractItemDelegate::event(event);
@@ -292,14 +273,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemDelegate_virtualbase_event(void* self, QEvent* event);
+	friend bool QAbstractItemDelegate_virtualbase_event(VirtualQAbstractItemDelegate* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractItemDelegate::eventFilter(watched, event);
@@ -308,14 +288,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemDelegate_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractItemDelegate_virtualbase_eventFilter(VirtualQAbstractItemDelegate* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractItemDelegate::timerEvent(event);
@@ -324,13 +303,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractItemDelegate_virtualbase_timerEvent(VirtualQAbstractItemDelegate* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractItemDelegate::childEvent(event);
@@ -339,13 +317,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractItemDelegate_virtualbase_childEvent(VirtualQAbstractItemDelegate* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractItemDelegate::customEvent(event);
@@ -354,13 +331,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractItemDelegate_virtualbase_customEvent(VirtualQAbstractItemDelegate* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractItemDelegate::connectNotify(signal);
@@ -371,13 +347,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractItemDelegate_virtualbase_connectNotify(VirtualQAbstractItemDelegate* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractItemDelegate::disconnectNotify(signal);
@@ -388,25 +363,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractItemDelegate_virtualbase_disconnectNotify(VirtualQAbstractItemDelegate* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAbstractItemDelegate_protectedbase_sender(const void* self);
-	friend int QAbstractItemDelegate_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractItemDelegate_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAbstractItemDelegate_protectedbase_sender(const VirtualQAbstractItemDelegate* self);
+	friend int QAbstractItemDelegate_protectedbase_senderSignalIndex(const VirtualQAbstractItemDelegate* self);
+	friend int QAbstractItemDelegate_protectedbase_receivers(const VirtualQAbstractItemDelegate* self, const char* signal);
+	friend bool QAbstractItemDelegate_protectedbase_isSignalConnected(const VirtualQAbstractItemDelegate* self, QMetaMethod* signal);
 };
 
-QAbstractItemDelegate* QAbstractItemDelegate_new(struct QAbstractItemDelegate_VTable* vtbl) {
-	return new VirtualQAbstractItemDelegate(vtbl);
+VirtualQAbstractItemDelegate* QAbstractItemDelegate_new(const QAbstractItemDelegate_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractItemDelegate(vtbl, vdata);
 }
 
-QAbstractItemDelegate* QAbstractItemDelegate_new2(struct QAbstractItemDelegate_VTable* vtbl, QObject* parent) {
-	return new VirtualQAbstractItemDelegate(vtbl, parent);
+VirtualQAbstractItemDelegate* QAbstractItemDelegate_new2(const QAbstractItemDelegate_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAbstractItemDelegate(vtbl, vdata, parent);
 }
 
 void QAbstractItemDelegate_virtbase(QAbstractItemDelegate* src, QObject** outptr_QObject) {
@@ -489,7 +464,7 @@ void QAbstractItemDelegate_commitData(QAbstractItemDelegate* self, QWidget* edit
 	self->commitData(editor);
 }
 
-void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_commitData(VirtualQAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWidget*);
@@ -505,7 +480,7 @@ void QAbstractItemDelegate_closeEditor(QAbstractItemDelegate* self, QWidget* edi
 	self->closeEditor(editor);
 }
 
-void QAbstractItemDelegate_connect_closeEditor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_closeEditor(VirtualQAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWidget*);
@@ -521,7 +496,7 @@ void QAbstractItemDelegate_sizeHintChanged(QAbstractItemDelegate* self, QModelIn
 	self->sizeHintChanged(*param1);
 }
 
-void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_sizeHintChanged(VirtualQAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -561,7 +536,7 @@ void QAbstractItemDelegate_closeEditor2(QAbstractItemDelegate* self, QWidget* ed
 	self->closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_closeEditor2(VirtualQAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWidget*, int);
@@ -575,69 +550,59 @@ void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, int
 	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, local_caller{slot, callback, release});
 }
 
-QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const VirtualQAbstractItemDelegate* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::metaObject();
-
+	return (QMetaObject*) self->QAbstractItemDelegate::metaObject();
 }
 
-void* QAbstractItemDelegate_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractItemDelegate_virtualbase_metacast(VirtualQAbstractItemDelegate* self, const char* param1) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::qt_metacast(param1);
-
+	return self->QAbstractItemDelegate::qt_metacast(param1);
 }
 
-int QAbstractItemDelegate_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractItemDelegate_virtualbase_metacall(VirtualQAbstractItemDelegate* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractItemDelegate::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QWidget* QAbstractItemDelegate_virtualbase_createEditor(const void* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index) {
+QWidget* QAbstractItemDelegate_virtualbase_createEditor(const VirtualQAbstractItemDelegate* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index) {
 
-	return ( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::createEditor(parent, *option, *index);
-
+	return self->QAbstractItemDelegate::createEditor(parent, *option, *index);
 }
 
-void QAbstractItemDelegate_virtualbase_destroyEditor(const void* self, QWidget* editor, QModelIndex* index) {
+void QAbstractItemDelegate_virtualbase_destroyEditor(const VirtualQAbstractItemDelegate* self, QWidget* editor, QModelIndex* index) {
 
-	( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::destroyEditor(editor, *index);
-
+	self->QAbstractItemDelegate::destroyEditor(editor, *index);
 }
 
-void QAbstractItemDelegate_virtualbase_setEditorData(const void* self, QWidget* editor, QModelIndex* index) {
+void QAbstractItemDelegate_virtualbase_setEditorData(const VirtualQAbstractItemDelegate* self, QWidget* editor, QModelIndex* index) {
 
-	( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::setEditorData(editor, *index);
-
+	self->QAbstractItemDelegate::setEditorData(editor, *index);
 }
 
-void QAbstractItemDelegate_virtualbase_setModelData(const void* self, QWidget* editor, QAbstractItemModel* model, QModelIndex* index) {
+void QAbstractItemDelegate_virtualbase_setModelData(const VirtualQAbstractItemDelegate* self, QWidget* editor, QAbstractItemModel* model, QModelIndex* index) {
 
-	( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::setModelData(editor, model, *index);
-
+	self->QAbstractItemDelegate::setModelData(editor, model, *index);
 }
 
-void QAbstractItemDelegate_virtualbase_updateEditorGeometry(const void* self, QWidget* editor, QStyleOptionViewItem* option, QModelIndex* index) {
+void QAbstractItemDelegate_virtualbase_updateEditorGeometry(const VirtualQAbstractItemDelegate* self, QWidget* editor, QStyleOptionViewItem* option, QModelIndex* index) {
 
-	( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::updateEditorGeometry(editor, *option, *index);
-
+	self->QAbstractItemDelegate::updateEditorGeometry(editor, *option, *index);
 }
 
-bool QAbstractItemDelegate_virtualbase_editorEvent(void* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index) {
+bool QAbstractItemDelegate_virtualbase_editorEvent(VirtualQAbstractItemDelegate* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::editorEvent(event, model, *option, *index);
-
+	return self->QAbstractItemDelegate::editorEvent(event, model, *option, *index);
 }
 
-bool QAbstractItemDelegate_virtualbase_helpEvent(void* self, QHelpEvent* event, QAbstractItemView* view, QStyleOptionViewItem* option, QModelIndex* index) {
+bool QAbstractItemDelegate_virtualbase_helpEvent(VirtualQAbstractItemDelegate* self, QHelpEvent* event, QAbstractItemView* view, QStyleOptionViewItem* option, QModelIndex* index) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::helpEvent(event, view, *option, *index);
-
+	return self->QAbstractItemDelegate::helpEvent(event, view, *option, *index);
 }
 
-struct miqt_array /* of int */  QAbstractItemDelegate_virtualbase_paintingRoles(const void* self) {
+struct miqt_array /* of int */  QAbstractItemDelegate_virtualbase_paintingRoles(const VirtualQAbstractItemDelegate* self) {
 
-	QList<int> _ret = ( (const VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::paintingRoles();
+	QList<int> _ret = self->QAbstractItemDelegate::paintingRoles();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -647,78 +612,63 @@ struct miqt_array /* of int */  QAbstractItemDelegate_virtualbase_paintingRoles(
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-bool QAbstractItemDelegate_virtualbase_event(void* self, QEvent* event) {
+bool QAbstractItemDelegate_virtualbase_event(VirtualQAbstractItemDelegate* self, QEvent* event) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::event(event);
-
+	return self->QAbstractItemDelegate::event(event);
 }
 
-bool QAbstractItemDelegate_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractItemDelegate_virtualbase_eventFilter(VirtualQAbstractItemDelegate* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::eventFilter(watched, event);
-
+	return self->QAbstractItemDelegate::eventFilter(watched, event);
 }
 
-void QAbstractItemDelegate_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractItemDelegate_virtualbase_timerEvent(VirtualQAbstractItemDelegate* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::timerEvent(event);
-
+	self->QAbstractItemDelegate::timerEvent(event);
 }
 
-void QAbstractItemDelegate_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractItemDelegate_virtualbase_childEvent(VirtualQAbstractItemDelegate* self, QChildEvent* event) {
 
-	( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::childEvent(event);
-
+	self->QAbstractItemDelegate::childEvent(event);
 }
 
-void QAbstractItemDelegate_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractItemDelegate_virtualbase_customEvent(VirtualQAbstractItemDelegate* self, QEvent* event) {
 
-	( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::customEvent(event);
-
+	self->QAbstractItemDelegate::customEvent(event);
 }
 
-void QAbstractItemDelegate_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractItemDelegate_virtualbase_connectNotify(VirtualQAbstractItemDelegate* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::connectNotify(*signal);
-
+	self->QAbstractItemDelegate::connectNotify(*signal);
 }
 
-void QAbstractItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractItemDelegate_virtualbase_disconnectNotify(VirtualQAbstractItemDelegate* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractItemDelegate*)(self) )->QAbstractItemDelegate::disconnectNotify(*signal);
-
+	self->QAbstractItemDelegate::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractItemDelegate_staticMetaObject() { return &QAbstractItemDelegate::staticMetaObject; }
-QObject* QAbstractItemDelegate_protectedbase_sender(const void* self) {
-	VirtualQAbstractItemDelegate* self_cast = static_cast<VirtualQAbstractItemDelegate*>( (QAbstractItemDelegate*)(self) );
-	
-	return self_cast->sender();
 
+const QAbstractItemDelegate_VTable* QAbstractItemDelegate_vtbl(const VirtualQAbstractItemDelegate* self) { return self->vtbl; }
+void* QAbstractItemDelegate_vdata(const VirtualQAbstractItemDelegate* self) { return self->vdata; }
+void QAbstractItemDelegate_setVdata(VirtualQAbstractItemDelegate* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAbstractItemDelegate_protectedbase_sender(const VirtualQAbstractItemDelegate* self) {
+	return self->sender();
 }
 
-int QAbstractItemDelegate_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractItemDelegate* self_cast = static_cast<VirtualQAbstractItemDelegate*>( (QAbstractItemDelegate*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractItemDelegate_protectedbase_senderSignalIndex(const VirtualQAbstractItemDelegate* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractItemDelegate_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractItemDelegate* self_cast = static_cast<VirtualQAbstractItemDelegate*>( (QAbstractItemDelegate*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractItemDelegate_protectedbase_receivers(const VirtualQAbstractItemDelegate* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractItemDelegate* self_cast = static_cast<VirtualQAbstractItemDelegate*>( (QAbstractItemDelegate*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractItemDelegate_protectedbase_isSignalConnected(const VirtualQAbstractItemDelegate* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractItemDelegate_delete(QAbstractItemDelegate* self) {

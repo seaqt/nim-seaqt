@@ -38,6 +38,7 @@ typedef struct QVariant QVariant;
 
 QNetworkCacheMetaData* QNetworkCacheMetaData_new();
 QNetworkCacheMetaData* QNetworkCacheMetaData_new2(QNetworkCacheMetaData* other);
+
 void QNetworkCacheMetaData_operatorAssign(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
 void QNetworkCacheMetaData_swap(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
 bool QNetworkCacheMetaData_operatorEqual(const QNetworkCacheMetaData* self, QNetworkCacheMetaData* other);
@@ -55,6 +56,7 @@ bool QNetworkCacheMetaData_saveToDisk(const QNetworkCacheMetaData* self);
 void QNetworkCacheMetaData_setSaveToDisk(QNetworkCacheMetaData* self, bool allow);
 struct miqt_map /* of int to QVariant* */  QNetworkCacheMetaData_attributes(const QNetworkCacheMetaData* self);
 void QNetworkCacheMetaData_setAttributes(QNetworkCacheMetaData* self, struct miqt_map /* of int to QVariant* */  attributes);
+
 void QNetworkCacheMetaData_delete(QNetworkCacheMetaData* self);
 
 void QAbstractNetworkCache_virtbase(QAbstractNetworkCache* src, QObject** outptr_QObject);
@@ -72,6 +74,7 @@ void QAbstractNetworkCache_insert(QAbstractNetworkCache* self, QIODevice* device
 void QAbstractNetworkCache_clear(QAbstractNetworkCache* self);
 struct miqt_string QAbstractNetworkCache_tr2(const char* s, const char* c);
 struct miqt_string QAbstractNetworkCache_tr3(const char* s, const char* c, int n);
+
 const QMetaObject* QAbstractNetworkCache_staticMetaObject();
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self);
 

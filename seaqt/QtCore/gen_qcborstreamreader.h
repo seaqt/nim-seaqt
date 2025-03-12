@@ -29,6 +29,7 @@ QCborStreamReader* QCborStreamReader_new2(const char* data, ptrdiff_t len);
 QCborStreamReader* QCborStreamReader_new3(const unsigned char* data, ptrdiff_t len);
 QCborStreamReader* QCborStreamReader_new4(struct miqt_string data);
 QCborStreamReader* QCborStreamReader_new5(QIODevice* device);
+
 void QCborStreamReader_setDevice(QCborStreamReader* self, QIODevice* device);
 QIODevice* QCborStreamReader_device(const QCborStreamReader* self);
 void QCborStreamReader_addData(QCborStreamReader* self, struct miqt_string data);
@@ -79,6 +80,7 @@ float QCborStreamReader_toFloat(const QCborStreamReader* self);
 double QCborStreamReader_toDouble(const QCborStreamReader* self);
 long long QCborStreamReader_toInteger(const QCborStreamReader* self);
 bool QCborStreamReader_next1(QCborStreamReader* self, int maxRecursion);
+
 const QMetaObject* QCborStreamReader_staticMetaObject();
 void QCborStreamReader_delete(QCborStreamReader* self);
 

@@ -33,6 +33,7 @@ QPalette* QPalette_new4(QColor* button, QColor* window);
 QPalette* QPalette_new5(QBrush* windowText, QBrush* button, QBrush* light, QBrush* dark, QBrush* mid, QBrush* text, QBrush* bright_text, QBrush* base, QBrush* window);
 QPalette* QPalette_new6(QColor* windowText, QColor* window, QColor* light, QColor* dark, QColor* mid, QColor* text, QColor* base);
 QPalette* QPalette_new7(QPalette* palette);
+
 void QPalette_operatorAssign(QPalette* self, QPalette* palette);
 void QPalette_swap(QPalette* self, QPalette* other);
 QVariant* QPalette_ToQVariant(const QPalette* self);
@@ -76,6 +77,7 @@ long long QPalette_cacheKey(const QPalette* self);
 QPalette* QPalette_resolve(const QPalette* self, QPalette* other);
 unsigned long long QPalette_resolveMask(const QPalette* self);
 void QPalette_setResolveMask(QPalette* self, unsigned long long mask);
+
 const QMetaObject* QPalette_staticMetaObject();
 void QPalette_delete(QPalette* self);
 

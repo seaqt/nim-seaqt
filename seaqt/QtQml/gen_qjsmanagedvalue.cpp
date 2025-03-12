@@ -14,15 +14,6 @@
 #include <QVariant>
 #include <qjsmanagedvalue.h>
 #include "gen_qjsmanagedvalue.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJSManagedValue* QJSManagedValue_new() {
 	return new QJSManagedValue();
 }

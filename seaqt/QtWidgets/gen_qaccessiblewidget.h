@@ -45,6 +45,7 @@ typedef struct QWindow QWindow;
 QAccessibleWidget* QAccessibleWidget_new(QWidget* o);
 QAccessibleWidget* QAccessibleWidget_new2(QWidget* o, int r);
 QAccessibleWidget* QAccessibleWidget_new3(QWidget* o, int r, struct miqt_string name);
+
 void QAccessibleWidget_virtbase(QAccessibleWidget* src, QAccessibleObject** outptr_QAccessibleObject, QAccessibleActionInterface** outptr_QAccessibleActionInterface);
 bool QAccessibleWidget_isValid(const QAccessibleWidget* self);
 QWindow* QAccessibleWidget_window(const QAccessibleWidget* self);
@@ -64,6 +65,7 @@ void* QAccessibleWidget_interfaceCast(QAccessibleWidget* self, int t);
 struct miqt_array /* of struct miqt_string */  QAccessibleWidget_actionNames(const QAccessibleWidget* self);
 void QAccessibleWidget_doAction(QAccessibleWidget* self, struct miqt_string actionName);
 struct miqt_array /* of struct miqt_string */  QAccessibleWidget_keyBindingsForAction(const QAccessibleWidget* self, struct miqt_string actionName);
+
 
 #ifdef __cplusplus
 } /* extern C */

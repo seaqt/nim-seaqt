@@ -4,15 +4,6 @@
 #include <QIODevice>
 #include <qcryptographichash.h>
 #include "gen_qcryptographichash.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCryptographicHash* QCryptographicHash_new(int method) {
 	return new QCryptographicHash(static_cast<QCryptographicHash::Algorithm>(method));
 }
@@ -60,6 +51,7 @@ int QCryptographicHash_hashLength(int method) {
 }
 
 const QMetaObject* QCryptographicHash_staticMetaObject() { return &QCryptographicHash::staticMetaObject; }
+
 void QCryptographicHash_delete(QCryptographicHash* self) {
 	delete self;
 }

@@ -43,40 +43,33 @@
 #include <QWidget>
 #include <qmainwindow.h>
 #include "gen_qmainwindow.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMainWindow final : public QMainWindow {
-	struct QMainWindow_VTable* vtbl;
+	const QMainWindow_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMainWindow_VTable* QMainWindow_vtbl(const VirtualQMainWindow* self);
+	friend void* QMainWindow_vdata(const VirtualQMainWindow* self);
+	friend void QMainWindow_setVdata(VirtualQMainWindow* self, void* vdata);
 
-	VirtualQMainWindow(struct QMainWindow_VTable* vtbl, QWidget* parent): QMainWindow(parent), vtbl(vtbl) {};
-	VirtualQMainWindow(struct QMainWindow_VTable* vtbl): QMainWindow(), vtbl(vtbl) {};
-	VirtualQMainWindow(struct QMainWindow_VTable* vtbl, QWidget* parent, Qt::WindowFlags flags): QMainWindow(parent, flags), vtbl(vtbl) {};
+	VirtualQMainWindow(const QMainWindow_VTable* vtbl, void* vdata, QWidget* parent): QMainWindow(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMainWindow(const QMainWindow_VTable* vtbl, void* vdata): QMainWindow(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMainWindow(const QMainWindow_VTable* vtbl, void* vdata, QWidget* parent, Qt::WindowFlags flags): QMainWindow(parent, flags), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMainWindow() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMainWindow() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMainWindow::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMainWindow_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMainWindow_virtualbase_metaObject(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMainWindow::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMainWindow_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMainWindow_virtualbase_metacast(VirtualQMainWindow* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMainWindow::qt_metacall(param1, param2, param3);
@@ -102,28 +94,26 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMainWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMainWindow_virtualbase_metacall(VirtualQMainWindow* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMenu* createPopupMenu() override {
 		if (vtbl->createPopupMenu == 0) {
 			return QMainWindow::createPopupMenu();
 		}
 
 
-		QMenu* callback_return_value = vtbl->createPopupMenu(vtbl, this);
+		QMenu* callback_return_value = vtbl->createPopupMenu(this);
 
 		return callback_return_value;
 	}
 
-	friend QMenu* QMainWindow_virtualbase_createPopupMenu(void* self);
+	friend QMenu* QMainWindow_virtualbase_createPopupMenu(VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QMainWindow::contextMenuEvent(event);
@@ -132,13 +122,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QMainWindow_virtualbase_contextMenuEvent(VirtualQMainWindow* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QMainWindow::event(event);
@@ -146,28 +135,26 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMainWindow_virtualbase_event(void* self, QEvent* event);
+	friend bool QMainWindow_virtualbase_event(VirtualQMainWindow* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QMainWindow::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMainWindow_virtualbase_devType(const void* self);
+	friend int QMainWindow_virtualbase_devType(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QMainWindow::setVisible(visible);
@@ -176,45 +163,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_setVisible(void* self, bool visible);
+	friend void QMainWindow_virtualbase_setVisible(VirtualQMainWindow* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QMainWindow::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMainWindow_virtualbase_sizeHint(const void* self);
+	friend QSize* QMainWindow_virtualbase_sizeHint(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QMainWindow::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMainWindow_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QMainWindow_virtualbase_minimumSizeHint(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QMainWindow::heightForWidth(param1);
@@ -222,42 +206,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMainWindow_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QMainWindow_virtualbase_heightForWidth(const VirtualQMainWindow* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QMainWindow::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMainWindow_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QMainWindow_virtualbase_hasHeightForWidth(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QMainWindow::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QMainWindow_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QMainWindow_virtualbase_paintEngine(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QMainWindow::mousePressEvent(event);
@@ -266,13 +247,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QMainWindow_virtualbase_mousePressEvent(VirtualQMainWindow* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QMainWindow::mouseReleaseEvent(event);
@@ -281,13 +261,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QMainWindow_virtualbase_mouseReleaseEvent(VirtualQMainWindow* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QMainWindow::mouseDoubleClickEvent(event);
@@ -296,13 +275,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QMainWindow_virtualbase_mouseDoubleClickEvent(VirtualQMainWindow* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QMainWindow::mouseMoveEvent(event);
@@ -311,13 +289,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QMainWindow_virtualbase_mouseMoveEvent(VirtualQMainWindow* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QMainWindow::wheelEvent(event);
@@ -326,13 +303,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QMainWindow_virtualbase_wheelEvent(VirtualQMainWindow* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QMainWindow::keyPressEvent(event);
@@ -341,13 +317,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QMainWindow_virtualbase_keyPressEvent(VirtualQMainWindow* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QMainWindow::keyReleaseEvent(event);
@@ -356,13 +331,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QMainWindow_virtualbase_keyReleaseEvent(VirtualQMainWindow* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QMainWindow::focusInEvent(event);
@@ -371,13 +345,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QMainWindow_virtualbase_focusInEvent(VirtualQMainWindow* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QMainWindow::focusOutEvent(event);
@@ -386,13 +359,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QMainWindow_virtualbase_focusOutEvent(VirtualQMainWindow* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QMainWindow::enterEvent(event);
@@ -401,13 +373,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QMainWindow_virtualbase_enterEvent(VirtualQMainWindow* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QMainWindow::leaveEvent(event);
@@ -416,13 +387,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QMainWindow_virtualbase_leaveEvent(VirtualQMainWindow* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QMainWindow::paintEvent(event);
@@ -431,13 +401,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QMainWindow_virtualbase_paintEvent(VirtualQMainWindow* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QMainWindow::moveEvent(event);
@@ -446,13 +415,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QMainWindow_virtualbase_moveEvent(VirtualQMainWindow* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QMainWindow::resizeEvent(event);
@@ -461,13 +429,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QMainWindow_virtualbase_resizeEvent(VirtualQMainWindow* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QMainWindow::closeEvent(event);
@@ -476,13 +443,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QMainWindow_virtualbase_closeEvent(VirtualQMainWindow* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QMainWindow::tabletEvent(event);
@@ -491,13 +457,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QMainWindow_virtualbase_tabletEvent(VirtualQMainWindow* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QMainWindow::actionEvent(event);
@@ -506,13 +471,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QMainWindow_virtualbase_actionEvent(VirtualQMainWindow* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QMainWindow::dragEnterEvent(event);
@@ -521,13 +485,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QMainWindow_virtualbase_dragEnterEvent(VirtualQMainWindow* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QMainWindow::dragMoveEvent(event);
@@ -536,13 +499,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QMainWindow_virtualbase_dragMoveEvent(VirtualQMainWindow* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QMainWindow::dragLeaveEvent(event);
@@ -551,13 +513,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QMainWindow_virtualbase_dragLeaveEvent(VirtualQMainWindow* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QMainWindow::dropEvent(event);
@@ -566,13 +527,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QMainWindow_virtualbase_dropEvent(VirtualQMainWindow* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QMainWindow::showEvent(event);
@@ -581,13 +541,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QMainWindow_virtualbase_showEvent(VirtualQMainWindow* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QMainWindow::hideEvent(event);
@@ -596,13 +555,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QMainWindow_virtualbase_hideEvent(VirtualQMainWindow* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QMainWindow::nativeEvent(eventType, message, result);
@@ -618,14 +576,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QMainWindow_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QMainWindow_virtualbase_nativeEvent(VirtualQMainWindow* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QMainWindow::changeEvent(param1);
@@ -634,13 +591,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QMainWindow_virtualbase_changeEvent(VirtualQMainWindow* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QMainWindow::metric(param1);
@@ -649,14 +605,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMainWindow_virtualbase_metric(const void* self, int param1);
+	friend int QMainWindow_virtualbase_metric(const VirtualQMainWindow* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QMainWindow::initPainter(painter);
@@ -665,13 +620,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QMainWindow_virtualbase_initPainter(const VirtualQMainWindow* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QMainWindow::redirected(offset);
@@ -679,28 +633,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QMainWindow_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QMainWindow_virtualbase_redirected(const VirtualQMainWindow* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QMainWindow::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QMainWindow_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QMainWindow_virtualbase_sharedPainter(const VirtualQMainWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QMainWindow::inputMethodEvent(param1);
@@ -709,13 +661,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QMainWindow_virtualbase_inputMethodEvent(VirtualQMainWindow* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QMainWindow::inputMethodQuery(param1);
@@ -724,16 +675,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QMainWindow_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QMainWindow_virtualbase_inputMethodQuery(const VirtualQMainWindow* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QMainWindow::focusNextPrevChild(next);
@@ -741,14 +691,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMainWindow_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QMainWindow_virtualbase_focusNextPrevChild(VirtualQMainWindow* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMainWindow::eventFilter(watched, event);
@@ -757,14 +706,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMainWindow_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QMainWindow_virtualbase_eventFilter(VirtualQMainWindow* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMainWindow::timerEvent(event);
@@ -773,13 +721,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMainWindow_virtualbase_timerEvent(VirtualQMainWindow* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMainWindow::childEvent(event);
@@ -788,13 +735,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMainWindow_virtualbase_childEvent(VirtualQMainWindow* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMainWindow::customEvent(event);
@@ -803,13 +749,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMainWindow_virtualbase_customEvent(VirtualQMainWindow* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMainWindow::connectNotify(signal);
@@ -820,13 +765,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMainWindow_virtualbase_connectNotify(VirtualQMainWindow* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMainWindow::disconnectNotify(signal);
@@ -837,34 +781,34 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMainWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMainWindow_virtualbase_disconnectNotify(VirtualQMainWindow* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMainWindow_protectedbase_updateMicroFocus(void* self);
-	friend void QMainWindow_protectedbase_create(void* self);
-	friend void QMainWindow_protectedbase_destroy(void* self);
-	friend bool QMainWindow_protectedbase_focusNextChild(void* self);
-	friend bool QMainWindow_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QMainWindow_protectedbase_sender(const void* self);
-	friend int QMainWindow_protectedbase_senderSignalIndex(const void* self);
-	friend int QMainWindow_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMainWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QMainWindow_protectedbase_updateMicroFocus(VirtualQMainWindow* self);
+	friend void QMainWindow_protectedbase_create(VirtualQMainWindow* self);
+	friend void QMainWindow_protectedbase_destroy(VirtualQMainWindow* self);
+	friend bool QMainWindow_protectedbase_focusNextChild(VirtualQMainWindow* self);
+	friend bool QMainWindow_protectedbase_focusPreviousChild(VirtualQMainWindow* self);
+	friend QObject* QMainWindow_protectedbase_sender(const VirtualQMainWindow* self);
+	friend int QMainWindow_protectedbase_senderSignalIndex(const VirtualQMainWindow* self);
+	friend int QMainWindow_protectedbase_receivers(const VirtualQMainWindow* self, const char* signal);
+	friend bool QMainWindow_protectedbase_isSignalConnected(const VirtualQMainWindow* self, QMetaMethod* signal);
 };
 
-QMainWindow* QMainWindow_new(struct QMainWindow_VTable* vtbl, QWidget* parent) {
-	return new VirtualQMainWindow(vtbl, parent);
+VirtualQMainWindow* QMainWindow_new(const QMainWindow_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQMainWindow(vtbl, vdata, parent);
 }
 
-QMainWindow* QMainWindow_new2(struct QMainWindow_VTable* vtbl) {
-	return new VirtualQMainWindow(vtbl);
+VirtualQMainWindow* QMainWindow_new2(const QMainWindow_VTable* vtbl, void* vdata) {
+	return new VirtualQMainWindow(vtbl, vdata);
 }
 
-QMainWindow* QMainWindow_new3(struct QMainWindow_VTable* vtbl, QWidget* parent, int flags) {
-	return new VirtualQMainWindow(vtbl, parent, static_cast<Qt::WindowFlags>(flags));
+VirtualQMainWindow* QMainWindow_new3(const QMainWindow_VTable* vtbl, void* vdata, QWidget* parent, int flags) {
+	return new VirtualQMainWindow(vtbl, vdata, parent, static_cast<Qt::WindowFlags>(flags));
 }
 
 void QMainWindow_virtbase(QMainWindow* src, QWidget** outptr_QWidget) {
@@ -1141,7 +1085,7 @@ void QMainWindow_iconSizeChanged(QMainWindow* self, QSize* iconSize) {
 	self->iconSizeChanged(*iconSize);
 }
 
-void QMainWindow_connect_iconSizeChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+void QMainWindow_connect_iconSizeChanged(VirtualQMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSize*);
@@ -1159,7 +1103,7 @@ void QMainWindow_toolButtonStyleChanged(QMainWindow* self, int toolButtonStyle) 
 	self->toolButtonStyleChanged(static_cast<Qt::ToolButtonStyle>(toolButtonStyle));
 }
 
-void QMainWindow_connect_toolButtonStyleChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMainWindow_connect_toolButtonStyleChanged(VirtualQMainWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1176,7 +1120,7 @@ void QMainWindow_tabifiedDockWidgetActivated(QMainWindow* self, QDockWidget* doc
 	self->tabifiedDockWidgetActivated(dockWidget);
 }
 
-void QMainWindow_connect_tabifiedDockWidgetActivated(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) {
+void QMainWindow_connect_tabifiedDockWidgetActivated(VirtualQMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QDockWidget*);
@@ -1228,375 +1172,302 @@ bool QMainWindow_restoreState2(QMainWindow* self, struct miqt_string state, int 
 	return self->restoreState(state_QByteArray, static_cast<int>(version));
 }
 
-QMetaObject* QMainWindow_virtualbase_metaObject(const void* self) {
+QMetaObject* QMainWindow_virtualbase_metaObject(const VirtualQMainWindow* self) {
 
-	return (QMetaObject*) ( (const VirtualQMainWindow*)(self) )->QMainWindow::metaObject();
-
+	return (QMetaObject*) self->QMainWindow::metaObject();
 }
 
-void* QMainWindow_virtualbase_metacast(void* self, const char* param1) {
+void* QMainWindow_virtualbase_metacast(VirtualQMainWindow* self, const char* param1) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::qt_metacast(param1);
-
+	return self->QMainWindow::qt_metacast(param1);
 }
 
-int QMainWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMainWindow_virtualbase_metacall(VirtualQMainWindow* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMainWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QMenu* QMainWindow_virtualbase_createPopupMenu(void* self) {
+QMenu* QMainWindow_virtualbase_createPopupMenu(VirtualQMainWindow* self) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::createPopupMenu();
-
+	return self->QMainWindow::createPopupMenu();
 }
 
-void QMainWindow_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QMainWindow_virtualbase_contextMenuEvent(VirtualQMainWindow* self, QContextMenuEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::contextMenuEvent(event);
-
+	self->QMainWindow::contextMenuEvent(event);
 }
 
-bool QMainWindow_virtualbase_event(void* self, QEvent* event) {
+bool QMainWindow_virtualbase_event(VirtualQMainWindow* self, QEvent* event) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::event(event);
-
+	return self->QMainWindow::event(event);
 }
 
-int QMainWindow_virtualbase_devType(const void* self) {
+int QMainWindow_virtualbase_devType(const VirtualQMainWindow* self) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::devType();
-
+	return self->QMainWindow::devType();
 }
 
-void QMainWindow_virtualbase_setVisible(void* self, bool visible) {
+void QMainWindow_virtualbase_setVisible(VirtualQMainWindow* self, bool visible) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::setVisible(visible);
-
+	self->QMainWindow::setVisible(visible);
 }
 
-QSize* QMainWindow_virtualbase_sizeHint(const void* self) {
+QSize* QMainWindow_virtualbase_sizeHint(const VirtualQMainWindow* self) {
 
-	return new QSize(( (const VirtualQMainWindow*)(self) )->QMainWindow::sizeHint());
-
+	return new QSize(self->QMainWindow::sizeHint());
 }
 
-QSize* QMainWindow_virtualbase_minimumSizeHint(const void* self) {
+QSize* QMainWindow_virtualbase_minimumSizeHint(const VirtualQMainWindow* self) {
 
-	return new QSize(( (const VirtualQMainWindow*)(self) )->QMainWindow::minimumSizeHint());
-
+	return new QSize(self->QMainWindow::minimumSizeHint());
 }
 
-int QMainWindow_virtualbase_heightForWidth(const void* self, int param1) {
+int QMainWindow_virtualbase_heightForWidth(const VirtualQMainWindow* self, int param1) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::heightForWidth(static_cast<int>(param1));
-
+	return self->QMainWindow::heightForWidth(static_cast<int>(param1));
 }
 
-bool QMainWindow_virtualbase_hasHeightForWidth(const void* self) {
+bool QMainWindow_virtualbase_hasHeightForWidth(const VirtualQMainWindow* self) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::hasHeightForWidth();
-
+	return self->QMainWindow::hasHeightForWidth();
 }
 
-QPaintEngine* QMainWindow_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QMainWindow_virtualbase_paintEngine(const VirtualQMainWindow* self) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::paintEngine();
-
+	return self->QMainWindow::paintEngine();
 }
 
-void QMainWindow_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QMainWindow_virtualbase_mousePressEvent(VirtualQMainWindow* self, QMouseEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::mousePressEvent(event);
-
+	self->QMainWindow::mousePressEvent(event);
 }
 
-void QMainWindow_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QMainWindow_virtualbase_mouseReleaseEvent(VirtualQMainWindow* self, QMouseEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::mouseReleaseEvent(event);
-
+	self->QMainWindow::mouseReleaseEvent(event);
 }
 
-void QMainWindow_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QMainWindow_virtualbase_mouseDoubleClickEvent(VirtualQMainWindow* self, QMouseEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::mouseDoubleClickEvent(event);
-
+	self->QMainWindow::mouseDoubleClickEvent(event);
 }
 
-void QMainWindow_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QMainWindow_virtualbase_mouseMoveEvent(VirtualQMainWindow* self, QMouseEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::mouseMoveEvent(event);
-
+	self->QMainWindow::mouseMoveEvent(event);
 }
 
-void QMainWindow_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QMainWindow_virtualbase_wheelEvent(VirtualQMainWindow* self, QWheelEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::wheelEvent(event);
-
+	self->QMainWindow::wheelEvent(event);
 }
 
-void QMainWindow_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QMainWindow_virtualbase_keyPressEvent(VirtualQMainWindow* self, QKeyEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::keyPressEvent(event);
-
+	self->QMainWindow::keyPressEvent(event);
 }
 
-void QMainWindow_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QMainWindow_virtualbase_keyReleaseEvent(VirtualQMainWindow* self, QKeyEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::keyReleaseEvent(event);
-
+	self->QMainWindow::keyReleaseEvent(event);
 }
 
-void QMainWindow_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QMainWindow_virtualbase_focusInEvent(VirtualQMainWindow* self, QFocusEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::focusInEvent(event);
-
+	self->QMainWindow::focusInEvent(event);
 }
 
-void QMainWindow_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QMainWindow_virtualbase_focusOutEvent(VirtualQMainWindow* self, QFocusEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::focusOutEvent(event);
-
+	self->QMainWindow::focusOutEvent(event);
 }
 
-void QMainWindow_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QMainWindow_virtualbase_enterEvent(VirtualQMainWindow* self, QEnterEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::enterEvent(event);
-
+	self->QMainWindow::enterEvent(event);
 }
 
-void QMainWindow_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QMainWindow_virtualbase_leaveEvent(VirtualQMainWindow* self, QEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::leaveEvent(event);
-
+	self->QMainWindow::leaveEvent(event);
 }
 
-void QMainWindow_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QMainWindow_virtualbase_paintEvent(VirtualQMainWindow* self, QPaintEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::paintEvent(event);
-
+	self->QMainWindow::paintEvent(event);
 }
 
-void QMainWindow_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QMainWindow_virtualbase_moveEvent(VirtualQMainWindow* self, QMoveEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::moveEvent(event);
-
+	self->QMainWindow::moveEvent(event);
 }
 
-void QMainWindow_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QMainWindow_virtualbase_resizeEvent(VirtualQMainWindow* self, QResizeEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::resizeEvent(event);
-
+	self->QMainWindow::resizeEvent(event);
 }
 
-void QMainWindow_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QMainWindow_virtualbase_closeEvent(VirtualQMainWindow* self, QCloseEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::closeEvent(event);
-
+	self->QMainWindow::closeEvent(event);
 }
 
-void QMainWindow_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QMainWindow_virtualbase_tabletEvent(VirtualQMainWindow* self, QTabletEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::tabletEvent(event);
-
+	self->QMainWindow::tabletEvent(event);
 }
 
-void QMainWindow_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QMainWindow_virtualbase_actionEvent(VirtualQMainWindow* self, QActionEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::actionEvent(event);
-
+	self->QMainWindow::actionEvent(event);
 }
 
-void QMainWindow_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QMainWindow_virtualbase_dragEnterEvent(VirtualQMainWindow* self, QDragEnterEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::dragEnterEvent(event);
-
+	self->QMainWindow::dragEnterEvent(event);
 }
 
-void QMainWindow_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QMainWindow_virtualbase_dragMoveEvent(VirtualQMainWindow* self, QDragMoveEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::dragMoveEvent(event);
-
+	self->QMainWindow::dragMoveEvent(event);
 }
 
-void QMainWindow_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QMainWindow_virtualbase_dragLeaveEvent(VirtualQMainWindow* self, QDragLeaveEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::dragLeaveEvent(event);
-
+	self->QMainWindow::dragLeaveEvent(event);
 }
 
-void QMainWindow_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QMainWindow_virtualbase_dropEvent(VirtualQMainWindow* self, QDropEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::dropEvent(event);
-
+	self->QMainWindow::dropEvent(event);
 }
 
-void QMainWindow_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QMainWindow_virtualbase_showEvent(VirtualQMainWindow* self, QShowEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::showEvent(event);
-
+	self->QMainWindow::showEvent(event);
 }
 
-void QMainWindow_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QMainWindow_virtualbase_hideEvent(VirtualQMainWindow* self, QHideEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::hideEvent(event);
-
+	self->QMainWindow::hideEvent(event);
 }
 
-bool QMainWindow_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QMainWindow_virtualbase_nativeEvent(VirtualQMainWindow* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QMainWindow::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-void QMainWindow_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QMainWindow_virtualbase_changeEvent(VirtualQMainWindow* self, QEvent* param1) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::changeEvent(param1);
-
+	self->QMainWindow::changeEvent(param1);
 }
 
-int QMainWindow_virtualbase_metric(const void* self, int param1) {
+int QMainWindow_virtualbase_metric(const VirtualQMainWindow* self, int param1) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::metric(static_cast<VirtualQMainWindow::PaintDeviceMetric>(param1));
-
+	return self->QMainWindow::metric(static_cast<VirtualQMainWindow::PaintDeviceMetric>(param1));
 }
 
-void QMainWindow_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QMainWindow_virtualbase_initPainter(const VirtualQMainWindow* self, QPainter* painter) {
 
-	( (const VirtualQMainWindow*)(self) )->QMainWindow::initPainter(painter);
-
+	self->QMainWindow::initPainter(painter);
 }
 
-QPaintDevice* QMainWindow_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QMainWindow_virtualbase_redirected(const VirtualQMainWindow* self, QPoint* offset) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::redirected(offset);
-
+	return self->QMainWindow::redirected(offset);
 }
 
-QPainter* QMainWindow_virtualbase_sharedPainter(const void* self) {
+QPainter* QMainWindow_virtualbase_sharedPainter(const VirtualQMainWindow* self) {
 
-	return ( (const VirtualQMainWindow*)(self) )->QMainWindow::sharedPainter();
-
+	return self->QMainWindow::sharedPainter();
 }
 
-void QMainWindow_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QMainWindow_virtualbase_inputMethodEvent(VirtualQMainWindow* self, QInputMethodEvent* param1) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::inputMethodEvent(param1);
-
+	self->QMainWindow::inputMethodEvent(param1);
 }
 
-QVariant* QMainWindow_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QMainWindow_virtualbase_inputMethodQuery(const VirtualQMainWindow* self, int param1) {
 
-	return new QVariant(( (const VirtualQMainWindow*)(self) )->QMainWindow::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QMainWindow::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QMainWindow_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QMainWindow_virtualbase_focusNextPrevChild(VirtualQMainWindow* self, bool next) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::focusNextPrevChild(next);
-
+	return self->QMainWindow::focusNextPrevChild(next);
 }
 
-bool QMainWindow_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QMainWindow_virtualbase_eventFilter(VirtualQMainWindow* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQMainWindow*)(self) )->QMainWindow::eventFilter(watched, event);
-
+	return self->QMainWindow::eventFilter(watched, event);
 }
 
-void QMainWindow_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMainWindow_virtualbase_timerEvent(VirtualQMainWindow* self, QTimerEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::timerEvent(event);
-
+	self->QMainWindow::timerEvent(event);
 }
 
-void QMainWindow_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMainWindow_virtualbase_childEvent(VirtualQMainWindow* self, QChildEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::childEvent(event);
-
+	self->QMainWindow::childEvent(event);
 }
 
-void QMainWindow_virtualbase_customEvent(void* self, QEvent* event) {
+void QMainWindow_virtualbase_customEvent(VirtualQMainWindow* self, QEvent* event) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::customEvent(event);
-
+	self->QMainWindow::customEvent(event);
 }
 
-void QMainWindow_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMainWindow_virtualbase_connectNotify(VirtualQMainWindow* self, QMetaMethod* signal) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::connectNotify(*signal);
-
+	self->QMainWindow::connectNotify(*signal);
 }
 
-void QMainWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMainWindow_virtualbase_disconnectNotify(VirtualQMainWindow* self, QMetaMethod* signal) {
 
-	( (VirtualQMainWindow*)(self) )->QMainWindow::disconnectNotify(*signal);
-
+	self->QMainWindow::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMainWindow_staticMetaObject() { return &QMainWindow::staticMetaObject; }
-void QMainWindow_protectedbase_updateMicroFocus(void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QMainWindow_VTable* QMainWindow_vtbl(const VirtualQMainWindow* self) { return self->vtbl; }
+void* QMainWindow_vdata(const VirtualQMainWindow* self) { return self->vdata; }
+void QMainWindow_setVdata(VirtualQMainWindow* self, void* vdata) { self->vdata = vdata; }
+
+void QMainWindow_protectedbase_updateMicroFocus(VirtualQMainWindow* self) {
+	self->updateMicroFocus();
 }
 
-void QMainWindow_protectedbase_create(void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	self_cast->create();
-
+void QMainWindow_protectedbase_create(VirtualQMainWindow* self) {
+	self->create();
 }
 
-void QMainWindow_protectedbase_destroy(void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	self_cast->destroy();
-
+void QMainWindow_protectedbase_destroy(VirtualQMainWindow* self) {
+	self->destroy();
 }
 
-bool QMainWindow_protectedbase_focusNextChild(void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QMainWindow_protectedbase_focusNextChild(VirtualQMainWindow* self) {
+	return self->focusNextChild();
 }
 
-bool QMainWindow_protectedbase_focusPreviousChild(void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QMainWindow_protectedbase_focusPreviousChild(VirtualQMainWindow* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QMainWindow_protectedbase_sender(const void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QMainWindow_protectedbase_sender(const VirtualQMainWindow* self) {
+	return self->sender();
 }
 
-int QMainWindow_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMainWindow_protectedbase_senderSignalIndex(const VirtualQMainWindow* self) {
+	return self->senderSignalIndex();
 }
 
-int QMainWindow_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMainWindow_protectedbase_receivers(const VirtualQMainWindow* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMainWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMainWindow* self_cast = static_cast<VirtualQMainWindow*>( (QMainWindow*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMainWindow_protectedbase_isSignalConnected(const VirtualQMainWindow* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMainWindow_delete(QMainWindow* self) {

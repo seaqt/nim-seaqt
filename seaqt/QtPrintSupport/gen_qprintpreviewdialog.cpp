@@ -39,43 +39,36 @@
 #include <QWidget>
 #include <qprintpreviewdialog.h>
 #include "gen_qprintpreviewdialog.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPrintPreviewDialog final : public QPrintPreviewDialog {
-	struct QPrintPreviewDialog_VTable* vtbl;
+	const QPrintPreviewDialog_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPrintPreviewDialog_VTable* QPrintPreviewDialog_vtbl(const VirtualQPrintPreviewDialog* self);
+	friend void* QPrintPreviewDialog_vdata(const VirtualQPrintPreviewDialog* self);
+	friend void QPrintPreviewDialog_setVdata(VirtualQPrintPreviewDialog* self, void* vdata);
 
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl, QWidget* parent): QPrintPreviewDialog(parent), vtbl(vtbl) {};
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl): QPrintPreviewDialog(), vtbl(vtbl) {};
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer): QPrintPreviewDialog(printer), vtbl(vtbl) {};
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl, QWidget* parent, Qt::WindowFlags flags): QPrintPreviewDialog(parent, flags), vtbl(vtbl) {};
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer, QWidget* parent): QPrintPreviewDialog(printer, parent), vtbl(vtbl) {};
-	VirtualQPrintPreviewDialog(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer, QWidget* parent, Qt::WindowFlags flags): QPrintPreviewDialog(printer, parent, flags), vtbl(vtbl) {};
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QWidget* parent): QPrintPreviewDialog(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata): QPrintPreviewDialog(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer): QPrintPreviewDialog(printer), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QWidget* parent, Qt::WindowFlags flags): QPrintPreviewDialog(parent, flags), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer, QWidget* parent): QPrintPreviewDialog(printer, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPrintPreviewDialog(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer, QWidget* parent, Qt::WindowFlags flags): QPrintPreviewDialog(printer, parent, flags), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPrintPreviewDialog() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPrintPreviewDialog() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPrintPreviewDialog::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPrintPreviewDialog::qt_metacast(param1);
@@ -83,14 +76,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPrintPreviewDialog_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPrintPreviewDialog_virtualbase_metacast(VirtualQPrintPreviewDialog* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPrintPreviewDialog::qt_metacall(param1, param2, param3);
@@ -101,14 +93,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPrintPreviewDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPrintPreviewDialog_virtualbase_metacall(VirtualQPrintPreviewDialog* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QPrintPreviewDialog::setVisible(visible);
@@ -117,13 +108,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_setVisible(void* self, bool visible);
+	friend void QPrintPreviewDialog_virtualbase_setVisible(VirtualQPrintPreviewDialog* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int result) override {
 		if (vtbl->done == 0) {
 			QPrintPreviewDialog::done(result);
@@ -132,45 +122,42 @@ public:
 
 		int sigval1 = result;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_done(void* self, int result);
+	friend void QPrintPreviewDialog_virtualbase_done(VirtualQPrintPreviewDialog* self, int result);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QPrintPreviewDialog::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPrintPreviewDialog_virtualbase_sizeHint(const void* self);
+	friend QSize* QPrintPreviewDialog_virtualbase_sizeHint(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QPrintPreviewDialog::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPrintPreviewDialog_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QPrintPreviewDialog_virtualbase_minimumSizeHint(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QPrintPreviewDialog::open();
@@ -178,27 +165,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_open(void* self);
+	friend void QPrintPreviewDialog_virtualbase_open(VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QPrintPreviewDialog::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPrintPreviewDialog_virtualbase_exec(void* self);
+	friend int QPrintPreviewDialog_virtualbase_exec(VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QPrintPreviewDialog::accept();
@@ -206,13 +191,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_accept(void* self);
+	friend void QPrintPreviewDialog_virtualbase_accept(VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QPrintPreviewDialog::reject();
@@ -220,13 +204,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_reject(void* self);
+	friend void QPrintPreviewDialog_virtualbase_reject(VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QPrintPreviewDialog::keyPressEvent(param1);
@@ -235,13 +218,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_keyPressEvent(VirtualQPrintPreviewDialog* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QPrintPreviewDialog::closeEvent(param1);
@@ -250,13 +232,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_closeEvent(VirtualQPrintPreviewDialog* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QPrintPreviewDialog::showEvent(param1);
@@ -265,13 +246,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_showEvent(VirtualQPrintPreviewDialog* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QPrintPreviewDialog::resizeEvent(param1);
@@ -280,13 +260,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_resizeEvent(VirtualQPrintPreviewDialog* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QPrintPreviewDialog::contextMenuEvent(param1);
@@ -295,13 +274,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_contextMenuEvent(VirtualQPrintPreviewDialog* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QPrintPreviewDialog::eventFilter(param1, param2);
@@ -310,28 +288,26 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPrintPreviewDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QPrintPreviewDialog_virtualbase_eventFilter(VirtualQPrintPreviewDialog* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPrintPreviewDialog::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPrintPreviewDialog_virtualbase_devType(const void* self);
+	friend int QPrintPreviewDialog_virtualbase_devType(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QPrintPreviewDialog::heightForWidth(param1);
@@ -339,42 +315,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPrintPreviewDialog_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QPrintPreviewDialog_virtualbase_heightForWidth(const VirtualQPrintPreviewDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QPrintPreviewDialog::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPrintPreviewDialog_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QPrintPreviewDialog_virtualbase_hasHeightForWidth(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QPrintPreviewDialog::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QPrintPreviewDialog_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QPrintPreviewDialog_virtualbase_paintEngine(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QPrintPreviewDialog::event(event);
@@ -382,14 +355,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPrintPreviewDialog_virtualbase_event(void* self, QEvent* event);
+	friend bool QPrintPreviewDialog_virtualbase_event(VirtualQPrintPreviewDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QPrintPreviewDialog::mousePressEvent(event);
@@ -398,13 +370,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_mousePressEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QPrintPreviewDialog::mouseReleaseEvent(event);
@@ -413,13 +384,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_mouseReleaseEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QPrintPreviewDialog::mouseDoubleClickEvent(event);
@@ -428,13 +398,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_mouseDoubleClickEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QPrintPreviewDialog::mouseMoveEvent(event);
@@ -443,13 +412,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_mouseMoveEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QPrintPreviewDialog::wheelEvent(event);
@@ -458,13 +426,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_wheelEvent(VirtualQPrintPreviewDialog* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QPrintPreviewDialog::keyReleaseEvent(event);
@@ -473,13 +440,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_keyReleaseEvent(VirtualQPrintPreviewDialog* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QPrintPreviewDialog::focusInEvent(event);
@@ -488,13 +454,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_focusInEvent(VirtualQPrintPreviewDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QPrintPreviewDialog::focusOutEvent(event);
@@ -503,13 +468,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_focusOutEvent(VirtualQPrintPreviewDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QPrintPreviewDialog::enterEvent(event);
@@ -518,13 +482,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_enterEvent(VirtualQPrintPreviewDialog* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QPrintPreviewDialog::leaveEvent(event);
@@ -533,13 +496,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_leaveEvent(VirtualQPrintPreviewDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QPrintPreviewDialog::paintEvent(event);
@@ -548,13 +510,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_paintEvent(VirtualQPrintPreviewDialog* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QPrintPreviewDialog::moveEvent(event);
@@ -563,13 +524,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_moveEvent(VirtualQPrintPreviewDialog* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QPrintPreviewDialog::tabletEvent(event);
@@ -578,13 +538,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_tabletEvent(VirtualQPrintPreviewDialog* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QPrintPreviewDialog::actionEvent(event);
@@ -593,13 +552,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_actionEvent(VirtualQPrintPreviewDialog* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QPrintPreviewDialog::dragEnterEvent(event);
@@ -608,13 +566,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_dragEnterEvent(VirtualQPrintPreviewDialog* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QPrintPreviewDialog::dragMoveEvent(event);
@@ -623,13 +580,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_dragMoveEvent(VirtualQPrintPreviewDialog* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QPrintPreviewDialog::dragLeaveEvent(event);
@@ -638,13 +594,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_dragLeaveEvent(VirtualQPrintPreviewDialog* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QPrintPreviewDialog::dropEvent(event);
@@ -653,13 +608,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_dropEvent(VirtualQPrintPreviewDialog* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QPrintPreviewDialog::hideEvent(event);
@@ -668,13 +622,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_hideEvent(VirtualQPrintPreviewDialog* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QPrintPreviewDialog::nativeEvent(eventType, message, result);
@@ -690,14 +643,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QPrintPreviewDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QPrintPreviewDialog_virtualbase_nativeEvent(VirtualQPrintPreviewDialog* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QPrintPreviewDialog::changeEvent(param1);
@@ -706,13 +658,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_changeEvent(VirtualQPrintPreviewDialog* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QPrintPreviewDialog::metric(param1);
@@ -721,14 +672,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPrintPreviewDialog_virtualbase_metric(const void* self, int param1);
+	friend int QPrintPreviewDialog_virtualbase_metric(const VirtualQPrintPreviewDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPrintPreviewDialog::initPainter(painter);
@@ -737,13 +687,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPrintPreviewDialog_virtualbase_initPainter(const VirtualQPrintPreviewDialog* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPrintPreviewDialog::redirected(offset);
@@ -751,28 +700,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPrintPreviewDialog_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPrintPreviewDialog_virtualbase_redirected(const VirtualQPrintPreviewDialog* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPrintPreviewDialog::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPrintPreviewDialog_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPrintPreviewDialog_virtualbase_sharedPainter(const VirtualQPrintPreviewDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QPrintPreviewDialog::inputMethodEvent(param1);
@@ -781,13 +728,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QPrintPreviewDialog_virtualbase_inputMethodEvent(VirtualQPrintPreviewDialog* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QPrintPreviewDialog::inputMethodQuery(param1);
@@ -796,16 +742,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QPrintPreviewDialog_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QPrintPreviewDialog_virtualbase_inputMethodQuery(const VirtualQPrintPreviewDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QPrintPreviewDialog::focusNextPrevChild(next);
@@ -813,14 +758,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPrintPreviewDialog_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QPrintPreviewDialog_virtualbase_focusNextPrevChild(VirtualQPrintPreviewDialog* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QPrintPreviewDialog::timerEvent(event);
@@ -829,13 +773,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_timerEvent(VirtualQPrintPreviewDialog* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPrintPreviewDialog::childEvent(event);
@@ -844,13 +787,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_childEvent(VirtualQPrintPreviewDialog* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPrintPreviewDialog::customEvent(event);
@@ -859,13 +801,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPrintPreviewDialog_virtualbase_customEvent(VirtualQPrintPreviewDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPrintPreviewDialog::connectNotify(signal);
@@ -876,13 +817,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPrintPreviewDialog_virtualbase_connectNotify(VirtualQPrintPreviewDialog* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPrintPreviewDialog::disconnectNotify(signal);
@@ -893,47 +833,47 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPrintPreviewDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPrintPreviewDialog_virtualbase_disconnectNotify(VirtualQPrintPreviewDialog* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPrintPreviewDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QPrintPreviewDialog_protectedbase_updateMicroFocus(void* self);
-	friend void QPrintPreviewDialog_protectedbase_create(void* self);
-	friend void QPrintPreviewDialog_protectedbase_destroy(void* self);
-	friend bool QPrintPreviewDialog_protectedbase_focusNextChild(void* self);
-	friend bool QPrintPreviewDialog_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QPrintPreviewDialog_protectedbase_sender(const void* self);
-	friend int QPrintPreviewDialog_protectedbase_senderSignalIndex(const void* self);
-	friend int QPrintPreviewDialog_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPrintPreviewDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QPrintPreviewDialog_protectedbase_adjustPosition(VirtualQPrintPreviewDialog* self, QWidget* param1);
+	friend void QPrintPreviewDialog_protectedbase_updateMicroFocus(VirtualQPrintPreviewDialog* self);
+	friend void QPrintPreviewDialog_protectedbase_create(VirtualQPrintPreviewDialog* self);
+	friend void QPrintPreviewDialog_protectedbase_destroy(VirtualQPrintPreviewDialog* self);
+	friend bool QPrintPreviewDialog_protectedbase_focusNextChild(VirtualQPrintPreviewDialog* self);
+	friend bool QPrintPreviewDialog_protectedbase_focusPreviousChild(VirtualQPrintPreviewDialog* self);
+	friend QObject* QPrintPreviewDialog_protectedbase_sender(const VirtualQPrintPreviewDialog* self);
+	friend int QPrintPreviewDialog_protectedbase_senderSignalIndex(const VirtualQPrintPreviewDialog* self);
+	friend int QPrintPreviewDialog_protectedbase_receivers(const VirtualQPrintPreviewDialog* self, const char* signal);
+	friend bool QPrintPreviewDialog_protectedbase_isSignalConnected(const VirtualQPrintPreviewDialog* self, QMetaMethod* signal);
 };
 
-QPrintPreviewDialog* QPrintPreviewDialog_new(struct QPrintPreviewDialog_VTable* vtbl, QWidget* parent) {
-	return new VirtualQPrintPreviewDialog(vtbl, parent);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata, parent);
 }
 
-QPrintPreviewDialog* QPrintPreviewDialog_new2(struct QPrintPreviewDialog_VTable* vtbl) {
-	return new VirtualQPrintPreviewDialog(vtbl);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new2(const QPrintPreviewDialog_VTable* vtbl, void* vdata) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata);
 }
 
-QPrintPreviewDialog* QPrintPreviewDialog_new3(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer) {
-	return new VirtualQPrintPreviewDialog(vtbl, printer);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new3(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata, printer);
 }
 
-QPrintPreviewDialog* QPrintPreviewDialog_new4(struct QPrintPreviewDialog_VTable* vtbl, QWidget* parent, int flags) {
-	return new VirtualQPrintPreviewDialog(vtbl, parent, static_cast<Qt::WindowFlags>(flags));
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new4(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QWidget* parent, int flags) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata, parent, static_cast<Qt::WindowFlags>(flags));
 }
 
-QPrintPreviewDialog* QPrintPreviewDialog_new5(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer, QWidget* parent) {
-	return new VirtualQPrintPreviewDialog(vtbl, printer, parent);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new5(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer, QWidget* parent) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata, printer, parent);
 }
 
-QPrintPreviewDialog* QPrintPreviewDialog_new6(struct QPrintPreviewDialog_VTable* vtbl, QPrinter* printer, QWidget* parent, int flags) {
-	return new VirtualQPrintPreviewDialog(vtbl, printer, parent, static_cast<Qt::WindowFlags>(flags));
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new6(const QPrintPreviewDialog_VTable* vtbl, void* vdata, QPrinter* printer, QWidget* parent, int flags) {
+	return new VirtualQPrintPreviewDialog(vtbl, vdata, printer, parent, static_cast<Qt::WindowFlags>(flags));
 }
 
 void QPrintPreviewDialog_virtbase(QPrintPreviewDialog* src, QDialog** outptr_QDialog) {
@@ -979,7 +919,7 @@ void QPrintPreviewDialog_paintRequested(QPrintPreviewDialog* self, QPrinter* pri
 	self->paintRequested(printer);
 }
 
-void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) {
+void QPrintPreviewDialog_connect_paintRequested(VirtualQPrintPreviewDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QPrinter*);
@@ -1013,406 +953,326 @@ struct miqt_string QPrintPreviewDialog_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const void* self) {
+QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const VirtualQPrintPreviewDialog* self) {
 
-	return (QMetaObject*) ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::metaObject();
-
+	return (QMetaObject*) self->QPrintPreviewDialog::metaObject();
 }
 
-void* QPrintPreviewDialog_virtualbase_metacast(void* self, const char* param1) {
+void* QPrintPreviewDialog_virtualbase_metacast(VirtualQPrintPreviewDialog* self, const char* param1) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::qt_metacast(param1);
-
+	return self->QPrintPreviewDialog::qt_metacast(param1);
 }
 
-int QPrintPreviewDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPrintPreviewDialog_virtualbase_metacall(VirtualQPrintPreviewDialog* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPrintPreviewDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QPrintPreviewDialog_virtualbase_setVisible(void* self, bool visible) {
+void QPrintPreviewDialog_virtualbase_setVisible(VirtualQPrintPreviewDialog* self, bool visible) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::setVisible(visible);
-
+	self->QPrintPreviewDialog::setVisible(visible);
 }
 
-void QPrintPreviewDialog_virtualbase_done(void* self, int result) {
+void QPrintPreviewDialog_virtualbase_done(VirtualQPrintPreviewDialog* self, int result) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::done(static_cast<int>(result));
-
+	self->QPrintPreviewDialog::done(static_cast<int>(result));
 }
 
-QSize* QPrintPreviewDialog_virtualbase_sizeHint(const void* self) {
+QSize* QPrintPreviewDialog_virtualbase_sizeHint(const VirtualQPrintPreviewDialog* self) {
 
-	return new QSize(( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::sizeHint());
-
+	return new QSize(self->QPrintPreviewDialog::sizeHint());
 }
 
-QSize* QPrintPreviewDialog_virtualbase_minimumSizeHint(const void* self) {
+QSize* QPrintPreviewDialog_virtualbase_minimumSizeHint(const VirtualQPrintPreviewDialog* self) {
 
-	return new QSize(( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::minimumSizeHint());
-
+	return new QSize(self->QPrintPreviewDialog::minimumSizeHint());
 }
 
-void QPrintPreviewDialog_virtualbase_open(void* self) {
+void QPrintPreviewDialog_virtualbase_open(VirtualQPrintPreviewDialog* self) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::open();
-
+	self->QPrintPreviewDialog::open();
 }
 
-int QPrintPreviewDialog_virtualbase_exec(void* self) {
+int QPrintPreviewDialog_virtualbase_exec(VirtualQPrintPreviewDialog* self) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::exec();
-
+	return self->QPrintPreviewDialog::exec();
 }
 
-void QPrintPreviewDialog_virtualbase_accept(void* self) {
+void QPrintPreviewDialog_virtualbase_accept(VirtualQPrintPreviewDialog* self) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::accept();
-
+	self->QPrintPreviewDialog::accept();
 }
 
-void QPrintPreviewDialog_virtualbase_reject(void* self) {
+void QPrintPreviewDialog_virtualbase_reject(VirtualQPrintPreviewDialog* self) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::reject();
-
+	self->QPrintPreviewDialog::reject();
 }
 
-void QPrintPreviewDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QPrintPreviewDialog_virtualbase_keyPressEvent(VirtualQPrintPreviewDialog* self, QKeyEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::keyPressEvent(param1);
-
+	self->QPrintPreviewDialog::keyPressEvent(param1);
 }
 
-void QPrintPreviewDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QPrintPreviewDialog_virtualbase_closeEvent(VirtualQPrintPreviewDialog* self, QCloseEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::closeEvent(param1);
-
+	self->QPrintPreviewDialog::closeEvent(param1);
 }
 
-void QPrintPreviewDialog_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QPrintPreviewDialog_virtualbase_showEvent(VirtualQPrintPreviewDialog* self, QShowEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::showEvent(param1);
-
+	self->QPrintPreviewDialog::showEvent(param1);
 }
 
-void QPrintPreviewDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QPrintPreviewDialog_virtualbase_resizeEvent(VirtualQPrintPreviewDialog* self, QResizeEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::resizeEvent(param1);
-
+	self->QPrintPreviewDialog::resizeEvent(param1);
 }
 
-void QPrintPreviewDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QPrintPreviewDialog_virtualbase_contextMenuEvent(VirtualQPrintPreviewDialog* self, QContextMenuEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::contextMenuEvent(param1);
-
+	self->QPrintPreviewDialog::contextMenuEvent(param1);
 }
 
-bool QPrintPreviewDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QPrintPreviewDialog_virtualbase_eventFilter(VirtualQPrintPreviewDialog* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::eventFilter(param1, param2);
-
+	return self->QPrintPreviewDialog::eventFilter(param1, param2);
 }
 
-int QPrintPreviewDialog_virtualbase_devType(const void* self) {
+int QPrintPreviewDialog_virtualbase_devType(const VirtualQPrintPreviewDialog* self) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::devType();
-
+	return self->QPrintPreviewDialog::devType();
 }
 
-int QPrintPreviewDialog_virtualbase_heightForWidth(const void* self, int param1) {
+int QPrintPreviewDialog_virtualbase_heightForWidth(const VirtualQPrintPreviewDialog* self, int param1) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::heightForWidth(static_cast<int>(param1));
-
+	return self->QPrintPreviewDialog::heightForWidth(static_cast<int>(param1));
 }
 
-bool QPrintPreviewDialog_virtualbase_hasHeightForWidth(const void* self) {
+bool QPrintPreviewDialog_virtualbase_hasHeightForWidth(const VirtualQPrintPreviewDialog* self) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::hasHeightForWidth();
-
+	return self->QPrintPreviewDialog::hasHeightForWidth();
 }
 
-QPaintEngine* QPrintPreviewDialog_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QPrintPreviewDialog_virtualbase_paintEngine(const VirtualQPrintPreviewDialog* self) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::paintEngine();
-
+	return self->QPrintPreviewDialog::paintEngine();
 }
 
-bool QPrintPreviewDialog_virtualbase_event(void* self, QEvent* event) {
+bool QPrintPreviewDialog_virtualbase_event(VirtualQPrintPreviewDialog* self, QEvent* event) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::event(event);
-
+	return self->QPrintPreviewDialog::event(event);
 }
 
-void QPrintPreviewDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QPrintPreviewDialog_virtualbase_mousePressEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::mousePressEvent(event);
-
+	self->QPrintPreviewDialog::mousePressEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QPrintPreviewDialog_virtualbase_mouseReleaseEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::mouseReleaseEvent(event);
-
+	self->QPrintPreviewDialog::mouseReleaseEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QPrintPreviewDialog_virtualbase_mouseDoubleClickEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::mouseDoubleClickEvent(event);
-
+	self->QPrintPreviewDialog::mouseDoubleClickEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QPrintPreviewDialog_virtualbase_mouseMoveEvent(VirtualQPrintPreviewDialog* self, QMouseEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::mouseMoveEvent(event);
-
+	self->QPrintPreviewDialog::mouseMoveEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QPrintPreviewDialog_virtualbase_wheelEvent(VirtualQPrintPreviewDialog* self, QWheelEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::wheelEvent(event);
-
+	self->QPrintPreviewDialog::wheelEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QPrintPreviewDialog_virtualbase_keyReleaseEvent(VirtualQPrintPreviewDialog* self, QKeyEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::keyReleaseEvent(event);
-
+	self->QPrintPreviewDialog::keyReleaseEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QPrintPreviewDialog_virtualbase_focusInEvent(VirtualQPrintPreviewDialog* self, QFocusEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::focusInEvent(event);
-
+	self->QPrintPreviewDialog::focusInEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QPrintPreviewDialog_virtualbase_focusOutEvent(VirtualQPrintPreviewDialog* self, QFocusEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::focusOutEvent(event);
-
+	self->QPrintPreviewDialog::focusOutEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QPrintPreviewDialog_virtualbase_enterEvent(VirtualQPrintPreviewDialog* self, QEnterEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::enterEvent(event);
-
+	self->QPrintPreviewDialog::enterEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QPrintPreviewDialog_virtualbase_leaveEvent(VirtualQPrintPreviewDialog* self, QEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::leaveEvent(event);
-
+	self->QPrintPreviewDialog::leaveEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QPrintPreviewDialog_virtualbase_paintEvent(VirtualQPrintPreviewDialog* self, QPaintEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::paintEvent(event);
-
+	self->QPrintPreviewDialog::paintEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QPrintPreviewDialog_virtualbase_moveEvent(VirtualQPrintPreviewDialog* self, QMoveEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::moveEvent(event);
-
+	self->QPrintPreviewDialog::moveEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QPrintPreviewDialog_virtualbase_tabletEvent(VirtualQPrintPreviewDialog* self, QTabletEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::tabletEvent(event);
-
+	self->QPrintPreviewDialog::tabletEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QPrintPreviewDialog_virtualbase_actionEvent(VirtualQPrintPreviewDialog* self, QActionEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::actionEvent(event);
-
+	self->QPrintPreviewDialog::actionEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QPrintPreviewDialog_virtualbase_dragEnterEvent(VirtualQPrintPreviewDialog* self, QDragEnterEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::dragEnterEvent(event);
-
+	self->QPrintPreviewDialog::dragEnterEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QPrintPreviewDialog_virtualbase_dragMoveEvent(VirtualQPrintPreviewDialog* self, QDragMoveEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::dragMoveEvent(event);
-
+	self->QPrintPreviewDialog::dragMoveEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QPrintPreviewDialog_virtualbase_dragLeaveEvent(VirtualQPrintPreviewDialog* self, QDragLeaveEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::dragLeaveEvent(event);
-
+	self->QPrintPreviewDialog::dragLeaveEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QPrintPreviewDialog_virtualbase_dropEvent(VirtualQPrintPreviewDialog* self, QDropEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::dropEvent(event);
-
+	self->QPrintPreviewDialog::dropEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QPrintPreviewDialog_virtualbase_hideEvent(VirtualQPrintPreviewDialog* self, QHideEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::hideEvent(event);
-
+	self->QPrintPreviewDialog::hideEvent(event);
 }
 
-bool QPrintPreviewDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QPrintPreviewDialog_virtualbase_nativeEvent(VirtualQPrintPreviewDialog* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QPrintPreviewDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-void QPrintPreviewDialog_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QPrintPreviewDialog_virtualbase_changeEvent(VirtualQPrintPreviewDialog* self, QEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::changeEvent(param1);
-
+	self->QPrintPreviewDialog::changeEvent(param1);
 }
 
-int QPrintPreviewDialog_virtualbase_metric(const void* self, int param1) {
+int QPrintPreviewDialog_virtualbase_metric(const VirtualQPrintPreviewDialog* self, int param1) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::metric(static_cast<VirtualQPrintPreviewDialog::PaintDeviceMetric>(param1));
-
+	return self->QPrintPreviewDialog::metric(static_cast<VirtualQPrintPreviewDialog::PaintDeviceMetric>(param1));
 }
 
-void QPrintPreviewDialog_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPrintPreviewDialog_virtualbase_initPainter(const VirtualQPrintPreviewDialog* self, QPainter* painter) {
 
-	( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::initPainter(painter);
-
+	self->QPrintPreviewDialog::initPainter(painter);
 }
 
-QPaintDevice* QPrintPreviewDialog_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPrintPreviewDialog_virtualbase_redirected(const VirtualQPrintPreviewDialog* self, QPoint* offset) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::redirected(offset);
-
+	return self->QPrintPreviewDialog::redirected(offset);
 }
 
-QPainter* QPrintPreviewDialog_virtualbase_sharedPainter(const void* self) {
+QPainter* QPrintPreviewDialog_virtualbase_sharedPainter(const VirtualQPrintPreviewDialog* self) {
 
-	return ( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::sharedPainter();
-
+	return self->QPrintPreviewDialog::sharedPainter();
 }
 
-void QPrintPreviewDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QPrintPreviewDialog_virtualbase_inputMethodEvent(VirtualQPrintPreviewDialog* self, QInputMethodEvent* param1) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::inputMethodEvent(param1);
-
+	self->QPrintPreviewDialog::inputMethodEvent(param1);
 }
 
-QVariant* QPrintPreviewDialog_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QPrintPreviewDialog_virtualbase_inputMethodQuery(const VirtualQPrintPreviewDialog* self, int param1) {
 
-	return new QVariant(( (const VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QPrintPreviewDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QPrintPreviewDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QPrintPreviewDialog_virtualbase_focusNextPrevChild(VirtualQPrintPreviewDialog* self, bool next) {
 
-	return ( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::focusNextPrevChild(next);
-
+	return self->QPrintPreviewDialog::focusNextPrevChild(next);
 }
 
-void QPrintPreviewDialog_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QPrintPreviewDialog_virtualbase_timerEvent(VirtualQPrintPreviewDialog* self, QTimerEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::timerEvent(event);
-
+	self->QPrintPreviewDialog::timerEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPrintPreviewDialog_virtualbase_childEvent(VirtualQPrintPreviewDialog* self, QChildEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::childEvent(event);
-
+	self->QPrintPreviewDialog::childEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_customEvent(void* self, QEvent* event) {
+void QPrintPreviewDialog_virtualbase_customEvent(VirtualQPrintPreviewDialog* self, QEvent* event) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::customEvent(event);
-
+	self->QPrintPreviewDialog::customEvent(event);
 }
 
-void QPrintPreviewDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPrintPreviewDialog_virtualbase_connectNotify(VirtualQPrintPreviewDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::connectNotify(*signal);
-
+	self->QPrintPreviewDialog::connectNotify(*signal);
 }
 
-void QPrintPreviewDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPrintPreviewDialog_virtualbase_disconnectNotify(VirtualQPrintPreviewDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQPrintPreviewDialog*)(self) )->QPrintPreviewDialog::disconnectNotify(*signal);
-
+	self->QPrintPreviewDialog::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPrintPreviewDialog_staticMetaObject() { return &QPrintPreviewDialog::staticMetaObject; }
-void QPrintPreviewDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	self_cast->adjustPosition(param1);
 
+const QPrintPreviewDialog_VTable* QPrintPreviewDialog_vtbl(const VirtualQPrintPreviewDialog* self) { return self->vtbl; }
+void* QPrintPreviewDialog_vdata(const VirtualQPrintPreviewDialog* self) { return self->vdata; }
+void QPrintPreviewDialog_setVdata(VirtualQPrintPreviewDialog* self, void* vdata) { self->vdata = vdata; }
+
+void QPrintPreviewDialog_protectedbase_adjustPosition(VirtualQPrintPreviewDialog* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QPrintPreviewDialog_protectedbase_updateMicroFocus(void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QPrintPreviewDialog_protectedbase_updateMicroFocus(VirtualQPrintPreviewDialog* self) {
+	self->updateMicroFocus();
 }
 
-void QPrintPreviewDialog_protectedbase_create(void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	self_cast->create();
-
+void QPrintPreviewDialog_protectedbase_create(VirtualQPrintPreviewDialog* self) {
+	self->create();
 }
 
-void QPrintPreviewDialog_protectedbase_destroy(void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	self_cast->destroy();
-
+void QPrintPreviewDialog_protectedbase_destroy(VirtualQPrintPreviewDialog* self) {
+	self->destroy();
 }
 
-bool QPrintPreviewDialog_protectedbase_focusNextChild(void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QPrintPreviewDialog_protectedbase_focusNextChild(VirtualQPrintPreviewDialog* self) {
+	return self->focusNextChild();
 }
 
-bool QPrintPreviewDialog_protectedbase_focusPreviousChild(void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QPrintPreviewDialog_protectedbase_focusPreviousChild(VirtualQPrintPreviewDialog* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QPrintPreviewDialog_protectedbase_sender(const void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QPrintPreviewDialog_protectedbase_sender(const VirtualQPrintPreviewDialog* self) {
+	return self->sender();
 }
 
-int QPrintPreviewDialog_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPrintPreviewDialog_protectedbase_senderSignalIndex(const VirtualQPrintPreviewDialog* self) {
+	return self->senderSignalIndex();
 }
 
-int QPrintPreviewDialog_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPrintPreviewDialog_protectedbase_receivers(const VirtualQPrintPreviewDialog* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPrintPreviewDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPrintPreviewDialog_protectedbase_isSignalConnected(const VirtualQPrintPreviewDialog* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPrintPreviewDialog_delete(QPrintPreviewDialog* self) {

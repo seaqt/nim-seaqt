@@ -3,15 +3,6 @@
 #include <QSize>
 #include <qquickrendertarget.h>
 #include "gen_qquickrendertarget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQuickRenderTarget* QQuickRenderTarget_new() {
 	return new QQuickRenderTarget();
 }

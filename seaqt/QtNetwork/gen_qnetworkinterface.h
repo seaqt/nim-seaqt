@@ -28,6 +28,7 @@ typedef struct QNetworkInterface QNetworkInterface;
 
 QNetworkAddressEntry* QNetworkAddressEntry_new();
 QNetworkAddressEntry* QNetworkAddressEntry_new2(QNetworkAddressEntry* other);
+
 void QNetworkAddressEntry_operatorAssign(QNetworkAddressEntry* self, QNetworkAddressEntry* other);
 void QNetworkAddressEntry_swap(QNetworkAddressEntry* self, QNetworkAddressEntry* other);
 bool QNetworkAddressEntry_operatorEqual(const QNetworkAddressEntry* self, QNetworkAddressEntry* other);
@@ -49,10 +50,12 @@ void QNetworkAddressEntry_setAddressLifetime(QNetworkAddressEntry* self, QDeadli
 void QNetworkAddressEntry_clearAddressLifetime(QNetworkAddressEntry* self);
 bool QNetworkAddressEntry_isPermanent(const QNetworkAddressEntry* self);
 bool QNetworkAddressEntry_isTemporary(const QNetworkAddressEntry* self);
+
 void QNetworkAddressEntry_delete(QNetworkAddressEntry* self);
 
 QNetworkInterface* QNetworkInterface_new();
 QNetworkInterface* QNetworkInterface_new2(QNetworkInterface* other);
+
 void QNetworkInterface_operatorAssign(QNetworkInterface* self, QNetworkInterface* other);
 void QNetworkInterface_swap(QNetworkInterface* self, QNetworkInterface* other);
 bool QNetworkInterface_isValid(const QNetworkInterface* self);
@@ -70,6 +73,7 @@ QNetworkInterface* QNetworkInterface_interfaceFromIndex(int index);
 struct miqt_string QNetworkInterface_interfaceNameFromIndex(int index);
 struct miqt_array /* of QNetworkInterface* */  QNetworkInterface_allInterfaces();
 struct miqt_array /* of QHostAddress* */  QNetworkInterface_allAddresses();
+
 const QMetaObject* QNetworkInterface_staticMetaObject();
 void QNetworkInterface_delete(QNetworkInterface* self);
 

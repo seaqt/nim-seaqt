@@ -66,7 +66,7 @@ proc fcQQmlDebuggingEnabler_new2(printWarning: bool): ptr cQQmlDebuggingEnabler 
 proc enableDebugging*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, printWarning: bool): void =
   fcQQmlDebuggingEnabler_enableDebugging(printWarning)
 
-proc debuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
+proc debuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler): seq[string] =
   var v_ma = fcQQmlDebuggingEnabler_debuggerServices()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -78,7 +78,7 @@ proc debuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc inspectorServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
+proc inspectorServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler): seq[string] =
   var v_ma = fcQQmlDebuggingEnabler_inspectorServices()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -90,7 +90,7 @@ proc inspectorServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq
   c_free(v_ma.data)
   vx_ret
 
-proc profilerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
+proc profilerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler): seq[string] =
   var v_ma = fcQQmlDebuggingEnabler_profilerServices()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -102,7 +102,7 @@ proc profilerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc nativeDebuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
+proc nativeDebuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler): seq[string] =
   var v_ma = fcQQmlDebuggingEnabler_nativeDebuggerServices()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

@@ -43,19 +43,24 @@ typedef struct QStaticPlugin QStaticPlugin;
 #endif
 
 unsigned char QPluginMetaData_archRequirements();
+
 void QPluginMetaData_delete(QPluginMetaData* self);
 
 QJsonObject* QStaticPlugin_metaData(const QStaticPlugin* self);
+
 void QStaticPlugin_delete(QStaticPlugin* self);
 
 QPluginMetaData__Header* QPluginMetaData__Header_new(QPluginMetaData__Header* param1);
+
 void QPluginMetaData__Header_delete(QPluginMetaData__Header* self);
 
 QPluginMetaData__MagicHeader* QPluginMetaData__MagicHeader_new();
+
 void QPluginMetaData__MagicHeader_delete(QPluginMetaData__MagicHeader* self);
 
 QPluginMetaData__ElfNoteHeader* QPluginMetaData__ElfNoteHeader_new(unsigned int payloadSize);
 QPluginMetaData__ElfNoteHeader* QPluginMetaData__ElfNoteHeader_new2(QPluginMetaData__ElfNoteHeader* param1);
+
 void QPluginMetaData__ElfNoteHeader_delete(QPluginMetaData__ElfNoteHeader* self);
 
 #ifdef __cplusplus

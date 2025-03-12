@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qgenericpluginfactory.h>
 #include "gen_qgenericpluginfactory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 struct miqt_array /* of struct miqt_string */  QGenericPluginFactory_keys() {
 	QStringList _ret = QGenericPluginFactory::keys();
 	// Convert QList<> from C++ memory to manually-managed C memory

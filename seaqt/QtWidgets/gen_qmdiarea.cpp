@@ -44,39 +44,32 @@
 #include <QWidget>
 #include <qmdiarea.h>
 #include "gen_qmdiarea.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMdiArea final : public QMdiArea {
-	struct QMdiArea_VTable* vtbl;
+	const QMdiArea_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMdiArea_VTable* QMdiArea_vtbl(const VirtualQMdiArea* self);
+	friend void* QMdiArea_vdata(const VirtualQMdiArea* self);
+	friend void QMdiArea_setVdata(VirtualQMdiArea* self, void* vdata);
 
-	VirtualQMdiArea(struct QMdiArea_VTable* vtbl, QWidget* parent): QMdiArea(parent), vtbl(vtbl) {};
-	VirtualQMdiArea(struct QMdiArea_VTable* vtbl): QMdiArea(), vtbl(vtbl) {};
+	VirtualQMdiArea(const QMdiArea_VTable* vtbl, void* vdata, QWidget* parent): QMdiArea(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMdiArea(const QMdiArea_VTable* vtbl, void* vdata): QMdiArea(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMdiArea() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMdiArea() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMdiArea::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMdiArea_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMdiArea_virtualbase_metaObject(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMdiArea::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMdiArea_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMdiArea_virtualbase_metacast(VirtualQMdiArea* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMdiArea::qt_metacall(param1, param2, param3);
@@ -102,46 +94,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMdiArea_virtualbase_metacall(VirtualQMdiArea* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QMdiArea::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMdiArea_virtualbase_sizeHint(const void* self);
+	friend QSize* QMdiArea_virtualbase_sizeHint(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QMdiArea::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMdiArea_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QMdiArea_virtualbase_minimumSizeHint(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
 		if (vtbl->setupViewport == 0) {
 			QMdiArea::setupViewport(viewport);
@@ -150,13 +139,12 @@ public:
 
 		QWidget* sigval1 = viewport;
 
-		vtbl->setupViewport(vtbl, this, sigval1);
+		vtbl->setupViewport(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport);
+	friend void QMdiArea_virtualbase_setupViewport(VirtualQMdiArea* self, QWidget* viewport);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QMdiArea::event(event);
@@ -164,14 +152,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_event(void* self, QEvent* event);
+	friend bool QMdiArea_virtualbase_event(VirtualQMdiArea* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMdiArea::eventFilter(object, event);
@@ -180,14 +167,13 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QMdiArea_virtualbase_eventFilter(VirtualQMdiArea* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* paintEvent) override {
 		if (vtbl->paintEvent == 0) {
 			QMdiArea::paintEvent(paintEvent);
@@ -196,13 +182,12 @@ public:
 
 		QPaintEvent* sigval1 = paintEvent;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_paintEvent(void* self, QPaintEvent* paintEvent);
+	friend void QMdiArea_virtualbase_paintEvent(VirtualQMdiArea* self, QPaintEvent* paintEvent);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* childEvent) override {
 		if (vtbl->childEvent == 0) {
 			QMdiArea::childEvent(childEvent);
@@ -211,13 +196,12 @@ public:
 
 		QChildEvent* sigval1 = childEvent;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_childEvent(void* self, QChildEvent* childEvent);
+	friend void QMdiArea_virtualbase_childEvent(VirtualQMdiArea* self, QChildEvent* childEvent);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* resizeEvent) override {
 		if (vtbl->resizeEvent == 0) {
 			QMdiArea::resizeEvent(resizeEvent);
@@ -226,13 +210,12 @@ public:
 
 		QResizeEvent* sigval1 = resizeEvent;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_resizeEvent(void* self, QResizeEvent* resizeEvent);
+	friend void QMdiArea_virtualbase_resizeEvent(VirtualQMdiArea* self, QResizeEvent* resizeEvent);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* timerEvent) override {
 		if (vtbl->timerEvent == 0) {
 			QMdiArea::timerEvent(timerEvent);
@@ -241,13 +224,12 @@ public:
 
 		QTimerEvent* sigval1 = timerEvent;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_timerEvent(void* self, QTimerEvent* timerEvent);
+	friend void QMdiArea_virtualbase_timerEvent(VirtualQMdiArea* self, QTimerEvent* timerEvent);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* showEvent) override {
 		if (vtbl->showEvent == 0) {
 			QMdiArea::showEvent(showEvent);
@@ -256,13 +238,12 @@ public:
 
 		QShowEvent* sigval1 = showEvent;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_showEvent(void* self, QShowEvent* showEvent);
+	friend void QMdiArea_virtualbase_showEvent(VirtualQMdiArea* self, QShowEvent* showEvent);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
 		if (vtbl->viewportEvent == 0) {
 			return QMdiArea::viewportEvent(event);
@@ -270,14 +251,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_viewportEvent(void* self, QEvent* event);
+	friend bool QMdiArea_virtualbase_viewportEvent(VirtualQMdiArea* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
 		if (vtbl->scrollContentsBy == 0) {
 			QMdiArea::scrollContentsBy(dx, dy);
@@ -287,13 +267,12 @@ public:
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
+		vtbl->scrollContentsBy(this, sigval1, sigval2);
 
 	}
 
-	friend void QMdiArea_virtualbase_scrollContentsBy(void* self, int dx, int dy);
+	friend void QMdiArea_virtualbase_scrollContentsBy(VirtualQMdiArea* self, int dx, int dy);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QMdiArea::mousePressEvent(param1);
@@ -302,13 +281,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
+	friend void QMdiArea_virtualbase_mousePressEvent(VirtualQMdiArea* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QMdiArea::mouseReleaseEvent(param1);
@@ -317,13 +295,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
+	friend void QMdiArea_virtualbase_mouseReleaseEvent(VirtualQMdiArea* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QMdiArea::mouseDoubleClickEvent(param1);
@@ -332,13 +309,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1);
+	friend void QMdiArea_virtualbase_mouseDoubleClickEvent(VirtualQMdiArea* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QMdiArea::mouseMoveEvent(param1);
@@ -347,13 +323,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QMdiArea_virtualbase_mouseMoveEvent(VirtualQMdiArea* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QMdiArea::wheelEvent(param1);
@@ -362,13 +337,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QMdiArea_virtualbase_wheelEvent(VirtualQMdiArea* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QMdiArea::contextMenuEvent(param1);
@@ -377,13 +351,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QMdiArea_virtualbase_contextMenuEvent(VirtualQMdiArea* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* param1) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QMdiArea::dragEnterEvent(param1);
@@ -392,13 +365,12 @@ public:
 
 		QDragEnterEvent* sigval1 = param1;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1);
+	friend void QMdiArea_virtualbase_dragEnterEvent(VirtualQMdiArea* self, QDragEnterEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* param1) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QMdiArea::dragMoveEvent(param1);
@@ -407,13 +379,12 @@ public:
 
 		QDragMoveEvent* sigval1 = param1;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1);
+	friend void QMdiArea_virtualbase_dragMoveEvent(VirtualQMdiArea* self, QDragMoveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* param1) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QMdiArea::dragLeaveEvent(param1);
@@ -422,13 +393,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = param1;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1);
+	friend void QMdiArea_virtualbase_dragLeaveEvent(VirtualQMdiArea* self, QDragLeaveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* param1) override {
 		if (vtbl->dropEvent == 0) {
 			QMdiArea::dropEvent(param1);
@@ -437,13 +407,12 @@ public:
 
 		QDropEvent* sigval1 = param1;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_dropEvent(void* self, QDropEvent* param1);
+	friend void QMdiArea_virtualbase_dropEvent(VirtualQMdiArea* self, QDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QMdiArea::keyPressEvent(param1);
@@ -452,29 +421,27 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QMdiArea_virtualbase_keyPressEvent(VirtualQMdiArea* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
 		if (vtbl->viewportSizeHint == 0) {
 			return QMdiArea::viewportSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->viewportSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMdiArea_virtualbase_viewportSizeHint(const void* self);
+	friend QSize* QMdiArea_virtualbase_viewportSizeHint(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QMdiArea::changeEvent(param1);
@@ -483,13 +450,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QMdiArea_virtualbase_changeEvent(VirtualQMdiArea* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QMdiArea::initStyleOption(option);
@@ -498,27 +464,25 @@ public:
 
 		QStyleOptionFrame* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QMdiArea_virtualbase_initStyleOption(const VirtualQMdiArea* self, QStyleOptionFrame* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QMdiArea::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMdiArea_virtualbase_devType(const void* self);
+	friend int QMdiArea_virtualbase_devType(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QMdiArea::setVisible(visible);
@@ -527,13 +491,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_setVisible(void* self, bool visible);
+	friend void QMdiArea_virtualbase_setVisible(VirtualQMdiArea* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QMdiArea::heightForWidth(param1);
@@ -541,42 +504,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMdiArea_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QMdiArea_virtualbase_heightForWidth(const VirtualQMdiArea* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QMdiArea::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QMdiArea_virtualbase_hasHeightForWidth(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QMdiArea::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QMdiArea_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QMdiArea_virtualbase_paintEngine(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QMdiArea::keyReleaseEvent(event);
@@ -585,13 +545,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QMdiArea_virtualbase_keyReleaseEvent(VirtualQMdiArea* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QMdiArea::focusInEvent(event);
@@ -600,13 +559,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QMdiArea_virtualbase_focusInEvent(VirtualQMdiArea* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QMdiArea::focusOutEvent(event);
@@ -615,13 +573,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QMdiArea_virtualbase_focusOutEvent(VirtualQMdiArea* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QMdiArea::enterEvent(event);
@@ -630,13 +587,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QMdiArea_virtualbase_enterEvent(VirtualQMdiArea* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QMdiArea::leaveEvent(event);
@@ -645,13 +601,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QMdiArea_virtualbase_leaveEvent(VirtualQMdiArea* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QMdiArea::moveEvent(event);
@@ -660,13 +615,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QMdiArea_virtualbase_moveEvent(VirtualQMdiArea* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QMdiArea::closeEvent(event);
@@ -675,13 +629,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QMdiArea_virtualbase_closeEvent(VirtualQMdiArea* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QMdiArea::tabletEvent(event);
@@ -690,13 +643,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QMdiArea_virtualbase_tabletEvent(VirtualQMdiArea* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QMdiArea::actionEvent(event);
@@ -705,13 +657,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QMdiArea_virtualbase_actionEvent(VirtualQMdiArea* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QMdiArea::hideEvent(event);
@@ -720,13 +671,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QMdiArea_virtualbase_hideEvent(VirtualQMdiArea* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QMdiArea::nativeEvent(eventType, message, result);
@@ -742,14 +692,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QMdiArea_virtualbase_nativeEvent(VirtualQMdiArea* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QMdiArea::metric(param1);
@@ -758,14 +707,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMdiArea_virtualbase_metric(const void* self, int param1);
+	friend int QMdiArea_virtualbase_metric(const VirtualQMdiArea* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QMdiArea::initPainter(painter);
@@ -774,13 +722,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QMdiArea_virtualbase_initPainter(const VirtualQMdiArea* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QMdiArea::redirected(offset);
@@ -788,28 +735,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QMdiArea_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QMdiArea_virtualbase_redirected(const VirtualQMdiArea* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QMdiArea::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QMdiArea_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QMdiArea_virtualbase_sharedPainter(const VirtualQMdiArea* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QMdiArea::inputMethodEvent(param1);
@@ -818,13 +763,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QMdiArea_virtualbase_inputMethodEvent(VirtualQMdiArea* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QMdiArea::inputMethodQuery(param1);
@@ -833,16 +777,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QMdiArea_virtualbase_inputMethodQuery(const VirtualQMdiArea* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QMdiArea::focusNextPrevChild(next);
@@ -850,14 +793,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMdiArea_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QMdiArea_virtualbase_focusNextPrevChild(VirtualQMdiArea* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMdiArea::customEvent(event);
@@ -866,13 +808,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMdiArea_virtualbase_customEvent(VirtualQMdiArea* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMdiArea::connectNotify(signal);
@@ -883,13 +824,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMdiArea_virtualbase_connectNotify(VirtualQMdiArea* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMdiArea::disconnectNotify(signal);
@@ -900,33 +840,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMdiArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMdiArea_virtualbase_disconnectNotify(VirtualQMdiArea* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMdiArea_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
-	friend QMargins* QMdiArea_protectedbase_viewportMargins(const void* self);
-	friend void QMdiArea_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QMdiArea_protectedbase_updateMicroFocus(void* self);
-	friend void QMdiArea_protectedbase_create(void* self);
-	friend void QMdiArea_protectedbase_destroy(void* self);
-	friend bool QMdiArea_protectedbase_focusNextChild(void* self);
-	friend bool QMdiArea_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QMdiArea_protectedbase_sender(const void* self);
-	friend int QMdiArea_protectedbase_senderSignalIndex(const void* self);
-	friend int QMdiArea_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMdiArea_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QMdiArea_protectedbase_setViewportMargins(VirtualQMdiArea* self, int left, int top, int right, int bottom);
+	friend QMargins* QMdiArea_protectedbase_viewportMargins(const VirtualQMdiArea* self);
+	friend void QMdiArea_protectedbase_drawFrame(VirtualQMdiArea* self, QPainter* param1);
+	friend void QMdiArea_protectedbase_updateMicroFocus(VirtualQMdiArea* self);
+	friend void QMdiArea_protectedbase_create(VirtualQMdiArea* self);
+	friend void QMdiArea_protectedbase_destroy(VirtualQMdiArea* self);
+	friend bool QMdiArea_protectedbase_focusNextChild(VirtualQMdiArea* self);
+	friend bool QMdiArea_protectedbase_focusPreviousChild(VirtualQMdiArea* self);
+	friend QObject* QMdiArea_protectedbase_sender(const VirtualQMdiArea* self);
+	friend int QMdiArea_protectedbase_senderSignalIndex(const VirtualQMdiArea* self);
+	friend int QMdiArea_protectedbase_receivers(const VirtualQMdiArea* self, const char* signal);
+	friend bool QMdiArea_protectedbase_isSignalConnected(const VirtualQMdiArea* self, QMetaMethod* signal);
 };
 
-QMdiArea* QMdiArea_new(struct QMdiArea_VTable* vtbl, QWidget* parent) {
-	return new VirtualQMdiArea(vtbl, parent);
+VirtualQMdiArea* QMdiArea_new(const QMdiArea_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQMdiArea(vtbl, vdata, parent);
 }
 
-QMdiArea* QMdiArea_new2(struct QMdiArea_VTable* vtbl) {
-	return new VirtualQMdiArea(vtbl);
+VirtualQMdiArea* QMdiArea_new2(const QMdiArea_VTable* vtbl, void* vdata) {
+	return new VirtualQMdiArea(vtbl, vdata);
 }
 
 void QMdiArea_virtbase(QMdiArea* src, QAbstractScrollArea** outptr_QAbstractScrollArea) {
@@ -1073,7 +1013,7 @@ void QMdiArea_subWindowActivated(QMdiArea* self, QMdiSubWindow* param1) {
 	self->subWindowActivated(param1);
 }
 
-void QMdiArea_connect_subWindowActivated(QMdiArea* self, intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t)) {
+void QMdiArea_connect_subWindowActivated(VirtualQMdiArea* self, intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QMdiSubWindow*);
@@ -1156,420 +1096,334 @@ void QMdiArea_setOption2(QMdiArea* self, int option, bool on) {
 	self->setOption(static_cast<QMdiArea::AreaOption>(option), on);
 }
 
-QMetaObject* QMdiArea_virtualbase_metaObject(const void* self) {
+QMetaObject* QMdiArea_virtualbase_metaObject(const VirtualQMdiArea* self) {
 
-	return (QMetaObject*) ( (const VirtualQMdiArea*)(self) )->QMdiArea::metaObject();
-
+	return (QMetaObject*) self->QMdiArea::metaObject();
 }
 
-void* QMdiArea_virtualbase_metacast(void* self, const char* param1) {
+void* QMdiArea_virtualbase_metacast(VirtualQMdiArea* self, const char* param1) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::qt_metacast(param1);
-
+	return self->QMdiArea::qt_metacast(param1);
 }
 
-int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMdiArea_virtualbase_metacall(VirtualQMdiArea* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMdiArea::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QMdiArea_virtualbase_sizeHint(const void* self) {
+QSize* QMdiArea_virtualbase_sizeHint(const VirtualQMdiArea* self) {
 
-	return new QSize(( (const VirtualQMdiArea*)(self) )->QMdiArea::sizeHint());
-
+	return new QSize(self->QMdiArea::sizeHint());
 }
 
-QSize* QMdiArea_virtualbase_minimumSizeHint(const void* self) {
+QSize* QMdiArea_virtualbase_minimumSizeHint(const VirtualQMdiArea* self) {
 
-	return new QSize(( (const VirtualQMdiArea*)(self) )->QMdiArea::minimumSizeHint());
-
+	return new QSize(self->QMdiArea::minimumSizeHint());
 }
 
-void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport) {
+void QMdiArea_virtualbase_setupViewport(VirtualQMdiArea* self, QWidget* viewport) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::setupViewport(viewport);
-
+	self->QMdiArea::setupViewport(viewport);
 }
 
-bool QMdiArea_virtualbase_event(void* self, QEvent* event) {
+bool QMdiArea_virtualbase_event(VirtualQMdiArea* self, QEvent* event) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::event(event);
-
+	return self->QMdiArea::event(event);
 }
 
-bool QMdiArea_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QMdiArea_virtualbase_eventFilter(VirtualQMdiArea* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::eventFilter(object, event);
-
+	return self->QMdiArea::eventFilter(object, event);
 }
 
-void QMdiArea_virtualbase_paintEvent(void* self, QPaintEvent* paintEvent) {
+void QMdiArea_virtualbase_paintEvent(VirtualQMdiArea* self, QPaintEvent* paintEvent) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::paintEvent(paintEvent);
-
+	self->QMdiArea::paintEvent(paintEvent);
 }
 
-void QMdiArea_virtualbase_childEvent(void* self, QChildEvent* childEvent) {
+void QMdiArea_virtualbase_childEvent(VirtualQMdiArea* self, QChildEvent* childEvent) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::childEvent(childEvent);
-
+	self->QMdiArea::childEvent(childEvent);
 }
 
-void QMdiArea_virtualbase_resizeEvent(void* self, QResizeEvent* resizeEvent) {
+void QMdiArea_virtualbase_resizeEvent(VirtualQMdiArea* self, QResizeEvent* resizeEvent) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::resizeEvent(resizeEvent);
-
+	self->QMdiArea::resizeEvent(resizeEvent);
 }
 
-void QMdiArea_virtualbase_timerEvent(void* self, QTimerEvent* timerEvent) {
+void QMdiArea_virtualbase_timerEvent(VirtualQMdiArea* self, QTimerEvent* timerEvent) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::timerEvent(timerEvent);
-
+	self->QMdiArea::timerEvent(timerEvent);
 }
 
-void QMdiArea_virtualbase_showEvent(void* self, QShowEvent* showEvent) {
+void QMdiArea_virtualbase_showEvent(VirtualQMdiArea* self, QShowEvent* showEvent) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::showEvent(showEvent);
-
+	self->QMdiArea::showEvent(showEvent);
 }
 
-bool QMdiArea_virtualbase_viewportEvent(void* self, QEvent* event) {
+bool QMdiArea_virtualbase_viewportEvent(VirtualQMdiArea* self, QEvent* event) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::viewportEvent(event);
-
+	return self->QMdiArea::viewportEvent(event);
 }
 
-void QMdiArea_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
+void QMdiArea_virtualbase_scrollContentsBy(VirtualQMdiArea* self, int dx, int dy) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
-
+	self->QMdiArea::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QMdiArea_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
+void QMdiArea_virtualbase_mousePressEvent(VirtualQMdiArea* self, QMouseEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::mousePressEvent(param1);
-
+	self->QMdiArea::mousePressEvent(param1);
 }
 
-void QMdiArea_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
+void QMdiArea_virtualbase_mouseReleaseEvent(VirtualQMdiArea* self, QMouseEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::mouseReleaseEvent(param1);
-
+	self->QMdiArea::mouseReleaseEvent(param1);
 }
 
-void QMdiArea_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1) {
+void QMdiArea_virtualbase_mouseDoubleClickEvent(VirtualQMdiArea* self, QMouseEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::mouseDoubleClickEvent(param1);
-
+	self->QMdiArea::mouseDoubleClickEvent(param1);
 }
 
-void QMdiArea_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QMdiArea_virtualbase_mouseMoveEvent(VirtualQMdiArea* self, QMouseEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::mouseMoveEvent(param1);
-
+	self->QMdiArea::mouseMoveEvent(param1);
 }
 
-void QMdiArea_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QMdiArea_virtualbase_wheelEvent(VirtualQMdiArea* self, QWheelEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::wheelEvent(param1);
-
+	self->QMdiArea::wheelEvent(param1);
 }
 
-void QMdiArea_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QMdiArea_virtualbase_contextMenuEvent(VirtualQMdiArea* self, QContextMenuEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::contextMenuEvent(param1);
-
+	self->QMdiArea::contextMenuEvent(param1);
 }
 
-void QMdiArea_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1) {
+void QMdiArea_virtualbase_dragEnterEvent(VirtualQMdiArea* self, QDragEnterEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::dragEnterEvent(param1);
-
+	self->QMdiArea::dragEnterEvent(param1);
 }
 
-void QMdiArea_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1) {
+void QMdiArea_virtualbase_dragMoveEvent(VirtualQMdiArea* self, QDragMoveEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::dragMoveEvent(param1);
-
+	self->QMdiArea::dragMoveEvent(param1);
 }
 
-void QMdiArea_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1) {
+void QMdiArea_virtualbase_dragLeaveEvent(VirtualQMdiArea* self, QDragLeaveEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::dragLeaveEvent(param1);
-
+	self->QMdiArea::dragLeaveEvent(param1);
 }
 
-void QMdiArea_virtualbase_dropEvent(void* self, QDropEvent* param1) {
+void QMdiArea_virtualbase_dropEvent(VirtualQMdiArea* self, QDropEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::dropEvent(param1);
-
+	self->QMdiArea::dropEvent(param1);
 }
 
-void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QMdiArea_virtualbase_keyPressEvent(VirtualQMdiArea* self, QKeyEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::keyPressEvent(param1);
-
+	self->QMdiArea::keyPressEvent(param1);
 }
 
-QSize* QMdiArea_virtualbase_viewportSizeHint(const void* self) {
+QSize* QMdiArea_virtualbase_viewportSizeHint(const VirtualQMdiArea* self) {
 
-	return new QSize(( (const VirtualQMdiArea*)(self) )->QMdiArea::viewportSizeHint());
-
+	return new QSize(self->QMdiArea::viewportSizeHint());
 }
 
-void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QMdiArea_virtualbase_changeEvent(VirtualQMdiArea* self, QEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::changeEvent(param1);
-
+	self->QMdiArea::changeEvent(param1);
 }
 
-void QMdiArea_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+void QMdiArea_virtualbase_initStyleOption(const VirtualQMdiArea* self, QStyleOptionFrame* option) {
 
-	( (const VirtualQMdiArea*)(self) )->QMdiArea::initStyleOption(option);
-
+	self->QMdiArea::initStyleOption(option);
 }
 
-int QMdiArea_virtualbase_devType(const void* self) {
+int QMdiArea_virtualbase_devType(const VirtualQMdiArea* self) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::devType();
-
+	return self->QMdiArea::devType();
 }
 
-void QMdiArea_virtualbase_setVisible(void* self, bool visible) {
+void QMdiArea_virtualbase_setVisible(VirtualQMdiArea* self, bool visible) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::setVisible(visible);
-
+	self->QMdiArea::setVisible(visible);
 }
 
-int QMdiArea_virtualbase_heightForWidth(const void* self, int param1) {
+int QMdiArea_virtualbase_heightForWidth(const VirtualQMdiArea* self, int param1) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::heightForWidth(static_cast<int>(param1));
-
+	return self->QMdiArea::heightForWidth(static_cast<int>(param1));
 }
 
-bool QMdiArea_virtualbase_hasHeightForWidth(const void* self) {
+bool QMdiArea_virtualbase_hasHeightForWidth(const VirtualQMdiArea* self) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::hasHeightForWidth();
-
+	return self->QMdiArea::hasHeightForWidth();
 }
 
-QPaintEngine* QMdiArea_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QMdiArea_virtualbase_paintEngine(const VirtualQMdiArea* self) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::paintEngine();
-
+	return self->QMdiArea::paintEngine();
 }
 
-void QMdiArea_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QMdiArea_virtualbase_keyReleaseEvent(VirtualQMdiArea* self, QKeyEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::keyReleaseEvent(event);
-
+	self->QMdiArea::keyReleaseEvent(event);
 }
 
-void QMdiArea_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QMdiArea_virtualbase_focusInEvent(VirtualQMdiArea* self, QFocusEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::focusInEvent(event);
-
+	self->QMdiArea::focusInEvent(event);
 }
 
-void QMdiArea_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QMdiArea_virtualbase_focusOutEvent(VirtualQMdiArea* self, QFocusEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::focusOutEvent(event);
-
+	self->QMdiArea::focusOutEvent(event);
 }
 
-void QMdiArea_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QMdiArea_virtualbase_enterEvent(VirtualQMdiArea* self, QEnterEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::enterEvent(event);
-
+	self->QMdiArea::enterEvent(event);
 }
 
-void QMdiArea_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QMdiArea_virtualbase_leaveEvent(VirtualQMdiArea* self, QEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::leaveEvent(event);
-
+	self->QMdiArea::leaveEvent(event);
 }
 
-void QMdiArea_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QMdiArea_virtualbase_moveEvent(VirtualQMdiArea* self, QMoveEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::moveEvent(event);
-
+	self->QMdiArea::moveEvent(event);
 }
 
-void QMdiArea_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QMdiArea_virtualbase_closeEvent(VirtualQMdiArea* self, QCloseEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::closeEvent(event);
-
+	self->QMdiArea::closeEvent(event);
 }
 
-void QMdiArea_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QMdiArea_virtualbase_tabletEvent(VirtualQMdiArea* self, QTabletEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::tabletEvent(event);
-
+	self->QMdiArea::tabletEvent(event);
 }
 
-void QMdiArea_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QMdiArea_virtualbase_actionEvent(VirtualQMdiArea* self, QActionEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::actionEvent(event);
-
+	self->QMdiArea::actionEvent(event);
 }
 
-void QMdiArea_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QMdiArea_virtualbase_hideEvent(VirtualQMdiArea* self, QHideEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::hideEvent(event);
-
+	self->QMdiArea::hideEvent(event);
 }
 
-bool QMdiArea_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QMdiArea_virtualbase_nativeEvent(VirtualQMdiArea* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QMdiArea::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QMdiArea_virtualbase_metric(const void* self, int param1) {
+int QMdiArea_virtualbase_metric(const VirtualQMdiArea* self, int param1) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::metric(static_cast<VirtualQMdiArea::PaintDeviceMetric>(param1));
-
+	return self->QMdiArea::metric(static_cast<VirtualQMdiArea::PaintDeviceMetric>(param1));
 }
 
-void QMdiArea_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QMdiArea_virtualbase_initPainter(const VirtualQMdiArea* self, QPainter* painter) {
 
-	( (const VirtualQMdiArea*)(self) )->QMdiArea::initPainter(painter);
-
+	self->QMdiArea::initPainter(painter);
 }
 
-QPaintDevice* QMdiArea_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QMdiArea_virtualbase_redirected(const VirtualQMdiArea* self, QPoint* offset) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::redirected(offset);
-
+	return self->QMdiArea::redirected(offset);
 }
 
-QPainter* QMdiArea_virtualbase_sharedPainter(const void* self) {
+QPainter* QMdiArea_virtualbase_sharedPainter(const VirtualQMdiArea* self) {
 
-	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::sharedPainter();
-
+	return self->QMdiArea::sharedPainter();
 }
 
-void QMdiArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QMdiArea_virtualbase_inputMethodEvent(VirtualQMdiArea* self, QInputMethodEvent* param1) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::inputMethodEvent(param1);
-
+	self->QMdiArea::inputMethodEvent(param1);
 }
 
-QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QMdiArea_virtualbase_inputMethodQuery(const VirtualQMdiArea* self, int param1) {
 
-	return new QVariant(( (const VirtualQMdiArea*)(self) )->QMdiArea::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QMdiArea::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QMdiArea_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QMdiArea_virtualbase_focusNextPrevChild(VirtualQMdiArea* self, bool next) {
 
-	return ( (VirtualQMdiArea*)(self) )->QMdiArea::focusNextPrevChild(next);
-
+	return self->QMdiArea::focusNextPrevChild(next);
 }
 
-void QMdiArea_virtualbase_customEvent(void* self, QEvent* event) {
+void QMdiArea_virtualbase_customEvent(VirtualQMdiArea* self, QEvent* event) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::customEvent(event);
-
+	self->QMdiArea::customEvent(event);
 }
 
-void QMdiArea_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMdiArea_virtualbase_connectNotify(VirtualQMdiArea* self, QMetaMethod* signal) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::connectNotify(*signal);
-
+	self->QMdiArea::connectNotify(*signal);
 }
 
-void QMdiArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMdiArea_virtualbase_disconnectNotify(VirtualQMdiArea* self, QMetaMethod* signal) {
 
-	( (VirtualQMdiArea*)(self) )->QMdiArea::disconnectNotify(*signal);
-
+	self->QMdiArea::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMdiArea_staticMetaObject() { return &QMdiArea::staticMetaObject; }
-void QMdiArea_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
+const QMdiArea_VTable* QMdiArea_vtbl(const VirtualQMdiArea* self) { return self->vtbl; }
+void* QMdiArea_vdata(const VirtualQMdiArea* self) { return self->vdata; }
+void QMdiArea_setVdata(VirtualQMdiArea* self, void* vdata) { self->vdata = vdata; }
+
+void QMdiArea_protectedbase_setViewportMargins(VirtualQMdiArea* self, int left, int top, int right, int bottom) {
+	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QMdiArea_protectedbase_viewportMargins(const void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return new QMargins(self_cast->viewportMargins());
-
+QMargins* QMdiArea_protectedbase_viewportMargins(const VirtualQMdiArea* self) {
+	return new QMargins(self->viewportMargins());
 }
 
-void QMdiArea_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	self_cast->drawFrame(param1);
-
+void QMdiArea_protectedbase_drawFrame(VirtualQMdiArea* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QMdiArea_protectedbase_updateMicroFocus(void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QMdiArea_protectedbase_updateMicroFocus(VirtualQMdiArea* self) {
+	self->updateMicroFocus();
 }
 
-void QMdiArea_protectedbase_create(void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	self_cast->create();
-
+void QMdiArea_protectedbase_create(VirtualQMdiArea* self) {
+	self->create();
 }
 
-void QMdiArea_protectedbase_destroy(void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	self_cast->destroy();
-
+void QMdiArea_protectedbase_destroy(VirtualQMdiArea* self) {
+	self->destroy();
 }
 
-bool QMdiArea_protectedbase_focusNextChild(void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QMdiArea_protectedbase_focusNextChild(VirtualQMdiArea* self) {
+	return self->focusNextChild();
 }
 
-bool QMdiArea_protectedbase_focusPreviousChild(void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QMdiArea_protectedbase_focusPreviousChild(VirtualQMdiArea* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QMdiArea_protectedbase_sender(const void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QMdiArea_protectedbase_sender(const VirtualQMdiArea* self) {
+	return self->sender();
 }
 
-int QMdiArea_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMdiArea_protectedbase_senderSignalIndex(const VirtualQMdiArea* self) {
+	return self->senderSignalIndex();
 }
 
-int QMdiArea_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMdiArea_protectedbase_receivers(const VirtualQMdiArea* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMdiArea_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMdiArea* self_cast = static_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMdiArea_protectedbase_isSignalConnected(const VirtualQMdiArea* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMdiArea_delete(QMdiArea* self) {

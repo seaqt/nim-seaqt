@@ -4,15 +4,6 @@
 #include <QPoint>
 #include <qpaintdevice.h>
 #include "gen_qpaintdevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 int QPaintDevice_devType(const QPaintDevice* self) {
 	return self->devType();
 }

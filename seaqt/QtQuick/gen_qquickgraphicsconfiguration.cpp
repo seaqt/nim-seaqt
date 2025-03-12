@@ -1,15 +1,6 @@
 #include <QQuickGraphicsConfiguration>
 #include <qquickgraphicsconfiguration.h>
 #include "gen_qquickgraphicsconfiguration.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQuickGraphicsConfiguration* QQuickGraphicsConfiguration_new() {
 	return new QQuickGraphicsConfiguration();
 }

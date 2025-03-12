@@ -30,21 +30,30 @@ typedef struct QSGNode QSGNode;
 typedef struct QSGSimpleRectNode QSGSimpleRectNode;
 #endif
 
-struct QSGSimpleRectNode_VTable {
-	void (*destructor)(struct QSGSimpleRectNode_VTable* vtbl, QSGSimpleRectNode* self);
-	bool (*isSubtreeBlocked)(struct QSGSimpleRectNode_VTable* vtbl, const QSGSimpleRectNode* self);
-	void (*preprocess)(struct QSGSimpleRectNode_VTable* vtbl, QSGSimpleRectNode* self);
-};
-QSGSimpleRectNode* QSGSimpleRectNode_new(struct QSGSimpleRectNode_VTable* vtbl, QRectF* rect, QColor* color);
-QSGSimpleRectNode* QSGSimpleRectNode_new2(struct QSGSimpleRectNode_VTable* vtbl);
+typedef struct VirtualQSGSimpleRectNode VirtualQSGSimpleRectNode;
+typedef struct QSGSimpleRectNode_VTable{
+	void (*destructor)(VirtualQSGSimpleRectNode* self);
+	bool (*isSubtreeBlocked)(const VirtualQSGSimpleRectNode* self);
+	void (*preprocess)(VirtualQSGSimpleRectNode* self);
+}QSGSimpleRectNode_VTable;
+
+const QSGSimpleRectNode_VTable* QSGSimpleRectNode_vtbl(const VirtualQSGSimpleRectNode* self);
+void* QSGSimpleRectNode_vdata(const VirtualQSGSimpleRectNode* self);
+void QSGSimpleRectNode_setVdata(VirtualQSGSimpleRectNode* self, void* vdata);
+
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new(const QSGSimpleRectNode_VTable* vtbl, void* vdata, QRectF* rect, QColor* color);
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new2(const QSGSimpleRectNode_VTable* vtbl, void* vdata);
+
 void QSGSimpleRectNode_virtbase(QSGSimpleRectNode* src, QSGGeometryNode** outptr_QSGGeometryNode);
 void QSGSimpleRectNode_setRect(QSGSimpleRectNode* self, QRectF* rect);
 void QSGSimpleRectNode_setRect2(QSGSimpleRectNode* self, double x, double y, double w, double h);
 QRectF* QSGSimpleRectNode_rect(const QSGSimpleRectNode* self);
 void QSGSimpleRectNode_setColor(QSGSimpleRectNode* self, QColor* color);
 QColor* QSGSimpleRectNode_color(const QSGSimpleRectNode* self);
-bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const void* self);
-void QSGSimpleRectNode_virtualbase_preprocess(void* self);
+
+bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const VirtualQSGSimpleRectNode* self);
+void QSGSimpleRectNode_virtualbase_preprocess(VirtualQSGSimpleRectNode* self);
+
 void QSGSimpleRectNode_delete(QSGSimpleRectNode* self);
 
 #ifdef __cplusplus

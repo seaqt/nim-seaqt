@@ -63,7 +63,7 @@ proc fcQMimeDatabase_mimeTypeForUrl(self: pointer, url: pointer): pointer {.impo
 proc fcQMimeDatabase_mimeTypeForFileNameAndData(self: pointer, fileName: struct_miqt_string, device: pointer): pointer {.importc: "QMimeDatabase_mimeTypeForFileNameAndData".}
 proc fcQMimeDatabase_mimeTypeForFileNameAndData2(self: pointer, fileName: struct_miqt_string, data: struct_miqt_string): pointer {.importc: "QMimeDatabase_mimeTypeForFileNameAndData2".}
 proc fcQMimeDatabase_suffixForFileName(self: pointer, fileName: struct_miqt_string): struct_miqt_string {.importc: "QMimeDatabase_suffixForFileName".}
-proc fcQMimeDatabase_allMimeTypes(self: pointer, ): struct_miqt_array {.importc: "QMimeDatabase_allMimeTypes".}
+proc fcQMimeDatabase_allMimeTypes(self: pointer): struct_miqt_array {.importc: "QMimeDatabase_allMimeTypes".}
 proc fcQMimeDatabase_mimeTypeForFile2(self: pointer, fileName: struct_miqt_string, mode: cint): pointer {.importc: "QMimeDatabase_mimeTypeForFile2".}
 proc fcQMimeDatabase_mimeTypeForFile22(self: pointer, fileInfo: pointer, mode: cint): pointer {.importc: "QMimeDatabase_mimeTypeForFile22".}
 proc fcQMimeDatabase_new(): ptr cQMimeDatabase {.importc: "QMimeDatabase_new".}
@@ -107,7 +107,7 @@ proc suffixForFileName*(self: gen_qmimedatabase_types.QMimeDatabase, fileName: s
   c_free(v_ms.data)
   vx_ret
 
-proc allMimeTypes*(self: gen_qmimedatabase_types.QMimeDatabase, ): seq[gen_qmimetype_types.QMimeType] =
+proc allMimeTypes*(self: gen_qmimedatabase_types.QMimeDatabase): seq[gen_qmimetype_types.QMimeType] =
   var v_ma = fcQMimeDatabase_allMimeTypes(self.h)
   var vx_ret = newSeq[gen_qmimetype_types.QMimeType](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)

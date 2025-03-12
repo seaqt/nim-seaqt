@@ -40,39 +40,32 @@
 #include <QWidget>
 #include <qabstractbutton.h>
 #include "gen_qabstractbutton.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractButton final : public QAbstractButton {
-	struct QAbstractButton_VTable* vtbl;
+	const QAbstractButton_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractButton_VTable* QAbstractButton_vtbl(const VirtualQAbstractButton* self);
+	friend void* QAbstractButton_vdata(const VirtualQAbstractButton* self);
+	friend void QAbstractButton_setVdata(VirtualQAbstractButton* self, void* vdata);
 
-	VirtualQAbstractButton(struct QAbstractButton_VTable* vtbl, QWidget* parent): QAbstractButton(parent), vtbl(vtbl) {};
-	VirtualQAbstractButton(struct QAbstractButton_VTable* vtbl): QAbstractButton(), vtbl(vtbl) {};
+	VirtualQAbstractButton(const QAbstractButton_VTable* vtbl, void* vdata, QWidget* parent): QAbstractButton(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractButton(const QAbstractButton_VTable* vtbl, void* vdata): QAbstractButton(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractButton() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractButton() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractButton::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractButton_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractButton_virtualbase_metaObject(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractButton::qt_metacast(param1);
@@ -80,14 +73,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractButton_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractButton_virtualbase_metacast(VirtualQAbstractButton* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractButton::qt_metacall(param1, param2, param3);
@@ -98,14 +90,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractButton_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractButton_virtualbase_metacall(VirtualQAbstractButton* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -113,11 +104,10 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hitButton(const QPoint& pos) const override {
 		if (vtbl->hitButton == 0) {
 			return QAbstractButton::hitButton(pos);
@@ -127,14 +117,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
 
-		bool callback_return_value = vtbl->hitButton(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hitButton(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_hitButton(const void* self, QPoint* pos);
+	friend bool QAbstractButton_virtualbase_hitButton(const VirtualQAbstractButton* self, QPoint* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void checkStateSet() override {
 		if (vtbl->checkStateSet == 0) {
 			QAbstractButton::checkStateSet();
@@ -142,13 +131,12 @@ public:
 		}
 
 
-		vtbl->checkStateSet(vtbl, this);
+		vtbl->checkStateSet(this);
 
 	}
 
-	friend void QAbstractButton_virtualbase_checkStateSet(void* self);
+	friend void QAbstractButton_virtualbase_checkStateSet(VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void nextCheckState() override {
 		if (vtbl->nextCheckState == 0) {
 			QAbstractButton::nextCheckState();
@@ -156,13 +144,12 @@ public:
 		}
 
 
-		vtbl->nextCheckState(vtbl, this);
+		vtbl->nextCheckState(this);
 
 	}
 
-	friend void QAbstractButton_virtualbase_nextCheckState(void* self);
+	friend void QAbstractButton_virtualbase_nextCheckState(VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QAbstractButton::event(e);
@@ -170,14 +157,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_event(void* self, QEvent* e);
+	friend bool QAbstractButton_virtualbase_event(VirtualQAbstractButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QAbstractButton::keyPressEvent(e);
@@ -186,13 +172,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QAbstractButton_virtualbase_keyPressEvent(VirtualQAbstractButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QAbstractButton::keyReleaseEvent(e);
@@ -201,13 +186,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QAbstractButton_virtualbase_keyReleaseEvent(VirtualQAbstractButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QAbstractButton::mousePressEvent(e);
@@ -216,13 +200,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QAbstractButton_virtualbase_mousePressEvent(VirtualQAbstractButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QAbstractButton::mouseReleaseEvent(e);
@@ -231,13 +214,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QAbstractButton_virtualbase_mouseReleaseEvent(VirtualQAbstractButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QAbstractButton::mouseMoveEvent(e);
@@ -246,13 +228,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
+	friend void QAbstractButton_virtualbase_mouseMoveEvent(VirtualQAbstractButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QAbstractButton::focusInEvent(e);
@@ -261,13 +242,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QAbstractButton_virtualbase_focusInEvent(VirtualQAbstractButton* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QAbstractButton::focusOutEvent(e);
@@ -276,13 +256,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QAbstractButton_virtualbase_focusOutEvent(VirtualQAbstractButton* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QAbstractButton::changeEvent(e);
@@ -291,13 +270,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QAbstractButton_virtualbase_changeEvent(VirtualQAbstractButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractButton::timerEvent(e);
@@ -306,27 +284,25 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QAbstractButton_virtualbase_timerEvent(VirtualQAbstractButton* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QAbstractButton::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractButton_virtualbase_devType(const void* self);
+	friend int QAbstractButton_virtualbase_devType(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QAbstractButton::setVisible(visible);
@@ -335,45 +311,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_setVisible(void* self, bool visible);
+	friend void QAbstractButton_virtualbase_setVisible(VirtualQAbstractButton* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QAbstractButton::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractButton_virtualbase_sizeHint(const void* self);
+	friend QSize* QAbstractButton_virtualbase_sizeHint(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QAbstractButton::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractButton_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QAbstractButton_virtualbase_minimumSizeHint(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QAbstractButton::heightForWidth(param1);
@@ -381,42 +354,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractButton_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QAbstractButton_virtualbase_heightForWidth(const VirtualQAbstractButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QAbstractButton::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QAbstractButton_virtualbase_hasHeightForWidth(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QAbstractButton::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QAbstractButton_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QAbstractButton_virtualbase_paintEngine(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QAbstractButton::mouseDoubleClickEvent(event);
@@ -425,13 +395,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QAbstractButton_virtualbase_mouseDoubleClickEvent(VirtualQAbstractButton* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QAbstractButton::wheelEvent(event);
@@ -440,13 +409,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QAbstractButton_virtualbase_wheelEvent(VirtualQAbstractButton* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QAbstractButton::enterEvent(event);
@@ -455,13 +423,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QAbstractButton_virtualbase_enterEvent(VirtualQAbstractButton* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QAbstractButton::leaveEvent(event);
@@ -470,13 +437,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QAbstractButton_virtualbase_leaveEvent(VirtualQAbstractButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QAbstractButton::moveEvent(event);
@@ -485,13 +451,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QAbstractButton_virtualbase_moveEvent(VirtualQAbstractButton* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QAbstractButton::resizeEvent(event);
@@ -500,13 +465,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QAbstractButton_virtualbase_resizeEvent(VirtualQAbstractButton* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QAbstractButton::closeEvent(event);
@@ -515,13 +479,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QAbstractButton_virtualbase_closeEvent(VirtualQAbstractButton* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QAbstractButton::contextMenuEvent(event);
@@ -530,13 +493,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QAbstractButton_virtualbase_contextMenuEvent(VirtualQAbstractButton* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QAbstractButton::tabletEvent(event);
@@ -545,13 +507,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QAbstractButton_virtualbase_tabletEvent(VirtualQAbstractButton* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QAbstractButton::actionEvent(event);
@@ -560,13 +521,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QAbstractButton_virtualbase_actionEvent(VirtualQAbstractButton* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QAbstractButton::dragEnterEvent(event);
@@ -575,13 +535,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QAbstractButton_virtualbase_dragEnterEvent(VirtualQAbstractButton* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QAbstractButton::dragMoveEvent(event);
@@ -590,13 +549,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QAbstractButton_virtualbase_dragMoveEvent(VirtualQAbstractButton* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QAbstractButton::dragLeaveEvent(event);
@@ -605,13 +563,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QAbstractButton_virtualbase_dragLeaveEvent(VirtualQAbstractButton* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QAbstractButton::dropEvent(event);
@@ -620,13 +577,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QAbstractButton_virtualbase_dropEvent(VirtualQAbstractButton* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QAbstractButton::showEvent(event);
@@ -635,13 +591,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QAbstractButton_virtualbase_showEvent(VirtualQAbstractButton* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QAbstractButton::hideEvent(event);
@@ -650,13 +605,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QAbstractButton_virtualbase_hideEvent(VirtualQAbstractButton* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QAbstractButton::nativeEvent(eventType, message, result);
@@ -672,14 +626,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QAbstractButton_virtualbase_nativeEvent(VirtualQAbstractButton* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QAbstractButton::metric(param1);
@@ -688,14 +641,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractButton_virtualbase_metric(const void* self, int param1);
+	friend int QAbstractButton_virtualbase_metric(const VirtualQAbstractButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QAbstractButton::initPainter(painter);
@@ -704,13 +656,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QAbstractButton_virtualbase_initPainter(const VirtualQAbstractButton* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QAbstractButton::redirected(offset);
@@ -718,28 +669,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QAbstractButton_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QAbstractButton_virtualbase_redirected(const VirtualQAbstractButton* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QAbstractButton::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QAbstractButton_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QAbstractButton_virtualbase_sharedPainter(const VirtualQAbstractButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QAbstractButton::inputMethodEvent(param1);
@@ -748,13 +697,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QAbstractButton_virtualbase_inputMethodEvent(VirtualQAbstractButton* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QAbstractButton::inputMethodQuery(param1);
@@ -763,16 +711,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractButton_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QAbstractButton_virtualbase_inputMethodQuery(const VirtualQAbstractButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QAbstractButton::focusNextPrevChild(next);
@@ -780,14 +727,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QAbstractButton_virtualbase_focusNextPrevChild(VirtualQAbstractButton* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractButton::eventFilter(watched, event);
@@ -796,14 +742,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractButton_virtualbase_eventFilter(VirtualQAbstractButton* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractButton::childEvent(event);
@@ -812,13 +757,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractButton_virtualbase_childEvent(VirtualQAbstractButton* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractButton::customEvent(event);
@@ -827,13 +771,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractButton_virtualbase_customEvent(VirtualQAbstractButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractButton::connectNotify(signal);
@@ -844,13 +787,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractButton_virtualbase_connectNotify(VirtualQAbstractButton* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractButton::disconnectNotify(signal);
@@ -861,30 +803,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractButton_virtualbase_disconnectNotify(VirtualQAbstractButton* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractButton_protectedbase_updateMicroFocus(void* self);
-	friend void QAbstractButton_protectedbase_create(void* self);
-	friend void QAbstractButton_protectedbase_destroy(void* self);
-	friend bool QAbstractButton_protectedbase_focusNextChild(void* self);
-	friend bool QAbstractButton_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QAbstractButton_protectedbase_sender(const void* self);
-	friend int QAbstractButton_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractButton_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QAbstractButton_protectedbase_updateMicroFocus(VirtualQAbstractButton* self);
+	friend void QAbstractButton_protectedbase_create(VirtualQAbstractButton* self);
+	friend void QAbstractButton_protectedbase_destroy(VirtualQAbstractButton* self);
+	friend bool QAbstractButton_protectedbase_focusNextChild(VirtualQAbstractButton* self);
+	friend bool QAbstractButton_protectedbase_focusPreviousChild(VirtualQAbstractButton* self);
+	friend QObject* QAbstractButton_protectedbase_sender(const VirtualQAbstractButton* self);
+	friend int QAbstractButton_protectedbase_senderSignalIndex(const VirtualQAbstractButton* self);
+	friend int QAbstractButton_protectedbase_receivers(const VirtualQAbstractButton* self, const char* signal);
+	friend bool QAbstractButton_protectedbase_isSignalConnected(const VirtualQAbstractButton* self, QMetaMethod* signal);
 };
 
-QAbstractButton* QAbstractButton_new(struct QAbstractButton_VTable* vtbl, QWidget* parent) {
-	return new VirtualQAbstractButton(vtbl, parent);
+VirtualQAbstractButton* QAbstractButton_new(const QAbstractButton_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQAbstractButton(vtbl, vdata, parent);
 }
 
-QAbstractButton* QAbstractButton_new2(struct QAbstractButton_VTable* vtbl) {
-	return new VirtualQAbstractButton(vtbl);
+VirtualQAbstractButton* QAbstractButton_new2(const QAbstractButton_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractButton(vtbl, vdata);
 }
 
 void QAbstractButton_virtbase(QAbstractButton* src, QWidget** outptr_QWidget) {
@@ -1030,7 +972,7 @@ void QAbstractButton_pressed(QAbstractButton* self) {
 	self->pressed();
 }
 
-void QAbstractButton_connect_pressed(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractButton_connect_pressed(VirtualQAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1045,7 +987,7 @@ void QAbstractButton_released(QAbstractButton* self) {
 	self->released();
 }
 
-void QAbstractButton_connect_released(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractButton_connect_released(VirtualQAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1060,7 +1002,7 @@ void QAbstractButton_clicked(QAbstractButton* self) {
 	self->clicked();
 }
 
-void QAbstractButton_connect_clicked(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractButton_connect_clicked(VirtualQAbstractButton* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1075,7 +1017,7 @@ void QAbstractButton_toggled(QAbstractButton* self, bool checked) {
 	self->toggled(checked);
 }
 
-void QAbstractButton_connect_toggled(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAbstractButton_connect_toggled(VirtualQAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1113,7 +1055,7 @@ void QAbstractButton_clicked1(QAbstractButton* self, bool checked) {
 	self->clicked(checked);
 }
 
-void QAbstractButton_connect_clicked1(QAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAbstractButton_connect_clicked1(VirtualQAbstractButton* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1125,381 +1067,307 @@ void QAbstractButton_connect_clicked1(QAbstractButton* self, intptr_t slot, void
 	VirtualQAbstractButton::connect(self, static_cast<void (QAbstractButton::*)(bool)>(&QAbstractButton::clicked), self, local_caller{slot, callback, release});
 }
 
-QMetaObject* QAbstractButton_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractButton_virtualbase_metaObject(const VirtualQAbstractButton* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::metaObject();
-
+	return (QMetaObject*) self->QAbstractButton::metaObject();
 }
 
-void* QAbstractButton_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractButton_virtualbase_metacast(VirtualQAbstractButton* self, const char* param1) {
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::qt_metacast(param1);
-
+	return self->QAbstractButton::qt_metacast(param1);
 }
 
-int QAbstractButton_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractButton_virtualbase_metacall(VirtualQAbstractButton* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAbstractButton_virtualbase_hitButton(const void* self, QPoint* pos) {
+bool QAbstractButton_virtualbase_hitButton(const VirtualQAbstractButton* self, QPoint* pos) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::hitButton(*pos);
-
+	return self->QAbstractButton::hitButton(*pos);
 }
 
-void QAbstractButton_virtualbase_checkStateSet(void* self) {
+void QAbstractButton_virtualbase_checkStateSet(VirtualQAbstractButton* self) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::checkStateSet();
-
+	self->QAbstractButton::checkStateSet();
 }
 
-void QAbstractButton_virtualbase_nextCheckState(void* self) {
+void QAbstractButton_virtualbase_nextCheckState(VirtualQAbstractButton* self) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::nextCheckState();
-
+	self->QAbstractButton::nextCheckState();
 }
 
-bool QAbstractButton_virtualbase_event(void* self, QEvent* e) {
+bool QAbstractButton_virtualbase_event(VirtualQAbstractButton* self, QEvent* e) {
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::event(e);
-
+	return self->QAbstractButton::event(e);
 }
 
-void QAbstractButton_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QAbstractButton_virtualbase_keyPressEvent(VirtualQAbstractButton* self, QKeyEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::keyPressEvent(e);
-
+	self->QAbstractButton::keyPressEvent(e);
 }
 
-void QAbstractButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QAbstractButton_virtualbase_keyReleaseEvent(VirtualQAbstractButton* self, QKeyEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::keyReleaseEvent(e);
-
+	self->QAbstractButton::keyReleaseEvent(e);
 }
 
-void QAbstractButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QAbstractButton_virtualbase_mousePressEvent(VirtualQAbstractButton* self, QMouseEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::mousePressEvent(e);
-
+	self->QAbstractButton::mousePressEvent(e);
 }
 
-void QAbstractButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QAbstractButton_virtualbase_mouseReleaseEvent(VirtualQAbstractButton* self, QMouseEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::mouseReleaseEvent(e);
-
+	self->QAbstractButton::mouseReleaseEvent(e);
 }
 
-void QAbstractButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
+void QAbstractButton_virtualbase_mouseMoveEvent(VirtualQAbstractButton* self, QMouseEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::mouseMoveEvent(e);
-
+	self->QAbstractButton::mouseMoveEvent(e);
 }
 
-void QAbstractButton_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QAbstractButton_virtualbase_focusInEvent(VirtualQAbstractButton* self, QFocusEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::focusInEvent(e);
-
+	self->QAbstractButton::focusInEvent(e);
 }
 
-void QAbstractButton_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QAbstractButton_virtualbase_focusOutEvent(VirtualQAbstractButton* self, QFocusEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::focusOutEvent(e);
-
+	self->QAbstractButton::focusOutEvent(e);
 }
 
-void QAbstractButton_virtualbase_changeEvent(void* self, QEvent* e) {
+void QAbstractButton_virtualbase_changeEvent(VirtualQAbstractButton* self, QEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::changeEvent(e);
-
+	self->QAbstractButton::changeEvent(e);
 }
 
-void QAbstractButton_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QAbstractButton_virtualbase_timerEvent(VirtualQAbstractButton* self, QTimerEvent* e) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::timerEvent(e);
-
+	self->QAbstractButton::timerEvent(e);
 }
 
-int QAbstractButton_virtualbase_devType(const void* self) {
+int QAbstractButton_virtualbase_devType(const VirtualQAbstractButton* self) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::devType();
-
+	return self->QAbstractButton::devType();
 }
 
-void QAbstractButton_virtualbase_setVisible(void* self, bool visible) {
+void QAbstractButton_virtualbase_setVisible(VirtualQAbstractButton* self, bool visible) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::setVisible(visible);
-
+	self->QAbstractButton::setVisible(visible);
 }
 
-QSize* QAbstractButton_virtualbase_sizeHint(const void* self) {
+QSize* QAbstractButton_virtualbase_sizeHint(const VirtualQAbstractButton* self) {
 
-	return new QSize(( (const VirtualQAbstractButton*)(self) )->QAbstractButton::sizeHint());
-
+	return new QSize(self->QAbstractButton::sizeHint());
 }
 
-QSize* QAbstractButton_virtualbase_minimumSizeHint(const void* self) {
+QSize* QAbstractButton_virtualbase_minimumSizeHint(const VirtualQAbstractButton* self) {
 
-	return new QSize(( (const VirtualQAbstractButton*)(self) )->QAbstractButton::minimumSizeHint());
-
+	return new QSize(self->QAbstractButton::minimumSizeHint());
 }
 
-int QAbstractButton_virtualbase_heightForWidth(const void* self, int param1) {
+int QAbstractButton_virtualbase_heightForWidth(const VirtualQAbstractButton* self, int param1) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::heightForWidth(static_cast<int>(param1));
-
+	return self->QAbstractButton::heightForWidth(static_cast<int>(param1));
 }
 
-bool QAbstractButton_virtualbase_hasHeightForWidth(const void* self) {
+bool QAbstractButton_virtualbase_hasHeightForWidth(const VirtualQAbstractButton* self) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::hasHeightForWidth();
-
+	return self->QAbstractButton::hasHeightForWidth();
 }
 
-QPaintEngine* QAbstractButton_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QAbstractButton_virtualbase_paintEngine(const VirtualQAbstractButton* self) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::paintEngine();
-
+	return self->QAbstractButton::paintEngine();
 }
 
-void QAbstractButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QAbstractButton_virtualbase_mouseDoubleClickEvent(VirtualQAbstractButton* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::mouseDoubleClickEvent(event);
-
+	self->QAbstractButton::mouseDoubleClickEvent(event);
 }
 
-void QAbstractButton_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QAbstractButton_virtualbase_wheelEvent(VirtualQAbstractButton* self, QWheelEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::wheelEvent(event);
-
+	self->QAbstractButton::wheelEvent(event);
 }
 
-void QAbstractButton_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QAbstractButton_virtualbase_enterEvent(VirtualQAbstractButton* self, QEnterEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::enterEvent(event);
-
+	self->QAbstractButton::enterEvent(event);
 }
 
-void QAbstractButton_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QAbstractButton_virtualbase_leaveEvent(VirtualQAbstractButton* self, QEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::leaveEvent(event);
-
+	self->QAbstractButton::leaveEvent(event);
 }
 
-void QAbstractButton_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QAbstractButton_virtualbase_moveEvent(VirtualQAbstractButton* self, QMoveEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::moveEvent(event);
-
+	self->QAbstractButton::moveEvent(event);
 }
 
-void QAbstractButton_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QAbstractButton_virtualbase_resizeEvent(VirtualQAbstractButton* self, QResizeEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::resizeEvent(event);
-
+	self->QAbstractButton::resizeEvent(event);
 }
 
-void QAbstractButton_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QAbstractButton_virtualbase_closeEvent(VirtualQAbstractButton* self, QCloseEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::closeEvent(event);
-
+	self->QAbstractButton::closeEvent(event);
 }
 
-void QAbstractButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QAbstractButton_virtualbase_contextMenuEvent(VirtualQAbstractButton* self, QContextMenuEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::contextMenuEvent(event);
-
+	self->QAbstractButton::contextMenuEvent(event);
 }
 
-void QAbstractButton_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QAbstractButton_virtualbase_tabletEvent(VirtualQAbstractButton* self, QTabletEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::tabletEvent(event);
-
+	self->QAbstractButton::tabletEvent(event);
 }
 
-void QAbstractButton_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QAbstractButton_virtualbase_actionEvent(VirtualQAbstractButton* self, QActionEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::actionEvent(event);
-
+	self->QAbstractButton::actionEvent(event);
 }
 
-void QAbstractButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QAbstractButton_virtualbase_dragEnterEvent(VirtualQAbstractButton* self, QDragEnterEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::dragEnterEvent(event);
-
+	self->QAbstractButton::dragEnterEvent(event);
 }
 
-void QAbstractButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QAbstractButton_virtualbase_dragMoveEvent(VirtualQAbstractButton* self, QDragMoveEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::dragMoveEvent(event);
-
+	self->QAbstractButton::dragMoveEvent(event);
 }
 
-void QAbstractButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QAbstractButton_virtualbase_dragLeaveEvent(VirtualQAbstractButton* self, QDragLeaveEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::dragLeaveEvent(event);
-
+	self->QAbstractButton::dragLeaveEvent(event);
 }
 
-void QAbstractButton_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QAbstractButton_virtualbase_dropEvent(VirtualQAbstractButton* self, QDropEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::dropEvent(event);
-
+	self->QAbstractButton::dropEvent(event);
 }
 
-void QAbstractButton_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QAbstractButton_virtualbase_showEvent(VirtualQAbstractButton* self, QShowEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::showEvent(event);
-
+	self->QAbstractButton::showEvent(event);
 }
 
-void QAbstractButton_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QAbstractButton_virtualbase_hideEvent(VirtualQAbstractButton* self, QHideEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::hideEvent(event);
-
+	self->QAbstractButton::hideEvent(event);
 }
 
-bool QAbstractButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QAbstractButton_virtualbase_nativeEvent(VirtualQAbstractButton* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QAbstractButton::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QAbstractButton_virtualbase_metric(const void* self, int param1) {
+int QAbstractButton_virtualbase_metric(const VirtualQAbstractButton* self, int param1) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::metric(static_cast<VirtualQAbstractButton::PaintDeviceMetric>(param1));
-
+	return self->QAbstractButton::metric(static_cast<VirtualQAbstractButton::PaintDeviceMetric>(param1));
 }
 
-void QAbstractButton_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QAbstractButton_virtualbase_initPainter(const VirtualQAbstractButton* self, QPainter* painter) {
 
-	( (const VirtualQAbstractButton*)(self) )->QAbstractButton::initPainter(painter);
-
+	self->QAbstractButton::initPainter(painter);
 }
 
-QPaintDevice* QAbstractButton_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QAbstractButton_virtualbase_redirected(const VirtualQAbstractButton* self, QPoint* offset) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::redirected(offset);
-
+	return self->QAbstractButton::redirected(offset);
 }
 
-QPainter* QAbstractButton_virtualbase_sharedPainter(const void* self) {
+QPainter* QAbstractButton_virtualbase_sharedPainter(const VirtualQAbstractButton* self) {
 
-	return ( (const VirtualQAbstractButton*)(self) )->QAbstractButton::sharedPainter();
-
+	return self->QAbstractButton::sharedPainter();
 }
 
-void QAbstractButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QAbstractButton_virtualbase_inputMethodEvent(VirtualQAbstractButton* self, QInputMethodEvent* param1) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::inputMethodEvent(param1);
-
+	self->QAbstractButton::inputMethodEvent(param1);
 }
 
-QVariant* QAbstractButton_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QAbstractButton_virtualbase_inputMethodQuery(const VirtualQAbstractButton* self, int param1) {
 
-	return new QVariant(( (const VirtualQAbstractButton*)(self) )->QAbstractButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QAbstractButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QAbstractButton_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QAbstractButton_virtualbase_focusNextPrevChild(VirtualQAbstractButton* self, bool next) {
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::focusNextPrevChild(next);
-
+	return self->QAbstractButton::focusNextPrevChild(next);
 }
 
-bool QAbstractButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractButton_virtualbase_eventFilter(VirtualQAbstractButton* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractButton*)(self) )->QAbstractButton::eventFilter(watched, event);
-
+	return self->QAbstractButton::eventFilter(watched, event);
 }
 
-void QAbstractButton_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractButton_virtualbase_childEvent(VirtualQAbstractButton* self, QChildEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::childEvent(event);
-
+	self->QAbstractButton::childEvent(event);
 }
 
-void QAbstractButton_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractButton_virtualbase_customEvent(VirtualQAbstractButton* self, QEvent* event) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::customEvent(event);
-
+	self->QAbstractButton::customEvent(event);
 }
 
-void QAbstractButton_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractButton_virtualbase_connectNotify(VirtualQAbstractButton* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::connectNotify(*signal);
-
+	self->QAbstractButton::connectNotify(*signal);
 }
 
-void QAbstractButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractButton_virtualbase_disconnectNotify(VirtualQAbstractButton* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractButton*)(self) )->QAbstractButton::disconnectNotify(*signal);
-
+	self->QAbstractButton::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractButton_staticMetaObject() { return &QAbstractButton::staticMetaObject; }
-void QAbstractButton_protectedbase_updateMicroFocus(void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QAbstractButton_VTable* QAbstractButton_vtbl(const VirtualQAbstractButton* self) { return self->vtbl; }
+void* QAbstractButton_vdata(const VirtualQAbstractButton* self) { return self->vdata; }
+void QAbstractButton_setVdata(VirtualQAbstractButton* self, void* vdata) { self->vdata = vdata; }
+
+void QAbstractButton_protectedbase_updateMicroFocus(VirtualQAbstractButton* self) {
+	self->updateMicroFocus();
 }
 
-void QAbstractButton_protectedbase_create(void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	self_cast->create();
-
+void QAbstractButton_protectedbase_create(VirtualQAbstractButton* self) {
+	self->create();
 }
 
-void QAbstractButton_protectedbase_destroy(void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	self_cast->destroy();
-
+void QAbstractButton_protectedbase_destroy(VirtualQAbstractButton* self) {
+	self->destroy();
 }
 
-bool QAbstractButton_protectedbase_focusNextChild(void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QAbstractButton_protectedbase_focusNextChild(VirtualQAbstractButton* self) {
+	return self->focusNextChild();
 }
 
-bool QAbstractButton_protectedbase_focusPreviousChild(void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QAbstractButton_protectedbase_focusPreviousChild(VirtualQAbstractButton* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QAbstractButton_protectedbase_sender(const void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractButton_protectedbase_sender(const VirtualQAbstractButton* self) {
+	return self->sender();
 }
 
-int QAbstractButton_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractButton_protectedbase_senderSignalIndex(const VirtualQAbstractButton* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractButton_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractButton_protectedbase_receivers(const VirtualQAbstractButton* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractButton_protectedbase_isSignalConnected(const VirtualQAbstractButton* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractButton_delete(QAbstractButton* self) {

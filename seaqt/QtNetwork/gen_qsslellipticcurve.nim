@@ -39,10 +39,10 @@ type cQSslEllipticCurve*{.exportc: "QSslEllipticCurve", incompleteStruct.} = obj
 
 proc fcQSslEllipticCurve_fromShortName(name: struct_miqt_string): pointer {.importc: "QSslEllipticCurve_fromShortName".}
 proc fcQSslEllipticCurve_fromLongName(name: struct_miqt_string): pointer {.importc: "QSslEllipticCurve_fromLongName".}
-proc fcQSslEllipticCurve_shortName(self: pointer, ): struct_miqt_string {.importc: "QSslEllipticCurve_shortName".}
-proc fcQSslEllipticCurve_longName(self: pointer, ): struct_miqt_string {.importc: "QSslEllipticCurve_longName".}
-proc fcQSslEllipticCurve_isValid(self: pointer, ): bool {.importc: "QSslEllipticCurve_isValid".}
-proc fcQSslEllipticCurve_isTlsNamedCurve(self: pointer, ): bool {.importc: "QSslEllipticCurve_isTlsNamedCurve".}
+proc fcQSslEllipticCurve_shortName(self: pointer): struct_miqt_string {.importc: "QSslEllipticCurve_shortName".}
+proc fcQSslEllipticCurve_longName(self: pointer): struct_miqt_string {.importc: "QSslEllipticCurve_longName".}
+proc fcQSslEllipticCurve_isValid(self: pointer): bool {.importc: "QSslEllipticCurve_isValid".}
+proc fcQSslEllipticCurve_isTlsNamedCurve(self: pointer): bool {.importc: "QSslEllipticCurve_isTlsNamedCurve".}
 proc fcQSslEllipticCurve_new(): ptr cQSslEllipticCurve {.importc: "QSslEllipticCurve_new".}
 proc fcQSslEllipticCurve_new2(param1: pointer): ptr cQSslEllipticCurve {.importc: "QSslEllipticCurve_new2".}
 
@@ -52,22 +52,22 @@ proc fromShortName*(_: type gen_qsslellipticcurve_types.QSslEllipticCurve, name:
 proc fromLongName*(_: type gen_qsslellipticcurve_types.QSslEllipticCurve, name: string): gen_qsslellipticcurve_types.QSslEllipticCurve =
   gen_qsslellipticcurve_types.QSslEllipticCurve(h: fcQSslEllipticCurve_fromLongName(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
 
-proc shortName*(self: gen_qsslellipticcurve_types.QSslEllipticCurve, ): string =
+proc shortName*(self: gen_qsslellipticcurve_types.QSslEllipticCurve): string =
   let v_ms = fcQSslEllipticCurve_shortName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc longName*(self: gen_qsslellipticcurve_types.QSslEllipticCurve, ): string =
+proc longName*(self: gen_qsslellipticcurve_types.QSslEllipticCurve): string =
   let v_ms = fcQSslEllipticCurve_longName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isValid*(self: gen_qsslellipticcurve_types.QSslEllipticCurve, ): bool =
+proc isValid*(self: gen_qsslellipticcurve_types.QSslEllipticCurve): bool =
   fcQSslEllipticCurve_isValid(self.h)
 
-proc isTlsNamedCurve*(self: gen_qsslellipticcurve_types.QSslEllipticCurve, ): bool =
+proc isTlsNamedCurve*(self: gen_qsslellipticcurve_types.QSslEllipticCurve): bool =
   fcQSslEllipticCurve_isTlsNamedCurve(self.h)
 
 proc create*(T: type gen_qsslellipticcurve_types.QSslEllipticCurve): gen_qsslellipticcurve_types.QSslEllipticCurve =

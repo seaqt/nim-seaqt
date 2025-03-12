@@ -11,15 +11,6 @@
 #include <QVariant>
 #include <qqmlproperty.h>
 #include "gen_qqmlproperty.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlProperty* QQmlProperty_new() {
 	return new QQmlProperty();
 }
@@ -203,6 +194,7 @@ QMetaMethod* QQmlProperty_method(const QQmlProperty* self) {
 }
 
 const QMetaObject* QQmlProperty_staticMetaObject() { return &QQmlProperty::staticMetaObject; }
+
 void QQmlProperty_delete(QQmlProperty* self) {
 	delete self;
 }

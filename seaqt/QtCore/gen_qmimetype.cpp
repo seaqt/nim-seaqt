@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qmimetype.h>
 #include "gen_qmimetype.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMimeType* QMimeType_new() {
 	return new QMimeType();
 }
@@ -218,6 +209,7 @@ struct miqt_string QMimeType_filterString(const QMimeType* self) {
 }
 
 const QMetaObject* QMimeType_staticMetaObject() { return &QMimeType::staticMetaObject; }
+
 void QMimeType_delete(QMimeType* self) {
 	delete self;
 }

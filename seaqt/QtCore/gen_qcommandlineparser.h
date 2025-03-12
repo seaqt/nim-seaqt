@@ -25,6 +25,7 @@ typedef struct QCoreApplication QCoreApplication;
 #endif
 
 QCommandLineParser* QCommandLineParser_new();
+
 struct miqt_string QCommandLineParser_tr(const char* sourceText);
 void QCommandLineParser_setSingleDashWordOptionMode(QCommandLineParser* self, int parsingMode);
 void QCommandLineParser_setOptionsAfterPositionalArgumentsMode(QCommandLineParser* self, int mode);
@@ -56,6 +57,7 @@ struct miqt_string QCommandLineParser_tr2(const char* sourceText, const char* di
 struct miqt_string QCommandLineParser_tr3(const char* sourceText, const char* disambiguation, int n);
 void QCommandLineParser_addPositionalArgument3(QCommandLineParser* self, struct miqt_string name, struct miqt_string description, struct miqt_string syntax);
 void QCommandLineParser_showHelp1(QCommandLineParser* self, int exitCode);
+
 void QCommandLineParser_delete(QCommandLineParser* self);
 
 #ifdef __cplusplus

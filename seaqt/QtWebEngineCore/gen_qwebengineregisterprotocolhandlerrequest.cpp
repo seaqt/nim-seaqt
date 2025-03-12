@@ -5,15 +5,6 @@
 #include <QWebEngineRegisterProtocolHandlerRequest>
 #include <qwebengineregisterprotocolhandlerrequest.h>
 #include "gen_qwebengineregisterprotocolhandlerrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineRegisterProtocolHandlerRequest* QWebEngineRegisterProtocolHandlerRequest_new() {
 	return new QWebEngineRegisterProtocolHandlerRequest();
 }
@@ -54,6 +45,7 @@ bool QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(const QWebEngineR
 }
 
 const QMetaObject* QWebEngineRegisterProtocolHandlerRequest_staticMetaObject() { return &QWebEngineRegisterProtocolHandlerRequest::staticMetaObject; }
+
 void QWebEngineRegisterProtocolHandlerRequest_delete(QWebEngineRegisterProtocolHandlerRequest* self) {
 	delete self;
 }

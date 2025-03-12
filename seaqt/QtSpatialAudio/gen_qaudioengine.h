@@ -34,23 +34,30 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QAudioEngine_VTable {
-	void (*destructor)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self);
-	QMetaObject* (*metaObject)(struct QAudioEngine_VTable* vtbl, const QAudioEngine* self);
-	void* (*metacast)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, const char* param1);
-	int (*metacall)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, int param1, int param2, void** param3);
-	bool (*event)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QEvent* event);
-	bool (*eventFilter)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QTimerEvent* event);
-	void (*childEvent)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QChildEvent* event);
-	void (*customEvent)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QEvent* event);
-	void (*connectNotify)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QAudioEngine_VTable* vtbl, QAudioEngine* self, QMetaMethod* signal);
-};
-QAudioEngine* QAudioEngine_new(struct QAudioEngine_VTable* vtbl);
-QAudioEngine* QAudioEngine_new2(struct QAudioEngine_VTable* vtbl, QObject* parent);
-QAudioEngine* QAudioEngine_new3(struct QAudioEngine_VTable* vtbl, int sampleRate);
-QAudioEngine* QAudioEngine_new4(struct QAudioEngine_VTable* vtbl, int sampleRate, QObject* parent);
+typedef struct VirtualQAudioEngine VirtualQAudioEngine;
+typedef struct QAudioEngine_VTable{
+	void (*destructor)(VirtualQAudioEngine* self);
+	QMetaObject* (*metaObject)(const VirtualQAudioEngine* self);
+	void* (*metacast)(VirtualQAudioEngine* self, const char* param1);
+	int (*metacall)(VirtualQAudioEngine* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQAudioEngine* self, QEvent* event);
+	bool (*eventFilter)(VirtualQAudioEngine* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQAudioEngine* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQAudioEngine* self, QChildEvent* event);
+	void (*customEvent)(VirtualQAudioEngine* self, QEvent* event);
+	void (*connectNotify)(VirtualQAudioEngine* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQAudioEngine* self, QMetaMethod* signal);
+}QAudioEngine_VTable;
+
+const QAudioEngine_VTable* QAudioEngine_vtbl(const VirtualQAudioEngine* self);
+void* QAudioEngine_vdata(const VirtualQAudioEngine* self);
+void QAudioEngine_setVdata(VirtualQAudioEngine* self, void* vdata);
+
+VirtualQAudioEngine* QAudioEngine_new(const QAudioEngine_VTable* vtbl, void* vdata);
+VirtualQAudioEngine* QAudioEngine_new2(const QAudioEngine_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQAudioEngine* QAudioEngine_new3(const QAudioEngine_VTable* vtbl, void* vdata, int sampleRate);
+VirtualQAudioEngine* QAudioEngine_new4(const QAudioEngine_VTable* vtbl, void* vdata, int sampleRate, QObject* parent);
+
 void QAudioEngine_virtbase(QAudioEngine* src, QObject** outptr_QObject);
 QMetaObject* QAudioEngine_metaObject(const QAudioEngine* self);
 void* QAudioEngine_metacast(QAudioEngine* self, const char* param1);
@@ -70,35 +77,38 @@ bool QAudioEngine_roomEffectsEnabled(const QAudioEngine* self);
 void QAudioEngine_setDistanceScale(QAudioEngine* self, float scale);
 float QAudioEngine_distanceScale(const QAudioEngine* self);
 void QAudioEngine_outputModeChanged(QAudioEngine* self);
-void QAudioEngine_connect_outputModeChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioEngine_connect_outputModeChanged(VirtualQAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioEngine_outputDeviceChanged(QAudioEngine* self);
-void QAudioEngine_connect_outputDeviceChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioEngine_connect_outputDeviceChanged(VirtualQAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioEngine_masterVolumeChanged(QAudioEngine* self);
-void QAudioEngine_connect_masterVolumeChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioEngine_connect_masterVolumeChanged(VirtualQAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioEngine_pausedChanged(QAudioEngine* self);
-void QAudioEngine_connect_pausedChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioEngine_connect_pausedChanged(VirtualQAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioEngine_distanceScaleChanged(QAudioEngine* self);
-void QAudioEngine_connect_distanceScaleChanged(QAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioEngine_connect_distanceScaleChanged(VirtualQAudioEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAudioEngine_start(QAudioEngine* self);
 void QAudioEngine_stop(QAudioEngine* self);
 void QAudioEngine_pause(QAudioEngine* self);
 void QAudioEngine_resume(QAudioEngine* self);
 struct miqt_string QAudioEngine_tr2(const char* s, const char* c);
 struct miqt_string QAudioEngine_tr3(const char* s, const char* c, int n);
-QMetaObject* QAudioEngine_virtualbase_metaObject(const void* self);
-void* QAudioEngine_virtualbase_metacast(void* self, const char* param1);
-int QAudioEngine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QAudioEngine_virtualbase_event(void* self, QEvent* event);
-bool QAudioEngine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QAudioEngine_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QAudioEngine_virtualbase_childEvent(void* self, QChildEvent* event);
-void QAudioEngine_virtualbase_customEvent(void* self, QEvent* event);
-void QAudioEngine_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QAudioEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QAudioEngine_protectedbase_sender(const void* self);
-int QAudioEngine_protectedbase_senderSignalIndex(const void* self);
-int QAudioEngine_protectedbase_receivers(const void* self, const char* signal);
-bool QAudioEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QAudioEngine_virtualbase_metaObject(const VirtualQAudioEngine* self);
+void* QAudioEngine_virtualbase_metacast(VirtualQAudioEngine* self, const char* param1);
+int QAudioEngine_virtualbase_metacall(VirtualQAudioEngine* self, int param1, int param2, void** param3);
+bool QAudioEngine_virtualbase_event(VirtualQAudioEngine* self, QEvent* event);
+bool QAudioEngine_virtualbase_eventFilter(VirtualQAudioEngine* self, QObject* watched, QEvent* event);
+void QAudioEngine_virtualbase_timerEvent(VirtualQAudioEngine* self, QTimerEvent* event);
+void QAudioEngine_virtualbase_childEvent(VirtualQAudioEngine* self, QChildEvent* event);
+void QAudioEngine_virtualbase_customEvent(VirtualQAudioEngine* self, QEvent* event);
+void QAudioEngine_virtualbase_connectNotify(VirtualQAudioEngine* self, QMetaMethod* signal);
+void QAudioEngine_virtualbase_disconnectNotify(VirtualQAudioEngine* self, QMetaMethod* signal);
+
+QObject* QAudioEngine_protectedbase_sender(const VirtualQAudioEngine* self);
+int QAudioEngine_protectedbase_senderSignalIndex(const VirtualQAudioEngine* self);
+int QAudioEngine_protectedbase_receivers(const VirtualQAudioEngine* self, const char* signal);
+bool QAudioEngine_protectedbase_isSignalConnected(const VirtualQAudioEngine* self, QMetaMethod* signal);
+
 const QMetaObject* QAudioEngine_staticMetaObject();
 void QAudioEngine_delete(QAudioEngine* self);
 

@@ -77,10 +77,10 @@ type cQMediaMetaData*{.exportc: "QMediaMetaData", incompleteStruct.} = object
 proc fcQMediaMetaData_value(self: pointer, k: cint): pointer {.importc: "QMediaMetaData_value".}
 proc fcQMediaMetaData_insert(self: pointer, k: cint, value: pointer): void {.importc: "QMediaMetaData_insert".}
 proc fcQMediaMetaData_remove(self: pointer, k: cint): void {.importc: "QMediaMetaData_remove".}
-proc fcQMediaMetaData_keys(self: pointer, ): struct_miqt_array {.importc: "QMediaMetaData_keys".}
+proc fcQMediaMetaData_keys(self: pointer): struct_miqt_array {.importc: "QMediaMetaData_keys".}
 proc fcQMediaMetaData_operatorSubscript(self: pointer, k: cint): pointer {.importc: "QMediaMetaData_operatorSubscript".}
-proc fcQMediaMetaData_clear(self: pointer, ): void {.importc: "QMediaMetaData_clear".}
-proc fcQMediaMetaData_isEmpty(self: pointer, ): bool {.importc: "QMediaMetaData_isEmpty".}
+proc fcQMediaMetaData_clear(self: pointer): void {.importc: "QMediaMetaData_clear".}
+proc fcQMediaMetaData_isEmpty(self: pointer): bool {.importc: "QMediaMetaData_isEmpty".}
 proc fcQMediaMetaData_stringValue(self: pointer, k: cint): struct_miqt_string {.importc: "QMediaMetaData_stringValue".}
 proc fcQMediaMetaData_metaDataKeyToString(k: cint): struct_miqt_string {.importc: "QMediaMetaData_metaDataKeyToString".}
 proc fcQMediaMetaData_new(param1: pointer): ptr cQMediaMetaData {.importc: "QMediaMetaData_new".}
@@ -96,7 +96,7 @@ proc insert*(self: gen_qmediametadata_types.QMediaMetaData, k: cint, value: gen_
 proc remove*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): void =
   fcQMediaMetaData_remove(self.h, cint(k))
 
-proc keys*(self: gen_qmediametadata_types.QMediaMetaData, ): seq[cint] =
+proc keys*(self: gen_qmediametadata_types.QMediaMetaData): seq[cint] =
   var v_ma = fcQMediaMetaData_keys(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -108,10 +108,10 @@ proc keys*(self: gen_qmediametadata_types.QMediaMetaData, ): seq[cint] =
 proc operatorSubscript*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQMediaMetaData_operatorSubscript(self.h, cint(k)), owned: false)
 
-proc clear*(self: gen_qmediametadata_types.QMediaMetaData, ): void =
+proc clear*(self: gen_qmediametadata_types.QMediaMetaData): void =
   fcQMediaMetaData_clear(self.h)
 
-proc isEmpty*(self: gen_qmediametadata_types.QMediaMetaData, ): bool =
+proc isEmpty*(self: gen_qmediametadata_types.QMediaMetaData): bool =
   fcQMediaMetaData_isEmpty(self.h)
 
 proc stringValue*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): string =

@@ -70,18 +70,18 @@ export
 
 type cQStackedWidget*{.exportc: "QStackedWidget", incompleteStruct.} = object
 
-proc fcQStackedWidget_metaObject(self: pointer, ): pointer {.importc: "QStackedWidget_metaObject".}
+proc fcQStackedWidget_metaObject(self: pointer): pointer {.importc: "QStackedWidget_metaObject".}
 proc fcQStackedWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QStackedWidget_metacast".}
 proc fcQStackedWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStackedWidget_metacall".}
 proc fcQStackedWidget_tr(s: cstring): struct_miqt_string {.importc: "QStackedWidget_tr".}
 proc fcQStackedWidget_addWidget(self: pointer, w: pointer): cint {.importc: "QStackedWidget_addWidget".}
 proc fcQStackedWidget_insertWidget(self: pointer, index: cint, w: pointer): cint {.importc: "QStackedWidget_insertWidget".}
 proc fcQStackedWidget_removeWidget(self: pointer, w: pointer): void {.importc: "QStackedWidget_removeWidget".}
-proc fcQStackedWidget_currentWidget(self: pointer, ): pointer {.importc: "QStackedWidget_currentWidget".}
-proc fcQStackedWidget_currentIndex(self: pointer, ): cint {.importc: "QStackedWidget_currentIndex".}
+proc fcQStackedWidget_currentWidget(self: pointer): pointer {.importc: "QStackedWidget_currentWidget".}
+proc fcQStackedWidget_currentIndex(self: pointer): cint {.importc: "QStackedWidget_currentIndex".}
 proc fcQStackedWidget_indexOf(self: pointer, param1: pointer): cint {.importc: "QStackedWidget_indexOf".}
 proc fcQStackedWidget_widget(self: pointer, param1: cint): pointer {.importc: "QStackedWidget_widget".}
-proc fcQStackedWidget_count(self: pointer, ): cint {.importc: "QStackedWidget_count".}
+proc fcQStackedWidget_count(self: pointer): cint {.importc: "QStackedWidget_count".}
 proc fcQStackedWidget_setCurrentIndex(self: pointer, index: cint): void {.importc: "QStackedWidget_setCurrentIndex".}
 proc fcQStackedWidget_setCurrentWidget(self: pointer, w: pointer): void {.importc: "QStackedWidget_setCurrentWidget".}
 proc fcQStackedWidget_currentChanged(self: pointer, param1: cint): void {.importc: "QStackedWidget_currentChanged".}
@@ -90,73 +90,75 @@ proc fcQStackedWidget_widgetRemoved(self: pointer, index: cint): void {.importc:
 proc fcQStackedWidget_connect_widgetRemoved(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedWidget_connect_widgetRemoved".}
 proc fcQStackedWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStackedWidget_tr2".}
 proc fcQStackedWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStackedWidget_tr3".}
+proc fcQStackedWidget_vtbl(self: pointer): pointer {.importc: "QStackedWidget_vtbl".}
+proc fcQStackedWidget_vdata(self: pointer): pointer {.importc: "QStackedWidget_vdata".}
 type cQStackedWidgetVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQStackedWidgetVTable, self: ptr cQStackedWidget) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  initStyleOption*: proc(vtbl, self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQStackedWidget_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QStackedWidget_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  initStyleOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQStackedWidget_virtualbase_metaObject(self: pointer): pointer {.importc: "QStackedWidget_virtualbase_metaObject".}
 proc fcQStackedWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QStackedWidget_virtualbase_metacast".}
 proc fcQStackedWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStackedWidget_virtualbase_metacall".}
 proc fcQStackedWidget_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QStackedWidget_virtualbase_event".}
-proc fcQStackedWidget_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QStackedWidget_virtualbase_sizeHint".}
+proc fcQStackedWidget_virtualbase_sizeHint(self: pointer): pointer {.importc: "QStackedWidget_virtualbase_sizeHint".}
 proc fcQStackedWidget_virtualbase_paintEvent(self: pointer, param1: pointer): void {.importc: "QStackedWidget_virtualbase_paintEvent".}
 proc fcQStackedWidget_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QStackedWidget_virtualbase_changeEvent".}
 proc fcQStackedWidget_virtualbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QStackedWidget_virtualbase_initStyleOption".}
-proc fcQStackedWidget_virtualbase_devType(self: pointer, ): cint {.importc: "QStackedWidget_virtualbase_devType".}
+proc fcQStackedWidget_virtualbase_devType(self: pointer): cint {.importc: "QStackedWidget_virtualbase_devType".}
 proc fcQStackedWidget_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QStackedWidget_virtualbase_setVisible".}
-proc fcQStackedWidget_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QStackedWidget_virtualbase_minimumSizeHint".}
+proc fcQStackedWidget_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QStackedWidget_virtualbase_minimumSizeHint".}
 proc fcQStackedWidget_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QStackedWidget_virtualbase_heightForWidth".}
-proc fcQStackedWidget_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QStackedWidget_virtualbase_hasHeightForWidth".}
-proc fcQStackedWidget_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QStackedWidget_virtualbase_paintEngine".}
+proc fcQStackedWidget_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QStackedWidget_virtualbase_hasHeightForWidth".}
+proc fcQStackedWidget_virtualbase_paintEngine(self: pointer): pointer {.importc: "QStackedWidget_virtualbase_paintEngine".}
 proc fcQStackedWidget_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QStackedWidget_virtualbase_mousePressEvent".}
 proc fcQStackedWidget_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QStackedWidget_virtualbase_mouseReleaseEvent".}
 proc fcQStackedWidget_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QStackedWidget_virtualbase_mouseDoubleClickEvent".}
@@ -184,7 +186,7 @@ proc fcQStackedWidget_virtualbase_nativeEvent(self: pointer, eventType: struct_m
 proc fcQStackedWidget_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QStackedWidget_virtualbase_metric".}
 proc fcQStackedWidget_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QStackedWidget_virtualbase_initPainter".}
 proc fcQStackedWidget_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QStackedWidget_virtualbase_redirected".}
-proc fcQStackedWidget_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QStackedWidget_virtualbase_sharedPainter".}
+proc fcQStackedWidget_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QStackedWidget_virtualbase_sharedPainter".}
 proc fcQStackedWidget_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QStackedWidget_virtualbase_inputMethodEvent".}
 proc fcQStackedWidget_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QStackedWidget_virtualbase_inputMethodQuery".}
 proc fcQStackedWidget_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QStackedWidget_virtualbase_focusNextPrevChild".}
@@ -195,20 +197,20 @@ proc fcQStackedWidget_virtualbase_customEvent(self: pointer, event: pointer): vo
 proc fcQStackedWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStackedWidget_virtualbase_connectNotify".}
 proc fcQStackedWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStackedWidget_virtualbase_disconnectNotify".}
 proc fcQStackedWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QStackedWidget_protectedbase_drawFrame".}
-proc fcQStackedWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_updateMicroFocus".}
-proc fcQStackedWidget_protectedbase_create(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_create".}
-proc fcQStackedWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_destroy".}
-proc fcQStackedWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QStackedWidget_protectedbase_focusNextChild".}
-proc fcQStackedWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QStackedWidget_protectedbase_focusPreviousChild".}
-proc fcQStackedWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QStackedWidget_protectedbase_sender".}
-proc fcQStackedWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStackedWidget_protectedbase_senderSignalIndex".}
+proc fcQStackedWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QStackedWidget_protectedbase_updateMicroFocus".}
+proc fcQStackedWidget_protectedbase_create(self: pointer): void {.importc: "QStackedWidget_protectedbase_create".}
+proc fcQStackedWidget_protectedbase_destroy(self: pointer): void {.importc: "QStackedWidget_protectedbase_destroy".}
+proc fcQStackedWidget_protectedbase_focusNextChild(self: pointer): bool {.importc: "QStackedWidget_protectedbase_focusNextChild".}
+proc fcQStackedWidget_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QStackedWidget_protectedbase_focusPreviousChild".}
+proc fcQStackedWidget_protectedbase_sender(self: pointer): pointer {.importc: "QStackedWidget_protectedbase_sender".}
+proc fcQStackedWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QStackedWidget_protectedbase_senderSignalIndex".}
 proc fcQStackedWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStackedWidget_protectedbase_receivers".}
 proc fcQStackedWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStackedWidget_protectedbase_isSignalConnected".}
-proc fcQStackedWidget_new(vtbl: pointer, parent: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new".}
-proc fcQStackedWidget_new2(vtbl: pointer, ): ptr cQStackedWidget {.importc: "QStackedWidget_new2".}
+proc fcQStackedWidget_new(vtbl, vdata: pointer, parent: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new".}
+proc fcQStackedWidget_new2(vtbl, vdata: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new2".}
 proc fcQStackedWidget_staticMetaObject(): pointer {.importc: "QStackedWidget_staticMetaObject".}
 
-proc metaObject*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qstackedwidget_types.QStackedWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstackedwidget_types.QStackedWidget, param1: cstring): pointer =
@@ -232,10 +234,10 @@ proc insertWidget*(self: gen_qstackedwidget_types.QStackedWidget, index: cint, w
 proc removeWidget*(self: gen_qstackedwidget_types.QStackedWidget, w: gen_qwidget_types.QWidget): void =
   fcQStackedWidget_removeWidget(self.h, w.h)
 
-proc currentWidget*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qwidget_types.QWidget =
+proc currentWidget*(self: gen_qstackedwidget_types.QStackedWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQStackedWidget_currentWidget(self.h), owned: false)
 
-proc currentIndex*(self: gen_qstackedwidget_types.QStackedWidget, ): cint =
+proc currentIndex*(self: gen_qstackedwidget_types.QStackedWidget): cint =
   fcQStackedWidget_currentIndex(self.h)
 
 proc indexOf*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qwidget_types.QWidget): cint =
@@ -244,7 +246,7 @@ proc indexOf*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qwidget
 proc widget*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQStackedWidget_widget(self.h, param1), owned: false)
 
-proc count*(self: gen_qstackedwidget_types.QStackedWidget, ): cint =
+proc count*(self: gen_qstackedwidget_types.QStackedWidget): cint =
   fcQStackedWidget_count(self.h)
 
 proc setCurrentIndex*(self: gen_qstackedwidget_types.QStackedWidget, index: cint): void =
@@ -257,13 +259,13 @@ proc currentChanged*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint
   fcQStackedWidget_currentChanged(self.h, param1)
 
 type QStackedWidgetcurrentChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQStackedWidget_currentChanged(slot: int, param1: cint) {.cdecl.} =
+proc cQStackedWidget_slot_callback_currentChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedWidgetcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQStackedWidget_currentChanged_release(slot: int) {.cdecl.} =
+proc cQStackedWidget_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QStackedWidgetcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -271,19 +273,19 @@ proc oncurrentChanged*(self: gen_qstackedwidget_types.QStackedWidget, slot: QSta
   var tmp = new QStackedWidgetcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedWidget_currentChanged, miqt_exec_callback_cQStackedWidget_currentChanged_release)
+  fcQStackedWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), cQStackedWidget_slot_callback_currentChanged, cQStackedWidget_slot_callback_currentChanged_release)
 
 proc widgetRemoved*(self: gen_qstackedwidget_types.QStackedWidget, index: cint): void =
   fcQStackedWidget_widgetRemoved(self.h, index)
 
 type QStackedWidgetwidgetRemovedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQStackedWidget_widgetRemoved(slot: int, index: cint) {.cdecl.} =
+proc cQStackedWidget_slot_callback_widgetRemoved(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedWidgetwidgetRemovedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQStackedWidget_widgetRemoved_release(slot: int) {.cdecl.} =
+proc cQStackedWidget_slot_callback_widgetRemoved_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QStackedWidgetwidgetRemovedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -291,7 +293,7 @@ proc onwidgetRemoved*(self: gen_qstackedwidget_types.QStackedWidget, slot: QStac
   var tmp = new QStackedWidgetwidgetRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedWidget_connect_widgetRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedWidget_widgetRemoved, miqt_exec_callback_cQStackedWidget_widgetRemoved_release)
+  fcQStackedWidget_connect_widgetRemoved(self.h, cast[int](addr tmp[]), cQStackedWidget_slot_callback_widgetRemoved, cQStackedWidget_slot_callback_widgetRemoved_release)
 
 proc tr*(_: type gen_qstackedwidget_types.QStackedWidget, s: cstring, c: cstring): string =
   let v_ms = fcQStackedWidget_tr2(s, c)
@@ -409,11 +411,11 @@ type QStackedWidgetVTable* {.inheritable, pure.} = object
   customEvent*: QStackedWidgetcustomEventProc
   connectNotify*: QStackedWidgetconnectNotifyProc
   disconnectNotify*: QStackedWidgetdisconnectNotifyProc
-proc QStackedWidgetmetaObject*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc QStackedWidgetmetaObject*(self: gen_qstackedwidget_types.QStackedWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedWidget_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQStackedWidget_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -424,8 +426,8 @@ proc miqt_exec_callback_cQStackedWidget_metaObject(vtbl: pointer, self: pointer)
 proc QStackedWidgetmetacast*(self: gen_qstackedwidget_types.QStackedWidget, param1: cstring): pointer =
   fcQStackedWidget_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQStackedWidget_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -434,8 +436,8 @@ proc miqt_exec_callback_cQStackedWidget_metacast(vtbl: pointer, self: pointer, p
 proc QStackedWidgetmetacall*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint, param2: cint, param3: pointer): cint =
   fcQStackedWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQStackedWidget_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -446,18 +448,18 @@ proc miqt_exec_callback_cQStackedWidget_metacall(vtbl: pointer, self: pointer, p
 proc QStackedWidgetevent*(self: gen_qstackedwidget_types.QStackedWidget, e: gen_qcoreevent_types.QEvent): bool =
   fcQStackedWidget_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQStackedWidget_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QStackedWidgetsizeHint*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qsize_types.QSize =
+proc QStackedWidgetsizeHint*(self: gen_qstackedwidget_types.QStackedWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQStackedWidget_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQStackedWidget_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -468,8 +470,8 @@ proc miqt_exec_callback_cQStackedWidget_sizeHint(vtbl: pointer, self: pointer): 
 proc QStackedWidgetpaintEvent*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qevent_types.QPaintEvent): void =
   fcQStackedWidget_virtualbase_paintEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQStackedWidget_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -477,8 +479,8 @@ proc miqt_exec_callback_cQStackedWidget_paintEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetchangeEvent*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qcoreevent_types.QEvent): void =
   fcQStackedWidget_virtualbase_changeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQStackedWidget_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -486,17 +488,17 @@ proc miqt_exec_callback_cQStackedWidget_changeEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetinitStyleOption*(self: gen_qstackedwidget_types.QStackedWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void =
   fcQStackedWidget_virtualbase_initStyleOption(self.h, option.h)
 
-proc miqt_exec_callback_cQStackedWidget_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QStackedWidgetdevType*(self: gen_qstackedwidget_types.QStackedWidget, ): cint =
+proc QStackedWidgetdevType*(self: gen_qstackedwidget_types.QStackedWidget): cint =
   fcQStackedWidget_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQStackedWidget_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -504,17 +506,17 @@ proc miqt_exec_callback_cQStackedWidget_devType(vtbl: pointer, self: pointer): c
 proc QStackedWidgetsetVisible*(self: gen_qstackedwidget_types.QStackedWidget, visible: bool): void =
   fcQStackedWidget_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQStackedWidget_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QStackedWidgetminimumSizeHint*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qsize_types.QSize =
+proc QStackedWidgetminimumSizeHint*(self: gen_qstackedwidget_types.QStackedWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQStackedWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQStackedWidget_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -525,27 +527,27 @@ proc miqt_exec_callback_cQStackedWidget_minimumSizeHint(vtbl: pointer, self: poi
 proc QStackedWidgetheightForWidth*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint): cint =
   fcQStackedWidget_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQStackedWidget_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QStackedWidgethasHeightForWidth*(self: gen_qstackedwidget_types.QStackedWidget, ): bool =
+proc QStackedWidgethasHeightForWidth*(self: gen_qstackedwidget_types.QStackedWidget): bool =
   fcQStackedWidget_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQStackedWidget_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QStackedWidgetpaintEngine*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qpaintengine_types.QPaintEngine =
+proc QStackedWidgetpaintEngine*(self: gen_qstackedwidget_types.QStackedWidget): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQStackedWidget_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQStackedWidget_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -556,8 +558,8 @@ proc miqt_exec_callback_cQStackedWidget_paintEngine(vtbl: pointer, self: pointer
 proc QStackedWidgetmousePressEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQStackedWidget_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -565,8 +567,8 @@ proc miqt_exec_callback_cQStackedWidget_mousePressEvent(vtbl: pointer, self: poi
 proc QStackedWidgetmouseReleaseEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQStackedWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -574,8 +576,8 @@ proc miqt_exec_callback_cQStackedWidget_mouseReleaseEvent(vtbl: pointer, self: p
 proc QStackedWidgetmouseDoubleClickEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQStackedWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -583,8 +585,8 @@ proc miqt_exec_callback_cQStackedWidget_mouseDoubleClickEvent(vtbl: pointer, sel
 proc QStackedWidgetmouseMoveEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQStackedWidget_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -592,8 +594,8 @@ proc miqt_exec_callback_cQStackedWidget_mouseMoveEvent(vtbl: pointer, self: poin
 proc QStackedWidgetwheelEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QWheelEvent): void =
   fcQStackedWidget_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -601,8 +603,8 @@ proc miqt_exec_callback_cQStackedWidget_wheelEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetkeyPressEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QKeyEvent): void =
   fcQStackedWidget_virtualbase_keyPressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -610,8 +612,8 @@ proc miqt_exec_callback_cQStackedWidget_keyPressEvent(vtbl: pointer, self: point
 proc QStackedWidgetkeyReleaseEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QKeyEvent): void =
   fcQStackedWidget_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -619,8 +621,8 @@ proc miqt_exec_callback_cQStackedWidget_keyReleaseEvent(vtbl: pointer, self: poi
 proc QStackedWidgetfocusInEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQStackedWidget_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -628,8 +630,8 @@ proc miqt_exec_callback_cQStackedWidget_focusInEvent(vtbl: pointer, self: pointe
 proc QStackedWidgetfocusOutEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQStackedWidget_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -637,8 +639,8 @@ proc miqt_exec_callback_cQStackedWidget_focusOutEvent(vtbl: pointer, self: point
 proc QStackedWidgetenterEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QEnterEvent): void =
   fcQStackedWidget_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -646,8 +648,8 @@ proc miqt_exec_callback_cQStackedWidget_enterEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetleaveEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQStackedWidget_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -655,8 +657,8 @@ proc miqt_exec_callback_cQStackedWidget_leaveEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetmoveEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QMoveEvent): void =
   fcQStackedWidget_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -664,8 +666,8 @@ proc miqt_exec_callback_cQStackedWidget_moveEvent(vtbl: pointer, self: pointer, 
 proc QStackedWidgetresizeEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QResizeEvent): void =
   fcQStackedWidget_virtualbase_resizeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -673,8 +675,8 @@ proc miqt_exec_callback_cQStackedWidget_resizeEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetcloseEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QCloseEvent): void =
   fcQStackedWidget_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -682,8 +684,8 @@ proc miqt_exec_callback_cQStackedWidget_closeEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetcontextMenuEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QContextMenuEvent): void =
   fcQStackedWidget_virtualbase_contextMenuEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -691,8 +693,8 @@ proc miqt_exec_callback_cQStackedWidget_contextMenuEvent(vtbl: pointer, self: po
 proc QStackedWidgettabletEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QTabletEvent): void =
   fcQStackedWidget_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -700,8 +702,8 @@ proc miqt_exec_callback_cQStackedWidget_tabletEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetactionEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QActionEvent): void =
   fcQStackedWidget_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -709,8 +711,8 @@ proc miqt_exec_callback_cQStackedWidget_actionEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetdragEnterEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QDragEnterEvent): void =
   fcQStackedWidget_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -718,8 +720,8 @@ proc miqt_exec_callback_cQStackedWidget_dragEnterEvent(vtbl: pointer, self: poin
 proc QStackedWidgetdragMoveEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QDragMoveEvent): void =
   fcQStackedWidget_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -727,8 +729,8 @@ proc miqt_exec_callback_cQStackedWidget_dragMoveEvent(vtbl: pointer, self: point
 proc QStackedWidgetdragLeaveEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQStackedWidget_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -736,8 +738,8 @@ proc miqt_exec_callback_cQStackedWidget_dragLeaveEvent(vtbl: pointer, self: poin
 proc QStackedWidgetdropEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QDropEvent): void =
   fcQStackedWidget_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -745,8 +747,8 @@ proc miqt_exec_callback_cQStackedWidget_dropEvent(vtbl: pointer, self: pointer, 
 proc QStackedWidgetshowEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QShowEvent): void =
   fcQStackedWidget_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -754,8 +756,8 @@ proc miqt_exec_callback_cQStackedWidget_showEvent(vtbl: pointer, self: pointer, 
 proc QStackedWidgethideEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qevent_types.QHideEvent): void =
   fcQStackedWidget_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -763,8 +765,8 @@ proc miqt_exec_callback_cQStackedWidget_hideEvent(vtbl: pointer, self: pointer, 
 proc QStackedWidgetnativeEvent*(self: gen_qstackedwidget_types.QStackedWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQStackedWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQStackedWidget_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -778,8 +780,8 @@ proc miqt_exec_callback_cQStackedWidget_nativeEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetmetric*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint): cint =
   fcQStackedWidget_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQStackedWidget_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -788,8 +790,8 @@ proc miqt_exec_callback_cQStackedWidget_metric(vtbl: pointer, self: pointer, par
 proc QStackedWidgetinitPainter*(self: gen_qstackedwidget_types.QStackedWidget, painter: gen_qpainter_types.QPainter): void =
   fcQStackedWidget_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQStackedWidget_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -797,8 +799,8 @@ proc miqt_exec_callback_cQStackedWidget_initPainter(vtbl: pointer, self: pointer
 proc QStackedWidgetredirected*(self: gen_qstackedwidget_types.QStackedWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQStackedWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQStackedWidget_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -807,11 +809,11 @@ proc miqt_exec_callback_cQStackedWidget_redirected(vtbl: pointer, self: pointer,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QStackedWidgetsharedPainter*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qpainter_types.QPainter =
+proc QStackedWidgetsharedPainter*(self: gen_qstackedwidget_types.QStackedWidget): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQStackedWidget_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQStackedWidget_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -822,8 +824,8 @@ proc miqt_exec_callback_cQStackedWidget_sharedPainter(vtbl: pointer, self: point
 proc QStackedWidgetinputMethodEvent*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQStackedWidget_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQStackedWidget_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -831,8 +833,8 @@ proc miqt_exec_callback_cQStackedWidget_inputMethodEvent(vtbl: pointer, self: po
 proc QStackedWidgetinputMethodQuery*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQStackedWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQStackedWidget_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -844,8 +846,8 @@ proc miqt_exec_callback_cQStackedWidget_inputMethodQuery(vtbl: pointer, self: po
 proc QStackedWidgetfocusNextPrevChild*(self: gen_qstackedwidget_types.QStackedWidget, next: bool): bool =
   fcQStackedWidget_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQStackedWidget_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -854,8 +856,8 @@ proc miqt_exec_callback_cQStackedWidget_focusNextPrevChild(vtbl: pointer, self: 
 proc QStackedWidgeteventFilter*(self: gen_qstackedwidget_types.QStackedWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQStackedWidget_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -865,8 +867,8 @@ proc miqt_exec_callback_cQStackedWidget_eventFilter(vtbl: pointer, self: pointer
 proc QStackedWidgettimerEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQStackedWidget_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -874,8 +876,8 @@ proc miqt_exec_callback_cQStackedWidget_timerEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetchildEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qcoreevent_types.QChildEvent): void =
   fcQStackedWidget_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -883,8 +885,8 @@ proc miqt_exec_callback_cQStackedWidget_childEvent(vtbl: pointer, self: pointer,
 proc QStackedWidgetcustomEvent*(self: gen_qstackedwidget_types.QStackedWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQStackedWidget_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQStackedWidget_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -892,8 +894,8 @@ proc miqt_exec_callback_cQStackedWidget_customEvent(vtbl: pointer, self: pointer
 proc QStackedWidgetconnectNotify*(self: gen_qstackedwidget_types.QStackedWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQStackedWidget_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQStackedWidget_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -901,19 +903,19 @@ proc miqt_exec_callback_cQStackedWidget_connectNotify(vtbl: pointer, self: point
 proc QStackedWidgetdisconnectNotify*(self: gen_qstackedwidget_types.QStackedWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQStackedWidget_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQStackedWidget_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QStackedWidgetVTable](vtbl)
+proc cQStackedWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStackedWidgetVTable](fcQStackedWidget_vdata(self))
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQStackedWidget* {.inheritable.} = ref object of QStackedWidget
   vtbl*: cQStackedWidgetVTable
-method metaObject*(self: VirtualQStackedWidget, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQStackedWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
   QStackedWidgetmetaObject(self[])
-proc miqt_exec_method_cQStackedWidget_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQStackedWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -921,35 +923,35 @@ proc miqt_exec_method_cQStackedWidget_metaObject(vtbl: pointer, inst: pointer): 
 
 method metacast*(self: VirtualQStackedWidget, param1: cstring): pointer {.base.} =
   QStackedWidgetmetacast(self[], param1)
-proc miqt_exec_method_cQStackedWidget_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQStackedWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QStackedWidgetmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQStackedWidget_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQStackedWidget, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QStackedWidgetevent(self[], e)
-proc miqt_exec_method_cQStackedWidget_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method sizeHint*(self: VirtualQStackedWidget, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQStackedWidget): gen_qsize_types.QSize {.base.} =
   QStackedWidgetsizeHint(self[])
-proc miqt_exec_method_cQStackedWidget_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQStackedWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -957,44 +959,44 @@ proc miqt_exec_method_cQStackedWidget_sizeHint(vtbl: pointer, inst: pointer): po
 
 method paintEvent*(self: VirtualQStackedWidget, param1: gen_qevent_types.QPaintEvent): void {.base.} =
   QStackedWidgetpaintEvent(self[], param1)
-proc miqt_exec_method_cQStackedWidget_paintEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method changeEvent*(self: VirtualQStackedWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QStackedWidgetchangeEvent(self[], param1)
-proc miqt_exec_method_cQStackedWidget_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method initStyleOption*(self: VirtualQStackedWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
   QStackedWidgetinitStyleOption(self[], option)
-proc miqt_exec_method_cQStackedWidget_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
-  vtbl.initStyleOption(slotval1)
+  inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQStackedWidget, ): cint {.base.} =
+method devType*(self: VirtualQStackedWidget): cint {.base.} =
   QStackedWidgetdevType(self[])
-proc miqt_exec_method_cQStackedWidget_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQStackedWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method setVisible*(self: VirtualQStackedWidget, visible: bool): void {.base.} =
   QStackedWidgetsetVisible(self[], visible)
-proc miqt_exec_method_cQStackedWidget_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQStackedWidget, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQStackedWidget): gen_qsize_types.QSize {.base.} =
   QStackedWidgetminimumSizeHint(self[])
-proc miqt_exec_method_cQStackedWidget_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQStackedWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1002,24 +1004,24 @@ proc miqt_exec_method_cQStackedWidget_minimumSizeHint(vtbl: pointer, inst: point
 
 method heightForWidth*(self: VirtualQStackedWidget, param1: cint): cint {.base.} =
   QStackedWidgetheightForWidth(self[], param1)
-proc miqt_exec_method_cQStackedWidget_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQStackedWidget, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQStackedWidget): bool {.base.} =
   QStackedWidgethasHeightForWidth(self[])
-proc miqt_exec_method_cQStackedWidget_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQStackedWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQStackedWidget, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQStackedWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
   QStackedWidgetpaintEngine(self[])
-proc miqt_exec_method_cQStackedWidget_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQStackedWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1027,209 +1029,209 @@ proc miqt_exec_method_cQStackedWidget_paintEngine(vtbl: pointer, inst: pointer):
 
 method mousePressEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QStackedWidgetmousePressEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QStackedWidgetmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QStackedWidgetmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QStackedWidgetmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QStackedWidgetwheelEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QStackedWidgetkeyPressEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QStackedWidgetkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QStackedWidgetfocusInEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QStackedWidgetfocusOutEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QStackedWidgetenterEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQStackedWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QStackedWidgetleaveEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QStackedWidgetmoveEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QStackedWidgetresizeEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QStackedWidgetcloseEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QStackedWidgetcontextMenuEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QStackedWidgettabletEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
   QStackedWidgetactionEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QStackedWidgetdragEnterEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QStackedWidgetdragMoveEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QStackedWidgetdragLeaveEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
   QStackedWidgetdropEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
   QStackedWidgetshowEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQStackedWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
   QStackedWidgethideEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQStackedWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QStackedWidgetnativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQStackedWidget_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQStackedWidget, param1: cint): cint {.base.} =
   QStackedWidgetmetric(self[], param1)
-proc miqt_exec_method_cQStackedWidget_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQStackedWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
   QStackedWidgetinitPainter(self[], painter)
-proc miqt_exec_method_cQStackedWidget_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQStackedWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QStackedWidgetredirected(self[], offset)
-proc miqt_exec_method_cQStackedWidget_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQStackedWidget, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQStackedWidget): gen_qpainter_types.QPainter {.base.} =
   QStackedWidgetsharedPainter(self[])
-proc miqt_exec_method_cQStackedWidget_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQStackedWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1237,17 +1239,17 @@ proc miqt_exec_method_cQStackedWidget_sharedPainter(vtbl: pointer, inst: pointer
 
 method inputMethodEvent*(self: VirtualQStackedWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QStackedWidgetinputMethodEvent(self[], param1)
-proc miqt_exec_method_cQStackedWidget_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQStackedWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QStackedWidgetinputMethodQuery(self[], param1)
-proc miqt_exec_method_cQStackedWidget_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1255,78 +1257,78 @@ proc miqt_exec_method_cQStackedWidget_inputMethodQuery(vtbl: pointer, inst: poin
 
 method focusNextPrevChild*(self: VirtualQStackedWidget, next: bool): bool {.base.} =
   QStackedWidgetfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQStackedWidget_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQStackedWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QStackedWidgeteventFilter(self[], watched, event)
-proc miqt_exec_method_cQStackedWidget_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQStackedWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QStackedWidgettimerEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQStackedWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QStackedWidgetchildEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQStackedWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QStackedWidgetcustomEvent(self[], event)
-proc miqt_exec_method_cQStackedWidget_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQStackedWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QStackedWidgetconnectNotify(self[], signal)
-proc miqt_exec_method_cQStackedWidget_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQStackedWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QStackedWidgetdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQStackedWidget_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQStackedWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
+proc cQStackedWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQStackedWidget](fcQStackedWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc drawFrame*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qpainter_types.QPainter): void =
   fcQStackedWidget_protectedbase_drawFrame(self.h, param1.h)
 
-proc updateMicroFocus*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+proc updateMicroFocus*(self: gen_qstackedwidget_types.QStackedWidget): void =
   fcQStackedWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+proc create*(self: gen_qstackedwidget_types.QStackedWidget): void =
   fcQStackedWidget_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+proc destroy*(self: gen_qstackedwidget_types.QStackedWidget): void =
   fcQStackedWidget_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qstackedwidget_types.QStackedWidget, ): bool =
+proc focusNextChild*(self: gen_qstackedwidget_types.QStackedWidget): bool =
   fcQStackedWidget_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qstackedwidget_types.QStackedWidget, ): bool =
+proc focusPreviousChild*(self: gen_qstackedwidget_types.QStackedWidget): bool =
   fcQStackedWidget_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qstackedwidget_types.QStackedWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQStackedWidget_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qstackedwidget_types.QStackedWidget, ): cint =
+proc senderSignalIndex*(self: gen_qstackedwidget_types.QStackedWidget): cint =
   fcQStackedWidget_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qstackedwidget_types.QStackedWidget, signal: cstring): cint =
@@ -1340,348 +1342,293 @@ proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
     vtbl: ref QStackedWidgetVTable = nil): gen_qstackedwidget_types.QStackedWidget =
   let vtbl = if vtbl == nil: new QStackedWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStackedWidgetVTable, _: ptr cQStackedWidget) {.cdecl.} =
-    let vtbl = cast[ref QStackedWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QStackedWidgetVTable](fcQStackedWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStackedWidget_metaObject
+    vtbl[].vtbl.metaObject = cQStackedWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQStackedWidget_metacast
+    vtbl[].vtbl.metacast = cQStackedWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQStackedWidget_metacall
+    vtbl[].vtbl.metacall = cQStackedWidget_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQStackedWidget_event
+    vtbl[].vtbl.event = cQStackedWidget_vtable_callback_event
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQStackedWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQStackedWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQStackedWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQStackedWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQStackedWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQStackedWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQStackedWidget_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQStackedWidget_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQStackedWidget_devType
+    vtbl[].vtbl.devType = cQStackedWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQStackedWidget_setVisible
+    vtbl[].vtbl.setVisible = cQStackedWidget_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQStackedWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQStackedWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQStackedWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQStackedWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQStackedWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQStackedWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQStackedWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQStackedWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQStackedWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQStackedWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQStackedWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQStackedWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQStackedWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQStackedWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQStackedWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQStackedWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQStackedWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQStackedWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQStackedWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQStackedWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQStackedWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQStackedWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQStackedWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQStackedWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQStackedWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQStackedWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQStackedWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQStackedWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQStackedWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQStackedWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQStackedWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQStackedWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQStackedWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQStackedWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQStackedWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQStackedWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQStackedWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQStackedWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQStackedWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQStackedWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQStackedWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQStackedWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQStackedWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQStackedWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQStackedWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQStackedWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQStackedWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQStackedWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQStackedWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQStackedWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQStackedWidget_showEvent
+    vtbl[].vtbl.showEvent = cQStackedWidget_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQStackedWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQStackedWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQStackedWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQStackedWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQStackedWidget_metric
+    vtbl[].vtbl.metric = cQStackedWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQStackedWidget_initPainter
+    vtbl[].vtbl.initPainter = cQStackedWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQStackedWidget_redirected
+    vtbl[].vtbl.redirected = cQStackedWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQStackedWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQStackedWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQStackedWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQStackedWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQStackedWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQStackedWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQStackedWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQStackedWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStackedWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQStackedWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStackedWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQStackedWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStackedWidget_childEvent
+    vtbl[].vtbl.childEvent = cQStackedWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStackedWidget_customEvent
+    vtbl[].vtbl.customEvent = cQStackedWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStackedWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQStackedWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStackedWidget_disconnectNotify
-  gen_qstackedwidget_types.QStackedWidget(h: fcQStackedWidget_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQStackedWidget_vtable_callback_disconnectNotify
+  gen_qstackedwidget_types.QStackedWidget(h: fcQStackedWidget_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
     vtbl: ref QStackedWidgetVTable = nil): gen_qstackedwidget_types.QStackedWidget =
   let vtbl = if vtbl == nil: new QStackedWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStackedWidgetVTable, _: ptr cQStackedWidget) {.cdecl.} =
-    let vtbl = cast[ref QStackedWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QStackedWidgetVTable](fcQStackedWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStackedWidget_metaObject
+    vtbl[].vtbl.metaObject = cQStackedWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQStackedWidget_metacast
+    vtbl[].vtbl.metacast = cQStackedWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQStackedWidget_metacall
+    vtbl[].vtbl.metacall = cQStackedWidget_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQStackedWidget_event
+    vtbl[].vtbl.event = cQStackedWidget_vtable_callback_event
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQStackedWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQStackedWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQStackedWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQStackedWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQStackedWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQStackedWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQStackedWidget_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQStackedWidget_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQStackedWidget_devType
+    vtbl[].vtbl.devType = cQStackedWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQStackedWidget_setVisible
+    vtbl[].vtbl.setVisible = cQStackedWidget_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQStackedWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQStackedWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQStackedWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQStackedWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQStackedWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQStackedWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQStackedWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQStackedWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQStackedWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQStackedWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQStackedWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQStackedWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQStackedWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQStackedWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQStackedWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQStackedWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQStackedWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQStackedWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQStackedWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQStackedWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQStackedWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQStackedWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQStackedWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQStackedWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQStackedWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQStackedWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQStackedWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQStackedWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQStackedWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQStackedWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQStackedWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQStackedWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQStackedWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQStackedWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQStackedWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQStackedWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQStackedWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQStackedWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQStackedWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQStackedWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQStackedWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQStackedWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQStackedWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQStackedWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQStackedWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQStackedWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQStackedWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQStackedWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQStackedWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQStackedWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQStackedWidget_showEvent
+    vtbl[].vtbl.showEvent = cQStackedWidget_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQStackedWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQStackedWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQStackedWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQStackedWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQStackedWidget_metric
+    vtbl[].vtbl.metric = cQStackedWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQStackedWidget_initPainter
+    vtbl[].vtbl.initPainter = cQStackedWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQStackedWidget_redirected
+    vtbl[].vtbl.redirected = cQStackedWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQStackedWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQStackedWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQStackedWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQStackedWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQStackedWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQStackedWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQStackedWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQStackedWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStackedWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQStackedWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStackedWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQStackedWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStackedWidget_childEvent
+    vtbl[].vtbl.childEvent = cQStackedWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStackedWidget_customEvent
+    vtbl[].vtbl.customEvent = cQStackedWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStackedWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQStackedWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStackedWidget_disconnectNotify
-  gen_qstackedwidget_types.QStackedWidget(h: fcQStackedWidget_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQStackedWidget_vtable_callback_disconnectNotify
+  gen_qstackedwidget_types.QStackedWidget(h: fcQStackedWidget_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQStackedWidget_mvtbl = cQStackedWidgetVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQStackedWidget()[])](self.fcQStackedWidget_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQStackedWidget_method_callback_metaObject,
+  metacast: cQStackedWidget_method_callback_metacast,
+  metacall: cQStackedWidget_method_callback_metacall,
+  event: cQStackedWidget_method_callback_event,
+  sizeHint: cQStackedWidget_method_callback_sizeHint,
+  paintEvent: cQStackedWidget_method_callback_paintEvent,
+  changeEvent: cQStackedWidget_method_callback_changeEvent,
+  initStyleOption: cQStackedWidget_method_callback_initStyleOption,
+  devType: cQStackedWidget_method_callback_devType,
+  setVisible: cQStackedWidget_method_callback_setVisible,
+  minimumSizeHint: cQStackedWidget_method_callback_minimumSizeHint,
+  heightForWidth: cQStackedWidget_method_callback_heightForWidth,
+  hasHeightForWidth: cQStackedWidget_method_callback_hasHeightForWidth,
+  paintEngine: cQStackedWidget_method_callback_paintEngine,
+  mousePressEvent: cQStackedWidget_method_callback_mousePressEvent,
+  mouseReleaseEvent: cQStackedWidget_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQStackedWidget_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: cQStackedWidget_method_callback_mouseMoveEvent,
+  wheelEvent: cQStackedWidget_method_callback_wheelEvent,
+  keyPressEvent: cQStackedWidget_method_callback_keyPressEvent,
+  keyReleaseEvent: cQStackedWidget_method_callback_keyReleaseEvent,
+  focusInEvent: cQStackedWidget_method_callback_focusInEvent,
+  focusOutEvent: cQStackedWidget_method_callback_focusOutEvent,
+  enterEvent: cQStackedWidget_method_callback_enterEvent,
+  leaveEvent: cQStackedWidget_method_callback_leaveEvent,
+  moveEvent: cQStackedWidget_method_callback_moveEvent,
+  resizeEvent: cQStackedWidget_method_callback_resizeEvent,
+  closeEvent: cQStackedWidget_method_callback_closeEvent,
+  contextMenuEvent: cQStackedWidget_method_callback_contextMenuEvent,
+  tabletEvent: cQStackedWidget_method_callback_tabletEvent,
+  actionEvent: cQStackedWidget_method_callback_actionEvent,
+  dragEnterEvent: cQStackedWidget_method_callback_dragEnterEvent,
+  dragMoveEvent: cQStackedWidget_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQStackedWidget_method_callback_dragLeaveEvent,
+  dropEvent: cQStackedWidget_method_callback_dropEvent,
+  showEvent: cQStackedWidget_method_callback_showEvent,
+  hideEvent: cQStackedWidget_method_callback_hideEvent,
+  nativeEvent: cQStackedWidget_method_callback_nativeEvent,
+  metric: cQStackedWidget_method_callback_metric,
+  initPainter: cQStackedWidget_method_callback_initPainter,
+  redirected: cQStackedWidget_method_callback_redirected,
+  sharedPainter: cQStackedWidget_method_callback_sharedPainter,
+  inputMethodEvent: cQStackedWidget_method_callback_inputMethodEvent,
+  inputMethodQuery: cQStackedWidget_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQStackedWidget_method_callback_focusNextPrevChild,
+  eventFilter: cQStackedWidget_method_callback_eventFilter,
+  timerEvent: cQStackedWidget_method_callback_timerEvent,
+  childEvent: cQStackedWidget_method_callback_childEvent,
+  customEvent: cQStackedWidget_method_callback_customEvent,
+  connectNotify: cQStackedWidget_method_callback_connectNotify,
+  disconnectNotify: cQStackedWidget_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQStackedWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStackedWidgetVTable, _: ptr cQStackedWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQStackedWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQStackedWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQStackedWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQStackedWidget_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQStackedWidget_event
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQStackedWidget_sizeHint
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQStackedWidget_paintEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQStackedWidget_changeEvent
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQStackedWidget_initStyleOption
-  vtbl[].vtbl.devType = miqt_exec_method_cQStackedWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQStackedWidget_setVisible
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQStackedWidget_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQStackedWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQStackedWidget_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQStackedWidget_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQStackedWidget_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQStackedWidget_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQStackedWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQStackedWidget_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQStackedWidget_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQStackedWidget_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQStackedWidget_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQStackedWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQStackedWidget_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQStackedWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQStackedWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQStackedWidget_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQStackedWidget_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQStackedWidget_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQStackedWidget_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQStackedWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQStackedWidget_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQStackedWidget_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQStackedWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQStackedWidget_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQStackedWidget_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQStackedWidget_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQStackedWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQStackedWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQStackedWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQStackedWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQStackedWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQStackedWidget_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQStackedWidget_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQStackedWidget_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQStackedWidget_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStackedWidget_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStackedWidget_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQStackedWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQStackedWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStackedWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStackedWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQStackedWidget_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQStackedWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQStackedWidget_new(addr(cQStackedWidget_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
-    vtbl: VirtualQStackedWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStackedWidgetVTable, _: ptr cQStackedWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQStackedWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStackedWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQStackedWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQStackedWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQStackedWidget_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQStackedWidget_event
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQStackedWidget_sizeHint
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQStackedWidget_paintEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQStackedWidget_changeEvent
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQStackedWidget_initStyleOption
-  vtbl[].vtbl.devType = miqt_exec_method_cQStackedWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQStackedWidget_setVisible
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQStackedWidget_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQStackedWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQStackedWidget_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQStackedWidget_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQStackedWidget_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQStackedWidget_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQStackedWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQStackedWidget_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQStackedWidget_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQStackedWidget_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQStackedWidget_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQStackedWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQStackedWidget_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQStackedWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQStackedWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQStackedWidget_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQStackedWidget_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQStackedWidget_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQStackedWidget_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQStackedWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQStackedWidget_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQStackedWidget_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQStackedWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQStackedWidget_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQStackedWidget_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQStackedWidget_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQStackedWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQStackedWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQStackedWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQStackedWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQStackedWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQStackedWidget_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQStackedWidget_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQStackedWidget_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQStackedWidget_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStackedWidget_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStackedWidget_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQStackedWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQStackedWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStackedWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStackedWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQStackedWidget_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQStackedWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQStackedWidget_new2(addr(cQStackedWidget_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qstackedwidget_types.QStackedWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStackedWidget_staticMetaObject())

@@ -20,41 +20,34 @@
 #include <QWebEngineUrlSchemeHandler>
 #include <qwebengineprofile.h>
 #include "gen_qwebengineprofile.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQWebEngineProfile final : public QWebEngineProfile {
-	struct QWebEngineProfile_VTable* vtbl;
+	const QWebEngineProfile_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWebEngineProfile_VTable* QWebEngineProfile_vtbl(const VirtualQWebEngineProfile* self);
+	friend void* QWebEngineProfile_vdata(const VirtualQWebEngineProfile* self);
+	friend void QWebEngineProfile_setVdata(VirtualQWebEngineProfile* self, void* vdata);
 
-	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl): QWebEngineProfile(), vtbl(vtbl) {};
-	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, const QString& name): QWebEngineProfile(name), vtbl(vtbl) {};
-	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, QObject* parent): QWebEngineProfile(parent), vtbl(vtbl) {};
-	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, const QString& name, QObject* parent): QWebEngineProfile(name, parent), vtbl(vtbl) {};
+	VirtualQWebEngineProfile(const QWebEngineProfile_VTable* vtbl, void* vdata): QWebEngineProfile(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebEngineProfile(const QWebEngineProfile_VTable* vtbl, void* vdata, const QString& name): QWebEngineProfile(name), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebEngineProfile(const QWebEngineProfile_VTable* vtbl, void* vdata, QObject* parent): QWebEngineProfile(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebEngineProfile(const QWebEngineProfile_VTable* vtbl, void* vdata, const QString& name, QObject* parent): QWebEngineProfile(name, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWebEngineProfile() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWebEngineProfile() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QWebEngineProfile::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QWebEngineProfile_virtualbase_metaObject(const VirtualQWebEngineProfile* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QWebEngineProfile::qt_metacast(param1);
@@ -62,14 +55,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
+	friend void* QWebEngineProfile_virtualbase_metacast(VirtualQWebEngineProfile* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QWebEngineProfile::qt_metacall(param1, param2, param3);
@@ -80,14 +72,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QWebEngineProfile_virtualbase_metacall(VirtualQWebEngineProfile* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QWebEngineProfile::event(event);
@@ -95,14 +86,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event);
+	friend bool QWebEngineProfile_virtualbase_event(VirtualQWebEngineProfile* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QWebEngineProfile::eventFilter(watched, event);
@@ -111,14 +101,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QWebEngineProfile_virtualbase_eventFilter(VirtualQWebEngineProfile* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QWebEngineProfile::timerEvent(event);
@@ -127,13 +116,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QWebEngineProfile_virtualbase_timerEvent(VirtualQWebEngineProfile* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QWebEngineProfile::childEvent(event);
@@ -142,13 +130,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QWebEngineProfile_virtualbase_childEvent(VirtualQWebEngineProfile* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QWebEngineProfile::customEvent(event);
@@ -157,13 +144,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QWebEngineProfile_virtualbase_customEvent(VirtualQWebEngineProfile* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QWebEngineProfile::connectNotify(signal);
@@ -174,13 +160,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QWebEngineProfile_virtualbase_connectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QWebEngineProfile::disconnectNotify(signal);
@@ -191,35 +176,35 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QWebEngineProfile_virtualbase_disconnectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebEngineProfile_protectedbase_sender(const void* self);
-	friend int QWebEngineProfile_protectedbase_senderSignalIndex(const void* self);
-	friend int QWebEngineProfile_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QWebEngineProfile_protectedbase_sender(const VirtualQWebEngineProfile* self);
+	friend int QWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQWebEngineProfile* self);
+	friend int QWebEngineProfile_protectedbase_receivers(const VirtualQWebEngineProfile* self, const char* signal);
+	friend bool QWebEngineProfile_protectedbase_isSignalConnected(const VirtualQWebEngineProfile* self, QMetaMethod* signal);
 };
 
-QWebEngineProfile* QWebEngineProfile_new(struct QWebEngineProfile_VTable* vtbl) {
-	return new VirtualQWebEngineProfile(vtbl);
+VirtualQWebEngineProfile* QWebEngineProfile_new(const QWebEngineProfile_VTable* vtbl, void* vdata) {
+	return new VirtualQWebEngineProfile(vtbl, vdata);
 }
 
-QWebEngineProfile* QWebEngineProfile_new2(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name) {
+VirtualQWebEngineProfile* QWebEngineProfile_new2(const QWebEngineProfile_VTable* vtbl, void* vdata, struct miqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new VirtualQWebEngineProfile(vtbl, name_QString);
+	return new VirtualQWebEngineProfile(vtbl, vdata, name_QString);
 }
 
-QWebEngineProfile* QWebEngineProfile_new3(struct QWebEngineProfile_VTable* vtbl, QObject* parent) {
-	return new VirtualQWebEngineProfile(vtbl, parent);
+VirtualQWebEngineProfile* QWebEngineProfile_new3(const QWebEngineProfile_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQWebEngineProfile(vtbl, vdata, parent);
 }
 
-QWebEngineProfile* QWebEngineProfile_new4(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name, QObject* parent) {
+VirtualQWebEngineProfile* QWebEngineProfile_new4(const QWebEngineProfile_VTable* vtbl, void* vdata, struct miqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new VirtualQWebEngineProfile(vtbl, name_QString, parent);
+	return new VirtualQWebEngineProfile(vtbl, vdata, name_QString, parent);
 }
 
 void QWebEngineProfile_virtbase(QWebEngineProfile* src, QObject** outptr_QObject) {
@@ -482,7 +467,7 @@ void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDown
 	self->downloadRequested(download);
 }
 
-void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) {
+void QWebEngineProfile_connect_downloadRequested(VirtualQWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWebEngineDownloadRequest*);
@@ -516,93 +501,76 @@ struct miqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self) {
+QMetaObject* QWebEngineProfile_virtualbase_metaObject(const VirtualQWebEngineProfile* self) {
 
-	return (QMetaObject*) ( (const VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::metaObject();
-
+	return (QMetaObject*) self->QWebEngineProfile::metaObject();
 }
 
-void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1) {
+void* QWebEngineProfile_virtualbase_metacast(VirtualQWebEngineProfile* self, const char* param1) {
 
-	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::qt_metacast(param1);
-
+	return self->QWebEngineProfile::qt_metacast(param1);
 }
 
-int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QWebEngineProfile_virtualbase_metacall(VirtualQWebEngineProfile* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QWebEngineProfile::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event) {
+bool QWebEngineProfile_virtualbase_event(VirtualQWebEngineProfile* self, QEvent* event) {
 
-	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::event(event);
-
+	return self->QWebEngineProfile::event(event);
 }
 
-bool QWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QWebEngineProfile_virtualbase_eventFilter(VirtualQWebEngineProfile* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::eventFilter(watched, event);
-
+	return self->QWebEngineProfile::eventFilter(watched, event);
 }
 
-void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QWebEngineProfile_virtualbase_timerEvent(VirtualQWebEngineProfile* self, QTimerEvent* event) {
 
-	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::timerEvent(event);
-
+	self->QWebEngineProfile::timerEvent(event);
 }
 
-void QWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QWebEngineProfile_virtualbase_childEvent(VirtualQWebEngineProfile* self, QChildEvent* event) {
 
-	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::childEvent(event);
-
+	self->QWebEngineProfile::childEvent(event);
 }
 
-void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event) {
+void QWebEngineProfile_virtualbase_customEvent(VirtualQWebEngineProfile* self, QEvent* event) {
 
-	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::customEvent(event);
-
+	self->QWebEngineProfile::customEvent(event);
 }
 
-void QWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QWebEngineProfile_virtualbase_connectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal) {
 
-	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::connectNotify(*signal);
-
+	self->QWebEngineProfile::connectNotify(*signal);
 }
 
-void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QWebEngineProfile_virtualbase_disconnectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal) {
 
-	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::disconnectNotify(*signal);
-
+	self->QWebEngineProfile::disconnectNotify(*signal);
 }
 
 const QMetaObject* QWebEngineProfile_staticMetaObject() { return &QWebEngineProfile::staticMetaObject; }
-QObject* QWebEngineProfile_protectedbase_sender(const void* self) {
-	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	
-	return self_cast->sender();
 
+const QWebEngineProfile_VTable* QWebEngineProfile_vtbl(const VirtualQWebEngineProfile* self) { return self->vtbl; }
+void* QWebEngineProfile_vdata(const VirtualQWebEngineProfile* self) { return self->vdata; }
+void QWebEngineProfile_setVdata(VirtualQWebEngineProfile* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QWebEngineProfile_protectedbase_sender(const VirtualQWebEngineProfile* self) {
+	return self->sender();
 }
 
-int QWebEngineProfile_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQWebEngineProfile* self) {
+	return self->senderSignalIndex();
 }
 
-int QWebEngineProfile_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QWebEngineProfile_protectedbase_receivers(const VirtualQWebEngineProfile* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QWebEngineProfile_protectedbase_isSignalConnected(const VirtualQWebEngineProfile* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QWebEngineProfile_delete(QWebEngineProfile* self) {

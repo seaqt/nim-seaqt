@@ -36,34 +36,41 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QVariant QVariant;
 #endif
 
-struct QSettings_VTable {
-	void (*destructor)(struct QSettings_VTable* vtbl, QSettings* self);
-	QMetaObject* (*metaObject)(struct QSettings_VTable* vtbl, const QSettings* self);
-	void* (*metacast)(struct QSettings_VTable* vtbl, QSettings* self, const char* param1);
-	int (*metacall)(struct QSettings_VTable* vtbl, QSettings* self, int param1, int param2, void** param3);
-	bool (*event)(struct QSettings_VTable* vtbl, QSettings* self, QEvent* event);
-	bool (*eventFilter)(struct QSettings_VTable* vtbl, QSettings* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QSettings_VTable* vtbl, QSettings* self, QTimerEvent* event);
-	void (*childEvent)(struct QSettings_VTable* vtbl, QSettings* self, QChildEvent* event);
-	void (*customEvent)(struct QSettings_VTable* vtbl, QSettings* self, QEvent* event);
-	void (*connectNotify)(struct QSettings_VTable* vtbl, QSettings* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QSettings_VTable* vtbl, QSettings* self, QMetaMethod* signal);
-};
-QSettings* QSettings_new(struct QSettings_VTable* vtbl, struct miqt_string organization);
-QSettings* QSettings_new2(struct QSettings_VTable* vtbl, int scope, struct miqt_string organization);
-QSettings* QSettings_new3(struct QSettings_VTable* vtbl, int format, int scope, struct miqt_string organization);
-QSettings* QSettings_new4(struct QSettings_VTable* vtbl, struct miqt_string fileName, int format);
-QSettings* QSettings_new5(struct QSettings_VTable* vtbl);
-QSettings* QSettings_new6(struct QSettings_VTable* vtbl, int scope);
-QSettings* QSettings_new7(struct QSettings_VTable* vtbl, struct miqt_string organization, struct miqt_string application);
-QSettings* QSettings_new8(struct QSettings_VTable* vtbl, struct miqt_string organization, struct miqt_string application, QObject* parent);
-QSettings* QSettings_new9(struct QSettings_VTable* vtbl, int scope, struct miqt_string organization, struct miqt_string application);
-QSettings* QSettings_new10(struct QSettings_VTable* vtbl, int scope, struct miqt_string organization, struct miqt_string application, QObject* parent);
-QSettings* QSettings_new11(struct QSettings_VTable* vtbl, int format, int scope, struct miqt_string organization, struct miqt_string application);
-QSettings* QSettings_new12(struct QSettings_VTable* vtbl, int format, int scope, struct miqt_string organization, struct miqt_string application, QObject* parent);
-QSettings* QSettings_new13(struct QSettings_VTable* vtbl, struct miqt_string fileName, int format, QObject* parent);
-QSettings* QSettings_new14(struct QSettings_VTable* vtbl, QObject* parent);
-QSettings* QSettings_new15(struct QSettings_VTable* vtbl, int scope, QObject* parent);
+typedef struct VirtualQSettings VirtualQSettings;
+typedef struct QSettings_VTable{
+	void (*destructor)(VirtualQSettings* self);
+	QMetaObject* (*metaObject)(const VirtualQSettings* self);
+	void* (*metacast)(VirtualQSettings* self, const char* param1);
+	int (*metacall)(VirtualQSettings* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQSettings* self, QEvent* event);
+	bool (*eventFilter)(VirtualQSettings* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSettings* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQSettings* self, QChildEvent* event);
+	void (*customEvent)(VirtualQSettings* self, QEvent* event);
+	void (*connectNotify)(VirtualQSettings* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSettings* self, QMetaMethod* signal);
+}QSettings_VTable;
+
+const QSettings_VTable* QSettings_vtbl(const VirtualQSettings* self);
+void* QSettings_vdata(const VirtualQSettings* self);
+void QSettings_setVdata(VirtualQSettings* self, void* vdata);
+
+VirtualQSettings* QSettings_new(const QSettings_VTable* vtbl, void* vdata, struct miqt_string organization);
+VirtualQSettings* QSettings_new2(const QSettings_VTable* vtbl, void* vdata, int scope, struct miqt_string organization);
+VirtualQSettings* QSettings_new3(const QSettings_VTable* vtbl, void* vdata, int format, int scope, struct miqt_string organization);
+VirtualQSettings* QSettings_new4(const QSettings_VTable* vtbl, void* vdata, struct miqt_string fileName, int format);
+VirtualQSettings* QSettings_new5(const QSettings_VTable* vtbl, void* vdata);
+VirtualQSettings* QSettings_new6(const QSettings_VTable* vtbl, void* vdata, int scope);
+VirtualQSettings* QSettings_new7(const QSettings_VTable* vtbl, void* vdata, struct miqt_string organization, struct miqt_string application);
+VirtualQSettings* QSettings_new8(const QSettings_VTable* vtbl, void* vdata, struct miqt_string organization, struct miqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new9(const QSettings_VTable* vtbl, void* vdata, int scope, struct miqt_string organization, struct miqt_string application);
+VirtualQSettings* QSettings_new10(const QSettings_VTable* vtbl, void* vdata, int scope, struct miqt_string organization, struct miqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new11(const QSettings_VTable* vtbl, void* vdata, int format, int scope, struct miqt_string organization, struct miqt_string application);
+VirtualQSettings* QSettings_new12(const QSettings_VTable* vtbl, void* vdata, int format, int scope, struct miqt_string organization, struct miqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new13(const QSettings_VTable* vtbl, void* vdata, struct miqt_string fileName, int format, QObject* parent);
+VirtualQSettings* QSettings_new14(const QSettings_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQSettings* QSettings_new15(const QSettings_VTable* vtbl, void* vdata, int scope, QObject* parent);
+
 void QSettings_virtbase(QSettings* src, QObject** outptr_QObject);
 QMetaObject* QSettings_metaObject(const QSettings* self);
 void* QSettings_metacast(QSettings* self, const char* param1);
@@ -104,20 +111,23 @@ bool QSettings_event(QSettings* self, QEvent* event);
 struct miqt_string QSettings_tr2(const char* s, const char* c);
 struct miqt_string QSettings_tr3(const char* s, const char* c, int n);
 void QSettings_beginWriteArray2(QSettings* self, QAnyStringView* prefix, int size);
-QMetaObject* QSettings_virtualbase_metaObject(const void* self);
-void* QSettings_virtualbase_metacast(void* self, const char* param1);
-int QSettings_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QSettings_virtualbase_event(void* self, QEvent* event);
-bool QSettings_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QSettings_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QSettings_virtualbase_childEvent(void* self, QChildEvent* event);
-void QSettings_virtualbase_customEvent(void* self, QEvent* event);
-void QSettings_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QSettings_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QSettings_protectedbase_sender(const void* self);
-int QSettings_protectedbase_senderSignalIndex(const void* self);
-int QSettings_protectedbase_receivers(const void* self, const char* signal);
-bool QSettings_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QSettings_virtualbase_metaObject(const VirtualQSettings* self);
+void* QSettings_virtualbase_metacast(VirtualQSettings* self, const char* param1);
+int QSettings_virtualbase_metacall(VirtualQSettings* self, int param1, int param2, void** param3);
+bool QSettings_virtualbase_event(VirtualQSettings* self, QEvent* event);
+bool QSettings_virtualbase_eventFilter(VirtualQSettings* self, QObject* watched, QEvent* event);
+void QSettings_virtualbase_timerEvent(VirtualQSettings* self, QTimerEvent* event);
+void QSettings_virtualbase_childEvent(VirtualQSettings* self, QChildEvent* event);
+void QSettings_virtualbase_customEvent(VirtualQSettings* self, QEvent* event);
+void QSettings_virtualbase_connectNotify(VirtualQSettings* self, QMetaMethod* signal);
+void QSettings_virtualbase_disconnectNotify(VirtualQSettings* self, QMetaMethod* signal);
+
+QObject* QSettings_protectedbase_sender(const VirtualQSettings* self);
+int QSettings_protectedbase_senderSignalIndex(const VirtualQSettings* self);
+int QSettings_protectedbase_receivers(const VirtualQSettings* self, const char* signal);
+bool QSettings_protectedbase_isSignalConnected(const VirtualQSettings* self, QMetaMethod* signal);
+
 const QMetaObject* QSettings_staticMetaObject();
 void QSettings_delete(QSettings* self);
 

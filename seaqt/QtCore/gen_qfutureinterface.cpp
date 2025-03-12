@@ -7,15 +7,6 @@
 #include <QThreadPool>
 #include <qfutureinterface.h>
 #include "gen_qfutureinterface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFutureInterfaceBase* QFutureInterfaceBase_new() {
 	return new QFutureInterfaceBase();
 }

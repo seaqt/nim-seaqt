@@ -4,15 +4,6 @@
 #include <QWindow>
 #include <qtestsupport_gui.h>
 #include "gen_qtestsupport_gui.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTest__QTouchEventSequence* QTest__QTouchEventSequence_press(QTest__QTouchEventSequence* self, int touchId, QPoint* pt) {
 	QTest::QTouchEventSequence& _ret = self->press(static_cast<int>(touchId), *pt);
 	// Cast returned reference into pointer

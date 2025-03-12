@@ -39,6 +39,7 @@ QJSValue* QJSValue_new6(double value);
 QJSValue* QJSValue_new7(struct miqt_string value);
 QJSValue* QJSValue_new8(const char* str);
 QJSValue* QJSValue_new9(int value);
+
 void QJSValue_operatorAssign(QJSValue* self, QJSValue* other);
 bool QJSValue_isBool(const QJSValue* self);
 bool QJSValue_isNumber(const QJSValue* self);
@@ -84,6 +85,7 @@ int QJSValue_errorType(const QJSValue* self);
 QJSValue* QJSValue_call1(const QJSValue* self, struct miqt_array /* of QJSValue* */  args);
 QJSValue* QJSValue_callWithInstance2(const QJSValue* self, QJSValue* instance, struct miqt_array /* of QJSValue* */  args);
 QJSValue* QJSValue_callAsConstructor1(const QJSValue* self, struct miqt_array /* of QJSValue* */  args);
+
 void QJSValue_delete(QJSValue* self);
 
 #ifdef __cplusplus

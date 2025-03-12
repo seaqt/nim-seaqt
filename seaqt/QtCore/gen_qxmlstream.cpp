@@ -13,15 +13,6 @@
 #include <QXmlStreamWriter>
 #include <qxmlstream.h>
 #include "gen_qxmlstream.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QXmlStreamAttribute* QXmlStreamAttribute_new() {
 	return new QXmlStreamAttribute();
 }

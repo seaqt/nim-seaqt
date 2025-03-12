@@ -40,43 +40,36 @@
 #include <QWindow>
 #include <qquickview.h>
 #include "gen_qquickview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQuickView final : public QQuickView {
-	struct QQuickView_VTable* vtbl;
+	const QQuickView_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQuickView_VTable* QQuickView_vtbl(const VirtualQQuickView* self);
+	friend void* QQuickView_vdata(const VirtualQQuickView* self);
+	friend void QQuickView_setVdata(VirtualQQuickView* self, void* vdata);
 
-	VirtualQQuickView(struct QQuickView_VTable* vtbl): QQuickView(), vtbl(vtbl) {};
-	VirtualQQuickView(struct QQuickView_VTable* vtbl, QQmlEngine* engine, QWindow* parent): QQuickView(engine, parent), vtbl(vtbl) {};
-	VirtualQQuickView(struct QQuickView_VTable* vtbl, const QUrl& source): QQuickView(source), vtbl(vtbl) {};
-	VirtualQQuickView(struct QQuickView_VTable* vtbl, const QUrl& source, QQuickRenderControl* renderControl): QQuickView(source, renderControl), vtbl(vtbl) {};
-	VirtualQQuickView(struct QQuickView_VTable* vtbl, QWindow* parent): QQuickView(parent), vtbl(vtbl) {};
-	VirtualQQuickView(struct QQuickView_VTable* vtbl, const QUrl& source, QWindow* parent): QQuickView(source, parent), vtbl(vtbl) {};
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata): QQuickView(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata, QQmlEngine* engine, QWindow* parent): QQuickView(engine, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata, const QUrl& source): QQuickView(source), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata, const QUrl& source, QQuickRenderControl* renderControl): QQuickView(source, renderControl), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata, QWindow* parent): QQuickView(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickView(const QQuickView_VTable* vtbl, void* vdata, const QUrl& source, QWindow* parent): QQuickView(source, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQuickView() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQuickView() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQuickView::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQuickView_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQuickView_virtualbase_metaObject(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQuickView::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQuickView_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQuickView_virtualbase_metacast(VirtualQQuickView* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQuickView::qt_metacall(param1, param2, param3);
@@ -102,14 +94,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQuickView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQuickView_virtualbase_metacall(VirtualQQuickView* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QQuickView::resizeEvent(param1);
@@ -118,13 +109,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QQuickView_virtualbase_resizeEvent(VirtualQQuickView* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QQuickView::timerEvent(param1);
@@ -133,13 +123,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QQuickView_virtualbase_timerEvent(VirtualQQuickView* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QQuickView::keyPressEvent(param1);
@@ -148,13 +137,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QQuickView_virtualbase_keyPressEvent(VirtualQQuickView* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* param1) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QQuickView::keyReleaseEvent(param1);
@@ -163,13 +151,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1);
+	friend void QQuickView_virtualbase_keyReleaseEvent(VirtualQQuickView* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QQuickView::mousePressEvent(param1);
@@ -178,13 +165,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
+	friend void QQuickView_virtualbase_mousePressEvent(VirtualQQuickView* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QQuickView::mouseReleaseEvent(param1);
@@ -193,13 +179,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
+	friend void QQuickView_virtualbase_mouseReleaseEvent(VirtualQQuickView* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QQuickView::mouseMoveEvent(param1);
@@ -208,41 +193,38 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QQuickView_virtualbase_mouseMoveEvent(VirtualQQuickView* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QObject* focusObject() const override {
 		if (vtbl->focusObject == 0) {
 			return QQuickView::focusObject();
 		}
 
 
-		QObject* callback_return_value = vtbl->focusObject(vtbl, this);
+		QObject* callback_return_value = vtbl->focusObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QObject* QQuickView_virtualbase_focusObject(const void* self);
+	friend QObject* QQuickView_virtualbase_focusObject(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleRoot() const override {
 		if (vtbl->accessibleRoot == 0) {
 			return QQuickView::accessibleRoot();
 		}
 
 
-		QAccessibleInterface* callback_return_value = vtbl->accessibleRoot(vtbl, this);
+		QAccessibleInterface* callback_return_value = vtbl->accessibleRoot(this);
 
 		return callback_return_value;
 	}
 
-	friend QAccessibleInterface* QQuickView_virtualbase_accessibleRoot(const void* self);
+	friend QAccessibleInterface* QQuickView_virtualbase_accessibleRoot(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void exposeEvent(QExposeEvent* param1) override {
 		if (vtbl->exposeEvent == 0) {
 			QQuickView::exposeEvent(param1);
@@ -251,13 +233,12 @@ public:
 
 		QExposeEvent* sigval1 = param1;
 
-		vtbl->exposeEvent(vtbl, this, sigval1);
+		vtbl->exposeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_exposeEvent(void* self, QExposeEvent* param1);
+	friend void QQuickView_virtualbase_exposeEvent(VirtualQQuickView* self, QExposeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QQuickView::showEvent(param1);
@@ -266,13 +247,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QQuickView_virtualbase_showEvent(VirtualQQuickView* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* param1) override {
 		if (vtbl->hideEvent == 0) {
 			QQuickView::hideEvent(param1);
@@ -281,13 +261,12 @@ public:
 
 		QHideEvent* sigval1 = param1;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_hideEvent(void* self, QHideEvent* param1);
+	friend void QQuickView_virtualbase_hideEvent(VirtualQQuickView* self, QHideEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QQuickView::closeEvent(param1);
@@ -296,13 +275,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QQuickView_virtualbase_closeEvent(VirtualQQuickView* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QQuickView::focusInEvent(param1);
@@ -311,13 +289,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QQuickView_virtualbase_focusInEvent(VirtualQQuickView* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QQuickView::focusOutEvent(param1);
@@ -326,13 +303,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QQuickView_virtualbase_focusOutEvent(VirtualQQuickView* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QQuickView::event(param1);
@@ -340,14 +316,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickView_virtualbase_event(void* self, QEvent* param1);
+	friend bool QQuickView_virtualbase_event(VirtualQQuickView* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QQuickView::mouseDoubleClickEvent(param1);
@@ -356,13 +331,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1);
+	friend void QQuickView_virtualbase_mouseDoubleClickEvent(VirtualQQuickView* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QQuickView::wheelEvent(param1);
@@ -371,13 +345,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QQuickView_virtualbase_wheelEvent(VirtualQQuickView* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* param1) override {
 		if (vtbl->tabletEvent == 0) {
 			QQuickView::tabletEvent(param1);
@@ -386,59 +359,55 @@ public:
 
 		QTabletEvent* sigval1 = param1;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_tabletEvent(void* self, QTabletEvent* param1);
+	friend void QQuickView_virtualbase_tabletEvent(VirtualQQuickView* self, QTabletEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSurface::SurfaceType surfaceType() const override {
 		if (vtbl->surfaceType == 0) {
 			return QQuickView::surfaceType();
 		}
 
 
-		int callback_return_value = vtbl->surfaceType(vtbl, this);
+		int callback_return_value = vtbl->surfaceType(this);
 
 		return static_cast<QSurface::SurfaceType>(callback_return_value);
 	}
 
-	friend int QQuickView_virtualbase_surfaceType(const void* self);
+	friend int QQuickView_virtualbase_surfaceType(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSurfaceFormat format() const override {
 		if (vtbl->format == 0) {
 			return QQuickView::format();
 		}
 
 
-		QSurfaceFormat* callback_return_value = vtbl->format(vtbl, this);
+		QSurfaceFormat* callback_return_value = vtbl->format(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSurfaceFormat* QQuickView_virtualbase_format(const void* self);
+	friend QSurfaceFormat* QQuickView_virtualbase_format(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize size() const override {
 		if (vtbl->size == 0) {
 			return QQuickView::size();
 		}
 
 
-		QSize* callback_return_value = vtbl->size(vtbl, this);
+		QSize* callback_return_value = vtbl->size(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QQuickView_virtualbase_size(const void* self);
+	friend QSize* QQuickView_virtualbase_size(const VirtualQQuickView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QQuickView::paintEvent(param1);
@@ -447,13 +416,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QQuickView_virtualbase_paintEvent(VirtualQQuickView* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* param1) override {
 		if (vtbl->moveEvent == 0) {
 			QQuickView::moveEvent(param1);
@@ -462,13 +430,12 @@ public:
 
 		QMoveEvent* sigval1 = param1;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_moveEvent(void* self, QMoveEvent* param1);
+	friend void QQuickView_virtualbase_moveEvent(VirtualQQuickView* self, QMoveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void touchEvent(QTouchEvent* param1) override {
 		if (vtbl->touchEvent == 0) {
 			QQuickView::touchEvent(param1);
@@ -477,13 +444,12 @@ public:
 
 		QTouchEvent* sigval1 = param1;
 
-		vtbl->touchEvent(vtbl, this, sigval1);
+		vtbl->touchEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_touchEvent(void* self, QTouchEvent* param1);
+	friend void QQuickView_virtualbase_touchEvent(VirtualQQuickView* self, QTouchEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QQuickView::nativeEvent(eventType, message, result);
@@ -499,14 +465,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QQuickView_virtualbase_nativeEvent(VirtualQQuickView* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQuickView::eventFilter(watched, event);
@@ -515,14 +480,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickView_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQuickView_virtualbase_eventFilter(VirtualQQuickView* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQuickView::childEvent(event);
@@ -531,13 +495,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQuickView_virtualbase_childEvent(VirtualQQuickView* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQuickView::customEvent(event);
@@ -546,13 +509,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQuickView_virtualbase_customEvent(VirtualQQuickView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQuickView::connectNotify(signal);
@@ -563,13 +525,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickView_virtualbase_connectNotify(VirtualQQuickView* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQuickView::disconnectNotify(signal);
@@ -580,42 +541,42 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickView_virtualbase_disconnectNotify(VirtualQQuickView* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QQuickView_protectedbase_resolveInterface(const void* self, const char* name, int revision);
-	friend QObject* QQuickView_protectedbase_sender(const void* self);
-	friend int QQuickView_protectedbase_senderSignalIndex(const void* self);
-	friend int QQuickView_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQuickView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void* QQuickView_protectedbase_resolveInterface(const VirtualQQuickView* self, const char* name, int revision);
+	friend QObject* QQuickView_protectedbase_sender(const VirtualQQuickView* self);
+	friend int QQuickView_protectedbase_senderSignalIndex(const VirtualQQuickView* self);
+	friend int QQuickView_protectedbase_receivers(const VirtualQQuickView* self, const char* signal);
+	friend bool QQuickView_protectedbase_isSignalConnected(const VirtualQQuickView* self, QMetaMethod* signal);
 };
 
-QQuickView* QQuickView_new(struct QQuickView_VTable* vtbl) {
-	return new VirtualQQuickView(vtbl);
+VirtualQQuickView* QQuickView_new(const QQuickView_VTable* vtbl, void* vdata) {
+	return new VirtualQQuickView(vtbl, vdata);
 }
 
-QQuickView* QQuickView_new2(struct QQuickView_VTable* vtbl, QQmlEngine* engine, QWindow* parent) {
-	return new VirtualQQuickView(vtbl, engine, parent);
+VirtualQQuickView* QQuickView_new2(const QQuickView_VTable* vtbl, void* vdata, QQmlEngine* engine, QWindow* parent) {
+	return new VirtualQQuickView(vtbl, vdata, engine, parent);
 }
 
-QQuickView* QQuickView_new3(struct QQuickView_VTable* vtbl, QUrl* source) {
-	return new VirtualQQuickView(vtbl, *source);
+VirtualQQuickView* QQuickView_new3(const QQuickView_VTable* vtbl, void* vdata, QUrl* source) {
+	return new VirtualQQuickView(vtbl, vdata, *source);
 }
 
-QQuickView* QQuickView_new4(struct QQuickView_VTable* vtbl, QUrl* source, QQuickRenderControl* renderControl) {
-	return new VirtualQQuickView(vtbl, *source, renderControl);
+VirtualQQuickView* QQuickView_new4(const QQuickView_VTable* vtbl, void* vdata, QUrl* source, QQuickRenderControl* renderControl) {
+	return new VirtualQQuickView(vtbl, vdata, *source, renderControl);
 }
 
-QQuickView* QQuickView_new5(struct QQuickView_VTable* vtbl, QWindow* parent) {
-	return new VirtualQQuickView(vtbl, parent);
+VirtualQQuickView* QQuickView_new5(const QQuickView_VTable* vtbl, void* vdata, QWindow* parent) {
+	return new VirtualQQuickView(vtbl, vdata, parent);
 }
 
-QQuickView* QQuickView_new6(struct QQuickView_VTable* vtbl, QUrl* source, QWindow* parent) {
-	return new VirtualQQuickView(vtbl, *source, parent);
+VirtualQQuickView* QQuickView_new6(const QQuickView_VTable* vtbl, void* vdata, QUrl* source, QWindow* parent) {
+	return new VirtualQQuickView(vtbl, vdata, *source, parent);
 }
 
 void QQuickView_virtbase(QQuickView* src, QQuickWindow** outptr_QQuickWindow) {
@@ -719,7 +680,7 @@ void QQuickView_statusChanged(QQuickView* self, int param1) {
 	self->statusChanged(static_cast<QQuickView::Status>(param1));
 }
 
-void QQuickView_connect_statusChanged(QQuickView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QQuickView_connect_statusChanged(VirtualQQuickView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -754,246 +715,202 @@ struct miqt_string QQuickView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QQuickView_virtualbase_metaObject(const void* self) {
+QMetaObject* QQuickView_virtualbase_metaObject(const VirtualQQuickView* self) {
 
-	return (QMetaObject*) ( (const VirtualQQuickView*)(self) )->QQuickView::metaObject();
-
+	return (QMetaObject*) self->QQuickView::metaObject();
 }
 
-void* QQuickView_virtualbase_metacast(void* self, const char* param1) {
+void* QQuickView_virtualbase_metacast(VirtualQQuickView* self, const char* param1) {
 
-	return ( (VirtualQQuickView*)(self) )->QQuickView::qt_metacast(param1);
-
+	return self->QQuickView::qt_metacast(param1);
 }
 
-int QQuickView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQuickView_virtualbase_metacall(VirtualQQuickView* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQuickView*)(self) )->QQuickView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQuickView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QQuickView_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QQuickView_virtualbase_resizeEvent(VirtualQQuickView* self, QResizeEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::resizeEvent(param1);
-
+	self->QQuickView::resizeEvent(param1);
 }
 
-void QQuickView_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QQuickView_virtualbase_timerEvent(VirtualQQuickView* self, QTimerEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::timerEvent(param1);
-
+	self->QQuickView::timerEvent(param1);
 }
 
-void QQuickView_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QQuickView_virtualbase_keyPressEvent(VirtualQQuickView* self, QKeyEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::keyPressEvent(param1);
-
+	self->QQuickView::keyPressEvent(param1);
 }
 
-void QQuickView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1) {
+void QQuickView_virtualbase_keyReleaseEvent(VirtualQQuickView* self, QKeyEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::keyReleaseEvent(param1);
-
+	self->QQuickView::keyReleaseEvent(param1);
 }
 
-void QQuickView_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
+void QQuickView_virtualbase_mousePressEvent(VirtualQQuickView* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::mousePressEvent(param1);
-
+	self->QQuickView::mousePressEvent(param1);
 }
 
-void QQuickView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
+void QQuickView_virtualbase_mouseReleaseEvent(VirtualQQuickView* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::mouseReleaseEvent(param1);
-
+	self->QQuickView::mouseReleaseEvent(param1);
 }
 
-void QQuickView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QQuickView_virtualbase_mouseMoveEvent(VirtualQQuickView* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::mouseMoveEvent(param1);
-
+	self->QQuickView::mouseMoveEvent(param1);
 }
 
-QObject* QQuickView_virtualbase_focusObject(const void* self) {
+QObject* QQuickView_virtualbase_focusObject(const VirtualQQuickView* self) {
 
-	return ( (const VirtualQQuickView*)(self) )->QQuickView::focusObject();
-
+	return self->QQuickView::focusObject();
 }
 
-QAccessibleInterface* QQuickView_virtualbase_accessibleRoot(const void* self) {
+QAccessibleInterface* QQuickView_virtualbase_accessibleRoot(const VirtualQQuickView* self) {
 
-	return ( (const VirtualQQuickView*)(self) )->QQuickView::accessibleRoot();
-
+	return self->QQuickView::accessibleRoot();
 }
 
-void QQuickView_virtualbase_exposeEvent(void* self, QExposeEvent* param1) {
+void QQuickView_virtualbase_exposeEvent(VirtualQQuickView* self, QExposeEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::exposeEvent(param1);
-
+	self->QQuickView::exposeEvent(param1);
 }
 
-void QQuickView_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QQuickView_virtualbase_showEvent(VirtualQQuickView* self, QShowEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::showEvent(param1);
-
+	self->QQuickView::showEvent(param1);
 }
 
-void QQuickView_virtualbase_hideEvent(void* self, QHideEvent* param1) {
+void QQuickView_virtualbase_hideEvent(VirtualQQuickView* self, QHideEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::hideEvent(param1);
-
+	self->QQuickView::hideEvent(param1);
 }
 
-void QQuickView_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QQuickView_virtualbase_closeEvent(VirtualQQuickView* self, QCloseEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::closeEvent(param1);
-
+	self->QQuickView::closeEvent(param1);
 }
 
-void QQuickView_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QQuickView_virtualbase_focusInEvent(VirtualQQuickView* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::focusInEvent(param1);
-
+	self->QQuickView::focusInEvent(param1);
 }
 
-void QQuickView_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QQuickView_virtualbase_focusOutEvent(VirtualQQuickView* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::focusOutEvent(param1);
-
+	self->QQuickView::focusOutEvent(param1);
 }
 
-bool QQuickView_virtualbase_event(void* self, QEvent* param1) {
+bool QQuickView_virtualbase_event(VirtualQQuickView* self, QEvent* param1) {
 
-	return ( (VirtualQQuickView*)(self) )->QQuickView::event(param1);
-
+	return self->QQuickView::event(param1);
 }
 
-void QQuickView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1) {
+void QQuickView_virtualbase_mouseDoubleClickEvent(VirtualQQuickView* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::mouseDoubleClickEvent(param1);
-
+	self->QQuickView::mouseDoubleClickEvent(param1);
 }
 
-void QQuickView_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QQuickView_virtualbase_wheelEvent(VirtualQQuickView* self, QWheelEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::wheelEvent(param1);
-
+	self->QQuickView::wheelEvent(param1);
 }
 
-void QQuickView_virtualbase_tabletEvent(void* self, QTabletEvent* param1) {
+void QQuickView_virtualbase_tabletEvent(VirtualQQuickView* self, QTabletEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::tabletEvent(param1);
-
+	self->QQuickView::tabletEvent(param1);
 }
 
-int QQuickView_virtualbase_surfaceType(const void* self) {
+int QQuickView_virtualbase_surfaceType(const VirtualQQuickView* self) {
 
-	VirtualQQuickView::SurfaceType _ret = ( (const VirtualQQuickView*)(self) )->QQuickView::surfaceType();
+	VirtualQQuickView::SurfaceType _ret = self->QQuickView::surfaceType();
 	return static_cast<int>(_ret);
-
 }
 
-QSurfaceFormat* QQuickView_virtualbase_format(const void* self) {
+QSurfaceFormat* QQuickView_virtualbase_format(const VirtualQQuickView* self) {
 
-	return new QSurfaceFormat(( (const VirtualQQuickView*)(self) )->QQuickView::format());
-
+	return new QSurfaceFormat(self->QQuickView::format());
 }
 
-QSize* QQuickView_virtualbase_size(const void* self) {
+QSize* QQuickView_virtualbase_size(const VirtualQQuickView* self) {
 
-	return new QSize(( (const VirtualQQuickView*)(self) )->QQuickView::size());
-
+	return new QSize(self->QQuickView::size());
 }
 
-void QQuickView_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QQuickView_virtualbase_paintEvent(VirtualQQuickView* self, QPaintEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::paintEvent(param1);
-
+	self->QQuickView::paintEvent(param1);
 }
 
-void QQuickView_virtualbase_moveEvent(void* self, QMoveEvent* param1) {
+void QQuickView_virtualbase_moveEvent(VirtualQQuickView* self, QMoveEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::moveEvent(param1);
-
+	self->QQuickView::moveEvent(param1);
 }
 
-void QQuickView_virtualbase_touchEvent(void* self, QTouchEvent* param1) {
+void QQuickView_virtualbase_touchEvent(VirtualQQuickView* self, QTouchEvent* param1) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::touchEvent(param1);
-
+	self->QQuickView::touchEvent(param1);
 }
 
-bool QQuickView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QQuickView_virtualbase_nativeEvent(VirtualQQuickView* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQQuickView*)(self) )->QQuickView::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QQuickView::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-bool QQuickView_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQuickView_virtualbase_eventFilter(VirtualQQuickView* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQuickView*)(self) )->QQuickView::eventFilter(watched, event);
-
+	return self->QQuickView::eventFilter(watched, event);
 }
 
-void QQuickView_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQuickView_virtualbase_childEvent(VirtualQQuickView* self, QChildEvent* event) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::childEvent(event);
-
+	self->QQuickView::childEvent(event);
 }
 
-void QQuickView_virtualbase_customEvent(void* self, QEvent* event) {
+void QQuickView_virtualbase_customEvent(VirtualQQuickView* self, QEvent* event) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::customEvent(event);
-
+	self->QQuickView::customEvent(event);
 }
 
-void QQuickView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQuickView_virtualbase_connectNotify(VirtualQQuickView* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::connectNotify(*signal);
-
+	self->QQuickView::connectNotify(*signal);
 }
 
-void QQuickView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQuickView_virtualbase_disconnectNotify(VirtualQQuickView* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickView*)(self) )->QQuickView::disconnectNotify(*signal);
-
+	self->QQuickView::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQuickView_staticMetaObject() { return &QQuickView::staticMetaObject; }
-void* QQuickView_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
-	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	
-	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
+const QQuickView_VTable* QQuickView_vtbl(const VirtualQQuickView* self) { return self->vtbl; }
+void* QQuickView_vdata(const VirtualQQuickView* self) { return self->vdata; }
+void QQuickView_setVdata(VirtualQQuickView* self, void* vdata) { self->vdata = vdata; }
+
+void* QQuickView_protectedbase_resolveInterface(const VirtualQQuickView* self, const char* name, int revision) {
+	return self->resolveInterface(name, static_cast<int>(revision));
 }
 
-QObject* QQuickView_protectedbase_sender(const void* self) {
-	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QQuickView_protectedbase_sender(const VirtualQQuickView* self) {
+	return self->sender();
 }
 
-int QQuickView_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQuickView_protectedbase_senderSignalIndex(const VirtualQQuickView* self) {
+	return self->senderSignalIndex();
 }
 
-int QQuickView_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQuickView_protectedbase_receivers(const VirtualQQuickView* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQuickView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQuickView_protectedbase_isSignalConnected(const VirtualQQuickView* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQuickView_delete(QQuickView* self) {

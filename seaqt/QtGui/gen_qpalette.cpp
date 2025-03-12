@@ -4,15 +4,6 @@
 #include <QVariant>
 #include <qpalette.h>
 #include "gen_qpalette.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPalette* QPalette_new() {
 	return new QPalette();
 }
@@ -265,6 +256,7 @@ void QPalette_setResolveMask(QPalette* self, unsigned long long mask) {
 }
 
 const QMetaObject* QPalette_staticMetaObject() { return &QPalette::staticMetaObject; }
+
 void QPalette_delete(QPalette* self) {
 	delete self;
 }

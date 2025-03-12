@@ -11,15 +11,6 @@
 #include <QVariant>
 #include <qnetworkrequest.h>
 #include "gen_qnetworkrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkRequest* QNetworkRequest_new() {
 	return new QNetworkRequest();
 }

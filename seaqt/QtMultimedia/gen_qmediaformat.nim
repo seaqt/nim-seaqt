@@ -105,14 +105,14 @@ type cQMediaFormat*{.exportc: "QMediaFormat", incompleteStruct.} = object
 
 proc fcQMediaFormat_operatorAssign(self: pointer, other: pointer): void {.importc: "QMediaFormat_operatorAssign".}
 proc fcQMediaFormat_swap(self: pointer, other: pointer): void {.importc: "QMediaFormat_swap".}
-proc fcQMediaFormat_fileFormat(self: pointer, ): cint {.importc: "QMediaFormat_fileFormat".}
+proc fcQMediaFormat_fileFormat(self: pointer): cint {.importc: "QMediaFormat_fileFormat".}
 proc fcQMediaFormat_setFileFormat(self: pointer, f: cint): void {.importc: "QMediaFormat_setFileFormat".}
 proc fcQMediaFormat_setVideoCodec(self: pointer, codec: cint): void {.importc: "QMediaFormat_setVideoCodec".}
-proc fcQMediaFormat_videoCodec(self: pointer, ): cint {.importc: "QMediaFormat_videoCodec".}
+proc fcQMediaFormat_videoCodec(self: pointer): cint {.importc: "QMediaFormat_videoCodec".}
 proc fcQMediaFormat_setAudioCodec(self: pointer, codec: cint): void {.importc: "QMediaFormat_setAudioCodec".}
-proc fcQMediaFormat_audioCodec(self: pointer, ): cint {.importc: "QMediaFormat_audioCodec".}
+proc fcQMediaFormat_audioCodec(self: pointer): cint {.importc: "QMediaFormat_audioCodec".}
 proc fcQMediaFormat_isSupported(self: pointer, mode: cint): bool {.importc: "QMediaFormat_isSupported".}
-proc fcQMediaFormat_mimeType(self: pointer, ): pointer {.importc: "QMediaFormat_mimeType".}
+proc fcQMediaFormat_mimeType(self: pointer): pointer {.importc: "QMediaFormat_mimeType".}
 proc fcQMediaFormat_supportedFileFormats(self: pointer, m: cint): struct_miqt_array {.importc: "QMediaFormat_supportedFileFormats".}
 proc fcQMediaFormat_supportedVideoCodecs(self: pointer, m: cint): struct_miqt_array {.importc: "QMediaFormat_supportedVideoCodecs".}
 proc fcQMediaFormat_supportedAudioCodecs(self: pointer, m: cint): struct_miqt_array {.importc: "QMediaFormat_supportedAudioCodecs".}
@@ -136,7 +136,7 @@ proc operatorAssign*(self: gen_qmediaformat_types.QMediaFormat, other: gen_qmedi
 proc swap*(self: gen_qmediaformat_types.QMediaFormat, other: gen_qmediaformat_types.QMediaFormat): void =
   fcQMediaFormat_swap(self.h, other.h)
 
-proc fileFormat*(self: gen_qmediaformat_types.QMediaFormat, ): cint =
+proc fileFormat*(self: gen_qmediaformat_types.QMediaFormat): cint =
   cint(fcQMediaFormat_fileFormat(self.h))
 
 proc setFileFormat*(self: gen_qmediaformat_types.QMediaFormat, f: cint): void =
@@ -145,19 +145,19 @@ proc setFileFormat*(self: gen_qmediaformat_types.QMediaFormat, f: cint): void =
 proc setVideoCodec*(self: gen_qmediaformat_types.QMediaFormat, codec: cint): void =
   fcQMediaFormat_setVideoCodec(self.h, cint(codec))
 
-proc videoCodec*(self: gen_qmediaformat_types.QMediaFormat, ): cint =
+proc videoCodec*(self: gen_qmediaformat_types.QMediaFormat): cint =
   cint(fcQMediaFormat_videoCodec(self.h))
 
 proc setAudioCodec*(self: gen_qmediaformat_types.QMediaFormat, codec: cint): void =
   fcQMediaFormat_setAudioCodec(self.h, cint(codec))
 
-proc audioCodec*(self: gen_qmediaformat_types.QMediaFormat, ): cint =
+proc audioCodec*(self: gen_qmediaformat_types.QMediaFormat): cint =
   cint(fcQMediaFormat_audioCodec(self.h))
 
 proc isSupported*(self: gen_qmediaformat_types.QMediaFormat, mode: cint): bool =
   fcQMediaFormat_isSupported(self.h, cint(mode))
 
-proc mimeType*(self: gen_qmediaformat_types.QMediaFormat, ): gen_qmimetype_types.QMimeType =
+proc mimeType*(self: gen_qmediaformat_types.QMediaFormat): gen_qmimetype_types.QMimeType =
   gen_qmimetype_types.QMimeType(h: fcQMediaFormat_mimeType(self.h), owned: true)
 
 proc supportedFileFormats*(self: gen_qmediaformat_types.QMediaFormat, m: cint): seq[cint] =

@@ -2,15 +2,6 @@
 #include <QSemaphoreReleaser>
 #include <qsemaphore.h>
 #include "gen_qsemaphore.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSemaphore* QSemaphore_new() {
 	return new QSemaphore();
 }

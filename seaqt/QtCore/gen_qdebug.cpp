@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qdebug.h>
 #include "gen_qdebug.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDebug* QDebug_new(QIODevice* device) {
 	return new QDebug(device);
 }

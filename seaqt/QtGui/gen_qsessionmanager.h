@@ -49,6 +49,7 @@ bool QSessionManager_isPhase2(const QSessionManager* self);
 void QSessionManager_requestPhase2(QSessionManager* self);
 struct miqt_string QSessionManager_tr2(const char* s, const char* c);
 struct miqt_string QSessionManager_tr3(const char* s, const char* c, int n);
+
 const QMetaObject* QSessionManager_staticMetaObject();
 
 #ifdef __cplusplus

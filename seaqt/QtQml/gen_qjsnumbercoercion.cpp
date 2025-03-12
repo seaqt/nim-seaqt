@@ -1,15 +1,6 @@
 #include <QJSNumberCoercion>
 #include <qjsnumbercoercion.h>
 #include "gen_qjsnumbercoercion.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* param1) {
 	return new QJSNumberCoercion(*param1);
 }

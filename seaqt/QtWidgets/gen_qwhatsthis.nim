@@ -56,22 +56,22 @@ proc fcQWhatsThis_createAction(): pointer {.importc: "QWhatsThis_createAction".}
 proc fcQWhatsThis_showText3(pos: pointer, text: struct_miqt_string, w: pointer): void {.importc: "QWhatsThis_showText3".}
 proc fcQWhatsThis_createAction1(parent: pointer): pointer {.importc: "QWhatsThis_createAction1".}
 
-proc enterWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis, ): void =
+proc enterWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_enterWhatsThisMode()
 
-proc inWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis, ): bool =
+proc inWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): bool =
   fcQWhatsThis_inWhatsThisMode()
 
-proc leaveWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis, ): void =
+proc leaveWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_leaveWhatsThisMode()
 
 proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string): void =
   fcQWhatsThis_showText(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis, ): void =
+proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_hideText()
 
-proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis, ): gen_qaction_types.QAction =
+proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQWhatsThis_createAction(), owned: false)
 
 proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget): void =

@@ -26,22 +26,31 @@ typedef struct QGestureRecognizer QGestureRecognizer;
 typedef struct QObject QObject;
 #endif
 
-struct QGestureRecognizer_VTable {
-	void (*destructor)(struct QGestureRecognizer_VTable* vtbl, QGestureRecognizer* self);
-	QGesture* (*create)(struct QGestureRecognizer_VTable* vtbl, QGestureRecognizer* self, QObject* target);
-	int (*recognize)(struct QGestureRecognizer_VTable* vtbl, QGestureRecognizer* self, QGesture* state, QObject* watched, QEvent* event);
-	void (*reset)(struct QGestureRecognizer_VTable* vtbl, QGestureRecognizer* self, QGesture* state);
-};
-QGestureRecognizer* QGestureRecognizer_new(struct QGestureRecognizer_VTable* vtbl);
+typedef struct VirtualQGestureRecognizer VirtualQGestureRecognizer;
+typedef struct QGestureRecognizer_VTable{
+	void (*destructor)(VirtualQGestureRecognizer* self);
+	QGesture* (*create)(VirtualQGestureRecognizer* self, QObject* target);
+	int (*recognize)(VirtualQGestureRecognizer* self, QGesture* state, QObject* watched, QEvent* event);
+	void (*reset)(VirtualQGestureRecognizer* self, QGesture* state);
+}QGestureRecognizer_VTable;
+
+const QGestureRecognizer_VTable* QGestureRecognizer_vtbl(const VirtualQGestureRecognizer* self);
+void* QGestureRecognizer_vdata(const VirtualQGestureRecognizer* self);
+void QGestureRecognizer_setVdata(VirtualQGestureRecognizer* self, void* vdata);
+
+VirtualQGestureRecognizer* QGestureRecognizer_new(const QGestureRecognizer_VTable* vtbl, void* vdata);
+
 QGesture* QGestureRecognizer_create(QGestureRecognizer* self, QObject* target);
 int QGestureRecognizer_recognize(QGestureRecognizer* self, QGesture* state, QObject* watched, QEvent* event);
 void QGestureRecognizer_reset(QGestureRecognizer* self, QGesture* state);
 int QGestureRecognizer_registerRecognizer(QGestureRecognizer* recognizer);
 void QGestureRecognizer_unregisterRecognizer(int type);
 void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecognizer* param1);
-QGesture* QGestureRecognizer_virtualbase_create(void* self, QObject* target);
-int QGestureRecognizer_virtualbase_recognize(void* self, QGesture* state, QObject* watched, QEvent* event);
-void QGestureRecognizer_virtualbase_reset(void* self, QGesture* state);
+
+QGesture* QGestureRecognizer_virtualbase_create(VirtualQGestureRecognizer* self, QObject* target);
+int QGestureRecognizer_virtualbase_recognize(VirtualQGestureRecognizer* self, QGesture* state, QObject* watched, QEvent* event);
+void QGestureRecognizer_virtualbase_reset(VirtualQGestureRecognizer* self, QGesture* state);
+
 void QGestureRecognizer_delete(QGestureRecognizer* self);
 
 #ifdef __cplusplus

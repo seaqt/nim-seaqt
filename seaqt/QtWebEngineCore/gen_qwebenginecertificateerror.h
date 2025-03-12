@@ -25,6 +25,7 @@ typedef struct QWebEngineCertificateError QWebEngineCertificateError;
 #endif
 
 QWebEngineCertificateError* QWebEngineCertificateError_new(QWebEngineCertificateError* other);
+
 void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* other);
 int QWebEngineCertificateError_type(const QWebEngineCertificateError* self);
 QUrl* QWebEngineCertificateError_url(const QWebEngineCertificateError* self);
@@ -34,6 +35,7 @@ void QWebEngineCertificateError_defer(QWebEngineCertificateError* self);
 void QWebEngineCertificateError_rejectCertificate(QWebEngineCertificateError* self);
 void QWebEngineCertificateError_acceptCertificate(QWebEngineCertificateError* self);
 struct miqt_array /* of QSslCertificate* */  QWebEngineCertificateError_certificateChain(const QWebEngineCertificateError* self);
+
 const QMetaObject* QWebEngineCertificateError_staticMetaObject();
 void QWebEngineCertificateError_delete(QWebEngineCertificateError* self);
 

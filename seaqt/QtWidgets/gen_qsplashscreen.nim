@@ -72,89 +72,91 @@ export
 
 type cQSplashScreen*{.exportc: "QSplashScreen", incompleteStruct.} = object
 
-proc fcQSplashScreen_metaObject(self: pointer, ): pointer {.importc: "QSplashScreen_metaObject".}
+proc fcQSplashScreen_metaObject(self: pointer): pointer {.importc: "QSplashScreen_metaObject".}
 proc fcQSplashScreen_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplashScreen_metacast".}
 proc fcQSplashScreen_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplashScreen_metacall".}
 proc fcQSplashScreen_tr(s: cstring): struct_miqt_string {.importc: "QSplashScreen_tr".}
 proc fcQSplashScreen_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QSplashScreen_setPixmap".}
-proc fcQSplashScreen_pixmap(self: pointer, ): pointer {.importc: "QSplashScreen_pixmap".}
+proc fcQSplashScreen_pixmap(self: pointer): pointer {.importc: "QSplashScreen_pixmap".}
 proc fcQSplashScreen_finish(self: pointer, w: pointer): void {.importc: "QSplashScreen_finish".}
-proc fcQSplashScreen_repaint(self: pointer, ): void {.importc: "QSplashScreen_repaint".}
-proc fcQSplashScreen_message(self: pointer, ): struct_miqt_string {.importc: "QSplashScreen_message".}
+proc fcQSplashScreen_repaint(self: pointer): void {.importc: "QSplashScreen_repaint".}
+proc fcQSplashScreen_message(self: pointer): struct_miqt_string {.importc: "QSplashScreen_message".}
 proc fcQSplashScreen_showMessage(self: pointer, message: struct_miqt_string): void {.importc: "QSplashScreen_showMessage".}
-proc fcQSplashScreen_clearMessage(self: pointer, ): void {.importc: "QSplashScreen_clearMessage".}
+proc fcQSplashScreen_clearMessage(self: pointer): void {.importc: "QSplashScreen_clearMessage".}
 proc fcQSplashScreen_messageChanged(self: pointer, message: struct_miqt_string): void {.importc: "QSplashScreen_messageChanged".}
 proc fcQSplashScreen_connect_messageChanged(self: pointer, slot: int, callback: proc (slot: int, message: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSplashScreen_connect_messageChanged".}
 proc fcQSplashScreen_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSplashScreen_tr2".}
 proc fcQSplashScreen_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplashScreen_tr3".}
 proc fcQSplashScreen_showMessage2(self: pointer, message: struct_miqt_string, alignment: cint): void {.importc: "QSplashScreen_showMessage2".}
 proc fcQSplashScreen_showMessage3(self: pointer, message: struct_miqt_string, alignment: cint, color: pointer): void {.importc: "QSplashScreen_showMessage3".}
+proc fcQSplashScreen_vtbl(self: pointer): pointer {.importc: "QSplashScreen_vtbl".}
+proc fcQSplashScreen_vdata(self: pointer): pointer {.importc: "QSplashScreen_vdata".}
 type cQSplashScreenVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQSplashScreenVTable, self: ptr cQSplashScreen) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  drawContents*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQSplashScreen_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSplashScreen_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  drawContents*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSplashScreen_virtualbase_metaObject(self: pointer): pointer {.importc: "QSplashScreen_virtualbase_metaObject".}
 proc fcQSplashScreen_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplashScreen_virtualbase_metacast".}
 proc fcQSplashScreen_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplashScreen_virtualbase_metacall".}
 proc fcQSplashScreen_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QSplashScreen_virtualbase_event".}
 proc fcQSplashScreen_virtualbase_drawContents(self: pointer, painter: pointer): void {.importc: "QSplashScreen_virtualbase_drawContents".}
 proc fcQSplashScreen_virtualbase_mousePressEvent(self: pointer, param1: pointer): void {.importc: "QSplashScreen_virtualbase_mousePressEvent".}
-proc fcQSplashScreen_virtualbase_devType(self: pointer, ): cint {.importc: "QSplashScreen_virtualbase_devType".}
+proc fcQSplashScreen_virtualbase_devType(self: pointer): cint {.importc: "QSplashScreen_virtualbase_devType".}
 proc fcQSplashScreen_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QSplashScreen_virtualbase_setVisible".}
-proc fcQSplashScreen_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QSplashScreen_virtualbase_sizeHint".}
-proc fcQSplashScreen_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QSplashScreen_virtualbase_minimumSizeHint".}
+proc fcQSplashScreen_virtualbase_sizeHint(self: pointer): pointer {.importc: "QSplashScreen_virtualbase_sizeHint".}
+proc fcQSplashScreen_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QSplashScreen_virtualbase_minimumSizeHint".}
 proc fcQSplashScreen_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QSplashScreen_virtualbase_heightForWidth".}
-proc fcQSplashScreen_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QSplashScreen_virtualbase_hasHeightForWidth".}
-proc fcQSplashScreen_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QSplashScreen_virtualbase_paintEngine".}
+proc fcQSplashScreen_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QSplashScreen_virtualbase_hasHeightForWidth".}
+proc fcQSplashScreen_virtualbase_paintEngine(self: pointer): pointer {.importc: "QSplashScreen_virtualbase_paintEngine".}
 proc fcQSplashScreen_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QSplashScreen_virtualbase_mouseReleaseEvent".}
 proc fcQSplashScreen_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QSplashScreen_virtualbase_mouseDoubleClickEvent".}
 proc fcQSplashScreen_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QSplashScreen_virtualbase_mouseMoveEvent".}
@@ -183,7 +185,7 @@ proc fcQSplashScreen_virtualbase_changeEvent(self: pointer, param1: pointer): vo
 proc fcQSplashScreen_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QSplashScreen_virtualbase_metric".}
 proc fcQSplashScreen_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QSplashScreen_virtualbase_initPainter".}
 proc fcQSplashScreen_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QSplashScreen_virtualbase_redirected".}
-proc fcQSplashScreen_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QSplashScreen_virtualbase_sharedPainter".}
+proc fcQSplashScreen_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QSplashScreen_virtualbase_sharedPainter".}
 proc fcQSplashScreen_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QSplashScreen_virtualbase_inputMethodEvent".}
 proc fcQSplashScreen_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QSplashScreen_virtualbase_inputMethodQuery".}
 proc fcQSplashScreen_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QSplashScreen_virtualbase_focusNextPrevChild".}
@@ -193,24 +195,24 @@ proc fcQSplashScreen_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSplashScreen_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSplashScreen_virtualbase_customEvent".}
 proc fcQSplashScreen_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSplashScreen_virtualbase_connectNotify".}
 proc fcQSplashScreen_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSplashScreen_virtualbase_disconnectNotify".}
-proc fcQSplashScreen_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_updateMicroFocus".}
-proc fcQSplashScreen_protectedbase_create(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_create".}
-proc fcQSplashScreen_protectedbase_destroy(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_destroy".}
-proc fcQSplashScreen_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSplashScreen_protectedbase_focusNextChild".}
-proc fcQSplashScreen_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSplashScreen_protectedbase_focusPreviousChild".}
-proc fcQSplashScreen_protectedbase_sender(self: pointer, ): pointer {.importc: "QSplashScreen_protectedbase_sender".}
-proc fcQSplashScreen_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSplashScreen_protectedbase_senderSignalIndex".}
+proc fcQSplashScreen_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QSplashScreen_protectedbase_updateMicroFocus".}
+proc fcQSplashScreen_protectedbase_create(self: pointer): void {.importc: "QSplashScreen_protectedbase_create".}
+proc fcQSplashScreen_protectedbase_destroy(self: pointer): void {.importc: "QSplashScreen_protectedbase_destroy".}
+proc fcQSplashScreen_protectedbase_focusNextChild(self: pointer): bool {.importc: "QSplashScreen_protectedbase_focusNextChild".}
+proc fcQSplashScreen_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QSplashScreen_protectedbase_focusPreviousChild".}
+proc fcQSplashScreen_protectedbase_sender(self: pointer): pointer {.importc: "QSplashScreen_protectedbase_sender".}
+proc fcQSplashScreen_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSplashScreen_protectedbase_senderSignalIndex".}
 proc fcQSplashScreen_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplashScreen_protectedbase_receivers".}
 proc fcQSplashScreen_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplashScreen_protectedbase_isSignalConnected".}
-proc fcQSplashScreen_new(vtbl: pointer, ): ptr cQSplashScreen {.importc: "QSplashScreen_new".}
-proc fcQSplashScreen_new2(vtbl: pointer, screen: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new2".}
-proc fcQSplashScreen_new3(vtbl: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new3".}
-proc fcQSplashScreen_new4(vtbl: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new4".}
-proc fcQSplashScreen_new5(vtbl: pointer, screen: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new5".}
-proc fcQSplashScreen_new6(vtbl: pointer, screen: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new6".}
+proc fcQSplashScreen_new(vtbl, vdata: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new".}
+proc fcQSplashScreen_new2(vtbl, vdata: pointer, screen: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new2".}
+proc fcQSplashScreen_new3(vtbl, vdata: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new3".}
+proc fcQSplashScreen_new4(vtbl, vdata: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new4".}
+proc fcQSplashScreen_new5(vtbl, vdata: pointer, screen: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new5".}
+proc fcQSplashScreen_new6(vtbl, vdata: pointer, screen: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new6".}
 proc fcQSplashScreen_staticMetaObject(): pointer {.importc: "QSplashScreen_staticMetaObject".}
 
-proc metaObject*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsplashscreen_types.QSplashScreen, param1: cstring): pointer =
@@ -228,16 +230,16 @@ proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring): string =
 proc setPixmap*(self: gen_qsplashscreen_types.QSplashScreen, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQSplashScreen_setPixmap(self.h, pixmap.h)
 
-proc pixmap*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qpixmap_types.QPixmap =
+proc pixmap*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQSplashScreen_pixmap(self.h), owned: true)
 
 proc finish*(self: gen_qsplashscreen_types.QSplashScreen, w: gen_qwidget_types.QWidget): void =
   fcQSplashScreen_finish(self.h, w.h)
 
-proc repaint*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+proc repaint*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_repaint(self.h)
 
-proc message*(self: gen_qsplashscreen_types.QSplashScreen, ): string =
+proc message*(self: gen_qsplashscreen_types.QSplashScreen): string =
   let v_ms = fcQSplashScreen_message(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -246,14 +248,14 @@ proc message*(self: gen_qsplashscreen_types.QSplashScreen, ): string =
 proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: string): void =
   fcQSplashScreen_showMessage(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
 
-proc clearMessage*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+proc clearMessage*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_clearMessage(self.h)
 
 proc messageChanged*(self: gen_qsplashscreen_types.QSplashScreen, message: string): void =
   fcQSplashScreen_messageChanged(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
 
 type QSplashScreenmessageChangedSlot* = proc(message: string)
-proc miqt_exec_callback_cQSplashScreen_messageChanged(slot: int, message: struct_miqt_string) {.cdecl.} =
+proc cQSplashScreen_slot_callback_messageChanged(slot: int, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSplashScreenmessageChangedSlot](cast[pointer](slot))
   let vmessage_ms = message
   let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
@@ -262,7 +264,7 @@ proc miqt_exec_callback_cQSplashScreen_messageChanged(slot: int, message: struct
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQSplashScreen_messageChanged_release(slot: int) {.cdecl.} =
+proc cQSplashScreen_slot_callback_messageChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSplashScreenmessageChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -270,7 +272,7 @@ proc onmessageChanged*(self: gen_qsplashscreen_types.QSplashScreen, slot: QSplas
   var tmp = new QSplashScreenmessageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSplashScreen_connect_messageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSplashScreen_messageChanged, miqt_exec_callback_cQSplashScreen_messageChanged_release)
+  fcQSplashScreen_connect_messageChanged(self.h, cast[int](addr tmp[]), cQSplashScreen_slot_callback_messageChanged, cQSplashScreen_slot_callback_messageChanged_release)
 
 proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring): string =
   let v_ms = fcQSplashScreen_tr2(s, c)
@@ -394,11 +396,11 @@ type QSplashScreenVTable* {.inheritable, pure.} = object
   customEvent*: QSplashScreencustomEventProc
   connectNotify*: QSplashScreenconnectNotifyProc
   disconnectNotify*: QSplashScreendisconnectNotifyProc
-proc QSplashScreenmetaObject*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qobjectdefs_types.QMetaObject =
+proc QSplashScreenmetaObject*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQSplashScreen_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -409,8 +411,8 @@ proc miqt_exec_callback_cQSplashScreen_metaObject(vtbl: pointer, self: pointer):
 proc QSplashScreenmetacast*(self: gen_qsplashscreen_types.QSplashScreen, param1: cstring): pointer =
   fcQSplashScreen_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQSplashScreen_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -419,8 +421,8 @@ proc miqt_exec_callback_cQSplashScreen_metacast(vtbl: pointer, self: pointer, pa
 proc QSplashScreenmetacall*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint, param2: cint, param3: pointer): cint =
   fcQSplashScreen_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQSplashScreen_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -431,8 +433,8 @@ proc miqt_exec_callback_cQSplashScreen_metacall(vtbl: pointer, self: pointer, pa
 proc QSplashScreenevent*(self: gen_qsplashscreen_types.QSplashScreen, e: gen_qcoreevent_types.QEvent): bool =
   fcQSplashScreen_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQSplashScreen_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -441,8 +443,8 @@ proc miqt_exec_callback_cQSplashScreen_event(vtbl: pointer, self: pointer, e: po
 proc QSplashScreendrawContents*(self: gen_qsplashscreen_types.QSplashScreen, painter: gen_qpainter_types.QPainter): void =
   fcQSplashScreen_virtualbase_drawContents(self.h, painter.h)
 
-proc miqt_exec_callback_cQSplashScreen_drawContents(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_drawContents(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].drawContents(self, slotval1)
@@ -450,17 +452,17 @@ proc miqt_exec_callback_cQSplashScreen_drawContents(vtbl: pointer, self: pointer
 proc QSplashScreenmousePressEvent*(self: gen_qsplashscreen_types.QSplashScreen, param1: gen_qevent_types.QMouseEvent): void =
   fcQSplashScreen_virtualbase_mousePressEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQSplashScreen_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QSplashScreendevType*(self: gen_qsplashscreen_types.QSplashScreen, ): cint =
+proc QSplashScreendevType*(self: gen_qsplashscreen_types.QSplashScreen): cint =
   fcQSplashScreen_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQSplashScreen_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -468,17 +470,17 @@ proc miqt_exec_callback_cQSplashScreen_devType(vtbl: pointer, self: pointer): ci
 proc QSplashScreensetVisible*(self: gen_qsplashscreen_types.QSplashScreen, visible: bool): void =
   fcQSplashScreen_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQSplashScreen_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QSplashScreensizeHint*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qsize_types.QSize =
+proc QSplashScreensizeHint*(self: gen_qsplashscreen_types.QSplashScreen): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQSplashScreen_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -486,11 +488,11 @@ proc miqt_exec_callback_cQSplashScreen_sizeHint(vtbl: pointer, self: pointer): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplashScreenminimumSizeHint*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qsize_types.QSize =
+proc QSplashScreenminimumSizeHint*(self: gen_qsplashscreen_types.QSplashScreen): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSplashScreen_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQSplashScreen_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -501,27 +503,27 @@ proc miqt_exec_callback_cQSplashScreen_minimumSizeHint(vtbl: pointer, self: poin
 proc QSplashScreenheightForWidth*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): cint =
   fcQSplashScreen_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQSplashScreen_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QSplashScreenhasHeightForWidth*(self: gen_qsplashscreen_types.QSplashScreen, ): bool =
+proc QSplashScreenhasHeightForWidth*(self: gen_qsplashscreen_types.QSplashScreen): bool =
   fcQSplashScreen_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQSplashScreen_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QSplashScreenpaintEngine*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qpaintengine_types.QPaintEngine =
+proc QSplashScreenpaintEngine*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQSplashScreen_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQSplashScreen_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -532,8 +534,8 @@ proc miqt_exec_callback_cQSplashScreen_paintEngine(vtbl: pointer, self: pointer)
 proc QSplashScreenmouseReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
   fcQSplashScreen_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -541,8 +543,8 @@ proc miqt_exec_callback_cQSplashScreen_mouseReleaseEvent(vtbl: pointer, self: po
 proc QSplashScreenmouseDoubleClickEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
   fcQSplashScreen_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -550,8 +552,8 @@ proc miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent(vtbl: pointer, self
 proc QSplashScreenmouseMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMouseEvent): void =
   fcQSplashScreen_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -559,8 +561,8 @@ proc miqt_exec_callback_cQSplashScreen_mouseMoveEvent(vtbl: pointer, self: point
 proc QSplashScreenwheelEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QWheelEvent): void =
   fcQSplashScreen_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -568,8 +570,8 @@ proc miqt_exec_callback_cQSplashScreen_wheelEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreenkeyPressEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QKeyEvent): void =
   fcQSplashScreen_virtualbase_keyPressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -577,8 +579,8 @@ proc miqt_exec_callback_cQSplashScreen_keyPressEvent(vtbl: pointer, self: pointe
 proc QSplashScreenkeyReleaseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QKeyEvent): void =
   fcQSplashScreen_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -586,8 +588,8 @@ proc miqt_exec_callback_cQSplashScreen_keyReleaseEvent(vtbl: pointer, self: poin
 proc QSplashScreenfocusInEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QFocusEvent): void =
   fcQSplashScreen_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -595,8 +597,8 @@ proc miqt_exec_callback_cQSplashScreen_focusInEvent(vtbl: pointer, self: pointer
 proc QSplashScreenfocusOutEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QFocusEvent): void =
   fcQSplashScreen_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -604,8 +606,8 @@ proc miqt_exec_callback_cQSplashScreen_focusOutEvent(vtbl: pointer, self: pointe
 proc QSplashScreenenterEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QEnterEvent): void =
   fcQSplashScreen_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -613,8 +615,8 @@ proc miqt_exec_callback_cQSplashScreen_enterEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreenleaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QEvent): void =
   fcQSplashScreen_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -622,8 +624,8 @@ proc miqt_exec_callback_cQSplashScreen_leaveEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreenpaintEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QPaintEvent): void =
   fcQSplashScreen_virtualbase_paintEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -631,8 +633,8 @@ proc miqt_exec_callback_cQSplashScreen_paintEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreenmoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QMoveEvent): void =
   fcQSplashScreen_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -640,8 +642,8 @@ proc miqt_exec_callback_cQSplashScreen_moveEvent(vtbl: pointer, self: pointer, e
 proc QSplashScreenresizeEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QResizeEvent): void =
   fcQSplashScreen_virtualbase_resizeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -649,8 +651,8 @@ proc miqt_exec_callback_cQSplashScreen_resizeEvent(vtbl: pointer, self: pointer,
 proc QSplashScreencloseEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QCloseEvent): void =
   fcQSplashScreen_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -658,8 +660,8 @@ proc miqt_exec_callback_cQSplashScreen_closeEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreencontextMenuEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QContextMenuEvent): void =
   fcQSplashScreen_virtualbase_contextMenuEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -667,8 +669,8 @@ proc miqt_exec_callback_cQSplashScreen_contextMenuEvent(vtbl: pointer, self: poi
 proc QSplashScreentabletEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QTabletEvent): void =
   fcQSplashScreen_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -676,8 +678,8 @@ proc miqt_exec_callback_cQSplashScreen_tabletEvent(vtbl: pointer, self: pointer,
 proc QSplashScreenactionEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QActionEvent): void =
   fcQSplashScreen_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -685,8 +687,8 @@ proc miqt_exec_callback_cQSplashScreen_actionEvent(vtbl: pointer, self: pointer,
 proc QSplashScreendragEnterEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragEnterEvent): void =
   fcQSplashScreen_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -694,8 +696,8 @@ proc miqt_exec_callback_cQSplashScreen_dragEnterEvent(vtbl: pointer, self: point
 proc QSplashScreendragMoveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragMoveEvent): void =
   fcQSplashScreen_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -703,8 +705,8 @@ proc miqt_exec_callback_cQSplashScreen_dragMoveEvent(vtbl: pointer, self: pointe
 proc QSplashScreendragLeaveEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQSplashScreen_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -712,8 +714,8 @@ proc miqt_exec_callback_cQSplashScreen_dragLeaveEvent(vtbl: pointer, self: point
 proc QSplashScreendropEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QDropEvent): void =
   fcQSplashScreen_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -721,8 +723,8 @@ proc miqt_exec_callback_cQSplashScreen_dropEvent(vtbl: pointer, self: pointer, e
 proc QSplashScreenshowEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QShowEvent): void =
   fcQSplashScreen_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -730,8 +732,8 @@ proc miqt_exec_callback_cQSplashScreen_showEvent(vtbl: pointer, self: pointer, e
 proc QSplashScreenhideEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qevent_types.QHideEvent): void =
   fcQSplashScreen_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -739,8 +741,8 @@ proc miqt_exec_callback_cQSplashScreen_hideEvent(vtbl: pointer, self: pointer, e
 proc QSplashScreennativeEvent*(self: gen_qsplashscreen_types.QSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSplashScreen_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQSplashScreen_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -754,8 +756,8 @@ proc miqt_exec_callback_cQSplashScreen_nativeEvent(vtbl: pointer, self: pointer,
 proc QSplashScreenchangeEvent*(self: gen_qsplashscreen_types.QSplashScreen, param1: gen_qcoreevent_types.QEvent): void =
   fcQSplashScreen_virtualbase_changeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQSplashScreen_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -763,8 +765,8 @@ proc miqt_exec_callback_cQSplashScreen_changeEvent(vtbl: pointer, self: pointer,
 proc QSplashScreenmetric*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): cint =
   fcQSplashScreen_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQSplashScreen_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -773,8 +775,8 @@ proc miqt_exec_callback_cQSplashScreen_metric(vtbl: pointer, self: pointer, para
 proc QSplashScreeninitPainter*(self: gen_qsplashscreen_types.QSplashScreen, painter: gen_qpainter_types.QPainter): void =
   fcQSplashScreen_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQSplashScreen_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -782,8 +784,8 @@ proc miqt_exec_callback_cQSplashScreen_initPainter(vtbl: pointer, self: pointer,
 proc QSplashScreenredirected*(self: gen_qsplashscreen_types.QSplashScreen, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQSplashScreen_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQSplashScreen_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -792,11 +794,11 @@ proc miqt_exec_callback_cQSplashScreen_redirected(vtbl: pointer, self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSplashScreensharedPainter*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qpainter_types.QPainter =
+proc QSplashScreensharedPainter*(self: gen_qsplashscreen_types.QSplashScreen): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQSplashScreen_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQSplashScreen_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -807,8 +809,8 @@ proc miqt_exec_callback_cQSplashScreen_sharedPainter(vtbl: pointer, self: pointe
 proc QSplashScreeninputMethodEvent*(self: gen_qsplashscreen_types.QSplashScreen, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQSplashScreen_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQSplashScreen_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -816,8 +818,8 @@ proc miqt_exec_callback_cQSplashScreen_inputMethodEvent(vtbl: pointer, self: poi
 proc QSplashScreeninputMethodQuery*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSplashScreen_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQSplashScreen_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -829,8 +831,8 @@ proc miqt_exec_callback_cQSplashScreen_inputMethodQuery(vtbl: pointer, self: poi
 proc QSplashScreenfocusNextPrevChild*(self: gen_qsplashscreen_types.QSplashScreen, next: bool): bool =
   fcQSplashScreen_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQSplashScreen_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -839,8 +841,8 @@ proc miqt_exec_callback_cQSplashScreen_focusNextPrevChild(vtbl: pointer, self: p
 proc QSplashScreeneventFilter*(self: gen_qsplashscreen_types.QSplashScreen, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQSplashScreen_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -850,8 +852,8 @@ proc miqt_exec_callback_cQSplashScreen_eventFilter(vtbl: pointer, self: pointer,
 proc QSplashScreentimerEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQSplashScreen_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -859,8 +861,8 @@ proc miqt_exec_callback_cQSplashScreen_timerEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreenchildEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QChildEvent): void =
   fcQSplashScreen_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -868,8 +870,8 @@ proc miqt_exec_callback_cQSplashScreen_childEvent(vtbl: pointer, self: pointer, 
 proc QSplashScreencustomEvent*(self: gen_qsplashscreen_types.QSplashScreen, event: gen_qcoreevent_types.QEvent): void =
   fcQSplashScreen_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSplashScreen_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -877,8 +879,8 @@ proc miqt_exec_callback_cQSplashScreen_customEvent(vtbl: pointer, self: pointer,
 proc QSplashScreenconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSplashScreen_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSplashScreen_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -886,19 +888,19 @@ proc miqt_exec_callback_cQSplashScreen_connectNotify(vtbl: pointer, self: pointe
 proc QSplashScreendisconnectNotify*(self: gen_qsplashscreen_types.QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSplashScreen_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSplashScreen_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSplashScreenVTable](vtbl)
+proc cQSplashScreen_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSplashScreenVTable](fcQSplashScreen_vdata(self))
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSplashScreen* {.inheritable.} = ref object of QSplashScreen
   vtbl*: cQSplashScreenVTable
-method metaObject*(self: VirtualQSplashScreen, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQSplashScreen): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSplashScreenmetaObject(self[])
-proc miqt_exec_method_cQSplashScreen_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQSplashScreen_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -906,73 +908,73 @@ proc miqt_exec_method_cQSplashScreen_metaObject(vtbl: pointer, inst: pointer): p
 
 method metacast*(self: VirtualQSplashScreen, param1: cstring): pointer {.base.} =
   QSplashScreenmetacast(self[], param1)
-proc miqt_exec_method_cQSplashScreen_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQSplashScreen, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QSplashScreenmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQSplashScreen_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQSplashScreen, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSplashScreenevent(self[], e)
-proc miqt_exec_method_cQSplashScreen_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method drawContents*(self: VirtualQSplashScreen, painter: gen_qpainter_types.QPainter): void {.base.} =
   QSplashScreendrawContents(self[], painter)
-proc miqt_exec_method_cQSplashScreen_drawContents(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_drawContents(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.drawContents(slotval1)
+  inst.drawContents(slotval1)
 
 method mousePressEvent*(self: VirtualQSplashScreen, param1: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmousePressEvent(self[], param1)
-proc miqt_exec_method_cQSplashScreen_mousePressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
-method devType*(self: VirtualQSplashScreen, ): cint {.base.} =
+method devType*(self: VirtualQSplashScreen): cint {.base.} =
   QSplashScreendevType(self[])
-proc miqt_exec_method_cQSplashScreen_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQSplashScreen_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method setVisible*(self: VirtualQSplashScreen, visible: bool): void {.base.} =
   QSplashScreensetVisible(self[], visible)
-proc miqt_exec_method_cQSplashScreen_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQSplashScreen, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQSplashScreen): gen_qsize_types.QSize {.base.} =
   QSplashScreensizeHint(self[])
-proc miqt_exec_method_cQSplashScreen_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQSplashScreen_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQSplashScreen, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQSplashScreen): gen_qsize_types.QSize {.base.} =
   QSplashScreenminimumSizeHint(self[])
-proc miqt_exec_method_cQSplashScreen_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQSplashScreen_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -980,24 +982,24 @@ proc miqt_exec_method_cQSplashScreen_minimumSizeHint(vtbl: pointer, inst: pointe
 
 method heightForWidth*(self: VirtualQSplashScreen, param1: cint): cint {.base.} =
   QSplashScreenheightForWidth(self[], param1)
-proc miqt_exec_method_cQSplashScreen_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQSplashScreen, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQSplashScreen): bool {.base.} =
   QSplashScreenhasHeightForWidth(self[])
-proc miqt_exec_method_cQSplashScreen_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQSplashScreen_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQSplashScreen, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQSplashScreen): gen_qpaintengine_types.QPaintEngine {.base.} =
   QSplashScreenpaintEngine(self[])
-proc miqt_exec_method_cQSplashScreen_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQSplashScreen_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1005,216 +1007,216 @@ proc miqt_exec_method_cQSplashScreen_paintEngine(vtbl: pointer, inst: pointer): 
 
 method mouseReleaseEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QSplashScreenmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QSplashScreenwheelEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QSplashScreenkeyPressEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QSplashScreenkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QSplashScreenfocusInEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QSplashScreenfocusOutEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QSplashScreenenterEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSplashScreenleaveEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QSplashScreenpaintEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QSplashScreenmoveEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QSplashScreenresizeEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QSplashScreencloseEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QSplashScreencontextMenuEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QSplashScreentabletEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QActionEvent): void {.base.} =
   QSplashScreenactionEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QSplashScreendragEnterEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QSplashScreendragMoveEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QSplashScreendragLeaveEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QDropEvent): void {.base.} =
   QSplashScreendropEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QShowEvent): void {.base.} =
   QSplashScreenshowEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQSplashScreen, event: gen_qevent_types.QHideEvent): void {.base.} =
   QSplashScreenhideEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQSplashScreen, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSplashScreennativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQSplashScreen_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method changeEvent*(self: VirtualQSplashScreen, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QSplashScreenchangeEvent(self[], param1)
-proc miqt_exec_method_cQSplashScreen_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method metric*(self: VirtualQSplashScreen, param1: cint): cint {.base.} =
   QSplashScreenmetric(self[], param1)
-proc miqt_exec_method_cQSplashScreen_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQSplashScreen, painter: gen_qpainter_types.QPainter): void {.base.} =
   QSplashScreeninitPainter(self[], painter)
-proc miqt_exec_method_cQSplashScreen_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQSplashScreen, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QSplashScreenredirected(self[], offset)
-proc miqt_exec_method_cQSplashScreen_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQSplashScreen, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQSplashScreen): gen_qpainter_types.QPainter {.base.} =
   QSplashScreensharedPainter(self[])
-proc miqt_exec_method_cQSplashScreen_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQSplashScreen_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1222,17 +1224,17 @@ proc miqt_exec_method_cQSplashScreen_sharedPainter(vtbl: pointer, inst: pointer)
 
 method inputMethodEvent*(self: VirtualQSplashScreen, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QSplashScreeninputMethodEvent(self[], param1)
-proc miqt_exec_method_cQSplashScreen_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQSplashScreen, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QSplashScreeninputMethodQuery(self[], param1)
-proc miqt_exec_method_cQSplashScreen_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1240,75 +1242,75 @@ proc miqt_exec_method_cQSplashScreen_inputMethodQuery(vtbl: pointer, inst: point
 
 method focusNextPrevChild*(self: VirtualQSplashScreen, next: bool): bool {.base.} =
   QSplashScreenfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQSplashScreen_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQSplashScreen, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSplashScreeneventFilter(self[], watched, event)
-proc miqt_exec_method_cQSplashScreen_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QSplashScreentimerEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSplashScreenchildEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSplashScreen, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSplashScreencustomEvent(self[], event)
-proc miqt_exec_method_cQSplashScreen_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSplashScreenconnectNotify(self[], signal)
-proc miqt_exec_method_cQSplashScreen_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSplashScreendisconnectNotify(self[], signal)
-proc miqt_exec_method_cQSplashScreen_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSplashScreen](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
+proc cQSplashScreen_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSplashScreen](fcQSplashScreen_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc updateMicroFocus*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+proc updateMicroFocus*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+proc create*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+proc destroy*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qsplashscreen_types.QSplashScreen, ): bool =
+proc focusNextChild*(self: gen_qsplashscreen_types.QSplashScreen): bool =
   fcQSplashScreen_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qsplashscreen_types.QSplashScreen, ): bool =
+proc focusPreviousChild*(self: gen_qsplashscreen_types.QSplashScreen): bool =
   fcQSplashScreen_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSplashScreen_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qsplashscreen_types.QSplashScreen, ): cint =
+proc senderSignalIndex*(self: gen_qsplashscreen_types.QSplashScreen): cint =
   fcQSplashScreen_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qsplashscreen_types.QSplashScreen, signal: cstring): cint =
@@ -1321,1049 +1323,770 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new2(addr(vtbl[].vtbl), screen.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new2(addr(vtbl[].vtbl), addr(vtbl[]), screen.h), owned: true)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new3(addr(vtbl[].vtbl), pixmap.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new3(addr(vtbl[].vtbl), addr(vtbl[]), pixmap.h), owned: true)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap, f: cint,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new4(addr(vtbl[].vtbl), pixmap.h, cint(f)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new4(addr(vtbl[].vtbl), addr(vtbl[]), pixmap.h, cint(f)), owned: true)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new5(addr(vtbl[].vtbl), screen.h, pixmap.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new5(addr(vtbl[].vtbl), addr(vtbl[]), screen.h, pixmap.h), owned: true)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap, f: cint,
     vtbl: ref QSplashScreenVTable = nil): gen_qsplashscreen_types.QSplashScreen =
   let vtbl = if vtbl == nil: new QSplashScreenVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ref QSplashScreenVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSplashScreenVTable](fcQSplashScreen_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSplashScreen_metaObject
+    vtbl[].vtbl.metaObject = cQSplashScreen_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSplashScreen_metacast
+    vtbl[].vtbl.metacast = cQSplashScreen_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSplashScreen_metacall
+    vtbl[].vtbl.metacall = cQSplashScreen_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSplashScreen_event
+    vtbl[].vtbl.event = cQSplashScreen_vtable_callback_event
   if not isNil(vtbl[].drawContents):
-    vtbl[].vtbl.drawContents = miqt_exec_callback_cQSplashScreen_drawContents
+    vtbl[].vtbl.drawContents = cQSplashScreen_vtable_callback_drawContents
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQSplashScreen_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQSplashScreen_vtable_callback_mousePressEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQSplashScreen_devType
+    vtbl[].vtbl.devType = cQSplashScreen_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQSplashScreen_setVisible
+    vtbl[].vtbl.setVisible = cQSplashScreen_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQSplashScreen_sizeHint
+    vtbl[].vtbl.sizeHint = cQSplashScreen_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQSplashScreen_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQSplashScreen_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQSplashScreen_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQSplashScreen_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQSplashScreen_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQSplashScreen_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQSplashScreen_paintEngine
+    vtbl[].vtbl.paintEngine = cQSplashScreen_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQSplashScreen_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQSplashScreen_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQSplashScreen_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQSplashScreen_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQSplashScreen_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQSplashScreen_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQSplashScreen_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQSplashScreen_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQSplashScreen_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQSplashScreen_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQSplashScreen_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQSplashScreen_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQSplashScreen_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQSplashScreen_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQSplashScreen_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQSplashScreen_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQSplashScreen_enterEvent
+    vtbl[].vtbl.enterEvent = cQSplashScreen_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQSplashScreen_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQSplashScreen_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQSplashScreen_paintEvent
+    vtbl[].vtbl.paintEvent = cQSplashScreen_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQSplashScreen_moveEvent
+    vtbl[].vtbl.moveEvent = cQSplashScreen_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQSplashScreen_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQSplashScreen_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQSplashScreen_closeEvent
+    vtbl[].vtbl.closeEvent = cQSplashScreen_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQSplashScreen_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQSplashScreen_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQSplashScreen_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQSplashScreen_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQSplashScreen_actionEvent
+    vtbl[].vtbl.actionEvent = cQSplashScreen_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQSplashScreen_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQSplashScreen_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQSplashScreen_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQSplashScreen_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQSplashScreen_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQSplashScreen_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQSplashScreen_dropEvent
+    vtbl[].vtbl.dropEvent = cQSplashScreen_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQSplashScreen_showEvent
+    vtbl[].vtbl.showEvent = cQSplashScreen_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQSplashScreen_hideEvent
+    vtbl[].vtbl.hideEvent = cQSplashScreen_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQSplashScreen_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQSplashScreen_vtable_callback_nativeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQSplashScreen_changeEvent
+    vtbl[].vtbl.changeEvent = cQSplashScreen_vtable_callback_changeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQSplashScreen_metric
+    vtbl[].vtbl.metric = cQSplashScreen_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQSplashScreen_initPainter
+    vtbl[].vtbl.initPainter = cQSplashScreen_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQSplashScreen_redirected
+    vtbl[].vtbl.redirected = cQSplashScreen_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQSplashScreen_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQSplashScreen_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQSplashScreen_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQSplashScreen_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQSplashScreen_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQSplashScreen_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQSplashScreen_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQSplashScreen_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSplashScreen_eventFilter
+    vtbl[].vtbl.eventFilter = cQSplashScreen_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSplashScreen_timerEvent
+    vtbl[].vtbl.timerEvent = cQSplashScreen_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSplashScreen_childEvent
+    vtbl[].vtbl.childEvent = cQSplashScreen_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSplashScreen_customEvent
+    vtbl[].vtbl.customEvent = cQSplashScreen_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSplashScreen_connectNotify
+    vtbl[].vtbl.connectNotify = cQSplashScreen_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSplashScreen_disconnectNotify
-  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new6(addr(vtbl[].vtbl), screen.h, pixmap.h, cint(f)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSplashScreen_vtable_callback_disconnectNotify
+  gen_qsplashscreen_types.QSplashScreen(h: fcQSplashScreen_new6(addr(vtbl[].vtbl), addr(vtbl[]), screen.h, pixmap.h, cint(f)), owned: true)
 
+const cQSplashScreen_mvtbl = cQSplashScreenVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQSplashScreen()[])](self.fcQSplashScreen_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQSplashScreen_method_callback_metaObject,
+  metacast: cQSplashScreen_method_callback_metacast,
+  metacall: cQSplashScreen_method_callback_metacall,
+  event: cQSplashScreen_method_callback_event,
+  drawContents: cQSplashScreen_method_callback_drawContents,
+  mousePressEvent: cQSplashScreen_method_callback_mousePressEvent,
+  devType: cQSplashScreen_method_callback_devType,
+  setVisible: cQSplashScreen_method_callback_setVisible,
+  sizeHint: cQSplashScreen_method_callback_sizeHint,
+  minimumSizeHint: cQSplashScreen_method_callback_minimumSizeHint,
+  heightForWidth: cQSplashScreen_method_callback_heightForWidth,
+  hasHeightForWidth: cQSplashScreen_method_callback_hasHeightForWidth,
+  paintEngine: cQSplashScreen_method_callback_paintEngine,
+  mouseReleaseEvent: cQSplashScreen_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQSplashScreen_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: cQSplashScreen_method_callback_mouseMoveEvent,
+  wheelEvent: cQSplashScreen_method_callback_wheelEvent,
+  keyPressEvent: cQSplashScreen_method_callback_keyPressEvent,
+  keyReleaseEvent: cQSplashScreen_method_callback_keyReleaseEvent,
+  focusInEvent: cQSplashScreen_method_callback_focusInEvent,
+  focusOutEvent: cQSplashScreen_method_callback_focusOutEvent,
+  enterEvent: cQSplashScreen_method_callback_enterEvent,
+  leaveEvent: cQSplashScreen_method_callback_leaveEvent,
+  paintEvent: cQSplashScreen_method_callback_paintEvent,
+  moveEvent: cQSplashScreen_method_callback_moveEvent,
+  resizeEvent: cQSplashScreen_method_callback_resizeEvent,
+  closeEvent: cQSplashScreen_method_callback_closeEvent,
+  contextMenuEvent: cQSplashScreen_method_callback_contextMenuEvent,
+  tabletEvent: cQSplashScreen_method_callback_tabletEvent,
+  actionEvent: cQSplashScreen_method_callback_actionEvent,
+  dragEnterEvent: cQSplashScreen_method_callback_dragEnterEvent,
+  dragMoveEvent: cQSplashScreen_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQSplashScreen_method_callback_dragLeaveEvent,
+  dropEvent: cQSplashScreen_method_callback_dropEvent,
+  showEvent: cQSplashScreen_method_callback_showEvent,
+  hideEvent: cQSplashScreen_method_callback_hideEvent,
+  nativeEvent: cQSplashScreen_method_callback_nativeEvent,
+  changeEvent: cQSplashScreen_method_callback_changeEvent,
+  metric: cQSplashScreen_method_callback_metric,
+  initPainter: cQSplashScreen_method_callback_initPainter,
+  redirected: cQSplashScreen_method_callback_redirected,
+  sharedPainter: cQSplashScreen_method_callback_sharedPainter,
+  inputMethodEvent: cQSplashScreen_method_callback_inputMethodEvent,
+  inputMethodQuery: cQSplashScreen_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQSplashScreen_method_callback_focusNextPrevChild,
+  eventFilter: cQSplashScreen_method_callback_eventFilter,
+  timerEvent: cQSplashScreen_method_callback_timerEvent,
+  childEvent: cQSplashScreen_method_callback_childEvent,
+  customEvent: cQSplashScreen_method_callback_customEvent,
+  connectNotify: cQSplashScreen_method_callback_connectNotify,
+  disconnectNotify: cQSplashScreen_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new(addr(cQSplashScreen_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new2(addr(vtbl[].vtbl), screen.h)
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new2(addr(cQSplashScreen_mvtbl), addr(inst[]), screen.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new3(addr(vtbl[].vtbl), pixmap.h)
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new3(addr(cQSplashScreen_mvtbl), addr(inst[]), pixmap.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     pixmap: gen_qpixmap_types.QPixmap, f: cint,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new4(addr(vtbl[].vtbl), pixmap.h, cint(f))
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new4(addr(cQSplashScreen_mvtbl), addr(inst[]), pixmap.h, cint(f))
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new5(addr(vtbl[].vtbl), screen.h, pixmap.h)
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new5(addr(cQSplashScreen_mvtbl), addr(inst[]), screen.h, pixmap.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     screen: gen_qscreen_types.QScreen, pixmap: gen_qpixmap_types.QPixmap, f: cint,
-    vtbl: VirtualQSplashScreen) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSplashScreenVTable, _: ptr cQSplashScreen) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSplashScreen()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSplashScreen, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSplashScreen_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSplashScreen_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSplashScreen_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSplashScreen_event
-  vtbl[].vtbl.drawContents = miqt_exec_method_cQSplashScreen_drawContents
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQSplashScreen_mousePressEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQSplashScreen_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQSplashScreen_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQSplashScreen_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQSplashScreen_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQSplashScreen_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQSplashScreen_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQSplashScreen_paintEngine
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQSplashScreen_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQSplashScreen_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQSplashScreen_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQSplashScreen_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQSplashScreen_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQSplashScreen_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQSplashScreen_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQSplashScreen_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQSplashScreen_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQSplashScreen_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQSplashScreen_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQSplashScreen_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQSplashScreen_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQSplashScreen_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQSplashScreen_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQSplashScreen_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQSplashScreen_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQSplashScreen_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQSplashScreen_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQSplashScreen_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQSplashScreen_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQSplashScreen_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQSplashScreen_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQSplashScreen_nativeEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQSplashScreen_changeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQSplashScreen_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQSplashScreen_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQSplashScreen_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQSplashScreen_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQSplashScreen_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQSplashScreen_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQSplashScreen_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSplashScreen_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSplashScreen_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSplashScreen_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSplashScreen_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSplashScreen_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSplashScreen_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSplashScreen_new6(addr(vtbl[].vtbl), screen.h, pixmap.h, cint(f))
-  vtbl[].owned = true
+    inst: VirtualQSplashScreen) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSplashScreen_new6(addr(cQSplashScreen_mvtbl), addr(inst[]), screen.h, pixmap.h, cint(f))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSplashScreen_staticMetaObject())

@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qstandardpaths.h>
 #include "gen_qstandardpaths.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 struct miqt_string QStandardPaths_writableLocation(int type) {
 	QString _ret = QStandardPaths::writableLocation(static_cast<QStandardPaths::StandardLocation>(type));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -162,3 +153,4 @@ struct miqt_string QStandardPaths_findExecutable2(struct miqt_string executableN
 }
 
 const QMetaObject* QStandardPaths_staticMetaObject() { return &QStandardPaths::staticMetaObject; }
+

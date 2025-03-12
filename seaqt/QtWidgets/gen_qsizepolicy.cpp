@@ -2,15 +2,6 @@
 #include <QVariant>
 #include <qsizepolicy.h>
 #include "gen_qsizepolicy.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSizePolicy* QSizePolicy_new() {
 	return new QSizePolicy();
 }
@@ -120,6 +111,7 @@ QSizePolicy* QSizePolicy_transposed(const QSizePolicy* self) {
 }
 
 const QMetaObject* QSizePolicy_staticMetaObject() { return &QSizePolicy::staticMetaObject; }
+
 void QSizePolicy_delete(QSizePolicy* self) {
 	delete self;
 }

@@ -8,15 +8,6 @@
 #include <QUrl>
 #include <qnetworkcookie.h>
 #include "gen_qnetworkcookie.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkCookie* QNetworkCookie_new() {
 	return new QNetworkCookie();
 }
@@ -190,6 +181,7 @@ struct miqt_string QNetworkCookie_toRawForm1(const QNetworkCookie* self, int for
 }
 
 const QMetaObject* QNetworkCookie_staticMetaObject() { return &QNetworkCookie::staticMetaObject; }
+
 void QNetworkCookie_delete(QNetworkCookie* self) {
 	delete self;
 }

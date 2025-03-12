@@ -31,6 +31,7 @@ typedef struct QTransform QTransform;
 QStaticText* QStaticText_new();
 QStaticText* QStaticText_new2(struct miqt_string text);
 QStaticText* QStaticText_new3(QStaticText* other);
+
 void QStaticText_operatorAssign(QStaticText* self, QStaticText* param1);
 void QStaticText_swap(QStaticText* self, QStaticText* other);
 void QStaticText_setText(QStaticText* self, struct miqt_string text);
@@ -49,6 +50,7 @@ bool QStaticText_operatorEqual(const QStaticText* self, QStaticText* param1);
 bool QStaticText_operatorNotEqual(const QStaticText* self, QStaticText* param1);
 void QStaticText_prepare1(QStaticText* self, QTransform* matrix);
 void QStaticText_prepare2(QStaticText* self, QTransform* matrix, QFont* font);
+
 void QStaticText_delete(QStaticText* self);
 
 #ifdef __cplusplus

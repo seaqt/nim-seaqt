@@ -22,6 +22,7 @@ typedef struct QByteArrayView QByteArrayView;
 
 QByteArrayView* QByteArrayView_new();
 QByteArrayView* QByteArrayView_new2(QByteArrayView* param1);
+
 struct miqt_string QByteArrayView_toByteArray(const QByteArrayView* self);
 ptrdiff_t QByteArrayView_size(const QByteArrayView* self);
 const char* QByteArrayView_data(const QByteArrayView* self);
@@ -95,6 +96,7 @@ ptrdiff_t QByteArrayView_indexOf2(const QByteArrayView* self, QByteArrayView* a,
 ptrdiff_t QByteArrayView_indexOf22(const QByteArrayView* self, char ch, ptrdiff_t from);
 ptrdiff_t QByteArrayView_lastIndexOf22(const QByteArrayView* self, char ch, ptrdiff_t from);
 int QByteArrayView_compare2(const QByteArrayView* self, QByteArrayView* a, int cs);
+
 void QByteArrayView_delete(QByteArrayView* self);
 
 #ifdef __cplusplus

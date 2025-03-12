@@ -70,28 +70,28 @@ proc fcQHostAddress_setAddressWithIp6Addr(self: pointer, ip6Addr: ptr uint8): vo
 proc fcQHostAddress_setAddress2(self: pointer, ip6Addr: pointer): void {.importc: "QHostAddress_setAddress2".}
 proc fcQHostAddress_setAddress3(self: pointer, address: struct_miqt_string): bool {.importc: "QHostAddress_setAddress3".}
 proc fcQHostAddress_setAddress4(self: pointer, address: cint): void {.importc: "QHostAddress_setAddress4".}
-proc fcQHostAddress_protocol(self: pointer, ): cint {.importc: "QHostAddress_protocol".}
-proc fcQHostAddress_toIPv4Address(self: pointer, ): cuint {.importc: "QHostAddress_toIPv4Address".}
-proc fcQHostAddress_toIPv6Address(self: pointer, ): pointer {.importc: "QHostAddress_toIPv6Address".}
-proc fcQHostAddress_toString(self: pointer, ): struct_miqt_string {.importc: "QHostAddress_toString".}
-proc fcQHostAddress_scopeId(self: pointer, ): struct_miqt_string {.importc: "QHostAddress_scopeId".}
+proc fcQHostAddress_protocol(self: pointer): cint {.importc: "QHostAddress_protocol".}
+proc fcQHostAddress_toIPv4Address(self: pointer): cuint {.importc: "QHostAddress_toIPv4Address".}
+proc fcQHostAddress_toIPv6Address(self: pointer): pointer {.importc: "QHostAddress_toIPv6Address".}
+proc fcQHostAddress_toString(self: pointer): struct_miqt_string {.importc: "QHostAddress_toString".}
+proc fcQHostAddress_scopeId(self: pointer): struct_miqt_string {.importc: "QHostAddress_scopeId".}
 proc fcQHostAddress_setScopeId(self: pointer, id: struct_miqt_string): void {.importc: "QHostAddress_setScopeId".}
 proc fcQHostAddress_isEqual(self: pointer, address: pointer): bool {.importc: "QHostAddress_isEqual".}
 proc fcQHostAddress_operatorEqual(self: pointer, address: pointer): bool {.importc: "QHostAddress_operatorEqual".}
 proc fcQHostAddress_operatorEqualWithAddress(self: pointer, address: cint): bool {.importc: "QHostAddress_operatorEqualWithAddress".}
 proc fcQHostAddress_operatorNotEqual(self: pointer, address: pointer): bool {.importc: "QHostAddress_operatorNotEqual".}
 proc fcQHostAddress_operatorNotEqualWithAddress(self: pointer, address: cint): bool {.importc: "QHostAddress_operatorNotEqualWithAddress".}
-proc fcQHostAddress_isNull(self: pointer, ): bool {.importc: "QHostAddress_isNull".}
-proc fcQHostAddress_clear(self: pointer, ): void {.importc: "QHostAddress_clear".}
+proc fcQHostAddress_isNull(self: pointer): bool {.importc: "QHostAddress_isNull".}
+proc fcQHostAddress_clear(self: pointer): void {.importc: "QHostAddress_clear".}
 proc fcQHostAddress_isInSubnet(self: pointer, subnet: pointer, netmask: cint): bool {.importc: "QHostAddress_isInSubnet".}
 proc fcQHostAddress_isInSubnetWithSubnet(self: pointer, subnet: struct_miqt_map): bool {.importc: "QHostAddress_isInSubnetWithSubnet".}
-proc fcQHostAddress_isLoopback(self: pointer, ): bool {.importc: "QHostAddress_isLoopback".}
-proc fcQHostAddress_isGlobal(self: pointer, ): bool {.importc: "QHostAddress_isGlobal".}
-proc fcQHostAddress_isLinkLocal(self: pointer, ): bool {.importc: "QHostAddress_isLinkLocal".}
-proc fcQHostAddress_isSiteLocal(self: pointer, ): bool {.importc: "QHostAddress_isSiteLocal".}
-proc fcQHostAddress_isUniqueLocalUnicast(self: pointer, ): bool {.importc: "QHostAddress_isUniqueLocalUnicast".}
-proc fcQHostAddress_isMulticast(self: pointer, ): bool {.importc: "QHostAddress_isMulticast".}
-proc fcQHostAddress_isBroadcast(self: pointer, ): bool {.importc: "QHostAddress_isBroadcast".}
+proc fcQHostAddress_isLoopback(self: pointer): bool {.importc: "QHostAddress_isLoopback".}
+proc fcQHostAddress_isGlobal(self: pointer): bool {.importc: "QHostAddress_isGlobal".}
+proc fcQHostAddress_isLinkLocal(self: pointer): bool {.importc: "QHostAddress_isLinkLocal".}
+proc fcQHostAddress_isSiteLocal(self: pointer): bool {.importc: "QHostAddress_isSiteLocal".}
+proc fcQHostAddress_isUniqueLocalUnicast(self: pointer): bool {.importc: "QHostAddress_isUniqueLocalUnicast".}
+proc fcQHostAddress_isMulticast(self: pointer): bool {.importc: "QHostAddress_isMulticast".}
+proc fcQHostAddress_isBroadcast(self: pointer): bool {.importc: "QHostAddress_isBroadcast".}
 proc fcQHostAddress_parseSubnet(subnet: struct_miqt_string): struct_miqt_map {.importc: "QHostAddress_parseSubnet".}
 proc fcQHostAddress_toIPv4Address1(self: pointer, ok: ptr bool): cuint {.importc: "QHostAddress_toIPv4Address1".}
 proc fcQHostAddress_isEqual2(self: pointer, address: pointer, mode: cint): bool {.importc: "QHostAddress_isEqual2".}
@@ -131,22 +131,22 @@ proc setAddress*(self: gen_qhostaddress_types.QHostAddress, address: string): bo
 proc setAddress*(self: gen_qhostaddress_types.QHostAddress, address: cint): void =
   fcQHostAddress_setAddress4(self.h, cint(address))
 
-proc protocol*(self: gen_qhostaddress_types.QHostAddress, ): cint =
+proc protocol*(self: gen_qhostaddress_types.QHostAddress): cint =
   cint(fcQHostAddress_protocol(self.h))
 
-proc toIPv4Address*(self: gen_qhostaddress_types.QHostAddress, ): cuint =
+proc toIPv4Address*(self: gen_qhostaddress_types.QHostAddress): cuint =
   fcQHostAddress_toIPv4Address(self.h)
 
-proc toIPv6Address*(self: gen_qhostaddress_types.QHostAddress, ): gen_qhostaddress_types.QIPv6Address =
+proc toIPv6Address*(self: gen_qhostaddress_types.QHostAddress): gen_qhostaddress_types.QIPv6Address =
   gen_qhostaddress_types.QIPv6Address(h: fcQHostAddress_toIPv6Address(self.h), owned: true)
 
-proc toString*(self: gen_qhostaddress_types.QHostAddress, ): string =
+proc toString*(self: gen_qhostaddress_types.QHostAddress): string =
   let v_ms = fcQHostAddress_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc scopeId*(self: gen_qhostaddress_types.QHostAddress, ): string =
+proc scopeId*(self: gen_qhostaddress_types.QHostAddress): string =
   let v_ms = fcQHostAddress_scopeId(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -170,10 +170,10 @@ proc operatorNotEqual*(self: gen_qhostaddress_types.QHostAddress, address: gen_q
 proc operatorNotEqual*(self: gen_qhostaddress_types.QHostAddress, address: cint): bool =
   fcQHostAddress_operatorNotEqualWithAddress(self.h, cint(address))
 
-proc isNull*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isNull*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isNull(self.h)
 
-proc clear*(self: gen_qhostaddress_types.QHostAddress, ): void =
+proc clear*(self: gen_qhostaddress_types.QHostAddress): void =
   fcQHostAddress_clear(self.h)
 
 proc isInSubnet*(self: gen_qhostaddress_types.QHostAddress, subnet: gen_qhostaddress_types.QHostAddress, netmask: cint): bool =
@@ -186,25 +186,25 @@ proc isInSubnet*(self: gen_qhostaddress_types.QHostAddress, subnet: tuple[first:
   subnet_CArray_Second = subnet.second
   fcQHostAddress_isInSubnetWithSubnet(self.h, struct_miqt_map(len: 1,keys: addr(subnet_CArray_First),values: addr(subnet_CArray_Second),))
 
-proc isLoopback*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isLoopback*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isLoopback(self.h)
 
-proc isGlobal*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isGlobal*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isGlobal(self.h)
 
-proc isLinkLocal*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isLinkLocal*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isLinkLocal(self.h)
 
-proc isSiteLocal*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isSiteLocal*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isSiteLocal(self.h)
 
-proc isUniqueLocalUnicast*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isUniqueLocalUnicast*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isUniqueLocalUnicast(self.h)
 
-proc isMulticast*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isMulticast*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isMulticast(self.h)
 
-proc isBroadcast*(self: gen_qhostaddress_types.QHostAddress, ): bool =
+proc isBroadcast*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isBroadcast(self.h)
 
 proc parseSubnet*(_: type gen_qhostaddress_types.QHostAddress, subnet: string): tuple[first: gen_qhostaddress_types.QHostAddress, second: cint] =

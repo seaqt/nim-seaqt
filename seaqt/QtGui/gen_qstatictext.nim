@@ -55,17 +55,17 @@ type cQStaticText*{.exportc: "QStaticText", incompleteStruct.} = object
 proc fcQStaticText_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStaticText_operatorAssign".}
 proc fcQStaticText_swap(self: pointer, other: pointer): void {.importc: "QStaticText_swap".}
 proc fcQStaticText_setText(self: pointer, text: struct_miqt_string): void {.importc: "QStaticText_setText".}
-proc fcQStaticText_text(self: pointer, ): struct_miqt_string {.importc: "QStaticText_text".}
+proc fcQStaticText_text(self: pointer): struct_miqt_string {.importc: "QStaticText_text".}
 proc fcQStaticText_setTextFormat(self: pointer, textFormat: cint): void {.importc: "QStaticText_setTextFormat".}
-proc fcQStaticText_textFormat(self: pointer, ): cint {.importc: "QStaticText_textFormat".}
+proc fcQStaticText_textFormat(self: pointer): cint {.importc: "QStaticText_textFormat".}
 proc fcQStaticText_setTextWidth(self: pointer, textWidth: float64): void {.importc: "QStaticText_setTextWidth".}
-proc fcQStaticText_textWidth(self: pointer, ): float64 {.importc: "QStaticText_textWidth".}
+proc fcQStaticText_textWidth(self: pointer): float64 {.importc: "QStaticText_textWidth".}
 proc fcQStaticText_setTextOption(self: pointer, textOption: pointer): void {.importc: "QStaticText_setTextOption".}
-proc fcQStaticText_textOption(self: pointer, ): pointer {.importc: "QStaticText_textOption".}
-proc fcQStaticText_size(self: pointer, ): pointer {.importc: "QStaticText_size".}
-proc fcQStaticText_prepare(self: pointer, ): void {.importc: "QStaticText_prepare".}
+proc fcQStaticText_textOption(self: pointer): pointer {.importc: "QStaticText_textOption".}
+proc fcQStaticText_size(self: pointer): pointer {.importc: "QStaticText_size".}
+proc fcQStaticText_prepare(self: pointer): void {.importc: "QStaticText_prepare".}
 proc fcQStaticText_setPerformanceHint(self: pointer, performanceHint: cint): void {.importc: "QStaticText_setPerformanceHint".}
-proc fcQStaticText_performanceHint(self: pointer, ): cint {.importc: "QStaticText_performanceHint".}
+proc fcQStaticText_performanceHint(self: pointer): cint {.importc: "QStaticText_performanceHint".}
 proc fcQStaticText_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QStaticText_operatorEqual".}
 proc fcQStaticText_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QStaticText_operatorNotEqual".}
 proc fcQStaticText_prepare1(self: pointer, matrix: pointer): void {.importc: "QStaticText_prepare1".}
@@ -83,7 +83,7 @@ proc swap*(self: gen_qstatictext_types.QStaticText, other: gen_qstatictext_types
 proc setText*(self: gen_qstatictext_types.QStaticText, text: string): void =
   fcQStaticText_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc text*(self: gen_qstatictext_types.QStaticText, ): string =
+proc text*(self: gen_qstatictext_types.QStaticText): string =
   let v_ms = fcQStaticText_text(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -92,31 +92,31 @@ proc text*(self: gen_qstatictext_types.QStaticText, ): string =
 proc setTextFormat*(self: gen_qstatictext_types.QStaticText, textFormat: cint): void =
   fcQStaticText_setTextFormat(self.h, cint(textFormat))
 
-proc textFormat*(self: gen_qstatictext_types.QStaticText, ): cint =
+proc textFormat*(self: gen_qstatictext_types.QStaticText): cint =
   cint(fcQStaticText_textFormat(self.h))
 
 proc setTextWidth*(self: gen_qstatictext_types.QStaticText, textWidth: float64): void =
   fcQStaticText_setTextWidth(self.h, textWidth)
 
-proc textWidth*(self: gen_qstatictext_types.QStaticText, ): float64 =
+proc textWidth*(self: gen_qstatictext_types.QStaticText): float64 =
   fcQStaticText_textWidth(self.h)
 
 proc setTextOption*(self: gen_qstatictext_types.QStaticText, textOption: gen_qtextoption_types.QTextOption): void =
   fcQStaticText_setTextOption(self.h, textOption.h)
 
-proc textOption*(self: gen_qstatictext_types.QStaticText, ): gen_qtextoption_types.QTextOption =
+proc textOption*(self: gen_qstatictext_types.QStaticText): gen_qtextoption_types.QTextOption =
   gen_qtextoption_types.QTextOption(h: fcQStaticText_textOption(self.h), owned: true)
 
-proc size*(self: gen_qstatictext_types.QStaticText, ): gen_qsize_types.QSizeF =
+proc size*(self: gen_qstatictext_types.QStaticText): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQStaticText_size(self.h), owned: true)
 
-proc prepare*(self: gen_qstatictext_types.QStaticText, ): void =
+proc prepare*(self: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_prepare(self.h)
 
 proc setPerformanceHint*(self: gen_qstatictext_types.QStaticText, performanceHint: cint): void =
   fcQStaticText_setPerformanceHint(self.h, cint(performanceHint))
 
-proc performanceHint*(self: gen_qstatictext_types.QStaticText, ): cint =
+proc performanceHint*(self: gen_qstatictext_types.QStaticText): cint =
   cint(fcQStaticText_performanceHint(self.h))
 
 proc operatorEqual*(self: gen_qstatictext_types.QStaticText, param1: gen_qstatictext_types.QStaticText): bool =

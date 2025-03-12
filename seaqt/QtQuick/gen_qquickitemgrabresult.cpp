@@ -10,15 +10,6 @@
 #include <QUrl>
 #include <qquickitemgrabresult.h>
 #include "gen_qquickitemgrabresult.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QQuickItemGrabResult_virtbase(QQuickItemGrabResult* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -101,6 +92,7 @@ struct miqt_string QQuickItemGrabResult_tr3(const char* s, const char* c, int n)
 }
 
 const QMetaObject* QQuickItemGrabResult_staticMetaObject() { return &QQuickItemGrabResult::staticMetaObject; }
+
 void QQuickItemGrabResult_delete(QQuickItemGrabResult* self) {
 	delete self;
 }

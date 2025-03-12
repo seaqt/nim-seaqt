@@ -18,15 +18,6 @@
 #include <QTimerEvent>
 #include <qtexttable.h>
 #include "gen_qtexttable.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextTableCell* QTextTableCell_new() {
 	return new QTextTableCell();
 }
@@ -108,28 +99,30 @@ void QTextTableCell_delete(QTextTableCell* self) {
 }
 
 class VirtualQTextTable final : public QTextTable {
-	struct QTextTable_VTable* vtbl;
+	const QTextTable_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTextTable_VTable* QTextTable_vtbl(const VirtualQTextTable* self);
+	friend void* QTextTable_vdata(const VirtualQTextTable* self);
+	friend void QTextTable_setVdata(VirtualQTextTable* self, void* vdata);
 
-	VirtualQTextTable(struct QTextTable_VTable* vtbl, QTextDocument* doc): QTextTable(doc), vtbl(vtbl) {};
+	VirtualQTextTable(const QTextTable_VTable* vtbl, void* vdata, QTextDocument* doc): QTextTable(doc), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTextTable() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTextTable() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTextTable::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTextTable_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTextTable_virtualbase_metaObject(const VirtualQTextTable* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTextTable::qt_metacast(param1);
@@ -137,14 +130,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTextTable_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTextTable_virtualbase_metacast(VirtualQTextTable* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTextTable::qt_metacall(param1, param2, param3);
@@ -155,14 +147,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTextTable_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTextTable_virtualbase_metacall(VirtualQTextTable* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTextTable::event(event);
@@ -170,14 +161,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTextTable_virtualbase_event(void* self, QEvent* event);
+	friend bool QTextTable_virtualbase_event(VirtualQTextTable* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTextTable::eventFilter(watched, event);
@@ -186,14 +176,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTextTable_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTextTable_virtualbase_eventFilter(VirtualQTextTable* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTextTable::timerEvent(event);
@@ -202,13 +191,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTextTable_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTextTable_virtualbase_timerEvent(VirtualQTextTable* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTextTable::childEvent(event);
@@ -217,13 +205,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTextTable_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTextTable_virtualbase_childEvent(VirtualQTextTable* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTextTable::customEvent(event);
@@ -232,13 +219,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTextTable_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTextTable_virtualbase_customEvent(VirtualQTextTable* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTextTable::connectNotify(signal);
@@ -249,13 +235,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTextTable_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTextTable_virtualbase_connectNotify(VirtualQTextTable* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTextTable::disconnectNotify(signal);
@@ -266,21 +251,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTextTable_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTextTable_virtualbase_disconnectNotify(VirtualQTextTable* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QTextTable_protectedbase_sender(const void* self);
-	friend int QTextTable_protectedbase_senderSignalIndex(const void* self);
-	friend int QTextTable_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTextTable_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QTextTable_protectedbase_sender(const VirtualQTextTable* self);
+	friend int QTextTable_protectedbase_senderSignalIndex(const VirtualQTextTable* self);
+	friend int QTextTable_protectedbase_receivers(const VirtualQTextTable* self, const char* signal);
+	friend bool QTextTable_protectedbase_isSignalConnected(const VirtualQTextTable* self, QMetaMethod* signal);
 };
 
-QTextTable* QTextTable_new(struct QTextTable_VTable* vtbl, QTextDocument* doc) {
-	return new VirtualQTextTable(vtbl, doc);
+VirtualQTextTable* QTextTable_new(const QTextTable_VTable* vtbl, void* vdata, QTextDocument* doc) {
+	return new VirtualQTextTable(vtbl, vdata, doc);
 }
 
 void QTextTable_virtbase(QTextTable* src, QTextFrame** outptr_QTextFrame) {
@@ -408,93 +393,76 @@ struct miqt_string QTextTable_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QTextTable_virtualbase_metaObject(const void* self) {
+QMetaObject* QTextTable_virtualbase_metaObject(const VirtualQTextTable* self) {
 
-	return (QMetaObject*) ( (const VirtualQTextTable*)(self) )->QTextTable::metaObject();
-
+	return (QMetaObject*) self->QTextTable::metaObject();
 }
 
-void* QTextTable_virtualbase_metacast(void* self, const char* param1) {
+void* QTextTable_virtualbase_metacast(VirtualQTextTable* self, const char* param1) {
 
-	return ( (VirtualQTextTable*)(self) )->QTextTable::qt_metacast(param1);
-
+	return self->QTextTable::qt_metacast(param1);
 }
 
-int QTextTable_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTextTable_virtualbase_metacall(VirtualQTextTable* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTextTable*)(self) )->QTextTable::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTextTable::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QTextTable_virtualbase_event(void* self, QEvent* event) {
+bool QTextTable_virtualbase_event(VirtualQTextTable* self, QEvent* event) {
 
-	return ( (VirtualQTextTable*)(self) )->QTextTable::event(event);
-
+	return self->QTextTable::event(event);
 }
 
-bool QTextTable_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTextTable_virtualbase_eventFilter(VirtualQTextTable* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTextTable*)(self) )->QTextTable::eventFilter(watched, event);
-
+	return self->QTextTable::eventFilter(watched, event);
 }
 
-void QTextTable_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTextTable_virtualbase_timerEvent(VirtualQTextTable* self, QTimerEvent* event) {
 
-	( (VirtualQTextTable*)(self) )->QTextTable::timerEvent(event);
-
+	self->QTextTable::timerEvent(event);
 }
 
-void QTextTable_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTextTable_virtualbase_childEvent(VirtualQTextTable* self, QChildEvent* event) {
 
-	( (VirtualQTextTable*)(self) )->QTextTable::childEvent(event);
-
+	self->QTextTable::childEvent(event);
 }
 
-void QTextTable_virtualbase_customEvent(void* self, QEvent* event) {
+void QTextTable_virtualbase_customEvent(VirtualQTextTable* self, QEvent* event) {
 
-	( (VirtualQTextTable*)(self) )->QTextTable::customEvent(event);
-
+	self->QTextTable::customEvent(event);
 }
 
-void QTextTable_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTextTable_virtualbase_connectNotify(VirtualQTextTable* self, QMetaMethod* signal) {
 
-	( (VirtualQTextTable*)(self) )->QTextTable::connectNotify(*signal);
-
+	self->QTextTable::connectNotify(*signal);
 }
 
-void QTextTable_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTextTable_virtualbase_disconnectNotify(VirtualQTextTable* self, QMetaMethod* signal) {
 
-	( (VirtualQTextTable*)(self) )->QTextTable::disconnectNotify(*signal);
-
+	self->QTextTable::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTextTable_staticMetaObject() { return &QTextTable::staticMetaObject; }
-QObject* QTextTable_protectedbase_sender(const void* self) {
-	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	
-	return self_cast->sender();
 
+const QTextTable_VTable* QTextTable_vtbl(const VirtualQTextTable* self) { return self->vtbl; }
+void* QTextTable_vdata(const VirtualQTextTable* self) { return self->vdata; }
+void QTextTable_setVdata(VirtualQTextTable* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QTextTable_protectedbase_sender(const VirtualQTextTable* self) {
+	return self->sender();
 }
 
-int QTextTable_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTextTable_protectedbase_senderSignalIndex(const VirtualQTextTable* self) {
+	return self->senderSignalIndex();
 }
 
-int QTextTable_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTextTable_protectedbase_receivers(const VirtualQTextTable* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTextTable_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTextTable_protectedbase_isSignalConnected(const VirtualQTextTable* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTextTable_delete(QTextTable* self) {

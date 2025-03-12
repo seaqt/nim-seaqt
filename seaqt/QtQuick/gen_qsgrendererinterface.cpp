@@ -2,15 +2,6 @@
 #include <QSGRendererInterface>
 #include <qsgrendererinterface.h>
 #include "gen_qsgrendererinterface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 int QSGRendererInterface_graphicsApi(const QSGRendererInterface* self) {
 	QSGRendererInterface::GraphicsApi _ret = self->graphicsApi();
 	return static_cast<int>(_ret);

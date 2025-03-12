@@ -13,41 +13,34 @@
 #include <QTimerEvent>
 #include <qpluginloader.h>
 #include "gen_qpluginloader.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPluginLoader final : public QPluginLoader {
-	struct QPluginLoader_VTable* vtbl;
+	const QPluginLoader_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPluginLoader_VTable* QPluginLoader_vtbl(const VirtualQPluginLoader* self);
+	friend void* QPluginLoader_vdata(const VirtualQPluginLoader* self);
+	friend void QPluginLoader_setVdata(VirtualQPluginLoader* self, void* vdata);
 
-	VirtualQPluginLoader(struct QPluginLoader_VTable* vtbl): QPluginLoader(), vtbl(vtbl) {};
-	VirtualQPluginLoader(struct QPluginLoader_VTable* vtbl, const QString& fileName): QPluginLoader(fileName), vtbl(vtbl) {};
-	VirtualQPluginLoader(struct QPluginLoader_VTable* vtbl, QObject* parent): QPluginLoader(parent), vtbl(vtbl) {};
-	VirtualQPluginLoader(struct QPluginLoader_VTable* vtbl, const QString& fileName, QObject* parent): QPluginLoader(fileName, parent), vtbl(vtbl) {};
+	VirtualQPluginLoader(const QPluginLoader_VTable* vtbl, void* vdata): QPluginLoader(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPluginLoader(const QPluginLoader_VTable* vtbl, void* vdata, const QString& fileName): QPluginLoader(fileName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPluginLoader(const QPluginLoader_VTable* vtbl, void* vdata, QObject* parent): QPluginLoader(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPluginLoader(const QPluginLoader_VTable* vtbl, void* vdata, const QString& fileName, QObject* parent): QPluginLoader(fileName, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPluginLoader() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPluginLoader() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPluginLoader::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPluginLoader_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPluginLoader_virtualbase_metaObject(const VirtualQPluginLoader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPluginLoader::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPluginLoader_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPluginLoader_virtualbase_metacast(VirtualQPluginLoader* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPluginLoader::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPluginLoader_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPluginLoader_virtualbase_metacall(VirtualQPluginLoader* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QPluginLoader::event(event);
@@ -88,14 +79,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPluginLoader_virtualbase_event(void* self, QEvent* event);
+	friend bool QPluginLoader_virtualbase_event(VirtualQPluginLoader* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QPluginLoader::eventFilter(watched, event);
@@ -104,14 +94,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPluginLoader_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QPluginLoader_virtualbase_eventFilter(VirtualQPluginLoader* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QPluginLoader::timerEvent(event);
@@ -120,13 +109,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPluginLoader_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QPluginLoader_virtualbase_timerEvent(VirtualQPluginLoader* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPluginLoader::childEvent(event);
@@ -135,13 +123,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPluginLoader_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPluginLoader_virtualbase_childEvent(VirtualQPluginLoader* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPluginLoader::customEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPluginLoader_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPluginLoader_virtualbase_customEvent(VirtualQPluginLoader* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPluginLoader::connectNotify(signal);
@@ -167,13 +153,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPluginLoader_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPluginLoader_virtualbase_connectNotify(VirtualQPluginLoader* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPluginLoader::disconnectNotify(signal);
@@ -184,35 +169,35 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPluginLoader_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPluginLoader_virtualbase_disconnectNotify(VirtualQPluginLoader* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QPluginLoader_protectedbase_sender(const void* self);
-	friend int QPluginLoader_protectedbase_senderSignalIndex(const void* self);
-	friend int QPluginLoader_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPluginLoader_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QPluginLoader_protectedbase_sender(const VirtualQPluginLoader* self);
+	friend int QPluginLoader_protectedbase_senderSignalIndex(const VirtualQPluginLoader* self);
+	friend int QPluginLoader_protectedbase_receivers(const VirtualQPluginLoader* self, const char* signal);
+	friend bool QPluginLoader_protectedbase_isSignalConnected(const VirtualQPluginLoader* self, QMetaMethod* signal);
 };
 
-QPluginLoader* QPluginLoader_new(struct QPluginLoader_VTable* vtbl) {
-	return new VirtualQPluginLoader(vtbl);
+VirtualQPluginLoader* QPluginLoader_new(const QPluginLoader_VTable* vtbl, void* vdata) {
+	return new VirtualQPluginLoader(vtbl, vdata);
 }
 
-QPluginLoader* QPluginLoader_new2(struct QPluginLoader_VTable* vtbl, struct miqt_string fileName) {
+VirtualQPluginLoader* QPluginLoader_new2(const QPluginLoader_VTable* vtbl, void* vdata, struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQPluginLoader(vtbl, fileName_QString);
+	return new VirtualQPluginLoader(vtbl, vdata, fileName_QString);
 }
 
-QPluginLoader* QPluginLoader_new3(struct QPluginLoader_VTable* vtbl, QObject* parent) {
-	return new VirtualQPluginLoader(vtbl, parent);
+VirtualQPluginLoader* QPluginLoader_new3(const QPluginLoader_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQPluginLoader(vtbl, vdata, parent);
 }
 
-QPluginLoader* QPluginLoader_new4(struct QPluginLoader_VTable* vtbl, struct miqt_string fileName, QObject* parent) {
+VirtualQPluginLoader* QPluginLoader_new4(const QPluginLoader_VTable* vtbl, void* vdata, struct miqt_string fileName, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQPluginLoader(vtbl, fileName_QString, parent);
+	return new VirtualQPluginLoader(vtbl, vdata, fileName_QString, parent);
 }
 
 void QPluginLoader_virtbase(QPluginLoader* src, QObject** outptr_QObject) {
@@ -346,93 +331,76 @@ struct miqt_string QPluginLoader_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QPluginLoader_virtualbase_metaObject(const void* self) {
+QMetaObject* QPluginLoader_virtualbase_metaObject(const VirtualQPluginLoader* self) {
 
-	return (QMetaObject*) ( (const VirtualQPluginLoader*)(self) )->QPluginLoader::metaObject();
-
+	return (QMetaObject*) self->QPluginLoader::metaObject();
 }
 
-void* QPluginLoader_virtualbase_metacast(void* self, const char* param1) {
+void* QPluginLoader_virtualbase_metacast(VirtualQPluginLoader* self, const char* param1) {
 
-	return ( (VirtualQPluginLoader*)(self) )->QPluginLoader::qt_metacast(param1);
-
+	return self->QPluginLoader::qt_metacast(param1);
 }
 
-int QPluginLoader_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPluginLoader_virtualbase_metacall(VirtualQPluginLoader* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPluginLoader*)(self) )->QPluginLoader::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPluginLoader::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QPluginLoader_virtualbase_event(void* self, QEvent* event) {
+bool QPluginLoader_virtualbase_event(VirtualQPluginLoader* self, QEvent* event) {
 
-	return ( (VirtualQPluginLoader*)(self) )->QPluginLoader::event(event);
-
+	return self->QPluginLoader::event(event);
 }
 
-bool QPluginLoader_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QPluginLoader_virtualbase_eventFilter(VirtualQPluginLoader* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQPluginLoader*)(self) )->QPluginLoader::eventFilter(watched, event);
-
+	return self->QPluginLoader::eventFilter(watched, event);
 }
 
-void QPluginLoader_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QPluginLoader_virtualbase_timerEvent(VirtualQPluginLoader* self, QTimerEvent* event) {
 
-	( (VirtualQPluginLoader*)(self) )->QPluginLoader::timerEvent(event);
-
+	self->QPluginLoader::timerEvent(event);
 }
 
-void QPluginLoader_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPluginLoader_virtualbase_childEvent(VirtualQPluginLoader* self, QChildEvent* event) {
 
-	( (VirtualQPluginLoader*)(self) )->QPluginLoader::childEvent(event);
-
+	self->QPluginLoader::childEvent(event);
 }
 
-void QPluginLoader_virtualbase_customEvent(void* self, QEvent* event) {
+void QPluginLoader_virtualbase_customEvent(VirtualQPluginLoader* self, QEvent* event) {
 
-	( (VirtualQPluginLoader*)(self) )->QPluginLoader::customEvent(event);
-
+	self->QPluginLoader::customEvent(event);
 }
 
-void QPluginLoader_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPluginLoader_virtualbase_connectNotify(VirtualQPluginLoader* self, QMetaMethod* signal) {
 
-	( (VirtualQPluginLoader*)(self) )->QPluginLoader::connectNotify(*signal);
-
+	self->QPluginLoader::connectNotify(*signal);
 }
 
-void QPluginLoader_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPluginLoader_virtualbase_disconnectNotify(VirtualQPluginLoader* self, QMetaMethod* signal) {
 
-	( (VirtualQPluginLoader*)(self) )->QPluginLoader::disconnectNotify(*signal);
-
+	self->QPluginLoader::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPluginLoader_staticMetaObject() { return &QPluginLoader::staticMetaObject; }
-QObject* QPluginLoader_protectedbase_sender(const void* self) {
-	VirtualQPluginLoader* self_cast = static_cast<VirtualQPluginLoader*>( (QPluginLoader*)(self) );
-	
-	return self_cast->sender();
 
+const QPluginLoader_VTable* QPluginLoader_vtbl(const VirtualQPluginLoader* self) { return self->vtbl; }
+void* QPluginLoader_vdata(const VirtualQPluginLoader* self) { return self->vdata; }
+void QPluginLoader_setVdata(VirtualQPluginLoader* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QPluginLoader_protectedbase_sender(const VirtualQPluginLoader* self) {
+	return self->sender();
 }
 
-int QPluginLoader_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPluginLoader* self_cast = static_cast<VirtualQPluginLoader*>( (QPluginLoader*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPluginLoader_protectedbase_senderSignalIndex(const VirtualQPluginLoader* self) {
+	return self->senderSignalIndex();
 }
 
-int QPluginLoader_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPluginLoader* self_cast = static_cast<VirtualQPluginLoader*>( (QPluginLoader*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPluginLoader_protectedbase_receivers(const VirtualQPluginLoader* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPluginLoader_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPluginLoader* self_cast = static_cast<VirtualQPluginLoader*>( (QPluginLoader*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPluginLoader_protectedbase_isSignalConnected(const VirtualQPluginLoader* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPluginLoader_delete(QPluginLoader* self) {

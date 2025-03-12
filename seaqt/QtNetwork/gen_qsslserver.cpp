@@ -17,39 +17,32 @@
 #include <QTimerEvent>
 #include <qsslserver.h>
 #include "gen_qsslserver.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSslServer final : public QSslServer {
-	struct QSslServer_VTable* vtbl;
+	const QSslServer_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSslServer_VTable* QSslServer_vtbl(const VirtualQSslServer* self);
+	friend void* QSslServer_vdata(const VirtualQSslServer* self);
+	friend void QSslServer_setVdata(VirtualQSslServer* self, void* vdata);
 
-	VirtualQSslServer(struct QSslServer_VTable* vtbl): QSslServer(), vtbl(vtbl) {};
-	VirtualQSslServer(struct QSslServer_VTable* vtbl, QObject* parent): QSslServer(parent), vtbl(vtbl) {};
+	VirtualQSslServer(const QSslServer_VTable* vtbl, void* vdata): QSslServer(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSslServer(const QSslServer_VTable* vtbl, void* vdata, QObject* parent): QSslServer(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSslServer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSslServer() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QSslServer::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QSslServer_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QSslServer_virtualbase_metaObject(const VirtualQSslServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QSslServer::qt_metacast(param1);
@@ -57,14 +50,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QSslServer_virtualbase_metacast(void* self, const char* param1);
+	friend void* QSslServer_virtualbase_metacast(VirtualQSslServer* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QSslServer::qt_metacall(param1, param2, param3);
@@ -75,14 +67,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSslServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QSslServer_virtualbase_metacall(VirtualQSslServer* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void incomingConnection(qintptr socket) override {
 		if (vtbl->incomingConnection == 0) {
 			QSslServer::incomingConnection(socket);
@@ -92,41 +83,38 @@ public:
 		qintptr socket_ret = socket;
 		intptr_t sigval1 = (intptr_t)(socket_ret);
 
-		vtbl->incomingConnection(vtbl, this, sigval1);
+		vtbl->incomingConnection(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_incomingConnection(void* self, intptr_t socket);
+	friend void QSslServer_virtualbase_incomingConnection(VirtualQSslServer* self, intptr_t socket);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasPendingConnections() const override {
 		if (vtbl->hasPendingConnections == 0) {
 			return QSslServer::hasPendingConnections();
 		}
 
 
-		bool callback_return_value = vtbl->hasPendingConnections(vtbl, this);
+		bool callback_return_value = vtbl->hasPendingConnections(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSslServer_virtualbase_hasPendingConnections(const void* self);
+	friend bool QSslServer_virtualbase_hasPendingConnections(const VirtualQSslServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QTcpSocket* nextPendingConnection() override {
 		if (vtbl->nextPendingConnection == 0) {
 			return QSslServer::nextPendingConnection();
 		}
 
 
-		QTcpSocket* callback_return_value = vtbl->nextPendingConnection(vtbl, this);
+		QTcpSocket* callback_return_value = vtbl->nextPendingConnection(this);
 
 		return callback_return_value;
 	}
 
-	friend QTcpSocket* QSslServer_virtualbase_nextPendingConnection(void* self);
+	friend QTcpSocket* QSslServer_virtualbase_nextPendingConnection(VirtualQSslServer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QSslServer::event(event);
@@ -134,14 +122,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QSslServer_virtualbase_event(void* self, QEvent* event);
+	friend bool QSslServer_virtualbase_event(VirtualQSslServer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QSslServer::eventFilter(watched, event);
@@ -150,14 +137,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QSslServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QSslServer_virtualbase_eventFilter(VirtualQSslServer* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QSslServer::timerEvent(event);
@@ -166,13 +152,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QSslServer_virtualbase_timerEvent(VirtualQSslServer* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QSslServer::childEvent(event);
@@ -181,13 +166,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QSslServer_virtualbase_childEvent(VirtualQSslServer* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QSslServer::customEvent(event);
@@ -196,13 +180,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QSslServer_virtualbase_customEvent(VirtualQSslServer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QSslServer::connectNotify(signal);
@@ -213,13 +196,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QSslServer_virtualbase_connectNotify(VirtualQSslServer* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QSslServer::disconnectNotify(signal);
@@ -230,26 +212,26 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QSslServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QSslServer_virtualbase_disconnectNotify(VirtualQSslServer* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSslServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket);
-	friend QObject* QSslServer_protectedbase_sender(const void* self);
-	friend int QSslServer_protectedbase_senderSignalIndex(const void* self);
-	friend int QSslServer_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QSslServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QSslServer_protectedbase_addPendingConnection(VirtualQSslServer* self, QTcpSocket* socket);
+	friend QObject* QSslServer_protectedbase_sender(const VirtualQSslServer* self);
+	friend int QSslServer_protectedbase_senderSignalIndex(const VirtualQSslServer* self);
+	friend int QSslServer_protectedbase_receivers(const VirtualQSslServer* self, const char* signal);
+	friend bool QSslServer_protectedbase_isSignalConnected(const VirtualQSslServer* self, QMetaMethod* signal);
 };
 
-QSslServer* QSslServer_new(struct QSslServer_VTable* vtbl) {
-	return new VirtualQSslServer(vtbl);
+VirtualQSslServer* QSslServer_new(const QSslServer_VTable* vtbl, void* vdata) {
+	return new VirtualQSslServer(vtbl, vdata);
 }
 
-QSslServer* QSslServer_new2(struct QSslServer_VTable* vtbl, QObject* parent) {
-	return new VirtualQSslServer(vtbl, parent);
+VirtualQSslServer* QSslServer_new2(const QSslServer_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQSslServer(vtbl, vdata, parent);
 }
 
 void QSslServer_virtbase(QSslServer* src, QTcpServer** outptr_QTcpServer) {
@@ -305,7 +287,7 @@ void QSslServer_sslErrors(QSslServer* self, QSslSocket* socket, struct miqt_arra
 	self->sslErrors(socket, errors_QList);
 }
 
-void QSslServer_connect_sslErrors(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
+void QSslServer_connect_sslErrors(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, struct miqt_array /* of QSslError* */ );
@@ -331,7 +313,7 @@ void QSslServer_peerVerifyError(QSslServer* self, QSslSocket* socket, QSslError*
 	self->peerVerifyError(socket, *error);
 }
 
-void QSslServer_connect_peerVerifyError(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) {
+void QSslServer_connect_peerVerifyError(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, QSslError*);
@@ -350,7 +332,7 @@ void QSslServer_errorOccurred(QSslServer* self, QSslSocket* socket, int error) {
 	self->errorOccurred(socket, static_cast<QAbstractSocket::SocketError>(error));
 }
 
-void QSslServer_connect_errorOccurred(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int), void (*release)(intptr_t)) {
+void QSslServer_connect_errorOccurred(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, int);
@@ -368,7 +350,7 @@ void QSslServer_preSharedKeyAuthenticationRequired(QSslServer* self, QSslSocket*
 	self->preSharedKeyAuthenticationRequired(socket, authenticator);
 }
 
-void QSslServer_connect_preSharedKeyAuthenticationRequired(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
+void QSslServer_connect_preSharedKeyAuthenticationRequired(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, QSslPreSharedKeyAuthenticator*);
@@ -386,7 +368,7 @@ void QSslServer_alertSent(QSslServer* self, QSslSocket* socket, int level, int t
 	self->alertSent(socket, static_cast<QSsl::AlertLevel>(level), static_cast<QSsl::AlertType>(type), description_QString);
 }
 
-void QSslServer_connect_alertSent(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) {
+void QSslServer_connect_alertSent(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string);
@@ -415,7 +397,7 @@ void QSslServer_alertReceived(QSslServer* self, QSslSocket* socket, int level, i
 	self->alertReceived(socket, static_cast<QSsl::AlertLevel>(level), static_cast<QSsl::AlertType>(type), description_QString);
 }
 
-void QSslServer_connect_alertReceived(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) {
+void QSslServer_connect_alertReceived(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, int, int, struct miqt_string);
@@ -443,7 +425,7 @@ void QSslServer_handshakeInterruptedOnError(QSslServer* self, QSslSocket* socket
 	self->handshakeInterruptedOnError(socket, *error);
 }
 
-void QSslServer_connect_handshakeInterruptedOnError(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) {
+void QSslServer_connect_handshakeInterruptedOnError(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*, QSslError*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*, QSslError*);
@@ -462,7 +444,7 @@ void QSslServer_startedEncryptionHandshake(QSslServer* self, QSslSocket* socket)
 	self->startedEncryptionHandshake(socket);
 }
 
-void QSslServer_connect_startedEncryptionHandshake(QSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*), void (*release)(intptr_t)) {
+void QSslServer_connect_startedEncryptionHandshake(VirtualQSslServer* self, intptr_t slot, void (*callback)(intptr_t, QSslSocket*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslSocket*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslSocket*);
@@ -496,118 +478,95 @@ struct miqt_string QSslServer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QSslServer_virtualbase_metaObject(const void* self) {
+QMetaObject* QSslServer_virtualbase_metaObject(const VirtualQSslServer* self) {
 
-	return (QMetaObject*) ( (const VirtualQSslServer*)(self) )->QSslServer::metaObject();
-
+	return (QMetaObject*) self->QSslServer::metaObject();
 }
 
-void* QSslServer_virtualbase_metacast(void* self, const char* param1) {
+void* QSslServer_virtualbase_metacast(VirtualQSslServer* self, const char* param1) {
 
-	return ( (VirtualQSslServer*)(self) )->QSslServer::qt_metacast(param1);
-
+	return self->QSslServer::qt_metacast(param1);
 }
 
-int QSslServer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QSslServer_virtualbase_metacall(VirtualQSslServer* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQSslServer*)(self) )->QSslServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QSslServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QSslServer_virtualbase_incomingConnection(void* self, intptr_t socket) {
+void QSslServer_virtualbase_incomingConnection(VirtualQSslServer* self, intptr_t socket) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::incomingConnection((qintptr)(socket));
-
+	self->QSslServer::incomingConnection((qintptr)(socket));
 }
 
-bool QSslServer_virtualbase_hasPendingConnections(const void* self) {
+bool QSslServer_virtualbase_hasPendingConnections(const VirtualQSslServer* self) {
 
-	return ( (const VirtualQSslServer*)(self) )->QSslServer::hasPendingConnections();
-
+	return self->QSslServer::hasPendingConnections();
 }
 
-QTcpSocket* QSslServer_virtualbase_nextPendingConnection(void* self) {
+QTcpSocket* QSslServer_virtualbase_nextPendingConnection(VirtualQSslServer* self) {
 
-	return ( (VirtualQSslServer*)(self) )->QSslServer::nextPendingConnection();
-
+	return self->QSslServer::nextPendingConnection();
 }
 
-bool QSslServer_virtualbase_event(void* self, QEvent* event) {
+bool QSslServer_virtualbase_event(VirtualQSslServer* self, QEvent* event) {
 
-	return ( (VirtualQSslServer*)(self) )->QSslServer::event(event);
-
+	return self->QSslServer::event(event);
 }
 
-bool QSslServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QSslServer_virtualbase_eventFilter(VirtualQSslServer* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQSslServer*)(self) )->QSslServer::eventFilter(watched, event);
-
+	return self->QSslServer::eventFilter(watched, event);
 }
 
-void QSslServer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QSslServer_virtualbase_timerEvent(VirtualQSslServer* self, QTimerEvent* event) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::timerEvent(event);
-
+	self->QSslServer::timerEvent(event);
 }
 
-void QSslServer_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QSslServer_virtualbase_childEvent(VirtualQSslServer* self, QChildEvent* event) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::childEvent(event);
-
+	self->QSslServer::childEvent(event);
 }
 
-void QSslServer_virtualbase_customEvent(void* self, QEvent* event) {
+void QSslServer_virtualbase_customEvent(VirtualQSslServer* self, QEvent* event) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::customEvent(event);
-
+	self->QSslServer::customEvent(event);
 }
 
-void QSslServer_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QSslServer_virtualbase_connectNotify(VirtualQSslServer* self, QMetaMethod* signal) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::connectNotify(*signal);
-
+	self->QSslServer::connectNotify(*signal);
 }
 
-void QSslServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QSslServer_virtualbase_disconnectNotify(VirtualQSslServer* self, QMetaMethod* signal) {
 
-	( (VirtualQSslServer*)(self) )->QSslServer::disconnectNotify(*signal);
-
+	self->QSslServer::disconnectNotify(*signal);
 }
 
 const QMetaObject* QSslServer_staticMetaObject() { return &QSslServer::staticMetaObject; }
-void QSslServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket) {
-	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	
-	self_cast->addPendingConnection(socket);
 
+const QSslServer_VTable* QSslServer_vtbl(const VirtualQSslServer* self) { return self->vtbl; }
+void* QSslServer_vdata(const VirtualQSslServer* self) { return self->vdata; }
+void QSslServer_setVdata(VirtualQSslServer* self, void* vdata) { self->vdata = vdata; }
+
+void QSslServer_protectedbase_addPendingConnection(VirtualQSslServer* self, QTcpSocket* socket) {
+	self->addPendingConnection(socket);
 }
 
-QObject* QSslServer_protectedbase_sender(const void* self) {
-	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QSslServer_protectedbase_sender(const VirtualQSslServer* self) {
+	return self->sender();
 }
 
-int QSslServer_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QSslServer_protectedbase_senderSignalIndex(const VirtualQSslServer* self) {
+	return self->senderSignalIndex();
 }
 
-int QSslServer_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QSslServer_protectedbase_receivers(const VirtualQSslServer* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QSslServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QSslServer_protectedbase_isSignalConnected(const VirtualQSslServer* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QSslServer_delete(QSslServer* self) {

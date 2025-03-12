@@ -58,16 +58,16 @@ export
 
 type cQPagedPaintDevice*{.exportc: "QPagedPaintDevice", incompleteStruct.} = object
 
-proc fcQPagedPaintDevice_newPage(self: pointer, ): bool {.importc: "QPagedPaintDevice_newPage".}
+proc fcQPagedPaintDevice_newPage(self: pointer): bool {.importc: "QPagedPaintDevice_newPage".}
 proc fcQPagedPaintDevice_setPageLayout(self: pointer, pageLayout: pointer): bool {.importc: "QPagedPaintDevice_setPageLayout".}
 proc fcQPagedPaintDevice_setPageSize(self: pointer, pageSize: pointer): bool {.importc: "QPagedPaintDevice_setPageSize".}
 proc fcQPagedPaintDevice_setPageOrientation(self: pointer, orientation: cint): bool {.importc: "QPagedPaintDevice_setPageOrientation".}
 proc fcQPagedPaintDevice_setPageMargins(self: pointer, margins: pointer, units: cint): bool {.importc: "QPagedPaintDevice_setPageMargins".}
-proc fcQPagedPaintDevice_pageLayout(self: pointer, ): pointer {.importc: "QPagedPaintDevice_pageLayout".}
+proc fcQPagedPaintDevice_pageLayout(self: pointer): pointer {.importc: "QPagedPaintDevice_pageLayout".}
 proc fcQPagedPaintDevice_setPageRanges(self: pointer, ranges: pointer): void {.importc: "QPagedPaintDevice_setPageRanges".}
-proc fcQPagedPaintDevice_pageRanges(self: pointer, ): pointer {.importc: "QPagedPaintDevice_pageRanges".}
+proc fcQPagedPaintDevice_pageRanges(self: pointer): pointer {.importc: "QPagedPaintDevice_pageRanges".}
 
-proc newPage*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): bool =
+proc newPage*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): bool =
   fcQPagedPaintDevice_newPage(self.h)
 
 proc setPageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, pageLayout: gen_qpagelayout_types.QPageLayout): bool =
@@ -82,12 +82,12 @@ proc setPageOrientation*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, or
 proc setPageMargins*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, margins: gen_qmargins_types.QMarginsF, units: cint): bool =
   fcQPagedPaintDevice_setPageMargins(self.h, margins.h, cint(units))
 
-proc pageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpagelayout_types.QPageLayout =
+proc pageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpagelayout_types.QPageLayout =
   gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_pageLayout(self.h), owned: true)
 
 proc setPageRanges*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ranges: gen_qpageranges_types.QPageRanges): void =
   fcQPagedPaintDevice_setPageRanges(self.h, ranges.h)
 
-proc pageRanges*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpageranges_types.QPageRanges =
+proc pageRanges*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice): gen_qpageranges_types.QPageRanges =
   gen_qpageranges_types.QPageRanges(h: fcQPagedPaintDevice_pageRanges(self.h), owned: true)
 

@@ -14,15 +14,6 @@
 #include <QVariant>
 #include <qhttpmultipart.h>
 #include "gen_qhttpmultipart.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QHttpPart* QHttpPart_new() {
 	return new QHttpPart();
 }
@@ -71,31 +62,33 @@ void QHttpPart_delete(QHttpPart* self) {
 }
 
 class VirtualQHttpMultiPart final : public QHttpMultiPart {
-	struct QHttpMultiPart_VTable* vtbl;
+	const QHttpMultiPart_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QHttpMultiPart_VTable* QHttpMultiPart_vtbl(const VirtualQHttpMultiPart* self);
+	friend void* QHttpMultiPart_vdata(const VirtualQHttpMultiPart* self);
+	friend void QHttpMultiPart_setVdata(VirtualQHttpMultiPart* self, void* vdata);
 
-	VirtualQHttpMultiPart(struct QHttpMultiPart_VTable* vtbl): QHttpMultiPart(), vtbl(vtbl) {};
-	VirtualQHttpMultiPart(struct QHttpMultiPart_VTable* vtbl, QHttpMultiPart::ContentType contentType): QHttpMultiPart(contentType), vtbl(vtbl) {};
-	VirtualQHttpMultiPart(struct QHttpMultiPart_VTable* vtbl, QObject* parent): QHttpMultiPart(parent), vtbl(vtbl) {};
-	VirtualQHttpMultiPart(struct QHttpMultiPart_VTable* vtbl, QHttpMultiPart::ContentType contentType, QObject* parent): QHttpMultiPart(contentType, parent), vtbl(vtbl) {};
+	VirtualQHttpMultiPart(const QHttpMultiPart_VTable* vtbl, void* vdata): QHttpMultiPart(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHttpMultiPart(const QHttpMultiPart_VTable* vtbl, void* vdata, QHttpMultiPart::ContentType contentType): QHttpMultiPart(contentType), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHttpMultiPart(const QHttpMultiPart_VTable* vtbl, void* vdata, QObject* parent): QHttpMultiPart(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHttpMultiPart(const QHttpMultiPart_VTable* vtbl, void* vdata, QHttpMultiPart::ContentType contentType, QObject* parent): QHttpMultiPart(contentType, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQHttpMultiPart() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQHttpMultiPart() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QHttpMultiPart::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QHttpMultiPart_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QHttpMultiPart_virtualbase_metaObject(const VirtualQHttpMultiPart* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QHttpMultiPart::qt_metacast(param1);
@@ -103,14 +96,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QHttpMultiPart_virtualbase_metacast(void* self, const char* param1);
+	friend void* QHttpMultiPart_virtualbase_metacast(VirtualQHttpMultiPart* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QHttpMultiPart::qt_metacall(param1, param2, param3);
@@ -121,14 +113,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QHttpMultiPart_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QHttpMultiPart_virtualbase_metacall(VirtualQHttpMultiPart* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QHttpMultiPart::event(event);
@@ -136,14 +127,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QHttpMultiPart_virtualbase_event(void* self, QEvent* event);
+	friend bool QHttpMultiPart_virtualbase_event(VirtualQHttpMultiPart* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QHttpMultiPart::eventFilter(watched, event);
@@ -152,14 +142,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QHttpMultiPart_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QHttpMultiPart_virtualbase_eventFilter(VirtualQHttpMultiPart* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QHttpMultiPart::timerEvent(event);
@@ -168,13 +157,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QHttpMultiPart_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QHttpMultiPart_virtualbase_timerEvent(VirtualQHttpMultiPart* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QHttpMultiPart::childEvent(event);
@@ -183,13 +171,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QHttpMultiPart_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QHttpMultiPart_virtualbase_childEvent(VirtualQHttpMultiPart* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QHttpMultiPart::customEvent(event);
@@ -198,13 +185,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QHttpMultiPart_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QHttpMultiPart_virtualbase_customEvent(VirtualQHttpMultiPart* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QHttpMultiPart::connectNotify(signal);
@@ -215,13 +201,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QHttpMultiPart_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QHttpMultiPart_virtualbase_connectNotify(VirtualQHttpMultiPart* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QHttpMultiPart::disconnectNotify(signal);
@@ -232,33 +217,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QHttpMultiPart_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QHttpMultiPart_virtualbase_disconnectNotify(VirtualQHttpMultiPart* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QHttpMultiPart_protectedbase_sender(const void* self);
-	friend int QHttpMultiPart_protectedbase_senderSignalIndex(const void* self);
-	friend int QHttpMultiPart_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QHttpMultiPart_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QHttpMultiPart_protectedbase_sender(const VirtualQHttpMultiPart* self);
+	friend int QHttpMultiPart_protectedbase_senderSignalIndex(const VirtualQHttpMultiPart* self);
+	friend int QHttpMultiPart_protectedbase_receivers(const VirtualQHttpMultiPart* self, const char* signal);
+	friend bool QHttpMultiPart_protectedbase_isSignalConnected(const VirtualQHttpMultiPart* self, QMetaMethod* signal);
 };
 
-QHttpMultiPart* QHttpMultiPart_new(struct QHttpMultiPart_VTable* vtbl) {
-	return new VirtualQHttpMultiPart(vtbl);
+VirtualQHttpMultiPart* QHttpMultiPart_new(const QHttpMultiPart_VTable* vtbl, void* vdata) {
+	return new VirtualQHttpMultiPart(vtbl, vdata);
 }
 
-QHttpMultiPart* QHttpMultiPart_new2(struct QHttpMultiPart_VTable* vtbl, int contentType) {
-	return new VirtualQHttpMultiPart(vtbl, static_cast<QHttpMultiPart::ContentType>(contentType));
+VirtualQHttpMultiPart* QHttpMultiPart_new2(const QHttpMultiPart_VTable* vtbl, void* vdata, int contentType) {
+	return new VirtualQHttpMultiPart(vtbl, vdata, static_cast<QHttpMultiPart::ContentType>(contentType));
 }
 
-QHttpMultiPart* QHttpMultiPart_new3(struct QHttpMultiPart_VTable* vtbl, QObject* parent) {
-	return new VirtualQHttpMultiPart(vtbl, parent);
+VirtualQHttpMultiPart* QHttpMultiPart_new3(const QHttpMultiPart_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQHttpMultiPart(vtbl, vdata, parent);
 }
 
-QHttpMultiPart* QHttpMultiPart_new4(struct QHttpMultiPart_VTable* vtbl, int contentType, QObject* parent) {
-	return new VirtualQHttpMultiPart(vtbl, static_cast<QHttpMultiPart::ContentType>(contentType), parent);
+VirtualQHttpMultiPart* QHttpMultiPart_new4(const QHttpMultiPart_VTable* vtbl, void* vdata, int contentType, QObject* parent) {
+	return new VirtualQHttpMultiPart(vtbl, vdata, static_cast<QHttpMultiPart::ContentType>(contentType), parent);
 }
 
 void QHttpMultiPart_virtbase(QHttpMultiPart* src, QObject** outptr_QObject) {
@@ -332,93 +317,76 @@ struct miqt_string QHttpMultiPart_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QHttpMultiPart_virtualbase_metaObject(const void* self) {
+QMetaObject* QHttpMultiPart_virtualbase_metaObject(const VirtualQHttpMultiPart* self) {
 
-	return (QMetaObject*) ( (const VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::metaObject();
-
+	return (QMetaObject*) self->QHttpMultiPart::metaObject();
 }
 
-void* QHttpMultiPart_virtualbase_metacast(void* self, const char* param1) {
+void* QHttpMultiPart_virtualbase_metacast(VirtualQHttpMultiPart* self, const char* param1) {
 
-	return ( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::qt_metacast(param1);
-
+	return self->QHttpMultiPart::qt_metacast(param1);
 }
 
-int QHttpMultiPart_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QHttpMultiPart_virtualbase_metacall(VirtualQHttpMultiPart* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QHttpMultiPart::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QHttpMultiPart_virtualbase_event(void* self, QEvent* event) {
+bool QHttpMultiPart_virtualbase_event(VirtualQHttpMultiPart* self, QEvent* event) {
 
-	return ( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::event(event);
-
+	return self->QHttpMultiPart::event(event);
 }
 
-bool QHttpMultiPart_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QHttpMultiPart_virtualbase_eventFilter(VirtualQHttpMultiPart* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::eventFilter(watched, event);
-
+	return self->QHttpMultiPart::eventFilter(watched, event);
 }
 
-void QHttpMultiPart_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QHttpMultiPart_virtualbase_timerEvent(VirtualQHttpMultiPart* self, QTimerEvent* event) {
 
-	( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::timerEvent(event);
-
+	self->QHttpMultiPart::timerEvent(event);
 }
 
-void QHttpMultiPart_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QHttpMultiPart_virtualbase_childEvent(VirtualQHttpMultiPart* self, QChildEvent* event) {
 
-	( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::childEvent(event);
-
+	self->QHttpMultiPart::childEvent(event);
 }
 
-void QHttpMultiPart_virtualbase_customEvent(void* self, QEvent* event) {
+void QHttpMultiPart_virtualbase_customEvent(VirtualQHttpMultiPart* self, QEvent* event) {
 
-	( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::customEvent(event);
-
+	self->QHttpMultiPart::customEvent(event);
 }
 
-void QHttpMultiPart_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QHttpMultiPart_virtualbase_connectNotify(VirtualQHttpMultiPart* self, QMetaMethod* signal) {
 
-	( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::connectNotify(*signal);
-
+	self->QHttpMultiPart::connectNotify(*signal);
 }
 
-void QHttpMultiPart_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QHttpMultiPart_virtualbase_disconnectNotify(VirtualQHttpMultiPart* self, QMetaMethod* signal) {
 
-	( (VirtualQHttpMultiPart*)(self) )->QHttpMultiPart::disconnectNotify(*signal);
-
+	self->QHttpMultiPart::disconnectNotify(*signal);
 }
 
 const QMetaObject* QHttpMultiPart_staticMetaObject() { return &QHttpMultiPart::staticMetaObject; }
-QObject* QHttpMultiPart_protectedbase_sender(const void* self) {
-	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	
-	return self_cast->sender();
 
+const QHttpMultiPart_VTable* QHttpMultiPart_vtbl(const VirtualQHttpMultiPart* self) { return self->vtbl; }
+void* QHttpMultiPart_vdata(const VirtualQHttpMultiPart* self) { return self->vdata; }
+void QHttpMultiPart_setVdata(VirtualQHttpMultiPart* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QHttpMultiPart_protectedbase_sender(const VirtualQHttpMultiPart* self) {
+	return self->sender();
 }
 
-int QHttpMultiPart_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QHttpMultiPart_protectedbase_senderSignalIndex(const VirtualQHttpMultiPart* self) {
+	return self->senderSignalIndex();
 }
 
-int QHttpMultiPart_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QHttpMultiPart_protectedbase_receivers(const VirtualQHttpMultiPart* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QHttpMultiPart_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QHttpMultiPart_protectedbase_isSignalConnected(const VirtualQHttpMultiPart* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QHttpMultiPart_delete(QHttpMultiPart* self) {

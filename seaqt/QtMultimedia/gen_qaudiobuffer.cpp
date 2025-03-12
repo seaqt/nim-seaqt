@@ -3,15 +3,6 @@
 #include <QByteArray>
 #include <qaudiobuffer.h>
 #include "gen_qaudiobuffer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAudioBuffer* QAudioBuffer_new() {
 	return new QAudioBuffer();
 }

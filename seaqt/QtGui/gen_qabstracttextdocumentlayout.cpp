@@ -24,38 +24,31 @@
 #include <QTimerEvent>
 #include <qabstracttextdocumentlayout.h>
 #include "gen_qabstracttextdocumentlayout.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractTextDocumentLayout final : public QAbstractTextDocumentLayout {
-	struct QAbstractTextDocumentLayout_VTable* vtbl;
+	const QAbstractTextDocumentLayout_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractTextDocumentLayout_VTable* QAbstractTextDocumentLayout_vtbl(const VirtualQAbstractTextDocumentLayout* self);
+	friend void* QAbstractTextDocumentLayout_vdata(const VirtualQAbstractTextDocumentLayout* self);
+	friend void QAbstractTextDocumentLayout_setVdata(VirtualQAbstractTextDocumentLayout* self, void* vdata);
 
-	VirtualQAbstractTextDocumentLayout(struct QAbstractTextDocumentLayout_VTable* vtbl, QTextDocument* doc): QAbstractTextDocumentLayout(doc), vtbl(vtbl) {};
+	VirtualQAbstractTextDocumentLayout(const QAbstractTextDocumentLayout_VTable* vtbl, void* vdata, QTextDocument* doc): QAbstractTextDocumentLayout(doc), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractTextDocumentLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractTextDocumentLayout() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractTextDocumentLayout::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const VirtualQAbstractTextDocumentLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractTextDocumentLayout::qt_metacast(param1);
@@ -63,14 +56,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractTextDocumentLayout_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractTextDocumentLayout_virtualbase_metacast(VirtualQAbstractTextDocumentLayout* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractTextDocumentLayout::qt_metacall(param1, param2, param3);
@@ -81,14 +73,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractTextDocumentLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractTextDocumentLayout_virtualbase_metacall(VirtualQAbstractTextDocumentLayout* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QAbstractTextDocumentLayout::PaintContext& context) override {
 		if (vtbl->draw == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -99,11 +90,10 @@ public:
 		// Cast returned reference into pointer
 		QAbstractTextDocumentLayout__PaintContext* sigval2 = const_cast<QAbstractTextDocumentLayout::PaintContext*>(&context_ret);
 
-		vtbl->draw(vtbl, this, sigval1, sigval2);
+		vtbl->draw(this, sigval1, sigval2);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int hitTest(const QPointF& point, Qt::HitTestAccuracy accuracy) const override {
 		if (vtbl->hitTest == 0) {
 			return 0; // Pure virtual, there is no base we can call
@@ -115,38 +105,35 @@ public:
 		Qt::HitTestAccuracy accuracy_ret = accuracy;
 		int sigval2 = static_cast<int>(accuracy_ret);
 
-		int callback_return_value = vtbl->hitTest(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->hitTest(this, sigval1, sigval2);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int pageCount() const override {
 		if (vtbl->pageCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->pageCount(vtbl, this);
+		int callback_return_value = vtbl->pageCount(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizeF documentSize() const override {
 		if (vtbl->documentSize == 0) {
 			return QSizeF(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSizeF* callback_return_value = vtbl->documentSize(vtbl, this);
+		QSizeF* callback_return_value = vtbl->documentSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF frameBoundingRect(QTextFrame* frame) const override {
 		if (vtbl->frameBoundingRect == 0) {
 			return QRectF(); // Pure virtual, there is no base we can call
@@ -154,14 +141,13 @@ public:
 
 		QTextFrame* sigval1 = frame;
 
-		QRectF* callback_return_value = vtbl->frameBoundingRect(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->frameBoundingRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF blockBoundingRect(const QTextBlock& block) const override {
 		if (vtbl->blockBoundingRect == 0) {
 			return QRectF(); // Pure virtual, there is no base we can call
@@ -171,14 +157,13 @@ public:
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 
-		QRectF* callback_return_value = vtbl->blockBoundingRect(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->blockBoundingRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void documentChanged(int from, int charsRemoved, int charsAdded) override {
 		if (vtbl->documentChanged == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -188,11 +173,10 @@ public:
 		int sigval2 = charsRemoved;
 		int sigval3 = charsAdded;
 
-		vtbl->documentChanged(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->documentChanged(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->resizeInlineObject == 0) {
 			QAbstractTextDocumentLayout::resizeInlineObject(item, posInDocument, format);
@@ -205,13 +189,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->resizeInlineObject(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->resizeInlineObject(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	friend void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual void positionInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->positionInlineObject == 0) {
 			QAbstractTextDocumentLayout::positionInlineObject(item, posInDocument, format);
@@ -224,13 +207,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->positionInlineObject(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->positionInlineObject(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	friend void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawInlineObject(QPainter* painter, const QRectF& rect, QTextInlineObject object, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->drawInlineObject == 0) {
 			QAbstractTextDocumentLayout::drawInlineObject(painter, rect, object, posInDocument, format);
@@ -247,13 +229,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval5 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->drawInlineObject(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
+		vtbl->drawInlineObject(this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
+	friend void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAbstractTextDocumentLayout::event(event);
@@ -261,14 +242,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractTextDocumentLayout_virtualbase_event(void* self, QEvent* event);
+	friend bool QAbstractTextDocumentLayout_virtualbase_event(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractTextDocumentLayout::eventFilter(watched, event);
@@ -277,14 +257,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractTextDocumentLayout_virtualbase_eventFilter(VirtualQAbstractTextDocumentLayout* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractTextDocumentLayout::timerEvent(event);
@@ -293,13 +272,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractTextDocumentLayout_virtualbase_timerEvent(VirtualQAbstractTextDocumentLayout* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractTextDocumentLayout::childEvent(event);
@@ -308,13 +286,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractTextDocumentLayout_virtualbase_childEvent(VirtualQAbstractTextDocumentLayout* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractTextDocumentLayout::customEvent(event);
@@ -323,13 +300,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractTextDocumentLayout_virtualbase_customEvent(VirtualQAbstractTextDocumentLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractTextDocumentLayout::connectNotify(signal);
@@ -340,13 +316,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractTextDocumentLayout_virtualbase_connectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractTextDocumentLayout::disconnectNotify(signal);
@@ -357,23 +332,23 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend int QAbstractTextDocumentLayout_protectedbase_formatIndex(void* self, int pos);
-	friend QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(void* self, int pos);
-	friend QObject* QAbstractTextDocumentLayout_protectedbase_sender(const void* self);
-	friend int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend int QAbstractTextDocumentLayout_protectedbase_formatIndex(VirtualQAbstractTextDocumentLayout* self, int pos);
+	friend QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(VirtualQAbstractTextDocumentLayout* self, int pos);
+	friend QObject* QAbstractTextDocumentLayout_protectedbase_sender(const VirtualQAbstractTextDocumentLayout* self);
+	friend int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQAbstractTextDocumentLayout* self);
+	friend int QAbstractTextDocumentLayout_protectedbase_receivers(const VirtualQAbstractTextDocumentLayout* self, const char* signal);
+	friend bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
 };
 
-QAbstractTextDocumentLayout* QAbstractTextDocumentLayout_new(struct QAbstractTextDocumentLayout_VTable* vtbl, QTextDocument* doc) {
-	return new VirtualQAbstractTextDocumentLayout(vtbl, doc);
+VirtualQAbstractTextDocumentLayout* QAbstractTextDocumentLayout_new(const QAbstractTextDocumentLayout_VTable* vtbl, void* vdata, QTextDocument* doc) {
+	return new VirtualQAbstractTextDocumentLayout(vtbl, vdata, doc);
 }
 
 void QAbstractTextDocumentLayout_virtbase(QAbstractTextDocumentLayout* src, QObject** outptr_QObject) {
@@ -485,7 +460,7 @@ void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self) {
 	self->update();
 }
 
-void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_update(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -500,7 +475,7 @@ void QAbstractTextDocumentLayout_updateBlock(QAbstractTextDocumentLayout* self, 
 	self->updateBlock(*block);
 }
 
-void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_updateBlock(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTextBlock*);
@@ -518,7 +493,7 @@ void QAbstractTextDocumentLayout_documentSizeChanged(QAbstractTextDocumentLayout
 	self->documentSizeChanged(*newSize);
 }
 
-void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_documentSizeChanged(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSizeF*);
@@ -536,7 +511,7 @@ void QAbstractTextDocumentLayout_pageCountChanged(QAbstractTextDocumentLayout* s
 	self->pageCountChanged(static_cast<int>(newPages));
 }
 
-void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_pageCountChanged(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -578,7 +553,7 @@ void QAbstractTextDocumentLayout_update1(QAbstractTextDocumentLayout* self, QRec
 	self->update(*param1);
 }
 
-void QAbstractTextDocumentLayout_connect_update1(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_update1(VirtualQAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QRectF*);
@@ -592,125 +567,99 @@ void QAbstractTextDocumentLayout_connect_update1(QAbstractTextDocumentLayout* se
 	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, local_caller{slot, callback, release});
 }
 
-QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const VirtualQAbstractTextDocumentLayout* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::metaObject();
-
+	return (QMetaObject*) self->QAbstractTextDocumentLayout::metaObject();
 }
 
-void* QAbstractTextDocumentLayout_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractTextDocumentLayout_virtualbase_metacast(VirtualQAbstractTextDocumentLayout* self, const char* param1) {
 
-	return ( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::qt_metacast(param1);
-
+	return self->QAbstractTextDocumentLayout::qt_metacast(param1);
 }
 
-int QAbstractTextDocumentLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractTextDocumentLayout_virtualbase_metacall(VirtualQAbstractTextDocumentLayout* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractTextDocumentLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
+void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::resizeInlineObject(*item, static_cast<int>(posInDocument), *format);
-
+	self->QAbstractTextDocumentLayout::resizeInlineObject(*item, static_cast<int>(posInDocument), *format);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
+void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(VirtualQAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::positionInlineObject(*item, static_cast<int>(posInDocument), *format);
-
+	self->QAbstractTextDocumentLayout::positionInlineObject(*item, static_cast<int>(posInDocument), *format);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format) {
+void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(VirtualQAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::drawInlineObject(painter, *rect, *object, static_cast<int>(posInDocument), *format);
-
+	self->QAbstractTextDocumentLayout::drawInlineObject(painter, *rect, *object, static_cast<int>(posInDocument), *format);
 }
 
-bool QAbstractTextDocumentLayout_virtualbase_event(void* self, QEvent* event) {
+bool QAbstractTextDocumentLayout_virtualbase_event(VirtualQAbstractTextDocumentLayout* self, QEvent* event) {
 
-	return ( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::event(event);
-
+	return self->QAbstractTextDocumentLayout::event(event);
 }
 
-bool QAbstractTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractTextDocumentLayout_virtualbase_eventFilter(VirtualQAbstractTextDocumentLayout* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::eventFilter(watched, event);
-
+	return self->QAbstractTextDocumentLayout::eventFilter(watched, event);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractTextDocumentLayout_virtualbase_timerEvent(VirtualQAbstractTextDocumentLayout* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::timerEvent(event);
-
+	self->QAbstractTextDocumentLayout::timerEvent(event);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractTextDocumentLayout_virtualbase_childEvent(VirtualQAbstractTextDocumentLayout* self, QChildEvent* event) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::childEvent(event);
-
+	self->QAbstractTextDocumentLayout::childEvent(event);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractTextDocumentLayout_virtualbase_customEvent(VirtualQAbstractTextDocumentLayout* self, QEvent* event) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::customEvent(event);
-
+	self->QAbstractTextDocumentLayout::customEvent(event);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractTextDocumentLayout_virtualbase_connectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::connectNotify(*signal);
-
+	self->QAbstractTextDocumentLayout::connectNotify(*signal);
 }
 
-void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractTextDocumentLayout*)(self) )->QAbstractTextDocumentLayout::disconnectNotify(*signal);
-
+	self->QAbstractTextDocumentLayout::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractTextDocumentLayout_staticMetaObject() { return &QAbstractTextDocumentLayout::staticMetaObject; }
-int QAbstractTextDocumentLayout_protectedbase_formatIndex(void* self, int pos) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return self_cast->formatIndex(static_cast<int>(pos));
 
+const QAbstractTextDocumentLayout_VTable* QAbstractTextDocumentLayout_vtbl(const VirtualQAbstractTextDocumentLayout* self) { return self->vtbl; }
+void* QAbstractTextDocumentLayout_vdata(const VirtualQAbstractTextDocumentLayout* self) { return self->vdata; }
+void QAbstractTextDocumentLayout_setVdata(VirtualQAbstractTextDocumentLayout* self, void* vdata) { self->vdata = vdata; }
+
+int QAbstractTextDocumentLayout_protectedbase_formatIndex(VirtualQAbstractTextDocumentLayout* self, int pos) {
+	return self->formatIndex(static_cast<int>(pos));
 }
 
-QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(void* self, int pos) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return new QTextCharFormat(self_cast->format(static_cast<int>(pos)));
-
+QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(VirtualQAbstractTextDocumentLayout* self, int pos) {
+	return new QTextCharFormat(self->format(static_cast<int>(pos)));
 }
 
-QObject* QAbstractTextDocumentLayout_protectedbase_sender(const void* self) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractTextDocumentLayout_protectedbase_sender(const VirtualQAbstractTextDocumentLayout* self) {
+	return self->sender();
 }
 
-int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQAbstractTextDocumentLayout* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractTextDocumentLayout_protectedbase_receivers(const VirtualQAbstractTextDocumentLayout* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractTextDocumentLayout* self_cast = static_cast<VirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self) {
@@ -734,7 +683,7 @@ void QTextObjectInterface_delete(QTextObjectInterface* self) {
 }
 
 QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* param1) {
-	return new QAbstractTextDocumentLayout::Selection(*param1);
+	return new QAbstractTextDocumentLayout__Selection(*param1);
 }
 
 void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* param1) {
@@ -746,11 +695,11 @@ void QAbstractTextDocumentLayout__Selection_delete(QAbstractTextDocumentLayout__
 }
 
 QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new() {
-	return new QAbstractTextDocumentLayout::PaintContext();
+	return new QAbstractTextDocumentLayout__PaintContext();
 }
 
 QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new2(QAbstractTextDocumentLayout__PaintContext* param1) {
-	return new QAbstractTextDocumentLayout::PaintContext(*param1);
+	return new QAbstractTextDocumentLayout__PaintContext(*param1);
 }
 
 void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* param1) {

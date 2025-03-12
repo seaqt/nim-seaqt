@@ -38,39 +38,32 @@
 #include <QWidget>
 #include <qprogressbar.h>
 #include "gen_qprogressbar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQProgressBar final : public QProgressBar {
-	struct QProgressBar_VTable* vtbl;
+	const QProgressBar_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QProgressBar_VTable* QProgressBar_vtbl(const VirtualQProgressBar* self);
+	friend void* QProgressBar_vdata(const VirtualQProgressBar* self);
+	friend void QProgressBar_setVdata(VirtualQProgressBar* self, void* vdata);
 
-	VirtualQProgressBar(struct QProgressBar_VTable* vtbl, QWidget* parent): QProgressBar(parent), vtbl(vtbl) {};
-	VirtualQProgressBar(struct QProgressBar_VTable* vtbl): QProgressBar(), vtbl(vtbl) {};
+	VirtualQProgressBar(const QProgressBar_VTable* vtbl, void* vdata, QWidget* parent): QProgressBar(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressBar(const QProgressBar_VTable* vtbl, void* vdata): QProgressBar(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQProgressBar() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQProgressBar() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QProgressBar::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QProgressBar_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QProgressBar_virtualbase_metaObject(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QProgressBar::qt_metacast(param1);
@@ -78,14 +71,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QProgressBar_virtualbase_metacast(void* self, const char* param1);
+	friend void* QProgressBar_virtualbase_metacast(VirtualQProgressBar* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QProgressBar::qt_metacall(param1, param2, param3);
@@ -96,62 +88,58 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressBar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QProgressBar_virtualbase_metacall(VirtualQProgressBar* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QString text() const override {
 		if (vtbl->text == 0) {
 			return QProgressBar::text();
 		}
 
 
-		struct miqt_string callback_return_value = vtbl->text(vtbl, this);
+		struct miqt_string callback_return_value = vtbl->text(this);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
 
-	friend struct miqt_string QProgressBar_virtualbase_text(const void* self);
+	friend struct miqt_string QProgressBar_virtualbase_text(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QProgressBar::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QProgressBar_virtualbase_sizeHint(const void* self);
+	friend QSize* QProgressBar_virtualbase_sizeHint(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QProgressBar::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QProgressBar_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QProgressBar_virtualbase_minimumSizeHint(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QProgressBar::event(e);
@@ -159,14 +147,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressBar_virtualbase_event(void* self, QEvent* e);
+	friend bool QProgressBar_virtualbase_event(VirtualQProgressBar* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QProgressBar::paintEvent(param1);
@@ -175,13 +162,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QProgressBar_virtualbase_paintEvent(VirtualQProgressBar* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionProgressBar* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QProgressBar::initStyleOption(option);
@@ -190,27 +176,25 @@ public:
 
 		QStyleOptionProgressBar* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_initStyleOption(const void* self, QStyleOptionProgressBar* option);
+	friend void QProgressBar_virtualbase_initStyleOption(const VirtualQProgressBar* self, QStyleOptionProgressBar* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QProgressBar::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressBar_virtualbase_devType(const void* self);
+	friend int QProgressBar_virtualbase_devType(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QProgressBar::setVisible(visible);
@@ -219,13 +203,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_setVisible(void* self, bool visible);
+	friend void QProgressBar_virtualbase_setVisible(VirtualQProgressBar* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QProgressBar::heightForWidth(param1);
@@ -233,42 +216,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressBar_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QProgressBar_virtualbase_heightForWidth(const VirtualQProgressBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QProgressBar::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressBar_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QProgressBar_virtualbase_hasHeightForWidth(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QProgressBar::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QProgressBar_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QProgressBar_virtualbase_paintEngine(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QProgressBar::mousePressEvent(event);
@@ -277,13 +257,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QProgressBar_virtualbase_mousePressEvent(VirtualQProgressBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QProgressBar::mouseReleaseEvent(event);
@@ -292,13 +271,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QProgressBar_virtualbase_mouseReleaseEvent(VirtualQProgressBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QProgressBar::mouseDoubleClickEvent(event);
@@ -307,13 +285,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QProgressBar_virtualbase_mouseDoubleClickEvent(VirtualQProgressBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QProgressBar::mouseMoveEvent(event);
@@ -322,13 +299,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QProgressBar_virtualbase_mouseMoveEvent(VirtualQProgressBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QProgressBar::wheelEvent(event);
@@ -337,13 +313,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QProgressBar_virtualbase_wheelEvent(VirtualQProgressBar* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QProgressBar::keyPressEvent(event);
@@ -352,13 +327,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QProgressBar_virtualbase_keyPressEvent(VirtualQProgressBar* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QProgressBar::keyReleaseEvent(event);
@@ -367,13 +341,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QProgressBar_virtualbase_keyReleaseEvent(VirtualQProgressBar* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QProgressBar::focusInEvent(event);
@@ -382,13 +355,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QProgressBar_virtualbase_focusInEvent(VirtualQProgressBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QProgressBar::focusOutEvent(event);
@@ -397,13 +369,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QProgressBar_virtualbase_focusOutEvent(VirtualQProgressBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QProgressBar::enterEvent(event);
@@ -412,13 +383,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QProgressBar_virtualbase_enterEvent(VirtualQProgressBar* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QProgressBar::leaveEvent(event);
@@ -427,13 +397,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QProgressBar_virtualbase_leaveEvent(VirtualQProgressBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QProgressBar::moveEvent(event);
@@ -442,13 +411,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QProgressBar_virtualbase_moveEvent(VirtualQProgressBar* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QProgressBar::resizeEvent(event);
@@ -457,13 +425,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QProgressBar_virtualbase_resizeEvent(VirtualQProgressBar* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QProgressBar::closeEvent(event);
@@ -472,13 +439,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QProgressBar_virtualbase_closeEvent(VirtualQProgressBar* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QProgressBar::contextMenuEvent(event);
@@ -487,13 +453,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QProgressBar_virtualbase_contextMenuEvent(VirtualQProgressBar* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QProgressBar::tabletEvent(event);
@@ -502,13 +467,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QProgressBar_virtualbase_tabletEvent(VirtualQProgressBar* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QProgressBar::actionEvent(event);
@@ -517,13 +481,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QProgressBar_virtualbase_actionEvent(VirtualQProgressBar* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QProgressBar::dragEnterEvent(event);
@@ -532,13 +495,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QProgressBar_virtualbase_dragEnterEvent(VirtualQProgressBar* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QProgressBar::dragMoveEvent(event);
@@ -547,13 +509,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QProgressBar_virtualbase_dragMoveEvent(VirtualQProgressBar* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QProgressBar::dragLeaveEvent(event);
@@ -562,13 +523,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QProgressBar_virtualbase_dragLeaveEvent(VirtualQProgressBar* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QProgressBar::dropEvent(event);
@@ -577,13 +537,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QProgressBar_virtualbase_dropEvent(VirtualQProgressBar* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QProgressBar::showEvent(event);
@@ -592,13 +551,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QProgressBar_virtualbase_showEvent(VirtualQProgressBar* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QProgressBar::hideEvent(event);
@@ -607,13 +565,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QProgressBar_virtualbase_hideEvent(VirtualQProgressBar* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QProgressBar::nativeEvent(eventType, message, result);
@@ -629,14 +586,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QProgressBar_virtualbase_nativeEvent(VirtualQProgressBar* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QProgressBar::changeEvent(param1);
@@ -645,13 +601,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QProgressBar_virtualbase_changeEvent(VirtualQProgressBar* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QProgressBar::metric(param1);
@@ -660,14 +615,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressBar_virtualbase_metric(const void* self, int param1);
+	friend int QProgressBar_virtualbase_metric(const VirtualQProgressBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QProgressBar::initPainter(painter);
@@ -676,13 +630,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QProgressBar_virtualbase_initPainter(const VirtualQProgressBar* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QProgressBar::redirected(offset);
@@ -690,28 +643,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QProgressBar_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QProgressBar_virtualbase_redirected(const VirtualQProgressBar* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QProgressBar::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QProgressBar_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QProgressBar_virtualbase_sharedPainter(const VirtualQProgressBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QProgressBar::inputMethodEvent(param1);
@@ -720,13 +671,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QProgressBar_virtualbase_inputMethodEvent(VirtualQProgressBar* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QProgressBar::inputMethodQuery(param1);
@@ -735,16 +685,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QProgressBar_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QProgressBar_virtualbase_inputMethodQuery(const VirtualQProgressBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QProgressBar::focusNextPrevChild(next);
@@ -752,14 +701,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressBar_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QProgressBar_virtualbase_focusNextPrevChild(VirtualQProgressBar* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QProgressBar::eventFilter(watched, event);
@@ -768,14 +716,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QProgressBar_virtualbase_eventFilter(VirtualQProgressBar* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QProgressBar::timerEvent(event);
@@ -784,13 +731,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QProgressBar_virtualbase_timerEvent(VirtualQProgressBar* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QProgressBar::childEvent(event);
@@ -799,13 +745,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QProgressBar_virtualbase_childEvent(VirtualQProgressBar* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QProgressBar::customEvent(event);
@@ -814,13 +759,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QProgressBar_virtualbase_customEvent(VirtualQProgressBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QProgressBar::connectNotify(signal);
@@ -831,13 +775,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QProgressBar_virtualbase_connectNotify(VirtualQProgressBar* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QProgressBar::disconnectNotify(signal);
@@ -848,30 +791,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QProgressBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QProgressBar_virtualbase_disconnectNotify(VirtualQProgressBar* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QProgressBar_protectedbase_updateMicroFocus(void* self);
-	friend void QProgressBar_protectedbase_create(void* self);
-	friend void QProgressBar_protectedbase_destroy(void* self);
-	friend bool QProgressBar_protectedbase_focusNextChild(void* self);
-	friend bool QProgressBar_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QProgressBar_protectedbase_sender(const void* self);
-	friend int QProgressBar_protectedbase_senderSignalIndex(const void* self);
-	friend int QProgressBar_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QProgressBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QProgressBar_protectedbase_updateMicroFocus(VirtualQProgressBar* self);
+	friend void QProgressBar_protectedbase_create(VirtualQProgressBar* self);
+	friend void QProgressBar_protectedbase_destroy(VirtualQProgressBar* self);
+	friend bool QProgressBar_protectedbase_focusNextChild(VirtualQProgressBar* self);
+	friend bool QProgressBar_protectedbase_focusPreviousChild(VirtualQProgressBar* self);
+	friend QObject* QProgressBar_protectedbase_sender(const VirtualQProgressBar* self);
+	friend int QProgressBar_protectedbase_senderSignalIndex(const VirtualQProgressBar* self);
+	friend int QProgressBar_protectedbase_receivers(const VirtualQProgressBar* self, const char* signal);
+	friend bool QProgressBar_protectedbase_isSignalConnected(const VirtualQProgressBar* self, QMetaMethod* signal);
 };
 
-QProgressBar* QProgressBar_new(struct QProgressBar_VTable* vtbl, QWidget* parent) {
-	return new VirtualQProgressBar(vtbl, parent);
+VirtualQProgressBar* QProgressBar_new(const QProgressBar_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQProgressBar(vtbl, vdata, parent);
 }
 
-QProgressBar* QProgressBar_new2(struct QProgressBar_VTable* vtbl) {
-	return new VirtualQProgressBar(vtbl);
+VirtualQProgressBar* QProgressBar_new2(const QProgressBar_VTable* vtbl, void* vdata) {
+	return new VirtualQProgressBar(vtbl, vdata);
 }
 
 void QProgressBar_virtbase(QProgressBar* src, QWidget** outptr_QWidget) {
@@ -1019,7 +962,7 @@ void QProgressBar_valueChanged(QProgressBar* self, int value) {
 	self->valueChanged(static_cast<int>(value));
 }
 
-void QProgressBar_connect_valueChanged(QProgressBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QProgressBar_connect_valueChanged(VirtualQProgressBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1053,27 +996,24 @@ struct miqt_string QProgressBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QProgressBar_virtualbase_metaObject(const void* self) {
+QMetaObject* QProgressBar_virtualbase_metaObject(const VirtualQProgressBar* self) {
 
-	return (QMetaObject*) ( (const VirtualQProgressBar*)(self) )->QProgressBar::metaObject();
-
+	return (QMetaObject*) self->QProgressBar::metaObject();
 }
 
-void* QProgressBar_virtualbase_metacast(void* self, const char* param1) {
+void* QProgressBar_virtualbase_metacast(VirtualQProgressBar* self, const char* param1) {
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::qt_metacast(param1);
-
+	return self->QProgressBar::qt_metacast(param1);
 }
 
-int QProgressBar_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QProgressBar_virtualbase_metacall(VirtualQProgressBar* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QProgressBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct miqt_string QProgressBar_virtualbase_text(const void* self) {
+struct miqt_string QProgressBar_virtualbase_text(const VirtualQProgressBar* self) {
 
-	QString _ret = ( (const VirtualQProgressBar*)(self) )->QProgressBar::text();
+	QString _ret = self->QProgressBar::text();
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
 	struct miqt_string _ms;
@@ -1081,360 +1021,289 @@ struct miqt_string QProgressBar_virtualbase_text(const void* self) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
-
 }
 
-QSize* QProgressBar_virtualbase_sizeHint(const void* self) {
+QSize* QProgressBar_virtualbase_sizeHint(const VirtualQProgressBar* self) {
 
-	return new QSize(( (const VirtualQProgressBar*)(self) )->QProgressBar::sizeHint());
-
+	return new QSize(self->QProgressBar::sizeHint());
 }
 
-QSize* QProgressBar_virtualbase_minimumSizeHint(const void* self) {
+QSize* QProgressBar_virtualbase_minimumSizeHint(const VirtualQProgressBar* self) {
 
-	return new QSize(( (const VirtualQProgressBar*)(self) )->QProgressBar::minimumSizeHint());
-
+	return new QSize(self->QProgressBar::minimumSizeHint());
 }
 
-bool QProgressBar_virtualbase_event(void* self, QEvent* e) {
+bool QProgressBar_virtualbase_event(VirtualQProgressBar* self, QEvent* e) {
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::event(e);
-
+	return self->QProgressBar::event(e);
 }
 
-void QProgressBar_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QProgressBar_virtualbase_paintEvent(VirtualQProgressBar* self, QPaintEvent* param1) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::paintEvent(param1);
-
+	self->QProgressBar::paintEvent(param1);
 }
 
-void QProgressBar_virtualbase_initStyleOption(const void* self, QStyleOptionProgressBar* option) {
+void QProgressBar_virtualbase_initStyleOption(const VirtualQProgressBar* self, QStyleOptionProgressBar* option) {
 
-	( (const VirtualQProgressBar*)(self) )->QProgressBar::initStyleOption(option);
-
+	self->QProgressBar::initStyleOption(option);
 }
 
-int QProgressBar_virtualbase_devType(const void* self) {
+int QProgressBar_virtualbase_devType(const VirtualQProgressBar* self) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::devType();
-
+	return self->QProgressBar::devType();
 }
 
-void QProgressBar_virtualbase_setVisible(void* self, bool visible) {
+void QProgressBar_virtualbase_setVisible(VirtualQProgressBar* self, bool visible) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::setVisible(visible);
-
+	self->QProgressBar::setVisible(visible);
 }
 
-int QProgressBar_virtualbase_heightForWidth(const void* self, int param1) {
+int QProgressBar_virtualbase_heightForWidth(const VirtualQProgressBar* self, int param1) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::heightForWidth(static_cast<int>(param1));
-
+	return self->QProgressBar::heightForWidth(static_cast<int>(param1));
 }
 
-bool QProgressBar_virtualbase_hasHeightForWidth(const void* self) {
+bool QProgressBar_virtualbase_hasHeightForWidth(const VirtualQProgressBar* self) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::hasHeightForWidth();
-
+	return self->QProgressBar::hasHeightForWidth();
 }
 
-QPaintEngine* QProgressBar_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QProgressBar_virtualbase_paintEngine(const VirtualQProgressBar* self) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::paintEngine();
-
+	return self->QProgressBar::paintEngine();
 }
 
-void QProgressBar_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QProgressBar_virtualbase_mousePressEvent(VirtualQProgressBar* self, QMouseEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::mousePressEvent(event);
-
+	self->QProgressBar::mousePressEvent(event);
 }
 
-void QProgressBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QProgressBar_virtualbase_mouseReleaseEvent(VirtualQProgressBar* self, QMouseEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::mouseReleaseEvent(event);
-
+	self->QProgressBar::mouseReleaseEvent(event);
 }
 
-void QProgressBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QProgressBar_virtualbase_mouseDoubleClickEvent(VirtualQProgressBar* self, QMouseEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::mouseDoubleClickEvent(event);
-
+	self->QProgressBar::mouseDoubleClickEvent(event);
 }
 
-void QProgressBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QProgressBar_virtualbase_mouseMoveEvent(VirtualQProgressBar* self, QMouseEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::mouseMoveEvent(event);
-
+	self->QProgressBar::mouseMoveEvent(event);
 }
 
-void QProgressBar_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QProgressBar_virtualbase_wheelEvent(VirtualQProgressBar* self, QWheelEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::wheelEvent(event);
-
+	self->QProgressBar::wheelEvent(event);
 }
 
-void QProgressBar_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QProgressBar_virtualbase_keyPressEvent(VirtualQProgressBar* self, QKeyEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::keyPressEvent(event);
-
+	self->QProgressBar::keyPressEvent(event);
 }
 
-void QProgressBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QProgressBar_virtualbase_keyReleaseEvent(VirtualQProgressBar* self, QKeyEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::keyReleaseEvent(event);
-
+	self->QProgressBar::keyReleaseEvent(event);
 }
 
-void QProgressBar_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QProgressBar_virtualbase_focusInEvent(VirtualQProgressBar* self, QFocusEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::focusInEvent(event);
-
+	self->QProgressBar::focusInEvent(event);
 }
 
-void QProgressBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QProgressBar_virtualbase_focusOutEvent(VirtualQProgressBar* self, QFocusEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::focusOutEvent(event);
-
+	self->QProgressBar::focusOutEvent(event);
 }
 
-void QProgressBar_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QProgressBar_virtualbase_enterEvent(VirtualQProgressBar* self, QEnterEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::enterEvent(event);
-
+	self->QProgressBar::enterEvent(event);
 }
 
-void QProgressBar_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QProgressBar_virtualbase_leaveEvent(VirtualQProgressBar* self, QEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::leaveEvent(event);
-
+	self->QProgressBar::leaveEvent(event);
 }
 
-void QProgressBar_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QProgressBar_virtualbase_moveEvent(VirtualQProgressBar* self, QMoveEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::moveEvent(event);
-
+	self->QProgressBar::moveEvent(event);
 }
 
-void QProgressBar_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QProgressBar_virtualbase_resizeEvent(VirtualQProgressBar* self, QResizeEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::resizeEvent(event);
-
+	self->QProgressBar::resizeEvent(event);
 }
 
-void QProgressBar_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QProgressBar_virtualbase_closeEvent(VirtualQProgressBar* self, QCloseEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::closeEvent(event);
-
+	self->QProgressBar::closeEvent(event);
 }
 
-void QProgressBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QProgressBar_virtualbase_contextMenuEvent(VirtualQProgressBar* self, QContextMenuEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::contextMenuEvent(event);
-
+	self->QProgressBar::contextMenuEvent(event);
 }
 
-void QProgressBar_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QProgressBar_virtualbase_tabletEvent(VirtualQProgressBar* self, QTabletEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::tabletEvent(event);
-
+	self->QProgressBar::tabletEvent(event);
 }
 
-void QProgressBar_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QProgressBar_virtualbase_actionEvent(VirtualQProgressBar* self, QActionEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::actionEvent(event);
-
+	self->QProgressBar::actionEvent(event);
 }
 
-void QProgressBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QProgressBar_virtualbase_dragEnterEvent(VirtualQProgressBar* self, QDragEnterEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::dragEnterEvent(event);
-
+	self->QProgressBar::dragEnterEvent(event);
 }
 
-void QProgressBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QProgressBar_virtualbase_dragMoveEvent(VirtualQProgressBar* self, QDragMoveEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::dragMoveEvent(event);
-
+	self->QProgressBar::dragMoveEvent(event);
 }
 
-void QProgressBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QProgressBar_virtualbase_dragLeaveEvent(VirtualQProgressBar* self, QDragLeaveEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::dragLeaveEvent(event);
-
+	self->QProgressBar::dragLeaveEvent(event);
 }
 
-void QProgressBar_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QProgressBar_virtualbase_dropEvent(VirtualQProgressBar* self, QDropEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::dropEvent(event);
-
+	self->QProgressBar::dropEvent(event);
 }
 
-void QProgressBar_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QProgressBar_virtualbase_showEvent(VirtualQProgressBar* self, QShowEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::showEvent(event);
-
+	self->QProgressBar::showEvent(event);
 }
 
-void QProgressBar_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QProgressBar_virtualbase_hideEvent(VirtualQProgressBar* self, QHideEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::hideEvent(event);
-
+	self->QProgressBar::hideEvent(event);
 }
 
-bool QProgressBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QProgressBar_virtualbase_nativeEvent(VirtualQProgressBar* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QProgressBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-void QProgressBar_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QProgressBar_virtualbase_changeEvent(VirtualQProgressBar* self, QEvent* param1) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::changeEvent(param1);
-
+	self->QProgressBar::changeEvent(param1);
 }
 
-int QProgressBar_virtualbase_metric(const void* self, int param1) {
+int QProgressBar_virtualbase_metric(const VirtualQProgressBar* self, int param1) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::metric(static_cast<VirtualQProgressBar::PaintDeviceMetric>(param1));
-
+	return self->QProgressBar::metric(static_cast<VirtualQProgressBar::PaintDeviceMetric>(param1));
 }
 
-void QProgressBar_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QProgressBar_virtualbase_initPainter(const VirtualQProgressBar* self, QPainter* painter) {
 
-	( (const VirtualQProgressBar*)(self) )->QProgressBar::initPainter(painter);
-
+	self->QProgressBar::initPainter(painter);
 }
 
-QPaintDevice* QProgressBar_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QProgressBar_virtualbase_redirected(const VirtualQProgressBar* self, QPoint* offset) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::redirected(offset);
-
+	return self->QProgressBar::redirected(offset);
 }
 
-QPainter* QProgressBar_virtualbase_sharedPainter(const void* self) {
+QPainter* QProgressBar_virtualbase_sharedPainter(const VirtualQProgressBar* self) {
 
-	return ( (const VirtualQProgressBar*)(self) )->QProgressBar::sharedPainter();
-
+	return self->QProgressBar::sharedPainter();
 }
 
-void QProgressBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QProgressBar_virtualbase_inputMethodEvent(VirtualQProgressBar* self, QInputMethodEvent* param1) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::inputMethodEvent(param1);
-
+	self->QProgressBar::inputMethodEvent(param1);
 }
 
-QVariant* QProgressBar_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QProgressBar_virtualbase_inputMethodQuery(const VirtualQProgressBar* self, int param1) {
 
-	return new QVariant(( (const VirtualQProgressBar*)(self) )->QProgressBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QProgressBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QProgressBar_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QProgressBar_virtualbase_focusNextPrevChild(VirtualQProgressBar* self, bool next) {
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::focusNextPrevChild(next);
-
+	return self->QProgressBar::focusNextPrevChild(next);
 }
 
-bool QProgressBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QProgressBar_virtualbase_eventFilter(VirtualQProgressBar* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQProgressBar*)(self) )->QProgressBar::eventFilter(watched, event);
-
+	return self->QProgressBar::eventFilter(watched, event);
 }
 
-void QProgressBar_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QProgressBar_virtualbase_timerEvent(VirtualQProgressBar* self, QTimerEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::timerEvent(event);
-
+	self->QProgressBar::timerEvent(event);
 }
 
-void QProgressBar_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QProgressBar_virtualbase_childEvent(VirtualQProgressBar* self, QChildEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::childEvent(event);
-
+	self->QProgressBar::childEvent(event);
 }
 
-void QProgressBar_virtualbase_customEvent(void* self, QEvent* event) {
+void QProgressBar_virtualbase_customEvent(VirtualQProgressBar* self, QEvent* event) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::customEvent(event);
-
+	self->QProgressBar::customEvent(event);
 }
 
-void QProgressBar_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QProgressBar_virtualbase_connectNotify(VirtualQProgressBar* self, QMetaMethod* signal) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::connectNotify(*signal);
-
+	self->QProgressBar::connectNotify(*signal);
 }
 
-void QProgressBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QProgressBar_virtualbase_disconnectNotify(VirtualQProgressBar* self, QMetaMethod* signal) {
 
-	( (VirtualQProgressBar*)(self) )->QProgressBar::disconnectNotify(*signal);
-
+	self->QProgressBar::disconnectNotify(*signal);
 }
 
 const QMetaObject* QProgressBar_staticMetaObject() { return &QProgressBar::staticMetaObject; }
-void QProgressBar_protectedbase_updateMicroFocus(void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QProgressBar_VTable* QProgressBar_vtbl(const VirtualQProgressBar* self) { return self->vtbl; }
+void* QProgressBar_vdata(const VirtualQProgressBar* self) { return self->vdata; }
+void QProgressBar_setVdata(VirtualQProgressBar* self, void* vdata) { self->vdata = vdata; }
+
+void QProgressBar_protectedbase_updateMicroFocus(VirtualQProgressBar* self) {
+	self->updateMicroFocus();
 }
 
-void QProgressBar_protectedbase_create(void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	self_cast->create();
-
+void QProgressBar_protectedbase_create(VirtualQProgressBar* self) {
+	self->create();
 }
 
-void QProgressBar_protectedbase_destroy(void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	self_cast->destroy();
-
+void QProgressBar_protectedbase_destroy(VirtualQProgressBar* self) {
+	self->destroy();
 }
 
-bool QProgressBar_protectedbase_focusNextChild(void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QProgressBar_protectedbase_focusNextChild(VirtualQProgressBar* self) {
+	return self->focusNextChild();
 }
 
-bool QProgressBar_protectedbase_focusPreviousChild(void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QProgressBar_protectedbase_focusPreviousChild(VirtualQProgressBar* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QProgressBar_protectedbase_sender(const void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QProgressBar_protectedbase_sender(const VirtualQProgressBar* self) {
+	return self->sender();
 }
 
-int QProgressBar_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QProgressBar_protectedbase_senderSignalIndex(const VirtualQProgressBar* self) {
+	return self->senderSignalIndex();
 }
 
-int QProgressBar_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QProgressBar_protectedbase_receivers(const VirtualQProgressBar* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QProgressBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQProgressBar* self_cast = static_cast<VirtualQProgressBar*>( (QProgressBar*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QProgressBar_protectedbase_isSignalConnected(const VirtualQProgressBar* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QProgressBar_delete(QProgressBar* self) {

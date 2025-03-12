@@ -8,15 +8,6 @@
 #include <QVariant>
 #include <qjsprimitivevalue.h>
 #include "gen_qjsprimitivevalue.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJSPrimitiveUndefined* QJSPrimitiveUndefined_new() {
 	return new QJSPrimitiveUndefined();
 }

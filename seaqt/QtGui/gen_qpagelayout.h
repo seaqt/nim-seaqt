@@ -35,6 +35,7 @@ QPageLayout* QPageLayout_new2(QPageSize* pageSize, int orientation, QMarginsF* m
 QPageLayout* QPageLayout_new3(QPageLayout* other);
 QPageLayout* QPageLayout_new4(QPageSize* pageSize, int orientation, QMarginsF* margins, int units);
 QPageLayout* QPageLayout_new5(QPageSize* pageSize, int orientation, QMarginsF* margins, int units, QMarginsF* minMargins);
+
 void QPageLayout_operatorAssign(QPageLayout* self, QPageLayout* other);
 void QPageLayout_swap(QPageLayout* self, QPageLayout* other);
 bool QPageLayout_isEquivalentTo(const QPageLayout* self, QPageLayout* other);
@@ -68,6 +69,7 @@ QRectF* QPageLayout_paintRectWithUnits(const QPageLayout* self, int units);
 QRect* QPageLayout_paintRectPoints(const QPageLayout* self);
 QRect* QPageLayout_paintRectPixels(const QPageLayout* self, int resolution);
 void QPageLayout_setPageSize2(QPageLayout* self, QPageSize* pageSize, QMarginsF* minMargins);
+
 void QPageLayout_delete(QPageLayout* self);
 
 #ifdef __cplusplus

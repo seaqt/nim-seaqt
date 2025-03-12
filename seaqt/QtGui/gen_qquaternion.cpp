@@ -4,15 +4,6 @@
 #include <QVector4D>
 #include <qquaternion.h>
 #include "gen_qquaternion.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQuaternion* QQuaternion_new() {
 	return new QQuaternion();
 }

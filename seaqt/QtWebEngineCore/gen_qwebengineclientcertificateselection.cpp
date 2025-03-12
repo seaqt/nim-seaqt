@@ -4,15 +4,6 @@
 #include <QWebEngineClientCertificateSelection>
 #include <qwebengineclientcertificateselection.h>
 #include "gen_qwebengineclientcertificateselection.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineClientCertificateSelection* QWebEngineClientCertificateSelection_new(QWebEngineClientCertificateSelection* param1) {
 	return new QWebEngineClientCertificateSelection(*param1);
 }

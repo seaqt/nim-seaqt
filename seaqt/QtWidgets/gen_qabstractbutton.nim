@@ -72,41 +72,41 @@ export
 
 type cQAbstractButton*{.exportc: "QAbstractButton", incompleteStruct.} = object
 
-proc fcQAbstractButton_metaObject(self: pointer, ): pointer {.importc: "QAbstractButton_metaObject".}
+proc fcQAbstractButton_metaObject(self: pointer): pointer {.importc: "QAbstractButton_metaObject".}
 proc fcQAbstractButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractButton_metacast".}
 proc fcQAbstractButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractButton_metacall".}
 proc fcQAbstractButton_tr(s: cstring): struct_miqt_string {.importc: "QAbstractButton_tr".}
 proc fcQAbstractButton_setText(self: pointer, text: struct_miqt_string): void {.importc: "QAbstractButton_setText".}
-proc fcQAbstractButton_text(self: pointer, ): struct_miqt_string {.importc: "QAbstractButton_text".}
+proc fcQAbstractButton_text(self: pointer): struct_miqt_string {.importc: "QAbstractButton_text".}
 proc fcQAbstractButton_setIcon(self: pointer, icon: pointer): void {.importc: "QAbstractButton_setIcon".}
-proc fcQAbstractButton_icon(self: pointer, ): pointer {.importc: "QAbstractButton_icon".}
-proc fcQAbstractButton_iconSize(self: pointer, ): pointer {.importc: "QAbstractButton_iconSize".}
+proc fcQAbstractButton_icon(self: pointer): pointer {.importc: "QAbstractButton_icon".}
+proc fcQAbstractButton_iconSize(self: pointer): pointer {.importc: "QAbstractButton_iconSize".}
 proc fcQAbstractButton_setShortcut(self: pointer, key: pointer): void {.importc: "QAbstractButton_setShortcut".}
-proc fcQAbstractButton_shortcut(self: pointer, ): pointer {.importc: "QAbstractButton_shortcut".}
+proc fcQAbstractButton_shortcut(self: pointer): pointer {.importc: "QAbstractButton_shortcut".}
 proc fcQAbstractButton_setCheckable(self: pointer, checkable: bool): void {.importc: "QAbstractButton_setCheckable".}
-proc fcQAbstractButton_isCheckable(self: pointer, ): bool {.importc: "QAbstractButton_isCheckable".}
-proc fcQAbstractButton_isChecked(self: pointer, ): bool {.importc: "QAbstractButton_isChecked".}
+proc fcQAbstractButton_isCheckable(self: pointer): bool {.importc: "QAbstractButton_isCheckable".}
+proc fcQAbstractButton_isChecked(self: pointer): bool {.importc: "QAbstractButton_isChecked".}
 proc fcQAbstractButton_setDown(self: pointer, down: bool): void {.importc: "QAbstractButton_setDown".}
-proc fcQAbstractButton_isDown(self: pointer, ): bool {.importc: "QAbstractButton_isDown".}
+proc fcQAbstractButton_isDown(self: pointer): bool {.importc: "QAbstractButton_isDown".}
 proc fcQAbstractButton_setAutoRepeat(self: pointer, autoRepeat: bool): void {.importc: "QAbstractButton_setAutoRepeat".}
-proc fcQAbstractButton_autoRepeat(self: pointer, ): bool {.importc: "QAbstractButton_autoRepeat".}
+proc fcQAbstractButton_autoRepeat(self: pointer): bool {.importc: "QAbstractButton_autoRepeat".}
 proc fcQAbstractButton_setAutoRepeatDelay(self: pointer, autoRepeatDelay: cint): void {.importc: "QAbstractButton_setAutoRepeatDelay".}
-proc fcQAbstractButton_autoRepeatDelay(self: pointer, ): cint {.importc: "QAbstractButton_autoRepeatDelay".}
+proc fcQAbstractButton_autoRepeatDelay(self: pointer): cint {.importc: "QAbstractButton_autoRepeatDelay".}
 proc fcQAbstractButton_setAutoRepeatInterval(self: pointer, autoRepeatInterval: cint): void {.importc: "QAbstractButton_setAutoRepeatInterval".}
-proc fcQAbstractButton_autoRepeatInterval(self: pointer, ): cint {.importc: "QAbstractButton_autoRepeatInterval".}
+proc fcQAbstractButton_autoRepeatInterval(self: pointer): cint {.importc: "QAbstractButton_autoRepeatInterval".}
 proc fcQAbstractButton_setAutoExclusive(self: pointer, autoExclusive: bool): void {.importc: "QAbstractButton_setAutoExclusive".}
-proc fcQAbstractButton_autoExclusive(self: pointer, ): bool {.importc: "QAbstractButton_autoExclusive".}
-proc fcQAbstractButton_group(self: pointer, ): pointer {.importc: "QAbstractButton_group".}
+proc fcQAbstractButton_autoExclusive(self: pointer): bool {.importc: "QAbstractButton_autoExclusive".}
+proc fcQAbstractButton_group(self: pointer): pointer {.importc: "QAbstractButton_group".}
 proc fcQAbstractButton_setIconSize(self: pointer, size: pointer): void {.importc: "QAbstractButton_setIconSize".}
-proc fcQAbstractButton_animateClick(self: pointer, ): void {.importc: "QAbstractButton_animateClick".}
-proc fcQAbstractButton_click(self: pointer, ): void {.importc: "QAbstractButton_click".}
-proc fcQAbstractButton_toggle(self: pointer, ): void {.importc: "QAbstractButton_toggle".}
+proc fcQAbstractButton_animateClick(self: pointer): void {.importc: "QAbstractButton_animateClick".}
+proc fcQAbstractButton_click(self: pointer): void {.importc: "QAbstractButton_click".}
+proc fcQAbstractButton_toggle(self: pointer): void {.importc: "QAbstractButton_toggle".}
 proc fcQAbstractButton_setChecked(self: pointer, checked: bool): void {.importc: "QAbstractButton_setChecked".}
-proc fcQAbstractButton_pressed(self: pointer, ): void {.importc: "QAbstractButton_pressed".}
+proc fcQAbstractButton_pressed(self: pointer): void {.importc: "QAbstractButton_pressed".}
 proc fcQAbstractButton_connect_pressed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_pressed".}
-proc fcQAbstractButton_released(self: pointer, ): void {.importc: "QAbstractButton_released".}
+proc fcQAbstractButton_released(self: pointer): void {.importc: "QAbstractButton_released".}
 proc fcQAbstractButton_connect_released(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_released".}
-proc fcQAbstractButton_clicked(self: pointer, ): void {.importc: "QAbstractButton_clicked".}
+proc fcQAbstractButton_clicked(self: pointer): void {.importc: "QAbstractButton_clicked".}
 proc fcQAbstractButton_connect_clicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked".}
 proc fcQAbstractButton_toggled(self: pointer, checked: bool): void {.importc: "QAbstractButton_toggled".}
 proc fcQAbstractButton_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_toggled".}
@@ -114,67 +114,69 @@ proc fcQAbstractButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQAbstractButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractButton_tr3".}
 proc fcQAbstractButton_clicked1(self: pointer, checked: bool): void {.importc: "QAbstractButton_clicked1".}
 proc fcQAbstractButton_connect_clicked1(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked1".}
+proc fcQAbstractButton_vtbl(self: pointer): pointer {.importc: "QAbstractButton_vtbl".}
+proc fcQAbstractButton_vdata(self: pointer): pointer {.importc: "QAbstractButton_vdata".}
 type cQAbstractButtonVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractButtonVTable, self: ptr cQAbstractButton) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  hitButton*: proc(vtbl, self: pointer, pos: pointer): bool {.cdecl, raises: [], gcsafe.}
-  checkStateSet*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  nextCheckState*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractButton_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAbstractButton_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  hitButton*: proc(self: pointer, pos: pointer): bool {.cdecl, raises: [], gcsafe.}
+  checkStateSet*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  nextCheckState*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractButton_virtualbase_metaObject(self: pointer): pointer {.importc: "QAbstractButton_virtualbase_metaObject".}
 proc fcQAbstractButton_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractButton_virtualbase_metacast".}
 proc fcQAbstractButton_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractButton_virtualbase_metacall".}
 proc fcQAbstractButton_virtualbase_hitButton(self: pointer, pos: pointer): bool {.importc: "QAbstractButton_virtualbase_hitButton".}
-proc fcQAbstractButton_virtualbase_checkStateSet(self: pointer, ): void {.importc: "QAbstractButton_virtualbase_checkStateSet".}
-proc fcQAbstractButton_virtualbase_nextCheckState(self: pointer, ): void {.importc: "QAbstractButton_virtualbase_nextCheckState".}
+proc fcQAbstractButton_virtualbase_checkStateSet(self: pointer): void {.importc: "QAbstractButton_virtualbase_checkStateSet".}
+proc fcQAbstractButton_virtualbase_nextCheckState(self: pointer): void {.importc: "QAbstractButton_virtualbase_nextCheckState".}
 proc fcQAbstractButton_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QAbstractButton_virtualbase_event".}
 proc fcQAbstractButton_virtualbase_keyPressEvent(self: pointer, e: pointer): void {.importc: "QAbstractButton_virtualbase_keyPressEvent".}
 proc fcQAbstractButton_virtualbase_keyReleaseEvent(self: pointer, e: pointer): void {.importc: "QAbstractButton_virtualbase_keyReleaseEvent".}
@@ -185,13 +187,13 @@ proc fcQAbstractButton_virtualbase_focusInEvent(self: pointer, e: pointer): void
 proc fcQAbstractButton_virtualbase_focusOutEvent(self: pointer, e: pointer): void {.importc: "QAbstractButton_virtualbase_focusOutEvent".}
 proc fcQAbstractButton_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QAbstractButton_virtualbase_changeEvent".}
 proc fcQAbstractButton_virtualbase_timerEvent(self: pointer, e: pointer): void {.importc: "QAbstractButton_virtualbase_timerEvent".}
-proc fcQAbstractButton_virtualbase_devType(self: pointer, ): cint {.importc: "QAbstractButton_virtualbase_devType".}
+proc fcQAbstractButton_virtualbase_devType(self: pointer): cint {.importc: "QAbstractButton_virtualbase_devType".}
 proc fcQAbstractButton_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QAbstractButton_virtualbase_setVisible".}
-proc fcQAbstractButton_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QAbstractButton_virtualbase_sizeHint".}
-proc fcQAbstractButton_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QAbstractButton_virtualbase_minimumSizeHint".}
+proc fcQAbstractButton_virtualbase_sizeHint(self: pointer): pointer {.importc: "QAbstractButton_virtualbase_sizeHint".}
+proc fcQAbstractButton_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QAbstractButton_virtualbase_minimumSizeHint".}
 proc fcQAbstractButton_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QAbstractButton_virtualbase_heightForWidth".}
-proc fcQAbstractButton_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QAbstractButton_virtualbase_hasHeightForWidth".}
-proc fcQAbstractButton_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QAbstractButton_virtualbase_paintEngine".}
+proc fcQAbstractButton_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QAbstractButton_virtualbase_hasHeightForWidth".}
+proc fcQAbstractButton_virtualbase_paintEngine(self: pointer): pointer {.importc: "QAbstractButton_virtualbase_paintEngine".}
 proc fcQAbstractButton_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QAbstractButton_virtualbase_mouseDoubleClickEvent".}
 proc fcQAbstractButton_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QAbstractButton_virtualbase_wheelEvent".}
 proc fcQAbstractButton_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QAbstractButton_virtualbase_enterEvent".}
@@ -212,7 +214,7 @@ proc fcQAbstractButton_virtualbase_nativeEvent(self: pointer, eventType: struct_
 proc fcQAbstractButton_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QAbstractButton_virtualbase_metric".}
 proc fcQAbstractButton_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QAbstractButton_virtualbase_initPainter".}
 proc fcQAbstractButton_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QAbstractButton_virtualbase_redirected".}
-proc fcQAbstractButton_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QAbstractButton_virtualbase_sharedPainter".}
+proc fcQAbstractButton_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QAbstractButton_virtualbase_sharedPainter".}
 proc fcQAbstractButton_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QAbstractButton_virtualbase_inputMethodEvent".}
 proc fcQAbstractButton_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QAbstractButton_virtualbase_inputMethodQuery".}
 proc fcQAbstractButton_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QAbstractButton_virtualbase_focusNextPrevChild".}
@@ -221,20 +223,20 @@ proc fcQAbstractButton_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAbstractButton_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractButton_virtualbase_customEvent".}
 proc fcQAbstractButton_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractButton_virtualbase_connectNotify".}
 proc fcQAbstractButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractButton_virtualbase_disconnectNotify".}
-proc fcQAbstractButton_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_updateMicroFocus".}
-proc fcQAbstractButton_protectedbase_create(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_create".}
-proc fcQAbstractButton_protectedbase_destroy(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_destroy".}
-proc fcQAbstractButton_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QAbstractButton_protectedbase_focusNextChild".}
-proc fcQAbstractButton_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QAbstractButton_protectedbase_focusPreviousChild".}
-proc fcQAbstractButton_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractButton_protectedbase_sender".}
-proc fcQAbstractButton_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractButton_protectedbase_senderSignalIndex".}
+proc fcQAbstractButton_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QAbstractButton_protectedbase_updateMicroFocus".}
+proc fcQAbstractButton_protectedbase_create(self: pointer): void {.importc: "QAbstractButton_protectedbase_create".}
+proc fcQAbstractButton_protectedbase_destroy(self: pointer): void {.importc: "QAbstractButton_protectedbase_destroy".}
+proc fcQAbstractButton_protectedbase_focusNextChild(self: pointer): bool {.importc: "QAbstractButton_protectedbase_focusNextChild".}
+proc fcQAbstractButton_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QAbstractButton_protectedbase_focusPreviousChild".}
+proc fcQAbstractButton_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractButton_protectedbase_sender".}
+proc fcQAbstractButton_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractButton_protectedbase_senderSignalIndex".}
 proc fcQAbstractButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractButton_protectedbase_receivers".}
 proc fcQAbstractButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractButton_protectedbase_isSignalConnected".}
-proc fcQAbstractButton_new(vtbl: pointer, parent: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new".}
-proc fcQAbstractButton_new2(vtbl: pointer, ): ptr cQAbstractButton {.importc: "QAbstractButton_new2".}
+proc fcQAbstractButton_new(vtbl, vdata: pointer, parent: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new".}
+proc fcQAbstractButton_new2(vtbl, vdata: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new2".}
 proc fcQAbstractButton_staticMetaObject(): pointer {.importc: "QAbstractButton_staticMetaObject".}
 
-proc metaObject*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractButton_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractbutton_types.QAbstractButton, param1: cstring): pointer =
@@ -252,7 +254,7 @@ proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring): string 
 proc setText*(self: gen_qabstractbutton_types.QAbstractButton, text: string): void =
   fcQAbstractButton_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc text*(self: gen_qabstractbutton_types.QAbstractButton, ): string =
+proc text*(self: gen_qabstractbutton_types.QAbstractButton): string =
   let v_ms = fcQAbstractButton_text(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -261,84 +263,84 @@ proc text*(self: gen_qabstractbutton_types.QAbstractButton, ): string =
 proc setIcon*(self: gen_qabstractbutton_types.QAbstractButton, icon: gen_qicon_types.QIcon): void =
   fcQAbstractButton_setIcon(self.h, icon.h)
 
-proc icon*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qicon_types.QIcon =
+proc icon*(self: gen_qabstractbutton_types.QAbstractButton): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQAbstractButton_icon(self.h), owned: true)
 
-proc iconSize*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qsize_types.QSize =
+proc iconSize*(self: gen_qabstractbutton_types.QAbstractButton): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractButton_iconSize(self.h), owned: true)
 
 proc setShortcut*(self: gen_qabstractbutton_types.QAbstractButton, key: gen_qkeysequence_types.QKeySequence): void =
   fcQAbstractButton_setShortcut(self.h, key.h)
 
-proc shortcut*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qkeysequence_types.QKeySequence =
+proc shortcut*(self: gen_qabstractbutton_types.QAbstractButton): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQAbstractButton_shortcut(self.h), owned: true)
 
 proc setCheckable*(self: gen_qabstractbutton_types.QAbstractButton, checkable: bool): void =
   fcQAbstractButton_setCheckable(self.h, checkable)
 
-proc isCheckable*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc isCheckable*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_isCheckable(self.h)
 
-proc isChecked*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc isChecked*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_isChecked(self.h)
 
 proc setDown*(self: gen_qabstractbutton_types.QAbstractButton, down: bool): void =
   fcQAbstractButton_setDown(self.h, down)
 
-proc isDown*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc isDown*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_isDown(self.h)
 
 proc setAutoRepeat*(self: gen_qabstractbutton_types.QAbstractButton, autoRepeat: bool): void =
   fcQAbstractButton_setAutoRepeat(self.h, autoRepeat)
 
-proc autoRepeat*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc autoRepeat*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_autoRepeat(self.h)
 
 proc setAutoRepeatDelay*(self: gen_qabstractbutton_types.QAbstractButton, autoRepeatDelay: cint): void =
   fcQAbstractButton_setAutoRepeatDelay(self.h, autoRepeatDelay)
 
-proc autoRepeatDelay*(self: gen_qabstractbutton_types.QAbstractButton, ): cint =
+proc autoRepeatDelay*(self: gen_qabstractbutton_types.QAbstractButton): cint =
   fcQAbstractButton_autoRepeatDelay(self.h)
 
 proc setAutoRepeatInterval*(self: gen_qabstractbutton_types.QAbstractButton, autoRepeatInterval: cint): void =
   fcQAbstractButton_setAutoRepeatInterval(self.h, autoRepeatInterval)
 
-proc autoRepeatInterval*(self: gen_qabstractbutton_types.QAbstractButton, ): cint =
+proc autoRepeatInterval*(self: gen_qabstractbutton_types.QAbstractButton): cint =
   fcQAbstractButton_autoRepeatInterval(self.h)
 
 proc setAutoExclusive*(self: gen_qabstractbutton_types.QAbstractButton, autoExclusive: bool): void =
   fcQAbstractButton_setAutoExclusive(self.h, autoExclusive)
 
-proc autoExclusive*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc autoExclusive*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_autoExclusive(self.h)
 
-proc group*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qbuttongroup_types.QButtonGroup =
+proc group*(self: gen_qabstractbutton_types.QAbstractButton): gen_qbuttongroup_types.QButtonGroup =
   gen_qbuttongroup_types.QButtonGroup(h: fcQAbstractButton_group(self.h), owned: false)
 
 proc setIconSize*(self: gen_qabstractbutton_types.QAbstractButton, size: gen_qsize_types.QSize): void =
   fcQAbstractButton_setIconSize(self.h, size.h)
 
-proc animateClick*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc animateClick*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_animateClick(self.h)
 
-proc click*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc click*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_click(self.h)
 
-proc toggle*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc toggle*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_toggle(self.h)
 
 proc setChecked*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): void =
   fcQAbstractButton_setChecked(self.h, checked)
 
-proc pressed*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc pressed*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_pressed(self.h)
 
 type QAbstractButtonpressedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_pressed(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_pressed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonpressedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractButton_pressed_release(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_pressed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractButtonpressedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -346,17 +348,17 @@ proc onpressed*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   var tmp = new QAbstractButtonpressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_pressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_pressed, miqt_exec_callback_cQAbstractButton_pressed_release)
+  fcQAbstractButton_connect_pressed(self.h, cast[int](addr tmp[]), cQAbstractButton_slot_callback_pressed, cQAbstractButton_slot_callback_pressed_release)
 
-proc released*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc released*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_released(self.h)
 
 type QAbstractButtonreleasedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_released(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_released(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonreleasedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractButton_released_release(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_released_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractButtonreleasedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -364,17 +366,17 @@ proc onreleased*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstrac
   var tmp = new QAbstractButtonreleasedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_released(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_released, miqt_exec_callback_cQAbstractButton_released_release)
+  fcQAbstractButton_connect_released(self.h, cast[int](addr tmp[]), cQAbstractButton_slot_callback_released, cQAbstractButton_slot_callback_released_release)
 
-proc clicked*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc clicked*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_clicked(self.h)
 
 type QAbstractButtonclickedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_clicked(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_clicked(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonclickedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractButton_clicked_release(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_clicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractButtonclickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -382,19 +384,19 @@ proc onclicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   var tmp = new QAbstractButtonclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_clicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_clicked, miqt_exec_callback_cQAbstractButton_clicked_release)
+  fcQAbstractButton_connect_clicked(self.h, cast[int](addr tmp[]), cQAbstractButton_slot_callback_clicked, cQAbstractButton_slot_callback_clicked_release)
 
 proc toggled*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): void =
   fcQAbstractButton_toggled(self.h, checked)
 
 type QAbstractButtontoggledSlot* = proc(checked: bool)
-proc miqt_exec_callback_cQAbstractButton_toggled(slot: int, checked: bool) {.cdecl.} =
+proc cQAbstractButton_slot_callback_toggled(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtontoggledSlot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQAbstractButton_toggled_release(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_toggled_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractButtontoggledSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -402,7 +404,7 @@ proc ontoggled*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   var tmp = new QAbstractButtontoggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_toggled(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_toggled, miqt_exec_callback_cQAbstractButton_toggled_release)
+  fcQAbstractButton_connect_toggled(self.h, cast[int](addr tmp[]), cQAbstractButton_slot_callback_toggled, cQAbstractButton_slot_callback_toggled_release)
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractButton_tr2(s, c)
@@ -420,13 +422,13 @@ proc clicked*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): v
   fcQAbstractButton_clicked1(self.h, checked)
 
 type QAbstractButtonclicked1Slot* = proc(checked: bool)
-proc miqt_exec_callback_cQAbstractButton_clicked1(slot: int, checked: bool) {.cdecl.} =
+proc cQAbstractButton_slot_callback_clicked1(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonclicked1Slot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQAbstractButton_clicked1_release(slot: int) {.cdecl.} =
+proc cQAbstractButton_slot_callback_clicked1_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractButtonclicked1Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -434,7 +436,7 @@ proc onclicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   var tmp = new QAbstractButtonclicked1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_clicked1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_clicked1, miqt_exec_callback_cQAbstractButton_clicked1_release)
+  fcQAbstractButton_connect_clicked1(self.h, cast[int](addr tmp[]), cQAbstractButton_slot_callback_clicked1, cQAbstractButton_slot_callback_clicked1_release)
 
 type QAbstractButtonmetaObjectProc* = proc(self: QAbstractButton): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractButtonmetacastProc* = proc(self: QAbstractButton, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -544,11 +546,11 @@ type QAbstractButtonVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractButtoncustomEventProc
   connectNotify*: QAbstractButtonconnectNotifyProc
   disconnectNotify*: QAbstractButtondisconnectNotifyProc
-proc QAbstractButtonmetaObject*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobjectdefs_types.QMetaObject =
+proc QAbstractButtonmetaObject*(self: gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractButton_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractButton_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -559,8 +561,8 @@ proc miqt_exec_callback_cQAbstractButton_metaObject(vtbl: pointer, self: pointer
 proc QAbstractButtonmetacast*(self: gen_qabstractbutton_types.QAbstractButton, param1: cstring): pointer =
   fcQAbstractButton_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractButton_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -569,8 +571,8 @@ proc miqt_exec_callback_cQAbstractButton_metacast(vtbl: pointer, self: pointer, 
 proc QAbstractButtonmetacall*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint, param2: cint, param3: pointer): cint =
   fcQAbstractButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAbstractButton_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -578,8 +580,8 @@ proc miqt_exec_callback_cQAbstractButton_metacall(vtbl: pointer, self: pointer, 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractButton_paintEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -587,34 +589,34 @@ proc miqt_exec_callback_cQAbstractButton_paintEvent(vtbl: pointer, self: pointer
 proc QAbstractButtonhitButton*(self: gen_qabstractbutton_types.QAbstractButton, pos: gen_qpoint_types.QPoint): bool =
   fcQAbstractButton_virtualbase_hitButton(self.h, pos.h)
 
-proc miqt_exec_callback_cQAbstractButton_hitButton(vtbl: pointer, self: pointer, pos: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
 
-proc QAbstractButtoncheckStateSet*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc QAbstractButtoncheckStateSet*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_virtualbase_checkStateSet(self.h)
 
-proc miqt_exec_callback_cQAbstractButton_checkStateSet(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_checkStateSet(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   vtbl[].checkStateSet(self)
 
-proc QAbstractButtonnextCheckState*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc QAbstractButtonnextCheckState*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_virtualbase_nextCheckState(self.h)
 
-proc miqt_exec_callback_cQAbstractButton_nextCheckState(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_nextCheckState(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   vtbl[].nextCheckState(self)
 
 proc QAbstractButtonevent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractButton_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -623,8 +625,8 @@ proc miqt_exec_callback_cQAbstractButton_event(vtbl: pointer, self: pointer, e: 
 proc QAbstractButtonkeyPressEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QKeyEvent): void =
   fcQAbstractButton_virtualbase_keyPressEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_keyPressEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -632,8 +634,8 @@ proc miqt_exec_callback_cQAbstractButton_keyPressEvent(vtbl: pointer, self: poin
 proc QAbstractButtonkeyReleaseEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QKeyEvent): void =
   fcQAbstractButton_virtualbase_keyReleaseEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_keyReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -641,8 +643,8 @@ proc miqt_exec_callback_cQAbstractButton_keyReleaseEvent(vtbl: pointer, self: po
 proc QAbstractButtonmousePressEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QMouseEvent): void =
   fcQAbstractButton_virtualbase_mousePressEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_mousePressEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -650,8 +652,8 @@ proc miqt_exec_callback_cQAbstractButton_mousePressEvent(vtbl: pointer, self: po
 proc QAbstractButtonmouseReleaseEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QMouseEvent): void =
   fcQAbstractButton_virtualbase_mouseReleaseEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_mouseReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -659,8 +661,8 @@ proc miqt_exec_callback_cQAbstractButton_mouseReleaseEvent(vtbl: pointer, self: 
 proc QAbstractButtonmouseMoveEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QMouseEvent): void =
   fcQAbstractButton_virtualbase_mouseMoveEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_mouseMoveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -668,8 +670,8 @@ proc miqt_exec_callback_cQAbstractButton_mouseMoveEvent(vtbl: pointer, self: poi
 proc QAbstractButtonfocusInEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QFocusEvent): void =
   fcQAbstractButton_virtualbase_focusInEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_focusInEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -677,8 +679,8 @@ proc miqt_exec_callback_cQAbstractButton_focusInEvent(vtbl: pointer, self: point
 proc QAbstractButtonfocusOutEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qevent_types.QFocusEvent): void =
   fcQAbstractButton_virtualbase_focusOutEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_focusOutEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -686,8 +688,8 @@ proc miqt_exec_callback_cQAbstractButton_focusOutEvent(vtbl: pointer, self: poin
 proc QAbstractButtonchangeEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qcoreevent_types.QEvent): void =
   fcQAbstractButton_virtualbase_changeEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_changeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -695,17 +697,17 @@ proc miqt_exec_callback_cQAbstractButton_changeEvent(vtbl: pointer, self: pointe
 proc QAbstractButtontimerEvent*(self: gen_qabstractbutton_types.QAbstractButton, e: gen_qcoreevent_types.QTimerEvent): void =
   fcQAbstractButton_virtualbase_timerEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQAbstractButton_timerEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QAbstractButtondevType*(self: gen_qabstractbutton_types.QAbstractButton, ): cint =
+proc QAbstractButtondevType*(self: gen_qabstractbutton_types.QAbstractButton): cint =
   fcQAbstractButton_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQAbstractButton_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -713,17 +715,17 @@ proc miqt_exec_callback_cQAbstractButton_devType(vtbl: pointer, self: pointer): 
 proc QAbstractButtonsetVisible*(self: gen_qabstractbutton_types.QAbstractButton, visible: bool): void =
   fcQAbstractButton_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQAbstractButton_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QAbstractButtonsizeHint*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qsize_types.QSize =
+proc QAbstractButtonsizeHint*(self: gen_qabstractbutton_types.QAbstractButton): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractButton_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractButton_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -731,11 +733,11 @@ proc miqt_exec_callback_cQAbstractButton_sizeHint(vtbl: pointer, self: pointer):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractButtonminimumSizeHint*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qsize_types.QSize =
+proc QAbstractButtonminimumSizeHint*(self: gen_qabstractbutton_types.QAbstractButton): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractButton_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractButton_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -746,27 +748,27 @@ proc miqt_exec_callback_cQAbstractButton_minimumSizeHint(vtbl: pointer, self: po
 proc QAbstractButtonheightForWidth*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint): cint =
   fcQAbstractButton_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractButton_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QAbstractButtonhasHeightForWidth*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc QAbstractButtonhasHeightForWidth*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQAbstractButton_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QAbstractButtonpaintEngine*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qpaintengine_types.QPaintEngine =
+proc QAbstractButtonpaintEngine*(self: gen_qabstractbutton_types.QAbstractButton): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQAbstractButton_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractButton_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -777,8 +779,8 @@ proc miqt_exec_callback_cQAbstractButton_paintEngine(vtbl: pointer, self: pointe
 proc QAbstractButtonmouseDoubleClickEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QMouseEvent): void =
   fcQAbstractButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -786,8 +788,8 @@ proc miqt_exec_callback_cQAbstractButton_mouseDoubleClickEvent(vtbl: pointer, se
 proc QAbstractButtonwheelEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QWheelEvent): void =
   fcQAbstractButton_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -795,8 +797,8 @@ proc miqt_exec_callback_cQAbstractButton_wheelEvent(vtbl: pointer, self: pointer
 proc QAbstractButtonenterEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QEnterEvent): void =
   fcQAbstractButton_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -804,8 +806,8 @@ proc miqt_exec_callback_cQAbstractButton_enterEvent(vtbl: pointer, self: pointer
 proc QAbstractButtonleaveEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractButton_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -813,8 +815,8 @@ proc miqt_exec_callback_cQAbstractButton_leaveEvent(vtbl: pointer, self: pointer
 proc QAbstractButtonmoveEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QMoveEvent): void =
   fcQAbstractButton_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -822,8 +824,8 @@ proc miqt_exec_callback_cQAbstractButton_moveEvent(vtbl: pointer, self: pointer,
 proc QAbstractButtonresizeEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QResizeEvent): void =
   fcQAbstractButton_virtualbase_resizeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -831,8 +833,8 @@ proc miqt_exec_callback_cQAbstractButton_resizeEvent(vtbl: pointer, self: pointe
 proc QAbstractButtoncloseEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QCloseEvent): void =
   fcQAbstractButton_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -840,8 +842,8 @@ proc miqt_exec_callback_cQAbstractButton_closeEvent(vtbl: pointer, self: pointer
 proc QAbstractButtoncontextMenuEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QContextMenuEvent): void =
   fcQAbstractButton_virtualbase_contextMenuEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -849,8 +851,8 @@ proc miqt_exec_callback_cQAbstractButton_contextMenuEvent(vtbl: pointer, self: p
 proc QAbstractButtontabletEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QTabletEvent): void =
   fcQAbstractButton_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -858,8 +860,8 @@ proc miqt_exec_callback_cQAbstractButton_tabletEvent(vtbl: pointer, self: pointe
 proc QAbstractButtonactionEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QActionEvent): void =
   fcQAbstractButton_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -867,8 +869,8 @@ proc miqt_exec_callback_cQAbstractButton_actionEvent(vtbl: pointer, self: pointe
 proc QAbstractButtondragEnterEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QDragEnterEvent): void =
   fcQAbstractButton_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -876,8 +878,8 @@ proc miqt_exec_callback_cQAbstractButton_dragEnterEvent(vtbl: pointer, self: poi
 proc QAbstractButtondragMoveEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QDragMoveEvent): void =
   fcQAbstractButton_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -885,8 +887,8 @@ proc miqt_exec_callback_cQAbstractButton_dragMoveEvent(vtbl: pointer, self: poin
 proc QAbstractButtondragLeaveEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQAbstractButton_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -894,8 +896,8 @@ proc miqt_exec_callback_cQAbstractButton_dragLeaveEvent(vtbl: pointer, self: poi
 proc QAbstractButtondropEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QDropEvent): void =
   fcQAbstractButton_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -903,8 +905,8 @@ proc miqt_exec_callback_cQAbstractButton_dropEvent(vtbl: pointer, self: pointer,
 proc QAbstractButtonshowEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QShowEvent): void =
   fcQAbstractButton_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -912,8 +914,8 @@ proc miqt_exec_callback_cQAbstractButton_showEvent(vtbl: pointer, self: pointer,
 proc QAbstractButtonhideEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qevent_types.QHideEvent): void =
   fcQAbstractButton_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -921,8 +923,8 @@ proc miqt_exec_callback_cQAbstractButton_hideEvent(vtbl: pointer, self: pointer,
 proc QAbstractButtonnativeEvent*(self: gen_qabstractbutton_types.QAbstractButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractButton_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQAbstractButton_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -936,8 +938,8 @@ proc miqt_exec_callback_cQAbstractButton_nativeEvent(vtbl: pointer, self: pointe
 proc QAbstractButtonmetric*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint): cint =
   fcQAbstractButton_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQAbstractButton_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -946,8 +948,8 @@ proc miqt_exec_callback_cQAbstractButton_metric(vtbl: pointer, self: pointer, pa
 proc QAbstractButtoninitPainter*(self: gen_qabstractbutton_types.QAbstractButton, painter: gen_qpainter_types.QPainter): void =
   fcQAbstractButton_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQAbstractButton_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -955,8 +957,8 @@ proc miqt_exec_callback_cQAbstractButton_initPainter(vtbl: pointer, self: pointe
 proc QAbstractButtonredirected*(self: gen_qabstractbutton_types.QAbstractButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQAbstractButton_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractButton_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -965,11 +967,11 @@ proc miqt_exec_callback_cQAbstractButton_redirected(vtbl: pointer, self: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractButtonsharedPainter*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qpainter_types.QPainter =
+proc QAbstractButtonsharedPainter*(self: gen_qabstractbutton_types.QAbstractButton): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQAbstractButton_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractButton_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -980,8 +982,8 @@ proc miqt_exec_callback_cQAbstractButton_sharedPainter(vtbl: pointer, self: poin
 proc QAbstractButtoninputMethodEvent*(self: gen_qabstractbutton_types.QAbstractButton, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQAbstractButton_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQAbstractButton_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -989,8 +991,8 @@ proc miqt_exec_callback_cQAbstractButton_inputMethodEvent(vtbl: pointer, self: p
 proc QAbstractButtoninputMethodQuery*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQAbstractButton_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -1002,8 +1004,8 @@ proc miqt_exec_callback_cQAbstractButton_inputMethodQuery(vtbl: pointer, self: p
 proc QAbstractButtonfocusNextPrevChild*(self: gen_qabstractbutton_types.QAbstractButton, next: bool): bool =
   fcQAbstractButton_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQAbstractButton_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -1012,8 +1014,8 @@ proc miqt_exec_callback_cQAbstractButton_focusNextPrevChild(vtbl: pointer, self:
 proc QAbstractButtoneventFilter*(self: gen_qabstractbutton_types.QAbstractButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractButton_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1023,8 +1025,8 @@ proc miqt_exec_callback_cQAbstractButton_eventFilter(vtbl: pointer, self: pointe
 proc QAbstractButtonchildEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAbstractButton_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1032,8 +1034,8 @@ proc miqt_exec_callback_cQAbstractButton_childEvent(vtbl: pointer, self: pointer
 proc QAbstractButtoncustomEvent*(self: gen_qabstractbutton_types.QAbstractButton, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractButton_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractButton_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1041,8 +1043,8 @@ proc miqt_exec_callback_cQAbstractButton_customEvent(vtbl: pointer, self: pointe
 proc QAbstractButtonconnectNotify*(self: gen_qabstractbutton_types.QAbstractButton, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractButton_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractButton_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1050,19 +1052,19 @@ proc miqt_exec_callback_cQAbstractButton_connectNotify(vtbl: pointer, self: poin
 proc QAbstractButtondisconnectNotify*(self: gen_qabstractbutton_types.QAbstractButton, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractButton_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractButton_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractButtonVTable](vtbl)
+proc cQAbstractButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractButtonVTable](fcQAbstractButton_vdata(self))
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractButton* {.inheritable.} = ref object of QAbstractButton
   vtbl*: cQAbstractButtonVTable
-method metaObject*(self: VirtualQAbstractButton, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAbstractButton): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractButtonmetaObject(self[])
-proc miqt_exec_method_cQAbstractButton_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAbstractButton_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1070,149 +1072,149 @@ proc miqt_exec_method_cQAbstractButton_metaObject(vtbl: pointer, inst: pointer):
 
 method metacast*(self: VirtualQAbstractButton, param1: cstring): pointer {.base.} =
   QAbstractButtonmetacast(self[], param1)
-proc miqt_exec_method_cQAbstractButton_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAbstractButton, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAbstractButtonmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAbstractButton_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method paintEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QPaintEvent): void {.base.} =
   raiseAssert("missing implementation of QAbstractButton_virtualbase_paintEvent")
-proc miqt_exec_method_cQAbstractButton_paintEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method hitButton*(self: VirtualQAbstractButton, pos: gen_qpoint_types.QPoint): bool {.base.} =
   QAbstractButtonhitButton(self[], pos)
-proc miqt_exec_method_cQAbstractButton_hitButton(vtbl: pointer, inst: pointer, pos: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
-  var virtualReturn = vtbl.hitButton(slotval1)
+  var virtualReturn = inst.hitButton(slotval1)
   virtualReturn
 
-method checkStateSet*(self: VirtualQAbstractButton, ): void {.base.} =
+method checkStateSet*(self: VirtualQAbstractButton): void {.base.} =
   QAbstractButtoncheckStateSet(self[])
-proc miqt_exec_method_cQAbstractButton_checkStateSet(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  vtbl.checkStateSet()
+proc cQAbstractButton_method_callback_checkStateSet(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  inst.checkStateSet()
 
-method nextCheckState*(self: VirtualQAbstractButton, ): void {.base.} =
+method nextCheckState*(self: VirtualQAbstractButton): void {.base.} =
   QAbstractButtonnextCheckState(self[])
-proc miqt_exec_method_cQAbstractButton_nextCheckState(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  vtbl.nextCheckState()
+proc cQAbstractButton_method_callback_nextCheckState(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  inst.nextCheckState()
 
 method event*(self: VirtualQAbstractButton, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractButtonevent(self[], e)
-proc miqt_exec_method_cQAbstractButton_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method keyPressEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
   QAbstractButtonkeyPressEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_keyPressEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QKeyEvent): void {.base.} =
   QAbstractButtonkeyReleaseEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_keyReleaseEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QAbstractButtonmousePressEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_mousePressEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QAbstractButtonmouseReleaseEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_mouseReleaseEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QAbstractButtonmouseMoveEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_mouseMoveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method focusInEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
   QAbstractButtonfocusInEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_focusInEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQAbstractButton, e: gen_qevent_types.QFocusEvent): void {.base.} =
   QAbstractButtonfocusOutEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_focusOutEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method changeEvent*(self: VirtualQAbstractButton, e: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractButtonchangeEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_changeEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method timerEvent*(self: VirtualQAbstractButton, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAbstractButtontimerEvent(self[], e)
-proc miqt_exec_method_cQAbstractButton_timerEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
-method devType*(self: VirtualQAbstractButton, ): cint {.base.} =
+method devType*(self: VirtualQAbstractButton): cint {.base.} =
   QAbstractButtondevType(self[])
-proc miqt_exec_method_cQAbstractButton_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQAbstractButton_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method setVisible*(self: VirtualQAbstractButton, visible: bool): void {.base.} =
   QAbstractButtonsetVisible(self[], visible)
-proc miqt_exec_method_cQAbstractButton_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQAbstractButton, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQAbstractButton): gen_qsize_types.QSize {.base.} =
   QAbstractButtonsizeHint(self[])
-proc miqt_exec_method_cQAbstractButton_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQAbstractButton_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQAbstractButton, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQAbstractButton): gen_qsize_types.QSize {.base.} =
   QAbstractButtonminimumSizeHint(self[])
-proc miqt_exec_method_cQAbstractButton_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQAbstractButton_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1220,24 +1222,24 @@ proc miqt_exec_method_cQAbstractButton_minimumSizeHint(vtbl: pointer, inst: poin
 
 method heightForWidth*(self: VirtualQAbstractButton, param1: cint): cint {.base.} =
   QAbstractButtonheightForWidth(self[], param1)
-proc miqt_exec_method_cQAbstractButton_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQAbstractButton, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQAbstractButton): bool {.base.} =
   QAbstractButtonhasHeightForWidth(self[])
-proc miqt_exec_method_cQAbstractButton_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQAbstractButton_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQAbstractButton, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQAbstractButton): gen_qpaintengine_types.QPaintEngine {.base.} =
   QAbstractButtonpaintEngine(self[])
-proc miqt_exec_method_cQAbstractButton_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQAbstractButton_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1245,160 +1247,160 @@ proc miqt_exec_method_cQAbstractButton_paintEngine(vtbl: pointer, inst: pointer)
 
 method mouseDoubleClickEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QAbstractButtonmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method wheelEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QAbstractButtonwheelEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method enterEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QAbstractButtonenterEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQAbstractButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractButtonleaveEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QAbstractButtonmoveEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method resizeEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QAbstractButtonresizeEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method closeEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QAbstractButtoncloseEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QAbstractButtoncontextMenuEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method tabletEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QAbstractButtontabletEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QActionEvent): void {.base.} =
   QAbstractButtonactionEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QAbstractButtondragEnterEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QAbstractButtondragMoveEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QAbstractButtondragLeaveEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QDropEvent): void {.base.} =
   QAbstractButtondropEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method showEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QShowEvent): void {.base.} =
   QAbstractButtonshowEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQAbstractButton, event: gen_qevent_types.QHideEvent): void {.base.} =
   QAbstractButtonhideEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQAbstractButton, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QAbstractButtonnativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQAbstractButton_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQAbstractButton, param1: cint): cint {.base.} =
   QAbstractButtonmetric(self[], param1)
-proc miqt_exec_method_cQAbstractButton_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQAbstractButton, painter: gen_qpainter_types.QPainter): void {.base.} =
   QAbstractButtoninitPainter(self[], painter)
-proc miqt_exec_method_cQAbstractButton_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQAbstractButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QAbstractButtonredirected(self[], offset)
-proc miqt_exec_method_cQAbstractButton_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQAbstractButton, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQAbstractButton): gen_qpainter_types.QPainter {.base.} =
   QAbstractButtonsharedPainter(self[])
-proc miqt_exec_method_cQAbstractButton_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQAbstractButton_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1406,17 +1408,17 @@ proc miqt_exec_method_cQAbstractButton_sharedPainter(vtbl: pointer, inst: pointe
 
 method inputMethodEvent*(self: VirtualQAbstractButton, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QAbstractButtoninputMethodEvent(self[], param1)
-proc miqt_exec_method_cQAbstractButton_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQAbstractButton, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QAbstractButtoninputMethodQuery(self[], param1)
-proc miqt_exec_method_cQAbstractButton_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1424,68 +1426,68 @@ proc miqt_exec_method_cQAbstractButton_inputMethodQuery(vtbl: pointer, inst: poi
 
 method focusNextPrevChild*(self: VirtualQAbstractButton, next: bool): bool {.base.} =
   QAbstractButtonfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQAbstractButton_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAbstractButton, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractButtoneventFilter(self[], watched, event)
-proc miqt_exec_method_cQAbstractButton_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method childEvent*(self: VirtualQAbstractButton, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractButtonchildEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractButton, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractButtoncustomEvent(self[], event)
-proc miqt_exec_method_cQAbstractButton_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractButtonconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractButton_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractButton, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractButtondisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractButton_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractButton](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
+proc cQAbstractButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractButton](fcQAbstractButton_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc updateMicroFocus*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc updateMicroFocus*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc create*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+proc destroy*(self: gen_qabstractbutton_types.QAbstractButton): void =
   fcQAbstractButton_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc focusNextChild*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+proc focusPreviousChild*(self: gen_qabstractbutton_types.QAbstractButton): bool =
   fcQAbstractButton_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstractbutton_types.QAbstractButton): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractButton_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstractbutton_types.QAbstractButton, ): cint =
+proc senderSignalIndex*(self: gen_qabstractbutton_types.QAbstractButton): cint =
   fcQAbstractButton_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstractbutton_types.QAbstractButton, signal: cstring): cint =
@@ -1499,360 +1501,303 @@ proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
     vtbl: ref QAbstractButtonVTable = nil): gen_qabstractbutton_types.QAbstractButton =
   let vtbl = if vtbl == nil: new QAbstractButtonVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractButtonVTable, _: ptr cQAbstractButton) {.cdecl.} =
-    let vtbl = cast[ref QAbstractButtonVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractButtonVTable](fcQAbstractButton_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractButton_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractButton_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractButton_metacast
+    vtbl[].vtbl.metacast = cQAbstractButton_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractButton_metacall
+    vtbl[].vtbl.metacall = cQAbstractButton_vtable_callback_metacall
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQAbstractButton_paintEvent
+    vtbl[].vtbl.paintEvent = cQAbstractButton_vtable_callback_paintEvent
   if not isNil(vtbl[].hitButton):
-    vtbl[].vtbl.hitButton = miqt_exec_callback_cQAbstractButton_hitButton
+    vtbl[].vtbl.hitButton = cQAbstractButton_vtable_callback_hitButton
   if not isNil(vtbl[].checkStateSet):
-    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQAbstractButton_checkStateSet
+    vtbl[].vtbl.checkStateSet = cQAbstractButton_vtable_callback_checkStateSet
   if not isNil(vtbl[].nextCheckState):
-    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQAbstractButton_nextCheckState
+    vtbl[].vtbl.nextCheckState = cQAbstractButton_vtable_callback_nextCheckState
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractButton_event
+    vtbl[].vtbl.event = cQAbstractButton_vtable_callback_event
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQAbstractButton_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQAbstractButton_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQAbstractButton_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQAbstractButton_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQAbstractButton_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQAbstractButton_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQAbstractButton_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQAbstractButton_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQAbstractButton_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQAbstractButton_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQAbstractButton_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQAbstractButton_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQAbstractButton_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQAbstractButton_vtable_callback_focusOutEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQAbstractButton_changeEvent
+    vtbl[].vtbl.changeEvent = cQAbstractButton_vtable_callback_changeEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractButton_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractButton_vtable_callback_timerEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQAbstractButton_devType
+    vtbl[].vtbl.devType = cQAbstractButton_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQAbstractButton_setVisible
+    vtbl[].vtbl.setVisible = cQAbstractButton_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQAbstractButton_sizeHint
+    vtbl[].vtbl.sizeHint = cQAbstractButton_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQAbstractButton_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQAbstractButton_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQAbstractButton_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQAbstractButton_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQAbstractButton_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQAbstractButton_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQAbstractButton_paintEngine
+    vtbl[].vtbl.paintEngine = cQAbstractButton_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQAbstractButton_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQAbstractButton_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQAbstractButton_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQAbstractButton_vtable_callback_wheelEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQAbstractButton_enterEvent
+    vtbl[].vtbl.enterEvent = cQAbstractButton_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQAbstractButton_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQAbstractButton_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQAbstractButton_moveEvent
+    vtbl[].vtbl.moveEvent = cQAbstractButton_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQAbstractButton_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQAbstractButton_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQAbstractButton_closeEvent
+    vtbl[].vtbl.closeEvent = cQAbstractButton_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQAbstractButton_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQAbstractButton_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQAbstractButton_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQAbstractButton_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQAbstractButton_actionEvent
+    vtbl[].vtbl.actionEvent = cQAbstractButton_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQAbstractButton_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQAbstractButton_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQAbstractButton_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQAbstractButton_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQAbstractButton_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQAbstractButton_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQAbstractButton_dropEvent
+    vtbl[].vtbl.dropEvent = cQAbstractButton_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQAbstractButton_showEvent
+    vtbl[].vtbl.showEvent = cQAbstractButton_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQAbstractButton_hideEvent
+    vtbl[].vtbl.hideEvent = cQAbstractButton_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQAbstractButton_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQAbstractButton_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQAbstractButton_metric
+    vtbl[].vtbl.metric = cQAbstractButton_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQAbstractButton_initPainter
+    vtbl[].vtbl.initPainter = cQAbstractButton_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQAbstractButton_redirected
+    vtbl[].vtbl.redirected = cQAbstractButton_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQAbstractButton_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQAbstractButton_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQAbstractButton_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQAbstractButton_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQAbstractButton_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQAbstractButton_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQAbstractButton_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQAbstractButton_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractButton_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractButton_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractButton_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractButton_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractButton_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractButton_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractButton_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractButton_disconnectNotify
-  gen_qabstractbutton_types.QAbstractButton(h: fcQAbstractButton_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractButton_vtable_callback_disconnectNotify
+  gen_qabstractbutton_types.QAbstractButton(h: fcQAbstractButton_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
     vtbl: ref QAbstractButtonVTable = nil): gen_qabstractbutton_types.QAbstractButton =
   let vtbl = if vtbl == nil: new QAbstractButtonVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractButtonVTable, _: ptr cQAbstractButton) {.cdecl.} =
-    let vtbl = cast[ref QAbstractButtonVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractButtonVTable](fcQAbstractButton_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractButton_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractButton_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractButton_metacast
+    vtbl[].vtbl.metacast = cQAbstractButton_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractButton_metacall
+    vtbl[].vtbl.metacall = cQAbstractButton_vtable_callback_metacall
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQAbstractButton_paintEvent
+    vtbl[].vtbl.paintEvent = cQAbstractButton_vtable_callback_paintEvent
   if not isNil(vtbl[].hitButton):
-    vtbl[].vtbl.hitButton = miqt_exec_callback_cQAbstractButton_hitButton
+    vtbl[].vtbl.hitButton = cQAbstractButton_vtable_callback_hitButton
   if not isNil(vtbl[].checkStateSet):
-    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQAbstractButton_checkStateSet
+    vtbl[].vtbl.checkStateSet = cQAbstractButton_vtable_callback_checkStateSet
   if not isNil(vtbl[].nextCheckState):
-    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQAbstractButton_nextCheckState
+    vtbl[].vtbl.nextCheckState = cQAbstractButton_vtable_callback_nextCheckState
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractButton_event
+    vtbl[].vtbl.event = cQAbstractButton_vtable_callback_event
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQAbstractButton_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQAbstractButton_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQAbstractButton_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQAbstractButton_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQAbstractButton_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQAbstractButton_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQAbstractButton_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQAbstractButton_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQAbstractButton_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQAbstractButton_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQAbstractButton_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQAbstractButton_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQAbstractButton_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQAbstractButton_vtable_callback_focusOutEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQAbstractButton_changeEvent
+    vtbl[].vtbl.changeEvent = cQAbstractButton_vtable_callback_changeEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractButton_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractButton_vtable_callback_timerEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQAbstractButton_devType
+    vtbl[].vtbl.devType = cQAbstractButton_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQAbstractButton_setVisible
+    vtbl[].vtbl.setVisible = cQAbstractButton_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQAbstractButton_sizeHint
+    vtbl[].vtbl.sizeHint = cQAbstractButton_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQAbstractButton_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQAbstractButton_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQAbstractButton_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQAbstractButton_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQAbstractButton_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQAbstractButton_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQAbstractButton_paintEngine
+    vtbl[].vtbl.paintEngine = cQAbstractButton_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQAbstractButton_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQAbstractButton_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQAbstractButton_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQAbstractButton_vtable_callback_wheelEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQAbstractButton_enterEvent
+    vtbl[].vtbl.enterEvent = cQAbstractButton_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQAbstractButton_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQAbstractButton_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQAbstractButton_moveEvent
+    vtbl[].vtbl.moveEvent = cQAbstractButton_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQAbstractButton_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQAbstractButton_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQAbstractButton_closeEvent
+    vtbl[].vtbl.closeEvent = cQAbstractButton_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQAbstractButton_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQAbstractButton_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQAbstractButton_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQAbstractButton_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQAbstractButton_actionEvent
+    vtbl[].vtbl.actionEvent = cQAbstractButton_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQAbstractButton_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQAbstractButton_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQAbstractButton_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQAbstractButton_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQAbstractButton_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQAbstractButton_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQAbstractButton_dropEvent
+    vtbl[].vtbl.dropEvent = cQAbstractButton_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQAbstractButton_showEvent
+    vtbl[].vtbl.showEvent = cQAbstractButton_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQAbstractButton_hideEvent
+    vtbl[].vtbl.hideEvent = cQAbstractButton_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQAbstractButton_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQAbstractButton_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQAbstractButton_metric
+    vtbl[].vtbl.metric = cQAbstractButton_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQAbstractButton_initPainter
+    vtbl[].vtbl.initPainter = cQAbstractButton_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQAbstractButton_redirected
+    vtbl[].vtbl.redirected = cQAbstractButton_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQAbstractButton_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQAbstractButton_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQAbstractButton_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQAbstractButton_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQAbstractButton_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQAbstractButton_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQAbstractButton_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQAbstractButton_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractButton_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractButton_vtable_callback_eventFilter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractButton_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractButton_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractButton_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractButton_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractButton_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractButton_disconnectNotify
-  gen_qabstractbutton_types.QAbstractButton(h: fcQAbstractButton_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractButton_vtable_callback_disconnectNotify
+  gen_qabstractbutton_types.QAbstractButton(h: fcQAbstractButton_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQAbstractButton_mvtbl = cQAbstractButtonVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractButton()[])](self.fcQAbstractButton_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAbstractButton_method_callback_metaObject,
+  metacast: cQAbstractButton_method_callback_metacast,
+  metacall: cQAbstractButton_method_callback_metacall,
+  paintEvent: cQAbstractButton_method_callback_paintEvent,
+  hitButton: cQAbstractButton_method_callback_hitButton,
+  checkStateSet: cQAbstractButton_method_callback_checkStateSet,
+  nextCheckState: cQAbstractButton_method_callback_nextCheckState,
+  event: cQAbstractButton_method_callback_event,
+  keyPressEvent: cQAbstractButton_method_callback_keyPressEvent,
+  keyReleaseEvent: cQAbstractButton_method_callback_keyReleaseEvent,
+  mousePressEvent: cQAbstractButton_method_callback_mousePressEvent,
+  mouseReleaseEvent: cQAbstractButton_method_callback_mouseReleaseEvent,
+  mouseMoveEvent: cQAbstractButton_method_callback_mouseMoveEvent,
+  focusInEvent: cQAbstractButton_method_callback_focusInEvent,
+  focusOutEvent: cQAbstractButton_method_callback_focusOutEvent,
+  changeEvent: cQAbstractButton_method_callback_changeEvent,
+  timerEvent: cQAbstractButton_method_callback_timerEvent,
+  devType: cQAbstractButton_method_callback_devType,
+  setVisible: cQAbstractButton_method_callback_setVisible,
+  sizeHint: cQAbstractButton_method_callback_sizeHint,
+  minimumSizeHint: cQAbstractButton_method_callback_minimumSizeHint,
+  heightForWidth: cQAbstractButton_method_callback_heightForWidth,
+  hasHeightForWidth: cQAbstractButton_method_callback_hasHeightForWidth,
+  paintEngine: cQAbstractButton_method_callback_paintEngine,
+  mouseDoubleClickEvent: cQAbstractButton_method_callback_mouseDoubleClickEvent,
+  wheelEvent: cQAbstractButton_method_callback_wheelEvent,
+  enterEvent: cQAbstractButton_method_callback_enterEvent,
+  leaveEvent: cQAbstractButton_method_callback_leaveEvent,
+  moveEvent: cQAbstractButton_method_callback_moveEvent,
+  resizeEvent: cQAbstractButton_method_callback_resizeEvent,
+  closeEvent: cQAbstractButton_method_callback_closeEvent,
+  contextMenuEvent: cQAbstractButton_method_callback_contextMenuEvent,
+  tabletEvent: cQAbstractButton_method_callback_tabletEvent,
+  actionEvent: cQAbstractButton_method_callback_actionEvent,
+  dragEnterEvent: cQAbstractButton_method_callback_dragEnterEvent,
+  dragMoveEvent: cQAbstractButton_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQAbstractButton_method_callback_dragLeaveEvent,
+  dropEvent: cQAbstractButton_method_callback_dropEvent,
+  showEvent: cQAbstractButton_method_callback_showEvent,
+  hideEvent: cQAbstractButton_method_callback_hideEvent,
+  nativeEvent: cQAbstractButton_method_callback_nativeEvent,
+  metric: cQAbstractButton_method_callback_metric,
+  initPainter: cQAbstractButton_method_callback_initPainter,
+  redirected: cQAbstractButton_method_callback_redirected,
+  sharedPainter: cQAbstractButton_method_callback_sharedPainter,
+  inputMethodEvent: cQAbstractButton_method_callback_inputMethodEvent,
+  inputMethodQuery: cQAbstractButton_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQAbstractButton_method_callback_focusNextPrevChild,
+  eventFilter: cQAbstractButton_method_callback_eventFilter,
+  childEvent: cQAbstractButton_method_callback_childEvent,
+  customEvent: cQAbstractButton_method_callback_customEvent,
+  connectNotify: cQAbstractButton_method_callback_connectNotify,
+  disconnectNotify: cQAbstractButton_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQAbstractButton) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractButtonVTable, _: ptr cQAbstractButton) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractButton()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractButton_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractButton_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractButton_metacall
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQAbstractButton_paintEvent
-  vtbl[].vtbl.hitButton = miqt_exec_method_cQAbstractButton_hitButton
-  vtbl[].vtbl.checkStateSet = miqt_exec_method_cQAbstractButton_checkStateSet
-  vtbl[].vtbl.nextCheckState = miqt_exec_method_cQAbstractButton_nextCheckState
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractButton_event
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQAbstractButton_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQAbstractButton_keyReleaseEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQAbstractButton_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQAbstractButton_mouseReleaseEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQAbstractButton_mouseMoveEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQAbstractButton_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQAbstractButton_focusOutEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQAbstractButton_changeEvent
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractButton_timerEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQAbstractButton_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQAbstractButton_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQAbstractButton_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQAbstractButton_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQAbstractButton_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQAbstractButton_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQAbstractButton_paintEngine
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQAbstractButton_mouseDoubleClickEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQAbstractButton_wheelEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQAbstractButton_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQAbstractButton_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQAbstractButton_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQAbstractButton_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQAbstractButton_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQAbstractButton_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQAbstractButton_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQAbstractButton_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQAbstractButton_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQAbstractButton_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQAbstractButton_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQAbstractButton_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQAbstractButton_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQAbstractButton_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQAbstractButton_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQAbstractButton_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQAbstractButton_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQAbstractButton_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQAbstractButton_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQAbstractButton_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQAbstractButton_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQAbstractButton_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractButton_eventFilter
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractButton_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractButton_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractButton_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractButton_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractButton_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAbstractButton) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractButton_new(addr(cQAbstractButton_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
-    vtbl: VirtualQAbstractButton) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractButtonVTable, _: ptr cQAbstractButton) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractButton()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractButton, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractButton_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractButton_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractButton_metacall
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQAbstractButton_paintEvent
-  vtbl[].vtbl.hitButton = miqt_exec_method_cQAbstractButton_hitButton
-  vtbl[].vtbl.checkStateSet = miqt_exec_method_cQAbstractButton_checkStateSet
-  vtbl[].vtbl.nextCheckState = miqt_exec_method_cQAbstractButton_nextCheckState
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractButton_event
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQAbstractButton_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQAbstractButton_keyReleaseEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQAbstractButton_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQAbstractButton_mouseReleaseEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQAbstractButton_mouseMoveEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQAbstractButton_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQAbstractButton_focusOutEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQAbstractButton_changeEvent
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractButton_timerEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQAbstractButton_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQAbstractButton_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQAbstractButton_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQAbstractButton_minimumSizeHint
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQAbstractButton_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQAbstractButton_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQAbstractButton_paintEngine
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQAbstractButton_mouseDoubleClickEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQAbstractButton_wheelEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQAbstractButton_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQAbstractButton_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQAbstractButton_moveEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQAbstractButton_resizeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQAbstractButton_closeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQAbstractButton_contextMenuEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQAbstractButton_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQAbstractButton_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQAbstractButton_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQAbstractButton_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQAbstractButton_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQAbstractButton_dropEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQAbstractButton_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQAbstractButton_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQAbstractButton_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQAbstractButton_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQAbstractButton_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQAbstractButton_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQAbstractButton_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQAbstractButton_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQAbstractButton_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQAbstractButton_focusNextPrevChild
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractButton_eventFilter
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractButton_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractButton_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractButton_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractButton_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractButton_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAbstractButton) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractButton_new2(addr(cQAbstractButton_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractButton_staticMetaObject())

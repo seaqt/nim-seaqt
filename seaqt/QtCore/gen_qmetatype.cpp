@@ -7,15 +7,6 @@
 #include <QPartialOrdering>
 #include <qmetatype.h>
 #include "gen_qmetatype.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMetaType* QMetaType_new(int type) {
 	return new QMetaType(static_cast<int>(type));
 }

@@ -19,15 +19,6 @@
 #include <QWebEngineHistoryModel>
 #include <qwebenginehistory.h>
 #include "gen_qwebenginehistory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* other) {
 	return new QWebEngineHistoryItem(*other);
 }
@@ -160,6 +151,7 @@ struct miqt_string QWebEngineHistoryModel_tr3(const char* s, const char* c, int 
 }
 
 const QMetaObject* QWebEngineHistoryModel_staticMetaObject() { return &QWebEngineHistoryModel::staticMetaObject; }
+
 void QWebEngineHistory_virtbase(QWebEngineHistory* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -309,3 +301,4 @@ struct miqt_string QWebEngineHistory_tr3(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QWebEngineHistory_staticMetaObject() { return &QWebEngineHistory::staticMetaObject; }
+

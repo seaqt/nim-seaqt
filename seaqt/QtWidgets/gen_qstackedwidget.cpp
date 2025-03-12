@@ -39,39 +39,32 @@
 #include <QWidget>
 #include <qstackedwidget.h>
 #include "gen_qstackedwidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQStackedWidget final : public QStackedWidget {
-	struct QStackedWidget_VTable* vtbl;
+	const QStackedWidget_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QStackedWidget_VTable* QStackedWidget_vtbl(const VirtualQStackedWidget* self);
+	friend void* QStackedWidget_vdata(const VirtualQStackedWidget* self);
+	friend void QStackedWidget_setVdata(VirtualQStackedWidget* self, void* vdata);
 
-	VirtualQStackedWidget(struct QStackedWidget_VTable* vtbl, QWidget* parent): QStackedWidget(parent), vtbl(vtbl) {};
-	VirtualQStackedWidget(struct QStackedWidget_VTable* vtbl): QStackedWidget(), vtbl(vtbl) {};
+	VirtualQStackedWidget(const QStackedWidget_VTable* vtbl, void* vdata, QWidget* parent): QStackedWidget(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQStackedWidget(const QStackedWidget_VTable* vtbl, void* vdata): QStackedWidget(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQStackedWidget() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQStackedWidget() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QStackedWidget::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QStackedWidget_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QStackedWidget_virtualbase_metaObject(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QStackedWidget::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QStackedWidget_virtualbase_metacast(void* self, const char* param1);
+	friend void* QStackedWidget_virtualbase_metacast(VirtualQStackedWidget* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QStackedWidget::qt_metacall(param1, param2, param3);
@@ -97,14 +89,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStackedWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QStackedWidget_virtualbase_metacall(VirtualQStackedWidget* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QStackedWidget::event(e);
@@ -112,30 +103,28 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QStackedWidget_virtualbase_event(void* self, QEvent* e);
+	friend bool QStackedWidget_virtualbase_event(VirtualQStackedWidget* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QStackedWidget::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QStackedWidget_virtualbase_sizeHint(const void* self);
+	friend QSize* QStackedWidget_virtualbase_sizeHint(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QStackedWidget::paintEvent(param1);
@@ -144,13 +133,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QStackedWidget_virtualbase_paintEvent(VirtualQStackedWidget* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QStackedWidget::changeEvent(param1);
@@ -159,13 +147,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QStackedWidget_virtualbase_changeEvent(VirtualQStackedWidget* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QStackedWidget::initStyleOption(option);
@@ -174,27 +161,25 @@ public:
 
 		QStyleOptionFrame* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QStackedWidget_virtualbase_initStyleOption(const VirtualQStackedWidget* self, QStyleOptionFrame* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QStackedWidget::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStackedWidget_virtualbase_devType(const void* self);
+	friend int QStackedWidget_virtualbase_devType(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QStackedWidget::setVisible(visible);
@@ -203,29 +188,27 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_setVisible(void* self, bool visible);
+	friend void QStackedWidget_virtualbase_setVisible(VirtualQStackedWidget* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QStackedWidget::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QStackedWidget_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QStackedWidget_virtualbase_minimumSizeHint(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QStackedWidget::heightForWidth(param1);
@@ -233,42 +216,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStackedWidget_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QStackedWidget_virtualbase_heightForWidth(const VirtualQStackedWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QStackedWidget::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QStackedWidget_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QStackedWidget_virtualbase_hasHeightForWidth(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QStackedWidget::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QStackedWidget_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QStackedWidget_virtualbase_paintEngine(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QStackedWidget::mousePressEvent(event);
@@ -277,13 +257,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QStackedWidget_virtualbase_mousePressEvent(VirtualQStackedWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QStackedWidget::mouseReleaseEvent(event);
@@ -292,13 +271,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QStackedWidget_virtualbase_mouseReleaseEvent(VirtualQStackedWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QStackedWidget::mouseDoubleClickEvent(event);
@@ -307,13 +285,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QStackedWidget_virtualbase_mouseDoubleClickEvent(VirtualQStackedWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QStackedWidget::mouseMoveEvent(event);
@@ -322,13 +299,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QStackedWidget_virtualbase_mouseMoveEvent(VirtualQStackedWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QStackedWidget::wheelEvent(event);
@@ -337,13 +313,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QStackedWidget_virtualbase_wheelEvent(VirtualQStackedWidget* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QStackedWidget::keyPressEvent(event);
@@ -352,13 +327,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QStackedWidget_virtualbase_keyPressEvent(VirtualQStackedWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QStackedWidget::keyReleaseEvent(event);
@@ -367,13 +341,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QStackedWidget_virtualbase_keyReleaseEvent(VirtualQStackedWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QStackedWidget::focusInEvent(event);
@@ -382,13 +355,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QStackedWidget_virtualbase_focusInEvent(VirtualQStackedWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QStackedWidget::focusOutEvent(event);
@@ -397,13 +369,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QStackedWidget_virtualbase_focusOutEvent(VirtualQStackedWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QStackedWidget::enterEvent(event);
@@ -412,13 +383,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QStackedWidget_virtualbase_enterEvent(VirtualQStackedWidget* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QStackedWidget::leaveEvent(event);
@@ -427,13 +397,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QStackedWidget_virtualbase_leaveEvent(VirtualQStackedWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QStackedWidget::moveEvent(event);
@@ -442,13 +411,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QStackedWidget_virtualbase_moveEvent(VirtualQStackedWidget* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QStackedWidget::resizeEvent(event);
@@ -457,13 +425,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QStackedWidget_virtualbase_resizeEvent(VirtualQStackedWidget* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QStackedWidget::closeEvent(event);
@@ -472,13 +439,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QStackedWidget_virtualbase_closeEvent(VirtualQStackedWidget* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QStackedWidget::contextMenuEvent(event);
@@ -487,13 +453,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QStackedWidget_virtualbase_contextMenuEvent(VirtualQStackedWidget* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QStackedWidget::tabletEvent(event);
@@ -502,13 +467,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QStackedWidget_virtualbase_tabletEvent(VirtualQStackedWidget* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QStackedWidget::actionEvent(event);
@@ -517,13 +481,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QStackedWidget_virtualbase_actionEvent(VirtualQStackedWidget* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QStackedWidget::dragEnterEvent(event);
@@ -532,13 +495,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QStackedWidget_virtualbase_dragEnterEvent(VirtualQStackedWidget* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QStackedWidget::dragMoveEvent(event);
@@ -547,13 +509,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QStackedWidget_virtualbase_dragMoveEvent(VirtualQStackedWidget* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QStackedWidget::dragLeaveEvent(event);
@@ -562,13 +523,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QStackedWidget_virtualbase_dragLeaveEvent(VirtualQStackedWidget* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QStackedWidget::dropEvent(event);
@@ -577,13 +537,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QStackedWidget_virtualbase_dropEvent(VirtualQStackedWidget* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QStackedWidget::showEvent(event);
@@ -592,13 +551,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QStackedWidget_virtualbase_showEvent(VirtualQStackedWidget* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QStackedWidget::hideEvent(event);
@@ -607,13 +565,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QStackedWidget_virtualbase_hideEvent(VirtualQStackedWidget* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QStackedWidget::nativeEvent(eventType, message, result);
@@ -629,14 +586,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QStackedWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QStackedWidget_virtualbase_nativeEvent(VirtualQStackedWidget* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QStackedWidget::metric(param1);
@@ -645,14 +601,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStackedWidget_virtualbase_metric(const void* self, int param1);
+	friend int QStackedWidget_virtualbase_metric(const VirtualQStackedWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QStackedWidget::initPainter(painter);
@@ -661,13 +616,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QStackedWidget_virtualbase_initPainter(const VirtualQStackedWidget* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QStackedWidget::redirected(offset);
@@ -675,28 +629,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QStackedWidget_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QStackedWidget_virtualbase_redirected(const VirtualQStackedWidget* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QStackedWidget::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QStackedWidget_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QStackedWidget_virtualbase_sharedPainter(const VirtualQStackedWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QStackedWidget::inputMethodEvent(param1);
@@ -705,13 +657,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QStackedWidget_virtualbase_inputMethodEvent(VirtualQStackedWidget* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QStackedWidget::inputMethodQuery(param1);
@@ -720,16 +671,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QStackedWidget_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QStackedWidget_virtualbase_inputMethodQuery(const VirtualQStackedWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QStackedWidget::focusNextPrevChild(next);
@@ -737,14 +687,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QStackedWidget_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QStackedWidget_virtualbase_focusNextPrevChild(VirtualQStackedWidget* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QStackedWidget::eventFilter(watched, event);
@@ -753,14 +702,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QStackedWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QStackedWidget_virtualbase_eventFilter(VirtualQStackedWidget* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QStackedWidget::timerEvent(event);
@@ -769,13 +717,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QStackedWidget_virtualbase_timerEvent(VirtualQStackedWidget* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QStackedWidget::childEvent(event);
@@ -784,13 +731,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QStackedWidget_virtualbase_childEvent(VirtualQStackedWidget* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QStackedWidget::customEvent(event);
@@ -799,13 +745,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QStackedWidget_virtualbase_customEvent(VirtualQStackedWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QStackedWidget::connectNotify(signal);
@@ -816,13 +761,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QStackedWidget_virtualbase_connectNotify(VirtualQStackedWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QStackedWidget::disconnectNotify(signal);
@@ -833,31 +777,31 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QStackedWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QStackedWidget_virtualbase_disconnectNotify(VirtualQStackedWidget* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QStackedWidget_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QStackedWidget_protectedbase_updateMicroFocus(void* self);
-	friend void QStackedWidget_protectedbase_create(void* self);
-	friend void QStackedWidget_protectedbase_destroy(void* self);
-	friend bool QStackedWidget_protectedbase_focusNextChild(void* self);
-	friend bool QStackedWidget_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QStackedWidget_protectedbase_sender(const void* self);
-	friend int QStackedWidget_protectedbase_senderSignalIndex(const void* self);
-	friend int QStackedWidget_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QStackedWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QStackedWidget_protectedbase_drawFrame(VirtualQStackedWidget* self, QPainter* param1);
+	friend void QStackedWidget_protectedbase_updateMicroFocus(VirtualQStackedWidget* self);
+	friend void QStackedWidget_protectedbase_create(VirtualQStackedWidget* self);
+	friend void QStackedWidget_protectedbase_destroy(VirtualQStackedWidget* self);
+	friend bool QStackedWidget_protectedbase_focusNextChild(VirtualQStackedWidget* self);
+	friend bool QStackedWidget_protectedbase_focusPreviousChild(VirtualQStackedWidget* self);
+	friend QObject* QStackedWidget_protectedbase_sender(const VirtualQStackedWidget* self);
+	friend int QStackedWidget_protectedbase_senderSignalIndex(const VirtualQStackedWidget* self);
+	friend int QStackedWidget_protectedbase_receivers(const VirtualQStackedWidget* self, const char* signal);
+	friend bool QStackedWidget_protectedbase_isSignalConnected(const VirtualQStackedWidget* self, QMetaMethod* signal);
 };
 
-QStackedWidget* QStackedWidget_new(struct QStackedWidget_VTable* vtbl, QWidget* parent) {
-	return new VirtualQStackedWidget(vtbl, parent);
+VirtualQStackedWidget* QStackedWidget_new(const QStackedWidget_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQStackedWidget(vtbl, vdata, parent);
 }
 
-QStackedWidget* QStackedWidget_new2(struct QStackedWidget_VTable* vtbl) {
-	return new VirtualQStackedWidget(vtbl);
+VirtualQStackedWidget* QStackedWidget_new2(const QStackedWidget_VTable* vtbl, void* vdata) {
+	return new VirtualQStackedWidget(vtbl, vdata);
 }
 
 void QStackedWidget_virtbase(QStackedWidget* src, QFrame** outptr_QFrame) {
@@ -931,7 +875,7 @@ void QStackedWidget_currentChanged(QStackedWidget* self, int param1) {
 	self->currentChanged(static_cast<int>(param1));
 }
 
-void QStackedWidget_connect_currentChanged(QStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QStackedWidget_connect_currentChanged(VirtualQStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -947,7 +891,7 @@ void QStackedWidget_widgetRemoved(QStackedWidget* self, int index) {
 	self->widgetRemoved(static_cast<int>(index));
 }
 
-void QStackedWidget_connect_widgetRemoved(QStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QStackedWidget_connect_widgetRemoved(VirtualQStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -981,382 +925,306 @@ struct miqt_string QStackedWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QStackedWidget_virtualbase_metaObject(const void* self) {
+QMetaObject* QStackedWidget_virtualbase_metaObject(const VirtualQStackedWidget* self) {
 
-	return (QMetaObject*) ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::metaObject();
-
+	return (QMetaObject*) self->QStackedWidget::metaObject();
 }
 
-void* QStackedWidget_virtualbase_metacast(void* self, const char* param1) {
+void* QStackedWidget_virtualbase_metacast(VirtualQStackedWidget* self, const char* param1) {
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::qt_metacast(param1);
-
+	return self->QStackedWidget::qt_metacast(param1);
 }
 
-int QStackedWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QStackedWidget_virtualbase_metacall(VirtualQStackedWidget* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QStackedWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QStackedWidget_virtualbase_event(void* self, QEvent* e) {
+bool QStackedWidget_virtualbase_event(VirtualQStackedWidget* self, QEvent* e) {
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::event(e);
-
+	return self->QStackedWidget::event(e);
 }
 
-QSize* QStackedWidget_virtualbase_sizeHint(const void* self) {
+QSize* QStackedWidget_virtualbase_sizeHint(const VirtualQStackedWidget* self) {
 
-	return new QSize(( (const VirtualQStackedWidget*)(self) )->QStackedWidget::sizeHint());
-
+	return new QSize(self->QStackedWidget::sizeHint());
 }
 
-void QStackedWidget_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QStackedWidget_virtualbase_paintEvent(VirtualQStackedWidget* self, QPaintEvent* param1) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::paintEvent(param1);
-
+	self->QStackedWidget::paintEvent(param1);
 }
 
-void QStackedWidget_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QStackedWidget_virtualbase_changeEvent(VirtualQStackedWidget* self, QEvent* param1) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::changeEvent(param1);
-
+	self->QStackedWidget::changeEvent(param1);
 }
 
-void QStackedWidget_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+void QStackedWidget_virtualbase_initStyleOption(const VirtualQStackedWidget* self, QStyleOptionFrame* option) {
 
-	( (const VirtualQStackedWidget*)(self) )->QStackedWidget::initStyleOption(option);
-
+	self->QStackedWidget::initStyleOption(option);
 }
 
-int QStackedWidget_virtualbase_devType(const void* self) {
+int QStackedWidget_virtualbase_devType(const VirtualQStackedWidget* self) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::devType();
-
+	return self->QStackedWidget::devType();
 }
 
-void QStackedWidget_virtualbase_setVisible(void* self, bool visible) {
+void QStackedWidget_virtualbase_setVisible(VirtualQStackedWidget* self, bool visible) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::setVisible(visible);
-
+	self->QStackedWidget::setVisible(visible);
 }
 
-QSize* QStackedWidget_virtualbase_minimumSizeHint(const void* self) {
+QSize* QStackedWidget_virtualbase_minimumSizeHint(const VirtualQStackedWidget* self) {
 
-	return new QSize(( (const VirtualQStackedWidget*)(self) )->QStackedWidget::minimumSizeHint());
-
+	return new QSize(self->QStackedWidget::minimumSizeHint());
 }
 
-int QStackedWidget_virtualbase_heightForWidth(const void* self, int param1) {
+int QStackedWidget_virtualbase_heightForWidth(const VirtualQStackedWidget* self, int param1) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::heightForWidth(static_cast<int>(param1));
-
+	return self->QStackedWidget::heightForWidth(static_cast<int>(param1));
 }
 
-bool QStackedWidget_virtualbase_hasHeightForWidth(const void* self) {
+bool QStackedWidget_virtualbase_hasHeightForWidth(const VirtualQStackedWidget* self) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::hasHeightForWidth();
-
+	return self->QStackedWidget::hasHeightForWidth();
 }
 
-QPaintEngine* QStackedWidget_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QStackedWidget_virtualbase_paintEngine(const VirtualQStackedWidget* self) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::paintEngine();
-
+	return self->QStackedWidget::paintEngine();
 }
 
-void QStackedWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QStackedWidget_virtualbase_mousePressEvent(VirtualQStackedWidget* self, QMouseEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::mousePressEvent(event);
-
+	self->QStackedWidget::mousePressEvent(event);
 }
 
-void QStackedWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QStackedWidget_virtualbase_mouseReleaseEvent(VirtualQStackedWidget* self, QMouseEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::mouseReleaseEvent(event);
-
+	self->QStackedWidget::mouseReleaseEvent(event);
 }
 
-void QStackedWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QStackedWidget_virtualbase_mouseDoubleClickEvent(VirtualQStackedWidget* self, QMouseEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::mouseDoubleClickEvent(event);
-
+	self->QStackedWidget::mouseDoubleClickEvent(event);
 }
 
-void QStackedWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QStackedWidget_virtualbase_mouseMoveEvent(VirtualQStackedWidget* self, QMouseEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::mouseMoveEvent(event);
-
+	self->QStackedWidget::mouseMoveEvent(event);
 }
 
-void QStackedWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QStackedWidget_virtualbase_wheelEvent(VirtualQStackedWidget* self, QWheelEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::wheelEvent(event);
-
+	self->QStackedWidget::wheelEvent(event);
 }
 
-void QStackedWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QStackedWidget_virtualbase_keyPressEvent(VirtualQStackedWidget* self, QKeyEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::keyPressEvent(event);
-
+	self->QStackedWidget::keyPressEvent(event);
 }
 
-void QStackedWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QStackedWidget_virtualbase_keyReleaseEvent(VirtualQStackedWidget* self, QKeyEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::keyReleaseEvent(event);
-
+	self->QStackedWidget::keyReleaseEvent(event);
 }
 
-void QStackedWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QStackedWidget_virtualbase_focusInEvent(VirtualQStackedWidget* self, QFocusEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::focusInEvent(event);
-
+	self->QStackedWidget::focusInEvent(event);
 }
 
-void QStackedWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QStackedWidget_virtualbase_focusOutEvent(VirtualQStackedWidget* self, QFocusEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::focusOutEvent(event);
-
+	self->QStackedWidget::focusOutEvent(event);
 }
 
-void QStackedWidget_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QStackedWidget_virtualbase_enterEvent(VirtualQStackedWidget* self, QEnterEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::enterEvent(event);
-
+	self->QStackedWidget::enterEvent(event);
 }
 
-void QStackedWidget_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QStackedWidget_virtualbase_leaveEvent(VirtualQStackedWidget* self, QEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::leaveEvent(event);
-
+	self->QStackedWidget::leaveEvent(event);
 }
 
-void QStackedWidget_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QStackedWidget_virtualbase_moveEvent(VirtualQStackedWidget* self, QMoveEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::moveEvent(event);
-
+	self->QStackedWidget::moveEvent(event);
 }
 
-void QStackedWidget_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QStackedWidget_virtualbase_resizeEvent(VirtualQStackedWidget* self, QResizeEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::resizeEvent(event);
-
+	self->QStackedWidget::resizeEvent(event);
 }
 
-void QStackedWidget_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QStackedWidget_virtualbase_closeEvent(VirtualQStackedWidget* self, QCloseEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::closeEvent(event);
-
+	self->QStackedWidget::closeEvent(event);
 }
 
-void QStackedWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QStackedWidget_virtualbase_contextMenuEvent(VirtualQStackedWidget* self, QContextMenuEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::contextMenuEvent(event);
-
+	self->QStackedWidget::contextMenuEvent(event);
 }
 
-void QStackedWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QStackedWidget_virtualbase_tabletEvent(VirtualQStackedWidget* self, QTabletEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::tabletEvent(event);
-
+	self->QStackedWidget::tabletEvent(event);
 }
 
-void QStackedWidget_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QStackedWidget_virtualbase_actionEvent(VirtualQStackedWidget* self, QActionEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::actionEvent(event);
-
+	self->QStackedWidget::actionEvent(event);
 }
 
-void QStackedWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QStackedWidget_virtualbase_dragEnterEvent(VirtualQStackedWidget* self, QDragEnterEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::dragEnterEvent(event);
-
+	self->QStackedWidget::dragEnterEvent(event);
 }
 
-void QStackedWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QStackedWidget_virtualbase_dragMoveEvent(VirtualQStackedWidget* self, QDragMoveEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::dragMoveEvent(event);
-
+	self->QStackedWidget::dragMoveEvent(event);
 }
 
-void QStackedWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QStackedWidget_virtualbase_dragLeaveEvent(VirtualQStackedWidget* self, QDragLeaveEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::dragLeaveEvent(event);
-
+	self->QStackedWidget::dragLeaveEvent(event);
 }
 
-void QStackedWidget_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QStackedWidget_virtualbase_dropEvent(VirtualQStackedWidget* self, QDropEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::dropEvent(event);
-
+	self->QStackedWidget::dropEvent(event);
 }
 
-void QStackedWidget_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QStackedWidget_virtualbase_showEvent(VirtualQStackedWidget* self, QShowEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::showEvent(event);
-
+	self->QStackedWidget::showEvent(event);
 }
 
-void QStackedWidget_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QStackedWidget_virtualbase_hideEvent(VirtualQStackedWidget* self, QHideEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::hideEvent(event);
-
+	self->QStackedWidget::hideEvent(event);
 }
 
-bool QStackedWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QStackedWidget_virtualbase_nativeEvent(VirtualQStackedWidget* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QStackedWidget::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QStackedWidget_virtualbase_metric(const void* self, int param1) {
+int QStackedWidget_virtualbase_metric(const VirtualQStackedWidget* self, int param1) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::metric(static_cast<VirtualQStackedWidget::PaintDeviceMetric>(param1));
-
+	return self->QStackedWidget::metric(static_cast<VirtualQStackedWidget::PaintDeviceMetric>(param1));
 }
 
-void QStackedWidget_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QStackedWidget_virtualbase_initPainter(const VirtualQStackedWidget* self, QPainter* painter) {
 
-	( (const VirtualQStackedWidget*)(self) )->QStackedWidget::initPainter(painter);
-
+	self->QStackedWidget::initPainter(painter);
 }
 
-QPaintDevice* QStackedWidget_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QStackedWidget_virtualbase_redirected(const VirtualQStackedWidget* self, QPoint* offset) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::redirected(offset);
-
+	return self->QStackedWidget::redirected(offset);
 }
 
-QPainter* QStackedWidget_virtualbase_sharedPainter(const void* self) {
+QPainter* QStackedWidget_virtualbase_sharedPainter(const VirtualQStackedWidget* self) {
 
-	return ( (const VirtualQStackedWidget*)(self) )->QStackedWidget::sharedPainter();
-
+	return self->QStackedWidget::sharedPainter();
 }
 
-void QStackedWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QStackedWidget_virtualbase_inputMethodEvent(VirtualQStackedWidget* self, QInputMethodEvent* param1) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::inputMethodEvent(param1);
-
+	self->QStackedWidget::inputMethodEvent(param1);
 }
 
-QVariant* QStackedWidget_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QStackedWidget_virtualbase_inputMethodQuery(const VirtualQStackedWidget* self, int param1) {
 
-	return new QVariant(( (const VirtualQStackedWidget*)(self) )->QStackedWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QStackedWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QStackedWidget_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QStackedWidget_virtualbase_focusNextPrevChild(VirtualQStackedWidget* self, bool next) {
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::focusNextPrevChild(next);
-
+	return self->QStackedWidget::focusNextPrevChild(next);
 }
 
-bool QStackedWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QStackedWidget_virtualbase_eventFilter(VirtualQStackedWidget* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQStackedWidget*)(self) )->QStackedWidget::eventFilter(watched, event);
-
+	return self->QStackedWidget::eventFilter(watched, event);
 }
 
-void QStackedWidget_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QStackedWidget_virtualbase_timerEvent(VirtualQStackedWidget* self, QTimerEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::timerEvent(event);
-
+	self->QStackedWidget::timerEvent(event);
 }
 
-void QStackedWidget_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QStackedWidget_virtualbase_childEvent(VirtualQStackedWidget* self, QChildEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::childEvent(event);
-
+	self->QStackedWidget::childEvent(event);
 }
 
-void QStackedWidget_virtualbase_customEvent(void* self, QEvent* event) {
+void QStackedWidget_virtualbase_customEvent(VirtualQStackedWidget* self, QEvent* event) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::customEvent(event);
-
+	self->QStackedWidget::customEvent(event);
 }
 
-void QStackedWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QStackedWidget_virtualbase_connectNotify(VirtualQStackedWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::connectNotify(*signal);
-
+	self->QStackedWidget::connectNotify(*signal);
 }
 
-void QStackedWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QStackedWidget_virtualbase_disconnectNotify(VirtualQStackedWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQStackedWidget*)(self) )->QStackedWidget::disconnectNotify(*signal);
-
+	self->QStackedWidget::disconnectNotify(*signal);
 }
 
 const QMetaObject* QStackedWidget_staticMetaObject() { return &QStackedWidget::staticMetaObject; }
-void QStackedWidget_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	self_cast->drawFrame(param1);
 
+const QStackedWidget_VTable* QStackedWidget_vtbl(const VirtualQStackedWidget* self) { return self->vtbl; }
+void* QStackedWidget_vdata(const VirtualQStackedWidget* self) { return self->vdata; }
+void QStackedWidget_setVdata(VirtualQStackedWidget* self, void* vdata) { self->vdata = vdata; }
+
+void QStackedWidget_protectedbase_drawFrame(VirtualQStackedWidget* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QStackedWidget_protectedbase_updateMicroFocus(void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QStackedWidget_protectedbase_updateMicroFocus(VirtualQStackedWidget* self) {
+	self->updateMicroFocus();
 }
 
-void QStackedWidget_protectedbase_create(void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	self_cast->create();
-
+void QStackedWidget_protectedbase_create(VirtualQStackedWidget* self) {
+	self->create();
 }
 
-void QStackedWidget_protectedbase_destroy(void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	self_cast->destroy();
-
+void QStackedWidget_protectedbase_destroy(VirtualQStackedWidget* self) {
+	self->destroy();
 }
 
-bool QStackedWidget_protectedbase_focusNextChild(void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QStackedWidget_protectedbase_focusNextChild(VirtualQStackedWidget* self) {
+	return self->focusNextChild();
 }
 
-bool QStackedWidget_protectedbase_focusPreviousChild(void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QStackedWidget_protectedbase_focusPreviousChild(VirtualQStackedWidget* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QStackedWidget_protectedbase_sender(const void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QStackedWidget_protectedbase_sender(const VirtualQStackedWidget* self) {
+	return self->sender();
 }
 
-int QStackedWidget_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QStackedWidget_protectedbase_senderSignalIndex(const VirtualQStackedWidget* self) {
+	return self->senderSignalIndex();
 }
 
-int QStackedWidget_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QStackedWidget_protectedbase_receivers(const VirtualQStackedWidget* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QStackedWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQStackedWidget* self_cast = static_cast<VirtualQStackedWidget*>( (QStackedWidget*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QStackedWidget_protectedbase_isSignalConnected(const VirtualQStackedWidget* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QStackedWidget_delete(QStackedWidget* self) {

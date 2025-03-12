@@ -49,10 +49,10 @@ proc fcQWaitCondition_wait(self: pointer, lockedMutex: pointer): bool {.importc:
 proc fcQWaitCondition_wait2(self: pointer, lockedMutex: pointer, time: culong): bool {.importc: "QWaitCondition_wait2".}
 proc fcQWaitCondition_waitWithLockedReadWriteLock(self: pointer, lockedReadWriteLock: pointer): bool {.importc: "QWaitCondition_waitWithLockedReadWriteLock".}
 proc fcQWaitCondition_wait3(self: pointer, lockedReadWriteLock: pointer, time: culong): bool {.importc: "QWaitCondition_wait3".}
-proc fcQWaitCondition_wakeOne(self: pointer, ): void {.importc: "QWaitCondition_wakeOne".}
-proc fcQWaitCondition_wakeAll(self: pointer, ): void {.importc: "QWaitCondition_wakeAll".}
-proc fcQWaitCondition_notifyOne(self: pointer, ): void {.importc: "QWaitCondition_notifyOne".}
-proc fcQWaitCondition_notifyAll(self: pointer, ): void {.importc: "QWaitCondition_notifyAll".}
+proc fcQWaitCondition_wakeOne(self: pointer): void {.importc: "QWaitCondition_wakeOne".}
+proc fcQWaitCondition_wakeAll(self: pointer): void {.importc: "QWaitCondition_wakeAll".}
+proc fcQWaitCondition_notifyOne(self: pointer): void {.importc: "QWaitCondition_notifyOne".}
+proc fcQWaitCondition_notifyAll(self: pointer): void {.importc: "QWaitCondition_notifyAll".}
 proc fcQWaitCondition_wait22(self: pointer, lockedMutex: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait22".}
 proc fcQWaitCondition_wait23(self: pointer, lockedReadWriteLock: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait23".}
 proc fcQWaitCondition_new(): ptr cQWaitCondition {.importc: "QWaitCondition_new".}
@@ -69,16 +69,16 @@ proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedReadWriteLock: g
 proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedReadWriteLock: gen_qreadwritelock_types.QReadWriteLock, time: culong): bool =
   fcQWaitCondition_wait3(self.h, lockedReadWriteLock.h, time)
 
-proc wakeOne*(self: gen_qwaitcondition_types.QWaitCondition, ): void =
+proc wakeOne*(self: gen_qwaitcondition_types.QWaitCondition): void =
   fcQWaitCondition_wakeOne(self.h)
 
-proc wakeAll*(self: gen_qwaitcondition_types.QWaitCondition, ): void =
+proc wakeAll*(self: gen_qwaitcondition_types.QWaitCondition): void =
   fcQWaitCondition_wakeAll(self.h)
 
-proc notifyOne*(self: gen_qwaitcondition_types.QWaitCondition, ): void =
+proc notifyOne*(self: gen_qwaitcondition_types.QWaitCondition): void =
   fcQWaitCondition_notifyOne(self.h)
 
-proc notifyAll*(self: gen_qwaitcondition_types.QWaitCondition, ): void =
+proc notifyAll*(self: gen_qwaitcondition_types.QWaitCondition): void =
   fcQWaitCondition_notifyAll(self.h)
 
 proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedMutex: gen_qmutex_types.QMutex, deadline: gen_qdeadlinetimer_types.QDeadlineTimer): bool =

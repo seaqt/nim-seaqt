@@ -38,20 +38,27 @@ typedef struct QPoint QPoint;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QDrag_VTable {
-	void (*destructor)(struct QDrag_VTable* vtbl, QDrag* self);
-	QMetaObject* (*metaObject)(struct QDrag_VTable* vtbl, const QDrag* self);
-	void* (*metacast)(struct QDrag_VTable* vtbl, QDrag* self, const char* param1);
-	int (*metacall)(struct QDrag_VTable* vtbl, QDrag* self, int param1, int param2, void** param3);
-	bool (*event)(struct QDrag_VTable* vtbl, QDrag* self, QEvent* event);
-	bool (*eventFilter)(struct QDrag_VTable* vtbl, QDrag* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QDrag_VTable* vtbl, QDrag* self, QTimerEvent* event);
-	void (*childEvent)(struct QDrag_VTable* vtbl, QDrag* self, QChildEvent* event);
-	void (*customEvent)(struct QDrag_VTable* vtbl, QDrag* self, QEvent* event);
-	void (*connectNotify)(struct QDrag_VTable* vtbl, QDrag* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QDrag_VTable* vtbl, QDrag* self, QMetaMethod* signal);
-};
-QDrag* QDrag_new(struct QDrag_VTable* vtbl, QObject* dragSource);
+typedef struct VirtualQDrag VirtualQDrag;
+typedef struct QDrag_VTable{
+	void (*destructor)(VirtualQDrag* self);
+	QMetaObject* (*metaObject)(const VirtualQDrag* self);
+	void* (*metacast)(VirtualQDrag* self, const char* param1);
+	int (*metacall)(VirtualQDrag* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQDrag* self, QEvent* event);
+	bool (*eventFilter)(VirtualQDrag* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQDrag* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQDrag* self, QChildEvent* event);
+	void (*customEvent)(VirtualQDrag* self, QEvent* event);
+	void (*connectNotify)(VirtualQDrag* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQDrag* self, QMetaMethod* signal);
+}QDrag_VTable;
+
+const QDrag_VTable* QDrag_vtbl(const VirtualQDrag* self);
+void* QDrag_vdata(const VirtualQDrag* self);
+void QDrag_setVdata(VirtualQDrag* self, void* vdata);
+
+VirtualQDrag* QDrag_new(const QDrag_VTable* vtbl, void* vdata, QObject* dragSource);
+
 void QDrag_virtbase(QDrag* src, QObject** outptr_QObject);
 QMetaObject* QDrag_metaObject(const QDrag* self);
 void* QDrag_metacast(QDrag* self, const char* param1);
@@ -73,26 +80,29 @@ int QDrag_supportedActions(const QDrag* self);
 int QDrag_defaultAction(const QDrag* self);
 void QDrag_cancel();
 void QDrag_actionChanged(QDrag* self, int action);
-void QDrag_connect_actionChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QDrag_connect_actionChanged(VirtualQDrag* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDrag_targetChanged(QDrag* self, QObject* newTarget);
-void QDrag_connect_targetChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t));
+void QDrag_connect_targetChanged(VirtualQDrag* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t));
 struct miqt_string QDrag_tr2(const char* s, const char* c);
 struct miqt_string QDrag_tr3(const char* s, const char* c, int n);
 int QDrag_exec1(QDrag* self, int supportedActions);
-QMetaObject* QDrag_virtualbase_metaObject(const void* self);
-void* QDrag_virtualbase_metacast(void* self, const char* param1);
-int QDrag_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QDrag_virtualbase_event(void* self, QEvent* event);
-bool QDrag_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QDrag_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QDrag_virtualbase_childEvent(void* self, QChildEvent* event);
-void QDrag_virtualbase_customEvent(void* self, QEvent* event);
-void QDrag_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QDrag_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QDrag_protectedbase_sender(const void* self);
-int QDrag_protectedbase_senderSignalIndex(const void* self);
-int QDrag_protectedbase_receivers(const void* self, const char* signal);
-bool QDrag_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QDrag_virtualbase_metaObject(const VirtualQDrag* self);
+void* QDrag_virtualbase_metacast(VirtualQDrag* self, const char* param1);
+int QDrag_virtualbase_metacall(VirtualQDrag* self, int param1, int param2, void** param3);
+bool QDrag_virtualbase_event(VirtualQDrag* self, QEvent* event);
+bool QDrag_virtualbase_eventFilter(VirtualQDrag* self, QObject* watched, QEvent* event);
+void QDrag_virtualbase_timerEvent(VirtualQDrag* self, QTimerEvent* event);
+void QDrag_virtualbase_childEvent(VirtualQDrag* self, QChildEvent* event);
+void QDrag_virtualbase_customEvent(VirtualQDrag* self, QEvent* event);
+void QDrag_virtualbase_connectNotify(VirtualQDrag* self, QMetaMethod* signal);
+void QDrag_virtualbase_disconnectNotify(VirtualQDrag* self, QMetaMethod* signal);
+
+QObject* QDrag_protectedbase_sender(const VirtualQDrag* self);
+int QDrag_protectedbase_senderSignalIndex(const VirtualQDrag* self);
+int QDrag_protectedbase_receivers(const VirtualQDrag* self, const char* signal);
+bool QDrag_protectedbase_isSignalConnected(const VirtualQDrag* self, QMetaMethod* signal);
+
 const QMetaObject* QDrag_staticMetaObject();
 void QDrag_delete(QDrag* self);
 

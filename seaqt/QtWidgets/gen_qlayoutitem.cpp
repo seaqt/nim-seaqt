@@ -9,80 +9,70 @@
 #include <QWidgetItemV2>
 #include <qlayoutitem.h>
 #include "gen_qlayoutitem.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQLayoutItem final : public QLayoutItem {
-	struct QLayoutItem_VTable* vtbl;
+	const QLayoutItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QLayoutItem_VTable* QLayoutItem_vtbl(const VirtualQLayoutItem* self);
+	friend void* QLayoutItem_vdata(const VirtualQLayoutItem* self);
+	friend void QLayoutItem_setVdata(VirtualQLayoutItem* self, void* vdata);
 
-	VirtualQLayoutItem(struct QLayoutItem_VTable* vtbl): QLayoutItem(), vtbl(vtbl) {};
-	VirtualQLayoutItem(struct QLayoutItem_VTable* vtbl, const QLayoutItem& param1): QLayoutItem(param1), vtbl(vtbl) {};
-	VirtualQLayoutItem(struct QLayoutItem_VTable* vtbl, Qt::Alignment alignment): QLayoutItem(alignment), vtbl(vtbl) {};
+	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, void* vdata): QLayoutItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, void* vdata, const QLayoutItem& param1): QLayoutItem(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLayoutItem(const QLayoutItem_VTable* vtbl, void* vdata, Qt::Alignment alignment): QLayoutItem(alignment), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQLayoutItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQLayoutItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
 		if (vtbl->minimumSize == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
 		if (vtbl->maximumSize == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->maximumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
 		if (vtbl->expandingDirections == 0) {
 			return Qt::Orientations(); // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->expandingDirections(vtbl, this);
+		int callback_return_value = vtbl->expandingDirections(this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& geometry) override {
 		if (vtbl->setGeometry == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -92,51 +82,47 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
 			return QRect(); // Pure virtual, there is no base we can call
 		}
 
 
-		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		QRect* callback_return_value = vtbl->geometry(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QLayoutItem::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLayoutItem_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QLayoutItem_virtualbase_hasHeightForWidth(const VirtualQLayoutItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QLayoutItem::heightForWidth(param1);
@@ -144,14 +130,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayoutItem_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QLayoutItem_virtualbase_heightForWidth(const VirtualQLayoutItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
 		if (vtbl->minimumHeightForWidth == 0) {
 			return QLayoutItem::minimumHeightForWidth(param1);
@@ -159,14 +144,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayoutItem_virtualbase_minimumHeightForWidth(const void* self, int param1);
+	friend int QLayoutItem_virtualbase_minimumHeightForWidth(const VirtualQLayoutItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QLayoutItem::invalidate();
@@ -174,80 +158,76 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QLayoutItem_virtualbase_invalidate(void* self);
+	friend void QLayoutItem_virtualbase_invalidate(VirtualQLayoutItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
 		if (vtbl->widget == 0) {
 			return QLayoutItem::widget();
 		}
 
 
-		QWidget* callback_return_value = vtbl->widget(vtbl, this);
+		QWidget* callback_return_value = vtbl->widget(this);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QLayoutItem_virtualbase_widget(const void* self);
+	friend QWidget* QLayoutItem_virtualbase_widget(const VirtualQLayoutItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
 		if (vtbl->layout == 0) {
 			return QLayoutItem::layout();
 		}
 
 
-		QLayout* callback_return_value = vtbl->layout(vtbl, this);
+		QLayout* callback_return_value = vtbl->layout(this);
 
 		return callback_return_value;
 	}
 
-	friend QLayout* QLayoutItem_virtualbase_layout(void* self);
+	friend QLayout* QLayoutItem_virtualbase_layout(VirtualQLayoutItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
 		if (vtbl->spacerItem == 0) {
 			return QLayoutItem::spacerItem();
 		}
 
 
-		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
+		QSpacerItem* callback_return_value = vtbl->spacerItem(this);
 
 		return callback_return_value;
 	}
 
-	friend QSpacerItem* QLayoutItem_virtualbase_spacerItem(void* self);
+	friend QSpacerItem* QLayoutItem_virtualbase_spacerItem(VirtualQLayoutItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
 		if (vtbl->controlTypes == 0) {
 			return QLayoutItem::controlTypes();
 		}
 
 
-		int callback_return_value = vtbl->controlTypes(vtbl, this);
+		int callback_return_value = vtbl->controlTypes(this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
-	friend int QLayoutItem_virtualbase_controlTypes(const void* self);
+	friend int QLayoutItem_virtualbase_controlTypes(const VirtualQLayoutItem* self);
 
 };
 
-QLayoutItem* QLayoutItem_new(struct QLayoutItem_VTable* vtbl) {
-	return new VirtualQLayoutItem(vtbl);
+VirtualQLayoutItem* QLayoutItem_new(const QLayoutItem_VTable* vtbl, void* vdata) {
+	return new VirtualQLayoutItem(vtbl, vdata);
 }
 
-QLayoutItem* QLayoutItem_new2(struct QLayoutItem_VTable* vtbl, QLayoutItem* param1) {
-	return new VirtualQLayoutItem(vtbl, *param1);
+VirtualQLayoutItem* QLayoutItem_new2(const QLayoutItem_VTable* vtbl, void* vdata, QLayoutItem* param1) {
+	return new VirtualQLayoutItem(vtbl, vdata, *param1);
 }
 
-QLayoutItem* QLayoutItem_new3(struct QLayoutItem_VTable* vtbl, int alignment) {
-	return new VirtualQLayoutItem(vtbl, static_cast<Qt::Alignment>(alignment));
+VirtualQLayoutItem* QLayoutItem_new3(const QLayoutItem_VTable* vtbl, void* vdata, int alignment) {
+	return new VirtualQLayoutItem(vtbl, vdata, static_cast<Qt::Alignment>(alignment));
 }
 
 QSize* QLayoutItem_sizeHint(const QLayoutItem* self) {
@@ -321,147 +301,141 @@ int QLayoutItem_controlTypes(const QLayoutItem* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QLayoutItem_virtualbase_hasHeightForWidth(const void* self) {
+bool QLayoutItem_virtualbase_hasHeightForWidth(const VirtualQLayoutItem* self) {
 
-	return ( (const VirtualQLayoutItem*)(self) )->QLayoutItem::hasHeightForWidth();
-
+	return self->QLayoutItem::hasHeightForWidth();
 }
 
-int QLayoutItem_virtualbase_heightForWidth(const void* self, int param1) {
+int QLayoutItem_virtualbase_heightForWidth(const VirtualQLayoutItem* self, int param1) {
 
-	return ( (const VirtualQLayoutItem*)(self) )->QLayoutItem::heightForWidth(static_cast<int>(param1));
-
+	return self->QLayoutItem::heightForWidth(static_cast<int>(param1));
 }
 
-int QLayoutItem_virtualbase_minimumHeightForWidth(const void* self, int param1) {
+int QLayoutItem_virtualbase_minimumHeightForWidth(const VirtualQLayoutItem* self, int param1) {
 
-	return ( (const VirtualQLayoutItem*)(self) )->QLayoutItem::minimumHeightForWidth(static_cast<int>(param1));
-
+	return self->QLayoutItem::minimumHeightForWidth(static_cast<int>(param1));
 }
 
-void QLayoutItem_virtualbase_invalidate(void* self) {
+void QLayoutItem_virtualbase_invalidate(VirtualQLayoutItem* self) {
 
-	( (VirtualQLayoutItem*)(self) )->QLayoutItem::invalidate();
-
+	self->QLayoutItem::invalidate();
 }
 
-QWidget* QLayoutItem_virtualbase_widget(const void* self) {
+QWidget* QLayoutItem_virtualbase_widget(const VirtualQLayoutItem* self) {
 
-	return ( (const VirtualQLayoutItem*)(self) )->QLayoutItem::widget();
-
+	return self->QLayoutItem::widget();
 }
 
-QLayout* QLayoutItem_virtualbase_layout(void* self) {
+QLayout* QLayoutItem_virtualbase_layout(VirtualQLayoutItem* self) {
 
-	return ( (VirtualQLayoutItem*)(self) )->QLayoutItem::layout();
-
+	return self->QLayoutItem::layout();
 }
 
-QSpacerItem* QLayoutItem_virtualbase_spacerItem(void* self) {
+QSpacerItem* QLayoutItem_virtualbase_spacerItem(VirtualQLayoutItem* self) {
 
-	return ( (VirtualQLayoutItem*)(self) )->QLayoutItem::spacerItem();
-
+	return self->QLayoutItem::spacerItem();
 }
 
-int QLayoutItem_virtualbase_controlTypes(const void* self) {
+int QLayoutItem_virtualbase_controlTypes(const VirtualQLayoutItem* self) {
 
-	QSizePolicy::ControlTypes _ret = ( (const VirtualQLayoutItem*)(self) )->QLayoutItem::controlTypes();
+	QSizePolicy::ControlTypes _ret = self->QLayoutItem::controlTypes();
 	return static_cast<int>(_ret);
-
 }
+
+const QLayoutItem_VTable* QLayoutItem_vtbl(const VirtualQLayoutItem* self) { return self->vtbl; }
+void* QLayoutItem_vdata(const VirtualQLayoutItem* self) { return self->vdata; }
+void QLayoutItem_setVdata(VirtualQLayoutItem* self, void* vdata) { self->vdata = vdata; }
 
 void QLayoutItem_delete(QLayoutItem* self) {
 	delete self;
 }
 
 class VirtualQSpacerItem final : public QSpacerItem {
-	struct QSpacerItem_VTable* vtbl;
+	const QSpacerItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSpacerItem_VTable* QSpacerItem_vtbl(const VirtualQSpacerItem* self);
+	friend void* QSpacerItem_vdata(const VirtualQSpacerItem* self);
+	friend void QSpacerItem_setVdata(VirtualQSpacerItem* self, void* vdata);
 
-	VirtualQSpacerItem(struct QSpacerItem_VTable* vtbl, int w, int h): QSpacerItem(w, h), vtbl(vtbl) {};
-	VirtualQSpacerItem(struct QSpacerItem_VTable* vtbl, const QSpacerItem& param1): QSpacerItem(param1), vtbl(vtbl) {};
-	VirtualQSpacerItem(struct QSpacerItem_VTable* vtbl, int w, int h, QSizePolicy::Policy hData): QSpacerItem(w, h, hData), vtbl(vtbl) {};
-	VirtualQSpacerItem(struct QSpacerItem_VTable* vtbl, int w, int h, QSizePolicy::Policy hData, QSizePolicy::Policy vData): QSpacerItem(w, h, hData, vData), vtbl(vtbl) {};
+	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h): QSpacerItem(w, h), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, void* vdata, const QSpacerItem& param1): QSpacerItem(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h, QSizePolicy::Policy hData): QSpacerItem(w, h, hData), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSpacerItem(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h, QSizePolicy::Policy hData, QSizePolicy::Policy vData): QSpacerItem(w, h, hData, vData), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSpacerItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSpacerItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QSpacerItem::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QSpacerItem_virtualbase_sizeHint(const void* self);
+	friend QSize* QSpacerItem_virtualbase_sizeHint(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
 		if (vtbl->minimumSize == 0) {
 			return QSpacerItem::minimumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QSpacerItem_virtualbase_minimumSize(const void* self);
+	friend QSize* QSpacerItem_virtualbase_minimumSize(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
 		if (vtbl->maximumSize == 0) {
 			return QSpacerItem::maximumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->maximumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QSpacerItem_virtualbase_maximumSize(const void* self);
+	friend QSize* QSpacerItem_virtualbase_maximumSize(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
 		if (vtbl->expandingDirections == 0) {
 			return QSpacerItem::expandingDirections();
 		}
 
 
-		int callback_return_value = vtbl->expandingDirections(vtbl, this);
+		int callback_return_value = vtbl->expandingDirections(this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
-	friend int QSpacerItem_virtualbase_expandingDirections(const void* self);
+	friend int QSpacerItem_virtualbase_expandingDirections(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return QSpacerItem::isEmpty();
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSpacerItem_virtualbase_isEmpty(const void* self);
+	friend bool QSpacerItem_virtualbase_isEmpty(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& geometry) override {
 		if (vtbl->setGeometry == 0) {
 			QSpacerItem::setGeometry(geometry);
@@ -472,57 +446,53 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QSpacerItem_virtualbase_setGeometry(void* self, QRect* geometry);
+	friend void QSpacerItem_virtualbase_setGeometry(VirtualQSpacerItem* self, QRect* geometry);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
 			return QSpacerItem::geometry();
 		}
 
 
-		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		QRect* callback_return_value = vtbl->geometry(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QSpacerItem_virtualbase_geometry(const void* self);
+	friend QRect* QSpacerItem_virtualbase_geometry(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
 		if (vtbl->spacerItem == 0) {
 			return QSpacerItem::spacerItem();
 		}
 
 
-		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
+		QSpacerItem* callback_return_value = vtbl->spacerItem(this);
 
 		return callback_return_value;
 	}
 
-	friend QSpacerItem* QSpacerItem_virtualbase_spacerItem(void* self);
+	friend QSpacerItem* QSpacerItem_virtualbase_spacerItem(VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QSpacerItem::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSpacerItem_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QSpacerItem_virtualbase_hasHeightForWidth(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QSpacerItem::heightForWidth(param1);
@@ -530,14 +500,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSpacerItem_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QSpacerItem_virtualbase_heightForWidth(const VirtualQSpacerItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
 		if (vtbl->minimumHeightForWidth == 0) {
 			return QSpacerItem::minimumHeightForWidth(param1);
@@ -545,14 +514,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSpacerItem_virtualbase_minimumHeightForWidth(const void* self, int param1);
+	friend int QSpacerItem_virtualbase_minimumHeightForWidth(const VirtualQSpacerItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QSpacerItem::invalidate();
@@ -560,70 +528,67 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QSpacerItem_virtualbase_invalidate(void* self);
+	friend void QSpacerItem_virtualbase_invalidate(VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
 		if (vtbl->widget == 0) {
 			return QSpacerItem::widget();
 		}
 
 
-		QWidget* callback_return_value = vtbl->widget(vtbl, this);
+		QWidget* callback_return_value = vtbl->widget(this);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QSpacerItem_virtualbase_widget(const void* self);
+	friend QWidget* QSpacerItem_virtualbase_widget(const VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
 		if (vtbl->layout == 0) {
 			return QSpacerItem::layout();
 		}
 
 
-		QLayout* callback_return_value = vtbl->layout(vtbl, this);
+		QLayout* callback_return_value = vtbl->layout(this);
 
 		return callback_return_value;
 	}
 
-	friend QLayout* QSpacerItem_virtualbase_layout(void* self);
+	friend QLayout* QSpacerItem_virtualbase_layout(VirtualQSpacerItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
 		if (vtbl->controlTypes == 0) {
 			return QSpacerItem::controlTypes();
 		}
 
 
-		int callback_return_value = vtbl->controlTypes(vtbl, this);
+		int callback_return_value = vtbl->controlTypes(this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
-	friend int QSpacerItem_virtualbase_controlTypes(const void* self);
+	friend int QSpacerItem_virtualbase_controlTypes(const VirtualQSpacerItem* self);
 
 };
 
-QSpacerItem* QSpacerItem_new(struct QSpacerItem_VTable* vtbl, int w, int h) {
-	return new VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h));
+VirtualQSpacerItem* QSpacerItem_new(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h) {
+	return new VirtualQSpacerItem(vtbl, vdata, static_cast<int>(w), static_cast<int>(h));
 }
 
-QSpacerItem* QSpacerItem_new2(struct QSpacerItem_VTable* vtbl, QSpacerItem* param1) {
-	return new VirtualQSpacerItem(vtbl, *param1);
+VirtualQSpacerItem* QSpacerItem_new2(const QSpacerItem_VTable* vtbl, void* vdata, QSpacerItem* param1) {
+	return new VirtualQSpacerItem(vtbl, vdata, *param1);
 }
 
-QSpacerItem* QSpacerItem_new3(struct QSpacerItem_VTable* vtbl, int w, int h, int hData) {
-	return new VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData));
+VirtualQSpacerItem* QSpacerItem_new3(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h, int hData) {
+	return new VirtualQSpacerItem(vtbl, vdata, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData));
 }
 
-QSpacerItem* QSpacerItem_new4(struct QSpacerItem_VTable* vtbl, int w, int h, int hData, int vData) {
-	return new VirtualQSpacerItem(vtbl, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData), static_cast<QSizePolicy::Policy>(vData));
+VirtualQSpacerItem* QSpacerItem_new4(const QSpacerItem_VTable* vtbl, void* vdata, int w, int h, int hData, int vData) {
+	return new VirtualQSpacerItem(vtbl, vdata, static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData), static_cast<QSizePolicy::Policy>(vData));
 }
 
 void QSpacerItem_virtbase(QSpacerItem* src, QLayoutItem** outptr_QLayoutItem) {
@@ -679,187 +644,174 @@ void QSpacerItem_changeSize4(QSpacerItem* self, int w, int h, int hData, int vDa
 	self->changeSize(static_cast<int>(w), static_cast<int>(h), static_cast<QSizePolicy::Policy>(hData), static_cast<QSizePolicy::Policy>(vData));
 }
 
-QSize* QSpacerItem_virtualbase_sizeHint(const void* self) {
+QSize* QSpacerItem_virtualbase_sizeHint(const VirtualQSpacerItem* self) {
 
-	return new QSize(( (const VirtualQSpacerItem*)(self) )->QSpacerItem::sizeHint());
-
+	return new QSize(self->QSpacerItem::sizeHint());
 }
 
-QSize* QSpacerItem_virtualbase_minimumSize(const void* self) {
+QSize* QSpacerItem_virtualbase_minimumSize(const VirtualQSpacerItem* self) {
 
-	return new QSize(( (const VirtualQSpacerItem*)(self) )->QSpacerItem::minimumSize());
-
+	return new QSize(self->QSpacerItem::minimumSize());
 }
 
-QSize* QSpacerItem_virtualbase_maximumSize(const void* self) {
+QSize* QSpacerItem_virtualbase_maximumSize(const VirtualQSpacerItem* self) {
 
-	return new QSize(( (const VirtualQSpacerItem*)(self) )->QSpacerItem::maximumSize());
-
+	return new QSize(self->QSpacerItem::maximumSize());
 }
 
-int QSpacerItem_virtualbase_expandingDirections(const void* self) {
+int QSpacerItem_virtualbase_expandingDirections(const VirtualQSpacerItem* self) {
 
-	Qt::Orientations _ret = ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::expandingDirections();
+	Qt::Orientations _ret = self->QSpacerItem::expandingDirections();
 	return static_cast<int>(_ret);
-
 }
 
-bool QSpacerItem_virtualbase_isEmpty(const void* self) {
+bool QSpacerItem_virtualbase_isEmpty(const VirtualQSpacerItem* self) {
 
-	return ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::isEmpty();
-
+	return self->QSpacerItem::isEmpty();
 }
 
-void QSpacerItem_virtualbase_setGeometry(void* self, QRect* geometry) {
+void QSpacerItem_virtualbase_setGeometry(VirtualQSpacerItem* self, QRect* geometry) {
 
-	( (VirtualQSpacerItem*)(self) )->QSpacerItem::setGeometry(*geometry);
-
+	self->QSpacerItem::setGeometry(*geometry);
 }
 
-QRect* QSpacerItem_virtualbase_geometry(const void* self) {
+QRect* QSpacerItem_virtualbase_geometry(const VirtualQSpacerItem* self) {
 
-	return new QRect(( (const VirtualQSpacerItem*)(self) )->QSpacerItem::geometry());
-
+	return new QRect(self->QSpacerItem::geometry());
 }
 
-QSpacerItem* QSpacerItem_virtualbase_spacerItem(void* self) {
+QSpacerItem* QSpacerItem_virtualbase_spacerItem(VirtualQSpacerItem* self) {
 
-	return ( (VirtualQSpacerItem*)(self) )->QSpacerItem::spacerItem();
-
+	return self->QSpacerItem::spacerItem();
 }
 
-bool QSpacerItem_virtualbase_hasHeightForWidth(const void* self) {
+bool QSpacerItem_virtualbase_hasHeightForWidth(const VirtualQSpacerItem* self) {
 
-	return ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::hasHeightForWidth();
-
+	return self->QSpacerItem::hasHeightForWidth();
 }
 
-int QSpacerItem_virtualbase_heightForWidth(const void* self, int param1) {
+int QSpacerItem_virtualbase_heightForWidth(const VirtualQSpacerItem* self, int param1) {
 
-	return ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::heightForWidth(static_cast<int>(param1));
-
+	return self->QSpacerItem::heightForWidth(static_cast<int>(param1));
 }
 
-int QSpacerItem_virtualbase_minimumHeightForWidth(const void* self, int param1) {
+int QSpacerItem_virtualbase_minimumHeightForWidth(const VirtualQSpacerItem* self, int param1) {
 
-	return ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::minimumHeightForWidth(static_cast<int>(param1));
-
+	return self->QSpacerItem::minimumHeightForWidth(static_cast<int>(param1));
 }
 
-void QSpacerItem_virtualbase_invalidate(void* self) {
+void QSpacerItem_virtualbase_invalidate(VirtualQSpacerItem* self) {
 
-	( (VirtualQSpacerItem*)(self) )->QSpacerItem::invalidate();
-
+	self->QSpacerItem::invalidate();
 }
 
-QWidget* QSpacerItem_virtualbase_widget(const void* self) {
+QWidget* QSpacerItem_virtualbase_widget(const VirtualQSpacerItem* self) {
 
-	return ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::widget();
-
+	return self->QSpacerItem::widget();
 }
 
-QLayout* QSpacerItem_virtualbase_layout(void* self) {
+QLayout* QSpacerItem_virtualbase_layout(VirtualQSpacerItem* self) {
 
-	return ( (VirtualQSpacerItem*)(self) )->QSpacerItem::layout();
-
+	return self->QSpacerItem::layout();
 }
 
-int QSpacerItem_virtualbase_controlTypes(const void* self) {
+int QSpacerItem_virtualbase_controlTypes(const VirtualQSpacerItem* self) {
 
-	QSizePolicy::ControlTypes _ret = ( (const VirtualQSpacerItem*)(self) )->QSpacerItem::controlTypes();
+	QSizePolicy::ControlTypes _ret = self->QSpacerItem::controlTypes();
 	return static_cast<int>(_ret);
-
 }
+
+const QSpacerItem_VTable* QSpacerItem_vtbl(const VirtualQSpacerItem* self) { return self->vtbl; }
+void* QSpacerItem_vdata(const VirtualQSpacerItem* self) { return self->vdata; }
+void QSpacerItem_setVdata(VirtualQSpacerItem* self, void* vdata) { self->vdata = vdata; }
 
 void QSpacerItem_delete(QSpacerItem* self) {
 	delete self;
 }
 
 class VirtualQWidgetItem final : public QWidgetItem {
-	struct QWidgetItem_VTable* vtbl;
+	const QWidgetItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWidgetItem_VTable* QWidgetItem_vtbl(const VirtualQWidgetItem* self);
+	friend void* QWidgetItem_vdata(const VirtualQWidgetItem* self);
+	friend void QWidgetItem_setVdata(VirtualQWidgetItem* self, void* vdata);
 
-	VirtualQWidgetItem(struct QWidgetItem_VTable* vtbl, QWidget* w): QWidgetItem(w), vtbl(vtbl) {};
+	VirtualQWidgetItem(const QWidgetItem_VTable* vtbl, void* vdata, QWidget* w): QWidgetItem(w), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWidgetItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWidgetItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QWidgetItem::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItem_virtualbase_sizeHint(const void* self);
+	friend QSize* QWidgetItem_virtualbase_sizeHint(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
 		if (vtbl->minimumSize == 0) {
 			return QWidgetItem::minimumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItem_virtualbase_minimumSize(const void* self);
+	friend QSize* QWidgetItem_virtualbase_minimumSize(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
 		if (vtbl->maximumSize == 0) {
 			return QWidgetItem::maximumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->maximumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItem_virtualbase_maximumSize(const void* self);
+	friend QSize* QWidgetItem_virtualbase_maximumSize(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
 		if (vtbl->expandingDirections == 0) {
 			return QWidgetItem::expandingDirections();
 		}
 
 
-		int callback_return_value = vtbl->expandingDirections(vtbl, this);
+		int callback_return_value = vtbl->expandingDirections(this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
-	friend int QWidgetItem_virtualbase_expandingDirections(const void* self);
+	friend int QWidgetItem_virtualbase_expandingDirections(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return QWidgetItem::isEmpty();
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWidgetItem_virtualbase_isEmpty(const void* self);
+	friend bool QWidgetItem_virtualbase_isEmpty(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& geometry) override {
 		if (vtbl->setGeometry == 0) {
 			QWidgetItem::setGeometry(geometry);
@@ -870,57 +822,53 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QWidgetItem_virtualbase_setGeometry(void* self, QRect* geometry);
+	friend void QWidgetItem_virtualbase_setGeometry(VirtualQWidgetItem* self, QRect* geometry);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
 			return QWidgetItem::geometry();
 		}
 
 
-		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		QRect* callback_return_value = vtbl->geometry(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QWidgetItem_virtualbase_geometry(const void* self);
+	friend QRect* QWidgetItem_virtualbase_geometry(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
 		if (vtbl->widget == 0) {
 			return QWidgetItem::widget();
 		}
 
 
-		QWidget* callback_return_value = vtbl->widget(vtbl, this);
+		QWidget* callback_return_value = vtbl->widget(this);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QWidgetItem_virtualbase_widget(const void* self);
+	friend QWidget* QWidgetItem_virtualbase_widget(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QWidgetItem::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWidgetItem_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QWidgetItem_virtualbase_hasHeightForWidth(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QWidgetItem::heightForWidth(param1);
@@ -928,14 +876,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWidgetItem_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QWidgetItem_virtualbase_heightForWidth(const VirtualQWidgetItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
 		if (vtbl->minimumHeightForWidth == 0) {
 			return QWidgetItem::minimumHeightForWidth(param1);
@@ -943,28 +890,26 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWidgetItem_virtualbase_minimumHeightForWidth(const void* self, int param1);
+	friend int QWidgetItem_virtualbase_minimumHeightForWidth(const VirtualQWidgetItem* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
 		if (vtbl->controlTypes == 0) {
 			return QWidgetItem::controlTypes();
 		}
 
 
-		int callback_return_value = vtbl->controlTypes(vtbl, this);
+		int callback_return_value = vtbl->controlTypes(this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
-	friend int QWidgetItem_virtualbase_controlTypes(const void* self);
+	friend int QWidgetItem_virtualbase_controlTypes(const VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QWidgetItem::invalidate();
@@ -972,44 +917,42 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QWidgetItem_virtualbase_invalidate(void* self);
+	friend void QWidgetItem_virtualbase_invalidate(VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
 		if (vtbl->layout == 0) {
 			return QWidgetItem::layout();
 		}
 
 
-		QLayout* callback_return_value = vtbl->layout(vtbl, this);
+		QLayout* callback_return_value = vtbl->layout(this);
 
 		return callback_return_value;
 	}
 
-	friend QLayout* QWidgetItem_virtualbase_layout(void* self);
+	friend QLayout* QWidgetItem_virtualbase_layout(VirtualQWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
 		if (vtbl->spacerItem == 0) {
 			return QWidgetItem::spacerItem();
 		}
 
 
-		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
+		QSpacerItem* callback_return_value = vtbl->spacerItem(this);
 
 		return callback_return_value;
 	}
 
-	friend QSpacerItem* QWidgetItem_virtualbase_spacerItem(void* self);
+	friend QSpacerItem* QWidgetItem_virtualbase_spacerItem(VirtualQWidgetItem* self);
 
 };
 
-QWidgetItem* QWidgetItem_new(struct QWidgetItem_VTable* vtbl, QWidget* w) {
-	return new VirtualQWidgetItem(vtbl, w);
+VirtualQWidgetItem* QWidgetItem_new(const QWidgetItem_VTable* vtbl, void* vdata, QWidget* w) {
+	return new VirtualQWidgetItem(vtbl, vdata, w);
 }
 
 void QWidgetItem_virtbase(QWidgetItem* src, QLayoutItem** outptr_QLayoutItem) {
@@ -1066,159 +1009,148 @@ int QWidgetItem_controlTypes(const QWidgetItem* self) {
 	return static_cast<int>(_ret);
 }
 
-QSize* QWidgetItem_virtualbase_sizeHint(const void* self) {
+QSize* QWidgetItem_virtualbase_sizeHint(const VirtualQWidgetItem* self) {
 
-	return new QSize(( (const VirtualQWidgetItem*)(self) )->QWidgetItem::sizeHint());
-
+	return new QSize(self->QWidgetItem::sizeHint());
 }
 
-QSize* QWidgetItem_virtualbase_minimumSize(const void* self) {
+QSize* QWidgetItem_virtualbase_minimumSize(const VirtualQWidgetItem* self) {
 
-	return new QSize(( (const VirtualQWidgetItem*)(self) )->QWidgetItem::minimumSize());
-
+	return new QSize(self->QWidgetItem::minimumSize());
 }
 
-QSize* QWidgetItem_virtualbase_maximumSize(const void* self) {
+QSize* QWidgetItem_virtualbase_maximumSize(const VirtualQWidgetItem* self) {
 
-	return new QSize(( (const VirtualQWidgetItem*)(self) )->QWidgetItem::maximumSize());
-
+	return new QSize(self->QWidgetItem::maximumSize());
 }
 
-int QWidgetItem_virtualbase_expandingDirections(const void* self) {
+int QWidgetItem_virtualbase_expandingDirections(const VirtualQWidgetItem* self) {
 
-	Qt::Orientations _ret = ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::expandingDirections();
+	Qt::Orientations _ret = self->QWidgetItem::expandingDirections();
 	return static_cast<int>(_ret);
-
 }
 
-bool QWidgetItem_virtualbase_isEmpty(const void* self) {
+bool QWidgetItem_virtualbase_isEmpty(const VirtualQWidgetItem* self) {
 
-	return ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::isEmpty();
-
+	return self->QWidgetItem::isEmpty();
 }
 
-void QWidgetItem_virtualbase_setGeometry(void* self, QRect* geometry) {
+void QWidgetItem_virtualbase_setGeometry(VirtualQWidgetItem* self, QRect* geometry) {
 
-	( (VirtualQWidgetItem*)(self) )->QWidgetItem::setGeometry(*geometry);
-
+	self->QWidgetItem::setGeometry(*geometry);
 }
 
-QRect* QWidgetItem_virtualbase_geometry(const void* self) {
+QRect* QWidgetItem_virtualbase_geometry(const VirtualQWidgetItem* self) {
 
-	return new QRect(( (const VirtualQWidgetItem*)(self) )->QWidgetItem::geometry());
-
+	return new QRect(self->QWidgetItem::geometry());
 }
 
-QWidget* QWidgetItem_virtualbase_widget(const void* self) {
+QWidget* QWidgetItem_virtualbase_widget(const VirtualQWidgetItem* self) {
 
-	return ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::widget();
-
+	return self->QWidgetItem::widget();
 }
 
-bool QWidgetItem_virtualbase_hasHeightForWidth(const void* self) {
+bool QWidgetItem_virtualbase_hasHeightForWidth(const VirtualQWidgetItem* self) {
 
-	return ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::hasHeightForWidth();
-
+	return self->QWidgetItem::hasHeightForWidth();
 }
 
-int QWidgetItem_virtualbase_heightForWidth(const void* self, int param1) {
+int QWidgetItem_virtualbase_heightForWidth(const VirtualQWidgetItem* self, int param1) {
 
-	return ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::heightForWidth(static_cast<int>(param1));
-
+	return self->QWidgetItem::heightForWidth(static_cast<int>(param1));
 }
 
-int QWidgetItem_virtualbase_minimumHeightForWidth(const void* self, int param1) {
+int QWidgetItem_virtualbase_minimumHeightForWidth(const VirtualQWidgetItem* self, int param1) {
 
-	return ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::minimumHeightForWidth(static_cast<int>(param1));
-
+	return self->QWidgetItem::minimumHeightForWidth(static_cast<int>(param1));
 }
 
-int QWidgetItem_virtualbase_controlTypes(const void* self) {
+int QWidgetItem_virtualbase_controlTypes(const VirtualQWidgetItem* self) {
 
-	QSizePolicy::ControlTypes _ret = ( (const VirtualQWidgetItem*)(self) )->QWidgetItem::controlTypes();
+	QSizePolicy::ControlTypes _ret = self->QWidgetItem::controlTypes();
 	return static_cast<int>(_ret);
-
 }
 
-void QWidgetItem_virtualbase_invalidate(void* self) {
+void QWidgetItem_virtualbase_invalidate(VirtualQWidgetItem* self) {
 
-	( (VirtualQWidgetItem*)(self) )->QWidgetItem::invalidate();
-
+	self->QWidgetItem::invalidate();
 }
 
-QLayout* QWidgetItem_virtualbase_layout(void* self) {
+QLayout* QWidgetItem_virtualbase_layout(VirtualQWidgetItem* self) {
 
-	return ( (VirtualQWidgetItem*)(self) )->QWidgetItem::layout();
-
+	return self->QWidgetItem::layout();
 }
 
-QSpacerItem* QWidgetItem_virtualbase_spacerItem(void* self) {
+QSpacerItem* QWidgetItem_virtualbase_spacerItem(VirtualQWidgetItem* self) {
 
-	return ( (VirtualQWidgetItem*)(self) )->QWidgetItem::spacerItem();
-
+	return self->QWidgetItem::spacerItem();
 }
+
+const QWidgetItem_VTable* QWidgetItem_vtbl(const VirtualQWidgetItem* self) { return self->vtbl; }
+void* QWidgetItem_vdata(const VirtualQWidgetItem* self) { return self->vdata; }
+void QWidgetItem_setVdata(VirtualQWidgetItem* self, void* vdata) { self->vdata = vdata; }
 
 void QWidgetItem_delete(QWidgetItem* self) {
 	delete self;
 }
 
 class VirtualQWidgetItemV2 final : public QWidgetItemV2 {
-	struct QWidgetItemV2_VTable* vtbl;
+	const QWidgetItemV2_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWidgetItemV2_VTable* QWidgetItemV2_vtbl(const VirtualQWidgetItemV2* self);
+	friend void* QWidgetItemV2_vdata(const VirtualQWidgetItemV2* self);
+	friend void QWidgetItemV2_setVdata(VirtualQWidgetItemV2* self, void* vdata);
 
-	VirtualQWidgetItemV2(struct QWidgetItemV2_VTable* vtbl, QWidget* widget): QWidgetItemV2(widget), vtbl(vtbl) {};
+	VirtualQWidgetItemV2(const QWidgetItemV2_VTable* vtbl, void* vdata, QWidget* widget): QWidgetItemV2(widget), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWidgetItemV2() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWidgetItemV2() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QWidgetItemV2::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItemV2_virtualbase_sizeHint(const void* self);
+	friend QSize* QWidgetItemV2_virtualbase_sizeHint(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
 		if (vtbl->minimumSize == 0) {
 			return QWidgetItemV2::minimumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItemV2_virtualbase_minimumSize(const void* self);
+	friend QSize* QWidgetItemV2_virtualbase_minimumSize(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
 		if (vtbl->maximumSize == 0) {
 			return QWidgetItemV2::maximumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->maximumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWidgetItemV2_virtualbase_maximumSize(const void* self);
+	friend QSize* QWidgetItemV2_virtualbase_maximumSize(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int width) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QWidgetItemV2::heightForWidth(width);
@@ -1226,42 +1158,39 @@ public:
 
 		int sigval1 = width;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWidgetItemV2_virtualbase_heightForWidth(const void* self, int width);
+	friend int QWidgetItemV2_virtualbase_heightForWidth(const VirtualQWidgetItemV2* self, int width);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
 		if (vtbl->expandingDirections == 0) {
 			return QWidgetItemV2::expandingDirections();
 		}
 
 
-		int callback_return_value = vtbl->expandingDirections(vtbl, this);
+		int callback_return_value = vtbl->expandingDirections(this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
-	friend int QWidgetItemV2_virtualbase_expandingDirections(const void* self);
+	friend int QWidgetItemV2_virtualbase_expandingDirections(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return QWidgetItemV2::isEmpty();
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWidgetItemV2_virtualbase_isEmpty(const void* self);
+	friend bool QWidgetItemV2_virtualbase_isEmpty(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& geometry) override {
 		if (vtbl->setGeometry == 0) {
 			QWidgetItemV2::setGeometry(geometry);
@@ -1272,57 +1201,53 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QWidgetItemV2_virtualbase_setGeometry(void* self, QRect* geometry);
+	friend void QWidgetItemV2_virtualbase_setGeometry(VirtualQWidgetItemV2* self, QRect* geometry);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
 			return QWidgetItemV2::geometry();
 		}
 
 
-		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		QRect* callback_return_value = vtbl->geometry(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QWidgetItemV2_virtualbase_geometry(const void* self);
+	friend QRect* QWidgetItemV2_virtualbase_geometry(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
 		if (vtbl->widget == 0) {
 			return QWidgetItemV2::widget();
 		}
 
 
-		QWidget* callback_return_value = vtbl->widget(vtbl, this);
+		QWidget* callback_return_value = vtbl->widget(this);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QWidgetItemV2_virtualbase_widget(const void* self);
+	friend QWidget* QWidgetItemV2_virtualbase_widget(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QWidgetItemV2::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWidgetItemV2_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QWidgetItemV2_virtualbase_hasHeightForWidth(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
 		if (vtbl->minimumHeightForWidth == 0) {
 			return QWidgetItemV2::minimumHeightForWidth(param1);
@@ -1330,28 +1255,26 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWidgetItemV2_virtualbase_minimumHeightForWidth(const void* self, int param1);
+	friend int QWidgetItemV2_virtualbase_minimumHeightForWidth(const VirtualQWidgetItemV2* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
 		if (vtbl->controlTypes == 0) {
 			return QWidgetItemV2::controlTypes();
 		}
 
 
-		int callback_return_value = vtbl->controlTypes(vtbl, this);
+		int callback_return_value = vtbl->controlTypes(this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
-	friend int QWidgetItemV2_virtualbase_controlTypes(const void* self);
+	friend int QWidgetItemV2_virtualbase_controlTypes(const VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QWidgetItemV2::invalidate();
@@ -1359,44 +1282,42 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QWidgetItemV2_virtualbase_invalidate(void* self);
+	friend void QWidgetItemV2_virtualbase_invalidate(VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
 		if (vtbl->layout == 0) {
 			return QWidgetItemV2::layout();
 		}
 
 
-		QLayout* callback_return_value = vtbl->layout(vtbl, this);
+		QLayout* callback_return_value = vtbl->layout(this);
 
 		return callback_return_value;
 	}
 
-	friend QLayout* QWidgetItemV2_virtualbase_layout(void* self);
+	friend QLayout* QWidgetItemV2_virtualbase_layout(VirtualQWidgetItemV2* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
 		if (vtbl->spacerItem == 0) {
 			return QWidgetItemV2::spacerItem();
 		}
 
 
-		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
+		QSpacerItem* callback_return_value = vtbl->spacerItem(this);
 
 		return callback_return_value;
 	}
 
-	friend QSpacerItem* QWidgetItemV2_virtualbase_spacerItem(void* self);
+	friend QSpacerItem* QWidgetItemV2_virtualbase_spacerItem(VirtualQWidgetItemV2* self);
 
 };
 
-QWidgetItemV2* QWidgetItemV2_new(struct QWidgetItemV2_VTable* vtbl, QWidget* widget) {
-	return new VirtualQWidgetItemV2(vtbl, widget);
+VirtualQWidgetItemV2* QWidgetItemV2_new(const QWidgetItemV2_VTable* vtbl, void* vdata, QWidget* widget) {
+	return new VirtualQWidgetItemV2(vtbl, vdata, widget);
 }
 
 void QWidgetItemV2_virtbase(QWidgetItemV2* src, QWidgetItem** outptr_QWidgetItem) {
@@ -1419,97 +1340,86 @@ int QWidgetItemV2_heightForWidth(const QWidgetItemV2* self, int width) {
 	return self->heightForWidth(static_cast<int>(width));
 }
 
-QSize* QWidgetItemV2_virtualbase_sizeHint(const void* self) {
+QSize* QWidgetItemV2_virtualbase_sizeHint(const VirtualQWidgetItemV2* self) {
 
-	return new QSize(( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::sizeHint());
-
+	return new QSize(self->QWidgetItemV2::sizeHint());
 }
 
-QSize* QWidgetItemV2_virtualbase_minimumSize(const void* self) {
+QSize* QWidgetItemV2_virtualbase_minimumSize(const VirtualQWidgetItemV2* self) {
 
-	return new QSize(( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::minimumSize());
-
+	return new QSize(self->QWidgetItemV2::minimumSize());
 }
 
-QSize* QWidgetItemV2_virtualbase_maximumSize(const void* self) {
+QSize* QWidgetItemV2_virtualbase_maximumSize(const VirtualQWidgetItemV2* self) {
 
-	return new QSize(( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::maximumSize());
-
+	return new QSize(self->QWidgetItemV2::maximumSize());
 }
 
-int QWidgetItemV2_virtualbase_heightForWidth(const void* self, int width) {
+int QWidgetItemV2_virtualbase_heightForWidth(const VirtualQWidgetItemV2* self, int width) {
 
-	return ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::heightForWidth(static_cast<int>(width));
-
+	return self->QWidgetItemV2::heightForWidth(static_cast<int>(width));
 }
 
-int QWidgetItemV2_virtualbase_expandingDirections(const void* self) {
+int QWidgetItemV2_virtualbase_expandingDirections(const VirtualQWidgetItemV2* self) {
 
-	Qt::Orientations _ret = ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::expandingDirections();
+	Qt::Orientations _ret = self->QWidgetItemV2::expandingDirections();
 	return static_cast<int>(_ret);
-
 }
 
-bool QWidgetItemV2_virtualbase_isEmpty(const void* self) {
+bool QWidgetItemV2_virtualbase_isEmpty(const VirtualQWidgetItemV2* self) {
 
-	return ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::isEmpty();
-
+	return self->QWidgetItemV2::isEmpty();
 }
 
-void QWidgetItemV2_virtualbase_setGeometry(void* self, QRect* geometry) {
+void QWidgetItemV2_virtualbase_setGeometry(VirtualQWidgetItemV2* self, QRect* geometry) {
 
-	( (VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::setGeometry(*geometry);
-
+	self->QWidgetItemV2::setGeometry(*geometry);
 }
 
-QRect* QWidgetItemV2_virtualbase_geometry(const void* self) {
+QRect* QWidgetItemV2_virtualbase_geometry(const VirtualQWidgetItemV2* self) {
 
-	return new QRect(( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::geometry());
-
+	return new QRect(self->QWidgetItemV2::geometry());
 }
 
-QWidget* QWidgetItemV2_virtualbase_widget(const void* self) {
+QWidget* QWidgetItemV2_virtualbase_widget(const VirtualQWidgetItemV2* self) {
 
-	return ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::widget();
-
+	return self->QWidgetItemV2::widget();
 }
 
-bool QWidgetItemV2_virtualbase_hasHeightForWidth(const void* self) {
+bool QWidgetItemV2_virtualbase_hasHeightForWidth(const VirtualQWidgetItemV2* self) {
 
-	return ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::hasHeightForWidth();
-
+	return self->QWidgetItemV2::hasHeightForWidth();
 }
 
-int QWidgetItemV2_virtualbase_minimumHeightForWidth(const void* self, int param1) {
+int QWidgetItemV2_virtualbase_minimumHeightForWidth(const VirtualQWidgetItemV2* self, int param1) {
 
-	return ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::minimumHeightForWidth(static_cast<int>(param1));
-
+	return self->QWidgetItemV2::minimumHeightForWidth(static_cast<int>(param1));
 }
 
-int QWidgetItemV2_virtualbase_controlTypes(const void* self) {
+int QWidgetItemV2_virtualbase_controlTypes(const VirtualQWidgetItemV2* self) {
 
-	QSizePolicy::ControlTypes _ret = ( (const VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::controlTypes();
+	QSizePolicy::ControlTypes _ret = self->QWidgetItemV2::controlTypes();
 	return static_cast<int>(_ret);
-
 }
 
-void QWidgetItemV2_virtualbase_invalidate(void* self) {
+void QWidgetItemV2_virtualbase_invalidate(VirtualQWidgetItemV2* self) {
 
-	( (VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::invalidate();
-
+	self->QWidgetItemV2::invalidate();
 }
 
-QLayout* QWidgetItemV2_virtualbase_layout(void* self) {
+QLayout* QWidgetItemV2_virtualbase_layout(VirtualQWidgetItemV2* self) {
 
-	return ( (VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::layout();
-
+	return self->QWidgetItemV2::layout();
 }
 
-QSpacerItem* QWidgetItemV2_virtualbase_spacerItem(void* self) {
+QSpacerItem* QWidgetItemV2_virtualbase_spacerItem(VirtualQWidgetItemV2* self) {
 
-	return ( (VirtualQWidgetItemV2*)(self) )->QWidgetItemV2::spacerItem();
-
+	return self->QWidgetItemV2::spacerItem();
 }
+
+const QWidgetItemV2_VTable* QWidgetItemV2_vtbl(const VirtualQWidgetItemV2* self) { return self->vtbl; }
+void* QWidgetItemV2_vdata(const VirtualQWidgetItemV2* self) { return self->vdata; }
+void QWidgetItemV2_setVdata(VirtualQWidgetItemV2* self, void* vdata) { self->vdata = vdata; }
 
 void QWidgetItemV2_delete(QWidgetItemV2* self) {
 	delete self;

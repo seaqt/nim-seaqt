@@ -4,24 +4,18 @@
 #include <QSGVertexColorMaterial>
 #include <qsgvertexcolormaterial.h>
 #include "gen_qsgvertexcolormaterial.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGVertexColorMaterial final : public QSGVertexColorMaterial {
-	struct QSGVertexColorMaterial_VTable* vtbl;
+	const QSGVertexColorMaterial_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGVertexColorMaterial_VTable* QSGVertexColorMaterial_vtbl(const VirtualQSGVertexColorMaterial* self);
+	friend void* QSGVertexColorMaterial_vdata(const VirtualQSGVertexColorMaterial* self);
+	friend void QSGVertexColorMaterial_setVdata(VirtualQSGVertexColorMaterial* self, void* vdata);
 
-	VirtualQSGVertexColorMaterial(struct QSGVertexColorMaterial_VTable* vtbl): QSGVertexColorMaterial(), vtbl(vtbl) {};
+	VirtualQSGVertexColorMaterial(const QSGVertexColorMaterial_VTable* vtbl, void* vdata): QSGVertexColorMaterial(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGVertexColorMaterial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGVertexColorMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual int compare(const QSGMaterial* other) const override {
 		if (vtbl->compare == 0) {
 			return QSGVertexColorMaterial::compare(other);
@@ -29,28 +23,26 @@ public:
 
 		QSGMaterial* sigval1 = (QSGMaterial*) other;
 
-		int callback_return_value = vtbl->compare(vtbl, this, sigval1);
+		int callback_return_value = vtbl->compare(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGVertexColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+	friend int QSGVertexColorMaterial_virtualbase_compare(const VirtualQSGVertexColorMaterial* self, QSGMaterial* other);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialType* type() const override {
 		if (vtbl->type == 0) {
 			return QSGVertexColorMaterial::type();
 		}
 
 
-		QSGMaterialType* callback_return_value = vtbl->type(vtbl, this);
+		QSGMaterialType* callback_return_value = vtbl->type(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialType* QSGVertexColorMaterial_virtualbase_type(const void* self);
+	friend QSGMaterialType* QSGVertexColorMaterial_virtualbase_type(const VirtualQSGVertexColorMaterial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialShader* createShader(QSGRendererInterface::RenderMode renderMode) const override {
 		if (vtbl->createShader == 0) {
 			return QSGVertexColorMaterial::createShader(renderMode);
@@ -59,17 +51,17 @@ public:
 		QSGRendererInterface::RenderMode renderMode_ret = renderMode;
 		int sigval1 = static_cast<int>(renderMode_ret);
 
-		QSGMaterialShader* callback_return_value = vtbl->createShader(vtbl, this, sigval1);
+		QSGMaterialShader* callback_return_value = vtbl->createShader(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialShader* QSGVertexColorMaterial_virtualbase_createShader(const void* self, int renderMode);
+	friend QSGMaterialShader* QSGVertexColorMaterial_virtualbase_createShader(const VirtualQSGVertexColorMaterial* self, int renderMode);
 
 };
 
-QSGVertexColorMaterial* QSGVertexColorMaterial_new(struct QSGVertexColorMaterial_VTable* vtbl) {
-	return new VirtualQSGVertexColorMaterial(vtbl);
+VirtualQSGVertexColorMaterial* QSGVertexColorMaterial_new(const QSGVertexColorMaterial_VTable* vtbl, void* vdata) {
+	return new VirtualQSGVertexColorMaterial(vtbl, vdata);
 }
 
 void QSGVertexColorMaterial_virtbase(QSGVertexColorMaterial* src, QSGMaterial** outptr_QSGMaterial) {
@@ -80,23 +72,24 @@ int QSGVertexColorMaterial_compare(const QSGVertexColorMaterial* self, QSGMateri
 	return self->compare(other);
 }
 
-int QSGVertexColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other) {
+int QSGVertexColorMaterial_virtualbase_compare(const VirtualQSGVertexColorMaterial* self, QSGMaterial* other) {
 
-	return ( (const VirtualQSGVertexColorMaterial*)(self) )->QSGVertexColorMaterial::compare(other);
-
+	return self->QSGVertexColorMaterial::compare(other);
 }
 
-QSGMaterialType* QSGVertexColorMaterial_virtualbase_type(const void* self) {
+QSGMaterialType* QSGVertexColorMaterial_virtualbase_type(const VirtualQSGVertexColorMaterial* self) {
 
-	return ( (const VirtualQSGVertexColorMaterial*)(self) )->QSGVertexColorMaterial::type();
-
+	return self->QSGVertexColorMaterial::type();
 }
 
-QSGMaterialShader* QSGVertexColorMaterial_virtualbase_createShader(const void* self, int renderMode) {
+QSGMaterialShader* QSGVertexColorMaterial_virtualbase_createShader(const VirtualQSGVertexColorMaterial* self, int renderMode) {
 
-	return ( (const VirtualQSGVertexColorMaterial*)(self) )->QSGVertexColorMaterial::createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
-
+	return self->QSGVertexColorMaterial::createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
 }
+
+const QSGVertexColorMaterial_VTable* QSGVertexColorMaterial_vtbl(const VirtualQSGVertexColorMaterial* self) { return self->vtbl; }
+void* QSGVertexColorMaterial_vdata(const VirtualQSGVertexColorMaterial* self) { return self->vdata; }
+void QSGVertexColorMaterial_setVdata(VirtualQSGVertexColorMaterial* self, void* vdata) { self->vdata = vdata; }
 
 void QSGVertexColorMaterial_delete(QSGVertexColorMaterial* self) {
 	delete self;

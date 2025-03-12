@@ -34,39 +34,32 @@
 #include <QWheelEvent>
 #include <qquickpainteditem.h>
 #include "gen_qquickpainteditem.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQuickPaintedItem final : public QQuickPaintedItem {
-	struct QQuickPaintedItem_VTable* vtbl;
+	const QQuickPaintedItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQuickPaintedItem_VTable* QQuickPaintedItem_vtbl(const VirtualQQuickPaintedItem* self);
+	friend void* QQuickPaintedItem_vdata(const VirtualQQuickPaintedItem* self);
+	friend void QQuickPaintedItem_setVdata(VirtualQQuickPaintedItem* self, void* vdata);
 
-	VirtualQQuickPaintedItem(struct QQuickPaintedItem_VTable* vtbl): QQuickPaintedItem(), vtbl(vtbl) {};
-	VirtualQQuickPaintedItem(struct QQuickPaintedItem_VTable* vtbl, QQuickItem* parent): QQuickPaintedItem(parent), vtbl(vtbl) {};
+	VirtualQQuickPaintedItem(const QQuickPaintedItem_VTable* vtbl, void* vdata): QQuickPaintedItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickPaintedItem(const QQuickPaintedItem_VTable* vtbl, void* vdata, QQuickItem* parent): QQuickPaintedItem(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQuickPaintedItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQuickPaintedItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQuickPaintedItem::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQuickPaintedItem::qt_metacast(param1);
@@ -74,14 +67,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQuickPaintedItem_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQuickPaintedItem_virtualbase_metacast(VirtualQQuickPaintedItem* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQuickPaintedItem::qt_metacall(param1, param2, param3);
@@ -92,14 +84,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQuickPaintedItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQuickPaintedItem_virtualbase_metacall(VirtualQQuickPaintedItem* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter) override {
 		if (vtbl->paint == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -107,39 +98,36 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->paint(vtbl, this, sigval1);
+		vtbl->paint(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isTextureProvider() const override {
 		if (vtbl->isTextureProvider == 0) {
 			return QQuickPaintedItem::isTextureProvider();
 		}
 
 
-		bool callback_return_value = vtbl->isTextureProvider(vtbl, this);
+		bool callback_return_value = vtbl->isTextureProvider(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickPaintedItem_virtualbase_isTextureProvider(const void* self);
+	friend bool QQuickPaintedItem_virtualbase_isTextureProvider(const VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGTextureProvider* textureProvider() const override {
 		if (vtbl->textureProvider == 0) {
 			return QQuickPaintedItem::textureProvider();
 		}
 
 
-		QSGTextureProvider* callback_return_value = vtbl->textureProvider(vtbl, this);
+		QSGTextureProvider* callback_return_value = vtbl->textureProvider(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGTextureProvider* QQuickPaintedItem_virtualbase_textureProvider(const void* self);
+	friend QSGTextureProvider* QQuickPaintedItem_virtualbase_textureProvider(const VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGNode* updatePaintNode(QSGNode* param1, QQuickItem::UpdatePaintNodeData* param2) override {
 		if (vtbl->updatePaintNode == 0) {
 			return QQuickPaintedItem::updatePaintNode(param1, param2);
@@ -148,14 +136,13 @@ public:
 		QSGNode* sigval1 = param1;
 		QQuickItem__UpdatePaintNodeData* sigval2 = param2;
 
-		QSGNode* callback_return_value = vtbl->updatePaintNode(vtbl, this, sigval1, sigval2);
+		QSGNode* callback_return_value = vtbl->updatePaintNode(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend QSGNode* QQuickPaintedItem_virtualbase_updatePaintNode(void* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2);
+	friend QSGNode* QQuickPaintedItem_virtualbase_updatePaintNode(VirtualQQuickPaintedItem* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual void releaseResources() override {
 		if (vtbl->releaseResources == 0) {
 			QQuickPaintedItem::releaseResources();
@@ -163,13 +150,12 @@ public:
 		}
 
 
-		vtbl->releaseResources(vtbl, this);
+		vtbl->releaseResources(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_releaseResources(void* self);
+	friend void QQuickPaintedItem_virtualbase_releaseResources(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void itemChange(QQuickItem::ItemChange param1, const QQuickItem::ItemChangeData& param2) override {
 		if (vtbl->itemChange == 0) {
 			QQuickPaintedItem::itemChange(param1, param2);
@@ -182,45 +168,42 @@ public:
 		// Cast returned reference into pointer
 		QQuickItem__ItemChangeData* sigval2 = const_cast<QQuickItem::ItemChangeData*>(&param2_ret);
 
-		vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		vtbl->itemChange(this, sigval1, sigval2);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_itemChange(void* self, int param1, QQuickItem__ItemChangeData* param2);
+	friend void QQuickPaintedItem_virtualbase_itemChange(VirtualQQuickPaintedItem* self, int param1, QQuickItem__ItemChangeData* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QQuickPaintedItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QQuickPaintedItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QQuickPaintedItem_virtualbase_boundingRect(const VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF clipRect() const override {
 		if (vtbl->clipRect == 0) {
 			return QQuickPaintedItem::clipRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->clipRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->clipRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QQuickPaintedItem_virtualbase_clipRect(const void* self);
+	friend QRectF* QQuickPaintedItem_virtualbase_clipRect(const VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QQuickPaintedItem::contains(point);
@@ -230,14 +213,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickPaintedItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QQuickPaintedItem_virtualbase_contains(const VirtualQQuickPaintedItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QQuickPaintedItem::inputMethodQuery(query);
@@ -246,16 +228,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QQuickPaintedItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QQuickPaintedItem_virtualbase_inputMethodQuery(const VirtualQQuickPaintedItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QQuickPaintedItem::event(param1);
@@ -263,14 +244,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickPaintedItem_virtualbase_event(void* self, QEvent* param1);
+	friend bool QQuickPaintedItem_virtualbase_event(VirtualQQuickPaintedItem* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void geometryChange(const QRectF& newGeometry, const QRectF& oldGeometry) override {
 		if (vtbl->geometryChange == 0) {
 			QQuickPaintedItem::geometryChange(newGeometry, oldGeometry);
@@ -284,13 +264,12 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&oldGeometry_ret);
 
-		vtbl->geometryChange(vtbl, this, sigval1, sigval2);
+		vtbl->geometryChange(this, sigval1, sigval2);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_geometryChange(void* self, QRectF* newGeometry, QRectF* oldGeometry);
+	friend void QQuickPaintedItem_virtualbase_geometryChange(VirtualQQuickPaintedItem* self, QRectF* newGeometry, QRectF* oldGeometry);
 
-	// Subclass to allow providing a Go implementation
 	virtual void classBegin() override {
 		if (vtbl->classBegin == 0) {
 			QQuickPaintedItem::classBegin();
@@ -298,13 +277,12 @@ public:
 		}
 
 
-		vtbl->classBegin(vtbl, this);
+		vtbl->classBegin(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_classBegin(void* self);
+	friend void QQuickPaintedItem_virtualbase_classBegin(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void componentComplete() override {
 		if (vtbl->componentComplete == 0) {
 			QQuickPaintedItem::componentComplete();
@@ -312,13 +290,12 @@ public:
 		}
 
 
-		vtbl->componentComplete(vtbl, this);
+		vtbl->componentComplete(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_componentComplete(void* self);
+	friend void QQuickPaintedItem_virtualbase_componentComplete(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QQuickPaintedItem::keyPressEvent(event);
@@ -327,13 +304,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QQuickPaintedItem_virtualbase_keyPressEvent(VirtualQQuickPaintedItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QQuickPaintedItem::keyReleaseEvent(event);
@@ -342,13 +318,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QQuickPaintedItem_virtualbase_keyReleaseEvent(VirtualQQuickPaintedItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QQuickPaintedItem::inputMethodEvent(param1);
@@ -357,13 +332,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_inputMethodEvent(VirtualQQuickPaintedItem* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QQuickPaintedItem::focusInEvent(param1);
@@ -372,13 +346,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_focusInEvent(VirtualQQuickPaintedItem* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QQuickPaintedItem::focusOutEvent(param1);
@@ -387,13 +360,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_focusOutEvent(VirtualQQuickPaintedItem* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QQuickPaintedItem::mousePressEvent(event);
@@ -402,13 +374,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QQuickPaintedItem_virtualbase_mousePressEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QQuickPaintedItem::mouseMoveEvent(event);
@@ -417,13 +388,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QQuickPaintedItem_virtualbase_mouseMoveEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QQuickPaintedItem::mouseReleaseEvent(event);
@@ -432,13 +402,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QQuickPaintedItem_virtualbase_mouseReleaseEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QQuickPaintedItem::mouseDoubleClickEvent(event);
@@ -447,13 +416,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QQuickPaintedItem_virtualbase_mouseDoubleClickEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseUngrabEvent() override {
 		if (vtbl->mouseUngrabEvent == 0) {
 			QQuickPaintedItem::mouseUngrabEvent();
@@ -461,13 +429,12 @@ public:
 		}
 
 
-		vtbl->mouseUngrabEvent(vtbl, this);
+		vtbl->mouseUngrabEvent(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_mouseUngrabEvent(void* self);
+	friend void QQuickPaintedItem_virtualbase_mouseUngrabEvent(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void touchUngrabEvent() override {
 		if (vtbl->touchUngrabEvent == 0) {
 			QQuickPaintedItem::touchUngrabEvent();
@@ -475,13 +442,12 @@ public:
 		}
 
 
-		vtbl->touchUngrabEvent(vtbl, this);
+		vtbl->touchUngrabEvent(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_touchUngrabEvent(void* self);
+	friend void QQuickPaintedItem_virtualbase_touchUngrabEvent(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QQuickPaintedItem::wheelEvent(event);
@@ -490,13 +456,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QQuickPaintedItem_virtualbase_wheelEvent(VirtualQQuickPaintedItem* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void touchEvent(QTouchEvent* event) override {
 		if (vtbl->touchEvent == 0) {
 			QQuickPaintedItem::touchEvent(event);
@@ -505,13 +470,12 @@ public:
 
 		QTouchEvent* sigval1 = event;
 
-		vtbl->touchEvent(vtbl, this, sigval1);
+		vtbl->touchEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_touchEvent(void* self, QTouchEvent* event);
+	friend void QQuickPaintedItem_virtualbase_touchEvent(VirtualQQuickPaintedItem* self, QTouchEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QQuickPaintedItem::hoverEnterEvent(event);
@@ -520,13 +484,12 @@ public:
 
 		QHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_hoverEnterEvent(void* self, QHoverEvent* event);
+	friend void QQuickPaintedItem_virtualbase_hoverEnterEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QQuickPaintedItem::hoverMoveEvent(event);
@@ -535,13 +498,12 @@ public:
 
 		QHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_hoverMoveEvent(void* self, QHoverEvent* event);
+	friend void QQuickPaintedItem_virtualbase_hoverMoveEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QQuickPaintedItem::hoverLeaveEvent(event);
@@ -550,13 +512,12 @@ public:
 
 		QHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_hoverLeaveEvent(void* self, QHoverEvent* event);
+	friend void QQuickPaintedItem_virtualbase_hoverLeaveEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* param1) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QQuickPaintedItem::dragEnterEvent(param1);
@@ -565,13 +526,12 @@ public:
 
 		QDragEnterEvent* sigval1 = param1;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_dragEnterEvent(VirtualQQuickPaintedItem* self, QDragEnterEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* param1) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QQuickPaintedItem::dragMoveEvent(param1);
@@ -580,13 +540,12 @@ public:
 
 		QDragMoveEvent* sigval1 = param1;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_dragMoveEvent(VirtualQQuickPaintedItem* self, QDragMoveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* param1) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QQuickPaintedItem::dragLeaveEvent(param1);
@@ -595,13 +554,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = param1;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_dragLeaveEvent(VirtualQQuickPaintedItem* self, QDragLeaveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* param1) override {
 		if (vtbl->dropEvent == 0) {
 			QQuickPaintedItem::dropEvent(param1);
@@ -610,13 +568,12 @@ public:
 
 		QDropEvent* sigval1 = param1;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_dropEvent(void* self, QDropEvent* param1);
+	friend void QQuickPaintedItem_virtualbase_dropEvent(VirtualQQuickPaintedItem* self, QDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool childMouseEventFilter(QQuickItem* param1, QEvent* param2) override {
 		if (vtbl->childMouseEventFilter == 0) {
 			return QQuickPaintedItem::childMouseEventFilter(param1, param2);
@@ -625,14 +582,13 @@ public:
 		QQuickItem* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->childMouseEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->childMouseEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickPaintedItem_virtualbase_childMouseEventFilter(void* self, QQuickItem* param1, QEvent* param2);
+	friend bool QQuickPaintedItem_virtualbase_childMouseEventFilter(VirtualQQuickPaintedItem* self, QQuickItem* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updatePolish() override {
 		if (vtbl->updatePolish == 0) {
 			QQuickPaintedItem::updatePolish();
@@ -640,13 +596,12 @@ public:
 		}
 
 
-		vtbl->updatePolish(vtbl, this);
+		vtbl->updatePolish(this);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_updatePolish(void* self);
+	friend void QQuickPaintedItem_virtualbase_updatePolish(VirtualQQuickPaintedItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQuickPaintedItem::eventFilter(watched, event);
@@ -655,14 +610,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickPaintedItem_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQuickPaintedItem_virtualbase_eventFilter(VirtualQQuickPaintedItem* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QQuickPaintedItem::timerEvent(event);
@@ -671,13 +625,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QQuickPaintedItem_virtualbase_timerEvent(VirtualQQuickPaintedItem* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQuickPaintedItem::childEvent(event);
@@ -686,13 +639,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQuickPaintedItem_virtualbase_childEvent(VirtualQQuickPaintedItem* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQuickPaintedItem::customEvent(event);
@@ -701,13 +653,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQuickPaintedItem_virtualbase_customEvent(VirtualQQuickPaintedItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQuickPaintedItem::connectNotify(signal);
@@ -718,13 +669,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickPaintedItem_virtualbase_connectNotify(VirtualQQuickPaintedItem* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQuickPaintedItem::disconnectNotify(signal);
@@ -735,30 +685,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickPaintedItem_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickPaintedItem_virtualbase_disconnectNotify(VirtualQQuickPaintedItem* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend bool QQuickPaintedItem_protectedbase_isComponentComplete(const void* self);
-	friend void QQuickPaintedItem_protectedbase_updateInputMethod(void* self);
-	friend bool QQuickPaintedItem_protectedbase_widthValid(const void* self);
-	friend bool QQuickPaintedItem_protectedbase_heightValid(const void* self);
-	friend void QQuickPaintedItem_protectedbase_setImplicitSize(void* self, double param1, double param2);
-	friend QObject* QQuickPaintedItem_protectedbase_sender(const void* self);
-	friend int QQuickPaintedItem_protectedbase_senderSignalIndex(const void* self);
-	friend int QQuickPaintedItem_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQuickPaintedItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend bool QQuickPaintedItem_protectedbase_isComponentComplete(const VirtualQQuickPaintedItem* self);
+	friend void QQuickPaintedItem_protectedbase_updateInputMethod(VirtualQQuickPaintedItem* self);
+	friend bool QQuickPaintedItem_protectedbase_widthValid(const VirtualQQuickPaintedItem* self);
+	friend bool QQuickPaintedItem_protectedbase_heightValid(const VirtualQQuickPaintedItem* self);
+	friend void QQuickPaintedItem_protectedbase_setImplicitSize(VirtualQQuickPaintedItem* self, double param1, double param2);
+	friend QObject* QQuickPaintedItem_protectedbase_sender(const VirtualQQuickPaintedItem* self);
+	friend int QQuickPaintedItem_protectedbase_senderSignalIndex(const VirtualQQuickPaintedItem* self);
+	friend int QQuickPaintedItem_protectedbase_receivers(const VirtualQQuickPaintedItem* self, const char* signal);
+	friend bool QQuickPaintedItem_protectedbase_isSignalConnected(const VirtualQQuickPaintedItem* self, QMetaMethod* signal);
 };
 
-QQuickPaintedItem* QQuickPaintedItem_new(struct QQuickPaintedItem_VTable* vtbl) {
-	return new VirtualQQuickPaintedItem(vtbl);
+VirtualQQuickPaintedItem* QQuickPaintedItem_new(const QQuickPaintedItem_VTable* vtbl, void* vdata) {
+	return new VirtualQQuickPaintedItem(vtbl, vdata);
 }
 
-QQuickPaintedItem* QQuickPaintedItem_new2(struct QQuickPaintedItem_VTable* vtbl, QQuickItem* parent) {
-	return new VirtualQQuickPaintedItem(vtbl, parent);
+VirtualQQuickPaintedItem* QQuickPaintedItem_new2(const QQuickPaintedItem_VTable* vtbl, void* vdata, QQuickItem* parent) {
+	return new VirtualQQuickPaintedItem(vtbl, vdata, parent);
 }
 
 void QQuickPaintedItem_virtbase(QQuickPaintedItem* src, QQuickItem** outptr_QQuickItem) {
@@ -895,7 +845,7 @@ void QQuickPaintedItem_fillColorChanged(QQuickPaintedItem* self) {
 	self->fillColorChanged();
 }
 
-void QQuickPaintedItem_connect_fillColorChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickPaintedItem_connect_fillColorChanged(VirtualQQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -910,7 +860,7 @@ void QQuickPaintedItem_contentsSizeChanged(QQuickPaintedItem* self) {
 	self->contentsSizeChanged();
 }
 
-void QQuickPaintedItem_connect_contentsSizeChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickPaintedItem_connect_contentsSizeChanged(VirtualQQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -925,7 +875,7 @@ void QQuickPaintedItem_contentsScaleChanged(QQuickPaintedItem* self) {
 	self->contentsScaleChanged();
 }
 
-void QQuickPaintedItem_connect_contentsScaleChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickPaintedItem_connect_contentsScaleChanged(VirtualQQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -940,7 +890,7 @@ void QQuickPaintedItem_renderTargetChanged(QQuickPaintedItem* self) {
 	self->renderTargetChanged();
 }
 
-void QQuickPaintedItem_connect_renderTargetChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickPaintedItem_connect_renderTargetChanged(VirtualQQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -955,7 +905,7 @@ void QQuickPaintedItem_textureSizeChanged(QQuickPaintedItem* self) {
 	self->textureSizeChanged();
 }
 
-void QQuickPaintedItem_connect_textureSizeChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickPaintedItem_connect_textureSizeChanged(VirtualQQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -996,332 +946,266 @@ void QQuickPaintedItem_setPerformanceHint2(QQuickPaintedItem* self, int hint, bo
 	self->setPerformanceHint(static_cast<QQuickPaintedItem::PerformanceHint>(hint), enabled);
 }
 
-QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const void* self) {
+QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const VirtualQQuickPaintedItem* self) {
 
-	return (QMetaObject*) ( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::metaObject();
-
+	return (QMetaObject*) self->QQuickPaintedItem::metaObject();
 }
 
-void* QQuickPaintedItem_virtualbase_metacast(void* self, const char* param1) {
+void* QQuickPaintedItem_virtualbase_metacast(VirtualQQuickPaintedItem* self, const char* param1) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::qt_metacast(param1);
-
+	return self->QQuickPaintedItem::qt_metacast(param1);
 }
 
-int QQuickPaintedItem_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQuickPaintedItem_virtualbase_metacall(VirtualQQuickPaintedItem* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQuickPaintedItem::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QQuickPaintedItem_virtualbase_isTextureProvider(const void* self) {
+bool QQuickPaintedItem_virtualbase_isTextureProvider(const VirtualQQuickPaintedItem* self) {
 
-	return ( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::isTextureProvider();
-
+	return self->QQuickPaintedItem::isTextureProvider();
 }
 
-QSGTextureProvider* QQuickPaintedItem_virtualbase_textureProvider(const void* self) {
+QSGTextureProvider* QQuickPaintedItem_virtualbase_textureProvider(const VirtualQQuickPaintedItem* self) {
 
-	return ( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::textureProvider();
-
+	return self->QQuickPaintedItem::textureProvider();
 }
 
-QSGNode* QQuickPaintedItem_virtualbase_updatePaintNode(void* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2) {
+QSGNode* QQuickPaintedItem_virtualbase_updatePaintNode(VirtualQQuickPaintedItem* self, QSGNode* param1, QQuickItem__UpdatePaintNodeData* param2) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::updatePaintNode(param1, param2);
-
+	return self->QQuickPaintedItem::updatePaintNode(param1, param2);
 }
 
-void QQuickPaintedItem_virtualbase_releaseResources(void* self) {
+void QQuickPaintedItem_virtualbase_releaseResources(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::releaseResources();
-
+	self->QQuickPaintedItem::releaseResources();
 }
 
-void QQuickPaintedItem_virtualbase_itemChange(void* self, int param1, QQuickItem__ItemChangeData* param2) {
+void QQuickPaintedItem_virtualbase_itemChange(VirtualQQuickPaintedItem* self, int param1, QQuickItem__ItemChangeData* param2) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::itemChange(static_cast<VirtualQQuickPaintedItem::ItemChange>(param1), *param2);
-
+	self->QQuickPaintedItem::itemChange(static_cast<VirtualQQuickPaintedItem::ItemChange>(param1), *param2);
 }
 
-QRectF* QQuickPaintedItem_virtualbase_boundingRect(const void* self) {
+QRectF* QQuickPaintedItem_virtualbase_boundingRect(const VirtualQQuickPaintedItem* self) {
 
-	return new QRectF(( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::boundingRect());
-
+	return new QRectF(self->QQuickPaintedItem::boundingRect());
 }
 
-QRectF* QQuickPaintedItem_virtualbase_clipRect(const void* self) {
+QRectF* QQuickPaintedItem_virtualbase_clipRect(const VirtualQQuickPaintedItem* self) {
 
-	return new QRectF(( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::clipRect());
-
+	return new QRectF(self->QQuickPaintedItem::clipRect());
 }
 
-bool QQuickPaintedItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QQuickPaintedItem_virtualbase_contains(const VirtualQQuickPaintedItem* self, QPointF* point) {
 
-	return ( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::contains(*point);
-
+	return self->QQuickPaintedItem::contains(*point);
 }
 
-QVariant* QQuickPaintedItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QQuickPaintedItem_virtualbase_inputMethodQuery(const VirtualQQuickPaintedItem* self, int query) {
 
-	return new QVariant(( (const VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QQuickPaintedItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-bool QQuickPaintedItem_virtualbase_event(void* self, QEvent* param1) {
+bool QQuickPaintedItem_virtualbase_event(VirtualQQuickPaintedItem* self, QEvent* param1) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::event(param1);
-
+	return self->QQuickPaintedItem::event(param1);
 }
 
-void QQuickPaintedItem_virtualbase_geometryChange(void* self, QRectF* newGeometry, QRectF* oldGeometry) {
+void QQuickPaintedItem_virtualbase_geometryChange(VirtualQQuickPaintedItem* self, QRectF* newGeometry, QRectF* oldGeometry) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::geometryChange(*newGeometry, *oldGeometry);
-
+	self->QQuickPaintedItem::geometryChange(*newGeometry, *oldGeometry);
 }
 
-void QQuickPaintedItem_virtualbase_classBegin(void* self) {
+void QQuickPaintedItem_virtualbase_classBegin(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::classBegin();
-
+	self->QQuickPaintedItem::classBegin();
 }
 
-void QQuickPaintedItem_virtualbase_componentComplete(void* self) {
+void QQuickPaintedItem_virtualbase_componentComplete(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::componentComplete();
-
+	self->QQuickPaintedItem::componentComplete();
 }
 
-void QQuickPaintedItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QQuickPaintedItem_virtualbase_keyPressEvent(VirtualQQuickPaintedItem* self, QKeyEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::keyPressEvent(event);
-
+	self->QQuickPaintedItem::keyPressEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QQuickPaintedItem_virtualbase_keyReleaseEvent(VirtualQQuickPaintedItem* self, QKeyEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::keyReleaseEvent(event);
-
+	self->QQuickPaintedItem::keyReleaseEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QQuickPaintedItem_virtualbase_inputMethodEvent(VirtualQQuickPaintedItem* self, QInputMethodEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::inputMethodEvent(param1);
-
+	self->QQuickPaintedItem::inputMethodEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QQuickPaintedItem_virtualbase_focusInEvent(VirtualQQuickPaintedItem* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::focusInEvent(param1);
-
+	self->QQuickPaintedItem::focusInEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QQuickPaintedItem_virtualbase_focusOutEvent(VirtualQQuickPaintedItem* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::focusOutEvent(param1);
-
+	self->QQuickPaintedItem::focusOutEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QQuickPaintedItem_virtualbase_mousePressEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::mousePressEvent(event);
-
+	self->QQuickPaintedItem::mousePressEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QQuickPaintedItem_virtualbase_mouseMoveEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::mouseMoveEvent(event);
-
+	self->QQuickPaintedItem::mouseMoveEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QQuickPaintedItem_virtualbase_mouseReleaseEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::mouseReleaseEvent(event);
-
+	self->QQuickPaintedItem::mouseReleaseEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QQuickPaintedItem_virtualbase_mouseDoubleClickEvent(VirtualQQuickPaintedItem* self, QMouseEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::mouseDoubleClickEvent(event);
-
+	self->QQuickPaintedItem::mouseDoubleClickEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_mouseUngrabEvent(void* self) {
+void QQuickPaintedItem_virtualbase_mouseUngrabEvent(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::mouseUngrabEvent();
-
+	self->QQuickPaintedItem::mouseUngrabEvent();
 }
 
-void QQuickPaintedItem_virtualbase_touchUngrabEvent(void* self) {
+void QQuickPaintedItem_virtualbase_touchUngrabEvent(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::touchUngrabEvent();
-
+	self->QQuickPaintedItem::touchUngrabEvent();
 }
 
-void QQuickPaintedItem_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QQuickPaintedItem_virtualbase_wheelEvent(VirtualQQuickPaintedItem* self, QWheelEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::wheelEvent(event);
-
+	self->QQuickPaintedItem::wheelEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_touchEvent(void* self, QTouchEvent* event) {
+void QQuickPaintedItem_virtualbase_touchEvent(VirtualQQuickPaintedItem* self, QTouchEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::touchEvent(event);
-
+	self->QQuickPaintedItem::touchEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_hoverEnterEvent(void* self, QHoverEvent* event) {
+void QQuickPaintedItem_virtualbase_hoverEnterEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::hoverEnterEvent(event);
-
+	self->QQuickPaintedItem::hoverEnterEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_hoverMoveEvent(void* self, QHoverEvent* event) {
+void QQuickPaintedItem_virtualbase_hoverMoveEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::hoverMoveEvent(event);
-
+	self->QQuickPaintedItem::hoverMoveEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_hoverLeaveEvent(void* self, QHoverEvent* event) {
+void QQuickPaintedItem_virtualbase_hoverLeaveEvent(VirtualQQuickPaintedItem* self, QHoverEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::hoverLeaveEvent(event);
-
+	self->QQuickPaintedItem::hoverLeaveEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1) {
+void QQuickPaintedItem_virtualbase_dragEnterEvent(VirtualQQuickPaintedItem* self, QDragEnterEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::dragEnterEvent(param1);
-
+	self->QQuickPaintedItem::dragEnterEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1) {
+void QQuickPaintedItem_virtualbase_dragMoveEvent(VirtualQQuickPaintedItem* self, QDragMoveEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::dragMoveEvent(param1);
-
+	self->QQuickPaintedItem::dragMoveEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1) {
+void QQuickPaintedItem_virtualbase_dragLeaveEvent(VirtualQQuickPaintedItem* self, QDragLeaveEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::dragLeaveEvent(param1);
-
+	self->QQuickPaintedItem::dragLeaveEvent(param1);
 }
 
-void QQuickPaintedItem_virtualbase_dropEvent(void* self, QDropEvent* param1) {
+void QQuickPaintedItem_virtualbase_dropEvent(VirtualQQuickPaintedItem* self, QDropEvent* param1) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::dropEvent(param1);
-
+	self->QQuickPaintedItem::dropEvent(param1);
 }
 
-bool QQuickPaintedItem_virtualbase_childMouseEventFilter(void* self, QQuickItem* param1, QEvent* param2) {
+bool QQuickPaintedItem_virtualbase_childMouseEventFilter(VirtualQQuickPaintedItem* self, QQuickItem* param1, QEvent* param2) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::childMouseEventFilter(param1, param2);
-
+	return self->QQuickPaintedItem::childMouseEventFilter(param1, param2);
 }
 
-void QQuickPaintedItem_virtualbase_updatePolish(void* self) {
+void QQuickPaintedItem_virtualbase_updatePolish(VirtualQQuickPaintedItem* self) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::updatePolish();
-
+	self->QQuickPaintedItem::updatePolish();
 }
 
-bool QQuickPaintedItem_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQuickPaintedItem_virtualbase_eventFilter(VirtualQQuickPaintedItem* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::eventFilter(watched, event);
-
+	return self->QQuickPaintedItem::eventFilter(watched, event);
 }
 
-void QQuickPaintedItem_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QQuickPaintedItem_virtualbase_timerEvent(VirtualQQuickPaintedItem* self, QTimerEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::timerEvent(event);
-
+	self->QQuickPaintedItem::timerEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQuickPaintedItem_virtualbase_childEvent(VirtualQQuickPaintedItem* self, QChildEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::childEvent(event);
-
+	self->QQuickPaintedItem::childEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_customEvent(void* self, QEvent* event) {
+void QQuickPaintedItem_virtualbase_customEvent(VirtualQQuickPaintedItem* self, QEvent* event) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::customEvent(event);
-
+	self->QQuickPaintedItem::customEvent(event);
 }
 
-void QQuickPaintedItem_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQuickPaintedItem_virtualbase_connectNotify(VirtualQQuickPaintedItem* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::connectNotify(*signal);
-
+	self->QQuickPaintedItem::connectNotify(*signal);
 }
 
-void QQuickPaintedItem_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQuickPaintedItem_virtualbase_disconnectNotify(VirtualQQuickPaintedItem* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickPaintedItem*)(self) )->QQuickPaintedItem::disconnectNotify(*signal);
-
+	self->QQuickPaintedItem::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQuickPaintedItem_staticMetaObject() { return &QQuickPaintedItem::staticMetaObject; }
-bool QQuickPaintedItem_protectedbase_isComponentComplete(const void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->isComponentComplete();
 
+const QQuickPaintedItem_VTable* QQuickPaintedItem_vtbl(const VirtualQQuickPaintedItem* self) { return self->vtbl; }
+void* QQuickPaintedItem_vdata(const VirtualQQuickPaintedItem* self) { return self->vdata; }
+void QQuickPaintedItem_setVdata(VirtualQQuickPaintedItem* self, void* vdata) { self->vdata = vdata; }
+
+bool QQuickPaintedItem_protectedbase_isComponentComplete(const VirtualQQuickPaintedItem* self) {
+	return self->isComponentComplete();
 }
 
-void QQuickPaintedItem_protectedbase_updateInputMethod(void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	self_cast->updateInputMethod();
-
+void QQuickPaintedItem_protectedbase_updateInputMethod(VirtualQQuickPaintedItem* self) {
+	self->updateInputMethod();
 }
 
-bool QQuickPaintedItem_protectedbase_widthValid(const void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->widthValid();
-
+bool QQuickPaintedItem_protectedbase_widthValid(const VirtualQQuickPaintedItem* self) {
+	return self->widthValid();
 }
 
-bool QQuickPaintedItem_protectedbase_heightValid(const void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->heightValid();
-
+bool QQuickPaintedItem_protectedbase_heightValid(const VirtualQQuickPaintedItem* self) {
+	return self->heightValid();
 }
 
-void QQuickPaintedItem_protectedbase_setImplicitSize(void* self, double param1, double param2) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	self_cast->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
-
+void QQuickPaintedItem_protectedbase_setImplicitSize(VirtualQQuickPaintedItem* self, double param1, double param2) {
+	self->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 }
 
-QObject* QQuickPaintedItem_protectedbase_sender(const void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QQuickPaintedItem_protectedbase_sender(const VirtualQQuickPaintedItem* self) {
+	return self->sender();
 }
 
-int QQuickPaintedItem_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQuickPaintedItem_protectedbase_senderSignalIndex(const VirtualQQuickPaintedItem* self) {
+	return self->senderSignalIndex();
 }
 
-int QQuickPaintedItem_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQuickPaintedItem_protectedbase_receivers(const VirtualQQuickPaintedItem* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQuickPaintedItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQuickPaintedItem_protectedbase_isSignalConnected(const VirtualQQuickPaintedItem* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQuickPaintedItem_delete(QQuickPaintedItem* self) {

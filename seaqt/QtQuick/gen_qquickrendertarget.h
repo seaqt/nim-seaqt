@@ -26,6 +26,7 @@ typedef struct QSize QSize;
 
 QQuickRenderTarget* QQuickRenderTarget_new();
 QQuickRenderTarget* QQuickRenderTarget_new2(QQuickRenderTarget* other);
+
 void QQuickRenderTarget_operatorAssign(QQuickRenderTarget* self, QQuickRenderTarget* other);
 bool QQuickRenderTarget_isNull(const QQuickRenderTarget* self);
 double QQuickRenderTarget_devicePixelRatio(const QQuickRenderTarget* self);
@@ -40,6 +41,7 @@ QQuickRenderTarget* QQuickRenderTarget_fromPaintDevice(QPaintDevice* device);
 QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture4(unsigned int textureId, unsigned int format, QSize* pixelSize, int sampleCount);
 QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture3(unsigned int textureId, QSize* pixelSize, int sampleCount);
 QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer3(unsigned int renderbufferId, QSize* pixelSize, int sampleCount);
+
 void QQuickRenderTarget_delete(QQuickRenderTarget* self);
 
 #ifdef __cplusplus

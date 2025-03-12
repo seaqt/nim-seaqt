@@ -52,19 +52,19 @@ export
 
 type cQQmlFile*{.exportc: "QQmlFile", incompleteStruct.} = object
 
-proc fcQQmlFile_isNull(self: pointer, ): bool {.importc: "QQmlFile_isNull".}
-proc fcQQmlFile_isReady(self: pointer, ): bool {.importc: "QQmlFile_isReady".}
-proc fcQQmlFile_isError(self: pointer, ): bool {.importc: "QQmlFile_isError".}
-proc fcQQmlFile_isLoading(self: pointer, ): bool {.importc: "QQmlFile_isLoading".}
-proc fcQQmlFile_url(self: pointer, ): pointer {.importc: "QQmlFile_url".}
-proc fcQQmlFile_status(self: pointer, ): cint {.importc: "QQmlFile_status".}
-proc fcQQmlFile_error(self: pointer, ): struct_miqt_string {.importc: "QQmlFile_error".}
-proc fcQQmlFile_size(self: pointer, ): clonglong {.importc: "QQmlFile_size".}
-proc fcQQmlFile_data(self: pointer, ): cstring {.importc: "QQmlFile_data".}
-proc fcQQmlFile_dataByteArray(self: pointer, ): struct_miqt_string {.importc: "QQmlFile_dataByteArray".}
+proc fcQQmlFile_isNull(self: pointer): bool {.importc: "QQmlFile_isNull".}
+proc fcQQmlFile_isReady(self: pointer): bool {.importc: "QQmlFile_isReady".}
+proc fcQQmlFile_isError(self: pointer): bool {.importc: "QQmlFile_isError".}
+proc fcQQmlFile_isLoading(self: pointer): bool {.importc: "QQmlFile_isLoading".}
+proc fcQQmlFile_url(self: pointer): pointer {.importc: "QQmlFile_url".}
+proc fcQQmlFile_status(self: pointer): cint {.importc: "QQmlFile_status".}
+proc fcQQmlFile_error(self: pointer): struct_miqt_string {.importc: "QQmlFile_error".}
+proc fcQQmlFile_size(self: pointer): clonglong {.importc: "QQmlFile_size".}
+proc fcQQmlFile_data(self: pointer): cstring {.importc: "QQmlFile_data".}
+proc fcQQmlFile_dataByteArray(self: pointer): struct_miqt_string {.importc: "QQmlFile_dataByteArray".}
 proc fcQQmlFile_load(self: pointer, param1: pointer, param2: pointer): void {.importc: "QQmlFile_load".}
 proc fcQQmlFile_load2(self: pointer, param1: pointer, param2: struct_miqt_string): void {.importc: "QQmlFile_load2".}
-proc fcQQmlFile_clear(self: pointer, ): void {.importc: "QQmlFile_clear".}
+proc fcQQmlFile_clear(self: pointer): void {.importc: "QQmlFile_clear".}
 proc fcQQmlFile_clearWithQObject(self: pointer, param1: pointer): void {.importc: "QQmlFile_clearWithQObject".}
 proc fcQQmlFile_connectFinished(self: pointer, param1: pointer, param2: cstring): bool {.importc: "QQmlFile_connectFinished".}
 proc fcQQmlFile_connectFinished2(self: pointer, param1: pointer, param2: cint): bool {.importc: "QQmlFile_connectFinished2".}
@@ -80,37 +80,37 @@ proc fcQQmlFile_new(): ptr cQQmlFile {.importc: "QQmlFile_new".}
 proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new2".}
 proc fcQQmlFile_new3(param1: pointer, param2: struct_miqt_string): ptr cQQmlFile {.importc: "QQmlFile_new3".}
 
-proc isNull*(self: gen_qqmlfile_types.QQmlFile, ): bool =
+proc isNull*(self: gen_qqmlfile_types.QQmlFile): bool =
   fcQQmlFile_isNull(self.h)
 
-proc isReady*(self: gen_qqmlfile_types.QQmlFile, ): bool =
+proc isReady*(self: gen_qqmlfile_types.QQmlFile): bool =
   fcQQmlFile_isReady(self.h)
 
-proc isError*(self: gen_qqmlfile_types.QQmlFile, ): bool =
+proc isError*(self: gen_qqmlfile_types.QQmlFile): bool =
   fcQQmlFile_isError(self.h)
 
-proc isLoading*(self: gen_qqmlfile_types.QQmlFile, ): bool =
+proc isLoading*(self: gen_qqmlfile_types.QQmlFile): bool =
   fcQQmlFile_isLoading(self.h)
 
-proc url*(self: gen_qqmlfile_types.QQmlFile, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qqmlfile_types.QQmlFile): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQQmlFile_url(self.h), owned: true)
 
-proc status*(self: gen_qqmlfile_types.QQmlFile, ): cint =
+proc status*(self: gen_qqmlfile_types.QQmlFile): cint =
   cint(fcQQmlFile_status(self.h))
 
-proc error*(self: gen_qqmlfile_types.QQmlFile, ): string =
+proc error*(self: gen_qqmlfile_types.QQmlFile): string =
   let v_ms = fcQQmlFile_error(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc size*(self: gen_qqmlfile_types.QQmlFile, ): clonglong =
+proc size*(self: gen_qqmlfile_types.QQmlFile): clonglong =
   fcQQmlFile_size(self.h)
 
-proc data*(self: gen_qqmlfile_types.QQmlFile, ): cstring =
+proc data*(self: gen_qqmlfile_types.QQmlFile): cstring =
   (fcQQmlFile_data(self.h))
 
-proc dataByteArray*(self: gen_qqmlfile_types.QQmlFile, ): seq[byte] =
+proc dataByteArray*(self: gen_qqmlfile_types.QQmlFile): seq[byte] =
   var v_bytearray = fcQQmlFile_dataByteArray(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -122,7 +122,7 @@ proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlE
 proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: string): void =
   fcQQmlFile_load2(self.h, param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))))
 
-proc clear*(self: gen_qqmlfile_types.QQmlFile, ): void =
+proc clear*(self: gen_qqmlfile_types.QQmlFile): void =
   fcQQmlFile_clear(self.h)
 
 proc clear*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject): void =

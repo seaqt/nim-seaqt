@@ -12,15 +12,6 @@
 #include <QVariant>
 #include <qsslconfiguration.h>
 #include "gen_qsslconfiguration.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslConfiguration* QSslConfiguration_new() {
 	return new QSslConfiguration();
 }

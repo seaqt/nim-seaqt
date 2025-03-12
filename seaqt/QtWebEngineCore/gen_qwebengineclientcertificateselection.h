@@ -25,11 +25,13 @@ typedef struct QWebEngineClientCertificateSelection QWebEngineClientCertificateS
 #endif
 
 QWebEngineClientCertificateSelection* QWebEngineClientCertificateSelection_new(QWebEngineClientCertificateSelection* param1);
+
 void QWebEngineClientCertificateSelection_operatorAssign(QWebEngineClientCertificateSelection* self, QWebEngineClientCertificateSelection* param1);
 QUrl* QWebEngineClientCertificateSelection_host(const QWebEngineClientCertificateSelection* self);
 void QWebEngineClientCertificateSelection_select(QWebEngineClientCertificateSelection* self, QSslCertificate* certificate);
 void QWebEngineClientCertificateSelection_selectNone(QWebEngineClientCertificateSelection* self);
 struct miqt_array /* of QSslCertificate* */  QWebEngineClientCertificateSelection_certificates(const QWebEngineClientCertificateSelection* self);
+
 void QWebEngineClientCertificateSelection_delete(QWebEngineClientCertificateSelection* self);
 
 #ifdef __cplusplus

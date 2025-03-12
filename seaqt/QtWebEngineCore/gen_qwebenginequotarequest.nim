@@ -43,26 +43,26 @@ export
 
 type cQWebEngineQuotaRequest*{.exportc: "QWebEngineQuotaRequest", incompleteStruct.} = object
 
-proc fcQWebEngineQuotaRequest_accept(self: pointer, ): void {.importc: "QWebEngineQuotaRequest_accept".}
-proc fcQWebEngineQuotaRequest_reject(self: pointer, ): void {.importc: "QWebEngineQuotaRequest_reject".}
-proc fcQWebEngineQuotaRequest_origin(self: pointer, ): pointer {.importc: "QWebEngineQuotaRequest_origin".}
-proc fcQWebEngineQuotaRequest_requestedSize(self: pointer, ): clonglong {.importc: "QWebEngineQuotaRequest_requestedSize".}
+proc fcQWebEngineQuotaRequest_accept(self: pointer): void {.importc: "QWebEngineQuotaRequest_accept".}
+proc fcQWebEngineQuotaRequest_reject(self: pointer): void {.importc: "QWebEngineQuotaRequest_reject".}
+proc fcQWebEngineQuotaRequest_origin(self: pointer): pointer {.importc: "QWebEngineQuotaRequest_origin".}
+proc fcQWebEngineQuotaRequest_requestedSize(self: pointer): clonglong {.importc: "QWebEngineQuotaRequest_requestedSize".}
 proc fcQWebEngineQuotaRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorEqual".}
 proc fcQWebEngineQuotaRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorNotEqual".}
 proc fcQWebEngineQuotaRequest_new(): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new".}
 proc fcQWebEngineQuotaRequest_new2(param1: pointer): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new2".}
 proc fcQWebEngineQuotaRequest_staticMetaObject(): pointer {.importc: "QWebEngineQuotaRequest_staticMetaObject".}
 
-proc accept*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): void =
+proc accept*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): void =
   fcQWebEngineQuotaRequest_accept(self.h)
 
-proc reject*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): void =
+proc reject*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): void =
   fcQWebEngineQuotaRequest_reject(self.h)
 
-proc origin*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): gen_qurl_types.QUrl =
+proc origin*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineQuotaRequest_origin(self.h), owned: true)
 
-proc requestedSize*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): clonglong =
+proc requestedSize*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): clonglong =
   fcQWebEngineQuotaRequest_requestedSize(self.h)
 
 proc operatorEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, that: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): bool =

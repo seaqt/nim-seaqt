@@ -44,10 +44,10 @@ type cQQmlScriptString*{.exportc: "QQmlScriptString", incompleteStruct.} = objec
 proc fcQQmlScriptString_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlScriptString_operatorAssign".}
 proc fcQQmlScriptString_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorEqual".}
 proc fcQQmlScriptString_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorNotEqual".}
-proc fcQQmlScriptString_isEmpty(self: pointer, ): bool {.importc: "QQmlScriptString_isEmpty".}
-proc fcQQmlScriptString_isUndefinedLiteral(self: pointer, ): bool {.importc: "QQmlScriptString_isUndefinedLiteral".}
-proc fcQQmlScriptString_isNullLiteral(self: pointer, ): bool {.importc: "QQmlScriptString_isNullLiteral".}
-proc fcQQmlScriptString_stringLiteral(self: pointer, ): struct_miqt_string {.importc: "QQmlScriptString_stringLiteral".}
+proc fcQQmlScriptString_isEmpty(self: pointer): bool {.importc: "QQmlScriptString_isEmpty".}
+proc fcQQmlScriptString_isUndefinedLiteral(self: pointer): bool {.importc: "QQmlScriptString_isUndefinedLiteral".}
+proc fcQQmlScriptString_isNullLiteral(self: pointer): bool {.importc: "QQmlScriptString_isNullLiteral".}
+proc fcQQmlScriptString_stringLiteral(self: pointer): struct_miqt_string {.importc: "QQmlScriptString_stringLiteral".}
 proc fcQQmlScriptString_numberLiteral(self: pointer, ok: ptr bool): float64 {.importc: "QQmlScriptString_numberLiteral".}
 proc fcQQmlScriptString_booleanLiteral(self: pointer, ok: ptr bool): bool {.importc: "QQmlScriptString_booleanLiteral".}
 proc fcQQmlScriptString_new(): ptr cQQmlScriptString {.importc: "QQmlScriptString_new".}
@@ -63,16 +63,16 @@ proc operatorEqual*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: g
 proc operatorNotEqual*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): bool =
   fcQQmlScriptString_operatorNotEqual(self.h, param1.h)
 
-proc isEmpty*(self: gen_qqmlscriptstring_types.QQmlScriptString, ): bool =
+proc isEmpty*(self: gen_qqmlscriptstring_types.QQmlScriptString): bool =
   fcQQmlScriptString_isEmpty(self.h)
 
-proc isUndefinedLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ): bool =
+proc isUndefinedLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString): bool =
   fcQQmlScriptString_isUndefinedLiteral(self.h)
 
-proc isNullLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ): bool =
+proc isNullLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString): bool =
   fcQQmlScriptString_isNullLiteral(self.h)
 
-proc stringLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ): string =
+proc stringLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString): string =
   let v_ms = fcQQmlScriptString_stringLiteral(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

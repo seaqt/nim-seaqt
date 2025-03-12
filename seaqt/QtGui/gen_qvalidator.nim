@@ -68,33 +68,35 @@ type cQIntValidator*{.exportc: "QIntValidator", incompleteStruct.} = object
 type cQDoubleValidator*{.exportc: "QDoubleValidator", incompleteStruct.} = object
 type cQRegularExpressionValidator*{.exportc: "QRegularExpressionValidator", incompleteStruct.} = object
 
-proc fcQValidator_metaObject(self: pointer, ): pointer {.importc: "QValidator_metaObject".}
+proc fcQValidator_metaObject(self: pointer): pointer {.importc: "QValidator_metaObject".}
 proc fcQValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QValidator_metacast".}
 proc fcQValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QValidator_metacall".}
 proc fcQValidator_tr(s: cstring): struct_miqt_string {.importc: "QValidator_tr".}
 proc fcQValidator_setLocale(self: pointer, locale: pointer): void {.importc: "QValidator_setLocale".}
-proc fcQValidator_locale(self: pointer, ): pointer {.importc: "QValidator_locale".}
+proc fcQValidator_locale(self: pointer): pointer {.importc: "QValidator_locale".}
 proc fcQValidator_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.importc: "QValidator_validate".}
 proc fcQValidator_fixup(self: pointer, param1: struct_miqt_string): void {.importc: "QValidator_fixup".}
-proc fcQValidator_changed(self: pointer, ): void {.importc: "QValidator_changed".}
+proc fcQValidator_changed(self: pointer): void {.importc: "QValidator_changed".}
 proc fcQValidator_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QValidator_connect_changed".}
 proc fcQValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QValidator_tr2".}
 proc fcQValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QValidator_tr3".}
+proc fcQValidator_vtbl(self: pointer): pointer {.importc: "QValidator_vtbl".}
+proc fcQValidator_vdata(self: pointer): pointer {.importc: "QValidator_vdata".}
 type cQValidatorVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQValidatorVTable, self: ptr cQValidator) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  validate*: proc(vtbl, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
-  fixup*: proc(vtbl, self: pointer, param1: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQValidator_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QValidator_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  validate*: proc(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
+  fixup*: proc(self: pointer, param1: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQValidator_virtualbase_metaObject(self: pointer): pointer {.importc: "QValidator_virtualbase_metaObject".}
 proc fcQValidator_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QValidator_virtualbase_metacast".}
 proc fcQValidator_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QValidator_virtualbase_metacall".}
 proc fcQValidator_virtualbase_fixup(self: pointer, param1: struct_miqt_string): void {.importc: "QValidator_virtualbase_fixup".}
@@ -105,14 +107,14 @@ proc fcQValidator_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QValidator_virtualbase_customEvent".}
 proc fcQValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QValidator_virtualbase_connectNotify".}
 proc fcQValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QValidator_virtualbase_disconnectNotify".}
-proc fcQValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QValidator_protectedbase_sender".}
-proc fcQValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QValidator_protectedbase_senderSignalIndex".}
+proc fcQValidator_protectedbase_sender(self: pointer): pointer {.importc: "QValidator_protectedbase_sender".}
+proc fcQValidator_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QValidator_protectedbase_senderSignalIndex".}
 proc fcQValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QValidator_protectedbase_receivers".}
 proc fcQValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QValidator_protectedbase_isSignalConnected".}
-proc fcQValidator_new(vtbl: pointer, ): ptr cQValidator {.importc: "QValidator_new".}
-proc fcQValidator_new2(vtbl: pointer, parent: pointer): ptr cQValidator {.importc: "QValidator_new2".}
+proc fcQValidator_new(vtbl, vdata: pointer): ptr cQValidator {.importc: "QValidator_new".}
+proc fcQValidator_new2(vtbl, vdata: pointer, parent: pointer): ptr cQValidator {.importc: "QValidator_new2".}
 proc fcQValidator_staticMetaObject(): pointer {.importc: "QValidator_staticMetaObject".}
-proc fcQIntValidator_metaObject(self: pointer, ): pointer {.importc: "QIntValidator_metaObject".}
+proc fcQIntValidator_metaObject(self: pointer): pointer {.importc: "QIntValidator_metaObject".}
 proc fcQIntValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QIntValidator_metacast".}
 proc fcQIntValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIntValidator_metacall".}
 proc fcQIntValidator_tr(s: cstring): struct_miqt_string {.importc: "QIntValidator_tr".}
@@ -121,29 +123,31 @@ proc fcQIntValidator_fixup(self: pointer, input: struct_miqt_string): void {.imp
 proc fcQIntValidator_setBottom(self: pointer, bottom: cint): void {.importc: "QIntValidator_setBottom".}
 proc fcQIntValidator_setTop(self: pointer, top: cint): void {.importc: "QIntValidator_setTop".}
 proc fcQIntValidator_setRange(self: pointer, bottom: cint, top: cint): void {.importc: "QIntValidator_setRange".}
-proc fcQIntValidator_bottom(self: pointer, ): cint {.importc: "QIntValidator_bottom".}
-proc fcQIntValidator_top(self: pointer, ): cint {.importc: "QIntValidator_top".}
+proc fcQIntValidator_bottom(self: pointer): cint {.importc: "QIntValidator_bottom".}
+proc fcQIntValidator_top(self: pointer): cint {.importc: "QIntValidator_top".}
 proc fcQIntValidator_bottomChanged(self: pointer, bottom: cint): void {.importc: "QIntValidator_bottomChanged".}
 proc fcQIntValidator_connect_bottomChanged(self: pointer, slot: int, callback: proc (slot: int, bottom: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_bottomChanged".}
 proc fcQIntValidator_topChanged(self: pointer, top: cint): void {.importc: "QIntValidator_topChanged".}
 proc fcQIntValidator_connect_topChanged(self: pointer, slot: int, callback: proc (slot: int, top: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_topChanged".}
 proc fcQIntValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QIntValidator_tr2".}
 proc fcQIntValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIntValidator_tr3".}
+proc fcQIntValidator_vtbl(self: pointer): pointer {.importc: "QIntValidator_vtbl".}
+proc fcQIntValidator_vdata(self: pointer): pointer {.importc: "QIntValidator_vdata".}
 type cQIntValidatorVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQIntValidatorVTable, self: ptr cQIntValidator) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  validate*: proc(vtbl, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
-  fixup*: proc(vtbl, self: pointer, input: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQIntValidator_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QIntValidator_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  validate*: proc(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
+  fixup*: proc(self: pointer, input: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQIntValidator_virtualbase_metaObject(self: pointer): pointer {.importc: "QIntValidator_virtualbase_metaObject".}
 proc fcQIntValidator_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QIntValidator_virtualbase_metacast".}
 proc fcQIntValidator_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIntValidator_virtualbase_metacall".}
 proc fcQIntValidator_virtualbase_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.importc: "QIntValidator_virtualbase_validate".}
@@ -155,16 +159,16 @@ proc fcQIntValidator_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQIntValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QIntValidator_virtualbase_customEvent".}
 proc fcQIntValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIntValidator_virtualbase_connectNotify".}
 proc fcQIntValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIntValidator_virtualbase_disconnectNotify".}
-proc fcQIntValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QIntValidator_protectedbase_sender".}
-proc fcQIntValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QIntValidator_protectedbase_senderSignalIndex".}
+proc fcQIntValidator_protectedbase_sender(self: pointer): pointer {.importc: "QIntValidator_protectedbase_sender".}
+proc fcQIntValidator_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QIntValidator_protectedbase_senderSignalIndex".}
 proc fcQIntValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIntValidator_protectedbase_receivers".}
 proc fcQIntValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIntValidator_protectedbase_isSignalConnected".}
-proc fcQIntValidator_new(vtbl: pointer, ): ptr cQIntValidator {.importc: "QIntValidator_new".}
-proc fcQIntValidator_new2(vtbl: pointer, bottom: cint, top: cint): ptr cQIntValidator {.importc: "QIntValidator_new2".}
-proc fcQIntValidator_new3(vtbl: pointer, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new3".}
-proc fcQIntValidator_new4(vtbl: pointer, bottom: cint, top: cint, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new4".}
+proc fcQIntValidator_new(vtbl, vdata: pointer): ptr cQIntValidator {.importc: "QIntValidator_new".}
+proc fcQIntValidator_new2(vtbl, vdata: pointer, bottom: cint, top: cint): ptr cQIntValidator {.importc: "QIntValidator_new2".}
+proc fcQIntValidator_new3(vtbl, vdata: pointer, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new3".}
+proc fcQIntValidator_new4(vtbl, vdata: pointer, bottom: cint, top: cint, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new4".}
 proc fcQIntValidator_staticMetaObject(): pointer {.importc: "QIntValidator_staticMetaObject".}
-proc fcQDoubleValidator_metaObject(self: pointer, ): pointer {.importc: "QDoubleValidator_metaObject".}
+proc fcQDoubleValidator_metaObject(self: pointer): pointer {.importc: "QDoubleValidator_metaObject".}
 proc fcQDoubleValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QDoubleValidator_metacast".}
 proc fcQDoubleValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDoubleValidator_metacall".}
 proc fcQDoubleValidator_tr(s: cstring): struct_miqt_string {.importc: "QDoubleValidator_tr".}
@@ -176,10 +180,10 @@ proc fcQDoubleValidator_setBottom(self: pointer, bottom: float64): void {.import
 proc fcQDoubleValidator_setTop(self: pointer, top: float64): void {.importc: "QDoubleValidator_setTop".}
 proc fcQDoubleValidator_setDecimals(self: pointer, decimals: cint): void {.importc: "QDoubleValidator_setDecimals".}
 proc fcQDoubleValidator_setNotation(self: pointer, notation: cint): void {.importc: "QDoubleValidator_setNotation".}
-proc fcQDoubleValidator_bottom(self: pointer, ): float64 {.importc: "QDoubleValidator_bottom".}
-proc fcQDoubleValidator_top(self: pointer, ): float64 {.importc: "QDoubleValidator_top".}
-proc fcQDoubleValidator_decimals(self: pointer, ): cint {.importc: "QDoubleValidator_decimals".}
-proc fcQDoubleValidator_notation(self: pointer, ): cint {.importc: "QDoubleValidator_notation".}
+proc fcQDoubleValidator_bottom(self: pointer): float64 {.importc: "QDoubleValidator_bottom".}
+proc fcQDoubleValidator_top(self: pointer): float64 {.importc: "QDoubleValidator_top".}
+proc fcQDoubleValidator_decimals(self: pointer): cint {.importc: "QDoubleValidator_decimals".}
+proc fcQDoubleValidator_notation(self: pointer): cint {.importc: "QDoubleValidator_notation".}
 proc fcQDoubleValidator_bottomChanged(self: pointer, bottom: float64): void {.importc: "QDoubleValidator_bottomChanged".}
 proc fcQDoubleValidator_connect_bottomChanged(self: pointer, slot: int, callback: proc (slot: int, bottom: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_bottomChanged".}
 proc fcQDoubleValidator_topChanged(self: pointer, top: float64): void {.importc: "QDoubleValidator_topChanged".}
@@ -190,21 +194,23 @@ proc fcQDoubleValidator_notationChanged(self: pointer, notation: cint): void {.i
 proc fcQDoubleValidator_connect_notationChanged(self: pointer, slot: int, callback: proc (slot: int, notation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_notationChanged".}
 proc fcQDoubleValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDoubleValidator_tr2".}
 proc fcQDoubleValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDoubleValidator_tr3".}
+proc fcQDoubleValidator_vtbl(self: pointer): pointer {.importc: "QDoubleValidator_vtbl".}
+proc fcQDoubleValidator_vdata(self: pointer): pointer {.importc: "QDoubleValidator_vdata".}
 type cQDoubleValidatorVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQDoubleValidatorVTable, self: ptr cQDoubleValidator) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  validate*: proc(vtbl, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
-  fixup*: proc(vtbl, self: pointer, input: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQDoubleValidator_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QDoubleValidator_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  validate*: proc(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl, raises: [], gcsafe.}
+  fixup*: proc(self: pointer, input: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQDoubleValidator_virtualbase_metaObject(self: pointer): pointer {.importc: "QDoubleValidator_virtualbase_metaObject".}
 proc fcQDoubleValidator_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QDoubleValidator_virtualbase_metacast".}
 proc fcQDoubleValidator_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDoubleValidator_virtualbase_metacall".}
 proc fcQDoubleValidator_virtualbase_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.importc: "QDoubleValidator_virtualbase_validate".}
@@ -216,41 +222,43 @@ proc fcQDoubleValidator_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQDoubleValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDoubleValidator_virtualbase_customEvent".}
 proc fcQDoubleValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleValidator_virtualbase_connectNotify".}
 proc fcQDoubleValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleValidator_virtualbase_disconnectNotify".}
-proc fcQDoubleValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QDoubleValidator_protectedbase_sender".}
-proc fcQDoubleValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDoubleValidator_protectedbase_senderSignalIndex".}
+proc fcQDoubleValidator_protectedbase_sender(self: pointer): pointer {.importc: "QDoubleValidator_protectedbase_sender".}
+proc fcQDoubleValidator_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDoubleValidator_protectedbase_senderSignalIndex".}
 proc fcQDoubleValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDoubleValidator_protectedbase_receivers".}
 proc fcQDoubleValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDoubleValidator_protectedbase_isSignalConnected".}
-proc fcQDoubleValidator_new(vtbl: pointer, ): ptr cQDoubleValidator {.importc: "QDoubleValidator_new".}
-proc fcQDoubleValidator_new2(vtbl: pointer, bottom: float64, top: float64, decimals: cint): ptr cQDoubleValidator {.importc: "QDoubleValidator_new2".}
-proc fcQDoubleValidator_new3(vtbl: pointer, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new3".}
-proc fcQDoubleValidator_new4(vtbl: pointer, bottom: float64, top: float64, decimals: cint, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new4".}
+proc fcQDoubleValidator_new(vtbl, vdata: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new".}
+proc fcQDoubleValidator_new2(vtbl, vdata: pointer, bottom: float64, top: float64, decimals: cint): ptr cQDoubleValidator {.importc: "QDoubleValidator_new2".}
+proc fcQDoubleValidator_new3(vtbl, vdata: pointer, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new3".}
+proc fcQDoubleValidator_new4(vtbl, vdata: pointer, bottom: float64, top: float64, decimals: cint, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new4".}
 proc fcQDoubleValidator_staticMetaObject(): pointer {.importc: "QDoubleValidator_staticMetaObject".}
-proc fcQRegularExpressionValidator_metaObject(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_metaObject".}
+proc fcQRegularExpressionValidator_metaObject(self: pointer): pointer {.importc: "QRegularExpressionValidator_metaObject".}
 proc fcQRegularExpressionValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QRegularExpressionValidator_metacast".}
 proc fcQRegularExpressionValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRegularExpressionValidator_metacall".}
 proc fcQRegularExpressionValidator_tr(s: cstring): struct_miqt_string {.importc: "QRegularExpressionValidator_tr".}
 proc fcQRegularExpressionValidator_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.importc: "QRegularExpressionValidator_validate".}
-proc fcQRegularExpressionValidator_regularExpression(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_regularExpression".}
+proc fcQRegularExpressionValidator_regularExpression(self: pointer): pointer {.importc: "QRegularExpressionValidator_regularExpression".}
 proc fcQRegularExpressionValidator_setRegularExpression(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_setRegularExpression".}
 proc fcQRegularExpressionValidator_regularExpressionChanged(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_regularExpressionChanged".}
 proc fcQRegularExpressionValidator_connect_regularExpressionChanged(self: pointer, slot: int, callback: proc (slot: int, re: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRegularExpressionValidator_connect_regularExpressionChanged".}
 proc fcQRegularExpressionValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRegularExpressionValidator_tr2".}
 proc fcQRegularExpressionValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRegularExpressionValidator_tr3".}
+proc fcQRegularExpressionValidator_vtbl(self: pointer): pointer {.importc: "QRegularExpressionValidator_vtbl".}
+proc fcQRegularExpressionValidator_vdata(self: pointer): pointer {.importc: "QRegularExpressionValidator_vdata".}
 type cQRegularExpressionValidatorVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQRegularExpressionValidatorVTable, self: ptr cQRegularExpressionValidator) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  validate*: proc(vtbl, self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl, raises: [], gcsafe.}
-  fixup*: proc(vtbl, self: pointer, param1: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQRegularExpressionValidator_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  validate*: proc(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl, raises: [], gcsafe.}
+  fixup*: proc(self: pointer, param1: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQRegularExpressionValidator_virtualbase_metaObject(self: pointer): pointer {.importc: "QRegularExpressionValidator_virtualbase_metaObject".}
 proc fcQRegularExpressionValidator_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QRegularExpressionValidator_virtualbase_metacast".}
 proc fcQRegularExpressionValidator_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRegularExpressionValidator_virtualbase_metacall".}
 proc fcQRegularExpressionValidator_virtualbase_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.importc: "QRegularExpressionValidator_virtualbase_validate".}
@@ -262,17 +270,17 @@ proc fcQRegularExpressionValidator_virtualbase_childEvent(self: pointer, event: 
 proc fcQRegularExpressionValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_customEvent".}
 proc fcQRegularExpressionValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_connectNotify".}
 proc fcQRegularExpressionValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_disconnectNotify".}
-proc fcQRegularExpressionValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_protectedbase_sender".}
-proc fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRegularExpressionValidator_protectedbase_senderSignalIndex".}
+proc fcQRegularExpressionValidator_protectedbase_sender(self: pointer): pointer {.importc: "QRegularExpressionValidator_protectedbase_sender".}
+proc fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QRegularExpressionValidator_protectedbase_senderSignalIndex".}
 proc fcQRegularExpressionValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRegularExpressionValidator_protectedbase_receivers".}
 proc fcQRegularExpressionValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRegularExpressionValidator_protectedbase_isSignalConnected".}
-proc fcQRegularExpressionValidator_new(vtbl: pointer, ): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new".}
-proc fcQRegularExpressionValidator_new2(vtbl: pointer, re: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new2".}
-proc fcQRegularExpressionValidator_new3(vtbl: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new3".}
-proc fcQRegularExpressionValidator_new4(vtbl: pointer, re: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new4".}
+proc fcQRegularExpressionValidator_new(vtbl, vdata: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new".}
+proc fcQRegularExpressionValidator_new2(vtbl, vdata: pointer, re: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new2".}
+proc fcQRegularExpressionValidator_new3(vtbl, vdata: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new3".}
+proc fcQRegularExpressionValidator_new4(vtbl, vdata: pointer, re: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new4".}
 proc fcQRegularExpressionValidator_staticMetaObject(): pointer {.importc: "QRegularExpressionValidator_staticMetaObject".}
 
-proc metaObject*(self: gen_qvalidator_types.QValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qvalidator_types.QValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQValidator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvalidator_types.QValidator, param1: cstring): pointer =
@@ -290,7 +298,7 @@ proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring): string =
 proc setLocale*(self: gen_qvalidator_types.QValidator, locale: gen_qlocale_types.QLocale): void =
   fcQValidator_setLocale(self.h, locale.h)
 
-proc locale*(self: gen_qvalidator_types.QValidator, ): gen_qlocale_types.QLocale =
+proc locale*(self: gen_qvalidator_types.QValidator): gen_qlocale_types.QLocale =
   gen_qlocale_types.QLocale(h: fcQValidator_locale(self.h), owned: true)
 
 proc validate*(self: gen_qvalidator_types.QValidator, param1: string, param2: ptr cint): cint =
@@ -299,15 +307,15 @@ proc validate*(self: gen_qvalidator_types.QValidator, param1: string, param2: pt
 proc fixup*(self: gen_qvalidator_types.QValidator, param1: string): void =
   fcQValidator_fixup(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
-proc changed*(self: gen_qvalidator_types.QValidator, ): void =
+proc changed*(self: gen_qvalidator_types.QValidator): void =
   fcQValidator_changed(self.h)
 
 type QValidatorchangedSlot* = proc()
-proc miqt_exec_callback_cQValidator_changed(slot: int) {.cdecl.} =
+proc cQValidator_slot_callback_changed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QValidatorchangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQValidator_changed_release(slot: int) {.cdecl.} =
+proc cQValidator_slot_callback_changed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QValidatorchangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -315,7 +323,7 @@ proc onchanged*(self: gen_qvalidator_types.QValidator, slot: QValidatorchangedSl
   var tmp = new QValidatorchangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQValidator_connect_changed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQValidator_changed, miqt_exec_callback_cQValidator_changed_release)
+  fcQValidator_connect_changed(self.h, cast[int](addr tmp[]), cQValidator_slot_callback_changed, cQValidator_slot_callback_changed_release)
 
 proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring): string =
   let v_ms = fcQValidator_tr2(s, c)
@@ -355,11 +363,11 @@ type QValidatorVTable* {.inheritable, pure.} = object
   customEvent*: QValidatorcustomEventProc
   connectNotify*: QValidatorconnectNotifyProc
   disconnectNotify*: QValidatordisconnectNotifyProc
-proc QValidatormetaObject*(self: gen_qvalidator_types.QValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc QValidatormetaObject*(self: gen_qvalidator_types.QValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQValidator_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQValidator_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -370,8 +378,8 @@ proc miqt_exec_callback_cQValidator_metaObject(vtbl: pointer, self: pointer): po
 proc QValidatormetacast*(self: gen_qvalidator_types.QValidator, param1: cstring): pointer =
   fcQValidator_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQValidator_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -380,8 +388,8 @@ proc miqt_exec_callback_cQValidator_metacast(vtbl: pointer, self: pointer, param
 proc QValidatormetacall*(self: gen_qvalidator_types.QValidator, param1: cint, param2: cint, param3: pointer): cint =
   fcQValidator_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQValidator_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -389,8 +397,8 @@ proc miqt_exec_callback_cQValidator_metacall(vtbl: pointer, self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQValidator_validate(vtbl: pointer, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -403,8 +411,8 @@ proc miqt_exec_callback_cQValidator_validate(vtbl: pointer, self: pointer, param
 proc QValidatorfixup*(self: gen_qvalidator_types.QValidator, param1: string): void =
   fcQValidator_virtualbase_fixup(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
-proc miqt_exec_callback_cQValidator_fixup(vtbl: pointer, self: pointer, param1: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -415,8 +423,8 @@ proc miqt_exec_callback_cQValidator_fixup(vtbl: pointer, self: pointer, param1: 
 proc QValidatorevent*(self: gen_qvalidator_types.QValidator, event: gen_qcoreevent_types.QEvent): bool =
   fcQValidator_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQValidator_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -425,8 +433,8 @@ proc miqt_exec_callback_cQValidator_event(vtbl: pointer, self: pointer, event: p
 proc QValidatoreventFilter*(self: gen_qvalidator_types.QValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQValidator_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQValidator_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -436,8 +444,8 @@ proc miqt_exec_callback_cQValidator_eventFilter(vtbl: pointer, self: pointer, wa
 proc QValidatortimerEvent*(self: gen_qvalidator_types.QValidator, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQValidator_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQValidator_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -445,8 +453,8 @@ proc miqt_exec_callback_cQValidator_timerEvent(vtbl: pointer, self: pointer, eve
 proc QValidatorchildEvent*(self: gen_qvalidator_types.QValidator, event: gen_qcoreevent_types.QChildEvent): void =
   fcQValidator_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQValidator_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -454,8 +462,8 @@ proc miqt_exec_callback_cQValidator_childEvent(vtbl: pointer, self: pointer, eve
 proc QValidatorcustomEvent*(self: gen_qvalidator_types.QValidator, event: gen_qcoreevent_types.QEvent): void =
   fcQValidator_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQValidator_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -463,8 +471,8 @@ proc miqt_exec_callback_cQValidator_customEvent(vtbl: pointer, self: pointer, ev
 proc QValidatorconnectNotify*(self: gen_qvalidator_types.QValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQValidator_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQValidator_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -472,19 +480,19 @@ proc miqt_exec_callback_cQValidator_connectNotify(vtbl: pointer, self: pointer, 
 proc QValidatordisconnectNotify*(self: gen_qvalidator_types.QValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQValidator_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQValidator_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QValidatorVTable](vtbl)
+proc cQValidator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QValidatorVTable](fcQValidator_vdata(self))
   let self = QValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQValidator* {.inheritable.} = ref object of QValidator
   vtbl*: cQValidatorVTable
-method metaObject*(self: VirtualQValidator, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQValidator): gen_qobjectdefs_types.QMetaObject {.base.} =
   QValidatormetaObject(self[])
-proc miqt_exec_method_cQValidator_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -492,100 +500,100 @@ proc miqt_exec_method_cQValidator_metaObject(vtbl: pointer, inst: pointer): poin
 
 method metacast*(self: VirtualQValidator, param1: cstring): pointer {.base.} =
   QValidatormetacast(self[], param1)
-proc miqt_exec_method_cQValidator_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQValidator, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QValidatormetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQValidator_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method validate*(self: VirtualQValidator, param1: string, param2: ptr cint): cint {.base.} =
   raiseAssert("missing implementation of QValidator_virtualbase_validate")
-proc miqt_exec_method_cQValidator_validate(vtbl: pointer, inst: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
   let slotval2 = param2
-  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
 method fixup*(self: VirtualQValidator, param1: string): void {.base.} =
   QValidatorfixup(self[], param1)
-proc miqt_exec_method_cQValidator_fixup(vtbl: pointer, inst: pointer, param1: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
-  vtbl.fixup(slotval1)
+  inst.fixup(slotval1)
 
 method event*(self: VirtualQValidator, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QValidatorevent(self[], event)
-proc miqt_exec_method_cQValidator_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QValidatoreventFilter(self[], watched, event)
-proc miqt_exec_method_cQValidator_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQValidator, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QValidatortimerEvent(self[], event)
-proc miqt_exec_method_cQValidator_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQValidator, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QValidatorchildEvent(self[], event)
-proc miqt_exec_method_cQValidator_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQValidator, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QValidatorcustomEvent(self[], event)
-proc miqt_exec_method_cQValidator_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QValidatorconnectNotify(self[], signal)
-proc miqt_exec_method_cQValidator_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QValidatordisconnectNotify(self[], signal)
-proc miqt_exec_method_cQValidator_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
+proc cQValidator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQValidator](fcQValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qvalidator_types.QValidator, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qvalidator_types.QValidator): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQValidator_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qvalidator_types.QValidator, ): cint =
+proc senderSignalIndex*(self: gen_qvalidator_types.QValidator): cint =
   fcQValidator_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qvalidator_types.QValidator, signal: cstring): cint =
@@ -598,119 +606,103 @@ proc create*(T: type gen_qvalidator_types.QValidator,
     vtbl: ref QValidatorVTable = nil): gen_qvalidator_types.QValidator =
   let vtbl = if vtbl == nil: new QValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQValidatorVTable, _: ptr cQValidator) {.cdecl.} =
-    let vtbl = cast[ref QValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QValidatorVTable](fcQValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQValidator_metaObject
+    vtbl[].vtbl.metaObject = cQValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQValidator_metacast
+    vtbl[].vtbl.metacast = cQValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQValidator_metacall
+    vtbl[].vtbl.metacall = cQValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQValidator_validate
+    vtbl[].vtbl.validate = cQValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQValidator_fixup
+    vtbl[].vtbl.fixup = cQValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQValidator_event
+    vtbl[].vtbl.event = cQValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQValidator_childEvent
+    vtbl[].vtbl.childEvent = cQValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQValidator_customEvent
+    vtbl[].vtbl.customEvent = cQValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQValidator_disconnectNotify
-  gen_qvalidator_types.QValidator(h: fcQValidator_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QValidator(h: fcQValidator_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QValidator,
     parent: gen_qobject_types.QObject,
     vtbl: ref QValidatorVTable = nil): gen_qvalidator_types.QValidator =
   let vtbl = if vtbl == nil: new QValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQValidatorVTable, _: ptr cQValidator) {.cdecl.} =
-    let vtbl = cast[ref QValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QValidatorVTable](fcQValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQValidator_metaObject
+    vtbl[].vtbl.metaObject = cQValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQValidator_metacast
+    vtbl[].vtbl.metacast = cQValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQValidator_metacall
+    vtbl[].vtbl.metacall = cQValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQValidator_validate
+    vtbl[].vtbl.validate = cQValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQValidator_fixup
+    vtbl[].vtbl.fixup = cQValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQValidator_event
+    vtbl[].vtbl.event = cQValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQValidator_childEvent
+    vtbl[].vtbl.childEvent = cQValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQValidator_customEvent
+    vtbl[].vtbl.customEvent = cQValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQValidator_disconnectNotify
-  gen_qvalidator_types.QValidator(h: fcQValidator_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QValidator(h: fcQValidator_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQValidator_mvtbl = cQValidatorVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQValidator()[])](self.fcQValidator_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQValidator_method_callback_metaObject,
+  metacast: cQValidator_method_callback_metacast,
+  metacall: cQValidator_method_callback_metacall,
+  validate: cQValidator_method_callback_validate,
+  fixup: cQValidator_method_callback_fixup,
+  event: cQValidator_method_callback_event,
+  eventFilter: cQValidator_method_callback_eventFilter,
+  timerEvent: cQValidator_method_callback_timerEvent,
+  childEvent: cQValidator_method_callback_childEvent,
+  customEvent: cQValidator_method_callback_customEvent,
+  connectNotify: cQValidator_method_callback_connectNotify,
+  disconnectNotify: cQValidator_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qvalidator_types.QValidator,
-    vtbl: VirtualQValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQValidatorVTable, _: ptr cQValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQValidator_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQValidator_new(addr(cQValidator_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QValidator,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQValidatorVTable, _: ptr cQValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQValidator_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQValidator_new2(addr(cQValidator_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQValidator_staticMetaObject())
-proc metaObject*(self: gen_qvalidator_types.QIntValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qvalidator_types.QIntValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIntValidator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvalidator_types.QIntValidator, param1: cstring): pointer =
@@ -740,23 +732,23 @@ proc setTop*(self: gen_qvalidator_types.QIntValidator, top: cint): void =
 proc setRange*(self: gen_qvalidator_types.QIntValidator, bottom: cint, top: cint): void =
   fcQIntValidator_setRange(self.h, bottom, top)
 
-proc bottom*(self: gen_qvalidator_types.QIntValidator, ): cint =
+proc bottom*(self: gen_qvalidator_types.QIntValidator): cint =
   fcQIntValidator_bottom(self.h)
 
-proc top*(self: gen_qvalidator_types.QIntValidator, ): cint =
+proc top*(self: gen_qvalidator_types.QIntValidator): cint =
   fcQIntValidator_top(self.h)
 
 proc bottomChanged*(self: gen_qvalidator_types.QIntValidator, bottom: cint): void =
   fcQIntValidator_bottomChanged(self.h, bottom)
 
 type QIntValidatorbottomChangedSlot* = proc(bottom: cint)
-proc miqt_exec_callback_cQIntValidator_bottomChanged(slot: int, bottom: cint) {.cdecl.} =
+proc cQIntValidator_slot_callback_bottomChanged(slot: int, bottom: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIntValidatorbottomChangedSlot](cast[pointer](slot))
   let slotval1 = bottom
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQIntValidator_bottomChanged_release(slot: int) {.cdecl.} =
+proc cQIntValidator_slot_callback_bottomChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIntValidatorbottomChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -764,19 +756,19 @@ proc onbottomChanged*(self: gen_qvalidator_types.QIntValidator, slot: QIntValida
   var tmp = new QIntValidatorbottomChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIntValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIntValidator_bottomChanged, miqt_exec_callback_cQIntValidator_bottomChanged_release)
+  fcQIntValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), cQIntValidator_slot_callback_bottomChanged, cQIntValidator_slot_callback_bottomChanged_release)
 
 proc topChanged*(self: gen_qvalidator_types.QIntValidator, top: cint): void =
   fcQIntValidator_topChanged(self.h, top)
 
 type QIntValidatortopChangedSlot* = proc(top: cint)
-proc miqt_exec_callback_cQIntValidator_topChanged(slot: int, top: cint) {.cdecl.} =
+proc cQIntValidator_slot_callback_topChanged(slot: int, top: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIntValidatortopChangedSlot](cast[pointer](slot))
   let slotval1 = top
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQIntValidator_topChanged_release(slot: int) {.cdecl.} =
+proc cQIntValidator_slot_callback_topChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIntValidatortopChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -784,7 +776,7 @@ proc ontopChanged*(self: gen_qvalidator_types.QIntValidator, slot: QIntValidator
   var tmp = new QIntValidatortopChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIntValidator_connect_topChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIntValidator_topChanged, miqt_exec_callback_cQIntValidator_topChanged_release)
+  fcQIntValidator_connect_topChanged(self.h, cast[int](addr tmp[]), cQIntValidator_slot_callback_topChanged, cQIntValidator_slot_callback_topChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring): string =
   let v_ms = fcQIntValidator_tr2(s, c)
@@ -824,11 +816,11 @@ type QIntValidatorVTable* {.inheritable, pure.} = object
   customEvent*: QIntValidatorcustomEventProc
   connectNotify*: QIntValidatorconnectNotifyProc
   disconnectNotify*: QIntValidatordisconnectNotifyProc
-proc QIntValidatormetaObject*(self: gen_qvalidator_types.QIntValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc QIntValidatormetaObject*(self: gen_qvalidator_types.QIntValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIntValidator_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQIntValidator_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -839,8 +831,8 @@ proc miqt_exec_callback_cQIntValidator_metaObject(vtbl: pointer, self: pointer):
 proc QIntValidatormetacast*(self: gen_qvalidator_types.QIntValidator, param1: cstring): pointer =
   fcQIntValidator_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQIntValidator_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -849,8 +841,8 @@ proc miqt_exec_callback_cQIntValidator_metacast(vtbl: pointer, self: pointer, pa
 proc QIntValidatormetacall*(self: gen_qvalidator_types.QIntValidator, param1: cint, param2: cint, param3: pointer): cint =
   fcQIntValidator_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQIntValidator_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -861,8 +853,8 @@ proc miqt_exec_callback_cQIntValidator_metacall(vtbl: pointer, self: pointer, pa
 proc QIntValidatorvalidate*(self: gen_qvalidator_types.QIntValidator, param1: string, param2: ptr cint): cint =
   cint(fcQIntValidator_virtualbase_validate(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), param2))
 
-proc miqt_exec_callback_cQIntValidator_validate(vtbl: pointer, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -875,8 +867,8 @@ proc miqt_exec_callback_cQIntValidator_validate(vtbl: pointer, self: pointer, pa
 proc QIntValidatorfixup*(self: gen_qvalidator_types.QIntValidator, input: string): void =
   fcQIntValidator_virtualbase_fixup(self.h, struct_miqt_string(data: input, len: csize_t(len(input))))
 
-proc miqt_exec_callback_cQIntValidator_fixup(vtbl: pointer, self: pointer, input: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
@@ -887,8 +879,8 @@ proc miqt_exec_callback_cQIntValidator_fixup(vtbl: pointer, self: pointer, input
 proc QIntValidatorevent*(self: gen_qvalidator_types.QIntValidator, event: gen_qcoreevent_types.QEvent): bool =
   fcQIntValidator_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQIntValidator_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -897,8 +889,8 @@ proc miqt_exec_callback_cQIntValidator_event(vtbl: pointer, self: pointer, event
 proc QIntValidatoreventFilter*(self: gen_qvalidator_types.QIntValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQIntValidator_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQIntValidator_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -908,8 +900,8 @@ proc miqt_exec_callback_cQIntValidator_eventFilter(vtbl: pointer, self: pointer,
 proc QIntValidatortimerEvent*(self: gen_qvalidator_types.QIntValidator, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQIntValidator_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQIntValidator_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -917,8 +909,8 @@ proc miqt_exec_callback_cQIntValidator_timerEvent(vtbl: pointer, self: pointer, 
 proc QIntValidatorchildEvent*(self: gen_qvalidator_types.QIntValidator, event: gen_qcoreevent_types.QChildEvent): void =
   fcQIntValidator_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQIntValidator_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -926,8 +918,8 @@ proc miqt_exec_callback_cQIntValidator_childEvent(vtbl: pointer, self: pointer, 
 proc QIntValidatorcustomEvent*(self: gen_qvalidator_types.QIntValidator, event: gen_qcoreevent_types.QEvent): void =
   fcQIntValidator_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQIntValidator_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -935,8 +927,8 @@ proc miqt_exec_callback_cQIntValidator_customEvent(vtbl: pointer, self: pointer,
 proc QIntValidatorconnectNotify*(self: gen_qvalidator_types.QIntValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQIntValidator_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQIntValidator_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -944,19 +936,19 @@ proc miqt_exec_callback_cQIntValidator_connectNotify(vtbl: pointer, self: pointe
 proc QIntValidatordisconnectNotify*(self: gen_qvalidator_types.QIntValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQIntValidator_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQIntValidator_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIntValidatorVTable](vtbl)
+proc cQIntValidator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIntValidatorVTable](fcQIntValidator_vdata(self))
   let self = QIntValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQIntValidator* {.inheritable.} = ref object of QIntValidator
   vtbl*: cQIntValidatorVTable
-method metaObject*(self: VirtualQIntValidator, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQIntValidator): gen_qobjectdefs_types.QMetaObject {.base.} =
   QIntValidatormetaObject(self[])
-proc miqt_exec_method_cQIntValidator_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQIntValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -964,100 +956,100 @@ proc miqt_exec_method_cQIntValidator_metaObject(vtbl: pointer, inst: pointer): p
 
 method metacast*(self: VirtualQIntValidator, param1: cstring): pointer {.base.} =
   QIntValidatormetacast(self[], param1)
-proc miqt_exec_method_cQIntValidator_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQIntValidator, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QIntValidatormetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQIntValidator_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method validate*(self: VirtualQIntValidator, param1: string, param2: ptr cint): cint {.base.} =
   QIntValidatorvalidate(self[], param1, param2)
-proc miqt_exec_method_cQIntValidator_validate(vtbl: pointer, inst: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
   let slotval2 = param2
-  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
 method fixup*(self: VirtualQIntValidator, input: string): void {.base.} =
   QIntValidatorfixup(self[], input)
-proc miqt_exec_method_cQIntValidator_fixup(vtbl: pointer, inst: pointer, input: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
-  vtbl.fixup(slotval1)
+  inst.fixup(slotval1)
 
 method event*(self: VirtualQIntValidator, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QIntValidatorevent(self[], event)
-proc miqt_exec_method_cQIntValidator_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQIntValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QIntValidatoreventFilter(self[], watched, event)
-proc miqt_exec_method_cQIntValidator_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQIntValidator, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QIntValidatortimerEvent(self[], event)
-proc miqt_exec_method_cQIntValidator_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQIntValidator, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QIntValidatorchildEvent(self[], event)
-proc miqt_exec_method_cQIntValidator_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQIntValidator, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QIntValidatorcustomEvent(self[], event)
-proc miqt_exec_method_cQIntValidator_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQIntValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QIntValidatorconnectNotify(self[], signal)
-proc miqt_exec_method_cQIntValidator_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQIntValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QIntValidatordisconnectNotify(self[], signal)
-proc miqt_exec_method_cQIntValidator_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIntValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
+proc cQIntValidator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIntValidator](fcQIntValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qvalidator_types.QIntValidator, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qvalidator_types.QIntValidator): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQIntValidator_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qvalidator_types.QIntValidator, ): cint =
+proc senderSignalIndex*(self: gen_qvalidator_types.QIntValidator): cint =
   fcQIntValidator_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qvalidator_types.QIntValidator, signal: cstring): cint =
@@ -1070,235 +1062,185 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
     vtbl: ref QIntValidatorVTable = nil): gen_qvalidator_types.QIntValidator =
   let vtbl = if vtbl == nil: new QIntValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ref QIntValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIntValidatorVTable](fcQIntValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQIntValidator_metaObject
+    vtbl[].vtbl.metaObject = cQIntValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQIntValidator_metacast
+    vtbl[].vtbl.metacast = cQIntValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQIntValidator_metacall
+    vtbl[].vtbl.metacall = cQIntValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQIntValidator_validate
+    vtbl[].vtbl.validate = cQIntValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQIntValidator_fixup
+    vtbl[].vtbl.fixup = cQIntValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQIntValidator_event
+    vtbl[].vtbl.event = cQIntValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIntValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQIntValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIntValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQIntValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQIntValidator_childEvent
+    vtbl[].vtbl.childEvent = cQIntValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQIntValidator_customEvent
+    vtbl[].vtbl.customEvent = cQIntValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIntValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQIntValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIntValidator_disconnectNotify
-  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQIntValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint,
     vtbl: ref QIntValidatorVTable = nil): gen_qvalidator_types.QIntValidator =
   let vtbl = if vtbl == nil: new QIntValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ref QIntValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIntValidatorVTable](fcQIntValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQIntValidator_metaObject
+    vtbl[].vtbl.metaObject = cQIntValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQIntValidator_metacast
+    vtbl[].vtbl.metacast = cQIntValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQIntValidator_metacall
+    vtbl[].vtbl.metacall = cQIntValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQIntValidator_validate
+    vtbl[].vtbl.validate = cQIntValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQIntValidator_fixup
+    vtbl[].vtbl.fixup = cQIntValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQIntValidator_event
+    vtbl[].vtbl.event = cQIntValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIntValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQIntValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIntValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQIntValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQIntValidator_childEvent
+    vtbl[].vtbl.childEvent = cQIntValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQIntValidator_customEvent
+    vtbl[].vtbl.customEvent = cQIntValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIntValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQIntValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIntValidator_disconnectNotify
-  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new2(addr(vtbl[].vtbl), bottom, top), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQIntValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new2(addr(vtbl[].vtbl), addr(vtbl[]), bottom, top), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     parent: gen_qobject_types.QObject,
     vtbl: ref QIntValidatorVTable = nil): gen_qvalidator_types.QIntValidator =
   let vtbl = if vtbl == nil: new QIntValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ref QIntValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIntValidatorVTable](fcQIntValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQIntValidator_metaObject
+    vtbl[].vtbl.metaObject = cQIntValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQIntValidator_metacast
+    vtbl[].vtbl.metacast = cQIntValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQIntValidator_metacall
+    vtbl[].vtbl.metacall = cQIntValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQIntValidator_validate
+    vtbl[].vtbl.validate = cQIntValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQIntValidator_fixup
+    vtbl[].vtbl.fixup = cQIntValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQIntValidator_event
+    vtbl[].vtbl.event = cQIntValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIntValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQIntValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIntValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQIntValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQIntValidator_childEvent
+    vtbl[].vtbl.childEvent = cQIntValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQIntValidator_customEvent
+    vtbl[].vtbl.customEvent = cQIntValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIntValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQIntValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIntValidator_disconnectNotify
-  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new3(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQIntValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QIntValidatorVTable = nil): gen_qvalidator_types.QIntValidator =
   let vtbl = if vtbl == nil: new QIntValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ref QIntValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIntValidatorVTable](fcQIntValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQIntValidator_metaObject
+    vtbl[].vtbl.metaObject = cQIntValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQIntValidator_metacast
+    vtbl[].vtbl.metacast = cQIntValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQIntValidator_metacall
+    vtbl[].vtbl.metacall = cQIntValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQIntValidator_validate
+    vtbl[].vtbl.validate = cQIntValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQIntValidator_fixup
+    vtbl[].vtbl.fixup = cQIntValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQIntValidator_event
+    vtbl[].vtbl.event = cQIntValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIntValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQIntValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIntValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQIntValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQIntValidator_childEvent
+    vtbl[].vtbl.childEvent = cQIntValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQIntValidator_customEvent
+    vtbl[].vtbl.customEvent = cQIntValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIntValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQIntValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIntValidator_disconnectNotify
-  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new4(addr(vtbl[].vtbl), bottom, top, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQIntValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QIntValidator(h: fcQIntValidator_new4(addr(vtbl[].vtbl), addr(vtbl[]), bottom, top, parent.h), owned: true)
 
+const cQIntValidator_mvtbl = cQIntValidatorVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQIntValidator()[])](self.fcQIntValidator_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQIntValidator_method_callback_metaObject,
+  metacast: cQIntValidator_method_callback_metacast,
+  metacall: cQIntValidator_method_callback_metacall,
+  validate: cQIntValidator_method_callback_validate,
+  fixup: cQIntValidator_method_callback_fixup,
+  event: cQIntValidator_method_callback_event,
+  eventFilter: cQIntValidator_method_callback_eventFilter,
+  timerEvent: cQIntValidator_method_callback_timerEvent,
+  childEvent: cQIntValidator_method_callback_childEvent,
+  customEvent: cQIntValidator_method_callback_customEvent,
+  connectNotify: cQIntValidator_method_callback_connectNotify,
+  disconnectNotify: cQIntValidator_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qvalidator_types.QIntValidator,
-    vtbl: VirtualQIntValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIntValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQIntValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQIntValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQIntValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQIntValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQIntValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQIntValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIntValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIntValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQIntValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQIntValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIntValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIntValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIntValidator_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQIntValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIntValidator_new(addr(cQIntValidator_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint,
-    vtbl: VirtualQIntValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIntValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQIntValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQIntValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQIntValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQIntValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQIntValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQIntValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIntValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIntValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQIntValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQIntValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIntValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIntValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIntValidator_new2(addr(vtbl[].vtbl), bottom, top)
-  vtbl[].owned = true
+    inst: VirtualQIntValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIntValidator_new2(addr(cQIntValidator_mvtbl), addr(inst[]), bottom, top)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQIntValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIntValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQIntValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQIntValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQIntValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQIntValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQIntValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQIntValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIntValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIntValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQIntValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQIntValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIntValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIntValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIntValidator_new3(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQIntValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIntValidator_new3(addr(cQIntValidator_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     bottom: cint, top: cint, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQIntValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIntValidatorVTable, _: ptr cQIntValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIntValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIntValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQIntValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQIntValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQIntValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQIntValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQIntValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQIntValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIntValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIntValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQIntValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQIntValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIntValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIntValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIntValidator_new4(addr(vtbl[].vtbl), bottom, top, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQIntValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIntValidator_new4(addr(cQIntValidator_mvtbl), addr(inst[]), bottom, top, parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QIntValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIntValidator_staticMetaObject())
-proc metaObject*(self: gen_qvalidator_types.QDoubleValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qvalidator_types.QDoubleValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDoubleValidator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvalidator_types.QDoubleValidator, param1: cstring): pointer =
@@ -1337,29 +1279,29 @@ proc setDecimals*(self: gen_qvalidator_types.QDoubleValidator, decimals: cint): 
 proc setNotation*(self: gen_qvalidator_types.QDoubleValidator, notation: cint): void =
   fcQDoubleValidator_setNotation(self.h, cint(notation))
 
-proc bottom*(self: gen_qvalidator_types.QDoubleValidator, ): float64 =
+proc bottom*(self: gen_qvalidator_types.QDoubleValidator): float64 =
   fcQDoubleValidator_bottom(self.h)
 
-proc top*(self: gen_qvalidator_types.QDoubleValidator, ): float64 =
+proc top*(self: gen_qvalidator_types.QDoubleValidator): float64 =
   fcQDoubleValidator_top(self.h)
 
-proc decimals*(self: gen_qvalidator_types.QDoubleValidator, ): cint =
+proc decimals*(self: gen_qvalidator_types.QDoubleValidator): cint =
   fcQDoubleValidator_decimals(self.h)
 
-proc notation*(self: gen_qvalidator_types.QDoubleValidator, ): cint =
+proc notation*(self: gen_qvalidator_types.QDoubleValidator): cint =
   cint(fcQDoubleValidator_notation(self.h))
 
 proc bottomChanged*(self: gen_qvalidator_types.QDoubleValidator, bottom: float64): void =
   fcQDoubleValidator_bottomChanged(self.h, bottom)
 
 type QDoubleValidatorbottomChangedSlot* = proc(bottom: float64)
-proc miqt_exec_callback_cQDoubleValidator_bottomChanged(slot: int, bottom: float64) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_bottomChanged(slot: int, bottom: float64) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatorbottomChangedSlot](cast[pointer](slot))
   let slotval1 = bottom
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQDoubleValidator_bottomChanged_release(slot: int) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_bottomChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDoubleValidatorbottomChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1367,19 +1309,19 @@ proc onbottomChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDouble
   var tmp = new QDoubleValidatorbottomChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_bottomChanged, miqt_exec_callback_cQDoubleValidator_bottomChanged_release)
+  fcQDoubleValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), cQDoubleValidator_slot_callback_bottomChanged, cQDoubleValidator_slot_callback_bottomChanged_release)
 
 proc topChanged*(self: gen_qvalidator_types.QDoubleValidator, top: float64): void =
   fcQDoubleValidator_topChanged(self.h, top)
 
 type QDoubleValidatortopChangedSlot* = proc(top: float64)
-proc miqt_exec_callback_cQDoubleValidator_topChanged(slot: int, top: float64) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_topChanged(slot: int, top: float64) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatortopChangedSlot](cast[pointer](slot))
   let slotval1 = top
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQDoubleValidator_topChanged_release(slot: int) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_topChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDoubleValidatortopChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1387,19 +1329,19 @@ proc ontopChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoubleVal
   var tmp = new QDoubleValidatortopChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_topChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_topChanged, miqt_exec_callback_cQDoubleValidator_topChanged_release)
+  fcQDoubleValidator_connect_topChanged(self.h, cast[int](addr tmp[]), cQDoubleValidator_slot_callback_topChanged, cQDoubleValidator_slot_callback_topChanged_release)
 
 proc decimalsChanged*(self: gen_qvalidator_types.QDoubleValidator, decimals: cint): void =
   fcQDoubleValidator_decimalsChanged(self.h, decimals)
 
 type QDoubleValidatordecimalsChangedSlot* = proc(decimals: cint)
-proc miqt_exec_callback_cQDoubleValidator_decimalsChanged(slot: int, decimals: cint) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_decimalsChanged(slot: int, decimals: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatordecimalsChangedSlot](cast[pointer](slot))
   let slotval1 = decimals
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQDoubleValidator_decimalsChanged_release(slot: int) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_decimalsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDoubleValidatordecimalsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1407,19 +1349,19 @@ proc ondecimalsChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoub
   var tmp = new QDoubleValidatordecimalsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_decimalsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_decimalsChanged, miqt_exec_callback_cQDoubleValidator_decimalsChanged_release)
+  fcQDoubleValidator_connect_decimalsChanged(self.h, cast[int](addr tmp[]), cQDoubleValidator_slot_callback_decimalsChanged, cQDoubleValidator_slot_callback_decimalsChanged_release)
 
 proc notationChanged*(self: gen_qvalidator_types.QDoubleValidator, notation: cint): void =
   fcQDoubleValidator_notationChanged(self.h, cint(notation))
 
 type QDoubleValidatornotationChangedSlot* = proc(notation: cint)
-proc miqt_exec_callback_cQDoubleValidator_notationChanged(slot: int, notation: cint) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_notationChanged(slot: int, notation: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatornotationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(notation)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQDoubleValidator_notationChanged_release(slot: int) {.cdecl.} =
+proc cQDoubleValidator_slot_callback_notationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDoubleValidatornotationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1427,7 +1369,7 @@ proc onnotationChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoub
   var tmp = new QDoubleValidatornotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_notationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_notationChanged, miqt_exec_callback_cQDoubleValidator_notationChanged_release)
+  fcQDoubleValidator_connect_notationChanged(self.h, cast[int](addr tmp[]), cQDoubleValidator_slot_callback_notationChanged, cQDoubleValidator_slot_callback_notationChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring): string =
   let v_ms = fcQDoubleValidator_tr2(s, c)
@@ -1467,11 +1409,11 @@ type QDoubleValidatorVTable* {.inheritable, pure.} = object
   customEvent*: QDoubleValidatorcustomEventProc
   connectNotify*: QDoubleValidatorconnectNotifyProc
   disconnectNotify*: QDoubleValidatordisconnectNotifyProc
-proc QDoubleValidatormetaObject*(self: gen_qvalidator_types.QDoubleValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc QDoubleValidatormetaObject*(self: gen_qvalidator_types.QDoubleValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDoubleValidator_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQDoubleValidator_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -1482,8 +1424,8 @@ proc miqt_exec_callback_cQDoubleValidator_metaObject(vtbl: pointer, self: pointe
 proc QDoubleValidatormetacast*(self: gen_qvalidator_types.QDoubleValidator, param1: cstring): pointer =
   fcQDoubleValidator_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQDoubleValidator_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -1492,8 +1434,8 @@ proc miqt_exec_callback_cQDoubleValidator_metacast(vtbl: pointer, self: pointer,
 proc QDoubleValidatormetacall*(self: gen_qvalidator_types.QDoubleValidator, param1: cint, param2: cint, param3: pointer): cint =
   fcQDoubleValidator_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQDoubleValidator_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1504,8 +1446,8 @@ proc miqt_exec_callback_cQDoubleValidator_metacall(vtbl: pointer, self: pointer,
 proc QDoubleValidatorvalidate*(self: gen_qvalidator_types.QDoubleValidator, param1: string, param2: ptr cint): cint =
   cint(fcQDoubleValidator_virtualbase_validate(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), param2))
 
-proc miqt_exec_callback_cQDoubleValidator_validate(vtbl: pointer, self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -1518,8 +1460,8 @@ proc miqt_exec_callback_cQDoubleValidator_validate(vtbl: pointer, self: pointer,
 proc QDoubleValidatorfixup*(self: gen_qvalidator_types.QDoubleValidator, input: string): void =
   fcQDoubleValidator_virtualbase_fixup(self.h, struct_miqt_string(data: input, len: csize_t(len(input))))
 
-proc miqt_exec_callback_cQDoubleValidator_fixup(vtbl: pointer, self: pointer, input: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
@@ -1530,8 +1472,8 @@ proc miqt_exec_callback_cQDoubleValidator_fixup(vtbl: pointer, self: pointer, in
 proc QDoubleValidatorevent*(self: gen_qvalidator_types.QDoubleValidator, event: gen_qcoreevent_types.QEvent): bool =
   fcQDoubleValidator_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQDoubleValidator_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -1540,8 +1482,8 @@ proc miqt_exec_callback_cQDoubleValidator_event(vtbl: pointer, self: pointer, ev
 proc QDoubleValidatoreventFilter*(self: gen_qvalidator_types.QDoubleValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQDoubleValidator_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQDoubleValidator_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1551,8 +1493,8 @@ proc miqt_exec_callback_cQDoubleValidator_eventFilter(vtbl: pointer, self: point
 proc QDoubleValidatortimerEvent*(self: gen_qvalidator_types.QDoubleValidator, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQDoubleValidator_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQDoubleValidator_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1560,8 +1502,8 @@ proc miqt_exec_callback_cQDoubleValidator_timerEvent(vtbl: pointer, self: pointe
 proc QDoubleValidatorchildEvent*(self: gen_qvalidator_types.QDoubleValidator, event: gen_qcoreevent_types.QChildEvent): void =
   fcQDoubleValidator_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQDoubleValidator_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1569,8 +1511,8 @@ proc miqt_exec_callback_cQDoubleValidator_childEvent(vtbl: pointer, self: pointe
 proc QDoubleValidatorcustomEvent*(self: gen_qvalidator_types.QDoubleValidator, event: gen_qcoreevent_types.QEvent): void =
   fcQDoubleValidator_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQDoubleValidator_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1578,8 +1520,8 @@ proc miqt_exec_callback_cQDoubleValidator_customEvent(vtbl: pointer, self: point
 proc QDoubleValidatorconnectNotify*(self: gen_qvalidator_types.QDoubleValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQDoubleValidator_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQDoubleValidator_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1587,19 +1529,19 @@ proc miqt_exec_callback_cQDoubleValidator_connectNotify(vtbl: pointer, self: poi
 proc QDoubleValidatordisconnectNotify*(self: gen_qvalidator_types.QDoubleValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQDoubleValidator_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQDoubleValidator_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QDoubleValidatorVTable](vtbl)
+proc cQDoubleValidator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
   let self = QDoubleValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDoubleValidator* {.inheritable.} = ref object of QDoubleValidator
   vtbl*: cQDoubleValidatorVTable
-method metaObject*(self: VirtualQDoubleValidator, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQDoubleValidator): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDoubleValidatormetaObject(self[])
-proc miqt_exec_method_cQDoubleValidator_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQDoubleValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1607,100 +1549,100 @@ proc miqt_exec_method_cQDoubleValidator_metaObject(vtbl: pointer, inst: pointer)
 
 method metacast*(self: VirtualQDoubleValidator, param1: cstring): pointer {.base.} =
   QDoubleValidatormetacast(self[], param1)
-proc miqt_exec_method_cQDoubleValidator_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQDoubleValidator, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QDoubleValidatormetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQDoubleValidator_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method validate*(self: VirtualQDoubleValidator, param1: string, param2: ptr cint): cint {.base.} =
   QDoubleValidatorvalidate(self[], param1, param2)
-proc miqt_exec_method_cQDoubleValidator_validate(vtbl: pointer, inst: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
   let slotval2 = param2
-  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
 method fixup*(self: VirtualQDoubleValidator, input: string): void {.base.} =
   QDoubleValidatorfixup(self[], input)
-proc miqt_exec_method_cQDoubleValidator_fixup(vtbl: pointer, inst: pointer, input: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
-  vtbl.fixup(slotval1)
+  inst.fixup(slotval1)
 
 method event*(self: VirtualQDoubleValidator, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QDoubleValidatorevent(self[], event)
-proc miqt_exec_method_cQDoubleValidator_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQDoubleValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QDoubleValidatoreventFilter(self[], watched, event)
-proc miqt_exec_method_cQDoubleValidator_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQDoubleValidator, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QDoubleValidatortimerEvent(self[], event)
-proc miqt_exec_method_cQDoubleValidator_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQDoubleValidator, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QDoubleValidatorchildEvent(self[], event)
-proc miqt_exec_method_cQDoubleValidator_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQDoubleValidator, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QDoubleValidatorcustomEvent(self[], event)
-proc miqt_exec_method_cQDoubleValidator_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQDoubleValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QDoubleValidatorconnectNotify(self[], signal)
-proc miqt_exec_method_cQDoubleValidator_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQDoubleValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QDoubleValidatordisconnectNotify(self[], signal)
-proc miqt_exec_method_cQDoubleValidator_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQDoubleValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
+proc cQDoubleValidator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDoubleValidator](fcQDoubleValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qvalidator_types.QDoubleValidator, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qvalidator_types.QDoubleValidator): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQDoubleValidator_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qvalidator_types.QDoubleValidator, ): cint =
+proc senderSignalIndex*(self: gen_qvalidator_types.QDoubleValidator): cint =
   fcQDoubleValidator_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qvalidator_types.QDoubleValidator, signal: cstring): cint =
@@ -1713,235 +1655,185 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     vtbl: ref QDoubleValidatorVTable = nil): gen_qvalidator_types.QDoubleValidator =
   let vtbl = if vtbl == nil: new QDoubleValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ref QDoubleValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDoubleValidator_metaObject
+    vtbl[].vtbl.metaObject = cQDoubleValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQDoubleValidator_metacast
+    vtbl[].vtbl.metacast = cQDoubleValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQDoubleValidator_metacall
+    vtbl[].vtbl.metacall = cQDoubleValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQDoubleValidator_validate
+    vtbl[].vtbl.validate = cQDoubleValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQDoubleValidator_fixup
+    vtbl[].vtbl.fixup = cQDoubleValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQDoubleValidator_event
+    vtbl[].vtbl.event = cQDoubleValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDoubleValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQDoubleValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDoubleValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQDoubleValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDoubleValidator_childEvent
+    vtbl[].vtbl.childEvent = cQDoubleValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDoubleValidator_customEvent
+    vtbl[].vtbl.customEvent = cQDoubleValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDoubleValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQDoubleValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDoubleValidator_disconnectNotify
-  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQDoubleValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint,
     vtbl: ref QDoubleValidatorVTable = nil): gen_qvalidator_types.QDoubleValidator =
   let vtbl = if vtbl == nil: new QDoubleValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ref QDoubleValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDoubleValidator_metaObject
+    vtbl[].vtbl.metaObject = cQDoubleValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQDoubleValidator_metacast
+    vtbl[].vtbl.metacast = cQDoubleValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQDoubleValidator_metacall
+    vtbl[].vtbl.metacall = cQDoubleValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQDoubleValidator_validate
+    vtbl[].vtbl.validate = cQDoubleValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQDoubleValidator_fixup
+    vtbl[].vtbl.fixup = cQDoubleValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQDoubleValidator_event
+    vtbl[].vtbl.event = cQDoubleValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDoubleValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQDoubleValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDoubleValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQDoubleValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDoubleValidator_childEvent
+    vtbl[].vtbl.childEvent = cQDoubleValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDoubleValidator_customEvent
+    vtbl[].vtbl.customEvent = cQDoubleValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDoubleValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQDoubleValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDoubleValidator_disconnectNotify
-  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new2(addr(vtbl[].vtbl), bottom, top, decimals), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQDoubleValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new2(addr(vtbl[].vtbl), addr(vtbl[]), bottom, top, decimals), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     parent: gen_qobject_types.QObject,
     vtbl: ref QDoubleValidatorVTable = nil): gen_qvalidator_types.QDoubleValidator =
   let vtbl = if vtbl == nil: new QDoubleValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ref QDoubleValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDoubleValidator_metaObject
+    vtbl[].vtbl.metaObject = cQDoubleValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQDoubleValidator_metacast
+    vtbl[].vtbl.metacast = cQDoubleValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQDoubleValidator_metacall
+    vtbl[].vtbl.metacall = cQDoubleValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQDoubleValidator_validate
+    vtbl[].vtbl.validate = cQDoubleValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQDoubleValidator_fixup
+    vtbl[].vtbl.fixup = cQDoubleValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQDoubleValidator_event
+    vtbl[].vtbl.event = cQDoubleValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDoubleValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQDoubleValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDoubleValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQDoubleValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDoubleValidator_childEvent
+    vtbl[].vtbl.childEvent = cQDoubleValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDoubleValidator_customEvent
+    vtbl[].vtbl.customEvent = cQDoubleValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDoubleValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQDoubleValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDoubleValidator_disconnectNotify
-  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new3(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQDoubleValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QDoubleValidatorVTable = nil): gen_qvalidator_types.QDoubleValidator =
   let vtbl = if vtbl == nil: new QDoubleValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ref QDoubleValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDoubleValidatorVTable](fcQDoubleValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDoubleValidator_metaObject
+    vtbl[].vtbl.metaObject = cQDoubleValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQDoubleValidator_metacast
+    vtbl[].vtbl.metacast = cQDoubleValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQDoubleValidator_metacall
+    vtbl[].vtbl.metacall = cQDoubleValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQDoubleValidator_validate
+    vtbl[].vtbl.validate = cQDoubleValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQDoubleValidator_fixup
+    vtbl[].vtbl.fixup = cQDoubleValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQDoubleValidator_event
+    vtbl[].vtbl.event = cQDoubleValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDoubleValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQDoubleValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDoubleValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQDoubleValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDoubleValidator_childEvent
+    vtbl[].vtbl.childEvent = cQDoubleValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDoubleValidator_customEvent
+    vtbl[].vtbl.customEvent = cQDoubleValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDoubleValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQDoubleValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDoubleValidator_disconnectNotify
-  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new4(addr(vtbl[].vtbl), bottom, top, decimals, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQDoubleValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QDoubleValidator(h: fcQDoubleValidator_new4(addr(vtbl[].vtbl), addr(vtbl[]), bottom, top, decimals, parent.h), owned: true)
 
+const cQDoubleValidator_mvtbl = cQDoubleValidatorVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQDoubleValidator()[])](self.fcQDoubleValidator_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQDoubleValidator_method_callback_metaObject,
+  metacast: cQDoubleValidator_method_callback_metacast,
+  metacall: cQDoubleValidator_method_callback_metacall,
+  validate: cQDoubleValidator_method_callback_validate,
+  fixup: cQDoubleValidator_method_callback_fixup,
+  event: cQDoubleValidator_method_callback_event,
+  eventFilter: cQDoubleValidator_method_callback_eventFilter,
+  timerEvent: cQDoubleValidator_method_callback_timerEvent,
+  childEvent: cQDoubleValidator_method_callback_childEvent,
+  customEvent: cQDoubleValidator_method_callback_customEvent,
+  connectNotify: cQDoubleValidator_method_callback_connectNotify,
+  disconnectNotify: cQDoubleValidator_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
-    vtbl: VirtualQDoubleValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQDoubleValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQDoubleValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQDoubleValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQDoubleValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQDoubleValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQDoubleValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQDoubleValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDoubleValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDoubleValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQDoubleValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQDoubleValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDoubleValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDoubleValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQDoubleValidator_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQDoubleValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDoubleValidator_new(addr(cQDoubleValidator_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint,
-    vtbl: VirtualQDoubleValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQDoubleValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQDoubleValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQDoubleValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQDoubleValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQDoubleValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQDoubleValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQDoubleValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDoubleValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDoubleValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQDoubleValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQDoubleValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDoubleValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDoubleValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQDoubleValidator_new2(addr(vtbl[].vtbl), bottom, top, decimals)
-  vtbl[].owned = true
+    inst: VirtualQDoubleValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDoubleValidator_new2(addr(cQDoubleValidator_mvtbl), addr(inst[]), bottom, top, decimals)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQDoubleValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQDoubleValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQDoubleValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQDoubleValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQDoubleValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQDoubleValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQDoubleValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQDoubleValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDoubleValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDoubleValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQDoubleValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQDoubleValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDoubleValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDoubleValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQDoubleValidator_new3(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQDoubleValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDoubleValidator_new3(addr(cQDoubleValidator_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     bottom: float64, top: float64, decimals: cint, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQDoubleValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDoubleValidatorVTable, _: ptr cQDoubleValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQDoubleValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDoubleValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQDoubleValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQDoubleValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQDoubleValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQDoubleValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQDoubleValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQDoubleValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDoubleValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDoubleValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQDoubleValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQDoubleValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDoubleValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDoubleValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQDoubleValidator_new4(addr(vtbl[].vtbl), bottom, top, decimals, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQDoubleValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDoubleValidator_new4(addr(cQDoubleValidator_mvtbl), addr(inst[]), bottom, top, decimals, parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QDoubleValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDoubleValidator_staticMetaObject())
-proc metaObject*(self: gen_qvalidator_types.QRegularExpressionValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qvalidator_types.QRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRegularExpressionValidator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: cstring): pointer =
@@ -1959,7 +1851,7 @@ proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring): 
 proc validate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: string, pos: ptr cint): cint =
   cint(fcQRegularExpressionValidator_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
 
-proc regularExpression*(self: gen_qvalidator_types.QRegularExpressionValidator, ): gen_qregularexpression_types.QRegularExpression =
+proc regularExpression*(self: gen_qvalidator_types.QRegularExpressionValidator): gen_qregularexpression_types.QRegularExpression =
   gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpressionValidator_regularExpression(self.h), owned: true)
 
 proc setRegularExpression*(self: gen_qvalidator_types.QRegularExpressionValidator, re: gen_qregularexpression_types.QRegularExpression): void =
@@ -1969,13 +1861,13 @@ proc regularExpressionChanged*(self: gen_qvalidator_types.QRegularExpressionVali
   fcQRegularExpressionValidator_regularExpressionChanged(self.h, re.h)
 
 type QRegularExpressionValidatorregularExpressionChangedSlot* = proc(re: gen_qregularexpression_types.QRegularExpression)
-proc miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged(slot: int, re: pointer) {.cdecl.} =
+proc cQRegularExpressionValidator_slot_callback_regularExpressionChanged(slot: int, re: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QRegularExpressionValidatorregularExpressionChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qregularexpression_types.QRegularExpression(h: re, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged_release(slot: int) {.cdecl.} =
+proc cQRegularExpressionValidator_slot_callback_regularExpressionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRegularExpressionValidatorregularExpressionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1983,7 +1875,7 @@ proc onregularExpressionChanged*(self: gen_qvalidator_types.QRegularExpressionVa
   var tmp = new QRegularExpressionValidatorregularExpressionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRegularExpressionValidator_connect_regularExpressionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged, miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged_release)
+  fcQRegularExpressionValidator_connect_regularExpressionChanged(self.h, cast[int](addr tmp[]), cQRegularExpressionValidator_slot_callback_regularExpressionChanged, cQRegularExpressionValidator_slot_callback_regularExpressionChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring): string =
   let v_ms = fcQRegularExpressionValidator_tr2(s, c)
@@ -2023,11 +1915,11 @@ type QRegularExpressionValidatorVTable* {.inheritable, pure.} = object
   customEvent*: QRegularExpressionValidatorcustomEventProc
   connectNotify*: QRegularExpressionValidatorconnectNotifyProc
   disconnectNotify*: QRegularExpressionValidatordisconnectNotifyProc
-proc QRegularExpressionValidatormetaObject*(self: gen_qvalidator_types.QRegularExpressionValidator, ): gen_qobjectdefs_types.QMetaObject =
+proc QRegularExpressionValidatormetaObject*(self: gen_qvalidator_types.QRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRegularExpressionValidator_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -2038,8 +1930,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_metaObject(vtbl: pointer, s
 proc QRegularExpressionValidatormetacast*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: cstring): pointer =
   fcQRegularExpressionValidator_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -2048,8 +1940,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_metacast(vtbl: pointer, sel
 proc QRegularExpressionValidatormetacall*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: cint, param2: cint, param3: pointer): cint =
   fcQRegularExpressionValidator_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -2060,8 +1952,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_metacall(vtbl: pointer, sel
 proc QRegularExpressionValidatorvalidate*(self: gen_qvalidator_types.QRegularExpressionValidator, input: string, pos: ptr cint): cint =
   cint(fcQRegularExpressionValidator_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
 
-proc miqt_exec_callback_cQRegularExpressionValidator_validate(vtbl: pointer, self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
@@ -2074,8 +1966,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_validate(vtbl: pointer, sel
 proc QRegularExpressionValidatorfixup*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: string): void =
   fcQRegularExpressionValidator_virtualbase_fixup(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
-proc miqt_exec_callback_cQRegularExpressionValidator_fixup(vtbl: pointer, self: pointer, param1: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -2086,8 +1978,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_fixup(vtbl: pointer, self: 
 proc QRegularExpressionValidatorevent*(self: gen_qvalidator_types.QRegularExpressionValidator, event: gen_qcoreevent_types.QEvent): bool =
   fcQRegularExpressionValidator_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -2096,8 +1988,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_event(vtbl: pointer, self: 
 proc QRegularExpressionValidatoreventFilter*(self: gen_qvalidator_types.QRegularExpressionValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQRegularExpressionValidator_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -2107,8 +1999,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_eventFilter(vtbl: pointer, 
 proc QRegularExpressionValidatortimerEvent*(self: gen_qvalidator_types.QRegularExpressionValidator, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQRegularExpressionValidator_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -2116,8 +2008,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_timerEvent(vtbl: pointer, s
 proc QRegularExpressionValidatorchildEvent*(self: gen_qvalidator_types.QRegularExpressionValidator, event: gen_qcoreevent_types.QChildEvent): void =
   fcQRegularExpressionValidator_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -2125,8 +2017,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_childEvent(vtbl: pointer, s
 proc QRegularExpressionValidatorcustomEvent*(self: gen_qvalidator_types.QRegularExpressionValidator, event: gen_qcoreevent_types.QEvent): void =
   fcQRegularExpressionValidator_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -2134,8 +2026,8 @@ proc miqt_exec_callback_cQRegularExpressionValidator_customEvent(vtbl: pointer, 
 proc QRegularExpressionValidatorconnectNotify*(self: gen_qvalidator_types.QRegularExpressionValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQRegularExpressionValidator_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -2143,19 +2035,19 @@ proc miqt_exec_callback_cQRegularExpressionValidator_connectNotify(vtbl: pointer
 proc QRegularExpressionValidatordisconnectNotify*(self: gen_qvalidator_types.QRegularExpressionValidator, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQRegularExpressionValidator_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRegularExpressionValidatorVTable](vtbl)
+proc cQRegularExpressionValidator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQRegularExpressionValidator* {.inheritable.} = ref object of QRegularExpressionValidator
   vtbl*: cQRegularExpressionValidatorVTable
-method metaObject*(self: VirtualQRegularExpressionValidator, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject {.base.} =
   QRegularExpressionValidatormetaObject(self[])
-proc miqt_exec_method_cQRegularExpressionValidator_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQRegularExpressionValidator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2163,100 +2055,100 @@ proc miqt_exec_method_cQRegularExpressionValidator_metaObject(vtbl: pointer, ins
 
 method metacast*(self: VirtualQRegularExpressionValidator, param1: cstring): pointer {.base.} =
   QRegularExpressionValidatormetacast(self[], param1)
-proc miqt_exec_method_cQRegularExpressionValidator_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQRegularExpressionValidator, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QRegularExpressionValidatormetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQRegularExpressionValidator_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method validate*(self: VirtualQRegularExpressionValidator, input: string, pos: ptr cint): cint {.base.} =
   QRegularExpressionValidatorvalidate(self[], input, pos)
-proc miqt_exec_method_cQRegularExpressionValidator_validate(vtbl: pointer, inst: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let vinput_ms = input
   let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
-  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
 method fixup*(self: VirtualQRegularExpressionValidator, param1: string): void {.base.} =
   QRegularExpressionValidatorfixup(self[], param1)
-proc miqt_exec_method_cQRegularExpressionValidator_fixup(vtbl: pointer, inst: pointer, param1: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_fixup(self: pointer, param1: struct_miqt_string): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
-  vtbl.fixup(slotval1)
+  inst.fixup(slotval1)
 
 method event*(self: VirtualQRegularExpressionValidator, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QRegularExpressionValidatorevent(self[], event)
-proc miqt_exec_method_cQRegularExpressionValidator_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQRegularExpressionValidator, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QRegularExpressionValidatoreventFilter(self[], watched, event)
-proc miqt_exec_method_cQRegularExpressionValidator_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQRegularExpressionValidator, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QRegularExpressionValidatortimerEvent(self[], event)
-proc miqt_exec_method_cQRegularExpressionValidator_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQRegularExpressionValidator, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QRegularExpressionValidatorchildEvent(self[], event)
-proc miqt_exec_method_cQRegularExpressionValidator_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQRegularExpressionValidator, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QRegularExpressionValidatorcustomEvent(self[], event)
-proc miqt_exec_method_cQRegularExpressionValidator_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQRegularExpressionValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRegularExpressionValidatorconnectNotify(self[], signal)
-proc miqt_exec_method_cQRegularExpressionValidator_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQRegularExpressionValidator, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRegularExpressionValidatordisconnectNotify(self[], signal)
-proc miqt_exec_method_cQRegularExpressionValidator_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRegularExpressionValidator](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
+proc cQRegularExpressionValidator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRegularExpressionValidator](fcQRegularExpressionValidator_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qvalidator_types.QRegularExpressionValidator, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qvalidator_types.QRegularExpressionValidator): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQRegularExpressionValidator_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qvalidator_types.QRegularExpressionValidator, ): cint =
+proc senderSignalIndex*(self: gen_qvalidator_types.QRegularExpressionValidator): cint =
   fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qvalidator_types.QRegularExpressionValidator, signal: cstring): cint =
@@ -2269,231 +2161,181 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     vtbl: ref QRegularExpressionValidatorVTable = nil): gen_qvalidator_types.QRegularExpressionValidator =
   let vtbl = if vtbl == nil: new QRegularExpressionValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ref QRegularExpressionValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRegularExpressionValidator_metaObject
+    vtbl[].vtbl.metaObject = cQRegularExpressionValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRegularExpressionValidator_metacast
+    vtbl[].vtbl.metacast = cQRegularExpressionValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRegularExpressionValidator_metacall
+    vtbl[].vtbl.metacall = cQRegularExpressionValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQRegularExpressionValidator_validate
+    vtbl[].vtbl.validate = cQRegularExpressionValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQRegularExpressionValidator_fixup
+    vtbl[].vtbl.fixup = cQRegularExpressionValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRegularExpressionValidator_event
+    vtbl[].vtbl.event = cQRegularExpressionValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRegularExpressionValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQRegularExpressionValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRegularExpressionValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQRegularExpressionValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRegularExpressionValidator_childEvent
+    vtbl[].vtbl.childEvent = cQRegularExpressionValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRegularExpressionValidator_customEvent
+    vtbl[].vtbl.customEvent = cQRegularExpressionValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRegularExpressionValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQRegularExpressionValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify
-  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRegularExpressionValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression,
     vtbl: ref QRegularExpressionValidatorVTable = nil): gen_qvalidator_types.QRegularExpressionValidator =
   let vtbl = if vtbl == nil: new QRegularExpressionValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ref QRegularExpressionValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRegularExpressionValidator_metaObject
+    vtbl[].vtbl.metaObject = cQRegularExpressionValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRegularExpressionValidator_metacast
+    vtbl[].vtbl.metacast = cQRegularExpressionValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRegularExpressionValidator_metacall
+    vtbl[].vtbl.metacall = cQRegularExpressionValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQRegularExpressionValidator_validate
+    vtbl[].vtbl.validate = cQRegularExpressionValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQRegularExpressionValidator_fixup
+    vtbl[].vtbl.fixup = cQRegularExpressionValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRegularExpressionValidator_event
+    vtbl[].vtbl.event = cQRegularExpressionValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRegularExpressionValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQRegularExpressionValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRegularExpressionValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQRegularExpressionValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRegularExpressionValidator_childEvent
+    vtbl[].vtbl.childEvent = cQRegularExpressionValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRegularExpressionValidator_customEvent
+    vtbl[].vtbl.customEvent = cQRegularExpressionValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRegularExpressionValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQRegularExpressionValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify
-  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new2(addr(vtbl[].vtbl), re.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRegularExpressionValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new2(addr(vtbl[].vtbl), addr(vtbl[]), re.h), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     parent: gen_qobject_types.QObject,
     vtbl: ref QRegularExpressionValidatorVTable = nil): gen_qvalidator_types.QRegularExpressionValidator =
   let vtbl = if vtbl == nil: new QRegularExpressionValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ref QRegularExpressionValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRegularExpressionValidator_metaObject
+    vtbl[].vtbl.metaObject = cQRegularExpressionValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRegularExpressionValidator_metacast
+    vtbl[].vtbl.metacast = cQRegularExpressionValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRegularExpressionValidator_metacall
+    vtbl[].vtbl.metacall = cQRegularExpressionValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQRegularExpressionValidator_validate
+    vtbl[].vtbl.validate = cQRegularExpressionValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQRegularExpressionValidator_fixup
+    vtbl[].vtbl.fixup = cQRegularExpressionValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRegularExpressionValidator_event
+    vtbl[].vtbl.event = cQRegularExpressionValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRegularExpressionValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQRegularExpressionValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRegularExpressionValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQRegularExpressionValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRegularExpressionValidator_childEvent
+    vtbl[].vtbl.childEvent = cQRegularExpressionValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRegularExpressionValidator_customEvent
+    vtbl[].vtbl.customEvent = cQRegularExpressionValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRegularExpressionValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQRegularExpressionValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify
-  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new3(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRegularExpressionValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression, parent: gen_qobject_types.QObject,
     vtbl: ref QRegularExpressionValidatorVTable = nil): gen_qvalidator_types.QRegularExpressionValidator =
   let vtbl = if vtbl == nil: new QRegularExpressionValidatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ref QRegularExpressionValidatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRegularExpressionValidatorVTable](fcQRegularExpressionValidator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRegularExpressionValidator_metaObject
+    vtbl[].vtbl.metaObject = cQRegularExpressionValidator_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRegularExpressionValidator_metacast
+    vtbl[].vtbl.metacast = cQRegularExpressionValidator_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRegularExpressionValidator_metacall
+    vtbl[].vtbl.metacall = cQRegularExpressionValidator_vtable_callback_metacall
   if not isNil(vtbl[].validate):
-    vtbl[].vtbl.validate = miqt_exec_callback_cQRegularExpressionValidator_validate
+    vtbl[].vtbl.validate = cQRegularExpressionValidator_vtable_callback_validate
   if not isNil(vtbl[].fixup):
-    vtbl[].vtbl.fixup = miqt_exec_callback_cQRegularExpressionValidator_fixup
+    vtbl[].vtbl.fixup = cQRegularExpressionValidator_vtable_callback_fixup
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRegularExpressionValidator_event
+    vtbl[].vtbl.event = cQRegularExpressionValidator_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRegularExpressionValidator_eventFilter
+    vtbl[].vtbl.eventFilter = cQRegularExpressionValidator_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRegularExpressionValidator_timerEvent
+    vtbl[].vtbl.timerEvent = cQRegularExpressionValidator_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRegularExpressionValidator_childEvent
+    vtbl[].vtbl.childEvent = cQRegularExpressionValidator_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRegularExpressionValidator_customEvent
+    vtbl[].vtbl.customEvent = cQRegularExpressionValidator_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRegularExpressionValidator_connectNotify
+    vtbl[].vtbl.connectNotify = cQRegularExpressionValidator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify
-  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new4(addr(vtbl[].vtbl), re.h, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRegularExpressionValidator_vtable_callback_disconnectNotify
+  gen_qvalidator_types.QRegularExpressionValidator(h: fcQRegularExpressionValidator_new4(addr(vtbl[].vtbl), addr(vtbl[]), re.h, parent.h), owned: true)
 
+const cQRegularExpressionValidator_mvtbl = cQRegularExpressionValidatorVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](self.fcQRegularExpressionValidator_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQRegularExpressionValidator_method_callback_metaObject,
+  metacast: cQRegularExpressionValidator_method_callback_metacast,
+  metacall: cQRegularExpressionValidator_method_callback_metacall,
+  validate: cQRegularExpressionValidator_method_callback_validate,
+  fixup: cQRegularExpressionValidator_method_callback_fixup,
+  event: cQRegularExpressionValidator_method_callback_event,
+  eventFilter: cQRegularExpressionValidator_method_callback_eventFilter,
+  timerEvent: cQRegularExpressionValidator_method_callback_timerEvent,
+  childEvent: cQRegularExpressionValidator_method_callback_childEvent,
+  customEvent: cQRegularExpressionValidator_method_callback_customEvent,
+  connectNotify: cQRegularExpressionValidator_method_callback_connectNotify,
+  disconnectNotify: cQRegularExpressionValidator_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
-    vtbl: VirtualQRegularExpressionValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRegularExpressionValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRegularExpressionValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRegularExpressionValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQRegularExpressionValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQRegularExpressionValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQRegularExpressionValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRegularExpressionValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRegularExpressionValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRegularExpressionValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRegularExpressionValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRegularExpressionValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRegularExpressionValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRegularExpressionValidator_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQRegularExpressionValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRegularExpressionValidator_new(addr(cQRegularExpressionValidator_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression,
-    vtbl: VirtualQRegularExpressionValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRegularExpressionValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRegularExpressionValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRegularExpressionValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQRegularExpressionValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQRegularExpressionValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQRegularExpressionValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRegularExpressionValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRegularExpressionValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRegularExpressionValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRegularExpressionValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRegularExpressionValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRegularExpressionValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRegularExpressionValidator_new2(addr(vtbl[].vtbl), re.h)
-  vtbl[].owned = true
+    inst: VirtualQRegularExpressionValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRegularExpressionValidator_new2(addr(cQRegularExpressionValidator_mvtbl), addr(inst[]), re.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQRegularExpressionValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRegularExpressionValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRegularExpressionValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRegularExpressionValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQRegularExpressionValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQRegularExpressionValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQRegularExpressionValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRegularExpressionValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRegularExpressionValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRegularExpressionValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRegularExpressionValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRegularExpressionValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRegularExpressionValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRegularExpressionValidator_new3(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQRegularExpressionValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRegularExpressionValidator_new3(addr(cQRegularExpressionValidator_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     re: gen_qregularexpression_types.QRegularExpression, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQRegularExpressionValidator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRegularExpressionValidatorVTable, _: ptr cQRegularExpressionValidator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRegularExpressionValidator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRegularExpressionValidator_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRegularExpressionValidator_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRegularExpressionValidator_metacall
-  vtbl[].vtbl.validate = miqt_exec_method_cQRegularExpressionValidator_validate
-  vtbl[].vtbl.fixup = miqt_exec_method_cQRegularExpressionValidator_fixup
-  vtbl[].vtbl.event = miqt_exec_method_cQRegularExpressionValidator_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRegularExpressionValidator_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRegularExpressionValidator_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRegularExpressionValidator_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRegularExpressionValidator_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRegularExpressionValidator_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRegularExpressionValidator_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRegularExpressionValidator_new4(addr(vtbl[].vtbl), re.h, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQRegularExpressionValidator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRegularExpressionValidator_new4(addr(cQRegularExpressionValidator_mvtbl), addr(inst[]), re.h, parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qvalidator_types.QRegularExpressionValidator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRegularExpressionValidator_staticMetaObject())

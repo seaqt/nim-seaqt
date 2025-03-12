@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qanystringview.h>
 #include "gen_qanystringview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAnyStringView* QAnyStringView_new() {
 	return new QAnyStringView();
 }

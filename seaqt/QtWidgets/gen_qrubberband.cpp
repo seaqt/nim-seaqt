@@ -39,39 +39,32 @@
 #include <QWidget>
 #include <qrubberband.h>
 #include "gen_qrubberband.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQRubberBand final : public QRubberBand {
-	struct QRubberBand_VTable* vtbl;
+	const QRubberBand_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QRubberBand_VTable* QRubberBand_vtbl(const VirtualQRubberBand* self);
+	friend void* QRubberBand_vdata(const VirtualQRubberBand* self);
+	friend void QRubberBand_setVdata(VirtualQRubberBand* self, void* vdata);
 
-	VirtualQRubberBand(struct QRubberBand_VTable* vtbl, QRubberBand::Shape param1): QRubberBand(param1), vtbl(vtbl) {};
-	VirtualQRubberBand(struct QRubberBand_VTable* vtbl, QRubberBand::Shape param1, QWidget* param2): QRubberBand(param1, param2), vtbl(vtbl) {};
+	VirtualQRubberBand(const QRubberBand_VTable* vtbl, void* vdata, QRubberBand::Shape param1): QRubberBand(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQRubberBand(const QRubberBand_VTable* vtbl, void* vdata, QRubberBand::Shape param1, QWidget* param2): QRubberBand(param1, param2), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQRubberBand() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQRubberBand() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QRubberBand::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QRubberBand_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QRubberBand_virtualbase_metaObject(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QRubberBand::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QRubberBand_virtualbase_metacast(void* self, const char* param1);
+	friend void* QRubberBand_virtualbase_metacast(VirtualQRubberBand* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QRubberBand::qt_metacall(param1, param2, param3);
@@ -97,14 +89,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRubberBand_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QRubberBand_virtualbase_metacall(VirtualQRubberBand* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QRubberBand::event(e);
@@ -112,14 +103,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRubberBand_virtualbase_event(void* self, QEvent* e);
+	friend bool QRubberBand_virtualbase_event(VirtualQRubberBand* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QRubberBand::paintEvent(param1);
@@ -128,13 +118,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QRubberBand_virtualbase_paintEvent(VirtualQRubberBand* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QRubberBand::changeEvent(param1);
@@ -143,13 +132,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QRubberBand_virtualbase_changeEvent(VirtualQRubberBand* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QRubberBand::showEvent(param1);
@@ -158,13 +146,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QRubberBand_virtualbase_showEvent(VirtualQRubberBand* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QRubberBand::resizeEvent(param1);
@@ -173,13 +160,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QRubberBand_virtualbase_resizeEvent(VirtualQRubberBand* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* param1) override {
 		if (vtbl->moveEvent == 0) {
 			QRubberBand::moveEvent(param1);
@@ -188,13 +174,12 @@ public:
 
 		QMoveEvent* sigval1 = param1;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_moveEvent(void* self, QMoveEvent* param1);
+	friend void QRubberBand_virtualbase_moveEvent(VirtualQRubberBand* self, QMoveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionRubberBand* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QRubberBand::initStyleOption(option);
@@ -203,27 +188,25 @@ public:
 
 		QStyleOptionRubberBand* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_initStyleOption(const void* self, QStyleOptionRubberBand* option);
+	friend void QRubberBand_virtualbase_initStyleOption(const VirtualQRubberBand* self, QStyleOptionRubberBand* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QRubberBand::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRubberBand_virtualbase_devType(const void* self);
+	friend int QRubberBand_virtualbase_devType(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QRubberBand::setVisible(visible);
@@ -232,45 +215,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_setVisible(void* self, bool visible);
+	friend void QRubberBand_virtualbase_setVisible(VirtualQRubberBand* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QRubberBand::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QRubberBand_virtualbase_sizeHint(const void* self);
+	friend QSize* QRubberBand_virtualbase_sizeHint(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QRubberBand::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QRubberBand_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QRubberBand_virtualbase_minimumSizeHint(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QRubberBand::heightForWidth(param1);
@@ -278,42 +258,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRubberBand_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QRubberBand_virtualbase_heightForWidth(const VirtualQRubberBand* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QRubberBand::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QRubberBand_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QRubberBand_virtualbase_hasHeightForWidth(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QRubberBand::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QRubberBand_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QRubberBand_virtualbase_paintEngine(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QRubberBand::mousePressEvent(event);
@@ -322,13 +299,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QRubberBand_virtualbase_mousePressEvent(VirtualQRubberBand* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QRubberBand::mouseReleaseEvent(event);
@@ -337,13 +313,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QRubberBand_virtualbase_mouseReleaseEvent(VirtualQRubberBand* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QRubberBand::mouseDoubleClickEvent(event);
@@ -352,13 +327,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QRubberBand_virtualbase_mouseDoubleClickEvent(VirtualQRubberBand* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QRubberBand::mouseMoveEvent(event);
@@ -367,13 +341,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QRubberBand_virtualbase_mouseMoveEvent(VirtualQRubberBand* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QRubberBand::wheelEvent(event);
@@ -382,13 +355,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QRubberBand_virtualbase_wheelEvent(VirtualQRubberBand* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QRubberBand::keyPressEvent(event);
@@ -397,13 +369,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QRubberBand_virtualbase_keyPressEvent(VirtualQRubberBand* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QRubberBand::keyReleaseEvent(event);
@@ -412,13 +383,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QRubberBand_virtualbase_keyReleaseEvent(VirtualQRubberBand* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QRubberBand::focusInEvent(event);
@@ -427,13 +397,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QRubberBand_virtualbase_focusInEvent(VirtualQRubberBand* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QRubberBand::focusOutEvent(event);
@@ -442,13 +411,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QRubberBand_virtualbase_focusOutEvent(VirtualQRubberBand* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QRubberBand::enterEvent(event);
@@ -457,13 +425,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QRubberBand_virtualbase_enterEvent(VirtualQRubberBand* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QRubberBand::leaveEvent(event);
@@ -472,13 +439,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QRubberBand_virtualbase_leaveEvent(VirtualQRubberBand* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QRubberBand::closeEvent(event);
@@ -487,13 +453,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QRubberBand_virtualbase_closeEvent(VirtualQRubberBand* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QRubberBand::contextMenuEvent(event);
@@ -502,13 +467,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QRubberBand_virtualbase_contextMenuEvent(VirtualQRubberBand* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QRubberBand::tabletEvent(event);
@@ -517,13 +481,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QRubberBand_virtualbase_tabletEvent(VirtualQRubberBand* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QRubberBand::actionEvent(event);
@@ -532,13 +495,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QRubberBand_virtualbase_actionEvent(VirtualQRubberBand* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QRubberBand::dragEnterEvent(event);
@@ -547,13 +509,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QRubberBand_virtualbase_dragEnterEvent(VirtualQRubberBand* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QRubberBand::dragMoveEvent(event);
@@ -562,13 +523,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QRubberBand_virtualbase_dragMoveEvent(VirtualQRubberBand* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QRubberBand::dragLeaveEvent(event);
@@ -577,13 +537,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QRubberBand_virtualbase_dragLeaveEvent(VirtualQRubberBand* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QRubberBand::dropEvent(event);
@@ -592,13 +551,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QRubberBand_virtualbase_dropEvent(VirtualQRubberBand* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QRubberBand::hideEvent(event);
@@ -607,13 +565,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QRubberBand_virtualbase_hideEvent(VirtualQRubberBand* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QRubberBand::nativeEvent(eventType, message, result);
@@ -629,14 +586,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QRubberBand_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QRubberBand_virtualbase_nativeEvent(VirtualQRubberBand* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QRubberBand::metric(param1);
@@ -645,14 +601,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRubberBand_virtualbase_metric(const void* self, int param1);
+	friend int QRubberBand_virtualbase_metric(const VirtualQRubberBand* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QRubberBand::initPainter(painter);
@@ -661,13 +616,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QRubberBand_virtualbase_initPainter(const VirtualQRubberBand* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QRubberBand::redirected(offset);
@@ -675,28 +629,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QRubberBand_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QRubberBand_virtualbase_redirected(const VirtualQRubberBand* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QRubberBand::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QRubberBand_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QRubberBand_virtualbase_sharedPainter(const VirtualQRubberBand* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QRubberBand::inputMethodEvent(param1);
@@ -705,13 +657,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QRubberBand_virtualbase_inputMethodEvent(VirtualQRubberBand* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QRubberBand::inputMethodQuery(param1);
@@ -720,16 +671,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QRubberBand_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QRubberBand_virtualbase_inputMethodQuery(const VirtualQRubberBand* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QRubberBand::focusNextPrevChild(next);
@@ -737,14 +687,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRubberBand_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QRubberBand_virtualbase_focusNextPrevChild(VirtualQRubberBand* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QRubberBand::eventFilter(watched, event);
@@ -753,14 +702,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QRubberBand_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QRubberBand_virtualbase_eventFilter(VirtualQRubberBand* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QRubberBand::timerEvent(event);
@@ -769,13 +717,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QRubberBand_virtualbase_timerEvent(VirtualQRubberBand* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QRubberBand::childEvent(event);
@@ -784,13 +731,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QRubberBand_virtualbase_childEvent(VirtualQRubberBand* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QRubberBand::customEvent(event);
@@ -799,13 +745,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QRubberBand_virtualbase_customEvent(VirtualQRubberBand* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QRubberBand::connectNotify(signal);
@@ -816,13 +761,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QRubberBand_virtualbase_connectNotify(VirtualQRubberBand* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QRubberBand::disconnectNotify(signal);
@@ -833,30 +777,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QRubberBand_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QRubberBand_virtualbase_disconnectNotify(VirtualQRubberBand* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QRubberBand_protectedbase_updateMicroFocus(void* self);
-	friend void QRubberBand_protectedbase_create(void* self);
-	friend void QRubberBand_protectedbase_destroy(void* self);
-	friend bool QRubberBand_protectedbase_focusNextChild(void* self);
-	friend bool QRubberBand_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QRubberBand_protectedbase_sender(const void* self);
-	friend int QRubberBand_protectedbase_senderSignalIndex(const void* self);
-	friend int QRubberBand_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QRubberBand_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QRubberBand_protectedbase_updateMicroFocus(VirtualQRubberBand* self);
+	friend void QRubberBand_protectedbase_create(VirtualQRubberBand* self);
+	friend void QRubberBand_protectedbase_destroy(VirtualQRubberBand* self);
+	friend bool QRubberBand_protectedbase_focusNextChild(VirtualQRubberBand* self);
+	friend bool QRubberBand_protectedbase_focusPreviousChild(VirtualQRubberBand* self);
+	friend QObject* QRubberBand_protectedbase_sender(const VirtualQRubberBand* self);
+	friend int QRubberBand_protectedbase_senderSignalIndex(const VirtualQRubberBand* self);
+	friend int QRubberBand_protectedbase_receivers(const VirtualQRubberBand* self, const char* signal);
+	friend bool QRubberBand_protectedbase_isSignalConnected(const VirtualQRubberBand* self, QMetaMethod* signal);
 };
 
-QRubberBand* QRubberBand_new(struct QRubberBand_VTable* vtbl, int param1) {
-	return new VirtualQRubberBand(vtbl, static_cast<QRubberBand::Shape>(param1));
+VirtualQRubberBand* QRubberBand_new(const QRubberBand_VTable* vtbl, void* vdata, int param1) {
+	return new VirtualQRubberBand(vtbl, vdata, static_cast<QRubberBand::Shape>(param1));
 }
 
-QRubberBand* QRubberBand_new2(struct QRubberBand_VTable* vtbl, int param1, QWidget* param2) {
-	return new VirtualQRubberBand(vtbl, static_cast<QRubberBand::Shape>(param1), param2);
+VirtualQRubberBand* QRubberBand_new2(const QRubberBand_VTable* vtbl, void* vdata, int param1, QWidget* param2) {
+	return new VirtualQRubberBand(vtbl, vdata, static_cast<QRubberBand::Shape>(param1), param2);
 }
 
 void QRubberBand_virtbase(QRubberBand* src, QWidget** outptr_QWidget) {
@@ -937,375 +881,302 @@ struct miqt_string QRubberBand_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QRubberBand_virtualbase_metaObject(const void* self) {
+QMetaObject* QRubberBand_virtualbase_metaObject(const VirtualQRubberBand* self) {
 
-	return (QMetaObject*) ( (const VirtualQRubberBand*)(self) )->QRubberBand::metaObject();
-
+	return (QMetaObject*) self->QRubberBand::metaObject();
 }
 
-void* QRubberBand_virtualbase_metacast(void* self, const char* param1) {
+void* QRubberBand_virtualbase_metacast(VirtualQRubberBand* self, const char* param1) {
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::qt_metacast(param1);
-
+	return self->QRubberBand::qt_metacast(param1);
 }
 
-int QRubberBand_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QRubberBand_virtualbase_metacall(VirtualQRubberBand* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QRubberBand::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QRubberBand_virtualbase_event(void* self, QEvent* e) {
+bool QRubberBand_virtualbase_event(VirtualQRubberBand* self, QEvent* e) {
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::event(e);
-
+	return self->QRubberBand::event(e);
 }
 
-void QRubberBand_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QRubberBand_virtualbase_paintEvent(VirtualQRubberBand* self, QPaintEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::paintEvent(param1);
-
+	self->QRubberBand::paintEvent(param1);
 }
 
-void QRubberBand_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QRubberBand_virtualbase_changeEvent(VirtualQRubberBand* self, QEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::changeEvent(param1);
-
+	self->QRubberBand::changeEvent(param1);
 }
 
-void QRubberBand_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QRubberBand_virtualbase_showEvent(VirtualQRubberBand* self, QShowEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::showEvent(param1);
-
+	self->QRubberBand::showEvent(param1);
 }
 
-void QRubberBand_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QRubberBand_virtualbase_resizeEvent(VirtualQRubberBand* self, QResizeEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::resizeEvent(param1);
-
+	self->QRubberBand::resizeEvent(param1);
 }
 
-void QRubberBand_virtualbase_moveEvent(void* self, QMoveEvent* param1) {
+void QRubberBand_virtualbase_moveEvent(VirtualQRubberBand* self, QMoveEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::moveEvent(param1);
-
+	self->QRubberBand::moveEvent(param1);
 }
 
-void QRubberBand_virtualbase_initStyleOption(const void* self, QStyleOptionRubberBand* option) {
+void QRubberBand_virtualbase_initStyleOption(const VirtualQRubberBand* self, QStyleOptionRubberBand* option) {
 
-	( (const VirtualQRubberBand*)(self) )->QRubberBand::initStyleOption(option);
-
+	self->QRubberBand::initStyleOption(option);
 }
 
-int QRubberBand_virtualbase_devType(const void* self) {
+int QRubberBand_virtualbase_devType(const VirtualQRubberBand* self) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::devType();
-
+	return self->QRubberBand::devType();
 }
 
-void QRubberBand_virtualbase_setVisible(void* self, bool visible) {
+void QRubberBand_virtualbase_setVisible(VirtualQRubberBand* self, bool visible) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::setVisible(visible);
-
+	self->QRubberBand::setVisible(visible);
 }
 
-QSize* QRubberBand_virtualbase_sizeHint(const void* self) {
+QSize* QRubberBand_virtualbase_sizeHint(const VirtualQRubberBand* self) {
 
-	return new QSize(( (const VirtualQRubberBand*)(self) )->QRubberBand::sizeHint());
-
+	return new QSize(self->QRubberBand::sizeHint());
 }
 
-QSize* QRubberBand_virtualbase_minimumSizeHint(const void* self) {
+QSize* QRubberBand_virtualbase_minimumSizeHint(const VirtualQRubberBand* self) {
 
-	return new QSize(( (const VirtualQRubberBand*)(self) )->QRubberBand::minimumSizeHint());
-
+	return new QSize(self->QRubberBand::minimumSizeHint());
 }
 
-int QRubberBand_virtualbase_heightForWidth(const void* self, int param1) {
+int QRubberBand_virtualbase_heightForWidth(const VirtualQRubberBand* self, int param1) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::heightForWidth(static_cast<int>(param1));
-
+	return self->QRubberBand::heightForWidth(static_cast<int>(param1));
 }
 
-bool QRubberBand_virtualbase_hasHeightForWidth(const void* self) {
+bool QRubberBand_virtualbase_hasHeightForWidth(const VirtualQRubberBand* self) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::hasHeightForWidth();
-
+	return self->QRubberBand::hasHeightForWidth();
 }
 
-QPaintEngine* QRubberBand_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QRubberBand_virtualbase_paintEngine(const VirtualQRubberBand* self) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::paintEngine();
-
+	return self->QRubberBand::paintEngine();
 }
 
-void QRubberBand_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QRubberBand_virtualbase_mousePressEvent(VirtualQRubberBand* self, QMouseEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::mousePressEvent(event);
-
+	self->QRubberBand::mousePressEvent(event);
 }
 
-void QRubberBand_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QRubberBand_virtualbase_mouseReleaseEvent(VirtualQRubberBand* self, QMouseEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::mouseReleaseEvent(event);
-
+	self->QRubberBand::mouseReleaseEvent(event);
 }
 
-void QRubberBand_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QRubberBand_virtualbase_mouseDoubleClickEvent(VirtualQRubberBand* self, QMouseEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::mouseDoubleClickEvent(event);
-
+	self->QRubberBand::mouseDoubleClickEvent(event);
 }
 
-void QRubberBand_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QRubberBand_virtualbase_mouseMoveEvent(VirtualQRubberBand* self, QMouseEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::mouseMoveEvent(event);
-
+	self->QRubberBand::mouseMoveEvent(event);
 }
 
-void QRubberBand_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QRubberBand_virtualbase_wheelEvent(VirtualQRubberBand* self, QWheelEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::wheelEvent(event);
-
+	self->QRubberBand::wheelEvent(event);
 }
 
-void QRubberBand_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QRubberBand_virtualbase_keyPressEvent(VirtualQRubberBand* self, QKeyEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::keyPressEvent(event);
-
+	self->QRubberBand::keyPressEvent(event);
 }
 
-void QRubberBand_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QRubberBand_virtualbase_keyReleaseEvent(VirtualQRubberBand* self, QKeyEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::keyReleaseEvent(event);
-
+	self->QRubberBand::keyReleaseEvent(event);
 }
 
-void QRubberBand_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QRubberBand_virtualbase_focusInEvent(VirtualQRubberBand* self, QFocusEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::focusInEvent(event);
-
+	self->QRubberBand::focusInEvent(event);
 }
 
-void QRubberBand_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QRubberBand_virtualbase_focusOutEvent(VirtualQRubberBand* self, QFocusEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::focusOutEvent(event);
-
+	self->QRubberBand::focusOutEvent(event);
 }
 
-void QRubberBand_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QRubberBand_virtualbase_enterEvent(VirtualQRubberBand* self, QEnterEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::enterEvent(event);
-
+	self->QRubberBand::enterEvent(event);
 }
 
-void QRubberBand_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QRubberBand_virtualbase_leaveEvent(VirtualQRubberBand* self, QEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::leaveEvent(event);
-
+	self->QRubberBand::leaveEvent(event);
 }
 
-void QRubberBand_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QRubberBand_virtualbase_closeEvent(VirtualQRubberBand* self, QCloseEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::closeEvent(event);
-
+	self->QRubberBand::closeEvent(event);
 }
 
-void QRubberBand_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QRubberBand_virtualbase_contextMenuEvent(VirtualQRubberBand* self, QContextMenuEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::contextMenuEvent(event);
-
+	self->QRubberBand::contextMenuEvent(event);
 }
 
-void QRubberBand_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QRubberBand_virtualbase_tabletEvent(VirtualQRubberBand* self, QTabletEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::tabletEvent(event);
-
+	self->QRubberBand::tabletEvent(event);
 }
 
-void QRubberBand_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QRubberBand_virtualbase_actionEvent(VirtualQRubberBand* self, QActionEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::actionEvent(event);
-
+	self->QRubberBand::actionEvent(event);
 }
 
-void QRubberBand_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QRubberBand_virtualbase_dragEnterEvent(VirtualQRubberBand* self, QDragEnterEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::dragEnterEvent(event);
-
+	self->QRubberBand::dragEnterEvent(event);
 }
 
-void QRubberBand_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QRubberBand_virtualbase_dragMoveEvent(VirtualQRubberBand* self, QDragMoveEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::dragMoveEvent(event);
-
+	self->QRubberBand::dragMoveEvent(event);
 }
 
-void QRubberBand_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QRubberBand_virtualbase_dragLeaveEvent(VirtualQRubberBand* self, QDragLeaveEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::dragLeaveEvent(event);
-
+	self->QRubberBand::dragLeaveEvent(event);
 }
 
-void QRubberBand_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QRubberBand_virtualbase_dropEvent(VirtualQRubberBand* self, QDropEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::dropEvent(event);
-
+	self->QRubberBand::dropEvent(event);
 }
 
-void QRubberBand_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QRubberBand_virtualbase_hideEvent(VirtualQRubberBand* self, QHideEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::hideEvent(event);
-
+	self->QRubberBand::hideEvent(event);
 }
 
-bool QRubberBand_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QRubberBand_virtualbase_nativeEvent(VirtualQRubberBand* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QRubberBand::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QRubberBand_virtualbase_metric(const void* self, int param1) {
+int QRubberBand_virtualbase_metric(const VirtualQRubberBand* self, int param1) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::metric(static_cast<VirtualQRubberBand::PaintDeviceMetric>(param1));
-
+	return self->QRubberBand::metric(static_cast<VirtualQRubberBand::PaintDeviceMetric>(param1));
 }
 
-void QRubberBand_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QRubberBand_virtualbase_initPainter(const VirtualQRubberBand* self, QPainter* painter) {
 
-	( (const VirtualQRubberBand*)(self) )->QRubberBand::initPainter(painter);
-
+	self->QRubberBand::initPainter(painter);
 }
 
-QPaintDevice* QRubberBand_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QRubberBand_virtualbase_redirected(const VirtualQRubberBand* self, QPoint* offset) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::redirected(offset);
-
+	return self->QRubberBand::redirected(offset);
 }
 
-QPainter* QRubberBand_virtualbase_sharedPainter(const void* self) {
+QPainter* QRubberBand_virtualbase_sharedPainter(const VirtualQRubberBand* self) {
 
-	return ( (const VirtualQRubberBand*)(self) )->QRubberBand::sharedPainter();
-
+	return self->QRubberBand::sharedPainter();
 }
 
-void QRubberBand_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QRubberBand_virtualbase_inputMethodEvent(VirtualQRubberBand* self, QInputMethodEvent* param1) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::inputMethodEvent(param1);
-
+	self->QRubberBand::inputMethodEvent(param1);
 }
 
-QVariant* QRubberBand_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QRubberBand_virtualbase_inputMethodQuery(const VirtualQRubberBand* self, int param1) {
 
-	return new QVariant(( (const VirtualQRubberBand*)(self) )->QRubberBand::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QRubberBand::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QRubberBand_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QRubberBand_virtualbase_focusNextPrevChild(VirtualQRubberBand* self, bool next) {
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::focusNextPrevChild(next);
-
+	return self->QRubberBand::focusNextPrevChild(next);
 }
 
-bool QRubberBand_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QRubberBand_virtualbase_eventFilter(VirtualQRubberBand* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQRubberBand*)(self) )->QRubberBand::eventFilter(watched, event);
-
+	return self->QRubberBand::eventFilter(watched, event);
 }
 
-void QRubberBand_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QRubberBand_virtualbase_timerEvent(VirtualQRubberBand* self, QTimerEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::timerEvent(event);
-
+	self->QRubberBand::timerEvent(event);
 }
 
-void QRubberBand_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QRubberBand_virtualbase_childEvent(VirtualQRubberBand* self, QChildEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::childEvent(event);
-
+	self->QRubberBand::childEvent(event);
 }
 
-void QRubberBand_virtualbase_customEvent(void* self, QEvent* event) {
+void QRubberBand_virtualbase_customEvent(VirtualQRubberBand* self, QEvent* event) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::customEvent(event);
-
+	self->QRubberBand::customEvent(event);
 }
 
-void QRubberBand_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QRubberBand_virtualbase_connectNotify(VirtualQRubberBand* self, QMetaMethod* signal) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::connectNotify(*signal);
-
+	self->QRubberBand::connectNotify(*signal);
 }
 
-void QRubberBand_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QRubberBand_virtualbase_disconnectNotify(VirtualQRubberBand* self, QMetaMethod* signal) {
 
-	( (VirtualQRubberBand*)(self) )->QRubberBand::disconnectNotify(*signal);
-
+	self->QRubberBand::disconnectNotify(*signal);
 }
 
 const QMetaObject* QRubberBand_staticMetaObject() { return &QRubberBand::staticMetaObject; }
-void QRubberBand_protectedbase_updateMicroFocus(void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QRubberBand_VTable* QRubberBand_vtbl(const VirtualQRubberBand* self) { return self->vtbl; }
+void* QRubberBand_vdata(const VirtualQRubberBand* self) { return self->vdata; }
+void QRubberBand_setVdata(VirtualQRubberBand* self, void* vdata) { self->vdata = vdata; }
+
+void QRubberBand_protectedbase_updateMicroFocus(VirtualQRubberBand* self) {
+	self->updateMicroFocus();
 }
 
-void QRubberBand_protectedbase_create(void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	self_cast->create();
-
+void QRubberBand_protectedbase_create(VirtualQRubberBand* self) {
+	self->create();
 }
 
-void QRubberBand_protectedbase_destroy(void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	self_cast->destroy();
-
+void QRubberBand_protectedbase_destroy(VirtualQRubberBand* self) {
+	self->destroy();
 }
 
-bool QRubberBand_protectedbase_focusNextChild(void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QRubberBand_protectedbase_focusNextChild(VirtualQRubberBand* self) {
+	return self->focusNextChild();
 }
 
-bool QRubberBand_protectedbase_focusPreviousChild(void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QRubberBand_protectedbase_focusPreviousChild(VirtualQRubberBand* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QRubberBand_protectedbase_sender(const void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QRubberBand_protectedbase_sender(const VirtualQRubberBand* self) {
+	return self->sender();
 }
 
-int QRubberBand_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QRubberBand_protectedbase_senderSignalIndex(const VirtualQRubberBand* self) {
+	return self->senderSignalIndex();
 }
 
-int QRubberBand_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QRubberBand_protectedbase_receivers(const VirtualQRubberBand* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QRubberBand_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQRubberBand* self_cast = static_cast<VirtualQRubberBand*>( (QRubberBand*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QRubberBand_protectedbase_isSignalConnected(const VirtualQRubberBand* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QRubberBand_delete(QRubberBand* self) {

@@ -22,6 +22,7 @@ typedef struct QHttp2Configuration QHttp2Configuration;
 
 QHttp2Configuration* QHttp2Configuration_new();
 QHttp2Configuration* QHttp2Configuration_new2(QHttp2Configuration* other);
+
 void QHttp2Configuration_operatorAssign(QHttp2Configuration* self, QHttp2Configuration* other);
 void QHttp2Configuration_setServerPushEnabled(QHttp2Configuration* self, bool enable);
 bool QHttp2Configuration_serverPushEnabled(const QHttp2Configuration* self);
@@ -34,6 +35,7 @@ unsigned int QHttp2Configuration_streamReceiveWindowSize(const QHttp2Configurati
 bool QHttp2Configuration_setMaxFrameSize(QHttp2Configuration* self, unsigned int size);
 unsigned int QHttp2Configuration_maxFrameSize(const QHttp2Configuration* self);
 void QHttp2Configuration_swap(QHttp2Configuration* self, QHttp2Configuration* other);
+
 void QHttp2Configuration_delete(QHttp2Configuration* self);
 
 #ifdef __cplusplus

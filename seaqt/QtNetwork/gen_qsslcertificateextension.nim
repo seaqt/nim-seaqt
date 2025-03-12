@@ -43,11 +43,11 @@ type cQSslCertificateExtension*{.exportc: "QSslCertificateExtension", incomplete
 
 proc fcQSslCertificateExtension_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCertificateExtension_operatorAssign".}
 proc fcQSslCertificateExtension_swap(self: pointer, other: pointer): void {.importc: "QSslCertificateExtension_swap".}
-proc fcQSslCertificateExtension_oid(self: pointer, ): struct_miqt_string {.importc: "QSslCertificateExtension_oid".}
-proc fcQSslCertificateExtension_name(self: pointer, ): struct_miqt_string {.importc: "QSslCertificateExtension_name".}
-proc fcQSslCertificateExtension_value(self: pointer, ): pointer {.importc: "QSslCertificateExtension_value".}
-proc fcQSslCertificateExtension_isCritical(self: pointer, ): bool {.importc: "QSslCertificateExtension_isCritical".}
-proc fcQSslCertificateExtension_isSupported(self: pointer, ): bool {.importc: "QSslCertificateExtension_isSupported".}
+proc fcQSslCertificateExtension_oid(self: pointer): struct_miqt_string {.importc: "QSslCertificateExtension_oid".}
+proc fcQSslCertificateExtension_name(self: pointer): struct_miqt_string {.importc: "QSslCertificateExtension_name".}
+proc fcQSslCertificateExtension_value(self: pointer): pointer {.importc: "QSslCertificateExtension_value".}
+proc fcQSslCertificateExtension_isCritical(self: pointer): bool {.importc: "QSslCertificateExtension_isCritical".}
+proc fcQSslCertificateExtension_isSupported(self: pointer): bool {.importc: "QSslCertificateExtension_isSupported".}
 proc fcQSslCertificateExtension_new(): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new".}
 proc fcQSslCertificateExtension_new2(other: pointer): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new2".}
 
@@ -57,25 +57,25 @@ proc operatorAssign*(self: gen_qsslcertificateextension_types.QSslCertificateExt
 proc swap*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, other: gen_qsslcertificateextension_types.QSslCertificateExtension): void =
   fcQSslCertificateExtension_swap(self.h, other.h)
 
-proc oid*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): string =
+proc oid*(self: gen_qsslcertificateextension_types.QSslCertificateExtension): string =
   let v_ms = fcQSslCertificateExtension_oid(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc name*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): string =
+proc name*(self: gen_qsslcertificateextension_types.QSslCertificateExtension): string =
   let v_ms = fcQSslCertificateExtension_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc value*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): gen_qvariant_types.QVariant =
+proc value*(self: gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSslCertificateExtension_value(self.h), owned: true)
 
-proc isCritical*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): bool =
+proc isCritical*(self: gen_qsslcertificateextension_types.QSslCertificateExtension): bool =
   fcQSslCertificateExtension_isCritical(self.h)
 
-proc isSupported*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): bool =
+proc isSupported*(self: gen_qsslcertificateextension_types.QSslCertificateExtension): bool =
   fcQSslCertificateExtension_isSupported(self.h)
 
 proc create*(T: type gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qsslcertificateextension_types.QSslCertificateExtension =

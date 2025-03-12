@@ -120,6 +120,7 @@ QVariant* QVariant_new39(QModelIndex* modelIndex);
 QVariant* QVariant_new40(QPersistentModelIndex* modelIndex);
 QVariant* QVariant_new41(int type);
 QVariant* QVariant_new42(QMetaType* type, const void* copy);
+
 void QVariant_operatorAssign(QVariant* self, QVariant* other);
 void QVariant_swap(QVariant* self, QVariant* other);
 int QVariant_userType(const QVariant* self);
@@ -191,13 +192,16 @@ double QVariant_toDouble1(const QVariant* self, bool* ok);
 float QVariant_toFloat1(const QVariant* self, bool* ok);
 double QVariant_toReal1(const QVariant* self, bool* ok);
 QVariant* QVariant_fromValue(QObject* value);
+
 void QVariant_delete(QVariant* self);
 
 QVariantConstPointer* QVariantConstPointer_new(QVariant* variant);
 QVariantConstPointer* QVariantConstPointer_new2(QVariantConstPointer* param1);
+
 QVariant* QVariantConstPointer_operatorMultiply(const QVariantConstPointer* self);
 QVariant* QVariantConstPointer_operatorMinusGreater(const QVariantConstPointer* self);
 void QVariantConstPointer_operatorAssign(QVariantConstPointer* self, QVariantConstPointer* param1);
+
 void QVariantConstPointer_delete(QVariantConstPointer* self);
 
 #ifdef __cplusplus

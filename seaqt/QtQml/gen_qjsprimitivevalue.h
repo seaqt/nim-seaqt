@@ -30,10 +30,12 @@ typedef struct QVariant QVariant;
 
 QJSPrimitiveUndefined* QJSPrimitiveUndefined_new();
 QJSPrimitiveUndefined* QJSPrimitiveUndefined_new2(QJSPrimitiveUndefined* param1);
+
 void QJSPrimitiveUndefined_delete(QJSPrimitiveUndefined* self);
 
 QJSPrimitiveNull* QJSPrimitiveNull_new();
 QJSPrimitiveNull* QJSPrimitiveNull_new2(QJSPrimitiveNull* param1);
+
 void QJSPrimitiveNull_delete(QJSPrimitiveNull* self);
 
 QJSPrimitiveValue* QJSPrimitiveValue_new();
@@ -46,6 +48,7 @@ QJSPrimitiveValue* QJSPrimitiveValue_new7(struct miqt_string string);
 QJSPrimitiveValue* QJSPrimitiveValue_new8(QMetaType* type, const void* value);
 QJSPrimitiveValue* QJSPrimitiveValue_new9(QVariant* variant);
 QJSPrimitiveValue* QJSPrimitiveValue_new10(QJSPrimitiveValue* param1);
+
 uint8_t QJSPrimitiveValue_type(const QJSPrimitiveValue* self);
 bool QJSPrimitiveValue_toBoolean(const QJSPrimitiveValue* self);
 int QJSPrimitiveValue_toInteger(const QJSPrimitiveValue* self);
@@ -60,6 +63,7 @@ QJSPrimitiveValue* QJSPrimitiveValue_operatorPlus(QJSPrimitiveValue* self);
 QJSPrimitiveValue* QJSPrimitiveValue_operatorMinus(QJSPrimitiveValue* self);
 bool QJSPrimitiveValue_strictlyEquals(const QJSPrimitiveValue* self, QJSPrimitiveValue* other);
 bool QJSPrimitiveValue_equals(const QJSPrimitiveValue* self, QJSPrimitiveValue* other);
+
 void QJSPrimitiveValue_delete(QJSPrimitiveValue* self);
 
 #ifdef __cplusplus

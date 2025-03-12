@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qfontinfo.h>
 #include "gen_qfontinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFontInfo* QFontInfo_new(QFont* param1) {
 	return new QFontInfo(*param1);
 }

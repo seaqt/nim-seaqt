@@ -6,15 +6,6 @@
 #include <QWebEngineScriptCollection>
 #include <qwebenginescriptcollection.h>
 #include "gen_qwebenginescriptcollection.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 bool QWebEngineScriptCollection_isEmpty(const QWebEngineScriptCollection* self) {
 	return self->isEmpty();
 }

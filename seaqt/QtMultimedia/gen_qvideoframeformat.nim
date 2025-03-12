@@ -119,37 +119,37 @@ export
 type cQVideoFrameFormat*{.exportc: "QVideoFrameFormat", incompleteStruct.} = object
 
 proc fcQVideoFrameFormat_swap(self: pointer, other: pointer): void {.importc: "QVideoFrameFormat_swap".}
-proc fcQVideoFrameFormat_detach(self: pointer, ): void {.importc: "QVideoFrameFormat_detach".}
+proc fcQVideoFrameFormat_detach(self: pointer): void {.importc: "QVideoFrameFormat_detach".}
 proc fcQVideoFrameFormat_operatorAssign(self: pointer, format: pointer): void {.importc: "QVideoFrameFormat_operatorAssign".}
 proc fcQVideoFrameFormat_operatorEqual(self: pointer, format: pointer): bool {.importc: "QVideoFrameFormat_operatorEqual".}
 proc fcQVideoFrameFormat_operatorNotEqual(self: pointer, format: pointer): bool {.importc: "QVideoFrameFormat_operatorNotEqual".}
-proc fcQVideoFrameFormat_isValid(self: pointer, ): bool {.importc: "QVideoFrameFormat_isValid".}
-proc fcQVideoFrameFormat_pixelFormat(self: pointer, ): cint {.importc: "QVideoFrameFormat_pixelFormat".}
-proc fcQVideoFrameFormat_frameSize(self: pointer, ): pointer {.importc: "QVideoFrameFormat_frameSize".}
+proc fcQVideoFrameFormat_isValid(self: pointer): bool {.importc: "QVideoFrameFormat_isValid".}
+proc fcQVideoFrameFormat_pixelFormat(self: pointer): cint {.importc: "QVideoFrameFormat_pixelFormat".}
+proc fcQVideoFrameFormat_frameSize(self: pointer): pointer {.importc: "QVideoFrameFormat_frameSize".}
 proc fcQVideoFrameFormat_setFrameSize(self: pointer, size: pointer): void {.importc: "QVideoFrameFormat_setFrameSize".}
 proc fcQVideoFrameFormat_setFrameSize2(self: pointer, width: cint, height: cint): void {.importc: "QVideoFrameFormat_setFrameSize2".}
-proc fcQVideoFrameFormat_frameWidth(self: pointer, ): cint {.importc: "QVideoFrameFormat_frameWidth".}
-proc fcQVideoFrameFormat_frameHeight(self: pointer, ): cint {.importc: "QVideoFrameFormat_frameHeight".}
-proc fcQVideoFrameFormat_planeCount(self: pointer, ): cint {.importc: "QVideoFrameFormat_planeCount".}
-proc fcQVideoFrameFormat_viewport(self: pointer, ): pointer {.importc: "QVideoFrameFormat_viewport".}
+proc fcQVideoFrameFormat_frameWidth(self: pointer): cint {.importc: "QVideoFrameFormat_frameWidth".}
+proc fcQVideoFrameFormat_frameHeight(self: pointer): cint {.importc: "QVideoFrameFormat_frameHeight".}
+proc fcQVideoFrameFormat_planeCount(self: pointer): cint {.importc: "QVideoFrameFormat_planeCount".}
+proc fcQVideoFrameFormat_viewport(self: pointer): pointer {.importc: "QVideoFrameFormat_viewport".}
 proc fcQVideoFrameFormat_setViewport(self: pointer, viewport: pointer): void {.importc: "QVideoFrameFormat_setViewport".}
-proc fcQVideoFrameFormat_scanLineDirection(self: pointer, ): cint {.importc: "QVideoFrameFormat_scanLineDirection".}
+proc fcQVideoFrameFormat_scanLineDirection(self: pointer): cint {.importc: "QVideoFrameFormat_scanLineDirection".}
 proc fcQVideoFrameFormat_setScanLineDirection(self: pointer, direction: cint): void {.importc: "QVideoFrameFormat_setScanLineDirection".}
-proc fcQVideoFrameFormat_frameRate(self: pointer, ): float64 {.importc: "QVideoFrameFormat_frameRate".}
+proc fcQVideoFrameFormat_frameRate(self: pointer): float64 {.importc: "QVideoFrameFormat_frameRate".}
 proc fcQVideoFrameFormat_setFrameRate(self: pointer, rate: float64): void {.importc: "QVideoFrameFormat_setFrameRate".}
-proc fcQVideoFrameFormat_yCbCrColorSpace(self: pointer, ): cint {.importc: "QVideoFrameFormat_yCbCrColorSpace".}
+proc fcQVideoFrameFormat_yCbCrColorSpace(self: pointer): cint {.importc: "QVideoFrameFormat_yCbCrColorSpace".}
 proc fcQVideoFrameFormat_setYCbCrColorSpace(self: pointer, colorSpace: cint): void {.importc: "QVideoFrameFormat_setYCbCrColorSpace".}
-proc fcQVideoFrameFormat_colorSpace(self: pointer, ): cint {.importc: "QVideoFrameFormat_colorSpace".}
+proc fcQVideoFrameFormat_colorSpace(self: pointer): cint {.importc: "QVideoFrameFormat_colorSpace".}
 proc fcQVideoFrameFormat_setColorSpace(self: pointer, colorSpace: cint): void {.importc: "QVideoFrameFormat_setColorSpace".}
-proc fcQVideoFrameFormat_colorTransfer(self: pointer, ): cint {.importc: "QVideoFrameFormat_colorTransfer".}
+proc fcQVideoFrameFormat_colorTransfer(self: pointer): cint {.importc: "QVideoFrameFormat_colorTransfer".}
 proc fcQVideoFrameFormat_setColorTransfer(self: pointer, colorTransfer: cint): void {.importc: "QVideoFrameFormat_setColorTransfer".}
-proc fcQVideoFrameFormat_colorRange(self: pointer, ): cint {.importc: "QVideoFrameFormat_colorRange".}
+proc fcQVideoFrameFormat_colorRange(self: pointer): cint {.importc: "QVideoFrameFormat_colorRange".}
 proc fcQVideoFrameFormat_setColorRange(self: pointer, range: cint): void {.importc: "QVideoFrameFormat_setColorRange".}
-proc fcQVideoFrameFormat_isMirrored(self: pointer, ): bool {.importc: "QVideoFrameFormat_isMirrored".}
+proc fcQVideoFrameFormat_isMirrored(self: pointer): bool {.importc: "QVideoFrameFormat_isMirrored".}
 proc fcQVideoFrameFormat_setMirrored(self: pointer, mirrored: bool): void {.importc: "QVideoFrameFormat_setMirrored".}
-proc fcQVideoFrameFormat_vertexShaderFileName(self: pointer, ): struct_miqt_string {.importc: "QVideoFrameFormat_vertexShaderFileName".}
-proc fcQVideoFrameFormat_fragmentShaderFileName(self: pointer, ): struct_miqt_string {.importc: "QVideoFrameFormat_fragmentShaderFileName".}
-proc fcQVideoFrameFormat_maxLuminance(self: pointer, ): float32 {.importc: "QVideoFrameFormat_maxLuminance".}
+proc fcQVideoFrameFormat_vertexShaderFileName(self: pointer): struct_miqt_string {.importc: "QVideoFrameFormat_vertexShaderFileName".}
+proc fcQVideoFrameFormat_fragmentShaderFileName(self: pointer): struct_miqt_string {.importc: "QVideoFrameFormat_fragmentShaderFileName".}
+proc fcQVideoFrameFormat_maxLuminance(self: pointer): float32 {.importc: "QVideoFrameFormat_maxLuminance".}
 proc fcQVideoFrameFormat_setMaxLuminance(self: pointer, lum: float32): void {.importc: "QVideoFrameFormat_setMaxLuminance".}
 proc fcQVideoFrameFormat_pixelFormatFromImageFormat(format: cint): cint {.importc: "QVideoFrameFormat_pixelFormatFromImageFormat".}
 proc fcQVideoFrameFormat_imageFormatFromPixelFormat(format: cint): cint {.importc: "QVideoFrameFormat_imageFormatFromPixelFormat".}
@@ -161,7 +161,7 @@ proc fcQVideoFrameFormat_new3(format: pointer): ptr cQVideoFrameFormat {.importc
 proc swap*(self: gen_qvideoframeformat_types.QVideoFrameFormat, other: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_swap(self.h, other.h)
 
-proc detach*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): void =
+proc detach*(self: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_detach(self.h)
 
 proc operatorAssign*(self: gen_qvideoframeformat_types.QVideoFrameFormat, format: gen_qvideoframeformat_types.QVideoFrameFormat): void =
@@ -173,13 +173,13 @@ proc operatorEqual*(self: gen_qvideoframeformat_types.QVideoFrameFormat, format:
 proc operatorNotEqual*(self: gen_qvideoframeformat_types.QVideoFrameFormat, format: gen_qvideoframeformat_types.QVideoFrameFormat): bool =
   fcQVideoFrameFormat_operatorNotEqual(self.h, format.h)
 
-proc isValid*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): bool =
+proc isValid*(self: gen_qvideoframeformat_types.QVideoFrameFormat): bool =
   fcQVideoFrameFormat_isValid(self.h)
 
-proc pixelFormat*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc pixelFormat*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_pixelFormat(self.h))
 
-proc frameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): gen_qsize_types.QSize =
+proc frameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQVideoFrameFormat_frameSize(self.h), owned: true)
 
 proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, size: gen_qsize_types.QSize): void =
@@ -188,76 +188,76 @@ proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, size: ge
 proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, width: cint, height: cint): void =
   fcQVideoFrameFormat_setFrameSize2(self.h, width, height)
 
-proc frameWidth*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc frameWidth*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   fcQVideoFrameFormat_frameWidth(self.h)
 
-proc frameHeight*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc frameHeight*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   fcQVideoFrameFormat_frameHeight(self.h)
 
-proc planeCount*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc planeCount*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   fcQVideoFrameFormat_planeCount(self.h)
 
-proc viewport*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): gen_qrect_types.QRect =
+proc viewport*(self: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQVideoFrameFormat_viewport(self.h), owned: true)
 
 proc setViewport*(self: gen_qvideoframeformat_types.QVideoFrameFormat, viewport: gen_qrect_types.QRect): void =
   fcQVideoFrameFormat_setViewport(self.h, viewport.h)
 
-proc scanLineDirection*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc scanLineDirection*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_scanLineDirection(self.h))
 
 proc setScanLineDirection*(self: gen_qvideoframeformat_types.QVideoFrameFormat, direction: cint): void =
   fcQVideoFrameFormat_setScanLineDirection(self.h, cint(direction))
 
-proc frameRate*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): float64 =
+proc frameRate*(self: gen_qvideoframeformat_types.QVideoFrameFormat): float64 =
   fcQVideoFrameFormat_frameRate(self.h)
 
 proc setFrameRate*(self: gen_qvideoframeformat_types.QVideoFrameFormat, rate: float64): void =
   fcQVideoFrameFormat_setFrameRate(self.h, rate)
 
-proc yCbCrColorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc yCbCrColorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_yCbCrColorSpace(self.h))
 
 proc setYCbCrColorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat, colorSpace: cint): void =
   fcQVideoFrameFormat_setYCbCrColorSpace(self.h, cint(colorSpace))
 
-proc colorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc colorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_colorSpace(self.h))
 
 proc setColorSpace*(self: gen_qvideoframeformat_types.QVideoFrameFormat, colorSpace: cint): void =
   fcQVideoFrameFormat_setColorSpace(self.h, cint(colorSpace))
 
-proc colorTransfer*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc colorTransfer*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_colorTransfer(self.h))
 
 proc setColorTransfer*(self: gen_qvideoframeformat_types.QVideoFrameFormat, colorTransfer: cint): void =
   fcQVideoFrameFormat_setColorTransfer(self.h, cint(colorTransfer))
 
-proc colorRange*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
+proc colorRange*(self: gen_qvideoframeformat_types.QVideoFrameFormat): cint =
   cint(fcQVideoFrameFormat_colorRange(self.h))
 
 proc setColorRange*(self: gen_qvideoframeformat_types.QVideoFrameFormat, range: cint): void =
   fcQVideoFrameFormat_setColorRange(self.h, cint(range))
 
-proc isMirrored*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): bool =
+proc isMirrored*(self: gen_qvideoframeformat_types.QVideoFrameFormat): bool =
   fcQVideoFrameFormat_isMirrored(self.h)
 
 proc setMirrored*(self: gen_qvideoframeformat_types.QVideoFrameFormat, mirrored: bool): void =
   fcQVideoFrameFormat_setMirrored(self.h, mirrored)
 
-proc vertexShaderFileName*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): string =
+proc vertexShaderFileName*(self: gen_qvideoframeformat_types.QVideoFrameFormat): string =
   let v_ms = fcQVideoFrameFormat_vertexShaderFileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc fragmentShaderFileName*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): string =
+proc fragmentShaderFileName*(self: gen_qvideoframeformat_types.QVideoFrameFormat): string =
   let v_ms = fcQVideoFrameFormat_fragmentShaderFileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc maxLuminance*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): float32 =
+proc maxLuminance*(self: gen_qvideoframeformat_types.QVideoFrameFormat): float32 =
   fcQVideoFrameFormat_maxLuminance(self.h)
 
 proc setMaxLuminance*(self: gen_qvideoframeformat_types.QVideoFrameFormat, lum: float32): void =

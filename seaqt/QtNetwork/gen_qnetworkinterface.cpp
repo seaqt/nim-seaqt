@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qnetworkinterface.h>
 #include "gen_qnetworkinterface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkAddressEntry* QNetworkAddressEntry_new() {
 	return new QNetworkAddressEntry();
 }
@@ -250,6 +241,7 @@ struct miqt_array /* of QHostAddress* */  QNetworkInterface_allAddresses() {
 }
 
 const QMetaObject* QNetworkInterface_staticMetaObject() { return &QNetworkInterface::staticMetaObject; }
+
 void QNetworkInterface_delete(QNetworkInterface* self) {
 	delete self;
 }

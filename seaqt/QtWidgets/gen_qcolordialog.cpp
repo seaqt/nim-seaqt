@@ -39,41 +39,34 @@
 #include <QWidget>
 #include <qcolordialog.h>
 #include "gen_qcolordialog.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQColorDialog final : public QColorDialog {
-	struct QColorDialog_VTable* vtbl;
+	const QColorDialog_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QColorDialog_VTable* QColorDialog_vtbl(const VirtualQColorDialog* self);
+	friend void* QColorDialog_vdata(const VirtualQColorDialog* self);
+	friend void QColorDialog_setVdata(VirtualQColorDialog* self, void* vdata);
 
-	VirtualQColorDialog(struct QColorDialog_VTable* vtbl, QWidget* parent): QColorDialog(parent), vtbl(vtbl) {};
-	VirtualQColorDialog(struct QColorDialog_VTable* vtbl): QColorDialog(), vtbl(vtbl) {};
-	VirtualQColorDialog(struct QColorDialog_VTable* vtbl, const QColor& initial): QColorDialog(initial), vtbl(vtbl) {};
-	VirtualQColorDialog(struct QColorDialog_VTable* vtbl, const QColor& initial, QWidget* parent): QColorDialog(initial, parent), vtbl(vtbl) {};
+	VirtualQColorDialog(const QColorDialog_VTable* vtbl, void* vdata, QWidget* parent): QColorDialog(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQColorDialog(const QColorDialog_VTable* vtbl, void* vdata): QColorDialog(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQColorDialog(const QColorDialog_VTable* vtbl, void* vdata, const QColor& initial): QColorDialog(initial), vtbl(vtbl), vdata(vdata) {}
+	VirtualQColorDialog(const QColorDialog_VTable* vtbl, void* vdata, const QColor& initial, QWidget* parent): QColorDialog(initial, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQColorDialog() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQColorDialog() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QColorDialog::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QColorDialog_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QColorDialog_virtualbase_metaObject(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QColorDialog::qt_metacast(param1);
@@ -81,14 +74,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QColorDialog_virtualbase_metacast(void* self, const char* param1);
+	friend void* QColorDialog_virtualbase_metacast(VirtualQColorDialog* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QColorDialog::qt_metacall(param1, param2, param3);
@@ -99,14 +91,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QColorDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QColorDialog_virtualbase_metacall(VirtualQColorDialog* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QColorDialog::setVisible(visible);
@@ -115,13 +106,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_setVisible(void* self, bool visible);
+	friend void QColorDialog_virtualbase_setVisible(VirtualQColorDialog* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QColorDialog::changeEvent(event);
@@ -130,13 +120,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QColorDialog_virtualbase_changeEvent(VirtualQColorDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int result) override {
 		if (vtbl->done == 0) {
 			QColorDialog::done(result);
@@ -145,45 +134,42 @@ public:
 
 		int sigval1 = result;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_done(void* self, int result);
+	friend void QColorDialog_virtualbase_done(VirtualQColorDialog* self, int result);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QColorDialog::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QColorDialog_virtualbase_sizeHint(const void* self);
+	friend QSize* QColorDialog_virtualbase_sizeHint(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QColorDialog::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QColorDialog_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QColorDialog_virtualbase_minimumSizeHint(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QColorDialog::open();
@@ -191,27 +177,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QColorDialog_virtualbase_open(void* self);
+	friend void QColorDialog_virtualbase_open(VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QColorDialog::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QColorDialog_virtualbase_exec(void* self);
+	friend int QColorDialog_virtualbase_exec(VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QColorDialog::accept();
@@ -219,13 +203,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QColorDialog_virtualbase_accept(void* self);
+	friend void QColorDialog_virtualbase_accept(VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QColorDialog::reject();
@@ -233,13 +216,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QColorDialog_virtualbase_reject(void* self);
+	friend void QColorDialog_virtualbase_reject(VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QColorDialog::keyPressEvent(param1);
@@ -248,13 +230,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QColorDialog_virtualbase_keyPressEvent(VirtualQColorDialog* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QColorDialog::closeEvent(param1);
@@ -263,13 +244,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QColorDialog_virtualbase_closeEvent(VirtualQColorDialog* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QColorDialog::showEvent(param1);
@@ -278,13 +258,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QColorDialog_virtualbase_showEvent(VirtualQColorDialog* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QColorDialog::resizeEvent(param1);
@@ -293,13 +272,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QColorDialog_virtualbase_resizeEvent(VirtualQColorDialog* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QColorDialog::contextMenuEvent(param1);
@@ -308,13 +286,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QColorDialog_virtualbase_contextMenuEvent(VirtualQColorDialog* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QColorDialog::eventFilter(param1, param2);
@@ -323,28 +300,26 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QColorDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QColorDialog_virtualbase_eventFilter(VirtualQColorDialog* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QColorDialog::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QColorDialog_virtualbase_devType(const void* self);
+	friend int QColorDialog_virtualbase_devType(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QColorDialog::heightForWidth(param1);
@@ -352,42 +327,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QColorDialog_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QColorDialog_virtualbase_heightForWidth(const VirtualQColorDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QColorDialog::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QColorDialog_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QColorDialog_virtualbase_hasHeightForWidth(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QColorDialog::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QColorDialog_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QColorDialog_virtualbase_paintEngine(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QColorDialog::event(event);
@@ -395,14 +367,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QColorDialog_virtualbase_event(void* self, QEvent* event);
+	friend bool QColorDialog_virtualbase_event(VirtualQColorDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QColorDialog::mousePressEvent(event);
@@ -411,13 +382,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QColorDialog_virtualbase_mousePressEvent(VirtualQColorDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QColorDialog::mouseReleaseEvent(event);
@@ -426,13 +396,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QColorDialog_virtualbase_mouseReleaseEvent(VirtualQColorDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QColorDialog::mouseDoubleClickEvent(event);
@@ -441,13 +410,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QColorDialog_virtualbase_mouseDoubleClickEvent(VirtualQColorDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QColorDialog::mouseMoveEvent(event);
@@ -456,13 +424,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QColorDialog_virtualbase_mouseMoveEvent(VirtualQColorDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QColorDialog::wheelEvent(event);
@@ -471,13 +438,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QColorDialog_virtualbase_wheelEvent(VirtualQColorDialog* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QColorDialog::keyReleaseEvent(event);
@@ -486,13 +452,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QColorDialog_virtualbase_keyReleaseEvent(VirtualQColorDialog* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QColorDialog::focusInEvent(event);
@@ -501,13 +466,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QColorDialog_virtualbase_focusInEvent(VirtualQColorDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QColorDialog::focusOutEvent(event);
@@ -516,13 +480,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QColorDialog_virtualbase_focusOutEvent(VirtualQColorDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QColorDialog::enterEvent(event);
@@ -531,13 +494,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QColorDialog_virtualbase_enterEvent(VirtualQColorDialog* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QColorDialog::leaveEvent(event);
@@ -546,13 +508,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QColorDialog_virtualbase_leaveEvent(VirtualQColorDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QColorDialog::paintEvent(event);
@@ -561,13 +522,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QColorDialog_virtualbase_paintEvent(VirtualQColorDialog* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QColorDialog::moveEvent(event);
@@ -576,13 +536,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QColorDialog_virtualbase_moveEvent(VirtualQColorDialog* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QColorDialog::tabletEvent(event);
@@ -591,13 +550,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QColorDialog_virtualbase_tabletEvent(VirtualQColorDialog* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QColorDialog::actionEvent(event);
@@ -606,13 +564,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QColorDialog_virtualbase_actionEvent(VirtualQColorDialog* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QColorDialog::dragEnterEvent(event);
@@ -621,13 +578,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QColorDialog_virtualbase_dragEnterEvent(VirtualQColorDialog* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QColorDialog::dragMoveEvent(event);
@@ -636,13 +592,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QColorDialog_virtualbase_dragMoveEvent(VirtualQColorDialog* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QColorDialog::dragLeaveEvent(event);
@@ -651,13 +606,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QColorDialog_virtualbase_dragLeaveEvent(VirtualQColorDialog* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QColorDialog::dropEvent(event);
@@ -666,13 +620,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QColorDialog_virtualbase_dropEvent(VirtualQColorDialog* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QColorDialog::hideEvent(event);
@@ -681,13 +634,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QColorDialog_virtualbase_hideEvent(VirtualQColorDialog* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QColorDialog::nativeEvent(eventType, message, result);
@@ -703,14 +655,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QColorDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QColorDialog_virtualbase_nativeEvent(VirtualQColorDialog* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QColorDialog::metric(param1);
@@ -719,14 +670,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QColorDialog_virtualbase_metric(const void* self, int param1);
+	friend int QColorDialog_virtualbase_metric(const VirtualQColorDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QColorDialog::initPainter(painter);
@@ -735,13 +685,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QColorDialog_virtualbase_initPainter(const VirtualQColorDialog* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QColorDialog::redirected(offset);
@@ -749,28 +698,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QColorDialog_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QColorDialog_virtualbase_redirected(const VirtualQColorDialog* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QColorDialog::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QColorDialog_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QColorDialog_virtualbase_sharedPainter(const VirtualQColorDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QColorDialog::inputMethodEvent(param1);
@@ -779,13 +726,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QColorDialog_virtualbase_inputMethodEvent(VirtualQColorDialog* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QColorDialog::inputMethodQuery(param1);
@@ -794,16 +740,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QColorDialog_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QColorDialog_virtualbase_inputMethodQuery(const VirtualQColorDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QColorDialog::focusNextPrevChild(next);
@@ -811,14 +756,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QColorDialog_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QColorDialog_virtualbase_focusNextPrevChild(VirtualQColorDialog* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QColorDialog::timerEvent(event);
@@ -827,13 +771,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QColorDialog_virtualbase_timerEvent(VirtualQColorDialog* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QColorDialog::childEvent(event);
@@ -842,13 +785,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QColorDialog_virtualbase_childEvent(VirtualQColorDialog* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QColorDialog::customEvent(event);
@@ -857,13 +799,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QColorDialog_virtualbase_customEvent(VirtualQColorDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QColorDialog::connectNotify(signal);
@@ -874,13 +815,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QColorDialog_virtualbase_connectNotify(VirtualQColorDialog* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QColorDialog::disconnectNotify(signal);
@@ -891,39 +831,39 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QColorDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QColorDialog_virtualbase_disconnectNotify(VirtualQColorDialog* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QColorDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QColorDialog_protectedbase_updateMicroFocus(void* self);
-	friend void QColorDialog_protectedbase_create(void* self);
-	friend void QColorDialog_protectedbase_destroy(void* self);
-	friend bool QColorDialog_protectedbase_focusNextChild(void* self);
-	friend bool QColorDialog_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QColorDialog_protectedbase_sender(const void* self);
-	friend int QColorDialog_protectedbase_senderSignalIndex(const void* self);
-	friend int QColorDialog_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QColorDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QColorDialog_protectedbase_adjustPosition(VirtualQColorDialog* self, QWidget* param1);
+	friend void QColorDialog_protectedbase_updateMicroFocus(VirtualQColorDialog* self);
+	friend void QColorDialog_protectedbase_create(VirtualQColorDialog* self);
+	friend void QColorDialog_protectedbase_destroy(VirtualQColorDialog* self);
+	friend bool QColorDialog_protectedbase_focusNextChild(VirtualQColorDialog* self);
+	friend bool QColorDialog_protectedbase_focusPreviousChild(VirtualQColorDialog* self);
+	friend QObject* QColorDialog_protectedbase_sender(const VirtualQColorDialog* self);
+	friend int QColorDialog_protectedbase_senderSignalIndex(const VirtualQColorDialog* self);
+	friend int QColorDialog_protectedbase_receivers(const VirtualQColorDialog* self, const char* signal);
+	friend bool QColorDialog_protectedbase_isSignalConnected(const VirtualQColorDialog* self, QMetaMethod* signal);
 };
 
-QColorDialog* QColorDialog_new(struct QColorDialog_VTable* vtbl, QWidget* parent) {
-	return new VirtualQColorDialog(vtbl, parent);
+VirtualQColorDialog* QColorDialog_new(const QColorDialog_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQColorDialog(vtbl, vdata, parent);
 }
 
-QColorDialog* QColorDialog_new2(struct QColorDialog_VTable* vtbl) {
-	return new VirtualQColorDialog(vtbl);
+VirtualQColorDialog* QColorDialog_new2(const QColorDialog_VTable* vtbl, void* vdata) {
+	return new VirtualQColorDialog(vtbl, vdata);
 }
 
-QColorDialog* QColorDialog_new3(struct QColorDialog_VTable* vtbl, QColor* initial) {
-	return new VirtualQColorDialog(vtbl, *initial);
+VirtualQColorDialog* QColorDialog_new3(const QColorDialog_VTable* vtbl, void* vdata, QColor* initial) {
+	return new VirtualQColorDialog(vtbl, vdata, *initial);
 }
 
-QColorDialog* QColorDialog_new4(struct QColorDialog_VTable* vtbl, QColor* initial, QWidget* parent) {
-	return new VirtualQColorDialog(vtbl, *initial, parent);
+VirtualQColorDialog* QColorDialog_new4(const QColorDialog_VTable* vtbl, void* vdata, QColor* initial, QWidget* parent) {
+	return new VirtualQColorDialog(vtbl, vdata, *initial, parent);
 }
 
 void QColorDialog_virtbase(QColorDialog* src, QDialog** outptr_QDialog) {
@@ -1014,7 +954,7 @@ void QColorDialog_currentColorChanged(QColorDialog* self, QColor* color) {
 	self->currentColorChanged(*color);
 }
 
-void QColorDialog_connect_currentColorChanged(QColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+void QColorDialog_connect_currentColorChanged(VirtualQColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QColor*);
@@ -1032,7 +972,7 @@ void QColorDialog_colorSelected(QColorDialog* self, QColor* color) {
 	self->colorSelected(*color);
 }
 
-void QColorDialog_connect_colorSelected(QColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+void QColorDialog_connect_colorSelected(VirtualQColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QColor*);
@@ -1090,406 +1030,326 @@ QColor* QColorDialog_getColor4(QColor* initial, QWidget* parent, struct miqt_str
 	return new QColor(QColorDialog::getColor(*initial, parent, title_QString, static_cast<QColorDialog::ColorDialogOptions>(options)));
 }
 
-QMetaObject* QColorDialog_virtualbase_metaObject(const void* self) {
+QMetaObject* QColorDialog_virtualbase_metaObject(const VirtualQColorDialog* self) {
 
-	return (QMetaObject*) ( (const VirtualQColorDialog*)(self) )->QColorDialog::metaObject();
-
+	return (QMetaObject*) self->QColorDialog::metaObject();
 }
 
-void* QColorDialog_virtualbase_metacast(void* self, const char* param1) {
+void* QColorDialog_virtualbase_metacast(VirtualQColorDialog* self, const char* param1) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::qt_metacast(param1);
-
+	return self->QColorDialog::qt_metacast(param1);
 }
 
-int QColorDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QColorDialog_virtualbase_metacall(VirtualQColorDialog* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QColorDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QColorDialog_virtualbase_setVisible(void* self, bool visible) {
+void QColorDialog_virtualbase_setVisible(VirtualQColorDialog* self, bool visible) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::setVisible(visible);
-
+	self->QColorDialog::setVisible(visible);
 }
 
-void QColorDialog_virtualbase_changeEvent(void* self, QEvent* event) {
+void QColorDialog_virtualbase_changeEvent(VirtualQColorDialog* self, QEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::changeEvent(event);
-
+	self->QColorDialog::changeEvent(event);
 }
 
-void QColorDialog_virtualbase_done(void* self, int result) {
+void QColorDialog_virtualbase_done(VirtualQColorDialog* self, int result) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::done(static_cast<int>(result));
-
+	self->QColorDialog::done(static_cast<int>(result));
 }
 
-QSize* QColorDialog_virtualbase_sizeHint(const void* self) {
+QSize* QColorDialog_virtualbase_sizeHint(const VirtualQColorDialog* self) {
 
-	return new QSize(( (const VirtualQColorDialog*)(self) )->QColorDialog::sizeHint());
-
+	return new QSize(self->QColorDialog::sizeHint());
 }
 
-QSize* QColorDialog_virtualbase_minimumSizeHint(const void* self) {
+QSize* QColorDialog_virtualbase_minimumSizeHint(const VirtualQColorDialog* self) {
 
-	return new QSize(( (const VirtualQColorDialog*)(self) )->QColorDialog::minimumSizeHint());
-
+	return new QSize(self->QColorDialog::minimumSizeHint());
 }
 
-void QColorDialog_virtualbase_open(void* self) {
+void QColorDialog_virtualbase_open(VirtualQColorDialog* self) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::open();
-
+	self->QColorDialog::open();
 }
 
-int QColorDialog_virtualbase_exec(void* self) {
+int QColorDialog_virtualbase_exec(VirtualQColorDialog* self) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::exec();
-
+	return self->QColorDialog::exec();
 }
 
-void QColorDialog_virtualbase_accept(void* self) {
+void QColorDialog_virtualbase_accept(VirtualQColorDialog* self) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::accept();
-
+	self->QColorDialog::accept();
 }
 
-void QColorDialog_virtualbase_reject(void* self) {
+void QColorDialog_virtualbase_reject(VirtualQColorDialog* self) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::reject();
-
+	self->QColorDialog::reject();
 }
 
-void QColorDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QColorDialog_virtualbase_keyPressEvent(VirtualQColorDialog* self, QKeyEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::keyPressEvent(param1);
-
+	self->QColorDialog::keyPressEvent(param1);
 }
 
-void QColorDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QColorDialog_virtualbase_closeEvent(VirtualQColorDialog* self, QCloseEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::closeEvent(param1);
-
+	self->QColorDialog::closeEvent(param1);
 }
 
-void QColorDialog_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QColorDialog_virtualbase_showEvent(VirtualQColorDialog* self, QShowEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::showEvent(param1);
-
+	self->QColorDialog::showEvent(param1);
 }
 
-void QColorDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QColorDialog_virtualbase_resizeEvent(VirtualQColorDialog* self, QResizeEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::resizeEvent(param1);
-
+	self->QColorDialog::resizeEvent(param1);
 }
 
-void QColorDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QColorDialog_virtualbase_contextMenuEvent(VirtualQColorDialog* self, QContextMenuEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::contextMenuEvent(param1);
-
+	self->QColorDialog::contextMenuEvent(param1);
 }
 
-bool QColorDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QColorDialog_virtualbase_eventFilter(VirtualQColorDialog* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::eventFilter(param1, param2);
-
+	return self->QColorDialog::eventFilter(param1, param2);
 }
 
-int QColorDialog_virtualbase_devType(const void* self) {
+int QColorDialog_virtualbase_devType(const VirtualQColorDialog* self) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::devType();
-
+	return self->QColorDialog::devType();
 }
 
-int QColorDialog_virtualbase_heightForWidth(const void* self, int param1) {
+int QColorDialog_virtualbase_heightForWidth(const VirtualQColorDialog* self, int param1) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::heightForWidth(static_cast<int>(param1));
-
+	return self->QColorDialog::heightForWidth(static_cast<int>(param1));
 }
 
-bool QColorDialog_virtualbase_hasHeightForWidth(const void* self) {
+bool QColorDialog_virtualbase_hasHeightForWidth(const VirtualQColorDialog* self) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::hasHeightForWidth();
-
+	return self->QColorDialog::hasHeightForWidth();
 }
 
-QPaintEngine* QColorDialog_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QColorDialog_virtualbase_paintEngine(const VirtualQColorDialog* self) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::paintEngine();
-
+	return self->QColorDialog::paintEngine();
 }
 
-bool QColorDialog_virtualbase_event(void* self, QEvent* event) {
+bool QColorDialog_virtualbase_event(VirtualQColorDialog* self, QEvent* event) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::event(event);
-
+	return self->QColorDialog::event(event);
 }
 
-void QColorDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QColorDialog_virtualbase_mousePressEvent(VirtualQColorDialog* self, QMouseEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::mousePressEvent(event);
-
+	self->QColorDialog::mousePressEvent(event);
 }
 
-void QColorDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QColorDialog_virtualbase_mouseReleaseEvent(VirtualQColorDialog* self, QMouseEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::mouseReleaseEvent(event);
-
+	self->QColorDialog::mouseReleaseEvent(event);
 }
 
-void QColorDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QColorDialog_virtualbase_mouseDoubleClickEvent(VirtualQColorDialog* self, QMouseEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::mouseDoubleClickEvent(event);
-
+	self->QColorDialog::mouseDoubleClickEvent(event);
 }
 
-void QColorDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QColorDialog_virtualbase_mouseMoveEvent(VirtualQColorDialog* self, QMouseEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::mouseMoveEvent(event);
-
+	self->QColorDialog::mouseMoveEvent(event);
 }
 
-void QColorDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QColorDialog_virtualbase_wheelEvent(VirtualQColorDialog* self, QWheelEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::wheelEvent(event);
-
+	self->QColorDialog::wheelEvent(event);
 }
 
-void QColorDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QColorDialog_virtualbase_keyReleaseEvent(VirtualQColorDialog* self, QKeyEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::keyReleaseEvent(event);
-
+	self->QColorDialog::keyReleaseEvent(event);
 }
 
-void QColorDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QColorDialog_virtualbase_focusInEvent(VirtualQColorDialog* self, QFocusEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::focusInEvent(event);
-
+	self->QColorDialog::focusInEvent(event);
 }
 
-void QColorDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QColorDialog_virtualbase_focusOutEvent(VirtualQColorDialog* self, QFocusEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::focusOutEvent(event);
-
+	self->QColorDialog::focusOutEvent(event);
 }
 
-void QColorDialog_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QColorDialog_virtualbase_enterEvent(VirtualQColorDialog* self, QEnterEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::enterEvent(event);
-
+	self->QColorDialog::enterEvent(event);
 }
 
-void QColorDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QColorDialog_virtualbase_leaveEvent(VirtualQColorDialog* self, QEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::leaveEvent(event);
-
+	self->QColorDialog::leaveEvent(event);
 }
 
-void QColorDialog_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QColorDialog_virtualbase_paintEvent(VirtualQColorDialog* self, QPaintEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::paintEvent(event);
-
+	self->QColorDialog::paintEvent(event);
 }
 
-void QColorDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QColorDialog_virtualbase_moveEvent(VirtualQColorDialog* self, QMoveEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::moveEvent(event);
-
+	self->QColorDialog::moveEvent(event);
 }
 
-void QColorDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QColorDialog_virtualbase_tabletEvent(VirtualQColorDialog* self, QTabletEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::tabletEvent(event);
-
+	self->QColorDialog::tabletEvent(event);
 }
 
-void QColorDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QColorDialog_virtualbase_actionEvent(VirtualQColorDialog* self, QActionEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::actionEvent(event);
-
+	self->QColorDialog::actionEvent(event);
 }
 
-void QColorDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QColorDialog_virtualbase_dragEnterEvent(VirtualQColorDialog* self, QDragEnterEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::dragEnterEvent(event);
-
+	self->QColorDialog::dragEnterEvent(event);
 }
 
-void QColorDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QColorDialog_virtualbase_dragMoveEvent(VirtualQColorDialog* self, QDragMoveEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::dragMoveEvent(event);
-
+	self->QColorDialog::dragMoveEvent(event);
 }
 
-void QColorDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QColorDialog_virtualbase_dragLeaveEvent(VirtualQColorDialog* self, QDragLeaveEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::dragLeaveEvent(event);
-
+	self->QColorDialog::dragLeaveEvent(event);
 }
 
-void QColorDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QColorDialog_virtualbase_dropEvent(VirtualQColorDialog* self, QDropEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::dropEvent(event);
-
+	self->QColorDialog::dropEvent(event);
 }
 
-void QColorDialog_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QColorDialog_virtualbase_hideEvent(VirtualQColorDialog* self, QHideEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::hideEvent(event);
-
+	self->QColorDialog::hideEvent(event);
 }
 
-bool QColorDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QColorDialog_virtualbase_nativeEvent(VirtualQColorDialog* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QColorDialog::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QColorDialog_virtualbase_metric(const void* self, int param1) {
+int QColorDialog_virtualbase_metric(const VirtualQColorDialog* self, int param1) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::metric(static_cast<VirtualQColorDialog::PaintDeviceMetric>(param1));
-
+	return self->QColorDialog::metric(static_cast<VirtualQColorDialog::PaintDeviceMetric>(param1));
 }
 
-void QColorDialog_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QColorDialog_virtualbase_initPainter(const VirtualQColorDialog* self, QPainter* painter) {
 
-	( (const VirtualQColorDialog*)(self) )->QColorDialog::initPainter(painter);
-
+	self->QColorDialog::initPainter(painter);
 }
 
-QPaintDevice* QColorDialog_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QColorDialog_virtualbase_redirected(const VirtualQColorDialog* self, QPoint* offset) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::redirected(offset);
-
+	return self->QColorDialog::redirected(offset);
 }
 
-QPainter* QColorDialog_virtualbase_sharedPainter(const void* self) {
+QPainter* QColorDialog_virtualbase_sharedPainter(const VirtualQColorDialog* self) {
 
-	return ( (const VirtualQColorDialog*)(self) )->QColorDialog::sharedPainter();
-
+	return self->QColorDialog::sharedPainter();
 }
 
-void QColorDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QColorDialog_virtualbase_inputMethodEvent(VirtualQColorDialog* self, QInputMethodEvent* param1) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::inputMethodEvent(param1);
-
+	self->QColorDialog::inputMethodEvent(param1);
 }
 
-QVariant* QColorDialog_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QColorDialog_virtualbase_inputMethodQuery(const VirtualQColorDialog* self, int param1) {
 
-	return new QVariant(( (const VirtualQColorDialog*)(self) )->QColorDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QColorDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QColorDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QColorDialog_virtualbase_focusNextPrevChild(VirtualQColorDialog* self, bool next) {
 
-	return ( (VirtualQColorDialog*)(self) )->QColorDialog::focusNextPrevChild(next);
-
+	return self->QColorDialog::focusNextPrevChild(next);
 }
 
-void QColorDialog_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QColorDialog_virtualbase_timerEvent(VirtualQColorDialog* self, QTimerEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::timerEvent(event);
-
+	self->QColorDialog::timerEvent(event);
 }
 
-void QColorDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QColorDialog_virtualbase_childEvent(VirtualQColorDialog* self, QChildEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::childEvent(event);
-
+	self->QColorDialog::childEvent(event);
 }
 
-void QColorDialog_virtualbase_customEvent(void* self, QEvent* event) {
+void QColorDialog_virtualbase_customEvent(VirtualQColorDialog* self, QEvent* event) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::customEvent(event);
-
+	self->QColorDialog::customEvent(event);
 }
 
-void QColorDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QColorDialog_virtualbase_connectNotify(VirtualQColorDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::connectNotify(*signal);
-
+	self->QColorDialog::connectNotify(*signal);
 }
 
-void QColorDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QColorDialog_virtualbase_disconnectNotify(VirtualQColorDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQColorDialog*)(self) )->QColorDialog::disconnectNotify(*signal);
-
+	self->QColorDialog::disconnectNotify(*signal);
 }
 
 const QMetaObject* QColorDialog_staticMetaObject() { return &QColorDialog::staticMetaObject; }
-void QColorDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	self_cast->adjustPosition(param1);
 
+const QColorDialog_VTable* QColorDialog_vtbl(const VirtualQColorDialog* self) { return self->vtbl; }
+void* QColorDialog_vdata(const VirtualQColorDialog* self) { return self->vdata; }
+void QColorDialog_setVdata(VirtualQColorDialog* self, void* vdata) { self->vdata = vdata; }
+
+void QColorDialog_protectedbase_adjustPosition(VirtualQColorDialog* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QColorDialog_protectedbase_updateMicroFocus(void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QColorDialog_protectedbase_updateMicroFocus(VirtualQColorDialog* self) {
+	self->updateMicroFocus();
 }
 
-void QColorDialog_protectedbase_create(void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	self_cast->create();
-
+void QColorDialog_protectedbase_create(VirtualQColorDialog* self) {
+	self->create();
 }
 
-void QColorDialog_protectedbase_destroy(void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	self_cast->destroy();
-
+void QColorDialog_protectedbase_destroy(VirtualQColorDialog* self) {
+	self->destroy();
 }
 
-bool QColorDialog_protectedbase_focusNextChild(void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QColorDialog_protectedbase_focusNextChild(VirtualQColorDialog* self) {
+	return self->focusNextChild();
 }
 
-bool QColorDialog_protectedbase_focusPreviousChild(void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QColorDialog_protectedbase_focusPreviousChild(VirtualQColorDialog* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QColorDialog_protectedbase_sender(const void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QColorDialog_protectedbase_sender(const VirtualQColorDialog* self) {
+	return self->sender();
 }
 
-int QColorDialog_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QColorDialog_protectedbase_senderSignalIndex(const VirtualQColorDialog* self) {
+	return self->senderSignalIndex();
 }
 
-int QColorDialog_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QColorDialog_protectedbase_receivers(const VirtualQColorDialog* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QColorDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QColorDialog_protectedbase_isSignalConnected(const VirtualQColorDialog* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QColorDialog_delete(QColorDialog* self) {

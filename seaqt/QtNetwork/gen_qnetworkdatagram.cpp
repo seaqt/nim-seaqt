@@ -3,15 +3,6 @@
 #include <QNetworkDatagram>
 #include <qnetworkdatagram.h>
 #include "gen_qnetworkdatagram.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkDatagram* QNetworkDatagram_new() {
 	return new QNetworkDatagram();
 }

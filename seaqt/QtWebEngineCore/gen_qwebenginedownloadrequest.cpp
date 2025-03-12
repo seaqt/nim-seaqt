@@ -9,15 +9,6 @@
 #include <QWebEnginePage>
 #include <qwebenginedownloadrequest.h>
 #include "gen_qwebenginedownloadrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineDownloadRequest_virtbase(QWebEngineDownloadRequest* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -340,6 +331,7 @@ struct miqt_string QWebEngineDownloadRequest_tr3(const char* s, const char* c, i
 }
 
 const QMetaObject* QWebEngineDownloadRequest_staticMetaObject() { return &QWebEngineDownloadRequest::staticMetaObject; }
+
 void QWebEngineDownloadRequest_delete(QWebEngineDownloadRequest* self) {
 	delete self;
 }

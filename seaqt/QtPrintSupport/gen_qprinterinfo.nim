@@ -44,24 +44,24 @@ export
 type cQPrinterInfo*{.exportc: "QPrinterInfo", incompleteStruct.} = object
 
 proc fcQPrinterInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QPrinterInfo_operatorAssign".}
-proc fcQPrinterInfo_printerName(self: pointer, ): struct_miqt_string {.importc: "QPrinterInfo_printerName".}
-proc fcQPrinterInfo_description(self: pointer, ): struct_miqt_string {.importc: "QPrinterInfo_description".}
-proc fcQPrinterInfo_location(self: pointer, ): struct_miqt_string {.importc: "QPrinterInfo_location".}
-proc fcQPrinterInfo_makeAndModel(self: pointer, ): struct_miqt_string {.importc: "QPrinterInfo_makeAndModel".}
-proc fcQPrinterInfo_isNull(self: pointer, ): bool {.importc: "QPrinterInfo_isNull".}
-proc fcQPrinterInfo_isDefault(self: pointer, ): bool {.importc: "QPrinterInfo_isDefault".}
-proc fcQPrinterInfo_isRemote(self: pointer, ): bool {.importc: "QPrinterInfo_isRemote".}
-proc fcQPrinterInfo_state(self: pointer, ): cint {.importc: "QPrinterInfo_state".}
-proc fcQPrinterInfo_supportedPageSizes(self: pointer, ): struct_miqt_array {.importc: "QPrinterInfo_supportedPageSizes".}
-proc fcQPrinterInfo_defaultPageSize(self: pointer, ): pointer {.importc: "QPrinterInfo_defaultPageSize".}
-proc fcQPrinterInfo_supportsCustomPageSizes(self: pointer, ): bool {.importc: "QPrinterInfo_supportsCustomPageSizes".}
-proc fcQPrinterInfo_minimumPhysicalPageSize(self: pointer, ): pointer {.importc: "QPrinterInfo_minimumPhysicalPageSize".}
-proc fcQPrinterInfo_maximumPhysicalPageSize(self: pointer, ): pointer {.importc: "QPrinterInfo_maximumPhysicalPageSize".}
-proc fcQPrinterInfo_supportedResolutions(self: pointer, ): struct_miqt_array {.importc: "QPrinterInfo_supportedResolutions".}
-proc fcQPrinterInfo_defaultDuplexMode(self: pointer, ): cint {.importc: "QPrinterInfo_defaultDuplexMode".}
-proc fcQPrinterInfo_supportedDuplexModes(self: pointer, ): struct_miqt_array {.importc: "QPrinterInfo_supportedDuplexModes".}
-proc fcQPrinterInfo_defaultColorMode(self: pointer, ): cint {.importc: "QPrinterInfo_defaultColorMode".}
-proc fcQPrinterInfo_supportedColorModes(self: pointer, ): struct_miqt_array {.importc: "QPrinterInfo_supportedColorModes".}
+proc fcQPrinterInfo_printerName(self: pointer): struct_miqt_string {.importc: "QPrinterInfo_printerName".}
+proc fcQPrinterInfo_description(self: pointer): struct_miqt_string {.importc: "QPrinterInfo_description".}
+proc fcQPrinterInfo_location(self: pointer): struct_miqt_string {.importc: "QPrinterInfo_location".}
+proc fcQPrinterInfo_makeAndModel(self: pointer): struct_miqt_string {.importc: "QPrinterInfo_makeAndModel".}
+proc fcQPrinterInfo_isNull(self: pointer): bool {.importc: "QPrinterInfo_isNull".}
+proc fcQPrinterInfo_isDefault(self: pointer): bool {.importc: "QPrinterInfo_isDefault".}
+proc fcQPrinterInfo_isRemote(self: pointer): bool {.importc: "QPrinterInfo_isRemote".}
+proc fcQPrinterInfo_state(self: pointer): cint {.importc: "QPrinterInfo_state".}
+proc fcQPrinterInfo_supportedPageSizes(self: pointer): struct_miqt_array {.importc: "QPrinterInfo_supportedPageSizes".}
+proc fcQPrinterInfo_defaultPageSize(self: pointer): pointer {.importc: "QPrinterInfo_defaultPageSize".}
+proc fcQPrinterInfo_supportsCustomPageSizes(self: pointer): bool {.importc: "QPrinterInfo_supportsCustomPageSizes".}
+proc fcQPrinterInfo_minimumPhysicalPageSize(self: pointer): pointer {.importc: "QPrinterInfo_minimumPhysicalPageSize".}
+proc fcQPrinterInfo_maximumPhysicalPageSize(self: pointer): pointer {.importc: "QPrinterInfo_maximumPhysicalPageSize".}
+proc fcQPrinterInfo_supportedResolutions(self: pointer): struct_miqt_array {.importc: "QPrinterInfo_supportedResolutions".}
+proc fcQPrinterInfo_defaultDuplexMode(self: pointer): cint {.importc: "QPrinterInfo_defaultDuplexMode".}
+proc fcQPrinterInfo_supportedDuplexModes(self: pointer): struct_miqt_array {.importc: "QPrinterInfo_supportedDuplexModes".}
+proc fcQPrinterInfo_defaultColorMode(self: pointer): cint {.importc: "QPrinterInfo_defaultColorMode".}
+proc fcQPrinterInfo_supportedColorModes(self: pointer): struct_miqt_array {.importc: "QPrinterInfo_supportedColorModes".}
 proc fcQPrinterInfo_availablePrinterNames(): struct_miqt_array {.importc: "QPrinterInfo_availablePrinterNames".}
 proc fcQPrinterInfo_availablePrinters(): struct_miqt_array {.importc: "QPrinterInfo_availablePrinters".}
 proc fcQPrinterInfo_defaultPrinterName(): struct_miqt_string {.importc: "QPrinterInfo_defaultPrinterName".}
@@ -74,43 +74,43 @@ proc fcQPrinterInfo_new3(printer: pointer): ptr cQPrinterInfo {.importc: "QPrint
 proc operatorAssign*(self: gen_qprinterinfo_types.QPrinterInfo, other: gen_qprinterinfo_types.QPrinterInfo): void =
   fcQPrinterInfo_operatorAssign(self.h, other.h)
 
-proc printerName*(self: gen_qprinterinfo_types.QPrinterInfo, ): string =
+proc printerName*(self: gen_qprinterinfo_types.QPrinterInfo): string =
   let v_ms = fcQPrinterInfo_printerName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc description*(self: gen_qprinterinfo_types.QPrinterInfo, ): string =
+proc description*(self: gen_qprinterinfo_types.QPrinterInfo): string =
   let v_ms = fcQPrinterInfo_description(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc location*(self: gen_qprinterinfo_types.QPrinterInfo, ): string =
+proc location*(self: gen_qprinterinfo_types.QPrinterInfo): string =
   let v_ms = fcQPrinterInfo_location(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc makeAndModel*(self: gen_qprinterinfo_types.QPrinterInfo, ): string =
+proc makeAndModel*(self: gen_qprinterinfo_types.QPrinterInfo): string =
   let v_ms = fcQPrinterInfo_makeAndModel(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isNull*(self: gen_qprinterinfo_types.QPrinterInfo, ): bool =
+proc isNull*(self: gen_qprinterinfo_types.QPrinterInfo): bool =
   fcQPrinterInfo_isNull(self.h)
 
-proc isDefault*(self: gen_qprinterinfo_types.QPrinterInfo, ): bool =
+proc isDefault*(self: gen_qprinterinfo_types.QPrinterInfo): bool =
   fcQPrinterInfo_isDefault(self.h)
 
-proc isRemote*(self: gen_qprinterinfo_types.QPrinterInfo, ): bool =
+proc isRemote*(self: gen_qprinterinfo_types.QPrinterInfo): bool =
   fcQPrinterInfo_isRemote(self.h)
 
-proc state*(self: gen_qprinterinfo_types.QPrinterInfo, ): cint =
+proc state*(self: gen_qprinterinfo_types.QPrinterInfo): cint =
   cint(fcQPrinterInfo_state(self.h))
 
-proc supportedPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_qpagesize_types.QPageSize] =
+proc supportedPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo): seq[gen_qpagesize_types.QPageSize] =
   var v_ma = fcQPrinterInfo_supportedPageSizes(self.h)
   var vx_ret = newSeq[gen_qpagesize_types.QPageSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -119,19 +119,19 @@ proc supportedPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_q
   c_free(v_ma.data)
   vx_ret
 
-proc defaultPageSize*(self: gen_qprinterinfo_types.QPrinterInfo, ): gen_qpagesize_types.QPageSize =
+proc defaultPageSize*(self: gen_qprinterinfo_types.QPrinterInfo): gen_qpagesize_types.QPageSize =
   gen_qpagesize_types.QPageSize(h: fcQPrinterInfo_defaultPageSize(self.h), owned: true)
 
-proc supportsCustomPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo, ): bool =
+proc supportsCustomPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo): bool =
   fcQPrinterInfo_supportsCustomPageSizes(self.h)
 
-proc minimumPhysicalPageSize*(self: gen_qprinterinfo_types.QPrinterInfo, ): gen_qpagesize_types.QPageSize =
+proc minimumPhysicalPageSize*(self: gen_qprinterinfo_types.QPrinterInfo): gen_qpagesize_types.QPageSize =
   gen_qpagesize_types.QPageSize(h: fcQPrinterInfo_minimumPhysicalPageSize(self.h), owned: true)
 
-proc maximumPhysicalPageSize*(self: gen_qprinterinfo_types.QPrinterInfo, ): gen_qpagesize_types.QPageSize =
+proc maximumPhysicalPageSize*(self: gen_qprinterinfo_types.QPrinterInfo): gen_qpagesize_types.QPageSize =
   gen_qpagesize_types.QPageSize(h: fcQPrinterInfo_maximumPhysicalPageSize(self.h), owned: true)
 
-proc supportedResolutions*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint] =
+proc supportedResolutions*(self: gen_qprinterinfo_types.QPrinterInfo): seq[cint] =
   var v_ma = fcQPrinterInfo_supportedResolutions(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -140,10 +140,10 @@ proc supportedResolutions*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cin
   c_free(v_ma.data)
   vx_ret
 
-proc defaultDuplexMode*(self: gen_qprinterinfo_types.QPrinterInfo, ): cint =
+proc defaultDuplexMode*(self: gen_qprinterinfo_types.QPrinterInfo): cint =
   cint(fcQPrinterInfo_defaultDuplexMode(self.h))
 
-proc supportedDuplexModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint] =
+proc supportedDuplexModes*(self: gen_qprinterinfo_types.QPrinterInfo): seq[cint] =
   var v_ma = fcQPrinterInfo_supportedDuplexModes(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -152,10 +152,10 @@ proc supportedDuplexModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cin
   c_free(v_ma.data)
   vx_ret
 
-proc defaultColorMode*(self: gen_qprinterinfo_types.QPrinterInfo, ): cint =
+proc defaultColorMode*(self: gen_qprinterinfo_types.QPrinterInfo): cint =
   cint(fcQPrinterInfo_defaultColorMode(self.h))
 
-proc supportedColorModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint] =
+proc supportedColorModes*(self: gen_qprinterinfo_types.QPrinterInfo): seq[cint] =
   var v_ma = fcQPrinterInfo_supportedColorModes(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -164,7 +164,7 @@ proc supportedColorModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint
   c_free(v_ma.data)
   vx_ret
 
-proc availablePrinterNames*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[string] =
+proc availablePrinterNames*(_: type gen_qprinterinfo_types.QPrinterInfo): seq[string] =
   var v_ma = fcQPrinterInfo_availablePrinterNames()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -176,7 +176,7 @@ proc availablePrinterNames*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc availablePrinters*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_qprinterinfo_types.QPrinterInfo] =
+proc availablePrinters*(_: type gen_qprinterinfo_types.QPrinterInfo): seq[gen_qprinterinfo_types.QPrinterInfo] =
   var v_ma = fcQPrinterInfo_availablePrinters()
   var vx_ret = newSeq[gen_qprinterinfo_types.QPrinterInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -185,13 +185,13 @@ proc availablePrinters*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_
   c_free(v_ma.data)
   vx_ret
 
-proc defaultPrinterName*(_: type gen_qprinterinfo_types.QPrinterInfo, ): string =
+proc defaultPrinterName*(_: type gen_qprinterinfo_types.QPrinterInfo): string =
   let v_ms = fcQPrinterInfo_defaultPrinterName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc defaultPrinter*(_: type gen_qprinterinfo_types.QPrinterInfo, ): gen_qprinterinfo_types.QPrinterInfo =
+proc defaultPrinter*(_: type gen_qprinterinfo_types.QPrinterInfo): gen_qprinterinfo_types.QPrinterInfo =
   gen_qprinterinfo_types.QPrinterInfo(h: fcQPrinterInfo_defaultPrinter(), owned: true)
 
 proc printerInfo*(_: type gen_qprinterinfo_types.QPrinterInfo, printerName: string): gen_qprinterinfo_types.QPrinterInfo =

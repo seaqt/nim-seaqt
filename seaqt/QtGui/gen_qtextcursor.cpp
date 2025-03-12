@@ -17,15 +17,6 @@
 #include <QTextTableFormat>
 #include <qtextcursor.h>
 #include "gen_qtextcursor.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextCursor* QTextCursor_new() {
 	return new QTextCursor();
 }

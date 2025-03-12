@@ -14,38 +14,31 @@
 #include <QVector3D>
 #include <qspatialsound.h>
 #include "gen_qspatialsound.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSpatialSound final : public QSpatialSound {
-	struct QSpatialSound_VTable* vtbl;
+	const QSpatialSound_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSpatialSound_VTable* QSpatialSound_vtbl(const VirtualQSpatialSound* self);
+	friend void* QSpatialSound_vdata(const VirtualQSpatialSound* self);
+	friend void QSpatialSound_setVdata(VirtualQSpatialSound* self, void* vdata);
 
-	VirtualQSpatialSound(struct QSpatialSound_VTable* vtbl, QAudioEngine* engine): QSpatialSound(engine), vtbl(vtbl) {};
+	VirtualQSpatialSound(const QSpatialSound_VTable* vtbl, void* vdata, QAudioEngine* engine): QSpatialSound(engine), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSpatialSound() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSpatialSound() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QSpatialSound::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QSpatialSound_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QSpatialSound_virtualbase_metaObject(const VirtualQSpatialSound* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QSpatialSound::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QSpatialSound_virtualbase_metacast(void* self, const char* param1);
+	friend void* QSpatialSound_virtualbase_metacast(VirtualQSpatialSound* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QSpatialSound::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSpatialSound_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QSpatialSound_virtualbase_metacall(VirtualQSpatialSound* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QSpatialSound::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QSpatialSound_virtualbase_event(void* self, QEvent* event);
+	friend bool QSpatialSound_virtualbase_event(VirtualQSpatialSound* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QSpatialSound::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QSpatialSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QSpatialSound_virtualbase_eventFilter(VirtualQSpatialSound* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QSpatialSound::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QSpatialSound_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QSpatialSound_virtualbase_timerEvent(VirtualQSpatialSound* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QSpatialSound::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QSpatialSound_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QSpatialSound_virtualbase_childEvent(VirtualQSpatialSound* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QSpatialSound::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QSpatialSound_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QSpatialSound_virtualbase_customEvent(VirtualQSpatialSound* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QSpatialSound::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QSpatialSound_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QSpatialSound_virtualbase_connectNotify(VirtualQSpatialSound* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QSpatialSound::disconnectNotify(signal);
@@ -182,21 +167,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QSpatialSound_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QSpatialSound_virtualbase_disconnectNotify(VirtualQSpatialSound* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSpatialSound_protectedbase_sender(const void* self);
-	friend int QSpatialSound_protectedbase_senderSignalIndex(const void* self);
-	friend int QSpatialSound_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QSpatialSound_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QSpatialSound_protectedbase_sender(const VirtualQSpatialSound* self);
+	friend int QSpatialSound_protectedbase_senderSignalIndex(const VirtualQSpatialSound* self);
+	friend int QSpatialSound_protectedbase_receivers(const VirtualQSpatialSound* self, const char* signal);
+	friend bool QSpatialSound_protectedbase_isSignalConnected(const VirtualQSpatialSound* self, QMetaMethod* signal);
 };
 
-QSpatialSound* QSpatialSound_new(struct QSpatialSound_VTable* vtbl, QAudioEngine* engine) {
-	return new VirtualQSpatialSound(vtbl, engine);
+VirtualQSpatialSound* QSpatialSound_new(const QSpatialSound_VTable* vtbl, void* vdata, QAudioEngine* engine) {
+	return new VirtualQSpatialSound(vtbl, vdata, engine);
 }
 
 void QSpatialSound_virtbase(QSpatialSound* src, QObject** outptr_QObject) {
@@ -347,7 +332,7 @@ void QSpatialSound_sourceChanged(QSpatialSound* self) {
 	self->sourceChanged();
 }
 
-void QSpatialSound_connect_sourceChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_sourceChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -362,7 +347,7 @@ void QSpatialSound_loopsChanged(QSpatialSound* self) {
 	self->loopsChanged();
 }
 
-void QSpatialSound_connect_loopsChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_loopsChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -377,7 +362,7 @@ void QSpatialSound_autoPlayChanged(QSpatialSound* self) {
 	self->autoPlayChanged();
 }
 
-void QSpatialSound_connect_autoPlayChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_autoPlayChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -392,7 +377,7 @@ void QSpatialSound_positionChanged(QSpatialSound* self) {
 	self->positionChanged();
 }
 
-void QSpatialSound_connect_positionChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_positionChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -407,7 +392,7 @@ void QSpatialSound_rotationChanged(QSpatialSound* self) {
 	self->rotationChanged();
 }
 
-void QSpatialSound_connect_rotationChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_rotationChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -422,7 +407,7 @@ void QSpatialSound_volumeChanged(QSpatialSound* self) {
 	self->volumeChanged();
 }
 
-void QSpatialSound_connect_volumeChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_volumeChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -437,7 +422,7 @@ void QSpatialSound_distanceModelChanged(QSpatialSound* self) {
 	self->distanceModelChanged();
 }
 
-void QSpatialSound_connect_distanceModelChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_distanceModelChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -452,7 +437,7 @@ void QSpatialSound_sizeChanged(QSpatialSound* self) {
 	self->sizeChanged();
 }
 
-void QSpatialSound_connect_sizeChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_sizeChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -467,7 +452,7 @@ void QSpatialSound_distanceCutoffChanged(QSpatialSound* self) {
 	self->distanceCutoffChanged();
 }
 
-void QSpatialSound_connect_distanceCutoffChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_distanceCutoffChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -482,7 +467,7 @@ void QSpatialSound_manualAttenuationChanged(QSpatialSound* self) {
 	self->manualAttenuationChanged();
 }
 
-void QSpatialSound_connect_manualAttenuationChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_manualAttenuationChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -497,7 +482,7 @@ void QSpatialSound_occlusionIntensityChanged(QSpatialSound* self) {
 	self->occlusionIntensityChanged();
 }
 
-void QSpatialSound_connect_occlusionIntensityChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_occlusionIntensityChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -512,7 +497,7 @@ void QSpatialSound_directivityChanged(QSpatialSound* self) {
 	self->directivityChanged();
 }
 
-void QSpatialSound_connect_directivityChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_directivityChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -527,7 +512,7 @@ void QSpatialSound_directivityOrderChanged(QSpatialSound* self) {
 	self->directivityOrderChanged();
 }
 
-void QSpatialSound_connect_directivityOrderChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_directivityOrderChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -542,7 +527,7 @@ void QSpatialSound_nearFieldGainChanged(QSpatialSound* self) {
 	self->nearFieldGainChanged();
 }
 
-void QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSpatialSound_connect_nearFieldGainChanged(VirtualQSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -587,93 +572,76 @@ struct miqt_string QSpatialSound_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QSpatialSound_virtualbase_metaObject(const void* self) {
+QMetaObject* QSpatialSound_virtualbase_metaObject(const VirtualQSpatialSound* self) {
 
-	return (QMetaObject*) ( (const VirtualQSpatialSound*)(self) )->QSpatialSound::metaObject();
-
+	return (QMetaObject*) self->QSpatialSound::metaObject();
 }
 
-void* QSpatialSound_virtualbase_metacast(void* self, const char* param1) {
+void* QSpatialSound_virtualbase_metacast(VirtualQSpatialSound* self, const char* param1) {
 
-	return ( (VirtualQSpatialSound*)(self) )->QSpatialSound::qt_metacast(param1);
-
+	return self->QSpatialSound::qt_metacast(param1);
 }
 
-int QSpatialSound_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QSpatialSound_virtualbase_metacall(VirtualQSpatialSound* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQSpatialSound*)(self) )->QSpatialSound::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QSpatialSound::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QSpatialSound_virtualbase_event(void* self, QEvent* event) {
+bool QSpatialSound_virtualbase_event(VirtualQSpatialSound* self, QEvent* event) {
 
-	return ( (VirtualQSpatialSound*)(self) )->QSpatialSound::event(event);
-
+	return self->QSpatialSound::event(event);
 }
 
-bool QSpatialSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QSpatialSound_virtualbase_eventFilter(VirtualQSpatialSound* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQSpatialSound*)(self) )->QSpatialSound::eventFilter(watched, event);
-
+	return self->QSpatialSound::eventFilter(watched, event);
 }
 
-void QSpatialSound_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QSpatialSound_virtualbase_timerEvent(VirtualQSpatialSound* self, QTimerEvent* event) {
 
-	( (VirtualQSpatialSound*)(self) )->QSpatialSound::timerEvent(event);
-
+	self->QSpatialSound::timerEvent(event);
 }
 
-void QSpatialSound_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QSpatialSound_virtualbase_childEvent(VirtualQSpatialSound* self, QChildEvent* event) {
 
-	( (VirtualQSpatialSound*)(self) )->QSpatialSound::childEvent(event);
-
+	self->QSpatialSound::childEvent(event);
 }
 
-void QSpatialSound_virtualbase_customEvent(void* self, QEvent* event) {
+void QSpatialSound_virtualbase_customEvent(VirtualQSpatialSound* self, QEvent* event) {
 
-	( (VirtualQSpatialSound*)(self) )->QSpatialSound::customEvent(event);
-
+	self->QSpatialSound::customEvent(event);
 }
 
-void QSpatialSound_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QSpatialSound_virtualbase_connectNotify(VirtualQSpatialSound* self, QMetaMethod* signal) {
 
-	( (VirtualQSpatialSound*)(self) )->QSpatialSound::connectNotify(*signal);
-
+	self->QSpatialSound::connectNotify(*signal);
 }
 
-void QSpatialSound_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QSpatialSound_virtualbase_disconnectNotify(VirtualQSpatialSound* self, QMetaMethod* signal) {
 
-	( (VirtualQSpatialSound*)(self) )->QSpatialSound::disconnectNotify(*signal);
-
+	self->QSpatialSound::disconnectNotify(*signal);
 }
 
 const QMetaObject* QSpatialSound_staticMetaObject() { return &QSpatialSound::staticMetaObject; }
-QObject* QSpatialSound_protectedbase_sender(const void* self) {
-	VirtualQSpatialSound* self_cast = static_cast<VirtualQSpatialSound*>( (QSpatialSound*)(self) );
-	
-	return self_cast->sender();
 
+const QSpatialSound_VTable* QSpatialSound_vtbl(const VirtualQSpatialSound* self) { return self->vtbl; }
+void* QSpatialSound_vdata(const VirtualQSpatialSound* self) { return self->vdata; }
+void QSpatialSound_setVdata(VirtualQSpatialSound* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QSpatialSound_protectedbase_sender(const VirtualQSpatialSound* self) {
+	return self->sender();
 }
 
-int QSpatialSound_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQSpatialSound* self_cast = static_cast<VirtualQSpatialSound*>( (QSpatialSound*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QSpatialSound_protectedbase_senderSignalIndex(const VirtualQSpatialSound* self) {
+	return self->senderSignalIndex();
 }
 
-int QSpatialSound_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQSpatialSound* self_cast = static_cast<VirtualQSpatialSound*>( (QSpatialSound*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QSpatialSound_protectedbase_receivers(const VirtualQSpatialSound* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QSpatialSound_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQSpatialSound* self_cast = static_cast<VirtualQSpatialSound*>( (QSpatialSound*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QSpatialSound_protectedbase_isSignalConnected(const VirtualQSpatialSound* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QSpatialSound_delete(QSpatialSound* self) {

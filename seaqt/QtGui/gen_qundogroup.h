@@ -36,21 +36,28 @@ typedef struct QUndoGroup QUndoGroup;
 typedef struct QUndoStack QUndoStack;
 #endif
 
-struct QUndoGroup_VTable {
-	void (*destructor)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self);
-	QMetaObject* (*metaObject)(struct QUndoGroup_VTable* vtbl, const QUndoGroup* self);
-	void* (*metacast)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, const char* param1);
-	int (*metacall)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, int param1, int param2, void** param3);
-	bool (*event)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QEvent* event);
-	bool (*eventFilter)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QTimerEvent* event);
-	void (*childEvent)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QChildEvent* event);
-	void (*customEvent)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QEvent* event);
-	void (*connectNotify)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QUndoGroup_VTable* vtbl, QUndoGroup* self, QMetaMethod* signal);
-};
-QUndoGroup* QUndoGroup_new(struct QUndoGroup_VTable* vtbl);
-QUndoGroup* QUndoGroup_new2(struct QUndoGroup_VTable* vtbl, QObject* parent);
+typedef struct VirtualQUndoGroup VirtualQUndoGroup;
+typedef struct QUndoGroup_VTable{
+	void (*destructor)(VirtualQUndoGroup* self);
+	QMetaObject* (*metaObject)(const VirtualQUndoGroup* self);
+	void* (*metacast)(VirtualQUndoGroup* self, const char* param1);
+	int (*metacall)(VirtualQUndoGroup* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQUndoGroup* self, QEvent* event);
+	bool (*eventFilter)(VirtualQUndoGroup* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQUndoGroup* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQUndoGroup* self, QChildEvent* event);
+	void (*customEvent)(VirtualQUndoGroup* self, QEvent* event);
+	void (*connectNotify)(VirtualQUndoGroup* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQUndoGroup* self, QMetaMethod* signal);
+}QUndoGroup_VTable;
+
+const QUndoGroup_VTable* QUndoGroup_vtbl(const VirtualQUndoGroup* self);
+void* QUndoGroup_vdata(const VirtualQUndoGroup* self);
+void QUndoGroup_setVdata(VirtualQUndoGroup* self, void* vdata);
+
+VirtualQUndoGroup* QUndoGroup_new(const QUndoGroup_VTable* vtbl, void* vdata);
+VirtualQUndoGroup* QUndoGroup_new2(const QUndoGroup_VTable* vtbl, void* vdata, QObject* parent);
+
 void QUndoGroup_virtbase(QUndoGroup* src, QObject** outptr_QObject);
 QMetaObject* QUndoGroup_metaObject(const QUndoGroup* self);
 void* QUndoGroup_metacast(QUndoGroup* self, const char* param1);
@@ -71,37 +78,40 @@ void QUndoGroup_undo(QUndoGroup* self);
 void QUndoGroup_redo(QUndoGroup* self);
 void QUndoGroup_setActiveStack(QUndoGroup* self, QUndoStack* stack);
 void QUndoGroup_activeStackChanged(QUndoGroup* self, QUndoStack* stack);
-void QUndoGroup_connect_activeStackChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t));
+void QUndoGroup_connect_activeStackChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t));
 void QUndoGroup_indexChanged(QUndoGroup* self, int idx);
-void QUndoGroup_connect_indexChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QUndoGroup_connect_indexChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QUndoGroup_cleanChanged(QUndoGroup* self, bool clean);
-void QUndoGroup_connect_cleanChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoGroup_connect_cleanChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoGroup_canUndoChanged(QUndoGroup* self, bool canUndo);
-void QUndoGroup_connect_canUndoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoGroup_connect_canUndoChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoGroup_canRedoChanged(QUndoGroup* self, bool canRedo);
-void QUndoGroup_connect_canRedoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoGroup_connect_canRedoChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoGroup_undoTextChanged(QUndoGroup* self, struct miqt_string undoText);
-void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QUndoGroup_connect_undoTextChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QUndoGroup_redoTextChanged(QUndoGroup* self, struct miqt_string redoText);
-void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QUndoGroup_connect_redoTextChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 struct miqt_string QUndoGroup_tr2(const char* s, const char* c);
 struct miqt_string QUndoGroup_tr3(const char* s, const char* c, int n);
 QAction* QUndoGroup_createUndoAction2(const QUndoGroup* self, QObject* parent, struct miqt_string prefix);
 QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, struct miqt_string prefix);
-QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self);
-void* QUndoGroup_virtualbase_metacast(void* self, const char* param1);
-int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QUndoGroup_virtualbase_event(void* self, QEvent* event);
-bool QUndoGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QUndoGroup_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QUndoGroup_virtualbase_childEvent(void* self, QChildEvent* event);
-void QUndoGroup_virtualbase_customEvent(void* self, QEvent* event);
-void QUndoGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QUndoGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QUndoGroup_protectedbase_sender(const void* self);
-int QUndoGroup_protectedbase_senderSignalIndex(const void* self);
-int QUndoGroup_protectedbase_receivers(const void* self, const char* signal);
-bool QUndoGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self);
+void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1);
+int QUndoGroup_virtualbase_metacall(VirtualQUndoGroup* self, int param1, int param2, void** param3);
+bool QUndoGroup_virtualbase_event(VirtualQUndoGroup* self, QEvent* event);
+bool QUndoGroup_virtualbase_eventFilter(VirtualQUndoGroup* self, QObject* watched, QEvent* event);
+void QUndoGroup_virtualbase_timerEvent(VirtualQUndoGroup* self, QTimerEvent* event);
+void QUndoGroup_virtualbase_childEvent(VirtualQUndoGroup* self, QChildEvent* event);
+void QUndoGroup_virtualbase_customEvent(VirtualQUndoGroup* self, QEvent* event);
+void QUndoGroup_virtualbase_connectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
+void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
+
+QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self);
+int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self);
+int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal);
+bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal);
+
 const QMetaObject* QUndoGroup_staticMetaObject();
 void QUndoGroup_delete(QUndoGroup* self);
 

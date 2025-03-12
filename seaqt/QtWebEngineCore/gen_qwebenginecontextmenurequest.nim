@@ -100,32 +100,32 @@ export
 
 type cQWebEngineContextMenuRequest*{.exportc: "QWebEngineContextMenuRequest", incompleteStruct.} = object
 
-proc fcQWebEngineContextMenuRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_metaObject".}
+proc fcQWebEngineContextMenuRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineContextMenuRequest_metaObject".}
 proc fcQWebEngineContextMenuRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineContextMenuRequest_metacast".}
 proc fcQWebEngineContextMenuRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineContextMenuRequest_metacall".}
 proc fcQWebEngineContextMenuRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr".}
-proc fcQWebEngineContextMenuRequest_position(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_position".}
-proc fcQWebEngineContextMenuRequest_selectedText(self: pointer, ): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_selectedText".}
-proc fcQWebEngineContextMenuRequest_linkText(self: pointer, ): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_linkText".}
-proc fcQWebEngineContextMenuRequest_linkUrl(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_linkUrl".}
-proc fcQWebEngineContextMenuRequest_mediaUrl(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_mediaUrl".}
-proc fcQWebEngineContextMenuRequest_mediaType(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_mediaType".}
-proc fcQWebEngineContextMenuRequest_isContentEditable(self: pointer, ): bool {.importc: "QWebEngineContextMenuRequest_isContentEditable".}
-proc fcQWebEngineContextMenuRequest_misspelledWord(self: pointer, ): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_misspelledWord".}
-proc fcQWebEngineContextMenuRequest_spellCheckerSuggestions(self: pointer, ): struct_miqt_array {.importc: "QWebEngineContextMenuRequest_spellCheckerSuggestions".}
-proc fcQWebEngineContextMenuRequest_isAccepted(self: pointer, ): bool {.importc: "QWebEngineContextMenuRequest_isAccepted".}
+proc fcQWebEngineContextMenuRequest_position(self: pointer): pointer {.importc: "QWebEngineContextMenuRequest_position".}
+proc fcQWebEngineContextMenuRequest_selectedText(self: pointer): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_selectedText".}
+proc fcQWebEngineContextMenuRequest_linkText(self: pointer): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_linkText".}
+proc fcQWebEngineContextMenuRequest_linkUrl(self: pointer): pointer {.importc: "QWebEngineContextMenuRequest_linkUrl".}
+proc fcQWebEngineContextMenuRequest_mediaUrl(self: pointer): pointer {.importc: "QWebEngineContextMenuRequest_mediaUrl".}
+proc fcQWebEngineContextMenuRequest_mediaType(self: pointer): cint {.importc: "QWebEngineContextMenuRequest_mediaType".}
+proc fcQWebEngineContextMenuRequest_isContentEditable(self: pointer): bool {.importc: "QWebEngineContextMenuRequest_isContentEditable".}
+proc fcQWebEngineContextMenuRequest_misspelledWord(self: pointer): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_misspelledWord".}
+proc fcQWebEngineContextMenuRequest_spellCheckerSuggestions(self: pointer): struct_miqt_array {.importc: "QWebEngineContextMenuRequest_spellCheckerSuggestions".}
+proc fcQWebEngineContextMenuRequest_isAccepted(self: pointer): bool {.importc: "QWebEngineContextMenuRequest_isAccepted".}
 proc fcQWebEngineContextMenuRequest_setAccepted(self: pointer, accepted: bool): void {.importc: "QWebEngineContextMenuRequest_setAccepted".}
-proc fcQWebEngineContextMenuRequest_mediaFlags(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_mediaFlags".}
-proc fcQWebEngineContextMenuRequest_editFlags(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_editFlags".}
+proc fcQWebEngineContextMenuRequest_mediaFlags(self: pointer): cint {.importc: "QWebEngineContextMenuRequest_mediaFlags".}
+proc fcQWebEngineContextMenuRequest_editFlags(self: pointer): cint {.importc: "QWebEngineContextMenuRequest_editFlags".}
 proc fcQWebEngineContextMenuRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr2".}
 proc fcQWebEngineContextMenuRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr3".}
-proc fcQWebEngineContextMenuRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_protectedbase_sender".}
-proc fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineContextMenuRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineContextMenuRequest_protectedbase_sender".}
+proc fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineContextMenuRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_receivers".}
 proc fcQWebEngineContextMenuRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineContextMenuRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineContextMenuRequest_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuRequest_staticMetaObject".}
 
-proc metaObject*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, param1: cstring): pointer =
@@ -140,40 +140,40 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   c_free(v_ms.data)
   vx_ret
 
-proc position*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qpoint_types.QPoint =
+proc position*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQWebEngineContextMenuRequest_position(self.h), owned: true)
 
-proc selectedText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): string =
+proc selectedText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): string =
   let v_ms = fcQWebEngineContextMenuRequest_selectedText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc linkText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): string =
+proc linkText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): string =
   let v_ms = fcQWebEngineContextMenuRequest_linkText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc linkUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qurl_types.QUrl =
+proc linkUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_linkUrl(self.h), owned: true)
 
-proc mediaUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qurl_types.QUrl =
+proc mediaUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_mediaUrl(self.h), owned: true)
 
-proc mediaType*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): cint =
+proc mediaType*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   cint(fcQWebEngineContextMenuRequest_mediaType(self.h))
 
-proc isContentEditable*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): bool =
+proc isContentEditable*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): bool =
   fcQWebEngineContextMenuRequest_isContentEditable(self.h)
 
-proc misspelledWord*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): string =
+proc misspelledWord*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): string =
   let v_ms = fcQWebEngineContextMenuRequest_misspelledWord(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc spellCheckerSuggestions*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): seq[string] =
+proc spellCheckerSuggestions*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): seq[string] =
   var v_ma = fcQWebEngineContextMenuRequest_spellCheckerSuggestions(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -185,16 +185,16 @@ proc spellCheckerSuggestions*(self: gen_qwebenginecontextmenurequest_types.QWebE
   c_free(v_ma.data)
   vx_ret
 
-proc isAccepted*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): bool =
+proc isAccepted*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): bool =
   fcQWebEngineContextMenuRequest_isAccepted(self.h)
 
 proc setAccepted*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, accepted: bool): void =
   fcQWebEngineContextMenuRequest_setAccepted(self.h, accepted)
 
-proc mediaFlags*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): cint =
+proc mediaFlags*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   cint(fcQWebEngineContextMenuRequest_mediaFlags(self.h))
 
-proc editFlags*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): cint =
+proc editFlags*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   cint(fcQWebEngineContextMenuRequest_editFlags(self.h))
 
 proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, s: cstring, c: cstring): string =
@@ -209,10 +209,10 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineContextMenuRequest_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): cint =
+proc senderSignalIndex*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, signal: cstring): cint =

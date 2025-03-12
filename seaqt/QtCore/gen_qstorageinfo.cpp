@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qstorageinfo.h>
 #include "gen_qstorageinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStorageInfo* QStorageInfo_new() {
 	return new QStorageInfo();
 }

@@ -11,15 +11,6 @@
 #include <QVariant>
 #include <qinputmethod.h>
 #include "gen_qinputmethod.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QInputMethod_virtbase(QInputMethod* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -273,3 +264,4 @@ struct miqt_string QInputMethod_tr3(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QInputMethod_staticMetaObject() { return &QInputMethod::staticMetaObject; }
+

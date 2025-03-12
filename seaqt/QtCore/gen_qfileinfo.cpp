@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qfileinfo.h>
 #include "gen_qfileinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFileInfo* QFileInfo_new() {
 	return new QFileInfo();
 }

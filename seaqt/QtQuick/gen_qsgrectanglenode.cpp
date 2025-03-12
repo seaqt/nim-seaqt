@@ -6,15 +6,6 @@
 #include <QSGRectangleNode>
 #include <qsgrectanglenode.h>
 #include "gen_qsgrectanglenode.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSGRectangleNode_virtbase(QSGRectangleNode* src, QSGGeometryNode** outptr_QSGGeometryNode) {
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }

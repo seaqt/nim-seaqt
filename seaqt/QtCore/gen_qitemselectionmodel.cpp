@@ -16,15 +16,6 @@
 #include <QTimerEvent>
 #include <qitemselectionmodel.h>
 #include "gen_qitemselectionmodel.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QItemSelectionRange* QItemSelectionRange_new() {
 	return new QItemSelectionRange();
 }
@@ -139,30 +130,32 @@ void QItemSelectionRange_delete(QItemSelectionRange* self) {
 }
 
 class VirtualQItemSelectionModel final : public QItemSelectionModel {
-	struct QItemSelectionModel_VTable* vtbl;
+	const QItemSelectionModel_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QItemSelectionModel_VTable* QItemSelectionModel_vtbl(const VirtualQItemSelectionModel* self);
+	friend void* QItemSelectionModel_vdata(const VirtualQItemSelectionModel* self);
+	friend void QItemSelectionModel_setVdata(VirtualQItemSelectionModel* self, void* vdata);
 
-	VirtualQItemSelectionModel(struct QItemSelectionModel_VTable* vtbl): QItemSelectionModel(), vtbl(vtbl) {};
-	VirtualQItemSelectionModel(struct QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model, QObject* parent): QItemSelectionModel(model, parent), vtbl(vtbl) {};
-	VirtualQItemSelectionModel(struct QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model): QItemSelectionModel(model), vtbl(vtbl) {};
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl, void* vdata): QItemSelectionModel(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl, void* vdata, QAbstractItemModel* model, QObject* parent): QItemSelectionModel(model, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQItemSelectionModel(const QItemSelectionModel_VTable* vtbl, void* vdata, QAbstractItemModel* model): QItemSelectionModel(model), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQItemSelectionModel() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQItemSelectionModel() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QItemSelectionModel::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QItemSelectionModel_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QItemSelectionModel_virtualbase_metaObject(const VirtualQItemSelectionModel* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QItemSelectionModel::qt_metacast(param1);
@@ -170,14 +163,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QItemSelectionModel_virtualbase_metacast(void* self, const char* param1);
+	friend void* QItemSelectionModel_virtualbase_metacast(VirtualQItemSelectionModel* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QItemSelectionModel::qt_metacall(param1, param2, param3);
@@ -188,14 +180,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QItemSelectionModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QItemSelectionModel_virtualbase_metacall(VirtualQItemSelectionModel* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setCurrentIndex(const QModelIndex& index, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->setCurrentIndex == 0) {
 			QItemSelectionModel::setCurrentIndex(index, command);
@@ -208,13 +199,12 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->setCurrentIndex(vtbl, this, sigval1, sigval2);
+		vtbl->setCurrentIndex(this, sigval1, sigval2);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_setCurrentIndex(void* self, QModelIndex* index, int command);
+	friend void QItemSelectionModel_virtualbase_setCurrentIndex(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
 
-	// Subclass to allow providing a Go implementation
 	virtual void select(const QModelIndex& index, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->select == 0) {
 			QItemSelectionModel::select(index, command);
@@ -227,13 +217,12 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->select(vtbl, this, sigval1, sigval2);
+		vtbl->select(this, sigval1, sigval2);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_select(void* self, QModelIndex* index, int command);
+	friend void QItemSelectionModel_virtualbase_select(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
 
-	// Subclass to allow providing a Go implementation
 	virtual void select(const QItemSelection& selection, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->select2 == 0) {
 			QItemSelectionModel::select(selection, command);
@@ -246,13 +235,12 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->select2(vtbl, this, sigval1, sigval2);
+		vtbl->select2(this, sigval1, sigval2);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_select2(void* self, QItemSelection* selection, int command);
+	friend void QItemSelectionModel_virtualbase_select2(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
 		if (vtbl->clear == 0) {
 			QItemSelectionModel::clear();
@@ -260,13 +248,12 @@ public:
 		}
 
 
-		vtbl->clear(vtbl, this);
+		vtbl->clear(this);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_clear(void* self);
+	friend void QItemSelectionModel_virtualbase_clear(VirtualQItemSelectionModel* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
 		if (vtbl->reset == 0) {
 			QItemSelectionModel::reset();
@@ -274,13 +261,12 @@ public:
 		}
 
 
-		vtbl->reset(vtbl, this);
+		vtbl->reset(this);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_reset(void* self);
+	friend void QItemSelectionModel_virtualbase_reset(VirtualQItemSelectionModel* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clearCurrentIndex() override {
 		if (vtbl->clearCurrentIndex == 0) {
 			QItemSelectionModel::clearCurrentIndex();
@@ -288,13 +274,12 @@ public:
 		}
 
 
-		vtbl->clearCurrentIndex(vtbl, this);
+		vtbl->clearCurrentIndex(this);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_clearCurrentIndex(void* self);
+	friend void QItemSelectionModel_virtualbase_clearCurrentIndex(VirtualQItemSelectionModel* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QItemSelectionModel::event(event);
@@ -302,14 +287,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QItemSelectionModel_virtualbase_event(void* self, QEvent* event);
+	friend bool QItemSelectionModel_virtualbase_event(VirtualQItemSelectionModel* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QItemSelectionModel::eventFilter(watched, event);
@@ -318,14 +302,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QItemSelectionModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QItemSelectionModel_virtualbase_eventFilter(VirtualQItemSelectionModel* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QItemSelectionModel::timerEvent(event);
@@ -334,13 +317,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QItemSelectionModel_virtualbase_timerEvent(VirtualQItemSelectionModel* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QItemSelectionModel::childEvent(event);
@@ -349,13 +331,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QItemSelectionModel_virtualbase_childEvent(VirtualQItemSelectionModel* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QItemSelectionModel::customEvent(event);
@@ -364,13 +345,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QItemSelectionModel_virtualbase_customEvent(VirtualQItemSelectionModel* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QItemSelectionModel::connectNotify(signal);
@@ -381,13 +361,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QItemSelectionModel_virtualbase_connectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QItemSelectionModel::disconnectNotify(signal);
@@ -398,30 +377,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QItemSelectionModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QItemSelectionModel_virtualbase_disconnectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QItemSelectionModel_protectedbase_emitSelectionChanged(void* self, QItemSelection* newSelection, QItemSelection* oldSelection);
-	friend QObject* QItemSelectionModel_protectedbase_sender(const void* self);
-	friend int QItemSelectionModel_protectedbase_senderSignalIndex(const void* self);
-	friend int QItemSelectionModel_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QItemSelectionModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QItemSelectionModel_protectedbase_emitSelectionChanged(VirtualQItemSelectionModel* self, QItemSelection* newSelection, QItemSelection* oldSelection);
+	friend QObject* QItemSelectionModel_protectedbase_sender(const VirtualQItemSelectionModel* self);
+	friend int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelectionModel* self);
+	friend int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal);
+	friend bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal);
 };
 
-QItemSelectionModel* QItemSelectionModel_new(struct QItemSelectionModel_VTable* vtbl) {
-	return new VirtualQItemSelectionModel(vtbl);
+VirtualQItemSelectionModel* QItemSelectionModel_new(const QItemSelectionModel_VTable* vtbl, void* vdata) {
+	return new VirtualQItemSelectionModel(vtbl, vdata);
 }
 
-QItemSelectionModel* QItemSelectionModel_new2(struct QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model, QObject* parent) {
-	return new VirtualQItemSelectionModel(vtbl, model, parent);
+VirtualQItemSelectionModel* QItemSelectionModel_new2(const QItemSelectionModel_VTable* vtbl, void* vdata, QAbstractItemModel* model, QObject* parent) {
+	return new VirtualQItemSelectionModel(vtbl, vdata, model, parent);
 }
 
-QItemSelectionModel* QItemSelectionModel_new3(struct QItemSelectionModel_VTable* vtbl, QAbstractItemModel* model) {
-	return new VirtualQItemSelectionModel(vtbl, model);
+VirtualQItemSelectionModel* QItemSelectionModel_new3(const QItemSelectionModel_VTable* vtbl, void* vdata, QAbstractItemModel* model) {
+	return new VirtualQItemSelectionModel(vtbl, vdata, model);
 }
 
 void QItemSelectionModel_virtbase(QItemSelectionModel* src, QObject** outptr_QObject) {
@@ -566,7 +545,7 @@ void QItemSelectionModel_selectionChanged(QItemSelectionModel* self, QItemSelect
 	self->selectionChanged(*selected, *deselected);
 }
 
-void QItemSelectionModel_connect_selectionChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) {
+void QItemSelectionModel_connect_selectionChanged(VirtualQItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QItemSelection*, QItemSelection*);
@@ -587,7 +566,7 @@ void QItemSelectionModel_currentChanged(QItemSelectionModel* self, QModelIndex* 
 	self->currentChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+void QItemSelectionModel_connect_currentChanged(VirtualQItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
@@ -608,7 +587,7 @@ void QItemSelectionModel_currentRowChanged(QItemSelectionModel* self, QModelInde
 	self->currentRowChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentRowChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+void QItemSelectionModel_connect_currentRowChanged(VirtualQItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
@@ -629,7 +608,7 @@ void QItemSelectionModel_currentColumnChanged(QItemSelectionModel* self, QModelI
 	self->currentColumnChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentColumnChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+void QItemSelectionModel_connect_currentColumnChanged(VirtualQItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
@@ -650,7 +629,7 @@ void QItemSelectionModel_modelChanged(QItemSelectionModel* self, QAbstractItemMo
 	self->modelChanged(model);
 }
 
-void QItemSelectionModel_connect_modelChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) {
+void QItemSelectionModel_connect_modelChanged(VirtualQItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractItemModel*);
@@ -726,136 +705,110 @@ struct miqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumns1(co
 	return _out;
 }
 
-QMetaObject* QItemSelectionModel_virtualbase_metaObject(const void* self) {
+QMetaObject* QItemSelectionModel_virtualbase_metaObject(const VirtualQItemSelectionModel* self) {
 
-	return (QMetaObject*) ( (const VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::metaObject();
-
+	return (QMetaObject*) self->QItemSelectionModel::metaObject();
 }
 
-void* QItemSelectionModel_virtualbase_metacast(void* self, const char* param1) {
+void* QItemSelectionModel_virtualbase_metacast(VirtualQItemSelectionModel* self, const char* param1) {
 
-	return ( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::qt_metacast(param1);
-
+	return self->QItemSelectionModel::qt_metacast(param1);
 }
 
-int QItemSelectionModel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QItemSelectionModel_virtualbase_metacall(VirtualQItemSelectionModel* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QItemSelectionModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QItemSelectionModel_virtualbase_setCurrentIndex(void* self, QModelIndex* index, int command) {
+void QItemSelectionModel_virtualbase_setCurrentIndex(VirtualQItemSelectionModel* self, QModelIndex* index, int command) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::setCurrentIndex(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
-
+	self->QItemSelectionModel::setCurrentIndex(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
 }
 
-void QItemSelectionModel_virtualbase_select(void* self, QModelIndex* index, int command) {
+void QItemSelectionModel_virtualbase_select(VirtualQItemSelectionModel* self, QModelIndex* index, int command) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::select(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
-
+	self->QItemSelectionModel::select(*index, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
 }
 
-void QItemSelectionModel_virtualbase_select2(void* self, QItemSelection* selection, int command) {
+void QItemSelectionModel_virtualbase_select2(VirtualQItemSelectionModel* self, QItemSelection* selection, int command) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::select(*selection, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
-
+	self->QItemSelectionModel::select(*selection, static_cast<VirtualQItemSelectionModel::SelectionFlags>(command));
 }
 
-void QItemSelectionModel_virtualbase_clear(void* self) {
+void QItemSelectionModel_virtualbase_clear(VirtualQItemSelectionModel* self) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::clear();
-
+	self->QItemSelectionModel::clear();
 }
 
-void QItemSelectionModel_virtualbase_reset(void* self) {
+void QItemSelectionModel_virtualbase_reset(VirtualQItemSelectionModel* self) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::reset();
-
+	self->QItemSelectionModel::reset();
 }
 
-void QItemSelectionModel_virtualbase_clearCurrentIndex(void* self) {
+void QItemSelectionModel_virtualbase_clearCurrentIndex(VirtualQItemSelectionModel* self) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::clearCurrentIndex();
-
+	self->QItemSelectionModel::clearCurrentIndex();
 }
 
-bool QItemSelectionModel_virtualbase_event(void* self, QEvent* event) {
+bool QItemSelectionModel_virtualbase_event(VirtualQItemSelectionModel* self, QEvent* event) {
 
-	return ( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::event(event);
-
+	return self->QItemSelectionModel::event(event);
 }
 
-bool QItemSelectionModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QItemSelectionModel_virtualbase_eventFilter(VirtualQItemSelectionModel* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::eventFilter(watched, event);
-
+	return self->QItemSelectionModel::eventFilter(watched, event);
 }
 
-void QItemSelectionModel_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QItemSelectionModel_virtualbase_timerEvent(VirtualQItemSelectionModel* self, QTimerEvent* event) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::timerEvent(event);
-
+	self->QItemSelectionModel::timerEvent(event);
 }
 
-void QItemSelectionModel_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QItemSelectionModel_virtualbase_childEvent(VirtualQItemSelectionModel* self, QChildEvent* event) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::childEvent(event);
-
+	self->QItemSelectionModel::childEvent(event);
 }
 
-void QItemSelectionModel_virtualbase_customEvent(void* self, QEvent* event) {
+void QItemSelectionModel_virtualbase_customEvent(VirtualQItemSelectionModel* self, QEvent* event) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::customEvent(event);
-
+	self->QItemSelectionModel::customEvent(event);
 }
 
-void QItemSelectionModel_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QItemSelectionModel_virtualbase_connectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::connectNotify(*signal);
-
+	self->QItemSelectionModel::connectNotify(*signal);
 }
 
-void QItemSelectionModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QItemSelectionModel_virtualbase_disconnectNotify(VirtualQItemSelectionModel* self, QMetaMethod* signal) {
 
-	( (VirtualQItemSelectionModel*)(self) )->QItemSelectionModel::disconnectNotify(*signal);
-
+	self->QItemSelectionModel::disconnectNotify(*signal);
 }
 
 const QMetaObject* QItemSelectionModel_staticMetaObject() { return &QItemSelectionModel::staticMetaObject; }
-void QItemSelectionModel_protectedbase_emitSelectionChanged(void* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
-	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	
-	self_cast->emitSelectionChanged(*newSelection, *oldSelection);
 
+const QItemSelectionModel_VTable* QItemSelectionModel_vtbl(const VirtualQItemSelectionModel* self) { return self->vtbl; }
+void* QItemSelectionModel_vdata(const VirtualQItemSelectionModel* self) { return self->vdata; }
+void QItemSelectionModel_setVdata(VirtualQItemSelectionModel* self, void* vdata) { self->vdata = vdata; }
+
+void QItemSelectionModel_protectedbase_emitSelectionChanged(VirtualQItemSelectionModel* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
+	self->emitSelectionChanged(*newSelection, *oldSelection);
 }
 
-QObject* QItemSelectionModel_protectedbase_sender(const void* self) {
-	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QItemSelectionModel_protectedbase_sender(const VirtualQItemSelectionModel* self) {
+	return self->sender();
 }
 
-int QItemSelectionModel_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelectionModel* self) {
+	return self->senderSignalIndex();
 }
 
-int QItemSelectionModel_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QItemSelectionModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QItemSelectionModel_delete(QItemSelectionModel* self) {

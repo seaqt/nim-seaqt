@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qnetworkinformation.h>
 #include "gen_qnetworkinformation.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QNetworkInformation_virtbase(QNetworkInformation* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -207,3 +198,4 @@ struct miqt_string QNetworkInformation_tr3(const char* s, const char* c, int n) 
 }
 
 const QMetaObject* QNetworkInformation_staticMetaObject() { return &QNetworkInformation::staticMetaObject; }
+

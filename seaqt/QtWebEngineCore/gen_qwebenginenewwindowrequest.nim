@@ -61,24 +61,24 @@ export
 
 type cQWebEngineNewWindowRequest*{.exportc: "QWebEngineNewWindowRequest", incompleteStruct.} = object
 
-proc fcQWebEngineNewWindowRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_metaObject".}
+proc fcQWebEngineNewWindowRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_metaObject".}
 proc fcQWebEngineNewWindowRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNewWindowRequest_metacast".}
 proc fcQWebEngineNewWindowRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNewWindowRequest_metacall".}
 proc fcQWebEngineNewWindowRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr".}
-proc fcQWebEngineNewWindowRequest_destination(self: pointer, ): cint {.importc: "QWebEngineNewWindowRequest_destination".}
-proc fcQWebEngineNewWindowRequest_requestedUrl(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_requestedUrl".}
-proc fcQWebEngineNewWindowRequest_requestedGeometry(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_requestedGeometry".}
-proc fcQWebEngineNewWindowRequest_isUserInitiated(self: pointer, ): bool {.importc: "QWebEngineNewWindowRequest_isUserInitiated".}
+proc fcQWebEngineNewWindowRequest_destination(self: pointer): cint {.importc: "QWebEngineNewWindowRequest_destination".}
+proc fcQWebEngineNewWindowRequest_requestedUrl(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_requestedUrl".}
+proc fcQWebEngineNewWindowRequest_requestedGeometry(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_requestedGeometry".}
+proc fcQWebEngineNewWindowRequest_isUserInitiated(self: pointer): bool {.importc: "QWebEngineNewWindowRequest_isUserInitiated".}
 proc fcQWebEngineNewWindowRequest_openIn(self: pointer, param1: pointer): void {.importc: "QWebEngineNewWindowRequest_openIn".}
 proc fcQWebEngineNewWindowRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr2".}
 proc fcQWebEngineNewWindowRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr3".}
-proc fcQWebEngineNewWindowRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_protectedbase_sender".}
-proc fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNewWindowRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNewWindowRequest_protectedbase_sender".}
+proc fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNewWindowRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_receivers".}
 proc fcQWebEngineNewWindowRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNewWindowRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNewWindowRequest_staticMetaObject(): pointer {.importc: "QWebEngineNewWindowRequest_staticMetaObject".}
 
-proc metaObject*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, param1: cstring): pointer =
@@ -93,16 +93,16 @@ proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest
   c_free(v_ms.data)
   vx_ret
 
-proc destination*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): cint =
+proc destination*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): cint =
   cint(fcQWebEngineNewWindowRequest_destination(self.h))
 
-proc requestedUrl*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qurl_types.QUrl =
+proc requestedUrl*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineNewWindowRequest_requestedUrl(self.h), owned: true)
 
-proc requestedGeometry*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qrect_types.QRect =
+proc requestedGeometry*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQWebEngineNewWindowRequest_requestedGeometry(self.h), owned: true)
 
-proc isUserInitiated*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): bool =
+proc isUserInitiated*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): bool =
   fcQWebEngineNewWindowRequest_isUserInitiated(self.h)
 
 proc openIn*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, param1: gen_qwebenginepage_types.QWebEnginePage): void =
@@ -120,10 +120,10 @@ proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineNewWindowRequest_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): cint =
+proc senderSignalIndex*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): cint =
   fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, signal: cstring): cint =

@@ -62,51 +62,53 @@ export
 
 type cQMediaCaptureSession*{.exportc: "QMediaCaptureSession", incompleteStruct.} = object
 
-proc fcQMediaCaptureSession_metaObject(self: pointer, ): pointer {.importc: "QMediaCaptureSession_metaObject".}
+proc fcQMediaCaptureSession_metaObject(self: pointer): pointer {.importc: "QMediaCaptureSession_metaObject".}
 proc fcQMediaCaptureSession_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaCaptureSession_metacast".}
 proc fcQMediaCaptureSession_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaCaptureSession_metacall".}
 proc fcQMediaCaptureSession_tr(s: cstring): struct_miqt_string {.importc: "QMediaCaptureSession_tr".}
-proc fcQMediaCaptureSession_audioInput(self: pointer, ): pointer {.importc: "QMediaCaptureSession_audioInput".}
+proc fcQMediaCaptureSession_audioInput(self: pointer): pointer {.importc: "QMediaCaptureSession_audioInput".}
 proc fcQMediaCaptureSession_setAudioInput(self: pointer, input: pointer): void {.importc: "QMediaCaptureSession_setAudioInput".}
-proc fcQMediaCaptureSession_camera(self: pointer, ): pointer {.importc: "QMediaCaptureSession_camera".}
+proc fcQMediaCaptureSession_camera(self: pointer): pointer {.importc: "QMediaCaptureSession_camera".}
 proc fcQMediaCaptureSession_setCamera(self: pointer, camera: pointer): void {.importc: "QMediaCaptureSession_setCamera".}
-proc fcQMediaCaptureSession_imageCapture(self: pointer, ): pointer {.importc: "QMediaCaptureSession_imageCapture".}
+proc fcQMediaCaptureSession_imageCapture(self: pointer): pointer {.importc: "QMediaCaptureSession_imageCapture".}
 proc fcQMediaCaptureSession_setImageCapture(self: pointer, imageCapture: pointer): void {.importc: "QMediaCaptureSession_setImageCapture".}
-proc fcQMediaCaptureSession_recorder(self: pointer, ): pointer {.importc: "QMediaCaptureSession_recorder".}
+proc fcQMediaCaptureSession_recorder(self: pointer): pointer {.importc: "QMediaCaptureSession_recorder".}
 proc fcQMediaCaptureSession_setRecorder(self: pointer, recorder: pointer): void {.importc: "QMediaCaptureSession_setRecorder".}
 proc fcQMediaCaptureSession_setVideoOutput(self: pointer, output: pointer): void {.importc: "QMediaCaptureSession_setVideoOutput".}
-proc fcQMediaCaptureSession_videoOutput(self: pointer, ): pointer {.importc: "QMediaCaptureSession_videoOutput".}
+proc fcQMediaCaptureSession_videoOutput(self: pointer): pointer {.importc: "QMediaCaptureSession_videoOutput".}
 proc fcQMediaCaptureSession_setVideoSink(self: pointer, sink: pointer): void {.importc: "QMediaCaptureSession_setVideoSink".}
-proc fcQMediaCaptureSession_videoSink(self: pointer, ): pointer {.importc: "QMediaCaptureSession_videoSink".}
+proc fcQMediaCaptureSession_videoSink(self: pointer): pointer {.importc: "QMediaCaptureSession_videoSink".}
 proc fcQMediaCaptureSession_setAudioOutput(self: pointer, output: pointer): void {.importc: "QMediaCaptureSession_setAudioOutput".}
-proc fcQMediaCaptureSession_audioOutput(self: pointer, ): pointer {.importc: "QMediaCaptureSession_audioOutput".}
-proc fcQMediaCaptureSession_audioInputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_audioInputChanged".}
+proc fcQMediaCaptureSession_audioOutput(self: pointer): pointer {.importc: "QMediaCaptureSession_audioOutput".}
+proc fcQMediaCaptureSession_audioInputChanged(self: pointer): void {.importc: "QMediaCaptureSession_audioInputChanged".}
 proc fcQMediaCaptureSession_connect_audioInputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_audioInputChanged".}
-proc fcQMediaCaptureSession_cameraChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_cameraChanged".}
+proc fcQMediaCaptureSession_cameraChanged(self: pointer): void {.importc: "QMediaCaptureSession_cameraChanged".}
 proc fcQMediaCaptureSession_connect_cameraChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_cameraChanged".}
-proc fcQMediaCaptureSession_imageCaptureChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_imageCaptureChanged".}
+proc fcQMediaCaptureSession_imageCaptureChanged(self: pointer): void {.importc: "QMediaCaptureSession_imageCaptureChanged".}
 proc fcQMediaCaptureSession_connect_imageCaptureChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_imageCaptureChanged".}
-proc fcQMediaCaptureSession_recorderChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_recorderChanged".}
+proc fcQMediaCaptureSession_recorderChanged(self: pointer): void {.importc: "QMediaCaptureSession_recorderChanged".}
 proc fcQMediaCaptureSession_connect_recorderChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_recorderChanged".}
-proc fcQMediaCaptureSession_videoOutputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_videoOutputChanged".}
+proc fcQMediaCaptureSession_videoOutputChanged(self: pointer): void {.importc: "QMediaCaptureSession_videoOutputChanged".}
 proc fcQMediaCaptureSession_connect_videoOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_videoOutputChanged".}
-proc fcQMediaCaptureSession_audioOutputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_audioOutputChanged".}
+proc fcQMediaCaptureSession_audioOutputChanged(self: pointer): void {.importc: "QMediaCaptureSession_audioOutputChanged".}
 proc fcQMediaCaptureSession_connect_audioOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_audioOutputChanged".}
 proc fcQMediaCaptureSession_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaCaptureSession_tr2".}
 proc fcQMediaCaptureSession_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaCaptureSession_tr3".}
+proc fcQMediaCaptureSession_vtbl(self: pointer): pointer {.importc: "QMediaCaptureSession_vtbl".}
+proc fcQMediaCaptureSession_vdata(self: pointer): pointer {.importc: "QMediaCaptureSession_vdata".}
 type cQMediaCaptureSessionVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQMediaCaptureSessionVTable, self: ptr cQMediaCaptureSession) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQMediaCaptureSession_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QMediaCaptureSession_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQMediaCaptureSession_virtualbase_metaObject(self: pointer): pointer {.importc: "QMediaCaptureSession_virtualbase_metaObject".}
 proc fcQMediaCaptureSession_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaCaptureSession_virtualbase_metacast".}
 proc fcQMediaCaptureSession_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaCaptureSession_virtualbase_metacall".}
 proc fcQMediaCaptureSession_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QMediaCaptureSession_virtualbase_event".}
@@ -116,15 +118,15 @@ proc fcQMediaCaptureSession_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQMediaCaptureSession_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaCaptureSession_virtualbase_customEvent".}
 proc fcQMediaCaptureSession_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaCaptureSession_virtualbase_connectNotify".}
 proc fcQMediaCaptureSession_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaCaptureSession_virtualbase_disconnectNotify".}
-proc fcQMediaCaptureSession_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaCaptureSession_protectedbase_sender".}
-proc fcQMediaCaptureSession_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaCaptureSession_protectedbase_senderSignalIndex".}
+proc fcQMediaCaptureSession_protectedbase_sender(self: pointer): pointer {.importc: "QMediaCaptureSession_protectedbase_sender".}
+proc fcQMediaCaptureSession_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaCaptureSession_protectedbase_senderSignalIndex".}
 proc fcQMediaCaptureSession_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaCaptureSession_protectedbase_receivers".}
 proc fcQMediaCaptureSession_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaCaptureSession_protectedbase_isSignalConnected".}
-proc fcQMediaCaptureSession_new(vtbl: pointer, ): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new".}
-proc fcQMediaCaptureSession_new2(vtbl: pointer, parent: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new2".}
+proc fcQMediaCaptureSession_new(vtbl, vdata: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new".}
+proc fcQMediaCaptureSession_new2(vtbl, vdata: pointer, parent: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new2".}
 proc fcQMediaCaptureSession_staticMetaObject(): pointer {.importc: "QMediaCaptureSession_staticMetaObject".}
 
-proc metaObject*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaCaptureSession_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediacapturesession_types.QMediaCaptureSession, param1: cstring): pointer =
@@ -139,25 +141,25 @@ proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc audioInput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qaudioinput_types.QAudioInput =
+proc audioInput*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qaudioinput_types.QAudioInput =
   gen_qaudioinput_types.QAudioInput(h: fcQMediaCaptureSession_audioInput(self.h), owned: false)
 
 proc setAudioInput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, input: gen_qaudioinput_types.QAudioInput): void =
   fcQMediaCaptureSession_setAudioInput(self.h, input.h)
 
-proc camera*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qcamera_types.QCamera =
+proc camera*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qcamera_types.QCamera =
   gen_qcamera_types.QCamera(h: fcQMediaCaptureSession_camera(self.h), owned: false)
 
 proc setCamera*(self: gen_qmediacapturesession_types.QMediaCaptureSession, camera: gen_qcamera_types.QCamera): void =
   fcQMediaCaptureSession_setCamera(self.h, camera.h)
 
-proc imageCapture*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qimagecapture_types.QImageCapture =
+proc imageCapture*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qimagecapture_types.QImageCapture =
   gen_qimagecapture_types.QImageCapture(h: fcQMediaCaptureSession_imageCapture(self.h), owned: false)
 
 proc setImageCapture*(self: gen_qmediacapturesession_types.QMediaCaptureSession, imageCapture: gen_qimagecapture_types.QImageCapture): void =
   fcQMediaCaptureSession_setImageCapture(self.h, imageCapture.h)
 
-proc recorder*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qmediarecorder_types.QMediaRecorder =
+proc recorder*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qmediarecorder_types.QMediaRecorder =
   gen_qmediarecorder_types.QMediaRecorder(h: fcQMediaCaptureSession_recorder(self.h), owned: false)
 
 proc setRecorder*(self: gen_qmediacapturesession_types.QMediaCaptureSession, recorder: gen_qmediarecorder_types.QMediaRecorder): void =
@@ -166,30 +168,30 @@ proc setRecorder*(self: gen_qmediacapturesession_types.QMediaCaptureSession, rec
 proc setVideoOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, output: gen_qobject_types.QObject): void =
   fcQMediaCaptureSession_setVideoOutput(self.h, output.h)
 
-proc videoOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qobject_types.QObject =
+proc videoOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaCaptureSession_videoOutput(self.h), owned: false)
 
 proc setVideoSink*(self: gen_qmediacapturesession_types.QMediaCaptureSession, sink: gen_qvideosink_types.QVideoSink): void =
   fcQMediaCaptureSession_setVideoSink(self.h, sink.h)
 
-proc videoSink*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qvideosink_types.QVideoSink =
+proc videoSink*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qvideosink_types.QVideoSink =
   gen_qvideosink_types.QVideoSink(h: fcQMediaCaptureSession_videoSink(self.h), owned: false)
 
 proc setAudioOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, output: gen_qaudiooutput_types.QAudioOutput): void =
   fcQMediaCaptureSession_setAudioOutput(self.h, output.h)
 
-proc audioOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qaudiooutput_types.QAudioOutput =
+proc audioOutput*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qaudiooutput_types.QAudioOutput =
   gen_qaudiooutput_types.QAudioOutput(h: fcQMediaCaptureSession_audioOutput(self.h), owned: false)
 
-proc audioInputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc audioInputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_audioInputChanged(self.h)
 
 type QMediaCaptureSessionaudioInputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_audioInputChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_audioInputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionaudioInputChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_audioInputChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_audioInputChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessionaudioInputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -197,17 +199,17 @@ proc onaudioInputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSess
   var tmp = new QMediaCaptureSessionaudioInputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_audioInputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_audioInputChanged, miqt_exec_callback_cQMediaCaptureSession_audioInputChanged_release)
+  fcQMediaCaptureSession_connect_audioInputChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_audioInputChanged, cQMediaCaptureSession_slot_callback_audioInputChanged_release)
 
-proc cameraChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc cameraChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_cameraChanged(self.h)
 
 type QMediaCaptureSessioncameraChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_cameraChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_cameraChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessioncameraChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_cameraChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_cameraChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessioncameraChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -215,17 +217,17 @@ proc oncameraChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession,
   var tmp = new QMediaCaptureSessioncameraChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_cameraChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_cameraChanged, miqt_exec_callback_cQMediaCaptureSession_cameraChanged_release)
+  fcQMediaCaptureSession_connect_cameraChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_cameraChanged, cQMediaCaptureSession_slot_callback_cameraChanged_release)
 
-proc imageCaptureChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc imageCaptureChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_imageCaptureChanged(self.h)
 
 type QMediaCaptureSessionimageCaptureChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_imageCaptureChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionimageCaptureChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_imageCaptureChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessionimageCaptureChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -233,17 +235,17 @@ proc onimageCaptureChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSe
   var tmp = new QMediaCaptureSessionimageCaptureChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_imageCaptureChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged, miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged_release)
+  fcQMediaCaptureSession_connect_imageCaptureChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_imageCaptureChanged, cQMediaCaptureSession_slot_callback_imageCaptureChanged_release)
 
-proc recorderChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc recorderChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_recorderChanged(self.h)
 
 type QMediaCaptureSessionrecorderChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_recorderChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_recorderChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionrecorderChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_recorderChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_recorderChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessionrecorderChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -251,17 +253,17 @@ proc onrecorderChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSessio
   var tmp = new QMediaCaptureSessionrecorderChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_recorderChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_recorderChanged, miqt_exec_callback_cQMediaCaptureSession_recorderChanged_release)
+  fcQMediaCaptureSession_connect_recorderChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_recorderChanged, cQMediaCaptureSession_slot_callback_recorderChanged_release)
 
-proc videoOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc videoOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_videoOutputChanged(self.h)
 
 type QMediaCaptureSessionvideoOutputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_videoOutputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionvideoOutputChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_videoOutputChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessionvideoOutputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -269,17 +271,17 @@ proc onvideoOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSes
   var tmp = new QMediaCaptureSessionvideoOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_videoOutputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged, miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged_release)
+  fcQMediaCaptureSession_connect_videoOutputChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_videoOutputChanged, cQMediaCaptureSession_slot_callback_videoOutputChanged_release)
 
-proc audioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
+proc audioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession): void =
   fcQMediaCaptureSession_audioOutputChanged(self.h)
 
 type QMediaCaptureSessionaudioOutputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_audioOutputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionaudioOutputChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged_release(slot: int) {.cdecl.} =
+proc cQMediaCaptureSession_slot_callback_audioOutputChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaCaptureSessionaudioOutputChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -287,7 +289,7 @@ proc onaudioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSes
   var tmp = new QMediaCaptureSessionaudioOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_audioOutputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged, miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged_release)
+  fcQMediaCaptureSession_connect_audioOutputChanged(self.h, cast[int](addr tmp[]), cQMediaCaptureSession_slot_callback_audioOutputChanged, cQMediaCaptureSession_slot_callback_audioOutputChanged_release)
 
 proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring, c: cstring): string =
   let v_ms = fcQMediaCaptureSession_tr2(s, c)
@@ -323,11 +325,11 @@ type QMediaCaptureSessionVTable* {.inheritable, pure.} = object
   customEvent*: QMediaCaptureSessioncustomEventProc
   connectNotify*: QMediaCaptureSessionconnectNotifyProc
   disconnectNotify*: QMediaCaptureSessiondisconnectNotifyProc
-proc QMediaCaptureSessionmetaObject*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qobjectdefs_types.QMetaObject =
+proc QMediaCaptureSessionmetaObject*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaCaptureSession_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQMediaCaptureSession_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -338,8 +340,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_metaObject(vtbl: pointer, self: po
 proc QMediaCaptureSessionmetacast*(self: gen_qmediacapturesession_types.QMediaCaptureSession, param1: cstring): pointer =
   fcQMediaCaptureSession_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQMediaCaptureSession_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -348,8 +350,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_metacast(vtbl: pointer, self: poin
 proc QMediaCaptureSessionmetacall*(self: gen_qmediacapturesession_types.QMediaCaptureSession, param1: cint, param2: cint, param3: pointer): cint =
   fcQMediaCaptureSession_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQMediaCaptureSession_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -360,8 +362,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_metacall(vtbl: pointer, self: poin
 proc QMediaCaptureSessionevent*(self: gen_qmediacapturesession_types.QMediaCaptureSession, event: gen_qcoreevent_types.QEvent): bool =
   fcQMediaCaptureSession_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -370,8 +372,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_event(vtbl: pointer, self: pointer
 proc QMediaCaptureSessioneventFilter*(self: gen_qmediacapturesession_types.QMediaCaptureSession, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQMediaCaptureSession_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -381,8 +383,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_eventFilter(vtbl: pointer, self: p
 proc QMediaCaptureSessiontimerEvent*(self: gen_qmediacapturesession_types.QMediaCaptureSession, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQMediaCaptureSession_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -390,8 +392,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_timerEvent(vtbl: pointer, self: po
 proc QMediaCaptureSessionchildEvent*(self: gen_qmediacapturesession_types.QMediaCaptureSession, event: gen_qcoreevent_types.QChildEvent): void =
   fcQMediaCaptureSession_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -399,8 +401,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_childEvent(vtbl: pointer, self: po
 proc QMediaCaptureSessioncustomEvent*(self: gen_qmediacapturesession_types.QMediaCaptureSession, event: gen_qcoreevent_types.QEvent): void =
   fcQMediaCaptureSession_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -408,8 +410,8 @@ proc miqt_exec_callback_cQMediaCaptureSession_customEvent(vtbl: pointer, self: p
 proc QMediaCaptureSessionconnectNotify*(self: gen_qmediacapturesession_types.QMediaCaptureSession, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQMediaCaptureSession_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -417,19 +419,19 @@ proc miqt_exec_callback_cQMediaCaptureSession_connectNotify(vtbl: pointer, self:
 proc QMediaCaptureSessiondisconnectNotify*(self: gen_qmediacapturesession_types.QMediaCaptureSession, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQMediaCaptureSession_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQMediaCaptureSession_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMediaCaptureSessionVTable](vtbl)
+proc cQMediaCaptureSession_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQMediaCaptureSession* {.inheritable.} = ref object of QMediaCaptureSession
   vtbl*: cQMediaCaptureSessionVTable
-method metaObject*(self: VirtualQMediaCaptureSession, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQMediaCaptureSession): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMediaCaptureSessionmetaObject(self[])
-proc miqt_exec_method_cQMediaCaptureSession_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQMediaCaptureSession_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -437,78 +439,78 @@ proc miqt_exec_method_cQMediaCaptureSession_metaObject(vtbl: pointer, inst: poin
 
 method metacast*(self: VirtualQMediaCaptureSession, param1: cstring): pointer {.base.} =
   QMediaCaptureSessionmetacast(self[], param1)
-proc miqt_exec_method_cQMediaCaptureSession_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQMediaCaptureSession, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QMediaCaptureSessionmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQMediaCaptureSession_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQMediaCaptureSession, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QMediaCaptureSessionevent(self[], event)
-proc miqt_exec_method_cQMediaCaptureSession_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQMediaCaptureSession, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QMediaCaptureSessioneventFilter(self[], watched, event)
-proc miqt_exec_method_cQMediaCaptureSession_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQMediaCaptureSession, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QMediaCaptureSessiontimerEvent(self[], event)
-proc miqt_exec_method_cQMediaCaptureSession_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQMediaCaptureSession, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QMediaCaptureSessionchildEvent(self[], event)
-proc miqt_exec_method_cQMediaCaptureSession_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQMediaCaptureSession, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMediaCaptureSessioncustomEvent(self[], event)
-proc miqt_exec_method_cQMediaCaptureSession_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQMediaCaptureSession, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMediaCaptureSessionconnectNotify(self[], signal)
-proc miqt_exec_method_cQMediaCaptureSession_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQMediaCaptureSession, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMediaCaptureSessiondisconnectNotify(self[], signal)
-proc miqt_exec_method_cQMediaCaptureSession_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMediaCaptureSession](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
+proc cQMediaCaptureSession_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMediaCaptureSession](fcQMediaCaptureSession_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaCaptureSession_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): cint =
+proc senderSignalIndex*(self: gen_qmediacapturesession_types.QMediaCaptureSession): cint =
   fcQMediaCaptureSession_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qmediacapturesession_types.QMediaCaptureSession, signal: cstring): cint =
@@ -521,103 +523,89 @@ proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
     vtbl: ref QMediaCaptureSessionVTable = nil): gen_qmediacapturesession_types.QMediaCaptureSession =
   let vtbl = if vtbl == nil: new QMediaCaptureSessionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMediaCaptureSessionVTable, _: ptr cQMediaCaptureSession) {.cdecl.} =
-    let vtbl = cast[ref QMediaCaptureSessionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMediaCaptureSession_metaObject
+    vtbl[].vtbl.metaObject = cQMediaCaptureSession_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMediaCaptureSession_metacast
+    vtbl[].vtbl.metacast = cQMediaCaptureSession_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMediaCaptureSession_metacall
+    vtbl[].vtbl.metacall = cQMediaCaptureSession_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMediaCaptureSession_event
+    vtbl[].vtbl.event = cQMediaCaptureSession_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMediaCaptureSession_eventFilter
+    vtbl[].vtbl.eventFilter = cQMediaCaptureSession_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMediaCaptureSession_timerEvent
+    vtbl[].vtbl.timerEvent = cQMediaCaptureSession_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMediaCaptureSession_childEvent
+    vtbl[].vtbl.childEvent = cQMediaCaptureSession_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMediaCaptureSession_customEvent
+    vtbl[].vtbl.customEvent = cQMediaCaptureSession_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMediaCaptureSession_connectNotify
+    vtbl[].vtbl.connectNotify = cQMediaCaptureSession_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMediaCaptureSession_disconnectNotify
-  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQMediaCaptureSession_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMediaCaptureSession_vtable_callback_disconnectNotify
+  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQMediaCaptureSession_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
     parent: gen_qobject_types.QObject,
     vtbl: ref QMediaCaptureSessionVTable = nil): gen_qmediacapturesession_types.QMediaCaptureSession =
   let vtbl = if vtbl == nil: new QMediaCaptureSessionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMediaCaptureSessionVTable, _: ptr cQMediaCaptureSession) {.cdecl.} =
-    let vtbl = cast[ref QMediaCaptureSessionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMediaCaptureSessionVTable](fcQMediaCaptureSession_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMediaCaptureSession_metaObject
+    vtbl[].vtbl.metaObject = cQMediaCaptureSession_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMediaCaptureSession_metacast
+    vtbl[].vtbl.metacast = cQMediaCaptureSession_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMediaCaptureSession_metacall
+    vtbl[].vtbl.metacall = cQMediaCaptureSession_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMediaCaptureSession_event
+    vtbl[].vtbl.event = cQMediaCaptureSession_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMediaCaptureSession_eventFilter
+    vtbl[].vtbl.eventFilter = cQMediaCaptureSession_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMediaCaptureSession_timerEvent
+    vtbl[].vtbl.timerEvent = cQMediaCaptureSession_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMediaCaptureSession_childEvent
+    vtbl[].vtbl.childEvent = cQMediaCaptureSession_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMediaCaptureSession_customEvent
+    vtbl[].vtbl.customEvent = cQMediaCaptureSession_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMediaCaptureSession_connectNotify
+    vtbl[].vtbl.connectNotify = cQMediaCaptureSession_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMediaCaptureSession_disconnectNotify
-  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQMediaCaptureSession_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMediaCaptureSession_vtable_callback_disconnectNotify
+  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQMediaCaptureSession_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQMediaCaptureSession_mvtbl = cQMediaCaptureSessionVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQMediaCaptureSession()[])](self.fcQMediaCaptureSession_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQMediaCaptureSession_method_callback_metaObject,
+  metacast: cQMediaCaptureSession_method_callback_metacast,
+  metacall: cQMediaCaptureSession_method_callback_metacall,
+  event: cQMediaCaptureSession_method_callback_event,
+  eventFilter: cQMediaCaptureSession_method_callback_eventFilter,
+  timerEvent: cQMediaCaptureSession_method_callback_timerEvent,
+  childEvent: cQMediaCaptureSession_method_callback_childEvent,
+  customEvent: cQMediaCaptureSession_method_callback_customEvent,
+  connectNotify: cQMediaCaptureSession_method_callback_connectNotify,
+  disconnectNotify: cQMediaCaptureSession_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
-    vtbl: VirtualQMediaCaptureSession) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMediaCaptureSessionVTable, _: ptr cQMediaCaptureSession) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMediaCaptureSession()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMediaCaptureSession_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMediaCaptureSession_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMediaCaptureSession_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMediaCaptureSession_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMediaCaptureSession_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMediaCaptureSession_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMediaCaptureSession_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMediaCaptureSession_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMediaCaptureSession_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMediaCaptureSession_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMediaCaptureSession_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQMediaCaptureSession) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMediaCaptureSession_new(addr(cQMediaCaptureSession_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQMediaCaptureSession) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMediaCaptureSessionVTable, _: ptr cQMediaCaptureSession) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMediaCaptureSession()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMediaCaptureSession, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMediaCaptureSession_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMediaCaptureSession_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMediaCaptureSession_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMediaCaptureSession_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMediaCaptureSession_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMediaCaptureSession_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMediaCaptureSession_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMediaCaptureSession_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMediaCaptureSession_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMediaCaptureSession_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMediaCaptureSession_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQMediaCaptureSession) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMediaCaptureSession_new2(addr(cQMediaCaptureSession_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaCaptureSession_staticMetaObject())

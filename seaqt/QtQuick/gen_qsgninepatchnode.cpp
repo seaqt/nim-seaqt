@@ -8,15 +8,6 @@
 #include <QVector4D>
 #include <qsgninepatchnode.h>
 #include "gen_qsgninepatchnode.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSGNinePatchNode_virtbase(QSGNinePatchNode* src, QSGGeometryNode** outptr_QSGGeometryNode) {
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }

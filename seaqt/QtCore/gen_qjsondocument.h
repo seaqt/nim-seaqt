@@ -31,12 +31,14 @@ typedef struct QVariant QVariant;
 #endif
 
 struct miqt_string QJsonParseError_errorString(const QJsonParseError* self);
+
 void QJsonParseError_delete(QJsonParseError* self);
 
 QJsonDocument* QJsonDocument_new();
 QJsonDocument* QJsonDocument_new2(QJsonObject* object);
 QJsonDocument* QJsonDocument_new3(QJsonArray* array);
 QJsonDocument* QJsonDocument_new4(QJsonDocument* other);
+
 void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* other);
 void QJsonDocument_swap(QJsonDocument* self, QJsonDocument* other);
 QJsonDocument* QJsonDocument_fromVariant(QVariant* variant);
@@ -57,6 +59,7 @@ bool QJsonDocument_operatorNotEqual(const QJsonDocument* self, QJsonDocument* ot
 bool QJsonDocument_isNull(const QJsonDocument* self);
 QJsonDocument* QJsonDocument_fromJson2(struct miqt_string json, QJsonParseError* error);
 struct miqt_string QJsonDocument_toJson1(const QJsonDocument* self, int format);
+
 void QJsonDocument_delete(QJsonDocument* self);
 
 #ifdef __cplusplus

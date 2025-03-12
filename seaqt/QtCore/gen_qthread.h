@@ -36,22 +36,29 @@ typedef struct QThread QThread;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QThread_VTable {
-	void (*destructor)(struct QThread_VTable* vtbl, QThread* self);
-	QMetaObject* (*metaObject)(struct QThread_VTable* vtbl, const QThread* self);
-	void* (*metacast)(struct QThread_VTable* vtbl, QThread* self, const char* param1);
-	int (*metacall)(struct QThread_VTable* vtbl, QThread* self, int param1, int param2, void** param3);
-	bool (*event)(struct QThread_VTable* vtbl, QThread* self, QEvent* event);
-	void (*run)(struct QThread_VTable* vtbl, QThread* self);
-	bool (*eventFilter)(struct QThread_VTable* vtbl, QThread* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QThread_VTable* vtbl, QThread* self, QTimerEvent* event);
-	void (*childEvent)(struct QThread_VTable* vtbl, QThread* self, QChildEvent* event);
-	void (*customEvent)(struct QThread_VTable* vtbl, QThread* self, QEvent* event);
-	void (*connectNotify)(struct QThread_VTable* vtbl, QThread* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QThread_VTable* vtbl, QThread* self, QMetaMethod* signal);
-};
-QThread* QThread_new(struct QThread_VTable* vtbl);
-QThread* QThread_new2(struct QThread_VTable* vtbl, QObject* parent);
+typedef struct VirtualQThread VirtualQThread;
+typedef struct QThread_VTable{
+	void (*destructor)(VirtualQThread* self);
+	QMetaObject* (*metaObject)(const VirtualQThread* self);
+	void* (*metacast)(VirtualQThread* self, const char* param1);
+	int (*metacall)(VirtualQThread* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQThread* self, QEvent* event);
+	void (*run)(VirtualQThread* self);
+	bool (*eventFilter)(VirtualQThread* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQThread* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQThread* self, QChildEvent* event);
+	void (*customEvent)(VirtualQThread* self, QEvent* event);
+	void (*connectNotify)(VirtualQThread* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQThread* self, QMetaMethod* signal);
+}QThread_VTable;
+
+const QThread_VTable* QThread_vtbl(const VirtualQThread* self);
+void* QThread_vdata(const VirtualQThread* self);
+void QThread_setVdata(VirtualQThread* self, void* vdata);
+
+VirtualQThread* QThread_new(const QThread_VTable* vtbl, void* vdata);
+VirtualQThread* QThread_new2(const QThread_VTable* vtbl, void* vdata, QObject* parent);
+
 void QThread_virtbase(QThread* src, QObject** outptr_QObject);
 QMetaObject* QThread_metaObject(const QThread* self);
 void* QThread_metacast(QThread* self, const char* param1);
@@ -88,22 +95,25 @@ struct miqt_string QThread_tr3(const char* s, const char* c, int n);
 void QThread_start1(QThread* self, int param1);
 void QThread_exit1(QThread* self, int retcode);
 bool QThread_wait1(QThread* self, QDeadlineTimer* deadline);
-QMetaObject* QThread_virtualbase_metaObject(const void* self);
-void* QThread_virtualbase_metacast(void* self, const char* param1);
-int QThread_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QThread_virtualbase_event(void* self, QEvent* event);
-void QThread_virtualbase_run(void* self);
-bool QThread_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QThread_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QThread_virtualbase_childEvent(void* self, QChildEvent* event);
-void QThread_virtualbase_customEvent(void* self, QEvent* event);
-void QThread_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QThread_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-int QThread_protectedbase_exec(void* self);
-QObject* QThread_protectedbase_sender(const void* self);
-int QThread_protectedbase_senderSignalIndex(const void* self);
-int QThread_protectedbase_receivers(const void* self, const char* signal);
-bool QThread_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QThread_virtualbase_metaObject(const VirtualQThread* self);
+void* QThread_virtualbase_metacast(VirtualQThread* self, const char* param1);
+int QThread_virtualbase_metacall(VirtualQThread* self, int param1, int param2, void** param3);
+bool QThread_virtualbase_event(VirtualQThread* self, QEvent* event);
+void QThread_virtualbase_run(VirtualQThread* self);
+bool QThread_virtualbase_eventFilter(VirtualQThread* self, QObject* watched, QEvent* event);
+void QThread_virtualbase_timerEvent(VirtualQThread* self, QTimerEvent* event);
+void QThread_virtualbase_childEvent(VirtualQThread* self, QChildEvent* event);
+void QThread_virtualbase_customEvent(VirtualQThread* self, QEvent* event);
+void QThread_virtualbase_connectNotify(VirtualQThread* self, QMetaMethod* signal);
+void QThread_virtualbase_disconnectNotify(VirtualQThread* self, QMetaMethod* signal);
+
+int QThread_protectedbase_exec(VirtualQThread* self);
+QObject* QThread_protectedbase_sender(const VirtualQThread* self);
+int QThread_protectedbase_senderSignalIndex(const VirtualQThread* self);
+int QThread_protectedbase_receivers(const VirtualQThread* self, const char* signal);
+bool QThread_protectedbase_isSignalConnected(const VirtualQThread* self, QMetaMethod* signal);
+
 const QMetaObject* QThread_staticMetaObject();
 void QThread_delete(QThread* self);
 

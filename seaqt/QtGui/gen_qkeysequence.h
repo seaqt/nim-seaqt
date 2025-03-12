@@ -37,6 +37,7 @@ QKeySequence* QKeySequence_new10(int k1, int k2, int k3, int k4);
 QKeySequence* QKeySequence_new11(QKeyCombination* k1, QKeyCombination* k2);
 QKeySequence* QKeySequence_new12(QKeyCombination* k1, QKeyCombination* k2, QKeyCombination* k3);
 QKeySequence* QKeySequence_new13(QKeyCombination* k1, QKeyCombination* k2, QKeyCombination* k3, QKeyCombination* k4);
+
 int QKeySequence_count(const QKeySequence* self);
 bool QKeySequence_isEmpty(const QKeySequence* self);
 struct miqt_string QKeySequence_toString(const QKeySequence* self);
@@ -61,6 +62,7 @@ struct miqt_string QKeySequence_toString1(const QKeySequence* self, int format);
 QKeySequence* QKeySequence_fromString2(struct miqt_string str, int format);
 struct miqt_array /* of QKeySequence* */  QKeySequence_listFromString2(struct miqt_string str, int format);
 struct miqt_string QKeySequence_listToString2(struct miqt_array /* of QKeySequence* */  list, int format);
+
 const QMetaObject* QKeySequence_staticMetaObject();
 void QKeySequence_delete(QKeySequence* self);
 

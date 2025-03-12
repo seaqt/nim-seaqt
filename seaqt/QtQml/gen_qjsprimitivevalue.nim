@@ -58,18 +58,18 @@ proc fcQJSPrimitiveUndefined_new(): ptr cQJSPrimitiveUndefined {.importc: "QJSPr
 proc fcQJSPrimitiveUndefined_new2(param1: pointer): ptr cQJSPrimitiveUndefined {.importc: "QJSPrimitiveUndefined_new2".}
 proc fcQJSPrimitiveNull_new(): ptr cQJSPrimitiveNull {.importc: "QJSPrimitiveNull_new".}
 proc fcQJSPrimitiveNull_new2(param1: pointer): ptr cQJSPrimitiveNull {.importc: "QJSPrimitiveNull_new2".}
-proc fcQJSPrimitiveValue_typeX(self: pointer, ): cint {.importc: "QJSPrimitiveValue_type".}
-proc fcQJSPrimitiveValue_toBoolean(self: pointer, ): bool {.importc: "QJSPrimitiveValue_toBoolean".}
-proc fcQJSPrimitiveValue_toInteger(self: pointer, ): cint {.importc: "QJSPrimitiveValue_toInteger".}
-proc fcQJSPrimitiveValue_toDouble(self: pointer, ): float64 {.importc: "QJSPrimitiveValue_toDouble".}
-proc fcQJSPrimitiveValue_toString(self: pointer, ): struct_miqt_string {.importc: "QJSPrimitiveValue_toString".}
-proc fcQJSPrimitiveValue_toVariant(self: pointer, ): pointer {.importc: "QJSPrimitiveValue_toVariant".}
-proc fcQJSPrimitiveValue_operatorPlusPlus(self: pointer, ): pointer {.importc: "QJSPrimitiveValue_operatorPlusPlus".}
+proc fcQJSPrimitiveValue_typeX(self: pointer): cint {.importc: "QJSPrimitiveValue_type".}
+proc fcQJSPrimitiveValue_toBoolean(self: pointer): bool {.importc: "QJSPrimitiveValue_toBoolean".}
+proc fcQJSPrimitiveValue_toInteger(self: pointer): cint {.importc: "QJSPrimitiveValue_toInteger".}
+proc fcQJSPrimitiveValue_toDouble(self: pointer): float64 {.importc: "QJSPrimitiveValue_toDouble".}
+proc fcQJSPrimitiveValue_toString(self: pointer): struct_miqt_string {.importc: "QJSPrimitiveValue_toString".}
+proc fcQJSPrimitiveValue_toVariant(self: pointer): pointer {.importc: "QJSPrimitiveValue_toVariant".}
+proc fcQJSPrimitiveValue_operatorPlusPlus(self: pointer): pointer {.importc: "QJSPrimitiveValue_operatorPlusPlus".}
 proc fcQJSPrimitiveValue_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QJSPrimitiveValue_operatorPlusPlusWithInt".}
-proc fcQJSPrimitiveValue_operatorMinusMinus(self: pointer, ): pointer {.importc: "QJSPrimitiveValue_operatorMinusMinus".}
+proc fcQJSPrimitiveValue_operatorMinusMinus(self: pointer): pointer {.importc: "QJSPrimitiveValue_operatorMinusMinus".}
 proc fcQJSPrimitiveValue_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QJSPrimitiveValue_operatorMinusMinusWithInt".}
-proc fcQJSPrimitiveValue_operatorPlus(self: pointer, ): pointer {.importc: "QJSPrimitiveValue_operatorPlus".}
-proc fcQJSPrimitiveValue_operatorMinus(self: pointer, ): pointer {.importc: "QJSPrimitiveValue_operatorMinus".}
+proc fcQJSPrimitiveValue_operatorPlus(self: pointer): pointer {.importc: "QJSPrimitiveValue_operatorPlus".}
+proc fcQJSPrimitiveValue_operatorMinus(self: pointer): pointer {.importc: "QJSPrimitiveValue_operatorMinus".}
 proc fcQJSPrimitiveValue_strictlyEquals(self: pointer, other: pointer): bool {.importc: "QJSPrimitiveValue_strictlyEquals".}
 proc fcQJSPrimitiveValue_equals(self: pointer, other: pointer): bool {.importc: "QJSPrimitiveValue_equals".}
 proc fcQJSPrimitiveValue_new(): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new".}
@@ -97,43 +97,43 @@ proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveNull,
     param1: gen_qjsprimitivevalue_types.QJSPrimitiveNull): gen_qjsprimitivevalue_types.QJSPrimitiveNull =
   gen_qjsprimitivevalue_types.QJSPrimitiveNull(h: fcQJSPrimitiveNull_new2(param1.h), owned: true)
 
-proc typeX*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): cint =
+proc typeX*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): cint =
   cint(fcQJSPrimitiveValue_typeX(self.h))
 
-proc toBoolean*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): bool =
+proc toBoolean*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): bool =
   fcQJSPrimitiveValue_toBoolean(self.h)
 
-proc toInteger*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): cint =
+proc toInteger*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): cint =
   fcQJSPrimitiveValue_toInteger(self.h)
 
-proc toDouble*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): float64 =
+proc toDouble*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): float64 =
   fcQJSPrimitiveValue_toDouble(self.h)
 
-proc toString*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): string =
+proc toString*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): string =
   let v_ms = fcQJSPrimitiveValue_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc toVariant*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qvariant_types.QVariant =
+proc toVariant*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQJSPrimitiveValue_toVariant(self.h), owned: true)
 
-proc operatorPlusPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+proc operatorPlusPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, param1: cint): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
-proc operatorMinusMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+proc operatorMinusMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, param1: cint): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
-proc operatorPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+proc operatorPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlus(self.h), owned: true)
 
-proc operatorMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+proc operatorMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinus(self.h), owned: true)
 
 proc strictlyEquals*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, other: gen_qjsprimitivevalue_types.QJSPrimitiveValue): bool =

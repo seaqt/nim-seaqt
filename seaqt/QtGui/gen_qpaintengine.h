@@ -64,35 +64,43 @@ double QTextItem_width(const QTextItem* self);
 int QTextItem_renderFlags(const QTextItem* self);
 struct miqt_string QTextItem_text(const QTextItem* self);
 QFont* QTextItem_font(const QTextItem* self);
+
 void QTextItem_delete(QTextItem* self);
 
-struct QPaintEngine_VTable {
-	void (*destructor)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self);
-	bool (*begin)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPaintDevice* pdev);
-	bool (*end)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self);
-	void (*updateState)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPaintEngineState* state);
-	void (*drawRects)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRect* rects, int rectCount);
-	void (*drawRects2)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRectF* rects, int rectCount);
-	void (*drawLines)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QLine* lines, int lineCount);
-	void (*drawLines2)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QLineF* lines, int lineCount);
-	void (*drawEllipse)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRectF* r);
-	void (*drawEllipseWithQRect)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRect* r);
-	void (*drawPath)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPainterPath* path);
-	void (*drawPoints)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPointF* points, int pointCount);
-	void (*drawPoints2)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPoint* points, int pointCount);
-	void (*drawPolygon)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPointF* points, int pointCount, int mode);
-	void (*drawPolygon2)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPoint* points, int pointCount, int mode);
-	void (*drawPixmap)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRectF* r, QPixmap* pm, QRectF* sr);
-	void (*drawTextItem)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QPointF* p, QTextItem* textItem);
-	void (*drawTiledPixmap)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRectF* r, QPixmap* pixmap, QPointF* s);
-	void (*drawImage)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
-	QPoint* (*coordinateOffset)(struct QPaintEngine_VTable* vtbl, const QPaintEngine* self);
-	int (*type)(struct QPaintEngine_VTable* vtbl, const QPaintEngine* self);
-	QPixmap* (*createPixmap)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QSize* size);
-	QPixmap* (*createPixmapFromImage)(struct QPaintEngine_VTable* vtbl, QPaintEngine* self, QImage* image, int flags);
-};
-QPaintEngine* QPaintEngine_new(struct QPaintEngine_VTable* vtbl);
-QPaintEngine* QPaintEngine_new2(struct QPaintEngine_VTable* vtbl, int features);
+typedef struct VirtualQPaintEngine VirtualQPaintEngine;
+typedef struct QPaintEngine_VTable{
+	void (*destructor)(VirtualQPaintEngine* self);
+	bool (*begin)(VirtualQPaintEngine* self, QPaintDevice* pdev);
+	bool (*end)(VirtualQPaintEngine* self);
+	void (*updateState)(VirtualQPaintEngine* self, QPaintEngineState* state);
+	void (*drawRects)(VirtualQPaintEngine* self, QRect* rects, int rectCount);
+	void (*drawRects2)(VirtualQPaintEngine* self, QRectF* rects, int rectCount);
+	void (*drawLines)(VirtualQPaintEngine* self, QLine* lines, int lineCount);
+	void (*drawLines2)(VirtualQPaintEngine* self, QLineF* lines, int lineCount);
+	void (*drawEllipse)(VirtualQPaintEngine* self, QRectF* r);
+	void (*drawEllipseWithQRect)(VirtualQPaintEngine* self, QRect* r);
+	void (*drawPath)(VirtualQPaintEngine* self, QPainterPath* path);
+	void (*drawPoints)(VirtualQPaintEngine* self, QPointF* points, int pointCount);
+	void (*drawPoints2)(VirtualQPaintEngine* self, QPoint* points, int pointCount);
+	void (*drawPolygon)(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode);
+	void (*drawPolygon2)(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode);
+	void (*drawPixmap)(VirtualQPaintEngine* self, QRectF* r, QPixmap* pm, QRectF* sr);
+	void (*drawTextItem)(VirtualQPaintEngine* self, QPointF* p, QTextItem* textItem);
+	void (*drawTiledPixmap)(VirtualQPaintEngine* self, QRectF* r, QPixmap* pixmap, QPointF* s);
+	void (*drawImage)(VirtualQPaintEngine* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
+	QPoint* (*coordinateOffset)(const VirtualQPaintEngine* self);
+	int (*type)(const VirtualQPaintEngine* self);
+	QPixmap* (*createPixmap)(VirtualQPaintEngine* self, QSize* size);
+	QPixmap* (*createPixmapFromImage)(VirtualQPaintEngine* self, QImage* image, int flags);
+}QPaintEngine_VTable;
+
+const QPaintEngine_VTable* QPaintEngine_vtbl(const VirtualQPaintEngine* self);
+void* QPaintEngine_vdata(const VirtualQPaintEngine* self);
+void QPaintEngine_setVdata(VirtualQPaintEngine* self, void* vdata);
+
+VirtualQPaintEngine* QPaintEngine_new(const QPaintEngine_VTable* vtbl, void* vdata);
+VirtualQPaintEngine* QPaintEngine_new2(const QPaintEngine_VTable* vtbl, void* vdata, int features);
+
 bool QPaintEngine_isActive(const QPaintEngine* self);
 void QPaintEngine_setActive(QPaintEngine* self, bool newState);
 bool QPaintEngine_begin(QPaintEngine* self, QPaintDevice* pdev);
@@ -131,28 +139,30 @@ void QPaintEngine_syncState(QPaintEngine* self);
 bool QPaintEngine_isExtended(const QPaintEngine* self);
 QPixmap* QPaintEngine_createPixmap(QPaintEngine* self, QSize* size);
 QPixmap* QPaintEngine_createPixmapFromImage(QPaintEngine* self, QImage* image, int flags);
-bool QPaintEngine_virtualbase_begin(void* self, QPaintDevice* pdev);
-bool QPaintEngine_virtualbase_end(void* self);
-void QPaintEngine_virtualbase_updateState(void* self, QPaintEngineState* state);
-void QPaintEngine_virtualbase_drawRects(void* self, QRect* rects, int rectCount);
-void QPaintEngine_virtualbase_drawRects2(void* self, QRectF* rects, int rectCount);
-void QPaintEngine_virtualbase_drawLines(void* self, QLine* lines, int lineCount);
-void QPaintEngine_virtualbase_drawLines2(void* self, QLineF* lines, int lineCount);
-void QPaintEngine_virtualbase_drawEllipse(void* self, QRectF* r);
-void QPaintEngine_virtualbase_drawEllipseWithQRect(void* self, QRect* r);
-void QPaintEngine_virtualbase_drawPath(void* self, QPainterPath* path);
-void QPaintEngine_virtualbase_drawPoints(void* self, QPointF* points, int pointCount);
-void QPaintEngine_virtualbase_drawPoints2(void* self, QPoint* points, int pointCount);
-void QPaintEngine_virtualbase_drawPolygon(void* self, QPointF* points, int pointCount, int mode);
-void QPaintEngine_virtualbase_drawPolygon2(void* self, QPoint* points, int pointCount, int mode);
-void QPaintEngine_virtualbase_drawPixmap(void* self, QRectF* r, QPixmap* pm, QRectF* sr);
-void QPaintEngine_virtualbase_drawTextItem(void* self, QPointF* p, QTextItem* textItem);
-void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pixmap, QPointF* s);
-void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
-QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self);
-int QPaintEngine_virtualbase_type(const void* self);
-QPixmap* QPaintEngine_virtualbase_createPixmap(void* self, QSize* size);
-QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(void* self, QImage* image, int flags);
+
+bool QPaintEngine_virtualbase_begin(VirtualQPaintEngine* self, QPaintDevice* pdev);
+bool QPaintEngine_virtualbase_end(VirtualQPaintEngine* self);
+void QPaintEngine_virtualbase_updateState(VirtualQPaintEngine* self, QPaintEngineState* state);
+void QPaintEngine_virtualbase_drawRects(VirtualQPaintEngine* self, QRect* rects, int rectCount);
+void QPaintEngine_virtualbase_drawRects2(VirtualQPaintEngine* self, QRectF* rects, int rectCount);
+void QPaintEngine_virtualbase_drawLines(VirtualQPaintEngine* self, QLine* lines, int lineCount);
+void QPaintEngine_virtualbase_drawLines2(VirtualQPaintEngine* self, QLineF* lines, int lineCount);
+void QPaintEngine_virtualbase_drawEllipse(VirtualQPaintEngine* self, QRectF* r);
+void QPaintEngine_virtualbase_drawEllipseWithQRect(VirtualQPaintEngine* self, QRect* r);
+void QPaintEngine_virtualbase_drawPath(VirtualQPaintEngine* self, QPainterPath* path);
+void QPaintEngine_virtualbase_drawPoints(VirtualQPaintEngine* self, QPointF* points, int pointCount);
+void QPaintEngine_virtualbase_drawPoints2(VirtualQPaintEngine* self, QPoint* points, int pointCount);
+void QPaintEngine_virtualbase_drawPolygon(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode);
+void QPaintEngine_virtualbase_drawPolygon2(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode);
+void QPaintEngine_virtualbase_drawPixmap(VirtualQPaintEngine* self, QRectF* r, QPixmap* pm, QRectF* sr);
+void QPaintEngine_virtualbase_drawTextItem(VirtualQPaintEngine* self, QPointF* p, QTextItem* textItem);
+void QPaintEngine_virtualbase_drawTiledPixmap(VirtualQPaintEngine* self, QRectF* r, QPixmap* pixmap, QPointF* s);
+void QPaintEngine_virtualbase_drawImage(VirtualQPaintEngine* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
+QPoint* QPaintEngine_virtualbase_coordinateOffset(const VirtualQPaintEngine* self);
+int QPaintEngine_virtualbase_type(const VirtualQPaintEngine* self);
+QPixmap* QPaintEngine_virtualbase_createPixmap(VirtualQPaintEngine* self, QSize* size);
+QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(VirtualQPaintEngine* self, QImage* image, int flags);
+
 void QPaintEngine_delete(QPaintEngine* self);
 
 int QPaintEngineState_state(const QPaintEngineState* self);
@@ -173,6 +183,7 @@ double QPaintEngineState_opacity(const QPaintEngineState* self);
 QPainter* QPaintEngineState_painter(const QPaintEngineState* self);
 bool QPaintEngineState_brushNeedsResolving(const QPaintEngineState* self);
 bool QPaintEngineState_penNeedsResolving(const QPaintEngineState* self);
+
 void QPaintEngineState_delete(QPaintEngineState* self);
 
 #ifdef __cplusplus

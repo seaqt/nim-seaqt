@@ -127,7 +127,7 @@ proc fcQFontDatabase_isFixedPitch2(family: struct_miqt_string, style: struct_miq
 proc fcQFontDatabase_new(): ptr cQFontDatabase {.importc: "QFontDatabase_new".}
 proc fcQFontDatabase_staticMetaObject(): pointer {.importc: "QFontDatabase_staticMetaObject".}
 
-proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[cint] =
+proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase): seq[cint] =
   var v_ma = fcQFontDatabase_standardSizes()
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -136,7 +136,7 @@ proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[cint] 
   c_free(v_ma.data)
   vx_ret
 
-proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[cint] =
+proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase): seq[cint] =
   var v_ma = fcQFontDatabase_writingSystems()
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -154,7 +154,7 @@ proc writingSystems*(_: type gen_qfontdatabase_types.QFontDatabase, family: stri
   c_free(v_ma.data)
   vx_ret
 
-proc families*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[string] =
+proc families*(_: type gen_qfontdatabase_types.QFontDatabase): seq[string] =
   var v_ma = fcQFontDatabase_families()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -271,7 +271,7 @@ proc applicationFontFamilies*(_: type gen_qfontdatabase_types.QFontDatabase, id:
 proc removeApplicationFont*(_: type gen_qfontdatabase_types.QFontDatabase, id: cint): bool =
   fcQFontDatabase_removeApplicationFont(id)
 
-proc removeAllApplicationFonts*(_: type gen_qfontdatabase_types.QFontDatabase, ): bool =
+proc removeAllApplicationFonts*(_: type gen_qfontdatabase_types.QFontDatabase): bool =
   fcQFontDatabase_removeAllApplicationFonts()
 
 proc systemFont*(_: type gen_qfontdatabase_types.QFontDatabase, typeVal: cint): gen_qfont_types.QFont =

@@ -26,6 +26,7 @@ typedef struct QQmlNetworkAccessManagerFactory QQmlNetworkAccessManagerFactory;
 
 QNetworkAccessManager* QQmlNetworkAccessManagerFactory_create(QQmlNetworkAccessManagerFactory* self, QObject* parent);
 void QQmlNetworkAccessManagerFactory_operatorAssign(QQmlNetworkAccessManagerFactory* self, QQmlNetworkAccessManagerFactory* param1);
+
 void QQmlNetworkAccessManagerFactory_delete(QQmlNetworkAccessManagerFactory* self);
 
 #ifdef __cplusplus

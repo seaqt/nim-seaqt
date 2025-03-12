@@ -9,15 +9,6 @@
 #include <QTextDocumentWriter>
 #include <qtextdocumentwriter.h>
 #include "gen_qtextdocumentwriter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextDocumentWriter* QTextDocumentWriter_new() {
 	return new QTextDocumentWriter();
 }

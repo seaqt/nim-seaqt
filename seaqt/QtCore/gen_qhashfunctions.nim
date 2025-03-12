@@ -43,13 +43,13 @@ proc fcQHashSeed_resetRandomGlobalSeed(): void {.importc: "QHashSeed_resetRandom
 proc fcQHashSeed_new(): ptr cQHashSeed {.importc: "QHashSeed_new".}
 proc fcQHashSeed_new2(d: csize_t): ptr cQHashSeed {.importc: "QHashSeed_new2".}
 
-proc globalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): gen_qhashfunctions_types.QHashSeed =
+proc globalSeed*(_: type gen_qhashfunctions_types.QHashSeed): gen_qhashfunctions_types.QHashSeed =
   gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_globalSeed(), owned: true)
 
-proc setDeterministicGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): void =
+proc setDeterministicGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed): void =
   fcQHashSeed_setDeterministicGlobalSeed()
 
-proc resetRandomGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): void =
+proc resetRandomGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed): void =
   fcQHashSeed_resetRandomGlobalSeed()
 
 proc create*(T: type gen_qhashfunctions_types.QHashSeed): gen_qhashfunctions_types.QHashSeed =

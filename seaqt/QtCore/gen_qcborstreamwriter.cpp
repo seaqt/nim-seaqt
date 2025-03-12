@@ -3,15 +3,6 @@
 #include <QIODevice>
 #include <qcborstreamwriter.h>
 #include "gen_qcborstreamwriter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCborStreamWriter* QCborStreamWriter_new(QIODevice* device) {
 	return new QCborStreamWriter(device);
 }

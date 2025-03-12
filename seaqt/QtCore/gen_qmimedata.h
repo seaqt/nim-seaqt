@@ -38,23 +38,30 @@ typedef struct QUrl QUrl;
 typedef struct QVariant QVariant;
 #endif
 
-struct QMimeData_VTable {
-	void (*destructor)(struct QMimeData_VTable* vtbl, QMimeData* self);
-	QMetaObject* (*metaObject)(struct QMimeData_VTable* vtbl, const QMimeData* self);
-	void* (*metacast)(struct QMimeData_VTable* vtbl, QMimeData* self, const char* param1);
-	int (*metacall)(struct QMimeData_VTable* vtbl, QMimeData* self, int param1, int param2, void** param3);
-	bool (*hasFormat)(struct QMimeData_VTable* vtbl, const QMimeData* self, struct miqt_string mimetype);
-	struct miqt_array /* of struct miqt_string */  (*formats)(struct QMimeData_VTable* vtbl, const QMimeData* self);
-	QVariant* (*retrieveData)(struct QMimeData_VTable* vtbl, const QMimeData* self, struct miqt_string mimetype, QMetaType* preferredType);
-	bool (*event)(struct QMimeData_VTable* vtbl, QMimeData* self, QEvent* event);
-	bool (*eventFilter)(struct QMimeData_VTable* vtbl, QMimeData* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QMimeData_VTable* vtbl, QMimeData* self, QTimerEvent* event);
-	void (*childEvent)(struct QMimeData_VTable* vtbl, QMimeData* self, QChildEvent* event);
-	void (*customEvent)(struct QMimeData_VTable* vtbl, QMimeData* self, QEvent* event);
-	void (*connectNotify)(struct QMimeData_VTable* vtbl, QMimeData* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QMimeData_VTable* vtbl, QMimeData* self, QMetaMethod* signal);
-};
-QMimeData* QMimeData_new(struct QMimeData_VTable* vtbl);
+typedef struct VirtualQMimeData VirtualQMimeData;
+typedef struct QMimeData_VTable{
+	void (*destructor)(VirtualQMimeData* self);
+	QMetaObject* (*metaObject)(const VirtualQMimeData* self);
+	void* (*metacast)(VirtualQMimeData* self, const char* param1);
+	int (*metacall)(VirtualQMimeData* self, int param1, int param2, void** param3);
+	bool (*hasFormat)(const VirtualQMimeData* self, struct miqt_string mimetype);
+	struct miqt_array /* of struct miqt_string */  (*formats)(const VirtualQMimeData* self);
+	QVariant* (*retrieveData)(const VirtualQMimeData* self, struct miqt_string mimetype, QMetaType* preferredType);
+	bool (*event)(VirtualQMimeData* self, QEvent* event);
+	bool (*eventFilter)(VirtualQMimeData* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQMimeData* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQMimeData* self, QChildEvent* event);
+	void (*customEvent)(VirtualQMimeData* self, QEvent* event);
+	void (*connectNotify)(VirtualQMimeData* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQMimeData* self, QMetaMethod* signal);
+}QMimeData_VTable;
+
+const QMimeData_VTable* QMimeData_vtbl(const VirtualQMimeData* self);
+void* QMimeData_vdata(const VirtualQMimeData* self);
+void QMimeData_setVdata(VirtualQMimeData* self, void* vdata);
+
+VirtualQMimeData* QMimeData_new(const QMimeData_VTable* vtbl, void* vdata);
+
 void QMimeData_virtbase(QMimeData* src, QObject** outptr_QObject);
 QMetaObject* QMimeData_metaObject(const QMimeData* self);
 void* QMimeData_metacast(QMimeData* self, const char* param1);
@@ -84,23 +91,26 @@ void QMimeData_clear(QMimeData* self);
 QVariant* QMimeData_retrieveData(const QMimeData* self, struct miqt_string mimetype, QMetaType* preferredType);
 struct miqt_string QMimeData_tr2(const char* s, const char* c);
 struct miqt_string QMimeData_tr3(const char* s, const char* c, int n);
-QMetaObject* QMimeData_virtualbase_metaObject(const void* self);
-void* QMimeData_virtualbase_metacast(void* self, const char* param1);
-int QMimeData_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimetype);
-struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const void* self);
-QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_string mimetype, QMetaType* preferredType);
-bool QMimeData_virtualbase_event(void* self, QEvent* event);
-bool QMimeData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QMimeData_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QMimeData_virtualbase_childEvent(void* self, QChildEvent* event);
-void QMimeData_virtualbase_customEvent(void* self, QEvent* event);
-void QMimeData_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QMimeData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QMimeData_protectedbase_sender(const void* self);
-int QMimeData_protectedbase_senderSignalIndex(const void* self);
-int QMimeData_protectedbase_receivers(const void* self, const char* signal);
-bool QMimeData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QMimeData_virtualbase_metaObject(const VirtualQMimeData* self);
+void* QMimeData_virtualbase_metacast(VirtualQMimeData* self, const char* param1);
+int QMimeData_virtualbase_metacall(VirtualQMimeData* self, int param1, int param2, void** param3);
+bool QMimeData_virtualbase_hasFormat(const VirtualQMimeData* self, struct miqt_string mimetype);
+struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const VirtualQMimeData* self);
+QVariant* QMimeData_virtualbase_retrieveData(const VirtualQMimeData* self, struct miqt_string mimetype, QMetaType* preferredType);
+bool QMimeData_virtualbase_event(VirtualQMimeData* self, QEvent* event);
+bool QMimeData_virtualbase_eventFilter(VirtualQMimeData* self, QObject* watched, QEvent* event);
+void QMimeData_virtualbase_timerEvent(VirtualQMimeData* self, QTimerEvent* event);
+void QMimeData_virtualbase_childEvent(VirtualQMimeData* self, QChildEvent* event);
+void QMimeData_virtualbase_customEvent(VirtualQMimeData* self, QEvent* event);
+void QMimeData_virtualbase_connectNotify(VirtualQMimeData* self, QMetaMethod* signal);
+void QMimeData_virtualbase_disconnectNotify(VirtualQMimeData* self, QMetaMethod* signal);
+
+QObject* QMimeData_protectedbase_sender(const VirtualQMimeData* self);
+int QMimeData_protectedbase_senderSignalIndex(const VirtualQMimeData* self);
+int QMimeData_protectedbase_receivers(const VirtualQMimeData* self, const char* signal);
+bool QMimeData_protectedbase_isSignalConnected(const VirtualQMimeData* self, QMetaMethod* signal);
+
 const QMetaObject* QMimeData_staticMetaObject();
 void QMimeData_delete(QMimeData* self);
 

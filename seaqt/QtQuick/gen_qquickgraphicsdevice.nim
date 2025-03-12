@@ -38,7 +38,7 @@ export gen_qquickgraphicsdevice_types
 type cQQuickGraphicsDevice*{.exportc: "QQuickGraphicsDevice", incompleteStruct.} = object
 
 proc fcQQuickGraphicsDevice_operatorAssign(self: pointer, other: pointer): void {.importc: "QQuickGraphicsDevice_operatorAssign".}
-proc fcQQuickGraphicsDevice_isNull(self: pointer, ): bool {.importc: "QQuickGraphicsDevice_isNull".}
+proc fcQQuickGraphicsDevice_isNull(self: pointer): bool {.importc: "QQuickGraphicsDevice_isNull".}
 proc fcQQuickGraphicsDevice_fromPhysicalDevice(physicalDevice: cVkPhysicalDevice): pointer {.importc: "QQuickGraphicsDevice_fromPhysicalDevice".}
 proc fcQQuickGraphicsDevice_fromDeviceObjects(physicalDevice: cVkPhysicalDevice, device: cVkDevice, queueFamilyIndex: cint): pointer {.importc: "QQuickGraphicsDevice_fromDeviceObjects".}
 proc fcQQuickGraphicsDevice_fromDeviceObjects4(physicalDevice: cVkPhysicalDevice, device: cVkDevice, queueFamilyIndex: cint, queueIndex: cint): pointer {.importc: "QQuickGraphicsDevice_fromDeviceObjects4".}
@@ -48,7 +48,7 @@ proc fcQQuickGraphicsDevice_new2(other: pointer): ptr cQQuickGraphicsDevice {.im
 proc operatorAssign*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): void =
   fcQQuickGraphicsDevice_operatorAssign(self.h, other.h)
 
-proc isNull*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, ): bool =
+proc isNull*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): bool =
   fcQQuickGraphicsDevice_isNull(self.h)
 
 proc fromPhysicalDevice*(_: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, physicalDevice: VkPhysicalDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =

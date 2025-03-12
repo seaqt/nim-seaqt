@@ -3,15 +3,6 @@
 #include <QUntypedPropertyData>
 #include <qbindingstorage.h>
 #include "gen_qbindingstorage.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QBindingStatus_delete(QBindingStatus* self) {
 	delete self;
 }

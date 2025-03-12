@@ -6,15 +6,6 @@
 #include <QVariant>
 #include <qcursor.h>
 #include "gen_qcursor.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCursor* QCursor_new() {
 	return new QCursor();
 }

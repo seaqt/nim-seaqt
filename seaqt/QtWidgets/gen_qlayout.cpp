@@ -16,39 +16,32 @@
 #include <QWidget>
 #include <qlayout.h>
 #include "gen_qlayout.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQLayout final : public QLayout {
-	struct QLayout_VTable* vtbl;
+	const QLayout_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QLayout_VTable* QLayout_vtbl(const VirtualQLayout* self);
+	friend void* QLayout_vdata(const VirtualQLayout* self);
+	friend void QLayout_setVdata(VirtualQLayout* self, void* vdata);
 
-	VirtualQLayout(struct QLayout_VTable* vtbl, QWidget* parent): QLayout(parent), vtbl(vtbl) {};
-	VirtualQLayout(struct QLayout_VTable* vtbl): QLayout(), vtbl(vtbl) {};
+	VirtualQLayout(const QLayout_VTable* vtbl, void* vdata, QWidget* parent): QLayout(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLayout(const QLayout_VTable* vtbl, void* vdata): QLayout(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQLayout() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QLayout::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QLayout_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QLayout_virtualbase_metaObject(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QLayout::qt_metacast(param1);
@@ -56,14 +49,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QLayout_virtualbase_metacast(void* self, const char* param1);
+	friend void* QLayout_virtualbase_metacast(VirtualQLayout* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QLayout::qt_metacall(param1, param2, param3);
@@ -74,28 +66,26 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QLayout_virtualbase_metacall(VirtualQLayout* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual int spacing() const override {
 		if (vtbl->spacing == 0) {
 			return QLayout::spacing();
 		}
 
 
-		int callback_return_value = vtbl->spacing(vtbl, this);
+		int callback_return_value = vtbl->spacing(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_spacing(const void* self);
+	friend int QLayout_virtualbase_spacing(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSpacing(int spacing) override {
 		if (vtbl->setSpacing == 0) {
 			QLayout::setSpacing(spacing);
@@ -104,13 +94,12 @@ public:
 
 		int sigval1 = spacing;
 
-		vtbl->setSpacing(vtbl, this, sigval1);
+		vtbl->setSpacing(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_setSpacing(void* self, int spacing);
+	friend void QLayout_virtualbase_setSpacing(VirtualQLayout* self, int spacing);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QLayout::invalidate();
@@ -118,29 +107,27 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QLayout_virtualbase_invalidate(void* self);
+	friend void QLayout_virtualbase_invalidate(VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
 			return QLayout::geometry();
 		}
 
 
-		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		QRect* callback_return_value = vtbl->geometry(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QLayout_virtualbase_geometry(const void* self);
+	friend QRect* QLayout_virtualbase_geometry(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void addItem(QLayoutItem* param1) override {
 		if (vtbl->addItem == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -148,57 +135,53 @@ public:
 
 		QLayoutItem* sigval1 = param1;
 
-		vtbl->addItem(vtbl, this, sigval1);
+		vtbl->addItem(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
 		if (vtbl->expandingDirections == 0) {
 			return QLayout::expandingDirections();
 		}
 
 
-		int callback_return_value = vtbl->expandingDirections(vtbl, this);
+		int callback_return_value = vtbl->expandingDirections(this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_expandingDirections(const void* self);
+	friend int QLayout_virtualbase_expandingDirections(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
 		if (vtbl->minimumSize == 0) {
 			return QLayout::minimumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QLayout_virtualbase_minimumSize(const void* self);
+	friend QSize* QLayout_virtualbase_minimumSize(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
 		if (vtbl->maximumSize == 0) {
 			return QLayout::maximumSize();
 		}
 
 
-		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		QSize* callback_return_value = vtbl->maximumSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QLayout_virtualbase_maximumSize(const void* self);
+	friend QSize* QLayout_virtualbase_maximumSize(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& geometry) override {
 		if (vtbl->setGeometry == 0) {
 			QLayout::setGeometry(geometry);
@@ -209,13 +192,12 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_setGeometry(void* self, QRect* geometry);
+	friend void QLayout_virtualbase_setGeometry(VirtualQLayout* self, QRect* geometry);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* itemAt(int index) const override {
 		if (vtbl->itemAt == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -223,12 +205,11 @@ public:
 
 		int sigval1 = index;
 
-		QLayoutItem* callback_return_value = vtbl->itemAt(vtbl, this, sigval1);
+		QLayoutItem* callback_return_value = vtbl->itemAt(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* takeAt(int index) override {
 		if (vtbl->takeAt == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -236,12 +217,11 @@ public:
 
 		int sigval1 = index;
 
-		QLayoutItem* callback_return_value = vtbl->takeAt(vtbl, this, sigval1);
+		QLayoutItem* callback_return_value = vtbl->takeAt(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int indexOf(const QWidget* param1) const override {
 		if (vtbl->indexOf == 0) {
 			return QLayout::indexOf(param1);
@@ -249,14 +229,13 @@ public:
 
 		QWidget* sigval1 = (QWidget*) param1;
 
-		int callback_return_value = vtbl->indexOf(vtbl, this, sigval1);
+		int callback_return_value = vtbl->indexOf(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_indexOf(const void* self, QWidget* param1);
+	friend int QLayout_virtualbase_indexOf(const VirtualQLayout* self, QWidget* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int indexOf(const QLayoutItem* param1) const override {
 		if (vtbl->indexOfWithQLayoutItem == 0) {
 			return QLayout::indexOf(param1);
@@ -264,54 +243,50 @@ public:
 
 		QLayoutItem* sigval1 = (QLayoutItem*) param1;
 
-		int callback_return_value = vtbl->indexOfWithQLayoutItem(vtbl, this, sigval1);
+		int callback_return_value = vtbl->indexOfWithQLayoutItem(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_indexOfWithQLayoutItem(const void* self, QLayoutItem* param1);
+	friend int QLayout_virtualbase_indexOfWithQLayoutItem(const VirtualQLayout* self, QLayoutItem* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int count() const override {
 		if (vtbl->count == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->count(vtbl, this);
+		int callback_return_value = vtbl->count(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return QLayout::isEmpty();
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLayout_virtualbase_isEmpty(const void* self);
+	friend bool QLayout_virtualbase_isEmpty(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
 		if (vtbl->controlTypes == 0) {
 			return QLayout::controlTypes();
 		}
 
 
-		int callback_return_value = vtbl->controlTypes(vtbl, this);
+		int callback_return_value = vtbl->controlTypes(this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_controlTypes(const void* self);
+	friend int QLayout_virtualbase_controlTypes(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* replaceWidget(QWidget* from, QWidget* to, Qt::FindChildOptions options) override {
 		if (vtbl->replaceWidget == 0) {
 			return QLayout::replaceWidget(from, to, options);
@@ -322,28 +297,26 @@ public:
 		Qt::FindChildOptions options_ret = options;
 		int sigval3 = static_cast<int>(options_ret);
 
-		QLayoutItem* callback_return_value = vtbl->replaceWidget(vtbl, this, sigval1, sigval2, sigval3);
+		QLayoutItem* callback_return_value = vtbl->replaceWidget(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend QLayoutItem* QLayout_virtualbase_replaceWidget(void* self, QWidget* from, QWidget* to, int options);
+	friend QLayoutItem* QLayout_virtualbase_replaceWidget(VirtualQLayout* self, QWidget* from, QWidget* to, int options);
 
-	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
 		if (vtbl->layout == 0) {
 			return QLayout::layout();
 		}
 
 
-		QLayout* callback_return_value = vtbl->layout(vtbl, this);
+		QLayout* callback_return_value = vtbl->layout(this);
 
 		return callback_return_value;
 	}
 
-	friend QLayout* QLayout_virtualbase_layout(void* self);
+	friend QLayout* QLayout_virtualbase_layout(VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* e) override {
 		if (vtbl->childEvent == 0) {
 			QLayout::childEvent(e);
@@ -352,13 +325,12 @@ public:
 
 		QChildEvent* sigval1 = e;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_childEvent(void* self, QChildEvent* e);
+	friend void QLayout_virtualbase_childEvent(VirtualQLayout* self, QChildEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QLayout::event(event);
@@ -366,14 +338,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLayout_virtualbase_event(void* self, QEvent* event);
+	friend bool QLayout_virtualbase_event(VirtualQLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QLayout::eventFilter(watched, event);
@@ -382,14 +353,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QLayout_virtualbase_eventFilter(VirtualQLayout* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QLayout::timerEvent(event);
@@ -398,13 +368,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QLayout_virtualbase_timerEvent(VirtualQLayout* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QLayout::customEvent(event);
@@ -413,13 +382,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QLayout_virtualbase_customEvent(VirtualQLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QLayout::connectNotify(signal);
@@ -430,13 +398,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QLayout_virtualbase_connectNotify(VirtualQLayout* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QLayout::disconnectNotify(signal);
@@ -447,41 +414,38 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QLayout_virtualbase_disconnectNotify(VirtualQLayout* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QLayout::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLayout_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QLayout_virtualbase_hasHeightForWidth(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QLayout::heightForWidth(param1);
@@ -489,14 +453,13 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QLayout_virtualbase_heightForWidth(const VirtualQLayout* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
 		if (vtbl->minimumHeightForWidth == 0) {
 			return QLayout::minimumHeightForWidth(param1);
@@ -504,59 +467,57 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_minimumHeightForWidth(const void* self, int param1);
+	friend int QLayout_virtualbase_minimumHeightForWidth(const VirtualQLayout* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
 		if (vtbl->widget == 0) {
 			return QLayout::widget();
 		}
 
 
-		QWidget* callback_return_value = vtbl->widget(vtbl, this);
+		QWidget* callback_return_value = vtbl->widget(this);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QLayout_virtualbase_widget(const void* self);
+	friend QWidget* QLayout_virtualbase_widget(const VirtualQLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
 		if (vtbl->spacerItem == 0) {
 			return QLayout::spacerItem();
 		}
 
 
-		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
+		QSpacerItem* callback_return_value = vtbl->spacerItem(this);
 
 		return callback_return_value;
 	}
 
-	friend QSpacerItem* QLayout_virtualbase_spacerItem(void* self);
+	friend QSpacerItem* QLayout_virtualbase_spacerItem(VirtualQLayout* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLayout_protectedbase_widgetEvent(void* self, QEvent* param1);
-	friend void QLayout_protectedbase_addChildLayout(void* self, QLayout* l);
-	friend void QLayout_protectedbase_addChildWidget(void* self, QWidget* w);
-	friend bool QLayout_protectedbase_adoptLayout(void* self, QLayout* layout);
-	friend QRect* QLayout_protectedbase_alignmentRect(const void* self, QRect* param1);
-	friend QObject* QLayout_protectedbase_sender(const void* self);
-	friend int QLayout_protectedbase_senderSignalIndex(const void* self);
-	friend int QLayout_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QLayout_protectedbase_widgetEvent(VirtualQLayout* self, QEvent* param1);
+	friend void QLayout_protectedbase_addChildLayout(VirtualQLayout* self, QLayout* l);
+	friend void QLayout_protectedbase_addChildWidget(VirtualQLayout* self, QWidget* w);
+	friend bool QLayout_protectedbase_adoptLayout(VirtualQLayout* self, QLayout* layout);
+	friend QRect* QLayout_protectedbase_alignmentRect(const VirtualQLayout* self, QRect* param1);
+	friend QObject* QLayout_protectedbase_sender(const VirtualQLayout* self);
+	friend int QLayout_protectedbase_senderSignalIndex(const VirtualQLayout* self);
+	friend int QLayout_protectedbase_receivers(const VirtualQLayout* self, const char* signal);
+	friend bool QLayout_protectedbase_isSignalConnected(const VirtualQLayout* self, QMetaMethod* signal);
 };
 
-QLayout* QLayout_new(struct QLayout_VTable* vtbl, QWidget* parent) {
-	return new VirtualQLayout(vtbl, parent);
+VirtualQLayout* QLayout_new(const QLayout_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQLayout(vtbl, vdata, parent);
 }
 
-QLayout* QLayout_new2(struct QLayout_VTable* vtbl) {
-	return new VirtualQLayout(vtbl);
+VirtualQLayout* QLayout_new2(const QLayout_VTable* vtbl, void* vdata) {
+	return new VirtualQLayout(vtbl, vdata);
 }
 
 void QLayout_virtbase(QLayout* src, QObject** outptr_QObject, QLayoutItem** outptr_QLayoutItem) {
@@ -788,244 +749,193 @@ struct miqt_string QLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QLayout_virtualbase_metaObject(const void* self) {
+QMetaObject* QLayout_virtualbase_metaObject(const VirtualQLayout* self) {
 
-	return (QMetaObject*) ( (const VirtualQLayout*)(self) )->QLayout::metaObject();
-
+	return (QMetaObject*) self->QLayout::metaObject();
 }
 
-void* QLayout_virtualbase_metacast(void* self, const char* param1) {
+void* QLayout_virtualbase_metacast(VirtualQLayout* self, const char* param1) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::qt_metacast(param1);
-
+	return self->QLayout::qt_metacast(param1);
 }
 
-int QLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QLayout_virtualbase_metacall(VirtualQLayout* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-int QLayout_virtualbase_spacing(const void* self) {
+int QLayout_virtualbase_spacing(const VirtualQLayout* self) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::spacing();
-
+	return self->QLayout::spacing();
 }
 
-void QLayout_virtualbase_setSpacing(void* self, int spacing) {
+void QLayout_virtualbase_setSpacing(VirtualQLayout* self, int spacing) {
 
-	( (VirtualQLayout*)(self) )->QLayout::setSpacing(static_cast<int>(spacing));
-
+	self->QLayout::setSpacing(static_cast<int>(spacing));
 }
 
-void QLayout_virtualbase_invalidate(void* self) {
+void QLayout_virtualbase_invalidate(VirtualQLayout* self) {
 
-	( (VirtualQLayout*)(self) )->QLayout::invalidate();
-
+	self->QLayout::invalidate();
 }
 
-QRect* QLayout_virtualbase_geometry(const void* self) {
+QRect* QLayout_virtualbase_geometry(const VirtualQLayout* self) {
 
-	return new QRect(( (const VirtualQLayout*)(self) )->QLayout::geometry());
-
+	return new QRect(self->QLayout::geometry());
 }
 
-int QLayout_virtualbase_expandingDirections(const void* self) {
+int QLayout_virtualbase_expandingDirections(const VirtualQLayout* self) {
 
-	Qt::Orientations _ret = ( (const VirtualQLayout*)(self) )->QLayout::expandingDirections();
+	Qt::Orientations _ret = self->QLayout::expandingDirections();
 	return static_cast<int>(_ret);
-
 }
 
-QSize* QLayout_virtualbase_minimumSize(const void* self) {
+QSize* QLayout_virtualbase_minimumSize(const VirtualQLayout* self) {
 
-	return new QSize(( (const VirtualQLayout*)(self) )->QLayout::minimumSize());
-
+	return new QSize(self->QLayout::minimumSize());
 }
 
-QSize* QLayout_virtualbase_maximumSize(const void* self) {
+QSize* QLayout_virtualbase_maximumSize(const VirtualQLayout* self) {
 
-	return new QSize(( (const VirtualQLayout*)(self) )->QLayout::maximumSize());
-
+	return new QSize(self->QLayout::maximumSize());
 }
 
-void QLayout_virtualbase_setGeometry(void* self, QRect* geometry) {
+void QLayout_virtualbase_setGeometry(VirtualQLayout* self, QRect* geometry) {
 
-	( (VirtualQLayout*)(self) )->QLayout::setGeometry(*geometry);
-
+	self->QLayout::setGeometry(*geometry);
 }
 
-int QLayout_virtualbase_indexOf(const void* self, QWidget* param1) {
+int QLayout_virtualbase_indexOf(const VirtualQLayout* self, QWidget* param1) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::indexOf(param1);
-
+	return self->QLayout::indexOf(param1);
 }
 
-int QLayout_virtualbase_indexOfWithQLayoutItem(const void* self, QLayoutItem* param1) {
+int QLayout_virtualbase_indexOfWithQLayoutItem(const VirtualQLayout* self, QLayoutItem* param1) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::indexOf(param1);
-
+	return self->QLayout::indexOf(param1);
 }
 
-bool QLayout_virtualbase_isEmpty(const void* self) {
+bool QLayout_virtualbase_isEmpty(const VirtualQLayout* self) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::isEmpty();
-
+	return self->QLayout::isEmpty();
 }
 
-int QLayout_virtualbase_controlTypes(const void* self) {
+int QLayout_virtualbase_controlTypes(const VirtualQLayout* self) {
 
-	QSizePolicy::ControlTypes _ret = ( (const VirtualQLayout*)(self) )->QLayout::controlTypes();
+	QSizePolicy::ControlTypes _ret = self->QLayout::controlTypes();
 	return static_cast<int>(_ret);
-
 }
 
-QLayoutItem* QLayout_virtualbase_replaceWidget(void* self, QWidget* from, QWidget* to, int options) {
+QLayoutItem* QLayout_virtualbase_replaceWidget(VirtualQLayout* self, QWidget* from, QWidget* to, int options) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::replaceWidget(from, to, static_cast<Qt::FindChildOptions>(options));
-
+	return self->QLayout::replaceWidget(from, to, static_cast<Qt::FindChildOptions>(options));
 }
 
-QLayout* QLayout_virtualbase_layout(void* self) {
+QLayout* QLayout_virtualbase_layout(VirtualQLayout* self) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::layout();
-
+	return self->QLayout::layout();
 }
 
-void QLayout_virtualbase_childEvent(void* self, QChildEvent* e) {
+void QLayout_virtualbase_childEvent(VirtualQLayout* self, QChildEvent* e) {
 
-	( (VirtualQLayout*)(self) )->QLayout::childEvent(e);
-
+	self->QLayout::childEvent(e);
 }
 
-bool QLayout_virtualbase_event(void* self, QEvent* event) {
+bool QLayout_virtualbase_event(VirtualQLayout* self, QEvent* event) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::event(event);
-
+	return self->QLayout::event(event);
 }
 
-bool QLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QLayout_virtualbase_eventFilter(VirtualQLayout* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::eventFilter(watched, event);
-
+	return self->QLayout::eventFilter(watched, event);
 }
 
-void QLayout_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QLayout_virtualbase_timerEvent(VirtualQLayout* self, QTimerEvent* event) {
 
-	( (VirtualQLayout*)(self) )->QLayout::timerEvent(event);
-
+	self->QLayout::timerEvent(event);
 }
 
-void QLayout_virtualbase_customEvent(void* self, QEvent* event) {
+void QLayout_virtualbase_customEvent(VirtualQLayout* self, QEvent* event) {
 
-	( (VirtualQLayout*)(self) )->QLayout::customEvent(event);
-
+	self->QLayout::customEvent(event);
 }
 
-void QLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QLayout_virtualbase_connectNotify(VirtualQLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQLayout*)(self) )->QLayout::connectNotify(*signal);
-
+	self->QLayout::connectNotify(*signal);
 }
 
-void QLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QLayout_virtualbase_disconnectNotify(VirtualQLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQLayout*)(self) )->QLayout::disconnectNotify(*signal);
-
+	self->QLayout::disconnectNotify(*signal);
 }
 
-bool QLayout_virtualbase_hasHeightForWidth(const void* self) {
+bool QLayout_virtualbase_hasHeightForWidth(const VirtualQLayout* self) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::hasHeightForWidth();
-
+	return self->QLayout::hasHeightForWidth();
 }
 
-int QLayout_virtualbase_heightForWidth(const void* self, int param1) {
+int QLayout_virtualbase_heightForWidth(const VirtualQLayout* self, int param1) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::heightForWidth(static_cast<int>(param1));
-
+	return self->QLayout::heightForWidth(static_cast<int>(param1));
 }
 
-int QLayout_virtualbase_minimumHeightForWidth(const void* self, int param1) {
+int QLayout_virtualbase_minimumHeightForWidth(const VirtualQLayout* self, int param1) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::minimumHeightForWidth(static_cast<int>(param1));
-
+	return self->QLayout::minimumHeightForWidth(static_cast<int>(param1));
 }
 
-QWidget* QLayout_virtualbase_widget(const void* self) {
+QWidget* QLayout_virtualbase_widget(const VirtualQLayout* self) {
 
-	return ( (const VirtualQLayout*)(self) )->QLayout::widget();
-
+	return self->QLayout::widget();
 }
 
-QSpacerItem* QLayout_virtualbase_spacerItem(void* self) {
+QSpacerItem* QLayout_virtualbase_spacerItem(VirtualQLayout* self) {
 
-	return ( (VirtualQLayout*)(self) )->QLayout::spacerItem();
-
+	return self->QLayout::spacerItem();
 }
 
 const QMetaObject* QLayout_staticMetaObject() { return &QLayout::staticMetaObject; }
-void QLayout_protectedbase_widgetEvent(void* self, QEvent* param1) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	self_cast->widgetEvent(param1);
 
+const QLayout_VTable* QLayout_vtbl(const VirtualQLayout* self) { return self->vtbl; }
+void* QLayout_vdata(const VirtualQLayout* self) { return self->vdata; }
+void QLayout_setVdata(VirtualQLayout* self, void* vdata) { self->vdata = vdata; }
+
+void QLayout_protectedbase_widgetEvent(VirtualQLayout* self, QEvent* param1) {
+	self->widgetEvent(param1);
 }
 
-void QLayout_protectedbase_addChildLayout(void* self, QLayout* l) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	self_cast->addChildLayout(l);
-
+void QLayout_protectedbase_addChildLayout(VirtualQLayout* self, QLayout* l) {
+	self->addChildLayout(l);
 }
 
-void QLayout_protectedbase_addChildWidget(void* self, QWidget* w) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	self_cast->addChildWidget(w);
-
+void QLayout_protectedbase_addChildWidget(VirtualQLayout* self, QWidget* w) {
+	self->addChildWidget(w);
 }
 
-bool QLayout_protectedbase_adoptLayout(void* self, QLayout* layout) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return self_cast->adoptLayout(layout);
-
+bool QLayout_protectedbase_adoptLayout(VirtualQLayout* self, QLayout* layout) {
+	return self->adoptLayout(layout);
 }
 
-QRect* QLayout_protectedbase_alignmentRect(const void* self, QRect* param1) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return new QRect(self_cast->alignmentRect(*param1));
-
+QRect* QLayout_protectedbase_alignmentRect(const VirtualQLayout* self, QRect* param1) {
+	return new QRect(self->alignmentRect(*param1));
 }
 
-QObject* QLayout_protectedbase_sender(const void* self) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QLayout_protectedbase_sender(const VirtualQLayout* self) {
+	return self->sender();
 }
 
-int QLayout_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QLayout_protectedbase_senderSignalIndex(const VirtualQLayout* self) {
+	return self->senderSignalIndex();
 }
 
-int QLayout_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QLayout_protectedbase_receivers(const VirtualQLayout* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QLayout_protectedbase_isSignalConnected(const VirtualQLayout* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QLayout_delete(QLayout* self) {

@@ -189,18 +189,18 @@ type cQPageSize*{.exportc: "QPageSize", incompleteStruct.} = object
 proc fcQPageSize_operatorAssign(self: pointer, other: pointer): void {.importc: "QPageSize_operatorAssign".}
 proc fcQPageSize_swap(self: pointer, other: pointer): void {.importc: "QPageSize_swap".}
 proc fcQPageSize_isEquivalentTo(self: pointer, other: pointer): bool {.importc: "QPageSize_isEquivalentTo".}
-proc fcQPageSize_isValid(self: pointer, ): bool {.importc: "QPageSize_isValid".}
-proc fcQPageSize_key(self: pointer, ): struct_miqt_string {.importc: "QPageSize_key".}
-proc fcQPageSize_name(self: pointer, ): struct_miqt_string {.importc: "QPageSize_name".}
-proc fcQPageSize_id(self: pointer, ): cint {.importc: "QPageSize_id".}
-proc fcQPageSize_windowsId(self: pointer, ): cint {.importc: "QPageSize_windowsId".}
-proc fcQPageSize_definitionSize(self: pointer, ): pointer {.importc: "QPageSize_definitionSize".}
-proc fcQPageSize_definitionUnits(self: pointer, ): cint {.importc: "QPageSize_definitionUnits".}
+proc fcQPageSize_isValid(self: pointer): bool {.importc: "QPageSize_isValid".}
+proc fcQPageSize_key(self: pointer): struct_miqt_string {.importc: "QPageSize_key".}
+proc fcQPageSize_name(self: pointer): struct_miqt_string {.importc: "QPageSize_name".}
+proc fcQPageSize_id(self: pointer): cint {.importc: "QPageSize_id".}
+proc fcQPageSize_windowsId(self: pointer): cint {.importc: "QPageSize_windowsId".}
+proc fcQPageSize_definitionSize(self: pointer): pointer {.importc: "QPageSize_definitionSize".}
+proc fcQPageSize_definitionUnits(self: pointer): cint {.importc: "QPageSize_definitionUnits".}
 proc fcQPageSize_size(self: pointer, units: cint): pointer {.importc: "QPageSize_size".}
-proc fcQPageSize_sizePoints(self: pointer, ): pointer {.importc: "QPageSize_sizePoints".}
+proc fcQPageSize_sizePoints(self: pointer): pointer {.importc: "QPageSize_sizePoints".}
 proc fcQPageSize_sizePixels(self: pointer, resolution: cint): pointer {.importc: "QPageSize_sizePixels".}
 proc fcQPageSize_rect(self: pointer, units: cint): pointer {.importc: "QPageSize_rect".}
-proc fcQPageSize_rectPoints(self: pointer, ): pointer {.importc: "QPageSize_rectPoints".}
+proc fcQPageSize_rectPoints(self: pointer): pointer {.importc: "QPageSize_rectPoints".}
 proc fcQPageSize_rectPixels(self: pointer, resolution: cint): pointer {.importc: "QPageSize_rectPixels".}
 proc fcQPageSize_keyWithPageSizeId(pageSizeId: cint): struct_miqt_string {.importc: "QPageSize_keyWithPageSizeId".}
 proc fcQPageSize_nameWithPageSizeId(pageSizeId: cint): struct_miqt_string {.importc: "QPageSize_nameWithPageSizeId".}
@@ -234,37 +234,37 @@ proc swap*(self: gen_qpagesize_types.QPageSize, other: gen_qpagesize_types.QPage
 proc isEquivalentTo*(self: gen_qpagesize_types.QPageSize, other: gen_qpagesize_types.QPageSize): bool =
   fcQPageSize_isEquivalentTo(self.h, other.h)
 
-proc isValid*(self: gen_qpagesize_types.QPageSize, ): bool =
+proc isValid*(self: gen_qpagesize_types.QPageSize): bool =
   fcQPageSize_isValid(self.h)
 
-proc key*(self: gen_qpagesize_types.QPageSize, ): string =
+proc key*(self: gen_qpagesize_types.QPageSize): string =
   let v_ms = fcQPageSize_key(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc name*(self: gen_qpagesize_types.QPageSize, ): string =
+proc name*(self: gen_qpagesize_types.QPageSize): string =
   let v_ms = fcQPageSize_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc id*(self: gen_qpagesize_types.QPageSize, ): cint =
+proc id*(self: gen_qpagesize_types.QPageSize): cint =
   cint(fcQPageSize_id(self.h))
 
-proc windowsId*(self: gen_qpagesize_types.QPageSize, ): cint =
+proc windowsId*(self: gen_qpagesize_types.QPageSize): cint =
   fcQPageSize_windowsId(self.h)
 
-proc definitionSize*(self: gen_qpagesize_types.QPageSize, ): gen_qsize_types.QSizeF =
+proc definitionSize*(self: gen_qpagesize_types.QPageSize): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQPageSize_definitionSize(self.h), owned: true)
 
-proc definitionUnits*(self: gen_qpagesize_types.QPageSize, ): cint =
+proc definitionUnits*(self: gen_qpagesize_types.QPageSize): cint =
   cint(fcQPageSize_definitionUnits(self.h))
 
 proc size*(self: gen_qpagesize_types.QPageSize, units: cint): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQPageSize_size(self.h, cint(units)), owned: true)
 
-proc sizePoints*(self: gen_qpagesize_types.QPageSize, ): gen_qsize_types.QSize =
+proc sizePoints*(self: gen_qpagesize_types.QPageSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQPageSize_sizePoints(self.h), owned: true)
 
 proc sizePixels*(self: gen_qpagesize_types.QPageSize, resolution: cint): gen_qsize_types.QSize =
@@ -273,7 +273,7 @@ proc sizePixels*(self: gen_qpagesize_types.QPageSize, resolution: cint): gen_qsi
 proc rect*(self: gen_qpagesize_types.QPageSize, units: cint): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQPageSize_rect(self.h, cint(units)), owned: true)
 
-proc rectPoints*(self: gen_qpagesize_types.QPageSize, ): gen_qrect_types.QRect =
+proc rectPoints*(self: gen_qpagesize_types.QPageSize): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPageSize_rectPoints(self.h), owned: true)
 
 proc rectPixels*(self: gen_qpagesize_types.QPageSize, resolution: cint): gen_qrect_types.QRect =

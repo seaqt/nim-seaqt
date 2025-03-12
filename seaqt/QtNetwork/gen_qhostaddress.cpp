@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qhostaddress.h>
 #include "gen_qhostaddress.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 unsigned char QIPv6Address_operatorSubscript(const QIPv6Address* self, int index) {
 	quint8 _ret = self->operator[](static_cast<int>(index));
 	return static_cast<unsigned char>(_ret);
@@ -221,6 +212,7 @@ bool QHostAddress_isEqual2(const QHostAddress* self, QHostAddress* address, int 
 }
 
 const QMetaObject* QHostAddress_staticMetaObject() { return &QHostAddress::staticMetaObject; }
+
 void QHostAddress_delete(QHostAddress* self) {
 	delete self;
 }

@@ -7,15 +7,6 @@
 #include <QUuid>
 #include <quuid.h>
 #include "gen_quuid.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QUuid* QUuid_new() {
 	return new QUuid();
 }

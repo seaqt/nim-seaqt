@@ -47,45 +47,38 @@
 #include <QWidget>
 #include <qdatetimeedit.h>
 #include "gen_qdatetimeedit.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDateTimeEdit final : public QDateTimeEdit {
-	struct QDateTimeEdit_VTable* vtbl;
+	const QDateTimeEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDateTimeEdit_VTable* QDateTimeEdit_vtbl(const VirtualQDateTimeEdit* self);
+	friend void* QDateTimeEdit_vdata(const VirtualQDateTimeEdit* self);
+	friend void QDateTimeEdit_setVdata(VirtualQDateTimeEdit* self, void* vdata);
 
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, QWidget* parent): QDateTimeEdit(parent), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl): QDateTimeEdit(), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, const QDateTime& dt): QDateTimeEdit(dt), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, QDate d): QDateTimeEdit(d), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, QTime t): QDateTimeEdit(t), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, const QDateTime& dt, QWidget* parent): QDateTimeEdit(dt, parent), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, QDate d, QWidget* parent): QDateTimeEdit(d, parent), vtbl(vtbl) {};
-	VirtualQDateTimeEdit(struct QDateTimeEdit_VTable* vtbl, QTime t, QWidget* parent): QDateTimeEdit(t, parent), vtbl(vtbl) {};
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, QWidget* parent): QDateTimeEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata): QDateTimeEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, const QDateTime& dt): QDateTimeEdit(dt), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, QDate d): QDateTimeEdit(d), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, QTime t): QDateTimeEdit(t), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, const QDateTime& dt, QWidget* parent): QDateTimeEdit(dt, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, QDate d, QWidget* parent): QDateTimeEdit(d, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateTimeEdit(const QDateTimeEdit_VTable* vtbl, void* vdata, QTime t, QWidget* parent): QDateTimeEdit(t, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDateTimeEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDateTimeEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDateTimeEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDateTimeEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDateTimeEdit_virtualbase_metaObject(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDateTimeEdit::qt_metacast(param1);
@@ -93,14 +86,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDateTimeEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDateTimeEdit_virtualbase_metacast(VirtualQDateTimeEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDateTimeEdit::qt_metacall(param1, param2, param3);
@@ -111,30 +103,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDateTimeEdit_virtualbase_metacall(VirtualQDateTimeEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QDateTimeEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDateTimeEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QDateTimeEdit_virtualbase_sizeHint(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
 		if (vtbl->clear == 0) {
 			QDateTimeEdit::clear();
@@ -142,13 +132,12 @@ public:
 		}
 
 
-		vtbl->clear(vtbl, this);
+		vtbl->clear(this);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_clear(void* self);
+	friend void QDateTimeEdit_virtualbase_clear(VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
 		if (vtbl->stepBy == 0) {
 			QDateTimeEdit::stepBy(steps);
@@ -157,13 +146,12 @@ public:
 
 		int sigval1 = steps;
 
-		vtbl->stepBy(vtbl, this, sigval1);
+		vtbl->stepBy(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_stepBy(void* self, int steps);
+	friend void QDateTimeEdit_virtualbase_stepBy(VirtualQDateTimeEdit* self, int steps);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDateTimeEdit::event(event);
@@ -171,14 +159,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateTimeEdit_virtualbase_event(void* self, QEvent* event);
+	friend bool QDateTimeEdit_virtualbase_event(VirtualQDateTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QDateTimeEdit::keyPressEvent(event);
@@ -187,13 +174,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QDateTimeEdit_virtualbase_keyPressEvent(VirtualQDateTimeEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QDateTimeEdit::wheelEvent(event);
@@ -202,13 +188,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QDateTimeEdit_virtualbase_wheelEvent(VirtualQDateTimeEdit* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QDateTimeEdit::focusInEvent(event);
@@ -217,13 +202,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QDateTimeEdit_virtualbase_focusInEvent(VirtualQDateTimeEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QDateTimeEdit::focusNextPrevChild(next);
@@ -231,14 +215,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QDateTimeEdit_virtualbase_focusNextPrevChild(VirtualQDateTimeEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
 		if (vtbl->validate == 0) {
 			return QDateTimeEdit::validate(input, pos);
@@ -254,14 +237,13 @@ public:
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
 
-		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
+	friend int QDateTimeEdit_virtualbase_validate(const VirtualQDateTimeEdit* self, struct miqt_string input, int* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
 		if (vtbl->fixup == 0) {
 			QDateTimeEdit::fixup(input);
@@ -277,13 +259,12 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 
-		vtbl->fixup(vtbl, this, sigval1);
+		vtbl->fixup(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input);
+	friend void QDateTimeEdit_virtualbase_fixup(const VirtualQDateTimeEdit* self, struct miqt_string input);
 
-	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
 		if (vtbl->dateTimeFromText == 0) {
 			return QDateTimeEdit::dateTimeFromText(text);
@@ -298,16 +279,15 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 
-		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		QDateTime* callback_return_value = vtbl->dateTimeFromText(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
+	friend QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const VirtualQDateTimeEdit* self, struct miqt_string text);
 
-	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
 		if (vtbl->textFromDateTime == 0) {
 			return QDateTimeEdit::textFromDateTime(dt);
@@ -317,30 +297,28 @@ public:
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
 
-		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
+		struct miqt_string callback_return_value = vtbl->textFromDateTime(this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
 
-	friend struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
+	friend struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const VirtualQDateTimeEdit* self, QDateTime* dt);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
 		if (vtbl->stepEnabled == 0) {
 			return QDateTimeEdit::stepEnabled();
 		}
 
 
-		int callback_return_value = vtbl->stepEnabled(vtbl, this);
+		int callback_return_value = vtbl->stepEnabled(this);
 
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_stepEnabled(const void* self);
+	friend int QDateTimeEdit_virtualbase_stepEnabled(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QDateTimeEdit::mousePressEvent(event);
@@ -349,13 +327,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QDateTimeEdit_virtualbase_mousePressEvent(VirtualQDateTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QDateTimeEdit::paintEvent(event);
@@ -364,13 +341,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QDateTimeEdit_virtualbase_paintEvent(VirtualQDateTimeEdit* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionSpinBox* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QDateTimeEdit::initStyleOption(option);
@@ -379,29 +355,27 @@ public:
 
 		QStyleOptionSpinBox* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option);
+	friend void QDateTimeEdit_virtualbase_initStyleOption(const VirtualQDateTimeEdit* self, QStyleOptionSpinBox* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QDateTimeEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QDateTimeEdit::inputMethodQuery(param1);
@@ -410,16 +384,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const VirtualQDateTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QDateTimeEdit::resizeEvent(event);
@@ -428,13 +401,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QDateTimeEdit_virtualbase_resizeEvent(VirtualQDateTimeEdit* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QDateTimeEdit::keyReleaseEvent(event);
@@ -443,13 +415,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QDateTimeEdit_virtualbase_keyReleaseEvent(VirtualQDateTimeEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QDateTimeEdit::focusOutEvent(event);
@@ -458,13 +429,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QDateTimeEdit_virtualbase_focusOutEvent(VirtualQDateTimeEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QDateTimeEdit::contextMenuEvent(event);
@@ -473,13 +443,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QDateTimeEdit_virtualbase_contextMenuEvent(VirtualQDateTimeEdit* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QDateTimeEdit::changeEvent(event);
@@ -488,13 +457,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QDateTimeEdit_virtualbase_changeEvent(VirtualQDateTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QDateTimeEdit::closeEvent(event);
@@ -503,13 +471,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QDateTimeEdit_virtualbase_closeEvent(VirtualQDateTimeEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QDateTimeEdit::hideEvent(event);
@@ -518,13 +485,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QDateTimeEdit_virtualbase_hideEvent(VirtualQDateTimeEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QDateTimeEdit::mouseReleaseEvent(event);
@@ -533,13 +499,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QDateTimeEdit_virtualbase_mouseReleaseEvent(VirtualQDateTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QDateTimeEdit::mouseMoveEvent(event);
@@ -548,13 +513,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QDateTimeEdit_virtualbase_mouseMoveEvent(VirtualQDateTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDateTimeEdit::timerEvent(event);
@@ -563,13 +527,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDateTimeEdit_virtualbase_timerEvent(VirtualQDateTimeEdit* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QDateTimeEdit::showEvent(event);
@@ -578,27 +541,25 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QDateTimeEdit_virtualbase_showEvent(VirtualQDateTimeEdit* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QDateTimeEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_devType(const void* self);
+	friend int QDateTimeEdit_virtualbase_devType(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QDateTimeEdit::setVisible(visible);
@@ -607,13 +568,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QDateTimeEdit_virtualbase_setVisible(VirtualQDateTimeEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QDateTimeEdit::heightForWidth(param1);
@@ -621,42 +581,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QDateTimeEdit_virtualbase_heightForWidth(const VirtualQDateTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QDateTimeEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateTimeEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QDateTimeEdit_virtualbase_hasHeightForWidth(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QDateTimeEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QDateTimeEdit::mouseDoubleClickEvent(event);
@@ -665,13 +622,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(VirtualQDateTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QDateTimeEdit::enterEvent(event);
@@ -680,13 +636,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QDateTimeEdit_virtualbase_enterEvent(VirtualQDateTimeEdit* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QDateTimeEdit::leaveEvent(event);
@@ -695,13 +650,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QDateTimeEdit_virtualbase_leaveEvent(VirtualQDateTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QDateTimeEdit::moveEvent(event);
@@ -710,13 +664,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QDateTimeEdit_virtualbase_moveEvent(VirtualQDateTimeEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QDateTimeEdit::tabletEvent(event);
@@ -725,13 +678,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QDateTimeEdit_virtualbase_tabletEvent(VirtualQDateTimeEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QDateTimeEdit::actionEvent(event);
@@ -740,13 +692,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QDateTimeEdit_virtualbase_actionEvent(VirtualQDateTimeEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QDateTimeEdit::dragEnterEvent(event);
@@ -755,13 +706,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QDateTimeEdit_virtualbase_dragEnterEvent(VirtualQDateTimeEdit* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QDateTimeEdit::dragMoveEvent(event);
@@ -770,13 +720,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QDateTimeEdit_virtualbase_dragMoveEvent(VirtualQDateTimeEdit* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QDateTimeEdit::dragLeaveEvent(event);
@@ -785,13 +734,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QDateTimeEdit_virtualbase_dragLeaveEvent(VirtualQDateTimeEdit* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QDateTimeEdit::dropEvent(event);
@@ -800,13 +748,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QDateTimeEdit_virtualbase_dropEvent(VirtualQDateTimeEdit* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QDateTimeEdit::nativeEvent(eventType, message, result);
@@ -822,14 +769,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QDateTimeEdit_virtualbase_nativeEvent(VirtualQDateTimeEdit* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QDateTimeEdit::metric(param1);
@@ -838,14 +784,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateTimeEdit_virtualbase_metric(const void* self, int param1);
+	friend int QDateTimeEdit_virtualbase_metric(const VirtualQDateTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QDateTimeEdit::initPainter(painter);
@@ -854,13 +799,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QDateTimeEdit_virtualbase_initPainter(const VirtualQDateTimeEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QDateTimeEdit::redirected(offset);
@@ -868,28 +812,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QDateTimeEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QDateTimeEdit_virtualbase_redirected(const VirtualQDateTimeEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QDateTimeEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QDateTimeEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QDateTimeEdit_virtualbase_sharedPainter(const VirtualQDateTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QDateTimeEdit::inputMethodEvent(param1);
@@ -898,13 +840,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QDateTimeEdit_virtualbase_inputMethodEvent(VirtualQDateTimeEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDateTimeEdit::eventFilter(watched, event);
@@ -913,14 +854,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDateTimeEdit_virtualbase_eventFilter(VirtualQDateTimeEdit* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDateTimeEdit::childEvent(event);
@@ -929,13 +869,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDateTimeEdit_virtualbase_childEvent(VirtualQDateTimeEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDateTimeEdit::customEvent(event);
@@ -944,13 +883,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDateTimeEdit_virtualbase_customEvent(VirtualQDateTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDateTimeEdit::connectNotify(signal);
@@ -961,13 +899,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDateTimeEdit_virtualbase_connectNotify(VirtualQDateTimeEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDateTimeEdit::disconnectNotify(signal);
@@ -978,56 +915,56 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDateTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDateTimeEdit_virtualbase_disconnectNotify(VirtualQDateTimeEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QLineEdit* QDateTimeEdit_protectedbase_lineEdit(const void* self);
-	friend void QDateTimeEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit);
-	friend void QDateTimeEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QDateTimeEdit_protectedbase_create(void* self);
-	friend void QDateTimeEdit_protectedbase_destroy(void* self);
-	friend bool QDateTimeEdit_protectedbase_focusNextChild(void* self);
-	friend bool QDateTimeEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QDateTimeEdit_protectedbase_sender(const void* self);
-	friend int QDateTimeEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QDateTimeEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDateTimeEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QLineEdit* QDateTimeEdit_protectedbase_lineEdit(const VirtualQDateTimeEdit* self);
+	friend void QDateTimeEdit_protectedbase_setLineEdit(VirtualQDateTimeEdit* self, QLineEdit* edit);
+	friend void QDateTimeEdit_protectedbase_updateMicroFocus(VirtualQDateTimeEdit* self);
+	friend void QDateTimeEdit_protectedbase_create(VirtualQDateTimeEdit* self);
+	friend void QDateTimeEdit_protectedbase_destroy(VirtualQDateTimeEdit* self);
+	friend bool QDateTimeEdit_protectedbase_focusNextChild(VirtualQDateTimeEdit* self);
+	friend bool QDateTimeEdit_protectedbase_focusPreviousChild(VirtualQDateTimeEdit* self);
+	friend QObject* QDateTimeEdit_protectedbase_sender(const VirtualQDateTimeEdit* self);
+	friend int QDateTimeEdit_protectedbase_senderSignalIndex(const VirtualQDateTimeEdit* self);
+	friend int QDateTimeEdit_protectedbase_receivers(const VirtualQDateTimeEdit* self, const char* signal);
+	friend bool QDateTimeEdit_protectedbase_isSignalConnected(const VirtualQDateTimeEdit* self, QMetaMethod* signal);
 };
 
-QDateTimeEdit* QDateTimeEdit_new(struct QDateTimeEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQDateTimeEdit(vtbl, parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new(const QDateTimeEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, parent);
 }
 
-QDateTimeEdit* QDateTimeEdit_new2(struct QDateTimeEdit_VTable* vtbl) {
-	return new VirtualQDateTimeEdit(vtbl);
+VirtualQDateTimeEdit* QDateTimeEdit_new2(const QDateTimeEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQDateTimeEdit(vtbl, vdata);
 }
 
-QDateTimeEdit* QDateTimeEdit_new3(struct QDateTimeEdit_VTable* vtbl, QDateTime* dt) {
-	return new VirtualQDateTimeEdit(vtbl, *dt);
+VirtualQDateTimeEdit* QDateTimeEdit_new3(const QDateTimeEdit_VTable* vtbl, void* vdata, QDateTime* dt) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *dt);
 }
 
-QDateTimeEdit* QDateTimeEdit_new4(struct QDateTimeEdit_VTable* vtbl, QDate* d) {
-	return new VirtualQDateTimeEdit(vtbl, *d);
+VirtualQDateTimeEdit* QDateTimeEdit_new4(const QDateTimeEdit_VTable* vtbl, void* vdata, QDate* d) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *d);
 }
 
-QDateTimeEdit* QDateTimeEdit_new5(struct QDateTimeEdit_VTable* vtbl, QTime* t) {
-	return new VirtualQDateTimeEdit(vtbl, *t);
+VirtualQDateTimeEdit* QDateTimeEdit_new5(const QDateTimeEdit_VTable* vtbl, void* vdata, QTime* t) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *t);
 }
 
-QDateTimeEdit* QDateTimeEdit_new6(struct QDateTimeEdit_VTable* vtbl, QDateTime* dt, QWidget* parent) {
-	return new VirtualQDateTimeEdit(vtbl, *dt, parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new6(const QDateTimeEdit_VTable* vtbl, void* vdata, QDateTime* dt, QWidget* parent) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *dt, parent);
 }
 
-QDateTimeEdit* QDateTimeEdit_new7(struct QDateTimeEdit_VTable* vtbl, QDate* d, QWidget* parent) {
-	return new VirtualQDateTimeEdit(vtbl, *d, parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new7(const QDateTimeEdit_VTable* vtbl, void* vdata, QDate* d, QWidget* parent) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *d, parent);
 }
 
-QDateTimeEdit* QDateTimeEdit_new8(struct QDateTimeEdit_VTable* vtbl, QTime* t, QWidget* parent) {
-	return new VirtualQDateTimeEdit(vtbl, *t, parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new8(const QDateTimeEdit_VTable* vtbl, void* vdata, QTime* t, QWidget* parent) {
+	return new VirtualQDateTimeEdit(vtbl, vdata, *t, parent);
 }
 
 void QDateTimeEdit_virtbase(QDateTimeEdit* src, QAbstractSpinBox** outptr_QAbstractSpinBox) {
@@ -1268,7 +1205,7 @@ void QDateTimeEdit_dateTimeChanged(QDateTimeEdit* self, QDateTime* dateTime) {
 	self->dateTimeChanged(*dateTime);
 }
 
-void QDateTimeEdit_connect_dateTimeChanged(QDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QDateTime*), void (*release)(intptr_t)) {
+void QDateTimeEdit_connect_dateTimeChanged(VirtualQDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QDateTime*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDateTime*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QDateTime*);
@@ -1286,7 +1223,7 @@ void QDateTimeEdit_timeChanged(QDateTimeEdit* self, QTime* time) {
 	self->timeChanged(*time);
 }
 
-void QDateTimeEdit_connect_timeChanged(QDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) {
+void QDateTimeEdit_connect_timeChanged(VirtualQDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTime*);
@@ -1302,7 +1239,7 @@ void QDateTimeEdit_dateChanged(QDateTimeEdit* self, QDate* date) {
 	self->dateChanged(*date);
 }
 
-void QDateTimeEdit_connect_dateChanged(QDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
+void QDateTimeEdit_connect_dateChanged(VirtualQDateTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QDate*);
@@ -1348,97 +1285,83 @@ struct miqt_string QDateTimeEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QDateTimeEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QDateTimeEdit_virtualbase_metaObject(const VirtualQDateTimeEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::metaObject();
-
+	return (QMetaObject*) self->QDateTimeEdit::metaObject();
 }
 
-void* QDateTimeEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QDateTimeEdit_virtualbase_metacast(VirtualQDateTimeEdit* self, const char* param1) {
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::qt_metacast(param1);
-
+	return self->QDateTimeEdit::qt_metacast(param1);
 }
 
-int QDateTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDateTimeEdit_virtualbase_metacall(VirtualQDateTimeEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDateTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QDateTimeEdit_virtualbase_sizeHint(const void* self) {
+QSize* QDateTimeEdit_virtualbase_sizeHint(const VirtualQDateTimeEdit* self) {
 
-	return new QSize(( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::sizeHint());
-
+	return new QSize(self->QDateTimeEdit::sizeHint());
 }
 
-void QDateTimeEdit_virtualbase_clear(void* self) {
+void QDateTimeEdit_virtualbase_clear(VirtualQDateTimeEdit* self) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::clear();
-
+	self->QDateTimeEdit::clear();
 }
 
-void QDateTimeEdit_virtualbase_stepBy(void* self, int steps) {
+void QDateTimeEdit_virtualbase_stepBy(VirtualQDateTimeEdit* self, int steps) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::stepBy(static_cast<int>(steps));
-
+	self->QDateTimeEdit::stepBy(static_cast<int>(steps));
 }
 
-bool QDateTimeEdit_virtualbase_event(void* self, QEvent* event) {
+bool QDateTimeEdit_virtualbase_event(VirtualQDateTimeEdit* self, QEvent* event) {
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::event(event);
-
+	return self->QDateTimeEdit::event(event);
 }
 
-void QDateTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QDateTimeEdit_virtualbase_keyPressEvent(VirtualQDateTimeEdit* self, QKeyEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::keyPressEvent(event);
-
+	self->QDateTimeEdit::keyPressEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QDateTimeEdit_virtualbase_wheelEvent(VirtualQDateTimeEdit* self, QWheelEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::wheelEvent(event);
-
+	self->QDateTimeEdit::wheelEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QDateTimeEdit_virtualbase_focusInEvent(VirtualQDateTimeEdit* self, QFocusEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::focusInEvent(event);
-
+	self->QDateTimeEdit::focusInEvent(event);
 }
 
-bool QDateTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QDateTimeEdit_virtualbase_focusNextPrevChild(VirtualQDateTimeEdit* self, bool next) {
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::focusNextPrevChild(next);
-
+	return self->QDateTimeEdit::focusNextPrevChild(next);
 }
 
-int QDateTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos) {
+int QDateTimeEdit_virtualbase_validate(const VirtualQDateTimeEdit* self, struct miqt_string input, int* pos) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	QValidator::State _ret = ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::validate(input_QString, static_cast<int&>(*pos));
+	QValidator::State _ret = self->QDateTimeEdit::validate(input_QString, static_cast<int&>(*pos));
 	return static_cast<int>(_ret);
-
 }
 
-void QDateTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input) {
+void QDateTimeEdit_virtualbase_fixup(const VirtualQDateTimeEdit* self, struct miqt_string input) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::fixup(input_QString);
-
+	self->QDateTimeEdit::fixup(input_QString);
 }
 
-QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text) {
+QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const VirtualQDateTimeEdit* self, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 
-	return new QDateTime(( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::dateTimeFromText(text_QString));
-
+	return new QDateTime(self->QDateTimeEdit::dateTimeFromText(text_QString));
 }
 
-struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt) {
+struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const VirtualQDateTimeEdit* self, QDateTime* dt) {
 
-	QString _ret = ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::textFromDateTime(*dt);
+	QString _ret = self->QDateTimeEdit::textFromDateTime(*dt);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
 	struct miqt_string _ms;
@@ -1446,345 +1369,273 @@ struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const void* self, 
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
-
 }
 
-int QDateTimeEdit_virtualbase_stepEnabled(const void* self) {
+int QDateTimeEdit_virtualbase_stepEnabled(const VirtualQDateTimeEdit* self) {
 
-	VirtualQDateTimeEdit::StepEnabled _ret = ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::stepEnabled();
+	VirtualQDateTimeEdit::StepEnabled _ret = self->QDateTimeEdit::stepEnabled();
 	return static_cast<int>(_ret);
-
 }
 
-void QDateTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QDateTimeEdit_virtualbase_mousePressEvent(VirtualQDateTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::mousePressEvent(event);
-
+	self->QDateTimeEdit::mousePressEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QDateTimeEdit_virtualbase_paintEvent(VirtualQDateTimeEdit* self, QPaintEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::paintEvent(event);
-
+	self->QDateTimeEdit::paintEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option) {
+void QDateTimeEdit_virtualbase_initStyleOption(const VirtualQDateTimeEdit* self, QStyleOptionSpinBox* option) {
 
-	( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::initStyleOption(option);
-
+	self->QDateTimeEdit::initStyleOption(option);
 }
 
-QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const VirtualQDateTimeEdit* self) {
 
-	return new QSize(( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::minimumSizeHint());
-
+	return new QSize(self->QDateTimeEdit::minimumSizeHint());
 }
 
-QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const VirtualQDateTimeEdit* self, int param1) {
 
-	return new QVariant(( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QDateTimeEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-void QDateTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QDateTimeEdit_virtualbase_resizeEvent(VirtualQDateTimeEdit* self, QResizeEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::resizeEvent(event);
-
+	self->QDateTimeEdit::resizeEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QDateTimeEdit_virtualbase_keyReleaseEvent(VirtualQDateTimeEdit* self, QKeyEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::keyReleaseEvent(event);
-
+	self->QDateTimeEdit::keyReleaseEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QDateTimeEdit_virtualbase_focusOutEvent(VirtualQDateTimeEdit* self, QFocusEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::focusOutEvent(event);
-
+	self->QDateTimeEdit::focusOutEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QDateTimeEdit_virtualbase_contextMenuEvent(VirtualQDateTimeEdit* self, QContextMenuEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::contextMenuEvent(event);
-
+	self->QDateTimeEdit::contextMenuEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_changeEvent(void* self, QEvent* event) {
+void QDateTimeEdit_virtualbase_changeEvent(VirtualQDateTimeEdit* self, QEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::changeEvent(event);
-
+	self->QDateTimeEdit::changeEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QDateTimeEdit_virtualbase_closeEvent(VirtualQDateTimeEdit* self, QCloseEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::closeEvent(event);
-
+	self->QDateTimeEdit::closeEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QDateTimeEdit_virtualbase_hideEvent(VirtualQDateTimeEdit* self, QHideEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::hideEvent(event);
-
+	self->QDateTimeEdit::hideEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QDateTimeEdit_virtualbase_mouseReleaseEvent(VirtualQDateTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::mouseReleaseEvent(event);
-
+	self->QDateTimeEdit::mouseReleaseEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QDateTimeEdit_virtualbase_mouseMoveEvent(VirtualQDateTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::mouseMoveEvent(event);
-
+	self->QDateTimeEdit::mouseMoveEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDateTimeEdit_virtualbase_timerEvent(VirtualQDateTimeEdit* self, QTimerEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::timerEvent(event);
-
+	self->QDateTimeEdit::timerEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QDateTimeEdit_virtualbase_showEvent(VirtualQDateTimeEdit* self, QShowEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::showEvent(event);
-
+	self->QDateTimeEdit::showEvent(event);
 }
 
-int QDateTimeEdit_virtualbase_devType(const void* self) {
+int QDateTimeEdit_virtualbase_devType(const VirtualQDateTimeEdit* self) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::devType();
-
+	return self->QDateTimeEdit::devType();
 }
 
-void QDateTimeEdit_virtualbase_setVisible(void* self, bool visible) {
+void QDateTimeEdit_virtualbase_setVisible(VirtualQDateTimeEdit* self, bool visible) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::setVisible(visible);
-
+	self->QDateTimeEdit::setVisible(visible);
 }
 
-int QDateTimeEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QDateTimeEdit_virtualbase_heightForWidth(const VirtualQDateTimeEdit* self, int param1) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QDateTimeEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QDateTimeEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QDateTimeEdit_virtualbase_hasHeightForWidth(const VirtualQDateTimeEdit* self) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::hasHeightForWidth();
-
+	return self->QDateTimeEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const VirtualQDateTimeEdit* self) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::paintEngine();
-
+	return self->QDateTimeEdit::paintEngine();
 }
 
-void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(VirtualQDateTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::mouseDoubleClickEvent(event);
-
+	self->QDateTimeEdit::mouseDoubleClickEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QDateTimeEdit_virtualbase_enterEvent(VirtualQDateTimeEdit* self, QEnterEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::enterEvent(event);
-
+	self->QDateTimeEdit::enterEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QDateTimeEdit_virtualbase_leaveEvent(VirtualQDateTimeEdit* self, QEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::leaveEvent(event);
-
+	self->QDateTimeEdit::leaveEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QDateTimeEdit_virtualbase_moveEvent(VirtualQDateTimeEdit* self, QMoveEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::moveEvent(event);
-
+	self->QDateTimeEdit::moveEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QDateTimeEdit_virtualbase_tabletEvent(VirtualQDateTimeEdit* self, QTabletEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::tabletEvent(event);
-
+	self->QDateTimeEdit::tabletEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QDateTimeEdit_virtualbase_actionEvent(VirtualQDateTimeEdit* self, QActionEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::actionEvent(event);
-
+	self->QDateTimeEdit::actionEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QDateTimeEdit_virtualbase_dragEnterEvent(VirtualQDateTimeEdit* self, QDragEnterEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::dragEnterEvent(event);
-
+	self->QDateTimeEdit::dragEnterEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QDateTimeEdit_virtualbase_dragMoveEvent(VirtualQDateTimeEdit* self, QDragMoveEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::dragMoveEvent(event);
-
+	self->QDateTimeEdit::dragMoveEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QDateTimeEdit_virtualbase_dragLeaveEvent(VirtualQDateTimeEdit* self, QDragLeaveEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::dragLeaveEvent(event);
-
+	self->QDateTimeEdit::dragLeaveEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QDateTimeEdit_virtualbase_dropEvent(VirtualQDateTimeEdit* self, QDropEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::dropEvent(event);
-
+	self->QDateTimeEdit::dropEvent(event);
 }
 
-bool QDateTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QDateTimeEdit_virtualbase_nativeEvent(VirtualQDateTimeEdit* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QDateTimeEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QDateTimeEdit_virtualbase_metric(const void* self, int param1) {
+int QDateTimeEdit_virtualbase_metric(const VirtualQDateTimeEdit* self, int param1) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::metric(static_cast<VirtualQDateTimeEdit::PaintDeviceMetric>(param1));
-
+	return self->QDateTimeEdit::metric(static_cast<VirtualQDateTimeEdit::PaintDeviceMetric>(param1));
 }
 
-void QDateTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QDateTimeEdit_virtualbase_initPainter(const VirtualQDateTimeEdit* self, QPainter* painter) {
 
-	( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::initPainter(painter);
-
+	self->QDateTimeEdit::initPainter(painter);
 }
 
-QPaintDevice* QDateTimeEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QDateTimeEdit_virtualbase_redirected(const VirtualQDateTimeEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::redirected(offset);
-
+	return self->QDateTimeEdit::redirected(offset);
 }
 
-QPainter* QDateTimeEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QDateTimeEdit_virtualbase_sharedPainter(const VirtualQDateTimeEdit* self) {
 
-	return ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::sharedPainter();
-
+	return self->QDateTimeEdit::sharedPainter();
 }
 
-void QDateTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QDateTimeEdit_virtualbase_inputMethodEvent(VirtualQDateTimeEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::inputMethodEvent(param1);
-
+	self->QDateTimeEdit::inputMethodEvent(param1);
 }
 
-bool QDateTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDateTimeEdit_virtualbase_eventFilter(VirtualQDateTimeEdit* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::eventFilter(watched, event);
-
+	return self->QDateTimeEdit::eventFilter(watched, event);
 }
 
-void QDateTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDateTimeEdit_virtualbase_childEvent(VirtualQDateTimeEdit* self, QChildEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::childEvent(event);
-
+	self->QDateTimeEdit::childEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QDateTimeEdit_virtualbase_customEvent(VirtualQDateTimeEdit* self, QEvent* event) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::customEvent(event);
-
+	self->QDateTimeEdit::customEvent(event);
 }
 
-void QDateTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDateTimeEdit_virtualbase_connectNotify(VirtualQDateTimeEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::connectNotify(*signal);
-
+	self->QDateTimeEdit::connectNotify(*signal);
 }
 
-void QDateTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDateTimeEdit_virtualbase_disconnectNotify(VirtualQDateTimeEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::disconnectNotify(*signal);
-
+	self->QDateTimeEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDateTimeEdit_staticMetaObject() { return &QDateTimeEdit::staticMetaObject; }
-QLineEdit* QDateTimeEdit_protectedbase_lineEdit(const void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->lineEdit();
 
+const QDateTimeEdit_VTable* QDateTimeEdit_vtbl(const VirtualQDateTimeEdit* self) { return self->vtbl; }
+void* QDateTimeEdit_vdata(const VirtualQDateTimeEdit* self) { return self->vdata; }
+void QDateTimeEdit_setVdata(VirtualQDateTimeEdit* self, void* vdata) { self->vdata = vdata; }
+
+QLineEdit* QDateTimeEdit_protectedbase_lineEdit(const VirtualQDateTimeEdit* self) {
+	return self->lineEdit();
 }
 
-void QDateTimeEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	self_cast->setLineEdit(edit);
-
+void QDateTimeEdit_protectedbase_setLineEdit(VirtualQDateTimeEdit* self, QLineEdit* edit) {
+	self->setLineEdit(edit);
 }
 
-void QDateTimeEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QDateTimeEdit_protectedbase_updateMicroFocus(VirtualQDateTimeEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QDateTimeEdit_protectedbase_create(void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	self_cast->create();
-
+void QDateTimeEdit_protectedbase_create(VirtualQDateTimeEdit* self) {
+	self->create();
 }
 
-void QDateTimeEdit_protectedbase_destroy(void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QDateTimeEdit_protectedbase_destroy(VirtualQDateTimeEdit* self) {
+	self->destroy();
 }
 
-bool QDateTimeEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QDateTimeEdit_protectedbase_focusNextChild(VirtualQDateTimeEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QDateTimeEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QDateTimeEdit_protectedbase_focusPreviousChild(VirtualQDateTimeEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QDateTimeEdit_protectedbase_sender(const void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QDateTimeEdit_protectedbase_sender(const VirtualQDateTimeEdit* self) {
+	return self->sender();
 }
 
-int QDateTimeEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDateTimeEdit_protectedbase_senderSignalIndex(const VirtualQDateTimeEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QDateTimeEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDateTimeEdit_protectedbase_receivers(const VirtualQDateTimeEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDateTimeEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDateTimeEdit* self_cast = static_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDateTimeEdit_protectedbase_isSignalConnected(const VirtualQDateTimeEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDateTimeEdit_delete(QDateTimeEdit* self) {
@@ -1792,31 +1643,33 @@ void QDateTimeEdit_delete(QDateTimeEdit* self) {
 }
 
 class VirtualQTimeEdit final : public QTimeEdit {
-	struct QTimeEdit_VTable* vtbl;
+	const QTimeEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTimeEdit_VTable* QTimeEdit_vtbl(const VirtualQTimeEdit* self);
+	friend void* QTimeEdit_vdata(const VirtualQTimeEdit* self);
+	friend void QTimeEdit_setVdata(VirtualQTimeEdit* self, void* vdata);
 
-	VirtualQTimeEdit(struct QTimeEdit_VTable* vtbl, QWidget* parent): QTimeEdit(parent), vtbl(vtbl) {};
-	VirtualQTimeEdit(struct QTimeEdit_VTable* vtbl): QTimeEdit(), vtbl(vtbl) {};
-	VirtualQTimeEdit(struct QTimeEdit_VTable* vtbl, QTime time): QTimeEdit(time), vtbl(vtbl) {};
-	VirtualQTimeEdit(struct QTimeEdit_VTable* vtbl, QTime time, QWidget* parent): QTimeEdit(time, parent), vtbl(vtbl) {};
+	VirtualQTimeEdit(const QTimeEdit_VTable* vtbl, void* vdata, QWidget* parent): QTimeEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTimeEdit(const QTimeEdit_VTable* vtbl, void* vdata): QTimeEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTimeEdit(const QTimeEdit_VTable* vtbl, void* vdata, QTime time): QTimeEdit(time), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTimeEdit(const QTimeEdit_VTable* vtbl, void* vdata, QTime time, QWidget* parent): QTimeEdit(time, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTimeEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTimeEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTimeEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTimeEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTimeEdit_virtualbase_metaObject(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTimeEdit::qt_metacast(param1);
@@ -1824,14 +1677,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTimeEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTimeEdit_virtualbase_metacast(VirtualQTimeEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTimeEdit::qt_metacall(param1, param2, param3);
@@ -1842,30 +1694,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTimeEdit_virtualbase_metacall(VirtualQTimeEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QTimeEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTimeEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QTimeEdit_virtualbase_sizeHint(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
 		if (vtbl->clear == 0) {
 			QTimeEdit::clear();
@@ -1873,13 +1723,12 @@ public:
 		}
 
 
-		vtbl->clear(vtbl, this);
+		vtbl->clear(this);
 
 	}
 
-	friend void QTimeEdit_virtualbase_clear(void* self);
+	friend void QTimeEdit_virtualbase_clear(VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
 		if (vtbl->stepBy == 0) {
 			QTimeEdit::stepBy(steps);
@@ -1888,13 +1737,12 @@ public:
 
 		int sigval1 = steps;
 
-		vtbl->stepBy(vtbl, this, sigval1);
+		vtbl->stepBy(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_stepBy(void* self, int steps);
+	friend void QTimeEdit_virtualbase_stepBy(VirtualQTimeEdit* self, int steps);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTimeEdit::event(event);
@@ -1902,14 +1750,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimeEdit_virtualbase_event(void* self, QEvent* event);
+	friend bool QTimeEdit_virtualbase_event(VirtualQTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QTimeEdit::keyPressEvent(event);
@@ -1918,13 +1765,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QTimeEdit_virtualbase_keyPressEvent(VirtualQTimeEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QTimeEdit::wheelEvent(event);
@@ -1933,13 +1779,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QTimeEdit_virtualbase_wheelEvent(VirtualQTimeEdit* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QTimeEdit::focusInEvent(event);
@@ -1948,13 +1793,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QTimeEdit_virtualbase_focusInEvent(VirtualQTimeEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QTimeEdit::focusNextPrevChild(next);
@@ -1962,14 +1806,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QTimeEdit_virtualbase_focusNextPrevChild(VirtualQTimeEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
 		if (vtbl->validate == 0) {
 			return QTimeEdit::validate(input, pos);
@@ -1985,14 +1828,13 @@ public:
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
 
-		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
+	friend int QTimeEdit_virtualbase_validate(const VirtualQTimeEdit* self, struct miqt_string input, int* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
 		if (vtbl->fixup == 0) {
 			QTimeEdit::fixup(input);
@@ -2008,13 +1850,12 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 
-		vtbl->fixup(vtbl, this, sigval1);
+		vtbl->fixup(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input);
+	friend void QTimeEdit_virtualbase_fixup(const VirtualQTimeEdit* self, struct miqt_string input);
 
-	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
 		if (vtbl->dateTimeFromText == 0) {
 			return QTimeEdit::dateTimeFromText(text);
@@ -2029,16 +1870,15 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 
-		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		QDateTime* callback_return_value = vtbl->dateTimeFromText(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
+	friend QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const VirtualQTimeEdit* self, struct miqt_string text);
 
-	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
 		if (vtbl->textFromDateTime == 0) {
 			return QTimeEdit::textFromDateTime(dt);
@@ -2048,30 +1888,28 @@ public:
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
 
-		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
+		struct miqt_string callback_return_value = vtbl->textFromDateTime(this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
 
-	friend struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
+	friend struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const VirtualQTimeEdit* self, QDateTime* dt);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
 		if (vtbl->stepEnabled == 0) {
 			return QTimeEdit::stepEnabled();
 		}
 
 
-		int callback_return_value = vtbl->stepEnabled(vtbl, this);
+		int callback_return_value = vtbl->stepEnabled(this);
 
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_stepEnabled(const void* self);
+	friend int QTimeEdit_virtualbase_stepEnabled(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QTimeEdit::mousePressEvent(event);
@@ -2080,13 +1918,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QTimeEdit_virtualbase_mousePressEvent(VirtualQTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QTimeEdit::paintEvent(event);
@@ -2095,13 +1932,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QTimeEdit_virtualbase_paintEvent(VirtualQTimeEdit* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionSpinBox* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QTimeEdit::initStyleOption(option);
@@ -2110,29 +1946,27 @@ public:
 
 		QStyleOptionSpinBox* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option);
+	friend void QTimeEdit_virtualbase_initStyleOption(const VirtualQTimeEdit* self, QStyleOptionSpinBox* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QTimeEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTimeEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QTimeEdit_virtualbase_minimumSizeHint(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QTimeEdit::inputMethodQuery(param1);
@@ -2141,16 +1975,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QTimeEdit_virtualbase_inputMethodQuery(const VirtualQTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QTimeEdit::resizeEvent(event);
@@ -2159,13 +1992,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QTimeEdit_virtualbase_resizeEvent(VirtualQTimeEdit* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QTimeEdit::keyReleaseEvent(event);
@@ -2174,13 +2006,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QTimeEdit_virtualbase_keyReleaseEvent(VirtualQTimeEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QTimeEdit::focusOutEvent(event);
@@ -2189,13 +2020,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QTimeEdit_virtualbase_focusOutEvent(VirtualQTimeEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QTimeEdit::contextMenuEvent(event);
@@ -2204,13 +2034,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QTimeEdit_virtualbase_contextMenuEvent(VirtualQTimeEdit* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QTimeEdit::changeEvent(event);
@@ -2219,13 +2048,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QTimeEdit_virtualbase_changeEvent(VirtualQTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QTimeEdit::closeEvent(event);
@@ -2234,13 +2062,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QTimeEdit_virtualbase_closeEvent(VirtualQTimeEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QTimeEdit::hideEvent(event);
@@ -2249,13 +2076,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QTimeEdit_virtualbase_hideEvent(VirtualQTimeEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QTimeEdit::mouseReleaseEvent(event);
@@ -2264,13 +2090,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QTimeEdit_virtualbase_mouseReleaseEvent(VirtualQTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QTimeEdit::mouseMoveEvent(event);
@@ -2279,13 +2104,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QTimeEdit_virtualbase_mouseMoveEvent(VirtualQTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTimeEdit::timerEvent(event);
@@ -2294,13 +2118,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTimeEdit_virtualbase_timerEvent(VirtualQTimeEdit* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QTimeEdit::showEvent(event);
@@ -2309,27 +2132,25 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QTimeEdit_virtualbase_showEvent(VirtualQTimeEdit* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QTimeEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_devType(const void* self);
+	friend int QTimeEdit_virtualbase_devType(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QTimeEdit::setVisible(visible);
@@ -2338,13 +2159,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QTimeEdit_virtualbase_setVisible(VirtualQTimeEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QTimeEdit::heightForWidth(param1);
@@ -2352,42 +2172,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QTimeEdit_virtualbase_heightForWidth(const VirtualQTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QTimeEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimeEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QTimeEdit_virtualbase_hasHeightForWidth(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QTimeEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QTimeEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QTimeEdit_virtualbase_paintEngine(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QTimeEdit::mouseDoubleClickEvent(event);
@@ -2396,13 +2213,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QTimeEdit_virtualbase_mouseDoubleClickEvent(VirtualQTimeEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QTimeEdit::enterEvent(event);
@@ -2411,13 +2227,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QTimeEdit_virtualbase_enterEvent(VirtualQTimeEdit* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QTimeEdit::leaveEvent(event);
@@ -2426,13 +2241,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QTimeEdit_virtualbase_leaveEvent(VirtualQTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QTimeEdit::moveEvent(event);
@@ -2441,13 +2255,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QTimeEdit_virtualbase_moveEvent(VirtualQTimeEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QTimeEdit::tabletEvent(event);
@@ -2456,13 +2269,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QTimeEdit_virtualbase_tabletEvent(VirtualQTimeEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QTimeEdit::actionEvent(event);
@@ -2471,13 +2283,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QTimeEdit_virtualbase_actionEvent(VirtualQTimeEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QTimeEdit::dragEnterEvent(event);
@@ -2486,13 +2297,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QTimeEdit_virtualbase_dragEnterEvent(VirtualQTimeEdit* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QTimeEdit::dragMoveEvent(event);
@@ -2501,13 +2311,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QTimeEdit_virtualbase_dragMoveEvent(VirtualQTimeEdit* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QTimeEdit::dragLeaveEvent(event);
@@ -2516,13 +2325,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QTimeEdit_virtualbase_dragLeaveEvent(VirtualQTimeEdit* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QTimeEdit::dropEvent(event);
@@ -2531,13 +2339,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QTimeEdit_virtualbase_dropEvent(VirtualQTimeEdit* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QTimeEdit::nativeEvent(eventType, message, result);
@@ -2553,14 +2360,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QTimeEdit_virtualbase_nativeEvent(VirtualQTimeEdit* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QTimeEdit::metric(param1);
@@ -2569,14 +2375,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTimeEdit_virtualbase_metric(const void* self, int param1);
+	friend int QTimeEdit_virtualbase_metric(const VirtualQTimeEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QTimeEdit::initPainter(painter);
@@ -2585,13 +2390,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QTimeEdit_virtualbase_initPainter(const VirtualQTimeEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QTimeEdit::redirected(offset);
@@ -2599,28 +2403,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QTimeEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QTimeEdit_virtualbase_redirected(const VirtualQTimeEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QTimeEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QTimeEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QTimeEdit_virtualbase_sharedPainter(const VirtualQTimeEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QTimeEdit::inputMethodEvent(param1);
@@ -2629,13 +2431,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QTimeEdit_virtualbase_inputMethodEvent(VirtualQTimeEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTimeEdit::eventFilter(watched, event);
@@ -2644,14 +2445,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTimeEdit_virtualbase_eventFilter(VirtualQTimeEdit* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTimeEdit::childEvent(event);
@@ -2660,13 +2460,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTimeEdit_virtualbase_childEvent(VirtualQTimeEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTimeEdit::customEvent(event);
@@ -2675,13 +2474,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTimeEdit_virtualbase_customEvent(VirtualQTimeEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTimeEdit::connectNotify(signal);
@@ -2692,13 +2490,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTimeEdit_virtualbase_connectNotify(VirtualQTimeEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTimeEdit::disconnectNotify(signal);
@@ -2709,40 +2506,40 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTimeEdit_virtualbase_disconnectNotify(VirtualQTimeEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QLineEdit* QTimeEdit_protectedbase_lineEdit(const void* self);
-	friend void QTimeEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit);
-	friend void QTimeEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QTimeEdit_protectedbase_create(void* self);
-	friend void QTimeEdit_protectedbase_destroy(void* self);
-	friend bool QTimeEdit_protectedbase_focusNextChild(void* self);
-	friend bool QTimeEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QTimeEdit_protectedbase_sender(const void* self);
-	friend int QTimeEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QTimeEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTimeEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QLineEdit* QTimeEdit_protectedbase_lineEdit(const VirtualQTimeEdit* self);
+	friend void QTimeEdit_protectedbase_setLineEdit(VirtualQTimeEdit* self, QLineEdit* edit);
+	friend void QTimeEdit_protectedbase_updateMicroFocus(VirtualQTimeEdit* self);
+	friend void QTimeEdit_protectedbase_create(VirtualQTimeEdit* self);
+	friend void QTimeEdit_protectedbase_destroy(VirtualQTimeEdit* self);
+	friend bool QTimeEdit_protectedbase_focusNextChild(VirtualQTimeEdit* self);
+	friend bool QTimeEdit_protectedbase_focusPreviousChild(VirtualQTimeEdit* self);
+	friend QObject* QTimeEdit_protectedbase_sender(const VirtualQTimeEdit* self);
+	friend int QTimeEdit_protectedbase_senderSignalIndex(const VirtualQTimeEdit* self);
+	friend int QTimeEdit_protectedbase_receivers(const VirtualQTimeEdit* self, const char* signal);
+	friend bool QTimeEdit_protectedbase_isSignalConnected(const VirtualQTimeEdit* self, QMetaMethod* signal);
 };
 
-QTimeEdit* QTimeEdit_new(struct QTimeEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQTimeEdit(vtbl, parent);
+VirtualQTimeEdit* QTimeEdit_new(const QTimeEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQTimeEdit(vtbl, vdata, parent);
 }
 
-QTimeEdit* QTimeEdit_new2(struct QTimeEdit_VTable* vtbl) {
-	return new VirtualQTimeEdit(vtbl);
+VirtualQTimeEdit* QTimeEdit_new2(const QTimeEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQTimeEdit(vtbl, vdata);
 }
 
-QTimeEdit* QTimeEdit_new3(struct QTimeEdit_VTable* vtbl, QTime* time) {
-	return new VirtualQTimeEdit(vtbl, *time);
+VirtualQTimeEdit* QTimeEdit_new3(const QTimeEdit_VTable* vtbl, void* vdata, QTime* time) {
+	return new VirtualQTimeEdit(vtbl, vdata, *time);
 }
 
-QTimeEdit* QTimeEdit_new4(struct QTimeEdit_VTable* vtbl, QTime* time, QWidget* parent) {
-	return new VirtualQTimeEdit(vtbl, *time, parent);
+VirtualQTimeEdit* QTimeEdit_new4(const QTimeEdit_VTable* vtbl, void* vdata, QTime* time, QWidget* parent) {
+	return new VirtualQTimeEdit(vtbl, vdata, *time, parent);
 }
 
 void QTimeEdit_virtbase(QTimeEdit* src, QDateTimeEdit** outptr_QDateTimeEdit) {
@@ -2776,7 +2573,7 @@ void QTimeEdit_userTimeChanged(QTimeEdit* self, QTime* time) {
 	self->userTimeChanged(*time);
 }
 
-void QTimeEdit_connect_userTimeChanged(QTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) {
+void QTimeEdit_connect_userTimeChanged(VirtualQTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTime*);
@@ -2810,97 +2607,83 @@ struct miqt_string QTimeEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QTimeEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QTimeEdit_virtualbase_metaObject(const VirtualQTimeEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::metaObject();
-
+	return (QMetaObject*) self->QTimeEdit::metaObject();
 }
 
-void* QTimeEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QTimeEdit_virtualbase_metacast(VirtualQTimeEdit* self, const char* param1) {
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::qt_metacast(param1);
-
+	return self->QTimeEdit::qt_metacast(param1);
 }
 
-int QTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTimeEdit_virtualbase_metacall(VirtualQTimeEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QTimeEdit_virtualbase_sizeHint(const void* self) {
+QSize* QTimeEdit_virtualbase_sizeHint(const VirtualQTimeEdit* self) {
 
-	return new QSize(( (const VirtualQTimeEdit*)(self) )->QTimeEdit::sizeHint());
-
+	return new QSize(self->QTimeEdit::sizeHint());
 }
 
-void QTimeEdit_virtualbase_clear(void* self) {
+void QTimeEdit_virtualbase_clear(VirtualQTimeEdit* self) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::clear();
-
+	self->QTimeEdit::clear();
 }
 
-void QTimeEdit_virtualbase_stepBy(void* self, int steps) {
+void QTimeEdit_virtualbase_stepBy(VirtualQTimeEdit* self, int steps) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::stepBy(static_cast<int>(steps));
-
+	self->QTimeEdit::stepBy(static_cast<int>(steps));
 }
 
-bool QTimeEdit_virtualbase_event(void* self, QEvent* event) {
+bool QTimeEdit_virtualbase_event(VirtualQTimeEdit* self, QEvent* event) {
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::event(event);
-
+	return self->QTimeEdit::event(event);
 }
 
-void QTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QTimeEdit_virtualbase_keyPressEvent(VirtualQTimeEdit* self, QKeyEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::keyPressEvent(event);
-
+	self->QTimeEdit::keyPressEvent(event);
 }
 
-void QTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QTimeEdit_virtualbase_wheelEvent(VirtualQTimeEdit* self, QWheelEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::wheelEvent(event);
-
+	self->QTimeEdit::wheelEvent(event);
 }
 
-void QTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QTimeEdit_virtualbase_focusInEvent(VirtualQTimeEdit* self, QFocusEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::focusInEvent(event);
-
+	self->QTimeEdit::focusInEvent(event);
 }
 
-bool QTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QTimeEdit_virtualbase_focusNextPrevChild(VirtualQTimeEdit* self, bool next) {
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::focusNextPrevChild(next);
-
+	return self->QTimeEdit::focusNextPrevChild(next);
 }
 
-int QTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos) {
+int QTimeEdit_virtualbase_validate(const VirtualQTimeEdit* self, struct miqt_string input, int* pos) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	QValidator::State _ret = ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::validate(input_QString, static_cast<int&>(*pos));
+	QValidator::State _ret = self->QTimeEdit::validate(input_QString, static_cast<int&>(*pos));
 	return static_cast<int>(_ret);
-
 }
 
-void QTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input) {
+void QTimeEdit_virtualbase_fixup(const VirtualQTimeEdit* self, struct miqt_string input) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	( (const VirtualQTimeEdit*)(self) )->QTimeEdit::fixup(input_QString);
-
+	self->QTimeEdit::fixup(input_QString);
 }
 
-QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text) {
+QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const VirtualQTimeEdit* self, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 
-	return new QDateTime(( (const VirtualQTimeEdit*)(self) )->QTimeEdit::dateTimeFromText(text_QString));
-
+	return new QDateTime(self->QTimeEdit::dateTimeFromText(text_QString));
 }
 
-struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt) {
+struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const VirtualQTimeEdit* self, QDateTime* dt) {
 
-	QString _ret = ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::textFromDateTime(*dt);
+	QString _ret = self->QTimeEdit::textFromDateTime(*dt);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
 	struct miqt_string _ms;
@@ -2908,345 +2691,273 @@ struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const void* self, QDat
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
-
 }
 
-int QTimeEdit_virtualbase_stepEnabled(const void* self) {
+int QTimeEdit_virtualbase_stepEnabled(const VirtualQTimeEdit* self) {
 
-	VirtualQTimeEdit::StepEnabled _ret = ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::stepEnabled();
+	VirtualQTimeEdit::StepEnabled _ret = self->QTimeEdit::stepEnabled();
 	return static_cast<int>(_ret);
-
 }
 
-void QTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QTimeEdit_virtualbase_mousePressEvent(VirtualQTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::mousePressEvent(event);
-
+	self->QTimeEdit::mousePressEvent(event);
 }
 
-void QTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QTimeEdit_virtualbase_paintEvent(VirtualQTimeEdit* self, QPaintEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::paintEvent(event);
-
+	self->QTimeEdit::paintEvent(event);
 }
 
-void QTimeEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option) {
+void QTimeEdit_virtualbase_initStyleOption(const VirtualQTimeEdit* self, QStyleOptionSpinBox* option) {
 
-	( (const VirtualQTimeEdit*)(self) )->QTimeEdit::initStyleOption(option);
-
+	self->QTimeEdit::initStyleOption(option);
 }
 
-QSize* QTimeEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QTimeEdit_virtualbase_minimumSizeHint(const VirtualQTimeEdit* self) {
 
-	return new QSize(( (const VirtualQTimeEdit*)(self) )->QTimeEdit::minimumSizeHint());
-
+	return new QSize(self->QTimeEdit::minimumSizeHint());
 }
 
-QVariant* QTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QTimeEdit_virtualbase_inputMethodQuery(const VirtualQTimeEdit* self, int param1) {
 
-	return new QVariant(( (const VirtualQTimeEdit*)(self) )->QTimeEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QTimeEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-void QTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QTimeEdit_virtualbase_resizeEvent(VirtualQTimeEdit* self, QResizeEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::resizeEvent(event);
-
+	self->QTimeEdit::resizeEvent(event);
 }
 
-void QTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QTimeEdit_virtualbase_keyReleaseEvent(VirtualQTimeEdit* self, QKeyEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::keyReleaseEvent(event);
-
+	self->QTimeEdit::keyReleaseEvent(event);
 }
 
-void QTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QTimeEdit_virtualbase_focusOutEvent(VirtualQTimeEdit* self, QFocusEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::focusOutEvent(event);
-
+	self->QTimeEdit::focusOutEvent(event);
 }
 
-void QTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QTimeEdit_virtualbase_contextMenuEvent(VirtualQTimeEdit* self, QContextMenuEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::contextMenuEvent(event);
-
+	self->QTimeEdit::contextMenuEvent(event);
 }
 
-void QTimeEdit_virtualbase_changeEvent(void* self, QEvent* event) {
+void QTimeEdit_virtualbase_changeEvent(VirtualQTimeEdit* self, QEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::changeEvent(event);
-
+	self->QTimeEdit::changeEvent(event);
 }
 
-void QTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QTimeEdit_virtualbase_closeEvent(VirtualQTimeEdit* self, QCloseEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::closeEvent(event);
-
+	self->QTimeEdit::closeEvent(event);
 }
 
-void QTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QTimeEdit_virtualbase_hideEvent(VirtualQTimeEdit* self, QHideEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::hideEvent(event);
-
+	self->QTimeEdit::hideEvent(event);
 }
 
-void QTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QTimeEdit_virtualbase_mouseReleaseEvent(VirtualQTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::mouseReleaseEvent(event);
-
+	self->QTimeEdit::mouseReleaseEvent(event);
 }
 
-void QTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QTimeEdit_virtualbase_mouseMoveEvent(VirtualQTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::mouseMoveEvent(event);
-
+	self->QTimeEdit::mouseMoveEvent(event);
 }
 
-void QTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTimeEdit_virtualbase_timerEvent(VirtualQTimeEdit* self, QTimerEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::timerEvent(event);
-
+	self->QTimeEdit::timerEvent(event);
 }
 
-void QTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QTimeEdit_virtualbase_showEvent(VirtualQTimeEdit* self, QShowEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::showEvent(event);
-
+	self->QTimeEdit::showEvent(event);
 }
 
-int QTimeEdit_virtualbase_devType(const void* self) {
+int QTimeEdit_virtualbase_devType(const VirtualQTimeEdit* self) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::devType();
-
+	return self->QTimeEdit::devType();
 }
 
-void QTimeEdit_virtualbase_setVisible(void* self, bool visible) {
+void QTimeEdit_virtualbase_setVisible(VirtualQTimeEdit* self, bool visible) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::setVisible(visible);
-
+	self->QTimeEdit::setVisible(visible);
 }
 
-int QTimeEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QTimeEdit_virtualbase_heightForWidth(const VirtualQTimeEdit* self, int param1) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QTimeEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QTimeEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QTimeEdit_virtualbase_hasHeightForWidth(const VirtualQTimeEdit* self) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::hasHeightForWidth();
-
+	return self->QTimeEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QTimeEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QTimeEdit_virtualbase_paintEngine(const VirtualQTimeEdit* self) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::paintEngine();
-
+	return self->QTimeEdit::paintEngine();
 }
 
-void QTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QTimeEdit_virtualbase_mouseDoubleClickEvent(VirtualQTimeEdit* self, QMouseEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::mouseDoubleClickEvent(event);
-
+	self->QTimeEdit::mouseDoubleClickEvent(event);
 }
 
-void QTimeEdit_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QTimeEdit_virtualbase_enterEvent(VirtualQTimeEdit* self, QEnterEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::enterEvent(event);
-
+	self->QTimeEdit::enterEvent(event);
 }
 
-void QTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QTimeEdit_virtualbase_leaveEvent(VirtualQTimeEdit* self, QEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::leaveEvent(event);
-
+	self->QTimeEdit::leaveEvent(event);
 }
 
-void QTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QTimeEdit_virtualbase_moveEvent(VirtualQTimeEdit* self, QMoveEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::moveEvent(event);
-
+	self->QTimeEdit::moveEvent(event);
 }
 
-void QTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QTimeEdit_virtualbase_tabletEvent(VirtualQTimeEdit* self, QTabletEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::tabletEvent(event);
-
+	self->QTimeEdit::tabletEvent(event);
 }
 
-void QTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QTimeEdit_virtualbase_actionEvent(VirtualQTimeEdit* self, QActionEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::actionEvent(event);
-
+	self->QTimeEdit::actionEvent(event);
 }
 
-void QTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QTimeEdit_virtualbase_dragEnterEvent(VirtualQTimeEdit* self, QDragEnterEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::dragEnterEvent(event);
-
+	self->QTimeEdit::dragEnterEvent(event);
 }
 
-void QTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QTimeEdit_virtualbase_dragMoveEvent(VirtualQTimeEdit* self, QDragMoveEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::dragMoveEvent(event);
-
+	self->QTimeEdit::dragMoveEvent(event);
 }
 
-void QTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QTimeEdit_virtualbase_dragLeaveEvent(VirtualQTimeEdit* self, QDragLeaveEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::dragLeaveEvent(event);
-
+	self->QTimeEdit::dragLeaveEvent(event);
 }
 
-void QTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QTimeEdit_virtualbase_dropEvent(VirtualQTimeEdit* self, QDropEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::dropEvent(event);
-
+	self->QTimeEdit::dropEvent(event);
 }
 
-bool QTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QTimeEdit_virtualbase_nativeEvent(VirtualQTimeEdit* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QTimeEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QTimeEdit_virtualbase_metric(const void* self, int param1) {
+int QTimeEdit_virtualbase_metric(const VirtualQTimeEdit* self, int param1) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::metric(static_cast<VirtualQTimeEdit::PaintDeviceMetric>(param1));
-
+	return self->QTimeEdit::metric(static_cast<VirtualQTimeEdit::PaintDeviceMetric>(param1));
 }
 
-void QTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QTimeEdit_virtualbase_initPainter(const VirtualQTimeEdit* self, QPainter* painter) {
 
-	( (const VirtualQTimeEdit*)(self) )->QTimeEdit::initPainter(painter);
-
+	self->QTimeEdit::initPainter(painter);
 }
 
-QPaintDevice* QTimeEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QTimeEdit_virtualbase_redirected(const VirtualQTimeEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::redirected(offset);
-
+	return self->QTimeEdit::redirected(offset);
 }
 
-QPainter* QTimeEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QTimeEdit_virtualbase_sharedPainter(const VirtualQTimeEdit* self) {
 
-	return ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::sharedPainter();
-
+	return self->QTimeEdit::sharedPainter();
 }
 
-void QTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QTimeEdit_virtualbase_inputMethodEvent(VirtualQTimeEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::inputMethodEvent(param1);
-
+	self->QTimeEdit::inputMethodEvent(param1);
 }
 
-bool QTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTimeEdit_virtualbase_eventFilter(VirtualQTimeEdit* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::eventFilter(watched, event);
-
+	return self->QTimeEdit::eventFilter(watched, event);
 }
 
-void QTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTimeEdit_virtualbase_childEvent(VirtualQTimeEdit* self, QChildEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::childEvent(event);
-
+	self->QTimeEdit::childEvent(event);
 }
 
-void QTimeEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QTimeEdit_virtualbase_customEvent(VirtualQTimeEdit* self, QEvent* event) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::customEvent(event);
-
+	self->QTimeEdit::customEvent(event);
 }
 
-void QTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTimeEdit_virtualbase_connectNotify(VirtualQTimeEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::connectNotify(*signal);
-
+	self->QTimeEdit::connectNotify(*signal);
 }
 
-void QTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTimeEdit_virtualbase_disconnectNotify(VirtualQTimeEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQTimeEdit*)(self) )->QTimeEdit::disconnectNotify(*signal);
-
+	self->QTimeEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTimeEdit_staticMetaObject() { return &QTimeEdit::staticMetaObject; }
-QLineEdit* QTimeEdit_protectedbase_lineEdit(const void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->lineEdit();
 
+const QTimeEdit_VTable* QTimeEdit_vtbl(const VirtualQTimeEdit* self) { return self->vtbl; }
+void* QTimeEdit_vdata(const VirtualQTimeEdit* self) { return self->vdata; }
+void QTimeEdit_setVdata(VirtualQTimeEdit* self, void* vdata) { self->vdata = vdata; }
+
+QLineEdit* QTimeEdit_protectedbase_lineEdit(const VirtualQTimeEdit* self) {
+	return self->lineEdit();
 }
 
-void QTimeEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	self_cast->setLineEdit(edit);
-
+void QTimeEdit_protectedbase_setLineEdit(VirtualQTimeEdit* self, QLineEdit* edit) {
+	self->setLineEdit(edit);
 }
 
-void QTimeEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QTimeEdit_protectedbase_updateMicroFocus(VirtualQTimeEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QTimeEdit_protectedbase_create(void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	self_cast->create();
-
+void QTimeEdit_protectedbase_create(VirtualQTimeEdit* self) {
+	self->create();
 }
 
-void QTimeEdit_protectedbase_destroy(void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QTimeEdit_protectedbase_destroy(VirtualQTimeEdit* self) {
+	self->destroy();
 }
 
-bool QTimeEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QTimeEdit_protectedbase_focusNextChild(VirtualQTimeEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QTimeEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QTimeEdit_protectedbase_focusPreviousChild(VirtualQTimeEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QTimeEdit_protectedbase_sender(const void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QTimeEdit_protectedbase_sender(const VirtualQTimeEdit* self) {
+	return self->sender();
 }
 
-int QTimeEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTimeEdit_protectedbase_senderSignalIndex(const VirtualQTimeEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QTimeEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTimeEdit_protectedbase_receivers(const VirtualQTimeEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTimeEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTimeEdit* self_cast = static_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTimeEdit_protectedbase_isSignalConnected(const VirtualQTimeEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTimeEdit_delete(QTimeEdit* self) {
@@ -3254,31 +2965,33 @@ void QTimeEdit_delete(QTimeEdit* self) {
 }
 
 class VirtualQDateEdit final : public QDateEdit {
-	struct QDateEdit_VTable* vtbl;
+	const QDateEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDateEdit_VTable* QDateEdit_vtbl(const VirtualQDateEdit* self);
+	friend void* QDateEdit_vdata(const VirtualQDateEdit* self);
+	friend void QDateEdit_setVdata(VirtualQDateEdit* self, void* vdata);
 
-	VirtualQDateEdit(struct QDateEdit_VTable* vtbl, QWidget* parent): QDateEdit(parent), vtbl(vtbl) {};
-	VirtualQDateEdit(struct QDateEdit_VTable* vtbl): QDateEdit(), vtbl(vtbl) {};
-	VirtualQDateEdit(struct QDateEdit_VTable* vtbl, QDate date): QDateEdit(date), vtbl(vtbl) {};
-	VirtualQDateEdit(struct QDateEdit_VTable* vtbl, QDate date, QWidget* parent): QDateEdit(date, parent), vtbl(vtbl) {};
+	VirtualQDateEdit(const QDateEdit_VTable* vtbl, void* vdata, QWidget* parent): QDateEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateEdit(const QDateEdit_VTable* vtbl, void* vdata): QDateEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateEdit(const QDateEdit_VTable* vtbl, void* vdata, QDate date): QDateEdit(date), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDateEdit(const QDateEdit_VTable* vtbl, void* vdata, QDate date, QWidget* parent): QDateEdit(date, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDateEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDateEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDateEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDateEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDateEdit_virtualbase_metaObject(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDateEdit::qt_metacast(param1);
@@ -3286,14 +2999,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDateEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDateEdit_virtualbase_metacast(VirtualQDateEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDateEdit::qt_metacall(param1, param2, param3);
@@ -3304,30 +3016,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDateEdit_virtualbase_metacall(VirtualQDateEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QDateEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDateEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QDateEdit_virtualbase_sizeHint(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
 		if (vtbl->clear == 0) {
 			QDateEdit::clear();
@@ -3335,13 +3045,12 @@ public:
 		}
 
 
-		vtbl->clear(vtbl, this);
+		vtbl->clear(this);
 
 	}
 
-	friend void QDateEdit_virtualbase_clear(void* self);
+	friend void QDateEdit_virtualbase_clear(VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
 		if (vtbl->stepBy == 0) {
 			QDateEdit::stepBy(steps);
@@ -3350,13 +3059,12 @@ public:
 
 		int sigval1 = steps;
 
-		vtbl->stepBy(vtbl, this, sigval1);
+		vtbl->stepBy(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_stepBy(void* self, int steps);
+	friend void QDateEdit_virtualbase_stepBy(VirtualQDateEdit* self, int steps);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDateEdit::event(event);
@@ -3364,14 +3072,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateEdit_virtualbase_event(void* self, QEvent* event);
+	friend bool QDateEdit_virtualbase_event(VirtualQDateEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QDateEdit::keyPressEvent(event);
@@ -3380,13 +3087,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QDateEdit_virtualbase_keyPressEvent(VirtualQDateEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QDateEdit::wheelEvent(event);
@@ -3395,13 +3101,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QDateEdit_virtualbase_wheelEvent(VirtualQDateEdit* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QDateEdit::focusInEvent(event);
@@ -3410,13 +3115,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QDateEdit_virtualbase_focusInEvent(VirtualQDateEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QDateEdit::focusNextPrevChild(next);
@@ -3424,14 +3128,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QDateEdit_virtualbase_focusNextPrevChild(VirtualQDateEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
 		if (vtbl->validate == 0) {
 			return QDateEdit::validate(input, pos);
@@ -3447,14 +3150,13 @@ public:
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
 
-		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
+	friend int QDateEdit_virtualbase_validate(const VirtualQDateEdit* self, struct miqt_string input, int* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
 		if (vtbl->fixup == 0) {
 			QDateEdit::fixup(input);
@@ -3470,13 +3172,12 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 
-		vtbl->fixup(vtbl, this, sigval1);
+		vtbl->fixup(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_fixup(const void* self, struct miqt_string input);
+	friend void QDateEdit_virtualbase_fixup(const VirtualQDateEdit* self, struct miqt_string input);
 
-	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
 		if (vtbl->dateTimeFromText == 0) {
 			return QDateEdit::dateTimeFromText(text);
@@ -3491,16 +3192,15 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 
-		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		QDateTime* callback_return_value = vtbl->dateTimeFromText(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QDateTime* QDateEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
+	friend QDateTime* QDateEdit_virtualbase_dateTimeFromText(const VirtualQDateEdit* self, struct miqt_string text);
 
-	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
 		if (vtbl->textFromDateTime == 0) {
 			return QDateEdit::textFromDateTime(dt);
@@ -3510,30 +3210,28 @@ public:
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
 
-		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
+		struct miqt_string callback_return_value = vtbl->textFromDateTime(this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
 
-	friend struct miqt_string QDateEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
+	friend struct miqt_string QDateEdit_virtualbase_textFromDateTime(const VirtualQDateEdit* self, QDateTime* dt);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
 		if (vtbl->stepEnabled == 0) {
 			return QDateEdit::stepEnabled();
 		}
 
 
-		int callback_return_value = vtbl->stepEnabled(vtbl, this);
+		int callback_return_value = vtbl->stepEnabled(this);
 
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_stepEnabled(const void* self);
+	friend int QDateEdit_virtualbase_stepEnabled(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QDateEdit::mousePressEvent(event);
@@ -3542,13 +3240,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QDateEdit_virtualbase_mousePressEvent(VirtualQDateEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QDateEdit::paintEvent(event);
@@ -3557,13 +3254,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QDateEdit_virtualbase_paintEvent(VirtualQDateEdit* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionSpinBox* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QDateEdit::initStyleOption(option);
@@ -3572,29 +3268,27 @@ public:
 
 		QStyleOptionSpinBox* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option);
+	friend void QDateEdit_virtualbase_initStyleOption(const VirtualQDateEdit* self, QStyleOptionSpinBox* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QDateEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDateEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QDateEdit_virtualbase_minimumSizeHint(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QDateEdit::inputMethodQuery(param1);
@@ -3603,16 +3297,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QDateEdit_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QDateEdit_virtualbase_inputMethodQuery(const VirtualQDateEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QDateEdit::resizeEvent(event);
@@ -3621,13 +3314,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QDateEdit_virtualbase_resizeEvent(VirtualQDateEdit* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QDateEdit::keyReleaseEvent(event);
@@ -3636,13 +3328,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QDateEdit_virtualbase_keyReleaseEvent(VirtualQDateEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QDateEdit::focusOutEvent(event);
@@ -3651,13 +3342,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QDateEdit_virtualbase_focusOutEvent(VirtualQDateEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QDateEdit::contextMenuEvent(event);
@@ -3666,13 +3356,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QDateEdit_virtualbase_contextMenuEvent(VirtualQDateEdit* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QDateEdit::changeEvent(event);
@@ -3681,13 +3370,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QDateEdit_virtualbase_changeEvent(VirtualQDateEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QDateEdit::closeEvent(event);
@@ -3696,13 +3384,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QDateEdit_virtualbase_closeEvent(VirtualQDateEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QDateEdit::hideEvent(event);
@@ -3711,13 +3398,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QDateEdit_virtualbase_hideEvent(VirtualQDateEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QDateEdit::mouseReleaseEvent(event);
@@ -3726,13 +3412,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QDateEdit_virtualbase_mouseReleaseEvent(VirtualQDateEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QDateEdit::mouseMoveEvent(event);
@@ -3741,13 +3426,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QDateEdit_virtualbase_mouseMoveEvent(VirtualQDateEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDateEdit::timerEvent(event);
@@ -3756,13 +3440,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDateEdit_virtualbase_timerEvent(VirtualQDateEdit* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QDateEdit::showEvent(event);
@@ -3771,27 +3454,25 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QDateEdit_virtualbase_showEvent(VirtualQDateEdit* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QDateEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_devType(const void* self);
+	friend int QDateEdit_virtualbase_devType(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QDateEdit::setVisible(visible);
@@ -3800,13 +3481,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QDateEdit_virtualbase_setVisible(VirtualQDateEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QDateEdit::heightForWidth(param1);
@@ -3814,42 +3494,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QDateEdit_virtualbase_heightForWidth(const VirtualQDateEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QDateEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QDateEdit_virtualbase_hasHeightForWidth(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QDateEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QDateEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QDateEdit_virtualbase_paintEngine(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QDateEdit::mouseDoubleClickEvent(event);
@@ -3858,13 +3535,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QDateEdit_virtualbase_mouseDoubleClickEvent(VirtualQDateEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QDateEdit::enterEvent(event);
@@ -3873,13 +3549,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QDateEdit_virtualbase_enterEvent(VirtualQDateEdit* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QDateEdit::leaveEvent(event);
@@ -3888,13 +3563,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QDateEdit_virtualbase_leaveEvent(VirtualQDateEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QDateEdit::moveEvent(event);
@@ -3903,13 +3577,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QDateEdit_virtualbase_moveEvent(VirtualQDateEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QDateEdit::tabletEvent(event);
@@ -3918,13 +3591,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QDateEdit_virtualbase_tabletEvent(VirtualQDateEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QDateEdit::actionEvent(event);
@@ -3933,13 +3605,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QDateEdit_virtualbase_actionEvent(VirtualQDateEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QDateEdit::dragEnterEvent(event);
@@ -3948,13 +3619,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QDateEdit_virtualbase_dragEnterEvent(VirtualQDateEdit* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QDateEdit::dragMoveEvent(event);
@@ -3963,13 +3633,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QDateEdit_virtualbase_dragMoveEvent(VirtualQDateEdit* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QDateEdit::dragLeaveEvent(event);
@@ -3978,13 +3647,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QDateEdit_virtualbase_dragLeaveEvent(VirtualQDateEdit* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QDateEdit::dropEvent(event);
@@ -3993,13 +3661,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QDateEdit_virtualbase_dropEvent(VirtualQDateEdit* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QDateEdit::nativeEvent(eventType, message, result);
@@ -4015,14 +3682,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QDateEdit_virtualbase_nativeEvent(VirtualQDateEdit* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QDateEdit::metric(param1);
@@ -4031,14 +3697,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDateEdit_virtualbase_metric(const void* self, int param1);
+	friend int QDateEdit_virtualbase_metric(const VirtualQDateEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QDateEdit::initPainter(painter);
@@ -4047,13 +3712,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QDateEdit_virtualbase_initPainter(const VirtualQDateEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QDateEdit::redirected(offset);
@@ -4061,28 +3725,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QDateEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QDateEdit_virtualbase_redirected(const VirtualQDateEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QDateEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QDateEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QDateEdit_virtualbase_sharedPainter(const VirtualQDateEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QDateEdit::inputMethodEvent(param1);
@@ -4091,13 +3753,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QDateEdit_virtualbase_inputMethodEvent(VirtualQDateEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDateEdit::eventFilter(watched, event);
@@ -4106,14 +3767,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDateEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDateEdit_virtualbase_eventFilter(VirtualQDateEdit* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDateEdit::childEvent(event);
@@ -4122,13 +3782,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDateEdit_virtualbase_childEvent(VirtualQDateEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDateEdit::customEvent(event);
@@ -4137,13 +3796,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDateEdit_virtualbase_customEvent(VirtualQDateEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDateEdit::connectNotify(signal);
@@ -4154,13 +3812,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDateEdit_virtualbase_connectNotify(VirtualQDateEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDateEdit::disconnectNotify(signal);
@@ -4171,40 +3828,40 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDateEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDateEdit_virtualbase_disconnectNotify(VirtualQDateEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QLineEdit* QDateEdit_protectedbase_lineEdit(const void* self);
-	friend void QDateEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit);
-	friend void QDateEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QDateEdit_protectedbase_create(void* self);
-	friend void QDateEdit_protectedbase_destroy(void* self);
-	friend bool QDateEdit_protectedbase_focusNextChild(void* self);
-	friend bool QDateEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QDateEdit_protectedbase_sender(const void* self);
-	friend int QDateEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QDateEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDateEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QLineEdit* QDateEdit_protectedbase_lineEdit(const VirtualQDateEdit* self);
+	friend void QDateEdit_protectedbase_setLineEdit(VirtualQDateEdit* self, QLineEdit* edit);
+	friend void QDateEdit_protectedbase_updateMicroFocus(VirtualQDateEdit* self);
+	friend void QDateEdit_protectedbase_create(VirtualQDateEdit* self);
+	friend void QDateEdit_protectedbase_destroy(VirtualQDateEdit* self);
+	friend bool QDateEdit_protectedbase_focusNextChild(VirtualQDateEdit* self);
+	friend bool QDateEdit_protectedbase_focusPreviousChild(VirtualQDateEdit* self);
+	friend QObject* QDateEdit_protectedbase_sender(const VirtualQDateEdit* self);
+	friend int QDateEdit_protectedbase_senderSignalIndex(const VirtualQDateEdit* self);
+	friend int QDateEdit_protectedbase_receivers(const VirtualQDateEdit* self, const char* signal);
+	friend bool QDateEdit_protectedbase_isSignalConnected(const VirtualQDateEdit* self, QMetaMethod* signal);
 };
 
-QDateEdit* QDateEdit_new(struct QDateEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQDateEdit(vtbl, parent);
+VirtualQDateEdit* QDateEdit_new(const QDateEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQDateEdit(vtbl, vdata, parent);
 }
 
-QDateEdit* QDateEdit_new2(struct QDateEdit_VTable* vtbl) {
-	return new VirtualQDateEdit(vtbl);
+VirtualQDateEdit* QDateEdit_new2(const QDateEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQDateEdit(vtbl, vdata);
 }
 
-QDateEdit* QDateEdit_new3(struct QDateEdit_VTable* vtbl, QDate* date) {
-	return new VirtualQDateEdit(vtbl, *date);
+VirtualQDateEdit* QDateEdit_new3(const QDateEdit_VTable* vtbl, void* vdata, QDate* date) {
+	return new VirtualQDateEdit(vtbl, vdata, *date);
 }
 
-QDateEdit* QDateEdit_new4(struct QDateEdit_VTable* vtbl, QDate* date, QWidget* parent) {
-	return new VirtualQDateEdit(vtbl, *date, parent);
+VirtualQDateEdit* QDateEdit_new4(const QDateEdit_VTable* vtbl, void* vdata, QDate* date, QWidget* parent) {
+	return new VirtualQDateEdit(vtbl, vdata, *date, parent);
 }
 
 void QDateEdit_virtbase(QDateEdit* src, QDateTimeEdit** outptr_QDateTimeEdit) {
@@ -4238,7 +3895,7 @@ void QDateEdit_userDateChanged(QDateEdit* self, QDate* date) {
 	self->userDateChanged(*date);
 }
 
-void QDateEdit_connect_userDateChanged(QDateEdit* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
+void QDateEdit_connect_userDateChanged(VirtualQDateEdit* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QDate*);
@@ -4272,97 +3929,83 @@ struct miqt_string QDateEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QDateEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QDateEdit_virtualbase_metaObject(const VirtualQDateEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQDateEdit*)(self) )->QDateEdit::metaObject();
-
+	return (QMetaObject*) self->QDateEdit::metaObject();
 }
 
-void* QDateEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QDateEdit_virtualbase_metacast(VirtualQDateEdit* self, const char* param1) {
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::qt_metacast(param1);
-
+	return self->QDateEdit::qt_metacast(param1);
 }
 
-int QDateEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDateEdit_virtualbase_metacall(VirtualQDateEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDateEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QDateEdit_virtualbase_sizeHint(const void* self) {
+QSize* QDateEdit_virtualbase_sizeHint(const VirtualQDateEdit* self) {
 
-	return new QSize(( (const VirtualQDateEdit*)(self) )->QDateEdit::sizeHint());
-
+	return new QSize(self->QDateEdit::sizeHint());
 }
 
-void QDateEdit_virtualbase_clear(void* self) {
+void QDateEdit_virtualbase_clear(VirtualQDateEdit* self) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::clear();
-
+	self->QDateEdit::clear();
 }
 
-void QDateEdit_virtualbase_stepBy(void* self, int steps) {
+void QDateEdit_virtualbase_stepBy(VirtualQDateEdit* self, int steps) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::stepBy(static_cast<int>(steps));
-
+	self->QDateEdit::stepBy(static_cast<int>(steps));
 }
 
-bool QDateEdit_virtualbase_event(void* self, QEvent* event) {
+bool QDateEdit_virtualbase_event(VirtualQDateEdit* self, QEvent* event) {
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::event(event);
-
+	return self->QDateEdit::event(event);
 }
 
-void QDateEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QDateEdit_virtualbase_keyPressEvent(VirtualQDateEdit* self, QKeyEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::keyPressEvent(event);
-
+	self->QDateEdit::keyPressEvent(event);
 }
 
-void QDateEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QDateEdit_virtualbase_wheelEvent(VirtualQDateEdit* self, QWheelEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::wheelEvent(event);
-
+	self->QDateEdit::wheelEvent(event);
 }
 
-void QDateEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QDateEdit_virtualbase_focusInEvent(VirtualQDateEdit* self, QFocusEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::focusInEvent(event);
-
+	self->QDateEdit::focusInEvent(event);
 }
 
-bool QDateEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QDateEdit_virtualbase_focusNextPrevChild(VirtualQDateEdit* self, bool next) {
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::focusNextPrevChild(next);
-
+	return self->QDateEdit::focusNextPrevChild(next);
 }
 
-int QDateEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos) {
+int QDateEdit_virtualbase_validate(const VirtualQDateEdit* self, struct miqt_string input, int* pos) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	QValidator::State _ret = ( (const VirtualQDateEdit*)(self) )->QDateEdit::validate(input_QString, static_cast<int&>(*pos));
+	QValidator::State _ret = self->QDateEdit::validate(input_QString, static_cast<int&>(*pos));
 	return static_cast<int>(_ret);
-
 }
 
-void QDateEdit_virtualbase_fixup(const void* self, struct miqt_string input) {
+void QDateEdit_virtualbase_fixup(const VirtualQDateEdit* self, struct miqt_string input) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
-	( (const VirtualQDateEdit*)(self) )->QDateEdit::fixup(input_QString);
-
+	self->QDateEdit::fixup(input_QString);
 }
 
-QDateTime* QDateEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text) {
+QDateTime* QDateEdit_virtualbase_dateTimeFromText(const VirtualQDateEdit* self, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 
-	return new QDateTime(( (const VirtualQDateEdit*)(self) )->QDateEdit::dateTimeFromText(text_QString));
-
+	return new QDateTime(self->QDateEdit::dateTimeFromText(text_QString));
 }
 
-struct miqt_string QDateEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt) {
+struct miqt_string QDateEdit_virtualbase_textFromDateTime(const VirtualQDateEdit* self, QDateTime* dt) {
 
-	QString _ret = ( (const VirtualQDateEdit*)(self) )->QDateEdit::textFromDateTime(*dt);
+	QString _ret = self->QDateEdit::textFromDateTime(*dt);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
 	struct miqt_string _ms;
@@ -4370,345 +4013,273 @@ struct miqt_string QDateEdit_virtualbase_textFromDateTime(const void* self, QDat
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
-
 }
 
-int QDateEdit_virtualbase_stepEnabled(const void* self) {
+int QDateEdit_virtualbase_stepEnabled(const VirtualQDateEdit* self) {
 
-	VirtualQDateEdit::StepEnabled _ret = ( (const VirtualQDateEdit*)(self) )->QDateEdit::stepEnabled();
+	VirtualQDateEdit::StepEnabled _ret = self->QDateEdit::stepEnabled();
 	return static_cast<int>(_ret);
-
 }
 
-void QDateEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QDateEdit_virtualbase_mousePressEvent(VirtualQDateEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::mousePressEvent(event);
-
+	self->QDateEdit::mousePressEvent(event);
 }
 
-void QDateEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QDateEdit_virtualbase_paintEvent(VirtualQDateEdit* self, QPaintEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::paintEvent(event);
-
+	self->QDateEdit::paintEvent(event);
 }
 
-void QDateEdit_virtualbase_initStyleOption(const void* self, QStyleOptionSpinBox* option) {
+void QDateEdit_virtualbase_initStyleOption(const VirtualQDateEdit* self, QStyleOptionSpinBox* option) {
 
-	( (const VirtualQDateEdit*)(self) )->QDateEdit::initStyleOption(option);
-
+	self->QDateEdit::initStyleOption(option);
 }
 
-QSize* QDateEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QDateEdit_virtualbase_minimumSizeHint(const VirtualQDateEdit* self) {
 
-	return new QSize(( (const VirtualQDateEdit*)(self) )->QDateEdit::minimumSizeHint());
-
+	return new QSize(self->QDateEdit::minimumSizeHint());
 }
 
-QVariant* QDateEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QDateEdit_virtualbase_inputMethodQuery(const VirtualQDateEdit* self, int param1) {
 
-	return new QVariant(( (const VirtualQDateEdit*)(self) )->QDateEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QDateEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-void QDateEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QDateEdit_virtualbase_resizeEvent(VirtualQDateEdit* self, QResizeEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::resizeEvent(event);
-
+	self->QDateEdit::resizeEvent(event);
 }
 
-void QDateEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QDateEdit_virtualbase_keyReleaseEvent(VirtualQDateEdit* self, QKeyEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::keyReleaseEvent(event);
-
+	self->QDateEdit::keyReleaseEvent(event);
 }
 
-void QDateEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QDateEdit_virtualbase_focusOutEvent(VirtualQDateEdit* self, QFocusEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::focusOutEvent(event);
-
+	self->QDateEdit::focusOutEvent(event);
 }
 
-void QDateEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QDateEdit_virtualbase_contextMenuEvent(VirtualQDateEdit* self, QContextMenuEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::contextMenuEvent(event);
-
+	self->QDateEdit::contextMenuEvent(event);
 }
 
-void QDateEdit_virtualbase_changeEvent(void* self, QEvent* event) {
+void QDateEdit_virtualbase_changeEvent(VirtualQDateEdit* self, QEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::changeEvent(event);
-
+	self->QDateEdit::changeEvent(event);
 }
 
-void QDateEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QDateEdit_virtualbase_closeEvent(VirtualQDateEdit* self, QCloseEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::closeEvent(event);
-
+	self->QDateEdit::closeEvent(event);
 }
 
-void QDateEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QDateEdit_virtualbase_hideEvent(VirtualQDateEdit* self, QHideEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::hideEvent(event);
-
+	self->QDateEdit::hideEvent(event);
 }
 
-void QDateEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QDateEdit_virtualbase_mouseReleaseEvent(VirtualQDateEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::mouseReleaseEvent(event);
-
+	self->QDateEdit::mouseReleaseEvent(event);
 }
 
-void QDateEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QDateEdit_virtualbase_mouseMoveEvent(VirtualQDateEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::mouseMoveEvent(event);
-
+	self->QDateEdit::mouseMoveEvent(event);
 }
 
-void QDateEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDateEdit_virtualbase_timerEvent(VirtualQDateEdit* self, QTimerEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::timerEvent(event);
-
+	self->QDateEdit::timerEvent(event);
 }
 
-void QDateEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QDateEdit_virtualbase_showEvent(VirtualQDateEdit* self, QShowEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::showEvent(event);
-
+	self->QDateEdit::showEvent(event);
 }
 
-int QDateEdit_virtualbase_devType(const void* self) {
+int QDateEdit_virtualbase_devType(const VirtualQDateEdit* self) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::devType();
-
+	return self->QDateEdit::devType();
 }
 
-void QDateEdit_virtualbase_setVisible(void* self, bool visible) {
+void QDateEdit_virtualbase_setVisible(VirtualQDateEdit* self, bool visible) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::setVisible(visible);
-
+	self->QDateEdit::setVisible(visible);
 }
 
-int QDateEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QDateEdit_virtualbase_heightForWidth(const VirtualQDateEdit* self, int param1) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QDateEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QDateEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QDateEdit_virtualbase_hasHeightForWidth(const VirtualQDateEdit* self) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::hasHeightForWidth();
-
+	return self->QDateEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QDateEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QDateEdit_virtualbase_paintEngine(const VirtualQDateEdit* self) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::paintEngine();
-
+	return self->QDateEdit::paintEngine();
 }
 
-void QDateEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QDateEdit_virtualbase_mouseDoubleClickEvent(VirtualQDateEdit* self, QMouseEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::mouseDoubleClickEvent(event);
-
+	self->QDateEdit::mouseDoubleClickEvent(event);
 }
 
-void QDateEdit_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QDateEdit_virtualbase_enterEvent(VirtualQDateEdit* self, QEnterEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::enterEvent(event);
-
+	self->QDateEdit::enterEvent(event);
 }
 
-void QDateEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QDateEdit_virtualbase_leaveEvent(VirtualQDateEdit* self, QEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::leaveEvent(event);
-
+	self->QDateEdit::leaveEvent(event);
 }
 
-void QDateEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QDateEdit_virtualbase_moveEvent(VirtualQDateEdit* self, QMoveEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::moveEvent(event);
-
+	self->QDateEdit::moveEvent(event);
 }
 
-void QDateEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QDateEdit_virtualbase_tabletEvent(VirtualQDateEdit* self, QTabletEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::tabletEvent(event);
-
+	self->QDateEdit::tabletEvent(event);
 }
 
-void QDateEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QDateEdit_virtualbase_actionEvent(VirtualQDateEdit* self, QActionEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::actionEvent(event);
-
+	self->QDateEdit::actionEvent(event);
 }
 
-void QDateEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QDateEdit_virtualbase_dragEnterEvent(VirtualQDateEdit* self, QDragEnterEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::dragEnterEvent(event);
-
+	self->QDateEdit::dragEnterEvent(event);
 }
 
-void QDateEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QDateEdit_virtualbase_dragMoveEvent(VirtualQDateEdit* self, QDragMoveEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::dragMoveEvent(event);
-
+	self->QDateEdit::dragMoveEvent(event);
 }
 
-void QDateEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QDateEdit_virtualbase_dragLeaveEvent(VirtualQDateEdit* self, QDragLeaveEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::dragLeaveEvent(event);
-
+	self->QDateEdit::dragLeaveEvent(event);
 }
 
-void QDateEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QDateEdit_virtualbase_dropEvent(VirtualQDateEdit* self, QDropEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::dropEvent(event);
-
+	self->QDateEdit::dropEvent(event);
 }
 
-bool QDateEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QDateEdit_virtualbase_nativeEvent(VirtualQDateEdit* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QDateEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QDateEdit_virtualbase_metric(const void* self, int param1) {
+int QDateEdit_virtualbase_metric(const VirtualQDateEdit* self, int param1) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::metric(static_cast<VirtualQDateEdit::PaintDeviceMetric>(param1));
-
+	return self->QDateEdit::metric(static_cast<VirtualQDateEdit::PaintDeviceMetric>(param1));
 }
 
-void QDateEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QDateEdit_virtualbase_initPainter(const VirtualQDateEdit* self, QPainter* painter) {
 
-	( (const VirtualQDateEdit*)(self) )->QDateEdit::initPainter(painter);
-
+	self->QDateEdit::initPainter(painter);
 }
 
-QPaintDevice* QDateEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QDateEdit_virtualbase_redirected(const VirtualQDateEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::redirected(offset);
-
+	return self->QDateEdit::redirected(offset);
 }
 
-QPainter* QDateEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QDateEdit_virtualbase_sharedPainter(const VirtualQDateEdit* self) {
 
-	return ( (const VirtualQDateEdit*)(self) )->QDateEdit::sharedPainter();
-
+	return self->QDateEdit::sharedPainter();
 }
 
-void QDateEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QDateEdit_virtualbase_inputMethodEvent(VirtualQDateEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::inputMethodEvent(param1);
-
+	self->QDateEdit::inputMethodEvent(param1);
 }
 
-bool QDateEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDateEdit_virtualbase_eventFilter(VirtualQDateEdit* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDateEdit*)(self) )->QDateEdit::eventFilter(watched, event);
-
+	return self->QDateEdit::eventFilter(watched, event);
 }
 
-void QDateEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDateEdit_virtualbase_childEvent(VirtualQDateEdit* self, QChildEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::childEvent(event);
-
+	self->QDateEdit::childEvent(event);
 }
 
-void QDateEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QDateEdit_virtualbase_customEvent(VirtualQDateEdit* self, QEvent* event) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::customEvent(event);
-
+	self->QDateEdit::customEvent(event);
 }
 
-void QDateEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDateEdit_virtualbase_connectNotify(VirtualQDateEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::connectNotify(*signal);
-
+	self->QDateEdit::connectNotify(*signal);
 }
 
-void QDateEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDateEdit_virtualbase_disconnectNotify(VirtualQDateEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQDateEdit*)(self) )->QDateEdit::disconnectNotify(*signal);
-
+	self->QDateEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDateEdit_staticMetaObject() { return &QDateEdit::staticMetaObject; }
-QLineEdit* QDateEdit_protectedbase_lineEdit(const void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->lineEdit();
 
+const QDateEdit_VTable* QDateEdit_vtbl(const VirtualQDateEdit* self) { return self->vtbl; }
+void* QDateEdit_vdata(const VirtualQDateEdit* self) { return self->vdata; }
+void QDateEdit_setVdata(VirtualQDateEdit* self, void* vdata) { self->vdata = vdata; }
+
+QLineEdit* QDateEdit_protectedbase_lineEdit(const VirtualQDateEdit* self) {
+	return self->lineEdit();
 }
 
-void QDateEdit_protectedbase_setLineEdit(void* self, QLineEdit* edit) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	self_cast->setLineEdit(edit);
-
+void QDateEdit_protectedbase_setLineEdit(VirtualQDateEdit* self, QLineEdit* edit) {
+	self->setLineEdit(edit);
 }
 
-void QDateEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QDateEdit_protectedbase_updateMicroFocus(VirtualQDateEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QDateEdit_protectedbase_create(void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	self_cast->create();
-
+void QDateEdit_protectedbase_create(VirtualQDateEdit* self) {
+	self->create();
 }
 
-void QDateEdit_protectedbase_destroy(void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QDateEdit_protectedbase_destroy(VirtualQDateEdit* self) {
+	self->destroy();
 }
 
-bool QDateEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QDateEdit_protectedbase_focusNextChild(VirtualQDateEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QDateEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QDateEdit_protectedbase_focusPreviousChild(VirtualQDateEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QDateEdit_protectedbase_sender(const void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QDateEdit_protectedbase_sender(const VirtualQDateEdit* self) {
+	return self->sender();
 }
 
-int QDateEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDateEdit_protectedbase_senderSignalIndex(const VirtualQDateEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QDateEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDateEdit_protectedbase_receivers(const VirtualQDateEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDateEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDateEdit* self_cast = static_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDateEdit_protectedbase_isSignalConnected(const VirtualQDateEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDateEdit_delete(QDateEdit* self) {

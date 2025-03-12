@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qlockfile.h>
 #include "gen_qlockfile.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QLockFile* QLockFile_new(struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QLockFile(fileName_QString);

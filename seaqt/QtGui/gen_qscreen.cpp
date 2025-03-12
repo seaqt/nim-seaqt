@@ -14,15 +14,6 @@
 #include <QTransform>
 #include <qscreen.h>
 #include "gen_qscreen.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QScreen_virtbase(QScreen* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -430,6 +421,7 @@ QPixmap* QScreen_grabWindow5(QScreen* self, uintptr_t window, int x, int y, int 
 }
 
 const QMetaObject* QScreen_staticMetaObject() { return &QScreen::staticMetaObject; }
+
 void QScreen_delete(QScreen* self) {
 	delete self;
 }

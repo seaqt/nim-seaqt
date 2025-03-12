@@ -7,15 +7,6 @@
 #include <QVariant>
 #include <qfont.h>
 #include "gen_qfont.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFont* QFont_new() {
 	return new QFont();
 }
@@ -505,6 +496,7 @@ void QFont_setStyleHint2(QFont* self, int param1, int param2) {
 }
 
 const QMetaObject* QFont_staticMetaObject() { return &QFont::staticMetaObject; }
+
 void QFont_delete(QFont* self) {
 	delete self;
 }

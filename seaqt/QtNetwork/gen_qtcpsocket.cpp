@@ -15,39 +15,32 @@
 #include <QVariant>
 #include <qtcpsocket.h>
 #include "gen_qtcpsocket.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQTcpSocket final : public QTcpSocket {
-	struct QTcpSocket_VTable* vtbl;
+	const QTcpSocket_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTcpSocket_VTable* QTcpSocket_vtbl(const VirtualQTcpSocket* self);
+	friend void* QTcpSocket_vdata(const VirtualQTcpSocket* self);
+	friend void QTcpSocket_setVdata(VirtualQTcpSocket* self, void* vdata);
 
-	VirtualQTcpSocket(struct QTcpSocket_VTable* vtbl): QTcpSocket(), vtbl(vtbl) {};
-	VirtualQTcpSocket(struct QTcpSocket_VTable* vtbl, QObject* parent): QTcpSocket(parent), vtbl(vtbl) {};
+	VirtualQTcpSocket(const QTcpSocket_VTable* vtbl, void* vdata): QTcpSocket(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTcpSocket(const QTcpSocket_VTable* vtbl, void* vdata, QObject* parent): QTcpSocket(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTcpSocket() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTcpSocket() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTcpSocket::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTcpSocket_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTcpSocket_virtualbase_metaObject(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTcpSocket::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTcpSocket_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTcpSocket_virtualbase_metacast(VirtualQTcpSocket* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTcpSocket::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTcpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTcpSocket_virtualbase_metacall(VirtualQTcpSocket* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resume() override {
 		if (vtbl->resume == 0) {
 			QTcpSocket::resume();
@@ -88,13 +79,12 @@ public:
 		}
 
 
-		vtbl->resume(vtbl, this);
+		vtbl->resume(this);
 
 	}
 
-	friend void QTcpSocket_virtualbase_resume(void* self);
+	friend void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool bind(const QHostAddress& address, quint16 port, QAbstractSocket::BindMode mode) override {
 		if (vtbl->bind == 0) {
 			return QTcpSocket::bind(address, port, mode);
@@ -108,14 +98,13 @@ public:
 		QAbstractSocket::BindMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->bind(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->bind(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_bind(void* self, QHostAddress* address, uint16_t port, int mode);
+	friend bool QTcpSocket_virtualbase_bind(VirtualQTcpSocket* self, QHostAddress* address, uint16_t port, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODeviceBase::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
 		if (vtbl->connectToHost == 0) {
 			QTcpSocket::connectToHost(hostName, port, mode, protocol);
@@ -137,13 +126,12 @@ public:
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
 
-		vtbl->connectToHost(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QTcpSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol);
+	friend void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct miqt_string hostName, uint16_t port, int mode, int protocol);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectFromHost() override {
 		if (vtbl->disconnectFromHost == 0) {
 			QTcpSocket::disconnectFromHost();
@@ -151,41 +139,38 @@ public:
 		}
 
 
-		vtbl->disconnectFromHost(vtbl, this);
+		vtbl->disconnectFromHost(this);
 
 	}
 
-	friend void QTcpSocket_virtualbase_disconnectFromHost(void* self);
+	friend void QTcpSocket_virtualbase_disconnectFromHost(VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
 		if (vtbl->bytesAvailable == 0) {
 			return QTcpSocket::bytesAvailable();
 		}
 
 
-		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
+		long long callback_return_value = vtbl->bytesAvailable(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_bytesAvailable(const void* self);
+	friend long long QTcpSocket_virtualbase_bytesAvailable(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
 		if (vtbl->bytesToWrite == 0) {
 			return QTcpSocket::bytesToWrite();
 		}
 
 
-		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
+		long long callback_return_value = vtbl->bytesToWrite(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_bytesToWrite(const void* self);
+	friend long long QTcpSocket_virtualbase_bytesToWrite(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setReadBufferSize(qint64 size) override {
 		if (vtbl->setReadBufferSize == 0) {
 			QTcpSocket::setReadBufferSize(size);
@@ -195,27 +180,25 @@ public:
 		qint64 size_ret = size;
 		long long sigval1 = static_cast<long long>(size_ret);
 
-		vtbl->setReadBufferSize(vtbl, this, sigval1);
+		vtbl->setReadBufferSize(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_setReadBufferSize(void* self, long long size);
+	friend void QTcpSocket_virtualbase_setReadBufferSize(VirtualQTcpSocket* self, long long size);
 
-	// Subclass to allow providing a Go implementation
 	virtual qintptr socketDescriptor() const override {
 		if (vtbl->socketDescriptor == 0) {
 			return QTcpSocket::socketDescriptor();
 		}
 
 
-		intptr_t callback_return_value = vtbl->socketDescriptor(vtbl, this);
+		intptr_t callback_return_value = vtbl->socketDescriptor(this);
 
 		return (qintptr)(callback_return_value);
 	}
 
-	friend intptr_t QTcpSocket_virtualbase_socketDescriptor(const void* self);
+	friend intptr_t QTcpSocket_virtualbase_socketDescriptor(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketState state, QIODeviceBase::OpenMode openMode) override {
 		if (vtbl->setSocketDescriptor == 0) {
 			return QTcpSocket::setSocketDescriptor(socketDescriptor, state, openMode);
@@ -228,14 +211,13 @@ public:
 		QIODeviceBase::OpenMode openMode_ret = openMode;
 		int sigval3 = static_cast<int>(openMode_ret);
 
-		bool callback_return_value = vtbl->setSocketDescriptor(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setSocketDescriptor(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode);
+	friend bool QTcpSocket_virtualbase_setSocketDescriptor(VirtualQTcpSocket* self, intptr_t socketDescriptor, int state, int openMode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSocketOption(QAbstractSocket::SocketOption option, const QVariant& value) override {
 		if (vtbl->setSocketOption == 0) {
 			QTcpSocket::setSocketOption(option, value);
@@ -248,13 +230,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		vtbl->setSocketOption(vtbl, this, sigval1, sigval2);
+		vtbl->setSocketOption(this, sigval1, sigval2);
 
 	}
 
-	friend void QTcpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
+	friend void QTcpSocket_virtualbase_setSocketOption(VirtualQTcpSocket* self, int option, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant socketOption(QAbstractSocket::SocketOption option) override {
 		if (vtbl->socketOption == 0) {
 			return QTcpSocket::socketOption(option);
@@ -263,16 +244,15 @@ public:
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 
-		QVariant* callback_return_value = vtbl->socketOption(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->socketOption(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTcpSocket_virtualbase_socketOption(void* self, int option);
+	friend QVariant* QTcpSocket_virtualbase_socketOption(VirtualQTcpSocket* self, int option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void close() override {
 		if (vtbl->close == 0) {
 			QTcpSocket::close();
@@ -280,27 +260,25 @@ public:
 		}
 
 
-		vtbl->close(vtbl, this);
+		vtbl->close(this);
 
 	}
 
-	friend void QTcpSocket_virtualbase_close(void* self);
+	friend void QTcpSocket_virtualbase_close(VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
 		if (vtbl->isSequential == 0) {
 			return QTcpSocket::isSequential();
 		}
 
 
-		bool callback_return_value = vtbl->isSequential(vtbl, this);
+		bool callback_return_value = vtbl->isSequential(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_isSequential(const void* self);
+	friend bool QTcpSocket_virtualbase_isSequential(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForConnected(int msecs) override {
 		if (vtbl->waitForConnected == 0) {
 			return QTcpSocket::waitForConnected(msecs);
@@ -308,14 +286,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForConnected(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForConnected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_waitForConnected(void* self, int msecs);
+	friend bool QTcpSocket_virtualbase_waitForConnected(VirtualQTcpSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
 		if (vtbl->waitForReadyRead == 0) {
 			return QTcpSocket::waitForReadyRead(msecs);
@@ -323,14 +300,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_waitForReadyRead(void* self, int msecs);
+	friend bool QTcpSocket_virtualbase_waitForReadyRead(VirtualQTcpSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
 		if (vtbl->waitForBytesWritten == 0) {
 			return QTcpSocket::waitForBytesWritten(msecs);
@@ -338,14 +314,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_waitForBytesWritten(void* self, int msecs);
+	friend bool QTcpSocket_virtualbase_waitForBytesWritten(VirtualQTcpSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForDisconnected(int msecs) override {
 		if (vtbl->waitForDisconnected == 0) {
 			return QTcpSocket::waitForDisconnected(msecs);
@@ -353,14 +328,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForDisconnected(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForDisconnected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_waitForDisconnected(void* self, int msecs);
+	friend bool QTcpSocket_virtualbase_waitForDisconnected(VirtualQTcpSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
 		if (vtbl->readData == 0) {
 			return QTcpSocket::readData(data, maxlen);
@@ -370,14 +344,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_readData(void* self, char* data, long long maxlen);
+	friend long long QTcpSocket_virtualbase_readData(VirtualQTcpSocket* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
 		if (vtbl->readLineData == 0) {
 			return QTcpSocket::readLineData(data, maxlen);
@@ -387,14 +360,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_readLineData(void* self, char* data, long long maxlen);
+	friend long long QTcpSocket_virtualbase_readLineData(VirtualQTcpSocket* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 skipData(qint64 maxSize) override {
 		if (vtbl->skipData == 0) {
 			return QTcpSocket::skipData(maxSize);
@@ -403,14 +375,13 @@ public:
 		qint64 maxSize_ret = maxSize;
 		long long sigval1 = static_cast<long long>(maxSize_ret);
 
-		long long callback_return_value = vtbl->skipData(vtbl, this, sigval1);
+		long long callback_return_value = vtbl->skipData(this, sigval1);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_skipData(void* self, long long maxSize);
+	friend long long QTcpSocket_virtualbase_skipData(VirtualQTcpSocket* self, long long maxSize);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
 		if (vtbl->writeData == 0) {
 			return QTcpSocket::writeData(data, len);
@@ -420,14 +391,13 @@ public:
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
 
-		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_writeData(void* self, const char* data, long long len);
+	friend long long QTcpSocket_virtualbase_writeData(VirtualQTcpSocket* self, const char* data, long long len);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODeviceBase::OpenMode mode) override {
 		if (vtbl->open == 0) {
 			return QTcpSocket::open(mode);
@@ -436,42 +406,39 @@ public:
 		QIODeviceBase::OpenMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->open(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_open(void* self, int mode);
+	friend bool QTcpSocket_virtualbase_open(VirtualQTcpSocket* self, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
 		if (vtbl->pos == 0) {
 			return QTcpSocket::pos();
 		}
 
 
-		long long callback_return_value = vtbl->pos(vtbl, this);
+		long long callback_return_value = vtbl->pos(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_pos(const void* self);
+	friend long long QTcpSocket_virtualbase_pos(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
 			return QTcpSocket::size();
 		}
 
 
-		long long callback_return_value = vtbl->size(vtbl, this);
+		long long callback_return_value = vtbl->size(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QTcpSocket_virtualbase_size(const void* self);
+	friend long long QTcpSocket_virtualbase_size(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
 		if (vtbl->seek == 0) {
 			return QTcpSocket::seek(pos);
@@ -480,56 +447,52 @@ public:
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
 
-		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->seek(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_seek(void* self, long long pos);
+	friend bool QTcpSocket_virtualbase_seek(VirtualQTcpSocket* self, long long pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
 		if (vtbl->atEnd == 0) {
 			return QTcpSocket::atEnd();
 		}
 
 
-		bool callback_return_value = vtbl->atEnd(vtbl, this);
+		bool callback_return_value = vtbl->atEnd(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_atEnd(const void* self);
+	friend bool QTcpSocket_virtualbase_atEnd(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
 		if (vtbl->reset == 0) {
 			return QTcpSocket::reset();
 		}
 
 
-		bool callback_return_value = vtbl->reset(vtbl, this);
+		bool callback_return_value = vtbl->reset(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_reset(void* self);
+	friend bool QTcpSocket_virtualbase_reset(VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
 		if (vtbl->canReadLine == 0) {
 			return QTcpSocket::canReadLine();
 		}
 
 
-		bool callback_return_value = vtbl->canReadLine(vtbl, this);
+		bool callback_return_value = vtbl->canReadLine(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_canReadLine(const void* self);
+	friend bool QTcpSocket_virtualbase_canReadLine(const VirtualQTcpSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTcpSocket::event(event);
@@ -537,14 +500,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_event(void* self, QEvent* event);
+	friend bool QTcpSocket_virtualbase_event(VirtualQTcpSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTcpSocket::eventFilter(watched, event);
@@ -553,14 +515,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTcpSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTcpSocket_virtualbase_eventFilter(VirtualQTcpSocket* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTcpSocket::timerEvent(event);
@@ -569,13 +530,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTcpSocket_virtualbase_timerEvent(VirtualQTcpSocket* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTcpSocket::childEvent(event);
@@ -584,13 +544,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTcpSocket_virtualbase_childEvent(VirtualQTcpSocket* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTcpSocket::customEvent(event);
@@ -599,13 +558,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTcpSocket_virtualbase_customEvent(VirtualQTcpSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTcpSocket::connectNotify(signal);
@@ -616,13 +574,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTcpSocket_virtualbase_connectNotify(VirtualQTcpSocket* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTcpSocket::disconnectNotify(signal);
@@ -633,34 +590,34 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTcpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTcpSocket_virtualbase_disconnectNotify(VirtualQTcpSocket* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTcpSocket_protectedbase_setSocketState(void* self, int state);
-	friend void QTcpSocket_protectedbase_setSocketError(void* self, int socketError);
-	friend void QTcpSocket_protectedbase_setLocalPort(void* self, uint16_t port);
-	friend void QTcpSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address);
-	friend void QTcpSocket_protectedbase_setPeerPort(void* self, uint16_t port);
-	friend void QTcpSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address);
-	friend void QTcpSocket_protectedbase_setPeerName(void* self, struct miqt_string name);
-	friend void QTcpSocket_protectedbase_setOpenMode(void* self, int openMode);
-	friend void QTcpSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString);
-	friend QObject* QTcpSocket_protectedbase_sender(const void* self);
-	friend int QTcpSocket_protectedbase_senderSignalIndex(const void* self);
-	friend int QTcpSocket_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTcpSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QTcpSocket_protectedbase_setSocketState(VirtualQTcpSocket* self, int state);
+	friend void QTcpSocket_protectedbase_setSocketError(VirtualQTcpSocket* self, int socketError);
+	friend void QTcpSocket_protectedbase_setLocalPort(VirtualQTcpSocket* self, uint16_t port);
+	friend void QTcpSocket_protectedbase_setLocalAddress(VirtualQTcpSocket* self, QHostAddress* address);
+	friend void QTcpSocket_protectedbase_setPeerPort(VirtualQTcpSocket* self, uint16_t port);
+	friend void QTcpSocket_protectedbase_setPeerAddress(VirtualQTcpSocket* self, QHostAddress* address);
+	friend void QTcpSocket_protectedbase_setPeerName(VirtualQTcpSocket* self, struct miqt_string name);
+	friend void QTcpSocket_protectedbase_setOpenMode(VirtualQTcpSocket* self, int openMode);
+	friend void QTcpSocket_protectedbase_setErrorString(VirtualQTcpSocket* self, struct miqt_string errorString);
+	friend QObject* QTcpSocket_protectedbase_sender(const VirtualQTcpSocket* self);
+	friend int QTcpSocket_protectedbase_senderSignalIndex(const VirtualQTcpSocket* self);
+	friend int QTcpSocket_protectedbase_receivers(const VirtualQTcpSocket* self, const char* signal);
+	friend bool QTcpSocket_protectedbase_isSignalConnected(const VirtualQTcpSocket* self, QMetaMethod* signal);
 };
 
-QTcpSocket* QTcpSocket_new(struct QTcpSocket_VTable* vtbl) {
-	return new VirtualQTcpSocket(vtbl);
+VirtualQTcpSocket* QTcpSocket_new(const QTcpSocket_VTable* vtbl, void* vdata) {
+	return new VirtualQTcpSocket(vtbl, vdata);
 }
 
-QTcpSocket* QTcpSocket_new2(struct QTcpSocket_VTable* vtbl, QObject* parent) {
-	return new VirtualQTcpSocket(vtbl, parent);
+VirtualQTcpSocket* QTcpSocket_new2(const QTcpSocket_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQTcpSocket(vtbl, vdata, parent);
 }
 
 void QTcpSocket_virtbase(QTcpSocket* src, QAbstractSocket** outptr_QAbstractSocket) {
@@ -724,336 +681,264 @@ bool QTcpSocket_bind3(QTcpSocket* self, int addr, uint16_t port, int mode) {
 	return self->bind(static_cast<QHostAddress::SpecialAddress>(addr), static_cast<quint16>(port), static_cast<QAbstractSocket::BindMode>(mode));
 }
 
-QMetaObject* QTcpSocket_virtualbase_metaObject(const void* self) {
+QMetaObject* QTcpSocket_virtualbase_metaObject(const VirtualQTcpSocket* self) {
 
-	return (QMetaObject*) ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::metaObject();
-
+	return (QMetaObject*) self->QTcpSocket::metaObject();
 }
 
-void* QTcpSocket_virtualbase_metacast(void* self, const char* param1) {
+void* QTcpSocket_virtualbase_metacast(VirtualQTcpSocket* self, const char* param1) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::qt_metacast(param1);
-
+	return self->QTcpSocket::qt_metacast(param1);
 }
 
-int QTcpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTcpSocket_virtualbase_metacall(VirtualQTcpSocket* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTcpSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QTcpSocket_virtualbase_resume(void* self) {
+void QTcpSocket_virtualbase_resume(VirtualQTcpSocket* self) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::resume();
-
+	self->QTcpSocket::resume();
 }
 
-bool QTcpSocket_virtualbase_bind(void* self, QHostAddress* address, uint16_t port, int mode) {
+bool QTcpSocket_virtualbase_bind(VirtualQTcpSocket* self, QHostAddress* address, uint16_t port, int mode) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::bind(*address, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::BindMode>(mode));
-
+	return self->QTcpSocket::bind(*address, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::BindMode>(mode));
 }
 
-void QTcpSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol) {
+void QTcpSocket_virtualbase_connectToHost(VirtualQTcpSocket* self, struct miqt_string hostName, uint16_t port, int mode, int protocol) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::OpenMode>(mode), static_cast<VirtualQTcpSocket::NetworkLayerProtocol>(protocol));
-
+	self->QTcpSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQTcpSocket::OpenMode>(mode), static_cast<VirtualQTcpSocket::NetworkLayerProtocol>(protocol));
 }
 
-void QTcpSocket_virtualbase_disconnectFromHost(void* self) {
+void QTcpSocket_virtualbase_disconnectFromHost(VirtualQTcpSocket* self) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::disconnectFromHost();
-
+	self->QTcpSocket::disconnectFromHost();
 }
 
-long long QTcpSocket_virtualbase_bytesAvailable(const void* self) {
+long long QTcpSocket_virtualbase_bytesAvailable(const VirtualQTcpSocket* self) {
 
-	qint64 _ret = ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::bytesAvailable();
+	qint64 _ret = self->QTcpSocket::bytesAvailable();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QTcpSocket_virtualbase_bytesToWrite(const void* self) {
+long long QTcpSocket_virtualbase_bytesToWrite(const VirtualQTcpSocket* self) {
 
-	qint64 _ret = ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::bytesToWrite();
+	qint64 _ret = self->QTcpSocket::bytesToWrite();
 	return static_cast<long long>(_ret);
-
 }
 
-void QTcpSocket_virtualbase_setReadBufferSize(void* self, long long size) {
+void QTcpSocket_virtualbase_setReadBufferSize(VirtualQTcpSocket* self, long long size) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::setReadBufferSize(static_cast<qint64>(size));
-
+	self->QTcpSocket::setReadBufferSize(static_cast<qint64>(size));
 }
 
-intptr_t QTcpSocket_virtualbase_socketDescriptor(const void* self) {
+intptr_t QTcpSocket_virtualbase_socketDescriptor(const VirtualQTcpSocket* self) {
 
-	qintptr _ret = ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::socketDescriptor();
+	qintptr _ret = self->QTcpSocket::socketDescriptor();
 	return (intptr_t)(_ret);
-
 }
 
-bool QTcpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode) {
+bool QTcpSocket_virtualbase_setSocketDescriptor(VirtualQTcpSocket* self, intptr_t socketDescriptor, int state, int openMode) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::setSocketDescriptor((qintptr)(socketDescriptor), static_cast<VirtualQTcpSocket::SocketState>(state), static_cast<VirtualQTcpSocket::OpenMode>(openMode));
-
+	return self->QTcpSocket::setSocketDescriptor((qintptr)(socketDescriptor), static_cast<VirtualQTcpSocket::SocketState>(state), static_cast<VirtualQTcpSocket::OpenMode>(openMode));
 }
 
-void QTcpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value) {
+void QTcpSocket_virtualbase_setSocketOption(VirtualQTcpSocket* self, int option, QVariant* value) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::setSocketOption(static_cast<VirtualQTcpSocket::SocketOption>(option), *value);
-
+	self->QTcpSocket::setSocketOption(static_cast<VirtualQTcpSocket::SocketOption>(option), *value);
 }
 
-QVariant* QTcpSocket_virtualbase_socketOption(void* self, int option) {
+QVariant* QTcpSocket_virtualbase_socketOption(VirtualQTcpSocket* self, int option) {
 
-	return new QVariant(( (VirtualQTcpSocket*)(self) )->QTcpSocket::socketOption(static_cast<VirtualQTcpSocket::SocketOption>(option)));
-
+	return new QVariant(self->QTcpSocket::socketOption(static_cast<VirtualQTcpSocket::SocketOption>(option)));
 }
 
-void QTcpSocket_virtualbase_close(void* self) {
+void QTcpSocket_virtualbase_close(VirtualQTcpSocket* self) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::close();
-
+	self->QTcpSocket::close();
 }
 
-bool QTcpSocket_virtualbase_isSequential(const void* self) {
+bool QTcpSocket_virtualbase_isSequential(const VirtualQTcpSocket* self) {
 
-	return ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::isSequential();
-
+	return self->QTcpSocket::isSequential();
 }
 
-bool QTcpSocket_virtualbase_waitForConnected(void* self, int msecs) {
+bool QTcpSocket_virtualbase_waitForConnected(VirtualQTcpSocket* self, int msecs) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::waitForConnected(static_cast<int>(msecs));
-
+	return self->QTcpSocket::waitForConnected(static_cast<int>(msecs));
 }
 
-bool QTcpSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
+bool QTcpSocket_virtualbase_waitForReadyRead(VirtualQTcpSocket* self, int msecs) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::waitForReadyRead(static_cast<int>(msecs));
-
+	return self->QTcpSocket::waitForReadyRead(static_cast<int>(msecs));
 }
 
-bool QTcpSocket_virtualbase_waitForBytesWritten(void* self, int msecs) {
+bool QTcpSocket_virtualbase_waitForBytesWritten(VirtualQTcpSocket* self, int msecs) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::waitForBytesWritten(static_cast<int>(msecs));
-
+	return self->QTcpSocket::waitForBytesWritten(static_cast<int>(msecs));
 }
 
-bool QTcpSocket_virtualbase_waitForDisconnected(void* self, int msecs) {
+bool QTcpSocket_virtualbase_waitForDisconnected(VirtualQTcpSocket* self, int msecs) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::waitForDisconnected(static_cast<int>(msecs));
-
+	return self->QTcpSocket::waitForDisconnected(static_cast<int>(msecs));
 }
 
-long long QTcpSocket_virtualbase_readData(void* self, char* data, long long maxlen) {
+long long QTcpSocket_virtualbase_readData(VirtualQTcpSocket* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQTcpSocket*)(self) )->QTcpSocket::readData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QTcpSocket::readData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QTcpSocket_virtualbase_readLineData(void* self, char* data, long long maxlen) {
+long long QTcpSocket_virtualbase_readLineData(VirtualQTcpSocket* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQTcpSocket*)(self) )->QTcpSocket::readLineData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QTcpSocket::readLineData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QTcpSocket_virtualbase_skipData(void* self, long long maxSize) {
+long long QTcpSocket_virtualbase_skipData(VirtualQTcpSocket* self, long long maxSize) {
 
-	qint64 _ret = ( (VirtualQTcpSocket*)(self) )->QTcpSocket::skipData(static_cast<qint64>(maxSize));
+	qint64 _ret = self->QTcpSocket::skipData(static_cast<qint64>(maxSize));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QTcpSocket_virtualbase_writeData(void* self, const char* data, long long len) {
+long long QTcpSocket_virtualbase_writeData(VirtualQTcpSocket* self, const char* data, long long len) {
 
-	qint64 _ret = ( (VirtualQTcpSocket*)(self) )->QTcpSocket::writeData(data, static_cast<qint64>(len));
+	qint64 _ret = self->QTcpSocket::writeData(data, static_cast<qint64>(len));
 	return static_cast<long long>(_ret);
-
 }
 
-bool QTcpSocket_virtualbase_open(void* self, int mode) {
+bool QTcpSocket_virtualbase_open(VirtualQTcpSocket* self, int mode) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::open(static_cast<VirtualQTcpSocket::OpenMode>(mode));
-
+	return self->QTcpSocket::open(static_cast<VirtualQTcpSocket::OpenMode>(mode));
 }
 
-long long QTcpSocket_virtualbase_pos(const void* self) {
+long long QTcpSocket_virtualbase_pos(const VirtualQTcpSocket* self) {
 
-	qint64 _ret = ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::pos();
+	qint64 _ret = self->QTcpSocket::pos();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QTcpSocket_virtualbase_size(const void* self) {
+long long QTcpSocket_virtualbase_size(const VirtualQTcpSocket* self) {
 
-	qint64 _ret = ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::size();
+	qint64 _ret = self->QTcpSocket::size();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QTcpSocket_virtualbase_seek(void* self, long long pos) {
+bool QTcpSocket_virtualbase_seek(VirtualQTcpSocket* self, long long pos) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::seek(static_cast<qint64>(pos));
-
+	return self->QTcpSocket::seek(static_cast<qint64>(pos));
 }
 
-bool QTcpSocket_virtualbase_atEnd(const void* self) {
+bool QTcpSocket_virtualbase_atEnd(const VirtualQTcpSocket* self) {
 
-	return ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::atEnd();
-
+	return self->QTcpSocket::atEnd();
 }
 
-bool QTcpSocket_virtualbase_reset(void* self) {
+bool QTcpSocket_virtualbase_reset(VirtualQTcpSocket* self) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::reset();
-
+	return self->QTcpSocket::reset();
 }
 
-bool QTcpSocket_virtualbase_canReadLine(const void* self) {
+bool QTcpSocket_virtualbase_canReadLine(const VirtualQTcpSocket* self) {
 
-	return ( (const VirtualQTcpSocket*)(self) )->QTcpSocket::canReadLine();
-
+	return self->QTcpSocket::canReadLine();
 }
 
-bool QTcpSocket_virtualbase_event(void* self, QEvent* event) {
+bool QTcpSocket_virtualbase_event(VirtualQTcpSocket* self, QEvent* event) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::event(event);
-
+	return self->QTcpSocket::event(event);
 }
 
-bool QTcpSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTcpSocket_virtualbase_eventFilter(VirtualQTcpSocket* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTcpSocket*)(self) )->QTcpSocket::eventFilter(watched, event);
-
+	return self->QTcpSocket::eventFilter(watched, event);
 }
 
-void QTcpSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTcpSocket_virtualbase_timerEvent(VirtualQTcpSocket* self, QTimerEvent* event) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::timerEvent(event);
-
+	self->QTcpSocket::timerEvent(event);
 }
 
-void QTcpSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTcpSocket_virtualbase_childEvent(VirtualQTcpSocket* self, QChildEvent* event) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::childEvent(event);
-
+	self->QTcpSocket::childEvent(event);
 }
 
-void QTcpSocket_virtualbase_customEvent(void* self, QEvent* event) {
+void QTcpSocket_virtualbase_customEvent(VirtualQTcpSocket* self, QEvent* event) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::customEvent(event);
-
+	self->QTcpSocket::customEvent(event);
 }
 
-void QTcpSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTcpSocket_virtualbase_connectNotify(VirtualQTcpSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::connectNotify(*signal);
-
+	self->QTcpSocket::connectNotify(*signal);
 }
 
-void QTcpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTcpSocket_virtualbase_disconnectNotify(VirtualQTcpSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQTcpSocket*)(self) )->QTcpSocket::disconnectNotify(*signal);
-
+	self->QTcpSocket::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTcpSocket_staticMetaObject() { return &QTcpSocket::staticMetaObject; }
-void QTcpSocket_protectedbase_setSocketState(void* self, int state) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setSocketState(static_cast<VirtualQTcpSocket::SocketState>(state));
 
+const QTcpSocket_VTable* QTcpSocket_vtbl(const VirtualQTcpSocket* self) { return self->vtbl; }
+void* QTcpSocket_vdata(const VirtualQTcpSocket* self) { return self->vdata; }
+void QTcpSocket_setVdata(VirtualQTcpSocket* self, void* vdata) { self->vdata = vdata; }
+
+void QTcpSocket_protectedbase_setSocketState(VirtualQTcpSocket* self, int state) {
+	self->setSocketState(static_cast<VirtualQTcpSocket::SocketState>(state));
 }
 
-void QTcpSocket_protectedbase_setSocketError(void* self, int socketError) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setSocketError(static_cast<VirtualQTcpSocket::SocketError>(socketError));
-
+void QTcpSocket_protectedbase_setSocketError(VirtualQTcpSocket* self, int socketError) {
+	self->setSocketError(static_cast<VirtualQTcpSocket::SocketError>(socketError));
 }
 
-void QTcpSocket_protectedbase_setLocalPort(void* self, uint16_t port) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setLocalPort(static_cast<quint16>(port));
-
+void QTcpSocket_protectedbase_setLocalPort(VirtualQTcpSocket* self, uint16_t port) {
+	self->setLocalPort(static_cast<quint16>(port));
 }
 
-void QTcpSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setLocalAddress(*address);
-
+void QTcpSocket_protectedbase_setLocalAddress(VirtualQTcpSocket* self, QHostAddress* address) {
+	self->setLocalAddress(*address);
 }
 
-void QTcpSocket_protectedbase_setPeerPort(void* self, uint16_t port) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setPeerPort(static_cast<quint16>(port));
-
+void QTcpSocket_protectedbase_setPeerPort(VirtualQTcpSocket* self, uint16_t port) {
+	self->setPeerPort(static_cast<quint16>(port));
 }
 
-void QTcpSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setPeerAddress(*address);
-
+void QTcpSocket_protectedbase_setPeerAddress(VirtualQTcpSocket* self, QHostAddress* address) {
+	self->setPeerAddress(*address);
 }
 
-void QTcpSocket_protectedbase_setPeerName(void* self, struct miqt_string name) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-			QString name_QString = QString::fromUtf8(name.data, name.len);
-
-	self_cast->setPeerName(name_QString);
-
+void QTcpSocket_protectedbase_setPeerName(VirtualQTcpSocket* self, struct miqt_string name) {
+		QString name_QString = QString::fromUtf8(name.data, name.len);
+	self->setPeerName(name_QString);
 }
 
-void QTcpSocket_protectedbase_setOpenMode(void* self, int openMode) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	self_cast->setOpenMode(static_cast<VirtualQTcpSocket::OpenMode>(openMode));
-
+void QTcpSocket_protectedbase_setOpenMode(VirtualQTcpSocket* self, int openMode) {
+	self->setOpenMode(static_cast<VirtualQTcpSocket::OpenMode>(openMode));
 }
 
-void QTcpSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-
-	self_cast->setErrorString(errorString_QString);
-
+void QTcpSocket_protectedbase_setErrorString(VirtualQTcpSocket* self, struct miqt_string errorString) {
+		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
+	self->setErrorString(errorString_QString);
 }
 
-QObject* QTcpSocket_protectedbase_sender(const void* self) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QTcpSocket_protectedbase_sender(const VirtualQTcpSocket* self) {
+	return self->sender();
 }
 
-int QTcpSocket_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTcpSocket_protectedbase_senderSignalIndex(const VirtualQTcpSocket* self) {
+	return self->senderSignalIndex();
 }
 
-int QTcpSocket_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTcpSocket_protectedbase_receivers(const VirtualQTcpSocket* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTcpSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTcpSocket* self_cast = static_cast<VirtualQTcpSocket*>( (QTcpSocket*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTcpSocket_protectedbase_isSignalConnected(const VirtualQTcpSocket* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTcpSocket_delete(QTcpSocket* self) {

@@ -22,14 +22,23 @@ typedef struct QQmlAbstractUrlInterceptor QQmlAbstractUrlInterceptor;
 typedef struct QUrl QUrl;
 #endif
 
-struct QQmlAbstractUrlInterceptor_VTable {
-	void (*destructor)(struct QQmlAbstractUrlInterceptor_VTable* vtbl, QQmlAbstractUrlInterceptor* self);
-	QUrl* (*intercept)(struct QQmlAbstractUrlInterceptor_VTable* vtbl, QQmlAbstractUrlInterceptor* self, QUrl* path, int type);
-};
-QQmlAbstractUrlInterceptor* QQmlAbstractUrlInterceptor_new(struct QQmlAbstractUrlInterceptor_VTable* vtbl);
+typedef struct VirtualQQmlAbstractUrlInterceptor VirtualQQmlAbstractUrlInterceptor;
+typedef struct QQmlAbstractUrlInterceptor_VTable{
+	void (*destructor)(VirtualQQmlAbstractUrlInterceptor* self);
+	QUrl* (*intercept)(VirtualQQmlAbstractUrlInterceptor* self, QUrl* path, int type);
+}QQmlAbstractUrlInterceptor_VTable;
+
+const QQmlAbstractUrlInterceptor_VTable* QQmlAbstractUrlInterceptor_vtbl(const VirtualQQmlAbstractUrlInterceptor* self);
+void* QQmlAbstractUrlInterceptor_vdata(const VirtualQQmlAbstractUrlInterceptor* self);
+void QQmlAbstractUrlInterceptor_setVdata(VirtualQQmlAbstractUrlInterceptor* self, void* vdata);
+
+VirtualQQmlAbstractUrlInterceptor* QQmlAbstractUrlInterceptor_new(const QQmlAbstractUrlInterceptor_VTable* vtbl, void* vdata);
+
 QUrl* QQmlAbstractUrlInterceptor_intercept(QQmlAbstractUrlInterceptor* self, QUrl* path, int type);
 void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* param1);
-QUrl* QQmlAbstractUrlInterceptor_virtualbase_intercept(void* self, QUrl* path, int type);
+
+QUrl* QQmlAbstractUrlInterceptor_virtualbase_intercept(VirtualQQmlAbstractUrlInterceptor* self, QUrl* path, int type);
+
 void QQmlAbstractUrlInterceptor_delete(QQmlAbstractUrlInterceptor* self);
 
 #ifdef __cplusplus

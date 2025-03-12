@@ -10,38 +10,31 @@
 #include <QVector3D>
 #include <qaudiolistener.h>
 #include "gen_qaudiolistener.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAudioListener final : public QAudioListener {
-	struct QAudioListener_VTable* vtbl;
+	const QAudioListener_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAudioListener_VTable* QAudioListener_vtbl(const VirtualQAudioListener* self);
+	friend void* QAudioListener_vdata(const VirtualQAudioListener* self);
+	friend void QAudioListener_setVdata(VirtualQAudioListener* self, void* vdata);
 
-	VirtualQAudioListener(struct QAudioListener_VTable* vtbl, QAudioEngine* engine): QAudioListener(engine), vtbl(vtbl) {};
+	VirtualQAudioListener(const QAudioListener_VTable* vtbl, void* vdata, QAudioEngine* engine): QAudioListener(engine), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAudioListener() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAudioListener() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAudioListener::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAudioListener_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAudioListener_virtualbase_metaObject(const VirtualQAudioListener* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAudioListener::qt_metacast(param1);
@@ -49,14 +42,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAudioListener_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAudioListener_virtualbase_metacast(VirtualQAudioListener* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAudioListener::qt_metacall(param1, param2, param3);
@@ -67,14 +59,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAudioListener_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAudioListener_virtualbase_metacall(VirtualQAudioListener* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAudioListener::event(event);
@@ -82,14 +73,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioListener_virtualbase_event(void* self, QEvent* event);
+	friend bool QAudioListener_virtualbase_event(VirtualQAudioListener* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAudioListener::eventFilter(watched, event);
@@ -98,14 +88,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioListener_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAudioListener_virtualbase_eventFilter(VirtualQAudioListener* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAudioListener::timerEvent(event);
@@ -114,13 +103,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAudioListener_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAudioListener_virtualbase_timerEvent(VirtualQAudioListener* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAudioListener::childEvent(event);
@@ -129,13 +117,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAudioListener_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAudioListener_virtualbase_childEvent(VirtualQAudioListener* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAudioListener::customEvent(event);
@@ -144,13 +131,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAudioListener_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAudioListener_virtualbase_customEvent(VirtualQAudioListener* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAudioListener::connectNotify(signal);
@@ -161,13 +147,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioListener_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioListener_virtualbase_connectNotify(VirtualQAudioListener* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAudioListener::disconnectNotify(signal);
@@ -178,21 +163,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioListener_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioListener_virtualbase_disconnectNotify(VirtualQAudioListener* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAudioListener_protectedbase_sender(const void* self);
-	friend int QAudioListener_protectedbase_senderSignalIndex(const void* self);
-	friend int QAudioListener_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAudioListener_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAudioListener_protectedbase_sender(const VirtualQAudioListener* self);
+	friend int QAudioListener_protectedbase_senderSignalIndex(const VirtualQAudioListener* self);
+	friend int QAudioListener_protectedbase_receivers(const VirtualQAudioListener* self, const char* signal);
+	friend bool QAudioListener_protectedbase_isSignalConnected(const VirtualQAudioListener* self, QMetaMethod* signal);
 };
 
-QAudioListener* QAudioListener_new(struct QAudioListener_VTable* vtbl, QAudioEngine* engine) {
-	return new VirtualQAudioListener(vtbl, engine);
+VirtualQAudioListener* QAudioListener_new(const QAudioListener_VTable* vtbl, void* vdata, QAudioEngine* engine) {
+	return new VirtualQAudioListener(vtbl, vdata, engine);
 }
 
 void QAudioListener_virtbase(QAudioListener* src, QObject** outptr_QObject) {
@@ -219,92 +204,74 @@ QAudioEngine* QAudioListener_engine(const QAudioListener* self) {
 	return self->engine();
 }
 
-QMetaObject* QAudioListener_virtualbase_metaObject(const void* self) {
+QMetaObject* QAudioListener_virtualbase_metaObject(const VirtualQAudioListener* self) {
 
-	return (QMetaObject*) ( (const VirtualQAudioListener*)(self) )->QAudioListener::metaObject();
-
+	return (QMetaObject*) self->QAudioListener::metaObject();
 }
 
-void* QAudioListener_virtualbase_metacast(void* self, const char* param1) {
+void* QAudioListener_virtualbase_metacast(VirtualQAudioListener* self, const char* param1) {
 
-	return ( (VirtualQAudioListener*)(self) )->QAudioListener::qt_metacast(param1);
-
+	return self->QAudioListener::qt_metacast(param1);
 }
 
-int QAudioListener_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAudioListener_virtualbase_metacall(VirtualQAudioListener* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAudioListener*)(self) )->QAudioListener::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAudioListener::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAudioListener_virtualbase_event(void* self, QEvent* event) {
+bool QAudioListener_virtualbase_event(VirtualQAudioListener* self, QEvent* event) {
 
-	return ( (VirtualQAudioListener*)(self) )->QAudioListener::event(event);
-
+	return self->QAudioListener::event(event);
 }
 
-bool QAudioListener_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAudioListener_virtualbase_eventFilter(VirtualQAudioListener* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAudioListener*)(self) )->QAudioListener::eventFilter(watched, event);
-
+	return self->QAudioListener::eventFilter(watched, event);
 }
 
-void QAudioListener_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAudioListener_virtualbase_timerEvent(VirtualQAudioListener* self, QTimerEvent* event) {
 
-	( (VirtualQAudioListener*)(self) )->QAudioListener::timerEvent(event);
-
+	self->QAudioListener::timerEvent(event);
 }
 
-void QAudioListener_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAudioListener_virtualbase_childEvent(VirtualQAudioListener* self, QChildEvent* event) {
 
-	( (VirtualQAudioListener*)(self) )->QAudioListener::childEvent(event);
-
+	self->QAudioListener::childEvent(event);
 }
 
-void QAudioListener_virtualbase_customEvent(void* self, QEvent* event) {
+void QAudioListener_virtualbase_customEvent(VirtualQAudioListener* self, QEvent* event) {
 
-	( (VirtualQAudioListener*)(self) )->QAudioListener::customEvent(event);
-
+	self->QAudioListener::customEvent(event);
 }
 
-void QAudioListener_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAudioListener_virtualbase_connectNotify(VirtualQAudioListener* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioListener*)(self) )->QAudioListener::connectNotify(*signal);
-
+	self->QAudioListener::connectNotify(*signal);
 }
 
-void QAudioListener_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAudioListener_virtualbase_disconnectNotify(VirtualQAudioListener* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioListener*)(self) )->QAudioListener::disconnectNotify(*signal);
-
+	self->QAudioListener::disconnectNotify(*signal);
 }
 
-QObject* QAudioListener_protectedbase_sender(const void* self) {
-	VirtualQAudioListener* self_cast = static_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
-	
-	return self_cast->sender();
+const QAudioListener_VTable* QAudioListener_vtbl(const VirtualQAudioListener* self) { return self->vtbl; }
+void* QAudioListener_vdata(const VirtualQAudioListener* self) { return self->vdata; }
+void QAudioListener_setVdata(VirtualQAudioListener* self, void* vdata) { self->vdata = vdata; }
 
+QObject* QAudioListener_protectedbase_sender(const VirtualQAudioListener* self) {
+	return self->sender();
 }
 
-int QAudioListener_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAudioListener* self_cast = static_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAudioListener_protectedbase_senderSignalIndex(const VirtualQAudioListener* self) {
+	return self->senderSignalIndex();
 }
 
-int QAudioListener_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAudioListener* self_cast = static_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAudioListener_protectedbase_receivers(const VirtualQAudioListener* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAudioListener_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAudioListener* self_cast = static_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAudioListener_protectedbase_isSignalConnected(const VirtualQAudioListener* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAudioListener_delete(QAudioListener* self) {

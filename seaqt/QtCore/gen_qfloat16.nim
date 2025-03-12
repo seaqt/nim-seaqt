@@ -37,28 +37,28 @@ export gen_qfloat16_types
 
 type cqfloat16*{.exportc: "qfloat16", incompleteStruct.} = object
 
-proc fcqfloat16_isInf(self: pointer, ): bool {.importc: "qfloat16_isInf".}
-proc fcqfloat16_isNaN(self: pointer, ): bool {.importc: "qfloat16_isNaN".}
-proc fcqfloat16_isFinite(self: pointer, ): bool {.importc: "qfloat16_isFinite".}
-proc fcqfloat16_fpClassify(self: pointer, ): cint {.importc: "qfloat16_fpClassify".}
-proc fcqfloat16_isNormal(self: pointer, ): bool {.importc: "qfloat16_isNormal".}
+proc fcqfloat16_isInf(self: pointer): bool {.importc: "qfloat16_isInf".}
+proc fcqfloat16_isNaN(self: pointer): bool {.importc: "qfloat16_isNaN".}
+proc fcqfloat16_isFinite(self: pointer): bool {.importc: "qfloat16_isFinite".}
+proc fcqfloat16_fpClassify(self: pointer): cint {.importc: "qfloat16_fpClassify".}
+proc fcqfloat16_isNormal(self: pointer): bool {.importc: "qfloat16_isNormal".}
 proc fcqfloat16_new(): ptr cqfloat16 {.importc: "qfloat16_new".}
 proc fcqfloat16_new2(param1: cint): ptr cqfloat16 {.importc: "qfloat16_new2".}
 proc fcqfloat16_new3(f: float32): ptr cqfloat16 {.importc: "qfloat16_new3".}
 
-proc isInf*(self: gen_qfloat16_types.qfloat16, ): bool =
+proc isInf*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isInf(self.h)
 
-proc isNaN*(self: gen_qfloat16_types.qfloat16, ): bool =
+proc isNaN*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isNaN(self.h)
 
-proc isFinite*(self: gen_qfloat16_types.qfloat16, ): bool =
+proc isFinite*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isFinite(self.h)
 
-proc fpClassify*(self: gen_qfloat16_types.qfloat16, ): cint =
+proc fpClassify*(self: gen_qfloat16_types.qfloat16): cint =
   fcqfloat16_fpClassify(self.h)
 
-proc isNormal*(self: gen_qfloat16_types.qfloat16, ): bool =
+proc isNormal*(self: gen_qfloat16_types.qfloat16): bool =
   fcqfloat16_isNormal(self.h)
 
 proc create*(T: type gen_qfloat16_types.qfloat16): gen_qfloat16_types.qfloat16 =

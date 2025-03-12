@@ -49,25 +49,25 @@ export
 
 type cQBackingStore*{.exportc: "QBackingStore", incompleteStruct.} = object
 
-proc fcQBackingStore_window(self: pointer, ): pointer {.importc: "QBackingStore_window".}
-proc fcQBackingStore_paintDevice(self: pointer, ): pointer {.importc: "QBackingStore_paintDevice".}
+proc fcQBackingStore_window(self: pointer): pointer {.importc: "QBackingStore_window".}
+proc fcQBackingStore_paintDevice(self: pointer): pointer {.importc: "QBackingStore_paintDevice".}
 proc fcQBackingStore_flush(self: pointer, region: pointer): void {.importc: "QBackingStore_flush".}
 proc fcQBackingStore_resize(self: pointer, size: pointer): void {.importc: "QBackingStore_resize".}
-proc fcQBackingStore_size(self: pointer, ): pointer {.importc: "QBackingStore_size".}
+proc fcQBackingStore_size(self: pointer): pointer {.importc: "QBackingStore_size".}
 proc fcQBackingStore_scroll(self: pointer, area: pointer, dx: cint, dy: cint): bool {.importc: "QBackingStore_scroll".}
 proc fcQBackingStore_beginPaint(self: pointer, param1: pointer): void {.importc: "QBackingStore_beginPaint".}
-proc fcQBackingStore_endPaint(self: pointer, ): void {.importc: "QBackingStore_endPaint".}
+proc fcQBackingStore_endPaint(self: pointer): void {.importc: "QBackingStore_endPaint".}
 proc fcQBackingStore_setStaticContents(self: pointer, region: pointer): void {.importc: "QBackingStore_setStaticContents".}
-proc fcQBackingStore_staticContents(self: pointer, ): pointer {.importc: "QBackingStore_staticContents".}
-proc fcQBackingStore_hasStaticContents(self: pointer, ): bool {.importc: "QBackingStore_hasStaticContents".}
+proc fcQBackingStore_staticContents(self: pointer): pointer {.importc: "QBackingStore_staticContents".}
+proc fcQBackingStore_hasStaticContents(self: pointer): bool {.importc: "QBackingStore_hasStaticContents".}
 proc fcQBackingStore_flush2(self: pointer, region: pointer, window: pointer): void {.importc: "QBackingStore_flush2".}
 proc fcQBackingStore_flush3(self: pointer, region: pointer, window: pointer, offset: pointer): void {.importc: "QBackingStore_flush3".}
 proc fcQBackingStore_new(window: pointer): ptr cQBackingStore {.importc: "QBackingStore_new".}
 
-proc window*(self: gen_qbackingstore_types.QBackingStore, ): gen_qwindow_types.QWindow =
+proc window*(self: gen_qbackingstore_types.QBackingStore): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fcQBackingStore_window(self.h), owned: false)
 
-proc paintDevice*(self: gen_qbackingstore_types.QBackingStore, ): gen_qpaintdevice_types.QPaintDevice =
+proc paintDevice*(self: gen_qbackingstore_types.QBackingStore): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQBackingStore_paintDevice(self.h), owned: false)
 
 proc flush*(self: gen_qbackingstore_types.QBackingStore, region: gen_qregion_types.QRegion): void =
@@ -76,7 +76,7 @@ proc flush*(self: gen_qbackingstore_types.QBackingStore, region: gen_qregion_typ
 proc resize*(self: gen_qbackingstore_types.QBackingStore, size: gen_qsize_types.QSize): void =
   fcQBackingStore_resize(self.h, size.h)
 
-proc size*(self: gen_qbackingstore_types.QBackingStore, ): gen_qsize_types.QSize =
+proc size*(self: gen_qbackingstore_types.QBackingStore): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQBackingStore_size(self.h), owned: true)
 
 proc scroll*(self: gen_qbackingstore_types.QBackingStore, area: gen_qregion_types.QRegion, dx: cint, dy: cint): bool =
@@ -85,16 +85,16 @@ proc scroll*(self: gen_qbackingstore_types.QBackingStore, area: gen_qregion_type
 proc beginPaint*(self: gen_qbackingstore_types.QBackingStore, param1: gen_qregion_types.QRegion): void =
   fcQBackingStore_beginPaint(self.h, param1.h)
 
-proc endPaint*(self: gen_qbackingstore_types.QBackingStore, ): void =
+proc endPaint*(self: gen_qbackingstore_types.QBackingStore): void =
   fcQBackingStore_endPaint(self.h)
 
 proc setStaticContents*(self: gen_qbackingstore_types.QBackingStore, region: gen_qregion_types.QRegion): void =
   fcQBackingStore_setStaticContents(self.h, region.h)
 
-proc staticContents*(self: gen_qbackingstore_types.QBackingStore, ): gen_qregion_types.QRegion =
+proc staticContents*(self: gen_qbackingstore_types.QBackingStore): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQBackingStore_staticContents(self.h), owned: true)
 
-proc hasStaticContents*(self: gen_qbackingstore_types.QBackingStore, ): bool =
+proc hasStaticContents*(self: gen_qbackingstore_types.QBackingStore): bool =
   fcQBackingStore_hasStaticContents(self.h)
 
 proc flush*(self: gen_qbackingstore_types.QBackingStore, region: gen_qregion_types.QRegion, window: gen_qwindow_types.QWindow): void =

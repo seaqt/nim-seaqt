@@ -13,38 +13,31 @@
 #include <QTimerEvent>
 #include <qsgtexture.h>
 #include "gen_qsgtexture.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGTexture final : public QSGTexture {
-	struct QSGTexture_VTable* vtbl;
+	const QSGTexture_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGTexture_VTable* QSGTexture_vtbl(const VirtualQSGTexture* self);
+	friend void* QSGTexture_vdata(const VirtualQSGTexture* self);
+	friend void QSGTexture_setVdata(VirtualQSGTexture* self, void* vdata);
 
-	VirtualQSGTexture(struct QSGTexture_VTable* vtbl): QSGTexture(), vtbl(vtbl) {};
+	VirtualQSGTexture(const QSGTexture_VTable* vtbl, void* vdata): QSGTexture(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGTexture() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGTexture() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QSGTexture::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QSGTexture_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QSGTexture_virtualbase_metaObject(const VirtualQSGTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QSGTexture::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QSGTexture_virtualbase_metacast(void* self, const char* param1);
+	friend void* QSGTexture_virtualbase_metacast(VirtualQSGTexture* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QSGTexture::qt_metacall(param1, param2, param3);
@@ -70,94 +62,87 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QSGTexture_virtualbase_metacall(VirtualQSGTexture* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 comparisonKey() const override {
 		if (vtbl->comparisonKey == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		long long callback_return_value = vtbl->comparisonKey(vtbl, this);
+		long long callback_return_value = vtbl->comparisonKey(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize textureSize() const override {
 		if (vtbl->textureSize == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->textureSize(vtbl, this);
+		QSize* callback_return_value = vtbl->textureSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasAlphaChannel() const override {
 		if (vtbl->hasAlphaChannel == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->hasAlphaChannel(vtbl, this);
+		bool callback_return_value = vtbl->hasAlphaChannel(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasMipmaps() const override {
 		if (vtbl->hasMipmaps == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->hasMipmaps(vtbl, this);
+		bool callback_return_value = vtbl->hasMipmaps(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF normalizedTextureSubRect() const override {
 		if (vtbl->normalizedTextureSubRect == 0) {
 			return QSGTexture::normalizedTextureSubRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->normalizedTextureSubRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->normalizedTextureSubRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QSGTexture_virtualbase_normalizedTextureSubRect(const void* self);
+	friend QRectF* QSGTexture_virtualbase_normalizedTextureSubRect(const VirtualQSGTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isAtlasTexture() const override {
 		if (vtbl->isAtlasTexture == 0) {
 			return QSGTexture::isAtlasTexture();
 		}
 
 
-		bool callback_return_value = vtbl->isAtlasTexture(vtbl, this);
+		bool callback_return_value = vtbl->isAtlasTexture(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGTexture_virtualbase_isAtlasTexture(const void* self);
+	friend bool QSGTexture_virtualbase_isAtlasTexture(const VirtualQSGTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QSGTexture::event(event);
@@ -165,14 +150,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGTexture_virtualbase_event(void* self, QEvent* event);
+	friend bool QSGTexture_virtualbase_event(VirtualQSGTexture* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QSGTexture::eventFilter(watched, event);
@@ -181,14 +165,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGTexture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QSGTexture_virtualbase_eventFilter(VirtualQSGTexture* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QSGTexture::timerEvent(event);
@@ -197,13 +180,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QSGTexture_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QSGTexture_virtualbase_timerEvent(VirtualQSGTexture* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QSGTexture::childEvent(event);
@@ -212,13 +194,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QSGTexture_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QSGTexture_virtualbase_childEvent(VirtualQSGTexture* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QSGTexture::customEvent(event);
@@ -227,13 +208,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QSGTexture_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QSGTexture_virtualbase_customEvent(VirtualQSGTexture* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QSGTexture::connectNotify(signal);
@@ -244,13 +224,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QSGTexture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QSGTexture_virtualbase_connectNotify(VirtualQSGTexture* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QSGTexture::disconnectNotify(signal);
@@ -261,22 +240,22 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QSGTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QSGTexture_virtualbase_disconnectNotify(VirtualQSGTexture* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QSGTexture_protectedbase_resolveInterface(const void* self, const char* name, int revision);
-	friend QObject* QSGTexture_protectedbase_sender(const void* self);
-	friend int QSGTexture_protectedbase_senderSignalIndex(const void* self);
-	friend int QSGTexture_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QSGTexture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void* QSGTexture_protectedbase_resolveInterface(const VirtualQSGTexture* self, const char* name, int revision);
+	friend QObject* QSGTexture_protectedbase_sender(const VirtualQSGTexture* self);
+	friend int QSGTexture_protectedbase_senderSignalIndex(const VirtualQSGTexture* self);
+	friend int QSGTexture_protectedbase_receivers(const VirtualQSGTexture* self, const char* signal);
+	friend bool QSGTexture_protectedbase_isSignalConnected(const VirtualQSGTexture* self, QMetaMethod* signal);
 };
 
-QSGTexture* QSGTexture_new(struct QSGTexture_VTable* vtbl) {
-	return new VirtualQSGTexture(vtbl);
+VirtualQSGTexture* QSGTexture_new(const QSGTexture_VTable* vtbl, void* vdata) {
+	return new VirtualQSGTexture(vtbl, vdata);
 }
 
 void QSGTexture_virtbase(QSGTexture* src, QObject** outptr_QObject) {
@@ -402,112 +381,90 @@ struct miqt_string QSGTexture_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QSGTexture_virtualbase_metaObject(const void* self) {
+QMetaObject* QSGTexture_virtualbase_metaObject(const VirtualQSGTexture* self) {
 
-	return (QMetaObject*) ( (const VirtualQSGTexture*)(self) )->QSGTexture::metaObject();
-
+	return (QMetaObject*) self->QSGTexture::metaObject();
 }
 
-void* QSGTexture_virtualbase_metacast(void* self, const char* param1) {
+void* QSGTexture_virtualbase_metacast(VirtualQSGTexture* self, const char* param1) {
 
-	return ( (VirtualQSGTexture*)(self) )->QSGTexture::qt_metacast(param1);
-
+	return self->QSGTexture::qt_metacast(param1);
 }
 
-int QSGTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QSGTexture_virtualbase_metacall(VirtualQSGTexture* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQSGTexture*)(self) )->QSGTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QSGTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QSGTexture_virtualbase_normalizedTextureSubRect(const void* self) {
+QRectF* QSGTexture_virtualbase_normalizedTextureSubRect(const VirtualQSGTexture* self) {
 
-	return new QRectF(( (const VirtualQSGTexture*)(self) )->QSGTexture::normalizedTextureSubRect());
-
+	return new QRectF(self->QSGTexture::normalizedTextureSubRect());
 }
 
-bool QSGTexture_virtualbase_isAtlasTexture(const void* self) {
+bool QSGTexture_virtualbase_isAtlasTexture(const VirtualQSGTexture* self) {
 
-	return ( (const VirtualQSGTexture*)(self) )->QSGTexture::isAtlasTexture();
-
+	return self->QSGTexture::isAtlasTexture();
 }
 
-bool QSGTexture_virtualbase_event(void* self, QEvent* event) {
+bool QSGTexture_virtualbase_event(VirtualQSGTexture* self, QEvent* event) {
 
-	return ( (VirtualQSGTexture*)(self) )->QSGTexture::event(event);
-
+	return self->QSGTexture::event(event);
 }
 
-bool QSGTexture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QSGTexture_virtualbase_eventFilter(VirtualQSGTexture* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQSGTexture*)(self) )->QSGTexture::eventFilter(watched, event);
-
+	return self->QSGTexture::eventFilter(watched, event);
 }
 
-void QSGTexture_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QSGTexture_virtualbase_timerEvent(VirtualQSGTexture* self, QTimerEvent* event) {
 
-	( (VirtualQSGTexture*)(self) )->QSGTexture::timerEvent(event);
-
+	self->QSGTexture::timerEvent(event);
 }
 
-void QSGTexture_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QSGTexture_virtualbase_childEvent(VirtualQSGTexture* self, QChildEvent* event) {
 
-	( (VirtualQSGTexture*)(self) )->QSGTexture::childEvent(event);
-
+	self->QSGTexture::childEvent(event);
 }
 
-void QSGTexture_virtualbase_customEvent(void* self, QEvent* event) {
+void QSGTexture_virtualbase_customEvent(VirtualQSGTexture* self, QEvent* event) {
 
-	( (VirtualQSGTexture*)(self) )->QSGTexture::customEvent(event);
-
+	self->QSGTexture::customEvent(event);
 }
 
-void QSGTexture_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QSGTexture_virtualbase_connectNotify(VirtualQSGTexture* self, QMetaMethod* signal) {
 
-	( (VirtualQSGTexture*)(self) )->QSGTexture::connectNotify(*signal);
-
+	self->QSGTexture::connectNotify(*signal);
 }
 
-void QSGTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QSGTexture_virtualbase_disconnectNotify(VirtualQSGTexture* self, QMetaMethod* signal) {
 
-	( (VirtualQSGTexture*)(self) )->QSGTexture::disconnectNotify(*signal);
-
+	self->QSGTexture::disconnectNotify(*signal);
 }
 
 const QMetaObject* QSGTexture_staticMetaObject() { return &QSGTexture::staticMetaObject; }
-void* QSGTexture_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
-	VirtualQSGTexture* self_cast = static_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
-	
-	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
+const QSGTexture_VTable* QSGTexture_vtbl(const VirtualQSGTexture* self) { return self->vtbl; }
+void* QSGTexture_vdata(const VirtualQSGTexture* self) { return self->vdata; }
+void QSGTexture_setVdata(VirtualQSGTexture* self, void* vdata) { self->vdata = vdata; }
+
+void* QSGTexture_protectedbase_resolveInterface(const VirtualQSGTexture* self, const char* name, int revision) {
+	return self->resolveInterface(name, static_cast<int>(revision));
 }
 
-QObject* QSGTexture_protectedbase_sender(const void* self) {
-	VirtualQSGTexture* self_cast = static_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QSGTexture_protectedbase_sender(const VirtualQSGTexture* self) {
+	return self->sender();
 }
 
-int QSGTexture_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQSGTexture* self_cast = static_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QSGTexture_protectedbase_senderSignalIndex(const VirtualQSGTexture* self) {
+	return self->senderSignalIndex();
 }
 
-int QSGTexture_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQSGTexture* self_cast = static_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QSGTexture_protectedbase_receivers(const VirtualQSGTexture* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QSGTexture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQSGTexture* self_cast = static_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QSGTexture_protectedbase_isSignalConnected(const VirtualQSGTexture* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QSGTexture_delete(QSGTexture* self) {
@@ -515,28 +472,30 @@ void QSGTexture_delete(QSGTexture* self) {
 }
 
 class VirtualQSGDynamicTexture final : public QSGDynamicTexture {
-	struct QSGDynamicTexture_VTable* vtbl;
+	const QSGDynamicTexture_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGDynamicTexture_VTable* QSGDynamicTexture_vtbl(const VirtualQSGDynamicTexture* self);
+	friend void* QSGDynamicTexture_vdata(const VirtualQSGDynamicTexture* self);
+	friend void QSGDynamicTexture_setVdata(VirtualQSGDynamicTexture* self, void* vdata);
 
-	VirtualQSGDynamicTexture(struct QSGDynamicTexture_VTable* vtbl): QSGDynamicTexture(), vtbl(vtbl) {};
+	VirtualQSGDynamicTexture(const QSGDynamicTexture_VTable* vtbl, void* vdata): QSGDynamicTexture(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGDynamicTexture() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGDynamicTexture() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QSGDynamicTexture::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const VirtualQSGDynamicTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QSGDynamicTexture::qt_metacast(param1);
@@ -544,14 +503,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QSGDynamicTexture_virtualbase_metacast(void* self, const char* param1);
+	friend void* QSGDynamicTexture_virtualbase_metacast(VirtualQSGDynamicTexture* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QSGDynamicTexture::qt_metacall(param1, param2, param3);
@@ -562,106 +520,98 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGDynamicTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QSGDynamicTexture_virtualbase_metacall(VirtualQSGDynamicTexture* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool updateTexture() override {
 		if (vtbl->updateTexture == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->updateTexture(vtbl, this);
+		bool callback_return_value = vtbl->updateTexture(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 comparisonKey() const override {
 		if (vtbl->comparisonKey == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		long long callback_return_value = vtbl->comparisonKey(vtbl, this);
+		long long callback_return_value = vtbl->comparisonKey(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize textureSize() const override {
 		if (vtbl->textureSize == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
 
 
-		QSize* callback_return_value = vtbl->textureSize(vtbl, this);
+		QSize* callback_return_value = vtbl->textureSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasAlphaChannel() const override {
 		if (vtbl->hasAlphaChannel == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->hasAlphaChannel(vtbl, this);
+		bool callback_return_value = vtbl->hasAlphaChannel(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasMipmaps() const override {
 		if (vtbl->hasMipmaps == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->hasMipmaps(vtbl, this);
+		bool callback_return_value = vtbl->hasMipmaps(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF normalizedTextureSubRect() const override {
 		if (vtbl->normalizedTextureSubRect == 0) {
 			return QSGDynamicTexture::normalizedTextureSubRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->normalizedTextureSubRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->normalizedTextureSubRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QSGDynamicTexture_virtualbase_normalizedTextureSubRect(const void* self);
+	friend QRectF* QSGDynamicTexture_virtualbase_normalizedTextureSubRect(const VirtualQSGDynamicTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isAtlasTexture() const override {
 		if (vtbl->isAtlasTexture == 0) {
 			return QSGDynamicTexture::isAtlasTexture();
 		}
 
 
-		bool callback_return_value = vtbl->isAtlasTexture(vtbl, this);
+		bool callback_return_value = vtbl->isAtlasTexture(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGDynamicTexture_virtualbase_isAtlasTexture(const void* self);
+	friend bool QSGDynamicTexture_virtualbase_isAtlasTexture(const VirtualQSGDynamicTexture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QSGDynamicTexture::event(event);
@@ -669,14 +619,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGDynamicTexture_virtualbase_event(void* self, QEvent* event);
+	friend bool QSGDynamicTexture_virtualbase_event(VirtualQSGDynamicTexture* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QSGDynamicTexture::eventFilter(watched, event);
@@ -685,14 +634,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGDynamicTexture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QSGDynamicTexture_virtualbase_eventFilter(VirtualQSGDynamicTexture* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QSGDynamicTexture::timerEvent(event);
@@ -701,13 +649,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QSGDynamicTexture_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QSGDynamicTexture_virtualbase_timerEvent(VirtualQSGDynamicTexture* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QSGDynamicTexture::childEvent(event);
@@ -716,13 +663,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QSGDynamicTexture_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QSGDynamicTexture_virtualbase_childEvent(VirtualQSGDynamicTexture* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QSGDynamicTexture::customEvent(event);
@@ -731,13 +677,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QSGDynamicTexture_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QSGDynamicTexture_virtualbase_customEvent(VirtualQSGDynamicTexture* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QSGDynamicTexture::connectNotify(signal);
@@ -748,13 +693,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QSGDynamicTexture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QSGDynamicTexture_virtualbase_connectNotify(VirtualQSGDynamicTexture* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QSGDynamicTexture::disconnectNotify(signal);
@@ -765,22 +709,22 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QSGDynamicTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QSGDynamicTexture_virtualbase_disconnectNotify(VirtualQSGDynamicTexture* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QSGDynamicTexture_protectedbase_resolveInterface(const void* self, const char* name, int revision);
-	friend QObject* QSGDynamicTexture_protectedbase_sender(const void* self);
-	friend int QSGDynamicTexture_protectedbase_senderSignalIndex(const void* self);
-	friend int QSGDynamicTexture_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QSGDynamicTexture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void* QSGDynamicTexture_protectedbase_resolveInterface(const VirtualQSGDynamicTexture* self, const char* name, int revision);
+	friend QObject* QSGDynamicTexture_protectedbase_sender(const VirtualQSGDynamicTexture* self);
+	friend int QSGDynamicTexture_protectedbase_senderSignalIndex(const VirtualQSGDynamicTexture* self);
+	friend int QSGDynamicTexture_protectedbase_receivers(const VirtualQSGDynamicTexture* self, const char* signal);
+	friend bool QSGDynamicTexture_protectedbase_isSignalConnected(const VirtualQSGDynamicTexture* self, QMetaMethod* signal);
 };
 
-QSGDynamicTexture* QSGDynamicTexture_new(struct QSGDynamicTexture_VTable* vtbl) {
-	return new VirtualQSGDynamicTexture(vtbl);
+VirtualQSGDynamicTexture* QSGDynamicTexture_new(const QSGDynamicTexture_VTable* vtbl, void* vdata) {
+	return new VirtualQSGDynamicTexture(vtbl, vdata);
 }
 
 void QSGDynamicTexture_virtbase(QSGDynamicTexture* src, QSGTexture** outptr_QSGTexture) {
@@ -836,112 +780,90 @@ struct miqt_string QSGDynamicTexture_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const void* self) {
+QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const VirtualQSGDynamicTexture* self) {
 
-	return (QMetaObject*) ( (const VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::metaObject();
-
+	return (QMetaObject*) self->QSGDynamicTexture::metaObject();
 }
 
-void* QSGDynamicTexture_virtualbase_metacast(void* self, const char* param1) {
+void* QSGDynamicTexture_virtualbase_metacast(VirtualQSGDynamicTexture* self, const char* param1) {
 
-	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::qt_metacast(param1);
-
+	return self->QSGDynamicTexture::qt_metacast(param1);
 }
 
-int QSGDynamicTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QSGDynamicTexture_virtualbase_metacall(VirtualQSGDynamicTexture* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QSGDynamicTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QSGDynamicTexture_virtualbase_normalizedTextureSubRect(const void* self) {
+QRectF* QSGDynamicTexture_virtualbase_normalizedTextureSubRect(const VirtualQSGDynamicTexture* self) {
 
-	return new QRectF(( (const VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::normalizedTextureSubRect());
-
+	return new QRectF(self->QSGDynamicTexture::normalizedTextureSubRect());
 }
 
-bool QSGDynamicTexture_virtualbase_isAtlasTexture(const void* self) {
+bool QSGDynamicTexture_virtualbase_isAtlasTexture(const VirtualQSGDynamicTexture* self) {
 
-	return ( (const VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::isAtlasTexture();
-
+	return self->QSGDynamicTexture::isAtlasTexture();
 }
 
-bool QSGDynamicTexture_virtualbase_event(void* self, QEvent* event) {
+bool QSGDynamicTexture_virtualbase_event(VirtualQSGDynamicTexture* self, QEvent* event) {
 
-	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::event(event);
-
+	return self->QSGDynamicTexture::event(event);
 }
 
-bool QSGDynamicTexture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QSGDynamicTexture_virtualbase_eventFilter(VirtualQSGDynamicTexture* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::eventFilter(watched, event);
-
+	return self->QSGDynamicTexture::eventFilter(watched, event);
 }
 
-void QSGDynamicTexture_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QSGDynamicTexture_virtualbase_timerEvent(VirtualQSGDynamicTexture* self, QTimerEvent* event) {
 
-	( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::timerEvent(event);
-
+	self->QSGDynamicTexture::timerEvent(event);
 }
 
-void QSGDynamicTexture_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QSGDynamicTexture_virtualbase_childEvent(VirtualQSGDynamicTexture* self, QChildEvent* event) {
 
-	( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::childEvent(event);
-
+	self->QSGDynamicTexture::childEvent(event);
 }
 
-void QSGDynamicTexture_virtualbase_customEvent(void* self, QEvent* event) {
+void QSGDynamicTexture_virtualbase_customEvent(VirtualQSGDynamicTexture* self, QEvent* event) {
 
-	( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::customEvent(event);
-
+	self->QSGDynamicTexture::customEvent(event);
 }
 
-void QSGDynamicTexture_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QSGDynamicTexture_virtualbase_connectNotify(VirtualQSGDynamicTexture* self, QMetaMethod* signal) {
 
-	( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::connectNotify(*signal);
-
+	self->QSGDynamicTexture::connectNotify(*signal);
 }
 
-void QSGDynamicTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QSGDynamicTexture_virtualbase_disconnectNotify(VirtualQSGDynamicTexture* self, QMetaMethod* signal) {
 
-	( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::disconnectNotify(*signal);
-
+	self->QSGDynamicTexture::disconnectNotify(*signal);
 }
 
 const QMetaObject* QSGDynamicTexture_staticMetaObject() { return &QSGDynamicTexture::staticMetaObject; }
-void* QSGDynamicTexture_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
-	VirtualQSGDynamicTexture* self_cast = static_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
-	
-	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
+const QSGDynamicTexture_VTable* QSGDynamicTexture_vtbl(const VirtualQSGDynamicTexture* self) { return self->vtbl; }
+void* QSGDynamicTexture_vdata(const VirtualQSGDynamicTexture* self) { return self->vdata; }
+void QSGDynamicTexture_setVdata(VirtualQSGDynamicTexture* self, void* vdata) { self->vdata = vdata; }
+
+void* QSGDynamicTexture_protectedbase_resolveInterface(const VirtualQSGDynamicTexture* self, const char* name, int revision) {
+	return self->resolveInterface(name, static_cast<int>(revision));
 }
 
-QObject* QSGDynamicTexture_protectedbase_sender(const void* self) {
-	VirtualQSGDynamicTexture* self_cast = static_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QSGDynamicTexture_protectedbase_sender(const VirtualQSGDynamicTexture* self) {
+	return self->sender();
 }
 
-int QSGDynamicTexture_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQSGDynamicTexture* self_cast = static_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QSGDynamicTexture_protectedbase_senderSignalIndex(const VirtualQSGDynamicTexture* self) {
+	return self->senderSignalIndex();
 }
 
-int QSGDynamicTexture_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQSGDynamicTexture* self_cast = static_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QSGDynamicTexture_protectedbase_receivers(const VirtualQSGDynamicTexture* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QSGDynamicTexture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQSGDynamicTexture* self_cast = static_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QSGDynamicTexture_protectedbase_isSignalConnected(const VirtualQSGDynamicTexture* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QSGDynamicTexture_delete(QSGDynamicTexture* self) {

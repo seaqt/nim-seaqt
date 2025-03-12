@@ -13,39 +13,32 @@
 #include <QUndoStack>
 #include <qundogroup.h>
 #include "gen_qundogroup.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQUndoGroup final : public QUndoGroup {
-	struct QUndoGroup_VTable* vtbl;
+	const QUndoGroup_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QUndoGroup_VTable* QUndoGroup_vtbl(const VirtualQUndoGroup* self);
+	friend void* QUndoGroup_vdata(const VirtualQUndoGroup* self);
+	friend void QUndoGroup_setVdata(VirtualQUndoGroup* self, void* vdata);
 
-	VirtualQUndoGroup(struct QUndoGroup_VTable* vtbl): QUndoGroup(), vtbl(vtbl) {};
-	VirtualQUndoGroup(struct QUndoGroup_VTable* vtbl, QObject* parent): QUndoGroup(parent), vtbl(vtbl) {};
+	VirtualQUndoGroup(const QUndoGroup_VTable* vtbl, void* vdata): QUndoGroup(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQUndoGroup(const QUndoGroup_VTable* vtbl, void* vdata, QObject* parent): QUndoGroup(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQUndoGroup() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQUndoGroup() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QUndoGroup::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QUndoGroup::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QUndoGroup_virtualbase_metacast(void* self, const char* param1);
+	friend void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QUndoGroup::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QUndoGroup_virtualbase_metacall(VirtualQUndoGroup* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QUndoGroup::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoGroup_virtualbase_event(void* self, QEvent* event);
+	friend bool QUndoGroup_virtualbase_event(VirtualQUndoGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QUndoGroup::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QUndoGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QUndoGroup_virtualbase_eventFilter(VirtualQUndoGroup* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QUndoGroup::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QUndoGroup_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QUndoGroup_virtualbase_timerEvent(VirtualQUndoGroup* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QUndoGroup::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QUndoGroup_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QUndoGroup_virtualbase_childEvent(VirtualQUndoGroup* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QUndoGroup::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QUndoGroup_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QUndoGroup_virtualbase_customEvent(VirtualQUndoGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QUndoGroup::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QUndoGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QUndoGroup_virtualbase_connectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QUndoGroup::disconnectNotify(signal);
@@ -182,25 +167,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QUndoGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QUndoGroup_protectedbase_sender(const void* self);
-	friend int QUndoGroup_protectedbase_senderSignalIndex(const void* self);
-	friend int QUndoGroup_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QUndoGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self);
+	friend int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self);
+	friend int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal);
+	friend bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal);
 };
 
-QUndoGroup* QUndoGroup_new(struct QUndoGroup_VTable* vtbl) {
-	return new VirtualQUndoGroup(vtbl);
+VirtualQUndoGroup* QUndoGroup_new(const QUndoGroup_VTable* vtbl, void* vdata) {
+	return new VirtualQUndoGroup(vtbl, vdata);
 }
 
-QUndoGroup* QUndoGroup_new2(struct QUndoGroup_VTable* vtbl, QObject* parent) {
-	return new VirtualQUndoGroup(vtbl, parent);
+VirtualQUndoGroup* QUndoGroup_new2(const QUndoGroup_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQUndoGroup(vtbl, vdata, parent);
 }
 
 void QUndoGroup_virtbase(QUndoGroup* src, QObject** outptr_QObject) {
@@ -313,7 +298,7 @@ void QUndoGroup_activeStackChanged(QUndoGroup* self, QUndoStack* stack) {
 	self->activeStackChanged(stack);
 }
 
-void QUndoGroup_connect_activeStackChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) {
+void QUndoGroup_connect_activeStackChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QUndoStack*);
@@ -329,7 +314,7 @@ void QUndoGroup_indexChanged(QUndoGroup* self, int idx) {
 	self->indexChanged(static_cast<int>(idx));
 }
 
-void QUndoGroup_connect_indexChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QUndoGroup_connect_indexChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -345,7 +330,7 @@ void QUndoGroup_cleanChanged(QUndoGroup* self, bool clean) {
 	self->cleanChanged(clean);
 }
 
-void QUndoGroup_connect_cleanChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QUndoGroup_connect_cleanChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -361,7 +346,7 @@ void QUndoGroup_canUndoChanged(QUndoGroup* self, bool canUndo) {
 	self->canUndoChanged(canUndo);
 }
 
-void QUndoGroup_connect_canUndoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QUndoGroup_connect_canUndoChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -377,7 +362,7 @@ void QUndoGroup_canRedoChanged(QUndoGroup* self, bool canRedo) {
 	self->canRedoChanged(canRedo);
 }
 
-void QUndoGroup_connect_canRedoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QUndoGroup_connect_canRedoChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -394,7 +379,7 @@ void QUndoGroup_undoTextChanged(QUndoGroup* self, struct miqt_string undoText) {
 	self->undoTextChanged(undoText_QString);
 }
 
-void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QUndoGroup_connect_undoTextChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -418,7 +403,7 @@ void QUndoGroup_redoTextChanged(QUndoGroup* self, struct miqt_string redoText) {
 	self->redoTextChanged(redoText_QString);
 }
 
-void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QUndoGroup_connect_redoTextChanged(VirtualQUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -469,93 +454,76 @@ QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, s
 	return self->createRedoAction(parent, prefix_QString);
 }
 
-QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self) {
+QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self) {
 
-	return (QMetaObject*) ( (const VirtualQUndoGroup*)(self) )->QUndoGroup::metaObject();
-
+	return (QMetaObject*) self->QUndoGroup::metaObject();
 }
 
-void* QUndoGroup_virtualbase_metacast(void* self, const char* param1) {
+void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1) {
 
-	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::qt_metacast(param1);
-
+	return self->QUndoGroup::qt_metacast(param1);
 }
 
-int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QUndoGroup_virtualbase_metacall(VirtualQUndoGroup* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QUndoGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QUndoGroup_virtualbase_event(void* self, QEvent* event) {
+bool QUndoGroup_virtualbase_event(VirtualQUndoGroup* self, QEvent* event) {
 
-	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::event(event);
-
+	return self->QUndoGroup::event(event);
 }
 
-bool QUndoGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QUndoGroup_virtualbase_eventFilter(VirtualQUndoGroup* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::eventFilter(watched, event);
-
+	return self->QUndoGroup::eventFilter(watched, event);
 }
 
-void QUndoGroup_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QUndoGroup_virtualbase_timerEvent(VirtualQUndoGroup* self, QTimerEvent* event) {
 
-	( (VirtualQUndoGroup*)(self) )->QUndoGroup::timerEvent(event);
-
+	self->QUndoGroup::timerEvent(event);
 }
 
-void QUndoGroup_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QUndoGroup_virtualbase_childEvent(VirtualQUndoGroup* self, QChildEvent* event) {
 
-	( (VirtualQUndoGroup*)(self) )->QUndoGroup::childEvent(event);
-
+	self->QUndoGroup::childEvent(event);
 }
 
-void QUndoGroup_virtualbase_customEvent(void* self, QEvent* event) {
+void QUndoGroup_virtualbase_customEvent(VirtualQUndoGroup* self, QEvent* event) {
 
-	( (VirtualQUndoGroup*)(self) )->QUndoGroup::customEvent(event);
-
+	self->QUndoGroup::customEvent(event);
 }
 
-void QUndoGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QUndoGroup_virtualbase_connectNotify(VirtualQUndoGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQUndoGroup*)(self) )->QUndoGroup::connectNotify(*signal);
-
+	self->QUndoGroup::connectNotify(*signal);
 }
 
-void QUndoGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQUndoGroup*)(self) )->QUndoGroup::disconnectNotify(*signal);
-
+	self->QUndoGroup::disconnectNotify(*signal);
 }
 
 const QMetaObject* QUndoGroup_staticMetaObject() { return &QUndoGroup::staticMetaObject; }
-QObject* QUndoGroup_protectedbase_sender(const void* self) {
-	VirtualQUndoGroup* self_cast = static_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
-	
-	return self_cast->sender();
 
+const QUndoGroup_VTable* QUndoGroup_vtbl(const VirtualQUndoGroup* self) { return self->vtbl; }
+void* QUndoGroup_vdata(const VirtualQUndoGroup* self) { return self->vdata; }
+void QUndoGroup_setVdata(VirtualQUndoGroup* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self) {
+	return self->sender();
 }
 
-int QUndoGroup_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQUndoGroup* self_cast = static_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self) {
+	return self->senderSignalIndex();
 }
 
-int QUndoGroup_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQUndoGroup* self_cast = static_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QUndoGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQUndoGroup* self_cast = static_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QUndoGroup_delete(QUndoGroup* self) {

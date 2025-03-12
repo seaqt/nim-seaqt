@@ -22,6 +22,7 @@ typedef struct QStringTokenizerBaseBase QStringTokenizerBaseBase;
 
 QStringTokenizerBaseBase* QStringTokenizerBaseBase_new(QStringTokenizerBaseBase* param1);
 
+
 #ifdef __cplusplus
 } /* extern C */
 #endif

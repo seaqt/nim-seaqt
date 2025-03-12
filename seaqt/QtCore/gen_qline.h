@@ -30,6 +30,7 @@ QLine* QLine_new();
 QLine* QLine_new2(QPoint* pt1, QPoint* pt2);
 QLine* QLine_new3(int x1, int y1, int x2, int y2);
 QLine* QLine_new4(QLine* param1);
+
 bool QLine_isNull(const QLine* self);
 QPoint* QLine_p1(const QLine* self);
 QPoint* QLine_p2(const QLine* self);
@@ -51,6 +52,7 @@ void QLine_setLine(QLine* self, int x1, int y1, int x2, int y2);
 bool QLine_operatorEqual(const QLine* self, QLine* d);
 bool QLine_operatorNotEqual(const QLine* self, QLine* d);
 QLineF* QLine_toLineF(const QLine* self);
+
 void QLine_delete(QLine* self);
 
 QLineF* QLineF_new();
@@ -58,6 +60,7 @@ QLineF* QLineF_new2(QPointF* pt1, QPointF* pt2);
 QLineF* QLineF_new3(double x1, double y1, double x2, double y2);
 QLineF* QLineF_new4(QLine* line);
 QLineF* QLineF_new5(QLineF* param1);
+
 QLineF* QLineF_fromPolar(double length, double angle);
 bool QLineF_isNull(const QLineF* self);
 QPointF* QLineF_p1(const QLineF* self);
@@ -90,6 +93,7 @@ bool QLineF_operatorEqual(const QLineF* self, QLineF* d);
 bool QLineF_operatorNotEqual(const QLineF* self, QLineF* d);
 QLine* QLineF_toLine(const QLineF* self);
 int QLineF_intersects2(const QLineF* self, QLineF* l, QPointF* intersectionPoint);
+
 void QLineF_delete(QLineF* self);
 
 #ifdef __cplusplus

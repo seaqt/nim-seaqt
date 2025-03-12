@@ -39,6 +39,7 @@ QCursor* QCursor_new6(QBitmap* bitmap, QBitmap* mask, int hotX);
 QCursor* QCursor_new7(QBitmap* bitmap, QBitmap* mask, int hotX, int hotY);
 QCursor* QCursor_new8(QPixmap* pixmap, int hotX);
 QCursor* QCursor_new9(QPixmap* pixmap, int hotX, int hotY);
+
 void QCursor_operatorAssign(QCursor* self, QCursor* cursor);
 void QCursor_swap(QCursor* self, QCursor* other);
 QVariant* QCursor_ToQVariant(const QCursor* self);
@@ -56,6 +57,7 @@ void QCursor_setPos(int x, int y);
 void QCursor_setPos2(QScreen* screen, int x, int y);
 void QCursor_setPosWithQPoint(QPoint* p);
 void QCursor_setPos3(QScreen* screen, QPoint* p);
+
 void QCursor_delete(QCursor* self);
 
 #ifdef __cplusplus

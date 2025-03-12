@@ -37,10 +37,10 @@ export gen_qbytearrayview_types
 
 type cQByteArrayView*{.exportc: "QByteArrayView", incompleteStruct.} = object
 
-proc fcQByteArrayView_toByteArray(self: pointer, ): struct_miqt_string {.importc: "QByteArrayView_toByteArray".}
-proc fcQByteArrayView_size(self: pointer, ): int64 {.importc: "QByteArrayView_size".}
-proc fcQByteArrayView_data(self: pointer, ): cstring {.importc: "QByteArrayView_data".}
-proc fcQByteArrayView_constData(self: pointer, ): cstring {.importc: "QByteArrayView_constData".}
+proc fcQByteArrayView_toByteArray(self: pointer): struct_miqt_string {.importc: "QByteArrayView_toByteArray".}
+proc fcQByteArrayView_size(self: pointer): int64 {.importc: "QByteArrayView_size".}
+proc fcQByteArrayView_data(self: pointer): cstring {.importc: "QByteArrayView_data".}
+proc fcQByteArrayView_constData(self: pointer): cstring {.importc: "QByteArrayView_constData".}
 proc fcQByteArrayView_operatorSubscript(self: pointer, n: int64): cchar {.importc: "QByteArrayView_operatorSubscript".}
 proc fcQByteArrayView_at(self: pointer, n: int64): cchar {.importc: "QByteArrayView_at".}
 proc fcQByteArrayView_first(self: pointer, n: int64): pointer {.importc: "QByteArrayView_first".}
@@ -50,17 +50,17 @@ proc fcQByteArrayView_sliced2(self: pointer, pos: int64, n: int64): pointer {.im
 proc fcQByteArrayView_chopped(self: pointer, len: int64): pointer {.importc: "QByteArrayView_chopped".}
 proc fcQByteArrayView_truncate(self: pointer, n: int64): void {.importc: "QByteArrayView_truncate".}
 proc fcQByteArrayView_chop(self: pointer, n: int64): void {.importc: "QByteArrayView_chop".}
-proc fcQByteArrayView_trimmed(self: pointer, ): pointer {.importc: "QByteArrayView_trimmed".}
-proc fcQByteArrayView_toShort(self: pointer, ): cshort {.importc: "QByteArrayView_toShort".}
-proc fcQByteArrayView_toUShort(self: pointer, ): cushort {.importc: "QByteArrayView_toUShort".}
-proc fcQByteArrayView_toInt(self: pointer, ): cint {.importc: "QByteArrayView_toInt".}
-proc fcQByteArrayView_toUInt(self: pointer, ): cuint {.importc: "QByteArrayView_toUInt".}
-proc fcQByteArrayView_toLong(self: pointer, ): clong {.importc: "QByteArrayView_toLong".}
-proc fcQByteArrayView_toULong(self: pointer, ): culong {.importc: "QByteArrayView_toULong".}
-proc fcQByteArrayView_toLongLong(self: pointer, ): clonglong {.importc: "QByteArrayView_toLongLong".}
-proc fcQByteArrayView_toULongLong(self: pointer, ): culonglong {.importc: "QByteArrayView_toULongLong".}
-proc fcQByteArrayView_toFloat(self: pointer, ): float32 {.importc: "QByteArrayView_toFloat".}
-proc fcQByteArrayView_toDouble(self: pointer, ): float64 {.importc: "QByteArrayView_toDouble".}
+proc fcQByteArrayView_trimmed(self: pointer): pointer {.importc: "QByteArrayView_trimmed".}
+proc fcQByteArrayView_toShort(self: pointer): cshort {.importc: "QByteArrayView_toShort".}
+proc fcQByteArrayView_toUShort(self: pointer): cushort {.importc: "QByteArrayView_toUShort".}
+proc fcQByteArrayView_toInt(self: pointer): cint {.importc: "QByteArrayView_toInt".}
+proc fcQByteArrayView_toUInt(self: pointer): cuint {.importc: "QByteArrayView_toUInt".}
+proc fcQByteArrayView_toLong(self: pointer): clong {.importc: "QByteArrayView_toLong".}
+proc fcQByteArrayView_toULong(self: pointer): culong {.importc: "QByteArrayView_toULong".}
+proc fcQByteArrayView_toLongLong(self: pointer): clonglong {.importc: "QByteArrayView_toLongLong".}
+proc fcQByteArrayView_toULongLong(self: pointer): culonglong {.importc: "QByteArrayView_toULongLong".}
+proc fcQByteArrayView_toFloat(self: pointer): float32 {.importc: "QByteArrayView_toFloat".}
+proc fcQByteArrayView_toDouble(self: pointer): float64 {.importc: "QByteArrayView_toDouble".}
 proc fcQByteArrayView_startsWith(self: pointer, other: pointer): bool {.importc: "QByteArrayView_startsWith".}
 proc fcQByteArrayView_startsWithWithChar(self: pointer, c: cchar): bool {.importc: "QByteArrayView_startsWithWithChar".}
 proc fcQByteArrayView_endsWith(self: pointer, other: pointer): bool {.importc: "QByteArrayView_endsWith".}
@@ -75,19 +75,19 @@ proc fcQByteArrayView_lastIndexOfWithCh(self: pointer, ch: cchar): int64 {.impor
 proc fcQByteArrayView_count(self: pointer, a: pointer): int64 {.importc: "QByteArrayView_count".}
 proc fcQByteArrayView_countWithCh(self: pointer, ch: cchar): int64 {.importc: "QByteArrayView_countWithCh".}
 proc fcQByteArrayView_compare(self: pointer, a: pointer): cint {.importc: "QByteArrayView_compare".}
-proc fcQByteArrayView_isValidUtf8(self: pointer, ): bool {.importc: "QByteArrayView_isValidUtf8".}
-proc fcQByteArrayView_begin(self: pointer, ): cstring {.importc: "QByteArrayView_begin".}
-proc fcQByteArrayView_endX(self: pointer, ): cstring {.importc: "QByteArrayView_end".}
-proc fcQByteArrayView_cbegin(self: pointer, ): cstring {.importc: "QByteArrayView_cbegin".}
-proc fcQByteArrayView_cend(self: pointer, ): cstring {.importc: "QByteArrayView_cend".}
-proc fcQByteArrayView_empty(self: pointer, ): bool {.importc: "QByteArrayView_empty".}
-proc fcQByteArrayView_front(self: pointer, ): cchar {.importc: "QByteArrayView_front".}
-proc fcQByteArrayView_back(self: pointer, ): cchar {.importc: "QByteArrayView_back".}
-proc fcQByteArrayView_isNull(self: pointer, ): bool {.importc: "QByteArrayView_isNull".}
-proc fcQByteArrayView_isEmpty(self: pointer, ): bool {.importc: "QByteArrayView_isEmpty".}
-proc fcQByteArrayView_length(self: pointer, ): int64 {.importc: "QByteArrayView_length".}
-proc fcQByteArrayView_first2(self: pointer, ): cchar {.importc: "QByteArrayView_first2".}
-proc fcQByteArrayView_last2(self: pointer, ): cchar {.importc: "QByteArrayView_last2".}
+proc fcQByteArrayView_isValidUtf8(self: pointer): bool {.importc: "QByteArrayView_isValidUtf8".}
+proc fcQByteArrayView_begin(self: pointer): cstring {.importc: "QByteArrayView_begin".}
+proc fcQByteArrayView_endX(self: pointer): cstring {.importc: "QByteArrayView_end".}
+proc fcQByteArrayView_cbegin(self: pointer): cstring {.importc: "QByteArrayView_cbegin".}
+proc fcQByteArrayView_cend(self: pointer): cstring {.importc: "QByteArrayView_cend".}
+proc fcQByteArrayView_empty(self: pointer): bool {.importc: "QByteArrayView_empty".}
+proc fcQByteArrayView_front(self: pointer): cchar {.importc: "QByteArrayView_front".}
+proc fcQByteArrayView_back(self: pointer): cchar {.importc: "QByteArrayView_back".}
+proc fcQByteArrayView_isNull(self: pointer): bool {.importc: "QByteArrayView_isNull".}
+proc fcQByteArrayView_isEmpty(self: pointer): bool {.importc: "QByteArrayView_isEmpty".}
+proc fcQByteArrayView_length(self: pointer): int64 {.importc: "QByteArrayView_length".}
+proc fcQByteArrayView_first2(self: pointer): cchar {.importc: "QByteArrayView_first2".}
+proc fcQByteArrayView_last2(self: pointer): cchar {.importc: "QByteArrayView_last2".}
 proc fcQByteArrayView_toShort1(self: pointer, ok: ptr bool): cshort {.importc: "QByteArrayView_toShort1".}
 proc fcQByteArrayView_toShort2(self: pointer, ok: ptr bool, base: cint): cshort {.importc: "QByteArrayView_toShort2".}
 proc fcQByteArrayView_toUShort1(self: pointer, ok: ptr bool): cushort {.importc: "QByteArrayView_toUShort1".}
@@ -113,19 +113,19 @@ proc fcQByteArrayView_compare2(self: pointer, a: pointer, cs: cint): cint {.impo
 proc fcQByteArrayView_new(): ptr cQByteArrayView {.importc: "QByteArrayView_new".}
 proc fcQByteArrayView_new2(param1: pointer): ptr cQByteArrayView {.importc: "QByteArrayView_new2".}
 
-proc toByteArray*(self: gen_qbytearrayview_types.QByteArrayView, ): seq[byte] =
+proc toByteArray*(self: gen_qbytearrayview_types.QByteArrayView): seq[byte] =
   var v_bytearray = fcQByteArrayView_toByteArray(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc size*(self: gen_qbytearrayview_types.QByteArrayView, ): int64 =
+proc size*(self: gen_qbytearrayview_types.QByteArrayView): int64 =
   fcQByteArrayView_size(self.h)
 
-proc data*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc data*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_data(self.h))
 
-proc constData*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc constData*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_constData(self.h))
 
 proc operatorSubscript*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): cchar =
@@ -155,37 +155,37 @@ proc truncate*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): void =
 proc chop*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): void =
   fcQByteArrayView_chop(self.h, n)
 
-proc trimmed*(self: gen_qbytearrayview_types.QByteArrayView, ): gen_qbytearrayview_types.QByteArrayView =
+proc trimmed*(self: gen_qbytearrayview_types.QByteArrayView): gen_qbytearrayview_types.QByteArrayView =
   gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_trimmed(self.h), owned: true)
 
-proc toShort*(self: gen_qbytearrayview_types.QByteArrayView, ): cshort =
+proc toShort*(self: gen_qbytearrayview_types.QByteArrayView): cshort =
   fcQByteArrayView_toShort(self.h)
 
-proc toUShort*(self: gen_qbytearrayview_types.QByteArrayView, ): cushort =
+proc toUShort*(self: gen_qbytearrayview_types.QByteArrayView): cushort =
   fcQByteArrayView_toUShort(self.h)
 
-proc toInt*(self: gen_qbytearrayview_types.QByteArrayView, ): cint =
+proc toInt*(self: gen_qbytearrayview_types.QByteArrayView): cint =
   fcQByteArrayView_toInt(self.h)
 
-proc toUInt*(self: gen_qbytearrayview_types.QByteArrayView, ): cuint =
+proc toUInt*(self: gen_qbytearrayview_types.QByteArrayView): cuint =
   fcQByteArrayView_toUInt(self.h)
 
-proc toLong*(self: gen_qbytearrayview_types.QByteArrayView, ): clong =
+proc toLong*(self: gen_qbytearrayview_types.QByteArrayView): clong =
   fcQByteArrayView_toLong(self.h)
 
-proc toULong*(self: gen_qbytearrayview_types.QByteArrayView, ): culong =
+proc toULong*(self: gen_qbytearrayview_types.QByteArrayView): culong =
   fcQByteArrayView_toULong(self.h)
 
-proc toLongLong*(self: gen_qbytearrayview_types.QByteArrayView, ): clonglong =
+proc toLongLong*(self: gen_qbytearrayview_types.QByteArrayView): clonglong =
   fcQByteArrayView_toLongLong(self.h)
 
-proc toULongLong*(self: gen_qbytearrayview_types.QByteArrayView, ): culonglong =
+proc toULongLong*(self: gen_qbytearrayview_types.QByteArrayView): culonglong =
   fcQByteArrayView_toULongLong(self.h)
 
-proc toFloat*(self: gen_qbytearrayview_types.QByteArrayView, ): float32 =
+proc toFloat*(self: gen_qbytearrayview_types.QByteArrayView): float32 =
   fcQByteArrayView_toFloat(self.h)
 
-proc toDouble*(self: gen_qbytearrayview_types.QByteArrayView, ): float64 =
+proc toDouble*(self: gen_qbytearrayview_types.QByteArrayView): float64 =
   fcQByteArrayView_toDouble(self.h)
 
 proc startsWith*(self: gen_qbytearrayview_types.QByteArrayView, other: gen_qbytearrayview_types.QByteArrayView): bool =
@@ -230,43 +230,43 @@ proc count*(self: gen_qbytearrayview_types.QByteArrayView, ch: cchar): int64 =
 proc compare*(self: gen_qbytearrayview_types.QByteArrayView, a: gen_qbytearrayview_types.QByteArrayView): cint =
   fcQByteArrayView_compare(self.h, a.h)
 
-proc isValidUtf8*(self: gen_qbytearrayview_types.QByteArrayView, ): bool =
+proc isValidUtf8*(self: gen_qbytearrayview_types.QByteArrayView): bool =
   fcQByteArrayView_isValidUtf8(self.h)
 
-proc begin*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc begin*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_begin(self.h))
 
-proc endX*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc endX*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_endX(self.h))
 
-proc cbegin*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc cbegin*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_cbegin(self.h))
 
-proc cend*(self: gen_qbytearrayview_types.QByteArrayView, ): cstring =
+proc cend*(self: gen_qbytearrayview_types.QByteArrayView): cstring =
   (fcQByteArrayView_cend(self.h))
 
-proc empty*(self: gen_qbytearrayview_types.QByteArrayView, ): bool =
+proc empty*(self: gen_qbytearrayview_types.QByteArrayView): bool =
   fcQByteArrayView_empty(self.h)
 
-proc front*(self: gen_qbytearrayview_types.QByteArrayView, ): cchar =
+proc front*(self: gen_qbytearrayview_types.QByteArrayView): cchar =
   fcQByteArrayView_front(self.h)
 
-proc back*(self: gen_qbytearrayview_types.QByteArrayView, ): cchar =
+proc back*(self: gen_qbytearrayview_types.QByteArrayView): cchar =
   fcQByteArrayView_back(self.h)
 
-proc isNull*(self: gen_qbytearrayview_types.QByteArrayView, ): bool =
+proc isNull*(self: gen_qbytearrayview_types.QByteArrayView): bool =
   fcQByteArrayView_isNull(self.h)
 
-proc isEmpty*(self: gen_qbytearrayview_types.QByteArrayView, ): bool =
+proc isEmpty*(self: gen_qbytearrayview_types.QByteArrayView): bool =
   fcQByteArrayView_isEmpty(self.h)
 
-proc length*(self: gen_qbytearrayview_types.QByteArrayView, ): int64 =
+proc length*(self: gen_qbytearrayview_types.QByteArrayView): int64 =
   fcQByteArrayView_length(self.h)
 
-proc first*(self: gen_qbytearrayview_types.QByteArrayView, ): cchar =
+proc first*(self: gen_qbytearrayview_types.QByteArrayView): cchar =
   fcQByteArrayView_first2(self.h)
 
-proc last*(self: gen_qbytearrayview_types.QByteArrayView, ): cchar =
+proc last*(self: gen_qbytearrayview_types.QByteArrayView): cchar =
   fcQByteArrayView_last2(self.h)
 
 proc toShort*(self: gen_qbytearrayview_types.QByteArrayView, ok: ptr bool): cshort =

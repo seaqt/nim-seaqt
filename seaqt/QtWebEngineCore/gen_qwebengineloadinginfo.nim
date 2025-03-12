@@ -62,37 +62,37 @@ export
 type cQWebEngineLoadingInfo*{.exportc: "QWebEngineLoadingInfo", incompleteStruct.} = object
 
 proc fcQWebEngineLoadingInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineLoadingInfo_operatorAssign".}
-proc fcQWebEngineLoadingInfo_url(self: pointer, ): pointer {.importc: "QWebEngineLoadingInfo_url".}
-proc fcQWebEngineLoadingInfo_isErrorPage(self: pointer, ): bool {.importc: "QWebEngineLoadingInfo_isErrorPage".}
-proc fcQWebEngineLoadingInfo_status(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_status".}
-proc fcQWebEngineLoadingInfo_errorString(self: pointer, ): struct_miqt_string {.importc: "QWebEngineLoadingInfo_errorString".}
-proc fcQWebEngineLoadingInfo_errorDomain(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorDomain".}
-proc fcQWebEngineLoadingInfo_errorCode(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
+proc fcQWebEngineLoadingInfo_url(self: pointer): pointer {.importc: "QWebEngineLoadingInfo_url".}
+proc fcQWebEngineLoadingInfo_isErrorPage(self: pointer): bool {.importc: "QWebEngineLoadingInfo_isErrorPage".}
+proc fcQWebEngineLoadingInfo_status(self: pointer): cint {.importc: "QWebEngineLoadingInfo_status".}
+proc fcQWebEngineLoadingInfo_errorString(self: pointer): struct_miqt_string {.importc: "QWebEngineLoadingInfo_errorString".}
+proc fcQWebEngineLoadingInfo_errorDomain(self: pointer): cint {.importc: "QWebEngineLoadingInfo_errorDomain".}
+proc fcQWebEngineLoadingInfo_errorCode(self: pointer): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
 proc fcQWebEngineLoadingInfo_new(other: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
 proc fcQWebEngineLoadingInfo_staticMetaObject(): pointer {.importc: "QWebEngineLoadingInfo_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): void =
   fcQWebEngineLoadingInfo_operatorAssign(self.h, other.h)
 
-proc url*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineLoadingInfo_url(self.h), owned: true)
 
-proc isErrorPage*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): bool =
+proc isErrorPage*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): bool =
   fcQWebEngineLoadingInfo_isErrorPage(self.h)
 
-proc status*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): cint =
+proc status*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): cint =
   cint(fcQWebEngineLoadingInfo_status(self.h))
 
-proc errorString*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): string =
+proc errorString*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): string =
   let v_ms = fcQWebEngineLoadingInfo_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc errorDomain*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): cint =
+proc errorDomain*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): cint =
   cint(fcQWebEngineLoadingInfo_errorDomain(self.h))
 
-proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): cint =
+proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): cint =
   fcQWebEngineLoadingInfo_errorCode(self.h)
 
 proc create*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo,

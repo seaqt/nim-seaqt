@@ -5,15 +5,6 @@
 #include <QWebEngineLoadingInfo>
 #include <qwebengineloadinginfo.h>
 #include "gen_qwebengineloadinginfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineLoadingInfo* QWebEngineLoadingInfo_new(QWebEngineLoadingInfo* other) {
 	return new QWebEngineLoadingInfo(*other);
 }
@@ -56,6 +47,7 @@ int QWebEngineLoadingInfo_errorCode(const QWebEngineLoadingInfo* self) {
 }
 
 const QMetaObject* QWebEngineLoadingInfo_staticMetaObject() { return &QWebEngineLoadingInfo::staticMetaObject; }
+
 void QWebEngineLoadingInfo_delete(QWebEngineLoadingInfo* self) {
 	delete self;
 }

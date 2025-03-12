@@ -6,15 +6,6 @@
 #include <QStringEncoder>
 #include <qstringconverter.h>
 #include "gen_qstringconverter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStringEncoder* QStringEncoder_new() {
 	return new QStringEncoder();
 }

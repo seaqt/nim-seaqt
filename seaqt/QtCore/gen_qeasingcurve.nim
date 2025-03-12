@@ -99,16 +99,16 @@ proc fcQEasingCurve_operatorAssign(self: pointer, other: pointer): void {.import
 proc fcQEasingCurve_swap(self: pointer, other: pointer): void {.importc: "QEasingCurve_swap".}
 proc fcQEasingCurve_operatorEqual(self: pointer, other: pointer): bool {.importc: "QEasingCurve_operatorEqual".}
 proc fcQEasingCurve_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QEasingCurve_operatorNotEqual".}
-proc fcQEasingCurve_amplitude(self: pointer, ): float64 {.importc: "QEasingCurve_amplitude".}
+proc fcQEasingCurve_amplitude(self: pointer): float64 {.importc: "QEasingCurve_amplitude".}
 proc fcQEasingCurve_setAmplitude(self: pointer, amplitude: float64): void {.importc: "QEasingCurve_setAmplitude".}
-proc fcQEasingCurve_period(self: pointer, ): float64 {.importc: "QEasingCurve_period".}
+proc fcQEasingCurve_period(self: pointer): float64 {.importc: "QEasingCurve_period".}
 proc fcQEasingCurve_setPeriod(self: pointer, period: float64): void {.importc: "QEasingCurve_setPeriod".}
-proc fcQEasingCurve_overshoot(self: pointer, ): float64 {.importc: "QEasingCurve_overshoot".}
+proc fcQEasingCurve_overshoot(self: pointer): float64 {.importc: "QEasingCurve_overshoot".}
 proc fcQEasingCurve_setOvershoot(self: pointer, overshoot: float64): void {.importc: "QEasingCurve_setOvershoot".}
 proc fcQEasingCurve_addCubicBezierSegment(self: pointer, c1: pointer, c2: pointer, endPoint: pointer): void {.importc: "QEasingCurve_addCubicBezierSegment".}
 proc fcQEasingCurve_addTCBSegment(self: pointer, nextPoint: pointer, t: float64, c: float64, b: float64): void {.importc: "QEasingCurve_addTCBSegment".}
-proc fcQEasingCurve_toCubicSpline(self: pointer, ): struct_miqt_array {.importc: "QEasingCurve_toCubicSpline".}
-proc fcQEasingCurve_typeX(self: pointer, ): cint {.importc: "QEasingCurve_type".}
+proc fcQEasingCurve_toCubicSpline(self: pointer): struct_miqt_array {.importc: "QEasingCurve_toCubicSpline".}
+proc fcQEasingCurve_typeX(self: pointer): cint {.importc: "QEasingCurve_type".}
 proc fcQEasingCurve_setType(self: pointer, typeVal: cint): void {.importc: "QEasingCurve_setType".}
 proc fcQEasingCurve_valueForProgress(self: pointer, progress: float64): float64 {.importc: "QEasingCurve_valueForProgress".}
 proc fcQEasingCurve_new(): ptr cQEasingCurve {.importc: "QEasingCurve_new".}
@@ -128,19 +128,19 @@ proc operatorEqual*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasin
 proc operatorNotEqual*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): bool =
   fcQEasingCurve_operatorNotEqual(self.h, other.h)
 
-proc amplitude*(self: gen_qeasingcurve_types.QEasingCurve, ): float64 =
+proc amplitude*(self: gen_qeasingcurve_types.QEasingCurve): float64 =
   fcQEasingCurve_amplitude(self.h)
 
 proc setAmplitude*(self: gen_qeasingcurve_types.QEasingCurve, amplitude: float64): void =
   fcQEasingCurve_setAmplitude(self.h, amplitude)
 
-proc period*(self: gen_qeasingcurve_types.QEasingCurve, ): float64 =
+proc period*(self: gen_qeasingcurve_types.QEasingCurve): float64 =
   fcQEasingCurve_period(self.h)
 
 proc setPeriod*(self: gen_qeasingcurve_types.QEasingCurve, period: float64): void =
   fcQEasingCurve_setPeriod(self.h, period)
 
-proc overshoot*(self: gen_qeasingcurve_types.QEasingCurve, ): float64 =
+proc overshoot*(self: gen_qeasingcurve_types.QEasingCurve): float64 =
   fcQEasingCurve_overshoot(self.h)
 
 proc setOvershoot*(self: gen_qeasingcurve_types.QEasingCurve, overshoot: float64): void =
@@ -152,7 +152,7 @@ proc addCubicBezierSegment*(self: gen_qeasingcurve_types.QEasingCurve, c1: gen_q
 proc addTCBSegment*(self: gen_qeasingcurve_types.QEasingCurve, nextPoint: gen_qpoint_types.QPointF, t: float64, c: float64, b: float64): void =
   fcQEasingCurve_addTCBSegment(self.h, nextPoint.h, t, c, b)
 
-proc toCubicSpline*(self: gen_qeasingcurve_types.QEasingCurve, ): seq[gen_qpoint_types.QPointF] =
+proc toCubicSpline*(self: gen_qeasingcurve_types.QEasingCurve): seq[gen_qpoint_types.QPointF] =
   var v_ma = fcQEasingCurve_toCubicSpline(self.h)
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -161,7 +161,7 @@ proc toCubicSpline*(self: gen_qeasingcurve_types.QEasingCurve, ): seq[gen_qpoint
   c_free(v_ma.data)
   vx_ret
 
-proc typeX*(self: gen_qeasingcurve_types.QEasingCurve, ): cint =
+proc typeX*(self: gen_qeasingcurve_types.QEasingCurve): cint =
   cint(fcQEasingCurve_typeX(self.h))
 
 proc setType*(self: gen_qeasingcurve_types.QEasingCurve, typeVal: cint): void =

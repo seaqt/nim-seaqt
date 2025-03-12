@@ -37,9 +37,9 @@ export gen_qfactoryinterface_types
 
 type cQFactoryInterface*{.exportc: "QFactoryInterface", incompleteStruct.} = object
 
-proc fcQFactoryInterface_keys(self: pointer, ): struct_miqt_array {.importc: "QFactoryInterface_keys".}
+proc fcQFactoryInterface_keys(self: pointer): struct_miqt_array {.importc: "QFactoryInterface_keys".}
 
-proc keys*(self: gen_qfactoryinterface_types.QFactoryInterface, ): seq[string] =
+proc keys*(self: gen_qfactoryinterface_types.QFactoryInterface): seq[string] =
   var v_ma = fcQFactoryInterface_keys(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

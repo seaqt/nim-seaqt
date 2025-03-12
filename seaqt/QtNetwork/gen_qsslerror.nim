@@ -88,9 +88,9 @@ proc fcQSslError_swap(self: pointer, other: pointer): void {.importc: "QSslError
 proc fcQSslError_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslError_operatorAssign".}
 proc fcQSslError_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslError_operatorEqual".}
 proc fcQSslError_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslError_operatorNotEqual".}
-proc fcQSslError_error(self: pointer, ): cint {.importc: "QSslError_error".}
-proc fcQSslError_errorString(self: pointer, ): struct_miqt_string {.importc: "QSslError_errorString".}
-proc fcQSslError_certificate(self: pointer, ): pointer {.importc: "QSslError_certificate".}
+proc fcQSslError_error(self: pointer): cint {.importc: "QSslError_error".}
+proc fcQSslError_errorString(self: pointer): struct_miqt_string {.importc: "QSslError_errorString".}
+proc fcQSslError_certificate(self: pointer): pointer {.importc: "QSslError_certificate".}
 proc fcQSslError_new(): ptr cQSslError {.importc: "QSslError_new".}
 proc fcQSslError_new2(error: cint): ptr cQSslError {.importc: "QSslError_new2".}
 proc fcQSslError_new3(error: cint, certificate: pointer): ptr cQSslError {.importc: "QSslError_new3".}
@@ -109,16 +109,16 @@ proc operatorEqual*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_ty
 proc operatorNotEqual*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_types.QSslError): bool =
   fcQSslError_operatorNotEqual(self.h, other.h)
 
-proc error*(self: gen_qsslerror_types.QSslError, ): cint =
+proc error*(self: gen_qsslerror_types.QSslError): cint =
   cint(fcQSslError_error(self.h))
 
-proc errorString*(self: gen_qsslerror_types.QSslError, ): string =
+proc errorString*(self: gen_qsslerror_types.QSslError): string =
   let v_ms = fcQSslError_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc certificate*(self: gen_qsslerror_types.QSslError, ): gen_qsslcertificate_types.QSslCertificate =
+proc certificate*(self: gen_qsslerror_types.QSslError): gen_qsslcertificate_types.QSslCertificate =
   gen_qsslcertificate_types.QSslCertificate(h: fcQSslError_certificate(self.h), owned: true)
 
 proc create*(T: type gen_qsslerror_types.QSslError): gen_qsslerror_types.QSslError =

@@ -1,15 +1,6 @@
 #include <QHashSeed>
 #include <qhashfunctions.h>
 #include "gen_qhashfunctions.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QHashSeed* QHashSeed_new() {
 	return new QHashSeed();
 }

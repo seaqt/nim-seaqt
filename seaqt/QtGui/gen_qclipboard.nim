@@ -61,32 +61,32 @@ export
 
 type cQClipboard*{.exportc: "QClipboard", incompleteStruct.} = object
 
-proc fcQClipboard_metaObject(self: pointer, ): pointer {.importc: "QClipboard_metaObject".}
+proc fcQClipboard_metaObject(self: pointer): pointer {.importc: "QClipboard_metaObject".}
 proc fcQClipboard_metacast(self: pointer, param1: cstring): pointer {.importc: "QClipboard_metacast".}
 proc fcQClipboard_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QClipboard_metacall".}
 proc fcQClipboard_tr(s: cstring): struct_miqt_string {.importc: "QClipboard_tr".}
-proc fcQClipboard_clear(self: pointer, ): void {.importc: "QClipboard_clear".}
-proc fcQClipboard_supportsSelection(self: pointer, ): bool {.importc: "QClipboard_supportsSelection".}
-proc fcQClipboard_supportsFindBuffer(self: pointer, ): bool {.importc: "QClipboard_supportsFindBuffer".}
-proc fcQClipboard_ownsSelection(self: pointer, ): bool {.importc: "QClipboard_ownsSelection".}
-proc fcQClipboard_ownsClipboard(self: pointer, ): bool {.importc: "QClipboard_ownsClipboard".}
-proc fcQClipboard_ownsFindBuffer(self: pointer, ): bool {.importc: "QClipboard_ownsFindBuffer".}
-proc fcQClipboard_text(self: pointer, ): struct_miqt_string {.importc: "QClipboard_text".}
+proc fcQClipboard_clear(self: pointer): void {.importc: "QClipboard_clear".}
+proc fcQClipboard_supportsSelection(self: pointer): bool {.importc: "QClipboard_supportsSelection".}
+proc fcQClipboard_supportsFindBuffer(self: pointer): bool {.importc: "QClipboard_supportsFindBuffer".}
+proc fcQClipboard_ownsSelection(self: pointer): bool {.importc: "QClipboard_ownsSelection".}
+proc fcQClipboard_ownsClipboard(self: pointer): bool {.importc: "QClipboard_ownsClipboard".}
+proc fcQClipboard_ownsFindBuffer(self: pointer): bool {.importc: "QClipboard_ownsFindBuffer".}
+proc fcQClipboard_text(self: pointer): struct_miqt_string {.importc: "QClipboard_text".}
 proc fcQClipboard_textWithSubtype(self: pointer, subtype: struct_miqt_string): struct_miqt_string {.importc: "QClipboard_textWithSubtype".}
 proc fcQClipboard_setText(self: pointer, param1: struct_miqt_string): void {.importc: "QClipboard_setText".}
-proc fcQClipboard_mimeData(self: pointer, ): pointer {.importc: "QClipboard_mimeData".}
+proc fcQClipboard_mimeData(self: pointer): pointer {.importc: "QClipboard_mimeData".}
 proc fcQClipboard_setMimeData(self: pointer, data: pointer): void {.importc: "QClipboard_setMimeData".}
-proc fcQClipboard_image(self: pointer, ): pointer {.importc: "QClipboard_image".}
-proc fcQClipboard_pixmap(self: pointer, ): pointer {.importc: "QClipboard_pixmap".}
+proc fcQClipboard_image(self: pointer): pointer {.importc: "QClipboard_image".}
+proc fcQClipboard_pixmap(self: pointer): pointer {.importc: "QClipboard_pixmap".}
 proc fcQClipboard_setImage(self: pointer, param1: pointer): void {.importc: "QClipboard_setImage".}
 proc fcQClipboard_setPixmap(self: pointer, param1: pointer): void {.importc: "QClipboard_setPixmap".}
 proc fcQClipboard_changed(self: pointer, mode: cint): void {.importc: "QClipboard_changed".}
 proc fcQClipboard_connect_changed(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QClipboard_connect_changed".}
-proc fcQClipboard_selectionChanged(self: pointer, ): void {.importc: "QClipboard_selectionChanged".}
+proc fcQClipboard_selectionChanged(self: pointer): void {.importc: "QClipboard_selectionChanged".}
 proc fcQClipboard_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QClipboard_connect_selectionChanged".}
-proc fcQClipboard_findBufferChanged(self: pointer, ): void {.importc: "QClipboard_findBufferChanged".}
+proc fcQClipboard_findBufferChanged(self: pointer): void {.importc: "QClipboard_findBufferChanged".}
 proc fcQClipboard_connect_findBufferChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QClipboard_connect_findBufferChanged".}
-proc fcQClipboard_dataChanged(self: pointer, ): void {.importc: "QClipboard_dataChanged".}
+proc fcQClipboard_dataChanged(self: pointer): void {.importc: "QClipboard_dataChanged".}
 proc fcQClipboard_connect_dataChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QClipboard_connect_dataChanged".}
 proc fcQClipboard_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QClipboard_tr2".}
 proc fcQClipboard_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QClipboard_tr3".}
@@ -100,13 +100,13 @@ proc fcQClipboard_image1(self: pointer, mode: cint): pointer {.importc: "QClipbo
 proc fcQClipboard_pixmap1(self: pointer, mode: cint): pointer {.importc: "QClipboard_pixmap1".}
 proc fcQClipboard_setImage2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setImage2".}
 proc fcQClipboard_setPixmap2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setPixmap2".}
-proc fcQClipboard_protectedbase_sender(self: pointer, ): pointer {.importc: "QClipboard_protectedbase_sender".}
-proc fcQClipboard_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QClipboard_protectedbase_senderSignalIndex".}
+proc fcQClipboard_protectedbase_sender(self: pointer): pointer {.importc: "QClipboard_protectedbase_sender".}
+proc fcQClipboard_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QClipboard_protectedbase_senderSignalIndex".}
 proc fcQClipboard_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QClipboard_protectedbase_receivers".}
 proc fcQClipboard_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QClipboard_protectedbase_isSignalConnected".}
 proc fcQClipboard_staticMetaObject(): pointer {.importc: "QClipboard_staticMetaObject".}
 
-proc metaObject*(self: gen_qclipboard_types.QClipboard, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qclipboard_types.QClipboard): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qclipboard_types.QClipboard, param1: cstring): pointer =
@@ -121,25 +121,25 @@ proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc clear*(self: gen_qclipboard_types.QClipboard, ): void =
+proc clear*(self: gen_qclipboard_types.QClipboard): void =
   fcQClipboard_clear(self.h)
 
-proc supportsSelection*(self: gen_qclipboard_types.QClipboard, ): bool =
+proc supportsSelection*(self: gen_qclipboard_types.QClipboard): bool =
   fcQClipboard_supportsSelection(self.h)
 
-proc supportsFindBuffer*(self: gen_qclipboard_types.QClipboard, ): bool =
+proc supportsFindBuffer*(self: gen_qclipboard_types.QClipboard): bool =
   fcQClipboard_supportsFindBuffer(self.h)
 
-proc ownsSelection*(self: gen_qclipboard_types.QClipboard, ): bool =
+proc ownsSelection*(self: gen_qclipboard_types.QClipboard): bool =
   fcQClipboard_ownsSelection(self.h)
 
-proc ownsClipboard*(self: gen_qclipboard_types.QClipboard, ): bool =
+proc ownsClipboard*(self: gen_qclipboard_types.QClipboard): bool =
   fcQClipboard_ownsClipboard(self.h)
 
-proc ownsFindBuffer*(self: gen_qclipboard_types.QClipboard, ): bool =
+proc ownsFindBuffer*(self: gen_qclipboard_types.QClipboard): bool =
   fcQClipboard_ownsFindBuffer(self.h)
 
-proc text*(self: gen_qclipboard_types.QClipboard, ): string =
+proc text*(self: gen_qclipboard_types.QClipboard): string =
   let v_ms = fcQClipboard_text(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -154,16 +154,16 @@ proc text*(self: gen_qclipboard_types.QClipboard, subtype: string): string =
 proc setText*(self: gen_qclipboard_types.QClipboard, param1: string): void =
   fcQClipboard_setText(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
-proc mimeData*(self: gen_qclipboard_types.QClipboard, ): gen_qmimedata_types.QMimeData =
+proc mimeData*(self: gen_qclipboard_types.QClipboard): gen_qmimedata_types.QMimeData =
   gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeData(self.h), owned: false)
 
 proc setMimeData*(self: gen_qclipboard_types.QClipboard, data: gen_qmimedata_types.QMimeData): void =
   fcQClipboard_setMimeData(self.h, data.h)
 
-proc image*(self: gen_qclipboard_types.QClipboard, ): gen_qimage_types.QImage =
+proc image*(self: gen_qclipboard_types.QClipboard): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQClipboard_image(self.h), owned: true)
 
-proc pixmap*(self: gen_qclipboard_types.QClipboard, ): gen_qpixmap_types.QPixmap =
+proc pixmap*(self: gen_qclipboard_types.QClipboard): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQClipboard_pixmap(self.h), owned: true)
 
 proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.QImage): void =
@@ -176,13 +176,13 @@ proc changed*(self: gen_qclipboard_types.QClipboard, mode: cint): void =
   fcQClipboard_changed(self.h, cint(mode))
 
 type QClipboardchangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQClipboard_changed(slot: int, mode: cint) {.cdecl.} =
+proc cQClipboard_slot_callback_changed(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QClipboardchangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQClipboard_changed_release(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_changed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardchangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -190,17 +190,17 @@ proc onchanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboardchangedSl
   var tmp = new QClipboardchangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQClipboard_connect_changed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQClipboard_changed, miqt_exec_callback_cQClipboard_changed_release)
+  fcQClipboard_connect_changed(self.h, cast[int](addr tmp[]), cQClipboard_slot_callback_changed, cQClipboard_slot_callback_changed_release)
 
-proc selectionChanged*(self: gen_qclipboard_types.QClipboard, ): void =
+proc selectionChanged*(self: gen_qclipboard_types.QClipboard): void =
   fcQClipboard_selectionChanged(self.h)
 
 type QClipboardselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQClipboard_selectionChanged(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QClipboardselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQClipboard_selectionChanged_release(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_selectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardselectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -208,17 +208,17 @@ proc onselectionChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboard
   var tmp = new QClipboardselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQClipboard_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQClipboard_selectionChanged, miqt_exec_callback_cQClipboard_selectionChanged_release)
+  fcQClipboard_connect_selectionChanged(self.h, cast[int](addr tmp[]), cQClipboard_slot_callback_selectionChanged, cQClipboard_slot_callback_selectionChanged_release)
 
-proc findBufferChanged*(self: gen_qclipboard_types.QClipboard, ): void =
+proc findBufferChanged*(self: gen_qclipboard_types.QClipboard): void =
   fcQClipboard_findBufferChanged(self.h)
 
 type QClipboardfindBufferChangedSlot* = proc()
-proc miqt_exec_callback_cQClipboard_findBufferChanged(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_findBufferChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QClipboardfindBufferChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQClipboard_findBufferChanged_release(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_findBufferChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboardfindBufferChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -226,17 +226,17 @@ proc onfindBufferChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboar
   var tmp = new QClipboardfindBufferChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQClipboard_connect_findBufferChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQClipboard_findBufferChanged, miqt_exec_callback_cQClipboard_findBufferChanged_release)
+  fcQClipboard_connect_findBufferChanged(self.h, cast[int](addr tmp[]), cQClipboard_slot_callback_findBufferChanged, cQClipboard_slot_callback_findBufferChanged_release)
 
-proc dataChanged*(self: gen_qclipboard_types.QClipboard, ): void =
+proc dataChanged*(self: gen_qclipboard_types.QClipboard): void =
   fcQClipboard_dataChanged(self.h)
 
 type QClipboarddataChangedSlot* = proc()
-proc miqt_exec_callback_cQClipboard_dataChanged(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_dataChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QClipboarddataChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQClipboard_dataChanged_release(slot: int) {.cdecl.} =
+proc cQClipboard_slot_callback_dataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QClipboarddataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -244,7 +244,7 @@ proc ondataChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboarddataC
   var tmp = new QClipboarddataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQClipboard_connect_dataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQClipboard_dataChanged, miqt_exec_callback_cQClipboard_dataChanged_release)
+  fcQClipboard_connect_dataChanged(self.h, cast[int](addr tmp[]), cQClipboard_slot_callback_dataChanged, cQClipboard_slot_callback_dataChanged_release)
 
 proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring, c: cstring): string =
   let v_ms = fcQClipboard_tr2(s, c)
@@ -294,10 +294,10 @@ proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.Q
 proc setPixmap*(self: gen_qclipboard_types.QClipboard, param1: gen_qpixmap_types.QPixmap, mode: cint): void =
   fcQClipboard_setPixmap2(self.h, param1.h, cint(mode))
 
-proc sender*(self: gen_qclipboard_types.QClipboard, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qclipboard_types.QClipboard): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQClipboard_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qclipboard_types.QClipboard, ): cint =
+proc senderSignalIndex*(self: gen_qclipboard_types.QClipboard): cint =
   fcQClipboard_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qclipboard_types.QClipboard, signal: cstring): cint =

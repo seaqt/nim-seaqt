@@ -48,21 +48,28 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QWidget QWidget;
 #endif
 
-struct QGesture_VTable {
-	void (*destructor)(struct QGesture_VTable* vtbl, QGesture* self);
-	QMetaObject* (*metaObject)(struct QGesture_VTable* vtbl, const QGesture* self);
-	void* (*metacast)(struct QGesture_VTable* vtbl, QGesture* self, const char* param1);
-	int (*metacall)(struct QGesture_VTable* vtbl, QGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QGesture_VTable* vtbl, QGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QGesture_VTable* vtbl, QGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QGesture_VTable* vtbl, QGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QGesture_VTable* vtbl, QGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QGesture_VTable* vtbl, QGesture* self, QEvent* event);
-	void (*connectNotify)(struct QGesture_VTable* vtbl, QGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QGesture_VTable* vtbl, QGesture* self, QMetaMethod* signal);
-};
-QGesture* QGesture_new(struct QGesture_VTable* vtbl);
-QGesture* QGesture_new2(struct QGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQGesture VirtualQGesture;
+typedef struct QGesture_VTable{
+	void (*destructor)(VirtualQGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQGesture* self);
+	void* (*metacast)(VirtualQGesture* self, const char* param1);
+	int (*metacall)(VirtualQGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQGesture* self, QMetaMethod* signal);
+}QGesture_VTable;
+
+const QGesture_VTable* QGesture_vtbl(const VirtualQGesture* self);
+void* QGesture_vdata(const VirtualQGesture* self);
+void QGesture_setVdata(VirtualQGesture* self, void* vdata);
+
+VirtualQGesture* QGesture_new(const QGesture_VTable* vtbl, void* vdata);
+VirtualQGesture* QGesture_new2(const QGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QGesture_virtbase(QGesture* src, QObject** outptr_QObject);
 QMetaObject* QGesture_metaObject(const QGesture* self);
 void* QGesture_metacast(QGesture* self, const char* param1);
@@ -78,38 +85,48 @@ void QGesture_setGestureCancelPolicy(QGesture* self, int policy);
 int QGesture_gestureCancelPolicy(const QGesture* self);
 struct miqt_string QGesture_tr2(const char* s, const char* c);
 struct miqt_string QGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QGesture_virtualbase_metaObject(const void* self);
-void* QGesture_virtualbase_metacast(void* self, const char* param1);
-int QGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QGesture_virtualbase_event(void* self, QEvent* event);
-bool QGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QGesture_protectedbase_sender(const void* self);
-int QGesture_protectedbase_senderSignalIndex(const void* self);
-int QGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QGesture_virtualbase_metaObject(const VirtualQGesture* self);
+void* QGesture_virtualbase_metacast(VirtualQGesture* self, const char* param1);
+int QGesture_virtualbase_metacall(VirtualQGesture* self, int param1, int param2, void** param3);
+bool QGesture_virtualbase_event(VirtualQGesture* self, QEvent* event);
+bool QGesture_virtualbase_eventFilter(VirtualQGesture* self, QObject* watched, QEvent* event);
+void QGesture_virtualbase_timerEvent(VirtualQGesture* self, QTimerEvent* event);
+void QGesture_virtualbase_childEvent(VirtualQGesture* self, QChildEvent* event);
+void QGesture_virtualbase_customEvent(VirtualQGesture* self, QEvent* event);
+void QGesture_virtualbase_connectNotify(VirtualQGesture* self, QMetaMethod* signal);
+void QGesture_virtualbase_disconnectNotify(VirtualQGesture* self, QMetaMethod* signal);
+
+QObject* QGesture_protectedbase_sender(const VirtualQGesture* self);
+int QGesture_protectedbase_senderSignalIndex(const VirtualQGesture* self);
+int QGesture_protectedbase_receivers(const VirtualQGesture* self, const char* signal);
+bool QGesture_protectedbase_isSignalConnected(const VirtualQGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QGesture_staticMetaObject();
 void QGesture_delete(QGesture* self);
 
-struct QPanGesture_VTable {
-	void (*destructor)(struct QPanGesture_VTable* vtbl, QPanGesture* self);
-	QMetaObject* (*metaObject)(struct QPanGesture_VTable* vtbl, const QPanGesture* self);
-	void* (*metacast)(struct QPanGesture_VTable* vtbl, QPanGesture* self, const char* param1);
-	int (*metacall)(struct QPanGesture_VTable* vtbl, QPanGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QEvent* event);
-	void (*connectNotify)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QPanGesture_VTable* vtbl, QPanGesture* self, QMetaMethod* signal);
-};
-QPanGesture* QPanGesture_new(struct QPanGesture_VTable* vtbl);
-QPanGesture* QPanGesture_new2(struct QPanGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQPanGesture VirtualQPanGesture;
+typedef struct QPanGesture_VTable{
+	void (*destructor)(VirtualQPanGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQPanGesture* self);
+	void* (*metacast)(VirtualQPanGesture* self, const char* param1);
+	int (*metacall)(VirtualQPanGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQPanGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQPanGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQPanGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQPanGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQPanGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQPanGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQPanGesture* self, QMetaMethod* signal);
+}QPanGesture_VTable;
+
+const QPanGesture_VTable* QPanGesture_vtbl(const VirtualQPanGesture* self);
+void* QPanGesture_vdata(const VirtualQPanGesture* self);
+void QPanGesture_setVdata(VirtualQPanGesture* self, void* vdata);
+
+VirtualQPanGesture* QPanGesture_new(const QPanGesture_VTable* vtbl, void* vdata);
+VirtualQPanGesture* QPanGesture_new2(const QPanGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QPanGesture_virtbase(QPanGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QPanGesture_metaObject(const QPanGesture* self);
 void* QPanGesture_metacast(QPanGesture* self, const char* param1);
@@ -124,38 +141,48 @@ void QPanGesture_setOffset(QPanGesture* self, QPointF* value);
 void QPanGesture_setAcceleration(QPanGesture* self, double value);
 struct miqt_string QPanGesture_tr2(const char* s, const char* c);
 struct miqt_string QPanGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QPanGesture_virtualbase_metaObject(const void* self);
-void* QPanGesture_virtualbase_metacast(void* self, const char* param1);
-int QPanGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QPanGesture_virtualbase_event(void* self, QEvent* event);
-bool QPanGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QPanGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QPanGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QPanGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QPanGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QPanGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QPanGesture_protectedbase_sender(const void* self);
-int QPanGesture_protectedbase_senderSignalIndex(const void* self);
-int QPanGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QPanGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QPanGesture_virtualbase_metaObject(const VirtualQPanGesture* self);
+void* QPanGesture_virtualbase_metacast(VirtualQPanGesture* self, const char* param1);
+int QPanGesture_virtualbase_metacall(VirtualQPanGesture* self, int param1, int param2, void** param3);
+bool QPanGesture_virtualbase_event(VirtualQPanGesture* self, QEvent* event);
+bool QPanGesture_virtualbase_eventFilter(VirtualQPanGesture* self, QObject* watched, QEvent* event);
+void QPanGesture_virtualbase_timerEvent(VirtualQPanGesture* self, QTimerEvent* event);
+void QPanGesture_virtualbase_childEvent(VirtualQPanGesture* self, QChildEvent* event);
+void QPanGesture_virtualbase_customEvent(VirtualQPanGesture* self, QEvent* event);
+void QPanGesture_virtualbase_connectNotify(VirtualQPanGesture* self, QMetaMethod* signal);
+void QPanGesture_virtualbase_disconnectNotify(VirtualQPanGesture* self, QMetaMethod* signal);
+
+QObject* QPanGesture_protectedbase_sender(const VirtualQPanGesture* self);
+int QPanGesture_protectedbase_senderSignalIndex(const VirtualQPanGesture* self);
+int QPanGesture_protectedbase_receivers(const VirtualQPanGesture* self, const char* signal);
+bool QPanGesture_protectedbase_isSignalConnected(const VirtualQPanGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QPanGesture_staticMetaObject();
 void QPanGesture_delete(QPanGesture* self);
 
-struct QPinchGesture_VTable {
-	void (*destructor)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self);
-	QMetaObject* (*metaObject)(struct QPinchGesture_VTable* vtbl, const QPinchGesture* self);
-	void* (*metacast)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, const char* param1);
-	int (*metacall)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QEvent* event);
-	void (*connectNotify)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QPinchGesture_VTable* vtbl, QPinchGesture* self, QMetaMethod* signal);
-};
-QPinchGesture* QPinchGesture_new(struct QPinchGesture_VTable* vtbl);
-QPinchGesture* QPinchGesture_new2(struct QPinchGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQPinchGesture VirtualQPinchGesture;
+typedef struct QPinchGesture_VTable{
+	void (*destructor)(VirtualQPinchGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQPinchGesture* self);
+	void* (*metacast)(VirtualQPinchGesture* self, const char* param1);
+	int (*metacall)(VirtualQPinchGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQPinchGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQPinchGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQPinchGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQPinchGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQPinchGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQPinchGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQPinchGesture* self, QMetaMethod* signal);
+}QPinchGesture_VTable;
+
+const QPinchGesture_VTable* QPinchGesture_vtbl(const VirtualQPinchGesture* self);
+void* QPinchGesture_vdata(const VirtualQPinchGesture* self);
+void QPinchGesture_setVdata(VirtualQPinchGesture* self, void* vdata);
+
+VirtualQPinchGesture* QPinchGesture_new(const QPinchGesture_VTable* vtbl, void* vdata);
+VirtualQPinchGesture* QPinchGesture_new2(const QPinchGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QPinchGesture_virtbase(QPinchGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QPinchGesture_metaObject(const QPinchGesture* self);
 void* QPinchGesture_metacast(QPinchGesture* self, const char* param1);
@@ -185,38 +212,48 @@ void QPinchGesture_setLastRotationAngle(QPinchGesture* self, double value);
 void QPinchGesture_setRotationAngle(QPinchGesture* self, double value);
 struct miqt_string QPinchGesture_tr2(const char* s, const char* c);
 struct miqt_string QPinchGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QPinchGesture_virtualbase_metaObject(const void* self);
-void* QPinchGesture_virtualbase_metacast(void* self, const char* param1);
-int QPinchGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QPinchGesture_virtualbase_event(void* self, QEvent* event);
-bool QPinchGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QPinchGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QPinchGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QPinchGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QPinchGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QPinchGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QPinchGesture_protectedbase_sender(const void* self);
-int QPinchGesture_protectedbase_senderSignalIndex(const void* self);
-int QPinchGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QPinchGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QPinchGesture_virtualbase_metaObject(const VirtualQPinchGesture* self);
+void* QPinchGesture_virtualbase_metacast(VirtualQPinchGesture* self, const char* param1);
+int QPinchGesture_virtualbase_metacall(VirtualQPinchGesture* self, int param1, int param2, void** param3);
+bool QPinchGesture_virtualbase_event(VirtualQPinchGesture* self, QEvent* event);
+bool QPinchGesture_virtualbase_eventFilter(VirtualQPinchGesture* self, QObject* watched, QEvent* event);
+void QPinchGesture_virtualbase_timerEvent(VirtualQPinchGesture* self, QTimerEvent* event);
+void QPinchGesture_virtualbase_childEvent(VirtualQPinchGesture* self, QChildEvent* event);
+void QPinchGesture_virtualbase_customEvent(VirtualQPinchGesture* self, QEvent* event);
+void QPinchGesture_virtualbase_connectNotify(VirtualQPinchGesture* self, QMetaMethod* signal);
+void QPinchGesture_virtualbase_disconnectNotify(VirtualQPinchGesture* self, QMetaMethod* signal);
+
+QObject* QPinchGesture_protectedbase_sender(const VirtualQPinchGesture* self);
+int QPinchGesture_protectedbase_senderSignalIndex(const VirtualQPinchGesture* self);
+int QPinchGesture_protectedbase_receivers(const VirtualQPinchGesture* self, const char* signal);
+bool QPinchGesture_protectedbase_isSignalConnected(const VirtualQPinchGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QPinchGesture_staticMetaObject();
 void QPinchGesture_delete(QPinchGesture* self);
 
-struct QSwipeGesture_VTable {
-	void (*destructor)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self);
-	QMetaObject* (*metaObject)(struct QSwipeGesture_VTable* vtbl, const QSwipeGesture* self);
-	void* (*metacast)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, const char* param1);
-	int (*metacall)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QEvent* event);
-	void (*connectNotify)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QSwipeGesture_VTable* vtbl, QSwipeGesture* self, QMetaMethod* signal);
-};
-QSwipeGesture* QSwipeGesture_new(struct QSwipeGesture_VTable* vtbl);
-QSwipeGesture* QSwipeGesture_new2(struct QSwipeGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQSwipeGesture VirtualQSwipeGesture;
+typedef struct QSwipeGesture_VTable{
+	void (*destructor)(VirtualQSwipeGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQSwipeGesture* self);
+	void* (*metacast)(VirtualQSwipeGesture* self, const char* param1);
+	int (*metacall)(VirtualQSwipeGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQSwipeGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQSwipeGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSwipeGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQSwipeGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQSwipeGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQSwipeGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSwipeGesture* self, QMetaMethod* signal);
+}QSwipeGesture_VTable;
+
+const QSwipeGesture_VTable* QSwipeGesture_vtbl(const VirtualQSwipeGesture* self);
+void* QSwipeGesture_vdata(const VirtualQSwipeGesture* self);
+void QSwipeGesture_setVdata(VirtualQSwipeGesture* self, void* vdata);
+
+VirtualQSwipeGesture* QSwipeGesture_new(const QSwipeGesture_VTable* vtbl, void* vdata);
+VirtualQSwipeGesture* QSwipeGesture_new2(const QSwipeGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QSwipeGesture_virtbase(QSwipeGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QSwipeGesture_metaObject(const QSwipeGesture* self);
 void* QSwipeGesture_metacast(QSwipeGesture* self, const char* param1);
@@ -228,38 +265,48 @@ double QSwipeGesture_swipeAngle(const QSwipeGesture* self);
 void QSwipeGesture_setSwipeAngle(QSwipeGesture* self, double value);
 struct miqt_string QSwipeGesture_tr2(const char* s, const char* c);
 struct miqt_string QSwipeGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QSwipeGesture_virtualbase_metaObject(const void* self);
-void* QSwipeGesture_virtualbase_metacast(void* self, const char* param1);
-int QSwipeGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QSwipeGesture_virtualbase_event(void* self, QEvent* event);
-bool QSwipeGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QSwipeGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QSwipeGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QSwipeGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QSwipeGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QSwipeGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QSwipeGesture_protectedbase_sender(const void* self);
-int QSwipeGesture_protectedbase_senderSignalIndex(const void* self);
-int QSwipeGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QSwipeGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QSwipeGesture_virtualbase_metaObject(const VirtualQSwipeGesture* self);
+void* QSwipeGesture_virtualbase_metacast(VirtualQSwipeGesture* self, const char* param1);
+int QSwipeGesture_virtualbase_metacall(VirtualQSwipeGesture* self, int param1, int param2, void** param3);
+bool QSwipeGesture_virtualbase_event(VirtualQSwipeGesture* self, QEvent* event);
+bool QSwipeGesture_virtualbase_eventFilter(VirtualQSwipeGesture* self, QObject* watched, QEvent* event);
+void QSwipeGesture_virtualbase_timerEvent(VirtualQSwipeGesture* self, QTimerEvent* event);
+void QSwipeGesture_virtualbase_childEvent(VirtualQSwipeGesture* self, QChildEvent* event);
+void QSwipeGesture_virtualbase_customEvent(VirtualQSwipeGesture* self, QEvent* event);
+void QSwipeGesture_virtualbase_connectNotify(VirtualQSwipeGesture* self, QMetaMethod* signal);
+void QSwipeGesture_virtualbase_disconnectNotify(VirtualQSwipeGesture* self, QMetaMethod* signal);
+
+QObject* QSwipeGesture_protectedbase_sender(const VirtualQSwipeGesture* self);
+int QSwipeGesture_protectedbase_senderSignalIndex(const VirtualQSwipeGesture* self);
+int QSwipeGesture_protectedbase_receivers(const VirtualQSwipeGesture* self, const char* signal);
+bool QSwipeGesture_protectedbase_isSignalConnected(const VirtualQSwipeGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QSwipeGesture_staticMetaObject();
 void QSwipeGesture_delete(QSwipeGesture* self);
 
-struct QTapGesture_VTable {
-	void (*destructor)(struct QTapGesture_VTable* vtbl, QTapGesture* self);
-	QMetaObject* (*metaObject)(struct QTapGesture_VTable* vtbl, const QTapGesture* self);
-	void* (*metacast)(struct QTapGesture_VTable* vtbl, QTapGesture* self, const char* param1);
-	int (*metacall)(struct QTapGesture_VTable* vtbl, QTapGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QEvent* event);
-	void (*connectNotify)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QTapGesture_VTable* vtbl, QTapGesture* self, QMetaMethod* signal);
-};
-QTapGesture* QTapGesture_new(struct QTapGesture_VTable* vtbl);
-QTapGesture* QTapGesture_new2(struct QTapGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQTapGesture VirtualQTapGesture;
+typedef struct QTapGesture_VTable{
+	void (*destructor)(VirtualQTapGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQTapGesture* self);
+	void* (*metacast)(VirtualQTapGesture* self, const char* param1);
+	int (*metacall)(VirtualQTapGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQTapGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQTapGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQTapGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQTapGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQTapGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQTapGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQTapGesture* self, QMetaMethod* signal);
+}QTapGesture_VTable;
+
+const QTapGesture_VTable* QTapGesture_vtbl(const VirtualQTapGesture* self);
+void* QTapGesture_vdata(const VirtualQTapGesture* self);
+void QTapGesture_setVdata(VirtualQTapGesture* self, void* vdata);
+
+VirtualQTapGesture* QTapGesture_new(const QTapGesture_VTable* vtbl, void* vdata);
+VirtualQTapGesture* QTapGesture_new2(const QTapGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QTapGesture_virtbase(QTapGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QTapGesture_metaObject(const QTapGesture* self);
 void* QTapGesture_metacast(QTapGesture* self, const char* param1);
@@ -269,38 +316,48 @@ QPointF* QTapGesture_position(const QTapGesture* self);
 void QTapGesture_setPosition(QTapGesture* self, QPointF* pos);
 struct miqt_string QTapGesture_tr2(const char* s, const char* c);
 struct miqt_string QTapGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QTapGesture_virtualbase_metaObject(const void* self);
-void* QTapGesture_virtualbase_metacast(void* self, const char* param1);
-int QTapGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QTapGesture_virtualbase_event(void* self, QEvent* event);
-bool QTapGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QTapGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QTapGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QTapGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QTapGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QTapGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QTapGesture_protectedbase_sender(const void* self);
-int QTapGesture_protectedbase_senderSignalIndex(const void* self);
-int QTapGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QTapGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QTapGesture_virtualbase_metaObject(const VirtualQTapGesture* self);
+void* QTapGesture_virtualbase_metacast(VirtualQTapGesture* self, const char* param1);
+int QTapGesture_virtualbase_metacall(VirtualQTapGesture* self, int param1, int param2, void** param3);
+bool QTapGesture_virtualbase_event(VirtualQTapGesture* self, QEvent* event);
+bool QTapGesture_virtualbase_eventFilter(VirtualQTapGesture* self, QObject* watched, QEvent* event);
+void QTapGesture_virtualbase_timerEvent(VirtualQTapGesture* self, QTimerEvent* event);
+void QTapGesture_virtualbase_childEvent(VirtualQTapGesture* self, QChildEvent* event);
+void QTapGesture_virtualbase_customEvent(VirtualQTapGesture* self, QEvent* event);
+void QTapGesture_virtualbase_connectNotify(VirtualQTapGesture* self, QMetaMethod* signal);
+void QTapGesture_virtualbase_disconnectNotify(VirtualQTapGesture* self, QMetaMethod* signal);
+
+QObject* QTapGesture_protectedbase_sender(const VirtualQTapGesture* self);
+int QTapGesture_protectedbase_senderSignalIndex(const VirtualQTapGesture* self);
+int QTapGesture_protectedbase_receivers(const VirtualQTapGesture* self, const char* signal);
+bool QTapGesture_protectedbase_isSignalConnected(const VirtualQTapGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QTapGesture_staticMetaObject();
 void QTapGesture_delete(QTapGesture* self);
 
-struct QTapAndHoldGesture_VTable {
-	void (*destructor)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self);
-	QMetaObject* (*metaObject)(struct QTapAndHoldGesture_VTable* vtbl, const QTapAndHoldGesture* self);
-	void* (*metacast)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, const char* param1);
-	int (*metacall)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, int param1, int param2, void** param3);
-	bool (*event)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QEvent* event);
-	bool (*eventFilter)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QTimerEvent* event);
-	void (*childEvent)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QChildEvent* event);
-	void (*customEvent)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QEvent* event);
-	void (*connectNotify)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QTapAndHoldGesture_VTable* vtbl, QTapAndHoldGesture* self, QMetaMethod* signal);
-};
-QTapAndHoldGesture* QTapAndHoldGesture_new(struct QTapAndHoldGesture_VTable* vtbl);
-QTapAndHoldGesture* QTapAndHoldGesture_new2(struct QTapAndHoldGesture_VTable* vtbl, QObject* parent);
+typedef struct VirtualQTapAndHoldGesture VirtualQTapAndHoldGesture;
+typedef struct QTapAndHoldGesture_VTable{
+	void (*destructor)(VirtualQTapAndHoldGesture* self);
+	QMetaObject* (*metaObject)(const VirtualQTapAndHoldGesture* self);
+	void* (*metacast)(VirtualQTapAndHoldGesture* self, const char* param1);
+	int (*metacall)(VirtualQTapAndHoldGesture* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQTapAndHoldGesture* self, QEvent* event);
+	bool (*eventFilter)(VirtualQTapAndHoldGesture* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQTapAndHoldGesture* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQTapAndHoldGesture* self, QChildEvent* event);
+	void (*customEvent)(VirtualQTapAndHoldGesture* self, QEvent* event);
+	void (*connectNotify)(VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
+}QTapAndHoldGesture_VTable;
+
+const QTapAndHoldGesture_VTable* QTapAndHoldGesture_vtbl(const VirtualQTapAndHoldGesture* self);
+void* QTapAndHoldGesture_vdata(const VirtualQTapAndHoldGesture* self);
+void QTapAndHoldGesture_setVdata(VirtualQTapAndHoldGesture* self, void* vdata);
+
+VirtualQTapAndHoldGesture* QTapAndHoldGesture_new(const QTapAndHoldGesture_VTable* vtbl, void* vdata);
+VirtualQTapAndHoldGesture* QTapAndHoldGesture_new2(const QTapAndHoldGesture_VTable* vtbl, void* vdata, QObject* parent);
+
 void QTapAndHoldGesture_virtbase(QTapAndHoldGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QTapAndHoldGesture_metaObject(const QTapAndHoldGesture* self);
 void* QTapAndHoldGesture_metacast(QTapAndHoldGesture* self, const char* param1);
@@ -312,30 +369,40 @@ void QTapAndHoldGesture_setTimeout(int msecs);
 int QTapAndHoldGesture_timeout();
 struct miqt_string QTapAndHoldGesture_tr2(const char* s, const char* c);
 struct miqt_string QTapAndHoldGesture_tr3(const char* s, const char* c, int n);
-QMetaObject* QTapAndHoldGesture_virtualbase_metaObject(const void* self);
-void* QTapAndHoldGesture_virtualbase_metacast(void* self, const char* param1);
-int QTapAndHoldGesture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QTapAndHoldGesture_virtualbase_event(void* self, QEvent* event);
-bool QTapAndHoldGesture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QTapAndHoldGesture_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QTapAndHoldGesture_virtualbase_childEvent(void* self, QChildEvent* event);
-void QTapAndHoldGesture_virtualbase_customEvent(void* self, QEvent* event);
-void QTapAndHoldGesture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QTapAndHoldGesture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QTapAndHoldGesture_protectedbase_sender(const void* self);
-int QTapAndHoldGesture_protectedbase_senderSignalIndex(const void* self);
-int QTapAndHoldGesture_protectedbase_receivers(const void* self, const char* signal);
-bool QTapAndHoldGesture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QTapAndHoldGesture_virtualbase_metaObject(const VirtualQTapAndHoldGesture* self);
+void* QTapAndHoldGesture_virtualbase_metacast(VirtualQTapAndHoldGesture* self, const char* param1);
+int QTapAndHoldGesture_virtualbase_metacall(VirtualQTapAndHoldGesture* self, int param1, int param2, void** param3);
+bool QTapAndHoldGesture_virtualbase_event(VirtualQTapAndHoldGesture* self, QEvent* event);
+bool QTapAndHoldGesture_virtualbase_eventFilter(VirtualQTapAndHoldGesture* self, QObject* watched, QEvent* event);
+void QTapAndHoldGesture_virtualbase_timerEvent(VirtualQTapAndHoldGesture* self, QTimerEvent* event);
+void QTapAndHoldGesture_virtualbase_childEvent(VirtualQTapAndHoldGesture* self, QChildEvent* event);
+void QTapAndHoldGesture_virtualbase_customEvent(VirtualQTapAndHoldGesture* self, QEvent* event);
+void QTapAndHoldGesture_virtualbase_connectNotify(VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
+void QTapAndHoldGesture_virtualbase_disconnectNotify(VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
+
+QObject* QTapAndHoldGesture_protectedbase_sender(const VirtualQTapAndHoldGesture* self);
+int QTapAndHoldGesture_protectedbase_senderSignalIndex(const VirtualQTapAndHoldGesture* self);
+int QTapAndHoldGesture_protectedbase_receivers(const VirtualQTapAndHoldGesture* self, const char* signal);
+bool QTapAndHoldGesture_protectedbase_isSignalConnected(const VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
+
 const QMetaObject* QTapAndHoldGesture_staticMetaObject();
 void QTapAndHoldGesture_delete(QTapAndHoldGesture* self);
 
-struct QGestureEvent_VTable {
-	void (*destructor)(struct QGestureEvent_VTable* vtbl, QGestureEvent* self);
-	void (*setAccepted)(struct QGestureEvent_VTable* vtbl, QGestureEvent* self, bool accepted);
-	QEvent* (*clone)(struct QGestureEvent_VTable* vtbl, const QGestureEvent* self);
-};
-QGestureEvent* QGestureEvent_new(struct QGestureEvent_VTable* vtbl, struct miqt_array /* of QGesture* */  gestures);
-QGestureEvent* QGestureEvent_new2(struct QGestureEvent_VTable* vtbl, QGestureEvent* param1);
+typedef struct VirtualQGestureEvent VirtualQGestureEvent;
+typedef struct QGestureEvent_VTable{
+	void (*destructor)(VirtualQGestureEvent* self);
+	void (*setAccepted)(VirtualQGestureEvent* self, bool accepted);
+	QEvent* (*clone)(const VirtualQGestureEvent* self);
+}QGestureEvent_VTable;
+
+const QGestureEvent_VTable* QGestureEvent_vtbl(const VirtualQGestureEvent* self);
+void* QGestureEvent_vdata(const VirtualQGestureEvent* self);
+void QGestureEvent_setVdata(VirtualQGestureEvent* self, void* vdata);
+
+VirtualQGestureEvent* QGestureEvent_new(const QGestureEvent_VTable* vtbl, void* vdata, struct miqt_array /* of QGesture* */  gestures);
+VirtualQGestureEvent* QGestureEvent_new2(const QGestureEvent_VTable* vtbl, void* vdata, QGestureEvent* param1);
+
 void QGestureEvent_virtbase(QGestureEvent* src, QEvent** outptr_QEvent);
 struct miqt_array /* of QGesture* */  QGestureEvent_gestures(const QGestureEvent* self);
 QGesture* QGestureEvent_gesture(const QGestureEvent* self, int type);
@@ -352,8 +419,10 @@ bool QGestureEvent_isAcceptedWithQtGestureType(const QGestureEvent* self, int pa
 void QGestureEvent_setWidget(QGestureEvent* self, QWidget* widget);
 QWidget* QGestureEvent_widget(const QGestureEvent* self);
 QPointF* QGestureEvent_mapToGraphicsScene(const QGestureEvent* self, QPointF* gesturePoint);
-void QGestureEvent_virtualbase_setAccepted(void* self, bool accepted);
-QEvent* QGestureEvent_virtualbase_clone(const void* self);
+
+void QGestureEvent_virtualbase_setAccepted(VirtualQGestureEvent* self, bool accepted);
+QEvent* QGestureEvent_virtualbase_clone(const VirtualQGestureEvent* self);
+
 void QGestureEvent_delete(QGestureEvent* self);
 
 #ifdef __cplusplus

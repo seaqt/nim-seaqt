@@ -58,15 +58,6 @@
 #include <QWidget>
 #include <qtablewidget.h>
 #include "gen_qtablewidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTableWidgetSelectionRange* QTableWidgetSelectionRange_new() {
 	return new QTableWidgetSelectionRange();
 }
@@ -104,34 +95,36 @@ void QTableWidgetSelectionRange_delete(QTableWidgetSelectionRange* self) {
 }
 
 class VirtualQTableWidgetItem final : public QTableWidgetItem {
-	struct QTableWidgetItem_VTable* vtbl;
+	const QTableWidgetItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTableWidgetItem_VTable* QTableWidgetItem_vtbl(const VirtualQTableWidgetItem* self);
+	friend void* QTableWidgetItem_vdata(const VirtualQTableWidgetItem* self);
+	friend void QTableWidgetItem_setVdata(VirtualQTableWidgetItem* self, void* vdata);
 
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl): QTableWidgetItem(), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, const QString& text): QTableWidgetItem(text), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, const QIcon& icon, const QString& text): QTableWidgetItem(icon, text), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, const QTableWidgetItem& other): QTableWidgetItem(other), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, int type): QTableWidgetItem(type), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, const QString& text, int type): QTableWidgetItem(text, type), vtbl(vtbl) {};
-	VirtualQTableWidgetItem(struct QTableWidgetItem_VTable* vtbl, const QIcon& icon, const QString& text, int type): QTableWidgetItem(icon, text, type), vtbl(vtbl) {};
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata): QTableWidgetItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, const QString& text): QTableWidgetItem(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text): QTableWidgetItem(icon, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, const QTableWidgetItem& other): QTableWidgetItem(other), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, int type): QTableWidgetItem(type), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, const QString& text, int type): QTableWidgetItem(text, type), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text, int type): QTableWidgetItem(icon, text, type), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTableWidgetItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTableWidgetItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QTableWidgetItem* clone() const override {
 		if (vtbl->clone == 0) {
 			return QTableWidgetItem::clone();
 		}
 
 
-		QTableWidgetItem* callback_return_value = vtbl->clone(vtbl, this);
+		QTableWidgetItem* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QTableWidgetItem* QTableWidgetItem_virtualbase_clone(const void* self);
+	friend QTableWidgetItem* QTableWidgetItem_virtualbase_clone(const VirtualQTableWidgetItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant data(int role) const override {
 		if (vtbl->data == 0) {
 			return QTableWidgetItem::data(role);
@@ -139,16 +132,15 @@ public:
 
 		int sigval1 = role;
 
-		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->data(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTableWidgetItem_virtualbase_data(const void* self, int role);
+	friend QVariant* QTableWidgetItem_virtualbase_data(const VirtualQTableWidgetItem* self, int role);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setData(int role, const QVariant& value) override {
 		if (vtbl->setData == 0) {
 			QTableWidgetItem::setData(role, value);
@@ -160,13 +152,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		vtbl->setData(vtbl, this, sigval1, sigval2);
+		vtbl->setData(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidgetItem_virtualbase_setData(void* self, int role, QVariant* value);
+	friend void QTableWidgetItem_virtualbase_setData(VirtualQTableWidgetItem* self, int role, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool operator<(const QTableWidgetItem& other) const override {
 		if (vtbl->operatorLesser == 0) {
 			return QTableWidgetItem::operator<(other);
@@ -176,14 +167,13 @@ public:
 		// Cast returned reference into pointer
 		QTableWidgetItem* sigval1 = const_cast<QTableWidgetItem*>(&other_ret);
 
-		bool callback_return_value = vtbl->operatorLesser(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->operatorLesser(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidgetItem_virtualbase_operatorLesser(const void* self, QTableWidgetItem* other);
+	friend bool QTableWidgetItem_virtualbase_operatorLesser(const VirtualQTableWidgetItem* self, QTableWidgetItem* other);
 
-	// Subclass to allow providing a Go implementation
 	virtual void read(QDataStream& in) override {
 		if (vtbl->read == 0) {
 			QTableWidgetItem::read(in);
@@ -194,13 +184,12 @@ public:
 		// Cast returned reference into pointer
 		QDataStream* sigval1 = &in_ret;
 
-		vtbl->read(vtbl, this, sigval1);
+		vtbl->read(this, sigval1);
 
 	}
 
-	friend void QTableWidgetItem_virtualbase_read(void* self, QDataStream* in);
+	friend void QTableWidgetItem_virtualbase_read(VirtualQTableWidgetItem* self, QDataStream* in);
 
-	// Subclass to allow providing a Go implementation
 	virtual void write(QDataStream& out) const override {
 		if (vtbl->write == 0) {
 			QTableWidgetItem::write(out);
@@ -211,44 +200,44 @@ public:
 		// Cast returned reference into pointer
 		QDataStream* sigval1 = &out_ret;
 
-		vtbl->write(vtbl, this, sigval1);
+		vtbl->write(this, sigval1);
 
 	}
 
-	friend void QTableWidgetItem_virtualbase_write(const void* self, QDataStream* out);
+	friend void QTableWidgetItem_virtualbase_write(const VirtualQTableWidgetItem* self, QDataStream* out);
 
 };
 
-QTableWidgetItem* QTableWidgetItem_new(struct QTableWidgetItem_VTable* vtbl) {
-	return new VirtualQTableWidgetItem(vtbl);
+VirtualQTableWidgetItem* QTableWidgetItem_new(const QTableWidgetItem_VTable* vtbl, void* vdata) {
+	return new VirtualQTableWidgetItem(vtbl, vdata);
 }
 
-QTableWidgetItem* QTableWidgetItem_new2(struct QTableWidgetItem_VTable* vtbl, struct miqt_string text) {
+VirtualQTableWidgetItem* QTableWidgetItem_new2(const QTableWidgetItem_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTableWidgetItem(vtbl, text_QString);
+	return new VirtualQTableWidgetItem(vtbl, vdata, text_QString);
 }
 
-QTableWidgetItem* QTableWidgetItem_new3(struct QTableWidgetItem_VTable* vtbl, QIcon* icon, struct miqt_string text) {
+VirtualQTableWidgetItem* QTableWidgetItem_new3(const QTableWidgetItem_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTableWidgetItem(vtbl, *icon, text_QString);
+	return new VirtualQTableWidgetItem(vtbl, vdata, *icon, text_QString);
 }
 
-QTableWidgetItem* QTableWidgetItem_new4(struct QTableWidgetItem_VTable* vtbl, QTableWidgetItem* other) {
-	return new VirtualQTableWidgetItem(vtbl, *other);
+VirtualQTableWidgetItem* QTableWidgetItem_new4(const QTableWidgetItem_VTable* vtbl, void* vdata, QTableWidgetItem* other) {
+	return new VirtualQTableWidgetItem(vtbl, vdata, *other);
 }
 
-QTableWidgetItem* QTableWidgetItem_new5(struct QTableWidgetItem_VTable* vtbl, int type) {
-	return new VirtualQTableWidgetItem(vtbl, static_cast<int>(type));
+VirtualQTableWidgetItem* QTableWidgetItem_new5(const QTableWidgetItem_VTable* vtbl, void* vdata, int type) {
+	return new VirtualQTableWidgetItem(vtbl, vdata, static_cast<int>(type));
 }
 
-QTableWidgetItem* QTableWidgetItem_new6(struct QTableWidgetItem_VTable* vtbl, struct miqt_string text, int type) {
+VirtualQTableWidgetItem* QTableWidgetItem_new6(const QTableWidgetItem_VTable* vtbl, void* vdata, struct miqt_string text, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTableWidgetItem(vtbl, text_QString, static_cast<int>(type));
+	return new VirtualQTableWidgetItem(vtbl, vdata, text_QString, static_cast<int>(type));
 }
 
-QTableWidgetItem* QTableWidgetItem_new7(struct QTableWidgetItem_VTable* vtbl, QIcon* icon, struct miqt_string text, int type) {
+VirtualQTableWidgetItem* QTableWidgetItem_new7(const QTableWidgetItem_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTableWidgetItem(vtbl, *icon, text_QString, static_cast<int>(type));
+	return new VirtualQTableWidgetItem(vtbl, vdata, *icon, text_QString, static_cast<int>(type));
 }
 
 QTableWidgetItem* QTableWidgetItem_clone(const QTableWidgetItem* self) {
@@ -441,72 +430,72 @@ int QTableWidgetItem_type(const QTableWidgetItem* self) {
 	return self->type();
 }
 
-QTableWidgetItem* QTableWidgetItem_virtualbase_clone(const void* self) {
+QTableWidgetItem* QTableWidgetItem_virtualbase_clone(const VirtualQTableWidgetItem* self) {
 
-	return ( (const VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::clone();
-
+	return self->QTableWidgetItem::clone();
 }
 
-QVariant* QTableWidgetItem_virtualbase_data(const void* self, int role) {
+QVariant* QTableWidgetItem_virtualbase_data(const VirtualQTableWidgetItem* self, int role) {
 
-	return new QVariant(( (const VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::data(static_cast<int>(role)));
-
+	return new QVariant(self->QTableWidgetItem::data(static_cast<int>(role)));
 }
 
-void QTableWidgetItem_virtualbase_setData(void* self, int role, QVariant* value) {
+void QTableWidgetItem_virtualbase_setData(VirtualQTableWidgetItem* self, int role, QVariant* value) {
 
-	( (VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::setData(static_cast<int>(role), *value);
-
+	self->QTableWidgetItem::setData(static_cast<int>(role), *value);
 }
 
-bool QTableWidgetItem_virtualbase_operatorLesser(const void* self, QTableWidgetItem* other) {
+bool QTableWidgetItem_virtualbase_operatorLesser(const VirtualQTableWidgetItem* self, QTableWidgetItem* other) {
 
-	return ( (const VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::operator<(*other);
-
+	return self->QTableWidgetItem::operator<(*other);
 }
 
-void QTableWidgetItem_virtualbase_read(void* self, QDataStream* in) {
+void QTableWidgetItem_virtualbase_read(VirtualQTableWidgetItem* self, QDataStream* in) {
 
-	( (VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::read(*in);
-
+	self->QTableWidgetItem::read(*in);
 }
 
-void QTableWidgetItem_virtualbase_write(const void* self, QDataStream* out) {
+void QTableWidgetItem_virtualbase_write(const VirtualQTableWidgetItem* self, QDataStream* out) {
 
-	( (const VirtualQTableWidgetItem*)(self) )->QTableWidgetItem::write(*out);
-
+	self->QTableWidgetItem::write(*out);
 }
+
+const QTableWidgetItem_VTable* QTableWidgetItem_vtbl(const VirtualQTableWidgetItem* self) { return self->vtbl; }
+void* QTableWidgetItem_vdata(const VirtualQTableWidgetItem* self) { return self->vdata; }
+void QTableWidgetItem_setVdata(VirtualQTableWidgetItem* self, void* vdata) { self->vdata = vdata; }
 
 void QTableWidgetItem_delete(QTableWidgetItem* self) {
 	delete self;
 }
 
 class VirtualQTableWidget final : public QTableWidget {
-	struct QTableWidget_VTable* vtbl;
+	const QTableWidget_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTableWidget_VTable* QTableWidget_vtbl(const VirtualQTableWidget* self);
+	friend void* QTableWidget_vdata(const VirtualQTableWidget* self);
+	friend void QTableWidget_setVdata(VirtualQTableWidget* self, void* vdata);
 
-	VirtualQTableWidget(struct QTableWidget_VTable* vtbl, QWidget* parent): QTableWidget(parent), vtbl(vtbl) {};
-	VirtualQTableWidget(struct QTableWidget_VTable* vtbl): QTableWidget(), vtbl(vtbl) {};
-	VirtualQTableWidget(struct QTableWidget_VTable* vtbl, int rows, int columns): QTableWidget(rows, columns), vtbl(vtbl) {};
-	VirtualQTableWidget(struct QTableWidget_VTable* vtbl, int rows, int columns, QWidget* parent): QTableWidget(rows, columns, parent), vtbl(vtbl) {};
+	VirtualQTableWidget(const QTableWidget_VTable* vtbl, void* vdata, QWidget* parent): QTableWidget(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidget(const QTableWidget_VTable* vtbl, void* vdata): QTableWidget(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidget(const QTableWidget_VTable* vtbl, void* vdata, int rows, int columns): QTableWidget(rows, columns), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTableWidget(const QTableWidget_VTable* vtbl, void* vdata, int rows, int columns, QWidget* parent): QTableWidget(rows, columns, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTableWidget() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTableWidget() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTableWidget::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTableWidget_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTableWidget_virtualbase_metaObject(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTableWidget::qt_metacast(param1);
@@ -514,14 +503,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTableWidget_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTableWidget_virtualbase_metacast(VirtualQTableWidget* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTableWidget::qt_metacall(param1, param2, param3);
@@ -532,14 +520,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTableWidget_virtualbase_metacall(VirtualQTableWidget* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QTableWidget::event(e);
@@ -547,21 +534,20 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_event(void* self, QEvent* e);
+	friend bool QTableWidget_virtualbase_event(VirtualQTableWidget* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual QStringList mimeTypes() const override {
 		if (vtbl->mimeTypes == 0) {
 			return QTableWidget::mimeTypes();
 		}
 
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->mimeTypes(vtbl, this);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->mimeTypes(this);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -575,9 +561,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of struct miqt_string */  QTableWidget_virtualbase_mimeTypes(const void* self);
+	friend struct miqt_array /* of struct miqt_string */  QTableWidget_virtualbase_mimeTypes(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMimeData* mimeData(const QList<QTableWidgetItem *>& items) const override {
 		if (vtbl->mimeData == 0) {
 			return QTableWidget::mimeData(items);
@@ -594,14 +579,13 @@ public:
 		items_out.data = static_cast<void*>(items_arr);
 		struct miqt_array /* of QTableWidgetItem* */  sigval1 = items_out;
 
-		QMimeData* callback_return_value = vtbl->mimeData(vtbl, this, sigval1);
+		QMimeData* callback_return_value = vtbl->mimeData(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QMimeData* QTableWidget_virtualbase_mimeData(const void* self, struct miqt_array /* of QTableWidgetItem* */  items);
+	friend QMimeData* QTableWidget_virtualbase_mimeData(const VirtualQTableWidget* self, struct miqt_array /* of QTableWidgetItem* */  items);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool dropMimeData(int row, int column, const QMimeData* data, Qt::DropAction action) override {
 		if (vtbl->dropMimeData == 0) {
 			return QTableWidget::dropMimeData(row, column, data, action);
@@ -613,28 +597,26 @@ public:
 		Qt::DropAction action_ret = action;
 		int sigval4 = static_cast<int>(action_ret);
 
-		bool callback_return_value = vtbl->dropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->dropMimeData(this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_dropMimeData(void* self, int row, int column, QMimeData* data, int action);
+	friend bool QTableWidget_virtualbase_dropMimeData(VirtualQTableWidget* self, int row, int column, QMimeData* data, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDropActions() const override {
 		if (vtbl->supportedDropActions == 0) {
 			return QTableWidget::supportedDropActions();
 		}
 
 
-		int callback_return_value = vtbl->supportedDropActions(vtbl, this);
+		int callback_return_value = vtbl->supportedDropActions(this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_supportedDropActions(const void* self);
+	friend int QTableWidget_virtualbase_supportedDropActions(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QTableWidget::dropEvent(event);
@@ -643,13 +625,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QTableWidget_virtualbase_dropEvent(VirtualQTableWidget* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setRootIndex(const QModelIndex& index) override {
 		if (vtbl->setRootIndex == 0) {
 			QTableWidget::setRootIndex(index);
@@ -660,13 +641,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->setRootIndex(vtbl, this, sigval1);
+		vtbl->setRootIndex(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_setRootIndex(void* self, QModelIndex* index);
+	friend void QTableWidget_virtualbase_setRootIndex(VirtualQTableWidget* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelectionModel(QItemSelectionModel* selectionModel) override {
 		if (vtbl->setSelectionModel == 0) {
 			QTableWidget::setSelectionModel(selectionModel);
@@ -675,13 +655,12 @@ public:
 
 		QItemSelectionModel* sigval1 = selectionModel;
 
-		vtbl->setSelectionModel(vtbl, this, sigval1);
+		vtbl->setSelectionModel(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
+	friend void QTableWidget_virtualbase_setSelectionModel(VirtualQTableWidget* self, QItemSelectionModel* selectionModel);
 
-	// Subclass to allow providing a Go implementation
 	virtual void doItemsLayout() override {
 		if (vtbl->doItemsLayout == 0) {
 			QTableWidget::doItemsLayout();
@@ -689,13 +668,12 @@ public:
 		}
 
 
-		vtbl->doItemsLayout(vtbl, this);
+		vtbl->doItemsLayout(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_doItemsLayout(void* self);
+	friend void QTableWidget_virtualbase_doItemsLayout(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect visualRect(const QModelIndex& index) const override {
 		if (vtbl->visualRect == 0) {
 			return QTableWidget::visualRect(index);
@@ -705,16 +683,15 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QRect* callback_return_value = vtbl->visualRect(vtbl, this, sigval1);
+		QRect* callback_return_value = vtbl->visualRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QTableWidget_virtualbase_visualRect(const void* self, QModelIndex* index);
+	friend QRect* QTableWidget_virtualbase_visualRect(const VirtualQTableWidget* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHint hint) override {
 		if (vtbl->scrollTo == 0) {
 			QTableWidget::scrollTo(index, hint);
@@ -727,13 +704,12 @@ public:
 		QAbstractItemView::ScrollHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->scrollTo(vtbl, this, sigval1, sigval2);
+		vtbl->scrollTo(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_scrollTo(void* self, QModelIndex* index, int hint);
+	friend void QTableWidget_virtualbase_scrollTo(VirtualQTableWidget* self, QModelIndex* index, int hint);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex indexAt(const QPoint& p) const override {
 		if (vtbl->indexAt == 0) {
 			return QTableWidget::indexAt(p);
@@ -743,16 +719,15 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&p_ret);
 
-		QModelIndex* callback_return_value = vtbl->indexAt(vtbl, this, sigval1);
+		QModelIndex* callback_return_value = vtbl->indexAt(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QTableWidget_virtualbase_indexAt(const void* self, QPoint* p);
+	friend QModelIndex* QTableWidget_virtualbase_indexAt(const VirtualQTableWidget* self, QPoint* p);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
 		if (vtbl->scrollContentsBy == 0) {
 			QTableWidget::scrollContentsBy(dx, dy);
@@ -762,13 +737,12 @@ public:
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
+		vtbl->scrollContentsBy(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_scrollContentsBy(void* self, int dx, int dy);
+	friend void QTableWidget_virtualbase_scrollContentsBy(VirtualQTableWidget* self, int dx, int dy);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initViewItemOption(QStyleOptionViewItem* option) const override {
 		if (vtbl->initViewItemOption == 0) {
 			QTableWidget::initViewItemOption(option);
@@ -777,13 +751,12 @@ public:
 
 		QStyleOptionViewItem* sigval1 = option;
 
-		vtbl->initViewItemOption(vtbl, this, sigval1);
+		vtbl->initViewItemOption(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_initViewItemOption(const void* self, QStyleOptionViewItem* option);
+	friend void QTableWidget_virtualbase_initViewItemOption(const VirtualQTableWidget* self, QStyleOptionViewItem* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			QTableWidget::paintEvent(e);
@@ -792,13 +765,12 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_paintEvent(void* self, QPaintEvent* e);
+	friend void QTableWidget_virtualbase_paintEvent(VirtualQTableWidget* self, QPaintEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTableWidget::timerEvent(event);
@@ -807,41 +779,38 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTableWidget_virtualbase_timerEvent(VirtualQTableWidget* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int horizontalOffset() const override {
 		if (vtbl->horizontalOffset == 0) {
 			return QTableWidget::horizontalOffset();
 		}
 
 
-		int callback_return_value = vtbl->horizontalOffset(vtbl, this);
+		int callback_return_value = vtbl->horizontalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_horizontalOffset(const void* self);
+	friend int QTableWidget_virtualbase_horizontalOffset(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int verticalOffset() const override {
 		if (vtbl->verticalOffset == 0) {
 			return QTableWidget::verticalOffset();
 		}
 
 
-		int callback_return_value = vtbl->verticalOffset(vtbl, this);
+		int callback_return_value = vtbl->verticalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_verticalOffset(const void* self);
+	friend int QTableWidget_virtualbase_verticalOffset(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override {
 		if (vtbl->moveCursor == 0) {
 			return QTableWidget::moveCursor(cursorAction, modifiers);
@@ -852,16 +821,15 @@ public:
 		Qt::KeyboardModifiers modifiers_ret = modifiers;
 		int sigval2 = static_cast<int>(modifiers_ret);
 
-		QModelIndex* callback_return_value = vtbl->moveCursor(vtbl, this, sigval1, sigval2);
+		QModelIndex* callback_return_value = vtbl->moveCursor(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QModelIndex* QTableWidget_virtualbase_moveCursor(void* self, int cursorAction, int modifiers);
+	friend QModelIndex* QTableWidget_virtualbase_moveCursor(VirtualQTableWidget* self, int cursorAction, int modifiers);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->setSelection == 0) {
 			QTableWidget::setSelection(rect, command);
@@ -874,13 +842,12 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->setSelection(vtbl, this, sigval1, sigval2);
+		vtbl->setSelection(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_setSelection(void* self, QRect* rect, int command);
+	friend void QTableWidget_virtualbase_setSelection(VirtualQTableWidget* self, QRect* rect, int command);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRegion visualRegionForSelection(const QItemSelection& selection) const override {
 		if (vtbl->visualRegionForSelection == 0) {
 			return QTableWidget::visualRegionForSelection(selection);
@@ -890,23 +857,22 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
-		QRegion* callback_return_value = vtbl->visualRegionForSelection(vtbl, this, sigval1);
+		QRegion* callback_return_value = vtbl->visualRegionForSelection(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRegion* QTableWidget_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection);
+	friend QRegion* QTableWidget_virtualbase_visualRegionForSelection(const VirtualQTableWidget* self, QItemSelection* selection);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList selectedIndexes() const override {
 		if (vtbl->selectedIndexes == 0) {
 			return QTableWidget::selectedIndexes();
 		}
 
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(vtbl, this);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(this);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -918,9 +884,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of QModelIndex* */  QTableWidget_virtualbase_selectedIndexes(const void* self);
+	friend struct miqt_array /* of QModelIndex* */  QTableWidget_virtualbase_selectedIndexes(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometries() override {
 		if (vtbl->updateGeometries == 0) {
 			QTableWidget::updateGeometries();
@@ -928,29 +893,27 @@ public:
 		}
 
 
-		vtbl->updateGeometries(vtbl, this);
+		vtbl->updateGeometries(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_updateGeometries(void* self);
+	friend void QTableWidget_virtualbase_updateGeometries(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
 		if (vtbl->viewportSizeHint == 0) {
 			return QTableWidget::viewportSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->viewportSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTableWidget_virtualbase_viewportSizeHint(const void* self);
+	friend QSize* QTableWidget_virtualbase_viewportSizeHint(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForRow(int row) const override {
 		if (vtbl->sizeHintForRow == 0) {
 			return QTableWidget::sizeHintForRow(row);
@@ -958,14 +921,13 @@ public:
 
 		int sigval1 = row;
 
-		int callback_return_value = vtbl->sizeHintForRow(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForRow(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_sizeHintForRow(const void* self, int row);
+	friend int QTableWidget_virtualbase_sizeHintForRow(const VirtualQTableWidget* self, int row);
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForColumn(int column) const override {
 		if (vtbl->sizeHintForColumn == 0) {
 			return QTableWidget::sizeHintForColumn(column);
@@ -973,14 +935,13 @@ public:
 
 		int sigval1 = column;
 
-		int callback_return_value = vtbl->sizeHintForColumn(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForColumn(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_sizeHintForColumn(const void* self, int column);
+	friend int QTableWidget_virtualbase_sizeHintForColumn(const VirtualQTableWidget* self, int column);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarAction(int action) override {
 		if (vtbl->verticalScrollbarAction == 0) {
 			QTableWidget::verticalScrollbarAction(action);
@@ -989,13 +950,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->verticalScrollbarAction(vtbl, this, sigval1);
+		vtbl->verticalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_verticalScrollbarAction(void* self, int action);
+	friend void QTableWidget_virtualbase_verticalScrollbarAction(VirtualQTableWidget* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarAction(int action) override {
 		if (vtbl->horizontalScrollbarAction == 0) {
 			QTableWidget::horizontalScrollbarAction(action);
@@ -1004,13 +964,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->horizontalScrollbarAction(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_horizontalScrollbarAction(void* self, int action);
+	friend void QTableWidget_virtualbase_horizontalScrollbarAction(VirtualQTableWidget* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isIndexHidden(const QModelIndex& index) const override {
 		if (vtbl->isIndexHidden == 0) {
 			return QTableWidget::isIndexHidden(index);
@@ -1020,14 +979,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		bool callback_return_value = vtbl->isIndexHidden(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isIndexHidden(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_isIndexHidden(const void* self, QModelIndex* index);
+	friend bool QTableWidget_virtualbase_isIndexHidden(const VirtualQTableWidget* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override {
 		if (vtbl->selectionChanged == 0) {
 			QTableWidget::selectionChanged(selected, deselected);
@@ -1041,13 +999,12 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
 
-		vtbl->selectionChanged(vtbl, this, sigval1, sigval2);
+		vtbl->selectionChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected);
+	friend void QTableWidget_virtualbase_selectionChanged(VirtualQTableWidget* self, QItemSelection* selected, QItemSelection* deselected);
 
-	// Subclass to allow providing a Go implementation
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous) override {
 		if (vtbl->currentChanged == 0) {
 			QTableWidget::currentChanged(current, previous);
@@ -1061,13 +1018,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
 
-		vtbl->currentChanged(vtbl, this, sigval1, sigval2);
+		vtbl->currentChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous);
+	friend void QTableWidget_virtualbase_currentChanged(VirtualQTableWidget* self, QModelIndex* current, QModelIndex* previous);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyboardSearch(const QString& search) override {
 		if (vtbl->keyboardSearch == 0) {
 			QTableWidget::keyboardSearch(search);
@@ -1083,13 +1039,12 @@ public:
 		memcpy(search_ms.data, search_b.data(), search_ms.len);
 		struct miqt_string sigval1 = search_ms;
 
-		vtbl->keyboardSearch(vtbl, this, sigval1);
+		vtbl->keyboardSearch(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_keyboardSearch(void* self, struct miqt_string search);
+	friend void QTableWidget_virtualbase_keyboardSearch(VirtualQTableWidget* self, struct miqt_string search);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractItemDelegate* itemDelegateForIndex(const QModelIndex& index) const override {
 		if (vtbl->itemDelegateForIndex == 0) {
 			return QTableWidget::itemDelegateForIndex(index);
@@ -1099,14 +1054,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QAbstractItemDelegate* callback_return_value = vtbl->itemDelegateForIndex(vtbl, this, sigval1);
+		QAbstractItemDelegate* callback_return_value = vtbl->itemDelegateForIndex(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QAbstractItemDelegate* QTableWidget_virtualbase_itemDelegateForIndex(const void* self, QModelIndex* index);
+	friend QAbstractItemDelegate* QTableWidget_virtualbase_itemDelegateForIndex(const VirtualQTableWidget* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QTableWidget::inputMethodQuery(query);
@@ -1115,16 +1069,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTableWidget_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QTableWidget_virtualbase_inputMethodQuery(const VirtualQTableWidget* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
 		if (vtbl->reset == 0) {
 			QTableWidget::reset();
@@ -1132,13 +1085,12 @@ public:
 		}
 
 
-		vtbl->reset(vtbl, this);
+		vtbl->reset(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_reset(void* self);
+	friend void QTableWidget_virtualbase_reset(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectAll() override {
 		if (vtbl->selectAll == 0) {
 			QTableWidget::selectAll();
@@ -1146,13 +1098,12 @@ public:
 		}
 
 
-		vtbl->selectAll(vtbl, this);
+		vtbl->selectAll(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_selectAll(void* self);
+	friend void QTableWidget_virtualbase_selectAll(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QList<int>& roles) override {
 		if (vtbl->dataChanged == 0) {
 			QTableWidget::dataChanged(topLeft, bottomRight, roles);
@@ -1176,13 +1127,12 @@ public:
 		roles_out.data = static_cast<void*>(roles_arr);
 		struct miqt_array /* of int */  sigval3 = roles_out;
 
-		vtbl->dataChanged(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->dataChanged(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QTableWidget_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
+	friend void QTableWidget_virtualbase_dataChanged(VirtualQTableWidget* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsInserted(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsInserted == 0) {
 			QTableWidget::rowsInserted(parent, start, end);
@@ -1195,13 +1145,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsInserted(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsInserted(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QTableWidget_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end);
+	friend void QTableWidget_virtualbase_rowsInserted(VirtualQTableWidget* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsAboutToBeRemoved(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsAboutToBeRemoved == 0) {
 			QTableWidget::rowsAboutToBeRemoved(parent, start, end);
@@ -1214,13 +1163,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsAboutToBeRemoved(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsAboutToBeRemoved(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QTableWidget_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end);
+	friend void QTableWidget_virtualbase_rowsAboutToBeRemoved(VirtualQTableWidget* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorData() override {
 		if (vtbl->updateEditorData == 0) {
 			QTableWidget::updateEditorData();
@@ -1228,13 +1176,12 @@ public:
 		}
 
 
-		vtbl->updateEditorData(vtbl, this);
+		vtbl->updateEditorData(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_updateEditorData(void* self);
+	friend void QTableWidget_virtualbase_updateEditorData(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorGeometries() override {
 		if (vtbl->updateEditorGeometries == 0) {
 			QTableWidget::updateEditorGeometries();
@@ -1242,13 +1189,12 @@ public:
 		}
 
 
-		vtbl->updateEditorGeometries(vtbl, this);
+		vtbl->updateEditorGeometries(this);
 
 	}
 
-	friend void QTableWidget_virtualbase_updateEditorGeometries(void* self);
+	friend void QTableWidget_virtualbase_updateEditorGeometries(VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarValueChanged(int value) override {
 		if (vtbl->verticalScrollbarValueChanged == 0) {
 			QTableWidget::verticalScrollbarValueChanged(value);
@@ -1257,13 +1203,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->verticalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->verticalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_verticalScrollbarValueChanged(void* self, int value);
+	friend void QTableWidget_virtualbase_verticalScrollbarValueChanged(VirtualQTableWidget* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarValueChanged(int value) override {
 		if (vtbl->horizontalScrollbarValueChanged == 0) {
 			QTableWidget::horizontalScrollbarValueChanged(value);
@@ -1272,13 +1217,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->horizontalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_horizontalScrollbarValueChanged(void* self, int value);
+	friend void QTableWidget_virtualbase_horizontalScrollbarValueChanged(VirtualQTableWidget* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) override {
 		if (vtbl->closeEditor == 0) {
 			QTableWidget::closeEditor(editor, hint);
@@ -1289,13 +1233,12 @@ public:
 		QAbstractItemDelegate::EndEditHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->closeEditor(vtbl, this, sigval1, sigval2);
+		vtbl->closeEditor(this, sigval1, sigval2);
 
 	}
 
-	friend void QTableWidget_virtualbase_closeEditor(void* self, QWidget* editor, int hint);
+	friend void QTableWidget_virtualbase_closeEditor(VirtualQTableWidget* self, QWidget* editor, int hint);
 
-	// Subclass to allow providing a Go implementation
 	virtual void commitData(QWidget* editor) override {
 		if (vtbl->commitData == 0) {
 			QTableWidget::commitData(editor);
@@ -1304,13 +1247,12 @@ public:
 
 		QWidget* sigval1 = editor;
 
-		vtbl->commitData(vtbl, this, sigval1);
+		vtbl->commitData(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_commitData(void* self, QWidget* editor);
+	friend void QTableWidget_virtualbase_commitData(VirtualQTableWidget* self, QWidget* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual void editorDestroyed(QObject* editor) override {
 		if (vtbl->editorDestroyed == 0) {
 			QTableWidget::editorDestroyed(editor);
@@ -1319,13 +1261,12 @@ public:
 
 		QObject* sigval1 = editor;
 
-		vtbl->editorDestroyed(vtbl, this, sigval1);
+		vtbl->editorDestroyed(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_editorDestroyed(void* self, QObject* editor);
+	friend void QTableWidget_virtualbase_editorDestroyed(VirtualQTableWidget* self, QObject* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
 		if (vtbl->edit2 == 0) {
 			return QTableWidget::edit(index, trigger, event);
@@ -1338,14 +1279,13 @@ public:
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
 
-		bool callback_return_value = vtbl->edit2(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QTableWidget_virtualbase_edit2(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
 			return QTableWidget::selectionCommand(index, event);
@@ -1356,14 +1296,13 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QEvent* sigval2 = (QEvent*) event;
 
-		int callback_return_value = vtbl->selectionCommand(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->selectionCommand(this, sigval1, sigval2);
 
 		return static_cast<QItemSelectionModel::SelectionFlags>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event);
+	friend int QTableWidget_virtualbase_selectionCommand(const VirtualQTableWidget* self, QModelIndex* index, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void startDrag(Qt::DropActions supportedActions) override {
 		if (vtbl->startDrag == 0) {
 			QTableWidget::startDrag(supportedActions);
@@ -1373,13 +1312,12 @@ public:
 		Qt::DropActions supportedActions_ret = supportedActions;
 		int sigval1 = static_cast<int>(supportedActions_ret);
 
-		vtbl->startDrag(vtbl, this, sigval1);
+		vtbl->startDrag(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_startDrag(void* self, int supportedActions);
+	friend void QTableWidget_virtualbase_startDrag(VirtualQTableWidget* self, int supportedActions);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QTableWidget::focusNextPrevChild(next);
@@ -1387,14 +1325,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QTableWidget_virtualbase_focusNextPrevChild(VirtualQTableWidget* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
 		if (vtbl->viewportEvent == 0) {
 			return QTableWidget::viewportEvent(event);
@@ -1402,14 +1339,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_viewportEvent(void* self, QEvent* event);
+	friend bool QTableWidget_virtualbase_viewportEvent(VirtualQTableWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QTableWidget::mousePressEvent(event);
@@ -1418,13 +1354,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QTableWidget_virtualbase_mousePressEvent(VirtualQTableWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QTableWidget::mouseMoveEvent(event);
@@ -1433,13 +1368,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QTableWidget_virtualbase_mouseMoveEvent(VirtualQTableWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QTableWidget::mouseReleaseEvent(event);
@@ -1448,13 +1382,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QTableWidget_virtualbase_mouseReleaseEvent(VirtualQTableWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QTableWidget::mouseDoubleClickEvent(event);
@@ -1463,13 +1396,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QTableWidget_virtualbase_mouseDoubleClickEvent(VirtualQTableWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QTableWidget::dragEnterEvent(event);
@@ -1478,13 +1410,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QTableWidget_virtualbase_dragEnterEvent(VirtualQTableWidget* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QTableWidget::dragMoveEvent(event);
@@ -1493,13 +1424,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QTableWidget_virtualbase_dragMoveEvent(VirtualQTableWidget* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QTableWidget::dragLeaveEvent(event);
@@ -1508,13 +1438,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QTableWidget_virtualbase_dragLeaveEvent(VirtualQTableWidget* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QTableWidget::focusInEvent(event);
@@ -1523,13 +1452,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QTableWidget_virtualbase_focusInEvent(VirtualQTableWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QTableWidget::focusOutEvent(event);
@@ -1538,13 +1466,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QTableWidget_virtualbase_focusOutEvent(VirtualQTableWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QTableWidget::keyPressEvent(event);
@@ -1553,13 +1480,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QTableWidget_virtualbase_keyPressEvent(VirtualQTableWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QTableWidget::resizeEvent(event);
@@ -1568,13 +1494,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QTableWidget_virtualbase_resizeEvent(VirtualQTableWidget* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QTableWidget::inputMethodEvent(event);
@@ -1583,13 +1508,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QTableWidget_virtualbase_inputMethodEvent(VirtualQTableWidget* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTableWidget::eventFilter(object, event);
@@ -1598,46 +1522,43 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QTableWidget_virtualbase_eventFilter(VirtualQTableWidget* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QTableWidget::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTableWidget_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QTableWidget_virtualbase_minimumSizeHint(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QTableWidget::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTableWidget_virtualbase_sizeHint(const void* self);
+	friend QSize* QTableWidget_virtualbase_sizeHint(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
 		if (vtbl->setupViewport == 0) {
 			QTableWidget::setupViewport(viewport);
@@ -1646,13 +1567,12 @@ public:
 
 		QWidget* sigval1 = viewport;
 
-		vtbl->setupViewport(vtbl, this, sigval1);
+		vtbl->setupViewport(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_setupViewport(void* self, QWidget* viewport);
+	friend void QTableWidget_virtualbase_setupViewport(VirtualQTableWidget* self, QWidget* viewport);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QTableWidget::wheelEvent(param1);
@@ -1661,13 +1581,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QTableWidget_virtualbase_wheelEvent(VirtualQTableWidget* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QTableWidget::contextMenuEvent(param1);
@@ -1676,13 +1595,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QTableWidget_virtualbase_contextMenuEvent(VirtualQTableWidget* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QTableWidget::changeEvent(param1);
@@ -1691,13 +1609,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QTableWidget_virtualbase_changeEvent(VirtualQTableWidget* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QTableWidget::initStyleOption(option);
@@ -1706,27 +1623,25 @@ public:
 
 		QStyleOptionFrame* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QTableWidget_virtualbase_initStyleOption(const VirtualQTableWidget* self, QStyleOptionFrame* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QTableWidget::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_devType(const void* self);
+	friend int QTableWidget_virtualbase_devType(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QTableWidget::setVisible(visible);
@@ -1735,13 +1650,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_setVisible(void* self, bool visible);
+	friend void QTableWidget_virtualbase_setVisible(VirtualQTableWidget* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QTableWidget::heightForWidth(param1);
@@ -1749,42 +1663,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QTableWidget_virtualbase_heightForWidth(const VirtualQTableWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QTableWidget::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QTableWidget_virtualbase_hasHeightForWidth(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QTableWidget::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QTableWidget_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QTableWidget_virtualbase_paintEngine(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QTableWidget::keyReleaseEvent(event);
@@ -1793,13 +1704,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QTableWidget_virtualbase_keyReleaseEvent(VirtualQTableWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QTableWidget::enterEvent(event);
@@ -1808,13 +1718,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QTableWidget_virtualbase_enterEvent(VirtualQTableWidget* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QTableWidget::leaveEvent(event);
@@ -1823,13 +1732,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QTableWidget_virtualbase_leaveEvent(VirtualQTableWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QTableWidget::moveEvent(event);
@@ -1838,13 +1746,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QTableWidget_virtualbase_moveEvent(VirtualQTableWidget* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QTableWidget::closeEvent(event);
@@ -1853,13 +1760,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QTableWidget_virtualbase_closeEvent(VirtualQTableWidget* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QTableWidget::tabletEvent(event);
@@ -1868,13 +1774,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QTableWidget_virtualbase_tabletEvent(VirtualQTableWidget* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QTableWidget::actionEvent(event);
@@ -1883,13 +1788,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QTableWidget_virtualbase_actionEvent(VirtualQTableWidget* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QTableWidget::showEvent(event);
@@ -1898,13 +1802,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QTableWidget_virtualbase_showEvent(VirtualQTableWidget* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QTableWidget::hideEvent(event);
@@ -1913,13 +1816,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QTableWidget_virtualbase_hideEvent(VirtualQTableWidget* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QTableWidget::nativeEvent(eventType, message, result);
@@ -1935,14 +1837,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QTableWidget_virtualbase_nativeEvent(VirtualQTableWidget* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QTableWidget::metric(param1);
@@ -1951,14 +1852,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTableWidget_virtualbase_metric(const void* self, int param1);
+	friend int QTableWidget_virtualbase_metric(const VirtualQTableWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QTableWidget::initPainter(painter);
@@ -1967,13 +1867,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QTableWidget_virtualbase_initPainter(const VirtualQTableWidget* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QTableWidget::redirected(offset);
@@ -1981,28 +1880,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QTableWidget_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QTableWidget_virtualbase_redirected(const VirtualQTableWidget* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QTableWidget::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QTableWidget_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QTableWidget_virtualbase_sharedPainter(const VirtualQTableWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTableWidget::childEvent(event);
@@ -2011,13 +1908,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTableWidget_virtualbase_childEvent(VirtualQTableWidget* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTableWidget::customEvent(event);
@@ -2026,13 +1922,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTableWidget_virtualbase_customEvent(VirtualQTableWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTableWidget::connectNotify(signal);
@@ -2043,13 +1938,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTableWidget_virtualbase_connectNotify(VirtualQTableWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTableWidget::disconnectNotify(signal);
@@ -2060,58 +1954,58 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTableWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTableWidget_virtualbase_disconnectNotify(VirtualQTableWidget* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTableWidget_protectedbase_rowMoved(void* self, int row, int oldIndex, int newIndex);
-	friend void QTableWidget_protectedbase_columnMoved(void* self, int column, int oldIndex, int newIndex);
-	friend void QTableWidget_protectedbase_rowResized(void* self, int row, int oldHeight, int newHeight);
-	friend void QTableWidget_protectedbase_columnResized(void* self, int column, int oldWidth, int newWidth);
-	friend void QTableWidget_protectedbase_rowCountChanged(void* self, int oldCount, int newCount);
-	friend void QTableWidget_protectedbase_columnCountChanged(void* self, int oldCount, int newCount);
-	friend int QTableWidget_protectedbase_state(const void* self);
-	friend void QTableWidget_protectedbase_setState(void* self, int state);
-	friend void QTableWidget_protectedbase_scheduleDelayedItemsLayout(void* self);
-	friend void QTableWidget_protectedbase_executeDelayedItemsLayout(void* self);
-	friend void QTableWidget_protectedbase_setDirtyRegion(void* self, QRegion* region);
-	friend void QTableWidget_protectedbase_scrollDirtyRegion(void* self, int dx, int dy);
-	friend QPoint* QTableWidget_protectedbase_dirtyRegionOffset(const void* self);
-	friend void QTableWidget_protectedbase_startAutoScroll(void* self);
-	friend void QTableWidget_protectedbase_stopAutoScroll(void* self);
-	friend void QTableWidget_protectedbase_doAutoScroll(void* self);
-	friend int QTableWidget_protectedbase_dropIndicatorPosition(const void* self);
-	friend void QTableWidget_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
-	friend QMargins* QTableWidget_protectedbase_viewportMargins(const void* self);
-	friend void QTableWidget_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QTableWidget_protectedbase_updateMicroFocus(void* self);
-	friend void QTableWidget_protectedbase_create(void* self);
-	friend void QTableWidget_protectedbase_destroy(void* self);
-	friend bool QTableWidget_protectedbase_focusNextChild(void* self);
-	friend bool QTableWidget_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QTableWidget_protectedbase_sender(const void* self);
-	friend int QTableWidget_protectedbase_senderSignalIndex(const void* self);
-	friend int QTableWidget_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTableWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QTableWidget_protectedbase_rowMoved(VirtualQTableWidget* self, int row, int oldIndex, int newIndex);
+	friend void QTableWidget_protectedbase_columnMoved(VirtualQTableWidget* self, int column, int oldIndex, int newIndex);
+	friend void QTableWidget_protectedbase_rowResized(VirtualQTableWidget* self, int row, int oldHeight, int newHeight);
+	friend void QTableWidget_protectedbase_columnResized(VirtualQTableWidget* self, int column, int oldWidth, int newWidth);
+	friend void QTableWidget_protectedbase_rowCountChanged(VirtualQTableWidget* self, int oldCount, int newCount);
+	friend void QTableWidget_protectedbase_columnCountChanged(VirtualQTableWidget* self, int oldCount, int newCount);
+	friend int QTableWidget_protectedbase_state(const VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_setState(VirtualQTableWidget* self, int state);
+	friend void QTableWidget_protectedbase_scheduleDelayedItemsLayout(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_executeDelayedItemsLayout(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_setDirtyRegion(VirtualQTableWidget* self, QRegion* region);
+	friend void QTableWidget_protectedbase_scrollDirtyRegion(VirtualQTableWidget* self, int dx, int dy);
+	friend QPoint* QTableWidget_protectedbase_dirtyRegionOffset(const VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_startAutoScroll(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_stopAutoScroll(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_doAutoScroll(VirtualQTableWidget* self);
+	friend int QTableWidget_protectedbase_dropIndicatorPosition(const VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_setViewportMargins(VirtualQTableWidget* self, int left, int top, int right, int bottom);
+	friend QMargins* QTableWidget_protectedbase_viewportMargins(const VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_drawFrame(VirtualQTableWidget* self, QPainter* param1);
+	friend void QTableWidget_protectedbase_updateMicroFocus(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_create(VirtualQTableWidget* self);
+	friend void QTableWidget_protectedbase_destroy(VirtualQTableWidget* self);
+	friend bool QTableWidget_protectedbase_focusNextChild(VirtualQTableWidget* self);
+	friend bool QTableWidget_protectedbase_focusPreviousChild(VirtualQTableWidget* self);
+	friend QObject* QTableWidget_protectedbase_sender(const VirtualQTableWidget* self);
+	friend int QTableWidget_protectedbase_senderSignalIndex(const VirtualQTableWidget* self);
+	friend int QTableWidget_protectedbase_receivers(const VirtualQTableWidget* self, const char* signal);
+	friend bool QTableWidget_protectedbase_isSignalConnected(const VirtualQTableWidget* self, QMetaMethod* signal);
 };
 
-QTableWidget* QTableWidget_new(struct QTableWidget_VTable* vtbl, QWidget* parent) {
-	return new VirtualQTableWidget(vtbl, parent);
+VirtualQTableWidget* QTableWidget_new(const QTableWidget_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQTableWidget(vtbl, vdata, parent);
 }
 
-QTableWidget* QTableWidget_new2(struct QTableWidget_VTable* vtbl) {
-	return new VirtualQTableWidget(vtbl);
+VirtualQTableWidget* QTableWidget_new2(const QTableWidget_VTable* vtbl, void* vdata) {
+	return new VirtualQTableWidget(vtbl, vdata);
 }
 
-QTableWidget* QTableWidget_new3(struct QTableWidget_VTable* vtbl, int rows, int columns) {
-	return new VirtualQTableWidget(vtbl, static_cast<int>(rows), static_cast<int>(columns));
+VirtualQTableWidget* QTableWidget_new3(const QTableWidget_VTable* vtbl, void* vdata, int rows, int columns) {
+	return new VirtualQTableWidget(vtbl, vdata, static_cast<int>(rows), static_cast<int>(columns));
 }
 
-QTableWidget* QTableWidget_new4(struct QTableWidget_VTable* vtbl, int rows, int columns, QWidget* parent) {
-	return new VirtualQTableWidget(vtbl, static_cast<int>(rows), static_cast<int>(columns), parent);
+VirtualQTableWidget* QTableWidget_new4(const QTableWidget_VTable* vtbl, void* vdata, int rows, int columns, QWidget* parent) {
+	return new VirtualQTableWidget(vtbl, vdata, static_cast<int>(rows), static_cast<int>(columns), parent);
 }
 
 void QTableWidget_virtbase(QTableWidget* src, QTableView** outptr_QTableView) {
@@ -2416,7 +2310,7 @@ void QTableWidget_itemPressed(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemPressed(item);
 }
 
-void QTableWidget_connect_itemPressed(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemPressed(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2432,7 +2326,7 @@ void QTableWidget_itemClicked(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemClicked(item);
 }
 
-void QTableWidget_connect_itemClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemClicked(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2448,7 +2342,7 @@ void QTableWidget_itemDoubleClicked(QTableWidget* self, QTableWidgetItem* item) 
 	self->itemDoubleClicked(item);
 }
 
-void QTableWidget_connect_itemDoubleClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemDoubleClicked(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2464,7 +2358,7 @@ void QTableWidget_itemActivated(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemActivated(item);
 }
 
-void QTableWidget_connect_itemActivated(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemActivated(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2480,7 +2374,7 @@ void QTableWidget_itemEntered(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemEntered(item);
 }
 
-void QTableWidget_connect_itemEntered(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemEntered(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2496,7 +2390,7 @@ void QTableWidget_itemChanged(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemChanged(item);
 }
 
-void QTableWidget_connect_itemChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemChanged(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*);
@@ -2512,7 +2406,7 @@ void QTableWidget_currentItemChanged(QTableWidget* self, QTableWidgetItem* curre
 	self->currentItemChanged(current, previous);
 }
 
-void QTableWidget_connect_currentItemChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*), void (*release)(intptr_t)) {
+void QTableWidget_connect_currentItemChanged(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*);
@@ -2529,7 +2423,7 @@ void QTableWidget_itemSelectionChanged(QTableWidget* self) {
 	self->itemSelectionChanged();
 }
 
-void QTableWidget_connect_itemSelectionChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QTableWidget_connect_itemSelectionChanged(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2544,7 +2438,7 @@ void QTableWidget_cellPressed(QTableWidget* self, int row, int column) {
 	self->cellPressed(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellPressed(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellPressed(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2561,7 +2455,7 @@ void QTableWidget_cellClicked(QTableWidget* self, int row, int column) {
 	self->cellClicked(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellClicked(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2578,7 +2472,7 @@ void QTableWidget_cellDoubleClicked(QTableWidget* self, int row, int column) {
 	self->cellDoubleClicked(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellDoubleClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellDoubleClicked(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2595,7 +2489,7 @@ void QTableWidget_cellActivated(QTableWidget* self, int row, int column) {
 	self->cellActivated(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellActivated(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellActivated(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2612,7 +2506,7 @@ void QTableWidget_cellEntered(QTableWidget* self, int row, int column) {
 	self->cellEntered(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellEntered(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellEntered(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2629,7 +2523,7 @@ void QTableWidget_cellChanged(QTableWidget* self, int row, int column) {
 	self->cellChanged(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_cellChanged(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -2646,7 +2540,7 @@ void QTableWidget_currentCellChanged(QTableWidget* self, int currentRow, int cur
 	self->currentCellChanged(static_cast<int>(currentRow), static_cast<int>(currentColumn), static_cast<int>(previousRow), static_cast<int>(previousColumn));
 }
 
-void QTableWidget_connect_currentCellChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int, int, int), void (*release)(intptr_t)) {
+void QTableWidget_connect_currentCellChanged(VirtualQTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int, int, int);
@@ -2691,33 +2585,29 @@ void QTableWidget_scrollToItem2(QTableWidget* self, QTableWidgetItem* item, int 
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
 }
 
-QMetaObject* QTableWidget_virtualbase_metaObject(const void* self) {
+QMetaObject* QTableWidget_virtualbase_metaObject(const VirtualQTableWidget* self) {
 
-	return (QMetaObject*) ( (const VirtualQTableWidget*)(self) )->QTableWidget::metaObject();
-
+	return (QMetaObject*) self->QTableWidget::metaObject();
 }
 
-void* QTableWidget_virtualbase_metacast(void* self, const char* param1) {
+void* QTableWidget_virtualbase_metacast(VirtualQTableWidget* self, const char* param1) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::qt_metacast(param1);
-
+	return self->QTableWidget::qt_metacast(param1);
 }
 
-int QTableWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTableWidget_virtualbase_metacall(VirtualQTableWidget* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTableWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QTableWidget_virtualbase_event(void* self, QEvent* e) {
+bool QTableWidget_virtualbase_event(VirtualQTableWidget* self, QEvent* e) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::event(e);
-
+	return self->QTableWidget::event(e);
 }
 
-struct miqt_array /* of struct miqt_string */  QTableWidget_virtualbase_mimeTypes(const void* self) {
+struct miqt_array /* of struct miqt_string */  QTableWidget_virtualbase_mimeTypes(const VirtualQTableWidget* self) {
 
-	QStringList _ret = ( (const VirtualQTableWidget*)(self) )->QTableWidget::mimeTypes();
+	QStringList _ret = self->QTableWidget::mimeTypes();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct miqt_string* _arr = static_cast<struct miqt_string*>(malloc(sizeof(struct miqt_string) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -2734,10 +2624,9 @@ struct miqt_array /* of struct miqt_string */  QTableWidget_virtualbase_mimeType
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-QMimeData* QTableWidget_virtualbase_mimeData(const void* self, struct miqt_array /* of QTableWidgetItem* */  items) {
+QMimeData* QTableWidget_virtualbase_mimeData(const VirtualQTableWidget* self, struct miqt_array /* of QTableWidgetItem* */  items) {
 	QList<QTableWidgetItem *> items_QList;
 	items_QList.reserve(items.len);
 	QTableWidgetItem** items_arr = static_cast<QTableWidgetItem**>(items.data);
@@ -2745,122 +2634,103 @@ QMimeData* QTableWidget_virtualbase_mimeData(const void* self, struct miqt_array
 		items_QList.push_back(items_arr[i]);
 	}
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::mimeData(items_QList);
-
+	return self->QTableWidget::mimeData(items_QList);
 }
 
-bool QTableWidget_virtualbase_dropMimeData(void* self, int row, int column, QMimeData* data, int action) {
+bool QTableWidget_virtualbase_dropMimeData(VirtualQTableWidget* self, int row, int column, QMimeData* data, int action) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::dropMimeData(static_cast<int>(row), static_cast<int>(column), data, static_cast<Qt::DropAction>(action));
-
+	return self->QTableWidget::dropMimeData(static_cast<int>(row), static_cast<int>(column), data, static_cast<Qt::DropAction>(action));
 }
 
-int QTableWidget_virtualbase_supportedDropActions(const void* self) {
+int QTableWidget_virtualbase_supportedDropActions(const VirtualQTableWidget* self) {
 
-	Qt::DropActions _ret = ( (const VirtualQTableWidget*)(self) )->QTableWidget::supportedDropActions();
+	Qt::DropActions _ret = self->QTableWidget::supportedDropActions();
 	return static_cast<int>(_ret);
-
 }
 
-void QTableWidget_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QTableWidget_virtualbase_dropEvent(VirtualQTableWidget* self, QDropEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::dropEvent(event);
-
+	self->QTableWidget::dropEvent(event);
 }
 
-void QTableWidget_virtualbase_setRootIndex(void* self, QModelIndex* index) {
+void QTableWidget_virtualbase_setRootIndex(VirtualQTableWidget* self, QModelIndex* index) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::setRootIndex(*index);
-
+	self->QTableWidget::setRootIndex(*index);
 }
 
-void QTableWidget_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel) {
+void QTableWidget_virtualbase_setSelectionModel(VirtualQTableWidget* self, QItemSelectionModel* selectionModel) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::setSelectionModel(selectionModel);
-
+	self->QTableWidget::setSelectionModel(selectionModel);
 }
 
-void QTableWidget_virtualbase_doItemsLayout(void* self) {
+void QTableWidget_virtualbase_doItemsLayout(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::doItemsLayout();
-
+	self->QTableWidget::doItemsLayout();
 }
 
-QRect* QTableWidget_virtualbase_visualRect(const void* self, QModelIndex* index) {
+QRect* QTableWidget_virtualbase_visualRect(const VirtualQTableWidget* self, QModelIndex* index) {
 
-	return new QRect(( (const VirtualQTableWidget*)(self) )->QTableWidget::visualRect(*index));
-
+	return new QRect(self->QTableWidget::visualRect(*index));
 }
 
-void QTableWidget_virtualbase_scrollTo(void* self, QModelIndex* index, int hint) {
+void QTableWidget_virtualbase_scrollTo(VirtualQTableWidget* self, QModelIndex* index, int hint) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::scrollTo(*index, static_cast<VirtualQTableWidget::ScrollHint>(hint));
-
+	self->QTableWidget::scrollTo(*index, static_cast<VirtualQTableWidget::ScrollHint>(hint));
 }
 
-QModelIndex* QTableWidget_virtualbase_indexAt(const void* self, QPoint* p) {
+QModelIndex* QTableWidget_virtualbase_indexAt(const VirtualQTableWidget* self, QPoint* p) {
 
-	return new QModelIndex(( (const VirtualQTableWidget*)(self) )->QTableWidget::indexAt(*p));
-
+	return new QModelIndex(self->QTableWidget::indexAt(*p));
 }
 
-void QTableWidget_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
+void QTableWidget_virtualbase_scrollContentsBy(VirtualQTableWidget* self, int dx, int dy) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
-
+	self->QTableWidget::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QTableWidget_virtualbase_initViewItemOption(const void* self, QStyleOptionViewItem* option) {
+void QTableWidget_virtualbase_initViewItemOption(const VirtualQTableWidget* self, QStyleOptionViewItem* option) {
 
-	( (const VirtualQTableWidget*)(self) )->QTableWidget::initViewItemOption(option);
-
+	self->QTableWidget::initViewItemOption(option);
 }
 
-void QTableWidget_virtualbase_paintEvent(void* self, QPaintEvent* e) {
+void QTableWidget_virtualbase_paintEvent(VirtualQTableWidget* self, QPaintEvent* e) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::paintEvent(e);
-
+	self->QTableWidget::paintEvent(e);
 }
 
-void QTableWidget_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTableWidget_virtualbase_timerEvent(VirtualQTableWidget* self, QTimerEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::timerEvent(event);
-
+	self->QTableWidget::timerEvent(event);
 }
 
-int QTableWidget_virtualbase_horizontalOffset(const void* self) {
+int QTableWidget_virtualbase_horizontalOffset(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::horizontalOffset();
-
+	return self->QTableWidget::horizontalOffset();
 }
 
-int QTableWidget_virtualbase_verticalOffset(const void* self) {
+int QTableWidget_virtualbase_verticalOffset(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::verticalOffset();
-
+	return self->QTableWidget::verticalOffset();
 }
 
-QModelIndex* QTableWidget_virtualbase_moveCursor(void* self, int cursorAction, int modifiers) {
+QModelIndex* QTableWidget_virtualbase_moveCursor(VirtualQTableWidget* self, int cursorAction, int modifiers) {
 
-	return new QModelIndex(( (VirtualQTableWidget*)(self) )->QTableWidget::moveCursor(static_cast<VirtualQTableWidget::CursorAction>(cursorAction), static_cast<Qt::KeyboardModifiers>(modifiers)));
-
+	return new QModelIndex(self->QTableWidget::moveCursor(static_cast<VirtualQTableWidget::CursorAction>(cursorAction), static_cast<Qt::KeyboardModifiers>(modifiers)));
 }
 
-void QTableWidget_virtualbase_setSelection(void* self, QRect* rect, int command) {
+void QTableWidget_virtualbase_setSelection(VirtualQTableWidget* self, QRect* rect, int command) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::setSelection(*rect, static_cast<QItemSelectionModel::SelectionFlags>(command));
-
+	self->QTableWidget::setSelection(*rect, static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-QRegion* QTableWidget_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection) {
+QRegion* QTableWidget_virtualbase_visualRegionForSelection(const VirtualQTableWidget* self, QItemSelection* selection) {
 
-	return new QRegion(( (const VirtualQTableWidget*)(self) )->QTableWidget::visualRegionForSelection(*selection));
-
+	return new QRegion(self->QTableWidget::visualRegionForSelection(*selection));
 }
 
-struct miqt_array /* of QModelIndex* */  QTableWidget_virtualbase_selectedIndexes(const void* self) {
+struct miqt_array /* of QModelIndex* */  QTableWidget_virtualbase_selectedIndexes(const VirtualQTableWidget* self) {
 
-	QModelIndexList _ret = ( (const VirtualQTableWidget*)(self) )->QTableWidget::selectedIndexes();
+	QModelIndexList _ret = self->QTableWidget::selectedIndexes();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -2870,95 +2740,80 @@ struct miqt_array /* of QModelIndex* */  QTableWidget_virtualbase_selectedIndexe
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-void QTableWidget_virtualbase_updateGeometries(void* self) {
+void QTableWidget_virtualbase_updateGeometries(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::updateGeometries();
-
+	self->QTableWidget::updateGeometries();
 }
 
-QSize* QTableWidget_virtualbase_viewportSizeHint(const void* self) {
+QSize* QTableWidget_virtualbase_viewportSizeHint(const VirtualQTableWidget* self) {
 
-	return new QSize(( (const VirtualQTableWidget*)(self) )->QTableWidget::viewportSizeHint());
-
+	return new QSize(self->QTableWidget::viewportSizeHint());
 }
 
-int QTableWidget_virtualbase_sizeHintForRow(const void* self, int row) {
+int QTableWidget_virtualbase_sizeHintForRow(const VirtualQTableWidget* self, int row) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::sizeHintForRow(static_cast<int>(row));
-
+	return self->QTableWidget::sizeHintForRow(static_cast<int>(row));
 }
 
-int QTableWidget_virtualbase_sizeHintForColumn(const void* self, int column) {
+int QTableWidget_virtualbase_sizeHintForColumn(const VirtualQTableWidget* self, int column) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::sizeHintForColumn(static_cast<int>(column));
-
+	return self->QTableWidget::sizeHintForColumn(static_cast<int>(column));
 }
 
-void QTableWidget_virtualbase_verticalScrollbarAction(void* self, int action) {
+void QTableWidget_virtualbase_verticalScrollbarAction(VirtualQTableWidget* self, int action) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::verticalScrollbarAction(static_cast<int>(action));
-
+	self->QTableWidget::verticalScrollbarAction(static_cast<int>(action));
 }
 
-void QTableWidget_virtualbase_horizontalScrollbarAction(void* self, int action) {
+void QTableWidget_virtualbase_horizontalScrollbarAction(VirtualQTableWidget* self, int action) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::horizontalScrollbarAction(static_cast<int>(action));
-
+	self->QTableWidget::horizontalScrollbarAction(static_cast<int>(action));
 }
 
-bool QTableWidget_virtualbase_isIndexHidden(const void* self, QModelIndex* index) {
+bool QTableWidget_virtualbase_isIndexHidden(const VirtualQTableWidget* self, QModelIndex* index) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::isIndexHidden(*index);
-
+	return self->QTableWidget::isIndexHidden(*index);
 }
 
-void QTableWidget_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected) {
+void QTableWidget_virtualbase_selectionChanged(VirtualQTableWidget* self, QItemSelection* selected, QItemSelection* deselected) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::selectionChanged(*selected, *deselected);
-
+	self->QTableWidget::selectionChanged(*selected, *deselected);
 }
 
-void QTableWidget_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous) {
+void QTableWidget_virtualbase_currentChanged(VirtualQTableWidget* self, QModelIndex* current, QModelIndex* previous) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::currentChanged(*current, *previous);
-
+	self->QTableWidget::currentChanged(*current, *previous);
 }
 
-void QTableWidget_virtualbase_keyboardSearch(void* self, struct miqt_string search) {
+void QTableWidget_virtualbase_keyboardSearch(VirtualQTableWidget* self, struct miqt_string search) {
 	QString search_QString = QString::fromUtf8(search.data, search.len);
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::keyboardSearch(search_QString);
-
+	self->QTableWidget::keyboardSearch(search_QString);
 }
 
-QAbstractItemDelegate* QTableWidget_virtualbase_itemDelegateForIndex(const void* self, QModelIndex* index) {
+QAbstractItemDelegate* QTableWidget_virtualbase_itemDelegateForIndex(const VirtualQTableWidget* self, QModelIndex* index) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::itemDelegateForIndex(*index);
-
+	return self->QTableWidget::itemDelegateForIndex(*index);
 }
 
-QVariant* QTableWidget_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QTableWidget_virtualbase_inputMethodQuery(const VirtualQTableWidget* self, int query) {
 
-	return new QVariant(( (const VirtualQTableWidget*)(self) )->QTableWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QTableWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-void QTableWidget_virtualbase_reset(void* self) {
+void QTableWidget_virtualbase_reset(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::reset();
-
+	self->QTableWidget::reset();
 }
 
-void QTableWidget_virtualbase_selectAll(void* self) {
+void QTableWidget_virtualbase_selectAll(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::selectAll();
-
+	self->QTableWidget::selectAll();
 }
 
-void QTableWidget_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
+void QTableWidget_virtualbase_dataChanged(VirtualQTableWidget* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
 	QList<int> roles_QList;
 	roles_QList.reserve(roles.len);
 	int* roles_arr = static_cast<int*>(roles.data);
@@ -2966,558 +2821,418 @@ void QTableWidget_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QMod
 		roles_QList.push_back(static_cast<int>(roles_arr[i]));
 	}
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::dataChanged(*topLeft, *bottomRight, roles_QList);
-
+	self->QTableWidget::dataChanged(*topLeft, *bottomRight, roles_QList);
 }
 
-void QTableWidget_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end) {
+void QTableWidget_virtualbase_rowsInserted(VirtualQTableWidget* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QTableWidget::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QTableWidget_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end) {
+void QTableWidget_virtualbase_rowsAboutToBeRemoved(VirtualQTableWidget* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QTableWidget::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QTableWidget_virtualbase_updateEditorData(void* self) {
+void QTableWidget_virtualbase_updateEditorData(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::updateEditorData();
-
+	self->QTableWidget::updateEditorData();
 }
 
-void QTableWidget_virtualbase_updateEditorGeometries(void* self) {
+void QTableWidget_virtualbase_updateEditorGeometries(VirtualQTableWidget* self) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::updateEditorGeometries();
-
+	self->QTableWidget::updateEditorGeometries();
 }
 
-void QTableWidget_virtualbase_verticalScrollbarValueChanged(void* self, int value) {
+void QTableWidget_virtualbase_verticalScrollbarValueChanged(VirtualQTableWidget* self, int value) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::verticalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QTableWidget::verticalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QTableWidget_virtualbase_horizontalScrollbarValueChanged(void* self, int value) {
+void QTableWidget_virtualbase_horizontalScrollbarValueChanged(VirtualQTableWidget* self, int value) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::horizontalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QTableWidget::horizontalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QTableWidget_virtualbase_closeEditor(void* self, QWidget* editor, int hint) {
+void QTableWidget_virtualbase_closeEditor(VirtualQTableWidget* self, QWidget* editor, int hint) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
-
+	self->QTableWidget::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QTableWidget_virtualbase_commitData(void* self, QWidget* editor) {
+void QTableWidget_virtualbase_commitData(VirtualQTableWidget* self, QWidget* editor) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::commitData(editor);
-
+	self->QTableWidget::commitData(editor);
 }
 
-void QTableWidget_virtualbase_editorDestroyed(void* self, QObject* editor) {
+void QTableWidget_virtualbase_editorDestroyed(VirtualQTableWidget* self, QObject* editor) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::editorDestroyed(editor);
-
+	self->QTableWidget::editorDestroyed(editor);
 }
 
-bool QTableWidget_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QTableWidget_virtualbase_edit2(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::edit(*index, static_cast<VirtualQTableWidget::EditTrigger>(trigger), event);
-
+	return self->QTableWidget::edit(*index, static_cast<VirtualQTableWidget::EditTrigger>(trigger), event);
 }
 
-int QTableWidget_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event) {
+int QTableWidget_virtualbase_selectionCommand(const VirtualQTableWidget* self, QModelIndex* index, QEvent* event) {
 
-	QItemSelectionModel::SelectionFlags _ret = ( (const VirtualQTableWidget*)(self) )->QTableWidget::selectionCommand(*index, event);
+	QItemSelectionModel::SelectionFlags _ret = self->QTableWidget::selectionCommand(*index, event);
 	return static_cast<int>(_ret);
-
 }
 
-void QTableWidget_virtualbase_startDrag(void* self, int supportedActions) {
+void QTableWidget_virtualbase_startDrag(VirtualQTableWidget* self, int supportedActions) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::startDrag(static_cast<Qt::DropActions>(supportedActions));
-
+	self->QTableWidget::startDrag(static_cast<Qt::DropActions>(supportedActions));
 }
 
-bool QTableWidget_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QTableWidget_virtualbase_focusNextPrevChild(VirtualQTableWidget* self, bool next) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::focusNextPrevChild(next);
-
+	return self->QTableWidget::focusNextPrevChild(next);
 }
 
-bool QTableWidget_virtualbase_viewportEvent(void* self, QEvent* event) {
+bool QTableWidget_virtualbase_viewportEvent(VirtualQTableWidget* self, QEvent* event) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::viewportEvent(event);
-
+	return self->QTableWidget::viewportEvent(event);
 }
 
-void QTableWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QTableWidget_virtualbase_mousePressEvent(VirtualQTableWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::mousePressEvent(event);
-
+	self->QTableWidget::mousePressEvent(event);
 }
 
-void QTableWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QTableWidget_virtualbase_mouseMoveEvent(VirtualQTableWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::mouseMoveEvent(event);
-
+	self->QTableWidget::mouseMoveEvent(event);
 }
 
-void QTableWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QTableWidget_virtualbase_mouseReleaseEvent(VirtualQTableWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::mouseReleaseEvent(event);
-
+	self->QTableWidget::mouseReleaseEvent(event);
 }
 
-void QTableWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QTableWidget_virtualbase_mouseDoubleClickEvent(VirtualQTableWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::mouseDoubleClickEvent(event);
-
+	self->QTableWidget::mouseDoubleClickEvent(event);
 }
 
-void QTableWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QTableWidget_virtualbase_dragEnterEvent(VirtualQTableWidget* self, QDragEnterEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::dragEnterEvent(event);
-
+	self->QTableWidget::dragEnterEvent(event);
 }
 
-void QTableWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QTableWidget_virtualbase_dragMoveEvent(VirtualQTableWidget* self, QDragMoveEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::dragMoveEvent(event);
-
+	self->QTableWidget::dragMoveEvent(event);
 }
 
-void QTableWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QTableWidget_virtualbase_dragLeaveEvent(VirtualQTableWidget* self, QDragLeaveEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::dragLeaveEvent(event);
-
+	self->QTableWidget::dragLeaveEvent(event);
 }
 
-void QTableWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QTableWidget_virtualbase_focusInEvent(VirtualQTableWidget* self, QFocusEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::focusInEvent(event);
-
+	self->QTableWidget::focusInEvent(event);
 }
 
-void QTableWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QTableWidget_virtualbase_focusOutEvent(VirtualQTableWidget* self, QFocusEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::focusOutEvent(event);
-
+	self->QTableWidget::focusOutEvent(event);
 }
 
-void QTableWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QTableWidget_virtualbase_keyPressEvent(VirtualQTableWidget* self, QKeyEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::keyPressEvent(event);
-
+	self->QTableWidget::keyPressEvent(event);
 }
 
-void QTableWidget_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QTableWidget_virtualbase_resizeEvent(VirtualQTableWidget* self, QResizeEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::resizeEvent(event);
-
+	self->QTableWidget::resizeEvent(event);
 }
 
-void QTableWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QTableWidget_virtualbase_inputMethodEvent(VirtualQTableWidget* self, QInputMethodEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::inputMethodEvent(event);
-
+	self->QTableWidget::inputMethodEvent(event);
 }
 
-bool QTableWidget_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QTableWidget_virtualbase_eventFilter(VirtualQTableWidget* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::eventFilter(object, event);
-
+	return self->QTableWidget::eventFilter(object, event);
 }
 
-QSize* QTableWidget_virtualbase_minimumSizeHint(const void* self) {
+QSize* QTableWidget_virtualbase_minimumSizeHint(const VirtualQTableWidget* self) {
 
-	return new QSize(( (const VirtualQTableWidget*)(self) )->QTableWidget::minimumSizeHint());
-
+	return new QSize(self->QTableWidget::minimumSizeHint());
 }
 
-QSize* QTableWidget_virtualbase_sizeHint(const void* self) {
+QSize* QTableWidget_virtualbase_sizeHint(const VirtualQTableWidget* self) {
 
-	return new QSize(( (const VirtualQTableWidget*)(self) )->QTableWidget::sizeHint());
-
+	return new QSize(self->QTableWidget::sizeHint());
 }
 
-void QTableWidget_virtualbase_setupViewport(void* self, QWidget* viewport) {
+void QTableWidget_virtualbase_setupViewport(VirtualQTableWidget* self, QWidget* viewport) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::setupViewport(viewport);
-
+	self->QTableWidget::setupViewport(viewport);
 }
 
-void QTableWidget_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QTableWidget_virtualbase_wheelEvent(VirtualQTableWidget* self, QWheelEvent* param1) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::wheelEvent(param1);
-
+	self->QTableWidget::wheelEvent(param1);
 }
 
-void QTableWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QTableWidget_virtualbase_contextMenuEvent(VirtualQTableWidget* self, QContextMenuEvent* param1) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::contextMenuEvent(param1);
-
+	self->QTableWidget::contextMenuEvent(param1);
 }
 
-void QTableWidget_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QTableWidget_virtualbase_changeEvent(VirtualQTableWidget* self, QEvent* param1) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::changeEvent(param1);
-
+	self->QTableWidget::changeEvent(param1);
 }
 
-void QTableWidget_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+void QTableWidget_virtualbase_initStyleOption(const VirtualQTableWidget* self, QStyleOptionFrame* option) {
 
-	( (const VirtualQTableWidget*)(self) )->QTableWidget::initStyleOption(option);
-
+	self->QTableWidget::initStyleOption(option);
 }
 
-int QTableWidget_virtualbase_devType(const void* self) {
+int QTableWidget_virtualbase_devType(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::devType();
-
+	return self->QTableWidget::devType();
 }
 
-void QTableWidget_virtualbase_setVisible(void* self, bool visible) {
+void QTableWidget_virtualbase_setVisible(VirtualQTableWidget* self, bool visible) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::setVisible(visible);
-
+	self->QTableWidget::setVisible(visible);
 }
 
-int QTableWidget_virtualbase_heightForWidth(const void* self, int param1) {
+int QTableWidget_virtualbase_heightForWidth(const VirtualQTableWidget* self, int param1) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::heightForWidth(static_cast<int>(param1));
-
+	return self->QTableWidget::heightForWidth(static_cast<int>(param1));
 }
 
-bool QTableWidget_virtualbase_hasHeightForWidth(const void* self) {
+bool QTableWidget_virtualbase_hasHeightForWidth(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::hasHeightForWidth();
-
+	return self->QTableWidget::hasHeightForWidth();
 }
 
-QPaintEngine* QTableWidget_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QTableWidget_virtualbase_paintEngine(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::paintEngine();
-
+	return self->QTableWidget::paintEngine();
 }
 
-void QTableWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QTableWidget_virtualbase_keyReleaseEvent(VirtualQTableWidget* self, QKeyEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::keyReleaseEvent(event);
-
+	self->QTableWidget::keyReleaseEvent(event);
 }
 
-void QTableWidget_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QTableWidget_virtualbase_enterEvent(VirtualQTableWidget* self, QEnterEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::enterEvent(event);
-
+	self->QTableWidget::enterEvent(event);
 }
 
-void QTableWidget_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QTableWidget_virtualbase_leaveEvent(VirtualQTableWidget* self, QEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::leaveEvent(event);
-
+	self->QTableWidget::leaveEvent(event);
 }
 
-void QTableWidget_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QTableWidget_virtualbase_moveEvent(VirtualQTableWidget* self, QMoveEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::moveEvent(event);
-
+	self->QTableWidget::moveEvent(event);
 }
 
-void QTableWidget_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QTableWidget_virtualbase_closeEvent(VirtualQTableWidget* self, QCloseEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::closeEvent(event);
-
+	self->QTableWidget::closeEvent(event);
 }
 
-void QTableWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QTableWidget_virtualbase_tabletEvent(VirtualQTableWidget* self, QTabletEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::tabletEvent(event);
-
+	self->QTableWidget::tabletEvent(event);
 }
 
-void QTableWidget_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QTableWidget_virtualbase_actionEvent(VirtualQTableWidget* self, QActionEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::actionEvent(event);
-
+	self->QTableWidget::actionEvent(event);
 }
 
-void QTableWidget_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QTableWidget_virtualbase_showEvent(VirtualQTableWidget* self, QShowEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::showEvent(event);
-
+	self->QTableWidget::showEvent(event);
 }
 
-void QTableWidget_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QTableWidget_virtualbase_hideEvent(VirtualQTableWidget* self, QHideEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::hideEvent(event);
-
+	self->QTableWidget::hideEvent(event);
 }
 
-bool QTableWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QTableWidget_virtualbase_nativeEvent(VirtualQTableWidget* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQTableWidget*)(self) )->QTableWidget::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QTableWidget::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QTableWidget_virtualbase_metric(const void* self, int param1) {
+int QTableWidget_virtualbase_metric(const VirtualQTableWidget* self, int param1) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::metric(static_cast<VirtualQTableWidget::PaintDeviceMetric>(param1));
-
+	return self->QTableWidget::metric(static_cast<VirtualQTableWidget::PaintDeviceMetric>(param1));
 }
 
-void QTableWidget_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QTableWidget_virtualbase_initPainter(const VirtualQTableWidget* self, QPainter* painter) {
 
-	( (const VirtualQTableWidget*)(self) )->QTableWidget::initPainter(painter);
-
+	self->QTableWidget::initPainter(painter);
 }
 
-QPaintDevice* QTableWidget_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QTableWidget_virtualbase_redirected(const VirtualQTableWidget* self, QPoint* offset) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::redirected(offset);
-
+	return self->QTableWidget::redirected(offset);
 }
 
-QPainter* QTableWidget_virtualbase_sharedPainter(const void* self) {
+QPainter* QTableWidget_virtualbase_sharedPainter(const VirtualQTableWidget* self) {
 
-	return ( (const VirtualQTableWidget*)(self) )->QTableWidget::sharedPainter();
-
+	return self->QTableWidget::sharedPainter();
 }
 
-void QTableWidget_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTableWidget_virtualbase_childEvent(VirtualQTableWidget* self, QChildEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::childEvent(event);
-
+	self->QTableWidget::childEvent(event);
 }
 
-void QTableWidget_virtualbase_customEvent(void* self, QEvent* event) {
+void QTableWidget_virtualbase_customEvent(VirtualQTableWidget* self, QEvent* event) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::customEvent(event);
-
+	self->QTableWidget::customEvent(event);
 }
 
-void QTableWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTableWidget_virtualbase_connectNotify(VirtualQTableWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::connectNotify(*signal);
-
+	self->QTableWidget::connectNotify(*signal);
 }
 
-void QTableWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTableWidget_virtualbase_disconnectNotify(VirtualQTableWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQTableWidget*)(self) )->QTableWidget::disconnectNotify(*signal);
-
+	self->QTableWidget::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTableWidget_staticMetaObject() { return &QTableWidget::staticMetaObject; }
-void QTableWidget_protectedbase_rowMoved(void* self, int row, int oldIndex, int newIndex) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->rowMoved(static_cast<int>(row), static_cast<int>(oldIndex), static_cast<int>(newIndex));
 
+const QTableWidget_VTable* QTableWidget_vtbl(const VirtualQTableWidget* self) { return self->vtbl; }
+void* QTableWidget_vdata(const VirtualQTableWidget* self) { return self->vdata; }
+void QTableWidget_setVdata(VirtualQTableWidget* self, void* vdata) { self->vdata = vdata; }
+
+void QTableWidget_protectedbase_rowMoved(VirtualQTableWidget* self, int row, int oldIndex, int newIndex) {
+	self->rowMoved(static_cast<int>(row), static_cast<int>(oldIndex), static_cast<int>(newIndex));
 }
 
-void QTableWidget_protectedbase_columnMoved(void* self, int column, int oldIndex, int newIndex) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->columnMoved(static_cast<int>(column), static_cast<int>(oldIndex), static_cast<int>(newIndex));
-
+void QTableWidget_protectedbase_columnMoved(VirtualQTableWidget* self, int column, int oldIndex, int newIndex) {
+	self->columnMoved(static_cast<int>(column), static_cast<int>(oldIndex), static_cast<int>(newIndex));
 }
 
-void QTableWidget_protectedbase_rowResized(void* self, int row, int oldHeight, int newHeight) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->rowResized(static_cast<int>(row), static_cast<int>(oldHeight), static_cast<int>(newHeight));
-
+void QTableWidget_protectedbase_rowResized(VirtualQTableWidget* self, int row, int oldHeight, int newHeight) {
+	self->rowResized(static_cast<int>(row), static_cast<int>(oldHeight), static_cast<int>(newHeight));
 }
 
-void QTableWidget_protectedbase_columnResized(void* self, int column, int oldWidth, int newWidth) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->columnResized(static_cast<int>(column), static_cast<int>(oldWidth), static_cast<int>(newWidth));
-
+void QTableWidget_protectedbase_columnResized(VirtualQTableWidget* self, int column, int oldWidth, int newWidth) {
+	self->columnResized(static_cast<int>(column), static_cast<int>(oldWidth), static_cast<int>(newWidth));
 }
 
-void QTableWidget_protectedbase_rowCountChanged(void* self, int oldCount, int newCount) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->rowCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
-
+void QTableWidget_protectedbase_rowCountChanged(VirtualQTableWidget* self, int oldCount, int newCount) {
+	self->rowCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
-void QTableWidget_protectedbase_columnCountChanged(void* self, int oldCount, int newCount) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
-
+void QTableWidget_protectedbase_columnCountChanged(VirtualQTableWidget* self, int oldCount, int newCount) {
+	self->columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
-int QTableWidget_protectedbase_state(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	VirtualQTableWidget::State _ret = self_cast->state();
+int QTableWidget_protectedbase_state(const VirtualQTableWidget* self) {
+	VirtualQTableWidget::State _ret = self->state();
 	return static_cast<int>(_ret);
-
 }
 
-void QTableWidget_protectedbase_setState(void* self, int state) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->setState(static_cast<VirtualQTableWidget::State>(state));
-
+void QTableWidget_protectedbase_setState(VirtualQTableWidget* self, int state) {
+	self->setState(static_cast<VirtualQTableWidget::State>(state));
 }
 
-void QTableWidget_protectedbase_scheduleDelayedItemsLayout(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->scheduleDelayedItemsLayout();
-
+void QTableWidget_protectedbase_scheduleDelayedItemsLayout(VirtualQTableWidget* self) {
+	self->scheduleDelayedItemsLayout();
 }
 
-void QTableWidget_protectedbase_executeDelayedItemsLayout(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->executeDelayedItemsLayout();
-
+void QTableWidget_protectedbase_executeDelayedItemsLayout(VirtualQTableWidget* self) {
+	self->executeDelayedItemsLayout();
 }
 
-void QTableWidget_protectedbase_setDirtyRegion(void* self, QRegion* region) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->setDirtyRegion(*region);
-
+void QTableWidget_protectedbase_setDirtyRegion(VirtualQTableWidget* self, QRegion* region) {
+	self->setDirtyRegion(*region);
 }
 
-void QTableWidget_protectedbase_scrollDirtyRegion(void* self, int dx, int dy) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
-
+void QTableWidget_protectedbase_scrollDirtyRegion(VirtualQTableWidget* self, int dx, int dy) {
+	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-QPoint* QTableWidget_protectedbase_dirtyRegionOffset(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return new QPoint(self_cast->dirtyRegionOffset());
-
+QPoint* QTableWidget_protectedbase_dirtyRegionOffset(const VirtualQTableWidget* self) {
+	return new QPoint(self->dirtyRegionOffset());
 }
 
-void QTableWidget_protectedbase_startAutoScroll(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->startAutoScroll();
-
+void QTableWidget_protectedbase_startAutoScroll(VirtualQTableWidget* self) {
+	self->startAutoScroll();
 }
 
-void QTableWidget_protectedbase_stopAutoScroll(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->stopAutoScroll();
-
+void QTableWidget_protectedbase_stopAutoScroll(VirtualQTableWidget* self) {
+	self->stopAutoScroll();
 }
 
-void QTableWidget_protectedbase_doAutoScroll(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->doAutoScroll();
-
+void QTableWidget_protectedbase_doAutoScroll(VirtualQTableWidget* self) {
+	self->doAutoScroll();
 }
 
-int QTableWidget_protectedbase_dropIndicatorPosition(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	VirtualQTableWidget::DropIndicatorPosition _ret = self_cast->dropIndicatorPosition();
+int QTableWidget_protectedbase_dropIndicatorPosition(const VirtualQTableWidget* self) {
+	VirtualQTableWidget::DropIndicatorPosition _ret = self->dropIndicatorPosition();
 	return static_cast<int>(_ret);
-
 }
 
-void QTableWidget_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
-
+void QTableWidget_protectedbase_setViewportMargins(VirtualQTableWidget* self, int left, int top, int right, int bottom) {
+	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QTableWidget_protectedbase_viewportMargins(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return new QMargins(self_cast->viewportMargins());
-
+QMargins* QTableWidget_protectedbase_viewportMargins(const VirtualQTableWidget* self) {
+	return new QMargins(self->viewportMargins());
 }
 
-void QTableWidget_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->drawFrame(param1);
-
+void QTableWidget_protectedbase_drawFrame(VirtualQTableWidget* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QTableWidget_protectedbase_updateMicroFocus(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QTableWidget_protectedbase_updateMicroFocus(VirtualQTableWidget* self) {
+	self->updateMicroFocus();
 }
 
-void QTableWidget_protectedbase_create(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->create();
-
+void QTableWidget_protectedbase_create(VirtualQTableWidget* self) {
+	self->create();
 }
 
-void QTableWidget_protectedbase_destroy(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	self_cast->destroy();
-
+void QTableWidget_protectedbase_destroy(VirtualQTableWidget* self) {
+	self->destroy();
 }
 
-bool QTableWidget_protectedbase_focusNextChild(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QTableWidget_protectedbase_focusNextChild(VirtualQTableWidget* self) {
+	return self->focusNextChild();
 }
 
-bool QTableWidget_protectedbase_focusPreviousChild(void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QTableWidget_protectedbase_focusPreviousChild(VirtualQTableWidget* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QTableWidget_protectedbase_sender(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QTableWidget_protectedbase_sender(const VirtualQTableWidget* self) {
+	return self->sender();
 }
 
-int QTableWidget_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTableWidget_protectedbase_senderSignalIndex(const VirtualQTableWidget* self) {
+	return self->senderSignalIndex();
 }
 
-int QTableWidget_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTableWidget_protectedbase_receivers(const VirtualQTableWidget* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTableWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTableWidget* self_cast = static_cast<VirtualQTableWidget*>( (QTableWidget*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTableWidget_protectedbase_isSignalConnected(const VirtualQTableWidget* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTableWidget_delete(QTableWidget* self) {

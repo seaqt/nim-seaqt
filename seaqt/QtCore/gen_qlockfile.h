@@ -21,6 +21,7 @@ typedef struct QLockFile QLockFile;
 #endif
 
 QLockFile* QLockFile_new(struct miqt_string fileName);
+
 struct miqt_string QLockFile_fileName(const QLockFile* self);
 bool QLockFile_lock(QLockFile* self);
 bool QLockFile_tryLock(QLockFile* self);
@@ -31,6 +32,7 @@ bool QLockFile_isLocked(const QLockFile* self);
 bool QLockFile_removeStaleLockFile(QLockFile* self);
 int QLockFile_error(const QLockFile* self);
 bool QLockFile_tryLock1(QLockFile* self, int timeout);
+
 void QLockFile_delete(QLockFile* self);
 
 #ifdef __cplusplus

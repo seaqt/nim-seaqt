@@ -4,15 +4,6 @@
 #include <QWebEngineSettings>
 #include <qwebenginesettings.h>
 #include "gen_qwebenginesettings.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineSettings_setFontFamily(QWebEngineSettings* self, int which, struct miqt_string family) {
 	QString family_QString = QString::fromUtf8(family.data, family.len);
 	self->setFontFamily(static_cast<QWebEngineSettings::FontFamily>(which), family_QString);

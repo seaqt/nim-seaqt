@@ -27,6 +27,7 @@ QAnyStringView* QAnyStringView_new2(struct miqt_string str);
 QAnyStringView* QAnyStringView_new3(struct miqt_string str);
 QAnyStringView* QAnyStringView_new4(QChar* c);
 QAnyStringView* QAnyStringView_new5(QAnyStringView* param1);
+
 struct miqt_string QAnyStringView_toString(const QAnyStringView* self);
 ptrdiff_t QAnyStringView_size(const QAnyStringView* self);
 const void* QAnyStringView_data(const QAnyStringView* self);
@@ -40,6 +41,7 @@ bool QAnyStringView_isNull(const QAnyStringView* self);
 bool QAnyStringView_isEmpty(const QAnyStringView* self);
 ptrdiff_t QAnyStringView_length(const QAnyStringView* self);
 int QAnyStringView_compare3(QAnyStringView* lhs, QAnyStringView* rhs, int cs);
+
 void QAnyStringView_delete(QAnyStringView* self);
 
 #ifdef __cplusplus

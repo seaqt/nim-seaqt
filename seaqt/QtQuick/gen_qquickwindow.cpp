@@ -44,40 +44,33 @@
 #include <QWindow>
 #include <qquickwindow.h>
 #include "gen_qquickwindow.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQuickWindow final : public QQuickWindow {
-	struct QQuickWindow_VTable* vtbl;
+	const QQuickWindow_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQuickWindow_VTable* QQuickWindow_vtbl(const VirtualQQuickWindow* self);
+	friend void* QQuickWindow_vdata(const VirtualQQuickWindow* self);
+	friend void QQuickWindow_setVdata(VirtualQQuickWindow* self, void* vdata);
 
-	VirtualQQuickWindow(struct QQuickWindow_VTable* vtbl): QQuickWindow(), vtbl(vtbl) {};
-	VirtualQQuickWindow(struct QQuickWindow_VTable* vtbl, QQuickRenderControl* renderControl): QQuickWindow(renderControl), vtbl(vtbl) {};
-	VirtualQQuickWindow(struct QQuickWindow_VTable* vtbl, QWindow* parent): QQuickWindow(parent), vtbl(vtbl) {};
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl, void* vdata): QQuickWindow(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl, void* vdata, QQuickRenderControl* renderControl): QQuickWindow(renderControl), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl, void* vdata, QWindow* parent): QQuickWindow(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQuickWindow() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQuickWindow() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQuickWindow::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQuickWindow_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQuickWindow_virtualbase_metaObject(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQuickWindow::qt_metacast(param1);
@@ -85,14 +78,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQuickWindow_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQuickWindow_virtualbase_metacast(VirtualQQuickWindow* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQuickWindow::qt_metacall(param1, param2, param3);
@@ -103,42 +95,39 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQuickWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQuickWindow_virtualbase_metacall(VirtualQQuickWindow* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QObject* focusObject() const override {
 		if (vtbl->focusObject == 0) {
 			return QQuickWindow::focusObject();
 		}
 
 
-		QObject* callback_return_value = vtbl->focusObject(vtbl, this);
+		QObject* callback_return_value = vtbl->focusObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QObject* QQuickWindow_virtualbase_focusObject(const void* self);
+	friend QObject* QQuickWindow_virtualbase_focusObject(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleRoot() const override {
 		if (vtbl->accessibleRoot == 0) {
 			return QQuickWindow::accessibleRoot();
 		}
 
 
-		QAccessibleInterface* callback_return_value = vtbl->accessibleRoot(vtbl, this);
+		QAccessibleInterface* callback_return_value = vtbl->accessibleRoot(this);
 
 		return callback_return_value;
 	}
 
-	friend QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const void* self);
+	friend QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void exposeEvent(QExposeEvent* param1) override {
 		if (vtbl->exposeEvent == 0) {
 			QQuickWindow::exposeEvent(param1);
@@ -147,13 +136,12 @@ public:
 
 		QExposeEvent* sigval1 = param1;
 
-		vtbl->exposeEvent(vtbl, this, sigval1);
+		vtbl->exposeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_exposeEvent(void* self, QExposeEvent* param1);
+	friend void QQuickWindow_virtualbase_exposeEvent(VirtualQQuickWindow* self, QExposeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QQuickWindow::resizeEvent(param1);
@@ -162,13 +150,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QQuickWindow_virtualbase_resizeEvent(VirtualQQuickWindow* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QQuickWindow::showEvent(param1);
@@ -177,13 +164,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QQuickWindow_virtualbase_showEvent(VirtualQQuickWindow* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* param1) override {
 		if (vtbl->hideEvent == 0) {
 			QQuickWindow::hideEvent(param1);
@@ -192,13 +178,12 @@ public:
 
 		QHideEvent* sigval1 = param1;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_hideEvent(void* self, QHideEvent* param1);
+	friend void QQuickWindow_virtualbase_hideEvent(VirtualQQuickWindow* self, QHideEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QQuickWindow::closeEvent(param1);
@@ -207,13 +192,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QQuickWindow_virtualbase_closeEvent(VirtualQQuickWindow* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QQuickWindow::focusInEvent(param1);
@@ -222,13 +206,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QQuickWindow_virtualbase_focusInEvent(VirtualQQuickWindow* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QQuickWindow::focusOutEvent(param1);
@@ -237,13 +220,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QQuickWindow_virtualbase_focusOutEvent(VirtualQQuickWindow* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QQuickWindow::event(param1);
@@ -251,14 +233,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickWindow_virtualbase_event(void* self, QEvent* param1);
+	friend bool QQuickWindow_virtualbase_event(VirtualQQuickWindow* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QQuickWindow::keyPressEvent(param1);
@@ -267,13 +248,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QQuickWindow_virtualbase_keyPressEvent(VirtualQQuickWindow* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* param1) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QQuickWindow::keyReleaseEvent(param1);
@@ -282,13 +262,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1);
+	friend void QQuickWindow_virtualbase_keyReleaseEvent(VirtualQQuickWindow* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QQuickWindow::mousePressEvent(param1);
@@ -297,13 +276,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
+	friend void QQuickWindow_virtualbase_mousePressEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QQuickWindow::mouseReleaseEvent(param1);
@@ -312,13 +290,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
+	friend void QQuickWindow_virtualbase_mouseReleaseEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QQuickWindow::mouseDoubleClickEvent(param1);
@@ -327,13 +304,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1);
+	friend void QQuickWindow_virtualbase_mouseDoubleClickEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QQuickWindow::mouseMoveEvent(param1);
@@ -342,13 +318,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QQuickWindow_virtualbase_mouseMoveEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QQuickWindow::wheelEvent(param1);
@@ -357,13 +332,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QQuickWindow_virtualbase_wheelEvent(VirtualQQuickWindow* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* param1) override {
 		if (vtbl->tabletEvent == 0) {
 			QQuickWindow::tabletEvent(param1);
@@ -372,59 +346,55 @@ public:
 
 		QTabletEvent* sigval1 = param1;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_tabletEvent(void* self, QTabletEvent* param1);
+	friend void QQuickWindow_virtualbase_tabletEvent(VirtualQQuickWindow* self, QTabletEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSurface::SurfaceType surfaceType() const override {
 		if (vtbl->surfaceType == 0) {
 			return QQuickWindow::surfaceType();
 		}
 
 
-		int callback_return_value = vtbl->surfaceType(vtbl, this);
+		int callback_return_value = vtbl->surfaceType(this);
 
 		return static_cast<QSurface::SurfaceType>(callback_return_value);
 	}
 
-	friend int QQuickWindow_virtualbase_surfaceType(const void* self);
+	friend int QQuickWindow_virtualbase_surfaceType(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSurfaceFormat format() const override {
 		if (vtbl->format == 0) {
 			return QQuickWindow::format();
 		}
 
 
-		QSurfaceFormat* callback_return_value = vtbl->format(vtbl, this);
+		QSurfaceFormat* callback_return_value = vtbl->format(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSurfaceFormat* QQuickWindow_virtualbase_format(const void* self);
+	friend QSurfaceFormat* QQuickWindow_virtualbase_format(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize size() const override {
 		if (vtbl->size == 0) {
 			return QQuickWindow::size();
 		}
 
 
-		QSize* callback_return_value = vtbl->size(vtbl, this);
+		QSize* callback_return_value = vtbl->size(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QQuickWindow_virtualbase_size(const void* self);
+	friend QSize* QQuickWindow_virtualbase_size(const VirtualQQuickWindow* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QQuickWindow::paintEvent(param1);
@@ -433,13 +403,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QQuickWindow_virtualbase_paintEvent(VirtualQQuickWindow* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* param1) override {
 		if (vtbl->moveEvent == 0) {
 			QQuickWindow::moveEvent(param1);
@@ -448,13 +417,12 @@ public:
 
 		QMoveEvent* sigval1 = param1;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_moveEvent(void* self, QMoveEvent* param1);
+	friend void QQuickWindow_virtualbase_moveEvent(VirtualQQuickWindow* self, QMoveEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void touchEvent(QTouchEvent* param1) override {
 		if (vtbl->touchEvent == 0) {
 			QQuickWindow::touchEvent(param1);
@@ -463,13 +431,12 @@ public:
 
 		QTouchEvent* sigval1 = param1;
 
-		vtbl->touchEvent(vtbl, this, sigval1);
+		vtbl->touchEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_touchEvent(void* self, QTouchEvent* param1);
+	friend void QQuickWindow_virtualbase_touchEvent(VirtualQQuickWindow* self, QTouchEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QQuickWindow::nativeEvent(eventType, message, result);
@@ -485,14 +452,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickWindow_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QQuickWindow_virtualbase_nativeEvent(VirtualQQuickWindow* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQuickWindow::eventFilter(watched, event);
@@ -501,14 +467,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickWindow_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQuickWindow_virtualbase_eventFilter(VirtualQQuickWindow* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QQuickWindow::timerEvent(event);
@@ -517,13 +482,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QQuickWindow_virtualbase_timerEvent(VirtualQQuickWindow* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQuickWindow::childEvent(event);
@@ -532,13 +496,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQuickWindow_virtualbase_childEvent(VirtualQQuickWindow* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQuickWindow::customEvent(event);
@@ -547,13 +510,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQuickWindow_virtualbase_customEvent(VirtualQQuickWindow* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQuickWindow::connectNotify(signal);
@@ -564,13 +526,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickWindow_virtualbase_connectNotify(VirtualQQuickWindow* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQuickWindow::disconnectNotify(signal);
@@ -581,30 +542,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickWindow_virtualbase_disconnectNotify(VirtualQQuickWindow* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QQuickWindow_protectedbase_resolveInterface(const void* self, const char* name, int revision);
-	friend QObject* QQuickWindow_protectedbase_sender(const void* self);
-	friend int QQuickWindow_protectedbase_senderSignalIndex(const void* self);
-	friend int QQuickWindow_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQuickWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void* QQuickWindow_protectedbase_resolveInterface(const VirtualQQuickWindow* self, const char* name, int revision);
+	friend QObject* QQuickWindow_protectedbase_sender(const VirtualQQuickWindow* self);
+	friend int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self);
+	friend int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal);
+	friend bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal);
 };
 
-QQuickWindow* QQuickWindow_new(struct QQuickWindow_VTable* vtbl) {
-	return new VirtualQQuickWindow(vtbl);
+VirtualQQuickWindow* QQuickWindow_new(const QQuickWindow_VTable* vtbl, void* vdata) {
+	return new VirtualQQuickWindow(vtbl, vdata);
 }
 
-QQuickWindow* QQuickWindow_new2(struct QQuickWindow_VTable* vtbl, QQuickRenderControl* renderControl) {
-	return new VirtualQQuickWindow(vtbl, renderControl);
+VirtualQQuickWindow* QQuickWindow_new2(const QQuickWindow_VTable* vtbl, void* vdata, QQuickRenderControl* renderControl) {
+	return new VirtualQQuickWindow(vtbl, vdata, renderControl);
 }
 
-QQuickWindow* QQuickWindow_new3(struct QQuickWindow_VTable* vtbl, QWindow* parent) {
-	return new VirtualQQuickWindow(vtbl, parent);
+VirtualQQuickWindow* QQuickWindow_new3(const QQuickWindow_VTable* vtbl, void* vdata, QWindow* parent) {
+	return new VirtualQQuickWindow(vtbl, vdata, parent);
 }
 
 void QQuickWindow_virtbase(QQuickWindow* src, QWindow** outptr_QWindow) {
@@ -807,7 +768,7 @@ void QQuickWindow_frameSwapped(QQuickWindow* self) {
 	self->frameSwapped();
 }
 
-void QQuickWindow_connect_frameSwapped(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_frameSwapped(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -822,7 +783,7 @@ void QQuickWindow_sceneGraphInitialized(QQuickWindow* self) {
 	self->sceneGraphInitialized();
 }
 
-void QQuickWindow_connect_sceneGraphInitialized(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_sceneGraphInitialized(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -837,7 +798,7 @@ void QQuickWindow_sceneGraphInvalidated(QQuickWindow* self) {
 	self->sceneGraphInvalidated();
 }
 
-void QQuickWindow_connect_sceneGraphInvalidated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_sceneGraphInvalidated(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -852,7 +813,7 @@ void QQuickWindow_beforeSynchronizing(QQuickWindow* self) {
 	self->beforeSynchronizing();
 }
 
-void QQuickWindow_connect_beforeSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_beforeSynchronizing(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -867,7 +828,7 @@ void QQuickWindow_afterSynchronizing(QQuickWindow* self) {
 	self->afterSynchronizing();
 }
 
-void QQuickWindow_connect_afterSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_afterSynchronizing(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -882,7 +843,7 @@ void QQuickWindow_beforeRendering(QQuickWindow* self) {
 	self->beforeRendering();
 }
 
-void QQuickWindow_connect_beforeRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_beforeRendering(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -897,7 +858,7 @@ void QQuickWindow_afterRendering(QQuickWindow* self) {
 	self->afterRendering();
 }
 
-void QQuickWindow_connect_afterRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_afterRendering(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -912,7 +873,7 @@ void QQuickWindow_afterAnimating(QQuickWindow* self) {
 	self->afterAnimating();
 }
 
-void QQuickWindow_connect_afterAnimating(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_afterAnimating(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -927,7 +888,7 @@ void QQuickWindow_sceneGraphAboutToStop(QQuickWindow* self) {
 	self->sceneGraphAboutToStop();
 }
 
-void QQuickWindow_connect_sceneGraphAboutToStop(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_sceneGraphAboutToStop(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -942,7 +903,7 @@ void QQuickWindow_colorChanged(QQuickWindow* self, QColor* param1) {
 	self->colorChanged(*param1);
 }
 
-void QQuickWindow_connect_colorChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+void QQuickWindow_connect_colorChanged(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QColor*);
@@ -960,7 +921,7 @@ void QQuickWindow_activeFocusItemChanged(QQuickWindow* self) {
 	self->activeFocusItemChanged();
 }
 
-void QQuickWindow_connect_activeFocusItemChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_activeFocusItemChanged(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -976,7 +937,7 @@ void QQuickWindow_sceneGraphError(QQuickWindow* self, int error, struct miqt_str
 	self->sceneGraphError(static_cast<QQuickWindow::SceneGraphError>(error), message_QString);
 }
 
-void QQuickWindow_connect_sceneGraphError(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
+void QQuickWindow_connect_sceneGraphError(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, struct miqt_string);
@@ -1001,7 +962,7 @@ void QQuickWindow_beforeRenderPassRecording(QQuickWindow* self) {
 	self->beforeRenderPassRecording();
 }
 
-void QQuickWindow_connect_beforeRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_beforeRenderPassRecording(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1016,7 +977,7 @@ void QQuickWindow_afterRenderPassRecording(QQuickWindow* self) {
 	self->afterRenderPassRecording();
 }
 
-void QQuickWindow_connect_afterRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_afterRenderPassRecording(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1031,7 +992,7 @@ void QQuickWindow_paletteChanged(QQuickWindow* self) {
 	self->paletteChanged();
 }
 
-void QQuickWindow_connect_paletteChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_paletteChanged(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1046,7 +1007,7 @@ void QQuickWindow_paletteCreated(QQuickWindow* self) {
 	self->paletteCreated();
 }
 
-void QQuickWindow_connect_paletteCreated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_paletteCreated(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1061,7 +1022,7 @@ void QQuickWindow_beforeFrameBegin(QQuickWindow* self) {
 	self->beforeFrameBegin();
 }
 
-void QQuickWindow_connect_beforeFrameBegin(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_beforeFrameBegin(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1076,7 +1037,7 @@ void QQuickWindow_afterFrameEnd(QQuickWindow* self) {
 	self->afterFrameEnd();
 }
 
-void QQuickWindow_connect_afterFrameEnd(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QQuickWindow_connect_afterFrameEnd(VirtualQQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1117,246 +1078,202 @@ struct miqt_string QQuickWindow_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QQuickWindow_virtualbase_metaObject(const void* self) {
+QMetaObject* QQuickWindow_virtualbase_metaObject(const VirtualQQuickWindow* self) {
 
-	return (QMetaObject*) ( (const VirtualQQuickWindow*)(self) )->QQuickWindow::metaObject();
-
+	return (QMetaObject*) self->QQuickWindow::metaObject();
 }
 
-void* QQuickWindow_virtualbase_metacast(void* self, const char* param1) {
+void* QQuickWindow_virtualbase_metacast(VirtualQQuickWindow* self, const char* param1) {
 
-	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::qt_metacast(param1);
-
+	return self->QQuickWindow::qt_metacast(param1);
 }
 
-int QQuickWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQuickWindow_virtualbase_metacall(VirtualQQuickWindow* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQuickWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QObject* QQuickWindow_virtualbase_focusObject(const void* self) {
+QObject* QQuickWindow_virtualbase_focusObject(const VirtualQQuickWindow* self) {
 
-	return ( (const VirtualQQuickWindow*)(self) )->QQuickWindow::focusObject();
-
+	return self->QQuickWindow::focusObject();
 }
 
-QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const void* self) {
+QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const VirtualQQuickWindow* self) {
 
-	return ( (const VirtualQQuickWindow*)(self) )->QQuickWindow::accessibleRoot();
-
+	return self->QQuickWindow::accessibleRoot();
 }
 
-void QQuickWindow_virtualbase_exposeEvent(void* self, QExposeEvent* param1) {
+void QQuickWindow_virtualbase_exposeEvent(VirtualQQuickWindow* self, QExposeEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::exposeEvent(param1);
-
+	self->QQuickWindow::exposeEvent(param1);
 }
 
-void QQuickWindow_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QQuickWindow_virtualbase_resizeEvent(VirtualQQuickWindow* self, QResizeEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::resizeEvent(param1);
-
+	self->QQuickWindow::resizeEvent(param1);
 }
 
-void QQuickWindow_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QQuickWindow_virtualbase_showEvent(VirtualQQuickWindow* self, QShowEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::showEvent(param1);
-
+	self->QQuickWindow::showEvent(param1);
 }
 
-void QQuickWindow_virtualbase_hideEvent(void* self, QHideEvent* param1) {
+void QQuickWindow_virtualbase_hideEvent(VirtualQQuickWindow* self, QHideEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::hideEvent(param1);
-
+	self->QQuickWindow::hideEvent(param1);
 }
 
-void QQuickWindow_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QQuickWindow_virtualbase_closeEvent(VirtualQQuickWindow* self, QCloseEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::closeEvent(param1);
-
+	self->QQuickWindow::closeEvent(param1);
 }
 
-void QQuickWindow_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QQuickWindow_virtualbase_focusInEvent(VirtualQQuickWindow* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::focusInEvent(param1);
-
+	self->QQuickWindow::focusInEvent(param1);
 }
 
-void QQuickWindow_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QQuickWindow_virtualbase_focusOutEvent(VirtualQQuickWindow* self, QFocusEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::focusOutEvent(param1);
-
+	self->QQuickWindow::focusOutEvent(param1);
 }
 
-bool QQuickWindow_virtualbase_event(void* self, QEvent* param1) {
+bool QQuickWindow_virtualbase_event(VirtualQQuickWindow* self, QEvent* param1) {
 
-	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::event(param1);
-
+	return self->QQuickWindow::event(param1);
 }
 
-void QQuickWindow_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QQuickWindow_virtualbase_keyPressEvent(VirtualQQuickWindow* self, QKeyEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::keyPressEvent(param1);
-
+	self->QQuickWindow::keyPressEvent(param1);
 }
 
-void QQuickWindow_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1) {
+void QQuickWindow_virtualbase_keyReleaseEvent(VirtualQQuickWindow* self, QKeyEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::keyReleaseEvent(param1);
-
+	self->QQuickWindow::keyReleaseEvent(param1);
 }
 
-void QQuickWindow_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
+void QQuickWindow_virtualbase_mousePressEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::mousePressEvent(param1);
-
+	self->QQuickWindow::mousePressEvent(param1);
 }
 
-void QQuickWindow_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
+void QQuickWindow_virtualbase_mouseReleaseEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::mouseReleaseEvent(param1);
-
+	self->QQuickWindow::mouseReleaseEvent(param1);
 }
 
-void QQuickWindow_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1) {
+void QQuickWindow_virtualbase_mouseDoubleClickEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::mouseDoubleClickEvent(param1);
-
+	self->QQuickWindow::mouseDoubleClickEvent(param1);
 }
 
-void QQuickWindow_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QQuickWindow_virtualbase_mouseMoveEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::mouseMoveEvent(param1);
-
+	self->QQuickWindow::mouseMoveEvent(param1);
 }
 
-void QQuickWindow_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QQuickWindow_virtualbase_wheelEvent(VirtualQQuickWindow* self, QWheelEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::wheelEvent(param1);
-
+	self->QQuickWindow::wheelEvent(param1);
 }
 
-void QQuickWindow_virtualbase_tabletEvent(void* self, QTabletEvent* param1) {
+void QQuickWindow_virtualbase_tabletEvent(VirtualQQuickWindow* self, QTabletEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::tabletEvent(param1);
-
+	self->QQuickWindow::tabletEvent(param1);
 }
 
-int QQuickWindow_virtualbase_surfaceType(const void* self) {
+int QQuickWindow_virtualbase_surfaceType(const VirtualQQuickWindow* self) {
 
-	VirtualQQuickWindow::SurfaceType _ret = ( (const VirtualQQuickWindow*)(self) )->QQuickWindow::surfaceType();
+	VirtualQQuickWindow::SurfaceType _ret = self->QQuickWindow::surfaceType();
 	return static_cast<int>(_ret);
-
 }
 
-QSurfaceFormat* QQuickWindow_virtualbase_format(const void* self) {
+QSurfaceFormat* QQuickWindow_virtualbase_format(const VirtualQQuickWindow* self) {
 
-	return new QSurfaceFormat(( (const VirtualQQuickWindow*)(self) )->QQuickWindow::format());
-
+	return new QSurfaceFormat(self->QQuickWindow::format());
 }
 
-QSize* QQuickWindow_virtualbase_size(const void* self) {
+QSize* QQuickWindow_virtualbase_size(const VirtualQQuickWindow* self) {
 
-	return new QSize(( (const VirtualQQuickWindow*)(self) )->QQuickWindow::size());
-
+	return new QSize(self->QQuickWindow::size());
 }
 
-void QQuickWindow_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QQuickWindow_virtualbase_paintEvent(VirtualQQuickWindow* self, QPaintEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::paintEvent(param1);
-
+	self->QQuickWindow::paintEvent(param1);
 }
 
-void QQuickWindow_virtualbase_moveEvent(void* self, QMoveEvent* param1) {
+void QQuickWindow_virtualbase_moveEvent(VirtualQQuickWindow* self, QMoveEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::moveEvent(param1);
-
+	self->QQuickWindow::moveEvent(param1);
 }
 
-void QQuickWindow_virtualbase_touchEvent(void* self, QTouchEvent* param1) {
+void QQuickWindow_virtualbase_touchEvent(VirtualQQuickWindow* self, QTouchEvent* param1) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::touchEvent(param1);
-
+	self->QQuickWindow::touchEvent(param1);
 }
 
-bool QQuickWindow_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QQuickWindow_virtualbase_nativeEvent(VirtualQQuickWindow* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QQuickWindow::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-bool QQuickWindow_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQuickWindow_virtualbase_eventFilter(VirtualQQuickWindow* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::eventFilter(watched, event);
-
+	return self->QQuickWindow::eventFilter(watched, event);
 }
 
-void QQuickWindow_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QQuickWindow_virtualbase_timerEvent(VirtualQQuickWindow* self, QTimerEvent* event) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::timerEvent(event);
-
+	self->QQuickWindow::timerEvent(event);
 }
 
-void QQuickWindow_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQuickWindow_virtualbase_childEvent(VirtualQQuickWindow* self, QChildEvent* event) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::childEvent(event);
-
+	self->QQuickWindow::childEvent(event);
 }
 
-void QQuickWindow_virtualbase_customEvent(void* self, QEvent* event) {
+void QQuickWindow_virtualbase_customEvent(VirtualQQuickWindow* self, QEvent* event) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::customEvent(event);
-
+	self->QQuickWindow::customEvent(event);
 }
 
-void QQuickWindow_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQuickWindow_virtualbase_connectNotify(VirtualQQuickWindow* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::connectNotify(*signal);
-
+	self->QQuickWindow::connectNotify(*signal);
 }
 
-void QQuickWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQuickWindow_virtualbase_disconnectNotify(VirtualQQuickWindow* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickWindow*)(self) )->QQuickWindow::disconnectNotify(*signal);
-
+	self->QQuickWindow::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQuickWindow_staticMetaObject() { return &QQuickWindow::staticMetaObject; }
-void* QQuickWindow_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
-	VirtualQQuickWindow* self_cast = static_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
-	
-	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
+const QQuickWindow_VTable* QQuickWindow_vtbl(const VirtualQQuickWindow* self) { return self->vtbl; }
+void* QQuickWindow_vdata(const VirtualQQuickWindow* self) { return self->vdata; }
+void QQuickWindow_setVdata(VirtualQQuickWindow* self, void* vdata) { self->vdata = vdata; }
+
+void* QQuickWindow_protectedbase_resolveInterface(const VirtualQQuickWindow* self, const char* name, int revision) {
+	return self->resolveInterface(name, static_cast<int>(revision));
 }
 
-QObject* QQuickWindow_protectedbase_sender(const void* self) {
-	VirtualQQuickWindow* self_cast = static_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QQuickWindow_protectedbase_sender(const VirtualQQuickWindow* self) {
+	return self->sender();
 }
 
-int QQuickWindow_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQuickWindow* self_cast = static_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self) {
+	return self->senderSignalIndex();
 }
 
-int QQuickWindow_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQuickWindow* self_cast = static_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQuickWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQuickWindow* self_cast = static_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQuickWindow_delete(QQuickWindow* self) {

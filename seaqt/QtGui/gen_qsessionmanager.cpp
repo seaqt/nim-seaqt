@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qsessionmanager.h>
 #include "gen_qsessionmanager.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSessionManager_virtbase(QSessionManager* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -202,3 +193,4 @@ struct miqt_string QSessionManager_tr3(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QSessionManager_staticMetaObject() { return &QSessionManager::staticMetaObject; }
+

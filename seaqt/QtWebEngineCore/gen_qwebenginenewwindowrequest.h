@@ -44,6 +44,7 @@ bool QWebEngineNewWindowRequest_isUserInitiated(const QWebEngineNewWindowRequest
 void QWebEngineNewWindowRequest_openIn(QWebEngineNewWindowRequest* self, QWebEnginePage* param1);
 struct miqt_string QWebEngineNewWindowRequest_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineNewWindowRequest_tr3(const char* s, const char* c, int n);
+
 const QMetaObject* QWebEngineNewWindowRequest_staticMetaObject();
 void QWebEngineNewWindowRequest_delete(QWebEngineNewWindowRequest* self);
 

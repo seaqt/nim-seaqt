@@ -26,6 +26,7 @@ QUrl* QUrl_new();
 QUrl* QUrl_new2(QUrl* copy);
 QUrl* QUrl_new3(struct miqt_string url);
 QUrl* QUrl_new4(struct miqt_string url, int mode);
+
 void QUrl_operatorAssign(QUrl* self, QUrl* copy);
 void QUrl_operatorAssignWithUrl(QUrl* self, struct miqt_string url);
 void QUrl_swap(QUrl* self, QUrl* other);
@@ -110,6 +111,7 @@ struct miqt_string QUrl_toPercentEncoding3(struct miqt_string param1, struct miq
 struct miqt_string QUrl_fromAce2(struct miqt_string domain, unsigned int options);
 struct miqt_string QUrl_toAce2(struct miqt_string domain, unsigned int options);
 struct miqt_array /* of QUrl* */  QUrl_fromStringList2(struct miqt_array /* of struct miqt_string */  uris, int mode);
+
 void QUrl_delete(QUrl* self);
 
 #ifdef __cplusplus

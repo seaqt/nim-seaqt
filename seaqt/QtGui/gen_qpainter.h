@@ -76,6 +76,7 @@ typedef struct QTransform QTransform;
 
 QPainter* QPainter_new();
 QPainter* QPainter_new2(QPaintDevice* param1);
+
 QPaintDevice* QPainter_device(const QPainter* self);
 bool QPainter_begin(QPainter* self, QPaintDevice* param1);
 bool QPainter_end(QPainter* self);
@@ -295,6 +296,7 @@ void QPainter_drawText32(QPainter* self, QRectF* r, struct miqt_string text, QTe
 QRectF* QPainter_boundingRect32(QPainter* self, QRectF* rect, struct miqt_string text, QTextOption* o);
 void QPainter_setRenderHint2(QPainter* self, int hint, bool on);
 void QPainter_setRenderHints2(QPainter* self, int hints, bool on);
+
 const QMetaObject* QPainter_staticMetaObject();
 void QPainter_delete(QPainter* self);
 
@@ -303,6 +305,7 @@ QPainter__PixmapFragment* QPainter__PixmapFragment_create3(QPointF* pos, QRectF*
 QPainter__PixmapFragment* QPainter__PixmapFragment_create4(QPointF* pos, QRectF* sourceRect, double scaleX, double scaleY);
 QPainter__PixmapFragment* QPainter__PixmapFragment_create5(QPointF* pos, QRectF* sourceRect, double scaleX, double scaleY, double rotation);
 QPainter__PixmapFragment* QPainter__PixmapFragment_create6(QPointF* pos, QRectF* sourceRect, double scaleX, double scaleY, double rotation, double opacity);
+
 void QPainter__PixmapFragment_delete(QPainter__PixmapFragment* self);
 
 #ifdef __cplusplus

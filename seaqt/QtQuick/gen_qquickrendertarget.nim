@@ -44,10 +44,10 @@ export
 type cQQuickRenderTarget*{.exportc: "QQuickRenderTarget", incompleteStruct.} = object
 
 proc fcQQuickRenderTarget_operatorAssign(self: pointer, other: pointer): void {.importc: "QQuickRenderTarget_operatorAssign".}
-proc fcQQuickRenderTarget_isNull(self: pointer, ): bool {.importc: "QQuickRenderTarget_isNull".}
-proc fcQQuickRenderTarget_devicePixelRatio(self: pointer, ): float64 {.importc: "QQuickRenderTarget_devicePixelRatio".}
+proc fcQQuickRenderTarget_isNull(self: pointer): bool {.importc: "QQuickRenderTarget_isNull".}
+proc fcQQuickRenderTarget_devicePixelRatio(self: pointer): float64 {.importc: "QQuickRenderTarget_devicePixelRatio".}
 proc fcQQuickRenderTarget_setDevicePixelRatio(self: pointer, ratio: float64): void {.importc: "QQuickRenderTarget_setDevicePixelRatio".}
-proc fcQQuickRenderTarget_mirrorVertically(self: pointer, ): bool {.importc: "QQuickRenderTarget_mirrorVertically".}
+proc fcQQuickRenderTarget_mirrorVertically(self: pointer): bool {.importc: "QQuickRenderTarget_mirrorVertically".}
 proc fcQQuickRenderTarget_setMirrorVertically(self: pointer, enable: bool): void {.importc: "QQuickRenderTarget_setMirrorVertically".}
 proc fcQQuickRenderTarget_fromOpenGLTexture(textureId: cuint, format: cuint, pixelSize: pointer): pointer {.importc: "QQuickRenderTarget_fromOpenGLTexture".}
 proc fcQQuickRenderTarget_fromOpenGLTexture2(textureId: cuint, pixelSize: pointer): pointer {.importc: "QQuickRenderTarget_fromOpenGLTexture2".}
@@ -63,16 +63,16 @@ proc fcQQuickRenderTarget_new2(other: pointer): ptr cQQuickRenderTarget {.import
 proc operatorAssign*(self: gen_qquickrendertarget_types.QQuickRenderTarget, other: gen_qquickrendertarget_types.QQuickRenderTarget): void =
   fcQQuickRenderTarget_operatorAssign(self.h, other.h)
 
-proc isNull*(self: gen_qquickrendertarget_types.QQuickRenderTarget, ): bool =
+proc isNull*(self: gen_qquickrendertarget_types.QQuickRenderTarget): bool =
   fcQQuickRenderTarget_isNull(self.h)
 
-proc devicePixelRatio*(self: gen_qquickrendertarget_types.QQuickRenderTarget, ): float64 =
+proc devicePixelRatio*(self: gen_qquickrendertarget_types.QQuickRenderTarget): float64 =
   fcQQuickRenderTarget_devicePixelRatio(self.h)
 
 proc setDevicePixelRatio*(self: gen_qquickrendertarget_types.QQuickRenderTarget, ratio: float64): void =
   fcQQuickRenderTarget_setDevicePixelRatio(self.h, ratio)
 
-proc mirrorVertically*(self: gen_qquickrendertarget_types.QQuickRenderTarget, ): bool =
+proc mirrorVertically*(self: gen_qquickrendertarget_types.QQuickRenderTarget): bool =
   fcQQuickRenderTarget_mirrorVertically(self.h)
 
 proc setMirrorVertically*(self: gen_qquickrendertarget_types.QQuickRenderTarget, enable: bool): void =

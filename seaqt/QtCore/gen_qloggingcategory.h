@@ -21,6 +21,7 @@ typedef struct QLoggingCategory QLoggingCategory;
 #endif
 
 QLoggingCategory* QLoggingCategory_new(const char* category);
+
 bool QLoggingCategory_isDebugEnabled(const QLoggingCategory* self);
 bool QLoggingCategory_isInfoEnabled(const QLoggingCategory* self);
 bool QLoggingCategory_isWarningEnabled(const QLoggingCategory* self);
@@ -30,6 +31,7 @@ QLoggingCategory* QLoggingCategory_operatorCall(QLoggingCategory* self);
 QLoggingCategory* QLoggingCategory_operatorCall2(const QLoggingCategory* self);
 QLoggingCategory* QLoggingCategory_defaultCategory();
 void QLoggingCategory_setFilterRules(struct miqt_string rules);
+
 void QLoggingCategory_delete(QLoggingCategory* self);
 
 #ifdef __cplusplus

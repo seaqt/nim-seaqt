@@ -41,20 +41,20 @@ export
 
 type cQWebEngineScriptCollection*{.exportc: "QWebEngineScriptCollection", incompleteStruct.} = object
 
-proc fcQWebEngineScriptCollection_isEmpty(self: pointer, ): bool {.importc: "QWebEngineScriptCollection_isEmpty".}
-proc fcQWebEngineScriptCollection_count(self: pointer, ): cint {.importc: "QWebEngineScriptCollection_count".}
+proc fcQWebEngineScriptCollection_isEmpty(self: pointer): bool {.importc: "QWebEngineScriptCollection_isEmpty".}
+proc fcQWebEngineScriptCollection_count(self: pointer): cint {.importc: "QWebEngineScriptCollection_count".}
 proc fcQWebEngineScriptCollection_contains(self: pointer, value: pointer): bool {.importc: "QWebEngineScriptCollection_contains".}
 proc fcQWebEngineScriptCollection_find(self: pointer, name: struct_miqt_string): struct_miqt_array {.importc: "QWebEngineScriptCollection_find".}
 proc fcQWebEngineScriptCollection_insert(self: pointer, param1: pointer): void {.importc: "QWebEngineScriptCollection_insert".}
 proc fcQWebEngineScriptCollection_insertWithList(self: pointer, list: struct_miqt_array): void {.importc: "QWebEngineScriptCollection_insertWithList".}
 proc fcQWebEngineScriptCollection_remove(self: pointer, param1: pointer): bool {.importc: "QWebEngineScriptCollection_remove".}
-proc fcQWebEngineScriptCollection_clear(self: pointer, ): void {.importc: "QWebEngineScriptCollection_clear".}
-proc fcQWebEngineScriptCollection_toList(self: pointer, ): struct_miqt_array {.importc: "QWebEngineScriptCollection_toList".}
+proc fcQWebEngineScriptCollection_clear(self: pointer): void {.importc: "QWebEngineScriptCollection_clear".}
+proc fcQWebEngineScriptCollection_toList(self: pointer): struct_miqt_array {.importc: "QWebEngineScriptCollection_toList".}
 
-proc isEmpty*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): bool =
+proc isEmpty*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection): bool =
   fcQWebEngineScriptCollection_isEmpty(self.h)
 
-proc count*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): cint =
+proc count*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection): cint =
   fcQWebEngineScriptCollection_count(self.h)
 
 proc contains*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, value: gen_qwebenginescript_types.QWebEngineScript): bool =
@@ -82,10 +82,10 @@ proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollecti
 proc remove*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, param1: gen_qwebenginescript_types.QWebEngineScript): bool =
   fcQWebEngineScriptCollection_remove(self.h, param1.h)
 
-proc clear*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): void =
+proc clear*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection): void =
   fcQWebEngineScriptCollection_clear(self.h)
 
-proc toList*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): seq[gen_qwebenginescript_types.QWebEngineScript] =
+proc toList*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection): seq[gen_qwebenginescript_types.QWebEngineScript] =
   var v_ma = fcQWebEngineScriptCollection_toList(self.h)
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)

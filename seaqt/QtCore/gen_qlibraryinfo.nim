@@ -66,13 +66,13 @@ proc fcQLibraryInfo_path(p: cint): struct_miqt_string {.importc: "QLibraryInfo_p
 proc fcQLibraryInfo_location(location: cint): struct_miqt_string {.importc: "QLibraryInfo_location".}
 proc fcQLibraryInfo_platformPluginArguments(platformName: struct_miqt_string): struct_miqt_array {.importc: "QLibraryInfo_platformPluginArguments".}
 
-proc build*(_: type gen_qlibraryinfo_types.QLibraryInfo, ): cstring =
+proc build*(_: type gen_qlibraryinfo_types.QLibraryInfo): cstring =
   (fcQLibraryInfo_build())
 
-proc isDebugBuild*(_: type gen_qlibraryinfo_types.QLibraryInfo, ): bool =
+proc isDebugBuild*(_: type gen_qlibraryinfo_types.QLibraryInfo): bool =
   fcQLibraryInfo_isDebugBuild()
 
-proc version*(_: type gen_qlibraryinfo_types.QLibraryInfo, ): gen_qversionnumber_types.QVersionNumber =
+proc version*(_: type gen_qlibraryinfo_types.QLibraryInfo): gen_qversionnumber_types.QVersionNumber =
   gen_qversionnumber_types.QVersionNumber(h: fcQLibraryInfo_version(), owned: true)
 
 proc path*(_: type gen_qlibraryinfo_types.QLibraryInfo, p: cint): string =

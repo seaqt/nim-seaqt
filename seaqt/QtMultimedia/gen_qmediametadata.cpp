@@ -6,15 +6,6 @@
 #include <QVariant>
 #include <qmediametadata.h>
 #include "gen_qmediametadata.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaMetaData* QMediaMetaData_new(QMediaMetaData* param1) {
 	return new QMediaMetaData(*param1);
 }
@@ -86,6 +77,7 @@ struct miqt_string QMediaMetaData_metaDataKeyToString(int k) {
 }
 
 const QMetaObject* QMediaMetaData_staticMetaObject() { return &QMediaMetaData::staticMetaObject; }
+
 void QMediaMetaData_delete(QMediaMetaData* self) {
 	delete self;
 }

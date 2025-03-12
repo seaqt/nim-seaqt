@@ -12,15 +12,6 @@
 #include <QWindow>
 #include <qicon.h>
 #include "gen_qicon.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QIcon* QIcon_new() {
 	return new QIcon();
 }

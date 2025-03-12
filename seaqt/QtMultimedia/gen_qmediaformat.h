@@ -25,6 +25,7 @@ typedef struct QMimeType QMimeType;
 QMediaFormat* QMediaFormat_new();
 QMediaFormat* QMediaFormat_new2(QMediaFormat* other);
 QMediaFormat* QMediaFormat_new3(int format);
+
 void QMediaFormat_operatorAssign(QMediaFormat* self, QMediaFormat* other);
 void QMediaFormat_swap(QMediaFormat* self, QMediaFormat* other);
 int QMediaFormat_fileFormat(const QMediaFormat* self);
@@ -47,6 +48,7 @@ struct miqt_string QMediaFormat_videoCodecDescription(int codec);
 bool QMediaFormat_operatorEqual(const QMediaFormat* self, QMediaFormat* other);
 bool QMediaFormat_operatorNotEqual(const QMediaFormat* self, QMediaFormat* other);
 void QMediaFormat_resolveForEncoding(QMediaFormat* self, int flags);
+
 const QMetaObject* QMediaFormat_staticMetaObject();
 void QMediaFormat_delete(QMediaFormat* self);
 

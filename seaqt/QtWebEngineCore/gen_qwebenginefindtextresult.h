@@ -22,9 +22,11 @@ typedef struct QWebEngineFindTextResult QWebEngineFindTextResult;
 
 QWebEngineFindTextResult* QWebEngineFindTextResult_new();
 QWebEngineFindTextResult* QWebEngineFindTextResult_new2(QWebEngineFindTextResult* other);
+
 int QWebEngineFindTextResult_numberOfMatches(const QWebEngineFindTextResult* self);
 int QWebEngineFindTextResult_activeMatch(const QWebEngineFindTextResult* self);
 void QWebEngineFindTextResult_operatorAssign(QWebEngineFindTextResult* self, QWebEngineFindTextResult* other);
+
 const QMetaObject* QWebEngineFindTextResult_staticMetaObject();
 void QWebEngineFindTextResult_delete(QWebEngineFindTextResult* self);
 

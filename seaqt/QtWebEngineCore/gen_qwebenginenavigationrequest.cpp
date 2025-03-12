@@ -8,15 +8,6 @@
 #include <QWebEngineNavigationRequest>
 #include <qwebenginenavigationrequest.h>
 #include "gen_qwebenginenavigationrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineNavigationRequest_virtbase(QWebEngineNavigationRequest* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -103,6 +94,7 @@ struct miqt_string QWebEngineNavigationRequest_tr3(const char* s, const char* c,
 }
 
 const QMetaObject* QWebEngineNavigationRequest_staticMetaObject() { return &QWebEngineNavigationRequest::staticMetaObject; }
+
 void QWebEngineNavigationRequest_delete(QWebEngineNavigationRequest* self) {
 	delete self;
 }

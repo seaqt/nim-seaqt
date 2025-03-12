@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qqmlscriptstring.h>
 #include "gen_qqmlscriptstring.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlScriptString* QQmlScriptString_new() {
 	return new QQmlScriptString();
 }
@@ -66,6 +57,7 @@ bool QQmlScriptString_booleanLiteral(const QQmlScriptString* self, bool* ok) {
 }
 
 const QMetaObject* QQmlScriptString_staticMetaObject() { return &QQmlScriptString::staticMetaObject; }
+
 void QQmlScriptString_delete(QQmlScriptString* self) {
 	delete self;
 }

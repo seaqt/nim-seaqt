@@ -42,21 +42,28 @@ typedef struct QWebEngineUrlRequestInterceptor QWebEngineUrlRequestInterceptor;
 typedef struct QWebEngineUrlSchemeHandler QWebEngineUrlSchemeHandler;
 #endif
 
-struct QQuickWebEngineProfile_VTable {
-	void (*destructor)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self);
-	QMetaObject* (*metaObject)(struct QQuickWebEngineProfile_VTable* vtbl, const QQuickWebEngineProfile* self);
-	void* (*metacast)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, const char* param1);
-	int (*metacall)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, int param1, int param2, void** param3);
-	bool (*event)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QEvent* event);
-	bool (*eventFilter)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QTimerEvent* event);
-	void (*childEvent)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QChildEvent* event);
-	void (*customEvent)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QEvent* event);
-	void (*connectNotify)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QQuickWebEngineProfile_VTable* vtbl, QQuickWebEngineProfile* self, QMetaMethod* signal);
-};
-QQuickWebEngineProfile* QQuickWebEngineProfile_new(struct QQuickWebEngineProfile_VTable* vtbl);
-QQuickWebEngineProfile* QQuickWebEngineProfile_new2(struct QQuickWebEngineProfile_VTable* vtbl, QObject* parent);
+typedef struct VirtualQQuickWebEngineProfile VirtualQQuickWebEngineProfile;
+typedef struct QQuickWebEngineProfile_VTable{
+	void (*destructor)(VirtualQQuickWebEngineProfile* self);
+	QMetaObject* (*metaObject)(const VirtualQQuickWebEngineProfile* self);
+	void* (*metacast)(VirtualQQuickWebEngineProfile* self, const char* param1);
+	int (*metacall)(VirtualQQuickWebEngineProfile* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQQuickWebEngineProfile* self, QEvent* event);
+	bool (*eventFilter)(VirtualQQuickWebEngineProfile* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQQuickWebEngineProfile* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQQuickWebEngineProfile* self, QChildEvent* event);
+	void (*customEvent)(VirtualQQuickWebEngineProfile* self, QEvent* event);
+	void (*connectNotify)(VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
+}QQuickWebEngineProfile_VTable;
+
+const QQuickWebEngineProfile_VTable* QQuickWebEngineProfile_vtbl(const VirtualQQuickWebEngineProfile* self);
+void* QQuickWebEngineProfile_vdata(const VirtualQQuickWebEngineProfile* self);
+void QQuickWebEngineProfile_setVdata(VirtualQQuickWebEngineProfile* self, void* vdata);
+
+VirtualQQuickWebEngineProfile* QQuickWebEngineProfile_new(const QQuickWebEngineProfile_VTable* vtbl, void* vdata);
+VirtualQQuickWebEngineProfile* QQuickWebEngineProfile_new2(const QQuickWebEngineProfile_VTable* vtbl, void* vdata, QObject* parent);
+
 void QQuickWebEngineProfile_virtbase(QQuickWebEngineProfile* src, QObject** outptr_QObject);
 QMetaObject* QQuickWebEngineProfile_metaObject(const QQuickWebEngineProfile* self);
 void* QQuickWebEngineProfile_metacast(QQuickWebEngineProfile* self, const char* param1);
@@ -97,47 +104,50 @@ void QQuickWebEngineProfile_setDownloadPath(QQuickWebEngineProfile* self, struct
 QWebEngineClientCertificateStore* QQuickWebEngineProfile_clientCertificateStore(QQuickWebEngineProfile* self);
 QQuickWebEngineProfile* QQuickWebEngineProfile_defaultProfile();
 void QQuickWebEngineProfile_storageNameChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_storageNameChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_storageNameChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_offTheRecordChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_offTheRecordChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_offTheRecordChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_persistentStoragePathChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_persistentStoragePathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_persistentStoragePathChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_cachePathChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_cachePathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_cachePathChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_httpUserAgentChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_httpUserAgentChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_httpUserAgentChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_httpCacheTypeChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_httpCacheTypeChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_httpCacheTypeChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_persistentCookiesPolicyChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_httpCacheMaximumSizeChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_httpAcceptLanguageChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_httpAcceptLanguageChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_httpAcceptLanguageChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_spellCheckLanguagesChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_spellCheckLanguagesChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_spellCheckLanguagesChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_spellCheckEnabledChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_spellCheckEnabledChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_spellCheckEnabledChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_downloadPathChanged(QQuickWebEngineProfile* self);
-void QQuickWebEngineProfile_connect_downloadPathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_downloadPathChanged(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_presentNotification(QQuickWebEngineProfile* self, QWebEngineNotification* notification);
-void QQuickWebEngineProfile_connect_presentNotification(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNotification*), void (*release)(intptr_t));
+void QQuickWebEngineProfile_connect_presentNotification(VirtualQQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNotification*), void (*release)(intptr_t));
 struct miqt_string QQuickWebEngineProfile_tr2(const char* s, const char* c);
 struct miqt_string QQuickWebEngineProfile_tr3(const char* s, const char* c, int n);
-QMetaObject* QQuickWebEngineProfile_virtualbase_metaObject(const void* self);
-void* QQuickWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
-int QQuickWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QQuickWebEngineProfile_virtualbase_event(void* self, QEvent* event);
-bool QQuickWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QQuickWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QQuickWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event);
-void QQuickWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event);
-void QQuickWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QQuickWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickWebEngineProfile_protectedbase_sender(const void* self);
-int QQuickWebEngineProfile_protectedbase_senderSignalIndex(const void* self);
-int QQuickWebEngineProfile_protectedbase_receivers(const void* self, const char* signal);
-bool QQuickWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QQuickWebEngineProfile_virtualbase_metaObject(const VirtualQQuickWebEngineProfile* self);
+void* QQuickWebEngineProfile_virtualbase_metacast(VirtualQQuickWebEngineProfile* self, const char* param1);
+int QQuickWebEngineProfile_virtualbase_metacall(VirtualQQuickWebEngineProfile* self, int param1, int param2, void** param3);
+bool QQuickWebEngineProfile_virtualbase_event(VirtualQQuickWebEngineProfile* self, QEvent* event);
+bool QQuickWebEngineProfile_virtualbase_eventFilter(VirtualQQuickWebEngineProfile* self, QObject* watched, QEvent* event);
+void QQuickWebEngineProfile_virtualbase_timerEvent(VirtualQQuickWebEngineProfile* self, QTimerEvent* event);
+void QQuickWebEngineProfile_virtualbase_childEvent(VirtualQQuickWebEngineProfile* self, QChildEvent* event);
+void QQuickWebEngineProfile_virtualbase_customEvent(VirtualQQuickWebEngineProfile* self, QEvent* event);
+void QQuickWebEngineProfile_virtualbase_connectNotify(VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
+void QQuickWebEngineProfile_virtualbase_disconnectNotify(VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
+
+QObject* QQuickWebEngineProfile_protectedbase_sender(const VirtualQQuickWebEngineProfile* self);
+int QQuickWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQQuickWebEngineProfile* self);
+int QQuickWebEngineProfile_protectedbase_receivers(const VirtualQQuickWebEngineProfile* self, const char* signal);
+bool QQuickWebEngineProfile_protectedbase_isSignalConnected(const VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
+
 const QMetaObject* QQuickWebEngineProfile_staticMetaObject();
 void QQuickWebEngineProfile_delete(QQuickWebEngineProfile* self);
 

@@ -22,11 +22,13 @@ typedef struct QQuickGraphicsDevice QQuickGraphicsDevice;
 
 QQuickGraphicsDevice* QQuickGraphicsDevice_new();
 QQuickGraphicsDevice* QQuickGraphicsDevice_new2(QQuickGraphicsDevice* other);
+
 void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* other);
 bool QQuickGraphicsDevice_isNull(const QQuickGraphicsDevice* self);
 QQuickGraphicsDevice* QQuickGraphicsDevice_fromPhysicalDevice(VkPhysicalDevice physicalDevice);
 QQuickGraphicsDevice* QQuickGraphicsDevice_fromDeviceObjects(VkPhysicalDevice physicalDevice, VkDevice device, int queueFamilyIndex);
 QQuickGraphicsDevice* QQuickGraphicsDevice_fromDeviceObjects4(VkPhysicalDevice physicalDevice, VkDevice device, int queueFamilyIndex, int queueIndex);
+
 void QQuickGraphicsDevice_delete(QQuickGraphicsDevice* self);
 
 #ifdef __cplusplus

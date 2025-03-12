@@ -26,23 +26,32 @@ typedef struct QFileInfo QFileInfo;
 typedef struct QIcon QIcon;
 #endif
 
-struct QFileIconProvider_VTable {
-	void (*destructor)(struct QFileIconProvider_VTable* vtbl, QFileIconProvider* self);
-	QIcon* (*icon)(struct QFileIconProvider_VTable* vtbl, const QFileIconProvider* self, int type);
-	QIcon* (*iconWithInfo)(struct QFileIconProvider_VTable* vtbl, const QFileIconProvider* self, QFileInfo* info);
-	struct miqt_string (*type)(struct QFileIconProvider_VTable* vtbl, const QFileIconProvider* self, QFileInfo* param1);
-	void (*setOptions)(struct QFileIconProvider_VTable* vtbl, QFileIconProvider* self, int options);
-	int (*options)(struct QFileIconProvider_VTable* vtbl, const QFileIconProvider* self);
-};
-QFileIconProvider* QFileIconProvider_new(struct QFileIconProvider_VTable* vtbl);
+typedef struct VirtualQFileIconProvider VirtualQFileIconProvider;
+typedef struct QFileIconProvider_VTable{
+	void (*destructor)(VirtualQFileIconProvider* self);
+	QIcon* (*icon)(const VirtualQFileIconProvider* self, int type);
+	QIcon* (*iconWithInfo)(const VirtualQFileIconProvider* self, QFileInfo* info);
+	struct miqt_string (*type)(const VirtualQFileIconProvider* self, QFileInfo* param1);
+	void (*setOptions)(VirtualQFileIconProvider* self, int options);
+	int (*options)(const VirtualQFileIconProvider* self);
+}QFileIconProvider_VTable;
+
+const QFileIconProvider_VTable* QFileIconProvider_vtbl(const VirtualQFileIconProvider* self);
+void* QFileIconProvider_vdata(const VirtualQFileIconProvider* self);
+void QFileIconProvider_setVdata(VirtualQFileIconProvider* self, void* vdata);
+
+VirtualQFileIconProvider* QFileIconProvider_new(const QFileIconProvider_VTable* vtbl, void* vdata);
+
 void QFileIconProvider_virtbase(QFileIconProvider* src, QAbstractFileIconProvider** outptr_QAbstractFileIconProvider);
 QIcon* QFileIconProvider_icon(const QFileIconProvider* self, int type);
 QIcon* QFileIconProvider_iconWithInfo(const QFileIconProvider* self, QFileInfo* info);
-QIcon* QFileIconProvider_virtualbase_icon(const void* self, int type);
-QIcon* QFileIconProvider_virtualbase_iconWithInfo(const void* self, QFileInfo* info);
-struct miqt_string QFileIconProvider_virtualbase_type(const void* self, QFileInfo* param1);
-void QFileIconProvider_virtualbase_setOptions(void* self, int options);
-int QFileIconProvider_virtualbase_options(const void* self);
+
+QIcon* QFileIconProvider_virtualbase_icon(const VirtualQFileIconProvider* self, int type);
+QIcon* QFileIconProvider_virtualbase_iconWithInfo(const VirtualQFileIconProvider* self, QFileInfo* info);
+struct miqt_string QFileIconProvider_virtualbase_type(const VirtualQFileIconProvider* self, QFileInfo* param1);
+void QFileIconProvider_virtualbase_setOptions(VirtualQFileIconProvider* self, int options);
+int QFileIconProvider_virtualbase_options(const VirtualQFileIconProvider* self);
+
 void QFileIconProvider_delete(QFileIconProvider* self);
 
 #ifdef __cplusplus

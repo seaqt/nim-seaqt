@@ -60,10 +60,10 @@ export
 type cQOcspResponse*{.exportc: "QOcspResponse", incompleteStruct.} = object
 
 proc fcQOcspResponse_operatorAssign(self: pointer, other: pointer): void {.importc: "QOcspResponse_operatorAssign".}
-proc fcQOcspResponse_certificateStatus(self: pointer, ): cint {.importc: "QOcspResponse_certificateStatus".}
-proc fcQOcspResponse_revocationReason(self: pointer, ): cint {.importc: "QOcspResponse_revocationReason".}
-proc fcQOcspResponse_responder(self: pointer, ): pointer {.importc: "QOcspResponse_responder".}
-proc fcQOcspResponse_subject(self: pointer, ): pointer {.importc: "QOcspResponse_subject".}
+proc fcQOcspResponse_certificateStatus(self: pointer): cint {.importc: "QOcspResponse_certificateStatus".}
+proc fcQOcspResponse_revocationReason(self: pointer): cint {.importc: "QOcspResponse_revocationReason".}
+proc fcQOcspResponse_responder(self: pointer): pointer {.importc: "QOcspResponse_responder".}
+proc fcQOcspResponse_subject(self: pointer): pointer {.importc: "QOcspResponse_subject".}
 proc fcQOcspResponse_swap(self: pointer, other: pointer): void {.importc: "QOcspResponse_swap".}
 proc fcQOcspResponse_new(): ptr cQOcspResponse {.importc: "QOcspResponse_new".}
 proc fcQOcspResponse_new2(other: pointer): ptr cQOcspResponse {.importc: "QOcspResponse_new2".}
@@ -71,16 +71,16 @@ proc fcQOcspResponse_new2(other: pointer): ptr cQOcspResponse {.importc: "QOcspR
 proc operatorAssign*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =
   fcQOcspResponse_operatorAssign(self.h, other.h)
 
-proc certificateStatus*(self: gen_qocspresponse_types.QOcspResponse, ): cint =
+proc certificateStatus*(self: gen_qocspresponse_types.QOcspResponse): cint =
   cint(fcQOcspResponse_certificateStatus(self.h))
 
-proc revocationReason*(self: gen_qocspresponse_types.QOcspResponse, ): cint =
+proc revocationReason*(self: gen_qocspresponse_types.QOcspResponse): cint =
   cint(fcQOcspResponse_revocationReason(self.h))
 
-proc responder*(self: gen_qocspresponse_types.QOcspResponse, ): gen_qsslcertificate_types.QSslCertificate =
+proc responder*(self: gen_qocspresponse_types.QOcspResponse): gen_qsslcertificate_types.QSslCertificate =
   gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_responder(self.h), owned: true)
 
-proc subject*(self: gen_qocspresponse_types.QOcspResponse, ): gen_qsslcertificate_types.QSslCertificate =
+proc subject*(self: gen_qocspresponse_types.QOcspResponse): gen_qsslcertificate_types.QSslCertificate =
   gen_qsslcertificate_types.QSslCertificate(h: fcQOcspResponse_subject(self.h), owned: true)
 
 proc swap*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =

@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qjsvalueiterator.h>
 #include "gen_qjsvalueiterator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJSValueIterator* QJSValueIterator_new(QJSValue* value) {
 	return new QJSValueIterator(*value);
 }

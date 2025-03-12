@@ -8,15 +8,6 @@
 #include <QVariant>
 #include <qcolor.h>
 #include "gen_qcolor.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QColor* QColor_new() {
 	return new QColor();
 }

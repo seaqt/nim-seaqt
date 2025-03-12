@@ -12,39 +12,32 @@
 #include <QUrl>
 #include <qfileselector.h>
 #include "gen_qfileselector.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQFileSelector final : public QFileSelector {
-	struct QFileSelector_VTable* vtbl;
+	const QFileSelector_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFileSelector_VTable* QFileSelector_vtbl(const VirtualQFileSelector* self);
+	friend void* QFileSelector_vdata(const VirtualQFileSelector* self);
+	friend void QFileSelector_setVdata(VirtualQFileSelector* self, void* vdata);
 
-	VirtualQFileSelector(struct QFileSelector_VTable* vtbl): QFileSelector(), vtbl(vtbl) {};
-	VirtualQFileSelector(struct QFileSelector_VTable* vtbl, QObject* parent): QFileSelector(parent), vtbl(vtbl) {};
+	VirtualQFileSelector(const QFileSelector_VTable* vtbl, void* vdata): QFileSelector(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFileSelector(const QFileSelector_VTable* vtbl, void* vdata, QObject* parent): QFileSelector(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFileSelector() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFileSelector() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QFileSelector::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QFileSelector_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QFileSelector_virtualbase_metaObject(const VirtualQFileSelector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QFileSelector::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QFileSelector_virtualbase_metacast(void* self, const char* param1);
+	friend void* QFileSelector_virtualbase_metacast(VirtualQFileSelector* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QFileSelector::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFileSelector_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QFileSelector_virtualbase_metacall(VirtualQFileSelector* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QFileSelector::event(event);
@@ -85,14 +76,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFileSelector_virtualbase_event(void* self, QEvent* event);
+	friend bool QFileSelector_virtualbase_event(VirtualQFileSelector* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QFileSelector::eventFilter(watched, event);
@@ -101,14 +91,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QFileSelector_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QFileSelector_virtualbase_eventFilter(VirtualQFileSelector* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QFileSelector::timerEvent(event);
@@ -117,13 +106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QFileSelector_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QFileSelector_virtualbase_timerEvent(VirtualQFileSelector* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QFileSelector::childEvent(event);
@@ -132,13 +120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QFileSelector_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QFileSelector_virtualbase_childEvent(VirtualQFileSelector* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QFileSelector::customEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QFileSelector_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QFileSelector_virtualbase_customEvent(VirtualQFileSelector* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QFileSelector::connectNotify(signal);
@@ -164,13 +150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QFileSelector_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QFileSelector_virtualbase_connectNotify(VirtualQFileSelector* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QFileSelector::disconnectNotify(signal);
@@ -181,25 +166,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QFileSelector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QFileSelector_virtualbase_disconnectNotify(VirtualQFileSelector* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QFileSelector_protectedbase_sender(const void* self);
-	friend int QFileSelector_protectedbase_senderSignalIndex(const void* self);
-	friend int QFileSelector_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QFileSelector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QFileSelector_protectedbase_sender(const VirtualQFileSelector* self);
+	friend int QFileSelector_protectedbase_senderSignalIndex(const VirtualQFileSelector* self);
+	friend int QFileSelector_protectedbase_receivers(const VirtualQFileSelector* self, const char* signal);
+	friend bool QFileSelector_protectedbase_isSignalConnected(const VirtualQFileSelector* self, QMetaMethod* signal);
 };
 
-QFileSelector* QFileSelector_new(struct QFileSelector_VTable* vtbl) {
-	return new VirtualQFileSelector(vtbl);
+VirtualQFileSelector* QFileSelector_new(const QFileSelector_VTable* vtbl, void* vdata) {
+	return new VirtualQFileSelector(vtbl, vdata);
 }
 
-QFileSelector* QFileSelector_new2(struct QFileSelector_VTable* vtbl, QObject* parent) {
-	return new VirtualQFileSelector(vtbl, parent);
+VirtualQFileSelector* QFileSelector_new2(const QFileSelector_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQFileSelector(vtbl, vdata, parent);
 }
 
 void QFileSelector_virtbase(QFileSelector* src, QObject** outptr_QObject) {
@@ -318,93 +303,76 @@ struct miqt_string QFileSelector_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QFileSelector_virtualbase_metaObject(const void* self) {
+QMetaObject* QFileSelector_virtualbase_metaObject(const VirtualQFileSelector* self) {
 
-	return (QMetaObject*) ( (const VirtualQFileSelector*)(self) )->QFileSelector::metaObject();
-
+	return (QMetaObject*) self->QFileSelector::metaObject();
 }
 
-void* QFileSelector_virtualbase_metacast(void* self, const char* param1) {
+void* QFileSelector_virtualbase_metacast(VirtualQFileSelector* self, const char* param1) {
 
-	return ( (VirtualQFileSelector*)(self) )->QFileSelector::qt_metacast(param1);
-
+	return self->QFileSelector::qt_metacast(param1);
 }
 
-int QFileSelector_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QFileSelector_virtualbase_metacall(VirtualQFileSelector* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQFileSelector*)(self) )->QFileSelector::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QFileSelector::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QFileSelector_virtualbase_event(void* self, QEvent* event) {
+bool QFileSelector_virtualbase_event(VirtualQFileSelector* self, QEvent* event) {
 
-	return ( (VirtualQFileSelector*)(self) )->QFileSelector::event(event);
-
+	return self->QFileSelector::event(event);
 }
 
-bool QFileSelector_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QFileSelector_virtualbase_eventFilter(VirtualQFileSelector* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQFileSelector*)(self) )->QFileSelector::eventFilter(watched, event);
-
+	return self->QFileSelector::eventFilter(watched, event);
 }
 
-void QFileSelector_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QFileSelector_virtualbase_timerEvent(VirtualQFileSelector* self, QTimerEvent* event) {
 
-	( (VirtualQFileSelector*)(self) )->QFileSelector::timerEvent(event);
-
+	self->QFileSelector::timerEvent(event);
 }
 
-void QFileSelector_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QFileSelector_virtualbase_childEvent(VirtualQFileSelector* self, QChildEvent* event) {
 
-	( (VirtualQFileSelector*)(self) )->QFileSelector::childEvent(event);
-
+	self->QFileSelector::childEvent(event);
 }
 
-void QFileSelector_virtualbase_customEvent(void* self, QEvent* event) {
+void QFileSelector_virtualbase_customEvent(VirtualQFileSelector* self, QEvent* event) {
 
-	( (VirtualQFileSelector*)(self) )->QFileSelector::customEvent(event);
-
+	self->QFileSelector::customEvent(event);
 }
 
-void QFileSelector_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QFileSelector_virtualbase_connectNotify(VirtualQFileSelector* self, QMetaMethod* signal) {
 
-	( (VirtualQFileSelector*)(self) )->QFileSelector::connectNotify(*signal);
-
+	self->QFileSelector::connectNotify(*signal);
 }
 
-void QFileSelector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QFileSelector_virtualbase_disconnectNotify(VirtualQFileSelector* self, QMetaMethod* signal) {
 
-	( (VirtualQFileSelector*)(self) )->QFileSelector::disconnectNotify(*signal);
-
+	self->QFileSelector::disconnectNotify(*signal);
 }
 
 const QMetaObject* QFileSelector_staticMetaObject() { return &QFileSelector::staticMetaObject; }
-QObject* QFileSelector_protectedbase_sender(const void* self) {
-	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	
-	return self_cast->sender();
 
+const QFileSelector_VTable* QFileSelector_vtbl(const VirtualQFileSelector* self) { return self->vtbl; }
+void* QFileSelector_vdata(const VirtualQFileSelector* self) { return self->vdata; }
+void QFileSelector_setVdata(VirtualQFileSelector* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QFileSelector_protectedbase_sender(const VirtualQFileSelector* self) {
+	return self->sender();
 }
 
-int QFileSelector_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QFileSelector_protectedbase_senderSignalIndex(const VirtualQFileSelector* self) {
+	return self->senderSignalIndex();
 }
 
-int QFileSelector_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QFileSelector_protectedbase_receivers(const VirtualQFileSelector* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QFileSelector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QFileSelector_protectedbase_isSignalConnected(const VirtualQFileSelector* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QFileSelector_delete(QFileSelector* self) {

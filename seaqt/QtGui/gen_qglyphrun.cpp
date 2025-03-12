@@ -5,15 +5,6 @@
 #include <QRectF>
 #include <qglyphrun.h>
 #include "gen_qglyphrun.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QGlyphRun* QGlyphRun_new() {
 	return new QGlyphRun();
 }

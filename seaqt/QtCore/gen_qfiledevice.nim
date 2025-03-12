@@ -102,23 +102,23 @@ export
 
 type cQFileDevice*{.exportc: "QFileDevice", incompleteStruct.} = object
 
-proc fcQFileDevice_metaObject(self: pointer, ): pointer {.importc: "QFileDevice_metaObject".}
+proc fcQFileDevice_metaObject(self: pointer): pointer {.importc: "QFileDevice_metaObject".}
 proc fcQFileDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileDevice_metacast".}
 proc fcQFileDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileDevice_metacall".}
 proc fcQFileDevice_tr(s: cstring): struct_miqt_string {.importc: "QFileDevice_tr".}
-proc fcQFileDevice_error(self: pointer, ): cint {.importc: "QFileDevice_error".}
-proc fcQFileDevice_unsetError(self: pointer, ): void {.importc: "QFileDevice_unsetError".}
-proc fcQFileDevice_close(self: pointer, ): void {.importc: "QFileDevice_close".}
-proc fcQFileDevice_isSequential(self: pointer, ): bool {.importc: "QFileDevice_isSequential".}
-proc fcQFileDevice_handle(self: pointer, ): cint {.importc: "QFileDevice_handle".}
-proc fcQFileDevice_fileName(self: pointer, ): struct_miqt_string {.importc: "QFileDevice_fileName".}
-proc fcQFileDevice_pos(self: pointer, ): clonglong {.importc: "QFileDevice_pos".}
+proc fcQFileDevice_error(self: pointer): cint {.importc: "QFileDevice_error".}
+proc fcQFileDevice_unsetError(self: pointer): void {.importc: "QFileDevice_unsetError".}
+proc fcQFileDevice_close(self: pointer): void {.importc: "QFileDevice_close".}
+proc fcQFileDevice_isSequential(self: pointer): bool {.importc: "QFileDevice_isSequential".}
+proc fcQFileDevice_handle(self: pointer): cint {.importc: "QFileDevice_handle".}
+proc fcQFileDevice_fileName(self: pointer): struct_miqt_string {.importc: "QFileDevice_fileName".}
+proc fcQFileDevice_pos(self: pointer): clonglong {.importc: "QFileDevice_pos".}
 proc fcQFileDevice_seek(self: pointer, offset: clonglong): bool {.importc: "QFileDevice_seek".}
-proc fcQFileDevice_atEnd(self: pointer, ): bool {.importc: "QFileDevice_atEnd".}
-proc fcQFileDevice_flush(self: pointer, ): bool {.importc: "QFileDevice_flush".}
-proc fcQFileDevice_size(self: pointer, ): clonglong {.importc: "QFileDevice_size".}
+proc fcQFileDevice_atEnd(self: pointer): bool {.importc: "QFileDevice_atEnd".}
+proc fcQFileDevice_flush(self: pointer): bool {.importc: "QFileDevice_flush".}
+proc fcQFileDevice_size(self: pointer): clonglong {.importc: "QFileDevice_size".}
 proc fcQFileDevice_resize(self: pointer, sz: clonglong): bool {.importc: "QFileDevice_resize".}
-proc fcQFileDevice_permissions(self: pointer, ): cint {.importc: "QFileDevice_permissions".}
+proc fcQFileDevice_permissions(self: pointer): cint {.importc: "QFileDevice_permissions".}
 proc fcQFileDevice_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QFileDevice_setPermissions".}
 proc fcQFileDevice_map(self: pointer, offset: clonglong, size: clonglong): ptr uint8 {.importc: "QFileDevice_map".}
 proc fcQFileDevice_unmap(self: pointer, address: ptr uint8): bool {.importc: "QFileDevice_unmap".}
@@ -129,13 +129,13 @@ proc fcQFileDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.im
 proc fcQFileDevice_map3(self: pointer, offset: clonglong, size: clonglong, flags: cint): ptr uint8 {.importc: "QFileDevice_map3".}
 proc fcQFileDevice_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QFileDevice_protectedbase_setOpenMode".}
 proc fcQFileDevice_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QFileDevice_protectedbase_setErrorString".}
-proc fcQFileDevice_protectedbase_sender(self: pointer, ): pointer {.importc: "QFileDevice_protectedbase_sender".}
-proc fcQFileDevice_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFileDevice_protectedbase_senderSignalIndex".}
+proc fcQFileDevice_protectedbase_sender(self: pointer): pointer {.importc: "QFileDevice_protectedbase_sender".}
+proc fcQFileDevice_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFileDevice_protectedbase_senderSignalIndex".}
 proc fcQFileDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDevice_protectedbase_receivers".}
 proc fcQFileDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDevice_protectedbase_isSignalConnected".}
 proc fcQFileDevice_staticMetaObject(): pointer {.importc: "QFileDevice_staticMetaObject".}
 
-proc metaObject*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qfiledevice_types.QFileDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfiledevice_types.QFileDevice, param1: cstring): pointer =
@@ -150,46 +150,46 @@ proc tr*(_: type gen_qfiledevice_types.QFileDevice, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc error*(self: gen_qfiledevice_types.QFileDevice, ): cint =
+proc error*(self: gen_qfiledevice_types.QFileDevice): cint =
   cint(fcQFileDevice_error(self.h))
 
-proc unsetError*(self: gen_qfiledevice_types.QFileDevice, ): void =
+proc unsetError*(self: gen_qfiledevice_types.QFileDevice): void =
   fcQFileDevice_unsetError(self.h)
 
-proc close*(self: gen_qfiledevice_types.QFileDevice, ): void =
+proc close*(self: gen_qfiledevice_types.QFileDevice): void =
   fcQFileDevice_close(self.h)
 
-proc isSequential*(self: gen_qfiledevice_types.QFileDevice, ): bool =
+proc isSequential*(self: gen_qfiledevice_types.QFileDevice): bool =
   fcQFileDevice_isSequential(self.h)
 
-proc handle*(self: gen_qfiledevice_types.QFileDevice, ): cint =
+proc handle*(self: gen_qfiledevice_types.QFileDevice): cint =
   fcQFileDevice_handle(self.h)
 
-proc fileName*(self: gen_qfiledevice_types.QFileDevice, ): string =
+proc fileName*(self: gen_qfiledevice_types.QFileDevice): string =
   let v_ms = fcQFileDevice_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc pos*(self: gen_qfiledevice_types.QFileDevice, ): clonglong =
+proc pos*(self: gen_qfiledevice_types.QFileDevice): clonglong =
   fcQFileDevice_pos(self.h)
 
 proc seek*(self: gen_qfiledevice_types.QFileDevice, offset: clonglong): bool =
   fcQFileDevice_seek(self.h, offset)
 
-proc atEnd*(self: gen_qfiledevice_types.QFileDevice, ): bool =
+proc atEnd*(self: gen_qfiledevice_types.QFileDevice): bool =
   fcQFileDevice_atEnd(self.h)
 
-proc flush*(self: gen_qfiledevice_types.QFileDevice, ): bool =
+proc flush*(self: gen_qfiledevice_types.QFileDevice): bool =
   fcQFileDevice_flush(self.h)
 
-proc size*(self: gen_qfiledevice_types.QFileDevice, ): clonglong =
+proc size*(self: gen_qfiledevice_types.QFileDevice): clonglong =
   fcQFileDevice_size(self.h)
 
 proc resize*(self: gen_qfiledevice_types.QFileDevice, sz: clonglong): bool =
   fcQFileDevice_resize(self.h, sz)
 
-proc permissions*(self: gen_qfiledevice_types.QFileDevice, ): cint =
+proc permissions*(self: gen_qfiledevice_types.QFileDevice): cint =
   cint(fcQFileDevice_permissions(self.h))
 
 proc setPermissions*(self: gen_qfiledevice_types.QFileDevice, permissionSpec: cint): bool =
@@ -228,10 +228,10 @@ proc setOpenMode*(self: gen_qfiledevice_types.QFileDevice, openMode: cint): void
 proc setErrorString*(self: gen_qfiledevice_types.QFileDevice, errorString: string): void =
   fcQFileDevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
-proc sender*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qfiledevice_types.QFileDevice): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQFileDevice_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qfiledevice_types.QFileDevice, ): cint =
+proc senderSignalIndex*(self: gen_qfiledevice_types.QFileDevice): cint =
   fcQFileDevice_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qfiledevice_types.QFileDevice, signal: cstring): cint =

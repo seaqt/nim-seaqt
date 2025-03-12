@@ -48,23 +48,30 @@ typedef struct QWebEngineUrlRequestInterceptor QWebEngineUrlRequestInterceptor;
 typedef struct QWebEngineUrlSchemeHandler QWebEngineUrlSchemeHandler;
 #endif
 
-struct QWebEngineProfile_VTable {
-	void (*destructor)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self);
-	QMetaObject* (*metaObject)(struct QWebEngineProfile_VTable* vtbl, const QWebEngineProfile* self);
-	void* (*metacast)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, const char* param1);
-	int (*metacall)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, int param1, int param2, void** param3);
-	bool (*event)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QEvent* event);
-	bool (*eventFilter)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QTimerEvent* event);
-	void (*childEvent)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QChildEvent* event);
-	void (*customEvent)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QEvent* event);
-	void (*connectNotify)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QWebEngineProfile_VTable* vtbl, QWebEngineProfile* self, QMetaMethod* signal);
-};
-QWebEngineProfile* QWebEngineProfile_new(struct QWebEngineProfile_VTable* vtbl);
-QWebEngineProfile* QWebEngineProfile_new2(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name);
-QWebEngineProfile* QWebEngineProfile_new3(struct QWebEngineProfile_VTable* vtbl, QObject* parent);
-QWebEngineProfile* QWebEngineProfile_new4(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name, QObject* parent);
+typedef struct VirtualQWebEngineProfile VirtualQWebEngineProfile;
+typedef struct QWebEngineProfile_VTable{
+	void (*destructor)(VirtualQWebEngineProfile* self);
+	QMetaObject* (*metaObject)(const VirtualQWebEngineProfile* self);
+	void* (*metacast)(VirtualQWebEngineProfile* self, const char* param1);
+	int (*metacall)(VirtualQWebEngineProfile* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQWebEngineProfile* self, QEvent* event);
+	bool (*eventFilter)(VirtualQWebEngineProfile* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQWebEngineProfile* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQWebEngineProfile* self, QChildEvent* event);
+	void (*customEvent)(VirtualQWebEngineProfile* self, QEvent* event);
+	void (*connectNotify)(VirtualQWebEngineProfile* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQWebEngineProfile* self, QMetaMethod* signal);
+}QWebEngineProfile_VTable;
+
+const QWebEngineProfile_VTable* QWebEngineProfile_vtbl(const VirtualQWebEngineProfile* self);
+void* QWebEngineProfile_vdata(const VirtualQWebEngineProfile* self);
+void QWebEngineProfile_setVdata(VirtualQWebEngineProfile* self, void* vdata);
+
+VirtualQWebEngineProfile* QWebEngineProfile_new(const QWebEngineProfile_VTable* vtbl, void* vdata);
+VirtualQWebEngineProfile* QWebEngineProfile_new2(const QWebEngineProfile_VTable* vtbl, void* vdata, struct miqt_string name);
+VirtualQWebEngineProfile* QWebEngineProfile_new3(const QWebEngineProfile_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQWebEngineProfile* QWebEngineProfile_new4(const QWebEngineProfile_VTable* vtbl, void* vdata, struct miqt_string name, QObject* parent);
+
 void QWebEngineProfile_virtbase(QWebEngineProfile* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineProfile_metaObject(const QWebEngineProfile* self);
 void* QWebEngineProfile_metacast(QWebEngineProfile* self, const char* param1);
@@ -108,23 +115,26 @@ void QWebEngineProfile_setDownloadPath(QWebEngineProfile* self, struct miqt_stri
 QWebEngineClientCertificateStore* QWebEngineProfile_clientCertificateStore(QWebEngineProfile* self);
 QWebEngineProfile* QWebEngineProfile_defaultProfile();
 void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDownloadRequest* download);
-void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t));
+void QWebEngineProfile_connect_downloadRequested(VirtualQWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t));
 struct miqt_string QWebEngineProfile_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n);
-QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self);
-void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
-int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event);
-bool QWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event);
-void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event);
-void QWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebEngineProfile_protectedbase_sender(const void* self);
-int QWebEngineProfile_protectedbase_senderSignalIndex(const void* self);
-int QWebEngineProfile_protectedbase_receivers(const void* self, const char* signal);
-bool QWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QWebEngineProfile_virtualbase_metaObject(const VirtualQWebEngineProfile* self);
+void* QWebEngineProfile_virtualbase_metacast(VirtualQWebEngineProfile* self, const char* param1);
+int QWebEngineProfile_virtualbase_metacall(VirtualQWebEngineProfile* self, int param1, int param2, void** param3);
+bool QWebEngineProfile_virtualbase_event(VirtualQWebEngineProfile* self, QEvent* event);
+bool QWebEngineProfile_virtualbase_eventFilter(VirtualQWebEngineProfile* self, QObject* watched, QEvent* event);
+void QWebEngineProfile_virtualbase_timerEvent(VirtualQWebEngineProfile* self, QTimerEvent* event);
+void QWebEngineProfile_virtualbase_childEvent(VirtualQWebEngineProfile* self, QChildEvent* event);
+void QWebEngineProfile_virtualbase_customEvent(VirtualQWebEngineProfile* self, QEvent* event);
+void QWebEngineProfile_virtualbase_connectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal);
+void QWebEngineProfile_virtualbase_disconnectNotify(VirtualQWebEngineProfile* self, QMetaMethod* signal);
+
+QObject* QWebEngineProfile_protectedbase_sender(const VirtualQWebEngineProfile* self);
+int QWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQWebEngineProfile* self);
+int QWebEngineProfile_protectedbase_receivers(const VirtualQWebEngineProfile* self, const char* signal);
+bool QWebEngineProfile_protectedbase_isSignalConnected(const VirtualQWebEngineProfile* self, QMetaMethod* signal);
+
 const QMetaObject* QWebEngineProfile_staticMetaObject();
 void QWebEngineProfile_delete(QWebEngineProfile* self);
 

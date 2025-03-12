@@ -42,16 +42,16 @@ export gen_qdeadlinetimer_types
 type cQDeadlineTimer*{.exportc: "QDeadlineTimer", incompleteStruct.} = object
 
 proc fcQDeadlineTimer_swap(self: pointer, other: pointer): void {.importc: "QDeadlineTimer_swap".}
-proc fcQDeadlineTimer_isForever(self: pointer, ): bool {.importc: "QDeadlineTimer_isForever".}
-proc fcQDeadlineTimer_hasExpired(self: pointer, ): bool {.importc: "QDeadlineTimer_hasExpired".}
-proc fcQDeadlineTimer_timerType(self: pointer, ): cint {.importc: "QDeadlineTimer_timerType".}
+proc fcQDeadlineTimer_isForever(self: pointer): bool {.importc: "QDeadlineTimer_isForever".}
+proc fcQDeadlineTimer_hasExpired(self: pointer): bool {.importc: "QDeadlineTimer_hasExpired".}
+proc fcQDeadlineTimer_timerType(self: pointer): cint {.importc: "QDeadlineTimer_timerType".}
 proc fcQDeadlineTimer_setTimerType(self: pointer, typeVal: cint): void {.importc: "QDeadlineTimer_setTimerType".}
-proc fcQDeadlineTimer_remainingTime(self: pointer, ): clonglong {.importc: "QDeadlineTimer_remainingTime".}
-proc fcQDeadlineTimer_remainingTimeNSecs(self: pointer, ): clonglong {.importc: "QDeadlineTimer_remainingTimeNSecs".}
+proc fcQDeadlineTimer_remainingTime(self: pointer): clonglong {.importc: "QDeadlineTimer_remainingTime".}
+proc fcQDeadlineTimer_remainingTimeNSecs(self: pointer): clonglong {.importc: "QDeadlineTimer_remainingTimeNSecs".}
 proc fcQDeadlineTimer_setRemainingTime(self: pointer, msecs: clonglong): void {.importc: "QDeadlineTimer_setRemainingTime".}
 proc fcQDeadlineTimer_setPreciseRemainingTime(self: pointer, secs: clonglong): void {.importc: "QDeadlineTimer_setPreciseRemainingTime".}
-proc fcQDeadlineTimer_deadline(self: pointer, ): clonglong {.importc: "QDeadlineTimer_deadline".}
-proc fcQDeadlineTimer_deadlineNSecs(self: pointer, ): clonglong {.importc: "QDeadlineTimer_deadlineNSecs".}
+proc fcQDeadlineTimer_deadline(self: pointer): clonglong {.importc: "QDeadlineTimer_deadline".}
+proc fcQDeadlineTimer_deadlineNSecs(self: pointer): clonglong {.importc: "QDeadlineTimer_deadlineNSecs".}
 proc fcQDeadlineTimer_setDeadline(self: pointer, msecs: clonglong): void {.importc: "QDeadlineTimer_setDeadline".}
 proc fcQDeadlineTimer_setPreciseDeadline(self: pointer, secs: clonglong): void {.importc: "QDeadlineTimer_setPreciseDeadline".}
 proc fcQDeadlineTimer_addNSecs(dt: pointer, nsecs: clonglong): pointer {.importc: "QDeadlineTimer_addNSecs".}
@@ -77,22 +77,22 @@ proc fcQDeadlineTimer_new7(msecs: clonglong, typeVal: cint): ptr cQDeadlineTimer
 proc swap*(self: gen_qdeadlinetimer_types.QDeadlineTimer, other: gen_qdeadlinetimer_types.QDeadlineTimer): void =
   fcQDeadlineTimer_swap(self.h, other.h)
 
-proc isForever*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): bool =
+proc isForever*(self: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
   fcQDeadlineTimer_isForever(self.h)
 
-proc hasExpired*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): bool =
+proc hasExpired*(self: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
   fcQDeadlineTimer_hasExpired(self.h)
 
-proc timerType*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): cint =
+proc timerType*(self: gen_qdeadlinetimer_types.QDeadlineTimer): cint =
   cint(fcQDeadlineTimer_timerType(self.h))
 
 proc setTimerType*(self: gen_qdeadlinetimer_types.QDeadlineTimer, typeVal: cint): void =
   fcQDeadlineTimer_setTimerType(self.h, cint(typeVal))
 
-proc remainingTime*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): clonglong =
+proc remainingTime*(self: gen_qdeadlinetimer_types.QDeadlineTimer): clonglong =
   fcQDeadlineTimer_remainingTime(self.h)
 
-proc remainingTimeNSecs*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): clonglong =
+proc remainingTimeNSecs*(self: gen_qdeadlinetimer_types.QDeadlineTimer): clonglong =
   fcQDeadlineTimer_remainingTimeNSecs(self.h)
 
 proc setRemainingTime*(self: gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clonglong): void =
@@ -101,10 +101,10 @@ proc setRemainingTime*(self: gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clo
 proc setPreciseRemainingTime*(self: gen_qdeadlinetimer_types.QDeadlineTimer, secs: clonglong): void =
   fcQDeadlineTimer_setPreciseRemainingTime(self.h, secs)
 
-proc deadline*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): clonglong =
+proc deadline*(self: gen_qdeadlinetimer_types.QDeadlineTimer): clonglong =
   fcQDeadlineTimer_deadline(self.h)
 
-proc deadlineNSecs*(self: gen_qdeadlinetimer_types.QDeadlineTimer, ): clonglong =
+proc deadlineNSecs*(self: gen_qdeadlinetimer_types.QDeadlineTimer): clonglong =
   fcQDeadlineTimer_deadlineNSecs(self.h)
 
 proc setDeadline*(self: gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clonglong): void =
@@ -116,7 +116,7 @@ proc setPreciseDeadline*(self: gen_qdeadlinetimer_types.QDeadlineTimer, secs: cl
 proc addNSecs*(_: type gen_qdeadlinetimer_types.QDeadlineTimer, dt: gen_qdeadlinetimer_types.QDeadlineTimer, nsecs: clonglong): gen_qdeadlinetimer_types.QDeadlineTimer =
   gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_addNSecs(dt.h, nsecs), owned: true)
 
-proc current*(_: type gen_qdeadlinetimer_types.QDeadlineTimer, ): gen_qdeadlinetimer_types.QDeadlineTimer =
+proc current*(_: type gen_qdeadlinetimer_types.QDeadlineTimer): gen_qdeadlinetimer_types.QDeadlineTimer =
   gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_current(), owned: true)
 
 proc operatorPlusAssign*(self: gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clonglong): gen_qdeadlinetimer_types.QDeadlineTimer =

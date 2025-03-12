@@ -38,15 +38,18 @@ bool QPixmapCache_replace(QPixmapCache__Key* key, QPixmap* pixmap);
 void QPixmapCache_remove(struct miqt_string key);
 void QPixmapCache_removeWithKey(QPixmapCache__Key* key);
 void QPixmapCache_clear();
+
 void QPixmapCache_delete(QPixmapCache* self);
 
 QPixmapCache__Key* QPixmapCache__Key_new();
 QPixmapCache__Key* QPixmapCache__Key_new2(QPixmapCache__Key* other);
+
 bool QPixmapCache__Key_operatorEqual(const QPixmapCache__Key* self, QPixmapCache__Key* key);
 bool QPixmapCache__Key_operatorNotEqual(const QPixmapCache__Key* self, QPixmapCache__Key* key);
 void QPixmapCache__Key_operatorAssign(QPixmapCache__Key* self, QPixmapCache__Key* other);
 void QPixmapCache__Key_swap(QPixmapCache__Key* self, QPixmapCache__Key* other);
 bool QPixmapCache__Key_isValid(const QPixmapCache__Key* self);
+
 void QPixmapCache__Key_delete(QPixmapCache__Key* self);
 
 #ifdef __cplusplus

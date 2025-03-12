@@ -36,40 +36,33 @@
 #include <QWidget>
 #include <qgraphicsproxywidget.h>
 #include "gen_qgraphicsproxywidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGraphicsProxyWidget final : public QGraphicsProxyWidget {
-	struct QGraphicsProxyWidget_VTable* vtbl;
+	const QGraphicsProxyWidget_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsProxyWidget_VTable* QGraphicsProxyWidget_vtbl(const VirtualQGraphicsProxyWidget* self);
+	friend void* QGraphicsProxyWidget_vdata(const VirtualQGraphicsProxyWidget* self);
+	friend void QGraphicsProxyWidget_setVdata(VirtualQGraphicsProxyWidget* self, void* vdata);
 
-	VirtualQGraphicsProxyWidget(struct QGraphicsProxyWidget_VTable* vtbl): QGraphicsProxyWidget(), vtbl(vtbl) {};
-	VirtualQGraphicsProxyWidget(struct QGraphicsProxyWidget_VTable* vtbl, QGraphicsItem* parent): QGraphicsProxyWidget(parent), vtbl(vtbl) {};
-	VirtualQGraphicsProxyWidget(struct QGraphicsProxyWidget_VTable* vtbl, QGraphicsItem* parent, Qt::WindowFlags wFlags): QGraphicsProxyWidget(parent, wFlags), vtbl(vtbl) {};
+	VirtualQGraphicsProxyWidget(const QGraphicsProxyWidget_VTable* vtbl, void* vdata): QGraphicsProxyWidget(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsProxyWidget(const QGraphicsProxyWidget_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsProxyWidget(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsProxyWidget(const QGraphicsProxyWidget_VTable* vtbl, void* vdata, QGraphicsItem* parent, Qt::WindowFlags wFlags): QGraphicsProxyWidget(parent, wFlags), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsProxyWidget() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsProxyWidget() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsProxyWidget::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsProxyWidget_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsProxyWidget_virtualbase_metaObject(const VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsProxyWidget::qt_metacast(param1);
@@ -77,14 +70,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsProxyWidget_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsProxyWidget_virtualbase_metacast(VirtualQGraphicsProxyWidget* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsProxyWidget::qt_metacall(param1, param2, param3);
@@ -95,14 +87,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsProxyWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsProxyWidget_virtualbase_metacall(VirtualQGraphicsProxyWidget* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRectF& rect) override {
 		if (vtbl->setGeometry == 0) {
 			QGraphicsProxyWidget::setGeometry(rect);
@@ -113,13 +104,12 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_setGeometry(void* self, QRectF* rect);
+	friend void QGraphicsProxyWidget_virtualbase_setGeometry(VirtualQGraphicsProxyWidget* self, QRectF* rect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsProxyWidget::paint(painter, option, widget);
@@ -130,27 +120,25 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsProxyWidget_virtualbase_paint(VirtualQGraphicsProxyWidget* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsProxyWidget::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsProxyWidget_virtualbase_type(const void* self);
+	friend int QGraphicsProxyWidget_virtualbase_type(const VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsProxyWidget::itemChange(change, value);
@@ -162,16 +150,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsProxyWidget_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsProxyWidget_virtualbase_itemChange(VirtualQGraphicsProxyWidget* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsProxyWidget::event(event);
@@ -179,14 +166,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsProxyWidget_virtualbase_event(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsProxyWidget::eventFilter(object, event);
@@ -195,14 +181,13 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QGraphicsProxyWidget_virtualbase_eventFilter(VirtualQGraphicsProxyWidget* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QGraphicsProxyWidget::showEvent(event);
@@ -211,13 +196,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_showEvent(VirtualQGraphicsProxyWidget* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QGraphicsProxyWidget::hideEvent(event);
@@ -226,13 +210,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_hideEvent(VirtualQGraphicsProxyWidget* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsProxyWidget::contextMenuEvent(event);
@@ -241,13 +224,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_contextMenuEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsProxyWidget::dragEnterEvent(event);
@@ -256,13 +238,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_dragEnterEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsProxyWidget::dragLeaveEvent(event);
@@ -271,13 +252,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_dragLeaveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsProxyWidget::dragMoveEvent(event);
@@ -286,13 +266,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_dragMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsProxyWidget::dropEvent(event);
@@ -301,13 +280,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_dropEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsProxyWidget::hoverEnterEvent(event);
@@ -316,13 +294,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_hoverEnterEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsProxyWidget::hoverLeaveEvent(event);
@@ -331,13 +308,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_hoverLeaveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsProxyWidget::hoverMoveEvent(event);
@@ -346,13 +322,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_hoverMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void grabMouseEvent(QEvent* event) override {
 		if (vtbl->grabMouseEvent == 0) {
 			QGraphicsProxyWidget::grabMouseEvent(event);
@@ -361,13 +336,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->grabMouseEvent(vtbl, this, sigval1);
+		vtbl->grabMouseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_grabMouseEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_grabMouseEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void ungrabMouseEvent(QEvent* event) override {
 		if (vtbl->ungrabMouseEvent == 0) {
 			QGraphicsProxyWidget::ungrabMouseEvent(event);
@@ -376,13 +350,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->ungrabMouseEvent(vtbl, this, sigval1);
+		vtbl->ungrabMouseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_ungrabMouseEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_ungrabMouseEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsProxyWidget::mouseMoveEvent(event);
@@ -391,13 +364,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_mouseMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsProxyWidget::mousePressEvent(event);
@@ -406,13 +378,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_mousePressEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsProxyWidget::mouseReleaseEvent(event);
@@ -421,13 +392,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_mouseReleaseEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsProxyWidget::mouseDoubleClickEvent(event);
@@ -436,13 +406,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsProxyWidget::wheelEvent(event);
@@ -451,13 +420,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_wheelEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsProxyWidget::keyPressEvent(event);
@@ -466,13 +434,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_keyPressEvent(VirtualQGraphicsProxyWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsProxyWidget::keyReleaseEvent(event);
@@ -481,13 +448,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_keyReleaseEvent(VirtualQGraphicsProxyWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsProxyWidget::focusInEvent(event);
@@ -496,13 +462,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_focusInEvent(VirtualQGraphicsProxyWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsProxyWidget::focusOutEvent(event);
@@ -511,13 +476,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_focusOutEvent(VirtualQGraphicsProxyWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QGraphicsProxyWidget::focusNextPrevChild(next);
@@ -525,14 +489,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QGraphicsProxyWidget_virtualbase_focusNextPrevChild(VirtualQGraphicsProxyWidget* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsProxyWidget::inputMethodQuery(query);
@@ -541,16 +504,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsProxyWidget_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsProxyWidget_virtualbase_inputMethodQuery(const VirtualQGraphicsProxyWidget* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsProxyWidget::inputMethodEvent(event);
@@ -559,13 +521,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_inputMethodEvent(VirtualQGraphicsProxyWidget* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
 		if (vtbl->sizeHint == 0) {
 			return QGraphicsProxyWidget::sizeHint(which, constraint);
@@ -577,16 +538,15 @@ public:
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
-		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		QSizeF* callback_return_value = vtbl->sizeHint(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSizeF* QGraphicsProxyWidget_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
+	friend QSizeF* QGraphicsProxyWidget_virtualbase_sizeHint(const VirtualQGraphicsProxyWidget* self, int which, QSizeF* constraint);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QGraphicsProxyWidget::resizeEvent(event);
@@ -595,13 +555,12 @@ public:
 
 		QGraphicsSceneResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_resizeEvent(void* self, QGraphicsSceneResizeEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_resizeEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
 		if (vtbl->getContentsMargins == 0) {
 			QGraphicsProxyWidget::getContentsMargins(left, top, right, bottom);
@@ -617,13 +576,12 @@ public:
 		qreal* bottom_ret = bottom;
 		double* sigval4 = static_cast<double*>(bottom_ret);
 
-		vtbl->getContentsMargins(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->getContentsMargins(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
+	friend void QGraphicsProxyWidget_virtualbase_getContentsMargins(const VirtualQGraphicsProxyWidget* self, double* left, double* top, double* right, double* bottom);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintWindowFrame(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paintWindowFrame == 0) {
 			QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);
@@ -634,45 +592,42 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paintWindowFrame(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paintWindowFrame(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_paintWindowFrame(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsProxyWidget_virtualbase_paintWindowFrame(VirtualQGraphicsProxyWidget* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsProxyWidget::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsProxyWidget_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsProxyWidget_virtualbase_boundingRect(const VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsProxyWidget::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsProxyWidget_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsProxyWidget_virtualbase_shape(const VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOption* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QGraphicsProxyWidget::initStyleOption(option);
@@ -681,13 +636,12 @@ public:
 
 		QStyleOption* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_initStyleOption(const void* self, QStyleOption* option);
+	friend void QGraphicsProxyWidget_virtualbase_initStyleOption(const VirtualQGraphicsProxyWidget* self, QStyleOption* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometry() override {
 		if (vtbl->updateGeometry == 0) {
 			QGraphicsProxyWidget::updateGeometry();
@@ -695,13 +649,12 @@ public:
 		}
 
 
-		vtbl->updateGeometry(vtbl, this);
+		vtbl->updateGeometry(this);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_updateGeometry(void* self);
+	friend void QGraphicsProxyWidget_virtualbase_updateGeometry(VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant propertyChange(const QString& propertyName, const QVariant& value) override {
 		if (vtbl->propertyChange == 0) {
 			return QGraphicsProxyWidget::propertyChange(propertyName, value);
@@ -719,16 +672,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->propertyChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->propertyChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsProxyWidget_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value);
+	friend QVariant* QGraphicsProxyWidget_virtualbase_propertyChange(VirtualQGraphicsProxyWidget* self, struct miqt_string propertyName, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsProxyWidget::sceneEvent(event);
@@ -736,14 +688,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsProxyWidget_virtualbase_sceneEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool windowFrameEvent(QEvent* e) override {
 		if (vtbl->windowFrameEvent == 0) {
 			return QGraphicsProxyWidget::windowFrameEvent(e);
@@ -751,14 +702,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->windowFrameEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->windowFrameEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_windowFrameEvent(void* self, QEvent* e);
+	friend bool QGraphicsProxyWidget_virtualbase_windowFrameEvent(VirtualQGraphicsProxyWidget* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::WindowFrameSection windowFrameSectionAt(const QPointF& pos) const override {
 		if (vtbl->windowFrameSectionAt == 0) {
 			return QGraphicsProxyWidget::windowFrameSectionAt(pos);
@@ -768,14 +718,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&pos_ret);
 
-		int callback_return_value = vtbl->windowFrameSectionAt(vtbl, this, sigval1);
+		int callback_return_value = vtbl->windowFrameSectionAt(this, sigval1);
 
 		return static_cast<Qt::WindowFrameSection>(callback_return_value);
 	}
 
-	friend int QGraphicsProxyWidget_virtualbase_windowFrameSectionAt(const void* self, QPointF* pos);
+	friend int QGraphicsProxyWidget_virtualbase_windowFrameSectionAt(const VirtualQGraphicsProxyWidget* self, QPointF* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QGraphicsProxyWidget::changeEvent(event);
@@ -784,13 +733,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_changeEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QGraphicsProxyWidget::closeEvent(event);
@@ -799,13 +747,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_closeEvent(VirtualQGraphicsProxyWidget* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QGraphicsSceneMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QGraphicsProxyWidget::moveEvent(event);
@@ -814,13 +761,12 @@ public:
 
 		QGraphicsSceneMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_moveEvent(void* self, QGraphicsSceneMoveEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_moveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void polishEvent() override {
 		if (vtbl->polishEvent == 0) {
 			QGraphicsProxyWidget::polishEvent();
@@ -828,13 +774,12 @@ public:
 		}
 
 
-		vtbl->polishEvent(vtbl, this);
+		vtbl->polishEvent(this);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_polishEvent(void* self);
+	friend void QGraphicsProxyWidget_virtualbase_polishEvent(VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void grabKeyboardEvent(QEvent* event) override {
 		if (vtbl->grabKeyboardEvent == 0) {
 			QGraphicsProxyWidget::grabKeyboardEvent(event);
@@ -843,13 +788,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->grabKeyboardEvent(vtbl, this, sigval1);
+		vtbl->grabKeyboardEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_grabKeyboardEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_grabKeyboardEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void ungrabKeyboardEvent(QEvent* event) override {
 		if (vtbl->ungrabKeyboardEvent == 0) {
 			QGraphicsProxyWidget::ungrabKeyboardEvent(event);
@@ -858,13 +802,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->ungrabKeyboardEvent(vtbl, this, sigval1);
+		vtbl->ungrabKeyboardEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_ungrabKeyboardEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_ungrabKeyboardEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsProxyWidget::timerEvent(event);
@@ -873,13 +816,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_timerEvent(VirtualQGraphicsProxyWidget* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsProxyWidget::childEvent(event);
@@ -888,13 +830,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_childEvent(VirtualQGraphicsProxyWidget* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsProxyWidget::customEvent(event);
@@ -903,13 +844,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsProxyWidget_virtualbase_customEvent(VirtualQGraphicsProxyWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsProxyWidget::connectNotify(signal);
@@ -920,13 +860,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsProxyWidget_virtualbase_connectNotify(VirtualQGraphicsProxyWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsProxyWidget::disconnectNotify(signal);
@@ -937,13 +876,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsProxyWidget_virtualbase_disconnectNotify(VirtualQGraphicsProxyWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsProxyWidget::advance(phase);
@@ -952,13 +890,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsProxyWidget_virtualbase_advance(VirtualQGraphicsProxyWidget* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsProxyWidget::contains(point);
@@ -968,14 +905,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsProxyWidget_virtualbase_contains(const VirtualQGraphicsProxyWidget* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsProxyWidget::collidesWithItem(other, mode);
@@ -985,14 +921,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsProxyWidget_virtualbase_collidesWithItem(const VirtualQGraphicsProxyWidget* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsProxyWidget::collidesWithPath(path, mode);
@@ -1004,14 +939,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsProxyWidget_virtualbase_collidesWithPath(const VirtualQGraphicsProxyWidget* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsProxyWidget::isObscuredBy(item);
@@ -1019,30 +953,28 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsProxyWidget_virtualbase_isObscuredBy(const VirtualQGraphicsProxyWidget* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsProxyWidget::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsProxyWidget_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsProxyWidget_virtualbase_opaqueArea(const VirtualQGraphicsProxyWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsProxyWidget::sceneEventFilter(watched, event);
@@ -1051,14 +983,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsProxyWidget_virtualbase_sceneEventFilter(VirtualQGraphicsProxyWidget* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsProxyWidget::supportsExtension(extension);
@@ -1067,14 +998,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsProxyWidget_virtualbase_supportsExtension(const VirtualQGraphicsProxyWidget* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsProxyWidget::setExtension(extension, variant);
@@ -1087,13 +1017,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsProxyWidget_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsProxyWidget_virtualbase_setExtension(VirtualQGraphicsProxyWidget* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsProxyWidget::extension(variant);
@@ -1103,53 +1032,52 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsProxyWidget_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsProxyWidget_virtualbase_extension(const VirtualQGraphicsProxyWidget* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
 			return QGraphicsProxyWidget::isEmpty();
 		}
 
 
-		bool callback_return_value = vtbl->isEmpty(vtbl, this);
+		bool callback_return_value = vtbl->isEmpty(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsProxyWidget_virtualbase_isEmpty(const void* self);
+	friend bool QGraphicsProxyWidget_virtualbase_isEmpty(const VirtualQGraphicsProxyWidget* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(void* self, QWidget* param1);
-	friend void QGraphicsProxyWidget_protectedbase_updateMicroFocus(void* self);
-	friend QObject* QGraphicsProxyWidget_protectedbase_sender(const void* self);
-	friend int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsProxyWidget_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
-	friend void QGraphicsProxyWidget_protectedbase_addToIndex(void* self);
-	friend void QGraphicsProxyWidget_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(void* self);
-	friend void QGraphicsProxyWidget_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
-	friend void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
+	friend QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(VirtualQGraphicsProxyWidget* self, QWidget* param1);
+	friend void QGraphicsProxyWidget_protectedbase_updateMicroFocus(VirtualQGraphicsProxyWidget* self);
+	friend QObject* QGraphicsProxyWidget_protectedbase_sender(const VirtualQGraphicsProxyWidget* self);
+	friend int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const VirtualQGraphicsProxyWidget* self);
+	friend int QGraphicsProxyWidget_protectedbase_receivers(const VirtualQGraphicsProxyWidget* self, const char* signal);
+	friend bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const VirtualQGraphicsProxyWidget* self, QMetaMethod* signal);
+	friend void QGraphicsProxyWidget_protectedbase_addToIndex(VirtualQGraphicsProxyWidget* self);
+	friend void QGraphicsProxyWidget_protectedbase_removeFromIndex(VirtualQGraphicsProxyWidget* self);
+	friend void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsProxyWidget* self);
+	friend void QGraphicsProxyWidget_protectedbase_setGraphicsItem(VirtualQGraphicsProxyWidget* self, QGraphicsItem* item);
+	friend void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsProxyWidget* self, bool ownedByLayout);
 };
 
-QGraphicsProxyWidget* QGraphicsProxyWidget_new(struct QGraphicsProxyWidget_VTable* vtbl) {
-	return new VirtualQGraphicsProxyWidget(vtbl);
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new(const QGraphicsProxyWidget_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsProxyWidget(vtbl, vdata);
 }
 
-QGraphicsProxyWidget* QGraphicsProxyWidget_new2(struct QGraphicsProxyWidget_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsProxyWidget(vtbl, parent);
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new2(const QGraphicsProxyWidget_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsProxyWidget(vtbl, vdata, parent);
 }
 
-QGraphicsProxyWidget* QGraphicsProxyWidget_new3(struct QGraphicsProxyWidget_VTable* vtbl, QGraphicsItem* parent, int wFlags) {
-	return new VirtualQGraphicsProxyWidget(vtbl, parent, static_cast<Qt::WindowFlags>(wFlags));
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new3(const QGraphicsProxyWidget_VTable* vtbl, void* vdata, QGraphicsItem* parent, int wFlags) {
+	return new VirtualQGraphicsProxyWidget(vtbl, vdata, parent, static_cast<Qt::WindowFlags>(wFlags));
 }
 
 void QGraphicsProxyWidget_virtbase(QGraphicsProxyWidget* src, QGraphicsWidget** outptr_QGraphicsWidget) {
@@ -1229,486 +1157,391 @@ struct miqt_string QGraphicsProxyWidget_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-QMetaObject* QGraphicsProxyWidget_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsProxyWidget_virtualbase_metaObject(const VirtualQGraphicsProxyWidget* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::metaObject();
-
+	return (QMetaObject*) self->QGraphicsProxyWidget::metaObject();
 }
 
-void* QGraphicsProxyWidget_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsProxyWidget_virtualbase_metacast(VirtualQGraphicsProxyWidget* self, const char* param1) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::qt_metacast(param1);
-
+	return self->QGraphicsProxyWidget::qt_metacast(param1);
 }
 
-int QGraphicsProxyWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsProxyWidget_virtualbase_metacall(VirtualQGraphicsProxyWidget* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsProxyWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QGraphicsProxyWidget_virtualbase_setGeometry(void* self, QRectF* rect) {
+void QGraphicsProxyWidget_virtualbase_setGeometry(VirtualQGraphicsProxyWidget* self, QRectF* rect) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::setGeometry(*rect);
-
+	self->QGraphicsProxyWidget::setGeometry(*rect);
 }
 
-void QGraphicsProxyWidget_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsProxyWidget_virtualbase_paint(VirtualQGraphicsProxyWidget* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::paint(painter, option, widget);
-
+	self->QGraphicsProxyWidget::paint(painter, option, widget);
 }
 
-int QGraphicsProxyWidget_virtualbase_type(const void* self) {
+int QGraphicsProxyWidget_virtualbase_type(const VirtualQGraphicsProxyWidget* self) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::type();
-
+	return self->QGraphicsProxyWidget::type();
 }
 
-QVariant* QGraphicsProxyWidget_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsProxyWidget_virtualbase_itemChange(VirtualQGraphicsProxyWidget* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::itemChange(static_cast<VirtualQGraphicsProxyWidget::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsProxyWidget::itemChange(static_cast<VirtualQGraphicsProxyWidget::GraphicsItemChange>(change), *value));
 }
 
-bool QGraphicsProxyWidget_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsProxyWidget_virtualbase_event(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::event(event);
-
+	return self->QGraphicsProxyWidget::event(event);
 }
 
-bool QGraphicsProxyWidget_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QGraphicsProxyWidget_virtualbase_eventFilter(VirtualQGraphicsProxyWidget* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::eventFilter(object, event);
-
+	return self->QGraphicsProxyWidget::eventFilter(object, event);
 }
 
-void QGraphicsProxyWidget_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QGraphicsProxyWidget_virtualbase_showEvent(VirtualQGraphicsProxyWidget* self, QShowEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::showEvent(event);
-
+	self->QGraphicsProxyWidget::showEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QGraphicsProxyWidget_virtualbase_hideEvent(VirtualQGraphicsProxyWidget* self, QHideEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::hideEvent(event);
-
+	self->QGraphicsProxyWidget::hideEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsProxyWidget_virtualbase_contextMenuEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::contextMenuEvent(event);
-
+	self->QGraphicsProxyWidget::contextMenuEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsProxyWidget_virtualbase_dragEnterEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::dragEnterEvent(event);
-
+	self->QGraphicsProxyWidget::dragEnterEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsProxyWidget_virtualbase_dragLeaveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::dragLeaveEvent(event);
-
+	self->QGraphicsProxyWidget::dragLeaveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsProxyWidget_virtualbase_dragMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::dragMoveEvent(event);
-
+	self->QGraphicsProxyWidget::dragMoveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsProxyWidget_virtualbase_dropEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::dropEvent(event);
-
+	self->QGraphicsProxyWidget::dropEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsProxyWidget_virtualbase_hoverEnterEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::hoverEnterEvent(event);
-
+	self->QGraphicsProxyWidget::hoverEnterEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsProxyWidget_virtualbase_hoverLeaveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::hoverLeaveEvent(event);
-
+	self->QGraphicsProxyWidget::hoverLeaveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsProxyWidget_virtualbase_hoverMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::hoverMoveEvent(event);
-
+	self->QGraphicsProxyWidget::hoverMoveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_grabMouseEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_grabMouseEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::grabMouseEvent(event);
-
+	self->QGraphicsProxyWidget::grabMouseEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_ungrabMouseEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_ungrabMouseEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::ungrabMouseEvent(event);
-
+	self->QGraphicsProxyWidget::ungrabMouseEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsProxyWidget_virtualbase_mouseMoveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::mouseMoveEvent(event);
-
+	self->QGraphicsProxyWidget::mouseMoveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsProxyWidget_virtualbase_mousePressEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::mousePressEvent(event);
-
+	self->QGraphicsProxyWidget::mousePressEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsProxyWidget_virtualbase_mouseReleaseEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::mouseReleaseEvent(event);
-
+	self->QGraphicsProxyWidget::mouseReleaseEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsProxyWidget_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::mouseDoubleClickEvent(event);
-
+	self->QGraphicsProxyWidget::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsProxyWidget_virtualbase_wheelEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::wheelEvent(event);
-
+	self->QGraphicsProxyWidget::wheelEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsProxyWidget_virtualbase_keyPressEvent(VirtualQGraphicsProxyWidget* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::keyPressEvent(event);
-
+	self->QGraphicsProxyWidget::keyPressEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsProxyWidget_virtualbase_keyReleaseEvent(VirtualQGraphicsProxyWidget* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::keyReleaseEvent(event);
-
+	self->QGraphicsProxyWidget::keyReleaseEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsProxyWidget_virtualbase_focusInEvent(VirtualQGraphicsProxyWidget* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::focusInEvent(event);
-
+	self->QGraphicsProxyWidget::focusInEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsProxyWidget_virtualbase_focusOutEvent(VirtualQGraphicsProxyWidget* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::focusOutEvent(event);
-
+	self->QGraphicsProxyWidget::focusOutEvent(event);
 }
 
-bool QGraphicsProxyWidget_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QGraphicsProxyWidget_virtualbase_focusNextPrevChild(VirtualQGraphicsProxyWidget* self, bool next) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::focusNextPrevChild(next);
-
+	return self->QGraphicsProxyWidget::focusNextPrevChild(next);
 }
 
-QVariant* QGraphicsProxyWidget_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsProxyWidget_virtualbase_inputMethodQuery(const VirtualQGraphicsProxyWidget* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsProxyWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-void QGraphicsProxyWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsProxyWidget_virtualbase_inputMethodEvent(VirtualQGraphicsProxyWidget* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::inputMethodEvent(event);
-
+	self->QGraphicsProxyWidget::inputMethodEvent(event);
 }
 
-QSizeF* QGraphicsProxyWidget_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint) {
+QSizeF* QGraphicsProxyWidget_virtualbase_sizeHint(const VirtualQGraphicsProxyWidget* self, int which, QSizeF* constraint) {
 
-	return new QSizeF(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-
+	return new QSizeF(self->QGraphicsProxyWidget::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
 }
 
-void QGraphicsProxyWidget_virtualbase_resizeEvent(void* self, QGraphicsSceneResizeEvent* event) {
+void QGraphicsProxyWidget_virtualbase_resizeEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneResizeEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::resizeEvent(event);
-
+	self->QGraphicsProxyWidget::resizeEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom) {
+void QGraphicsProxyWidget_virtualbase_getContentsMargins(const VirtualQGraphicsProxyWidget* self, double* left, double* top, double* right, double* bottom) {
 
-	( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
-
+	self->QGraphicsProxyWidget::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
 }
 
-void QGraphicsProxyWidget_virtualbase_paintWindowFrame(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsProxyWidget_virtualbase_paintWindowFrame(VirtualQGraphicsProxyWidget* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);
-
+	self->QGraphicsProxyWidget::paintWindowFrame(painter, option, widget);
 }
 
-QRectF* QGraphicsProxyWidget_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsProxyWidget_virtualbase_boundingRect(const VirtualQGraphicsProxyWidget* self) {
 
-	return new QRectF(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::boundingRect());
-
+	return new QRectF(self->QGraphicsProxyWidget::boundingRect());
 }
 
-QPainterPath* QGraphicsProxyWidget_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsProxyWidget_virtualbase_shape(const VirtualQGraphicsProxyWidget* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::shape());
-
+	return new QPainterPath(self->QGraphicsProxyWidget::shape());
 }
 
-void QGraphicsProxyWidget_virtualbase_initStyleOption(const void* self, QStyleOption* option) {
+void QGraphicsProxyWidget_virtualbase_initStyleOption(const VirtualQGraphicsProxyWidget* self, QStyleOption* option) {
 
-	( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::initStyleOption(option);
-
+	self->QGraphicsProxyWidget::initStyleOption(option);
 }
 
-void QGraphicsProxyWidget_virtualbase_updateGeometry(void* self) {
+void QGraphicsProxyWidget_virtualbase_updateGeometry(VirtualQGraphicsProxyWidget* self) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::updateGeometry();
-
+	self->QGraphicsProxyWidget::updateGeometry();
 }
 
-QVariant* QGraphicsProxyWidget_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value) {
+QVariant* QGraphicsProxyWidget_virtualbase_propertyChange(VirtualQGraphicsProxyWidget* self, struct miqt_string propertyName, QVariant* value) {
 	QString propertyName_QString = QString::fromUtf8(propertyName.data, propertyName.len);
 
-	return new QVariant(( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::propertyChange(propertyName_QString, *value));
-
+	return new QVariant(self->QGraphicsProxyWidget::propertyChange(propertyName_QString, *value));
 }
 
-bool QGraphicsProxyWidget_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsProxyWidget_virtualbase_sceneEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::sceneEvent(event);
-
+	return self->QGraphicsProxyWidget::sceneEvent(event);
 }
 
-bool QGraphicsProxyWidget_virtualbase_windowFrameEvent(void* self, QEvent* e) {
+bool QGraphicsProxyWidget_virtualbase_windowFrameEvent(VirtualQGraphicsProxyWidget* self, QEvent* e) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::windowFrameEvent(e);
-
+	return self->QGraphicsProxyWidget::windowFrameEvent(e);
 }
 
-int QGraphicsProxyWidget_virtualbase_windowFrameSectionAt(const void* self, QPointF* pos) {
+int QGraphicsProxyWidget_virtualbase_windowFrameSectionAt(const VirtualQGraphicsProxyWidget* self, QPointF* pos) {
 
-	Qt::WindowFrameSection _ret = ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::windowFrameSectionAt(*pos);
+	Qt::WindowFrameSection _ret = self->QGraphicsProxyWidget::windowFrameSectionAt(*pos);
 	return static_cast<int>(_ret);
-
 }
 
-void QGraphicsProxyWidget_virtualbase_changeEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_changeEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::changeEvent(event);
-
+	self->QGraphicsProxyWidget::changeEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QGraphicsProxyWidget_virtualbase_closeEvent(VirtualQGraphicsProxyWidget* self, QCloseEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::closeEvent(event);
-
+	self->QGraphicsProxyWidget::closeEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_moveEvent(void* self, QGraphicsSceneMoveEvent* event) {
+void QGraphicsProxyWidget_virtualbase_moveEvent(VirtualQGraphicsProxyWidget* self, QGraphicsSceneMoveEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::moveEvent(event);
-
+	self->QGraphicsProxyWidget::moveEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_polishEvent(void* self) {
+void QGraphicsProxyWidget_virtualbase_polishEvent(VirtualQGraphicsProxyWidget* self) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::polishEvent();
-
+	self->QGraphicsProxyWidget::polishEvent();
 }
 
-void QGraphicsProxyWidget_virtualbase_grabKeyboardEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_grabKeyboardEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::grabKeyboardEvent(event);
-
+	self->QGraphicsProxyWidget::grabKeyboardEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_ungrabKeyboardEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_ungrabKeyboardEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::ungrabKeyboardEvent(event);
-
+	self->QGraphicsProxyWidget::ungrabKeyboardEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsProxyWidget_virtualbase_timerEvent(VirtualQGraphicsProxyWidget* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::timerEvent(event);
-
+	self->QGraphicsProxyWidget::timerEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsProxyWidget_virtualbase_childEvent(VirtualQGraphicsProxyWidget* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::childEvent(event);
-
+	self->QGraphicsProxyWidget::childEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsProxyWidget_virtualbase_customEvent(VirtualQGraphicsProxyWidget* self, QEvent* event) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::customEvent(event);
-
+	self->QGraphicsProxyWidget::customEvent(event);
 }
 
-void QGraphicsProxyWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsProxyWidget_virtualbase_connectNotify(VirtualQGraphicsProxyWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::connectNotify(*signal);
-
+	self->QGraphicsProxyWidget::connectNotify(*signal);
 }
 
-void QGraphicsProxyWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsProxyWidget_virtualbase_disconnectNotify(VirtualQGraphicsProxyWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::disconnectNotify(*signal);
-
+	self->QGraphicsProxyWidget::disconnectNotify(*signal);
 }
 
-void QGraphicsProxyWidget_virtualbase_advance(void* self, int phase) {
+void QGraphicsProxyWidget_virtualbase_advance(VirtualQGraphicsProxyWidget* self, int phase) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::advance(static_cast<int>(phase));
-
+	self->QGraphicsProxyWidget::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsProxyWidget_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsProxyWidget_virtualbase_contains(const VirtualQGraphicsProxyWidget* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::contains(*point);
-
+	return self->QGraphicsProxyWidget::contains(*point);
 }
 
-bool QGraphicsProxyWidget_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsProxyWidget_virtualbase_collidesWithItem(const VirtualQGraphicsProxyWidget* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsProxyWidget::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsProxyWidget_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsProxyWidget_virtualbase_collidesWithPath(const VirtualQGraphicsProxyWidget* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsProxyWidget::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsProxyWidget_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsProxyWidget_virtualbase_isObscuredBy(const VirtualQGraphicsProxyWidget* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::isObscuredBy(item);
-
+	return self->QGraphicsProxyWidget::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsProxyWidget_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsProxyWidget_virtualbase_opaqueArea(const VirtualQGraphicsProxyWidget* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsProxyWidget::opaqueArea());
 }
 
-bool QGraphicsProxyWidget_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsProxyWidget_virtualbase_sceneEventFilter(VirtualQGraphicsProxyWidget* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::sceneEventFilter(watched, event);
-
+	return self->QGraphicsProxyWidget::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsProxyWidget_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsProxyWidget_virtualbase_supportsExtension(const VirtualQGraphicsProxyWidget* self, int extension) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::supportsExtension(static_cast<VirtualQGraphicsProxyWidget::Extension>(extension));
-
+	return self->QGraphicsProxyWidget::supportsExtension(static_cast<VirtualQGraphicsProxyWidget::Extension>(extension));
 }
 
-void QGraphicsProxyWidget_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsProxyWidget_virtualbase_setExtension(VirtualQGraphicsProxyWidget* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::setExtension(static_cast<VirtualQGraphicsProxyWidget::Extension>(extension), *variant);
-
+	self->QGraphicsProxyWidget::setExtension(static_cast<VirtualQGraphicsProxyWidget::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsProxyWidget_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsProxyWidget_virtualbase_extension(const VirtualQGraphicsProxyWidget* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::extension(*variant));
-
+	return new QVariant(self->QGraphicsProxyWidget::extension(*variant));
 }
 
-bool QGraphicsProxyWidget_virtualbase_isEmpty(const void* self) {
+bool QGraphicsProxyWidget_virtualbase_isEmpty(const VirtualQGraphicsProxyWidget* self) {
 
-	return ( (const VirtualQGraphicsProxyWidget*)(self) )->QGraphicsProxyWidget::isEmpty();
-
+	return self->QGraphicsProxyWidget::isEmpty();
 }
 
 const QMetaObject* QGraphicsProxyWidget_staticMetaObject() { return &QGraphicsProxyWidget::staticMetaObject; }
-QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(void* self, QWidget* param1) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	return self_cast->newProxyWidget(param1);
 
+const QGraphicsProxyWidget_VTable* QGraphicsProxyWidget_vtbl(const VirtualQGraphicsProxyWidget* self) { return self->vtbl; }
+void* QGraphicsProxyWidget_vdata(const VirtualQGraphicsProxyWidget* self) { return self->vdata; }
+void QGraphicsProxyWidget_setVdata(VirtualQGraphicsProxyWidget* self, void* vdata) { self->vdata = vdata; }
+
+QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(VirtualQGraphicsProxyWidget* self, QWidget* param1) {
+	return self->newProxyWidget(param1);
 }
 
-void QGraphicsProxyWidget_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QGraphicsProxyWidget_protectedbase_updateMicroFocus(VirtualQGraphicsProxyWidget* self) {
+	self->updateMicroFocus();
 }
 
-QObject* QGraphicsProxyWidget_protectedbase_sender(const void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsProxyWidget_protectedbase_sender(const VirtualQGraphicsProxyWidget* self) {
+	return self->sender();
 }
 
-int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const VirtualQGraphicsProxyWidget* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsProxyWidget_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsProxyWidget_protectedbase_receivers(const VirtualQGraphicsProxyWidget* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const VirtualQGraphicsProxyWidget* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
-void QGraphicsProxyWidget_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsProxyWidget_protectedbase_addToIndex(VirtualQGraphicsProxyWidget* self) {
+	self->addToIndex();
 }
 
-void QGraphicsProxyWidget_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsProxyWidget_protectedbase_removeFromIndex(VirtualQGraphicsProxyWidget* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsProxyWidget* self) {
+	self->prepareGeometryChange();
 }
 
-void QGraphicsProxyWidget_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->setGraphicsItem(item);
-
+void QGraphicsProxyWidget_protectedbase_setGraphicsItem(VirtualQGraphicsProxyWidget* self, QGraphicsItem* item) {
+	self->setGraphicsItem(item);
 }
 
-void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
-	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	
-	self_cast->setOwnedByLayout(ownedByLayout);
-
+void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsProxyWidget* self, bool ownedByLayout) {
+	self->setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsProxyWidget_delete(QGraphicsProxyWidget* self) {

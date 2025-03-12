@@ -24,9 +24,11 @@ typedef struct QSharedData QSharedData;
 
 QSharedData* QSharedData_new();
 QSharedData* QSharedData_new2(QSharedData* param1);
+
 void QSharedData_delete(QSharedData* self);
 
 QAdoptSharedDataTag* QAdoptSharedDataTag_new();
+
 void QAdoptSharedDataTag_delete(QAdoptSharedDataTag* self);
 
 #ifdef __cplusplus

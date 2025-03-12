@@ -88,48 +88,48 @@ proc fcQUrl_operatorAssign(self: pointer, copy: pointer): void {.importc: "QUrl_
 proc fcQUrl_operatorAssignWithUrl(self: pointer, url: struct_miqt_string): void {.importc: "QUrl_operatorAssignWithUrl".}
 proc fcQUrl_swap(self: pointer, other: pointer): void {.importc: "QUrl_swap".}
 proc fcQUrl_setUrl(self: pointer, url: struct_miqt_string): void {.importc: "QUrl_setUrl".}
-proc fcQUrl_url(self: pointer, ): struct_miqt_string {.importc: "QUrl_url".}
-proc fcQUrl_toString(self: pointer, ): struct_miqt_string {.importc: "QUrl_toString".}
-proc fcQUrl_toDisplayString(self: pointer, ): struct_miqt_string {.importc: "QUrl_toDisplayString".}
-proc fcQUrl_toEncoded(self: pointer, ): struct_miqt_string {.importc: "QUrl_toEncoded".}
+proc fcQUrl_url(self: pointer): struct_miqt_string {.importc: "QUrl_url".}
+proc fcQUrl_toString(self: pointer): struct_miqt_string {.importc: "QUrl_toString".}
+proc fcQUrl_toDisplayString(self: pointer): struct_miqt_string {.importc: "QUrl_toDisplayString".}
+proc fcQUrl_toEncoded(self: pointer): struct_miqt_string {.importc: "QUrl_toEncoded".}
 proc fcQUrl_fromEncoded(url: struct_miqt_string): pointer {.importc: "QUrl_fromEncoded".}
 proc fcQUrl_fromUserInput(userInput: struct_miqt_string): pointer {.importc: "QUrl_fromUserInput".}
-proc fcQUrl_isValid(self: pointer, ): bool {.importc: "QUrl_isValid".}
-proc fcQUrl_errorString(self: pointer, ): struct_miqt_string {.importc: "QUrl_errorString".}
-proc fcQUrl_isEmpty(self: pointer, ): bool {.importc: "QUrl_isEmpty".}
-proc fcQUrl_clear(self: pointer, ): void {.importc: "QUrl_clear".}
+proc fcQUrl_isValid(self: pointer): bool {.importc: "QUrl_isValid".}
+proc fcQUrl_errorString(self: pointer): struct_miqt_string {.importc: "QUrl_errorString".}
+proc fcQUrl_isEmpty(self: pointer): bool {.importc: "QUrl_isEmpty".}
+proc fcQUrl_clear(self: pointer): void {.importc: "QUrl_clear".}
 proc fcQUrl_setScheme(self: pointer, scheme: struct_miqt_string): void {.importc: "QUrl_setScheme".}
-proc fcQUrl_scheme(self: pointer, ): struct_miqt_string {.importc: "QUrl_scheme".}
+proc fcQUrl_scheme(self: pointer): struct_miqt_string {.importc: "QUrl_scheme".}
 proc fcQUrl_setAuthority(self: pointer, authority: struct_miqt_string): void {.importc: "QUrl_setAuthority".}
-proc fcQUrl_authority(self: pointer, ): struct_miqt_string {.importc: "QUrl_authority".}
+proc fcQUrl_authority(self: pointer): struct_miqt_string {.importc: "QUrl_authority".}
 proc fcQUrl_setUserInfo(self: pointer, userInfo: struct_miqt_string): void {.importc: "QUrl_setUserInfo".}
-proc fcQUrl_userInfo(self: pointer, ): struct_miqt_string {.importc: "QUrl_userInfo".}
+proc fcQUrl_userInfo(self: pointer): struct_miqt_string {.importc: "QUrl_userInfo".}
 proc fcQUrl_setUserName(self: pointer, userName: struct_miqt_string): void {.importc: "QUrl_setUserName".}
-proc fcQUrl_userName(self: pointer, ): struct_miqt_string {.importc: "QUrl_userName".}
+proc fcQUrl_userName(self: pointer): struct_miqt_string {.importc: "QUrl_userName".}
 proc fcQUrl_setPassword(self: pointer, password: struct_miqt_string): void {.importc: "QUrl_setPassword".}
-proc fcQUrl_password(self: pointer, ): struct_miqt_string {.importc: "QUrl_password".}
+proc fcQUrl_password(self: pointer): struct_miqt_string {.importc: "QUrl_password".}
 proc fcQUrl_setHost(self: pointer, host: struct_miqt_string): void {.importc: "QUrl_setHost".}
-proc fcQUrl_host(self: pointer, ): struct_miqt_string {.importc: "QUrl_host".}
+proc fcQUrl_host(self: pointer): struct_miqt_string {.importc: "QUrl_host".}
 proc fcQUrl_setPort(self: pointer, port: cint): void {.importc: "QUrl_setPort".}
-proc fcQUrl_port(self: pointer, ): cint {.importc: "QUrl_port".}
+proc fcQUrl_port(self: pointer): cint {.importc: "QUrl_port".}
 proc fcQUrl_setPath(self: pointer, path: struct_miqt_string): void {.importc: "QUrl_setPath".}
-proc fcQUrl_path(self: pointer, ): struct_miqt_string {.importc: "QUrl_path".}
-proc fcQUrl_fileName(self: pointer, ): struct_miqt_string {.importc: "QUrl_fileName".}
-proc fcQUrl_hasQuery(self: pointer, ): bool {.importc: "QUrl_hasQuery".}
+proc fcQUrl_path(self: pointer): struct_miqt_string {.importc: "QUrl_path".}
+proc fcQUrl_fileName(self: pointer): struct_miqt_string {.importc: "QUrl_fileName".}
+proc fcQUrl_hasQuery(self: pointer): bool {.importc: "QUrl_hasQuery".}
 proc fcQUrl_setQuery(self: pointer, query: struct_miqt_string): void {.importc: "QUrl_setQuery".}
 proc fcQUrl_setQueryWithQuery(self: pointer, query: pointer): void {.importc: "QUrl_setQueryWithQuery".}
-proc fcQUrl_query(self: pointer, ): struct_miqt_string {.importc: "QUrl_query".}
-proc fcQUrl_hasFragment(self: pointer, ): bool {.importc: "QUrl_hasFragment".}
-proc fcQUrl_fragment(self: pointer, ): struct_miqt_string {.importc: "QUrl_fragment".}
+proc fcQUrl_query(self: pointer): struct_miqt_string {.importc: "QUrl_query".}
+proc fcQUrl_hasFragment(self: pointer): bool {.importc: "QUrl_hasFragment".}
+proc fcQUrl_fragment(self: pointer): struct_miqt_string {.importc: "QUrl_fragment".}
 proc fcQUrl_setFragment(self: pointer, fragment: struct_miqt_string): void {.importc: "QUrl_setFragment".}
 proc fcQUrl_resolved(self: pointer, relative: pointer): pointer {.importc: "QUrl_resolved".}
-proc fcQUrl_isRelative(self: pointer, ): bool {.importc: "QUrl_isRelative".}
+proc fcQUrl_isRelative(self: pointer): bool {.importc: "QUrl_isRelative".}
 proc fcQUrl_isParentOf(self: pointer, url: pointer): bool {.importc: "QUrl_isParentOf".}
-proc fcQUrl_isLocalFile(self: pointer, ): bool {.importc: "QUrl_isLocalFile".}
+proc fcQUrl_isLocalFile(self: pointer): bool {.importc: "QUrl_isLocalFile".}
 proc fcQUrl_fromLocalFile(localfile: struct_miqt_string): pointer {.importc: "QUrl_fromLocalFile".}
-proc fcQUrl_toLocalFile(self: pointer, ): struct_miqt_string {.importc: "QUrl_toLocalFile".}
-proc fcQUrl_detach(self: pointer, ): void {.importc: "QUrl_detach".}
-proc fcQUrl_isDetached(self: pointer, ): bool {.importc: "QUrl_isDetached".}
+proc fcQUrl_toLocalFile(self: pointer): struct_miqt_string {.importc: "QUrl_toLocalFile".}
+proc fcQUrl_detach(self: pointer): void {.importc: "QUrl_detach".}
+proc fcQUrl_isDetached(self: pointer): bool {.importc: "QUrl_isDetached".}
 proc fcQUrl_operatorLesser(self: pointer, url: pointer): bool {.importc: "QUrl_operatorLesser".}
 proc fcQUrl_operatorEqual(self: pointer, url: pointer): bool {.importc: "QUrl_operatorEqual".}
 proc fcQUrl_operatorNotEqual(self: pointer, url: pointer): bool {.importc: "QUrl_operatorNotEqual".}
@@ -185,25 +185,25 @@ proc swap*(self: gen_qurl_types.QUrl, other: gen_qurl_types.QUrl): void =
 proc setUrl*(self: gen_qurl_types.QUrl, url: string): void =
   fcQUrl_setUrl(self.h, struct_miqt_string(data: url, len: csize_t(len(url))))
 
-proc url*(self: gen_qurl_types.QUrl, ): string =
+proc url*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_url(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qurl_types.QUrl, ): string =
+proc toString*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc toDisplayString*(self: gen_qurl_types.QUrl, ): string =
+proc toDisplayString*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_toDisplayString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc toEncoded*(self: gen_qurl_types.QUrl, ): seq[byte] =
+proc toEncoded*(self: gen_qurl_types.QUrl): seq[byte] =
   var v_bytearray = fcQUrl_toEncoded(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -215,25 +215,25 @@ proc fromEncoded*(_: type gen_qurl_types.QUrl, url: seq[byte]): gen_qurl_types.Q
 proc fromUserInput*(_: type gen_qurl_types.QUrl, userInput: string): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQUrl_fromUserInput(struct_miqt_string(data: userInput, len: csize_t(len(userInput)))), owned: true)
 
-proc isValid*(self: gen_qurl_types.QUrl, ): bool =
+proc isValid*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isValid(self.h)
 
-proc errorString*(self: gen_qurl_types.QUrl, ): string =
+proc errorString*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isEmpty*(self: gen_qurl_types.QUrl, ): bool =
+proc isEmpty*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isEmpty(self.h)
 
-proc clear*(self: gen_qurl_types.QUrl, ): void =
+proc clear*(self: gen_qurl_types.QUrl): void =
   fcQUrl_clear(self.h)
 
 proc setScheme*(self: gen_qurl_types.QUrl, scheme: string): void =
   fcQUrl_setScheme(self.h, struct_miqt_string(data: scheme, len: csize_t(len(scheme))))
 
-proc scheme*(self: gen_qurl_types.QUrl, ): string =
+proc scheme*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_scheme(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -242,7 +242,7 @@ proc scheme*(self: gen_qurl_types.QUrl, ): string =
 proc setAuthority*(self: gen_qurl_types.QUrl, authority: string): void =
   fcQUrl_setAuthority(self.h, struct_miqt_string(data: authority, len: csize_t(len(authority))))
 
-proc authority*(self: gen_qurl_types.QUrl, ): string =
+proc authority*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_authority(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -251,7 +251,7 @@ proc authority*(self: gen_qurl_types.QUrl, ): string =
 proc setUserInfo*(self: gen_qurl_types.QUrl, userInfo: string): void =
   fcQUrl_setUserInfo(self.h, struct_miqt_string(data: userInfo, len: csize_t(len(userInfo))))
 
-proc userInfo*(self: gen_qurl_types.QUrl, ): string =
+proc userInfo*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_userInfo(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -260,7 +260,7 @@ proc userInfo*(self: gen_qurl_types.QUrl, ): string =
 proc setUserName*(self: gen_qurl_types.QUrl, userName: string): void =
   fcQUrl_setUserName(self.h, struct_miqt_string(data: userName, len: csize_t(len(userName))))
 
-proc userName*(self: gen_qurl_types.QUrl, ): string =
+proc userName*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_userName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -269,7 +269,7 @@ proc userName*(self: gen_qurl_types.QUrl, ): string =
 proc setPassword*(self: gen_qurl_types.QUrl, password: string): void =
   fcQUrl_setPassword(self.h, struct_miqt_string(data: password, len: csize_t(len(password))))
 
-proc password*(self: gen_qurl_types.QUrl, ): string =
+proc password*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_password(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -278,7 +278,7 @@ proc password*(self: gen_qurl_types.QUrl, ): string =
 proc setHost*(self: gen_qurl_types.QUrl, host: string): void =
   fcQUrl_setHost(self.h, struct_miqt_string(data: host, len: csize_t(len(host))))
 
-proc host*(self: gen_qurl_types.QUrl, ): string =
+proc host*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_host(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -287,25 +287,25 @@ proc host*(self: gen_qurl_types.QUrl, ): string =
 proc setPort*(self: gen_qurl_types.QUrl, port: cint): void =
   fcQUrl_setPort(self.h, port)
 
-proc port*(self: gen_qurl_types.QUrl, ): cint =
+proc port*(self: gen_qurl_types.QUrl): cint =
   fcQUrl_port(self.h)
 
 proc setPath*(self: gen_qurl_types.QUrl, path: string): void =
   fcQUrl_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
 
-proc path*(self: gen_qurl_types.QUrl, ): string =
+proc path*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_path(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc fileName*(self: gen_qurl_types.QUrl, ): string =
+proc fileName*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc hasQuery*(self: gen_qurl_types.QUrl, ): bool =
+proc hasQuery*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_hasQuery(self.h)
 
 proc setQuery*(self: gen_qurl_types.QUrl, query: string): void =
@@ -314,16 +314,16 @@ proc setQuery*(self: gen_qurl_types.QUrl, query: string): void =
 proc setQuery*(self: gen_qurl_types.QUrl, query: gen_qurlquery_types.QUrlQuery): void =
   fcQUrl_setQueryWithQuery(self.h, query.h)
 
-proc query*(self: gen_qurl_types.QUrl, ): string =
+proc query*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_query(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc hasFragment*(self: gen_qurl_types.QUrl, ): bool =
+proc hasFragment*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_hasFragment(self.h)
 
-proc fragment*(self: gen_qurl_types.QUrl, ): string =
+proc fragment*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_fragment(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -335,28 +335,28 @@ proc setFragment*(self: gen_qurl_types.QUrl, fragment: string): void =
 proc resolved*(self: gen_qurl_types.QUrl, relative: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQUrl_resolved(self.h, relative.h), owned: true)
 
-proc isRelative*(self: gen_qurl_types.QUrl, ): bool =
+proc isRelative*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isRelative(self.h)
 
 proc isParentOf*(self: gen_qurl_types.QUrl, url: gen_qurl_types.QUrl): bool =
   fcQUrl_isParentOf(self.h, url.h)
 
-proc isLocalFile*(self: gen_qurl_types.QUrl, ): bool =
+proc isLocalFile*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isLocalFile(self.h)
 
 proc fromLocalFile*(_: type gen_qurl_types.QUrl, localfile: string): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQUrl_fromLocalFile(struct_miqt_string(data: localfile, len: csize_t(len(localfile)))), owned: true)
 
-proc toLocalFile*(self: gen_qurl_types.QUrl, ): string =
+proc toLocalFile*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_toLocalFile(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc detach*(self: gen_qurl_types.QUrl, ): void =
+proc detach*(self: gen_qurl_types.QUrl): void =
   fcQUrl_detach(self.h)
 
-proc isDetached*(self: gen_qurl_types.QUrl, ): bool =
+proc isDetached*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isDetached(self.h)
 
 proc operatorLesser*(self: gen_qurl_types.QUrl, url: gen_qurl_types.QUrl): bool =
@@ -392,7 +392,7 @@ proc toAce*(_: type gen_qurl_types.QUrl, domain: string): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc idnWhitelist*(_: type gen_qurl_types.QUrl, ): seq[string] =
+proc idnWhitelist*(_: type gen_qurl_types.QUrl): seq[string] =
   var v_ma = fcQUrl_idnWhitelist()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

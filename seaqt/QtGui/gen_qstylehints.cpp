@@ -8,15 +8,6 @@
 #include <QStyleHints>
 #include <qstylehints.h>
 #include "gen_qstylehints.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QStyleHints_virtbase(QStyleHints* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -382,6 +373,7 @@ struct miqt_string QStyleHints_tr3(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QStyleHints_staticMetaObject() { return &QStyleHints::staticMetaObject; }
+
 void QStyleHints_delete(QStyleHints* self) {
 	delete self;
 }

@@ -39,41 +39,34 @@
 #include <QWidget>
 #include <qscrollbar.h>
 #include "gen_qscrollbar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQScrollBar final : public QScrollBar {
-	struct QScrollBar_VTable* vtbl;
+	const QScrollBar_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QScrollBar_VTable* QScrollBar_vtbl(const VirtualQScrollBar* self);
+	friend void* QScrollBar_vdata(const VirtualQScrollBar* self);
+	friend void QScrollBar_setVdata(VirtualQScrollBar* self, void* vdata);
 
-	VirtualQScrollBar(struct QScrollBar_VTable* vtbl, QWidget* parent): QScrollBar(parent), vtbl(vtbl) {};
-	VirtualQScrollBar(struct QScrollBar_VTable* vtbl): QScrollBar(), vtbl(vtbl) {};
-	VirtualQScrollBar(struct QScrollBar_VTable* vtbl, Qt::Orientation param1): QScrollBar(param1), vtbl(vtbl) {};
-	VirtualQScrollBar(struct QScrollBar_VTable* vtbl, Qt::Orientation param1, QWidget* parent): QScrollBar(param1, parent), vtbl(vtbl) {};
+	VirtualQScrollBar(const QScrollBar_VTable* vtbl, void* vdata, QWidget* parent): QScrollBar(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQScrollBar(const QScrollBar_VTable* vtbl, void* vdata): QScrollBar(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQScrollBar(const QScrollBar_VTable* vtbl, void* vdata, Qt::Orientation param1): QScrollBar(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQScrollBar(const QScrollBar_VTable* vtbl, void* vdata, Qt::Orientation param1, QWidget* parent): QScrollBar(param1, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQScrollBar() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQScrollBar() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QScrollBar::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QScrollBar_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QScrollBar_virtualbase_metaObject(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QScrollBar::qt_metacast(param1);
@@ -81,14 +74,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QScrollBar_virtualbase_metacast(void* self, const char* param1);
+	friend void* QScrollBar_virtualbase_metacast(VirtualQScrollBar* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QScrollBar::qt_metacall(param1, param2, param3);
@@ -99,30 +91,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QScrollBar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QScrollBar_virtualbase_metacall(VirtualQScrollBar* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QScrollBar::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QScrollBar_virtualbase_sizeHint(const void* self);
+	friend QSize* QScrollBar_virtualbase_sizeHint(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QScrollBar::event(event);
@@ -130,14 +120,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QScrollBar_virtualbase_event(void* self, QEvent* event);
+	friend bool QScrollBar_virtualbase_event(VirtualQScrollBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QScrollBar::wheelEvent(param1);
@@ -146,13 +135,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QScrollBar_virtualbase_wheelEvent(VirtualQScrollBar* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QScrollBar::paintEvent(param1);
@@ -161,13 +149,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QScrollBar_virtualbase_paintEvent(VirtualQScrollBar* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QScrollBar::mousePressEvent(param1);
@@ -176,13 +163,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
+	friend void QScrollBar_virtualbase_mousePressEvent(VirtualQScrollBar* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QScrollBar::mouseReleaseEvent(param1);
@@ -191,13 +177,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
+	friend void QScrollBar_virtualbase_mouseReleaseEvent(VirtualQScrollBar* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QScrollBar::mouseMoveEvent(param1);
@@ -206,13 +191,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QScrollBar_virtualbase_mouseMoveEvent(VirtualQScrollBar* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* param1) override {
 		if (vtbl->hideEvent == 0) {
 			QScrollBar::hideEvent(param1);
@@ -221,13 +205,12 @@ public:
 
 		QHideEvent* sigval1 = param1;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_hideEvent(void* self, QHideEvent* param1);
+	friend void QScrollBar_virtualbase_hideEvent(VirtualQScrollBar* self, QHideEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sliderChange(QAbstractSlider::SliderChange change) override {
 		if (vtbl->sliderChange == 0) {
 			QScrollBar::sliderChange(change);
@@ -237,13 +220,12 @@ public:
 		QAbstractSlider::SliderChange change_ret = change;
 		int sigval1 = static_cast<int>(change_ret);
 
-		vtbl->sliderChange(vtbl, this, sigval1);
+		vtbl->sliderChange(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_sliderChange(void* self, int change);
+	friend void QScrollBar_virtualbase_sliderChange(VirtualQScrollBar* self, int change);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QScrollBar::contextMenuEvent(param1);
@@ -252,13 +234,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QScrollBar_virtualbase_contextMenuEvent(VirtualQScrollBar* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionSlider* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QScrollBar::initStyleOption(option);
@@ -267,13 +248,12 @@ public:
 
 		QStyleOptionSlider* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_initStyleOption(const void* self, QStyleOptionSlider* option);
+	friend void QScrollBar_virtualbase_initStyleOption(const VirtualQScrollBar* self, QStyleOptionSlider* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* ev) override {
 		if (vtbl->keyPressEvent == 0) {
 			QScrollBar::keyPressEvent(ev);
@@ -282,13 +262,12 @@ public:
 
 		QKeyEvent* sigval1 = ev;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_keyPressEvent(void* self, QKeyEvent* ev);
+	friend void QScrollBar_virtualbase_keyPressEvent(VirtualQScrollBar* self, QKeyEvent* ev);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QScrollBar::timerEvent(param1);
@@ -297,13 +276,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QScrollBar_virtualbase_timerEvent(VirtualQScrollBar* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QScrollBar::changeEvent(e);
@@ -312,27 +290,25 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QScrollBar_virtualbase_changeEvent(VirtualQScrollBar* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QScrollBar::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QScrollBar_virtualbase_devType(const void* self);
+	friend int QScrollBar_virtualbase_devType(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QScrollBar::setVisible(visible);
@@ -341,29 +317,27 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_setVisible(void* self, bool visible);
+	friend void QScrollBar_virtualbase_setVisible(VirtualQScrollBar* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QScrollBar::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QScrollBar_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QScrollBar_virtualbase_minimumSizeHint(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QScrollBar::heightForWidth(param1);
@@ -371,42 +345,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QScrollBar_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QScrollBar_virtualbase_heightForWidth(const VirtualQScrollBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QScrollBar::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QScrollBar_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QScrollBar_virtualbase_hasHeightForWidth(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QScrollBar::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QScrollBar_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QScrollBar_virtualbase_paintEngine(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QScrollBar::mouseDoubleClickEvent(event);
@@ -415,13 +386,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QScrollBar_virtualbase_mouseDoubleClickEvent(VirtualQScrollBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QScrollBar::keyReleaseEvent(event);
@@ -430,13 +400,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QScrollBar_virtualbase_keyReleaseEvent(VirtualQScrollBar* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QScrollBar::focusInEvent(event);
@@ -445,13 +414,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QScrollBar_virtualbase_focusInEvent(VirtualQScrollBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QScrollBar::focusOutEvent(event);
@@ -460,13 +428,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QScrollBar_virtualbase_focusOutEvent(VirtualQScrollBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QScrollBar::enterEvent(event);
@@ -475,13 +442,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QScrollBar_virtualbase_enterEvent(VirtualQScrollBar* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QScrollBar::leaveEvent(event);
@@ -490,13 +456,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QScrollBar_virtualbase_leaveEvent(VirtualQScrollBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QScrollBar::moveEvent(event);
@@ -505,13 +470,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QScrollBar_virtualbase_moveEvent(VirtualQScrollBar* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QScrollBar::resizeEvent(event);
@@ -520,13 +484,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QScrollBar_virtualbase_resizeEvent(VirtualQScrollBar* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QScrollBar::closeEvent(event);
@@ -535,13 +498,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QScrollBar_virtualbase_closeEvent(VirtualQScrollBar* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QScrollBar::tabletEvent(event);
@@ -550,13 +512,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QScrollBar_virtualbase_tabletEvent(VirtualQScrollBar* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QScrollBar::actionEvent(event);
@@ -565,13 +526,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QScrollBar_virtualbase_actionEvent(VirtualQScrollBar* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QScrollBar::dragEnterEvent(event);
@@ -580,13 +540,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QScrollBar_virtualbase_dragEnterEvent(VirtualQScrollBar* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QScrollBar::dragMoveEvent(event);
@@ -595,13 +554,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QScrollBar_virtualbase_dragMoveEvent(VirtualQScrollBar* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QScrollBar::dragLeaveEvent(event);
@@ -610,13 +568,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QScrollBar_virtualbase_dragLeaveEvent(VirtualQScrollBar* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QScrollBar::dropEvent(event);
@@ -625,13 +582,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QScrollBar_virtualbase_dropEvent(VirtualQScrollBar* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QScrollBar::showEvent(event);
@@ -640,13 +596,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QScrollBar_virtualbase_showEvent(VirtualQScrollBar* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QScrollBar::nativeEvent(eventType, message, result);
@@ -662,14 +617,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QScrollBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QScrollBar_virtualbase_nativeEvent(VirtualQScrollBar* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QScrollBar::metric(param1);
@@ -678,14 +632,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QScrollBar_virtualbase_metric(const void* self, int param1);
+	friend int QScrollBar_virtualbase_metric(const VirtualQScrollBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QScrollBar::initPainter(painter);
@@ -694,13 +647,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QScrollBar_virtualbase_initPainter(const VirtualQScrollBar* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QScrollBar::redirected(offset);
@@ -708,28 +660,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QScrollBar_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QScrollBar_virtualbase_redirected(const VirtualQScrollBar* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QScrollBar::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QScrollBar_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QScrollBar_virtualbase_sharedPainter(const VirtualQScrollBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QScrollBar::inputMethodEvent(param1);
@@ -738,13 +688,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QScrollBar_virtualbase_inputMethodEvent(VirtualQScrollBar* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QScrollBar::inputMethodQuery(param1);
@@ -753,16 +702,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QScrollBar_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QScrollBar_virtualbase_inputMethodQuery(const VirtualQScrollBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QScrollBar::focusNextPrevChild(next);
@@ -770,14 +718,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QScrollBar_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QScrollBar_virtualbase_focusNextPrevChild(VirtualQScrollBar* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QScrollBar::eventFilter(watched, event);
@@ -786,14 +733,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QScrollBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QScrollBar_virtualbase_eventFilter(VirtualQScrollBar* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QScrollBar::childEvent(event);
@@ -802,13 +748,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QScrollBar_virtualbase_childEvent(VirtualQScrollBar* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QScrollBar::customEvent(event);
@@ -817,13 +762,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QScrollBar_virtualbase_customEvent(VirtualQScrollBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QScrollBar::connectNotify(signal);
@@ -834,13 +778,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QScrollBar_virtualbase_connectNotify(VirtualQScrollBar* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QScrollBar::disconnectNotify(signal);
@@ -851,40 +794,40 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QScrollBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QScrollBar_protectedbase_setRepeatAction(void* self, int action);
-	friend int QScrollBar_protectedbase_repeatAction(const void* self);
-	friend void QScrollBar_protectedbase_updateMicroFocus(void* self);
-	friend void QScrollBar_protectedbase_create(void* self);
-	friend void QScrollBar_protectedbase_destroy(void* self);
-	friend bool QScrollBar_protectedbase_focusNextChild(void* self);
-	friend bool QScrollBar_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QScrollBar_protectedbase_sender(const void* self);
-	friend int QScrollBar_protectedbase_senderSignalIndex(const void* self);
-	friend int QScrollBar_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QScrollBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QScrollBar_protectedbase_setRepeatAction(VirtualQScrollBar* self, int action);
+	friend int QScrollBar_protectedbase_repeatAction(const VirtualQScrollBar* self);
+	friend void QScrollBar_protectedbase_updateMicroFocus(VirtualQScrollBar* self);
+	friend void QScrollBar_protectedbase_create(VirtualQScrollBar* self);
+	friend void QScrollBar_protectedbase_destroy(VirtualQScrollBar* self);
+	friend bool QScrollBar_protectedbase_focusNextChild(VirtualQScrollBar* self);
+	friend bool QScrollBar_protectedbase_focusPreviousChild(VirtualQScrollBar* self);
+	friend QObject* QScrollBar_protectedbase_sender(const VirtualQScrollBar* self);
+	friend int QScrollBar_protectedbase_senderSignalIndex(const VirtualQScrollBar* self);
+	friend int QScrollBar_protectedbase_receivers(const VirtualQScrollBar* self, const char* signal);
+	friend bool QScrollBar_protectedbase_isSignalConnected(const VirtualQScrollBar* self, QMetaMethod* signal);
 };
 
-QScrollBar* QScrollBar_new(struct QScrollBar_VTable* vtbl, QWidget* parent) {
-	return new VirtualQScrollBar(vtbl, parent);
+VirtualQScrollBar* QScrollBar_new(const QScrollBar_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQScrollBar(vtbl, vdata, parent);
 }
 
-QScrollBar* QScrollBar_new2(struct QScrollBar_VTable* vtbl) {
-	return new VirtualQScrollBar(vtbl);
+VirtualQScrollBar* QScrollBar_new2(const QScrollBar_VTable* vtbl, void* vdata) {
+	return new VirtualQScrollBar(vtbl, vdata);
 }
 
-QScrollBar* QScrollBar_new3(struct QScrollBar_VTable* vtbl, int param1) {
-	return new VirtualQScrollBar(vtbl, static_cast<Qt::Orientation>(param1));
+VirtualQScrollBar* QScrollBar_new3(const QScrollBar_VTable* vtbl, void* vdata, int param1) {
+	return new VirtualQScrollBar(vtbl, vdata, static_cast<Qt::Orientation>(param1));
 }
 
-QScrollBar* QScrollBar_new4(struct QScrollBar_VTable* vtbl, int param1, QWidget* parent) {
-	return new VirtualQScrollBar(vtbl, static_cast<Qt::Orientation>(param1), parent);
+VirtualQScrollBar* QScrollBar_new4(const QScrollBar_VTable* vtbl, void* vdata, int param1, QWidget* parent) {
+	return new VirtualQScrollBar(vtbl, vdata, static_cast<Qt::Orientation>(param1), parent);
 }
 
 void QScrollBar_virtbase(QScrollBar* src, QAbstractSlider** outptr_QAbstractSlider) {
@@ -944,396 +887,316 @@ struct miqt_string QScrollBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QScrollBar_virtualbase_metaObject(const void* self) {
+QMetaObject* QScrollBar_virtualbase_metaObject(const VirtualQScrollBar* self) {
 
-	return (QMetaObject*) ( (const VirtualQScrollBar*)(self) )->QScrollBar::metaObject();
-
+	return (QMetaObject*) self->QScrollBar::metaObject();
 }
 
-void* QScrollBar_virtualbase_metacast(void* self, const char* param1) {
+void* QScrollBar_virtualbase_metacast(VirtualQScrollBar* self, const char* param1) {
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::qt_metacast(param1);
-
+	return self->QScrollBar::qt_metacast(param1);
 }
 
-int QScrollBar_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QScrollBar_virtualbase_metacall(VirtualQScrollBar* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QScrollBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QScrollBar_virtualbase_sizeHint(const void* self) {
+QSize* QScrollBar_virtualbase_sizeHint(const VirtualQScrollBar* self) {
 
-	return new QSize(( (const VirtualQScrollBar*)(self) )->QScrollBar::sizeHint());
-
+	return new QSize(self->QScrollBar::sizeHint());
 }
 
-bool QScrollBar_virtualbase_event(void* self, QEvent* event) {
+bool QScrollBar_virtualbase_event(VirtualQScrollBar* self, QEvent* event) {
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::event(event);
-
+	return self->QScrollBar::event(event);
 }
 
-void QScrollBar_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QScrollBar_virtualbase_wheelEvent(VirtualQScrollBar* self, QWheelEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::wheelEvent(param1);
-
+	self->QScrollBar::wheelEvent(param1);
 }
 
-void QScrollBar_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QScrollBar_virtualbase_paintEvent(VirtualQScrollBar* self, QPaintEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::paintEvent(param1);
-
+	self->QScrollBar::paintEvent(param1);
 }
 
-void QScrollBar_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
+void QScrollBar_virtualbase_mousePressEvent(VirtualQScrollBar* self, QMouseEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::mousePressEvent(param1);
-
+	self->QScrollBar::mousePressEvent(param1);
 }
 
-void QScrollBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
+void QScrollBar_virtualbase_mouseReleaseEvent(VirtualQScrollBar* self, QMouseEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::mouseReleaseEvent(param1);
-
+	self->QScrollBar::mouseReleaseEvent(param1);
 }
 
-void QScrollBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QScrollBar_virtualbase_mouseMoveEvent(VirtualQScrollBar* self, QMouseEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::mouseMoveEvent(param1);
-
+	self->QScrollBar::mouseMoveEvent(param1);
 }
 
-void QScrollBar_virtualbase_hideEvent(void* self, QHideEvent* param1) {
+void QScrollBar_virtualbase_hideEvent(VirtualQScrollBar* self, QHideEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::hideEvent(param1);
-
+	self->QScrollBar::hideEvent(param1);
 }
 
-void QScrollBar_virtualbase_sliderChange(void* self, int change) {
+void QScrollBar_virtualbase_sliderChange(VirtualQScrollBar* self, int change) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::sliderChange(static_cast<VirtualQScrollBar::SliderChange>(change));
-
+	self->QScrollBar::sliderChange(static_cast<VirtualQScrollBar::SliderChange>(change));
 }
 
-void QScrollBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QScrollBar_virtualbase_contextMenuEvent(VirtualQScrollBar* self, QContextMenuEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::contextMenuEvent(param1);
-
+	self->QScrollBar::contextMenuEvent(param1);
 }
 
-void QScrollBar_virtualbase_initStyleOption(const void* self, QStyleOptionSlider* option) {
+void QScrollBar_virtualbase_initStyleOption(const VirtualQScrollBar* self, QStyleOptionSlider* option) {
 
-	( (const VirtualQScrollBar*)(self) )->QScrollBar::initStyleOption(option);
-
+	self->QScrollBar::initStyleOption(option);
 }
 
-void QScrollBar_virtualbase_keyPressEvent(void* self, QKeyEvent* ev) {
+void QScrollBar_virtualbase_keyPressEvent(VirtualQScrollBar* self, QKeyEvent* ev) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::keyPressEvent(ev);
-
+	self->QScrollBar::keyPressEvent(ev);
 }
 
-void QScrollBar_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QScrollBar_virtualbase_timerEvent(VirtualQScrollBar* self, QTimerEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::timerEvent(param1);
-
+	self->QScrollBar::timerEvent(param1);
 }
 
-void QScrollBar_virtualbase_changeEvent(void* self, QEvent* e) {
+void QScrollBar_virtualbase_changeEvent(VirtualQScrollBar* self, QEvent* e) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::changeEvent(e);
-
+	self->QScrollBar::changeEvent(e);
 }
 
-int QScrollBar_virtualbase_devType(const void* self) {
+int QScrollBar_virtualbase_devType(const VirtualQScrollBar* self) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::devType();
-
+	return self->QScrollBar::devType();
 }
 
-void QScrollBar_virtualbase_setVisible(void* self, bool visible) {
+void QScrollBar_virtualbase_setVisible(VirtualQScrollBar* self, bool visible) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::setVisible(visible);
-
+	self->QScrollBar::setVisible(visible);
 }
 
-QSize* QScrollBar_virtualbase_minimumSizeHint(const void* self) {
+QSize* QScrollBar_virtualbase_minimumSizeHint(const VirtualQScrollBar* self) {
 
-	return new QSize(( (const VirtualQScrollBar*)(self) )->QScrollBar::minimumSizeHint());
-
+	return new QSize(self->QScrollBar::minimumSizeHint());
 }
 
-int QScrollBar_virtualbase_heightForWidth(const void* self, int param1) {
+int QScrollBar_virtualbase_heightForWidth(const VirtualQScrollBar* self, int param1) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::heightForWidth(static_cast<int>(param1));
-
+	return self->QScrollBar::heightForWidth(static_cast<int>(param1));
 }
 
-bool QScrollBar_virtualbase_hasHeightForWidth(const void* self) {
+bool QScrollBar_virtualbase_hasHeightForWidth(const VirtualQScrollBar* self) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::hasHeightForWidth();
-
+	return self->QScrollBar::hasHeightForWidth();
 }
 
-QPaintEngine* QScrollBar_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QScrollBar_virtualbase_paintEngine(const VirtualQScrollBar* self) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::paintEngine();
-
+	return self->QScrollBar::paintEngine();
 }
 
-void QScrollBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QScrollBar_virtualbase_mouseDoubleClickEvent(VirtualQScrollBar* self, QMouseEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::mouseDoubleClickEvent(event);
-
+	self->QScrollBar::mouseDoubleClickEvent(event);
 }
 
-void QScrollBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QScrollBar_virtualbase_keyReleaseEvent(VirtualQScrollBar* self, QKeyEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::keyReleaseEvent(event);
-
+	self->QScrollBar::keyReleaseEvent(event);
 }
 
-void QScrollBar_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QScrollBar_virtualbase_focusInEvent(VirtualQScrollBar* self, QFocusEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::focusInEvent(event);
-
+	self->QScrollBar::focusInEvent(event);
 }
 
-void QScrollBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QScrollBar_virtualbase_focusOutEvent(VirtualQScrollBar* self, QFocusEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::focusOutEvent(event);
-
+	self->QScrollBar::focusOutEvent(event);
 }
 
-void QScrollBar_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QScrollBar_virtualbase_enterEvent(VirtualQScrollBar* self, QEnterEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::enterEvent(event);
-
+	self->QScrollBar::enterEvent(event);
 }
 
-void QScrollBar_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QScrollBar_virtualbase_leaveEvent(VirtualQScrollBar* self, QEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::leaveEvent(event);
-
+	self->QScrollBar::leaveEvent(event);
 }
 
-void QScrollBar_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QScrollBar_virtualbase_moveEvent(VirtualQScrollBar* self, QMoveEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::moveEvent(event);
-
+	self->QScrollBar::moveEvent(event);
 }
 
-void QScrollBar_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QScrollBar_virtualbase_resizeEvent(VirtualQScrollBar* self, QResizeEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::resizeEvent(event);
-
+	self->QScrollBar::resizeEvent(event);
 }
 
-void QScrollBar_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QScrollBar_virtualbase_closeEvent(VirtualQScrollBar* self, QCloseEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::closeEvent(event);
-
+	self->QScrollBar::closeEvent(event);
 }
 
-void QScrollBar_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QScrollBar_virtualbase_tabletEvent(VirtualQScrollBar* self, QTabletEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::tabletEvent(event);
-
+	self->QScrollBar::tabletEvent(event);
 }
 
-void QScrollBar_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QScrollBar_virtualbase_actionEvent(VirtualQScrollBar* self, QActionEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::actionEvent(event);
-
+	self->QScrollBar::actionEvent(event);
 }
 
-void QScrollBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QScrollBar_virtualbase_dragEnterEvent(VirtualQScrollBar* self, QDragEnterEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::dragEnterEvent(event);
-
+	self->QScrollBar::dragEnterEvent(event);
 }
 
-void QScrollBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QScrollBar_virtualbase_dragMoveEvent(VirtualQScrollBar* self, QDragMoveEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::dragMoveEvent(event);
-
+	self->QScrollBar::dragMoveEvent(event);
 }
 
-void QScrollBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QScrollBar_virtualbase_dragLeaveEvent(VirtualQScrollBar* self, QDragLeaveEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::dragLeaveEvent(event);
-
+	self->QScrollBar::dragLeaveEvent(event);
 }
 
-void QScrollBar_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QScrollBar_virtualbase_dropEvent(VirtualQScrollBar* self, QDropEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::dropEvent(event);
-
+	self->QScrollBar::dropEvent(event);
 }
 
-void QScrollBar_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QScrollBar_virtualbase_showEvent(VirtualQScrollBar* self, QShowEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::showEvent(event);
-
+	self->QScrollBar::showEvent(event);
 }
 
-bool QScrollBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QScrollBar_virtualbase_nativeEvent(VirtualQScrollBar* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QScrollBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QScrollBar_virtualbase_metric(const void* self, int param1) {
+int QScrollBar_virtualbase_metric(const VirtualQScrollBar* self, int param1) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::metric(static_cast<VirtualQScrollBar::PaintDeviceMetric>(param1));
-
+	return self->QScrollBar::metric(static_cast<VirtualQScrollBar::PaintDeviceMetric>(param1));
 }
 
-void QScrollBar_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QScrollBar_virtualbase_initPainter(const VirtualQScrollBar* self, QPainter* painter) {
 
-	( (const VirtualQScrollBar*)(self) )->QScrollBar::initPainter(painter);
-
+	self->QScrollBar::initPainter(painter);
 }
 
-QPaintDevice* QScrollBar_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QScrollBar_virtualbase_redirected(const VirtualQScrollBar* self, QPoint* offset) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::redirected(offset);
-
+	return self->QScrollBar::redirected(offset);
 }
 
-QPainter* QScrollBar_virtualbase_sharedPainter(const void* self) {
+QPainter* QScrollBar_virtualbase_sharedPainter(const VirtualQScrollBar* self) {
 
-	return ( (const VirtualQScrollBar*)(self) )->QScrollBar::sharedPainter();
-
+	return self->QScrollBar::sharedPainter();
 }
 
-void QScrollBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QScrollBar_virtualbase_inputMethodEvent(VirtualQScrollBar* self, QInputMethodEvent* param1) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::inputMethodEvent(param1);
-
+	self->QScrollBar::inputMethodEvent(param1);
 }
 
-QVariant* QScrollBar_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QScrollBar_virtualbase_inputMethodQuery(const VirtualQScrollBar* self, int param1) {
 
-	return new QVariant(( (const VirtualQScrollBar*)(self) )->QScrollBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QScrollBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QScrollBar_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QScrollBar_virtualbase_focusNextPrevChild(VirtualQScrollBar* self, bool next) {
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::focusNextPrevChild(next);
-
+	return self->QScrollBar::focusNextPrevChild(next);
 }
 
-bool QScrollBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QScrollBar_virtualbase_eventFilter(VirtualQScrollBar* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQScrollBar*)(self) )->QScrollBar::eventFilter(watched, event);
-
+	return self->QScrollBar::eventFilter(watched, event);
 }
 
-void QScrollBar_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QScrollBar_virtualbase_childEvent(VirtualQScrollBar* self, QChildEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::childEvent(event);
-
+	self->QScrollBar::childEvent(event);
 }
 
-void QScrollBar_virtualbase_customEvent(void* self, QEvent* event) {
+void QScrollBar_virtualbase_customEvent(VirtualQScrollBar* self, QEvent* event) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::customEvent(event);
-
+	self->QScrollBar::customEvent(event);
 }
 
-void QScrollBar_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QScrollBar_virtualbase_connectNotify(VirtualQScrollBar* self, QMetaMethod* signal) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::connectNotify(*signal);
-
+	self->QScrollBar::connectNotify(*signal);
 }
 
-void QScrollBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMethod* signal) {
 
-	( (VirtualQScrollBar*)(self) )->QScrollBar::disconnectNotify(*signal);
-
+	self->QScrollBar::disconnectNotify(*signal);
 }
 
 const QMetaObject* QScrollBar_staticMetaObject() { return &QScrollBar::staticMetaObject; }
-void QScrollBar_protectedbase_setRepeatAction(void* self, int action) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	self_cast->setRepeatAction(static_cast<VirtualQScrollBar::SliderAction>(action));
 
+const QScrollBar_VTable* QScrollBar_vtbl(const VirtualQScrollBar* self) { return self->vtbl; }
+void* QScrollBar_vdata(const VirtualQScrollBar* self) { return self->vdata; }
+void QScrollBar_setVdata(VirtualQScrollBar* self, void* vdata) { self->vdata = vdata; }
+
+void QScrollBar_protectedbase_setRepeatAction(VirtualQScrollBar* self, int action) {
+	self->setRepeatAction(static_cast<VirtualQScrollBar::SliderAction>(action));
 }
 
-int QScrollBar_protectedbase_repeatAction(const void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	VirtualQScrollBar::SliderAction _ret = self_cast->repeatAction();
+int QScrollBar_protectedbase_repeatAction(const VirtualQScrollBar* self) {
+	VirtualQScrollBar::SliderAction _ret = self->repeatAction();
 	return static_cast<int>(_ret);
-
 }
 
-void QScrollBar_protectedbase_updateMicroFocus(void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QScrollBar_protectedbase_updateMicroFocus(VirtualQScrollBar* self) {
+	self->updateMicroFocus();
 }
 
-void QScrollBar_protectedbase_create(void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	self_cast->create();
-
+void QScrollBar_protectedbase_create(VirtualQScrollBar* self) {
+	self->create();
 }
 
-void QScrollBar_protectedbase_destroy(void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	self_cast->destroy();
-
+void QScrollBar_protectedbase_destroy(VirtualQScrollBar* self) {
+	self->destroy();
 }
 
-bool QScrollBar_protectedbase_focusNextChild(void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QScrollBar_protectedbase_focusNextChild(VirtualQScrollBar* self) {
+	return self->focusNextChild();
 }
 
-bool QScrollBar_protectedbase_focusPreviousChild(void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QScrollBar_protectedbase_focusPreviousChild(VirtualQScrollBar* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QScrollBar_protectedbase_sender(const void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QScrollBar_protectedbase_sender(const VirtualQScrollBar* self) {
+	return self->sender();
 }
 
-int QScrollBar_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QScrollBar_protectedbase_senderSignalIndex(const VirtualQScrollBar* self) {
+	return self->senderSignalIndex();
 }
 
-int QScrollBar_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QScrollBar_protectedbase_receivers(const VirtualQScrollBar* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QScrollBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQScrollBar* self_cast = static_cast<VirtualQScrollBar*>( (QScrollBar*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QScrollBar_protectedbase_isSignalConnected(const VirtualQScrollBar* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QScrollBar_delete(QScrollBar* self) {

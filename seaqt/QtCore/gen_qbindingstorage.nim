@@ -42,15 +42,15 @@ export
 type cQBindingStatus*{.exportc: "QBindingStatus", incompleteStruct.} = object
 type cQBindingStorage*{.exportc: "QBindingStorage", incompleteStruct.} = object
 
-proc fcQBindingStorage_isEmpty(self: pointer, ): bool {.importc: "QBindingStorage_isEmpty".}
-proc fcQBindingStorage_isValid(self: pointer, ): bool {.importc: "QBindingStorage_isValid".}
+proc fcQBindingStorage_isEmpty(self: pointer): bool {.importc: "QBindingStorage_isEmpty".}
+proc fcQBindingStorage_isValid(self: pointer): bool {.importc: "QBindingStorage_isValid".}
 proc fcQBindingStorage_registerDependency(self: pointer, data: pointer): void {.importc: "QBindingStorage_registerDependency".}
 proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
 
-proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage, ): bool =
+proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage): bool =
   fcQBindingStorage_isEmpty(self.h)
 
-proc isValid*(self: gen_qbindingstorage_types.QBindingStorage, ): bool =
+proc isValid*(self: gen_qbindingstorage_types.QBindingStorage): bool =
   fcQBindingStorage_isValid(self.h)
 
 proc registerDependency*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpropertyprivate_types.QUntypedPropertyData): void =

@@ -40,30 +40,37 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QUrl QUrl;
 #endif
 
-struct QNetworkDiskCache_VTable {
-	void (*destructor)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self);
-	QMetaObject* (*metaObject)(struct QNetworkDiskCache_VTable* vtbl, const QNetworkDiskCache* self);
-	void* (*metacast)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, const char* param1);
-	int (*metacall)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, int param1, int param2, void** param3);
-	long long (*cacheSize)(struct QNetworkDiskCache_VTable* vtbl, const QNetworkDiskCache* self);
-	QNetworkCacheMetaData* (*metaData)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QUrl* url);
-	void (*updateMetaData)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
-	QIODevice* (*data)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QUrl* url);
-	bool (*remove)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QUrl* url);
-	QIODevice* (*prepare)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
-	void (*insert)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QIODevice* device);
-	void (*clear)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self);
-	long long (*expire)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self);
-	bool (*event)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QEvent* event);
-	bool (*eventFilter)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QTimerEvent* event);
-	void (*childEvent)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QChildEvent* event);
-	void (*customEvent)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QEvent* event);
-	void (*connectNotify)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QNetworkDiskCache_VTable* vtbl, QNetworkDiskCache* self, QMetaMethod* signal);
-};
-QNetworkDiskCache* QNetworkDiskCache_new(struct QNetworkDiskCache_VTable* vtbl);
-QNetworkDiskCache* QNetworkDiskCache_new2(struct QNetworkDiskCache_VTable* vtbl, QObject* parent);
+typedef struct VirtualQNetworkDiskCache VirtualQNetworkDiskCache;
+typedef struct QNetworkDiskCache_VTable{
+	void (*destructor)(VirtualQNetworkDiskCache* self);
+	QMetaObject* (*metaObject)(const VirtualQNetworkDiskCache* self);
+	void* (*metacast)(VirtualQNetworkDiskCache* self, const char* param1);
+	int (*metacall)(VirtualQNetworkDiskCache* self, int param1, int param2, void** param3);
+	long long (*cacheSize)(const VirtualQNetworkDiskCache* self);
+	QNetworkCacheMetaData* (*metaData)(VirtualQNetworkDiskCache* self, QUrl* url);
+	void (*updateMetaData)(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+	QIODevice* (*data)(VirtualQNetworkDiskCache* self, QUrl* url);
+	bool (*remove)(VirtualQNetworkDiskCache* self, QUrl* url);
+	QIODevice* (*prepare)(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+	void (*insert)(VirtualQNetworkDiskCache* self, QIODevice* device);
+	void (*clear)(VirtualQNetworkDiskCache* self);
+	long long (*expire)(VirtualQNetworkDiskCache* self);
+	bool (*event)(VirtualQNetworkDiskCache* self, QEvent* event);
+	bool (*eventFilter)(VirtualQNetworkDiskCache* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQNetworkDiskCache* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQNetworkDiskCache* self, QChildEvent* event);
+	void (*customEvent)(VirtualQNetworkDiskCache* self, QEvent* event);
+	void (*connectNotify)(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+}QNetworkDiskCache_VTable;
+
+const QNetworkDiskCache_VTable* QNetworkDiskCache_vtbl(const VirtualQNetworkDiskCache* self);
+void* QNetworkDiskCache_vdata(const VirtualQNetworkDiskCache* self);
+void QNetworkDiskCache_setVdata(VirtualQNetworkDiskCache* self, void* vdata);
+
+VirtualQNetworkDiskCache* QNetworkDiskCache_new(const QNetworkDiskCache_VTable* vtbl, void* vdata);
+VirtualQNetworkDiskCache* QNetworkDiskCache_new2(const QNetworkDiskCache_VTable* vtbl, void* vdata, QObject* parent);
+
 void QNetworkDiskCache_virtbase(QNetworkDiskCache* src, QAbstractNetworkCache** outptr_QAbstractNetworkCache);
 QMetaObject* QNetworkDiskCache_metaObject(const QNetworkDiskCache* self);
 void* QNetworkDiskCache_metacast(QNetworkDiskCache* self, const char* param1);
@@ -85,29 +92,32 @@ void QNetworkDiskCache_clear(QNetworkDiskCache* self);
 long long QNetworkDiskCache_expire(QNetworkDiskCache* self);
 struct miqt_string QNetworkDiskCache_tr2(const char* s, const char* c);
 struct miqt_string QNetworkDiskCache_tr3(const char* s, const char* c, int n);
-QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const void* self);
-void* QNetworkDiskCache_virtualbase_metacast(void* self, const char* param1);
-int QNetworkDiskCache_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-long long QNetworkDiskCache_virtualbase_cacheSize(const void* self);
-QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(void* self, QUrl* url);
-void QNetworkDiskCache_virtualbase_updateMetaData(void* self, QNetworkCacheMetaData* metaData);
-QIODevice* QNetworkDiskCache_virtualbase_data(void* self, QUrl* url);
-bool QNetworkDiskCache_virtualbase_remove(void* self, QUrl* url);
-QIODevice* QNetworkDiskCache_virtualbase_prepare(void* self, QNetworkCacheMetaData* metaData);
-void QNetworkDiskCache_virtualbase_insert(void* self, QIODevice* device);
-void QNetworkDiskCache_virtualbase_clear(void* self);
-long long QNetworkDiskCache_virtualbase_expire(void* self);
-bool QNetworkDiskCache_virtualbase_event(void* self, QEvent* event);
-bool QNetworkDiskCache_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QNetworkDiskCache_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QNetworkDiskCache_virtualbase_childEvent(void* self, QChildEvent* event);
-void QNetworkDiskCache_virtualbase_customEvent(void* self, QEvent* event);
-void QNetworkDiskCache_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QNetworkDiskCache_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QNetworkDiskCache_protectedbase_sender(const void* self);
-int QNetworkDiskCache_protectedbase_senderSignalIndex(const void* self);
-int QNetworkDiskCache_protectedbase_receivers(const void* self, const char* signal);
-bool QNetworkDiskCache_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const VirtualQNetworkDiskCache* self);
+void* QNetworkDiskCache_virtualbase_metacast(VirtualQNetworkDiskCache* self, const char* param1);
+int QNetworkDiskCache_virtualbase_metacall(VirtualQNetworkDiskCache* self, int param1, int param2, void** param3);
+long long QNetworkDiskCache_virtualbase_cacheSize(const VirtualQNetworkDiskCache* self);
+QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(VirtualQNetworkDiskCache* self, QUrl* url);
+void QNetworkDiskCache_virtualbase_updateMetaData(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+QIODevice* QNetworkDiskCache_virtualbase_data(VirtualQNetworkDiskCache* self, QUrl* url);
+bool QNetworkDiskCache_virtualbase_remove(VirtualQNetworkDiskCache* self, QUrl* url);
+QIODevice* QNetworkDiskCache_virtualbase_prepare(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+void QNetworkDiskCache_virtualbase_insert(VirtualQNetworkDiskCache* self, QIODevice* device);
+void QNetworkDiskCache_virtualbase_clear(VirtualQNetworkDiskCache* self);
+long long QNetworkDiskCache_virtualbase_expire(VirtualQNetworkDiskCache* self);
+bool QNetworkDiskCache_virtualbase_event(VirtualQNetworkDiskCache* self, QEvent* event);
+bool QNetworkDiskCache_virtualbase_eventFilter(VirtualQNetworkDiskCache* self, QObject* watched, QEvent* event);
+void QNetworkDiskCache_virtualbase_timerEvent(VirtualQNetworkDiskCache* self, QTimerEvent* event);
+void QNetworkDiskCache_virtualbase_childEvent(VirtualQNetworkDiskCache* self, QChildEvent* event);
+void QNetworkDiskCache_virtualbase_customEvent(VirtualQNetworkDiskCache* self, QEvent* event);
+void QNetworkDiskCache_virtualbase_connectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+void QNetworkDiskCache_virtualbase_disconnectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+
+QObject* QNetworkDiskCache_protectedbase_sender(const VirtualQNetworkDiskCache* self);
+int QNetworkDiskCache_protectedbase_senderSignalIndex(const VirtualQNetworkDiskCache* self);
+int QNetworkDiskCache_protectedbase_receivers(const VirtualQNetworkDiskCache* self, const char* signal);
+bool QNetworkDiskCache_protectedbase_isSignalConnected(const VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+
 const QMetaObject* QNetworkDiskCache_staticMetaObject();
 void QNetworkDiskCache_delete(QNetworkDiskCache* self);
 

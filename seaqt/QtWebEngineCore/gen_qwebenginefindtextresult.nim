@@ -41,17 +41,17 @@ export
 
 type cQWebEngineFindTextResult*{.exportc: "QWebEngineFindTextResult", incompleteStruct.} = object
 
-proc fcQWebEngineFindTextResult_numberOfMatches(self: pointer, ): cint {.importc: "QWebEngineFindTextResult_numberOfMatches".}
-proc fcQWebEngineFindTextResult_activeMatch(self: pointer, ): cint {.importc: "QWebEngineFindTextResult_activeMatch".}
+proc fcQWebEngineFindTextResult_numberOfMatches(self: pointer): cint {.importc: "QWebEngineFindTextResult_numberOfMatches".}
+proc fcQWebEngineFindTextResult_activeMatch(self: pointer): cint {.importc: "QWebEngineFindTextResult_activeMatch".}
 proc fcQWebEngineFindTextResult_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineFindTextResult_operatorAssign".}
 proc fcQWebEngineFindTextResult_new(): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new".}
 proc fcQWebEngineFindTextResult_new2(other: pointer): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new2".}
 proc fcQWebEngineFindTextResult_staticMetaObject(): pointer {.importc: "QWebEngineFindTextResult_staticMetaObject".}
 
-proc numberOfMatches*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult, ): cint =
+proc numberOfMatches*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): cint =
   fcQWebEngineFindTextResult_numberOfMatches(self.h)
 
-proc activeMatch*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult, ): cint =
+proc activeMatch*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): cint =
   fcQWebEngineFindTextResult_activeMatch(self.h)
 
 proc operatorAssign*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult, other: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): void =

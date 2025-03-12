@@ -128,7 +128,7 @@ export
 
 type cQMessageBox*{.exportc: "QMessageBox", incompleteStruct.} = object
 
-proc fcQMessageBox_metaObject(self: pointer, ): pointer {.importc: "QMessageBox_metaObject".}
+proc fcQMessageBox_metaObject(self: pointer): pointer {.importc: "QMessageBox_metaObject".}
 proc fcQMessageBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QMessageBox_metacast".}
 proc fcQMessageBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMessageBox_metacall".}
 proc fcQMessageBox_tr(s: cstring): struct_miqt_string {.importc: "QMessageBox_tr".}
@@ -136,31 +136,31 @@ proc fcQMessageBox_addButton(self: pointer, button: pointer, role: cint): void {
 proc fcQMessageBox_addButton2(self: pointer, text: struct_miqt_string, role: cint): pointer {.importc: "QMessageBox_addButton2".}
 proc fcQMessageBox_addButtonWithButton(self: pointer, button: cint): pointer {.importc: "QMessageBox_addButtonWithButton".}
 proc fcQMessageBox_removeButton(self: pointer, button: pointer): void {.importc: "QMessageBox_removeButton".}
-proc fcQMessageBox_buttons(self: pointer, ): struct_miqt_array {.importc: "QMessageBox_buttons".}
+proc fcQMessageBox_buttons(self: pointer): struct_miqt_array {.importc: "QMessageBox_buttons".}
 proc fcQMessageBox_buttonRole(self: pointer, button: pointer): cint {.importc: "QMessageBox_buttonRole".}
 proc fcQMessageBox_setStandardButtons(self: pointer, buttons: cint): void {.importc: "QMessageBox_setStandardButtons".}
-proc fcQMessageBox_standardButtons(self: pointer, ): cint {.importc: "QMessageBox_standardButtons".}
+proc fcQMessageBox_standardButtons(self: pointer): cint {.importc: "QMessageBox_standardButtons".}
 proc fcQMessageBox_standardButton(self: pointer, button: pointer): cint {.importc: "QMessageBox_standardButton".}
 proc fcQMessageBox_button(self: pointer, which: cint): pointer {.importc: "QMessageBox_button".}
-proc fcQMessageBox_defaultButton(self: pointer, ): pointer {.importc: "QMessageBox_defaultButton".}
+proc fcQMessageBox_defaultButton(self: pointer): pointer {.importc: "QMessageBox_defaultButton".}
 proc fcQMessageBox_setDefaultButton(self: pointer, button: pointer): void {.importc: "QMessageBox_setDefaultButton".}
 proc fcQMessageBox_setDefaultButtonWithButton(self: pointer, button: cint): void {.importc: "QMessageBox_setDefaultButtonWithButton".}
-proc fcQMessageBox_escapeButton(self: pointer, ): pointer {.importc: "QMessageBox_escapeButton".}
+proc fcQMessageBox_escapeButton(self: pointer): pointer {.importc: "QMessageBox_escapeButton".}
 proc fcQMessageBox_setEscapeButton(self: pointer, button: pointer): void {.importc: "QMessageBox_setEscapeButton".}
 proc fcQMessageBox_setEscapeButtonWithButton(self: pointer, button: cint): void {.importc: "QMessageBox_setEscapeButtonWithButton".}
-proc fcQMessageBox_clickedButton(self: pointer, ): pointer {.importc: "QMessageBox_clickedButton".}
-proc fcQMessageBox_text(self: pointer, ): struct_miqt_string {.importc: "QMessageBox_text".}
+proc fcQMessageBox_clickedButton(self: pointer): pointer {.importc: "QMessageBox_clickedButton".}
+proc fcQMessageBox_text(self: pointer): struct_miqt_string {.importc: "QMessageBox_text".}
 proc fcQMessageBox_setText(self: pointer, text: struct_miqt_string): void {.importc: "QMessageBox_setText".}
-proc fcQMessageBox_icon(self: pointer, ): cint {.importc: "QMessageBox_icon".}
+proc fcQMessageBox_icon(self: pointer): cint {.importc: "QMessageBox_icon".}
 proc fcQMessageBox_setIcon(self: pointer, icon: cint): void {.importc: "QMessageBox_setIcon".}
-proc fcQMessageBox_iconPixmap(self: pointer, ): pointer {.importc: "QMessageBox_iconPixmap".}
+proc fcQMessageBox_iconPixmap(self: pointer): pointer {.importc: "QMessageBox_iconPixmap".}
 proc fcQMessageBox_setIconPixmap(self: pointer, pixmap: pointer): void {.importc: "QMessageBox_setIconPixmap".}
-proc fcQMessageBox_textFormat(self: pointer, ): cint {.importc: "QMessageBox_textFormat".}
+proc fcQMessageBox_textFormat(self: pointer): cint {.importc: "QMessageBox_textFormat".}
 proc fcQMessageBox_setTextFormat(self: pointer, format: cint): void {.importc: "QMessageBox_setTextFormat".}
 proc fcQMessageBox_setTextInteractionFlags(self: pointer, flags: cint): void {.importc: "QMessageBox_setTextInteractionFlags".}
-proc fcQMessageBox_textInteractionFlags(self: pointer, ): cint {.importc: "QMessageBox_textInteractionFlags".}
+proc fcQMessageBox_textInteractionFlags(self: pointer): cint {.importc: "QMessageBox_textInteractionFlags".}
 proc fcQMessageBox_setCheckBox(self: pointer, cb: pointer): void {.importc: "QMessageBox_setCheckBox".}
-proc fcQMessageBox_checkBox(self: pointer, ): pointer {.importc: "QMessageBox_checkBox".}
+proc fcQMessageBox_checkBox(self: pointer): pointer {.importc: "QMessageBox_checkBox".}
 proc fcQMessageBox_information(parent: pointer, title: struct_miqt_string, text: struct_miqt_string): cint {.importc: "QMessageBox_information".}
 proc fcQMessageBox_information2(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0: cint): cint {.importc: "QMessageBox_information2".}
 proc fcQMessageBox_question(parent: pointer, title: struct_miqt_string, text: struct_miqt_string): cint {.importc: "QMessageBox_question".}
@@ -181,9 +181,9 @@ proc fcQMessageBox_critical3(parent: pointer, title: struct_miqt_string, text: s
 proc fcQMessageBox_critical4(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string): cint {.importc: "QMessageBox_critical4".}
 proc fcQMessageBox_buttonText(self: pointer, button: cint): struct_miqt_string {.importc: "QMessageBox_buttonText".}
 proc fcQMessageBox_setButtonText(self: pointer, button: cint, text: struct_miqt_string): void {.importc: "QMessageBox_setButtonText".}
-proc fcQMessageBox_informativeText(self: pointer, ): struct_miqt_string {.importc: "QMessageBox_informativeText".}
+proc fcQMessageBox_informativeText(self: pointer): struct_miqt_string {.importc: "QMessageBox_informativeText".}
 proc fcQMessageBox_setInformativeText(self: pointer, text: struct_miqt_string): void {.importc: "QMessageBox_setInformativeText".}
-proc fcQMessageBox_detailedText(self: pointer, ): struct_miqt_string {.importc: "QMessageBox_detailedText".}
+proc fcQMessageBox_detailedText(self: pointer): struct_miqt_string {.importc: "QMessageBox_detailedText".}
 proc fcQMessageBox_setDetailedText(self: pointer, text: struct_miqt_string): void {.importc: "QMessageBox_setDetailedText".}
 proc fcQMessageBox_setWindowTitle(self: pointer, title: struct_miqt_string): void {.importc: "QMessageBox_setWindowTitle".}
 proc fcQMessageBox_setWindowModality(self: pointer, windowModality: cint): void {.importc: "QMessageBox_setWindowModality".}
@@ -224,64 +224,66 @@ proc fcQMessageBox_critical52(parent: pointer, title: struct_miqt_string, text: 
 proc fcQMessageBox_critical62(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string): cint {.importc: "QMessageBox_critical62".}
 proc fcQMessageBox_critical7(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string, defaultButtonNumber: cint): cint {.importc: "QMessageBox_critical7".}
 proc fcQMessageBox_critical8(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint {.importc: "QMessageBox_critical8".}
+proc fcQMessageBox_vtbl(self: pointer): pointer {.importc: "QMessageBox_vtbl".}
+proc fcQMessageBox_vdata(self: pointer): pointer {.importc: "QMessageBox_vdata".}
 type cQMessageBoxVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQMessageBoxVTable, self: ptr cQMessageBox) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  open*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  exec*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  done*: proc(vtbl, self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
-  accept*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  reject*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQMessageBox_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QMessageBox_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  open*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  exec*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  done*: proc(self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
+  accept*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  reject*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQMessageBox_virtualbase_metaObject(self: pointer): pointer {.importc: "QMessageBox_virtualbase_metaObject".}
 proc fcQMessageBox_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QMessageBox_virtualbase_metacast".}
 proc fcQMessageBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMessageBox_virtualbase_metacall".}
 proc fcQMessageBox_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QMessageBox_virtualbase_event".}
@@ -291,19 +293,19 @@ proc fcQMessageBox_virtualbase_closeEvent(self: pointer, event: pointer): void {
 proc fcQMessageBox_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_keyPressEvent".}
 proc fcQMessageBox_virtualbase_changeEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_changeEvent".}
 proc fcQMessageBox_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QMessageBox_virtualbase_setVisible".}
-proc fcQMessageBox_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QMessageBox_virtualbase_sizeHint".}
-proc fcQMessageBox_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QMessageBox_virtualbase_minimumSizeHint".}
-proc fcQMessageBox_virtualbase_open(self: pointer, ): void {.importc: "QMessageBox_virtualbase_open".}
-proc fcQMessageBox_virtualbase_exec(self: pointer, ): cint {.importc: "QMessageBox_virtualbase_exec".}
+proc fcQMessageBox_virtualbase_sizeHint(self: pointer): pointer {.importc: "QMessageBox_virtualbase_sizeHint".}
+proc fcQMessageBox_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QMessageBox_virtualbase_minimumSizeHint".}
+proc fcQMessageBox_virtualbase_open(self: pointer): void {.importc: "QMessageBox_virtualbase_open".}
+proc fcQMessageBox_virtualbase_exec(self: pointer): cint {.importc: "QMessageBox_virtualbase_exec".}
 proc fcQMessageBox_virtualbase_done(self: pointer, param1: cint): void {.importc: "QMessageBox_virtualbase_done".}
-proc fcQMessageBox_virtualbase_accept(self: pointer, ): void {.importc: "QMessageBox_virtualbase_accept".}
-proc fcQMessageBox_virtualbase_reject(self: pointer, ): void {.importc: "QMessageBox_virtualbase_reject".}
+proc fcQMessageBox_virtualbase_accept(self: pointer): void {.importc: "QMessageBox_virtualbase_accept".}
+proc fcQMessageBox_virtualbase_reject(self: pointer): void {.importc: "QMessageBox_virtualbase_reject".}
 proc fcQMessageBox_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QMessageBox_virtualbase_contextMenuEvent".}
 proc fcQMessageBox_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QMessageBox_virtualbase_eventFilter".}
-proc fcQMessageBox_virtualbase_devType(self: pointer, ): cint {.importc: "QMessageBox_virtualbase_devType".}
+proc fcQMessageBox_virtualbase_devType(self: pointer): cint {.importc: "QMessageBox_virtualbase_devType".}
 proc fcQMessageBox_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QMessageBox_virtualbase_heightForWidth".}
-proc fcQMessageBox_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QMessageBox_virtualbase_hasHeightForWidth".}
-proc fcQMessageBox_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QMessageBox_virtualbase_paintEngine".}
+proc fcQMessageBox_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QMessageBox_virtualbase_hasHeightForWidth".}
+proc fcQMessageBox_virtualbase_paintEngine(self: pointer): pointer {.importc: "QMessageBox_virtualbase_paintEngine".}
 proc fcQMessageBox_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_mousePressEvent".}
 proc fcQMessageBox_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_mouseReleaseEvent".}
 proc fcQMessageBox_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_mouseDoubleClickEvent".}
@@ -327,7 +329,7 @@ proc fcQMessageBox_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt
 proc fcQMessageBox_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QMessageBox_virtualbase_metric".}
 proc fcQMessageBox_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QMessageBox_virtualbase_initPainter".}
 proc fcQMessageBox_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QMessageBox_virtualbase_redirected".}
-proc fcQMessageBox_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QMessageBox_virtualbase_sharedPainter".}
+proc fcQMessageBox_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QMessageBox_virtualbase_sharedPainter".}
 proc fcQMessageBox_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QMessageBox_virtualbase_inputMethodEvent".}
 proc fcQMessageBox_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QMessageBox_virtualbase_inputMethodQuery".}
 proc fcQMessageBox_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QMessageBox_virtualbase_focusNextPrevChild".}
@@ -337,27 +339,27 @@ proc fcQMessageBox_virtualbase_customEvent(self: pointer, event: pointer): void 
 proc fcQMessageBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMessageBox_virtualbase_connectNotify".}
 proc fcQMessageBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMessageBox_virtualbase_disconnectNotify".}
 proc fcQMessageBox_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QMessageBox_protectedbase_adjustPosition".}
-proc fcQMessageBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QMessageBox_protectedbase_updateMicroFocus".}
-proc fcQMessageBox_protectedbase_create(self: pointer, ): void {.importc: "QMessageBox_protectedbase_create".}
-proc fcQMessageBox_protectedbase_destroy(self: pointer, ): void {.importc: "QMessageBox_protectedbase_destroy".}
-proc fcQMessageBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QMessageBox_protectedbase_focusNextChild".}
-proc fcQMessageBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QMessageBox_protectedbase_focusPreviousChild".}
-proc fcQMessageBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QMessageBox_protectedbase_sender".}
-proc fcQMessageBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMessageBox_protectedbase_senderSignalIndex".}
+proc fcQMessageBox_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QMessageBox_protectedbase_updateMicroFocus".}
+proc fcQMessageBox_protectedbase_create(self: pointer): void {.importc: "QMessageBox_protectedbase_create".}
+proc fcQMessageBox_protectedbase_destroy(self: pointer): void {.importc: "QMessageBox_protectedbase_destroy".}
+proc fcQMessageBox_protectedbase_focusNextChild(self: pointer): bool {.importc: "QMessageBox_protectedbase_focusNextChild".}
+proc fcQMessageBox_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QMessageBox_protectedbase_focusPreviousChild".}
+proc fcQMessageBox_protectedbase_sender(self: pointer): pointer {.importc: "QMessageBox_protectedbase_sender".}
+proc fcQMessageBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMessageBox_protectedbase_senderSignalIndex".}
 proc fcQMessageBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMessageBox_protectedbase_receivers".}
 proc fcQMessageBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMessageBox_protectedbase_isSignalConnected".}
-proc fcQMessageBox_new(vtbl: pointer, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new".}
-proc fcQMessageBox_new2(vtbl: pointer, ): ptr cQMessageBox {.importc: "QMessageBox_new2".}
-proc fcQMessageBox_new3(vtbl: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string): ptr cQMessageBox {.importc: "QMessageBox_new3".}
-proc fcQMessageBox_new4(vtbl: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint): ptr cQMessageBox {.importc: "QMessageBox_new4".}
-proc fcQMessageBox_new5(vtbl: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint): ptr cQMessageBox {.importc: "QMessageBox_new5".}
-proc fcQMessageBox_new6(vtbl: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new6".}
-proc fcQMessageBox_new7(vtbl: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint, parent: pointer, flags: cint): ptr cQMessageBox {.importc: "QMessageBox_new7".}
-proc fcQMessageBox_new8(vtbl: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new8".}
-proc fcQMessageBox_new9(vtbl: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer, f: cint): ptr cQMessageBox {.importc: "QMessageBox_new9".}
+proc fcQMessageBox_new(vtbl, vdata: pointer, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new".}
+proc fcQMessageBox_new2(vtbl, vdata: pointer): ptr cQMessageBox {.importc: "QMessageBox_new2".}
+proc fcQMessageBox_new3(vtbl, vdata: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string): ptr cQMessageBox {.importc: "QMessageBox_new3".}
+proc fcQMessageBox_new4(vtbl, vdata: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint): ptr cQMessageBox {.importc: "QMessageBox_new4".}
+proc fcQMessageBox_new5(vtbl, vdata: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint): ptr cQMessageBox {.importc: "QMessageBox_new5".}
+proc fcQMessageBox_new6(vtbl, vdata: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new6".}
+proc fcQMessageBox_new7(vtbl, vdata: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string, buttons: cint, parent: pointer, flags: cint): ptr cQMessageBox {.importc: "QMessageBox_new7".}
+proc fcQMessageBox_new8(vtbl, vdata: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new8".}
+proc fcQMessageBox_new9(vtbl, vdata: pointer, title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer, f: cint): ptr cQMessageBox {.importc: "QMessageBox_new9".}
 proc fcQMessageBox_staticMetaObject(): pointer {.importc: "QMessageBox_staticMetaObject".}
 
-proc metaObject*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
@@ -384,7 +386,7 @@ proc addButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): gen_qpus
 proc removeButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): void =
   fcQMessageBox_removeButton(self.h, button.h)
 
-proc buttons*(self: gen_qmessagebox_types.QMessageBox, ): seq[gen_qabstractbutton_types.QAbstractButton] =
+proc buttons*(self: gen_qmessagebox_types.QMessageBox): seq[gen_qabstractbutton_types.QAbstractButton] =
   var v_ma = fcQMessageBox_buttons(self.h)
   var vx_ret = newSeq[gen_qabstractbutton_types.QAbstractButton](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -399,7 +401,7 @@ proc buttonRole*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractb
 proc setStandardButtons*(self: gen_qmessagebox_types.QMessageBox, buttons: cint): void =
   fcQMessageBox_setStandardButtons(self.h, cint(buttons))
 
-proc standardButtons*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc standardButtons*(self: gen_qmessagebox_types.QMessageBox): cint =
   cint(fcQMessageBox_standardButtons(self.h))
 
 proc standardButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): cint =
@@ -408,7 +410,7 @@ proc standardButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstr
 proc button*(self: gen_qmessagebox_types.QMessageBox, which: cint): gen_qabstractbutton_types.QAbstractButton =
   gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_button(self.h, cint(which)), owned: false)
 
-proc defaultButton*(self: gen_qmessagebox_types.QMessageBox, ): gen_qpushbutton_types.QPushButton =
+proc defaultButton*(self: gen_qmessagebox_types.QMessageBox): gen_qpushbutton_types.QPushButton =
   gen_qpushbutton_types.QPushButton(h: fcQMessageBox_defaultButton(self.h), owned: false)
 
 proc setDefaultButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qpushbutton_types.QPushButton): void =
@@ -417,7 +419,7 @@ proc setDefaultButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qpus
 proc setDefaultButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): void =
   fcQMessageBox_setDefaultButtonWithButton(self.h, cint(button))
 
-proc escapeButton*(self: gen_qmessagebox_types.QMessageBox, ): gen_qabstractbutton_types.QAbstractButton =
+proc escapeButton*(self: gen_qmessagebox_types.QMessageBox): gen_qabstractbutton_types.QAbstractButton =
   gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_escapeButton(self.h), owned: false)
 
 proc setEscapeButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstractbutton_types.QAbstractButton): void =
@@ -426,10 +428,10 @@ proc setEscapeButton*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabst
 proc setEscapeButton*(self: gen_qmessagebox_types.QMessageBox, button: cint): void =
   fcQMessageBox_setEscapeButtonWithButton(self.h, cint(button))
 
-proc clickedButton*(self: gen_qmessagebox_types.QMessageBox, ): gen_qabstractbutton_types.QAbstractButton =
+proc clickedButton*(self: gen_qmessagebox_types.QMessageBox): gen_qabstractbutton_types.QAbstractButton =
   gen_qabstractbutton_types.QAbstractButton(h: fcQMessageBox_clickedButton(self.h), owned: false)
 
-proc text*(self: gen_qmessagebox_types.QMessageBox, ): string =
+proc text*(self: gen_qmessagebox_types.QMessageBox): string =
   let v_ms = fcQMessageBox_text(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -438,19 +440,19 @@ proc text*(self: gen_qmessagebox_types.QMessageBox, ): string =
 proc setText*(self: gen_qmessagebox_types.QMessageBox, text: string): void =
   fcQMessageBox_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc icon*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc icon*(self: gen_qmessagebox_types.QMessageBox): cint =
   cint(fcQMessageBox_icon(self.h))
 
 proc setIcon*(self: gen_qmessagebox_types.QMessageBox, icon: cint): void =
   fcQMessageBox_setIcon(self.h, cint(icon))
 
-proc iconPixmap*(self: gen_qmessagebox_types.QMessageBox, ): gen_qpixmap_types.QPixmap =
+proc iconPixmap*(self: gen_qmessagebox_types.QMessageBox): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQMessageBox_iconPixmap(self.h), owned: true)
 
 proc setIconPixmap*(self: gen_qmessagebox_types.QMessageBox, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQMessageBox_setIconPixmap(self.h, pixmap.h)
 
-proc textFormat*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc textFormat*(self: gen_qmessagebox_types.QMessageBox): cint =
   cint(fcQMessageBox_textFormat(self.h))
 
 proc setTextFormat*(self: gen_qmessagebox_types.QMessageBox, format: cint): void =
@@ -459,13 +461,13 @@ proc setTextFormat*(self: gen_qmessagebox_types.QMessageBox, format: cint): void
 proc setTextInteractionFlags*(self: gen_qmessagebox_types.QMessageBox, flags: cint): void =
   fcQMessageBox_setTextInteractionFlags(self.h, cint(flags))
 
-proc textInteractionFlags*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc textInteractionFlags*(self: gen_qmessagebox_types.QMessageBox): cint =
   cint(fcQMessageBox_textInteractionFlags(self.h))
 
 proc setCheckBox*(self: gen_qmessagebox_types.QMessageBox, cb: gen_qcheckbox_types.QCheckBox): void =
   fcQMessageBox_setCheckBox(self.h, cb.h)
 
-proc checkBox*(self: gen_qmessagebox_types.QMessageBox, ): gen_qcheckbox_types.QCheckBox =
+proc checkBox*(self: gen_qmessagebox_types.QMessageBox): gen_qcheckbox_types.QCheckBox =
   gen_qcheckbox_types.QCheckBox(h: fcQMessageBox_checkBox(self.h), owned: false)
 
 proc information*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string): cint =
@@ -531,7 +533,7 @@ proc buttonText*(self: gen_qmessagebox_types.QMessageBox, button: cint): string 
 proc setButtonText*(self: gen_qmessagebox_types.QMessageBox, button: cint, text: string): void =
   fcQMessageBox_setButtonText(self.h, button, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc informativeText*(self: gen_qmessagebox_types.QMessageBox, ): string =
+proc informativeText*(self: gen_qmessagebox_types.QMessageBox): string =
   let v_ms = fcQMessageBox_informativeText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -540,7 +542,7 @@ proc informativeText*(self: gen_qmessagebox_types.QMessageBox, ): string =
 proc setInformativeText*(self: gen_qmessagebox_types.QMessageBox, text: string): void =
   fcQMessageBox_setInformativeText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc detailedText*(self: gen_qmessagebox_types.QMessageBox, ): string =
+proc detailedText*(self: gen_qmessagebox_types.QMessageBox): string =
   let v_ms = fcQMessageBox_detailedText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -562,13 +564,13 @@ proc buttonClicked*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstra
   fcQMessageBox_buttonClicked(self.h, button.h)
 
 type QMessageBoxbuttonClickedSlot* = proc(button: gen_qabstractbutton_types.QAbstractButton)
-proc miqt_exec_callback_cQMessageBox_buttonClicked(slot: int, button: pointer) {.cdecl.} =
+proc cQMessageBox_slot_callback_buttonClicked(slot: int, button: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMessageBoxbuttonClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQMessageBox_buttonClicked_release(slot: int) {.cdecl.} =
+proc cQMessageBox_slot_callback_buttonClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMessageBoxbuttonClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -576,7 +578,7 @@ proc onbuttonClicked*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBox
   var tmp = new QMessageBoxbuttonClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMessageBox_buttonClicked, miqt_exec_callback_cQMessageBox_buttonClicked_release)
+  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]), cQMessageBox_slot_callback_buttonClicked, cQMessageBox_slot_callback_buttonClicked_release)
 
 proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring, c: cstring): string =
   let v_ms = fcQMessageBox_tr2(s, c)
@@ -798,11 +800,11 @@ type QMessageBoxVTable* {.inheritable, pure.} = object
   customEvent*: QMessageBoxcustomEventProc
   connectNotify*: QMessageBoxconnectNotifyProc
   disconnectNotify*: QMessageBoxdisconnectNotifyProc
-proc QMessageBoxmetaObject*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobjectdefs_types.QMetaObject =
+proc QMessageBoxmetaObject*(self: gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQMessageBox_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -813,8 +815,8 @@ proc miqt_exec_callback_cQMessageBox_metaObject(vtbl: pointer, self: pointer): p
 proc QMessageBoxmetacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
   fcQMessageBox_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQMessageBox_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -823,8 +825,8 @@ proc miqt_exec_callback_cQMessageBox_metacast(vtbl: pointer, self: pointer, para
 proc QMessageBoxmetacall*(self: gen_qmessagebox_types.QMessageBox, param1: cint, param2: cint, param3: pointer): cint =
   fcQMessageBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQMessageBox_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -835,8 +837,8 @@ proc miqt_exec_callback_cQMessageBox_metacall(vtbl: pointer, self: pointer, para
 proc QMessageBoxevent*(self: gen_qmessagebox_types.QMessageBox, e: gen_qcoreevent_types.QEvent): bool =
   fcQMessageBox_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQMessageBox_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -845,8 +847,8 @@ proc miqt_exec_callback_cQMessageBox_event(vtbl: pointer, self: pointer, e: poin
 proc QMessageBoxresizeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QResizeEvent): void =
   fcQMessageBox_virtualbase_resizeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -854,8 +856,8 @@ proc miqt_exec_callback_cQMessageBox_resizeEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxshowEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QShowEvent): void =
   fcQMessageBox_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -863,8 +865,8 @@ proc miqt_exec_callback_cQMessageBox_showEvent(vtbl: pointer, self: pointer, eve
 proc QMessageBoxcloseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QCloseEvent): void =
   fcQMessageBox_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -872,8 +874,8 @@ proc miqt_exec_callback_cQMessageBox_closeEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxkeyPressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
   fcQMessageBox_virtualbase_keyPressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -881,8 +883,8 @@ proc miqt_exec_callback_cQMessageBox_keyPressEvent(vtbl: pointer, self: pointer,
 proc QMessageBoxchangeEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
   fcQMessageBox_virtualbase_changeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_changeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -890,17 +892,17 @@ proc miqt_exec_callback_cQMessageBox_changeEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxsetVisible*(self: gen_qmessagebox_types.QMessageBox, visible: bool): void =
   fcQMessageBox_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQMessageBox_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QMessageBoxsizeHint*(self: gen_qmessagebox_types.QMessageBox, ): gen_qsize_types.QSize =
+proc QMessageBoxsizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQMessageBox_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -908,11 +910,11 @@ proc miqt_exec_callback_cQMessageBox_sizeHint(vtbl: pointer, self: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxminimumSizeHint*(self: gen_qmessagebox_types.QMessageBox, ): gen_qsize_types.QSize =
+proc QMessageBoxminimumSizeHint*(self: gen_qmessagebox_types.QMessageBox): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQMessageBox_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQMessageBox_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -920,19 +922,19 @@ proc miqt_exec_callback_cQMessageBox_minimumSizeHint(vtbl: pointer, self: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxopen*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc QMessageBoxopen*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_virtualbase_open(self.h)
 
-proc miqt_exec_callback_cQMessageBox_open(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_open(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].open(self)
 
-proc QMessageBoxexec*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc QMessageBoxexec*(self: gen_qmessagebox_types.QMessageBox): cint =
   fcQMessageBox_virtualbase_exec(self.h)
 
-proc miqt_exec_callback_cQMessageBox_exec(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_exec(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
@@ -940,33 +942,33 @@ proc miqt_exec_callback_cQMessageBox_exec(vtbl: pointer, self: pointer): cint {.
 proc QMessageBoxdone*(self: gen_qmessagebox_types.QMessageBox, param1: cint): void =
   fcQMessageBox_virtualbase_done(self.h, param1)
 
-proc miqt_exec_callback_cQMessageBox_done(vtbl: pointer, self: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = param1
   vtbl[].done(self, slotval1)
 
-proc QMessageBoxaccept*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc QMessageBoxaccept*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_virtualbase_accept(self.h)
 
-proc miqt_exec_callback_cQMessageBox_accept(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_accept(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].accept(self)
 
-proc QMessageBoxreject*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc QMessageBoxreject*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_virtualbase_reject(self.h)
 
-proc miqt_exec_callback_cQMessageBox_reject(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_reject(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   vtbl[].reject(self)
 
 proc QMessageBoxcontextMenuEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QContextMenuEvent): void =
   fcQMessageBox_virtualbase_contextMenuEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQMessageBox_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -974,19 +976,19 @@ proc miqt_exec_callback_cQMessageBox_contextMenuEvent(vtbl: pointer, self: point
 proc QMessageBoxeventFilter*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
   fcQMessageBox_virtualbase_eventFilter(self.h, param1.h, param2.h)
 
-proc miqt_exec_callback_cQMessageBox_eventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMessageBoxdevType*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc QMessageBoxdevType*(self: gen_qmessagebox_types.QMessageBox): cint =
   fcQMessageBox_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQMessageBox_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -994,27 +996,27 @@ proc miqt_exec_callback_cQMessageBox_devType(vtbl: pointer, self: pointer): cint
 proc QMessageBoxheightForWidth*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
   fcQMessageBox_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQMessageBox_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QMessageBoxhasHeightForWidth*(self: gen_qmessagebox_types.QMessageBox, ): bool =
+proc QMessageBoxhasHeightForWidth*(self: gen_qmessagebox_types.QMessageBox): bool =
   fcQMessageBox_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQMessageBox_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QMessageBoxpaintEngine*(self: gen_qmessagebox_types.QMessageBox, ): gen_qpaintengine_types.QPaintEngine =
+proc QMessageBoxpaintEngine*(self: gen_qmessagebox_types.QMessageBox): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQMessageBox_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQMessageBox_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -1025,8 +1027,8 @@ proc miqt_exec_callback_cQMessageBox_paintEngine(vtbl: pointer, self: pointer): 
 proc QMessageBoxmousePressEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
   fcQMessageBox_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -1034,8 +1036,8 @@ proc miqt_exec_callback_cQMessageBox_mousePressEvent(vtbl: pointer, self: pointe
 proc QMessageBoxmouseReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
   fcQMessageBox_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -1043,8 +1045,8 @@ proc miqt_exec_callback_cQMessageBox_mouseReleaseEvent(vtbl: pointer, self: poin
 proc QMessageBoxmouseDoubleClickEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
   fcQMessageBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -1052,8 +1054,8 @@ proc miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent(vtbl: pointer, self: 
 proc QMessageBoxmouseMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMouseEvent): void =
   fcQMessageBox_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -1061,8 +1063,8 @@ proc miqt_exec_callback_cQMessageBox_mouseMoveEvent(vtbl: pointer, self: pointer
 proc QMessageBoxwheelEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QWheelEvent): void =
   fcQMessageBox_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -1070,8 +1072,8 @@ proc miqt_exec_callback_cQMessageBox_wheelEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxkeyReleaseEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QKeyEvent): void =
   fcQMessageBox_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -1079,8 +1081,8 @@ proc miqt_exec_callback_cQMessageBox_keyReleaseEvent(vtbl: pointer, self: pointe
 proc QMessageBoxfocusInEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
   fcQMessageBox_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -1088,8 +1090,8 @@ proc miqt_exec_callback_cQMessageBox_focusInEvent(vtbl: pointer, self: pointer, 
 proc QMessageBoxfocusOutEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QFocusEvent): void =
   fcQMessageBox_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -1097,8 +1099,8 @@ proc miqt_exec_callback_cQMessageBox_focusOutEvent(vtbl: pointer, self: pointer,
 proc QMessageBoxenterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QEnterEvent): void =
   fcQMessageBox_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -1106,8 +1108,8 @@ proc miqt_exec_callback_cQMessageBox_enterEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxleaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
   fcQMessageBox_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -1115,8 +1117,8 @@ proc miqt_exec_callback_cQMessageBox_leaveEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxpaintEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QPaintEvent): void =
   fcQMessageBox_virtualbase_paintEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -1124,8 +1126,8 @@ proc miqt_exec_callback_cQMessageBox_paintEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxmoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QMoveEvent): void =
   fcQMessageBox_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -1133,8 +1135,8 @@ proc miqt_exec_callback_cQMessageBox_moveEvent(vtbl: pointer, self: pointer, eve
 proc QMessageBoxtabletEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QTabletEvent): void =
   fcQMessageBox_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -1142,8 +1144,8 @@ proc miqt_exec_callback_cQMessageBox_tabletEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxactionEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QActionEvent): void =
   fcQMessageBox_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -1151,8 +1153,8 @@ proc miqt_exec_callback_cQMessageBox_actionEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxdragEnterEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragEnterEvent): void =
   fcQMessageBox_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -1160,8 +1162,8 @@ proc miqt_exec_callback_cQMessageBox_dragEnterEvent(vtbl: pointer, self: pointer
 proc QMessageBoxdragMoveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragMoveEvent): void =
   fcQMessageBox_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -1169,8 +1171,8 @@ proc miqt_exec_callback_cQMessageBox_dragMoveEvent(vtbl: pointer, self: pointer,
 proc QMessageBoxdragLeaveEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQMessageBox_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -1178,8 +1180,8 @@ proc miqt_exec_callback_cQMessageBox_dragLeaveEvent(vtbl: pointer, self: pointer
 proc QMessageBoxdropEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QDropEvent): void =
   fcQMessageBox_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -1187,8 +1189,8 @@ proc miqt_exec_callback_cQMessageBox_dropEvent(vtbl: pointer, self: pointer, eve
 proc QMessageBoxhideEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qevent_types.QHideEvent): void =
   fcQMessageBox_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -1196,8 +1198,8 @@ proc miqt_exec_callback_cQMessageBox_hideEvent(vtbl: pointer, self: pointer, eve
 proc QMessageBoxnativeEvent*(self: gen_qmessagebox_types.QMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQMessageBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQMessageBox_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -1211,8 +1213,8 @@ proc miqt_exec_callback_cQMessageBox_nativeEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxmetric*(self: gen_qmessagebox_types.QMessageBox, param1: cint): cint =
   fcQMessageBox_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQMessageBox_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -1221,8 +1223,8 @@ proc miqt_exec_callback_cQMessageBox_metric(vtbl: pointer, self: pointer, param1
 proc QMessageBoxinitPainter*(self: gen_qmessagebox_types.QMessageBox, painter: gen_qpainter_types.QPainter): void =
   fcQMessageBox_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQMessageBox_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -1230,8 +1232,8 @@ proc miqt_exec_callback_cQMessageBox_initPainter(vtbl: pointer, self: pointer, p
 proc QMessageBoxredirected*(self: gen_qmessagebox_types.QMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQMessageBox_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQMessageBox_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -1240,11 +1242,11 @@ proc miqt_exec_callback_cQMessageBox_redirected(vtbl: pointer, self: pointer, of
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMessageBoxsharedPainter*(self: gen_qmessagebox_types.QMessageBox, ): gen_qpainter_types.QPainter =
+proc QMessageBoxsharedPainter*(self: gen_qmessagebox_types.QMessageBox): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQMessageBox_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQMessageBox_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -1255,8 +1257,8 @@ proc miqt_exec_callback_cQMessageBox_sharedPainter(vtbl: pointer, self: pointer)
 proc QMessageBoxinputMethodEvent*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQMessageBox_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQMessageBox_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -1264,8 +1266,8 @@ proc miqt_exec_callback_cQMessageBox_inputMethodEvent(vtbl: pointer, self: point
 proc QMessageBoxinputMethodQuery*(self: gen_qmessagebox_types.QMessageBox, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQMessageBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQMessageBox_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -1277,8 +1279,8 @@ proc miqt_exec_callback_cQMessageBox_inputMethodQuery(vtbl: pointer, self: point
 proc QMessageBoxfocusNextPrevChild*(self: gen_qmessagebox_types.QMessageBox, next: bool): bool =
   fcQMessageBox_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQMessageBox_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -1287,8 +1289,8 @@ proc miqt_exec_callback_cQMessageBox_focusNextPrevChild(vtbl: pointer, self: poi
 proc QMessageBoxtimerEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQMessageBox_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1296,8 +1298,8 @@ proc miqt_exec_callback_cQMessageBox_timerEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxchildEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QChildEvent): void =
   fcQMessageBox_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1305,8 +1307,8 @@ proc miqt_exec_callback_cQMessageBox_childEvent(vtbl: pointer, self: pointer, ev
 proc QMessageBoxcustomEvent*(self: gen_qmessagebox_types.QMessageBox, event: gen_qcoreevent_types.QEvent): void =
   fcQMessageBox_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQMessageBox_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1314,8 +1316,8 @@ proc miqt_exec_callback_cQMessageBox_customEvent(vtbl: pointer, self: pointer, e
 proc QMessageBoxconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQMessageBox_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQMessageBox_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1323,19 +1325,19 @@ proc miqt_exec_callback_cQMessageBox_connectNotify(vtbl: pointer, self: pointer,
 proc QMessageBoxdisconnectNotify*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQMessageBox_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQMessageBox_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QMessageBoxVTable](vtbl)
+proc cQMessageBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QMessageBoxVTable](fcQMessageBox_vdata(self))
   let self = QMessageBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQMessageBox* {.inheritable.} = ref object of QMessageBox
   vtbl*: cQMessageBoxVTable
-method metaObject*(self: VirtualQMessageBox, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQMessageBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMessageBoxmetaObject(self[])
-proc miqt_exec_method_cQMessageBox_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQMessageBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1343,167 +1345,167 @@ proc miqt_exec_method_cQMessageBox_metaObject(vtbl: pointer, inst: pointer): poi
 
 method metacast*(self: VirtualQMessageBox, param1: cstring): pointer {.base.} =
   QMessageBoxmetacast(self[], param1)
-proc miqt_exec_method_cQMessageBox_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQMessageBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QMessageBoxmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQMessageBox_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQMessageBox, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QMessageBoxevent(self[], e)
-proc miqt_exec_method_cQMessageBox_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method resizeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
   QMessageBoxresizeEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method showEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QShowEvent): void {.base.} =
   QMessageBoxshowEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method closeEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QMessageBoxcloseEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QMessageBoxkeyPressEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method changeEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxchangeEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_changeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method setVisible*(self: VirtualQMessageBox, visible: bool): void {.base.} =
   QMessageBoxsetVisible(self[], visible)
-proc miqt_exec_method_cQMessageBox_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQMessageBox, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
   QMessageBoxsizeHint(self[])
-proc miqt_exec_method_cQMessageBox_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQMessageBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQMessageBox, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQMessageBox): gen_qsize_types.QSize {.base.} =
   QMessageBoxminimumSizeHint(self[])
-proc miqt_exec_method_cQMessageBox_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQMessageBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method open*(self: VirtualQMessageBox, ): void {.base.} =
+method open*(self: VirtualQMessageBox): void {.base.} =
   QMessageBoxopen(self[])
-proc miqt_exec_method_cQMessageBox_open(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  vtbl.open()
+proc cQMessageBox_method_callback_open(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  inst.open()
 
-method exec*(self: VirtualQMessageBox, ): cint {.base.} =
+method exec*(self: VirtualQMessageBox): cint {.base.} =
   QMessageBoxexec(self[])
-proc miqt_exec_method_cQMessageBox_exec(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.exec()
+proc cQMessageBox_method_callback_exec(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.exec()
   virtualReturn
 
 method done*(self: VirtualQMessageBox, param1: cint): void {.base.} =
   QMessageBoxdone(self[], param1)
-proc miqt_exec_method_cQMessageBox_done(vtbl: pointer, inst: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = param1
-  vtbl.done(slotval1)
+  inst.done(slotval1)
 
-method accept*(self: VirtualQMessageBox, ): void {.base.} =
+method accept*(self: VirtualQMessageBox): void {.base.} =
   QMessageBoxaccept(self[])
-proc miqt_exec_method_cQMessageBox_accept(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  vtbl.accept()
+proc cQMessageBox_method_callback_accept(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  inst.accept()
 
-method reject*(self: VirtualQMessageBox, ): void {.base.} =
+method reject*(self: VirtualQMessageBox): void {.base.} =
   QMessageBoxreject(self[])
-proc miqt_exec_method_cQMessageBox_reject(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  vtbl.reject()
+proc cQMessageBox_method_callback_reject(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  inst.reject()
 
 method contextMenuEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QMessageBoxcontextMenuEvent(self[], param1)
-proc miqt_exec_method_cQMessageBox_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method eventFilter*(self: VirtualQMessageBox, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QMessageBoxeventFilter(self[], param1, param2)
-proc miqt_exec_method_cQMessageBox_eventFilter(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method devType*(self: VirtualQMessageBox, ): cint {.base.} =
+method devType*(self: VirtualQMessageBox): cint {.base.} =
   QMessageBoxdevType(self[])
-proc miqt_exec_method_cQMessageBox_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQMessageBox_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method heightForWidth*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
   QMessageBoxheightForWidth(self[], param1)
-proc miqt_exec_method_cQMessageBox_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQMessageBox, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQMessageBox): bool {.base.} =
   QMessageBoxhasHeightForWidth(self[])
-proc miqt_exec_method_cQMessageBox_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQMessageBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQMessageBox, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQMessageBox): gen_qpaintengine_types.QPaintEngine {.base.} =
   QMessageBoxpaintEngine(self[])
-proc miqt_exec_method_cQMessageBox_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQMessageBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1511,181 +1513,181 @@ proc miqt_exec_method_cQMessageBox_paintEngine(vtbl: pointer, inst: pointer): po
 
 method mousePressEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmousePressEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QMessageBoxmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QMessageBoxwheelEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QMessageBoxkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QMessageBoxfocusInEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QMessageBoxfocusOutEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QMessageBoxenterEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxleaveEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QMessageBoxpaintEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QMessageBoxmoveEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method tabletEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QMessageBoxtabletEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QActionEvent): void {.base.} =
   QMessageBoxactionEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QMessageBoxdragEnterEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QMessageBoxdragMoveEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QMessageBoxdragLeaveEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QDropEvent): void {.base.} =
   QMessageBoxdropEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method hideEvent*(self: VirtualQMessageBox, event: gen_qevent_types.QHideEvent): void {.base.} =
   QMessageBoxhideEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQMessageBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QMessageBoxnativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQMessageBox_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQMessageBox, param1: cint): cint {.base.} =
   QMessageBoxmetric(self[], param1)
-proc miqt_exec_method_cQMessageBox_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQMessageBox, painter: gen_qpainter_types.QPainter): void {.base.} =
   QMessageBoxinitPainter(self[], painter)
-proc miqt_exec_method_cQMessageBox_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQMessageBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QMessageBoxredirected(self[], offset)
-proc miqt_exec_method_cQMessageBox_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQMessageBox, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQMessageBox): gen_qpainter_types.QPainter {.base.} =
   QMessageBoxsharedPainter(self[])
-proc miqt_exec_method_cQMessageBox_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQMessageBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1693,17 +1695,17 @@ proc miqt_exec_method_cQMessageBox_sharedPainter(vtbl: pointer, inst: pointer): 
 
 method inputMethodEvent*(self: VirtualQMessageBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QMessageBoxinputMethodEvent(self[], param1)
-proc miqt_exec_method_cQMessageBox_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQMessageBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QMessageBoxinputMethodQuery(self[], param1)
-proc miqt_exec_method_cQMessageBox_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1711,69 +1713,69 @@ proc miqt_exec_method_cQMessageBox_inputMethodQuery(vtbl: pointer, inst: pointer
 
 method focusNextPrevChild*(self: VirtualQMessageBox, next: bool): bool {.base.} =
   QMessageBoxfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQMessageBox_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method timerEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QMessageBoxtimerEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QMessageBoxchildEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQMessageBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QMessageBoxcustomEvent(self[], event)
-proc miqt_exec_method_cQMessageBox_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMessageBoxconnectNotify(self[], signal)
-proc miqt_exec_method_cQMessageBox_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQMessageBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QMessageBoxdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQMessageBox_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQMessageBox](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
+proc cQMessageBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQMessageBox](fcQMessageBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc adjustPosition*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qwidget_types.QWidget): void =
   fcQMessageBox_protectedbase_adjustPosition(self.h, param1.h)
 
-proc updateMicroFocus*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc updateMicroFocus*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc create*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qmessagebox_types.QMessageBox, ): void =
+proc destroy*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qmessagebox_types.QMessageBox, ): bool =
+proc focusNextChild*(self: gen_qmessagebox_types.QMessageBox): bool =
   fcQMessageBox_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qmessagebox_types.QMessageBox, ): bool =
+proc focusPreviousChild*(self: gen_qmessagebox_types.QMessageBox): bool =
   fcQMessageBox_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qmessagebox_types.QMessageBox): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMessageBox_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+proc senderSignalIndex*(self: gen_qmessagebox_types.QMessageBox): cint =
   fcQMessageBox_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qmessagebox_types.QMessageBox, signal: cstring): cint =
@@ -1787,1681 +1789,1202 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new3(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new4(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new5(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new5(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons)), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new6(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new7(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new7(addr(vtbl[].vtbl), addr(vtbl[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new8(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h), owned: true)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
     vtbl: ref QMessageBoxVTable = nil): gen_qmessagebox_types.QMessageBox =
   let vtbl = if vtbl == nil: new QMessageBoxVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ref QMessageBoxVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QMessageBoxVTable](fcQMessageBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQMessageBox_metaObject
+    vtbl[].vtbl.metaObject = cQMessageBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQMessageBox_metacast
+    vtbl[].vtbl.metacast = cQMessageBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQMessageBox_metacall
+    vtbl[].vtbl.metacall = cQMessageBox_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQMessageBox_event
+    vtbl[].vtbl.event = cQMessageBox_vtable_callback_event
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQMessageBox_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQMessageBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQMessageBox_showEvent
+    vtbl[].vtbl.showEvent = cQMessageBox_vtable_callback_showEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQMessageBox_closeEvent
+    vtbl[].vtbl.closeEvent = cQMessageBox_vtable_callback_closeEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQMessageBox_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQMessageBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQMessageBox_changeEvent
+    vtbl[].vtbl.changeEvent = cQMessageBox_vtable_callback_changeEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQMessageBox_setVisible
+    vtbl[].vtbl.setVisible = cQMessageBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQMessageBox_sizeHint
+    vtbl[].vtbl.sizeHint = cQMessageBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQMessageBox_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQMessageBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQMessageBox_open
+    vtbl[].vtbl.open = cQMessageBox_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQMessageBox_exec
+    vtbl[].vtbl.exec = cQMessageBox_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQMessageBox_done
+    vtbl[].vtbl.done = cQMessageBox_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQMessageBox_accept
+    vtbl[].vtbl.accept = cQMessageBox_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQMessageBox_reject
+    vtbl[].vtbl.reject = cQMessageBox_vtable_callback_reject
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQMessageBox_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQMessageBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQMessageBox_eventFilter
+    vtbl[].vtbl.eventFilter = cQMessageBox_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQMessageBox_devType
+    vtbl[].vtbl.devType = cQMessageBox_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQMessageBox_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQMessageBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQMessageBox_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQMessageBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQMessageBox_paintEngine
+    vtbl[].vtbl.paintEngine = cQMessageBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQMessageBox_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQMessageBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQMessageBox_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQMessageBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQMessageBox_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQMessageBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQMessageBox_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQMessageBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQMessageBox_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQMessageBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQMessageBox_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQMessageBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQMessageBox_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQMessageBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQMessageBox_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQMessageBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQMessageBox_enterEvent
+    vtbl[].vtbl.enterEvent = cQMessageBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQMessageBox_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQMessageBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQMessageBox_paintEvent
+    vtbl[].vtbl.paintEvent = cQMessageBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQMessageBox_moveEvent
+    vtbl[].vtbl.moveEvent = cQMessageBox_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQMessageBox_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQMessageBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQMessageBox_actionEvent
+    vtbl[].vtbl.actionEvent = cQMessageBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQMessageBox_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQMessageBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQMessageBox_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQMessageBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQMessageBox_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQMessageBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQMessageBox_dropEvent
+    vtbl[].vtbl.dropEvent = cQMessageBox_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQMessageBox_hideEvent
+    vtbl[].vtbl.hideEvent = cQMessageBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQMessageBox_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQMessageBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQMessageBox_metric
+    vtbl[].vtbl.metric = cQMessageBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQMessageBox_initPainter
+    vtbl[].vtbl.initPainter = cQMessageBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQMessageBox_redirected
+    vtbl[].vtbl.redirected = cQMessageBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQMessageBox_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQMessageBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQMessageBox_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQMessageBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQMessageBox_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQMessageBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQMessageBox_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQMessageBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQMessageBox_timerEvent
+    vtbl[].vtbl.timerEvent = cQMessageBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQMessageBox_childEvent
+    vtbl[].vtbl.childEvent = cQMessageBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQMessageBox_customEvent
+    vtbl[].vtbl.customEvent = cQMessageBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQMessageBox_connectNotify
+    vtbl[].vtbl.connectNotify = cQMessageBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQMessageBox_disconnectNotify
-  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new9(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQMessageBox_vtable_callback_disconnectNotify
+  gen_qmessagebox_types.QMessageBox(h: fcQMessageBox_new9(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f)), owned: true)
 
+const cQMessageBox_mvtbl = cQMessageBoxVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQMessageBox()[])](self.fcQMessageBox_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQMessageBox_method_callback_metaObject,
+  metacast: cQMessageBox_method_callback_metacast,
+  metacall: cQMessageBox_method_callback_metacall,
+  event: cQMessageBox_method_callback_event,
+  resizeEvent: cQMessageBox_method_callback_resizeEvent,
+  showEvent: cQMessageBox_method_callback_showEvent,
+  closeEvent: cQMessageBox_method_callback_closeEvent,
+  keyPressEvent: cQMessageBox_method_callback_keyPressEvent,
+  changeEvent: cQMessageBox_method_callback_changeEvent,
+  setVisible: cQMessageBox_method_callback_setVisible,
+  sizeHint: cQMessageBox_method_callback_sizeHint,
+  minimumSizeHint: cQMessageBox_method_callback_minimumSizeHint,
+  open: cQMessageBox_method_callback_open,
+  exec: cQMessageBox_method_callback_exec,
+  done: cQMessageBox_method_callback_done,
+  accept: cQMessageBox_method_callback_accept,
+  reject: cQMessageBox_method_callback_reject,
+  contextMenuEvent: cQMessageBox_method_callback_contextMenuEvent,
+  eventFilter: cQMessageBox_method_callback_eventFilter,
+  devType: cQMessageBox_method_callback_devType,
+  heightForWidth: cQMessageBox_method_callback_heightForWidth,
+  hasHeightForWidth: cQMessageBox_method_callback_hasHeightForWidth,
+  paintEngine: cQMessageBox_method_callback_paintEngine,
+  mousePressEvent: cQMessageBox_method_callback_mousePressEvent,
+  mouseReleaseEvent: cQMessageBox_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQMessageBox_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: cQMessageBox_method_callback_mouseMoveEvent,
+  wheelEvent: cQMessageBox_method_callback_wheelEvent,
+  keyReleaseEvent: cQMessageBox_method_callback_keyReleaseEvent,
+  focusInEvent: cQMessageBox_method_callback_focusInEvent,
+  focusOutEvent: cQMessageBox_method_callback_focusOutEvent,
+  enterEvent: cQMessageBox_method_callback_enterEvent,
+  leaveEvent: cQMessageBox_method_callback_leaveEvent,
+  paintEvent: cQMessageBox_method_callback_paintEvent,
+  moveEvent: cQMessageBox_method_callback_moveEvent,
+  tabletEvent: cQMessageBox_method_callback_tabletEvent,
+  actionEvent: cQMessageBox_method_callback_actionEvent,
+  dragEnterEvent: cQMessageBox_method_callback_dragEnterEvent,
+  dragMoveEvent: cQMessageBox_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQMessageBox_method_callback_dragLeaveEvent,
+  dropEvent: cQMessageBox_method_callback_dropEvent,
+  hideEvent: cQMessageBox_method_callback_hideEvent,
+  nativeEvent: cQMessageBox_method_callback_nativeEvent,
+  metric: cQMessageBox_method_callback_metric,
+  initPainter: cQMessageBox_method_callback_initPainter,
+  redirected: cQMessageBox_method_callback_redirected,
+  sharedPainter: cQMessageBox_method_callback_sharedPainter,
+  inputMethodEvent: cQMessageBox_method_callback_inputMethodEvent,
+  inputMethodQuery: cQMessageBox_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQMessageBox_method_callback_focusNextPrevChild,
+  timerEvent: cQMessageBox_method_callback_timerEvent,
+  childEvent: cQMessageBox_method_callback_childEvent,
+  customEvent: cQMessageBox_method_callback_customEvent,
+  connectNotify: cQMessageBox_method_callback_connectNotify,
+  disconnectNotify: cQMessageBox_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new(addr(cQMessageBox_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new2(addr(cQMessageBox_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new3(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))))
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new3(addr(cQMessageBox_mvtbl), addr(inst[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new4(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2)
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new4(addr(cQMessageBox_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2)
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new5(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons))
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new5(addr(cQMessageBox_mvtbl), addr(inst[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons))
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new6(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new6(addr(cQMessageBox_mvtbl), addr(inst[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     icon: cint, title: string, text: string, buttons: cint, parent: gen_qwidget_types.QWidget, flags: cint,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new7(addr(vtbl[].vtbl), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags))
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new7(addr(cQMessageBox_mvtbl), addr(inst[]), cint(icon), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(buttons), parent.h, cint(flags))
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new8(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new8(addr(cQMessageBox_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     title: string, text: string, icon: cint, button0: cint, button1: cint, button2: cint, parent: gen_qwidget_types.QWidget, f: cint,
-    vtbl: VirtualQMessageBox) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQMessageBoxVTable, _: ptr cQMessageBox) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQMessageBox()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQMessageBox, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQMessageBox_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQMessageBox_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQMessageBox_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQMessageBox_event
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQMessageBox_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQMessageBox_showEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQMessageBox_closeEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQMessageBox_keyPressEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQMessageBox_changeEvent
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQMessageBox_setVisible
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQMessageBox_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQMessageBox_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQMessageBox_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQMessageBox_exec
-  vtbl[].vtbl.done = miqt_exec_method_cQMessageBox_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQMessageBox_accept
-  vtbl[].vtbl.reject = miqt_exec_method_cQMessageBox_reject
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQMessageBox_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQMessageBox_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQMessageBox_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQMessageBox_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQMessageBox_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQMessageBox_paintEngine
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQMessageBox_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQMessageBox_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQMessageBox_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQMessageBox_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQMessageBox_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQMessageBox_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQMessageBox_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQMessageBox_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQMessageBox_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQMessageBox_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQMessageBox_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQMessageBox_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQMessageBox_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQMessageBox_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQMessageBox_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQMessageBox_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQMessageBox_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQMessageBox_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQMessageBox_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQMessageBox_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQMessageBox_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQMessageBox_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQMessageBox_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQMessageBox_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQMessageBox_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQMessageBox_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQMessageBox_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQMessageBox_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQMessageBox_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQMessageBox_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQMessageBox_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQMessageBox_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQMessageBox_new9(addr(vtbl[].vtbl), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f))
-  vtbl[].owned = true
+    inst: VirtualQMessageBox) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQMessageBox_new9(addr(cQMessageBox_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), cint(icon), button0, button1, button2, parent.h, cint(f))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_staticMetaObject())

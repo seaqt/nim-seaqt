@@ -62,53 +62,57 @@ export
 type cQQmlIncubator*{.exportc: "QQmlIncubator", incompleteStruct.} = object
 type cQQmlIncubationController*{.exportc: "QQmlIncubationController", incompleteStruct.} = object
 
-proc fcQQmlIncubator_clear(self: pointer, ): void {.importc: "QQmlIncubator_clear".}
-proc fcQQmlIncubator_forceCompletion(self: pointer, ): void {.importc: "QQmlIncubator_forceCompletion".}
-proc fcQQmlIncubator_isNull(self: pointer, ): bool {.importc: "QQmlIncubator_isNull".}
-proc fcQQmlIncubator_isReady(self: pointer, ): bool {.importc: "QQmlIncubator_isReady".}
-proc fcQQmlIncubator_isError(self: pointer, ): bool {.importc: "QQmlIncubator_isError".}
-proc fcQQmlIncubator_isLoading(self: pointer, ): bool {.importc: "QQmlIncubator_isLoading".}
-proc fcQQmlIncubator_errors(self: pointer, ): struct_miqt_array {.importc: "QQmlIncubator_errors".}
-proc fcQQmlIncubator_incubationMode(self: pointer, ): cint {.importc: "QQmlIncubator_incubationMode".}
-proc fcQQmlIncubator_status(self: pointer, ): cint {.importc: "QQmlIncubator_status".}
-proc fcQQmlIncubator_objectX(self: pointer, ): pointer {.importc: "QQmlIncubator_object".}
+proc fcQQmlIncubator_clear(self: pointer): void {.importc: "QQmlIncubator_clear".}
+proc fcQQmlIncubator_forceCompletion(self: pointer): void {.importc: "QQmlIncubator_forceCompletion".}
+proc fcQQmlIncubator_isNull(self: pointer): bool {.importc: "QQmlIncubator_isNull".}
+proc fcQQmlIncubator_isReady(self: pointer): bool {.importc: "QQmlIncubator_isReady".}
+proc fcQQmlIncubator_isError(self: pointer): bool {.importc: "QQmlIncubator_isError".}
+proc fcQQmlIncubator_isLoading(self: pointer): bool {.importc: "QQmlIncubator_isLoading".}
+proc fcQQmlIncubator_errors(self: pointer): struct_miqt_array {.importc: "QQmlIncubator_errors".}
+proc fcQQmlIncubator_incubationMode(self: pointer): cint {.importc: "QQmlIncubator_incubationMode".}
+proc fcQQmlIncubator_status(self: pointer): cint {.importc: "QQmlIncubator_status".}
+proc fcQQmlIncubator_objectX(self: pointer): pointer {.importc: "QQmlIncubator_object".}
 proc fcQQmlIncubator_setInitialProperties(self: pointer, initialProperties: struct_miqt_map): void {.importc: "QQmlIncubator_setInitialProperties".}
+proc fcQQmlIncubator_vtbl(self: pointer): pointer {.importc: "QQmlIncubator_vtbl".}
+proc fcQQmlIncubator_vdata(self: pointer): pointer {.importc: "QQmlIncubator_vdata".}
 type cQQmlIncubatorVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQQmlIncubatorVTable, self: ptr cQQmlIncubator) {.cdecl, raises:[], gcsafe.}
-  statusChanged*: proc(vtbl, self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
-  setInitialState*: proc(vtbl, self: pointer, initialState: pointer): void {.cdecl, raises: [], gcsafe.}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  statusChanged*: proc(self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
+  setInitialState*: proc(self: pointer, initialState: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQQmlIncubator_virtualbase_statusChanged(self: pointer, param1: cint): void {.importc: "QQmlIncubator_virtualbase_statusChanged".}
 proc fcQQmlIncubator_virtualbase_setInitialState(self: pointer, initialState: pointer): void {.importc: "QQmlIncubator_virtualbase_setInitialState".}
-proc fcQQmlIncubator_new(vtbl: pointer, ): ptr cQQmlIncubator {.importc: "QQmlIncubator_new".}
-proc fcQQmlIncubator_new2(vtbl: pointer, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new2".}
-proc fcQQmlIncubationController_engine(self: pointer, ): pointer {.importc: "QQmlIncubationController_engine".}
-proc fcQQmlIncubationController_incubatingObjectCount(self: pointer, ): cint {.importc: "QQmlIncubationController_incubatingObjectCount".}
+proc fcQQmlIncubator_new(vtbl, vdata: pointer): ptr cQQmlIncubator {.importc: "QQmlIncubator_new".}
+proc fcQQmlIncubator_new2(vtbl, vdata: pointer, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new2".}
+proc fcQQmlIncubationController_engine(self: pointer): pointer {.importc: "QQmlIncubationController_engine".}
+proc fcQQmlIncubationController_incubatingObjectCount(self: pointer): cint {.importc: "QQmlIncubationController_incubatingObjectCount".}
 proc fcQQmlIncubationController_incubateFor(self: pointer, msecs: cint): void {.importc: "QQmlIncubationController_incubateFor".}
+proc fcQQmlIncubationController_vtbl(self: pointer): pointer {.importc: "QQmlIncubationController_vtbl".}
+proc fcQQmlIncubationController_vdata(self: pointer): pointer {.importc: "QQmlIncubationController_vdata".}
 type cQQmlIncubationControllerVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQQmlIncubationControllerVTable, self: ptr cQQmlIncubationController) {.cdecl, raises:[], gcsafe.}
-  incubatingObjectCountChanged*: proc(vtbl, self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  incubatingObjectCountChanged*: proc(self: pointer, param1: cint): void {.cdecl, raises: [], gcsafe.}
 proc fcQQmlIncubationController_virtualbase_incubatingObjectCountChanged(self: pointer, param1: cint): void {.importc: "QQmlIncubationController_virtualbase_incubatingObjectCountChanged".}
-proc fcQQmlIncubationController_new(vtbl: pointer, ): ptr cQQmlIncubationController {.importc: "QQmlIncubationController_new".}
+proc fcQQmlIncubationController_new(vtbl, vdata: pointer): ptr cQQmlIncubationController {.importc: "QQmlIncubationController_new".}
 
-proc clear*(self: gen_qqmlincubator_types.QQmlIncubator, ): void =
+proc clear*(self: gen_qqmlincubator_types.QQmlIncubator): void =
   fcQQmlIncubator_clear(self.h)
 
-proc forceCompletion*(self: gen_qqmlincubator_types.QQmlIncubator, ): void =
+proc forceCompletion*(self: gen_qqmlincubator_types.QQmlIncubator): void =
   fcQQmlIncubator_forceCompletion(self.h)
 
-proc isNull*(self: gen_qqmlincubator_types.QQmlIncubator, ): bool =
+proc isNull*(self: gen_qqmlincubator_types.QQmlIncubator): bool =
   fcQQmlIncubator_isNull(self.h)
 
-proc isReady*(self: gen_qqmlincubator_types.QQmlIncubator, ): bool =
+proc isReady*(self: gen_qqmlincubator_types.QQmlIncubator): bool =
   fcQQmlIncubator_isReady(self.h)
 
-proc isError*(self: gen_qqmlincubator_types.QQmlIncubator, ): bool =
+proc isError*(self: gen_qqmlincubator_types.QQmlIncubator): bool =
   fcQQmlIncubator_isError(self.h)
 
-proc isLoading*(self: gen_qqmlincubator_types.QQmlIncubator, ): bool =
+proc isLoading*(self: gen_qqmlincubator_types.QQmlIncubator): bool =
   fcQQmlIncubator_isLoading(self.h)
 
-proc errors*(self: gen_qqmlincubator_types.QQmlIncubator, ): seq[gen_qqmlerror_types.QQmlError] =
+proc errors*(self: gen_qqmlincubator_types.QQmlIncubator): seq[gen_qqmlerror_types.QQmlError] =
   var v_ma = fcQQmlIncubator_errors(self.h)
   var vx_ret = newSeq[gen_qqmlerror_types.QQmlError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -117,13 +121,13 @@ proc errors*(self: gen_qqmlincubator_types.QQmlIncubator, ): seq[gen_qqmlerror_t
   c_free(v_ma.data)
   vx_ret
 
-proc incubationMode*(self: gen_qqmlincubator_types.QQmlIncubator, ): cint =
+proc incubationMode*(self: gen_qqmlincubator_types.QQmlIncubator): cint =
   cint(fcQQmlIncubator_incubationMode(self.h))
 
-proc status*(self: gen_qqmlincubator_types.QQmlIncubator, ): cint =
+proc status*(self: gen_qqmlincubator_types.QQmlIncubator): cint =
   cint(fcQQmlIncubator_status(self.h))
 
-proc objectX*(self: gen_qqmlincubator_types.QQmlIncubator, ): gen_qobject_types.QObject =
+proc objectX*(self: gen_qqmlincubator_types.QQmlIncubator): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlIncubator_objectX(self.h), owned: false)
 
 proc setInitialProperties*(self: gen_qqmlincubator_types.QQmlIncubator, initialProperties: Table[string,gen_qvariant_types.QVariant]): void =
@@ -149,8 +153,8 @@ type QQmlIncubatorVTable* {.inheritable, pure.} = object
 proc QQmlIncubatorstatusChanged*(self: gen_qqmlincubator_types.QQmlIncubator, param1: cint): void =
   fcQQmlIncubator_virtualbase_statusChanged(self.h, cint(param1))
 
-proc miqt_exec_callback_cQQmlIncubator_statusChanged(vtbl: pointer, self: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlIncubatorVTable](vtbl)
+proc cQQmlIncubator_vtable_callback_statusChanged(self: pointer, param1: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlIncubatorVTable](fcQQmlIncubator_vdata(self))
   let self = QQmlIncubator(h: self)
   let slotval1 = cint(param1)
   vtbl[].statusChanged(self, slotval1)
@@ -158,8 +162,8 @@ proc miqt_exec_callback_cQQmlIncubator_statusChanged(vtbl: pointer, self: pointe
 proc QQmlIncubatorsetInitialState*(self: gen_qqmlincubator_types.QQmlIncubator, initialState: gen_qobject_types.QObject): void =
   fcQQmlIncubator_virtualbase_setInitialState(self.h, initialState.h)
 
-proc miqt_exec_callback_cQQmlIncubator_setInitialState(vtbl: pointer, self: pointer, initialState: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlIncubatorVTable](vtbl)
+proc cQQmlIncubator_vtable_callback_setInitialState(self: pointer, initialState: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlIncubatorVTable](fcQQmlIncubator_vdata(self))
   let self = QQmlIncubator(h: self)
   let slotval1 = gen_qobject_types.QObject(h: initialState, owned: false)
   vtbl[].setInitialState(self, slotval1)
@@ -168,76 +172,70 @@ type VirtualQQmlIncubator* {.inheritable.} = ref object of QQmlIncubator
   vtbl*: cQQmlIncubatorVTable
 method statusChanged*(self: VirtualQQmlIncubator, param1: cint): void {.base.} =
   QQmlIncubatorstatusChanged(self[], param1)
-proc miqt_exec_method_cQQmlIncubator_statusChanged(vtbl: pointer, inst: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlIncubator](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubator, vtbl)))
+proc cQQmlIncubator_method_callback_statusChanged(self: pointer, param1: cint): void {.cdecl.} =
+  let inst = cast[VirtualQQmlIncubator](fcQQmlIncubator_vdata(self))
   let slotval1 = cint(param1)
-  vtbl.statusChanged(slotval1)
+  inst.statusChanged(slotval1)
 
 method setInitialState*(self: VirtualQQmlIncubator, initialState: gen_qobject_types.QObject): void {.base.} =
   QQmlIncubatorsetInitialState(self[], initialState)
-proc miqt_exec_method_cQQmlIncubator_setInitialState(vtbl: pointer, inst: pointer, initialState: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlIncubator](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubator, vtbl)))
+proc cQQmlIncubator_method_callback_setInitialState(self: pointer, initialState: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlIncubator](fcQQmlIncubator_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: initialState, owned: false)
-  vtbl.setInitialState(slotval1)
+  inst.setInitialState(slotval1)
 
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
     vtbl: ref QQmlIncubatorVTable = nil): gen_qqmlincubator_types.QQmlIncubator =
   let vtbl = if vtbl == nil: new QQmlIncubatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubatorVTable, _: ptr cQQmlIncubator) {.cdecl.} =
-    let vtbl = cast[ref QQmlIncubatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQmlIncubatorVTable](fcQQmlIncubator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].statusChanged):
-    vtbl[].vtbl.statusChanged = miqt_exec_callback_cQQmlIncubator_statusChanged
+    vtbl[].vtbl.statusChanged = cQQmlIncubator_vtable_callback_statusChanged
   if not isNil(vtbl[].setInitialState):
-    vtbl[].vtbl.setInitialState = miqt_exec_callback_cQQmlIncubator_setInitialState
-  gen_qqmlincubator_types.QQmlIncubator(h: fcQQmlIncubator_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.setInitialState = cQQmlIncubator_vtable_callback_setInitialState
+  gen_qqmlincubator_types.QQmlIncubator(h: fcQQmlIncubator_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
     param1: cint,
     vtbl: ref QQmlIncubatorVTable = nil): gen_qqmlincubator_types.QQmlIncubator =
   let vtbl = if vtbl == nil: new QQmlIncubatorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubatorVTable, _: ptr cQQmlIncubator) {.cdecl.} =
-    let vtbl = cast[ref QQmlIncubatorVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQmlIncubatorVTable](fcQQmlIncubator_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].statusChanged):
-    vtbl[].vtbl.statusChanged = miqt_exec_callback_cQQmlIncubator_statusChanged
+    vtbl[].vtbl.statusChanged = cQQmlIncubator_vtable_callback_statusChanged
   if not isNil(vtbl[].setInitialState):
-    vtbl[].vtbl.setInitialState = miqt_exec_callback_cQQmlIncubator_setInitialState
-  gen_qqmlincubator_types.QQmlIncubator(h: fcQQmlIncubator_new2(addr(vtbl[].vtbl), cint(param1)), owned: true)
+    vtbl[].vtbl.setInitialState = cQQmlIncubator_vtable_callback_setInitialState
+  gen_qqmlincubator_types.QQmlIncubator(h: fcQQmlIncubator_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(param1)), owned: true)
 
+const cQQmlIncubator_mvtbl = cQQmlIncubatorVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQQmlIncubator()[])](self.fcQQmlIncubator_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  statusChanged: cQQmlIncubator_method_callback_statusChanged,
+  setInitialState: cQQmlIncubator_method_callback_setInitialState,
+)
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
-    vtbl: VirtualQQmlIncubator) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubatorVTable, _: ptr cQQmlIncubator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQmlIncubator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.statusChanged = miqt_exec_method_cQQmlIncubator_statusChanged
-  vtbl[].vtbl.setInitialState = miqt_exec_method_cQQmlIncubator_setInitialState
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQmlIncubator_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQQmlIncubator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQmlIncubator_new(addr(cQQmlIncubator_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
     param1: cint,
-    vtbl: VirtualQQmlIncubator) =
+    inst: VirtualQQmlIncubator) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQmlIncubator_new2(addr(cQQmlIncubator_mvtbl), addr(inst[]), cint(param1))
+  inst[].owned = true
 
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubatorVTable, _: ptr cQQmlIncubator) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQmlIncubator()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubator, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.statusChanged = miqt_exec_method_cQQmlIncubator_statusChanged
-  vtbl[].vtbl.setInitialState = miqt_exec_method_cQQmlIncubator_setInitialState
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQmlIncubator_new2(addr(vtbl[].vtbl), cint(param1))
-  vtbl[].owned = true
-
-proc engine*(self: gen_qqmlincubator_types.QQmlIncubationController, ): gen_qqmlengine_types.QQmlEngine =
+proc engine*(self: gen_qqmlincubator_types.QQmlIncubationController): gen_qqmlengine_types.QQmlEngine =
   gen_qqmlengine_types.QQmlEngine(h: fcQQmlIncubationController_engine(self.h), owned: false)
 
-proc incubatingObjectCount*(self: gen_qqmlincubator_types.QQmlIncubationController, ): cint =
+proc incubatingObjectCount*(self: gen_qqmlincubator_types.QQmlIncubationController): cint =
   fcQQmlIncubationController_incubatingObjectCount(self.h)
 
 proc incubateFor*(self: gen_qqmlincubator_types.QQmlIncubationController, msecs: cint): void =
@@ -250,8 +248,8 @@ type QQmlIncubationControllerVTable* {.inheritable, pure.} = object
 proc QQmlIncubationControllerincubatingObjectCountChanged*(self: gen_qqmlincubator_types.QQmlIncubationController, param1: cint): void =
   fcQQmlIncubationController_virtualbase_incubatingObjectCountChanged(self.h, param1)
 
-proc miqt_exec_callback_cQQmlIncubationController_incubatingObjectCountChanged(vtbl: pointer, self: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlIncubationControllerVTable](vtbl)
+proc cQQmlIncubationController_vtable_callback_incubatingObjectCountChanged(self: pointer, param1: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlIncubationControllerVTable](fcQQmlIncubationController_vdata(self))
   let self = QQmlIncubationController(h: self)
   let slotval1 = param1
   vtbl[].incubatingObjectCountChanged(self, slotval1)
@@ -260,31 +258,32 @@ type VirtualQQmlIncubationController* {.inheritable.} = ref object of QQmlIncuba
   vtbl*: cQQmlIncubationControllerVTable
 method incubatingObjectCountChanged*(self: VirtualQQmlIncubationController, param1: cint): void {.base.} =
   QQmlIncubationControllerincubatingObjectCountChanged(self[], param1)
-proc miqt_exec_method_cQQmlIncubationController_incubatingObjectCountChanged(vtbl: pointer, inst: pointer, param1: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlIncubationController](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubationController, vtbl)))
+proc cQQmlIncubationController_method_callback_incubatingObjectCountChanged(self: pointer, param1: cint): void {.cdecl.} =
+  let inst = cast[VirtualQQmlIncubationController](fcQQmlIncubationController_vdata(self))
   let slotval1 = param1
-  vtbl.incubatingObjectCountChanged(slotval1)
+  inst.incubatingObjectCountChanged(slotval1)
 
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubationController,
     vtbl: ref QQmlIncubationControllerVTable = nil): gen_qqmlincubator_types.QQmlIncubationController =
   let vtbl = if vtbl == nil: new QQmlIncubationControllerVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubationControllerVTable, _: ptr cQQmlIncubationController) {.cdecl.} =
-    let vtbl = cast[ref QQmlIncubationControllerVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQmlIncubationControllerVTable](fcQQmlIncubationController_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].incubatingObjectCountChanged):
-    vtbl[].vtbl.incubatingObjectCountChanged = miqt_exec_callback_cQQmlIncubationController_incubatingObjectCountChanged
-  gen_qqmlincubator_types.QQmlIncubationController(h: fcQQmlIncubationController_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.incubatingObjectCountChanged = cQQmlIncubationController_vtable_callback_incubatingObjectCountChanged
+  gen_qqmlincubator_types.QQmlIncubationController(h: fcQQmlIncubationController_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQQmlIncubationController_mvtbl = cQQmlIncubationControllerVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQQmlIncubationController()[])](self.fcQQmlIncubationController_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  incubatingObjectCountChanged: cQQmlIncubationController_method_callback_incubatingObjectCountChanged,
+)
 proc create*(T: type gen_qqmlincubator_types.QQmlIncubationController,
-    vtbl: VirtualQQmlIncubationController) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlIncubationControllerVTable, _: ptr cQQmlIncubationController) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQmlIncubationController()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlIncubationController, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.incubatingObjectCountChanged = miqt_exec_method_cQQmlIncubationController_incubatingObjectCountChanged
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQmlIncubationController_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQQmlIncubationController) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQmlIncubationController_new(addr(cQQmlIncubationController_mvtbl), addr(inst[]))
+  inst[].owned = true
 

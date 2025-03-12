@@ -10,15 +10,6 @@
 #include <QWebEngineContextMenuRequest>
 #include <qwebenginecontextmenurequest.h>
 #include "gen_qwebenginecontextmenurequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineContextMenuRequest_virtbase(QWebEngineContextMenuRequest* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -161,6 +152,7 @@ struct miqt_string QWebEngineContextMenuRequest_tr3(const char* s, const char* c
 }
 
 const QMetaObject* QWebEngineContextMenuRequest_staticMetaObject() { return &QWebEngineContextMenuRequest::staticMetaObject; }
+
 void QWebEngineContextMenuRequest_delete(QWebEngineContextMenuRequest* self) {
 	delete self;
 }

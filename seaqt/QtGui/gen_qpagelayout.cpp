@@ -6,15 +6,6 @@
 #include <QRectF>
 #include <qpagelayout.h>
 #include "gen_qpagelayout.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPageLayout* QPageLayout_new() {
 	return new QPageLayout();
 }

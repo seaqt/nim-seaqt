@@ -87,48 +87,48 @@ export gen_qaudioformat_types
 
 type cQAudioFormat*{.exportc: "QAudioFormat", incompleteStruct.} = object
 
-proc fcQAudioFormat_isValid(self: pointer, ): bool {.importc: "QAudioFormat_isValid".}
+proc fcQAudioFormat_isValid(self: pointer): bool {.importc: "QAudioFormat_isValid".}
 proc fcQAudioFormat_setSampleRate(self: pointer, sampleRate: cint): void {.importc: "QAudioFormat_setSampleRate".}
-proc fcQAudioFormat_sampleRate(self: pointer, ): cint {.importc: "QAudioFormat_sampleRate".}
+proc fcQAudioFormat_sampleRate(self: pointer): cint {.importc: "QAudioFormat_sampleRate".}
 proc fcQAudioFormat_setChannelConfig(self: pointer, config: cint): void {.importc: "QAudioFormat_setChannelConfig".}
-proc fcQAudioFormat_channelConfig(self: pointer, ): cint {.importc: "QAudioFormat_channelConfig".}
+proc fcQAudioFormat_channelConfig(self: pointer): cint {.importc: "QAudioFormat_channelConfig".}
 proc fcQAudioFormat_setChannelCount(self: pointer, channelCount: cint): void {.importc: "QAudioFormat_setChannelCount".}
-proc fcQAudioFormat_channelCount(self: pointer, ): cint {.importc: "QAudioFormat_channelCount".}
+proc fcQAudioFormat_channelCount(self: pointer): cint {.importc: "QAudioFormat_channelCount".}
 proc fcQAudioFormat_channelOffset(self: pointer, channel: cint): cint {.importc: "QAudioFormat_channelOffset".}
 proc fcQAudioFormat_setSampleFormat(self: pointer, f: cint): void {.importc: "QAudioFormat_setSampleFormat".}
-proc fcQAudioFormat_sampleFormat(self: pointer, ): cint {.importc: "QAudioFormat_sampleFormat".}
+proc fcQAudioFormat_sampleFormat(self: pointer): cint {.importc: "QAudioFormat_sampleFormat".}
 proc fcQAudioFormat_bytesForDuration(self: pointer, microseconds: clonglong): cint {.importc: "QAudioFormat_bytesForDuration".}
 proc fcQAudioFormat_durationForBytes(self: pointer, byteCount: cint): clonglong {.importc: "QAudioFormat_durationForBytes".}
 proc fcQAudioFormat_bytesForFrames(self: pointer, frameCount: cint): cint {.importc: "QAudioFormat_bytesForFrames".}
 proc fcQAudioFormat_framesForBytes(self: pointer, byteCount: cint): cint {.importc: "QAudioFormat_framesForBytes".}
 proc fcQAudioFormat_framesForDuration(self: pointer, microseconds: clonglong): cint {.importc: "QAudioFormat_framesForDuration".}
 proc fcQAudioFormat_durationForFrames(self: pointer, frameCount: cint): clonglong {.importc: "QAudioFormat_durationForFrames".}
-proc fcQAudioFormat_bytesPerFrame(self: pointer, ): cint {.importc: "QAudioFormat_bytesPerFrame".}
-proc fcQAudioFormat_bytesPerSample(self: pointer, ): cint {.importc: "QAudioFormat_bytesPerSample".}
+proc fcQAudioFormat_bytesPerFrame(self: pointer): cint {.importc: "QAudioFormat_bytesPerFrame".}
+proc fcQAudioFormat_bytesPerSample(self: pointer): cint {.importc: "QAudioFormat_bytesPerSample".}
 proc fcQAudioFormat_normalizedSampleValue(self: pointer, sample: pointer): float32 {.importc: "QAudioFormat_normalizedSampleValue".}
 proc fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount: cint): cint {.importc: "QAudioFormat_defaultChannelConfigForChannelCount".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
 proc fcQAudioFormat_new2(param1: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
 
-proc isValid*(self: gen_qaudioformat_types.QAudioFormat, ): bool =
+proc isValid*(self: gen_qaudioformat_types.QAudioFormat): bool =
   fcQAudioFormat_isValid(self.h)
 
 proc setSampleRate*(self: gen_qaudioformat_types.QAudioFormat, sampleRate: cint): void =
   fcQAudioFormat_setSampleRate(self.h, sampleRate)
 
-proc sampleRate*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc sampleRate*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_sampleRate(self.h)
 
 proc setChannelConfig*(self: gen_qaudioformat_types.QAudioFormat, config: cint): void =
   fcQAudioFormat_setChannelConfig(self.h, cint(config))
 
-proc channelConfig*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc channelConfig*(self: gen_qaudioformat_types.QAudioFormat): cint =
   cint(fcQAudioFormat_channelConfig(self.h))
 
 proc setChannelCount*(self: gen_qaudioformat_types.QAudioFormat, channelCount: cint): void =
   fcQAudioFormat_setChannelCount(self.h, channelCount)
 
-proc channelCount*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc channelCount*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_channelCount(self.h)
 
 proc channelOffset*(self: gen_qaudioformat_types.QAudioFormat, channel: cint): cint =
@@ -137,7 +137,7 @@ proc channelOffset*(self: gen_qaudioformat_types.QAudioFormat, channel: cint): c
 proc setSampleFormat*(self: gen_qaudioformat_types.QAudioFormat, f: cint): void =
   fcQAudioFormat_setSampleFormat(self.h, cint(f))
 
-proc sampleFormat*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc sampleFormat*(self: gen_qaudioformat_types.QAudioFormat): cint =
   cint(fcQAudioFormat_sampleFormat(self.h))
 
 proc bytesForDuration*(self: gen_qaudioformat_types.QAudioFormat, microseconds: clonglong): cint =
@@ -158,10 +158,10 @@ proc framesForDuration*(self: gen_qaudioformat_types.QAudioFormat, microseconds:
 proc durationForFrames*(self: gen_qaudioformat_types.QAudioFormat, frameCount: cint): clonglong =
   fcQAudioFormat_durationForFrames(self.h, frameCount)
 
-proc bytesPerFrame*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc bytesPerFrame*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_bytesPerFrame(self.h)
 
-proc bytesPerSample*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
+proc bytesPerSample*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_bytesPerSample(self.h)
 
 proc normalizedSampleValue*(self: gen_qaudioformat_types.QAudioFormat, sample: pointer): float32 =

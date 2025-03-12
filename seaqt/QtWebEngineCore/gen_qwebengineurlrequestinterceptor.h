@@ -34,22 +34,29 @@ typedef struct QWebEngineUrlRequestInfo QWebEngineUrlRequestInfo;
 typedef struct QWebEngineUrlRequestInterceptor QWebEngineUrlRequestInterceptor;
 #endif
 
-struct QWebEngineUrlRequestInterceptor_VTable {
-	void (*destructor)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self);
-	QMetaObject* (*metaObject)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, const QWebEngineUrlRequestInterceptor* self);
-	void* (*metacast)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, const char* param1);
-	int (*metacall)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, int param1, int param2, void** param3);
-	void (*interceptRequest)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
-	bool (*event)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QEvent* event);
-	bool (*eventFilter)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QTimerEvent* event);
-	void (*childEvent)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QChildEvent* event);
-	void (*customEvent)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QEvent* event);
-	void (*connectNotify)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
-};
-QWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new(struct QWebEngineUrlRequestInterceptor_VTable* vtbl);
-QWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new2(struct QWebEngineUrlRequestInterceptor_VTable* vtbl, QObject* p);
+typedef struct VirtualQWebEngineUrlRequestInterceptor VirtualQWebEngineUrlRequestInterceptor;
+typedef struct QWebEngineUrlRequestInterceptor_VTable{
+	void (*destructor)(VirtualQWebEngineUrlRequestInterceptor* self);
+	QMetaObject* (*metaObject)(const VirtualQWebEngineUrlRequestInterceptor* self);
+	void* (*metacast)(VirtualQWebEngineUrlRequestInterceptor* self, const char* param1);
+	int (*metacall)(VirtualQWebEngineUrlRequestInterceptor* self, int param1, int param2, void** param3);
+	void (*interceptRequest)(VirtualQWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
+	bool (*event)(VirtualQWebEngineUrlRequestInterceptor* self, QEvent* event);
+	bool (*eventFilter)(VirtualQWebEngineUrlRequestInterceptor* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQWebEngineUrlRequestInterceptor* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQWebEngineUrlRequestInterceptor* self, QChildEvent* event);
+	void (*customEvent)(VirtualQWebEngineUrlRequestInterceptor* self, QEvent* event);
+	void (*connectNotify)(VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
+}QWebEngineUrlRequestInterceptor_VTable;
+
+const QWebEngineUrlRequestInterceptor_VTable* QWebEngineUrlRequestInterceptor_vtbl(const VirtualQWebEngineUrlRequestInterceptor* self);
+void* QWebEngineUrlRequestInterceptor_vdata(const VirtualQWebEngineUrlRequestInterceptor* self);
+void QWebEngineUrlRequestInterceptor_setVdata(VirtualQWebEngineUrlRequestInterceptor* self, void* vdata);
+
+VirtualQWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new(const QWebEngineUrlRequestInterceptor_VTable* vtbl, void* vdata);
+VirtualQWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new2(const QWebEngineUrlRequestInterceptor_VTable* vtbl, void* vdata, QObject* p);
+
 void QWebEngineUrlRequestInterceptor_virtbase(QWebEngineUrlRequestInterceptor* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlRequestInterceptor_metaObject(const QWebEngineUrlRequestInterceptor* self);
 void* QWebEngineUrlRequestInterceptor_metacast(QWebEngineUrlRequestInterceptor* self, const char* param1);
@@ -58,21 +65,24 @@ struct miqt_string QWebEngineUrlRequestInterceptor_tr(const char* s);
 void QWebEngineUrlRequestInterceptor_interceptRequest(QWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
 struct miqt_string QWebEngineUrlRequestInterceptor_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineUrlRequestInterceptor_tr3(const char* s, const char* c, int n);
-QMetaObject* QWebEngineUrlRequestInterceptor_virtualbase_metaObject(const void* self);
-void* QWebEngineUrlRequestInterceptor_virtualbase_metacast(void* self, const char* param1);
-int QWebEngineUrlRequestInterceptor_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-void QWebEngineUrlRequestInterceptor_virtualbase_interceptRequest(void* self, QWebEngineUrlRequestInfo* info);
-bool QWebEngineUrlRequestInterceptor_virtualbase_event(void* self, QEvent* event);
-bool QWebEngineUrlRequestInterceptor_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QWebEngineUrlRequestInterceptor_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QWebEngineUrlRequestInterceptor_virtualbase_childEvent(void* self, QChildEvent* event);
-void QWebEngineUrlRequestInterceptor_virtualbase_customEvent(void* self, QEvent* event);
-void QWebEngineUrlRequestInterceptor_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(const void* self);
-int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const void* self);
-int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const void* self, const char* signal);
-bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QWebEngineUrlRequestInterceptor_virtualbase_metaObject(const VirtualQWebEngineUrlRequestInterceptor* self);
+void* QWebEngineUrlRequestInterceptor_virtualbase_metacast(VirtualQWebEngineUrlRequestInterceptor* self, const char* param1);
+int QWebEngineUrlRequestInterceptor_virtualbase_metacall(VirtualQWebEngineUrlRequestInterceptor* self, int param1, int param2, void** param3);
+void QWebEngineUrlRequestInterceptor_virtualbase_interceptRequest(VirtualQWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
+bool QWebEngineUrlRequestInterceptor_virtualbase_event(VirtualQWebEngineUrlRequestInterceptor* self, QEvent* event);
+bool QWebEngineUrlRequestInterceptor_virtualbase_eventFilter(VirtualQWebEngineUrlRequestInterceptor* self, QObject* watched, QEvent* event);
+void QWebEngineUrlRequestInterceptor_virtualbase_timerEvent(VirtualQWebEngineUrlRequestInterceptor* self, QTimerEvent* event);
+void QWebEngineUrlRequestInterceptor_virtualbase_childEvent(VirtualQWebEngineUrlRequestInterceptor* self, QChildEvent* event);
+void QWebEngineUrlRequestInterceptor_virtualbase_customEvent(VirtualQWebEngineUrlRequestInterceptor* self, QEvent* event);
+void QWebEngineUrlRequestInterceptor_virtualbase_connectNotify(VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
+void QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
+
+QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(const VirtualQWebEngineUrlRequestInterceptor* self);
+int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const VirtualQWebEngineUrlRequestInterceptor* self);
+int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const VirtualQWebEngineUrlRequestInterceptor* self, const char* signal);
+bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
+
 const QMetaObject* QWebEngineUrlRequestInterceptor_staticMetaObject();
 void QWebEngineUrlRequestInterceptor_delete(QWebEngineUrlRequestInterceptor* self);
 

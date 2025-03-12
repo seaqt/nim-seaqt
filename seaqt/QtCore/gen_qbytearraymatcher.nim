@@ -46,7 +46,7 @@ proc fcQByteArrayMatcher_operatorAssign(self: pointer, other: pointer): void {.i
 proc fcQByteArrayMatcher_setPattern(self: pointer, pattern: struct_miqt_string): void {.importc: "QByteArrayMatcher_setPattern".}
 proc fcQByteArrayMatcher_indexIn(self: pointer, str: cstring, len: int64): int64 {.importc: "QByteArrayMatcher_indexIn".}
 proc fcQByteArrayMatcher_indexInWithData(self: pointer, data: pointer): int64 {.importc: "QByteArrayMatcher_indexInWithData".}
-proc fcQByteArrayMatcher_pattern(self: pointer, ): struct_miqt_string {.importc: "QByteArrayMatcher_pattern".}
+proc fcQByteArrayMatcher_pattern(self: pointer): struct_miqt_string {.importc: "QByteArrayMatcher_pattern".}
 proc fcQByteArrayMatcher_indexIn3(self: pointer, str: cstring, len: int64, fromVal: int64): int64 {.importc: "QByteArrayMatcher_indexIn3".}
 proc fcQByteArrayMatcher_indexIn2(self: pointer, data: pointer, fromVal: int64): int64 {.importc: "QByteArrayMatcher_indexIn2".}
 proc fcQByteArrayMatcher_new(): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new".}
@@ -69,7 +69,7 @@ proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring,
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, data: gen_qbytearrayview_types.QByteArrayView): int64 =
   fcQByteArrayMatcher_indexInWithData(self.h, data.h)
 
-proc pattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ): seq[byte] =
+proc pattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher): seq[byte] =
   var v_bytearray = fcQByteArrayMatcher_pattern(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)

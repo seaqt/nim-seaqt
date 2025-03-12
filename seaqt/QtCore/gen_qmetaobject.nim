@@ -71,34 +71,34 @@ type cQMetaEnum*{.exportc: "QMetaEnum", incompleteStruct.} = object
 type cQMetaProperty*{.exportc: "QMetaProperty", incompleteStruct.} = object
 type cQMetaClassInfo*{.exportc: "QMetaClassInfo", incompleteStruct.} = object
 
-proc fcQMetaMethod_methodSignature(self: pointer, ): struct_miqt_string {.importc: "QMetaMethod_methodSignature".}
-proc fcQMetaMethod_name(self: pointer, ): struct_miqt_string {.importc: "QMetaMethod_name".}
-proc fcQMetaMethod_typeName(self: pointer, ): cstring {.importc: "QMetaMethod_typeName".}
-proc fcQMetaMethod_returnType(self: pointer, ): cint {.importc: "QMetaMethod_returnType".}
-proc fcQMetaMethod_returnMetaType(self: pointer, ): pointer {.importc: "QMetaMethod_returnMetaType".}
-proc fcQMetaMethod_parameterCount(self: pointer, ): cint {.importc: "QMetaMethod_parameterCount".}
+proc fcQMetaMethod_methodSignature(self: pointer): struct_miqt_string {.importc: "QMetaMethod_methodSignature".}
+proc fcQMetaMethod_name(self: pointer): struct_miqt_string {.importc: "QMetaMethod_name".}
+proc fcQMetaMethod_typeName(self: pointer): cstring {.importc: "QMetaMethod_typeName".}
+proc fcQMetaMethod_returnType(self: pointer): cint {.importc: "QMetaMethod_returnType".}
+proc fcQMetaMethod_returnMetaType(self: pointer): pointer {.importc: "QMetaMethod_returnMetaType".}
+proc fcQMetaMethod_parameterCount(self: pointer): cint {.importc: "QMetaMethod_parameterCount".}
 proc fcQMetaMethod_parameterType(self: pointer, index: cint): cint {.importc: "QMetaMethod_parameterType".}
 proc fcQMetaMethod_parameterMetaType(self: pointer, index: cint): pointer {.importc: "QMetaMethod_parameterMetaType".}
 proc fcQMetaMethod_getParameterTypes(self: pointer, types: ptr cint): void {.importc: "QMetaMethod_getParameterTypes".}
-proc fcQMetaMethod_parameterTypes(self: pointer, ): struct_miqt_array {.importc: "QMetaMethod_parameterTypes".}
+proc fcQMetaMethod_parameterTypes(self: pointer): struct_miqt_array {.importc: "QMetaMethod_parameterTypes".}
 proc fcQMetaMethod_parameterTypeName(self: pointer, index: cint): struct_miqt_string {.importc: "QMetaMethod_parameterTypeName".}
-proc fcQMetaMethod_parameterNames(self: pointer, ): struct_miqt_array {.importc: "QMetaMethod_parameterNames".}
-proc fcQMetaMethod_tag(self: pointer, ): cstring {.importc: "QMetaMethod_tag".}
-proc fcQMetaMethod_access(self: pointer, ): cint {.importc: "QMetaMethod_access".}
-proc fcQMetaMethod_methodType(self: pointer, ): cint {.importc: "QMetaMethod_methodType".}
-proc fcQMetaMethod_attributes(self: pointer, ): cint {.importc: "QMetaMethod_attributes".}
-proc fcQMetaMethod_methodIndex(self: pointer, ): cint {.importc: "QMetaMethod_methodIndex".}
-proc fcQMetaMethod_relativeMethodIndex(self: pointer, ): cint {.importc: "QMetaMethod_relativeMethodIndex".}
-proc fcQMetaMethod_revision(self: pointer, ): cint {.importc: "QMetaMethod_revision".}
-proc fcQMetaMethod_isConst(self: pointer, ): bool {.importc: "QMetaMethod_isConst".}
-proc fcQMetaMethod_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaMethod_enclosingMetaObject".}
+proc fcQMetaMethod_parameterNames(self: pointer): struct_miqt_array {.importc: "QMetaMethod_parameterNames".}
+proc fcQMetaMethod_tag(self: pointer): cstring {.importc: "QMetaMethod_tag".}
+proc fcQMetaMethod_access(self: pointer): cint {.importc: "QMetaMethod_access".}
+proc fcQMetaMethod_methodType(self: pointer): cint {.importc: "QMetaMethod_methodType".}
+proc fcQMetaMethod_attributes(self: pointer): cint {.importc: "QMetaMethod_attributes".}
+proc fcQMetaMethod_methodIndex(self: pointer): cint {.importc: "QMetaMethod_methodIndex".}
+proc fcQMetaMethod_relativeMethodIndex(self: pointer): cint {.importc: "QMetaMethod_relativeMethodIndex".}
+proc fcQMetaMethod_revision(self: pointer): cint {.importc: "QMetaMethod_revision".}
+proc fcQMetaMethod_isConst(self: pointer): bool {.importc: "QMetaMethod_isConst".}
+proc fcQMetaMethod_enclosingMetaObject(self: pointer): pointer {.importc: "QMetaMethod_enclosingMetaObject".}
 proc fcQMetaMethod_invoke(self: pointer, objectVal: pointer, connectionType: cint, returnValue: pointer): bool {.importc: "QMetaMethod_invoke".}
 proc fcQMetaMethod_invoke2(self: pointer, objectVal: pointer, returnValue: pointer): bool {.importc: "QMetaMethod_invoke2".}
 proc fcQMetaMethod_invoke3(self: pointer, objectVal: pointer, connectionType: cint): bool {.importc: "QMetaMethod_invoke3".}
 proc fcQMetaMethod_invokeWithObject(self: pointer, objectVal: pointer): bool {.importc: "QMetaMethod_invokeWithObject".}
 proc fcQMetaMethod_invokeOnGadget(self: pointer, gadget: pointer, returnValue: pointer): bool {.importc: "QMetaMethod_invokeOnGadget".}
 proc fcQMetaMethod_invokeOnGadgetWithGadget(self: pointer, gadget: pointer): bool {.importc: "QMetaMethod_invokeOnGadgetWithGadget".}
-proc fcQMetaMethod_isValid(self: pointer, ): bool {.importc: "QMetaMethod_isValid".}
+proc fcQMetaMethod_isValid(self: pointer): bool {.importc: "QMetaMethod_isValid".}
 proc fcQMetaMethod_invoke4(self: pointer, objectVal: pointer, connectionType: cint, returnValue: pointer, val0: pointer): bool {.importc: "QMetaMethod_invoke4".}
 proc fcQMetaMethod_invoke5(self: pointer, objectVal: pointer, connectionType: cint, returnValue: pointer, val0: pointer, val1: pointer): bool {.importc: "QMetaMethod_invoke5".}
 proc fcQMetaMethod_invoke6(self: pointer, objectVal: pointer, connectionType: cint, returnValue: pointer, val0: pointer, val1: pointer, val2: pointer): bool {.importc: "QMetaMethod_invoke6".}
@@ -161,50 +161,50 @@ proc fcQMetaMethod_invokeOnGadget102(self: pointer, gadget: pointer, val0: point
 proc fcQMetaMethod_invokeOnGadget112(self: pointer, gadget: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaMethod_invokeOnGadget112".}
 proc fcQMetaMethod_new(): ptr cQMetaMethod {.importc: "QMetaMethod_new".}
 proc fcQMetaMethod_new2(param1: pointer): ptr cQMetaMethod {.importc: "QMetaMethod_new2".}
-proc fcQMetaEnum_name(self: pointer, ): cstring {.importc: "QMetaEnum_name".}
-proc fcQMetaEnum_enumName(self: pointer, ): cstring {.importc: "QMetaEnum_enumName".}
-proc fcQMetaEnum_isFlag(self: pointer, ): bool {.importc: "QMetaEnum_isFlag".}
-proc fcQMetaEnum_isScoped(self: pointer, ): bool {.importc: "QMetaEnum_isScoped".}
-proc fcQMetaEnum_keyCount(self: pointer, ): cint {.importc: "QMetaEnum_keyCount".}
+proc fcQMetaEnum_name(self: pointer): cstring {.importc: "QMetaEnum_name".}
+proc fcQMetaEnum_enumName(self: pointer): cstring {.importc: "QMetaEnum_enumName".}
+proc fcQMetaEnum_isFlag(self: pointer): bool {.importc: "QMetaEnum_isFlag".}
+proc fcQMetaEnum_isScoped(self: pointer): bool {.importc: "QMetaEnum_isScoped".}
+proc fcQMetaEnum_keyCount(self: pointer): cint {.importc: "QMetaEnum_keyCount".}
 proc fcQMetaEnum_key(self: pointer, index: cint): cstring {.importc: "QMetaEnum_key".}
 proc fcQMetaEnum_value(self: pointer, index: cint): cint {.importc: "QMetaEnum_value".}
-proc fcQMetaEnum_scope(self: pointer, ): cstring {.importc: "QMetaEnum_scope".}
+proc fcQMetaEnum_scope(self: pointer): cstring {.importc: "QMetaEnum_scope".}
 proc fcQMetaEnum_keyToValue(self: pointer, key: cstring): cint {.importc: "QMetaEnum_keyToValue".}
 proc fcQMetaEnum_valueToKey(self: pointer, value: cint): cstring {.importc: "QMetaEnum_valueToKey".}
 proc fcQMetaEnum_keysToValue(self: pointer, keys: cstring): cint {.importc: "QMetaEnum_keysToValue".}
 proc fcQMetaEnum_valueToKeys(self: pointer, value: cint): struct_miqt_string {.importc: "QMetaEnum_valueToKeys".}
-proc fcQMetaEnum_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaEnum_enclosingMetaObject".}
-proc fcQMetaEnum_isValid(self: pointer, ): bool {.importc: "QMetaEnum_isValid".}
+proc fcQMetaEnum_enclosingMetaObject(self: pointer): pointer {.importc: "QMetaEnum_enclosingMetaObject".}
+proc fcQMetaEnum_isValid(self: pointer): bool {.importc: "QMetaEnum_isValid".}
 proc fcQMetaEnum_keyToValue2(self: pointer, key: cstring, ok: ptr bool): cint {.importc: "QMetaEnum_keyToValue2".}
 proc fcQMetaEnum_keysToValue2(self: pointer, keys: cstring, ok: ptr bool): cint {.importc: "QMetaEnum_keysToValue2".}
 proc fcQMetaEnum_new(): ptr cQMetaEnum {.importc: "QMetaEnum_new".}
 proc fcQMetaEnum_new2(param1: pointer): ptr cQMetaEnum {.importc: "QMetaEnum_new2".}
-proc fcQMetaProperty_name(self: pointer, ): cstring {.importc: "QMetaProperty_name".}
-proc fcQMetaProperty_typeName(self: pointer, ): cstring {.importc: "QMetaProperty_typeName".}
-proc fcQMetaProperty_typeX(self: pointer, ): cint {.importc: "QMetaProperty_type".}
-proc fcQMetaProperty_userType(self: pointer, ): cint {.importc: "QMetaProperty_userType".}
-proc fcQMetaProperty_typeId(self: pointer, ): cint {.importc: "QMetaProperty_typeId".}
-proc fcQMetaProperty_metaType(self: pointer, ): pointer {.importc: "QMetaProperty_metaType".}
-proc fcQMetaProperty_propertyIndex(self: pointer, ): cint {.importc: "QMetaProperty_propertyIndex".}
-proc fcQMetaProperty_relativePropertyIndex(self: pointer, ): cint {.importc: "QMetaProperty_relativePropertyIndex".}
-proc fcQMetaProperty_isReadable(self: pointer, ): bool {.importc: "QMetaProperty_isReadable".}
-proc fcQMetaProperty_isWritable(self: pointer, ): bool {.importc: "QMetaProperty_isWritable".}
-proc fcQMetaProperty_isResettable(self: pointer, ): bool {.importc: "QMetaProperty_isResettable".}
-proc fcQMetaProperty_isDesignable(self: pointer, ): bool {.importc: "QMetaProperty_isDesignable".}
-proc fcQMetaProperty_isScriptable(self: pointer, ): bool {.importc: "QMetaProperty_isScriptable".}
-proc fcQMetaProperty_isStored(self: pointer, ): bool {.importc: "QMetaProperty_isStored".}
-proc fcQMetaProperty_isUser(self: pointer, ): bool {.importc: "QMetaProperty_isUser".}
-proc fcQMetaProperty_isConstant(self: pointer, ): bool {.importc: "QMetaProperty_isConstant".}
-proc fcQMetaProperty_isFinal(self: pointer, ): bool {.importc: "QMetaProperty_isFinal".}
-proc fcQMetaProperty_isRequired(self: pointer, ): bool {.importc: "QMetaProperty_isRequired".}
-proc fcQMetaProperty_isBindable(self: pointer, ): bool {.importc: "QMetaProperty_isBindable".}
-proc fcQMetaProperty_isFlagType(self: pointer, ): bool {.importc: "QMetaProperty_isFlagType".}
-proc fcQMetaProperty_isEnumType(self: pointer, ): bool {.importc: "QMetaProperty_isEnumType".}
-proc fcQMetaProperty_enumerator(self: pointer, ): pointer {.importc: "QMetaProperty_enumerator".}
-proc fcQMetaProperty_hasNotifySignal(self: pointer, ): bool {.importc: "QMetaProperty_hasNotifySignal".}
-proc fcQMetaProperty_notifySignal(self: pointer, ): pointer {.importc: "QMetaProperty_notifySignal".}
-proc fcQMetaProperty_notifySignalIndex(self: pointer, ): cint {.importc: "QMetaProperty_notifySignalIndex".}
-proc fcQMetaProperty_revision(self: pointer, ): cint {.importc: "QMetaProperty_revision".}
+proc fcQMetaProperty_name(self: pointer): cstring {.importc: "QMetaProperty_name".}
+proc fcQMetaProperty_typeName(self: pointer): cstring {.importc: "QMetaProperty_typeName".}
+proc fcQMetaProperty_typeX(self: pointer): cint {.importc: "QMetaProperty_type".}
+proc fcQMetaProperty_userType(self: pointer): cint {.importc: "QMetaProperty_userType".}
+proc fcQMetaProperty_typeId(self: pointer): cint {.importc: "QMetaProperty_typeId".}
+proc fcQMetaProperty_metaType(self: pointer): pointer {.importc: "QMetaProperty_metaType".}
+proc fcQMetaProperty_propertyIndex(self: pointer): cint {.importc: "QMetaProperty_propertyIndex".}
+proc fcQMetaProperty_relativePropertyIndex(self: pointer): cint {.importc: "QMetaProperty_relativePropertyIndex".}
+proc fcQMetaProperty_isReadable(self: pointer): bool {.importc: "QMetaProperty_isReadable".}
+proc fcQMetaProperty_isWritable(self: pointer): bool {.importc: "QMetaProperty_isWritable".}
+proc fcQMetaProperty_isResettable(self: pointer): bool {.importc: "QMetaProperty_isResettable".}
+proc fcQMetaProperty_isDesignable(self: pointer): bool {.importc: "QMetaProperty_isDesignable".}
+proc fcQMetaProperty_isScriptable(self: pointer): bool {.importc: "QMetaProperty_isScriptable".}
+proc fcQMetaProperty_isStored(self: pointer): bool {.importc: "QMetaProperty_isStored".}
+proc fcQMetaProperty_isUser(self: pointer): bool {.importc: "QMetaProperty_isUser".}
+proc fcQMetaProperty_isConstant(self: pointer): bool {.importc: "QMetaProperty_isConstant".}
+proc fcQMetaProperty_isFinal(self: pointer): bool {.importc: "QMetaProperty_isFinal".}
+proc fcQMetaProperty_isRequired(self: pointer): bool {.importc: "QMetaProperty_isRequired".}
+proc fcQMetaProperty_isBindable(self: pointer): bool {.importc: "QMetaProperty_isBindable".}
+proc fcQMetaProperty_isFlagType(self: pointer): bool {.importc: "QMetaProperty_isFlagType".}
+proc fcQMetaProperty_isEnumType(self: pointer): bool {.importc: "QMetaProperty_isEnumType".}
+proc fcQMetaProperty_enumerator(self: pointer): pointer {.importc: "QMetaProperty_enumerator".}
+proc fcQMetaProperty_hasNotifySignal(self: pointer): bool {.importc: "QMetaProperty_hasNotifySignal".}
+proc fcQMetaProperty_notifySignal(self: pointer): pointer {.importc: "QMetaProperty_notifySignal".}
+proc fcQMetaProperty_notifySignalIndex(self: pointer): cint {.importc: "QMetaProperty_notifySignalIndex".}
+proc fcQMetaProperty_revision(self: pointer): cint {.importc: "QMetaProperty_revision".}
 proc fcQMetaProperty_read(self: pointer, obj: pointer): pointer {.importc: "QMetaProperty_read".}
 proc fcQMetaProperty_write(self: pointer, obj: pointer, value: pointer): bool {.importc: "QMetaProperty_write".}
 proc fcQMetaProperty_reset(self: pointer, obj: pointer): bool {.importc: "QMetaProperty_reset".}
@@ -212,38 +212,38 @@ proc fcQMetaProperty_bindable(self: pointer, objectVal: pointer): pointer {.impo
 proc fcQMetaProperty_readOnGadget(self: pointer, gadget: pointer): pointer {.importc: "QMetaProperty_readOnGadget".}
 proc fcQMetaProperty_writeOnGadget(self: pointer, gadget: pointer, value: pointer): bool {.importc: "QMetaProperty_writeOnGadget".}
 proc fcQMetaProperty_resetOnGadget(self: pointer, gadget: pointer): bool {.importc: "QMetaProperty_resetOnGadget".}
-proc fcQMetaProperty_hasStdCppSet(self: pointer, ): bool {.importc: "QMetaProperty_hasStdCppSet".}
-proc fcQMetaProperty_isAlias(self: pointer, ): bool {.importc: "QMetaProperty_isAlias".}
-proc fcQMetaProperty_isValid(self: pointer, ): bool {.importc: "QMetaProperty_isValid".}
-proc fcQMetaProperty_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaProperty_enclosingMetaObject".}
+proc fcQMetaProperty_hasStdCppSet(self: pointer): bool {.importc: "QMetaProperty_hasStdCppSet".}
+proc fcQMetaProperty_isAlias(self: pointer): bool {.importc: "QMetaProperty_isAlias".}
+proc fcQMetaProperty_isValid(self: pointer): bool {.importc: "QMetaProperty_isValid".}
+proc fcQMetaProperty_enclosingMetaObject(self: pointer): pointer {.importc: "QMetaProperty_enclosingMetaObject".}
 proc fcQMetaProperty_new(): ptr cQMetaProperty {.importc: "QMetaProperty_new".}
-proc fcQMetaClassInfo_name(self: pointer, ): cstring {.importc: "QMetaClassInfo_name".}
-proc fcQMetaClassInfo_value(self: pointer, ): cstring {.importc: "QMetaClassInfo_value".}
-proc fcQMetaClassInfo_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaClassInfo_enclosingMetaObject".}
+proc fcQMetaClassInfo_name(self: pointer): cstring {.importc: "QMetaClassInfo_name".}
+proc fcQMetaClassInfo_value(self: pointer): cstring {.importc: "QMetaClassInfo_value".}
+proc fcQMetaClassInfo_enclosingMetaObject(self: pointer): pointer {.importc: "QMetaClassInfo_enclosingMetaObject".}
 proc fcQMetaClassInfo_new(): ptr cQMetaClassInfo {.importc: "QMetaClassInfo_new".}
 
-proc methodSignature*(self: gen_qmetaobject_types.QMetaMethod, ): seq[byte] =
+proc methodSignature*(self: gen_qmetaobject_types.QMetaMethod): seq[byte] =
   var v_bytearray = fcQMetaMethod_methodSignature(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc name*(self: gen_qmetaobject_types.QMetaMethod, ): seq[byte] =
+proc name*(self: gen_qmetaobject_types.QMetaMethod): seq[byte] =
   var v_bytearray = fcQMetaMethod_name(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc typeName*(self: gen_qmetaobject_types.QMetaMethod, ): cstring =
+proc typeName*(self: gen_qmetaobject_types.QMetaMethod): cstring =
   (fcQMetaMethod_typeName(self.h))
 
-proc returnType*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc returnType*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_returnType(self.h)
 
-proc returnMetaType*(self: gen_qmetaobject_types.QMetaMethod, ): gen_qmetatype_types.QMetaType =
+proc returnMetaType*(self: gen_qmetaobject_types.QMetaMethod): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaMethod_returnMetaType(self.h), owned: true)
 
-proc parameterCount*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc parameterCount*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_parameterCount(self.h)
 
 proc parameterType*(self: gen_qmetaobject_types.QMetaMethod, index: cint): cint =
@@ -255,7 +255,7 @@ proc parameterMetaType*(self: gen_qmetaobject_types.QMetaMethod, index: cint): g
 proc getParameterTypes*(self: gen_qmetaobject_types.QMetaMethod, types: ptr cint): void =
   fcQMetaMethod_getParameterTypes(self.h, types)
 
-proc parameterTypes*(self: gen_qmetaobject_types.QMetaMethod, ): seq[seq[byte]] =
+proc parameterTypes*(self: gen_qmetaobject_types.QMetaMethod): seq[seq[byte]] =
   var v_ma = fcQMetaMethod_parameterTypes(self.h)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -273,7 +273,7 @@ proc parameterTypeName*(self: gen_qmetaobject_types.QMetaMethod, index: cint): s
   c_free(v_bytearray.data)
   vx_ret
 
-proc parameterNames*(self: gen_qmetaobject_types.QMetaMethod, ): seq[seq[byte]] =
+proc parameterNames*(self: gen_qmetaobject_types.QMetaMethod): seq[seq[byte]] =
   var v_ma = fcQMetaMethod_parameterNames(self.h)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -285,31 +285,31 @@ proc parameterNames*(self: gen_qmetaobject_types.QMetaMethod, ): seq[seq[byte]] 
   c_free(v_ma.data)
   vx_ret
 
-proc tag*(self: gen_qmetaobject_types.QMetaMethod, ): cstring =
+proc tag*(self: gen_qmetaobject_types.QMetaMethod): cstring =
   (fcQMetaMethod_tag(self.h))
 
-proc access*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc access*(self: gen_qmetaobject_types.QMetaMethod): cint =
   cint(fcQMetaMethod_access(self.h))
 
-proc methodType*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc methodType*(self: gen_qmetaobject_types.QMetaMethod): cint =
   cint(fcQMetaMethod_methodType(self.h))
 
-proc attributes*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc attributes*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_attributes(self.h)
 
-proc methodIndex*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc methodIndex*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_methodIndex(self.h)
 
-proc relativeMethodIndex*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc relativeMethodIndex*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_relativeMethodIndex(self.h)
 
-proc revision*(self: gen_qmetaobject_types.QMetaMethod, ): cint =
+proc revision*(self: gen_qmetaobject_types.QMetaMethod): cint =
   fcQMetaMethod_revision(self.h)
 
-proc isConst*(self: gen_qmetaobject_types.QMetaMethod, ): bool =
+proc isConst*(self: gen_qmetaobject_types.QMetaMethod): bool =
   fcQMetaMethod_isConst(self.h)
 
-proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaMethod, ): gen_qobjectdefs_types.QMetaObject =
+proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaMethod): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaMethod_enclosingMetaObject(self.h), owned: false)
 
 proc invoke*(self: gen_qmetaobject_types.QMetaMethod, objectVal: gen_qobject_types.QObject, connectionType: cint, returnValue: gen_qobjectdefs_types.QGenericReturnArgument): bool =
@@ -330,7 +330,7 @@ proc invokeOnGadget*(self: gen_qmetaobject_types.QMetaMethod, gadget: pointer, r
 proc invokeOnGadget*(self: gen_qmetaobject_types.QMetaMethod, gadget: pointer): bool =
   fcQMetaMethod_invokeOnGadgetWithGadget(self.h, gadget)
 
-proc isValid*(self: gen_qmetaobject_types.QMetaMethod, ): bool =
+proc isValid*(self: gen_qmetaobject_types.QMetaMethod): bool =
   fcQMetaMethod_isValid(self.h)
 
 proc invoke*(self: gen_qmetaobject_types.QMetaMethod, objectVal: gen_qobject_types.QObject, connectionType: cint, returnValue: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument): bool =
@@ -520,19 +520,19 @@ proc create*(T: type gen_qmetaobject_types.QMetaMethod,
     param1: gen_qmetaobject_types.QMetaMethod): gen_qmetaobject_types.QMetaMethod =
   gen_qmetaobject_types.QMetaMethod(h: fcQMetaMethod_new2(param1.h), owned: true)
 
-proc name*(self: gen_qmetaobject_types.QMetaEnum, ): cstring =
+proc name*(self: gen_qmetaobject_types.QMetaEnum): cstring =
   (fcQMetaEnum_name(self.h))
 
-proc enumName*(self: gen_qmetaobject_types.QMetaEnum, ): cstring =
+proc enumName*(self: gen_qmetaobject_types.QMetaEnum): cstring =
   (fcQMetaEnum_enumName(self.h))
 
-proc isFlag*(self: gen_qmetaobject_types.QMetaEnum, ): bool =
+proc isFlag*(self: gen_qmetaobject_types.QMetaEnum): bool =
   fcQMetaEnum_isFlag(self.h)
 
-proc isScoped*(self: gen_qmetaobject_types.QMetaEnum, ): bool =
+proc isScoped*(self: gen_qmetaobject_types.QMetaEnum): bool =
   fcQMetaEnum_isScoped(self.h)
 
-proc keyCount*(self: gen_qmetaobject_types.QMetaEnum, ): cint =
+proc keyCount*(self: gen_qmetaobject_types.QMetaEnum): cint =
   fcQMetaEnum_keyCount(self.h)
 
 proc key*(self: gen_qmetaobject_types.QMetaEnum, index: cint): cstring =
@@ -541,7 +541,7 @@ proc key*(self: gen_qmetaobject_types.QMetaEnum, index: cint): cstring =
 proc value*(self: gen_qmetaobject_types.QMetaEnum, index: cint): cint =
   fcQMetaEnum_value(self.h, index)
 
-proc scope*(self: gen_qmetaobject_types.QMetaEnum, ): cstring =
+proc scope*(self: gen_qmetaobject_types.QMetaEnum): cstring =
   (fcQMetaEnum_scope(self.h))
 
 proc keyToValue*(self: gen_qmetaobject_types.QMetaEnum, key: cstring): cint =
@@ -559,10 +559,10 @@ proc valueToKeys*(self: gen_qmetaobject_types.QMetaEnum, value: cint): seq[byte]
   c_free(v_bytearray.data)
   vx_ret
 
-proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaEnum, ): gen_qobjectdefs_types.QMetaObject =
+proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaEnum): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaEnum_enclosingMetaObject(self.h), owned: false)
 
-proc isValid*(self: gen_qmetaobject_types.QMetaEnum, ): bool =
+proc isValid*(self: gen_qmetaobject_types.QMetaEnum): bool =
   fcQMetaEnum_isValid(self.h)
 
 proc keyToValue*(self: gen_qmetaobject_types.QMetaEnum, key: cstring, ok: ptr bool): cint =
@@ -578,82 +578,82 @@ proc create*(T: type gen_qmetaobject_types.QMetaEnum,
     param1: gen_qmetaobject_types.QMetaEnum): gen_qmetaobject_types.QMetaEnum =
   gen_qmetaobject_types.QMetaEnum(h: fcQMetaEnum_new2(param1.h), owned: true)
 
-proc name*(self: gen_qmetaobject_types.QMetaProperty, ): cstring =
+proc name*(self: gen_qmetaobject_types.QMetaProperty): cstring =
   (fcQMetaProperty_name(self.h))
 
-proc typeName*(self: gen_qmetaobject_types.QMetaProperty, ): cstring =
+proc typeName*(self: gen_qmetaobject_types.QMetaProperty): cstring =
   (fcQMetaProperty_typeName(self.h))
 
-proc typeX*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc typeX*(self: gen_qmetaobject_types.QMetaProperty): cint =
   cint(fcQMetaProperty_typeX(self.h))
 
-proc userType*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc userType*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_userType(self.h)
 
-proc typeId*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc typeId*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_typeId(self.h)
 
-proc metaType*(self: gen_qmetaobject_types.QMetaProperty, ): gen_qmetatype_types.QMetaType =
+proc metaType*(self: gen_qmetaobject_types.QMetaProperty): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaProperty_metaType(self.h), owned: true)
 
-proc propertyIndex*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc propertyIndex*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_propertyIndex(self.h)
 
-proc relativePropertyIndex*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc relativePropertyIndex*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_relativePropertyIndex(self.h)
 
-proc isReadable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isReadable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isReadable(self.h)
 
-proc isWritable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isWritable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isWritable(self.h)
 
-proc isResettable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isResettable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isResettable(self.h)
 
-proc isDesignable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isDesignable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isDesignable(self.h)
 
-proc isScriptable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isScriptable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isScriptable(self.h)
 
-proc isStored*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isStored*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isStored(self.h)
 
-proc isUser*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isUser*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isUser(self.h)
 
-proc isConstant*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isConstant*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isConstant(self.h)
 
-proc isFinal*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isFinal*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isFinal(self.h)
 
-proc isRequired*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isRequired*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isRequired(self.h)
 
-proc isBindable*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isBindable*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isBindable(self.h)
 
-proc isFlagType*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isFlagType*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isFlagType(self.h)
 
-proc isEnumType*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isEnumType*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isEnumType(self.h)
 
-proc enumerator*(self: gen_qmetaobject_types.QMetaProperty, ): gen_qmetaobject_types.QMetaEnum =
+proc enumerator*(self: gen_qmetaobject_types.QMetaProperty): gen_qmetaobject_types.QMetaEnum =
   gen_qmetaobject_types.QMetaEnum(h: fcQMetaProperty_enumerator(self.h), owned: true)
 
-proc hasNotifySignal*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc hasNotifySignal*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_hasNotifySignal(self.h)
 
-proc notifySignal*(self: gen_qmetaobject_types.QMetaProperty, ): gen_qmetaobject_types.QMetaMethod =
+proc notifySignal*(self: gen_qmetaobject_types.QMetaProperty): gen_qmetaobject_types.QMetaMethod =
   gen_qmetaobject_types.QMetaMethod(h: fcQMetaProperty_notifySignal(self.h), owned: true)
 
-proc notifySignalIndex*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc notifySignalIndex*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_notifySignalIndex(self.h)
 
-proc revision*(self: gen_qmetaobject_types.QMetaProperty, ): cint =
+proc revision*(self: gen_qmetaobject_types.QMetaProperty): cint =
   fcQMetaProperty_revision(self.h)
 
 proc read*(self: gen_qmetaobject_types.QMetaProperty, obj: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
@@ -677,28 +677,28 @@ proc writeOnGadget*(self: gen_qmetaobject_types.QMetaProperty, gadget: pointer, 
 proc resetOnGadget*(self: gen_qmetaobject_types.QMetaProperty, gadget: pointer): bool =
   fcQMetaProperty_resetOnGadget(self.h, gadget)
 
-proc hasStdCppSet*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc hasStdCppSet*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_hasStdCppSet(self.h)
 
-proc isAlias*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isAlias*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isAlias(self.h)
 
-proc isValid*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
+proc isValid*(self: gen_qmetaobject_types.QMetaProperty): bool =
   fcQMetaProperty_isValid(self.h)
 
-proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaProperty, ): gen_qobjectdefs_types.QMetaObject =
+proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaProperty): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaProperty_enclosingMetaObject(self.h), owned: false)
 
 proc create*(T: type gen_qmetaobject_types.QMetaProperty): gen_qmetaobject_types.QMetaProperty =
   gen_qmetaobject_types.QMetaProperty(h: fcQMetaProperty_new(), owned: true)
 
-proc name*(self: gen_qmetaobject_types.QMetaClassInfo, ): cstring =
+proc name*(self: gen_qmetaobject_types.QMetaClassInfo): cstring =
   (fcQMetaClassInfo_name(self.h))
 
-proc value*(self: gen_qmetaobject_types.QMetaClassInfo, ): cstring =
+proc value*(self: gen_qmetaobject_types.QMetaClassInfo): cstring =
   (fcQMetaClassInfo_value(self.h))
 
-proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaClassInfo, ): gen_qobjectdefs_types.QMetaObject =
+proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaClassInfo): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaClassInfo_enclosingMetaObject(self.h), owned: false)
 
 proc create*(T: type gen_qmetaobject_types.QMetaClassInfo): gen_qmetaobject_types.QMetaClassInfo =

@@ -8,15 +8,6 @@
 #include <QWebEngineHttpRequest>
 #include <qwebenginehttprequest.h>
 #include "gen_qwebenginehttprequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineHttpRequest* QWebEngineHttpRequest_new() {
 	return new QWebEngineHttpRequest();
 }

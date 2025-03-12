@@ -64,39 +64,32 @@
 #include <QWindowStateChangeEvent>
 #include <qevent.h>
 #include "gen_qevent.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQInputEvent final : public QInputEvent {
-	struct QInputEvent_VTable* vtbl;
+	const QInputEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QInputEvent_VTable* QInputEvent_vtbl(const VirtualQInputEvent* self);
+	friend void* QInputEvent_vdata(const VirtualQInputEvent* self);
+	friend void QInputEvent_setVdata(VirtualQInputEvent* self, void* vdata);
 
-	VirtualQInputEvent(struct QInputEvent_VTable* vtbl, QEvent::Type type, const QInputDevice* m_dev): QInputEvent(type, m_dev), vtbl(vtbl) {};
-	VirtualQInputEvent(struct QInputEvent_VTable* vtbl, QEvent::Type type, const QInputDevice* m_dev, Qt::KeyboardModifiers modifiers): QInputEvent(type, m_dev, modifiers), vtbl(vtbl) {};
+	VirtualQInputEvent(const QInputEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QInputDevice* m_dev): QInputEvent(type, m_dev), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputEvent(const QInputEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QInputDevice* m_dev, Qt::KeyboardModifiers modifiers): QInputEvent(type, m_dev, modifiers), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQInputEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQInputEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QInputEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QInputEvent::clone();
 		}
 
 
-		QInputEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QInputEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QInputEvent* QInputEvent_virtualbase_clone(const void* self);
+	friend QInputEvent* QInputEvent_virtualbase_clone(const VirtualQInputEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QInputEvent::setTimestamp(timestamp);
@@ -106,13 +99,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QInputEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QInputEvent_virtualbase_setTimestamp(VirtualQInputEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QInputEvent::setAccepted(accepted);
@@ -121,20 +113,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QInputEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QInputEvent_virtualbase_setAccepted(VirtualQInputEvent* self, bool accepted);
 
 };
 
-QInputEvent* QInputEvent_new(struct QInputEvent_VTable* vtbl, int type, QInputDevice* m_dev) {
-	return new VirtualQInputEvent(vtbl, static_cast<QEvent::Type>(type), m_dev);
+VirtualQInputEvent* QInputEvent_new(const QInputEvent_VTable* vtbl, void* vdata, int type, QInputDevice* m_dev) {
+	return new VirtualQInputEvent(vtbl, vdata, static_cast<QEvent::Type>(type), m_dev);
 }
 
-QInputEvent* QInputEvent_new2(struct QInputEvent_VTable* vtbl, int type, QInputDevice* m_dev, int modifiers) {
-	return new VirtualQInputEvent(vtbl, static_cast<QEvent::Type>(type), m_dev, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQInputEvent* QInputEvent_new2(const QInputEvent_VTable* vtbl, void* vdata, int type, QInputDevice* m_dev, int modifiers) {
+	return new VirtualQInputEvent(vtbl, vdata, static_cast<QEvent::Type>(type), m_dev, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
 void QInputEvent_virtbase(QInputEvent* src, QEvent** outptr_QEvent) {
@@ -172,53 +164,56 @@ void QInputEvent_setTimestamp(QInputEvent* self, unsigned long long timestamp) {
 	self->setTimestamp(static_cast<quint64>(timestamp));
 }
 
-QInputEvent* QInputEvent_virtualbase_clone(const void* self) {
+QInputEvent* QInputEvent_virtualbase_clone(const VirtualQInputEvent* self) {
 
-	return ( (const VirtualQInputEvent*)(self) )->QInputEvent::clone();
-
+	return self->QInputEvent::clone();
 }
 
-void QInputEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QInputEvent_virtualbase_setTimestamp(VirtualQInputEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQInputEvent*)(self) )->QInputEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QInputEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QInputEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QInputEvent_virtualbase_setAccepted(VirtualQInputEvent* self, bool accepted) {
 
-	( (VirtualQInputEvent*)(self) )->QInputEvent::setAccepted(accepted);
-
+	self->QInputEvent::setAccepted(accepted);
 }
+
+const QInputEvent_VTable* QInputEvent_vtbl(const VirtualQInputEvent* self) { return self->vtbl; }
+void* QInputEvent_vdata(const VirtualQInputEvent* self) { return self->vdata; }
+void QInputEvent_setVdata(VirtualQInputEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QInputEvent_delete(QInputEvent* self) {
 	delete self;
 }
 
 class VirtualQPointerEvent final : public QPointerEvent {
-	struct QPointerEvent_VTable* vtbl;
+	const QPointerEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPointerEvent_VTable* QPointerEvent_vtbl(const VirtualQPointerEvent* self);
+	friend void* QPointerEvent_vdata(const VirtualQPointerEvent* self);
+	friend void QPointerEvent_setVdata(VirtualQPointerEvent* self, void* vdata);
 
-	VirtualQPointerEvent(struct QPointerEvent_VTable* vtbl, QEvent::Type type, const QPointingDevice* dev): QPointerEvent(type, dev), vtbl(vtbl) {};
-	VirtualQPointerEvent(struct QPointerEvent_VTable* vtbl, QEvent::Type type, const QPointingDevice* dev, Qt::KeyboardModifiers modifiers): QPointerEvent(type, dev, modifiers), vtbl(vtbl) {};
-	VirtualQPointerEvent(struct QPointerEvent_VTable* vtbl, QEvent::Type type, const QPointingDevice* dev, Qt::KeyboardModifiers modifiers, const QList<QEventPoint>& points): QPointerEvent(type, dev, modifiers, points), vtbl(vtbl) {};
+	VirtualQPointerEvent(const QPointerEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointingDevice* dev): QPointerEvent(type, dev), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPointerEvent(const QPointerEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointingDevice* dev, Qt::KeyboardModifiers modifiers): QPointerEvent(type, dev, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPointerEvent(const QPointerEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointingDevice* dev, Qt::KeyboardModifiers modifiers, const QList<QEventPoint>& points): QPointerEvent(type, dev, modifiers, points), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPointerEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPointerEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QPointerEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QPointerEvent::clone();
 		}
 
 
-		QPointerEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QPointerEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QPointerEvent* QPointerEvent_virtualbase_clone(const void* self);
+	friend QPointerEvent* QPointerEvent_virtualbase_clone(const VirtualQPointerEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QPointerEvent::setTimestamp(timestamp);
@@ -228,55 +223,51 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QPointerEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QPointerEvent_virtualbase_setTimestamp(VirtualQPointerEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QPointerEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPointerEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QPointerEvent_virtualbase_isBeginEvent(const VirtualQPointerEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QPointerEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPointerEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QPointerEvent_virtualbase_isUpdateEvent(const VirtualQPointerEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QPointerEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPointerEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QPointerEvent_virtualbase_isEndEvent(const VirtualQPointerEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QPointerEvent::setAccepted(accepted);
@@ -285,30 +276,30 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QPointerEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QPointerEvent_virtualbase_setAccepted(VirtualQPointerEvent* self, bool accepted);
 
 };
 
-QPointerEvent* QPointerEvent_new(struct QPointerEvent_VTable* vtbl, int type, QPointingDevice* dev) {
-	return new VirtualQPointerEvent(vtbl, static_cast<QEvent::Type>(type), dev);
+VirtualQPointerEvent* QPointerEvent_new(const QPointerEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev) {
+	return new VirtualQPointerEvent(vtbl, vdata, static_cast<QEvent::Type>(type), dev);
 }
 
-QPointerEvent* QPointerEvent_new2(struct QPointerEvent_VTable* vtbl, int type, QPointingDevice* dev, int modifiers) {
-	return new VirtualQPointerEvent(vtbl, static_cast<QEvent::Type>(type), dev, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQPointerEvent* QPointerEvent_new2(const QPointerEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev, int modifiers) {
+	return new VirtualQPointerEvent(vtbl, vdata, static_cast<QEvent::Type>(type), dev, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QPointerEvent* QPointerEvent_new3(struct QPointerEvent_VTable* vtbl, int type, QPointingDevice* dev, int modifiers, struct miqt_array /* of QEventPoint* */  points) {
+VirtualQPointerEvent* QPointerEvent_new3(const QPointerEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev, int modifiers, struct miqt_array /* of QEventPoint* */  points) {
 	QList<QEventPoint> points_QList;
 	points_QList.reserve(points.len);
 	QEventPoint** points_arr = static_cast<QEventPoint**>(points.data);
 	for(size_t i = 0; i < points.len; ++i) {
 		points_QList.push_back(*(points_arr[i]));
 	}
-	return new VirtualQPointerEvent(vtbl, static_cast<QEvent::Type>(type), dev, static_cast<Qt::KeyboardModifiers>(modifiers), points_QList);
+	return new VirtualQPointerEvent(vtbl, vdata, static_cast<QEvent::Type>(type), dev, static_cast<Qt::KeyboardModifiers>(modifiers), points_QList);
 }
 
 void QPointerEvent_virtbase(QPointerEvent* src, QInputEvent** outptr_QInputEvent) {
@@ -404,41 +395,39 @@ bool QPointerEvent_removePassiveGrabber(QPointerEvent* self, QEventPoint* point,
 	return self->removePassiveGrabber(*point, grabber);
 }
 
-QPointerEvent* QPointerEvent_virtualbase_clone(const void* self) {
+QPointerEvent* QPointerEvent_virtualbase_clone(const VirtualQPointerEvent* self) {
 
-	return ( (const VirtualQPointerEvent*)(self) )->QPointerEvent::clone();
-
+	return self->QPointerEvent::clone();
 }
 
-void QPointerEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QPointerEvent_virtualbase_setTimestamp(VirtualQPointerEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQPointerEvent*)(self) )->QPointerEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QPointerEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-bool QPointerEvent_virtualbase_isBeginEvent(const void* self) {
+bool QPointerEvent_virtualbase_isBeginEvent(const VirtualQPointerEvent* self) {
 
-	return ( (const VirtualQPointerEvent*)(self) )->QPointerEvent::isBeginEvent();
-
+	return self->QPointerEvent::isBeginEvent();
 }
 
-bool QPointerEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QPointerEvent_virtualbase_isUpdateEvent(const VirtualQPointerEvent* self) {
 
-	return ( (const VirtualQPointerEvent*)(self) )->QPointerEvent::isUpdateEvent();
-
+	return self->QPointerEvent::isUpdateEvent();
 }
 
-bool QPointerEvent_virtualbase_isEndEvent(const void* self) {
+bool QPointerEvent_virtualbase_isEndEvent(const VirtualQPointerEvent* self) {
 
-	return ( (const VirtualQPointerEvent*)(self) )->QPointerEvent::isEndEvent();
-
+	return self->QPointerEvent::isEndEvent();
 }
 
-void QPointerEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QPointerEvent_virtualbase_setAccepted(VirtualQPointerEvent* self, bool accepted) {
 
-	( (VirtualQPointerEvent*)(self) )->QPointerEvent::setAccepted(accepted);
-
+	self->QPointerEvent::setAccepted(accepted);
 }
+
+const QPointerEvent_VTable* QPointerEvent_vtbl(const VirtualQPointerEvent* self) { return self->vtbl; }
+void* QPointerEvent_vdata(const VirtualQPointerEvent* self) { return self->vdata; }
+void QPointerEvent_setVdata(VirtualQPointerEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QPointerEvent_delete(QPointerEvent* self) {
 	delete self;
@@ -495,76 +484,76 @@ void QSinglePointEvent_setExclusivePointGrabber(QSinglePointEvent* self, QObject
 }
 
 const QMetaObject* QSinglePointEvent_staticMetaObject() { return &QSinglePointEvent::staticMetaObject; }
+
 void QSinglePointEvent_delete(QSinglePointEvent* self) {
 	delete self;
 }
 
 class VirtualQEnterEvent final : public QEnterEvent {
-	struct QEnterEvent_VTable* vtbl;
+	const QEnterEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QEnterEvent_VTable* QEnterEvent_vtbl(const VirtualQEnterEvent* self);
+	friend void* QEnterEvent_vdata(const VirtualQEnterEvent* self);
+	friend void QEnterEvent_setVdata(VirtualQEnterEvent* self, void* vdata);
 
-	VirtualQEnterEvent(struct QEnterEvent_VTable* vtbl, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos): QEnterEvent(localPos, scenePos, globalPos), vtbl(vtbl) {};
-	VirtualQEnterEvent(struct QEnterEvent_VTable* vtbl, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, const QPointingDevice* device): QEnterEvent(localPos, scenePos, globalPos, device), vtbl(vtbl) {};
+	VirtualQEnterEvent(const QEnterEvent_VTable* vtbl, void* vdata, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos): QEnterEvent(localPos, scenePos, globalPos), vtbl(vtbl), vdata(vdata) {}
+	VirtualQEnterEvent(const QEnterEvent_VTable* vtbl, void* vdata, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, const QPointingDevice* device): QEnterEvent(localPos, scenePos, globalPos, device), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQEnterEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQEnterEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QEnterEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QEnterEvent::clone();
 		}
 
 
-		QEnterEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QEnterEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QEnterEvent* QEnterEvent_virtualbase_clone(const void* self);
+	friend QEnterEvent* QEnterEvent_virtualbase_clone(const VirtualQEnterEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QEnterEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QEnterEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QEnterEvent_virtualbase_isBeginEvent(const VirtualQEnterEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QEnterEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QEnterEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QEnterEvent_virtualbase_isUpdateEvent(const VirtualQEnterEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QEnterEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QEnterEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QEnterEvent_virtualbase_isEndEvent(const VirtualQEnterEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QEnterEvent::setTimestamp(timestamp);
@@ -574,13 +563,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QEnterEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QEnterEvent_virtualbase_setTimestamp(VirtualQEnterEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QEnterEvent::setAccepted(accepted);
@@ -589,20 +577,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QEnterEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QEnterEvent_virtualbase_setAccepted(VirtualQEnterEvent* self, bool accepted);
 
 };
 
-QEnterEvent* QEnterEvent_new(struct QEnterEvent_VTable* vtbl, QPointF* localPos, QPointF* scenePos, QPointF* globalPos) {
-	return new VirtualQEnterEvent(vtbl, *localPos, *scenePos, *globalPos);
+VirtualQEnterEvent* QEnterEvent_new(const QEnterEvent_VTable* vtbl, void* vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos) {
+	return new VirtualQEnterEvent(vtbl, vdata, *localPos, *scenePos, *globalPos);
 }
 
-QEnterEvent* QEnterEvent_new2(struct QEnterEvent_VTable* vtbl, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, QPointingDevice* device) {
-	return new VirtualQEnterEvent(vtbl, *localPos, *scenePos, *globalPos, device);
+VirtualQEnterEvent* QEnterEvent_new2(const QEnterEvent_VTable* vtbl, void* vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, QPointingDevice* device) {
+	return new VirtualQEnterEvent(vtbl, vdata, *localPos, *scenePos, *globalPos, device);
 }
 
 void QEnterEvent_virtbase(QEnterEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -649,118 +637,115 @@ QPointF* QEnterEvent_screenPos(const QEnterEvent* self) {
 	return new QPointF(self->screenPos());
 }
 
-QEnterEvent* QEnterEvent_virtualbase_clone(const void* self) {
+QEnterEvent* QEnterEvent_virtualbase_clone(const VirtualQEnterEvent* self) {
 
-	return ( (const VirtualQEnterEvent*)(self) )->QEnterEvent::clone();
-
+	return self->QEnterEvent::clone();
 }
 
-bool QEnterEvent_virtualbase_isBeginEvent(const void* self) {
+bool QEnterEvent_virtualbase_isBeginEvent(const VirtualQEnterEvent* self) {
 
-	return ( (const VirtualQEnterEvent*)(self) )->QEnterEvent::isBeginEvent();
-
+	return self->QEnterEvent::isBeginEvent();
 }
 
-bool QEnterEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QEnterEvent_virtualbase_isUpdateEvent(const VirtualQEnterEvent* self) {
 
-	return ( (const VirtualQEnterEvent*)(self) )->QEnterEvent::isUpdateEvent();
-
+	return self->QEnterEvent::isUpdateEvent();
 }
 
-bool QEnterEvent_virtualbase_isEndEvent(const void* self) {
+bool QEnterEvent_virtualbase_isEndEvent(const VirtualQEnterEvent* self) {
 
-	return ( (const VirtualQEnterEvent*)(self) )->QEnterEvent::isEndEvent();
-
+	return self->QEnterEvent::isEndEvent();
 }
 
-void QEnterEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QEnterEvent_virtualbase_setTimestamp(VirtualQEnterEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQEnterEvent*)(self) )->QEnterEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QEnterEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QEnterEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QEnterEvent_virtualbase_setAccepted(VirtualQEnterEvent* self, bool accepted) {
 
-	( (VirtualQEnterEvent*)(self) )->QEnterEvent::setAccepted(accepted);
-
+	self->QEnterEvent::setAccepted(accepted);
 }
+
+const QEnterEvent_VTable* QEnterEvent_vtbl(const VirtualQEnterEvent* self) { return self->vtbl; }
+void* QEnterEvent_vdata(const VirtualQEnterEvent* self) { return self->vdata; }
+void QEnterEvent_setVdata(VirtualQEnterEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QEnterEvent_delete(QEnterEvent* self) {
 	delete self;
 }
 
 class VirtualQMouseEvent final : public QMouseEvent {
-	struct QMouseEvent_VTable* vtbl;
+	const QMouseEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMouseEvent_VTable* QMouseEvent_vtbl(const VirtualQMouseEvent* self);
+	friend void* QMouseEvent_vdata(const VirtualQMouseEvent* self);
+	friend void QMouseEvent_setVdata(VirtualQMouseEvent* self, void* vdata);
 
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, button, buttons, modifiers), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, globalPos, button, buttons, modifiers), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::MouseEventSource source): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, source), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, button, buttons, modifiers, device), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, globalPos, button, buttons, modifiers, device), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, device), vtbl(vtbl) {};
-	VirtualQMouseEvent(struct QMouseEvent_VTable* vtbl, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::MouseEventSource source, const QPointingDevice* device): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, source, device), vtbl(vtbl) {};
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, button, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, globalPos, button, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::MouseEventSource source): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, source), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, button, buttons, modifiers, device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, globalPos, button, buttons, modifiers, device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEvent(const QMouseEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::MouseEventSource source, const QPointingDevice* device): QMouseEvent(type, localPos, scenePos, globalPos, button, buttons, modifiers, source, device), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMouseEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMouseEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QMouseEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QMouseEvent::clone();
 		}
 
 
-		QMouseEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QMouseEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QMouseEvent* QMouseEvent_virtualbase_clone(const void* self);
+	friend QMouseEvent* QMouseEvent_virtualbase_clone(const VirtualQMouseEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QMouseEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QMouseEvent_virtualbase_isBeginEvent(const VirtualQMouseEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QMouseEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QMouseEvent_virtualbase_isUpdateEvent(const VirtualQMouseEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QMouseEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QMouseEvent_virtualbase_isEndEvent(const VirtualQMouseEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QMouseEvent::setTimestamp(timestamp);
@@ -770,13 +755,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QMouseEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QMouseEvent_virtualbase_setTimestamp(VirtualQMouseEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QMouseEvent::setAccepted(accepted);
@@ -785,44 +769,44 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QMouseEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QMouseEvent_virtualbase_setAccepted(VirtualQMouseEvent* self, bool accepted);
 
 };
 
-QMouseEvent* QMouseEvent_new(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, int button, int buttons, int modifiers) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQMouseEvent* QMouseEvent_new(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, int button, int buttons, int modifiers) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QMouseEvent* QMouseEvent_new2(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQMouseEvent* QMouseEvent_new2(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QMouseEvent* QMouseEvent_new3(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQMouseEvent* QMouseEvent_new3(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QMouseEvent* QMouseEvent_new4(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source));
+VirtualQMouseEvent* QMouseEvent_new4(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source));
 }
 
-QMouseEvent* QMouseEvent_new5(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, int button, int buttons, int modifiers, QPointingDevice* device) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
+VirtualQMouseEvent* QMouseEvent_new5(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
 }
 
-QMouseEvent* QMouseEvent_new6(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
+VirtualQMouseEvent* QMouseEvent_new6(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
 }
 
-QMouseEvent* QMouseEvent_new7(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
+VirtualQMouseEvent* QMouseEvent_new7(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device);
 }
 
-QMouseEvent* QMouseEvent_new8(struct QMouseEvent_VTable* vtbl, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source, QPointingDevice* device) {
-	return new VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source), device);
+VirtualQMouseEvent* QMouseEvent_new8(const QMouseEvent_VTable* vtbl, void* vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source, QPointingDevice* device) {
+	return new VirtualQMouseEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source), device);
 }
 
 void QMouseEvent_virtbase(QMouseEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -879,116 +863,113 @@ int QMouseEvent_flags(const QMouseEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QMouseEvent* QMouseEvent_virtualbase_clone(const void* self) {
+QMouseEvent* QMouseEvent_virtualbase_clone(const VirtualQMouseEvent* self) {
 
-	return ( (const VirtualQMouseEvent*)(self) )->QMouseEvent::clone();
-
+	return self->QMouseEvent::clone();
 }
 
-bool QMouseEvent_virtualbase_isBeginEvent(const void* self) {
+bool QMouseEvent_virtualbase_isBeginEvent(const VirtualQMouseEvent* self) {
 
-	return ( (const VirtualQMouseEvent*)(self) )->QMouseEvent::isBeginEvent();
-
+	return self->QMouseEvent::isBeginEvent();
 }
 
-bool QMouseEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QMouseEvent_virtualbase_isUpdateEvent(const VirtualQMouseEvent* self) {
 
-	return ( (const VirtualQMouseEvent*)(self) )->QMouseEvent::isUpdateEvent();
-
+	return self->QMouseEvent::isUpdateEvent();
 }
 
-bool QMouseEvent_virtualbase_isEndEvent(const void* self) {
+bool QMouseEvent_virtualbase_isEndEvent(const VirtualQMouseEvent* self) {
 
-	return ( (const VirtualQMouseEvent*)(self) )->QMouseEvent::isEndEvent();
-
+	return self->QMouseEvent::isEndEvent();
 }
 
-void QMouseEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QMouseEvent_virtualbase_setTimestamp(VirtualQMouseEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQMouseEvent*)(self) )->QMouseEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QMouseEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QMouseEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QMouseEvent_virtualbase_setAccepted(VirtualQMouseEvent* self, bool accepted) {
 
-	( (VirtualQMouseEvent*)(self) )->QMouseEvent::setAccepted(accepted);
-
+	self->QMouseEvent::setAccepted(accepted);
 }
+
+const QMouseEvent_VTable* QMouseEvent_vtbl(const VirtualQMouseEvent* self) { return self->vtbl; }
+void* QMouseEvent_vdata(const VirtualQMouseEvent* self) { return self->vdata; }
+void QMouseEvent_setVdata(VirtualQMouseEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QMouseEvent_delete(QMouseEvent* self) {
 	delete self;
 }
 
 class VirtualQHoverEvent final : public QHoverEvent {
-	struct QHoverEvent_VTable* vtbl;
+	const QHoverEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QHoverEvent_VTable* QHoverEvent_vtbl(const VirtualQHoverEvent* self);
+	friend void* QHoverEvent_vdata(const VirtualQHoverEvent* self);
+	friend void QHoverEvent_setVdata(VirtualQHoverEvent* self, void* vdata);
 
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos): QHoverEvent(type, scenePos, globalPos, oldPos), vtbl(vtbl) {};
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& pos, const QPointF& oldPos): QHoverEvent(type, pos, oldPos), vtbl(vtbl) {};
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers): QHoverEvent(type, scenePos, globalPos, oldPos, modifiers), vtbl(vtbl) {};
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QHoverEvent(type, scenePos, globalPos, oldPos, modifiers, device), vtbl(vtbl) {};
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& pos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers): QHoverEvent(type, pos, oldPos, modifiers), vtbl(vtbl) {};
-	VirtualQHoverEvent(struct QHoverEvent_VTable* vtbl, QEvent::Type type, const QPointF& pos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QHoverEvent(type, pos, oldPos, modifiers, device), vtbl(vtbl) {};
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos): QHoverEvent(type, scenePos, globalPos, oldPos), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& pos, const QPointF& oldPos): QHoverEvent(type, pos, oldPos), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers): QHoverEvent(type, scenePos, globalPos, oldPos, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& scenePos, const QPointF& globalPos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QHoverEvent(type, scenePos, globalPos, oldPos, modifiers, device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& pos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers): QHoverEvent(type, pos, oldPos, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHoverEvent(const QHoverEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPointF& pos, const QPointF& oldPos, Qt::KeyboardModifiers modifiers, const QPointingDevice* device): QHoverEvent(type, pos, oldPos, modifiers, device), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQHoverEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQHoverEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QHoverEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QHoverEvent::clone();
 		}
 
 
-		QHoverEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QHoverEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QHoverEvent* QHoverEvent_virtualbase_clone(const void* self);
+	friend QHoverEvent* QHoverEvent_virtualbase_clone(const VirtualQHoverEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QHoverEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QHoverEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QHoverEvent_virtualbase_isUpdateEvent(const VirtualQHoverEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QHoverEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QHoverEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QHoverEvent_virtualbase_isBeginEvent(const VirtualQHoverEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QHoverEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QHoverEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QHoverEvent_virtualbase_isEndEvent(const VirtualQHoverEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QHoverEvent::setTimestamp(timestamp);
@@ -998,13 +979,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QHoverEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QHoverEvent_virtualbase_setTimestamp(VirtualQHoverEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QHoverEvent::setAccepted(accepted);
@@ -1013,36 +993,36 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QHoverEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QHoverEvent_virtualbase_setAccepted(VirtualQHoverEvent* self, bool accepted);
 
 };
 
-QHoverEvent* QHoverEvent_new(struct QHoverEvent_VTable* vtbl, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos);
+VirtualQHoverEvent* QHoverEvent_new(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos);
 }
 
-QHoverEvent* QHoverEvent_new2(struct QHoverEvent_VTable* vtbl, int type, QPointF* pos, QPointF* oldPos) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos);
+VirtualQHoverEvent* QHoverEvent_new2(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* pos, QPointF* oldPos) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *pos, *oldPos);
 }
 
-QHoverEvent* QHoverEvent_new3(struct QHoverEvent_VTable* vtbl, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQHoverEvent* QHoverEvent_new3(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QHoverEvent* QHoverEvent_new4(struct QHoverEvent_VTable* vtbl, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device);
+VirtualQHoverEvent* QHoverEvent_new4(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device);
 }
 
-QHoverEvent* QHoverEvent_new5(struct QHoverEvent_VTable* vtbl, int type, QPointF* pos, QPointF* oldPos, int modifiers) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQHoverEvent* QHoverEvent_new5(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QHoverEvent* QHoverEvent_new6(struct QHoverEvent_VTable* vtbl, int type, QPointF* pos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
-	return new VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device);
+VirtualQHoverEvent* QHoverEvent_new6(const QHoverEvent_VTable* vtbl, void* vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
+	return new VirtualQHoverEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device);
 }
 
 void QHoverEvent_virtbase(QHoverEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -1073,113 +1053,110 @@ QPointF* QHoverEvent_oldPosF(const QHoverEvent* self) {
 	return new QPointF(self->oldPosF());
 }
 
-QHoverEvent* QHoverEvent_virtualbase_clone(const void* self) {
+QHoverEvent* QHoverEvent_virtualbase_clone(const VirtualQHoverEvent* self) {
 
-	return ( (const VirtualQHoverEvent*)(self) )->QHoverEvent::clone();
-
+	return self->QHoverEvent::clone();
 }
 
-bool QHoverEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QHoverEvent_virtualbase_isUpdateEvent(const VirtualQHoverEvent* self) {
 
-	return ( (const VirtualQHoverEvent*)(self) )->QHoverEvent::isUpdateEvent();
-
+	return self->QHoverEvent::isUpdateEvent();
 }
 
-bool QHoverEvent_virtualbase_isBeginEvent(const void* self) {
+bool QHoverEvent_virtualbase_isBeginEvent(const VirtualQHoverEvent* self) {
 
-	return ( (const VirtualQHoverEvent*)(self) )->QHoverEvent::isBeginEvent();
-
+	return self->QHoverEvent::isBeginEvent();
 }
 
-bool QHoverEvent_virtualbase_isEndEvent(const void* self) {
+bool QHoverEvent_virtualbase_isEndEvent(const VirtualQHoverEvent* self) {
 
-	return ( (const VirtualQHoverEvent*)(self) )->QHoverEvent::isEndEvent();
-
+	return self->QHoverEvent::isEndEvent();
 }
 
-void QHoverEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QHoverEvent_virtualbase_setTimestamp(VirtualQHoverEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQHoverEvent*)(self) )->QHoverEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QHoverEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QHoverEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QHoverEvent_virtualbase_setAccepted(VirtualQHoverEvent* self, bool accepted) {
 
-	( (VirtualQHoverEvent*)(self) )->QHoverEvent::setAccepted(accepted);
-
+	self->QHoverEvent::setAccepted(accepted);
 }
+
+const QHoverEvent_VTable* QHoverEvent_vtbl(const VirtualQHoverEvent* self) { return self->vtbl; }
+void* QHoverEvent_vdata(const VirtualQHoverEvent* self) { return self->vdata; }
+void QHoverEvent_setVdata(VirtualQHoverEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QHoverEvent_delete(QHoverEvent* self) {
 	delete self;
 }
 
 class VirtualQWheelEvent final : public QWheelEvent {
-	struct QWheelEvent_VTable* vtbl;
+	const QWheelEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWheelEvent_VTable* QWheelEvent_vtbl(const VirtualQWheelEvent* self);
+	friend void* QWheelEvent_vdata(const VirtualQWheelEvent* self);
+	friend void QWheelEvent_setVdata(VirtualQWheelEvent* self, void* vdata);
 
-	VirtualQWheelEvent(struct QWheelEvent_VTable* vtbl, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted), vtbl(vtbl) {};
-	VirtualQWheelEvent(struct QWheelEvent_VTable* vtbl, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted, Qt::MouseEventSource source): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted, source), vtbl(vtbl) {};
-	VirtualQWheelEvent(struct QWheelEvent_VTable* vtbl, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted, Qt::MouseEventSource source, const QPointingDevice* device): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted, source, device), vtbl(vtbl) {};
+	VirtualQWheelEvent(const QWheelEvent_VTable* vtbl, void* vdata, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWheelEvent(const QWheelEvent_VTable* vtbl, void* vdata, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted, Qt::MouseEventSource source): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted, source), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWheelEvent(const QWheelEvent_VTable* vtbl, void* vdata, const QPointF& pos, const QPointF& globalPos, QPoint pixelDelta, QPoint angleDelta, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, Qt::ScrollPhase phase, bool inverted, Qt::MouseEventSource source, const QPointingDevice* device): QWheelEvent(pos, globalPos, pixelDelta, angleDelta, buttons, modifiers, phase, inverted, source, device), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWheelEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWheelEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QWheelEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QWheelEvent::clone();
 		}
 
 
-		QWheelEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QWheelEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QWheelEvent* QWheelEvent_virtualbase_clone(const void* self);
+	friend QWheelEvent* QWheelEvent_virtualbase_clone(const VirtualQWheelEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QWheelEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWheelEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QWheelEvent_virtualbase_isBeginEvent(const VirtualQWheelEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QWheelEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWheelEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QWheelEvent_virtualbase_isUpdateEvent(const VirtualQWheelEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QWheelEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWheelEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QWheelEvent_virtualbase_isEndEvent(const VirtualQWheelEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QWheelEvent::setTimestamp(timestamp);
@@ -1189,13 +1166,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QWheelEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QWheelEvent_virtualbase_setTimestamp(VirtualQWheelEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QWheelEvent::setAccepted(accepted);
@@ -1204,24 +1180,24 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QWheelEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QWheelEvent_virtualbase_setAccepted(VirtualQWheelEvent* self, bool accepted);
 
 };
 
-QWheelEvent* QWheelEvent_new(struct QWheelEvent_VTable* vtbl, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted) {
-	return new VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted);
+VirtualQWheelEvent* QWheelEvent_new(const QWheelEvent_VTable* vtbl, void* vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted) {
+	return new VirtualQWheelEvent(vtbl, vdata, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted);
 }
 
-QWheelEvent* QWheelEvent_new2(struct QWheelEvent_VTable* vtbl, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source) {
-	return new VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source));
+VirtualQWheelEvent* QWheelEvent_new2(const QWheelEvent_VTable* vtbl, void* vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source) {
+	return new VirtualQWheelEvent(vtbl, vdata, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source));
 }
 
-QWheelEvent* QWheelEvent_new3(struct QWheelEvent_VTable* vtbl, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source, QPointingDevice* device) {
-	return new VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source), device);
+VirtualQWheelEvent* QWheelEvent_new3(const QWheelEvent_VTable* vtbl, void* vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source, QPointingDevice* device) {
+	return new VirtualQWheelEvent(vtbl, vdata, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source), device);
 }
 
 void QWheelEvent_virtbase(QWheelEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -1274,112 +1250,110 @@ int QWheelEvent_source(const QWheelEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QWheelEvent* QWheelEvent_virtualbase_clone(const void* self) {
+QWheelEvent* QWheelEvent_virtualbase_clone(const VirtualQWheelEvent* self) {
 
-	return ( (const VirtualQWheelEvent*)(self) )->QWheelEvent::clone();
-
+	return self->QWheelEvent::clone();
 }
 
-bool QWheelEvent_virtualbase_isBeginEvent(const void* self) {
+bool QWheelEvent_virtualbase_isBeginEvent(const VirtualQWheelEvent* self) {
 
-	return ( (const VirtualQWheelEvent*)(self) )->QWheelEvent::isBeginEvent();
-
+	return self->QWheelEvent::isBeginEvent();
 }
 
-bool QWheelEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QWheelEvent_virtualbase_isUpdateEvent(const VirtualQWheelEvent* self) {
 
-	return ( (const VirtualQWheelEvent*)(self) )->QWheelEvent::isUpdateEvent();
-
+	return self->QWheelEvent::isUpdateEvent();
 }
 
-bool QWheelEvent_virtualbase_isEndEvent(const void* self) {
+bool QWheelEvent_virtualbase_isEndEvent(const VirtualQWheelEvent* self) {
 
-	return ( (const VirtualQWheelEvent*)(self) )->QWheelEvent::isEndEvent();
-
+	return self->QWheelEvent::isEndEvent();
 }
 
-void QWheelEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QWheelEvent_virtualbase_setTimestamp(VirtualQWheelEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQWheelEvent*)(self) )->QWheelEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QWheelEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QWheelEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QWheelEvent_virtualbase_setAccepted(VirtualQWheelEvent* self, bool accepted) {
 
-	( (VirtualQWheelEvent*)(self) )->QWheelEvent::setAccepted(accepted);
-
+	self->QWheelEvent::setAccepted(accepted);
 }
 
 const QMetaObject* QWheelEvent_staticMetaObject() { return &QWheelEvent::staticMetaObject; }
+
+const QWheelEvent_VTable* QWheelEvent_vtbl(const VirtualQWheelEvent* self) { return self->vtbl; }
+void* QWheelEvent_vdata(const VirtualQWheelEvent* self) { return self->vdata; }
+void QWheelEvent_setVdata(VirtualQWheelEvent* self, void* vdata) { self->vdata = vdata; }
+
 void QWheelEvent_delete(QWheelEvent* self) {
 	delete self;
 }
 
 class VirtualQTabletEvent final : public QTabletEvent {
-	struct QTabletEvent_VTable* vtbl;
+	const QTabletEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTabletEvent_VTable* QTabletEvent_vtbl(const VirtualQTabletEvent* self);
+	friend void* QTabletEvent_vdata(const VirtualQTabletEvent* self);
+	friend void QTabletEvent_setVdata(VirtualQTabletEvent* self, void* vdata);
 
-	VirtualQTabletEvent(struct QTabletEvent_VTable* vtbl, QEvent::Type t, const QPointingDevice* device, const QPointF& pos, const QPointF& globalPos, qreal pressure, float xTilt, float yTilt, float tangentialPressure, qreal rotation, float z, Qt::KeyboardModifiers keyState, Qt::MouseButton button, Qt::MouseButtons buttons): QTabletEvent(t, device, pos, globalPos, pressure, xTilt, yTilt, tangentialPressure, rotation, z, keyState, button, buttons), vtbl(vtbl) {};
+	VirtualQTabletEvent(const QTabletEvent_VTable* vtbl, void* vdata, QEvent::Type t, const QPointingDevice* device, const QPointF& pos, const QPointF& globalPos, qreal pressure, float xTilt, float yTilt, float tangentialPressure, qreal rotation, float z, Qt::KeyboardModifiers keyState, Qt::MouseButton button, Qt::MouseButtons buttons): QTabletEvent(t, device, pos, globalPos, pressure, xTilt, yTilt, tangentialPressure, rotation, z, keyState, button, buttons), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTabletEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTabletEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QTabletEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QTabletEvent::clone();
 		}
 
 
-		QTabletEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QTabletEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QTabletEvent* QTabletEvent_virtualbase_clone(const void* self);
+	friend QTabletEvent* QTabletEvent_virtualbase_clone(const VirtualQTabletEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QTabletEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabletEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QTabletEvent_virtualbase_isBeginEvent(const VirtualQTabletEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QTabletEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabletEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QTabletEvent_virtualbase_isUpdateEvent(const VirtualQTabletEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QTabletEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabletEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QTabletEvent_virtualbase_isEndEvent(const VirtualQTabletEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QTabletEvent::setTimestamp(timestamp);
@@ -1389,13 +1363,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QTabletEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QTabletEvent_virtualbase_setTimestamp(VirtualQTabletEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QTabletEvent::setAccepted(accepted);
@@ -1404,16 +1377,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QTabletEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QTabletEvent_virtualbase_setAccepted(VirtualQTabletEvent* self, bool accepted);
 
 };
 
-QTabletEvent* QTabletEvent_new(struct QTabletEvent_VTable* vtbl, int t, QPointingDevice* device, QPointF* pos, QPointF* globalPos, double pressure, float xTilt, float yTilt, float tangentialPressure, double rotation, float z, int keyState, int button, int buttons) {
-	return new VirtualQTabletEvent(vtbl, static_cast<QEvent::Type>(t), device, *pos, *globalPos, static_cast<qreal>(pressure), static_cast<float>(xTilt), static_cast<float>(yTilt), static_cast<float>(tangentialPressure), static_cast<qreal>(rotation), static_cast<float>(z), static_cast<Qt::KeyboardModifiers>(keyState), static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons));
+VirtualQTabletEvent* QTabletEvent_new(const QTabletEvent_VTable* vtbl, void* vdata, int t, QPointingDevice* device, QPointF* pos, QPointF* globalPos, double pressure, float xTilt, float yTilt, float tangentialPressure, double rotation, float z, int keyState, int button, int buttons) {
+	return new VirtualQTabletEvent(vtbl, vdata, static_cast<QEvent::Type>(t), device, *pos, *globalPos, static_cast<qreal>(pressure), static_cast<float>(xTilt), static_cast<float>(yTilt), static_cast<float>(tangentialPressure), static_cast<qreal>(rotation), static_cast<float>(z), static_cast<Qt::KeyboardModifiers>(keyState), static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons));
 }
 
 void QTabletEvent_virtbase(QTabletEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -1501,113 +1474,110 @@ double QTabletEvent_yTilt(const QTabletEvent* self) {
 	return static_cast<double>(_ret);
 }
 
-QTabletEvent* QTabletEvent_virtualbase_clone(const void* self) {
+QTabletEvent* QTabletEvent_virtualbase_clone(const VirtualQTabletEvent* self) {
 
-	return ( (const VirtualQTabletEvent*)(self) )->QTabletEvent::clone();
-
+	return self->QTabletEvent::clone();
 }
 
-bool QTabletEvent_virtualbase_isBeginEvent(const void* self) {
+bool QTabletEvent_virtualbase_isBeginEvent(const VirtualQTabletEvent* self) {
 
-	return ( (const VirtualQTabletEvent*)(self) )->QTabletEvent::isBeginEvent();
-
+	return self->QTabletEvent::isBeginEvent();
 }
 
-bool QTabletEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QTabletEvent_virtualbase_isUpdateEvent(const VirtualQTabletEvent* self) {
 
-	return ( (const VirtualQTabletEvent*)(self) )->QTabletEvent::isUpdateEvent();
-
+	return self->QTabletEvent::isUpdateEvent();
 }
 
-bool QTabletEvent_virtualbase_isEndEvent(const void* self) {
+bool QTabletEvent_virtualbase_isEndEvent(const VirtualQTabletEvent* self) {
 
-	return ( (const VirtualQTabletEvent*)(self) )->QTabletEvent::isEndEvent();
-
+	return self->QTabletEvent::isEndEvent();
 }
 
-void QTabletEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QTabletEvent_virtualbase_setTimestamp(VirtualQTabletEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQTabletEvent*)(self) )->QTabletEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QTabletEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QTabletEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QTabletEvent_virtualbase_setAccepted(VirtualQTabletEvent* self, bool accepted) {
 
-	( (VirtualQTabletEvent*)(self) )->QTabletEvent::setAccepted(accepted);
-
+	self->QTabletEvent::setAccepted(accepted);
 }
+
+const QTabletEvent_VTable* QTabletEvent_vtbl(const VirtualQTabletEvent* self) { return self->vtbl; }
+void* QTabletEvent_vdata(const VirtualQTabletEvent* self) { return self->vdata; }
+void QTabletEvent_setVdata(VirtualQTabletEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QTabletEvent_delete(QTabletEvent* self) {
 	delete self;
 }
 
 class VirtualQNativeGestureEvent final : public QNativeGestureEvent {
-	struct QNativeGestureEvent_VTable* vtbl;
+	const QNativeGestureEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QNativeGestureEvent_VTable* QNativeGestureEvent_vtbl(const VirtualQNativeGestureEvent* self);
+	friend void* QNativeGestureEvent_vdata(const VirtualQNativeGestureEvent* self);
+	friend void QNativeGestureEvent_setVdata(VirtualQNativeGestureEvent* self, void* vdata);
 
-	VirtualQNativeGestureEvent(struct QNativeGestureEvent_VTable* vtbl, Qt::NativeGestureType type, const QPointingDevice* dev, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, quint64 sequenceId, quint64 intArgument): QNativeGestureEvent(type, dev, localPos, scenePos, globalPos, value, sequenceId, intArgument), vtbl(vtbl) {};
-	VirtualQNativeGestureEvent(struct QNativeGestureEvent_VTable* vtbl, Qt::NativeGestureType type, const QPointingDevice* dev, int fingerCount, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, const QPointF& delta): QNativeGestureEvent(type, dev, fingerCount, localPos, scenePos, globalPos, value, delta), vtbl(vtbl) {};
-	VirtualQNativeGestureEvent(struct QNativeGestureEvent_VTable* vtbl, Qt::NativeGestureType type, const QPointingDevice* dev, int fingerCount, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, const QPointF& delta, quint64 sequenceId): QNativeGestureEvent(type, dev, fingerCount, localPos, scenePos, globalPos, value, delta, sequenceId), vtbl(vtbl) {};
+	VirtualQNativeGestureEvent(const QNativeGestureEvent_VTable* vtbl, void* vdata, Qt::NativeGestureType type, const QPointingDevice* dev, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, quint64 sequenceId, quint64 intArgument): QNativeGestureEvent(type, dev, localPos, scenePos, globalPos, value, sequenceId, intArgument), vtbl(vtbl), vdata(vdata) {}
+	VirtualQNativeGestureEvent(const QNativeGestureEvent_VTable* vtbl, void* vdata, Qt::NativeGestureType type, const QPointingDevice* dev, int fingerCount, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, const QPointF& delta): QNativeGestureEvent(type, dev, fingerCount, localPos, scenePos, globalPos, value, delta), vtbl(vtbl), vdata(vdata) {}
+	VirtualQNativeGestureEvent(const QNativeGestureEvent_VTable* vtbl, void* vdata, Qt::NativeGestureType type, const QPointingDevice* dev, int fingerCount, const QPointF& localPos, const QPointF& scenePos, const QPointF& globalPos, qreal value, const QPointF& delta, quint64 sequenceId): QNativeGestureEvent(type, dev, fingerCount, localPos, scenePos, globalPos, value, delta, sequenceId), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQNativeGestureEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQNativeGestureEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QNativeGestureEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QNativeGestureEvent::clone();
 		}
 
 
-		QNativeGestureEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QNativeGestureEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QNativeGestureEvent* QNativeGestureEvent_virtualbase_clone(const void* self);
+	friend QNativeGestureEvent* QNativeGestureEvent_virtualbase_clone(const VirtualQNativeGestureEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QNativeGestureEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QNativeGestureEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QNativeGestureEvent_virtualbase_isBeginEvent(const VirtualQNativeGestureEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QNativeGestureEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QNativeGestureEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QNativeGestureEvent_virtualbase_isUpdateEvent(const VirtualQNativeGestureEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QNativeGestureEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QNativeGestureEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QNativeGestureEvent_virtualbase_isEndEvent(const VirtualQNativeGestureEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QNativeGestureEvent::setTimestamp(timestamp);
@@ -1617,13 +1587,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QNativeGestureEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QNativeGestureEvent_virtualbase_setTimestamp(VirtualQNativeGestureEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QNativeGestureEvent::setAccepted(accepted);
@@ -1632,24 +1601,24 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QNativeGestureEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QNativeGestureEvent_virtualbase_setAccepted(VirtualQNativeGestureEvent* self, bool accepted);
 
 };
 
-QNativeGestureEvent* QNativeGestureEvent_new(struct QNativeGestureEvent_VTable* vtbl, int type, QPointingDevice* dev, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, unsigned long long sequenceId, unsigned long long intArgument) {
-	return new VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, *localPos, *scenePos, *globalPos, static_cast<qreal>(value), static_cast<quint64>(sequenceId), static_cast<quint64>(intArgument));
+VirtualQNativeGestureEvent* QNativeGestureEvent_new(const QNativeGestureEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, unsigned long long sequenceId, unsigned long long intArgument) {
+	return new VirtualQNativeGestureEvent(vtbl, vdata, static_cast<Qt::NativeGestureType>(type), dev, *localPos, *scenePos, *globalPos, static_cast<qreal>(value), static_cast<quint64>(sequenceId), static_cast<quint64>(intArgument));
 }
 
-QNativeGestureEvent* QNativeGestureEvent_new2(struct QNativeGestureEvent_VTable* vtbl, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta) {
-	return new VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta);
+VirtualQNativeGestureEvent* QNativeGestureEvent_new2(const QNativeGestureEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta) {
+	return new VirtualQNativeGestureEvent(vtbl, vdata, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta);
 }
 
-QNativeGestureEvent* QNativeGestureEvent_new3(struct QNativeGestureEvent_VTable* vtbl, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta, unsigned long long sequenceId) {
-	return new VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta, static_cast<quint64>(sequenceId));
+VirtualQNativeGestureEvent* QNativeGestureEvent_new3(const QNativeGestureEvent_VTable* vtbl, void* vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta, unsigned long long sequenceId) {
+	return new VirtualQNativeGestureEvent(vtbl, vdata, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta, static_cast<quint64>(sequenceId));
 }
 
 void QNativeGestureEvent_virtbase(QNativeGestureEvent* src, QSinglePointEvent** outptr_QSinglePointEvent) {
@@ -1698,77 +1667,77 @@ QPointF* QNativeGestureEvent_screenPos(const QNativeGestureEvent* self) {
 	return new QPointF(self->screenPos());
 }
 
-QNativeGestureEvent* QNativeGestureEvent_virtualbase_clone(const void* self) {
+QNativeGestureEvent* QNativeGestureEvent_virtualbase_clone(const VirtualQNativeGestureEvent* self) {
 
-	return ( (const VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::clone();
-
+	return self->QNativeGestureEvent::clone();
 }
 
-bool QNativeGestureEvent_virtualbase_isBeginEvent(const void* self) {
+bool QNativeGestureEvent_virtualbase_isBeginEvent(const VirtualQNativeGestureEvent* self) {
 
-	return ( (const VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::isBeginEvent();
-
+	return self->QNativeGestureEvent::isBeginEvent();
 }
 
-bool QNativeGestureEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QNativeGestureEvent_virtualbase_isUpdateEvent(const VirtualQNativeGestureEvent* self) {
 
-	return ( (const VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::isUpdateEvent();
-
+	return self->QNativeGestureEvent::isUpdateEvent();
 }
 
-bool QNativeGestureEvent_virtualbase_isEndEvent(const void* self) {
+bool QNativeGestureEvent_virtualbase_isEndEvent(const VirtualQNativeGestureEvent* self) {
 
-	return ( (const VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::isEndEvent();
-
+	return self->QNativeGestureEvent::isEndEvent();
 }
 
-void QNativeGestureEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QNativeGestureEvent_virtualbase_setTimestamp(VirtualQNativeGestureEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QNativeGestureEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QNativeGestureEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QNativeGestureEvent_virtualbase_setAccepted(VirtualQNativeGestureEvent* self, bool accepted) {
 
-	( (VirtualQNativeGestureEvent*)(self) )->QNativeGestureEvent::setAccepted(accepted);
-
+	self->QNativeGestureEvent::setAccepted(accepted);
 }
+
+const QNativeGestureEvent_VTable* QNativeGestureEvent_vtbl(const VirtualQNativeGestureEvent* self) { return self->vtbl; }
+void* QNativeGestureEvent_vdata(const VirtualQNativeGestureEvent* self) { return self->vdata; }
+void QNativeGestureEvent_setVdata(VirtualQNativeGestureEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QNativeGestureEvent_delete(QNativeGestureEvent* self) {
 	delete self;
 }
 
 class VirtualQKeyEvent final : public QKeyEvent {
-	struct QKeyEvent_VTable* vtbl;
+	const QKeyEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QKeyEvent_VTable* QKeyEvent_vtbl(const VirtualQKeyEvent* self);
+	friend void* QKeyEvent_vdata(const VirtualQKeyEvent* self);
+	friend void QKeyEvent_setVdata(VirtualQKeyEvent* self, void* vdata);
 
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers): QKeyEvent(type, key, modifiers), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text): QKeyEvent(type, key, modifiers, text), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text, bool autorep): QKeyEvent(type, key, modifiers, text, autorep), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text, bool autorep, quint16 count): QKeyEvent(type, key, modifiers, text, autorep, count), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep, quint16 count): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep, count), vtbl(vtbl) {};
-	VirtualQKeyEvent(struct QKeyEvent_VTable* vtbl, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep, quint16 count, const QInputDevice* device): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep, count, device), vtbl(vtbl) {};
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers): QKeyEvent(type, key, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text): QKeyEvent(type, key, modifiers, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text, bool autorep): QKeyEvent(type, key, modifiers, text, autorep), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, const QString& text, bool autorep, quint16 count): QKeyEvent(type, key, modifiers, text, autorep, count), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep, quint16 count): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep, count), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeyEvent(const QKeyEvent_VTable* vtbl, void* vdata, QEvent::Type type, int key, Qt::KeyboardModifiers modifiers, quint32 nativeScanCode, quint32 nativeVirtualKey, quint32 nativeModifiers, const QString& text, bool autorep, quint16 count, const QInputDevice* device): QKeyEvent(type, key, modifiers, nativeScanCode, nativeVirtualKey, nativeModifiers, text, autorep, count, device), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQKeyEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQKeyEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QKeyEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QKeyEvent::clone();
 		}
 
 
-		QKeyEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QKeyEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QKeyEvent* QKeyEvent_virtualbase_clone(const void* self);
+	friend QKeyEvent* QKeyEvent_virtualbase_clone(const VirtualQKeyEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QKeyEvent::setTimestamp(timestamp);
@@ -1778,13 +1747,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QKeyEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QKeyEvent_virtualbase_setTimestamp(VirtualQKeyEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QKeyEvent::setAccepted(accepted);
@@ -1793,55 +1761,55 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QKeyEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QKeyEvent_virtualbase_setAccepted(VirtualQKeyEvent* self, bool accepted);
 
 };
 
-QKeyEvent* QKeyEvent_new(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers) {
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQKeyEvent* QKeyEvent_new(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers) {
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QKeyEvent* QKeyEvent_new2(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers) {
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers));
+VirtualQKeyEvent* QKeyEvent_new2(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers) {
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers));
 }
 
-QKeyEvent* QKeyEvent_new3(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, struct miqt_string text) {
+VirtualQKeyEvent* QKeyEvent_new3(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString);
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString);
 }
 
-QKeyEvent* QKeyEvent_new4(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, struct miqt_string text, bool autorep) {
+VirtualQKeyEvent* QKeyEvent_new4(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, struct miqt_string text, bool autorep) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep);
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep);
 }
 
-QKeyEvent* QKeyEvent_new5(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, struct miqt_string text, bool autorep, uint16_t count) {
+VirtualQKeyEvent* QKeyEvent_new5(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, struct miqt_string text, bool autorep, uint16_t count) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep, static_cast<quint16>(count));
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep, static_cast<quint16>(count));
 }
 
-QKeyEvent* QKeyEvent_new6(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text) {
+VirtualQKeyEvent* QKeyEvent_new6(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString);
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString);
 }
 
-QKeyEvent* QKeyEvent_new7(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep) {
+VirtualQKeyEvent* QKeyEvent_new7(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep);
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep);
 }
 
-QKeyEvent* QKeyEvent_new8(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep, uint16_t count) {
+VirtualQKeyEvent* QKeyEvent_new8(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep, uint16_t count) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count));
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count));
 }
 
-QKeyEvent* QKeyEvent_new9(struct QKeyEvent_VTable* vtbl, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep, uint16_t count, QInputDevice* device) {
+VirtualQKeyEvent* QKeyEvent_new9(const QKeyEvent_VTable* vtbl, void* vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct miqt_string text, bool autorep, uint16_t count, QInputDevice* device) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count), device);
+	return new VirtualQKeyEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count), device);
 }
 
 void QKeyEvent_virtbase(QKeyEvent* src, QInputEvent** outptr_QInputEvent) {
@@ -1903,52 +1871,55 @@ unsigned int QKeyEvent_nativeModifiers(const QKeyEvent* self) {
 	return static_cast<unsigned int>(_ret);
 }
 
-QKeyEvent* QKeyEvent_virtualbase_clone(const void* self) {
+QKeyEvent* QKeyEvent_virtualbase_clone(const VirtualQKeyEvent* self) {
 
-	return ( (const VirtualQKeyEvent*)(self) )->QKeyEvent::clone();
-
+	return self->QKeyEvent::clone();
 }
 
-void QKeyEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QKeyEvent_virtualbase_setTimestamp(VirtualQKeyEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQKeyEvent*)(self) )->QKeyEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QKeyEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QKeyEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QKeyEvent_virtualbase_setAccepted(VirtualQKeyEvent* self, bool accepted) {
 
-	( (VirtualQKeyEvent*)(self) )->QKeyEvent::setAccepted(accepted);
-
+	self->QKeyEvent::setAccepted(accepted);
 }
+
+const QKeyEvent_VTable* QKeyEvent_vtbl(const VirtualQKeyEvent* self) { return self->vtbl; }
+void* QKeyEvent_vdata(const VirtualQKeyEvent* self) { return self->vdata; }
+void QKeyEvent_setVdata(VirtualQKeyEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QKeyEvent_delete(QKeyEvent* self) {
 	delete self;
 }
 
 class VirtualQFocusEvent final : public QFocusEvent {
-	struct QFocusEvent_VTable* vtbl;
+	const QFocusEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFocusEvent_VTable* QFocusEvent_vtbl(const VirtualQFocusEvent* self);
+	friend void* QFocusEvent_vdata(const VirtualQFocusEvent* self);
+	friend void QFocusEvent_setVdata(VirtualQFocusEvent* self, void* vdata);
 
-	VirtualQFocusEvent(struct QFocusEvent_VTable* vtbl, QEvent::Type type): QFocusEvent(type), vtbl(vtbl) {};
-	VirtualQFocusEvent(struct QFocusEvent_VTable* vtbl, QEvent::Type type, Qt::FocusReason reason): QFocusEvent(type, reason), vtbl(vtbl) {};
+	VirtualQFocusEvent(const QFocusEvent_VTable* vtbl, void* vdata, QEvent::Type type): QFocusEvent(type), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFocusEvent(const QFocusEvent_VTable* vtbl, void* vdata, QEvent::Type type, Qt::FocusReason reason): QFocusEvent(type, reason), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFocusEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFocusEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QFocusEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QFocusEvent::clone();
 		}
 
 
-		QFocusEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QFocusEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QFocusEvent* QFocusEvent_virtualbase_clone(const void* self);
+	friend QFocusEvent* QFocusEvent_virtualbase_clone(const VirtualQFocusEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QFocusEvent::setAccepted(accepted);
@@ -1957,20 +1928,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QFocusEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QFocusEvent_virtualbase_setAccepted(VirtualQFocusEvent* self, bool accepted);
 
 };
 
-QFocusEvent* QFocusEvent_new(struct QFocusEvent_VTable* vtbl, int type) {
-	return new VirtualQFocusEvent(vtbl, static_cast<QEvent::Type>(type));
+VirtualQFocusEvent* QFocusEvent_new(const QFocusEvent_VTable* vtbl, void* vdata, int type) {
+	return new VirtualQFocusEvent(vtbl, vdata, static_cast<QEvent::Type>(type));
 }
 
-QFocusEvent* QFocusEvent_new2(struct QFocusEvent_VTable* vtbl, int type, int reason) {
-	return new VirtualQFocusEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<Qt::FocusReason>(reason));
+VirtualQFocusEvent* QFocusEvent_new2(const QFocusEvent_VTable* vtbl, void* vdata, int type, int reason) {
+	return new VirtualQFocusEvent(vtbl, vdata, static_cast<QEvent::Type>(type), static_cast<Qt::FocusReason>(reason));
 }
 
 void QFocusEvent_virtbase(QFocusEvent* src, QEvent** outptr_QEvent) {
@@ -1994,46 +1965,50 @@ int QFocusEvent_reason(const QFocusEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QFocusEvent* QFocusEvent_virtualbase_clone(const void* self) {
+QFocusEvent* QFocusEvent_virtualbase_clone(const VirtualQFocusEvent* self) {
 
-	return ( (const VirtualQFocusEvent*)(self) )->QFocusEvent::clone();
-
+	return self->QFocusEvent::clone();
 }
 
-void QFocusEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QFocusEvent_virtualbase_setAccepted(VirtualQFocusEvent* self, bool accepted) {
 
-	( (VirtualQFocusEvent*)(self) )->QFocusEvent::setAccepted(accepted);
-
+	self->QFocusEvent::setAccepted(accepted);
 }
+
+const QFocusEvent_VTable* QFocusEvent_vtbl(const VirtualQFocusEvent* self) { return self->vtbl; }
+void* QFocusEvent_vdata(const VirtualQFocusEvent* self) { return self->vdata; }
+void QFocusEvent_setVdata(VirtualQFocusEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QFocusEvent_delete(QFocusEvent* self) {
 	delete self;
 }
 
 class VirtualQPaintEvent final : public QPaintEvent {
-	struct QPaintEvent_VTable* vtbl;
+	const QPaintEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPaintEvent_VTable* QPaintEvent_vtbl(const VirtualQPaintEvent* self);
+	friend void* QPaintEvent_vdata(const VirtualQPaintEvent* self);
+	friend void QPaintEvent_setVdata(VirtualQPaintEvent* self, void* vdata);
 
-	VirtualQPaintEvent(struct QPaintEvent_VTable* vtbl, const QRegion& paintRegion): QPaintEvent(paintRegion), vtbl(vtbl) {};
-	VirtualQPaintEvent(struct QPaintEvent_VTable* vtbl, const QRect& paintRect): QPaintEvent(paintRect), vtbl(vtbl) {};
+	VirtualQPaintEvent(const QPaintEvent_VTable* vtbl, void* vdata, const QRegion& paintRegion): QPaintEvent(paintRegion), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPaintEvent(const QPaintEvent_VTable* vtbl, void* vdata, const QRect& paintRect): QPaintEvent(paintRect), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPaintEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPaintEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QPaintEvent::clone();
 		}
 
 
-		QPaintEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QPaintEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEvent* QPaintEvent_virtualbase_clone(const void* self);
+	friend QPaintEvent* QPaintEvent_virtualbase_clone(const VirtualQPaintEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QPaintEvent::setAccepted(accepted);
@@ -2042,20 +2017,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QPaintEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QPaintEvent_virtualbase_setAccepted(VirtualQPaintEvent* self, bool accepted);
 
 };
 
-QPaintEvent* QPaintEvent_new(struct QPaintEvent_VTable* vtbl, QRegion* paintRegion) {
-	return new VirtualQPaintEvent(vtbl, *paintRegion);
+VirtualQPaintEvent* QPaintEvent_new(const QPaintEvent_VTable* vtbl, void* vdata, QRegion* paintRegion) {
+	return new VirtualQPaintEvent(vtbl, vdata, *paintRegion);
 }
 
-QPaintEvent* QPaintEvent_new2(struct QPaintEvent_VTable* vtbl, QRect* paintRect) {
-	return new VirtualQPaintEvent(vtbl, *paintRect);
+VirtualQPaintEvent* QPaintEvent_new2(const QPaintEvent_VTable* vtbl, void* vdata, QRect* paintRect) {
+	return new VirtualQPaintEvent(vtbl, vdata, *paintRect);
 }
 
 void QPaintEvent_virtbase(QPaintEvent* src, QEvent** outptr_QEvent) {
@@ -2078,45 +2053,49 @@ QRegion* QPaintEvent_region(const QPaintEvent* self) {
 	return const_cast<QRegion*>(&_ret);
 }
 
-QPaintEvent* QPaintEvent_virtualbase_clone(const void* self) {
+QPaintEvent* QPaintEvent_virtualbase_clone(const VirtualQPaintEvent* self) {
 
-	return ( (const VirtualQPaintEvent*)(self) )->QPaintEvent::clone();
-
+	return self->QPaintEvent::clone();
 }
 
-void QPaintEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QPaintEvent_virtualbase_setAccepted(VirtualQPaintEvent* self, bool accepted) {
 
-	( (VirtualQPaintEvent*)(self) )->QPaintEvent::setAccepted(accepted);
-
+	self->QPaintEvent::setAccepted(accepted);
 }
+
+const QPaintEvent_VTable* QPaintEvent_vtbl(const VirtualQPaintEvent* self) { return self->vtbl; }
+void* QPaintEvent_vdata(const VirtualQPaintEvent* self) { return self->vdata; }
+void QPaintEvent_setVdata(VirtualQPaintEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QPaintEvent_delete(QPaintEvent* self) {
 	delete self;
 }
 
 class VirtualQMoveEvent final : public QMoveEvent {
-	struct QMoveEvent_VTable* vtbl;
+	const QMoveEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMoveEvent_VTable* QMoveEvent_vtbl(const VirtualQMoveEvent* self);
+	friend void* QMoveEvent_vdata(const VirtualQMoveEvent* self);
+	friend void QMoveEvent_setVdata(VirtualQMoveEvent* self, void* vdata);
 
-	VirtualQMoveEvent(struct QMoveEvent_VTable* vtbl, const QPoint& pos, const QPoint& oldPos): QMoveEvent(pos, oldPos), vtbl(vtbl) {};
+	VirtualQMoveEvent(const QMoveEvent_VTable* vtbl, void* vdata, const QPoint& pos, const QPoint& oldPos): QMoveEvent(pos, oldPos), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMoveEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMoveEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QMoveEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QMoveEvent::clone();
 		}
 
 
-		QMoveEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QMoveEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QMoveEvent* QMoveEvent_virtualbase_clone(const void* self);
+	friend QMoveEvent* QMoveEvent_virtualbase_clone(const VirtualQMoveEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QMoveEvent::setAccepted(accepted);
@@ -2125,16 +2104,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QMoveEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QMoveEvent_virtualbase_setAccepted(VirtualQMoveEvent* self, bool accepted);
 
 };
 
-QMoveEvent* QMoveEvent_new(struct QMoveEvent_VTable* vtbl, QPoint* pos, QPoint* oldPos) {
-	return new VirtualQMoveEvent(vtbl, *pos, *oldPos);
+VirtualQMoveEvent* QMoveEvent_new(const QMoveEvent_VTable* vtbl, void* vdata, QPoint* pos, QPoint* oldPos) {
+	return new VirtualQMoveEvent(vtbl, vdata, *pos, *oldPos);
 }
 
 void QMoveEvent_virtbase(QMoveEvent* src, QEvent** outptr_QEvent) {
@@ -2157,45 +2136,49 @@ QPoint* QMoveEvent_oldPos(const QMoveEvent* self) {
 	return const_cast<QPoint*>(&_ret);
 }
 
-QMoveEvent* QMoveEvent_virtualbase_clone(const void* self) {
+QMoveEvent* QMoveEvent_virtualbase_clone(const VirtualQMoveEvent* self) {
 
-	return ( (const VirtualQMoveEvent*)(self) )->QMoveEvent::clone();
-
+	return self->QMoveEvent::clone();
 }
 
-void QMoveEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QMoveEvent_virtualbase_setAccepted(VirtualQMoveEvent* self, bool accepted) {
 
-	( (VirtualQMoveEvent*)(self) )->QMoveEvent::setAccepted(accepted);
-
+	self->QMoveEvent::setAccepted(accepted);
 }
+
+const QMoveEvent_VTable* QMoveEvent_vtbl(const VirtualQMoveEvent* self) { return self->vtbl; }
+void* QMoveEvent_vdata(const VirtualQMoveEvent* self) { return self->vdata; }
+void QMoveEvent_setVdata(VirtualQMoveEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QMoveEvent_delete(QMoveEvent* self) {
 	delete self;
 }
 
 class VirtualQExposeEvent final : public QExposeEvent {
-	struct QExposeEvent_VTable* vtbl;
+	const QExposeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QExposeEvent_VTable* QExposeEvent_vtbl(const VirtualQExposeEvent* self);
+	friend void* QExposeEvent_vdata(const VirtualQExposeEvent* self);
+	friend void QExposeEvent_setVdata(VirtualQExposeEvent* self, void* vdata);
 
-	VirtualQExposeEvent(struct QExposeEvent_VTable* vtbl, const QRegion& m_region): QExposeEvent(m_region), vtbl(vtbl) {};
+	VirtualQExposeEvent(const QExposeEvent_VTable* vtbl, void* vdata, const QRegion& m_region): QExposeEvent(m_region), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQExposeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQExposeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QExposeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QExposeEvent::clone();
 		}
 
 
-		QExposeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QExposeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QExposeEvent* QExposeEvent_virtualbase_clone(const void* self);
+	friend QExposeEvent* QExposeEvent_virtualbase_clone(const VirtualQExposeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QExposeEvent::setAccepted(accepted);
@@ -2204,16 +2187,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QExposeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QExposeEvent_virtualbase_setAccepted(VirtualQExposeEvent* self, bool accepted);
 
 };
 
-QExposeEvent* QExposeEvent_new(struct QExposeEvent_VTable* vtbl, QRegion* m_region) {
-	return new VirtualQExposeEvent(vtbl, *m_region);
+VirtualQExposeEvent* QExposeEvent_new(const QExposeEvent_VTable* vtbl, void* vdata, QRegion* m_region) {
+	return new VirtualQExposeEvent(vtbl, vdata, *m_region);
 }
 
 void QExposeEvent_virtbase(QExposeEvent* src, QEvent** outptr_QEvent) {
@@ -2230,45 +2213,49 @@ QRegion* QExposeEvent_region(const QExposeEvent* self) {
 	return const_cast<QRegion*>(&_ret);
 }
 
-QExposeEvent* QExposeEvent_virtualbase_clone(const void* self) {
+QExposeEvent* QExposeEvent_virtualbase_clone(const VirtualQExposeEvent* self) {
 
-	return ( (const VirtualQExposeEvent*)(self) )->QExposeEvent::clone();
-
+	return self->QExposeEvent::clone();
 }
 
-void QExposeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QExposeEvent_virtualbase_setAccepted(VirtualQExposeEvent* self, bool accepted) {
 
-	( (VirtualQExposeEvent*)(self) )->QExposeEvent::setAccepted(accepted);
-
+	self->QExposeEvent::setAccepted(accepted);
 }
+
+const QExposeEvent_VTable* QExposeEvent_vtbl(const VirtualQExposeEvent* self) { return self->vtbl; }
+void* QExposeEvent_vdata(const VirtualQExposeEvent* self) { return self->vdata; }
+void QExposeEvent_setVdata(VirtualQExposeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QExposeEvent_delete(QExposeEvent* self) {
 	delete self;
 }
 
 class VirtualQPlatformSurfaceEvent final : public QPlatformSurfaceEvent {
-	struct QPlatformSurfaceEvent_VTable* vtbl;
+	const QPlatformSurfaceEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPlatformSurfaceEvent_VTable* QPlatformSurfaceEvent_vtbl(const VirtualQPlatformSurfaceEvent* self);
+	friend void* QPlatformSurfaceEvent_vdata(const VirtualQPlatformSurfaceEvent* self);
+	friend void QPlatformSurfaceEvent_setVdata(VirtualQPlatformSurfaceEvent* self, void* vdata);
 
-	VirtualQPlatformSurfaceEvent(struct QPlatformSurfaceEvent_VTable* vtbl, QPlatformSurfaceEvent::SurfaceEventType surfaceEventType): QPlatformSurfaceEvent(surfaceEventType), vtbl(vtbl) {};
+	VirtualQPlatformSurfaceEvent(const QPlatformSurfaceEvent_VTable* vtbl, void* vdata, QPlatformSurfaceEvent::SurfaceEventType surfaceEventType): QPlatformSurfaceEvent(surfaceEventType), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPlatformSurfaceEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPlatformSurfaceEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QPlatformSurfaceEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QPlatformSurfaceEvent::clone();
 		}
 
 
-		QPlatformSurfaceEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QPlatformSurfaceEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QPlatformSurfaceEvent* QPlatformSurfaceEvent_virtualbase_clone(const void* self);
+	friend QPlatformSurfaceEvent* QPlatformSurfaceEvent_virtualbase_clone(const VirtualQPlatformSurfaceEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QPlatformSurfaceEvent::setAccepted(accepted);
@@ -2277,16 +2264,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QPlatformSurfaceEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QPlatformSurfaceEvent_virtualbase_setAccepted(VirtualQPlatformSurfaceEvent* self, bool accepted);
 
 };
 
-QPlatformSurfaceEvent* QPlatformSurfaceEvent_new(struct QPlatformSurfaceEvent_VTable* vtbl, int surfaceEventType) {
-	return new VirtualQPlatformSurfaceEvent(vtbl, static_cast<QPlatformSurfaceEvent::SurfaceEventType>(surfaceEventType));
+VirtualQPlatformSurfaceEvent* QPlatformSurfaceEvent_new(const QPlatformSurfaceEvent_VTable* vtbl, void* vdata, int surfaceEventType) {
+	return new VirtualQPlatformSurfaceEvent(vtbl, vdata, static_cast<QPlatformSurfaceEvent::SurfaceEventType>(surfaceEventType));
 }
 
 void QPlatformSurfaceEvent_virtbase(QPlatformSurfaceEvent* src, QEvent** outptr_QEvent) {
@@ -2302,45 +2289,49 @@ int QPlatformSurfaceEvent_surfaceEventType(const QPlatformSurfaceEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QPlatformSurfaceEvent* QPlatformSurfaceEvent_virtualbase_clone(const void* self) {
+QPlatformSurfaceEvent* QPlatformSurfaceEvent_virtualbase_clone(const VirtualQPlatformSurfaceEvent* self) {
 
-	return ( (const VirtualQPlatformSurfaceEvent*)(self) )->QPlatformSurfaceEvent::clone();
-
+	return self->QPlatformSurfaceEvent::clone();
 }
 
-void QPlatformSurfaceEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QPlatformSurfaceEvent_virtualbase_setAccepted(VirtualQPlatformSurfaceEvent* self, bool accepted) {
 
-	( (VirtualQPlatformSurfaceEvent*)(self) )->QPlatformSurfaceEvent::setAccepted(accepted);
-
+	self->QPlatformSurfaceEvent::setAccepted(accepted);
 }
+
+const QPlatformSurfaceEvent_VTable* QPlatformSurfaceEvent_vtbl(const VirtualQPlatformSurfaceEvent* self) { return self->vtbl; }
+void* QPlatformSurfaceEvent_vdata(const VirtualQPlatformSurfaceEvent* self) { return self->vdata; }
+void QPlatformSurfaceEvent_setVdata(VirtualQPlatformSurfaceEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QPlatformSurfaceEvent_delete(QPlatformSurfaceEvent* self) {
 	delete self;
 }
 
 class VirtualQResizeEvent final : public QResizeEvent {
-	struct QResizeEvent_VTable* vtbl;
+	const QResizeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QResizeEvent_VTable* QResizeEvent_vtbl(const VirtualQResizeEvent* self);
+	friend void* QResizeEvent_vdata(const VirtualQResizeEvent* self);
+	friend void QResizeEvent_setVdata(VirtualQResizeEvent* self, void* vdata);
 
-	VirtualQResizeEvent(struct QResizeEvent_VTable* vtbl, const QSize& size, const QSize& oldSize): QResizeEvent(size, oldSize), vtbl(vtbl) {};
+	VirtualQResizeEvent(const QResizeEvent_VTable* vtbl, void* vdata, const QSize& size, const QSize& oldSize): QResizeEvent(size, oldSize), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQResizeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQResizeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QResizeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QResizeEvent::clone();
 		}
 
 
-		QResizeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QResizeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QResizeEvent* QResizeEvent_virtualbase_clone(const void* self);
+	friend QResizeEvent* QResizeEvent_virtualbase_clone(const VirtualQResizeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QResizeEvent::setAccepted(accepted);
@@ -2349,16 +2340,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QResizeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QResizeEvent_virtualbase_setAccepted(VirtualQResizeEvent* self, bool accepted);
 
 };
 
-QResizeEvent* QResizeEvent_new(struct QResizeEvent_VTable* vtbl, QSize* size, QSize* oldSize) {
-	return new VirtualQResizeEvent(vtbl, *size, *oldSize);
+VirtualQResizeEvent* QResizeEvent_new(const QResizeEvent_VTable* vtbl, void* vdata, QSize* size, QSize* oldSize) {
+	return new VirtualQResizeEvent(vtbl, vdata, *size, *oldSize);
 }
 
 void QResizeEvent_virtbase(QResizeEvent* src, QEvent** outptr_QEvent) {
@@ -2381,45 +2372,49 @@ QSize* QResizeEvent_oldSize(const QResizeEvent* self) {
 	return const_cast<QSize*>(&_ret);
 }
 
-QResizeEvent* QResizeEvent_virtualbase_clone(const void* self) {
+QResizeEvent* QResizeEvent_virtualbase_clone(const VirtualQResizeEvent* self) {
 
-	return ( (const VirtualQResizeEvent*)(self) )->QResizeEvent::clone();
-
+	return self->QResizeEvent::clone();
 }
 
-void QResizeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QResizeEvent_virtualbase_setAccepted(VirtualQResizeEvent* self, bool accepted) {
 
-	( (VirtualQResizeEvent*)(self) )->QResizeEvent::setAccepted(accepted);
-
+	self->QResizeEvent::setAccepted(accepted);
 }
+
+const QResizeEvent_VTable* QResizeEvent_vtbl(const VirtualQResizeEvent* self) { return self->vtbl; }
+void* QResizeEvent_vdata(const VirtualQResizeEvent* self) { return self->vdata; }
+void QResizeEvent_setVdata(VirtualQResizeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QResizeEvent_delete(QResizeEvent* self) {
 	delete self;
 }
 
 class VirtualQCloseEvent final : public QCloseEvent {
-	struct QCloseEvent_VTable* vtbl;
+	const QCloseEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QCloseEvent_VTable* QCloseEvent_vtbl(const VirtualQCloseEvent* self);
+	friend void* QCloseEvent_vdata(const VirtualQCloseEvent* self);
+	friend void QCloseEvent_setVdata(VirtualQCloseEvent* self, void* vdata);
 
-	VirtualQCloseEvent(struct QCloseEvent_VTable* vtbl): QCloseEvent(), vtbl(vtbl) {};
+	VirtualQCloseEvent(const QCloseEvent_VTable* vtbl, void* vdata): QCloseEvent(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQCloseEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQCloseEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QCloseEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QCloseEvent::clone();
 		}
 
 
-		QCloseEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QCloseEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QCloseEvent* QCloseEvent_virtualbase_clone(const void* self);
+	friend QCloseEvent* QCloseEvent_virtualbase_clone(const VirtualQCloseEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QCloseEvent::setAccepted(accepted);
@@ -2428,16 +2423,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QCloseEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QCloseEvent_virtualbase_setAccepted(VirtualQCloseEvent* self, bool accepted);
 
 };
 
-QCloseEvent* QCloseEvent_new(struct QCloseEvent_VTable* vtbl) {
-	return new VirtualQCloseEvent(vtbl);
+VirtualQCloseEvent* QCloseEvent_new(const QCloseEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQCloseEvent(vtbl, vdata);
 }
 
 void QCloseEvent_virtbase(QCloseEvent* src, QEvent** outptr_QEvent) {
@@ -2448,45 +2443,49 @@ QCloseEvent* QCloseEvent_clone(const QCloseEvent* self) {
 	return self->clone();
 }
 
-QCloseEvent* QCloseEvent_virtualbase_clone(const void* self) {
+QCloseEvent* QCloseEvent_virtualbase_clone(const VirtualQCloseEvent* self) {
 
-	return ( (const VirtualQCloseEvent*)(self) )->QCloseEvent::clone();
-
+	return self->QCloseEvent::clone();
 }
 
-void QCloseEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QCloseEvent_virtualbase_setAccepted(VirtualQCloseEvent* self, bool accepted) {
 
-	( (VirtualQCloseEvent*)(self) )->QCloseEvent::setAccepted(accepted);
-
+	self->QCloseEvent::setAccepted(accepted);
 }
+
+const QCloseEvent_VTable* QCloseEvent_vtbl(const VirtualQCloseEvent* self) { return self->vtbl; }
+void* QCloseEvent_vdata(const VirtualQCloseEvent* self) { return self->vdata; }
+void QCloseEvent_setVdata(VirtualQCloseEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QCloseEvent_delete(QCloseEvent* self) {
 	delete self;
 }
 
 class VirtualQIconDragEvent final : public QIconDragEvent {
-	struct QIconDragEvent_VTable* vtbl;
+	const QIconDragEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QIconDragEvent_VTable* QIconDragEvent_vtbl(const VirtualQIconDragEvent* self);
+	friend void* QIconDragEvent_vdata(const VirtualQIconDragEvent* self);
+	friend void QIconDragEvent_setVdata(VirtualQIconDragEvent* self, void* vdata);
 
-	VirtualQIconDragEvent(struct QIconDragEvent_VTable* vtbl): QIconDragEvent(), vtbl(vtbl) {};
+	VirtualQIconDragEvent(const QIconDragEvent_VTable* vtbl, void* vdata): QIconDragEvent(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQIconDragEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQIconDragEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QIconDragEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QIconDragEvent::clone();
 		}
 
 
-		QIconDragEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QIconDragEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QIconDragEvent* QIconDragEvent_virtualbase_clone(const void* self);
+	friend QIconDragEvent* QIconDragEvent_virtualbase_clone(const VirtualQIconDragEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QIconDragEvent::setAccepted(accepted);
@@ -2495,16 +2494,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QIconDragEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QIconDragEvent_virtualbase_setAccepted(VirtualQIconDragEvent* self, bool accepted);
 
 };
 
-QIconDragEvent* QIconDragEvent_new(struct QIconDragEvent_VTable* vtbl) {
-	return new VirtualQIconDragEvent(vtbl);
+VirtualQIconDragEvent* QIconDragEvent_new(const QIconDragEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQIconDragEvent(vtbl, vdata);
 }
 
 void QIconDragEvent_virtbase(QIconDragEvent* src, QEvent** outptr_QEvent) {
@@ -2515,45 +2514,49 @@ QIconDragEvent* QIconDragEvent_clone(const QIconDragEvent* self) {
 	return self->clone();
 }
 
-QIconDragEvent* QIconDragEvent_virtualbase_clone(const void* self) {
+QIconDragEvent* QIconDragEvent_virtualbase_clone(const VirtualQIconDragEvent* self) {
 
-	return ( (const VirtualQIconDragEvent*)(self) )->QIconDragEvent::clone();
-
+	return self->QIconDragEvent::clone();
 }
 
-void QIconDragEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QIconDragEvent_virtualbase_setAccepted(VirtualQIconDragEvent* self, bool accepted) {
 
-	( (VirtualQIconDragEvent*)(self) )->QIconDragEvent::setAccepted(accepted);
-
+	self->QIconDragEvent::setAccepted(accepted);
 }
+
+const QIconDragEvent_VTable* QIconDragEvent_vtbl(const VirtualQIconDragEvent* self) { return self->vtbl; }
+void* QIconDragEvent_vdata(const VirtualQIconDragEvent* self) { return self->vdata; }
+void QIconDragEvent_setVdata(VirtualQIconDragEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QIconDragEvent_delete(QIconDragEvent* self) {
 	delete self;
 }
 
 class VirtualQShowEvent final : public QShowEvent {
-	struct QShowEvent_VTable* vtbl;
+	const QShowEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QShowEvent_VTable* QShowEvent_vtbl(const VirtualQShowEvent* self);
+	friend void* QShowEvent_vdata(const VirtualQShowEvent* self);
+	friend void QShowEvent_setVdata(VirtualQShowEvent* self, void* vdata);
 
-	VirtualQShowEvent(struct QShowEvent_VTable* vtbl): QShowEvent(), vtbl(vtbl) {};
+	VirtualQShowEvent(const QShowEvent_VTable* vtbl, void* vdata): QShowEvent(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQShowEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQShowEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QShowEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QShowEvent::clone();
 		}
 
 
-		QShowEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QShowEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QShowEvent* QShowEvent_virtualbase_clone(const void* self);
+	friend QShowEvent* QShowEvent_virtualbase_clone(const VirtualQShowEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QShowEvent::setAccepted(accepted);
@@ -2562,16 +2565,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QShowEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QShowEvent_virtualbase_setAccepted(VirtualQShowEvent* self, bool accepted);
 
 };
 
-QShowEvent* QShowEvent_new(struct QShowEvent_VTable* vtbl) {
-	return new VirtualQShowEvent(vtbl);
+VirtualQShowEvent* QShowEvent_new(const QShowEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQShowEvent(vtbl, vdata);
 }
 
 void QShowEvent_virtbase(QShowEvent* src, QEvent** outptr_QEvent) {
@@ -2582,45 +2585,49 @@ QShowEvent* QShowEvent_clone(const QShowEvent* self) {
 	return self->clone();
 }
 
-QShowEvent* QShowEvent_virtualbase_clone(const void* self) {
+QShowEvent* QShowEvent_virtualbase_clone(const VirtualQShowEvent* self) {
 
-	return ( (const VirtualQShowEvent*)(self) )->QShowEvent::clone();
-
+	return self->QShowEvent::clone();
 }
 
-void QShowEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QShowEvent_virtualbase_setAccepted(VirtualQShowEvent* self, bool accepted) {
 
-	( (VirtualQShowEvent*)(self) )->QShowEvent::setAccepted(accepted);
-
+	self->QShowEvent::setAccepted(accepted);
 }
+
+const QShowEvent_VTable* QShowEvent_vtbl(const VirtualQShowEvent* self) { return self->vtbl; }
+void* QShowEvent_vdata(const VirtualQShowEvent* self) { return self->vdata; }
+void QShowEvent_setVdata(VirtualQShowEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QShowEvent_delete(QShowEvent* self) {
 	delete self;
 }
 
 class VirtualQHideEvent final : public QHideEvent {
-	struct QHideEvent_VTable* vtbl;
+	const QHideEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QHideEvent_VTable* QHideEvent_vtbl(const VirtualQHideEvent* self);
+	friend void* QHideEvent_vdata(const VirtualQHideEvent* self);
+	friend void QHideEvent_setVdata(VirtualQHideEvent* self, void* vdata);
 
-	VirtualQHideEvent(struct QHideEvent_VTable* vtbl): QHideEvent(), vtbl(vtbl) {};
+	VirtualQHideEvent(const QHideEvent_VTable* vtbl, void* vdata): QHideEvent(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQHideEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQHideEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QHideEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QHideEvent::clone();
 		}
 
 
-		QHideEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QHideEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QHideEvent* QHideEvent_virtualbase_clone(const void* self);
+	friend QHideEvent* QHideEvent_virtualbase_clone(const VirtualQHideEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QHideEvent::setAccepted(accepted);
@@ -2629,16 +2636,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QHideEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QHideEvent_virtualbase_setAccepted(VirtualQHideEvent* self, bool accepted);
 
 };
 
-QHideEvent* QHideEvent_new(struct QHideEvent_VTable* vtbl) {
-	return new VirtualQHideEvent(vtbl);
+VirtualQHideEvent* QHideEvent_new(const QHideEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQHideEvent(vtbl, vdata);
 }
 
 void QHideEvent_virtbase(QHideEvent* src, QEvent** outptr_QEvent) {
@@ -2649,47 +2656,51 @@ QHideEvent* QHideEvent_clone(const QHideEvent* self) {
 	return self->clone();
 }
 
-QHideEvent* QHideEvent_virtualbase_clone(const void* self) {
+QHideEvent* QHideEvent_virtualbase_clone(const VirtualQHideEvent* self) {
 
-	return ( (const VirtualQHideEvent*)(self) )->QHideEvent::clone();
-
+	return self->QHideEvent::clone();
 }
 
-void QHideEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QHideEvent_virtualbase_setAccepted(VirtualQHideEvent* self, bool accepted) {
 
-	( (VirtualQHideEvent*)(self) )->QHideEvent::setAccepted(accepted);
-
+	self->QHideEvent::setAccepted(accepted);
 }
+
+const QHideEvent_VTable* QHideEvent_vtbl(const VirtualQHideEvent* self) { return self->vtbl; }
+void* QHideEvent_vdata(const VirtualQHideEvent* self) { return self->vdata; }
+void QHideEvent_setVdata(VirtualQHideEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QHideEvent_delete(QHideEvent* self) {
 	delete self;
 }
 
 class VirtualQContextMenuEvent final : public QContextMenuEvent {
-	struct QContextMenuEvent_VTable* vtbl;
+	const QContextMenuEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QContextMenuEvent_VTable* QContextMenuEvent_vtbl(const VirtualQContextMenuEvent* self);
+	friend void* QContextMenuEvent_vdata(const VirtualQContextMenuEvent* self);
+	friend void QContextMenuEvent_setVdata(VirtualQContextMenuEvent* self, void* vdata);
 
-	VirtualQContextMenuEvent(struct QContextMenuEvent_VTable* vtbl, QContextMenuEvent::Reason reason, const QPoint& pos, const QPoint& globalPos): QContextMenuEvent(reason, pos, globalPos), vtbl(vtbl) {};
-	VirtualQContextMenuEvent(struct QContextMenuEvent_VTable* vtbl, QContextMenuEvent::Reason reason, const QPoint& pos): QContextMenuEvent(reason, pos), vtbl(vtbl) {};
-	VirtualQContextMenuEvent(struct QContextMenuEvent_VTable* vtbl, QContextMenuEvent::Reason reason, const QPoint& pos, const QPoint& globalPos, Qt::KeyboardModifiers modifiers): QContextMenuEvent(reason, pos, globalPos, modifiers), vtbl(vtbl) {};
+	VirtualQContextMenuEvent(const QContextMenuEvent_VTable* vtbl, void* vdata, QContextMenuEvent::Reason reason, const QPoint& pos, const QPoint& globalPos): QContextMenuEvent(reason, pos, globalPos), vtbl(vtbl), vdata(vdata) {}
+	VirtualQContextMenuEvent(const QContextMenuEvent_VTable* vtbl, void* vdata, QContextMenuEvent::Reason reason, const QPoint& pos): QContextMenuEvent(reason, pos), vtbl(vtbl), vdata(vdata) {}
+	VirtualQContextMenuEvent(const QContextMenuEvent_VTable* vtbl, void* vdata, QContextMenuEvent::Reason reason, const QPoint& pos, const QPoint& globalPos, Qt::KeyboardModifiers modifiers): QContextMenuEvent(reason, pos, globalPos, modifiers), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQContextMenuEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQContextMenuEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QContextMenuEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QContextMenuEvent::clone();
 		}
 
 
-		QContextMenuEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QContextMenuEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QContextMenuEvent* QContextMenuEvent_virtualbase_clone(const void* self);
+	friend QContextMenuEvent* QContextMenuEvent_virtualbase_clone(const VirtualQContextMenuEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QContextMenuEvent::setTimestamp(timestamp);
@@ -2699,13 +2710,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QContextMenuEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QContextMenuEvent_virtualbase_setTimestamp(VirtualQContextMenuEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QContextMenuEvent::setAccepted(accepted);
@@ -2714,24 +2724,24 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QContextMenuEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QContextMenuEvent_virtualbase_setAccepted(VirtualQContextMenuEvent* self, bool accepted);
 
 };
 
-QContextMenuEvent* QContextMenuEvent_new(struct QContextMenuEvent_VTable* vtbl, int reason, QPoint* pos, QPoint* globalPos) {
-	return new VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos);
+VirtualQContextMenuEvent* QContextMenuEvent_new(const QContextMenuEvent_VTable* vtbl, void* vdata, int reason, QPoint* pos, QPoint* globalPos) {
+	return new VirtualQContextMenuEvent(vtbl, vdata, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos);
 }
 
-QContextMenuEvent* QContextMenuEvent_new2(struct QContextMenuEvent_VTable* vtbl, int reason, QPoint* pos) {
-	return new VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos);
+VirtualQContextMenuEvent* QContextMenuEvent_new2(const QContextMenuEvent_VTable* vtbl, void* vdata, int reason, QPoint* pos) {
+	return new VirtualQContextMenuEvent(vtbl, vdata, static_cast<QContextMenuEvent::Reason>(reason), *pos);
 }
 
-QContextMenuEvent* QContextMenuEvent_new3(struct QContextMenuEvent_VTable* vtbl, int reason, QPoint* pos, QPoint* globalPos, int modifiers) {
-	return new VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQContextMenuEvent* QContextMenuEvent_new3(const QContextMenuEvent_VTable* vtbl, void* vdata, int reason, QPoint* pos, QPoint* globalPos, int modifiers) {
+	return new VirtualQContextMenuEvent(vtbl, vdata, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
 void QContextMenuEvent_virtbase(QContextMenuEvent* src, QInputEvent** outptr_QInputEvent) {
@@ -2775,52 +2785,55 @@ int QContextMenuEvent_reason(const QContextMenuEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QContextMenuEvent* QContextMenuEvent_virtualbase_clone(const void* self) {
+QContextMenuEvent* QContextMenuEvent_virtualbase_clone(const VirtualQContextMenuEvent* self) {
 
-	return ( (const VirtualQContextMenuEvent*)(self) )->QContextMenuEvent::clone();
-
+	return self->QContextMenuEvent::clone();
 }
 
-void QContextMenuEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QContextMenuEvent_virtualbase_setTimestamp(VirtualQContextMenuEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQContextMenuEvent*)(self) )->QContextMenuEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QContextMenuEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QContextMenuEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QContextMenuEvent_virtualbase_setAccepted(VirtualQContextMenuEvent* self, bool accepted) {
 
-	( (VirtualQContextMenuEvent*)(self) )->QContextMenuEvent::setAccepted(accepted);
-
+	self->QContextMenuEvent::setAccepted(accepted);
 }
+
+const QContextMenuEvent_VTable* QContextMenuEvent_vtbl(const VirtualQContextMenuEvent* self) { return self->vtbl; }
+void* QContextMenuEvent_vdata(const VirtualQContextMenuEvent* self) { return self->vdata; }
+void QContextMenuEvent_setVdata(VirtualQContextMenuEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QContextMenuEvent_delete(QContextMenuEvent* self) {
 	delete self;
 }
 
 class VirtualQInputMethodEvent final : public QInputMethodEvent {
-	struct QInputMethodEvent_VTable* vtbl;
+	const QInputMethodEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QInputMethodEvent_VTable* QInputMethodEvent_vtbl(const VirtualQInputMethodEvent* self);
+	friend void* QInputMethodEvent_vdata(const VirtualQInputMethodEvent* self);
+	friend void QInputMethodEvent_setVdata(VirtualQInputMethodEvent* self, void* vdata);
 
-	VirtualQInputMethodEvent(struct QInputMethodEvent_VTable* vtbl): QInputMethodEvent(), vtbl(vtbl) {};
-	VirtualQInputMethodEvent(struct QInputMethodEvent_VTable* vtbl, const QString& preeditText, const QList<QInputMethodEvent::Attribute>& attributes): QInputMethodEvent(preeditText, attributes), vtbl(vtbl) {};
+	VirtualQInputMethodEvent(const QInputMethodEvent_VTable* vtbl, void* vdata): QInputMethodEvent(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputMethodEvent(const QInputMethodEvent_VTable* vtbl, void* vdata, const QString& preeditText, const QList<QInputMethodEvent::Attribute>& attributes): QInputMethodEvent(preeditText, attributes), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQInputMethodEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQInputMethodEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QInputMethodEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QInputMethodEvent::clone();
 		}
 
 
-		QInputMethodEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QInputMethodEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QInputMethodEvent* QInputMethodEvent_virtualbase_clone(const void* self);
+	friend QInputMethodEvent* QInputMethodEvent_virtualbase_clone(const VirtualQInputMethodEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QInputMethodEvent::setAccepted(accepted);
@@ -2829,19 +2842,19 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QInputMethodEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QInputMethodEvent_virtualbase_setAccepted(VirtualQInputMethodEvent* self, bool accepted);
 
 };
 
-QInputMethodEvent* QInputMethodEvent_new(struct QInputMethodEvent_VTable* vtbl) {
-	return new VirtualQInputMethodEvent(vtbl);
+VirtualQInputMethodEvent* QInputMethodEvent_new(const QInputMethodEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQInputMethodEvent(vtbl, vdata);
 }
 
-QInputMethodEvent* QInputMethodEvent_new2(struct QInputMethodEvent_VTable* vtbl, struct miqt_string preeditText, struct miqt_array /* of QInputMethodEvent__Attribute* */  attributes) {
+VirtualQInputMethodEvent* QInputMethodEvent_new2(const QInputMethodEvent_VTable* vtbl, void* vdata, struct miqt_string preeditText, struct miqt_array /* of QInputMethodEvent__Attribute* */  attributes) {
 	QString preeditText_QString = QString::fromUtf8(preeditText.data, preeditText.len);
 	QList<QInputMethodEvent::Attribute> attributes_QList;
 	attributes_QList.reserve(attributes.len);
@@ -2849,7 +2862,7 @@ QInputMethodEvent* QInputMethodEvent_new2(struct QInputMethodEvent_VTable* vtbl,
 	for(size_t i = 0; i < attributes.len; ++i) {
 		attributes_QList.push_back(*(attributes_arr[i]));
 	}
-	return new VirtualQInputMethodEvent(vtbl, preeditText_QString, attributes_QList);
+	return new VirtualQInputMethodEvent(vtbl, vdata, preeditText_QString, attributes_QList);
 }
 
 void QInputMethodEvent_virtbase(QInputMethodEvent* src, QEvent** outptr_QEvent) {
@@ -2918,45 +2931,49 @@ void QInputMethodEvent_setCommitString3(QInputMethodEvent* self, struct miqt_str
 	self->setCommitString(commitString_QString, static_cast<int>(replaceFrom), static_cast<int>(replaceLength));
 }
 
-QInputMethodEvent* QInputMethodEvent_virtualbase_clone(const void* self) {
+QInputMethodEvent* QInputMethodEvent_virtualbase_clone(const VirtualQInputMethodEvent* self) {
 
-	return ( (const VirtualQInputMethodEvent*)(self) )->QInputMethodEvent::clone();
-
+	return self->QInputMethodEvent::clone();
 }
 
-void QInputMethodEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QInputMethodEvent_virtualbase_setAccepted(VirtualQInputMethodEvent* self, bool accepted) {
 
-	( (VirtualQInputMethodEvent*)(self) )->QInputMethodEvent::setAccepted(accepted);
-
+	self->QInputMethodEvent::setAccepted(accepted);
 }
+
+const QInputMethodEvent_VTable* QInputMethodEvent_vtbl(const VirtualQInputMethodEvent* self) { return self->vtbl; }
+void* QInputMethodEvent_vdata(const VirtualQInputMethodEvent* self) { return self->vdata; }
+void QInputMethodEvent_setVdata(VirtualQInputMethodEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QInputMethodEvent_delete(QInputMethodEvent* self) {
 	delete self;
 }
 
 class VirtualQInputMethodQueryEvent final : public QInputMethodQueryEvent {
-	struct QInputMethodQueryEvent_VTable* vtbl;
+	const QInputMethodQueryEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QInputMethodQueryEvent_VTable* QInputMethodQueryEvent_vtbl(const VirtualQInputMethodQueryEvent* self);
+	friend void* QInputMethodQueryEvent_vdata(const VirtualQInputMethodQueryEvent* self);
+	friend void QInputMethodQueryEvent_setVdata(VirtualQInputMethodQueryEvent* self, void* vdata);
 
-	VirtualQInputMethodQueryEvent(struct QInputMethodQueryEvent_VTable* vtbl, Qt::InputMethodQueries queries): QInputMethodQueryEvent(queries), vtbl(vtbl) {};
+	VirtualQInputMethodQueryEvent(const QInputMethodQueryEvent_VTable* vtbl, void* vdata, Qt::InputMethodQueries queries): QInputMethodQueryEvent(queries), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQInputMethodQueryEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQInputMethodQueryEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QInputMethodQueryEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QInputMethodQueryEvent::clone();
 		}
 
 
-		QInputMethodQueryEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QInputMethodQueryEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QInputMethodQueryEvent* QInputMethodQueryEvent_virtualbase_clone(const void* self);
+	friend QInputMethodQueryEvent* QInputMethodQueryEvent_virtualbase_clone(const VirtualQInputMethodQueryEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QInputMethodQueryEvent::setAccepted(accepted);
@@ -2965,16 +2982,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QInputMethodQueryEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QInputMethodQueryEvent_virtualbase_setAccepted(VirtualQInputMethodQueryEvent* self, bool accepted);
 
 };
 
-QInputMethodQueryEvent* QInputMethodQueryEvent_new(struct QInputMethodQueryEvent_VTable* vtbl, int queries) {
-	return new VirtualQInputMethodQueryEvent(vtbl, static_cast<Qt::InputMethodQueries>(queries));
+VirtualQInputMethodQueryEvent* QInputMethodQueryEvent_new(const QInputMethodQueryEvent_VTable* vtbl, void* vdata, int queries) {
+	return new VirtualQInputMethodQueryEvent(vtbl, vdata, static_cast<Qt::InputMethodQueries>(queries));
 }
 
 void QInputMethodQueryEvent_virtbase(QInputMethodQueryEvent* src, QEvent** outptr_QEvent) {
@@ -2998,46 +3015,50 @@ QVariant* QInputMethodQueryEvent_value(const QInputMethodQueryEvent* self, int q
 	return new QVariant(self->value(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QInputMethodQueryEvent* QInputMethodQueryEvent_virtualbase_clone(const void* self) {
+QInputMethodQueryEvent* QInputMethodQueryEvent_virtualbase_clone(const VirtualQInputMethodQueryEvent* self) {
 
-	return ( (const VirtualQInputMethodQueryEvent*)(self) )->QInputMethodQueryEvent::clone();
-
+	return self->QInputMethodQueryEvent::clone();
 }
 
-void QInputMethodQueryEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QInputMethodQueryEvent_virtualbase_setAccepted(VirtualQInputMethodQueryEvent* self, bool accepted) {
 
-	( (VirtualQInputMethodQueryEvent*)(self) )->QInputMethodQueryEvent::setAccepted(accepted);
-
+	self->QInputMethodQueryEvent::setAccepted(accepted);
 }
+
+const QInputMethodQueryEvent_VTable* QInputMethodQueryEvent_vtbl(const VirtualQInputMethodQueryEvent* self) { return self->vtbl; }
+void* QInputMethodQueryEvent_vdata(const VirtualQInputMethodQueryEvent* self) { return self->vdata; }
+void QInputMethodQueryEvent_setVdata(VirtualQInputMethodQueryEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QInputMethodQueryEvent_delete(QInputMethodQueryEvent* self) {
 	delete self;
 }
 
 class VirtualQDropEvent final : public QDropEvent {
-	struct QDropEvent_VTable* vtbl;
+	const QDropEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDropEvent_VTable* QDropEvent_vtbl(const VirtualQDropEvent* self);
+	friend void* QDropEvent_vdata(const VirtualQDropEvent* self);
+	friend void QDropEvent_setVdata(VirtualQDropEvent* self, void* vdata);
 
-	VirtualQDropEvent(struct QDropEvent_VTable* vtbl, const QPointF& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDropEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl) {};
-	VirtualQDropEvent(struct QDropEvent_VTable* vtbl, const QPointF& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, QEvent::Type type): QDropEvent(pos, actions, data, buttons, modifiers, type), vtbl(vtbl) {};
+	VirtualQDropEvent(const QDropEvent_VTable* vtbl, void* vdata, const QPointF& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDropEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDropEvent(const QDropEvent_VTable* vtbl, void* vdata, const QPointF& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, QEvent::Type type): QDropEvent(pos, actions, data, buttons, modifiers, type), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDropEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDropEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QDropEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QDropEvent::clone();
 		}
 
 
-		QDropEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QDropEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QDropEvent* QDropEvent_virtualbase_clone(const void* self);
+	friend QDropEvent* QDropEvent_virtualbase_clone(const VirtualQDropEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QDropEvent::setAccepted(accepted);
@@ -3046,20 +3067,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QDropEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QDropEvent_virtualbase_setAccepted(VirtualQDropEvent* self, bool accepted);
 
 };
 
-QDropEvent* QDropEvent_new(struct QDropEvent_VTable* vtbl, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers) {
-	return new VirtualQDropEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQDropEvent* QDropEvent_new(const QDropEvent_VTable* vtbl, void* vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers) {
+	return new VirtualQDropEvent(vtbl, vdata, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QDropEvent* QDropEvent_new2(struct QDropEvent_VTable* vtbl, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
-	return new VirtualQDropEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type));
+VirtualQDropEvent* QDropEvent_new2(const QDropEvent_VTable* vtbl, void* vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
+	return new VirtualQDropEvent(vtbl, vdata, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type));
 }
 
 void QDropEvent_virtbase(QDropEvent* src, QEvent** outptr_QEvent) {
@@ -3133,46 +3154,50 @@ QMimeData* QDropEvent_mimeData(const QDropEvent* self) {
 	return (QMimeData*) self->mimeData();
 }
 
-QDropEvent* QDropEvent_virtualbase_clone(const void* self) {
+QDropEvent* QDropEvent_virtualbase_clone(const VirtualQDropEvent* self) {
 
-	return ( (const VirtualQDropEvent*)(self) )->QDropEvent::clone();
-
+	return self->QDropEvent::clone();
 }
 
-void QDropEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QDropEvent_virtualbase_setAccepted(VirtualQDropEvent* self, bool accepted) {
 
-	( (VirtualQDropEvent*)(self) )->QDropEvent::setAccepted(accepted);
-
+	self->QDropEvent::setAccepted(accepted);
 }
+
+const QDropEvent_VTable* QDropEvent_vtbl(const VirtualQDropEvent* self) { return self->vtbl; }
+void* QDropEvent_vdata(const VirtualQDropEvent* self) { return self->vdata; }
+void QDropEvent_setVdata(VirtualQDropEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QDropEvent_delete(QDropEvent* self) {
 	delete self;
 }
 
 class VirtualQDragMoveEvent final : public QDragMoveEvent {
-	struct QDragMoveEvent_VTable* vtbl;
+	const QDragMoveEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDragMoveEvent_VTable* QDragMoveEvent_vtbl(const VirtualQDragMoveEvent* self);
+	friend void* QDragMoveEvent_vdata(const VirtualQDragMoveEvent* self);
+	friend void QDragMoveEvent_setVdata(VirtualQDragMoveEvent* self, void* vdata);
 
-	VirtualQDragMoveEvent(struct QDragMoveEvent_VTable* vtbl, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDragMoveEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl) {};
-	VirtualQDragMoveEvent(struct QDragMoveEvent_VTable* vtbl, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, QEvent::Type type): QDragMoveEvent(pos, actions, data, buttons, modifiers, type), vtbl(vtbl) {};
+	VirtualQDragMoveEvent(const QDragMoveEvent_VTable* vtbl, void* vdata, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDragMoveEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDragMoveEvent(const QDragMoveEvent_VTable* vtbl, void* vdata, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, QEvent::Type type): QDragMoveEvent(pos, actions, data, buttons, modifiers, type), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDragMoveEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDragMoveEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QDragMoveEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QDragMoveEvent::clone();
 		}
 
 
-		QDragMoveEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QDragMoveEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QDragMoveEvent* QDragMoveEvent_virtualbase_clone(const void* self);
+	friend QDragMoveEvent* QDragMoveEvent_virtualbase_clone(const VirtualQDragMoveEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QDragMoveEvent::setAccepted(accepted);
@@ -3181,20 +3206,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QDragMoveEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QDragMoveEvent_virtualbase_setAccepted(VirtualQDragMoveEvent* self, bool accepted);
 
 };
 
-QDragMoveEvent* QDragMoveEvent_new(struct QDragMoveEvent_VTable* vtbl, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
-	return new VirtualQDragMoveEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQDragMoveEvent* QDragMoveEvent_new(const QDragMoveEvent_VTable* vtbl, void* vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
+	return new VirtualQDragMoveEvent(vtbl, vdata, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QDragMoveEvent* QDragMoveEvent_new2(struct QDragMoveEvent_VTable* vtbl, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
-	return new VirtualQDragMoveEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type));
+VirtualQDragMoveEvent* QDragMoveEvent_new2(const QDragMoveEvent_VTable* vtbl, void* vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
+	return new VirtualQDragMoveEvent(vtbl, vdata, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type));
 }
 
 void QDragMoveEvent_virtbase(QDragMoveEvent* src, QDropEvent** outptr_QDropEvent) {
@@ -3225,45 +3250,49 @@ void QDragMoveEvent_ignoreWithQRect(QDragMoveEvent* self, QRect* r) {
 	self->ignore(*r);
 }
 
-QDragMoveEvent* QDragMoveEvent_virtualbase_clone(const void* self) {
+QDragMoveEvent* QDragMoveEvent_virtualbase_clone(const VirtualQDragMoveEvent* self) {
 
-	return ( (const VirtualQDragMoveEvent*)(self) )->QDragMoveEvent::clone();
-
+	return self->QDragMoveEvent::clone();
 }
 
-void QDragMoveEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QDragMoveEvent_virtualbase_setAccepted(VirtualQDragMoveEvent* self, bool accepted) {
 
-	( (VirtualQDragMoveEvent*)(self) )->QDragMoveEvent::setAccepted(accepted);
-
+	self->QDragMoveEvent::setAccepted(accepted);
 }
+
+const QDragMoveEvent_VTable* QDragMoveEvent_vtbl(const VirtualQDragMoveEvent* self) { return self->vtbl; }
+void* QDragMoveEvent_vdata(const VirtualQDragMoveEvent* self) { return self->vdata; }
+void QDragMoveEvent_setVdata(VirtualQDragMoveEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QDragMoveEvent_delete(QDragMoveEvent* self) {
 	delete self;
 }
 
 class VirtualQDragEnterEvent final : public QDragEnterEvent {
-	struct QDragEnterEvent_VTable* vtbl;
+	const QDragEnterEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDragEnterEvent_VTable* QDragEnterEvent_vtbl(const VirtualQDragEnterEvent* self);
+	friend void* QDragEnterEvent_vdata(const VirtualQDragEnterEvent* self);
+	friend void QDragEnterEvent_setVdata(VirtualQDragEnterEvent* self, void* vdata);
 
-	VirtualQDragEnterEvent(struct QDragEnterEvent_VTable* vtbl, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDragEnterEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl) {};
+	VirtualQDragEnterEvent(const QDragEnterEvent_VTable* vtbl, void* vdata, const QPoint& pos, Qt::DropActions actions, const QMimeData* data, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers): QDragEnterEvent(pos, actions, data, buttons, modifiers), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDragEnterEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDragEnterEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QDragEnterEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QDragEnterEvent::clone();
 		}
 
 
-		QDragEnterEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QDragEnterEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QDragEnterEvent* QDragEnterEvent_virtualbase_clone(const void* self);
+	friend QDragEnterEvent* QDragEnterEvent_virtualbase_clone(const VirtualQDragEnterEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QDragEnterEvent::setAccepted(accepted);
@@ -3272,16 +3301,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QDragEnterEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QDragEnterEvent_virtualbase_setAccepted(VirtualQDragEnterEvent* self, bool accepted);
 
 };
 
-QDragEnterEvent* QDragEnterEvent_new(struct QDragEnterEvent_VTable* vtbl, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
-	return new VirtualQDragEnterEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQDragEnterEvent* QDragEnterEvent_new(const QDragEnterEvent_VTable* vtbl, void* vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
+	return new VirtualQDragEnterEvent(vtbl, vdata, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
 void QDragEnterEvent_virtbase(QDragEnterEvent* src, QDragMoveEvent** outptr_QDragMoveEvent) {
@@ -3292,45 +3321,49 @@ QDragEnterEvent* QDragEnterEvent_clone(const QDragEnterEvent* self) {
 	return self->clone();
 }
 
-QDragEnterEvent* QDragEnterEvent_virtualbase_clone(const void* self) {
+QDragEnterEvent* QDragEnterEvent_virtualbase_clone(const VirtualQDragEnterEvent* self) {
 
-	return ( (const VirtualQDragEnterEvent*)(self) )->QDragEnterEvent::clone();
-
+	return self->QDragEnterEvent::clone();
 }
 
-void QDragEnterEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QDragEnterEvent_virtualbase_setAccepted(VirtualQDragEnterEvent* self, bool accepted) {
 
-	( (VirtualQDragEnterEvent*)(self) )->QDragEnterEvent::setAccepted(accepted);
-
+	self->QDragEnterEvent::setAccepted(accepted);
 }
+
+const QDragEnterEvent_VTable* QDragEnterEvent_vtbl(const VirtualQDragEnterEvent* self) { return self->vtbl; }
+void* QDragEnterEvent_vdata(const VirtualQDragEnterEvent* self) { return self->vdata; }
+void QDragEnterEvent_setVdata(VirtualQDragEnterEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QDragEnterEvent_delete(QDragEnterEvent* self) {
 	delete self;
 }
 
 class VirtualQDragLeaveEvent final : public QDragLeaveEvent {
-	struct QDragLeaveEvent_VTable* vtbl;
+	const QDragLeaveEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDragLeaveEvent_VTable* QDragLeaveEvent_vtbl(const VirtualQDragLeaveEvent* self);
+	friend void* QDragLeaveEvent_vdata(const VirtualQDragLeaveEvent* self);
+	friend void QDragLeaveEvent_setVdata(VirtualQDragLeaveEvent* self, void* vdata);
 
-	VirtualQDragLeaveEvent(struct QDragLeaveEvent_VTable* vtbl): QDragLeaveEvent(), vtbl(vtbl) {};
+	VirtualQDragLeaveEvent(const QDragLeaveEvent_VTable* vtbl, void* vdata): QDragLeaveEvent(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDragLeaveEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDragLeaveEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QDragLeaveEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QDragLeaveEvent::clone();
 		}
 
 
-		QDragLeaveEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QDragLeaveEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QDragLeaveEvent* QDragLeaveEvent_virtualbase_clone(const void* self);
+	friend QDragLeaveEvent* QDragLeaveEvent_virtualbase_clone(const VirtualQDragLeaveEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QDragLeaveEvent::setAccepted(accepted);
@@ -3339,16 +3372,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QDragLeaveEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QDragLeaveEvent_virtualbase_setAccepted(VirtualQDragLeaveEvent* self, bool accepted);
 
 };
 
-QDragLeaveEvent* QDragLeaveEvent_new(struct QDragLeaveEvent_VTable* vtbl) {
-	return new VirtualQDragLeaveEvent(vtbl);
+VirtualQDragLeaveEvent* QDragLeaveEvent_new(const QDragLeaveEvent_VTable* vtbl, void* vdata) {
+	return new VirtualQDragLeaveEvent(vtbl, vdata);
 }
 
 void QDragLeaveEvent_virtbase(QDragLeaveEvent* src, QEvent** outptr_QEvent) {
@@ -3359,45 +3392,49 @@ QDragLeaveEvent* QDragLeaveEvent_clone(const QDragLeaveEvent* self) {
 	return self->clone();
 }
 
-QDragLeaveEvent* QDragLeaveEvent_virtualbase_clone(const void* self) {
+QDragLeaveEvent* QDragLeaveEvent_virtualbase_clone(const VirtualQDragLeaveEvent* self) {
 
-	return ( (const VirtualQDragLeaveEvent*)(self) )->QDragLeaveEvent::clone();
-
+	return self->QDragLeaveEvent::clone();
 }
 
-void QDragLeaveEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QDragLeaveEvent_virtualbase_setAccepted(VirtualQDragLeaveEvent* self, bool accepted) {
 
-	( (VirtualQDragLeaveEvent*)(self) )->QDragLeaveEvent::setAccepted(accepted);
-
+	self->QDragLeaveEvent::setAccepted(accepted);
 }
+
+const QDragLeaveEvent_VTable* QDragLeaveEvent_vtbl(const VirtualQDragLeaveEvent* self) { return self->vtbl; }
+void* QDragLeaveEvent_vdata(const VirtualQDragLeaveEvent* self) { return self->vdata; }
+void QDragLeaveEvent_setVdata(VirtualQDragLeaveEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QDragLeaveEvent_delete(QDragLeaveEvent* self) {
 	delete self;
 }
 
 class VirtualQHelpEvent final : public QHelpEvent {
-	struct QHelpEvent_VTable* vtbl;
+	const QHelpEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QHelpEvent_VTable* QHelpEvent_vtbl(const VirtualQHelpEvent* self);
+	friend void* QHelpEvent_vdata(const VirtualQHelpEvent* self);
+	friend void QHelpEvent_setVdata(VirtualQHelpEvent* self, void* vdata);
 
-	VirtualQHelpEvent(struct QHelpEvent_VTable* vtbl, QEvent::Type type, const QPoint& pos, const QPoint& globalPos): QHelpEvent(type, pos, globalPos), vtbl(vtbl) {};
+	VirtualQHelpEvent(const QHelpEvent_VTable* vtbl, void* vdata, QEvent::Type type, const QPoint& pos, const QPoint& globalPos): QHelpEvent(type, pos, globalPos), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQHelpEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQHelpEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QHelpEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QHelpEvent::clone();
 		}
 
 
-		QHelpEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QHelpEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QHelpEvent* QHelpEvent_virtualbase_clone(const void* self);
+	friend QHelpEvent* QHelpEvent_virtualbase_clone(const VirtualQHelpEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QHelpEvent::setAccepted(accepted);
@@ -3406,16 +3443,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QHelpEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QHelpEvent_virtualbase_setAccepted(VirtualQHelpEvent* self, bool accepted);
 
 };
 
-QHelpEvent* QHelpEvent_new(struct QHelpEvent_VTable* vtbl, int type, QPoint* pos, QPoint* globalPos) {
-	return new VirtualQHelpEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *globalPos);
+VirtualQHelpEvent* QHelpEvent_new(const QHelpEvent_VTable* vtbl, void* vdata, int type, QPoint* pos, QPoint* globalPos) {
+	return new VirtualQHelpEvent(vtbl, vdata, static_cast<QEvent::Type>(type), *pos, *globalPos);
 }
 
 void QHelpEvent_virtbase(QHelpEvent* src, QEvent** outptr_QEvent) {
@@ -3454,45 +3491,49 @@ QPoint* QHelpEvent_globalPos(const QHelpEvent* self) {
 	return const_cast<QPoint*>(&_ret);
 }
 
-QHelpEvent* QHelpEvent_virtualbase_clone(const void* self) {
+QHelpEvent* QHelpEvent_virtualbase_clone(const VirtualQHelpEvent* self) {
 
-	return ( (const VirtualQHelpEvent*)(self) )->QHelpEvent::clone();
-
+	return self->QHelpEvent::clone();
 }
 
-void QHelpEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QHelpEvent_virtualbase_setAccepted(VirtualQHelpEvent* self, bool accepted) {
 
-	( (VirtualQHelpEvent*)(self) )->QHelpEvent::setAccepted(accepted);
-
+	self->QHelpEvent::setAccepted(accepted);
 }
+
+const QHelpEvent_VTable* QHelpEvent_vtbl(const VirtualQHelpEvent* self) { return self->vtbl; }
+void* QHelpEvent_vdata(const VirtualQHelpEvent* self) { return self->vdata; }
+void QHelpEvent_setVdata(VirtualQHelpEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QHelpEvent_delete(QHelpEvent* self) {
 	delete self;
 }
 
 class VirtualQStatusTipEvent final : public QStatusTipEvent {
-	struct QStatusTipEvent_VTable* vtbl;
+	const QStatusTipEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QStatusTipEvent_VTable* QStatusTipEvent_vtbl(const VirtualQStatusTipEvent* self);
+	friend void* QStatusTipEvent_vdata(const VirtualQStatusTipEvent* self);
+	friend void QStatusTipEvent_setVdata(VirtualQStatusTipEvent* self, void* vdata);
 
-	VirtualQStatusTipEvent(struct QStatusTipEvent_VTable* vtbl, const QString& tip): QStatusTipEvent(tip), vtbl(vtbl) {};
+	VirtualQStatusTipEvent(const QStatusTipEvent_VTable* vtbl, void* vdata, const QString& tip): QStatusTipEvent(tip), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQStatusTipEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQStatusTipEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QStatusTipEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QStatusTipEvent::clone();
 		}
 
 
-		QStatusTipEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QStatusTipEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QStatusTipEvent* QStatusTipEvent_virtualbase_clone(const void* self);
+	friend QStatusTipEvent* QStatusTipEvent_virtualbase_clone(const VirtualQStatusTipEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QStatusTipEvent::setAccepted(accepted);
@@ -3501,17 +3542,17 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QStatusTipEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QStatusTipEvent_virtualbase_setAccepted(VirtualQStatusTipEvent* self, bool accepted);
 
 };
 
-QStatusTipEvent* QStatusTipEvent_new(struct QStatusTipEvent_VTable* vtbl, struct miqt_string tip) {
+VirtualQStatusTipEvent* QStatusTipEvent_new(const QStatusTipEvent_VTable* vtbl, void* vdata, struct miqt_string tip) {
 	QString tip_QString = QString::fromUtf8(tip.data, tip.len);
-	return new VirtualQStatusTipEvent(vtbl, tip_QString);
+	return new VirtualQStatusTipEvent(vtbl, vdata, tip_QString);
 }
 
 void QStatusTipEvent_virtbase(QStatusTipEvent* src, QEvent** outptr_QEvent) {
@@ -3533,45 +3574,49 @@ struct miqt_string QStatusTipEvent_tip(const QStatusTipEvent* self) {
 	return _ms;
 }
 
-QStatusTipEvent* QStatusTipEvent_virtualbase_clone(const void* self) {
+QStatusTipEvent* QStatusTipEvent_virtualbase_clone(const VirtualQStatusTipEvent* self) {
 
-	return ( (const VirtualQStatusTipEvent*)(self) )->QStatusTipEvent::clone();
-
+	return self->QStatusTipEvent::clone();
 }
 
-void QStatusTipEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QStatusTipEvent_virtualbase_setAccepted(VirtualQStatusTipEvent* self, bool accepted) {
 
-	( (VirtualQStatusTipEvent*)(self) )->QStatusTipEvent::setAccepted(accepted);
-
+	self->QStatusTipEvent::setAccepted(accepted);
 }
+
+const QStatusTipEvent_VTable* QStatusTipEvent_vtbl(const VirtualQStatusTipEvent* self) { return self->vtbl; }
+void* QStatusTipEvent_vdata(const VirtualQStatusTipEvent* self) { return self->vdata; }
+void QStatusTipEvent_setVdata(VirtualQStatusTipEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QStatusTipEvent_delete(QStatusTipEvent* self) {
 	delete self;
 }
 
 class VirtualQWhatsThisClickedEvent final : public QWhatsThisClickedEvent {
-	struct QWhatsThisClickedEvent_VTable* vtbl;
+	const QWhatsThisClickedEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWhatsThisClickedEvent_VTable* QWhatsThisClickedEvent_vtbl(const VirtualQWhatsThisClickedEvent* self);
+	friend void* QWhatsThisClickedEvent_vdata(const VirtualQWhatsThisClickedEvent* self);
+	friend void QWhatsThisClickedEvent_setVdata(VirtualQWhatsThisClickedEvent* self, void* vdata);
 
-	VirtualQWhatsThisClickedEvent(struct QWhatsThisClickedEvent_VTable* vtbl, const QString& href): QWhatsThisClickedEvent(href), vtbl(vtbl) {};
+	VirtualQWhatsThisClickedEvent(const QWhatsThisClickedEvent_VTable* vtbl, void* vdata, const QString& href): QWhatsThisClickedEvent(href), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWhatsThisClickedEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWhatsThisClickedEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QWhatsThisClickedEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QWhatsThisClickedEvent::clone();
 		}
 
 
-		QWhatsThisClickedEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QWhatsThisClickedEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QWhatsThisClickedEvent* QWhatsThisClickedEvent_virtualbase_clone(const void* self);
+	friend QWhatsThisClickedEvent* QWhatsThisClickedEvent_virtualbase_clone(const VirtualQWhatsThisClickedEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QWhatsThisClickedEvent::setAccepted(accepted);
@@ -3580,17 +3625,17 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QWhatsThisClickedEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QWhatsThisClickedEvent_virtualbase_setAccepted(VirtualQWhatsThisClickedEvent* self, bool accepted);
 
 };
 
-QWhatsThisClickedEvent* QWhatsThisClickedEvent_new(struct QWhatsThisClickedEvent_VTable* vtbl, struct miqt_string href) {
+VirtualQWhatsThisClickedEvent* QWhatsThisClickedEvent_new(const QWhatsThisClickedEvent_VTable* vtbl, void* vdata, struct miqt_string href) {
 	QString href_QString = QString::fromUtf8(href.data, href.len);
-	return new VirtualQWhatsThisClickedEvent(vtbl, href_QString);
+	return new VirtualQWhatsThisClickedEvent(vtbl, vdata, href_QString);
 }
 
 void QWhatsThisClickedEvent_virtbase(QWhatsThisClickedEvent* src, QEvent** outptr_QEvent) {
@@ -3612,46 +3657,50 @@ struct miqt_string QWhatsThisClickedEvent_href(const QWhatsThisClickedEvent* sel
 	return _ms;
 }
 
-QWhatsThisClickedEvent* QWhatsThisClickedEvent_virtualbase_clone(const void* self) {
+QWhatsThisClickedEvent* QWhatsThisClickedEvent_virtualbase_clone(const VirtualQWhatsThisClickedEvent* self) {
 
-	return ( (const VirtualQWhatsThisClickedEvent*)(self) )->QWhatsThisClickedEvent::clone();
-
+	return self->QWhatsThisClickedEvent::clone();
 }
 
-void QWhatsThisClickedEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QWhatsThisClickedEvent_virtualbase_setAccepted(VirtualQWhatsThisClickedEvent* self, bool accepted) {
 
-	( (VirtualQWhatsThisClickedEvent*)(self) )->QWhatsThisClickedEvent::setAccepted(accepted);
-
+	self->QWhatsThisClickedEvent::setAccepted(accepted);
 }
+
+const QWhatsThisClickedEvent_VTable* QWhatsThisClickedEvent_vtbl(const VirtualQWhatsThisClickedEvent* self) { return self->vtbl; }
+void* QWhatsThisClickedEvent_vdata(const VirtualQWhatsThisClickedEvent* self) { return self->vdata; }
+void QWhatsThisClickedEvent_setVdata(VirtualQWhatsThisClickedEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QWhatsThisClickedEvent_delete(QWhatsThisClickedEvent* self) {
 	delete self;
 }
 
 class VirtualQActionEvent final : public QActionEvent {
-	struct QActionEvent_VTable* vtbl;
+	const QActionEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QActionEvent_VTable* QActionEvent_vtbl(const VirtualQActionEvent* self);
+	friend void* QActionEvent_vdata(const VirtualQActionEvent* self);
+	friend void QActionEvent_setVdata(VirtualQActionEvent* self, void* vdata);
 
-	VirtualQActionEvent(struct QActionEvent_VTable* vtbl, int type, QAction* action): QActionEvent(type, action), vtbl(vtbl) {};
-	VirtualQActionEvent(struct QActionEvent_VTable* vtbl, int type, QAction* action, QAction* before): QActionEvent(type, action, before), vtbl(vtbl) {};
+	VirtualQActionEvent(const QActionEvent_VTable* vtbl, void* vdata, int type, QAction* action): QActionEvent(type, action), vtbl(vtbl), vdata(vdata) {}
+	VirtualQActionEvent(const QActionEvent_VTable* vtbl, void* vdata, int type, QAction* action, QAction* before): QActionEvent(type, action, before), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQActionEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQActionEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QActionEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QActionEvent::clone();
 		}
 
 
-		QActionEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QActionEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QActionEvent* QActionEvent_virtualbase_clone(const void* self);
+	friend QActionEvent* QActionEvent_virtualbase_clone(const VirtualQActionEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QActionEvent::setAccepted(accepted);
@@ -3660,20 +3709,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QActionEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QActionEvent_virtualbase_setAccepted(VirtualQActionEvent* self, bool accepted);
 
 };
 
-QActionEvent* QActionEvent_new(struct QActionEvent_VTable* vtbl, int type, QAction* action) {
-	return new VirtualQActionEvent(vtbl, static_cast<int>(type), action);
+VirtualQActionEvent* QActionEvent_new(const QActionEvent_VTable* vtbl, void* vdata, int type, QAction* action) {
+	return new VirtualQActionEvent(vtbl, vdata, static_cast<int>(type), action);
 }
 
-QActionEvent* QActionEvent_new2(struct QActionEvent_VTable* vtbl, int type, QAction* action, QAction* before) {
-	return new VirtualQActionEvent(vtbl, static_cast<int>(type), action, before);
+VirtualQActionEvent* QActionEvent_new2(const QActionEvent_VTable* vtbl, void* vdata, int type, QAction* action, QAction* before) {
+	return new VirtualQActionEvent(vtbl, vdata, static_cast<int>(type), action, before);
 }
 
 void QActionEvent_virtbase(QActionEvent* src, QEvent** outptr_QEvent) {
@@ -3684,46 +3733,50 @@ QActionEvent* QActionEvent_clone(const QActionEvent* self) {
 	return self->clone();
 }
 
-QActionEvent* QActionEvent_virtualbase_clone(const void* self) {
+QActionEvent* QActionEvent_virtualbase_clone(const VirtualQActionEvent* self) {
 
-	return ( (const VirtualQActionEvent*)(self) )->QActionEvent::clone();
-
+	return self->QActionEvent::clone();
 }
 
-void QActionEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QActionEvent_virtualbase_setAccepted(VirtualQActionEvent* self, bool accepted) {
 
-	( (VirtualQActionEvent*)(self) )->QActionEvent::setAccepted(accepted);
-
+	self->QActionEvent::setAccepted(accepted);
 }
+
+const QActionEvent_VTable* QActionEvent_vtbl(const VirtualQActionEvent* self) { return self->vtbl; }
+void* QActionEvent_vdata(const VirtualQActionEvent* self) { return self->vdata; }
+void QActionEvent_setVdata(VirtualQActionEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QActionEvent_delete(QActionEvent* self) {
 	delete self;
 }
 
 class VirtualQFileOpenEvent final : public QFileOpenEvent {
-	struct QFileOpenEvent_VTable* vtbl;
+	const QFileOpenEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFileOpenEvent_VTable* QFileOpenEvent_vtbl(const VirtualQFileOpenEvent* self);
+	friend void* QFileOpenEvent_vdata(const VirtualQFileOpenEvent* self);
+	friend void QFileOpenEvent_setVdata(VirtualQFileOpenEvent* self, void* vdata);
 
-	VirtualQFileOpenEvent(struct QFileOpenEvent_VTable* vtbl, const QString& file): QFileOpenEvent(file), vtbl(vtbl) {};
-	VirtualQFileOpenEvent(struct QFileOpenEvent_VTable* vtbl, const QUrl& url): QFileOpenEvent(url), vtbl(vtbl) {};
+	VirtualQFileOpenEvent(const QFileOpenEvent_VTable* vtbl, void* vdata, const QString& file): QFileOpenEvent(file), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFileOpenEvent(const QFileOpenEvent_VTable* vtbl, void* vdata, const QUrl& url): QFileOpenEvent(url), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFileOpenEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFileOpenEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QFileOpenEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QFileOpenEvent::clone();
 		}
 
 
-		QFileOpenEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QFileOpenEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QFileOpenEvent* QFileOpenEvent_virtualbase_clone(const void* self);
+	friend QFileOpenEvent* QFileOpenEvent_virtualbase_clone(const VirtualQFileOpenEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QFileOpenEvent::setAccepted(accepted);
@@ -3732,21 +3785,21 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QFileOpenEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QFileOpenEvent_virtualbase_setAccepted(VirtualQFileOpenEvent* self, bool accepted);
 
 };
 
-QFileOpenEvent* QFileOpenEvent_new(struct QFileOpenEvent_VTable* vtbl, struct miqt_string file) {
+VirtualQFileOpenEvent* QFileOpenEvent_new(const QFileOpenEvent_VTable* vtbl, void* vdata, struct miqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
-	return new VirtualQFileOpenEvent(vtbl, file_QString);
+	return new VirtualQFileOpenEvent(vtbl, vdata, file_QString);
 }
 
-QFileOpenEvent* QFileOpenEvent_new2(struct QFileOpenEvent_VTable* vtbl, QUrl* url) {
-	return new VirtualQFileOpenEvent(vtbl, *url);
+VirtualQFileOpenEvent* QFileOpenEvent_new2(const QFileOpenEvent_VTable* vtbl, void* vdata, QUrl* url) {
+	return new VirtualQFileOpenEvent(vtbl, vdata, *url);
 }
 
 void QFileOpenEvent_virtbase(QFileOpenEvent* src, QEvent** outptr_QEvent) {
@@ -3776,45 +3829,49 @@ bool QFileOpenEvent_openFile(const QFileOpenEvent* self, QFile* file, int flags)
 	return self->openFile(*file, static_cast<QIODevice::OpenMode>(flags));
 }
 
-QFileOpenEvent* QFileOpenEvent_virtualbase_clone(const void* self) {
+QFileOpenEvent* QFileOpenEvent_virtualbase_clone(const VirtualQFileOpenEvent* self) {
 
-	return ( (const VirtualQFileOpenEvent*)(self) )->QFileOpenEvent::clone();
-
+	return self->QFileOpenEvent::clone();
 }
 
-void QFileOpenEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QFileOpenEvent_virtualbase_setAccepted(VirtualQFileOpenEvent* self, bool accepted) {
 
-	( (VirtualQFileOpenEvent*)(self) )->QFileOpenEvent::setAccepted(accepted);
-
+	self->QFileOpenEvent::setAccepted(accepted);
 }
+
+const QFileOpenEvent_VTable* QFileOpenEvent_vtbl(const VirtualQFileOpenEvent* self) { return self->vtbl; }
+void* QFileOpenEvent_vdata(const VirtualQFileOpenEvent* self) { return self->vdata; }
+void QFileOpenEvent_setVdata(VirtualQFileOpenEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QFileOpenEvent_delete(QFileOpenEvent* self) {
 	delete self;
 }
 
 class VirtualQToolBarChangeEvent final : public QToolBarChangeEvent {
-	struct QToolBarChangeEvent_VTable* vtbl;
+	const QToolBarChangeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QToolBarChangeEvent_VTable* QToolBarChangeEvent_vtbl(const VirtualQToolBarChangeEvent* self);
+	friend void* QToolBarChangeEvent_vdata(const VirtualQToolBarChangeEvent* self);
+	friend void QToolBarChangeEvent_setVdata(VirtualQToolBarChangeEvent* self, void* vdata);
 
-	VirtualQToolBarChangeEvent(struct QToolBarChangeEvent_VTable* vtbl, bool t): QToolBarChangeEvent(t), vtbl(vtbl) {};
+	VirtualQToolBarChangeEvent(const QToolBarChangeEvent_VTable* vtbl, void* vdata, bool t): QToolBarChangeEvent(t), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQToolBarChangeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQToolBarChangeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QToolBarChangeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QToolBarChangeEvent::clone();
 		}
 
 
-		QToolBarChangeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QToolBarChangeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QToolBarChangeEvent* QToolBarChangeEvent_virtualbase_clone(const void* self);
+	friend QToolBarChangeEvent* QToolBarChangeEvent_virtualbase_clone(const VirtualQToolBarChangeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QToolBarChangeEvent::setAccepted(accepted);
@@ -3823,16 +3880,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QToolBarChangeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QToolBarChangeEvent_virtualbase_setAccepted(VirtualQToolBarChangeEvent* self, bool accepted);
 
 };
 
-QToolBarChangeEvent* QToolBarChangeEvent_new(struct QToolBarChangeEvent_VTable* vtbl, bool t) {
-	return new VirtualQToolBarChangeEvent(vtbl, t);
+VirtualQToolBarChangeEvent* QToolBarChangeEvent_new(const QToolBarChangeEvent_VTable* vtbl, void* vdata, bool t) {
+	return new VirtualQToolBarChangeEvent(vtbl, vdata, t);
 }
 
 void QToolBarChangeEvent_virtbase(QToolBarChangeEvent* src, QEvent** outptr_QEvent) {
@@ -3847,46 +3904,50 @@ bool QToolBarChangeEvent_toggle(const QToolBarChangeEvent* self) {
 	return self->toggle();
 }
 
-QToolBarChangeEvent* QToolBarChangeEvent_virtualbase_clone(const void* self) {
+QToolBarChangeEvent* QToolBarChangeEvent_virtualbase_clone(const VirtualQToolBarChangeEvent* self) {
 
-	return ( (const VirtualQToolBarChangeEvent*)(self) )->QToolBarChangeEvent::clone();
-
+	return self->QToolBarChangeEvent::clone();
 }
 
-void QToolBarChangeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QToolBarChangeEvent_virtualbase_setAccepted(VirtualQToolBarChangeEvent* self, bool accepted) {
 
-	( (VirtualQToolBarChangeEvent*)(self) )->QToolBarChangeEvent::setAccepted(accepted);
-
+	self->QToolBarChangeEvent::setAccepted(accepted);
 }
+
+const QToolBarChangeEvent_VTable* QToolBarChangeEvent_vtbl(const VirtualQToolBarChangeEvent* self) { return self->vtbl; }
+void* QToolBarChangeEvent_vdata(const VirtualQToolBarChangeEvent* self) { return self->vdata; }
+void QToolBarChangeEvent_setVdata(VirtualQToolBarChangeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QToolBarChangeEvent_delete(QToolBarChangeEvent* self) {
 	delete self;
 }
 
 class VirtualQShortcutEvent final : public QShortcutEvent {
-	struct QShortcutEvent_VTable* vtbl;
+	const QShortcutEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QShortcutEvent_VTable* QShortcutEvent_vtbl(const VirtualQShortcutEvent* self);
+	friend void* QShortcutEvent_vdata(const VirtualQShortcutEvent* self);
+	friend void QShortcutEvent_setVdata(VirtualQShortcutEvent* self, void* vdata);
 
-	VirtualQShortcutEvent(struct QShortcutEvent_VTable* vtbl, const QKeySequence& key, int id): QShortcutEvent(key, id), vtbl(vtbl) {};
-	VirtualQShortcutEvent(struct QShortcutEvent_VTable* vtbl, const QKeySequence& key, int id, bool ambiguous): QShortcutEvent(key, id, ambiguous), vtbl(vtbl) {};
+	VirtualQShortcutEvent(const QShortcutEvent_VTable* vtbl, void* vdata, const QKeySequence& key, int id): QShortcutEvent(key, id), vtbl(vtbl), vdata(vdata) {}
+	VirtualQShortcutEvent(const QShortcutEvent_VTable* vtbl, void* vdata, const QKeySequence& key, int id, bool ambiguous): QShortcutEvent(key, id, ambiguous), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQShortcutEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQShortcutEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QShortcutEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QShortcutEvent::clone();
 		}
 
 
-		QShortcutEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QShortcutEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QShortcutEvent* QShortcutEvent_virtualbase_clone(const void* self);
+	friend QShortcutEvent* QShortcutEvent_virtualbase_clone(const VirtualQShortcutEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QShortcutEvent::setAccepted(accepted);
@@ -3895,20 +3956,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QShortcutEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QShortcutEvent_virtualbase_setAccepted(VirtualQShortcutEvent* self, bool accepted);
 
 };
 
-QShortcutEvent* QShortcutEvent_new(struct QShortcutEvent_VTable* vtbl, QKeySequence* key, int id) {
-	return new VirtualQShortcutEvent(vtbl, *key, static_cast<int>(id));
+VirtualQShortcutEvent* QShortcutEvent_new(const QShortcutEvent_VTable* vtbl, void* vdata, QKeySequence* key, int id) {
+	return new VirtualQShortcutEvent(vtbl, vdata, *key, static_cast<int>(id));
 }
 
-QShortcutEvent* QShortcutEvent_new2(struct QShortcutEvent_VTable* vtbl, QKeySequence* key, int id, bool ambiguous) {
-	return new VirtualQShortcutEvent(vtbl, *key, static_cast<int>(id), ambiguous);
+VirtualQShortcutEvent* QShortcutEvent_new2(const QShortcutEvent_VTable* vtbl, void* vdata, QKeySequence* key, int id, bool ambiguous) {
+	return new VirtualQShortcutEvent(vtbl, vdata, *key, static_cast<int>(id), ambiguous);
 }
 
 void QShortcutEvent_virtbase(QShortcutEvent* src, QEvent** outptr_QEvent) {
@@ -3933,46 +3994,50 @@ bool QShortcutEvent_isAmbiguous(const QShortcutEvent* self) {
 	return self->isAmbiguous();
 }
 
-QShortcutEvent* QShortcutEvent_virtualbase_clone(const void* self) {
+QShortcutEvent* QShortcutEvent_virtualbase_clone(const VirtualQShortcutEvent* self) {
 
-	return ( (const VirtualQShortcutEvent*)(self) )->QShortcutEvent::clone();
-
+	return self->QShortcutEvent::clone();
 }
 
-void QShortcutEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QShortcutEvent_virtualbase_setAccepted(VirtualQShortcutEvent* self, bool accepted) {
 
-	( (VirtualQShortcutEvent*)(self) )->QShortcutEvent::setAccepted(accepted);
-
+	self->QShortcutEvent::setAccepted(accepted);
 }
+
+const QShortcutEvent_VTable* QShortcutEvent_vtbl(const VirtualQShortcutEvent* self) { return self->vtbl; }
+void* QShortcutEvent_vdata(const VirtualQShortcutEvent* self) { return self->vdata; }
+void QShortcutEvent_setVdata(VirtualQShortcutEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QShortcutEvent_delete(QShortcutEvent* self) {
 	delete self;
 }
 
 class VirtualQWindowStateChangeEvent final : public QWindowStateChangeEvent {
-	struct QWindowStateChangeEvent_VTable* vtbl;
+	const QWindowStateChangeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWindowStateChangeEvent_VTable* QWindowStateChangeEvent_vtbl(const VirtualQWindowStateChangeEvent* self);
+	friend void* QWindowStateChangeEvent_vdata(const VirtualQWindowStateChangeEvent* self);
+	friend void QWindowStateChangeEvent_setVdata(VirtualQWindowStateChangeEvent* self, void* vdata);
 
-	VirtualQWindowStateChangeEvent(struct QWindowStateChangeEvent_VTable* vtbl, Qt::WindowStates oldState): QWindowStateChangeEvent(oldState), vtbl(vtbl) {};
-	VirtualQWindowStateChangeEvent(struct QWindowStateChangeEvent_VTable* vtbl, Qt::WindowStates oldState, bool isOverride): QWindowStateChangeEvent(oldState, isOverride), vtbl(vtbl) {};
+	VirtualQWindowStateChangeEvent(const QWindowStateChangeEvent_VTable* vtbl, void* vdata, Qt::WindowStates oldState): QWindowStateChangeEvent(oldState), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWindowStateChangeEvent(const QWindowStateChangeEvent_VTable* vtbl, void* vdata, Qt::WindowStates oldState, bool isOverride): QWindowStateChangeEvent(oldState, isOverride), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWindowStateChangeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWindowStateChangeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QWindowStateChangeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QWindowStateChangeEvent::clone();
 		}
 
 
-		QWindowStateChangeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QWindowStateChangeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QWindowStateChangeEvent* QWindowStateChangeEvent_virtualbase_clone(const void* self);
+	friend QWindowStateChangeEvent* QWindowStateChangeEvent_virtualbase_clone(const VirtualQWindowStateChangeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QWindowStateChangeEvent::setAccepted(accepted);
@@ -3981,20 +4046,20 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QWindowStateChangeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QWindowStateChangeEvent_virtualbase_setAccepted(VirtualQWindowStateChangeEvent* self, bool accepted);
 
 };
 
-QWindowStateChangeEvent* QWindowStateChangeEvent_new(struct QWindowStateChangeEvent_VTable* vtbl, int oldState) {
-	return new VirtualQWindowStateChangeEvent(vtbl, static_cast<Qt::WindowStates>(oldState));
+VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new(const QWindowStateChangeEvent_VTable* vtbl, void* vdata, int oldState) {
+	return new VirtualQWindowStateChangeEvent(vtbl, vdata, static_cast<Qt::WindowStates>(oldState));
 }
 
-QWindowStateChangeEvent* QWindowStateChangeEvent_new2(struct QWindowStateChangeEvent_VTable* vtbl, int oldState, bool isOverride) {
-	return new VirtualQWindowStateChangeEvent(vtbl, static_cast<Qt::WindowStates>(oldState), isOverride);
+VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new2(const QWindowStateChangeEvent_VTable* vtbl, void* vdata, int oldState, bool isOverride) {
+	return new VirtualQWindowStateChangeEvent(vtbl, vdata, static_cast<Qt::WindowStates>(oldState), isOverride);
 }
 
 void QWindowStateChangeEvent_virtbase(QWindowStateChangeEvent* src, QEvent** outptr_QEvent) {
@@ -4014,92 +4079,93 @@ bool QWindowStateChangeEvent_isOverride(const QWindowStateChangeEvent* self) {
 	return self->isOverride();
 }
 
-QWindowStateChangeEvent* QWindowStateChangeEvent_virtualbase_clone(const void* self) {
+QWindowStateChangeEvent* QWindowStateChangeEvent_virtualbase_clone(const VirtualQWindowStateChangeEvent* self) {
 
-	return ( (const VirtualQWindowStateChangeEvent*)(self) )->QWindowStateChangeEvent::clone();
-
+	return self->QWindowStateChangeEvent::clone();
 }
 
-void QWindowStateChangeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QWindowStateChangeEvent_virtualbase_setAccepted(VirtualQWindowStateChangeEvent* self, bool accepted) {
 
-	( (VirtualQWindowStateChangeEvent*)(self) )->QWindowStateChangeEvent::setAccepted(accepted);
-
+	self->QWindowStateChangeEvent::setAccepted(accepted);
 }
+
+const QWindowStateChangeEvent_VTable* QWindowStateChangeEvent_vtbl(const VirtualQWindowStateChangeEvent* self) { return self->vtbl; }
+void* QWindowStateChangeEvent_vdata(const VirtualQWindowStateChangeEvent* self) { return self->vdata; }
+void QWindowStateChangeEvent_setVdata(VirtualQWindowStateChangeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QWindowStateChangeEvent_delete(QWindowStateChangeEvent* self) {
 	delete self;
 }
 
 class VirtualQTouchEvent final : public QTouchEvent {
-	struct QTouchEvent_VTable* vtbl;
+	const QTouchEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTouchEvent_VTable* QTouchEvent_vtbl(const VirtualQTouchEvent* self);
+	friend void* QTouchEvent_vdata(const VirtualQTouchEvent* self);
+	friend void QTouchEvent_setVdata(VirtualQTouchEvent* self, void* vdata);
 
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType): QTouchEvent(eventType), vtbl(vtbl) {};
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, QEventPoint::States touchPointStates): QTouchEvent(eventType, device, modifiers, touchPointStates), vtbl(vtbl) {};
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType, const QPointingDevice* device): QTouchEvent(eventType, device), vtbl(vtbl) {};
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers): QTouchEvent(eventType, device, modifiers), vtbl(vtbl) {};
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, const QList<QEventPoint>& touchPoints): QTouchEvent(eventType, device, modifiers, touchPoints), vtbl(vtbl) {};
-	VirtualQTouchEvent(struct QTouchEvent_VTable* vtbl, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, QEventPoint::States touchPointStates, const QList<QEventPoint>& touchPoints): QTouchEvent(eventType, device, modifiers, touchPointStates, touchPoints), vtbl(vtbl) {};
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType): QTouchEvent(eventType), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, QEventPoint::States touchPointStates): QTouchEvent(eventType, device, modifiers, touchPointStates), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType, const QPointingDevice* device): QTouchEvent(eventType, device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers): QTouchEvent(eventType, device, modifiers), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, const QList<QEventPoint>& touchPoints): QTouchEvent(eventType, device, modifiers, touchPoints), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTouchEvent(const QTouchEvent_VTable* vtbl, void* vdata, QEvent::Type eventType, const QPointingDevice* device, Qt::KeyboardModifiers modifiers, QEventPoint::States touchPointStates, const QList<QEventPoint>& touchPoints): QTouchEvent(eventType, device, modifiers, touchPointStates, touchPoints), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTouchEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTouchEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QTouchEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QTouchEvent::clone();
 		}
 
 
-		QTouchEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QTouchEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QTouchEvent* QTouchEvent_virtualbase_clone(const void* self);
+	friend QTouchEvent* QTouchEvent_virtualbase_clone(const VirtualQTouchEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isBeginEvent() const override {
 		if (vtbl->isBeginEvent == 0) {
 			return QTouchEvent::isBeginEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isBeginEvent(vtbl, this);
+		bool callback_return_value = vtbl->isBeginEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTouchEvent_virtualbase_isBeginEvent(const void* self);
+	friend bool QTouchEvent_virtualbase_isBeginEvent(const VirtualQTouchEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isUpdateEvent() const override {
 		if (vtbl->isUpdateEvent == 0) {
 			return QTouchEvent::isUpdateEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isUpdateEvent(vtbl, this);
+		bool callback_return_value = vtbl->isUpdateEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTouchEvent_virtualbase_isUpdateEvent(const void* self);
+	friend bool QTouchEvent_virtualbase_isUpdateEvent(const VirtualQTouchEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isEndEvent() const override {
 		if (vtbl->isEndEvent == 0) {
 			return QTouchEvent::isEndEvent();
 		}
 
 
-		bool callback_return_value = vtbl->isEndEvent(vtbl, this);
+		bool callback_return_value = vtbl->isEndEvent(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTouchEvent_virtualbase_isEndEvent(const void* self);
+	friend bool QTouchEvent_virtualbase_isEndEvent(const VirtualQTouchEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setTimestamp(quint64 timestamp) override {
 		if (vtbl->setTimestamp == 0) {
 			QTouchEvent::setTimestamp(timestamp);
@@ -4109,13 +4175,12 @@ public:
 		quint64 timestamp_ret = timestamp;
 		unsigned long long sigval1 = static_cast<unsigned long long>(timestamp_ret);
 
-		vtbl->setTimestamp(vtbl, this, sigval1);
+		vtbl->setTimestamp(this, sigval1);
 
 	}
 
-	friend void QTouchEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
+	friend void QTouchEvent_virtualbase_setTimestamp(VirtualQTouchEvent* self, unsigned long long timestamp);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QTouchEvent::setAccepted(accepted);
@@ -4124,48 +4189,48 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QTouchEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QTouchEvent_virtualbase_setAccepted(VirtualQTouchEvent* self, bool accepted);
 
 };
 
-QTouchEvent* QTouchEvent_new(struct QTouchEvent_VTable* vtbl, int eventType) {
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType));
+VirtualQTouchEvent* QTouchEvent_new(const QTouchEvent_VTable* vtbl, void* vdata, int eventType) {
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType));
 }
 
-QTouchEvent* QTouchEvent_new2(struct QTouchEvent_VTable* vtbl, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates) {
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEventPoint::States>(touchPointStates));
+VirtualQTouchEvent* QTouchEvent_new2(const QTouchEvent_VTable* vtbl, void* vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates) {
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEventPoint::States>(touchPointStates));
 }
 
-QTouchEvent* QTouchEvent_new3(struct QTouchEvent_VTable* vtbl, int eventType, QPointingDevice* device) {
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device);
+VirtualQTouchEvent* QTouchEvent_new3(const QTouchEvent_VTable* vtbl, void* vdata, int eventType, QPointingDevice* device) {
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType), device);
 }
 
-QTouchEvent* QTouchEvent_new4(struct QTouchEvent_VTable* vtbl, int eventType, QPointingDevice* device, int modifiers) {
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers));
+VirtualQTouchEvent* QTouchEvent_new4(const QTouchEvent_VTable* vtbl, void* vdata, int eventType, QPointingDevice* device, int modifiers) {
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-QTouchEvent* QTouchEvent_new5(struct QTouchEvent_VTable* vtbl, int eventType, QPointingDevice* device, int modifiers, struct miqt_array /* of QEventPoint* */  touchPoints) {
+VirtualQTouchEvent* QTouchEvent_new5(const QTouchEvent_VTable* vtbl, void* vdata, int eventType, QPointingDevice* device, int modifiers, struct miqt_array /* of QEventPoint* */  touchPoints) {
 	QList<QEventPoint> touchPoints_QList;
 	touchPoints_QList.reserve(touchPoints.len);
 	QEventPoint** touchPoints_arr = static_cast<QEventPoint**>(touchPoints.data);
 	for(size_t i = 0; i < touchPoints.len; ++i) {
 		touchPoints_QList.push_back(*(touchPoints_arr[i]));
 	}
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), touchPoints_QList);
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), touchPoints_QList);
 }
 
-QTouchEvent* QTouchEvent_new6(struct QTouchEvent_VTable* vtbl, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates, struct miqt_array /* of QEventPoint* */  touchPoints) {
+VirtualQTouchEvent* QTouchEvent_new6(const QTouchEvent_VTable* vtbl, void* vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates, struct miqt_array /* of QEventPoint* */  touchPoints) {
 	QList<QEventPoint> touchPoints_QList;
 	touchPoints_QList.reserve(touchPoints.len);
 	QEventPoint** touchPoints_arr = static_cast<QEventPoint**>(touchPoints.data);
 	for(size_t i = 0; i < touchPoints.len; ++i) {
 		touchPoints_QList.push_back(*(touchPoints_arr[i]));
 	}
-	return new VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEventPoint::States>(touchPointStates), touchPoints_QList);
+	return new VirtualQTouchEvent(vtbl, vdata, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEventPoint::States>(touchPointStates), touchPoints_QList);
 }
 
 void QTouchEvent_virtbase(QTouchEvent* src, QPointerEvent** outptr_QPointerEvent) {
@@ -4210,69 +4275,69 @@ bool QTouchEvent_isEndEvent(const QTouchEvent* self) {
 	return self->isEndEvent();
 }
 
-QTouchEvent* QTouchEvent_virtualbase_clone(const void* self) {
+QTouchEvent* QTouchEvent_virtualbase_clone(const VirtualQTouchEvent* self) {
 
-	return ( (const VirtualQTouchEvent*)(self) )->QTouchEvent::clone();
-
+	return self->QTouchEvent::clone();
 }
 
-bool QTouchEvent_virtualbase_isBeginEvent(const void* self) {
+bool QTouchEvent_virtualbase_isBeginEvent(const VirtualQTouchEvent* self) {
 
-	return ( (const VirtualQTouchEvent*)(self) )->QTouchEvent::isBeginEvent();
-
+	return self->QTouchEvent::isBeginEvent();
 }
 
-bool QTouchEvent_virtualbase_isUpdateEvent(const void* self) {
+bool QTouchEvent_virtualbase_isUpdateEvent(const VirtualQTouchEvent* self) {
 
-	return ( (const VirtualQTouchEvent*)(self) )->QTouchEvent::isUpdateEvent();
-
+	return self->QTouchEvent::isUpdateEvent();
 }
 
-bool QTouchEvent_virtualbase_isEndEvent(const void* self) {
+bool QTouchEvent_virtualbase_isEndEvent(const VirtualQTouchEvent* self) {
 
-	return ( (const VirtualQTouchEvent*)(self) )->QTouchEvent::isEndEvent();
-
+	return self->QTouchEvent::isEndEvent();
 }
 
-void QTouchEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp) {
+void QTouchEvent_virtualbase_setTimestamp(VirtualQTouchEvent* self, unsigned long long timestamp) {
 
-	( (VirtualQTouchEvent*)(self) )->QTouchEvent::setTimestamp(static_cast<quint64>(timestamp));
-
+	self->QTouchEvent::setTimestamp(static_cast<quint64>(timestamp));
 }
 
-void QTouchEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QTouchEvent_virtualbase_setAccepted(VirtualQTouchEvent* self, bool accepted) {
 
-	( (VirtualQTouchEvent*)(self) )->QTouchEvent::setAccepted(accepted);
-
+	self->QTouchEvent::setAccepted(accepted);
 }
+
+const QTouchEvent_VTable* QTouchEvent_vtbl(const VirtualQTouchEvent* self) { return self->vtbl; }
+void* QTouchEvent_vdata(const VirtualQTouchEvent* self) { return self->vdata; }
+void QTouchEvent_setVdata(VirtualQTouchEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QTouchEvent_delete(QTouchEvent* self) {
 	delete self;
 }
 
 class VirtualQScrollPrepareEvent final : public QScrollPrepareEvent {
-	struct QScrollPrepareEvent_VTable* vtbl;
+	const QScrollPrepareEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QScrollPrepareEvent_VTable* QScrollPrepareEvent_vtbl(const VirtualQScrollPrepareEvent* self);
+	friend void* QScrollPrepareEvent_vdata(const VirtualQScrollPrepareEvent* self);
+	friend void QScrollPrepareEvent_setVdata(VirtualQScrollPrepareEvent* self, void* vdata);
 
-	VirtualQScrollPrepareEvent(struct QScrollPrepareEvent_VTable* vtbl, const QPointF& startPos): QScrollPrepareEvent(startPos), vtbl(vtbl) {};
+	VirtualQScrollPrepareEvent(const QScrollPrepareEvent_VTable* vtbl, void* vdata, const QPointF& startPos): QScrollPrepareEvent(startPos), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQScrollPrepareEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQScrollPrepareEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QScrollPrepareEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QScrollPrepareEvent::clone();
 		}
 
 
-		QScrollPrepareEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QScrollPrepareEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QScrollPrepareEvent* QScrollPrepareEvent_virtualbase_clone(const void* self);
+	friend QScrollPrepareEvent* QScrollPrepareEvent_virtualbase_clone(const VirtualQScrollPrepareEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QScrollPrepareEvent::setAccepted(accepted);
@@ -4281,16 +4346,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QScrollPrepareEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QScrollPrepareEvent_virtualbase_setAccepted(VirtualQScrollPrepareEvent* self, bool accepted);
 
 };
 
-QScrollPrepareEvent* QScrollPrepareEvent_new(struct QScrollPrepareEvent_VTable* vtbl, QPointF* startPos) {
-	return new VirtualQScrollPrepareEvent(vtbl, *startPos);
+VirtualQScrollPrepareEvent* QScrollPrepareEvent_new(const QScrollPrepareEvent_VTable* vtbl, void* vdata, QPointF* startPos) {
+	return new VirtualQScrollPrepareEvent(vtbl, vdata, *startPos);
 }
 
 void QScrollPrepareEvent_virtbase(QScrollPrepareEvent* src, QEvent** outptr_QEvent) {
@@ -4329,45 +4394,49 @@ void QScrollPrepareEvent_setContentPos(QScrollPrepareEvent* self, QPointF* pos) 
 	self->setContentPos(*pos);
 }
 
-QScrollPrepareEvent* QScrollPrepareEvent_virtualbase_clone(const void* self) {
+QScrollPrepareEvent* QScrollPrepareEvent_virtualbase_clone(const VirtualQScrollPrepareEvent* self) {
 
-	return ( (const VirtualQScrollPrepareEvent*)(self) )->QScrollPrepareEvent::clone();
-
+	return self->QScrollPrepareEvent::clone();
 }
 
-void QScrollPrepareEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QScrollPrepareEvent_virtualbase_setAccepted(VirtualQScrollPrepareEvent* self, bool accepted) {
 
-	( (VirtualQScrollPrepareEvent*)(self) )->QScrollPrepareEvent::setAccepted(accepted);
-
+	self->QScrollPrepareEvent::setAccepted(accepted);
 }
+
+const QScrollPrepareEvent_VTable* QScrollPrepareEvent_vtbl(const VirtualQScrollPrepareEvent* self) { return self->vtbl; }
+void* QScrollPrepareEvent_vdata(const VirtualQScrollPrepareEvent* self) { return self->vdata; }
+void QScrollPrepareEvent_setVdata(VirtualQScrollPrepareEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QScrollPrepareEvent_delete(QScrollPrepareEvent* self) {
 	delete self;
 }
 
 class VirtualQScrollEvent final : public QScrollEvent {
-	struct QScrollEvent_VTable* vtbl;
+	const QScrollEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QScrollEvent_VTable* QScrollEvent_vtbl(const VirtualQScrollEvent* self);
+	friend void* QScrollEvent_vdata(const VirtualQScrollEvent* self);
+	friend void QScrollEvent_setVdata(VirtualQScrollEvent* self, void* vdata);
 
-	VirtualQScrollEvent(struct QScrollEvent_VTable* vtbl, const QPointF& contentPos, const QPointF& overshoot, QScrollEvent::ScrollState scrollState): QScrollEvent(contentPos, overshoot, scrollState), vtbl(vtbl) {};
+	VirtualQScrollEvent(const QScrollEvent_VTable* vtbl, void* vdata, const QPointF& contentPos, const QPointF& overshoot, QScrollEvent::ScrollState scrollState): QScrollEvent(contentPos, overshoot, scrollState), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQScrollEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQScrollEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QScrollEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QScrollEvent::clone();
 		}
 
 
-		QScrollEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QScrollEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QScrollEvent* QScrollEvent_virtualbase_clone(const void* self);
+	friend QScrollEvent* QScrollEvent_virtualbase_clone(const VirtualQScrollEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QScrollEvent::setAccepted(accepted);
@@ -4376,16 +4445,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QScrollEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QScrollEvent_virtualbase_setAccepted(VirtualQScrollEvent* self, bool accepted);
 
 };
 
-QScrollEvent* QScrollEvent_new(struct QScrollEvent_VTable* vtbl, QPointF* contentPos, QPointF* overshoot, int scrollState) {
-	return new VirtualQScrollEvent(vtbl, *contentPos, *overshoot, static_cast<QScrollEvent::ScrollState>(scrollState));
+VirtualQScrollEvent* QScrollEvent_new(const QScrollEvent_VTable* vtbl, void* vdata, QPointF* contentPos, QPointF* overshoot, int scrollState) {
+	return new VirtualQScrollEvent(vtbl, vdata, *contentPos, *overshoot, static_cast<QScrollEvent::ScrollState>(scrollState));
 }
 
 void QScrollEvent_virtbase(QScrollEvent* src, QEvent** outptr_QEvent) {
@@ -4409,45 +4478,49 @@ int QScrollEvent_scrollState(const QScrollEvent* self) {
 	return static_cast<int>(_ret);
 }
 
-QScrollEvent* QScrollEvent_virtualbase_clone(const void* self) {
+QScrollEvent* QScrollEvent_virtualbase_clone(const VirtualQScrollEvent* self) {
 
-	return ( (const VirtualQScrollEvent*)(self) )->QScrollEvent::clone();
-
+	return self->QScrollEvent::clone();
 }
 
-void QScrollEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QScrollEvent_virtualbase_setAccepted(VirtualQScrollEvent* self, bool accepted) {
 
-	( (VirtualQScrollEvent*)(self) )->QScrollEvent::setAccepted(accepted);
-
+	self->QScrollEvent::setAccepted(accepted);
 }
+
+const QScrollEvent_VTable* QScrollEvent_vtbl(const VirtualQScrollEvent* self) { return self->vtbl; }
+void* QScrollEvent_vdata(const VirtualQScrollEvent* self) { return self->vdata; }
+void QScrollEvent_setVdata(VirtualQScrollEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QScrollEvent_delete(QScrollEvent* self) {
 	delete self;
 }
 
 class VirtualQScreenOrientationChangeEvent final : public QScreenOrientationChangeEvent {
-	struct QScreenOrientationChangeEvent_VTable* vtbl;
+	const QScreenOrientationChangeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QScreenOrientationChangeEvent_VTable* QScreenOrientationChangeEvent_vtbl(const VirtualQScreenOrientationChangeEvent* self);
+	friend void* QScreenOrientationChangeEvent_vdata(const VirtualQScreenOrientationChangeEvent* self);
+	friend void QScreenOrientationChangeEvent_setVdata(VirtualQScreenOrientationChangeEvent* self, void* vdata);
 
-	VirtualQScreenOrientationChangeEvent(struct QScreenOrientationChangeEvent_VTable* vtbl, QScreen* screen, Qt::ScreenOrientation orientation): QScreenOrientationChangeEvent(screen, orientation), vtbl(vtbl) {};
+	VirtualQScreenOrientationChangeEvent(const QScreenOrientationChangeEvent_VTable* vtbl, void* vdata, QScreen* screen, Qt::ScreenOrientation orientation): QScreenOrientationChangeEvent(screen, orientation), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQScreenOrientationChangeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQScreenOrientationChangeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QScreenOrientationChangeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QScreenOrientationChangeEvent::clone();
 		}
 
 
-		QScreenOrientationChangeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QScreenOrientationChangeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QScreenOrientationChangeEvent* QScreenOrientationChangeEvent_virtualbase_clone(const void* self);
+	friend QScreenOrientationChangeEvent* QScreenOrientationChangeEvent_virtualbase_clone(const VirtualQScreenOrientationChangeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QScreenOrientationChangeEvent::setAccepted(accepted);
@@ -4456,16 +4529,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QScreenOrientationChangeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QScreenOrientationChangeEvent_virtualbase_setAccepted(VirtualQScreenOrientationChangeEvent* self, bool accepted);
 
 };
 
-QScreenOrientationChangeEvent* QScreenOrientationChangeEvent_new(struct QScreenOrientationChangeEvent_VTable* vtbl, QScreen* screen, int orientation) {
-	return new VirtualQScreenOrientationChangeEvent(vtbl, screen, static_cast<Qt::ScreenOrientation>(orientation));
+VirtualQScreenOrientationChangeEvent* QScreenOrientationChangeEvent_new(const QScreenOrientationChangeEvent_VTable* vtbl, void* vdata, QScreen* screen, int orientation) {
+	return new VirtualQScreenOrientationChangeEvent(vtbl, vdata, screen, static_cast<Qt::ScreenOrientation>(orientation));
 }
 
 void QScreenOrientationChangeEvent_virtbase(QScreenOrientationChangeEvent* src, QEvent** outptr_QEvent) {
@@ -4485,45 +4558,49 @@ int QScreenOrientationChangeEvent_orientation(const QScreenOrientationChangeEven
 	return static_cast<int>(_ret);
 }
 
-QScreenOrientationChangeEvent* QScreenOrientationChangeEvent_virtualbase_clone(const void* self) {
+QScreenOrientationChangeEvent* QScreenOrientationChangeEvent_virtualbase_clone(const VirtualQScreenOrientationChangeEvent* self) {
 
-	return ( (const VirtualQScreenOrientationChangeEvent*)(self) )->QScreenOrientationChangeEvent::clone();
-
+	return self->QScreenOrientationChangeEvent::clone();
 }
 
-void QScreenOrientationChangeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QScreenOrientationChangeEvent_virtualbase_setAccepted(VirtualQScreenOrientationChangeEvent* self, bool accepted) {
 
-	( (VirtualQScreenOrientationChangeEvent*)(self) )->QScreenOrientationChangeEvent::setAccepted(accepted);
-
+	self->QScreenOrientationChangeEvent::setAccepted(accepted);
 }
+
+const QScreenOrientationChangeEvent_VTable* QScreenOrientationChangeEvent_vtbl(const VirtualQScreenOrientationChangeEvent* self) { return self->vtbl; }
+void* QScreenOrientationChangeEvent_vdata(const VirtualQScreenOrientationChangeEvent* self) { return self->vdata; }
+void QScreenOrientationChangeEvent_setVdata(VirtualQScreenOrientationChangeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QScreenOrientationChangeEvent_delete(QScreenOrientationChangeEvent* self) {
 	delete self;
 }
 
 class VirtualQApplicationStateChangeEvent final : public QApplicationStateChangeEvent {
-	struct QApplicationStateChangeEvent_VTable* vtbl;
+	const QApplicationStateChangeEvent_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QApplicationStateChangeEvent_VTable* QApplicationStateChangeEvent_vtbl(const VirtualQApplicationStateChangeEvent* self);
+	friend void* QApplicationStateChangeEvent_vdata(const VirtualQApplicationStateChangeEvent* self);
+	friend void QApplicationStateChangeEvent_setVdata(VirtualQApplicationStateChangeEvent* self, void* vdata);
 
-	VirtualQApplicationStateChangeEvent(struct QApplicationStateChangeEvent_VTable* vtbl, Qt::ApplicationState state): QApplicationStateChangeEvent(state), vtbl(vtbl) {};
+	VirtualQApplicationStateChangeEvent(const QApplicationStateChangeEvent_VTable* vtbl, void* vdata, Qt::ApplicationState state): QApplicationStateChangeEvent(state), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQApplicationStateChangeEvent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQApplicationStateChangeEvent() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QApplicationStateChangeEvent* clone() const override {
 		if (vtbl->clone == 0) {
 			return QApplicationStateChangeEvent::clone();
 		}
 
 
-		QApplicationStateChangeEvent* callback_return_value = vtbl->clone(vtbl, this);
+		QApplicationStateChangeEvent* callback_return_value = vtbl->clone(this);
 
 		return callback_return_value;
 	}
 
-	friend QApplicationStateChangeEvent* QApplicationStateChangeEvent_virtualbase_clone(const void* self);
+	friend QApplicationStateChangeEvent* QApplicationStateChangeEvent_virtualbase_clone(const VirtualQApplicationStateChangeEvent* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
 		if (vtbl->setAccepted == 0) {
 			QApplicationStateChangeEvent::setAccepted(accepted);
@@ -4532,16 +4609,16 @@ public:
 
 		bool sigval1 = accepted;
 
-		vtbl->setAccepted(vtbl, this, sigval1);
+		vtbl->setAccepted(this, sigval1);
 
 	}
 
-	friend void QApplicationStateChangeEvent_virtualbase_setAccepted(void* self, bool accepted);
+	friend void QApplicationStateChangeEvent_virtualbase_setAccepted(VirtualQApplicationStateChangeEvent* self, bool accepted);
 
 };
 
-QApplicationStateChangeEvent* QApplicationStateChangeEvent_new(struct QApplicationStateChangeEvent_VTable* vtbl, int state) {
-	return new VirtualQApplicationStateChangeEvent(vtbl, static_cast<Qt::ApplicationState>(state));
+VirtualQApplicationStateChangeEvent* QApplicationStateChangeEvent_new(const QApplicationStateChangeEvent_VTable* vtbl, void* vdata, int state) {
+	return new VirtualQApplicationStateChangeEvent(vtbl, vdata, static_cast<Qt::ApplicationState>(state));
 }
 
 void QApplicationStateChangeEvent_virtbase(QApplicationStateChangeEvent* src, QEvent** outptr_QEvent) {
@@ -4557,32 +4634,34 @@ int QApplicationStateChangeEvent_applicationState(const QApplicationStateChangeE
 	return static_cast<int>(_ret);
 }
 
-QApplicationStateChangeEvent* QApplicationStateChangeEvent_virtualbase_clone(const void* self) {
+QApplicationStateChangeEvent* QApplicationStateChangeEvent_virtualbase_clone(const VirtualQApplicationStateChangeEvent* self) {
 
-	return ( (const VirtualQApplicationStateChangeEvent*)(self) )->QApplicationStateChangeEvent::clone();
-
+	return self->QApplicationStateChangeEvent::clone();
 }
 
-void QApplicationStateChangeEvent_virtualbase_setAccepted(void* self, bool accepted) {
+void QApplicationStateChangeEvent_virtualbase_setAccepted(VirtualQApplicationStateChangeEvent* self, bool accepted) {
 
-	( (VirtualQApplicationStateChangeEvent*)(self) )->QApplicationStateChangeEvent::setAccepted(accepted);
-
+	self->QApplicationStateChangeEvent::setAccepted(accepted);
 }
+
+const QApplicationStateChangeEvent_VTable* QApplicationStateChangeEvent_vtbl(const VirtualQApplicationStateChangeEvent* self) { return self->vtbl; }
+void* QApplicationStateChangeEvent_vdata(const VirtualQApplicationStateChangeEvent* self) { return self->vdata; }
+void QApplicationStateChangeEvent_setVdata(VirtualQApplicationStateChangeEvent* self, void* vdata) { self->vdata = vdata; }
 
 void QApplicationStateChangeEvent_delete(QApplicationStateChangeEvent* self) {
 	delete self;
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new(int typ, int s, int l, QVariant* val) {
-	return new QInputMethodEvent::Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l), *val);
+	return new QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l), *val);
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new2(int typ, int s, int l) {
-	return new QInputMethodEvent::Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l));
+	return new QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l));
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new3(QInputMethodEvent__Attribute* param1) {
-	return new QInputMethodEvent::Attribute(*param1);
+	return new QInputMethodEvent__Attribute(*param1);
 }
 
 void QInputMethodEvent__Attribute_operatorAssign(QInputMethodEvent__Attribute* self, QInputMethodEvent__Attribute* param1) {

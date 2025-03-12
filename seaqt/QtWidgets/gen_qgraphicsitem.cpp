@@ -53,25 +53,19 @@
 #include <QWidget>
 #include <qgraphicsitem.h>
 #include "gen_qgraphicsitem.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGraphicsItem final : public QGraphicsItem {
-	struct QGraphicsItem_VTable* vtbl;
+	const QGraphicsItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsItem_VTable* QGraphicsItem_vtbl(const VirtualQGraphicsItem* self);
+	friend void* QGraphicsItem_vdata(const VirtualQGraphicsItem* self);
+	friend void QGraphicsItem_setVdata(VirtualQGraphicsItem* self, void* vdata);
 
-	VirtualQGraphicsItem(struct QGraphicsItem_VTable* vtbl): QGraphicsItem(), vtbl(vtbl) {};
-	VirtualQGraphicsItem(struct QGraphicsItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsItem(parent), vtbl(vtbl) {};
+	VirtualQGraphicsItem(const QGraphicsItem_VTable* vtbl, void* vdata): QGraphicsItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsItem(const QGraphicsItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsItem(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsItem::advance(phase);
@@ -80,43 +74,40 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsItem_virtualbase_advance(VirtualQGraphicsItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QRectF(); // Pure virtual, there is no base we can call
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsItem_virtualbase_shape(const VirtualQGraphicsItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsItem::contains(point);
@@ -126,14 +117,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsItem_virtualbase_contains(const VirtualQGraphicsItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsItem::collidesWithItem(other, mode);
@@ -143,14 +133,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsItem_virtualbase_collidesWithItem(const VirtualQGraphicsItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsItem::collidesWithPath(path, mode);
@@ -162,14 +151,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsItem_virtualbase_collidesWithPath(const VirtualQGraphicsItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsItem::isObscuredBy(item);
@@ -177,30 +165,28 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsItem_virtualbase_isObscuredBy(const VirtualQGraphicsItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsItem_virtualbase_opaqueArea(const VirtualQGraphicsItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -210,25 +196,23 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsItem_virtualbase_type(const void* self);
+	friend int QGraphicsItem_virtualbase_type(const VirtualQGraphicsItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsItem::sceneEventFilter(watched, event);
@@ -237,14 +221,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsItem_virtualbase_sceneEventFilter(VirtualQGraphicsItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsItem::sceneEvent(event);
@@ -252,14 +235,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsItem_virtualbase_sceneEvent(VirtualQGraphicsItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsItem::contextMenuEvent(event);
@@ -268,13 +250,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsItem_virtualbase_contextMenuEvent(VirtualQGraphicsItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsItem::dragEnterEvent(event);
@@ -283,13 +264,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItem_virtualbase_dragEnterEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsItem::dragLeaveEvent(event);
@@ -298,13 +278,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItem_virtualbase_dragLeaveEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsItem::dragMoveEvent(event);
@@ -313,13 +292,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItem_virtualbase_dragMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsItem::dropEvent(event);
@@ -328,13 +306,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItem_virtualbase_dropEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsItem::focusInEvent(event);
@@ -343,13 +320,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsItem_virtualbase_focusInEvent(VirtualQGraphicsItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsItem::focusOutEvent(event);
@@ -358,13 +334,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsItem_virtualbase_focusOutEvent(VirtualQGraphicsItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsItem::hoverEnterEvent(event);
@@ -373,13 +348,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItem_virtualbase_hoverEnterEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsItem::hoverMoveEvent(event);
@@ -388,13 +362,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItem_virtualbase_hoverMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsItem::hoverLeaveEvent(event);
@@ -403,13 +376,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsItem::keyPressEvent(event);
@@ -418,13 +390,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsItem_virtualbase_keyPressEvent(VirtualQGraphicsItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsItem::keyReleaseEvent(event);
@@ -433,13 +404,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsItem_virtualbase_keyReleaseEvent(VirtualQGraphicsItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsItem::mousePressEvent(event);
@@ -448,13 +418,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItem_virtualbase_mousePressEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsItem::mouseMoveEvent(event);
@@ -463,13 +432,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItem_virtualbase_mouseMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsItem::mouseReleaseEvent(event);
@@ -478,13 +446,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsItem::mouseDoubleClickEvent(event);
@@ -493,13 +460,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsItem::wheelEvent(event);
@@ -508,13 +474,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsItem_virtualbase_wheelEvent(VirtualQGraphicsItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsItem::inputMethodEvent(event);
@@ -523,13 +488,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsItem_virtualbase_inputMethodEvent(VirtualQGraphicsItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsItem::inputMethodQuery(query);
@@ -538,16 +502,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsItem_virtualbase_inputMethodQuery(const VirtualQGraphicsItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsItem::itemChange(change, value);
@@ -559,16 +522,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsItem_virtualbase_itemChange(VirtualQGraphicsItem* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsItem::supportsExtension(extension);
@@ -577,14 +539,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsItem_virtualbase_supportsExtension(const VirtualQGraphicsItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsItem::setExtension(extension, variant);
@@ -597,13 +558,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsItem_virtualbase_setExtension(VirtualQGraphicsItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsItem::extension(variant);
@@ -613,28 +573,28 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsItem_virtualbase_extension(const VirtualQGraphicsItem* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsItem_protectedbase_updateMicroFocus(VirtualQGraphicsItem* self);
+	friend void QGraphicsItem_protectedbase_addToIndex(VirtualQGraphicsItem* self);
+	friend void QGraphicsItem_protectedbase_removeFromIndex(VirtualQGraphicsItem* self);
+	friend void QGraphicsItem_protectedbase_prepareGeometryChange(VirtualQGraphicsItem* self);
 };
 
-QGraphicsItem* QGraphicsItem_new(struct QGraphicsItem_VTable* vtbl) {
-	return new VirtualQGraphicsItem(vtbl);
+VirtualQGraphicsItem* QGraphicsItem_new(const QGraphicsItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsItem(vtbl, vdata);
 }
 
-QGraphicsItem* QGraphicsItem_new2(struct QGraphicsItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsItem(vtbl, parent);
+VirtualQGraphicsItem* QGraphicsItem_new2(const QGraphicsItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsItem(vtbl, vdata, parent);
 }
 
 QGraphicsScene* QGraphicsItem_scene(const QGraphicsItem* self) {
@@ -1400,230 +1360,189 @@ void QGraphicsItem_scroll3(QGraphicsItem* self, double dx, double dy, QRectF* re
 	self->scroll(static_cast<qreal>(dx), static_cast<qreal>(dy), *rect);
 }
 
-void QGraphicsItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsItem_virtualbase_advance(VirtualQGraphicsItem* self, int phase) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsItem::advance(static_cast<int>(phase));
 }
 
-QPainterPath* QGraphicsItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsItem_virtualbase_shape(const VirtualQGraphicsItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::shape());
-
+	return new QPainterPath(self->QGraphicsItem::shape());
 }
 
-bool QGraphicsItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsItem_virtualbase_contains(const VirtualQGraphicsItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::contains(*point);
-
+	return self->QGraphicsItem::contains(*point);
 }
 
-bool QGraphicsItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsItem_virtualbase_collidesWithItem(const VirtualQGraphicsItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsItem_virtualbase_collidesWithPath(const VirtualQGraphicsItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsItem_virtualbase_isObscuredBy(const VirtualQGraphicsItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::isObscuredBy(item);
-
+	return self->QGraphicsItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsItem_virtualbase_opaqueArea(const VirtualQGraphicsItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsItem::opaqueArea());
 }
 
-int QGraphicsItem_virtualbase_type(const void* self) {
+int QGraphicsItem_virtualbase_type(const VirtualQGraphicsItem* self) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::type();
-
+	return self->QGraphicsItem::type();
 }
 
-bool QGraphicsItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsItem_virtualbase_sceneEventFilter(VirtualQGraphicsItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsItem_virtualbase_sceneEvent(VirtualQGraphicsItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::sceneEvent(event);
-
+	return self->QGraphicsItem::sceneEvent(event);
 }
 
-void QGraphicsItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsItem_virtualbase_contextMenuEvent(VirtualQGraphicsItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::contextMenuEvent(event);
-
+	self->QGraphicsItem::contextMenuEvent(event);
 }
 
-void QGraphicsItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItem_virtualbase_dragEnterEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::dragEnterEvent(event);
-
+	self->QGraphicsItem::dragEnterEvent(event);
 }
 
-void QGraphicsItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItem_virtualbase_dragLeaveEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::dragLeaveEvent(event);
-
+	self->QGraphicsItem::dragLeaveEvent(event);
 }
 
-void QGraphicsItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItem_virtualbase_dragMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::dragMoveEvent(event);
-
+	self->QGraphicsItem::dragMoveEvent(event);
 }
 
-void QGraphicsItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItem_virtualbase_dropEvent(VirtualQGraphicsItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::dropEvent(event);
-
+	self->QGraphicsItem::dropEvent(event);
 }
 
-void QGraphicsItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsItem_virtualbase_focusInEvent(VirtualQGraphicsItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::focusInEvent(event);
-
+	self->QGraphicsItem::focusInEvent(event);
 }
 
-void QGraphicsItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsItem_virtualbase_focusOutEvent(VirtualQGraphicsItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::focusOutEvent(event);
-
+	self->QGraphicsItem::focusOutEvent(event);
 }
 
-void QGraphicsItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItem_virtualbase_hoverEnterEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::hoverEnterEvent(event);
-
+	self->QGraphicsItem::hoverEnterEvent(event);
 }
 
-void QGraphicsItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItem_virtualbase_hoverMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::hoverMoveEvent(event);
-
+	self->QGraphicsItem::hoverMoveEvent(event);
 }
 
-void QGraphicsItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::hoverLeaveEvent(event);
-
+	self->QGraphicsItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsItem_virtualbase_keyPressEvent(VirtualQGraphicsItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::keyPressEvent(event);
-
+	self->QGraphicsItem::keyPressEvent(event);
 }
 
-void QGraphicsItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsItem_virtualbase_keyReleaseEvent(VirtualQGraphicsItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::keyReleaseEvent(event);
-
+	self->QGraphicsItem::keyReleaseEvent(event);
 }
 
-void QGraphicsItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItem_virtualbase_mousePressEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::mousePressEvent(event);
-
+	self->QGraphicsItem::mousePressEvent(event);
 }
 
-void QGraphicsItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItem_virtualbase_mouseMoveEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::mouseMoveEvent(event);
-
+	self->QGraphicsItem::mouseMoveEvent(event);
 }
 
-void QGraphicsItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::mouseReleaseEvent(event);
-
+	self->QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsItem_virtualbase_wheelEvent(VirtualQGraphicsItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::wheelEvent(event);
-
+	self->QGraphicsItem::wheelEvent(event);
 }
 
-void QGraphicsItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsItem_virtualbase_inputMethodEvent(VirtualQGraphicsItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::inputMethodEvent(event);
-
+	self->QGraphicsItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsItem_virtualbase_inputMethodQuery(const VirtualQGraphicsItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsItem_virtualbase_itemChange(VirtualQGraphicsItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::itemChange(static_cast<VirtualQGraphicsItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsItem::itemChange(static_cast<VirtualQGraphicsItem::GraphicsItemChange>(change), *value));
 }
 
-bool QGraphicsItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsItem_virtualbase_supportsExtension(const VirtualQGraphicsItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::supportsExtension(static_cast<VirtualQGraphicsItem::Extension>(extension));
-
+	return self->QGraphicsItem::supportsExtension(static_cast<VirtualQGraphicsItem::Extension>(extension));
 }
 
-void QGraphicsItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsItem_virtualbase_setExtension(VirtualQGraphicsItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsItem*)(self) )->QGraphicsItem::setExtension(static_cast<VirtualQGraphicsItem::Extension>(extension), *variant);
-
+	self->QGraphicsItem::setExtension(static_cast<VirtualQGraphicsItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsItem_virtualbase_extension(const VirtualQGraphicsItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsItem*)(self) )->QGraphicsItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsItem::extension(*variant));
 }
 
-void QGraphicsItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsItem_VTable* QGraphicsItem_vtbl(const VirtualQGraphicsItem* self) { return self->vtbl; }
+void* QGraphicsItem_vdata(const VirtualQGraphicsItem* self) { return self->vdata; }
+void QGraphicsItem_setVdata(VirtualQGraphicsItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsItem_protectedbase_updateMicroFocus(VirtualQGraphicsItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsItem_protectedbase_addToIndex(VirtualQGraphicsItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsItem_protectedbase_removeFromIndex(VirtualQGraphicsItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsItem_protectedbase_prepareGeometryChange(VirtualQGraphicsItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsItem_delete(QGraphicsItem* self) {
@@ -1631,29 +1550,31 @@ void QGraphicsItem_delete(QGraphicsItem* self) {
 }
 
 class VirtualQGraphicsObject final : public QGraphicsObject {
-	struct QGraphicsObject_VTable* vtbl;
+	const QGraphicsObject_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsObject_VTable* QGraphicsObject_vtbl(const VirtualQGraphicsObject* self);
+	friend void* QGraphicsObject_vdata(const VirtualQGraphicsObject* self);
+	friend void QGraphicsObject_setVdata(VirtualQGraphicsObject* self, void* vdata);
 
-	VirtualQGraphicsObject(struct QGraphicsObject_VTable* vtbl): QGraphicsObject(), vtbl(vtbl) {};
-	VirtualQGraphicsObject(struct QGraphicsObject_VTable* vtbl, QGraphicsItem* parent): QGraphicsObject(parent), vtbl(vtbl) {};
+	VirtualQGraphicsObject(const QGraphicsObject_VTable* vtbl, void* vdata): QGraphicsObject(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsObject(const QGraphicsObject_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsObject(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsObject() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsObject() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsObject::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsObject_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsObject_virtualbase_metaObject(const VirtualQGraphicsObject* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsObject::qt_metacast(param1);
@@ -1661,14 +1582,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsObject_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsObject_virtualbase_metacast(VirtualQGraphicsObject* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsObject::qt_metacall(param1, param2, param3);
@@ -1679,14 +1599,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsObject_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsObject_virtualbase_metacall(VirtualQGraphicsObject* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* ev) override {
 		if (vtbl->event == 0) {
 			return QGraphicsObject::event(ev);
@@ -1694,14 +1613,13 @@ public:
 
 		QEvent* sigval1 = ev;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_event(void* self, QEvent* ev);
+	friend bool QGraphicsObject_virtualbase_event(VirtualQGraphicsObject* self, QEvent* ev);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsObject::eventFilter(watched, event);
@@ -1710,14 +1628,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsObject_virtualbase_eventFilter(VirtualQGraphicsObject* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsObject::timerEvent(event);
@@ -1726,13 +1643,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsObject_virtualbase_timerEvent(VirtualQGraphicsObject* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsObject::childEvent(event);
@@ -1741,13 +1657,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsObject_virtualbase_childEvent(VirtualQGraphicsObject* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsObject::customEvent(event);
@@ -1756,13 +1671,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsObject_virtualbase_customEvent(VirtualQGraphicsObject* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsObject::connectNotify(signal);
@@ -1773,13 +1687,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsObject_virtualbase_connectNotify(VirtualQGraphicsObject* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsObject::disconnectNotify(signal);
@@ -1790,13 +1703,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsObject_virtualbase_disconnectNotify(VirtualQGraphicsObject* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsObject::advance(phase);
@@ -1805,43 +1717,40 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsObject_virtualbase_advance(VirtualQGraphicsObject* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QRectF(); // Pure virtual, there is no base we can call
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsObject::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsObject_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsObject_virtualbase_shape(const VirtualQGraphicsObject* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsObject::contains(point);
@@ -1851,14 +1760,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsObject_virtualbase_contains(const VirtualQGraphicsObject* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsObject::collidesWithItem(other, mode);
@@ -1868,14 +1776,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsObject_virtualbase_collidesWithItem(const VirtualQGraphicsObject* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsObject::collidesWithPath(path, mode);
@@ -1887,14 +1794,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsObject_virtualbase_collidesWithPath(const VirtualQGraphicsObject* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsObject::isObscuredBy(item);
@@ -1902,30 +1808,28 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsObject_virtualbase_isObscuredBy(const VirtualQGraphicsObject* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsObject::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsObject_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsObject_virtualbase_opaqueArea(const VirtualQGraphicsObject* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -1935,25 +1839,23 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsObject::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsObject_virtualbase_type(const void* self);
+	friend int QGraphicsObject_virtualbase_type(const VirtualQGraphicsObject* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsObject::sceneEventFilter(watched, event);
@@ -1962,14 +1864,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsObject_virtualbase_sceneEventFilter(VirtualQGraphicsObject* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsObject::sceneEvent(event);
@@ -1977,14 +1878,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsObject_virtualbase_sceneEvent(VirtualQGraphicsObject* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsObject::contextMenuEvent(event);
@@ -1993,13 +1893,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsObject_virtualbase_contextMenuEvent(VirtualQGraphicsObject* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsObject::dragEnterEvent(event);
@@ -2008,13 +1907,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsObject_virtualbase_dragEnterEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsObject::dragLeaveEvent(event);
@@ -2023,13 +1921,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsObject_virtualbase_dragLeaveEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsObject::dragMoveEvent(event);
@@ -2038,13 +1935,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsObject_virtualbase_dragMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsObject::dropEvent(event);
@@ -2053,13 +1949,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsObject_virtualbase_dropEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsObject::focusInEvent(event);
@@ -2068,13 +1963,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsObject_virtualbase_focusInEvent(VirtualQGraphicsObject* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsObject::focusOutEvent(event);
@@ -2083,13 +1977,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsObject_virtualbase_focusOutEvent(VirtualQGraphicsObject* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsObject::hoverEnterEvent(event);
@@ -2098,13 +1991,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsObject_virtualbase_hoverEnterEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsObject::hoverMoveEvent(event);
@@ -2113,13 +2005,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsObject_virtualbase_hoverMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsObject::hoverLeaveEvent(event);
@@ -2128,13 +2019,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsObject_virtualbase_hoverLeaveEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsObject::keyPressEvent(event);
@@ -2143,13 +2033,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsObject_virtualbase_keyPressEvent(VirtualQGraphicsObject* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsObject::keyReleaseEvent(event);
@@ -2158,13 +2047,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsObject_virtualbase_keyReleaseEvent(VirtualQGraphicsObject* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsObject::mousePressEvent(event);
@@ -2173,13 +2061,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsObject_virtualbase_mousePressEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsObject::mouseMoveEvent(event);
@@ -2188,13 +2075,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsObject_virtualbase_mouseMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsObject::mouseReleaseEvent(event);
@@ -2203,13 +2089,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsObject_virtualbase_mouseReleaseEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsObject::mouseDoubleClickEvent(event);
@@ -2218,13 +2103,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsObject_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsObject::wheelEvent(event);
@@ -2233,13 +2117,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsObject_virtualbase_wheelEvent(VirtualQGraphicsObject* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsObject::inputMethodEvent(event);
@@ -2248,13 +2131,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsObject_virtualbase_inputMethodEvent(VirtualQGraphicsObject* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsObject::inputMethodQuery(query);
@@ -2263,16 +2145,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsObject_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsObject_virtualbase_inputMethodQuery(const VirtualQGraphicsObject* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsObject::itemChange(change, value);
@@ -2284,16 +2165,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsObject_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsObject_virtualbase_itemChange(VirtualQGraphicsObject* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsObject::supportsExtension(extension);
@@ -2302,14 +2182,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsObject_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsObject_virtualbase_supportsExtension(const VirtualQGraphicsObject* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsObject::setExtension(extension, variant);
@@ -2322,13 +2201,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsObject_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsObject_virtualbase_setExtension(VirtualQGraphicsObject* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsObject::extension(variant);
@@ -2338,32 +2216,32 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsObject_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsObject_virtualbase_extension(const VirtualQGraphicsObject* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsObject_protectedbase_updateMicroFocus(void* self);
-	friend QObject* QGraphicsObject_protectedbase_sender(const void* self);
-	friend int QGraphicsObject_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsObject_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
-	friend void QGraphicsObject_protectedbase_addToIndex(void* self);
-	friend void QGraphicsObject_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsObject_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsObject_protectedbase_updateMicroFocus(VirtualQGraphicsObject* self);
+	friend QObject* QGraphicsObject_protectedbase_sender(const VirtualQGraphicsObject* self);
+	friend int QGraphicsObject_protectedbase_senderSignalIndex(const VirtualQGraphicsObject* self);
+	friend int QGraphicsObject_protectedbase_receivers(const VirtualQGraphicsObject* self, const char* signal);
+	friend bool QGraphicsObject_protectedbase_isSignalConnected(const VirtualQGraphicsObject* self, QMetaMethod* signal);
+	friend void QGraphicsObject_protectedbase_addToIndex(VirtualQGraphicsObject* self);
+	friend void QGraphicsObject_protectedbase_removeFromIndex(VirtualQGraphicsObject* self);
+	friend void QGraphicsObject_protectedbase_prepareGeometryChange(VirtualQGraphicsObject* self);
 };
 
-QGraphicsObject* QGraphicsObject_new(struct QGraphicsObject_VTable* vtbl) {
-	return new VirtualQGraphicsObject(vtbl);
+VirtualQGraphicsObject* QGraphicsObject_new(const QGraphicsObject_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsObject(vtbl, vdata);
 }
 
-QGraphicsObject* QGraphicsObject_new2(struct QGraphicsObject_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsObject(vtbl, parent);
+VirtualQGraphicsObject* QGraphicsObject_new2(const QGraphicsObject_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsObject(vtbl, vdata, parent);
 }
 
 void QGraphicsObject_virtbase(QGraphicsObject* src, QObject** outptr_QObject, QGraphicsItem** outptr_QGraphicsItem) {
@@ -2406,7 +2284,7 @@ void QGraphicsObject_parentChanged(QGraphicsObject* self) {
 	self->parentChanged();
 }
 
-void QGraphicsObject_connect_parentChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_parentChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2421,7 +2299,7 @@ void QGraphicsObject_opacityChanged(QGraphicsObject* self) {
 	self->opacityChanged();
 }
 
-void QGraphicsObject_connect_opacityChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_opacityChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2436,7 +2314,7 @@ void QGraphicsObject_visibleChanged(QGraphicsObject* self) {
 	self->visibleChanged();
 }
 
-void QGraphicsObject_connect_visibleChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_visibleChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2451,7 +2329,7 @@ void QGraphicsObject_enabledChanged(QGraphicsObject* self) {
 	self->enabledChanged();
 }
 
-void QGraphicsObject_connect_enabledChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_enabledChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2466,7 +2344,7 @@ void QGraphicsObject_xChanged(QGraphicsObject* self) {
 	self->xChanged();
 }
 
-void QGraphicsObject_connect_xChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_xChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2481,7 +2359,7 @@ void QGraphicsObject_yChanged(QGraphicsObject* self) {
 	self->yChanged();
 }
 
-void QGraphicsObject_connect_yChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_yChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2496,7 +2374,7 @@ void QGraphicsObject_zChanged(QGraphicsObject* self) {
 	self->zChanged();
 }
 
-void QGraphicsObject_connect_zChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_zChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2511,7 +2389,7 @@ void QGraphicsObject_rotationChanged(QGraphicsObject* self) {
 	self->rotationChanged();
 }
 
-void QGraphicsObject_connect_rotationChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_rotationChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2526,7 +2404,7 @@ void QGraphicsObject_scaleChanged(QGraphicsObject* self) {
 	self->scaleChanged();
 }
 
-void QGraphicsObject_connect_scaleChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_scaleChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2541,7 +2419,7 @@ void QGraphicsObject_childrenChanged(QGraphicsObject* self) {
 	self->childrenChanged();
 }
 
-void QGraphicsObject_connect_childrenChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_childrenChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2556,7 +2434,7 @@ void QGraphicsObject_widthChanged(QGraphicsObject* self) {
 	self->widthChanged();
 }
 
-void QGraphicsObject_connect_widthChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_widthChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2571,7 +2449,7 @@ void QGraphicsObject_heightChanged(QGraphicsObject* self) {
 	self->heightChanged();
 }
 
-void QGraphicsObject_connect_heightChanged(QGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsObject_connect_heightChanged(VirtualQGraphicsObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -2608,319 +2486,257 @@ void QGraphicsObject_grabGesture2(QGraphicsObject* self, int type, int flags) {
 	self->grabGesture(static_cast<Qt::GestureType>(type), static_cast<Qt::GestureFlags>(flags));
 }
 
-QMetaObject* QGraphicsObject_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsObject_virtualbase_metaObject(const VirtualQGraphicsObject* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::metaObject();
-
+	return (QMetaObject*) self->QGraphicsObject::metaObject();
 }
 
-void* QGraphicsObject_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsObject_virtualbase_metacast(VirtualQGraphicsObject* self, const char* param1) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::qt_metacast(param1);
-
+	return self->QGraphicsObject::qt_metacast(param1);
 }
 
-int QGraphicsObject_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsObject_virtualbase_metacall(VirtualQGraphicsObject* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsObject::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QGraphicsObject_virtualbase_event(void* self, QEvent* ev) {
+bool QGraphicsObject_virtualbase_event(VirtualQGraphicsObject* self, QEvent* ev) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::event(ev);
-
+	return self->QGraphicsObject::event(ev);
 }
 
-bool QGraphicsObject_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsObject_virtualbase_eventFilter(VirtualQGraphicsObject* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::eventFilter(watched, event);
-
+	return self->QGraphicsObject::eventFilter(watched, event);
 }
 
-void QGraphicsObject_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsObject_virtualbase_timerEvent(VirtualQGraphicsObject* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::timerEvent(event);
-
+	self->QGraphicsObject::timerEvent(event);
 }
 
-void QGraphicsObject_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsObject_virtualbase_childEvent(VirtualQGraphicsObject* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::childEvent(event);
-
+	self->QGraphicsObject::childEvent(event);
 }
 
-void QGraphicsObject_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsObject_virtualbase_customEvent(VirtualQGraphicsObject* self, QEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::customEvent(event);
-
+	self->QGraphicsObject::customEvent(event);
 }
 
-void QGraphicsObject_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsObject_virtualbase_connectNotify(VirtualQGraphicsObject* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::connectNotify(*signal);
-
+	self->QGraphicsObject::connectNotify(*signal);
 }
 
-void QGraphicsObject_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsObject_virtualbase_disconnectNotify(VirtualQGraphicsObject* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::disconnectNotify(*signal);
-
+	self->QGraphicsObject::disconnectNotify(*signal);
 }
 
-void QGraphicsObject_virtualbase_advance(void* self, int phase) {
+void QGraphicsObject_virtualbase_advance(VirtualQGraphicsObject* self, int phase) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::advance(static_cast<int>(phase));
-
+	self->QGraphicsObject::advance(static_cast<int>(phase));
 }
 
-QPainterPath* QGraphicsObject_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsObject_virtualbase_shape(const VirtualQGraphicsObject* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::shape());
-
+	return new QPainterPath(self->QGraphicsObject::shape());
 }
 
-bool QGraphicsObject_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsObject_virtualbase_contains(const VirtualQGraphicsObject* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::contains(*point);
-
+	return self->QGraphicsObject::contains(*point);
 }
 
-bool QGraphicsObject_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsObject_virtualbase_collidesWithItem(const VirtualQGraphicsObject* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsObject::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsObject_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsObject_virtualbase_collidesWithPath(const VirtualQGraphicsObject* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsObject::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsObject_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsObject_virtualbase_isObscuredBy(const VirtualQGraphicsObject* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::isObscuredBy(item);
-
+	return self->QGraphicsObject::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsObject_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsObject_virtualbase_opaqueArea(const VirtualQGraphicsObject* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsObject::opaqueArea());
 }
 
-int QGraphicsObject_virtualbase_type(const void* self) {
+int QGraphicsObject_virtualbase_type(const VirtualQGraphicsObject* self) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::type();
-
+	return self->QGraphicsObject::type();
 }
 
-bool QGraphicsObject_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsObject_virtualbase_sceneEventFilter(VirtualQGraphicsObject* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::sceneEventFilter(watched, event);
-
+	return self->QGraphicsObject::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsObject_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsObject_virtualbase_sceneEvent(VirtualQGraphicsObject* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::sceneEvent(event);
-
+	return self->QGraphicsObject::sceneEvent(event);
 }
 
-void QGraphicsObject_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsObject_virtualbase_contextMenuEvent(VirtualQGraphicsObject* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::contextMenuEvent(event);
-
+	self->QGraphicsObject::contextMenuEvent(event);
 }
 
-void QGraphicsObject_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsObject_virtualbase_dragEnterEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::dragEnterEvent(event);
-
+	self->QGraphicsObject::dragEnterEvent(event);
 }
 
-void QGraphicsObject_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsObject_virtualbase_dragLeaveEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::dragLeaveEvent(event);
-
+	self->QGraphicsObject::dragLeaveEvent(event);
 }
 
-void QGraphicsObject_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsObject_virtualbase_dragMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::dragMoveEvent(event);
-
+	self->QGraphicsObject::dragMoveEvent(event);
 }
 
-void QGraphicsObject_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsObject_virtualbase_dropEvent(VirtualQGraphicsObject* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::dropEvent(event);
-
+	self->QGraphicsObject::dropEvent(event);
 }
 
-void QGraphicsObject_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsObject_virtualbase_focusInEvent(VirtualQGraphicsObject* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::focusInEvent(event);
-
+	self->QGraphicsObject::focusInEvent(event);
 }
 
-void QGraphicsObject_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsObject_virtualbase_focusOutEvent(VirtualQGraphicsObject* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::focusOutEvent(event);
-
+	self->QGraphicsObject::focusOutEvent(event);
 }
 
-void QGraphicsObject_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsObject_virtualbase_hoverEnterEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::hoverEnterEvent(event);
-
+	self->QGraphicsObject::hoverEnterEvent(event);
 }
 
-void QGraphicsObject_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsObject_virtualbase_hoverMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::hoverMoveEvent(event);
-
+	self->QGraphicsObject::hoverMoveEvent(event);
 }
 
-void QGraphicsObject_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsObject_virtualbase_hoverLeaveEvent(VirtualQGraphicsObject* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::hoverLeaveEvent(event);
-
+	self->QGraphicsObject::hoverLeaveEvent(event);
 }
 
-void QGraphicsObject_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsObject_virtualbase_keyPressEvent(VirtualQGraphicsObject* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::keyPressEvent(event);
-
+	self->QGraphicsObject::keyPressEvent(event);
 }
 
-void QGraphicsObject_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsObject_virtualbase_keyReleaseEvent(VirtualQGraphicsObject* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::keyReleaseEvent(event);
-
+	self->QGraphicsObject::keyReleaseEvent(event);
 }
 
-void QGraphicsObject_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsObject_virtualbase_mousePressEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::mousePressEvent(event);
-
+	self->QGraphicsObject::mousePressEvent(event);
 }
 
-void QGraphicsObject_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsObject_virtualbase_mouseMoveEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::mouseMoveEvent(event);
-
+	self->QGraphicsObject::mouseMoveEvent(event);
 }
 
-void QGraphicsObject_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsObject_virtualbase_mouseReleaseEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::mouseReleaseEvent(event);
-
+	self->QGraphicsObject::mouseReleaseEvent(event);
 }
 
-void QGraphicsObject_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsObject_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsObject* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::mouseDoubleClickEvent(event);
-
+	self->QGraphicsObject::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsObject_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsObject_virtualbase_wheelEvent(VirtualQGraphicsObject* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::wheelEvent(event);
-
+	self->QGraphicsObject::wheelEvent(event);
 }
 
-void QGraphicsObject_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsObject_virtualbase_inputMethodEvent(VirtualQGraphicsObject* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::inputMethodEvent(event);
-
+	self->QGraphicsObject::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsObject_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsObject_virtualbase_inputMethodQuery(const VirtualQGraphicsObject* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsObject::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsObject_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsObject_virtualbase_itemChange(VirtualQGraphicsObject* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::itemChange(static_cast<VirtualQGraphicsObject::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsObject::itemChange(static_cast<VirtualQGraphicsObject::GraphicsItemChange>(change), *value));
 }
 
-bool QGraphicsObject_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsObject_virtualbase_supportsExtension(const VirtualQGraphicsObject* self, int extension) {
 
-	return ( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::supportsExtension(static_cast<VirtualQGraphicsObject::Extension>(extension));
-
+	return self->QGraphicsObject::supportsExtension(static_cast<VirtualQGraphicsObject::Extension>(extension));
 }
 
-void QGraphicsObject_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsObject_virtualbase_setExtension(VirtualQGraphicsObject* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsObject*)(self) )->QGraphicsObject::setExtension(static_cast<VirtualQGraphicsObject::Extension>(extension), *variant);
-
+	self->QGraphicsObject::setExtension(static_cast<VirtualQGraphicsObject::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsObject_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsObject_virtualbase_extension(const VirtualQGraphicsObject* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsObject*)(self) )->QGraphicsObject::extension(*variant));
-
+	return new QVariant(self->QGraphicsObject::extension(*variant));
 }
 
 const QMetaObject* QGraphicsObject_staticMetaObject() { return &QGraphicsObject::staticMetaObject; }
-void QGraphicsObject_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QGraphicsObject_VTable* QGraphicsObject_vtbl(const VirtualQGraphicsObject* self) { return self->vtbl; }
+void* QGraphicsObject_vdata(const VirtualQGraphicsObject* self) { return self->vdata; }
+void QGraphicsObject_setVdata(VirtualQGraphicsObject* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsObject_protectedbase_updateMicroFocus(VirtualQGraphicsObject* self) {
+	self->updateMicroFocus();
 }
 
-QObject* QGraphicsObject_protectedbase_sender(const void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsObject_protectedbase_sender(const VirtualQGraphicsObject* self) {
+	return self->sender();
 }
 
-int QGraphicsObject_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsObject_protectedbase_senderSignalIndex(const VirtualQGraphicsObject* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsObject_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsObject_protectedbase_receivers(const VirtualQGraphicsObject* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsObject_protectedbase_isSignalConnected(const VirtualQGraphicsObject* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
-void QGraphicsObject_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsObject_protectedbase_addToIndex(VirtualQGraphicsObject* self) {
+	self->addToIndex();
 }
 
-void QGraphicsObject_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsObject_protectedbase_removeFromIndex(VirtualQGraphicsObject* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsObject_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsObject_protectedbase_prepareGeometryChange(VirtualQGraphicsObject* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsObject_delete(QGraphicsObject* self) {
@@ -2928,15 +2744,18 @@ void QGraphicsObject_delete(QGraphicsObject* self) {
 }
 
 class VirtualQAbstractGraphicsShapeItem final : public QAbstractGraphicsShapeItem {
-	struct QAbstractGraphicsShapeItem_VTable* vtbl;
+	const QAbstractGraphicsShapeItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractGraphicsShapeItem_VTable* QAbstractGraphicsShapeItem_vtbl(const VirtualQAbstractGraphicsShapeItem* self);
+	friend void* QAbstractGraphicsShapeItem_vdata(const VirtualQAbstractGraphicsShapeItem* self);
+	friend void QAbstractGraphicsShapeItem_setVdata(VirtualQAbstractGraphicsShapeItem* self, void* vdata);
 
-	VirtualQAbstractGraphicsShapeItem(struct QAbstractGraphicsShapeItem_VTable* vtbl): QAbstractGraphicsShapeItem(), vtbl(vtbl) {};
-	VirtualQAbstractGraphicsShapeItem(struct QAbstractGraphicsShapeItem_VTable* vtbl, QGraphicsItem* parent): QAbstractGraphicsShapeItem(parent), vtbl(vtbl) {};
+	VirtualQAbstractGraphicsShapeItem(const QAbstractGraphicsShapeItem_VTable* vtbl, void* vdata): QAbstractGraphicsShapeItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractGraphicsShapeItem(const QAbstractGraphicsShapeItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QAbstractGraphicsShapeItem(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractGraphicsShapeItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractGraphicsShapeItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QAbstractGraphicsShapeItem::isObscuredBy(item);
@@ -2944,30 +2763,28 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_isObscuredBy(const VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QAbstractGraphicsShapeItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QAbstractGraphicsShapeItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QAbstractGraphicsShapeItem_virtualbase_opaqueArea(const VirtualQAbstractGraphicsShapeItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QAbstractGraphicsShapeItem::advance(phase);
@@ -2976,43 +2793,40 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_advance(void* self, int phase);
+	friend void QAbstractGraphicsShapeItem_virtualbase_advance(VirtualQAbstractGraphicsShapeItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QRectF(); // Pure virtual, there is no base we can call
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QAbstractGraphicsShapeItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QAbstractGraphicsShapeItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QAbstractGraphicsShapeItem_virtualbase_shape(const VirtualQAbstractGraphicsShapeItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QAbstractGraphicsShapeItem::contains(point);
@@ -3022,14 +2836,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_contains(const VirtualQAbstractGraphicsShapeItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QAbstractGraphicsShapeItem::collidesWithItem(other, mode);
@@ -3039,14 +2852,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_collidesWithItem(const VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QAbstractGraphicsShapeItem::collidesWithPath(path, mode);
@@ -3058,14 +2870,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_collidesWithPath(const VirtualQAbstractGraphicsShapeItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -3075,25 +2886,23 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QAbstractGraphicsShapeItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractGraphicsShapeItem_virtualbase_type(const void* self);
+	friend int QAbstractGraphicsShapeItem_virtualbase_type(const VirtualQAbstractGraphicsShapeItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QAbstractGraphicsShapeItem::sceneEventFilter(watched, event);
@@ -3102,14 +2911,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_sceneEventFilter(VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QAbstractGraphicsShapeItem::sceneEvent(event);
@@ -3117,14 +2925,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_sceneEvent(VirtualQAbstractGraphicsShapeItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QAbstractGraphicsShapeItem::contextMenuEvent(event);
@@ -3133,13 +2940,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_contextMenuEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QAbstractGraphicsShapeItem::dragEnterEvent(event);
@@ -3148,13 +2954,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_dragEnterEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QAbstractGraphicsShapeItem::dragLeaveEvent(event);
@@ -3163,13 +2968,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_dragLeaveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QAbstractGraphicsShapeItem::dragMoveEvent(event);
@@ -3178,13 +2982,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_dragMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QAbstractGraphicsShapeItem::dropEvent(event);
@@ -3193,13 +2996,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_dropEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QAbstractGraphicsShapeItem::focusInEvent(event);
@@ -3208,13 +3010,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_focusInEvent(VirtualQAbstractGraphicsShapeItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QAbstractGraphicsShapeItem::focusOutEvent(event);
@@ -3223,13 +3024,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_focusOutEvent(VirtualQAbstractGraphicsShapeItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QAbstractGraphicsShapeItem::hoverEnterEvent(event);
@@ -3238,13 +3038,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_hoverEnterEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QAbstractGraphicsShapeItem::hoverMoveEvent(event);
@@ -3253,13 +3052,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_hoverMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QAbstractGraphicsShapeItem::hoverLeaveEvent(event);
@@ -3268,13 +3066,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_hoverLeaveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QAbstractGraphicsShapeItem::keyPressEvent(event);
@@ -3283,13 +3080,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_keyPressEvent(VirtualQAbstractGraphicsShapeItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QAbstractGraphicsShapeItem::keyReleaseEvent(event);
@@ -3298,13 +3094,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_keyReleaseEvent(VirtualQAbstractGraphicsShapeItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QAbstractGraphicsShapeItem::mousePressEvent(event);
@@ -3313,13 +3108,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_mousePressEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QAbstractGraphicsShapeItem::mouseMoveEvent(event);
@@ -3328,13 +3122,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_mouseMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QAbstractGraphicsShapeItem::mouseReleaseEvent(event);
@@ -3343,13 +3136,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_mouseReleaseEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QAbstractGraphicsShapeItem::mouseDoubleClickEvent(event);
@@ -3358,13 +3150,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_mouseDoubleClickEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QAbstractGraphicsShapeItem::wheelEvent(event);
@@ -3373,13 +3164,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_wheelEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QAbstractGraphicsShapeItem::inputMethodEvent(event);
@@ -3388,13 +3178,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QAbstractGraphicsShapeItem_virtualbase_inputMethodEvent(VirtualQAbstractGraphicsShapeItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QAbstractGraphicsShapeItem::inputMethodQuery(query);
@@ -3403,16 +3192,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(const VirtualQAbstractGraphicsShapeItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QAbstractGraphicsShapeItem::itemChange(change, value);
@@ -3424,16 +3212,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_itemChange(VirtualQAbstractGraphicsShapeItem* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QAbstractGraphicsShapeItem::supportsExtension(extension);
@@ -3442,14 +3229,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractGraphicsShapeItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QAbstractGraphicsShapeItem_virtualbase_supportsExtension(const VirtualQAbstractGraphicsShapeItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QAbstractGraphicsShapeItem::setExtension(extension, variant);
@@ -3462,13 +3248,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractGraphicsShapeItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QAbstractGraphicsShapeItem_virtualbase_setExtension(VirtualQAbstractGraphicsShapeItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QAbstractGraphicsShapeItem::extension(variant);
@@ -3478,28 +3263,28 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const VirtualQAbstractGraphicsShapeItem* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_addToIndex(void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(VirtualQAbstractGraphicsShapeItem* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_addToIndex(VirtualQAbstractGraphicsShapeItem* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(VirtualQAbstractGraphicsShapeItem* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(VirtualQAbstractGraphicsShapeItem* self);
 };
 
-QAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new(struct QAbstractGraphicsShapeItem_VTable* vtbl) {
-	return new VirtualQAbstractGraphicsShapeItem(vtbl);
+VirtualQAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new(const QAbstractGraphicsShapeItem_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractGraphicsShapeItem(vtbl, vdata);
 }
 
-QAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new2(struct QAbstractGraphicsShapeItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQAbstractGraphicsShapeItem(vtbl, parent);
+VirtualQAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new2(const QAbstractGraphicsShapeItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQAbstractGraphicsShapeItem(vtbl, vdata, parent);
 }
 
 void QAbstractGraphicsShapeItem_virtbase(QAbstractGraphicsShapeItem* src, QGraphicsItem** outptr_QGraphicsItem) {
@@ -3530,230 +3315,189 @@ QPainterPath* QAbstractGraphicsShapeItem_opaqueArea(const QAbstractGraphicsShape
 	return new QPainterPath(self->opaqueArea());
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QAbstractGraphicsShapeItem_virtualbase_isObscuredBy(const VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::isObscuredBy(item);
-
+	return self->QAbstractGraphicsShapeItem::isObscuredBy(item);
 }
 
-QPainterPath* QAbstractGraphicsShapeItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QAbstractGraphicsShapeItem_virtualbase_opaqueArea(const VirtualQAbstractGraphicsShapeItem* self) {
 
-	return new QPainterPath(( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::opaqueArea());
-
+	return new QPainterPath(self->QAbstractGraphicsShapeItem::opaqueArea());
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_advance(void* self, int phase) {
+void QAbstractGraphicsShapeItem_virtualbase_advance(VirtualQAbstractGraphicsShapeItem* self, int phase) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::advance(static_cast<int>(phase));
-
+	self->QAbstractGraphicsShapeItem::advance(static_cast<int>(phase));
 }
 
-QPainterPath* QAbstractGraphicsShapeItem_virtualbase_shape(const void* self) {
+QPainterPath* QAbstractGraphicsShapeItem_virtualbase_shape(const VirtualQAbstractGraphicsShapeItem* self) {
 
-	return new QPainterPath(( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::shape());
-
+	return new QPainterPath(self->QAbstractGraphicsShapeItem::shape());
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QAbstractGraphicsShapeItem_virtualbase_contains(const VirtualQAbstractGraphicsShapeItem* self, QPointF* point) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::contains(*point);
-
+	return self->QAbstractGraphicsShapeItem::contains(*point);
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QAbstractGraphicsShapeItem_virtualbase_collidesWithItem(const VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QAbstractGraphicsShapeItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QAbstractGraphicsShapeItem_virtualbase_collidesWithPath(const VirtualQAbstractGraphicsShapeItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QAbstractGraphicsShapeItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-int QAbstractGraphicsShapeItem_virtualbase_type(const void* self) {
+int QAbstractGraphicsShapeItem_virtualbase_type(const VirtualQAbstractGraphicsShapeItem* self) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::type();
-
+	return self->QAbstractGraphicsShapeItem::type();
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QAbstractGraphicsShapeItem_virtualbase_sceneEventFilter(VirtualQAbstractGraphicsShapeItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::sceneEventFilter(watched, event);
-
+	return self->QAbstractGraphicsShapeItem::sceneEventFilter(watched, event);
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QAbstractGraphicsShapeItem_virtualbase_sceneEvent(VirtualQAbstractGraphicsShapeItem* self, QEvent* event) {
 
-	return ( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::sceneEvent(event);
-
+	return self->QAbstractGraphicsShapeItem::sceneEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_contextMenuEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::contextMenuEvent(event);
-
+	self->QAbstractGraphicsShapeItem::contextMenuEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_dragEnterEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::dragEnterEvent(event);
-
+	self->QAbstractGraphicsShapeItem::dragEnterEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_dragLeaveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::dragLeaveEvent(event);
-
+	self->QAbstractGraphicsShapeItem::dragLeaveEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_dragMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::dragMoveEvent(event);
-
+	self->QAbstractGraphicsShapeItem::dragMoveEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_dropEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::dropEvent(event);
-
+	self->QAbstractGraphicsShapeItem::dropEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_focusInEvent(VirtualQAbstractGraphicsShapeItem* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::focusInEvent(event);
-
+	self->QAbstractGraphicsShapeItem::focusInEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_focusOutEvent(VirtualQAbstractGraphicsShapeItem* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::focusOutEvent(event);
-
+	self->QAbstractGraphicsShapeItem::focusOutEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_hoverEnterEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::hoverEnterEvent(event);
-
+	self->QAbstractGraphicsShapeItem::hoverEnterEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_hoverMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::hoverMoveEvent(event);
-
+	self->QAbstractGraphicsShapeItem::hoverMoveEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_hoverLeaveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::hoverLeaveEvent(event);
-
+	self->QAbstractGraphicsShapeItem::hoverLeaveEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_keyPressEvent(VirtualQAbstractGraphicsShapeItem* self, QKeyEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::keyPressEvent(event);
-
+	self->QAbstractGraphicsShapeItem::keyPressEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_keyReleaseEvent(VirtualQAbstractGraphicsShapeItem* self, QKeyEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::keyReleaseEvent(event);
-
+	self->QAbstractGraphicsShapeItem::keyReleaseEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_mousePressEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::mousePressEvent(event);
-
+	self->QAbstractGraphicsShapeItem::mousePressEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_mouseMoveEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::mouseMoveEvent(event);
-
+	self->QAbstractGraphicsShapeItem::mouseMoveEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_mouseReleaseEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::mouseReleaseEvent(event);
-
+	self->QAbstractGraphicsShapeItem::mouseReleaseEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_mouseDoubleClickEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::mouseDoubleClickEvent(event);
-
+	self->QAbstractGraphicsShapeItem::mouseDoubleClickEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_wheelEvent(VirtualQAbstractGraphicsShapeItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::wheelEvent(event);
-
+	self->QAbstractGraphicsShapeItem::wheelEvent(event);
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QAbstractGraphicsShapeItem_virtualbase_inputMethodEvent(VirtualQAbstractGraphicsShapeItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::inputMethodEvent(event);
-
+	self->QAbstractGraphicsShapeItem::inputMethodEvent(event);
 }
 
-QVariant* QAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QAbstractGraphicsShapeItem_virtualbase_inputMethodQuery(const VirtualQAbstractGraphicsShapeItem* self, int query) {
 
-	return new QVariant(( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QAbstractGraphicsShapeItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QAbstractGraphicsShapeItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QAbstractGraphicsShapeItem_virtualbase_itemChange(VirtualQAbstractGraphicsShapeItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::itemChange(static_cast<VirtualQAbstractGraphicsShapeItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QAbstractGraphicsShapeItem::itemChange(static_cast<VirtualQAbstractGraphicsShapeItem::GraphicsItemChange>(change), *value));
 }
 
-bool QAbstractGraphicsShapeItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QAbstractGraphicsShapeItem_virtualbase_supportsExtension(const VirtualQAbstractGraphicsShapeItem* self, int extension) {
 
-	return ( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::supportsExtension(static_cast<VirtualQAbstractGraphicsShapeItem::Extension>(extension));
-
+	return self->QAbstractGraphicsShapeItem::supportsExtension(static_cast<VirtualQAbstractGraphicsShapeItem::Extension>(extension));
 }
 
-void QAbstractGraphicsShapeItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QAbstractGraphicsShapeItem_virtualbase_setExtension(VirtualQAbstractGraphicsShapeItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::setExtension(static_cast<VirtualQAbstractGraphicsShapeItem::Extension>(extension), *variant);
-
+	self->QAbstractGraphicsShapeItem::setExtension(static_cast<VirtualQAbstractGraphicsShapeItem::Extension>(extension), *variant);
 }
 
-QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const VirtualQAbstractGraphicsShapeItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQAbstractGraphicsShapeItem*)(self) )->QAbstractGraphicsShapeItem::extension(*variant));
-
+	return new QVariant(self->QAbstractGraphicsShapeItem::extension(*variant));
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QAbstractGraphicsShapeItem_VTable* QAbstractGraphicsShapeItem_vtbl(const VirtualQAbstractGraphicsShapeItem* self) { return self->vtbl; }
+void* QAbstractGraphicsShapeItem_vdata(const VirtualQAbstractGraphicsShapeItem* self) { return self->vdata; }
+void QAbstractGraphicsShapeItem_setVdata(VirtualQAbstractGraphicsShapeItem* self, void* vdata) { self->vdata = vdata; }
 
+void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(VirtualQAbstractGraphicsShapeItem* self) {
+	self->updateMicroFocus();
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_addToIndex(void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QAbstractGraphicsShapeItem_protectedbase_addToIndex(VirtualQAbstractGraphicsShapeItem* self) {
+	self->addToIndex();
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(VirtualQAbstractGraphicsShapeItem* self) {
+	self->removeFromIndex();
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(VirtualQAbstractGraphicsShapeItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QAbstractGraphicsShapeItem_delete(QAbstractGraphicsShapeItem* self) {
@@ -3761,49 +3505,50 @@ void QAbstractGraphicsShapeItem_delete(QAbstractGraphicsShapeItem* self) {
 }
 
 class VirtualQGraphicsPathItem final : public QGraphicsPathItem {
-	struct QGraphicsPathItem_VTable* vtbl;
+	const QGraphicsPathItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsPathItem_VTable* QGraphicsPathItem_vtbl(const VirtualQGraphicsPathItem* self);
+	friend void* QGraphicsPathItem_vdata(const VirtualQGraphicsPathItem* self);
+	friend void QGraphicsPathItem_setVdata(VirtualQGraphicsPathItem* self, void* vdata);
 
-	VirtualQGraphicsPathItem(struct QGraphicsPathItem_VTable* vtbl): QGraphicsPathItem(), vtbl(vtbl) {};
-	VirtualQGraphicsPathItem(struct QGraphicsPathItem_VTable* vtbl, const QPainterPath& path): QGraphicsPathItem(path), vtbl(vtbl) {};
-	VirtualQGraphicsPathItem(struct QGraphicsPathItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsPathItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsPathItem(struct QGraphicsPathItem_VTable* vtbl, const QPainterPath& path, QGraphicsItem* parent): QGraphicsPathItem(path, parent), vtbl(vtbl) {};
+	VirtualQGraphicsPathItem(const QGraphicsPathItem_VTable* vtbl, void* vdata): QGraphicsPathItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPathItem(const QGraphicsPathItem_VTable* vtbl, void* vdata, const QPainterPath& path): QGraphicsPathItem(path), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPathItem(const QGraphicsPathItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsPathItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPathItem(const QGraphicsPathItem_VTable* vtbl, void* vdata, const QPainterPath& path, QGraphicsItem* parent): QGraphicsPathItem(path, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsPathItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsPathItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsPathItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsPathItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsPathItem_virtualbase_boundingRect(const VirtualQGraphicsPathItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsPathItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPathItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsPathItem_virtualbase_shape(const VirtualQGraphicsPathItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsPathItem::contains(point);
@@ -3813,14 +3558,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsPathItem_virtualbase_contains(const VirtualQGraphicsPathItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsPathItem::paint(painter, option, widget);
@@ -3831,13 +3575,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsPathItem_virtualbase_paint(VirtualQGraphicsPathItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsPathItem::isObscuredBy(item);
@@ -3845,44 +3588,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsPathItem_virtualbase_isObscuredBy(const VirtualQGraphicsPathItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsPathItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPathItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsPathItem_virtualbase_opaqueArea(const VirtualQGraphicsPathItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsPathItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsPathItem_virtualbase_type(const void* self);
+	friend int QGraphicsPathItem_virtualbase_type(const VirtualQGraphicsPathItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsPathItem::supportsExtension(extension);
@@ -3891,14 +3631,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsPathItem_virtualbase_supportsExtension(const VirtualQGraphicsPathItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsPathItem::setExtension(extension, variant);
@@ -3911,13 +3650,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsPathItem_virtualbase_setExtension(VirtualQGraphicsPathItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsPathItem::extension(variant);
@@ -3927,16 +3665,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPathItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsPathItem_virtualbase_extension(const VirtualQGraphicsPathItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsPathItem::advance(phase);
@@ -3945,13 +3682,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsPathItem_virtualbase_advance(VirtualQGraphicsPathItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsPathItem::collidesWithItem(other, mode);
@@ -3961,14 +3697,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsPathItem_virtualbase_collidesWithItem(const VirtualQGraphicsPathItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsPathItem::collidesWithPath(path, mode);
@@ -3980,14 +3715,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsPathItem_virtualbase_collidesWithPath(const VirtualQGraphicsPathItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsPathItem::sceneEventFilter(watched, event);
@@ -3996,14 +3730,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsPathItem_virtualbase_sceneEventFilter(VirtualQGraphicsPathItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsPathItem::sceneEvent(event);
@@ -4011,14 +3744,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPathItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsPathItem_virtualbase_sceneEvent(VirtualQGraphicsPathItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsPathItem::contextMenuEvent(event);
@@ -4027,13 +3759,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsPathItem_virtualbase_contextMenuEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsPathItem::dragEnterEvent(event);
@@ -4042,13 +3773,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPathItem_virtualbase_dragEnterEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsPathItem::dragLeaveEvent(event);
@@ -4057,13 +3787,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPathItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsPathItem::dragMoveEvent(event);
@@ -4072,13 +3801,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPathItem_virtualbase_dragMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsPathItem::dropEvent(event);
@@ -4087,13 +3815,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPathItem_virtualbase_dropEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsPathItem::focusInEvent(event);
@@ -4102,13 +3829,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPathItem_virtualbase_focusInEvent(VirtualQGraphicsPathItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsPathItem::focusOutEvent(event);
@@ -4117,13 +3843,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPathItem_virtualbase_focusOutEvent(VirtualQGraphicsPathItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsPathItem::hoverEnterEvent(event);
@@ -4132,13 +3857,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPathItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsPathItem::hoverMoveEvent(event);
@@ -4147,13 +3871,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPathItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsPathItem::hoverLeaveEvent(event);
@@ -4162,13 +3885,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPathItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsPathItem::keyPressEvent(event);
@@ -4177,13 +3899,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPathItem_virtualbase_keyPressEvent(VirtualQGraphicsPathItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsPathItem::keyReleaseEvent(event);
@@ -4192,13 +3913,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPathItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPathItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsPathItem::mousePressEvent(event);
@@ -4207,13 +3927,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPathItem_virtualbase_mousePressEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsPathItem::mouseMoveEvent(event);
@@ -4222,13 +3941,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPathItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsPathItem::mouseReleaseEvent(event);
@@ -4237,13 +3955,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPathItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsPathItem::mouseDoubleClickEvent(event);
@@ -4252,13 +3969,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPathItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsPathItem::wheelEvent(event);
@@ -4267,13 +3983,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsPathItem_virtualbase_wheelEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsPathItem::inputMethodEvent(event);
@@ -4282,13 +3997,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPathItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsPathItem_virtualbase_inputMethodEvent(VirtualQGraphicsPathItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsPathItem::inputMethodQuery(query);
@@ -4297,16 +4011,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPathItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsPathItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPathItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsPathItem::itemChange(change, value);
@@ -4318,36 +4031,36 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPathItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsPathItem_virtualbase_itemChange(VirtualQGraphicsPathItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPathItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsPathItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsPathItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsPathItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsPathItem_protectedbase_updateMicroFocus(VirtualQGraphicsPathItem* self);
+	friend void QGraphicsPathItem_protectedbase_addToIndex(VirtualQGraphicsPathItem* self);
+	friend void QGraphicsPathItem_protectedbase_removeFromIndex(VirtualQGraphicsPathItem* self);
+	friend void QGraphicsPathItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPathItem* self);
 };
 
-QGraphicsPathItem* QGraphicsPathItem_new(struct QGraphicsPathItem_VTable* vtbl) {
-	return new VirtualQGraphicsPathItem(vtbl);
+VirtualQGraphicsPathItem* QGraphicsPathItem_new(const QGraphicsPathItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsPathItem(vtbl, vdata);
 }
 
-QGraphicsPathItem* QGraphicsPathItem_new2(struct QGraphicsPathItem_VTable* vtbl, QPainterPath* path) {
-	return new VirtualQGraphicsPathItem(vtbl, *path);
+VirtualQGraphicsPathItem* QGraphicsPathItem_new2(const QGraphicsPathItem_VTable* vtbl, void* vdata, QPainterPath* path) {
+	return new VirtualQGraphicsPathItem(vtbl, vdata, *path);
 }
 
-QGraphicsPathItem* QGraphicsPathItem_new3(struct QGraphicsPathItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsPathItem(vtbl, parent);
+VirtualQGraphicsPathItem* QGraphicsPathItem_new3(const QGraphicsPathItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsPathItem(vtbl, vdata, parent);
 }
 
-QGraphicsPathItem* QGraphicsPathItem_new4(struct QGraphicsPathItem_VTable* vtbl, QPainterPath* path, QGraphicsItem* parent) {
-	return new VirtualQGraphicsPathItem(vtbl, *path, parent);
+VirtualQGraphicsPathItem* QGraphicsPathItem_new4(const QGraphicsPathItem_VTable* vtbl, void* vdata, QPainterPath* path, QGraphicsItem* parent) {
+	return new VirtualQGraphicsPathItem(vtbl, vdata, *path, parent);
 }
 
 void QGraphicsPathItem_virtbase(QGraphicsPathItem* src, QAbstractGraphicsShapeItem** outptr_QAbstractGraphicsShapeItem) {
@@ -4390,242 +4103,199 @@ int QGraphicsPathItem_type(const QGraphicsPathItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsPathItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsPathItem_virtualbase_boundingRect(const VirtualQGraphicsPathItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::boundingRect());
-
+	return new QRectF(self->QGraphicsPathItem::boundingRect());
 }
 
-QPainterPath* QGraphicsPathItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsPathItem_virtualbase_shape(const VirtualQGraphicsPathItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::shape());
-
+	return new QPainterPath(self->QGraphicsPathItem::shape());
 }
 
-bool QGraphicsPathItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsPathItem_virtualbase_contains(const VirtualQGraphicsPathItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::contains(*point);
-
+	return self->QGraphicsPathItem::contains(*point);
 }
 
-void QGraphicsPathItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsPathItem_virtualbase_paint(VirtualQGraphicsPathItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::paint(painter, option, widget);
-
+	self->QGraphicsPathItem::paint(painter, option, widget);
 }
 
-bool QGraphicsPathItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsPathItem_virtualbase_isObscuredBy(const VirtualQGraphicsPathItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::isObscuredBy(item);
-
+	return self->QGraphicsPathItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsPathItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsPathItem_virtualbase_opaqueArea(const VirtualQGraphicsPathItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsPathItem::opaqueArea());
 }
 
-int QGraphicsPathItem_virtualbase_type(const void* self) {
+int QGraphicsPathItem_virtualbase_type(const VirtualQGraphicsPathItem* self) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::type();
-
+	return self->QGraphicsPathItem::type();
 }
 
-bool QGraphicsPathItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsPathItem_virtualbase_supportsExtension(const VirtualQGraphicsPathItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::supportsExtension(static_cast<VirtualQGraphicsPathItem::Extension>(extension));
-
+	return self->QGraphicsPathItem::supportsExtension(static_cast<VirtualQGraphicsPathItem::Extension>(extension));
 }
 
-void QGraphicsPathItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsPathItem_virtualbase_setExtension(VirtualQGraphicsPathItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::setExtension(static_cast<VirtualQGraphicsPathItem::Extension>(extension), *variant);
-
+	self->QGraphicsPathItem::setExtension(static_cast<VirtualQGraphicsPathItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsPathItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsPathItem_virtualbase_extension(const VirtualQGraphicsPathItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsPathItem::extension(*variant));
 }
 
-void QGraphicsPathItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsPathItem_virtualbase_advance(VirtualQGraphicsPathItem* self, int phase) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsPathItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsPathItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsPathItem_virtualbase_collidesWithItem(const VirtualQGraphicsPathItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPathItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPathItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsPathItem_virtualbase_collidesWithPath(const VirtualQGraphicsPathItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPathItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPathItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsPathItem_virtualbase_sceneEventFilter(VirtualQGraphicsPathItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsPathItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsPathItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsPathItem_virtualbase_sceneEvent(VirtualQGraphicsPathItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::sceneEvent(event);
-
+	return self->QGraphicsPathItem::sceneEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsPathItem_virtualbase_contextMenuEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::contextMenuEvent(event);
-
+	self->QGraphicsPathItem::contextMenuEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPathItem_virtualbase_dragEnterEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::dragEnterEvent(event);
-
+	self->QGraphicsPathItem::dragEnterEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPathItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::dragLeaveEvent(event);
-
+	self->QGraphicsPathItem::dragLeaveEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPathItem_virtualbase_dragMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::dragMoveEvent(event);
-
+	self->QGraphicsPathItem::dragMoveEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPathItem_virtualbase_dropEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::dropEvent(event);
-
+	self->QGraphicsPathItem::dropEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsPathItem_virtualbase_focusInEvent(VirtualQGraphicsPathItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::focusInEvent(event);
-
+	self->QGraphicsPathItem::focusInEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsPathItem_virtualbase_focusOutEvent(VirtualQGraphicsPathItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::focusOutEvent(event);
-
+	self->QGraphicsPathItem::focusOutEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPathItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::hoverEnterEvent(event);
-
+	self->QGraphicsPathItem::hoverEnterEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPathItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::hoverMoveEvent(event);
-
+	self->QGraphicsPathItem::hoverMoveEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPathItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::hoverLeaveEvent(event);
-
+	self->QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsPathItem_virtualbase_keyPressEvent(VirtualQGraphicsPathItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::keyPressEvent(event);
-
+	self->QGraphicsPathItem::keyPressEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsPathItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPathItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::keyReleaseEvent(event);
-
+	self->QGraphicsPathItem::keyReleaseEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPathItem_virtualbase_mousePressEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::mousePressEvent(event);
-
+	self->QGraphicsPathItem::mousePressEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPathItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::mouseMoveEvent(event);
-
+	self->QGraphicsPathItem::mouseMoveEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPathItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::mouseReleaseEvent(event);
-
+	self->QGraphicsPathItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPathItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsPathItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsPathItem_virtualbase_wheelEvent(VirtualQGraphicsPathItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::wheelEvent(event);
-
+	self->QGraphicsPathItem::wheelEvent(event);
 }
 
-void QGraphicsPathItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsPathItem_virtualbase_inputMethodEvent(VirtualQGraphicsPathItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::inputMethodEvent(event);
-
+	self->QGraphicsPathItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsPathItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsPathItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPathItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsPathItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsPathItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsPathItem_virtualbase_itemChange(VirtualQGraphicsPathItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsPathItem*)(self) )->QGraphicsPathItem::itemChange(static_cast<VirtualQGraphicsPathItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsPathItem::itemChange(static_cast<VirtualQGraphicsPathItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsPathItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsPathItem_VTable* QGraphicsPathItem_vtbl(const VirtualQGraphicsPathItem* self) { return self->vtbl; }
+void* QGraphicsPathItem_vdata(const VirtualQGraphicsPathItem* self) { return self->vdata; }
+void QGraphicsPathItem_setVdata(VirtualQGraphicsPathItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsPathItem_protectedbase_updateMicroFocus(VirtualQGraphicsPathItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsPathItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsPathItem_protectedbase_addToIndex(VirtualQGraphicsPathItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsPathItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsPathItem_protectedbase_removeFromIndex(VirtualQGraphicsPathItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsPathItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsPathItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPathItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsPathItem_delete(QGraphicsPathItem* self) {
@@ -4633,51 +4303,52 @@ void QGraphicsPathItem_delete(QGraphicsPathItem* self) {
 }
 
 class VirtualQGraphicsRectItem final : public QGraphicsRectItem {
-	struct QGraphicsRectItem_VTable* vtbl;
+	const QGraphicsRectItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsRectItem_VTable* QGraphicsRectItem_vtbl(const VirtualQGraphicsRectItem* self);
+	friend void* QGraphicsRectItem_vdata(const VirtualQGraphicsRectItem* self);
+	friend void QGraphicsRectItem_setVdata(VirtualQGraphicsRectItem* self, void* vdata);
 
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl): QGraphicsRectItem(), vtbl(vtbl) {};
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl, const QRectF& rect): QGraphicsRectItem(rect), vtbl(vtbl) {};
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl, qreal x, qreal y, qreal w, qreal h): QGraphicsRectItem(x, y, w, h), vtbl(vtbl) {};
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsRectItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl, const QRectF& rect, QGraphicsItem* parent): QGraphicsRectItem(rect, parent), vtbl(vtbl) {};
-	VirtualQGraphicsRectItem(struct QGraphicsRectItem_VTable* vtbl, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent): QGraphicsRectItem(x, y, w, h, parent), vtbl(vtbl) {};
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata): QGraphicsRectItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata, const QRectF& rect): QGraphicsRectItem(rect), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata, qreal x, qreal y, qreal w, qreal h): QGraphicsRectItem(x, y, w, h), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsRectItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata, const QRectF& rect, QGraphicsItem* parent): QGraphicsRectItem(rect, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsRectItem(const QGraphicsRectItem_VTable* vtbl, void* vdata, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent): QGraphicsRectItem(x, y, w, h, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsRectItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsRectItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsRectItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsRectItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsRectItem_virtualbase_boundingRect(const VirtualQGraphicsRectItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsRectItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsRectItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsRectItem_virtualbase_shape(const VirtualQGraphicsRectItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsRectItem::contains(point);
@@ -4687,14 +4358,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsRectItem_virtualbase_contains(const VirtualQGraphicsRectItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsRectItem::paint(painter, option, widget);
@@ -4705,13 +4375,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsRectItem_virtualbase_paint(VirtualQGraphicsRectItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsRectItem::isObscuredBy(item);
@@ -4719,44 +4388,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsRectItem_virtualbase_isObscuredBy(const VirtualQGraphicsRectItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsRectItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsRectItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsRectItem_virtualbase_opaqueArea(const VirtualQGraphicsRectItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsRectItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsRectItem_virtualbase_type(const void* self);
+	friend int QGraphicsRectItem_virtualbase_type(const VirtualQGraphicsRectItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsRectItem::supportsExtension(extension);
@@ -4765,14 +4431,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsRectItem_virtualbase_supportsExtension(const VirtualQGraphicsRectItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsRectItem::setExtension(extension, variant);
@@ -4785,13 +4450,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsRectItem_virtualbase_setExtension(VirtualQGraphicsRectItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsRectItem::extension(variant);
@@ -4801,16 +4465,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsRectItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsRectItem_virtualbase_extension(const VirtualQGraphicsRectItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsRectItem::advance(phase);
@@ -4819,13 +4482,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsRectItem_virtualbase_advance(VirtualQGraphicsRectItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsRectItem::collidesWithItem(other, mode);
@@ -4835,14 +4497,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsRectItem_virtualbase_collidesWithItem(const VirtualQGraphicsRectItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsRectItem::collidesWithPath(path, mode);
@@ -4854,14 +4515,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsRectItem_virtualbase_collidesWithPath(const VirtualQGraphicsRectItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsRectItem::sceneEventFilter(watched, event);
@@ -4870,14 +4530,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsRectItem_virtualbase_sceneEventFilter(VirtualQGraphicsRectItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsRectItem::sceneEvent(event);
@@ -4885,14 +4544,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsRectItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsRectItem_virtualbase_sceneEvent(VirtualQGraphicsRectItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsRectItem::contextMenuEvent(event);
@@ -4901,13 +4559,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsRectItem_virtualbase_contextMenuEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsRectItem::dragEnterEvent(event);
@@ -4916,13 +4573,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsRectItem_virtualbase_dragEnterEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsRectItem::dragLeaveEvent(event);
@@ -4931,13 +4587,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsRectItem_virtualbase_dragLeaveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsRectItem::dragMoveEvent(event);
@@ -4946,13 +4601,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsRectItem_virtualbase_dragMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsRectItem::dropEvent(event);
@@ -4961,13 +4615,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsRectItem_virtualbase_dropEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsRectItem::focusInEvent(event);
@@ -4976,13 +4629,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsRectItem_virtualbase_focusInEvent(VirtualQGraphicsRectItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsRectItem::focusOutEvent(event);
@@ -4991,13 +4643,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsRectItem_virtualbase_focusOutEvent(VirtualQGraphicsRectItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsRectItem::hoverEnterEvent(event);
@@ -5006,13 +4657,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsRectItem_virtualbase_hoverEnterEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsRectItem::hoverMoveEvent(event);
@@ -5021,13 +4671,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsRectItem_virtualbase_hoverMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsRectItem::hoverLeaveEvent(event);
@@ -5036,13 +4685,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsRectItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsRectItem::keyPressEvent(event);
@@ -5051,13 +4699,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsRectItem_virtualbase_keyPressEvent(VirtualQGraphicsRectItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsRectItem::keyReleaseEvent(event);
@@ -5066,13 +4713,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsRectItem_virtualbase_keyReleaseEvent(VirtualQGraphicsRectItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsRectItem::mousePressEvent(event);
@@ -5081,13 +4727,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsRectItem_virtualbase_mousePressEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsRectItem::mouseMoveEvent(event);
@@ -5096,13 +4741,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsRectItem_virtualbase_mouseMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsRectItem::mouseReleaseEvent(event);
@@ -5111,13 +4755,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsRectItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsRectItem::mouseDoubleClickEvent(event);
@@ -5126,13 +4769,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsRectItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsRectItem::wheelEvent(event);
@@ -5141,13 +4783,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsRectItem_virtualbase_wheelEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsRectItem::inputMethodEvent(event);
@@ -5156,13 +4797,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsRectItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsRectItem_virtualbase_inputMethodEvent(VirtualQGraphicsRectItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsRectItem::inputMethodQuery(query);
@@ -5171,16 +4811,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsRectItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsRectItem_virtualbase_inputMethodQuery(const VirtualQGraphicsRectItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsRectItem::itemChange(change, value);
@@ -5192,44 +4831,44 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsRectItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsRectItem_virtualbase_itemChange(VirtualQGraphicsRectItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsRectItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsRectItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsRectItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsRectItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsRectItem_protectedbase_updateMicroFocus(VirtualQGraphicsRectItem* self);
+	friend void QGraphicsRectItem_protectedbase_addToIndex(VirtualQGraphicsRectItem* self);
+	friend void QGraphicsRectItem_protectedbase_removeFromIndex(VirtualQGraphicsRectItem* self);
+	friend void QGraphicsRectItem_protectedbase_prepareGeometryChange(VirtualQGraphicsRectItem* self);
 };
 
-QGraphicsRectItem* QGraphicsRectItem_new(struct QGraphicsRectItem_VTable* vtbl) {
-	return new VirtualQGraphicsRectItem(vtbl);
+VirtualQGraphicsRectItem* QGraphicsRectItem_new(const QGraphicsRectItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata);
 }
 
-QGraphicsRectItem* QGraphicsRectItem_new2(struct QGraphicsRectItem_VTable* vtbl, QRectF* rect) {
-	return new VirtualQGraphicsRectItem(vtbl, *rect);
+VirtualQGraphicsRectItem* QGraphicsRectItem_new2(const QGraphicsRectItem_VTable* vtbl, void* vdata, QRectF* rect) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata, *rect);
 }
 
-QGraphicsRectItem* QGraphicsRectItem_new3(struct QGraphicsRectItem_VTable* vtbl, double x, double y, double w, double h) {
-	return new VirtualQGraphicsRectItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+VirtualQGraphicsRectItem* QGraphicsRectItem_new3(const QGraphicsRectItem_VTable* vtbl, void* vdata, double x, double y, double w, double h) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-QGraphicsRectItem* QGraphicsRectItem_new4(struct QGraphicsRectItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsRectItem(vtbl, parent);
+VirtualQGraphicsRectItem* QGraphicsRectItem_new4(const QGraphicsRectItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata, parent);
 }
 
-QGraphicsRectItem* QGraphicsRectItem_new5(struct QGraphicsRectItem_VTable* vtbl, QRectF* rect, QGraphicsItem* parent) {
-	return new VirtualQGraphicsRectItem(vtbl, *rect, parent);
+VirtualQGraphicsRectItem* QGraphicsRectItem_new5(const QGraphicsRectItem_VTable* vtbl, void* vdata, QRectF* rect, QGraphicsItem* parent) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata, *rect, parent);
 }
 
-QGraphicsRectItem* QGraphicsRectItem_new6(struct QGraphicsRectItem_VTable* vtbl, double x, double y, double w, double h, QGraphicsItem* parent) {
-	return new VirtualQGraphicsRectItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent);
+VirtualQGraphicsRectItem* QGraphicsRectItem_new6(const QGraphicsRectItem_VTable* vtbl, void* vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
+	return new VirtualQGraphicsRectItem(vtbl, vdata, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent);
 }
 
 void QGraphicsRectItem_virtbase(QGraphicsRectItem* src, QAbstractGraphicsShapeItem** outptr_QAbstractGraphicsShapeItem) {
@@ -5276,242 +4915,199 @@ int QGraphicsRectItem_type(const QGraphicsRectItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsRectItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsRectItem_virtualbase_boundingRect(const VirtualQGraphicsRectItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::boundingRect());
-
+	return new QRectF(self->QGraphicsRectItem::boundingRect());
 }
 
-QPainterPath* QGraphicsRectItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsRectItem_virtualbase_shape(const VirtualQGraphicsRectItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::shape());
-
+	return new QPainterPath(self->QGraphicsRectItem::shape());
 }
 
-bool QGraphicsRectItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsRectItem_virtualbase_contains(const VirtualQGraphicsRectItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::contains(*point);
-
+	return self->QGraphicsRectItem::contains(*point);
 }
 
-void QGraphicsRectItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsRectItem_virtualbase_paint(VirtualQGraphicsRectItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::paint(painter, option, widget);
-
+	self->QGraphicsRectItem::paint(painter, option, widget);
 }
 
-bool QGraphicsRectItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsRectItem_virtualbase_isObscuredBy(const VirtualQGraphicsRectItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::isObscuredBy(item);
-
+	return self->QGraphicsRectItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsRectItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsRectItem_virtualbase_opaqueArea(const VirtualQGraphicsRectItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsRectItem::opaqueArea());
 }
 
-int QGraphicsRectItem_virtualbase_type(const void* self) {
+int QGraphicsRectItem_virtualbase_type(const VirtualQGraphicsRectItem* self) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::type();
-
+	return self->QGraphicsRectItem::type();
 }
 
-bool QGraphicsRectItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsRectItem_virtualbase_supportsExtension(const VirtualQGraphicsRectItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::supportsExtension(static_cast<VirtualQGraphicsRectItem::Extension>(extension));
-
+	return self->QGraphicsRectItem::supportsExtension(static_cast<VirtualQGraphicsRectItem::Extension>(extension));
 }
 
-void QGraphicsRectItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsRectItem_virtualbase_setExtension(VirtualQGraphicsRectItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::setExtension(static_cast<VirtualQGraphicsRectItem::Extension>(extension), *variant);
-
+	self->QGraphicsRectItem::setExtension(static_cast<VirtualQGraphicsRectItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsRectItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsRectItem_virtualbase_extension(const VirtualQGraphicsRectItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsRectItem::extension(*variant));
 }
 
-void QGraphicsRectItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsRectItem_virtualbase_advance(VirtualQGraphicsRectItem* self, int phase) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsRectItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsRectItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsRectItem_virtualbase_collidesWithItem(const VirtualQGraphicsRectItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsRectItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsRectItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsRectItem_virtualbase_collidesWithPath(const VirtualQGraphicsRectItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsRectItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsRectItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsRectItem_virtualbase_sceneEventFilter(VirtualQGraphicsRectItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsRectItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsRectItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsRectItem_virtualbase_sceneEvent(VirtualQGraphicsRectItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::sceneEvent(event);
-
+	return self->QGraphicsRectItem::sceneEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsRectItem_virtualbase_contextMenuEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::contextMenuEvent(event);
-
+	self->QGraphicsRectItem::contextMenuEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsRectItem_virtualbase_dragEnterEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::dragEnterEvent(event);
-
+	self->QGraphicsRectItem::dragEnterEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsRectItem_virtualbase_dragLeaveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::dragLeaveEvent(event);
-
+	self->QGraphicsRectItem::dragLeaveEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsRectItem_virtualbase_dragMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::dragMoveEvent(event);
-
+	self->QGraphicsRectItem::dragMoveEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsRectItem_virtualbase_dropEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::dropEvent(event);
-
+	self->QGraphicsRectItem::dropEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsRectItem_virtualbase_focusInEvent(VirtualQGraphicsRectItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::focusInEvent(event);
-
+	self->QGraphicsRectItem::focusInEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsRectItem_virtualbase_focusOutEvent(VirtualQGraphicsRectItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::focusOutEvent(event);
-
+	self->QGraphicsRectItem::focusOutEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsRectItem_virtualbase_hoverEnterEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::hoverEnterEvent(event);
-
+	self->QGraphicsRectItem::hoverEnterEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsRectItem_virtualbase_hoverMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::hoverMoveEvent(event);
-
+	self->QGraphicsRectItem::hoverMoveEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsRectItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::hoverLeaveEvent(event);
-
+	self->QGraphicsRectItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsRectItem_virtualbase_keyPressEvent(VirtualQGraphicsRectItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::keyPressEvent(event);
-
+	self->QGraphicsRectItem::keyPressEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsRectItem_virtualbase_keyReleaseEvent(VirtualQGraphicsRectItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::keyReleaseEvent(event);
-
+	self->QGraphicsRectItem::keyReleaseEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsRectItem_virtualbase_mousePressEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::mousePressEvent(event);
-
+	self->QGraphicsRectItem::mousePressEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsRectItem_virtualbase_mouseMoveEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::mouseMoveEvent(event);
-
+	self->QGraphicsRectItem::mouseMoveEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsRectItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::mouseReleaseEvent(event);
-
+	self->QGraphicsRectItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsRectItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsRectItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsRectItem_virtualbase_wheelEvent(VirtualQGraphicsRectItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::wheelEvent(event);
-
+	self->QGraphicsRectItem::wheelEvent(event);
 }
 
-void QGraphicsRectItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsRectItem_virtualbase_inputMethodEvent(VirtualQGraphicsRectItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::inputMethodEvent(event);
-
+	self->QGraphicsRectItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsRectItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsRectItem_virtualbase_inputMethodQuery(const VirtualQGraphicsRectItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsRectItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsRectItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsRectItem_virtualbase_itemChange(VirtualQGraphicsRectItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsRectItem*)(self) )->QGraphicsRectItem::itemChange(static_cast<VirtualQGraphicsRectItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsRectItem::itemChange(static_cast<VirtualQGraphicsRectItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsRectItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsRectItem_VTable* QGraphicsRectItem_vtbl(const VirtualQGraphicsRectItem* self) { return self->vtbl; }
+void* QGraphicsRectItem_vdata(const VirtualQGraphicsRectItem* self) { return self->vdata; }
+void QGraphicsRectItem_setVdata(VirtualQGraphicsRectItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsRectItem_protectedbase_updateMicroFocus(VirtualQGraphicsRectItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsRectItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsRectItem_protectedbase_addToIndex(VirtualQGraphicsRectItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsRectItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsRectItem_protectedbase_removeFromIndex(VirtualQGraphicsRectItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsRectItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsRectItem_protectedbase_prepareGeometryChange(VirtualQGraphicsRectItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsRectItem_delete(QGraphicsRectItem* self) {
@@ -5519,51 +5115,52 @@ void QGraphicsRectItem_delete(QGraphicsRectItem* self) {
 }
 
 class VirtualQGraphicsEllipseItem final : public QGraphicsEllipseItem {
-	struct QGraphicsEllipseItem_VTable* vtbl;
+	const QGraphicsEllipseItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsEllipseItem_VTable* QGraphicsEllipseItem_vtbl(const VirtualQGraphicsEllipseItem* self);
+	friend void* QGraphicsEllipseItem_vdata(const VirtualQGraphicsEllipseItem* self);
+	friend void QGraphicsEllipseItem_setVdata(VirtualQGraphicsEllipseItem* self, void* vdata);
 
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl): QGraphicsEllipseItem(), vtbl(vtbl) {};
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl, const QRectF& rect): QGraphicsEllipseItem(rect), vtbl(vtbl) {};
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl, qreal x, qreal y, qreal w, qreal h): QGraphicsEllipseItem(x, y, w, h), vtbl(vtbl) {};
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsEllipseItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl, const QRectF& rect, QGraphicsItem* parent): QGraphicsEllipseItem(rect, parent), vtbl(vtbl) {};
-	VirtualQGraphicsEllipseItem(struct QGraphicsEllipseItem_VTable* vtbl, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent): QGraphicsEllipseItem(x, y, w, h, parent), vtbl(vtbl) {};
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata): QGraphicsEllipseItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, const QRectF& rect): QGraphicsEllipseItem(rect), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, qreal x, qreal y, qreal w, qreal h): QGraphicsEllipseItem(x, y, w, h), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsEllipseItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, const QRectF& rect, QGraphicsItem* parent): QGraphicsEllipseItem(rect, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEllipseItem(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent): QGraphicsEllipseItem(x, y, w, h, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsEllipseItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsEllipseItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsEllipseItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsEllipseItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsEllipseItem_virtualbase_boundingRect(const VirtualQGraphicsEllipseItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsEllipseItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsEllipseItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsEllipseItem_virtualbase_shape(const VirtualQGraphicsEllipseItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsEllipseItem::contains(point);
@@ -5573,14 +5170,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsEllipseItem_virtualbase_contains(const VirtualQGraphicsEllipseItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsEllipseItem::paint(painter, option, widget);
@@ -5591,13 +5187,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsEllipseItem_virtualbase_paint(VirtualQGraphicsEllipseItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsEllipseItem::isObscuredBy(item);
@@ -5605,44 +5200,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsEllipseItem_virtualbase_isObscuredBy(const VirtualQGraphicsEllipseItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsEllipseItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsEllipseItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsEllipseItem_virtualbase_opaqueArea(const VirtualQGraphicsEllipseItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsEllipseItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsEllipseItem_virtualbase_type(const void* self);
+	friend int QGraphicsEllipseItem_virtualbase_type(const VirtualQGraphicsEllipseItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsEllipseItem::supportsExtension(extension);
@@ -5651,14 +5243,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsEllipseItem_virtualbase_supportsExtension(const VirtualQGraphicsEllipseItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsEllipseItem::setExtension(extension, variant);
@@ -5671,13 +5262,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsEllipseItem_virtualbase_setExtension(VirtualQGraphicsEllipseItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsEllipseItem::extension(variant);
@@ -5687,16 +5277,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsEllipseItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsEllipseItem_virtualbase_extension(const VirtualQGraphicsEllipseItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsEllipseItem::advance(phase);
@@ -5705,13 +5294,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsEllipseItem_virtualbase_advance(VirtualQGraphicsEllipseItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsEllipseItem::collidesWithItem(other, mode);
@@ -5721,14 +5309,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsEllipseItem_virtualbase_collidesWithItem(const VirtualQGraphicsEllipseItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsEllipseItem::collidesWithPath(path, mode);
@@ -5740,14 +5327,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsEllipseItem_virtualbase_collidesWithPath(const VirtualQGraphicsEllipseItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsEllipseItem::sceneEventFilter(watched, event);
@@ -5756,14 +5342,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsEllipseItem_virtualbase_sceneEventFilter(VirtualQGraphicsEllipseItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsEllipseItem::sceneEvent(event);
@@ -5771,14 +5356,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEllipseItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsEllipseItem_virtualbase_sceneEvent(VirtualQGraphicsEllipseItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsEllipseItem::contextMenuEvent(event);
@@ -5787,13 +5371,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_contextMenuEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsEllipseItem::dragEnterEvent(event);
@@ -5802,13 +5385,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_dragEnterEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsEllipseItem::dragLeaveEvent(event);
@@ -5817,13 +5399,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_dragLeaveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsEllipseItem::dragMoveEvent(event);
@@ -5832,13 +5413,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_dragMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsEllipseItem::dropEvent(event);
@@ -5847,13 +5427,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_dropEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsEllipseItem::focusInEvent(event);
@@ -5862,13 +5441,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_focusInEvent(VirtualQGraphicsEllipseItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsEllipseItem::focusOutEvent(event);
@@ -5877,13 +5455,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_focusOutEvent(VirtualQGraphicsEllipseItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsEllipseItem::hoverEnterEvent(event);
@@ -5892,13 +5469,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_hoverEnterEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsEllipseItem::hoverMoveEvent(event);
@@ -5907,13 +5483,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_hoverMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsEllipseItem::hoverLeaveEvent(event);
@@ -5922,13 +5497,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsEllipseItem::keyPressEvent(event);
@@ -5937,13 +5511,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_keyPressEvent(VirtualQGraphicsEllipseItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsEllipseItem::keyReleaseEvent(event);
@@ -5952,13 +5525,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_keyReleaseEvent(VirtualQGraphicsEllipseItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsEllipseItem::mousePressEvent(event);
@@ -5967,13 +5539,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_mousePressEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsEllipseItem::mouseMoveEvent(event);
@@ -5982,13 +5553,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_mouseMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsEllipseItem::mouseReleaseEvent(event);
@@ -5997,13 +5567,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsEllipseItem::mouseDoubleClickEvent(event);
@@ -6012,13 +5581,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsEllipseItem::wheelEvent(event);
@@ -6027,13 +5595,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_wheelEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsEllipseItem::inputMethodEvent(event);
@@ -6042,13 +5609,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEllipseItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsEllipseItem_virtualbase_inputMethodEvent(VirtualQGraphicsEllipseItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsEllipseItem::inputMethodQuery(query);
@@ -6057,16 +5623,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsEllipseItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsEllipseItem_virtualbase_inputMethodQuery(const VirtualQGraphicsEllipseItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsEllipseItem::itemChange(change, value);
@@ -6078,44 +5643,44 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsEllipseItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsEllipseItem_virtualbase_itemChange(VirtualQGraphicsEllipseItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsEllipseItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsEllipseItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsEllipseItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsEllipseItem_protectedbase_updateMicroFocus(VirtualQGraphicsEllipseItem* self);
+	friend void QGraphicsEllipseItem_protectedbase_addToIndex(VirtualQGraphicsEllipseItem* self);
+	friend void QGraphicsEllipseItem_protectedbase_removeFromIndex(VirtualQGraphicsEllipseItem* self);
+	friend void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(VirtualQGraphicsEllipseItem* self);
 };
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new(struct QGraphicsEllipseItem_VTable* vtbl) {
-	return new VirtualQGraphicsEllipseItem(vtbl);
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new(const QGraphicsEllipseItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata);
 }
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new2(struct QGraphicsEllipseItem_VTable* vtbl, QRectF* rect) {
-	return new VirtualQGraphicsEllipseItem(vtbl, *rect);
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new2(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, QRectF* rect) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata, *rect);
 }
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new3(struct QGraphicsEllipseItem_VTable* vtbl, double x, double y, double w, double h) {
-	return new VirtualQGraphicsEllipseItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new3(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, double x, double y, double w, double h) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new4(struct QGraphicsEllipseItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsEllipseItem(vtbl, parent);
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new4(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata, parent);
 }
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new5(struct QGraphicsEllipseItem_VTable* vtbl, QRectF* rect, QGraphicsItem* parent) {
-	return new VirtualQGraphicsEllipseItem(vtbl, *rect, parent);
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new5(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, QRectF* rect, QGraphicsItem* parent) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata, *rect, parent);
 }
 
-QGraphicsEllipseItem* QGraphicsEllipseItem_new6(struct QGraphicsEllipseItem_VTable* vtbl, double x, double y, double w, double h, QGraphicsItem* parent) {
-	return new VirtualQGraphicsEllipseItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent);
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new6(const QGraphicsEllipseItem_VTable* vtbl, void* vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
+	return new VirtualQGraphicsEllipseItem(vtbl, vdata, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent);
 }
 
 void QGraphicsEllipseItem_virtbase(QGraphicsEllipseItem* src, QAbstractGraphicsShapeItem** outptr_QAbstractGraphicsShapeItem) {
@@ -6178,242 +5743,199 @@ int QGraphicsEllipseItem_type(const QGraphicsEllipseItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsEllipseItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsEllipseItem_virtualbase_boundingRect(const VirtualQGraphicsEllipseItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::boundingRect());
-
+	return new QRectF(self->QGraphicsEllipseItem::boundingRect());
 }
 
-QPainterPath* QGraphicsEllipseItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsEllipseItem_virtualbase_shape(const VirtualQGraphicsEllipseItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::shape());
-
+	return new QPainterPath(self->QGraphicsEllipseItem::shape());
 }
 
-bool QGraphicsEllipseItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsEllipseItem_virtualbase_contains(const VirtualQGraphicsEllipseItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::contains(*point);
-
+	return self->QGraphicsEllipseItem::contains(*point);
 }
 
-void QGraphicsEllipseItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsEllipseItem_virtualbase_paint(VirtualQGraphicsEllipseItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::paint(painter, option, widget);
-
+	self->QGraphicsEllipseItem::paint(painter, option, widget);
 }
 
-bool QGraphicsEllipseItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsEllipseItem_virtualbase_isObscuredBy(const VirtualQGraphicsEllipseItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::isObscuredBy(item);
-
+	return self->QGraphicsEllipseItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsEllipseItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsEllipseItem_virtualbase_opaqueArea(const VirtualQGraphicsEllipseItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsEllipseItem::opaqueArea());
 }
 
-int QGraphicsEllipseItem_virtualbase_type(const void* self) {
+int QGraphicsEllipseItem_virtualbase_type(const VirtualQGraphicsEllipseItem* self) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::type();
-
+	return self->QGraphicsEllipseItem::type();
 }
 
-bool QGraphicsEllipseItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsEllipseItem_virtualbase_supportsExtension(const VirtualQGraphicsEllipseItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::supportsExtension(static_cast<VirtualQGraphicsEllipseItem::Extension>(extension));
-
+	return self->QGraphicsEllipseItem::supportsExtension(static_cast<VirtualQGraphicsEllipseItem::Extension>(extension));
 }
 
-void QGraphicsEllipseItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsEllipseItem_virtualbase_setExtension(VirtualQGraphicsEllipseItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::setExtension(static_cast<VirtualQGraphicsEllipseItem::Extension>(extension), *variant);
-
+	self->QGraphicsEllipseItem::setExtension(static_cast<VirtualQGraphicsEllipseItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsEllipseItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsEllipseItem_virtualbase_extension(const VirtualQGraphicsEllipseItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsEllipseItem::extension(*variant));
 }
 
-void QGraphicsEllipseItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsEllipseItem_virtualbase_advance(VirtualQGraphicsEllipseItem* self, int phase) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsEllipseItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsEllipseItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsEllipseItem_virtualbase_collidesWithItem(const VirtualQGraphicsEllipseItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsEllipseItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsEllipseItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsEllipseItem_virtualbase_collidesWithPath(const VirtualQGraphicsEllipseItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsEllipseItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsEllipseItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsEllipseItem_virtualbase_sceneEventFilter(VirtualQGraphicsEllipseItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsEllipseItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsEllipseItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsEllipseItem_virtualbase_sceneEvent(VirtualQGraphicsEllipseItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::sceneEvent(event);
-
+	return self->QGraphicsEllipseItem::sceneEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsEllipseItem_virtualbase_contextMenuEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::contextMenuEvent(event);
-
+	self->QGraphicsEllipseItem::contextMenuEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsEllipseItem_virtualbase_dragEnterEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::dragEnterEvent(event);
-
+	self->QGraphicsEllipseItem::dragEnterEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsEllipseItem_virtualbase_dragLeaveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::dragLeaveEvent(event);
-
+	self->QGraphicsEllipseItem::dragLeaveEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsEllipseItem_virtualbase_dragMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::dragMoveEvent(event);
-
+	self->QGraphicsEllipseItem::dragMoveEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsEllipseItem_virtualbase_dropEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::dropEvent(event);
-
+	self->QGraphicsEllipseItem::dropEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsEllipseItem_virtualbase_focusInEvent(VirtualQGraphicsEllipseItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::focusInEvent(event);
-
+	self->QGraphicsEllipseItem::focusInEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsEllipseItem_virtualbase_focusOutEvent(VirtualQGraphicsEllipseItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::focusOutEvent(event);
-
+	self->QGraphicsEllipseItem::focusOutEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsEllipseItem_virtualbase_hoverEnterEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::hoverEnterEvent(event);
-
+	self->QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsEllipseItem_virtualbase_hoverMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::hoverMoveEvent(event);
-
+	self->QGraphicsEllipseItem::hoverMoveEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsEllipseItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::hoverLeaveEvent(event);
-
+	self->QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsEllipseItem_virtualbase_keyPressEvent(VirtualQGraphicsEllipseItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::keyPressEvent(event);
-
+	self->QGraphicsEllipseItem::keyPressEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsEllipseItem_virtualbase_keyReleaseEvent(VirtualQGraphicsEllipseItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::keyReleaseEvent(event);
-
+	self->QGraphicsEllipseItem::keyReleaseEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsEllipseItem_virtualbase_mousePressEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::mousePressEvent(event);
-
+	self->QGraphicsEllipseItem::mousePressEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsEllipseItem_virtualbase_mouseMoveEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::mouseMoveEvent(event);
-
+	self->QGraphicsEllipseItem::mouseMoveEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsEllipseItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::mouseReleaseEvent(event);
-
+	self->QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsEllipseItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsEllipseItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsEllipseItem_virtualbase_wheelEvent(VirtualQGraphicsEllipseItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::wheelEvent(event);
-
+	self->QGraphicsEllipseItem::wheelEvent(event);
 }
 
-void QGraphicsEllipseItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsEllipseItem_virtualbase_inputMethodEvent(VirtualQGraphicsEllipseItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::inputMethodEvent(event);
-
+	self->QGraphicsEllipseItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsEllipseItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsEllipseItem_virtualbase_inputMethodQuery(const VirtualQGraphicsEllipseItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsEllipseItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsEllipseItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsEllipseItem_virtualbase_itemChange(VirtualQGraphicsEllipseItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsEllipseItem*)(self) )->QGraphicsEllipseItem::itemChange(static_cast<VirtualQGraphicsEllipseItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsEllipseItem::itemChange(static_cast<VirtualQGraphicsEllipseItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsEllipseItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsEllipseItem_VTable* QGraphicsEllipseItem_vtbl(const VirtualQGraphicsEllipseItem* self) { return self->vtbl; }
+void* QGraphicsEllipseItem_vdata(const VirtualQGraphicsEllipseItem* self) { return self->vdata; }
+void QGraphicsEllipseItem_setVdata(VirtualQGraphicsEllipseItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsEllipseItem_protectedbase_updateMicroFocus(VirtualQGraphicsEllipseItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsEllipseItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsEllipseItem_protectedbase_addToIndex(VirtualQGraphicsEllipseItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsEllipseItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsEllipseItem_protectedbase_removeFromIndex(VirtualQGraphicsEllipseItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(VirtualQGraphicsEllipseItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsEllipseItem_delete(QGraphicsEllipseItem* self) {
@@ -6421,47 +5943,48 @@ void QGraphicsEllipseItem_delete(QGraphicsEllipseItem* self) {
 }
 
 class VirtualQGraphicsPolygonItem final : public QGraphicsPolygonItem {
-	struct QGraphicsPolygonItem_VTable* vtbl;
+	const QGraphicsPolygonItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsPolygonItem_VTable* QGraphicsPolygonItem_vtbl(const VirtualQGraphicsPolygonItem* self);
+	friend void* QGraphicsPolygonItem_vdata(const VirtualQGraphicsPolygonItem* self);
+	friend void QGraphicsPolygonItem_setVdata(VirtualQGraphicsPolygonItem* self, void* vdata);
 
-	VirtualQGraphicsPolygonItem(struct QGraphicsPolygonItem_VTable* vtbl): QGraphicsPolygonItem(), vtbl(vtbl) {};
-	VirtualQGraphicsPolygonItem(struct QGraphicsPolygonItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsPolygonItem(parent), vtbl(vtbl) {};
+	VirtualQGraphicsPolygonItem(const QGraphicsPolygonItem_VTable* vtbl, void* vdata): QGraphicsPolygonItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPolygonItem(const QGraphicsPolygonItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsPolygonItem(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsPolygonItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsPolygonItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsPolygonItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsPolygonItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsPolygonItem_virtualbase_boundingRect(const VirtualQGraphicsPolygonItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsPolygonItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPolygonItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsPolygonItem_virtualbase_shape(const VirtualQGraphicsPolygonItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsPolygonItem::contains(point);
@@ -6471,14 +5994,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsPolygonItem_virtualbase_contains(const VirtualQGraphicsPolygonItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsPolygonItem::paint(painter, option, widget);
@@ -6489,13 +6011,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsPolygonItem_virtualbase_paint(VirtualQGraphicsPolygonItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsPolygonItem::isObscuredBy(item);
@@ -6503,44 +6024,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsPolygonItem_virtualbase_isObscuredBy(const VirtualQGraphicsPolygonItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsPolygonItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPolygonItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsPolygonItem_virtualbase_opaqueArea(const VirtualQGraphicsPolygonItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsPolygonItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsPolygonItem_virtualbase_type(const void* self);
+	friend int QGraphicsPolygonItem_virtualbase_type(const VirtualQGraphicsPolygonItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsPolygonItem::supportsExtension(extension);
@@ -6549,14 +6067,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsPolygonItem_virtualbase_supportsExtension(const VirtualQGraphicsPolygonItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsPolygonItem::setExtension(extension, variant);
@@ -6569,13 +6086,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsPolygonItem_virtualbase_setExtension(VirtualQGraphicsPolygonItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsPolygonItem::extension(variant);
@@ -6585,16 +6101,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPolygonItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsPolygonItem_virtualbase_extension(const VirtualQGraphicsPolygonItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsPolygonItem::advance(phase);
@@ -6603,13 +6118,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsPolygonItem_virtualbase_advance(VirtualQGraphicsPolygonItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsPolygonItem::collidesWithItem(other, mode);
@@ -6619,14 +6133,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsPolygonItem_virtualbase_collidesWithItem(const VirtualQGraphicsPolygonItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsPolygonItem::collidesWithPath(path, mode);
@@ -6638,14 +6151,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsPolygonItem_virtualbase_collidesWithPath(const VirtualQGraphicsPolygonItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsPolygonItem::sceneEventFilter(watched, event);
@@ -6654,14 +6166,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsPolygonItem_virtualbase_sceneEventFilter(VirtualQGraphicsPolygonItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsPolygonItem::sceneEvent(event);
@@ -6669,14 +6180,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPolygonItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsPolygonItem_virtualbase_sceneEvent(VirtualQGraphicsPolygonItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsPolygonItem::contextMenuEvent(event);
@@ -6685,13 +6195,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_contextMenuEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsPolygonItem::dragEnterEvent(event);
@@ -6700,13 +6209,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_dragEnterEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsPolygonItem::dragLeaveEvent(event);
@@ -6715,13 +6223,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsPolygonItem::dragMoveEvent(event);
@@ -6730,13 +6237,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_dragMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsPolygonItem::dropEvent(event);
@@ -6745,13 +6251,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_dropEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsPolygonItem::focusInEvent(event);
@@ -6760,13 +6265,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_focusInEvent(VirtualQGraphicsPolygonItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsPolygonItem::focusOutEvent(event);
@@ -6775,13 +6279,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_focusOutEvent(VirtualQGraphicsPolygonItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsPolygonItem::hoverEnterEvent(event);
@@ -6790,13 +6293,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsPolygonItem::hoverMoveEvent(event);
@@ -6805,13 +6307,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsPolygonItem::hoverLeaveEvent(event);
@@ -6820,13 +6321,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsPolygonItem::keyPressEvent(event);
@@ -6835,13 +6335,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_keyPressEvent(VirtualQGraphicsPolygonItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsPolygonItem::keyReleaseEvent(event);
@@ -6850,13 +6349,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPolygonItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsPolygonItem::mousePressEvent(event);
@@ -6865,13 +6363,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_mousePressEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsPolygonItem::mouseMoveEvent(event);
@@ -6880,13 +6377,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsPolygonItem::mouseReleaseEvent(event);
@@ -6895,13 +6391,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsPolygonItem::mouseDoubleClickEvent(event);
@@ -6910,13 +6405,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsPolygonItem::wheelEvent(event);
@@ -6925,13 +6419,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_wheelEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsPolygonItem::inputMethodEvent(event);
@@ -6940,13 +6433,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPolygonItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsPolygonItem_virtualbase_inputMethodEvent(VirtualQGraphicsPolygonItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsPolygonItem::inputMethodQuery(query);
@@ -6955,16 +6447,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPolygonItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsPolygonItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPolygonItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsPolygonItem::itemChange(change, value);
@@ -6976,28 +6467,28 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPolygonItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsPolygonItem_virtualbase_itemChange(VirtualQGraphicsPolygonItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPolygonItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsPolygonItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsPolygonItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsPolygonItem_protectedbase_updateMicroFocus(VirtualQGraphicsPolygonItem* self);
+	friend void QGraphicsPolygonItem_protectedbase_addToIndex(VirtualQGraphicsPolygonItem* self);
+	friend void QGraphicsPolygonItem_protectedbase_removeFromIndex(VirtualQGraphicsPolygonItem* self);
+	friend void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPolygonItem* self);
 };
 
-QGraphicsPolygonItem* QGraphicsPolygonItem_new(struct QGraphicsPolygonItem_VTable* vtbl) {
-	return new VirtualQGraphicsPolygonItem(vtbl);
+VirtualQGraphicsPolygonItem* QGraphicsPolygonItem_new(const QGraphicsPolygonItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsPolygonItem(vtbl, vdata);
 }
 
-QGraphicsPolygonItem* QGraphicsPolygonItem_new2(struct QGraphicsPolygonItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsPolygonItem(vtbl, parent);
+VirtualQGraphicsPolygonItem* QGraphicsPolygonItem_new2(const QGraphicsPolygonItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsPolygonItem(vtbl, vdata, parent);
 }
 
 void QGraphicsPolygonItem_virtbase(QGraphicsPolygonItem* src, QAbstractGraphicsShapeItem** outptr_QAbstractGraphicsShapeItem) {
@@ -7041,242 +6532,199 @@ int QGraphicsPolygonItem_type(const QGraphicsPolygonItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsPolygonItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsPolygonItem_virtualbase_boundingRect(const VirtualQGraphicsPolygonItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::boundingRect());
-
+	return new QRectF(self->QGraphicsPolygonItem::boundingRect());
 }
 
-QPainterPath* QGraphicsPolygonItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsPolygonItem_virtualbase_shape(const VirtualQGraphicsPolygonItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::shape());
-
+	return new QPainterPath(self->QGraphicsPolygonItem::shape());
 }
 
-bool QGraphicsPolygonItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsPolygonItem_virtualbase_contains(const VirtualQGraphicsPolygonItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::contains(*point);
-
+	return self->QGraphicsPolygonItem::contains(*point);
 }
 
-void QGraphicsPolygonItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsPolygonItem_virtualbase_paint(VirtualQGraphicsPolygonItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::paint(painter, option, widget);
-
+	self->QGraphicsPolygonItem::paint(painter, option, widget);
 }
 
-bool QGraphicsPolygonItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsPolygonItem_virtualbase_isObscuredBy(const VirtualQGraphicsPolygonItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::isObscuredBy(item);
-
+	return self->QGraphicsPolygonItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsPolygonItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsPolygonItem_virtualbase_opaqueArea(const VirtualQGraphicsPolygonItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsPolygonItem::opaqueArea());
 }
 
-int QGraphicsPolygonItem_virtualbase_type(const void* self) {
+int QGraphicsPolygonItem_virtualbase_type(const VirtualQGraphicsPolygonItem* self) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::type();
-
+	return self->QGraphicsPolygonItem::type();
 }
 
-bool QGraphicsPolygonItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsPolygonItem_virtualbase_supportsExtension(const VirtualQGraphicsPolygonItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::supportsExtension(static_cast<VirtualQGraphicsPolygonItem::Extension>(extension));
-
+	return self->QGraphicsPolygonItem::supportsExtension(static_cast<VirtualQGraphicsPolygonItem::Extension>(extension));
 }
 
-void QGraphicsPolygonItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsPolygonItem_virtualbase_setExtension(VirtualQGraphicsPolygonItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::setExtension(static_cast<VirtualQGraphicsPolygonItem::Extension>(extension), *variant);
-
+	self->QGraphicsPolygonItem::setExtension(static_cast<VirtualQGraphicsPolygonItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsPolygonItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsPolygonItem_virtualbase_extension(const VirtualQGraphicsPolygonItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsPolygonItem::extension(*variant));
 }
 
-void QGraphicsPolygonItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsPolygonItem_virtualbase_advance(VirtualQGraphicsPolygonItem* self, int phase) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsPolygonItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsPolygonItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsPolygonItem_virtualbase_collidesWithItem(const VirtualQGraphicsPolygonItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPolygonItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPolygonItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsPolygonItem_virtualbase_collidesWithPath(const VirtualQGraphicsPolygonItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPolygonItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPolygonItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsPolygonItem_virtualbase_sceneEventFilter(VirtualQGraphicsPolygonItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsPolygonItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsPolygonItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsPolygonItem_virtualbase_sceneEvent(VirtualQGraphicsPolygonItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::sceneEvent(event);
-
+	return self->QGraphicsPolygonItem::sceneEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsPolygonItem_virtualbase_contextMenuEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::contextMenuEvent(event);
-
+	self->QGraphicsPolygonItem::contextMenuEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPolygonItem_virtualbase_dragEnterEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::dragEnterEvent(event);
-
+	self->QGraphicsPolygonItem::dragEnterEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPolygonItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::dragLeaveEvent(event);
-
+	self->QGraphicsPolygonItem::dragLeaveEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPolygonItem_virtualbase_dragMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::dragMoveEvent(event);
-
+	self->QGraphicsPolygonItem::dragMoveEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPolygonItem_virtualbase_dropEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::dropEvent(event);
-
+	self->QGraphicsPolygonItem::dropEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsPolygonItem_virtualbase_focusInEvent(VirtualQGraphicsPolygonItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::focusInEvent(event);
-
+	self->QGraphicsPolygonItem::focusInEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsPolygonItem_virtualbase_focusOutEvent(VirtualQGraphicsPolygonItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::focusOutEvent(event);
-
+	self->QGraphicsPolygonItem::focusOutEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPolygonItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::hoverEnterEvent(event);
-
+	self->QGraphicsPolygonItem::hoverEnterEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPolygonItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::hoverMoveEvent(event);
-
+	self->QGraphicsPolygonItem::hoverMoveEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPolygonItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::hoverLeaveEvent(event);
-
+	self->QGraphicsPolygonItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsPolygonItem_virtualbase_keyPressEvent(VirtualQGraphicsPolygonItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::keyPressEvent(event);
-
+	self->QGraphicsPolygonItem::keyPressEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsPolygonItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPolygonItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::keyReleaseEvent(event);
-
+	self->QGraphicsPolygonItem::keyReleaseEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPolygonItem_virtualbase_mousePressEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::mousePressEvent(event);
-
+	self->QGraphicsPolygonItem::mousePressEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPolygonItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::mouseMoveEvent(event);
-
+	self->QGraphicsPolygonItem::mouseMoveEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPolygonItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::mouseReleaseEvent(event);
-
+	self->QGraphicsPolygonItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPolygonItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsPolygonItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsPolygonItem_virtualbase_wheelEvent(VirtualQGraphicsPolygonItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::wheelEvent(event);
-
+	self->QGraphicsPolygonItem::wheelEvent(event);
 }
 
-void QGraphicsPolygonItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsPolygonItem_virtualbase_inputMethodEvent(VirtualQGraphicsPolygonItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::inputMethodEvent(event);
-
+	self->QGraphicsPolygonItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsPolygonItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsPolygonItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPolygonItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsPolygonItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsPolygonItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsPolygonItem_virtualbase_itemChange(VirtualQGraphicsPolygonItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsPolygonItem*)(self) )->QGraphicsPolygonItem::itemChange(static_cast<VirtualQGraphicsPolygonItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsPolygonItem::itemChange(static_cast<VirtualQGraphicsPolygonItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsPolygonItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsPolygonItem_VTable* QGraphicsPolygonItem_vtbl(const VirtualQGraphicsPolygonItem* self) { return self->vtbl; }
+void* QGraphicsPolygonItem_vdata(const VirtualQGraphicsPolygonItem* self) { return self->vdata; }
+void QGraphicsPolygonItem_setVdata(VirtualQGraphicsPolygonItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsPolygonItem_protectedbase_updateMicroFocus(VirtualQGraphicsPolygonItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsPolygonItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsPolygonItem_protectedbase_addToIndex(VirtualQGraphicsPolygonItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsPolygonItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsPolygonItem_protectedbase_removeFromIndex(VirtualQGraphicsPolygonItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPolygonItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsPolygonItem_delete(QGraphicsPolygonItem* self) {
@@ -7284,51 +6732,52 @@ void QGraphicsPolygonItem_delete(QGraphicsPolygonItem* self) {
 }
 
 class VirtualQGraphicsLineItem final : public QGraphicsLineItem {
-	struct QGraphicsLineItem_VTable* vtbl;
+	const QGraphicsLineItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsLineItem_VTable* QGraphicsLineItem_vtbl(const VirtualQGraphicsLineItem* self);
+	friend void* QGraphicsLineItem_vdata(const VirtualQGraphicsLineItem* self);
+	friend void QGraphicsLineItem_setVdata(VirtualQGraphicsLineItem* self, void* vdata);
 
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl): QGraphicsLineItem(), vtbl(vtbl) {};
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl, const QLineF& line): QGraphicsLineItem(line), vtbl(vtbl) {};
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl, qreal x1, qreal y1, qreal x2, qreal y2): QGraphicsLineItem(x1, y1, x2, y2), vtbl(vtbl) {};
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsLineItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl, const QLineF& line, QGraphicsItem* parent): QGraphicsLineItem(line, parent), vtbl(vtbl) {};
-	VirtualQGraphicsLineItem(struct QGraphicsLineItem_VTable* vtbl, qreal x1, qreal y1, qreal x2, qreal y2, QGraphicsItem* parent): QGraphicsLineItem(x1, y1, x2, y2, parent), vtbl(vtbl) {};
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata): QGraphicsLineItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata, const QLineF& line): QGraphicsLineItem(line), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata, qreal x1, qreal y1, qreal x2, qreal y2): QGraphicsLineItem(x1, y1, x2, y2), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsLineItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata, const QLineF& line, QGraphicsItem* parent): QGraphicsLineItem(line, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsLineItem(const QGraphicsLineItem_VTable* vtbl, void* vdata, qreal x1, qreal y1, qreal x2, qreal y2, QGraphicsItem* parent): QGraphicsLineItem(x1, y1, x2, y2, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsLineItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsLineItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsLineItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsLineItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsLineItem_virtualbase_boundingRect(const VirtualQGraphicsLineItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsLineItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsLineItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsLineItem_virtualbase_shape(const VirtualQGraphicsLineItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsLineItem::contains(point);
@@ -7338,14 +6787,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsLineItem_virtualbase_contains(const VirtualQGraphicsLineItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsLineItem::paint(painter, option, widget);
@@ -7356,13 +6804,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsLineItem_virtualbase_paint(VirtualQGraphicsLineItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsLineItem::isObscuredBy(item);
@@ -7370,44 +6817,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsLineItem_virtualbase_isObscuredBy(const VirtualQGraphicsLineItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsLineItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsLineItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsLineItem_virtualbase_opaqueArea(const VirtualQGraphicsLineItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsLineItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsLineItem_virtualbase_type(const void* self);
+	friend int QGraphicsLineItem_virtualbase_type(const VirtualQGraphicsLineItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsLineItem::supportsExtension(extension);
@@ -7416,14 +6860,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsLineItem_virtualbase_supportsExtension(const VirtualQGraphicsLineItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsLineItem::setExtension(extension, variant);
@@ -7436,13 +6879,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsLineItem_virtualbase_setExtension(VirtualQGraphicsLineItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsLineItem::extension(variant);
@@ -7452,16 +6894,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsLineItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsLineItem_virtualbase_extension(const VirtualQGraphicsLineItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsLineItem::advance(phase);
@@ -7470,13 +6911,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsLineItem_virtualbase_advance(VirtualQGraphicsLineItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsLineItem::collidesWithItem(other, mode);
@@ -7486,14 +6926,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsLineItem_virtualbase_collidesWithItem(const VirtualQGraphicsLineItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsLineItem::collidesWithPath(path, mode);
@@ -7505,14 +6944,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsLineItem_virtualbase_collidesWithPath(const VirtualQGraphicsLineItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsLineItem::sceneEventFilter(watched, event);
@@ -7521,14 +6959,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsLineItem_virtualbase_sceneEventFilter(VirtualQGraphicsLineItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsLineItem::sceneEvent(event);
@@ -7536,14 +6973,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsLineItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsLineItem_virtualbase_sceneEvent(VirtualQGraphicsLineItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsLineItem::contextMenuEvent(event);
@@ -7552,13 +6988,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsLineItem_virtualbase_contextMenuEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsLineItem::dragEnterEvent(event);
@@ -7567,13 +7002,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsLineItem_virtualbase_dragEnterEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsLineItem::dragLeaveEvent(event);
@@ -7582,13 +7016,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsLineItem_virtualbase_dragLeaveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsLineItem::dragMoveEvent(event);
@@ -7597,13 +7030,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsLineItem_virtualbase_dragMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsLineItem::dropEvent(event);
@@ -7612,13 +7044,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsLineItem_virtualbase_dropEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsLineItem::focusInEvent(event);
@@ -7627,13 +7058,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsLineItem_virtualbase_focusInEvent(VirtualQGraphicsLineItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsLineItem::focusOutEvent(event);
@@ -7642,13 +7072,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsLineItem_virtualbase_focusOutEvent(VirtualQGraphicsLineItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsLineItem::hoverEnterEvent(event);
@@ -7657,13 +7086,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsLineItem_virtualbase_hoverEnterEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsLineItem::hoverMoveEvent(event);
@@ -7672,13 +7100,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsLineItem_virtualbase_hoverMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsLineItem::hoverLeaveEvent(event);
@@ -7687,13 +7114,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsLineItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsLineItem::keyPressEvent(event);
@@ -7702,13 +7128,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsLineItem_virtualbase_keyPressEvent(VirtualQGraphicsLineItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsLineItem::keyReleaseEvent(event);
@@ -7717,13 +7142,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsLineItem_virtualbase_keyReleaseEvent(VirtualQGraphicsLineItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsLineItem::mousePressEvent(event);
@@ -7732,13 +7156,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsLineItem_virtualbase_mousePressEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsLineItem::mouseMoveEvent(event);
@@ -7747,13 +7170,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsLineItem_virtualbase_mouseMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsLineItem::mouseReleaseEvent(event);
@@ -7762,13 +7184,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsLineItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsLineItem::mouseDoubleClickEvent(event);
@@ -7777,13 +7198,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsLineItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsLineItem::wheelEvent(event);
@@ -7792,13 +7212,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsLineItem_virtualbase_wheelEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsLineItem::inputMethodEvent(event);
@@ -7807,13 +7226,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsLineItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsLineItem_virtualbase_inputMethodEvent(VirtualQGraphicsLineItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsLineItem::inputMethodQuery(query);
@@ -7822,16 +7240,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsLineItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsLineItem_virtualbase_inputMethodQuery(const VirtualQGraphicsLineItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsLineItem::itemChange(change, value);
@@ -7843,44 +7260,44 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsLineItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsLineItem_virtualbase_itemChange(VirtualQGraphicsLineItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsLineItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsLineItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsLineItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsLineItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsLineItem_protectedbase_updateMicroFocus(VirtualQGraphicsLineItem* self);
+	friend void QGraphicsLineItem_protectedbase_addToIndex(VirtualQGraphicsLineItem* self);
+	friend void QGraphicsLineItem_protectedbase_removeFromIndex(VirtualQGraphicsLineItem* self);
+	friend void QGraphicsLineItem_protectedbase_prepareGeometryChange(VirtualQGraphicsLineItem* self);
 };
 
-QGraphicsLineItem* QGraphicsLineItem_new(struct QGraphicsLineItem_VTable* vtbl) {
-	return new VirtualQGraphicsLineItem(vtbl);
+VirtualQGraphicsLineItem* QGraphicsLineItem_new(const QGraphicsLineItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata);
 }
 
-QGraphicsLineItem* QGraphicsLineItem_new2(struct QGraphicsLineItem_VTable* vtbl, QLineF* line) {
-	return new VirtualQGraphicsLineItem(vtbl, *line);
+VirtualQGraphicsLineItem* QGraphicsLineItem_new2(const QGraphicsLineItem_VTable* vtbl, void* vdata, QLineF* line) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata, *line);
 }
 
-QGraphicsLineItem* QGraphicsLineItem_new3(struct QGraphicsLineItem_VTable* vtbl, double x1, double y1, double x2, double y2) {
-	return new VirtualQGraphicsLineItem(vtbl, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2));
+VirtualQGraphicsLineItem* QGraphicsLineItem_new3(const QGraphicsLineItem_VTable* vtbl, void* vdata, double x1, double y1, double x2, double y2) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2));
 }
 
-QGraphicsLineItem* QGraphicsLineItem_new4(struct QGraphicsLineItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsLineItem(vtbl, parent);
+VirtualQGraphicsLineItem* QGraphicsLineItem_new4(const QGraphicsLineItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata, parent);
 }
 
-QGraphicsLineItem* QGraphicsLineItem_new5(struct QGraphicsLineItem_VTable* vtbl, QLineF* line, QGraphicsItem* parent) {
-	return new VirtualQGraphicsLineItem(vtbl, *line, parent);
+VirtualQGraphicsLineItem* QGraphicsLineItem_new5(const QGraphicsLineItem_VTable* vtbl, void* vdata, QLineF* line, QGraphicsItem* parent) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata, *line, parent);
 }
 
-QGraphicsLineItem* QGraphicsLineItem_new6(struct QGraphicsLineItem_VTable* vtbl, double x1, double y1, double x2, double y2, QGraphicsItem* parent) {
-	return new VirtualQGraphicsLineItem(vtbl, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2), parent);
+VirtualQGraphicsLineItem* QGraphicsLineItem_new6(const QGraphicsLineItem_VTable* vtbl, void* vdata, double x1, double y1, double x2, double y2, QGraphicsItem* parent) {
+	return new VirtualQGraphicsLineItem(vtbl, vdata, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2), parent);
 }
 
 void QGraphicsLineItem_virtbase(QGraphicsLineItem* src, QGraphicsItem** outptr_QGraphicsItem) {
@@ -7935,242 +7352,199 @@ int QGraphicsLineItem_type(const QGraphicsLineItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsLineItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsLineItem_virtualbase_boundingRect(const VirtualQGraphicsLineItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::boundingRect());
-
+	return new QRectF(self->QGraphicsLineItem::boundingRect());
 }
 
-QPainterPath* QGraphicsLineItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsLineItem_virtualbase_shape(const VirtualQGraphicsLineItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::shape());
-
+	return new QPainterPath(self->QGraphicsLineItem::shape());
 }
 
-bool QGraphicsLineItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsLineItem_virtualbase_contains(const VirtualQGraphicsLineItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::contains(*point);
-
+	return self->QGraphicsLineItem::contains(*point);
 }
 
-void QGraphicsLineItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsLineItem_virtualbase_paint(VirtualQGraphicsLineItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::paint(painter, option, widget);
-
+	self->QGraphicsLineItem::paint(painter, option, widget);
 }
 
-bool QGraphicsLineItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsLineItem_virtualbase_isObscuredBy(const VirtualQGraphicsLineItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::isObscuredBy(item);
-
+	return self->QGraphicsLineItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsLineItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsLineItem_virtualbase_opaqueArea(const VirtualQGraphicsLineItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsLineItem::opaqueArea());
 }
 
-int QGraphicsLineItem_virtualbase_type(const void* self) {
+int QGraphicsLineItem_virtualbase_type(const VirtualQGraphicsLineItem* self) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::type();
-
+	return self->QGraphicsLineItem::type();
 }
 
-bool QGraphicsLineItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsLineItem_virtualbase_supportsExtension(const VirtualQGraphicsLineItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::supportsExtension(static_cast<VirtualQGraphicsLineItem::Extension>(extension));
-
+	return self->QGraphicsLineItem::supportsExtension(static_cast<VirtualQGraphicsLineItem::Extension>(extension));
 }
 
-void QGraphicsLineItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsLineItem_virtualbase_setExtension(VirtualQGraphicsLineItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::setExtension(static_cast<VirtualQGraphicsLineItem::Extension>(extension), *variant);
-
+	self->QGraphicsLineItem::setExtension(static_cast<VirtualQGraphicsLineItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsLineItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsLineItem_virtualbase_extension(const VirtualQGraphicsLineItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsLineItem::extension(*variant));
 }
 
-void QGraphicsLineItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsLineItem_virtualbase_advance(VirtualQGraphicsLineItem* self, int phase) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsLineItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsLineItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsLineItem_virtualbase_collidesWithItem(const VirtualQGraphicsLineItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsLineItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsLineItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsLineItem_virtualbase_collidesWithPath(const VirtualQGraphicsLineItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsLineItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsLineItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsLineItem_virtualbase_sceneEventFilter(VirtualQGraphicsLineItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsLineItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsLineItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsLineItem_virtualbase_sceneEvent(VirtualQGraphicsLineItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::sceneEvent(event);
-
+	return self->QGraphicsLineItem::sceneEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsLineItem_virtualbase_contextMenuEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::contextMenuEvent(event);
-
+	self->QGraphicsLineItem::contextMenuEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsLineItem_virtualbase_dragEnterEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::dragEnterEvent(event);
-
+	self->QGraphicsLineItem::dragEnterEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsLineItem_virtualbase_dragLeaveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::dragLeaveEvent(event);
-
+	self->QGraphicsLineItem::dragLeaveEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsLineItem_virtualbase_dragMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::dragMoveEvent(event);
-
+	self->QGraphicsLineItem::dragMoveEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsLineItem_virtualbase_dropEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::dropEvent(event);
-
+	self->QGraphicsLineItem::dropEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsLineItem_virtualbase_focusInEvent(VirtualQGraphicsLineItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::focusInEvent(event);
-
+	self->QGraphicsLineItem::focusInEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsLineItem_virtualbase_focusOutEvent(VirtualQGraphicsLineItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::focusOutEvent(event);
-
+	self->QGraphicsLineItem::focusOutEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsLineItem_virtualbase_hoverEnterEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::hoverEnterEvent(event);
-
+	self->QGraphicsLineItem::hoverEnterEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsLineItem_virtualbase_hoverMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::hoverMoveEvent(event);
-
+	self->QGraphicsLineItem::hoverMoveEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsLineItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::hoverLeaveEvent(event);
-
+	self->QGraphicsLineItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsLineItem_virtualbase_keyPressEvent(VirtualQGraphicsLineItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::keyPressEvent(event);
-
+	self->QGraphicsLineItem::keyPressEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsLineItem_virtualbase_keyReleaseEvent(VirtualQGraphicsLineItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::keyReleaseEvent(event);
-
+	self->QGraphicsLineItem::keyReleaseEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsLineItem_virtualbase_mousePressEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::mousePressEvent(event);
-
+	self->QGraphicsLineItem::mousePressEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsLineItem_virtualbase_mouseMoveEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::mouseMoveEvent(event);
-
+	self->QGraphicsLineItem::mouseMoveEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsLineItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::mouseReleaseEvent(event);
-
+	self->QGraphicsLineItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsLineItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsLineItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsLineItem_virtualbase_wheelEvent(VirtualQGraphicsLineItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::wheelEvent(event);
-
+	self->QGraphicsLineItem::wheelEvent(event);
 }
 
-void QGraphicsLineItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsLineItem_virtualbase_inputMethodEvent(VirtualQGraphicsLineItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::inputMethodEvent(event);
-
+	self->QGraphicsLineItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsLineItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsLineItem_virtualbase_inputMethodQuery(const VirtualQGraphicsLineItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsLineItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsLineItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsLineItem_virtualbase_itemChange(VirtualQGraphicsLineItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsLineItem*)(self) )->QGraphicsLineItem::itemChange(static_cast<VirtualQGraphicsLineItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsLineItem::itemChange(static_cast<VirtualQGraphicsLineItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsLineItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsLineItem_VTable* QGraphicsLineItem_vtbl(const VirtualQGraphicsLineItem* self) { return self->vtbl; }
+void* QGraphicsLineItem_vdata(const VirtualQGraphicsLineItem* self) { return self->vdata; }
+void QGraphicsLineItem_setVdata(VirtualQGraphicsLineItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsLineItem_protectedbase_updateMicroFocus(VirtualQGraphicsLineItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsLineItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsLineItem_protectedbase_addToIndex(VirtualQGraphicsLineItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsLineItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsLineItem_protectedbase_removeFromIndex(VirtualQGraphicsLineItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsLineItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsLineItem_protectedbase_prepareGeometryChange(VirtualQGraphicsLineItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsLineItem_delete(QGraphicsLineItem* self) {
@@ -8178,49 +7552,50 @@ void QGraphicsLineItem_delete(QGraphicsLineItem* self) {
 }
 
 class VirtualQGraphicsPixmapItem final : public QGraphicsPixmapItem {
-	struct QGraphicsPixmapItem_VTable* vtbl;
+	const QGraphicsPixmapItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsPixmapItem_VTable* QGraphicsPixmapItem_vtbl(const VirtualQGraphicsPixmapItem* self);
+	friend void* QGraphicsPixmapItem_vdata(const VirtualQGraphicsPixmapItem* self);
+	friend void QGraphicsPixmapItem_setVdata(VirtualQGraphicsPixmapItem* self, void* vdata);
 
-	VirtualQGraphicsPixmapItem(struct QGraphicsPixmapItem_VTable* vtbl): QGraphicsPixmapItem(), vtbl(vtbl) {};
-	VirtualQGraphicsPixmapItem(struct QGraphicsPixmapItem_VTable* vtbl, const QPixmap& pixmap): QGraphicsPixmapItem(pixmap), vtbl(vtbl) {};
-	VirtualQGraphicsPixmapItem(struct QGraphicsPixmapItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsPixmapItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsPixmapItem(struct QGraphicsPixmapItem_VTable* vtbl, const QPixmap& pixmap, QGraphicsItem* parent): QGraphicsPixmapItem(pixmap, parent), vtbl(vtbl) {};
+	VirtualQGraphicsPixmapItem(const QGraphicsPixmapItem_VTable* vtbl, void* vdata): QGraphicsPixmapItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPixmapItem(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, const QPixmap& pixmap): QGraphicsPixmapItem(pixmap), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPixmapItem(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsPixmapItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsPixmapItem(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, const QPixmap& pixmap, QGraphicsItem* parent): QGraphicsPixmapItem(pixmap, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsPixmapItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsPixmapItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsPixmapItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsPixmapItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsPixmapItem_virtualbase_boundingRect(const VirtualQGraphicsPixmapItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsPixmapItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPixmapItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsPixmapItem_virtualbase_shape(const VirtualQGraphicsPixmapItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsPixmapItem::contains(point);
@@ -8230,14 +7605,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsPixmapItem_virtualbase_contains(const VirtualQGraphicsPixmapItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsPixmapItem::paint(painter, option, widget);
@@ -8248,13 +7622,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsPixmapItem_virtualbase_paint(VirtualQGraphicsPixmapItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsPixmapItem::isObscuredBy(item);
@@ -8262,44 +7635,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsPixmapItem_virtualbase_isObscuredBy(const VirtualQGraphicsPixmapItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsPixmapItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsPixmapItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsPixmapItem_virtualbase_opaqueArea(const VirtualQGraphicsPixmapItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsPixmapItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsPixmapItem_virtualbase_type(const void* self);
+	friend int QGraphicsPixmapItem_virtualbase_type(const VirtualQGraphicsPixmapItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsPixmapItem::supportsExtension(extension);
@@ -8308,14 +7678,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsPixmapItem_virtualbase_supportsExtension(const VirtualQGraphicsPixmapItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsPixmapItem::setExtension(extension, variant);
@@ -8328,13 +7697,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsPixmapItem_virtualbase_setExtension(VirtualQGraphicsPixmapItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsPixmapItem::extension(variant);
@@ -8344,16 +7712,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPixmapItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsPixmapItem_virtualbase_extension(const VirtualQGraphicsPixmapItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsPixmapItem::advance(phase);
@@ -8362,13 +7729,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsPixmapItem_virtualbase_advance(VirtualQGraphicsPixmapItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsPixmapItem::collidesWithItem(other, mode);
@@ -8378,14 +7744,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsPixmapItem_virtualbase_collidesWithItem(const VirtualQGraphicsPixmapItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsPixmapItem::collidesWithPath(path, mode);
@@ -8397,14 +7762,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsPixmapItem_virtualbase_collidesWithPath(const VirtualQGraphicsPixmapItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsPixmapItem::sceneEventFilter(watched, event);
@@ -8413,14 +7777,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsPixmapItem_virtualbase_sceneEventFilter(VirtualQGraphicsPixmapItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsPixmapItem::sceneEvent(event);
@@ -8428,14 +7791,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsPixmapItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsPixmapItem_virtualbase_sceneEvent(VirtualQGraphicsPixmapItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsPixmapItem::contextMenuEvent(event);
@@ -8444,13 +7806,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_contextMenuEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsPixmapItem::dragEnterEvent(event);
@@ -8459,13 +7820,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_dragEnterEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsPixmapItem::dragLeaveEvent(event);
@@ -8474,13 +7834,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsPixmapItem::dragMoveEvent(event);
@@ -8489,13 +7848,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_dragMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsPixmapItem::dropEvent(event);
@@ -8504,13 +7862,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_dropEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsPixmapItem::focusInEvent(event);
@@ -8519,13 +7876,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_focusInEvent(VirtualQGraphicsPixmapItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsPixmapItem::focusOutEvent(event);
@@ -8534,13 +7890,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_focusOutEvent(VirtualQGraphicsPixmapItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsPixmapItem::hoverEnterEvent(event);
@@ -8549,13 +7904,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsPixmapItem::hoverMoveEvent(event);
@@ -8564,13 +7918,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsPixmapItem::hoverLeaveEvent(event);
@@ -8579,13 +7932,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsPixmapItem::keyPressEvent(event);
@@ -8594,13 +7946,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_keyPressEvent(VirtualQGraphicsPixmapItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsPixmapItem::keyReleaseEvent(event);
@@ -8609,13 +7960,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPixmapItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsPixmapItem::mousePressEvent(event);
@@ -8624,13 +7974,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_mousePressEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsPixmapItem::mouseMoveEvent(event);
@@ -8639,13 +7988,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsPixmapItem::mouseReleaseEvent(event);
@@ -8654,13 +8002,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsPixmapItem::mouseDoubleClickEvent(event);
@@ -8669,13 +8016,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsPixmapItem::wheelEvent(event);
@@ -8684,13 +8030,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_wheelEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsPixmapItem::inputMethodEvent(event);
@@ -8699,13 +8044,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsPixmapItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsPixmapItem_virtualbase_inputMethodEvent(VirtualQGraphicsPixmapItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsPixmapItem::inputMethodQuery(query);
@@ -8714,16 +8058,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPixmapItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsPixmapItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPixmapItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsPixmapItem::itemChange(change, value);
@@ -8735,36 +8078,36 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsPixmapItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsPixmapItem_virtualbase_itemChange(VirtualQGraphicsPixmapItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPixmapItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsPixmapItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsPixmapItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsPixmapItem_protectedbase_updateMicroFocus(VirtualQGraphicsPixmapItem* self);
+	friend void QGraphicsPixmapItem_protectedbase_addToIndex(VirtualQGraphicsPixmapItem* self);
+	friend void QGraphicsPixmapItem_protectedbase_removeFromIndex(VirtualQGraphicsPixmapItem* self);
+	friend void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPixmapItem* self);
 };
 
-QGraphicsPixmapItem* QGraphicsPixmapItem_new(struct QGraphicsPixmapItem_VTable* vtbl) {
-	return new VirtualQGraphicsPixmapItem(vtbl);
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new(const QGraphicsPixmapItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsPixmapItem(vtbl, vdata);
 }
 
-QGraphicsPixmapItem* QGraphicsPixmapItem_new2(struct QGraphicsPixmapItem_VTable* vtbl, QPixmap* pixmap) {
-	return new VirtualQGraphicsPixmapItem(vtbl, *pixmap);
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new2(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, QPixmap* pixmap) {
+	return new VirtualQGraphicsPixmapItem(vtbl, vdata, *pixmap);
 }
 
-QGraphicsPixmapItem* QGraphicsPixmapItem_new3(struct QGraphicsPixmapItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsPixmapItem(vtbl, parent);
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new3(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsPixmapItem(vtbl, vdata, parent);
 }
 
-QGraphicsPixmapItem* QGraphicsPixmapItem_new4(struct QGraphicsPixmapItem_VTable* vtbl, QPixmap* pixmap, QGraphicsItem* parent) {
-	return new VirtualQGraphicsPixmapItem(vtbl, *pixmap, parent);
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new4(const QGraphicsPixmapItem_VTable* vtbl, void* vdata, QPixmap* pixmap, QGraphicsItem* parent) {
+	return new VirtualQGraphicsPixmapItem(vtbl, vdata, *pixmap, parent);
 }
 
 void QGraphicsPixmapItem_virtbase(QGraphicsPixmapItem* src, QGraphicsItem** outptr_QGraphicsItem) {
@@ -8837,242 +8180,199 @@ void QGraphicsPixmapItem_setShapeMode(QGraphicsPixmapItem* self, int mode) {
 	self->setShapeMode(static_cast<QGraphicsPixmapItem::ShapeMode>(mode));
 }
 
-QRectF* QGraphicsPixmapItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsPixmapItem_virtualbase_boundingRect(const VirtualQGraphicsPixmapItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::boundingRect());
-
+	return new QRectF(self->QGraphicsPixmapItem::boundingRect());
 }
 
-QPainterPath* QGraphicsPixmapItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsPixmapItem_virtualbase_shape(const VirtualQGraphicsPixmapItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::shape());
-
+	return new QPainterPath(self->QGraphicsPixmapItem::shape());
 }
 
-bool QGraphicsPixmapItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsPixmapItem_virtualbase_contains(const VirtualQGraphicsPixmapItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::contains(*point);
-
+	return self->QGraphicsPixmapItem::contains(*point);
 }
 
-void QGraphicsPixmapItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsPixmapItem_virtualbase_paint(VirtualQGraphicsPixmapItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::paint(painter, option, widget);
-
+	self->QGraphicsPixmapItem::paint(painter, option, widget);
 }
 
-bool QGraphicsPixmapItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsPixmapItem_virtualbase_isObscuredBy(const VirtualQGraphicsPixmapItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::isObscuredBy(item);
-
+	return self->QGraphicsPixmapItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsPixmapItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsPixmapItem_virtualbase_opaqueArea(const VirtualQGraphicsPixmapItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsPixmapItem::opaqueArea());
 }
 
-int QGraphicsPixmapItem_virtualbase_type(const void* self) {
+int QGraphicsPixmapItem_virtualbase_type(const VirtualQGraphicsPixmapItem* self) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::type();
-
+	return self->QGraphicsPixmapItem::type();
 }
 
-bool QGraphicsPixmapItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsPixmapItem_virtualbase_supportsExtension(const VirtualQGraphicsPixmapItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::supportsExtension(static_cast<VirtualQGraphicsPixmapItem::Extension>(extension));
-
+	return self->QGraphicsPixmapItem::supportsExtension(static_cast<VirtualQGraphicsPixmapItem::Extension>(extension));
 }
 
-void QGraphicsPixmapItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsPixmapItem_virtualbase_setExtension(VirtualQGraphicsPixmapItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::setExtension(static_cast<VirtualQGraphicsPixmapItem::Extension>(extension), *variant);
-
+	self->QGraphicsPixmapItem::setExtension(static_cast<VirtualQGraphicsPixmapItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsPixmapItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsPixmapItem_virtualbase_extension(const VirtualQGraphicsPixmapItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsPixmapItem::extension(*variant));
 }
 
-void QGraphicsPixmapItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsPixmapItem_virtualbase_advance(VirtualQGraphicsPixmapItem* self, int phase) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsPixmapItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsPixmapItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsPixmapItem_virtualbase_collidesWithItem(const VirtualQGraphicsPixmapItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPixmapItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPixmapItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsPixmapItem_virtualbase_collidesWithPath(const VirtualQGraphicsPixmapItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsPixmapItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsPixmapItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsPixmapItem_virtualbase_sceneEventFilter(VirtualQGraphicsPixmapItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsPixmapItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsPixmapItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsPixmapItem_virtualbase_sceneEvent(VirtualQGraphicsPixmapItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::sceneEvent(event);
-
+	return self->QGraphicsPixmapItem::sceneEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsPixmapItem_virtualbase_contextMenuEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::contextMenuEvent(event);
-
+	self->QGraphicsPixmapItem::contextMenuEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPixmapItem_virtualbase_dragEnterEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::dragEnterEvent(event);
-
+	self->QGraphicsPixmapItem::dragEnterEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPixmapItem_virtualbase_dragLeaveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::dragLeaveEvent(event);
-
+	self->QGraphicsPixmapItem::dragLeaveEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPixmapItem_virtualbase_dragMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::dragMoveEvent(event);
-
+	self->QGraphicsPixmapItem::dragMoveEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsPixmapItem_virtualbase_dropEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::dropEvent(event);
-
+	self->QGraphicsPixmapItem::dropEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsPixmapItem_virtualbase_focusInEvent(VirtualQGraphicsPixmapItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::focusInEvent(event);
-
+	self->QGraphicsPixmapItem::focusInEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsPixmapItem_virtualbase_focusOutEvent(VirtualQGraphicsPixmapItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::focusOutEvent(event);
-
+	self->QGraphicsPixmapItem::focusOutEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPixmapItem_virtualbase_hoverEnterEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::hoverEnterEvent(event);
-
+	self->QGraphicsPixmapItem::hoverEnterEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPixmapItem_virtualbase_hoverMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::hoverMoveEvent(event);
-
+	self->QGraphicsPixmapItem::hoverMoveEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsPixmapItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::hoverLeaveEvent(event);
-
+	self->QGraphicsPixmapItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsPixmapItem_virtualbase_keyPressEvent(VirtualQGraphicsPixmapItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::keyPressEvent(event);
-
+	self->QGraphicsPixmapItem::keyPressEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsPixmapItem_virtualbase_keyReleaseEvent(VirtualQGraphicsPixmapItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::keyReleaseEvent(event);
-
+	self->QGraphicsPixmapItem::keyReleaseEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPixmapItem_virtualbase_mousePressEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::mousePressEvent(event);
-
+	self->QGraphicsPixmapItem::mousePressEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPixmapItem_virtualbase_mouseMoveEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::mouseMoveEvent(event);
-
+	self->QGraphicsPixmapItem::mouseMoveEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPixmapItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::mouseReleaseEvent(event);
-
+	self->QGraphicsPixmapItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsPixmapItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsPixmapItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsPixmapItem_virtualbase_wheelEvent(VirtualQGraphicsPixmapItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::wheelEvent(event);
-
+	self->QGraphicsPixmapItem::wheelEvent(event);
 }
 
-void QGraphicsPixmapItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsPixmapItem_virtualbase_inputMethodEvent(VirtualQGraphicsPixmapItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::inputMethodEvent(event);
-
+	self->QGraphicsPixmapItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsPixmapItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsPixmapItem_virtualbase_inputMethodQuery(const VirtualQGraphicsPixmapItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsPixmapItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsPixmapItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsPixmapItem_virtualbase_itemChange(VirtualQGraphicsPixmapItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsPixmapItem*)(self) )->QGraphicsPixmapItem::itemChange(static_cast<VirtualQGraphicsPixmapItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsPixmapItem::itemChange(static_cast<VirtualQGraphicsPixmapItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsPixmapItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsPixmapItem_VTable* QGraphicsPixmapItem_vtbl(const VirtualQGraphicsPixmapItem* self) { return self->vtbl; }
+void* QGraphicsPixmapItem_vdata(const VirtualQGraphicsPixmapItem* self) { return self->vdata; }
+void QGraphicsPixmapItem_setVdata(VirtualQGraphicsPixmapItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsPixmapItem_protectedbase_updateMicroFocus(VirtualQGraphicsPixmapItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsPixmapItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsPixmapItem_protectedbase_addToIndex(VirtualQGraphicsPixmapItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsPixmapItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsPixmapItem_protectedbase_removeFromIndex(VirtualQGraphicsPixmapItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPixmapItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsPixmapItem_delete(QGraphicsPixmapItem* self) {
@@ -9080,31 +8380,33 @@ void QGraphicsPixmapItem_delete(QGraphicsPixmapItem* self) {
 }
 
 class VirtualQGraphicsTextItem final : public QGraphicsTextItem {
-	struct QGraphicsTextItem_VTable* vtbl;
+	const QGraphicsTextItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsTextItem_VTable* QGraphicsTextItem_vtbl(const VirtualQGraphicsTextItem* self);
+	friend void* QGraphicsTextItem_vdata(const VirtualQGraphicsTextItem* self);
+	friend void QGraphicsTextItem_setVdata(VirtualQGraphicsTextItem* self, void* vdata);
 
-	VirtualQGraphicsTextItem(struct QGraphicsTextItem_VTable* vtbl): QGraphicsTextItem(), vtbl(vtbl) {};
-	VirtualQGraphicsTextItem(struct QGraphicsTextItem_VTable* vtbl, const QString& text): QGraphicsTextItem(text), vtbl(vtbl) {};
-	VirtualQGraphicsTextItem(struct QGraphicsTextItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsTextItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsTextItem(struct QGraphicsTextItem_VTable* vtbl, const QString& text, QGraphicsItem* parent): QGraphicsTextItem(text, parent), vtbl(vtbl) {};
+	VirtualQGraphicsTextItem(const QGraphicsTextItem_VTable* vtbl, void* vdata): QGraphicsTextItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsTextItem(const QGraphicsTextItem_VTable* vtbl, void* vdata, const QString& text): QGraphicsTextItem(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsTextItem(const QGraphicsTextItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsTextItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsTextItem(const QGraphicsTextItem_VTable* vtbl, void* vdata, const QString& text, QGraphicsItem* parent): QGraphicsTextItem(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsTextItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsTextItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsTextItem::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsTextItem_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsTextItem_virtualbase_metaObject(const VirtualQGraphicsTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsTextItem::qt_metacast(param1);
@@ -9112,14 +8414,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsTextItem_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsTextItem_virtualbase_metacast(VirtualQGraphicsTextItem* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsTextItem::qt_metacall(param1, param2, param3);
@@ -9130,46 +8431,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsTextItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsTextItem_virtualbase_metacall(VirtualQGraphicsTextItem* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsTextItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsTextItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsTextItem_virtualbase_boundingRect(const VirtualQGraphicsTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsTextItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsTextItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsTextItem_virtualbase_shape(const VirtualQGraphicsTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsTextItem::contains(point);
@@ -9179,14 +8477,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsTextItem_virtualbase_contains(const VirtualQGraphicsTextItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsTextItem::paint(painter, option, widget);
@@ -9197,13 +8494,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsTextItem_virtualbase_paint(VirtualQGraphicsTextItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsTextItem::isObscuredBy(item);
@@ -9211,44 +8507,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsTextItem_virtualbase_isObscuredBy(const VirtualQGraphicsTextItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsTextItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsTextItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsTextItem_virtualbase_opaqueArea(const VirtualQGraphicsTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsTextItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsTextItem_virtualbase_type(const void* self);
+	friend int QGraphicsTextItem_virtualbase_type(const VirtualQGraphicsTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsTextItem::sceneEvent(event);
@@ -9256,14 +8549,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsTextItem_virtualbase_sceneEvent(VirtualQGraphicsTextItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsTextItem::mousePressEvent(event);
@@ -9272,13 +8564,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsTextItem_virtualbase_mousePressEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsTextItem::mouseMoveEvent(event);
@@ -9287,13 +8578,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsTextItem_virtualbase_mouseMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsTextItem::mouseReleaseEvent(event);
@@ -9302,13 +8592,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsTextItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsTextItem::mouseDoubleClickEvent(event);
@@ -9317,13 +8606,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsTextItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsTextItem::contextMenuEvent(event);
@@ -9332,13 +8620,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsTextItem_virtualbase_contextMenuEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsTextItem::keyPressEvent(event);
@@ -9347,13 +8634,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsTextItem_virtualbase_keyPressEvent(VirtualQGraphicsTextItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsTextItem::keyReleaseEvent(event);
@@ -9362,13 +8648,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsTextItem_virtualbase_keyReleaseEvent(VirtualQGraphicsTextItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsTextItem::focusInEvent(event);
@@ -9377,13 +8662,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsTextItem_virtualbase_focusInEvent(VirtualQGraphicsTextItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsTextItem::focusOutEvent(event);
@@ -9392,13 +8676,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsTextItem_virtualbase_focusOutEvent(VirtualQGraphicsTextItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsTextItem::dragEnterEvent(event);
@@ -9407,13 +8690,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsTextItem_virtualbase_dragEnterEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsTextItem::dragLeaveEvent(event);
@@ -9422,13 +8704,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsTextItem_virtualbase_dragLeaveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsTextItem::dragMoveEvent(event);
@@ -9437,13 +8718,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsTextItem_virtualbase_dragMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsTextItem::dropEvent(event);
@@ -9452,13 +8732,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsTextItem_virtualbase_dropEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsTextItem::inputMethodEvent(event);
@@ -9467,13 +8746,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsTextItem_virtualbase_inputMethodEvent(VirtualQGraphicsTextItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsTextItem::hoverEnterEvent(event);
@@ -9482,13 +8760,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsTextItem_virtualbase_hoverEnterEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsTextItem::hoverMoveEvent(event);
@@ -9497,13 +8774,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsTextItem_virtualbase_hoverMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsTextItem::hoverLeaveEvent(event);
@@ -9512,13 +8788,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsTextItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsTextItem::inputMethodQuery(query);
@@ -9527,16 +8802,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsTextItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsTextItem_virtualbase_inputMethodQuery(const VirtualQGraphicsTextItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsTextItem::supportsExtension(extension);
@@ -9545,14 +8819,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsTextItem_virtualbase_supportsExtension(const VirtualQGraphicsTextItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsTextItem::setExtension(extension, variant);
@@ -9565,13 +8838,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsTextItem_virtualbase_setExtension(VirtualQGraphicsTextItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsTextItem::extension(variant);
@@ -9581,16 +8853,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsTextItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsTextItem_virtualbase_extension(const VirtualQGraphicsTextItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* ev) override {
 		if (vtbl->event == 0) {
 			return QGraphicsTextItem::event(ev);
@@ -9598,14 +8869,13 @@ public:
 
 		QEvent* sigval1 = ev;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_event(void* self, QEvent* ev);
+	friend bool QGraphicsTextItem_virtualbase_event(VirtualQGraphicsTextItem* self, QEvent* ev);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsTextItem::eventFilter(watched, event);
@@ -9614,14 +8884,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsTextItem_virtualbase_eventFilter(VirtualQGraphicsTextItem* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsTextItem::timerEvent(event);
@@ -9630,13 +8899,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsTextItem_virtualbase_timerEvent(VirtualQGraphicsTextItem* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsTextItem::childEvent(event);
@@ -9645,13 +8913,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsTextItem_virtualbase_childEvent(VirtualQGraphicsTextItem* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsTextItem::customEvent(event);
@@ -9660,13 +8927,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsTextItem_virtualbase_customEvent(VirtualQGraphicsTextItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsTextItem::connectNotify(signal);
@@ -9677,13 +8943,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsTextItem_virtualbase_connectNotify(VirtualQGraphicsTextItem* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsTextItem::disconnectNotify(signal);
@@ -9694,13 +8959,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsTextItem_virtualbase_disconnectNotify(VirtualQGraphicsTextItem* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsTextItem::advance(phase);
@@ -9709,13 +8973,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsTextItem_virtualbase_advance(VirtualQGraphicsTextItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsTextItem::collidesWithItem(other, mode);
@@ -9725,14 +8988,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsTextItem_virtualbase_collidesWithItem(const VirtualQGraphicsTextItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsTextItem::collidesWithPath(path, mode);
@@ -9744,14 +9006,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsTextItem_virtualbase_collidesWithPath(const VirtualQGraphicsTextItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsTextItem::sceneEventFilter(watched, event);
@@ -9760,14 +9021,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsTextItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsTextItem_virtualbase_sceneEventFilter(VirtualQGraphicsTextItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsTextItem::wheelEvent(event);
@@ -9776,13 +9036,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsTextItem_virtualbase_wheelEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsTextItem::itemChange(change, value);
@@ -9794,42 +9053,42 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsTextItem_virtualbase_itemChange(VirtualQGraphicsTextItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsTextItem_protectedbase_updateMicroFocus(void* self);
-	friend QObject* QGraphicsTextItem_protectedbase_sender(const void* self);
-	friend int QGraphicsTextItem_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsTextItem_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsTextItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
-	friend void QGraphicsTextItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsTextItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsTextItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsTextItem* self);
+	friend QObject* QGraphicsTextItem_protectedbase_sender(const VirtualQGraphicsTextItem* self);
+	friend int QGraphicsTextItem_protectedbase_senderSignalIndex(const VirtualQGraphicsTextItem* self);
+	friend int QGraphicsTextItem_protectedbase_receivers(const VirtualQGraphicsTextItem* self, const char* signal);
+	friend bool QGraphicsTextItem_protectedbase_isSignalConnected(const VirtualQGraphicsTextItem* self, QMetaMethod* signal);
+	friend void QGraphicsTextItem_protectedbase_addToIndex(VirtualQGraphicsTextItem* self);
+	friend void QGraphicsTextItem_protectedbase_removeFromIndex(VirtualQGraphicsTextItem* self);
+	friend void QGraphicsTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsTextItem* self);
 };
 
-QGraphicsTextItem* QGraphicsTextItem_new(struct QGraphicsTextItem_VTable* vtbl) {
-	return new VirtualQGraphicsTextItem(vtbl);
+VirtualQGraphicsTextItem* QGraphicsTextItem_new(const QGraphicsTextItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsTextItem(vtbl, vdata);
 }
 
-QGraphicsTextItem* QGraphicsTextItem_new2(struct QGraphicsTextItem_VTable* vtbl, struct miqt_string text) {
+VirtualQGraphicsTextItem* QGraphicsTextItem_new2(const QGraphicsTextItem_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQGraphicsTextItem(vtbl, text_QString);
+	return new VirtualQGraphicsTextItem(vtbl, vdata, text_QString);
 }
 
-QGraphicsTextItem* QGraphicsTextItem_new3(struct QGraphicsTextItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsTextItem(vtbl, parent);
+VirtualQGraphicsTextItem* QGraphicsTextItem_new3(const QGraphicsTextItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsTextItem(vtbl, vdata, parent);
 }
 
-QGraphicsTextItem* QGraphicsTextItem_new4(struct QGraphicsTextItem_VTable* vtbl, struct miqt_string text, QGraphicsItem* parent) {
+VirtualQGraphicsTextItem* QGraphicsTextItem_new4(const QGraphicsTextItem_VTable* vtbl, void* vdata, struct miqt_string text, QGraphicsItem* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQGraphicsTextItem(vtbl, text_QString, parent);
+	return new VirtualQGraphicsTextItem(vtbl, vdata, text_QString, parent);
 }
 
 void QGraphicsTextItem_virtbase(QGraphicsTextItem* src, QGraphicsObject** outptr_QGraphicsObject) {
@@ -9994,7 +9253,7 @@ void QGraphicsTextItem_linkActivated(QGraphicsTextItem* self, struct miqt_string
 	self->linkActivated(param1_QString);
 }
 
-void QGraphicsTextItem_connect_linkActivated(QGraphicsTextItem* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QGraphicsTextItem_connect_linkActivated(VirtualQGraphicsTextItem* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -10018,7 +9277,7 @@ void QGraphicsTextItem_linkHovered(QGraphicsTextItem* self, struct miqt_string p
 	self->linkHovered(param1_QString);
 }
 
-void QGraphicsTextItem_connect_linkHovered(QGraphicsTextItem* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QGraphicsTextItem_connect_linkHovered(VirtualQGraphicsTextItem* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -10059,331 +9318,267 @@ struct miqt_string QGraphicsTextItem_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QGraphicsTextItem_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsTextItem_virtualbase_metaObject(const VirtualQGraphicsTextItem* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::metaObject();
-
+	return (QMetaObject*) self->QGraphicsTextItem::metaObject();
 }
 
-void* QGraphicsTextItem_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsTextItem_virtualbase_metacast(VirtualQGraphicsTextItem* self, const char* param1) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::qt_metacast(param1);
-
+	return self->QGraphicsTextItem::qt_metacast(param1);
 }
 
-int QGraphicsTextItem_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsTextItem_virtualbase_metacall(VirtualQGraphicsTextItem* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsTextItem::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QGraphicsTextItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsTextItem_virtualbase_boundingRect(const VirtualQGraphicsTextItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::boundingRect());
-
+	return new QRectF(self->QGraphicsTextItem::boundingRect());
 }
 
-QPainterPath* QGraphicsTextItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsTextItem_virtualbase_shape(const VirtualQGraphicsTextItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::shape());
-
+	return new QPainterPath(self->QGraphicsTextItem::shape());
 }
 
-bool QGraphicsTextItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsTextItem_virtualbase_contains(const VirtualQGraphicsTextItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::contains(*point);
-
+	return self->QGraphicsTextItem::contains(*point);
 }
 
-void QGraphicsTextItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsTextItem_virtualbase_paint(VirtualQGraphicsTextItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::paint(painter, option, widget);
-
+	self->QGraphicsTextItem::paint(painter, option, widget);
 }
 
-bool QGraphicsTextItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsTextItem_virtualbase_isObscuredBy(const VirtualQGraphicsTextItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::isObscuredBy(item);
-
+	return self->QGraphicsTextItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsTextItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsTextItem_virtualbase_opaqueArea(const VirtualQGraphicsTextItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsTextItem::opaqueArea());
 }
 
-int QGraphicsTextItem_virtualbase_type(const void* self) {
+int QGraphicsTextItem_virtualbase_type(const VirtualQGraphicsTextItem* self) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::type();
-
+	return self->QGraphicsTextItem::type();
 }
 
-bool QGraphicsTextItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsTextItem_virtualbase_sceneEvent(VirtualQGraphicsTextItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::sceneEvent(event);
-
+	return self->QGraphicsTextItem::sceneEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsTextItem_virtualbase_mousePressEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::mousePressEvent(event);
-
+	self->QGraphicsTextItem::mousePressEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsTextItem_virtualbase_mouseMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::mouseMoveEvent(event);
-
+	self->QGraphicsTextItem::mouseMoveEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsTextItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::mouseReleaseEvent(event);
-
+	self->QGraphicsTextItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsTextItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsTextItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsTextItem_virtualbase_contextMenuEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::contextMenuEvent(event);
-
+	self->QGraphicsTextItem::contextMenuEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsTextItem_virtualbase_keyPressEvent(VirtualQGraphicsTextItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::keyPressEvent(event);
-
+	self->QGraphicsTextItem::keyPressEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsTextItem_virtualbase_keyReleaseEvent(VirtualQGraphicsTextItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::keyReleaseEvent(event);
-
+	self->QGraphicsTextItem::keyReleaseEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsTextItem_virtualbase_focusInEvent(VirtualQGraphicsTextItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::focusInEvent(event);
-
+	self->QGraphicsTextItem::focusInEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsTextItem_virtualbase_focusOutEvent(VirtualQGraphicsTextItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::focusOutEvent(event);
-
+	self->QGraphicsTextItem::focusOutEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsTextItem_virtualbase_dragEnterEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::dragEnterEvent(event);
-
+	self->QGraphicsTextItem::dragEnterEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsTextItem_virtualbase_dragLeaveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::dragLeaveEvent(event);
-
+	self->QGraphicsTextItem::dragLeaveEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsTextItem_virtualbase_dragMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::dragMoveEvent(event);
-
+	self->QGraphicsTextItem::dragMoveEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsTextItem_virtualbase_dropEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::dropEvent(event);
-
+	self->QGraphicsTextItem::dropEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsTextItem_virtualbase_inputMethodEvent(VirtualQGraphicsTextItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::inputMethodEvent(event);
-
+	self->QGraphicsTextItem::inputMethodEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsTextItem_virtualbase_hoverEnterEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::hoverEnterEvent(event);
-
+	self->QGraphicsTextItem::hoverEnterEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsTextItem_virtualbase_hoverMoveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::hoverMoveEvent(event);
-
+	self->QGraphicsTextItem::hoverMoveEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsTextItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::hoverLeaveEvent(event);
-
+	self->QGraphicsTextItem::hoverLeaveEvent(event);
 }
 
-QVariant* QGraphicsTextItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsTextItem_virtualbase_inputMethodQuery(const VirtualQGraphicsTextItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsTextItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-bool QGraphicsTextItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsTextItem_virtualbase_supportsExtension(const VirtualQGraphicsTextItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::supportsExtension(static_cast<VirtualQGraphicsTextItem::Extension>(extension));
-
+	return self->QGraphicsTextItem::supportsExtension(static_cast<VirtualQGraphicsTextItem::Extension>(extension));
 }
 
-void QGraphicsTextItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsTextItem_virtualbase_setExtension(VirtualQGraphicsTextItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::setExtension(static_cast<VirtualQGraphicsTextItem::Extension>(extension), *variant);
-
+	self->QGraphicsTextItem::setExtension(static_cast<VirtualQGraphicsTextItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsTextItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsTextItem_virtualbase_extension(const VirtualQGraphicsTextItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsTextItem::extension(*variant));
 }
 
-bool QGraphicsTextItem_virtualbase_event(void* self, QEvent* ev) {
+bool QGraphicsTextItem_virtualbase_event(VirtualQGraphicsTextItem* self, QEvent* ev) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::event(ev);
-
+	return self->QGraphicsTextItem::event(ev);
 }
 
-bool QGraphicsTextItem_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsTextItem_virtualbase_eventFilter(VirtualQGraphicsTextItem* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::eventFilter(watched, event);
-
+	return self->QGraphicsTextItem::eventFilter(watched, event);
 }
 
-void QGraphicsTextItem_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsTextItem_virtualbase_timerEvent(VirtualQGraphicsTextItem* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::timerEvent(event);
-
+	self->QGraphicsTextItem::timerEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsTextItem_virtualbase_childEvent(VirtualQGraphicsTextItem* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::childEvent(event);
-
+	self->QGraphicsTextItem::childEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsTextItem_virtualbase_customEvent(VirtualQGraphicsTextItem* self, QEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::customEvent(event);
-
+	self->QGraphicsTextItem::customEvent(event);
 }
 
-void QGraphicsTextItem_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsTextItem_virtualbase_connectNotify(VirtualQGraphicsTextItem* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::connectNotify(*signal);
-
+	self->QGraphicsTextItem::connectNotify(*signal);
 }
 
-void QGraphicsTextItem_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsTextItem_virtualbase_disconnectNotify(VirtualQGraphicsTextItem* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::disconnectNotify(*signal);
-
+	self->QGraphicsTextItem::disconnectNotify(*signal);
 }
 
-void QGraphicsTextItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsTextItem_virtualbase_advance(VirtualQGraphicsTextItem* self, int phase) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsTextItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsTextItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsTextItem_virtualbase_collidesWithItem(const VirtualQGraphicsTextItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsTextItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsTextItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsTextItem_virtualbase_collidesWithPath(const VirtualQGraphicsTextItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsTextItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsTextItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsTextItem_virtualbase_sceneEventFilter(VirtualQGraphicsTextItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsTextItem::sceneEventFilter(watched, event);
 }
 
-void QGraphicsTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsTextItem_virtualbase_wheelEvent(VirtualQGraphicsTextItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::wheelEvent(event);
-
+	self->QGraphicsTextItem::wheelEvent(event);
 }
 
-QVariant* QGraphicsTextItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsTextItem_virtualbase_itemChange(VirtualQGraphicsTextItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsTextItem*)(self) )->QGraphicsTextItem::itemChange(static_cast<VirtualQGraphicsTextItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsTextItem::itemChange(static_cast<VirtualQGraphicsTextItem::GraphicsItemChange>(change), *value));
 }
 
 const QMetaObject* QGraphicsTextItem_staticMetaObject() { return &QGraphicsTextItem::staticMetaObject; }
-void QGraphicsTextItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QGraphicsTextItem_VTable* QGraphicsTextItem_vtbl(const VirtualQGraphicsTextItem* self) { return self->vtbl; }
+void* QGraphicsTextItem_vdata(const VirtualQGraphicsTextItem* self) { return self->vdata; }
+void QGraphicsTextItem_setVdata(VirtualQGraphicsTextItem* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsTextItem* self) {
+	self->updateMicroFocus();
 }
 
-QObject* QGraphicsTextItem_protectedbase_sender(const void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsTextItem_protectedbase_sender(const VirtualQGraphicsTextItem* self) {
+	return self->sender();
 }
 
-int QGraphicsTextItem_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsTextItem_protectedbase_senderSignalIndex(const VirtualQGraphicsTextItem* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsTextItem_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsTextItem_protectedbase_receivers(const VirtualQGraphicsTextItem* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsTextItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsTextItem_protectedbase_isSignalConnected(const VirtualQGraphicsTextItem* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
-void QGraphicsTextItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsTextItem_protectedbase_addToIndex(VirtualQGraphicsTextItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsTextItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsTextItem_protectedbase_removeFromIndex(VirtualQGraphicsTextItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsTextItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsTextItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsTextItem_delete(QGraphicsTextItem* self) {
@@ -10391,49 +9586,50 @@ void QGraphicsTextItem_delete(QGraphicsTextItem* self) {
 }
 
 class VirtualQGraphicsSimpleTextItem final : public QGraphicsSimpleTextItem {
-	struct QGraphicsSimpleTextItem_VTable* vtbl;
+	const QGraphicsSimpleTextItem_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsSimpleTextItem_VTable* QGraphicsSimpleTextItem_vtbl(const VirtualQGraphicsSimpleTextItem* self);
+	friend void* QGraphicsSimpleTextItem_vdata(const VirtualQGraphicsSimpleTextItem* self);
+	friend void QGraphicsSimpleTextItem_setVdata(VirtualQGraphicsSimpleTextItem* self, void* vdata);
 
-	VirtualQGraphicsSimpleTextItem(struct QGraphicsSimpleTextItem_VTable* vtbl): QGraphicsSimpleTextItem(), vtbl(vtbl) {};
-	VirtualQGraphicsSimpleTextItem(struct QGraphicsSimpleTextItem_VTable* vtbl, const QString& text): QGraphicsSimpleTextItem(text), vtbl(vtbl) {};
-	VirtualQGraphicsSimpleTextItem(struct QGraphicsSimpleTextItem_VTable* vtbl, QGraphicsItem* parent): QGraphicsSimpleTextItem(parent), vtbl(vtbl) {};
-	VirtualQGraphicsSimpleTextItem(struct QGraphicsSimpleTextItem_VTable* vtbl, const QString& text, QGraphicsItem* parent): QGraphicsSimpleTextItem(text, parent), vtbl(vtbl) {};
+	VirtualQGraphicsSimpleTextItem(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata): QGraphicsSimpleTextItem(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsSimpleTextItem(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, const QString& text): QGraphicsSimpleTextItem(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsSimpleTextItem(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsSimpleTextItem(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsSimpleTextItem(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, const QString& text, QGraphicsItem* parent): QGraphicsSimpleTextItem(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsSimpleTextItem() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsSimpleTextItem() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsSimpleTextItem::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsSimpleTextItem_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsSimpleTextItem_virtualbase_boundingRect(const VirtualQGraphicsSimpleTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsSimpleTextItem::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsSimpleTextItem_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsSimpleTextItem_virtualbase_shape(const VirtualQGraphicsSimpleTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsSimpleTextItem::contains(point);
@@ -10443,14 +9639,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsSimpleTextItem_virtualbase_contains(const VirtualQGraphicsSimpleTextItem* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsSimpleTextItem::paint(painter, option, widget);
@@ -10461,13 +9656,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsSimpleTextItem_virtualbase_paint(VirtualQGraphicsSimpleTextItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsSimpleTextItem::isObscuredBy(item);
@@ -10475,44 +9669,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsSimpleTextItem_virtualbase_isObscuredBy(const VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsSimpleTextItem::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsSimpleTextItem_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsSimpleTextItem_virtualbase_opaqueArea(const VirtualQGraphicsSimpleTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsSimpleTextItem::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsSimpleTextItem_virtualbase_type(const void* self);
+	friend int QGraphicsSimpleTextItem_virtualbase_type(const VirtualQGraphicsSimpleTextItem* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsSimpleTextItem::supportsExtension(extension);
@@ -10521,14 +9712,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsSimpleTextItem_virtualbase_supportsExtension(const VirtualQGraphicsSimpleTextItem* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsSimpleTextItem::setExtension(extension, variant);
@@ -10541,13 +9731,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsSimpleTextItem_virtualbase_setExtension(VirtualQGraphicsSimpleTextItem* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsSimpleTextItem::extension(variant);
@@ -10557,16 +9746,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsSimpleTextItem_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsSimpleTextItem_virtualbase_extension(const VirtualQGraphicsSimpleTextItem* self, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsSimpleTextItem::advance(phase);
@@ -10575,13 +9763,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsSimpleTextItem_virtualbase_advance(VirtualQGraphicsSimpleTextItem* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsSimpleTextItem::collidesWithItem(other, mode);
@@ -10591,14 +9778,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsSimpleTextItem_virtualbase_collidesWithItem(const VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsSimpleTextItem::collidesWithPath(path, mode);
@@ -10610,14 +9796,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsSimpleTextItem_virtualbase_collidesWithPath(const VirtualQGraphicsSimpleTextItem* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsSimpleTextItem::sceneEventFilter(watched, event);
@@ -10626,14 +9811,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsSimpleTextItem_virtualbase_sceneEventFilter(VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsSimpleTextItem::sceneEvent(event);
@@ -10641,14 +9825,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsSimpleTextItem_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsSimpleTextItem_virtualbase_sceneEvent(VirtualQGraphicsSimpleTextItem* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsSimpleTextItem::contextMenuEvent(event);
@@ -10657,13 +9840,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_contextMenuEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsSimpleTextItem::dragEnterEvent(event);
@@ -10672,13 +9854,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_dragEnterEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsSimpleTextItem::dragLeaveEvent(event);
@@ -10687,13 +9868,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_dragLeaveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsSimpleTextItem::dragMoveEvent(event);
@@ -10702,13 +9882,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_dragMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsSimpleTextItem::dropEvent(event);
@@ -10717,13 +9896,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_dropEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsSimpleTextItem::focusInEvent(event);
@@ -10732,13 +9910,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_focusInEvent(VirtualQGraphicsSimpleTextItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsSimpleTextItem::focusOutEvent(event);
@@ -10747,13 +9924,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_focusOutEvent(VirtualQGraphicsSimpleTextItem* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsSimpleTextItem::hoverEnterEvent(event);
@@ -10762,13 +9938,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_hoverEnterEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsSimpleTextItem::hoverMoveEvent(event);
@@ -10777,13 +9952,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_hoverMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsSimpleTextItem::hoverLeaveEvent(event);
@@ -10792,13 +9966,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsSimpleTextItem::keyPressEvent(event);
@@ -10807,13 +9980,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_keyPressEvent(VirtualQGraphicsSimpleTextItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsSimpleTextItem::keyReleaseEvent(event);
@@ -10822,13 +9994,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_keyReleaseEvent(VirtualQGraphicsSimpleTextItem* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsSimpleTextItem::mousePressEvent(event);
@@ -10837,13 +10008,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_mousePressEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsSimpleTextItem::mouseMoveEvent(event);
@@ -10852,13 +10022,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_mouseMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsSimpleTextItem::mouseReleaseEvent(event);
@@ -10867,13 +10036,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsSimpleTextItem::mouseDoubleClickEvent(event);
@@ -10882,13 +10050,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsSimpleTextItem::wheelEvent(event);
@@ -10897,13 +10064,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_wheelEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsSimpleTextItem::inputMethodEvent(event);
@@ -10912,13 +10078,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsSimpleTextItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsSimpleTextItem_virtualbase_inputMethodEvent(VirtualQGraphicsSimpleTextItem* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsSimpleTextItem::inputMethodQuery(query);
@@ -10927,16 +10092,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsSimpleTextItem_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsSimpleTextItem_virtualbase_inputMethodQuery(const VirtualQGraphicsSimpleTextItem* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsSimpleTextItem::itemChange(change, value);
@@ -10948,38 +10112,38 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(VirtualQGraphicsSimpleTextItem* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_addToIndex(void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsSimpleTextItem* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_addToIndex(VirtualQGraphicsSimpleTextItem* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(VirtualQGraphicsSimpleTextItem* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsSimpleTextItem* self);
 };
 
-QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new(struct QGraphicsSimpleTextItem_VTable* vtbl) {
-	return new VirtualQGraphicsSimpleTextItem(vtbl);
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsSimpleTextItem(vtbl, vdata);
 }
 
-QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new2(struct QGraphicsSimpleTextItem_VTable* vtbl, struct miqt_string text) {
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new2(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQGraphicsSimpleTextItem(vtbl, text_QString);
+	return new VirtualQGraphicsSimpleTextItem(vtbl, vdata, text_QString);
 }
 
-QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new3(struct QGraphicsSimpleTextItem_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsSimpleTextItem(vtbl, parent);
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new3(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsSimpleTextItem(vtbl, vdata, parent);
 }
 
-QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new4(struct QGraphicsSimpleTextItem_VTable* vtbl, struct miqt_string text, QGraphicsItem* parent) {
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new4(const QGraphicsSimpleTextItem_VTable* vtbl, void* vdata, struct miqt_string text, QGraphicsItem* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQGraphicsSimpleTextItem(vtbl, text_QString, parent);
+	return new VirtualQGraphicsSimpleTextItem(vtbl, vdata, text_QString, parent);
 }
 
 void QGraphicsSimpleTextItem_virtbase(QGraphicsSimpleTextItem* src, QAbstractGraphicsShapeItem** outptr_QAbstractGraphicsShapeItem) {
@@ -11038,242 +10202,199 @@ int QGraphicsSimpleTextItem_type(const QGraphicsSimpleTextItem* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsSimpleTextItem_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsSimpleTextItem_virtualbase_boundingRect(const VirtualQGraphicsSimpleTextItem* self) {
 
-	return new QRectF(( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::boundingRect());
-
+	return new QRectF(self->QGraphicsSimpleTextItem::boundingRect());
 }
 
-QPainterPath* QGraphicsSimpleTextItem_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsSimpleTextItem_virtualbase_shape(const VirtualQGraphicsSimpleTextItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::shape());
-
+	return new QPainterPath(self->QGraphicsSimpleTextItem::shape());
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsSimpleTextItem_virtualbase_contains(const VirtualQGraphicsSimpleTextItem* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::contains(*point);
-
+	return self->QGraphicsSimpleTextItem::contains(*point);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsSimpleTextItem_virtualbase_paint(VirtualQGraphicsSimpleTextItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::paint(painter, option, widget);
-
+	self->QGraphicsSimpleTextItem::paint(painter, option, widget);
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsSimpleTextItem_virtualbase_isObscuredBy(const VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::isObscuredBy(item);
-
+	return self->QGraphicsSimpleTextItem::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsSimpleTextItem_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsSimpleTextItem_virtualbase_opaqueArea(const VirtualQGraphicsSimpleTextItem* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsSimpleTextItem::opaqueArea());
 }
 
-int QGraphicsSimpleTextItem_virtualbase_type(const void* self) {
+int QGraphicsSimpleTextItem_virtualbase_type(const VirtualQGraphicsSimpleTextItem* self) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::type();
-
+	return self->QGraphicsSimpleTextItem::type();
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsSimpleTextItem_virtualbase_supportsExtension(const VirtualQGraphicsSimpleTextItem* self, int extension) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::supportsExtension(static_cast<VirtualQGraphicsSimpleTextItem::Extension>(extension));
-
+	return self->QGraphicsSimpleTextItem::supportsExtension(static_cast<VirtualQGraphicsSimpleTextItem::Extension>(extension));
 }
 
-void QGraphicsSimpleTextItem_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsSimpleTextItem_virtualbase_setExtension(VirtualQGraphicsSimpleTextItem* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::setExtension(static_cast<VirtualQGraphicsSimpleTextItem::Extension>(extension), *variant);
-
+	self->QGraphicsSimpleTextItem::setExtension(static_cast<VirtualQGraphicsSimpleTextItem::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsSimpleTextItem_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsSimpleTextItem_virtualbase_extension(const VirtualQGraphicsSimpleTextItem* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::extension(*variant));
-
+	return new QVariant(self->QGraphicsSimpleTextItem::extension(*variant));
 }
 
-void QGraphicsSimpleTextItem_virtualbase_advance(void* self, int phase) {
+void QGraphicsSimpleTextItem_virtualbase_advance(VirtualQGraphicsSimpleTextItem* self, int phase) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::advance(static_cast<int>(phase));
-
+	self->QGraphicsSimpleTextItem::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsSimpleTextItem_virtualbase_collidesWithItem(const VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsSimpleTextItem::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsSimpleTextItem_virtualbase_collidesWithPath(const VirtualQGraphicsSimpleTextItem* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsSimpleTextItem::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsSimpleTextItem_virtualbase_sceneEventFilter(VirtualQGraphicsSimpleTextItem* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::sceneEventFilter(watched, event);
-
+	return self->QGraphicsSimpleTextItem::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsSimpleTextItem_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsSimpleTextItem_virtualbase_sceneEvent(VirtualQGraphicsSimpleTextItem* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::sceneEvent(event);
-
+	return self->QGraphicsSimpleTextItem::sceneEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_contextMenuEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::contextMenuEvent(event);
-
+	self->QGraphicsSimpleTextItem::contextMenuEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_dragEnterEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::dragEnterEvent(event);
-
+	self->QGraphicsSimpleTextItem::dragEnterEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_dragLeaveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::dragLeaveEvent(event);
-
+	self->QGraphicsSimpleTextItem::dragLeaveEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_dragMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::dragMoveEvent(event);
-
+	self->QGraphicsSimpleTextItem::dragMoveEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_dropEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::dropEvent(event);
-
+	self->QGraphicsSimpleTextItem::dropEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_focusInEvent(VirtualQGraphicsSimpleTextItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::focusInEvent(event);
-
+	self->QGraphicsSimpleTextItem::focusInEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_focusOutEvent(VirtualQGraphicsSimpleTextItem* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::focusOutEvent(event);
-
+	self->QGraphicsSimpleTextItem::focusOutEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_hoverEnterEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::hoverEnterEvent(event);
-
+	self->QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_hoverMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::hoverMoveEvent(event);
-
+	self->QGraphicsSimpleTextItem::hoverMoveEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_hoverLeaveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::hoverLeaveEvent(event);
-
+	self->QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_keyPressEvent(VirtualQGraphicsSimpleTextItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::keyPressEvent(event);
-
+	self->QGraphicsSimpleTextItem::keyPressEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_keyReleaseEvent(VirtualQGraphicsSimpleTextItem* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::keyReleaseEvent(event);
-
+	self->QGraphicsSimpleTextItem::keyReleaseEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_mousePressEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::mousePressEvent(event);
-
+	self->QGraphicsSimpleTextItem::mousePressEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_mouseMoveEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::mouseMoveEvent(event);
-
+	self->QGraphicsSimpleTextItem::mouseMoveEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_mouseReleaseEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::mouseReleaseEvent(event);
-
+	self->QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::mouseDoubleClickEvent(event);
-
+	self->QGraphicsSimpleTextItem::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_wheelEvent(VirtualQGraphicsSimpleTextItem* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::wheelEvent(event);
-
+	self->QGraphicsSimpleTextItem::wheelEvent(event);
 }
 
-void QGraphicsSimpleTextItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsSimpleTextItem_virtualbase_inputMethodEvent(VirtualQGraphicsSimpleTextItem* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::inputMethodEvent(event);
-
+	self->QGraphicsSimpleTextItem::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsSimpleTextItem_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsSimpleTextItem_virtualbase_inputMethodQuery(const VirtualQGraphicsSimpleTextItem* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsSimpleTextItem::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(VirtualQGraphicsSimpleTextItem* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsSimpleTextItem*)(self) )->QGraphicsSimpleTextItem::itemChange(static_cast<VirtualQGraphicsSimpleTextItem::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsSimpleTextItem::itemChange(static_cast<VirtualQGraphicsSimpleTextItem::GraphicsItemChange>(change), *value));
 }
 
-void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsSimpleTextItem_VTable* QGraphicsSimpleTextItem_vtbl(const VirtualQGraphicsSimpleTextItem* self) { return self->vtbl; }
+void* QGraphicsSimpleTextItem_vdata(const VirtualQGraphicsSimpleTextItem* self) { return self->vdata; }
+void QGraphicsSimpleTextItem_setVdata(VirtualQGraphicsSimpleTextItem* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsSimpleTextItem* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsSimpleTextItem_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsSimpleTextItem_protectedbase_addToIndex(VirtualQGraphicsSimpleTextItem* self) {
+	self->addToIndex();
 }
 
-void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(VirtualQGraphicsSimpleTextItem* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsSimpleTextItem* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsSimpleTextItem_delete(QGraphicsSimpleTextItem* self) {
@@ -11281,31 +10402,33 @@ void QGraphicsSimpleTextItem_delete(QGraphicsSimpleTextItem* self) {
 }
 
 class VirtualQGraphicsItemGroup final : public QGraphicsItemGroup {
-	struct QGraphicsItemGroup_VTable* vtbl;
+	const QGraphicsItemGroup_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsItemGroup_VTable* QGraphicsItemGroup_vtbl(const VirtualQGraphicsItemGroup* self);
+	friend void* QGraphicsItemGroup_vdata(const VirtualQGraphicsItemGroup* self);
+	friend void QGraphicsItemGroup_setVdata(VirtualQGraphicsItemGroup* self, void* vdata);
 
-	VirtualQGraphicsItemGroup(struct QGraphicsItemGroup_VTable* vtbl): QGraphicsItemGroup(), vtbl(vtbl) {};
-	VirtualQGraphicsItemGroup(struct QGraphicsItemGroup_VTable* vtbl, QGraphicsItem* parent): QGraphicsItemGroup(parent), vtbl(vtbl) {};
+	VirtualQGraphicsItemGroup(const QGraphicsItemGroup_VTable* vtbl, void* vdata): QGraphicsItemGroup(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsItemGroup(const QGraphicsItemGroup_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsItemGroup(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsItemGroup() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsItemGroup() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsItemGroup::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsItemGroup_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsItemGroup_virtualbase_boundingRect(const VirtualQGraphicsItemGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsItemGroup::paint(painter, option, widget);
@@ -11316,13 +10439,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsItemGroup_virtualbase_paint(VirtualQGraphicsItemGroup* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsItemGroup::isObscuredBy(item);
@@ -11330,44 +10452,41 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsItemGroup_virtualbase_isObscuredBy(const VirtualQGraphicsItemGroup* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsItemGroup::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsItemGroup_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsItemGroup_virtualbase_opaqueArea(const VirtualQGraphicsItemGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsItemGroup::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsItemGroup_virtualbase_type(const void* self);
+	friend int QGraphicsItemGroup_virtualbase_type(const VirtualQGraphicsItemGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsItemGroup::advance(phase);
@@ -11376,29 +10495,27 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsItemGroup_virtualbase_advance(VirtualQGraphicsItemGroup* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsItemGroup::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsItemGroup_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsItemGroup_virtualbase_shape(const VirtualQGraphicsItemGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsItemGroup::contains(point);
@@ -11408,14 +10525,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsItemGroup_virtualbase_contains(const VirtualQGraphicsItemGroup* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsItemGroup::collidesWithItem(other, mode);
@@ -11425,14 +10541,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsItemGroup_virtualbase_collidesWithItem(const VirtualQGraphicsItemGroup* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsItemGroup::collidesWithPath(path, mode);
@@ -11444,14 +10559,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsItemGroup_virtualbase_collidesWithPath(const VirtualQGraphicsItemGroup* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsItemGroup::sceneEventFilter(watched, event);
@@ -11460,14 +10574,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsItemGroup_virtualbase_sceneEventFilter(VirtualQGraphicsItemGroup* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* event) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsItemGroup::sceneEvent(event);
@@ -11475,14 +10588,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_sceneEvent(void* self, QEvent* event);
+	friend bool QGraphicsItemGroup_virtualbase_sceneEvent(VirtualQGraphicsItemGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsItemGroup::contextMenuEvent(event);
@@ -11491,13 +10603,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_contextMenuEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsItemGroup::dragEnterEvent(event);
@@ -11506,13 +10617,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_dragEnterEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsItemGroup::dragLeaveEvent(event);
@@ -11521,13 +10631,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_dragLeaveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsItemGroup::dragMoveEvent(event);
@@ -11536,13 +10645,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_dragMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsItemGroup::dropEvent(event);
@@ -11551,13 +10659,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_dropEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsItemGroup::focusInEvent(event);
@@ -11566,13 +10673,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_focusInEvent(VirtualQGraphicsItemGroup* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsItemGroup::focusOutEvent(event);
@@ -11581,13 +10687,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_focusOutEvent(VirtualQGraphicsItemGroup* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsItemGroup::hoverEnterEvent(event);
@@ -11596,13 +10701,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_hoverEnterEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsItemGroup::hoverMoveEvent(event);
@@ -11611,13 +10715,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_hoverMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsItemGroup::hoverLeaveEvent(event);
@@ -11626,13 +10729,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_hoverLeaveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsItemGroup::keyPressEvent(event);
@@ -11641,13 +10743,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_keyPressEvent(VirtualQGraphicsItemGroup* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsItemGroup::keyReleaseEvent(event);
@@ -11656,13 +10757,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_keyReleaseEvent(VirtualQGraphicsItemGroup* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsItemGroup::mousePressEvent(event);
@@ -11671,13 +10771,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_mousePressEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsItemGroup::mouseMoveEvent(event);
@@ -11686,13 +10785,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_mouseMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsItemGroup::mouseReleaseEvent(event);
@@ -11701,13 +10799,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_mouseReleaseEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsItemGroup::mouseDoubleClickEvent(event);
@@ -11716,13 +10813,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsItemGroup::wheelEvent(event);
@@ -11731,13 +10827,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_wheelEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsItemGroup::inputMethodEvent(event);
@@ -11746,13 +10841,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QGraphicsItemGroup_virtualbase_inputMethodEvent(VirtualQGraphicsItemGroup* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsItemGroup::inputMethodQuery(query);
@@ -11761,16 +10855,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItemGroup_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsItemGroup_virtualbase_inputMethodQuery(const VirtualQGraphicsItemGroup* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsItemGroup::itemChange(change, value);
@@ -11782,16 +10875,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItemGroup_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsItemGroup_virtualbase_itemChange(VirtualQGraphicsItemGroup* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsItemGroup::supportsExtension(extension);
@@ -11800,14 +10892,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsItemGroup_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsItemGroup_virtualbase_supportsExtension(const VirtualQGraphicsItemGroup* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsItemGroup::setExtension(extension, variant);
@@ -11820,13 +10911,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsItemGroup_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsItemGroup_virtualbase_setExtension(VirtualQGraphicsItemGroup* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsItemGroup::extension(variant);
@@ -11836,28 +10926,28 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsItemGroup_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsItemGroup_virtualbase_extension(const VirtualQGraphicsItemGroup* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsItemGroup_protectedbase_updateMicroFocus(void* self);
-	friend void QGraphicsItemGroup_protectedbase_addToIndex(void* self);
-	friend void QGraphicsItemGroup_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsItemGroup_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsItemGroup_protectedbase_updateMicroFocus(VirtualQGraphicsItemGroup* self);
+	friend void QGraphicsItemGroup_protectedbase_addToIndex(VirtualQGraphicsItemGroup* self);
+	friend void QGraphicsItemGroup_protectedbase_removeFromIndex(VirtualQGraphicsItemGroup* self);
+	friend void QGraphicsItemGroup_protectedbase_prepareGeometryChange(VirtualQGraphicsItemGroup* self);
 };
 
-QGraphicsItemGroup* QGraphicsItemGroup_new(struct QGraphicsItemGroup_VTable* vtbl) {
-	return new VirtualQGraphicsItemGroup(vtbl);
+VirtualQGraphicsItemGroup* QGraphicsItemGroup_new(const QGraphicsItemGroup_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsItemGroup(vtbl, vdata);
 }
 
-QGraphicsItemGroup* QGraphicsItemGroup_new2(struct QGraphicsItemGroup_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsItemGroup(vtbl, parent);
+VirtualQGraphicsItemGroup* QGraphicsItemGroup_new2(const QGraphicsItemGroup_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsItemGroup(vtbl, vdata, parent);
 }
 
 void QGraphicsItemGroup_virtbase(QGraphicsItemGroup* src, QGraphicsItem** outptr_QGraphicsItem) {
@@ -11892,242 +10982,199 @@ int QGraphicsItemGroup_type(const QGraphicsItemGroup* self) {
 	return self->type();
 }
 
-QRectF* QGraphicsItemGroup_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsItemGroup_virtualbase_boundingRect(const VirtualQGraphicsItemGroup* self) {
 
-	return new QRectF(( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::boundingRect());
-
+	return new QRectF(self->QGraphicsItemGroup::boundingRect());
 }
 
-void QGraphicsItemGroup_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsItemGroup_virtualbase_paint(VirtualQGraphicsItemGroup* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::paint(painter, option, widget);
-
+	self->QGraphicsItemGroup::paint(painter, option, widget);
 }
 
-bool QGraphicsItemGroup_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsItemGroup_virtualbase_isObscuredBy(const VirtualQGraphicsItemGroup* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::isObscuredBy(item);
-
+	return self->QGraphicsItemGroup::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsItemGroup_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsItemGroup_virtualbase_opaqueArea(const VirtualQGraphicsItemGroup* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsItemGroup::opaqueArea());
 }
 
-int QGraphicsItemGroup_virtualbase_type(const void* self) {
+int QGraphicsItemGroup_virtualbase_type(const VirtualQGraphicsItemGroup* self) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::type();
-
+	return self->QGraphicsItemGroup::type();
 }
 
-void QGraphicsItemGroup_virtualbase_advance(void* self, int phase) {
+void QGraphicsItemGroup_virtualbase_advance(VirtualQGraphicsItemGroup* self, int phase) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::advance(static_cast<int>(phase));
-
+	self->QGraphicsItemGroup::advance(static_cast<int>(phase));
 }
 
-QPainterPath* QGraphicsItemGroup_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsItemGroup_virtualbase_shape(const VirtualQGraphicsItemGroup* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::shape());
-
+	return new QPainterPath(self->QGraphicsItemGroup::shape());
 }
 
-bool QGraphicsItemGroup_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsItemGroup_virtualbase_contains(const VirtualQGraphicsItemGroup* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::contains(*point);
-
+	return self->QGraphicsItemGroup::contains(*point);
 }
 
-bool QGraphicsItemGroup_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsItemGroup_virtualbase_collidesWithItem(const VirtualQGraphicsItemGroup* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsItemGroup::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsItemGroup_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsItemGroup_virtualbase_collidesWithPath(const VirtualQGraphicsItemGroup* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsItemGroup::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsItemGroup_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsItemGroup_virtualbase_sceneEventFilter(VirtualQGraphicsItemGroup* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::sceneEventFilter(watched, event);
-
+	return self->QGraphicsItemGroup::sceneEventFilter(watched, event);
 }
 
-bool QGraphicsItemGroup_virtualbase_sceneEvent(void* self, QEvent* event) {
+bool QGraphicsItemGroup_virtualbase_sceneEvent(VirtualQGraphicsItemGroup* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::sceneEvent(event);
-
+	return self->QGraphicsItemGroup::sceneEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event) {
+void QGraphicsItemGroup_virtualbase_contextMenuEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneContextMenuEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::contextMenuEvent(event);
-
+	self->QGraphicsItemGroup::contextMenuEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItemGroup_virtualbase_dragEnterEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::dragEnterEvent(event);
-
+	self->QGraphicsItemGroup::dragEnterEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItemGroup_virtualbase_dragLeaveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::dragLeaveEvent(event);
-
+	self->QGraphicsItemGroup::dragLeaveEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItemGroup_virtualbase_dragMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::dragMoveEvent(event);
-
+	self->QGraphicsItemGroup::dragMoveEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event) {
+void QGraphicsItemGroup_virtualbase_dropEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneDragDropEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::dropEvent(event);
-
+	self->QGraphicsItemGroup::dropEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGraphicsItemGroup_virtualbase_focusInEvent(VirtualQGraphicsItemGroup* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::focusInEvent(event);
-
+	self->QGraphicsItemGroup::focusInEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGraphicsItemGroup_virtualbase_focusOutEvent(VirtualQGraphicsItemGroup* self, QFocusEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::focusOutEvent(event);
-
+	self->QGraphicsItemGroup::focusOutEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItemGroup_virtualbase_hoverEnterEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::hoverEnterEvent(event);
-
+	self->QGraphicsItemGroup::hoverEnterEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItemGroup_virtualbase_hoverMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::hoverMoveEvent(event);
-
+	self->QGraphicsItemGroup::hoverMoveEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsItemGroup_virtualbase_hoverLeaveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::hoverLeaveEvent(event);
-
+	self->QGraphicsItemGroup::hoverLeaveEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGraphicsItemGroup_virtualbase_keyPressEvent(VirtualQGraphicsItemGroup* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::keyPressEvent(event);
-
+	self->QGraphicsItemGroup::keyPressEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGraphicsItemGroup_virtualbase_keyReleaseEvent(VirtualQGraphicsItemGroup* self, QKeyEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::keyReleaseEvent(event);
-
+	self->QGraphicsItemGroup::keyReleaseEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItemGroup_virtualbase_mousePressEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::mousePressEvent(event);
-
+	self->QGraphicsItemGroup::mousePressEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItemGroup_virtualbase_mouseMoveEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::mouseMoveEvent(event);
-
+	self->QGraphicsItemGroup::mouseMoveEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItemGroup_virtualbase_mouseReleaseEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::mouseReleaseEvent(event);
-
+	self->QGraphicsItemGroup::mouseReleaseEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event) {
+void QGraphicsItemGroup_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneMouseEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::mouseDoubleClickEvent(event);
-
+	self->QGraphicsItemGroup::mouseDoubleClickEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event) {
+void QGraphicsItemGroup_virtualbase_wheelEvent(VirtualQGraphicsItemGroup* self, QGraphicsSceneWheelEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::wheelEvent(event);
-
+	self->QGraphicsItemGroup::wheelEvent(event);
 }
 
-void QGraphicsItemGroup_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QGraphicsItemGroup_virtualbase_inputMethodEvent(VirtualQGraphicsItemGroup* self, QInputMethodEvent* event) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::inputMethodEvent(event);
-
+	self->QGraphicsItemGroup::inputMethodEvent(event);
 }
 
-QVariant* QGraphicsItemGroup_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsItemGroup_virtualbase_inputMethodQuery(const VirtualQGraphicsItemGroup* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsItemGroup::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-QVariant* QGraphicsItemGroup_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsItemGroup_virtualbase_itemChange(VirtualQGraphicsItemGroup* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::itemChange(static_cast<VirtualQGraphicsItemGroup::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsItemGroup::itemChange(static_cast<VirtualQGraphicsItemGroup::GraphicsItemChange>(change), *value));
 }
 
-bool QGraphicsItemGroup_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsItemGroup_virtualbase_supportsExtension(const VirtualQGraphicsItemGroup* self, int extension) {
 
-	return ( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::supportsExtension(static_cast<VirtualQGraphicsItemGroup::Extension>(extension));
-
+	return self->QGraphicsItemGroup::supportsExtension(static_cast<VirtualQGraphicsItemGroup::Extension>(extension));
 }
 
-void QGraphicsItemGroup_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsItemGroup_virtualbase_setExtension(VirtualQGraphicsItemGroup* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::setExtension(static_cast<VirtualQGraphicsItemGroup::Extension>(extension), *variant);
-
+	self->QGraphicsItemGroup::setExtension(static_cast<VirtualQGraphicsItemGroup::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsItemGroup_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsItemGroup_virtualbase_extension(const VirtualQGraphicsItemGroup* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsItemGroup*)(self) )->QGraphicsItemGroup::extension(*variant));
-
+	return new QVariant(self->QGraphicsItemGroup::extension(*variant));
 }
 
-void QGraphicsItemGroup_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	
-	self_cast->updateMicroFocus();
+const QGraphicsItemGroup_VTable* QGraphicsItemGroup_vtbl(const VirtualQGraphicsItemGroup* self) { return self->vtbl; }
+void* QGraphicsItemGroup_vdata(const VirtualQGraphicsItemGroup* self) { return self->vdata; }
+void QGraphicsItemGroup_setVdata(VirtualQGraphicsItemGroup* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsItemGroup_protectedbase_updateMicroFocus(VirtualQGraphicsItemGroup* self) {
+	self->updateMicroFocus();
 }
 
-void QGraphicsItemGroup_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsItemGroup_protectedbase_addToIndex(VirtualQGraphicsItemGroup* self) {
+	self->addToIndex();
 }
 
-void QGraphicsItemGroup_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsItemGroup_protectedbase_removeFromIndex(VirtualQGraphicsItemGroup* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsItemGroup_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsItemGroup_protectedbase_prepareGeometryChange(VirtualQGraphicsItemGroup* self) {
+	self->prepareGeometryChange();
 }
 
 void QGraphicsItemGroup_delete(QGraphicsItemGroup* self) {

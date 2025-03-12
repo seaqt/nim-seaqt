@@ -6,39 +6,32 @@
 #include <QSGSimpleRectNode>
 #include <qsgsimplerectnode.h>
 #include "gen_qsgsimplerectnode.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGSimpleRectNode final : public QSGSimpleRectNode {
-	struct QSGSimpleRectNode_VTable* vtbl;
+	const QSGSimpleRectNode_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGSimpleRectNode_VTable* QSGSimpleRectNode_vtbl(const VirtualQSGSimpleRectNode* self);
+	friend void* QSGSimpleRectNode_vdata(const VirtualQSGSimpleRectNode* self);
+	friend void QSGSimpleRectNode_setVdata(VirtualQSGSimpleRectNode* self, void* vdata);
 
-	VirtualQSGSimpleRectNode(struct QSGSimpleRectNode_VTable* vtbl, const QRectF& rect, const QColor& color): QSGSimpleRectNode(rect, color), vtbl(vtbl) {};
-	VirtualQSGSimpleRectNode(struct QSGSimpleRectNode_VTable* vtbl): QSGSimpleRectNode(), vtbl(vtbl) {};
+	VirtualQSGSimpleRectNode(const QSGSimpleRectNode_VTable* vtbl, void* vdata, const QRectF& rect, const QColor& color): QSGSimpleRectNode(rect, color), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSGSimpleRectNode(const QSGSimpleRectNode_VTable* vtbl, void* vdata): QSGSimpleRectNode(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGSimpleRectNode() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGSimpleRectNode() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isSubtreeBlocked() const override {
 		if (vtbl->isSubtreeBlocked == 0) {
 			return QSGSimpleRectNode::isSubtreeBlocked();
 		}
 
 
-		bool callback_return_value = vtbl->isSubtreeBlocked(vtbl, this);
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const void* self);
+	friend bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const VirtualQSGSimpleRectNode* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void preprocess() override {
 		if (vtbl->preprocess == 0) {
 			QSGSimpleRectNode::preprocess();
@@ -46,20 +39,20 @@ public:
 		}
 
 
-		vtbl->preprocess(vtbl, this);
+		vtbl->preprocess(this);
 
 	}
 
-	friend void QSGSimpleRectNode_virtualbase_preprocess(void* self);
+	friend void QSGSimpleRectNode_virtualbase_preprocess(VirtualQSGSimpleRectNode* self);
 
 };
 
-QSGSimpleRectNode* QSGSimpleRectNode_new(struct QSGSimpleRectNode_VTable* vtbl, QRectF* rect, QColor* color) {
-	return new VirtualQSGSimpleRectNode(vtbl, *rect, *color);
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new(const QSGSimpleRectNode_VTable* vtbl, void* vdata, QRectF* rect, QColor* color) {
+	return new VirtualQSGSimpleRectNode(vtbl, vdata, *rect, *color);
 }
 
-QSGSimpleRectNode* QSGSimpleRectNode_new2(struct QSGSimpleRectNode_VTable* vtbl) {
-	return new VirtualQSGSimpleRectNode(vtbl);
+VirtualQSGSimpleRectNode* QSGSimpleRectNode_new2(const QSGSimpleRectNode_VTable* vtbl, void* vdata) {
+	return new VirtualQSGSimpleRectNode(vtbl, vdata);
 }
 
 void QSGSimpleRectNode_virtbase(QSGSimpleRectNode* src, QSGGeometryNode** outptr_QSGGeometryNode) {
@@ -86,17 +79,19 @@ QColor* QSGSimpleRectNode_color(const QSGSimpleRectNode* self) {
 	return new QColor(self->color());
 }
 
-bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const void* self) {
+bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const VirtualQSGSimpleRectNode* self) {
 
-	return ( (const VirtualQSGSimpleRectNode*)(self) )->QSGSimpleRectNode::isSubtreeBlocked();
-
+	return self->QSGSimpleRectNode::isSubtreeBlocked();
 }
 
-void QSGSimpleRectNode_virtualbase_preprocess(void* self) {
+void QSGSimpleRectNode_virtualbase_preprocess(VirtualQSGSimpleRectNode* self) {
 
-	( (VirtualQSGSimpleRectNode*)(self) )->QSGSimpleRectNode::preprocess();
-
+	self->QSGSimpleRectNode::preprocess();
 }
+
+const QSGSimpleRectNode_VTable* QSGSimpleRectNode_vtbl(const VirtualQSGSimpleRectNode* self) { return self->vtbl; }
+void* QSGSimpleRectNode_vdata(const VirtualQSGSimpleRectNode* self) { return self->vdata; }
+void QSGSimpleRectNode_setVdata(VirtualQSGSimpleRectNode* self, void* vdata) { self->vdata = vdata; }
 
 void QSGSimpleRectNode_delete(QSGSimpleRectNode* self) {
 	delete self;

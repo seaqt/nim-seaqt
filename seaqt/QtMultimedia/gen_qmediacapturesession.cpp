@@ -16,39 +16,32 @@
 #include <QVideoSink>
 #include <qmediacapturesession.h>
 #include "gen_qmediacapturesession.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMediaCaptureSession final : public QMediaCaptureSession {
-	struct QMediaCaptureSession_VTable* vtbl;
+	const QMediaCaptureSession_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMediaCaptureSession_VTable* QMediaCaptureSession_vtbl(const VirtualQMediaCaptureSession* self);
+	friend void* QMediaCaptureSession_vdata(const VirtualQMediaCaptureSession* self);
+	friend void QMediaCaptureSession_setVdata(VirtualQMediaCaptureSession* self, void* vdata);
 
-	VirtualQMediaCaptureSession(struct QMediaCaptureSession_VTable* vtbl): QMediaCaptureSession(), vtbl(vtbl) {};
-	VirtualQMediaCaptureSession(struct QMediaCaptureSession_VTable* vtbl, QObject* parent): QMediaCaptureSession(parent), vtbl(vtbl) {};
+	VirtualQMediaCaptureSession(const QMediaCaptureSession_VTable* vtbl, void* vdata): QMediaCaptureSession(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMediaCaptureSession(const QMediaCaptureSession_VTable* vtbl, void* vdata, QObject* parent): QMediaCaptureSession(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMediaCaptureSession() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMediaCaptureSession() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMediaCaptureSession::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMediaCaptureSession_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMediaCaptureSession_virtualbase_metaObject(const VirtualQMediaCaptureSession* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMediaCaptureSession::qt_metacast(param1);
@@ -56,14 +49,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMediaCaptureSession_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMediaCaptureSession_virtualbase_metacast(VirtualQMediaCaptureSession* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMediaCaptureSession::qt_metacall(param1, param2, param3);
@@ -74,14 +66,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMediaCaptureSession_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMediaCaptureSession_virtualbase_metacall(VirtualQMediaCaptureSession* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QMediaCaptureSession::event(event);
@@ -89,14 +80,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMediaCaptureSession_virtualbase_event(void* self, QEvent* event);
+	friend bool QMediaCaptureSession_virtualbase_event(VirtualQMediaCaptureSession* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMediaCaptureSession::eventFilter(watched, event);
@@ -105,14 +95,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMediaCaptureSession_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QMediaCaptureSession_virtualbase_eventFilter(VirtualQMediaCaptureSession* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMediaCaptureSession::timerEvent(event);
@@ -121,13 +110,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMediaCaptureSession_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMediaCaptureSession_virtualbase_timerEvent(VirtualQMediaCaptureSession* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMediaCaptureSession::childEvent(event);
@@ -136,13 +124,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMediaCaptureSession_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMediaCaptureSession_virtualbase_childEvent(VirtualQMediaCaptureSession* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMediaCaptureSession::customEvent(event);
@@ -151,13 +138,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMediaCaptureSession_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMediaCaptureSession_virtualbase_customEvent(VirtualQMediaCaptureSession* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMediaCaptureSession::connectNotify(signal);
@@ -168,13 +154,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMediaCaptureSession_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMediaCaptureSession_virtualbase_connectNotify(VirtualQMediaCaptureSession* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMediaCaptureSession::disconnectNotify(signal);
@@ -185,25 +170,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMediaCaptureSession_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMediaCaptureSession_virtualbase_disconnectNotify(VirtualQMediaCaptureSession* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMediaCaptureSession_protectedbase_sender(const void* self);
-	friend int QMediaCaptureSession_protectedbase_senderSignalIndex(const void* self);
-	friend int QMediaCaptureSession_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMediaCaptureSession_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QMediaCaptureSession_protectedbase_sender(const VirtualQMediaCaptureSession* self);
+	friend int QMediaCaptureSession_protectedbase_senderSignalIndex(const VirtualQMediaCaptureSession* self);
+	friend int QMediaCaptureSession_protectedbase_receivers(const VirtualQMediaCaptureSession* self, const char* signal);
+	friend bool QMediaCaptureSession_protectedbase_isSignalConnected(const VirtualQMediaCaptureSession* self, QMetaMethod* signal);
 };
 
-QMediaCaptureSession* QMediaCaptureSession_new(struct QMediaCaptureSession_VTable* vtbl) {
-	return new VirtualQMediaCaptureSession(vtbl);
+VirtualQMediaCaptureSession* QMediaCaptureSession_new(const QMediaCaptureSession_VTable* vtbl, void* vdata) {
+	return new VirtualQMediaCaptureSession(vtbl, vdata);
 }
 
-QMediaCaptureSession* QMediaCaptureSession_new2(struct QMediaCaptureSession_VTable* vtbl, QObject* parent) {
-	return new VirtualQMediaCaptureSession(vtbl, parent);
+VirtualQMediaCaptureSession* QMediaCaptureSession_new2(const QMediaCaptureSession_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQMediaCaptureSession(vtbl, vdata, parent);
 }
 
 void QMediaCaptureSession_virtbase(QMediaCaptureSession* src, QObject** outptr_QObject) {
@@ -293,7 +278,7 @@ void QMediaCaptureSession_audioInputChanged(QMediaCaptureSession* self) {
 	self->audioInputChanged();
 }
 
-void QMediaCaptureSession_connect_audioInputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_audioInputChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -308,7 +293,7 @@ void QMediaCaptureSession_cameraChanged(QMediaCaptureSession* self) {
 	self->cameraChanged();
 }
 
-void QMediaCaptureSession_connect_cameraChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_cameraChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -323,7 +308,7 @@ void QMediaCaptureSession_imageCaptureChanged(QMediaCaptureSession* self) {
 	self->imageCaptureChanged();
 }
 
-void QMediaCaptureSession_connect_imageCaptureChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_imageCaptureChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -338,7 +323,7 @@ void QMediaCaptureSession_recorderChanged(QMediaCaptureSession* self) {
 	self->recorderChanged();
 }
 
-void QMediaCaptureSession_connect_recorderChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_recorderChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -353,7 +338,7 @@ void QMediaCaptureSession_videoOutputChanged(QMediaCaptureSession* self) {
 	self->videoOutputChanged();
 }
 
-void QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_videoOutputChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -368,7 +353,7 @@ void QMediaCaptureSession_audioOutputChanged(QMediaCaptureSession* self) {
 	self->audioOutputChanged();
 }
 
-void QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaCaptureSession_connect_audioOutputChanged(VirtualQMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -401,93 +386,76 @@ struct miqt_string QMediaCaptureSession_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-QMetaObject* QMediaCaptureSession_virtualbase_metaObject(const void* self) {
+QMetaObject* QMediaCaptureSession_virtualbase_metaObject(const VirtualQMediaCaptureSession* self) {
 
-	return (QMetaObject*) ( (const VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::metaObject();
-
+	return (QMetaObject*) self->QMediaCaptureSession::metaObject();
 }
 
-void* QMediaCaptureSession_virtualbase_metacast(void* self, const char* param1) {
+void* QMediaCaptureSession_virtualbase_metacast(VirtualQMediaCaptureSession* self, const char* param1) {
 
-	return ( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::qt_metacast(param1);
-
+	return self->QMediaCaptureSession::qt_metacast(param1);
 }
 
-int QMediaCaptureSession_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMediaCaptureSession_virtualbase_metacall(VirtualQMediaCaptureSession* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMediaCaptureSession::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QMediaCaptureSession_virtualbase_event(void* self, QEvent* event) {
+bool QMediaCaptureSession_virtualbase_event(VirtualQMediaCaptureSession* self, QEvent* event) {
 
-	return ( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::event(event);
-
+	return self->QMediaCaptureSession::event(event);
 }
 
-bool QMediaCaptureSession_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QMediaCaptureSession_virtualbase_eventFilter(VirtualQMediaCaptureSession* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::eventFilter(watched, event);
-
+	return self->QMediaCaptureSession::eventFilter(watched, event);
 }
 
-void QMediaCaptureSession_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMediaCaptureSession_virtualbase_timerEvent(VirtualQMediaCaptureSession* self, QTimerEvent* event) {
 
-	( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::timerEvent(event);
-
+	self->QMediaCaptureSession::timerEvent(event);
 }
 
-void QMediaCaptureSession_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMediaCaptureSession_virtualbase_childEvent(VirtualQMediaCaptureSession* self, QChildEvent* event) {
 
-	( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::childEvent(event);
-
+	self->QMediaCaptureSession::childEvent(event);
 }
 
-void QMediaCaptureSession_virtualbase_customEvent(void* self, QEvent* event) {
+void QMediaCaptureSession_virtualbase_customEvent(VirtualQMediaCaptureSession* self, QEvent* event) {
 
-	( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::customEvent(event);
-
+	self->QMediaCaptureSession::customEvent(event);
 }
 
-void QMediaCaptureSession_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMediaCaptureSession_virtualbase_connectNotify(VirtualQMediaCaptureSession* self, QMetaMethod* signal) {
 
-	( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::connectNotify(*signal);
-
+	self->QMediaCaptureSession::connectNotify(*signal);
 }
 
-void QMediaCaptureSession_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMediaCaptureSession_virtualbase_disconnectNotify(VirtualQMediaCaptureSession* self, QMetaMethod* signal) {
 
-	( (VirtualQMediaCaptureSession*)(self) )->QMediaCaptureSession::disconnectNotify(*signal);
-
+	self->QMediaCaptureSession::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMediaCaptureSession_staticMetaObject() { return &QMediaCaptureSession::staticMetaObject; }
-QObject* QMediaCaptureSession_protectedbase_sender(const void* self) {
-	VirtualQMediaCaptureSession* self_cast = static_cast<VirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
-	
-	return self_cast->sender();
 
+const QMediaCaptureSession_VTable* QMediaCaptureSession_vtbl(const VirtualQMediaCaptureSession* self) { return self->vtbl; }
+void* QMediaCaptureSession_vdata(const VirtualQMediaCaptureSession* self) { return self->vdata; }
+void QMediaCaptureSession_setVdata(VirtualQMediaCaptureSession* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QMediaCaptureSession_protectedbase_sender(const VirtualQMediaCaptureSession* self) {
+	return self->sender();
 }
 
-int QMediaCaptureSession_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMediaCaptureSession* self_cast = static_cast<VirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMediaCaptureSession_protectedbase_senderSignalIndex(const VirtualQMediaCaptureSession* self) {
+	return self->senderSignalIndex();
 }
 
-int QMediaCaptureSession_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMediaCaptureSession* self_cast = static_cast<VirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMediaCaptureSession_protectedbase_receivers(const VirtualQMediaCaptureSession* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMediaCaptureSession_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMediaCaptureSession* self_cast = static_cast<VirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMediaCaptureSession_protectedbase_isSignalConnected(const VirtualQMediaCaptureSession* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMediaCaptureSession_delete(QMediaCaptureSession* self) {

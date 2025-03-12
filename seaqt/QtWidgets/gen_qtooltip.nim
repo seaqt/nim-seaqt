@@ -64,25 +64,25 @@ proc fcQToolTip_showText5(pos: pointer, text: struct_miqt_string, w: pointer, re
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string): void =
   fcQToolTip_showText(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc hideText*(_: type gen_qtooltip_types.QToolTip, ): void =
+proc hideText*(_: type gen_qtooltip_types.QToolTip): void =
   fcQToolTip_hideText()
 
-proc isVisible*(_: type gen_qtooltip_types.QToolTip, ): bool =
+proc isVisible*(_: type gen_qtooltip_types.QToolTip): bool =
   fcQToolTip_isVisible()
 
-proc text*(_: type gen_qtooltip_types.QToolTip, ): string =
+proc text*(_: type gen_qtooltip_types.QToolTip): string =
   let v_ms = fcQToolTip_text()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc palette*(_: type gen_qtooltip_types.QToolTip, ): gen_qpalette_types.QPalette =
+proc palette*(_: type gen_qtooltip_types.QToolTip): gen_qpalette_types.QPalette =
   gen_qpalette_types.QPalette(h: fcQToolTip_palette(), owned: true)
 
 proc setPalette*(_: type gen_qtooltip_types.QToolTip, palette: gen_qpalette_types.QPalette): void =
   fcQToolTip_setPalette(palette.h)
 
-proc font*(_: type gen_qtooltip_types.QToolTip, ): gen_qfont_types.QFont =
+proc font*(_: type gen_qtooltip_types.QToolTip): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQToolTip_font(), owned: true)
 
 proc setFont*(_: type gen_qtooltip_types.QToolTip, font: gen_qfont_types.QFont): void =

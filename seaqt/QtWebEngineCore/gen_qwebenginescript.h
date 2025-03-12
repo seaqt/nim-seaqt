@@ -24,6 +24,7 @@ typedef struct QWebEngineScript QWebEngineScript;
 
 QWebEngineScript* QWebEngineScript_new();
 QWebEngineScript* QWebEngineScript_new2(QWebEngineScript* other);
+
 void QWebEngineScript_operatorAssign(QWebEngineScript* self, QWebEngineScript* other);
 struct miqt_string QWebEngineScript_name(const QWebEngineScript* self);
 void QWebEngineScript_setName(QWebEngineScript* self, struct miqt_string name);
@@ -40,6 +41,7 @@ void QWebEngineScript_setRunsOnSubFrames(QWebEngineScript* self, bool on);
 bool QWebEngineScript_operatorEqual(const QWebEngineScript* self, QWebEngineScript* other);
 bool QWebEngineScript_operatorNotEqual(const QWebEngineScript* self, QWebEngineScript* other);
 void QWebEngineScript_swap(QWebEngineScript* self, QWebEngineScript* other);
+
 const QMetaObject* QWebEngineScript_staticMetaObject();
 void QWebEngineScript_delete(QWebEngineScript* self);
 

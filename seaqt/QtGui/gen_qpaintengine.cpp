@@ -23,15 +23,6 @@
 #include <QTransform>
 #include <qpaintengine.h>
 #include "gen_qpaintengine.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 double QTextItem_descent(const QTextItem* self) {
 	qreal _ret = self->descent();
 	return static_cast<double>(_ret);
@@ -72,15 +63,18 @@ void QTextItem_delete(QTextItem* self) {
 }
 
 class VirtualQPaintEngine final : public QPaintEngine {
-	struct QPaintEngine_VTable* vtbl;
+	const QPaintEngine_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPaintEngine_VTable* QPaintEngine_vtbl(const VirtualQPaintEngine* self);
+	friend void* QPaintEngine_vdata(const VirtualQPaintEngine* self);
+	friend void QPaintEngine_setVdata(VirtualQPaintEngine* self, void* vdata);
 
-	VirtualQPaintEngine(struct QPaintEngine_VTable* vtbl): QPaintEngine(), vtbl(vtbl) {};
-	VirtualQPaintEngine(struct QPaintEngine_VTable* vtbl, QPaintEngine::PaintEngineFeatures features): QPaintEngine(features), vtbl(vtbl) {};
+	VirtualQPaintEngine(const QPaintEngine_VTable* vtbl, void* vdata): QPaintEngine(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPaintEngine(const QPaintEngine_VTable* vtbl, void* vdata, QPaintEngine::PaintEngineFeatures features): QPaintEngine(features), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPaintEngine() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPaintEngine() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool begin(QPaintDevice* pdev) override {
 		if (vtbl->begin == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -88,24 +82,22 @@ public:
 
 		QPaintDevice* sigval1 = pdev;
 
-		bool callback_return_value = vtbl->begin(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->begin(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool end() override {
 		if (vtbl->end == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->end(vtbl, this);
+		bool callback_return_value = vtbl->end(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateState(const QPaintEngineState& state) override {
 		if (vtbl->updateState == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -115,11 +107,10 @@ public:
 		// Cast returned reference into pointer
 		QPaintEngineState* sigval1 = const_cast<QPaintEngineState*>(&state_ret);
 
-		vtbl->updateState(vtbl, this, sigval1);
+		vtbl->updateState(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawRects(const QRect* rects, int rectCount) override {
 		if (vtbl->drawRects == 0) {
 			QPaintEngine::drawRects(rects, rectCount);
@@ -129,13 +120,12 @@ public:
 		QRect* sigval1 = (QRect*) rects;
 		int sigval2 = rectCount;
 
-		vtbl->drawRects(vtbl, this, sigval1, sigval2);
+		vtbl->drawRects(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawRects(void* self, QRect* rects, int rectCount);
+	friend void QPaintEngine_virtualbase_drawRects(VirtualQPaintEngine* self, QRect* rects, int rectCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawRects(const QRectF* rects, int rectCount) override {
 		if (vtbl->drawRects2 == 0) {
 			QPaintEngine::drawRects(rects, rectCount);
@@ -145,13 +135,12 @@ public:
 		QRectF* sigval1 = (QRectF*) rects;
 		int sigval2 = rectCount;
 
-		vtbl->drawRects2(vtbl, this, sigval1, sigval2);
+		vtbl->drawRects2(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawRects2(void* self, QRectF* rects, int rectCount);
+	friend void QPaintEngine_virtualbase_drawRects2(VirtualQPaintEngine* self, QRectF* rects, int rectCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawLines(const QLine* lines, int lineCount) override {
 		if (vtbl->drawLines == 0) {
 			QPaintEngine::drawLines(lines, lineCount);
@@ -161,13 +150,12 @@ public:
 		QLine* sigval1 = (QLine*) lines;
 		int sigval2 = lineCount;
 
-		vtbl->drawLines(vtbl, this, sigval1, sigval2);
+		vtbl->drawLines(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawLines(void* self, QLine* lines, int lineCount);
+	friend void QPaintEngine_virtualbase_drawLines(VirtualQPaintEngine* self, QLine* lines, int lineCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawLines(const QLineF* lines, int lineCount) override {
 		if (vtbl->drawLines2 == 0) {
 			QPaintEngine::drawLines(lines, lineCount);
@@ -177,13 +165,12 @@ public:
 		QLineF* sigval1 = (QLineF*) lines;
 		int sigval2 = lineCount;
 
-		vtbl->drawLines2(vtbl, this, sigval1, sigval2);
+		vtbl->drawLines2(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawLines2(void* self, QLineF* lines, int lineCount);
+	friend void QPaintEngine_virtualbase_drawLines2(VirtualQPaintEngine* self, QLineF* lines, int lineCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawEllipse(const QRectF& r) override {
 		if (vtbl->drawEllipse == 0) {
 			QPaintEngine::drawEllipse(r);
@@ -194,13 +181,12 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&r_ret);
 
-		vtbl->drawEllipse(vtbl, this, sigval1);
+		vtbl->drawEllipse(this, sigval1);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawEllipse(void* self, QRectF* r);
+	friend void QPaintEngine_virtualbase_drawEllipse(VirtualQPaintEngine* self, QRectF* r);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawEllipse(const QRect& r) override {
 		if (vtbl->drawEllipseWithQRect == 0) {
 			QPaintEngine::drawEllipse(r);
@@ -211,13 +197,12 @@ public:
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&r_ret);
 
-		vtbl->drawEllipseWithQRect(vtbl, this, sigval1);
+		vtbl->drawEllipseWithQRect(this, sigval1);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawEllipseWithQRect(void* self, QRect* r);
+	friend void QPaintEngine_virtualbase_drawEllipseWithQRect(VirtualQPaintEngine* self, QRect* r);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPath(const QPainterPath& path) override {
 		if (vtbl->drawPath == 0) {
 			QPaintEngine::drawPath(path);
@@ -228,13 +213,12 @@ public:
 		// Cast returned reference into pointer
 		QPainterPath* sigval1 = const_cast<QPainterPath*>(&path_ret);
 
-		vtbl->drawPath(vtbl, this, sigval1);
+		vtbl->drawPath(this, sigval1);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawPath(void* self, QPainterPath* path);
+	friend void QPaintEngine_virtualbase_drawPath(VirtualQPaintEngine* self, QPainterPath* path);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPoints(const QPointF* points, int pointCount) override {
 		if (vtbl->drawPoints == 0) {
 			QPaintEngine::drawPoints(points, pointCount);
@@ -244,13 +228,12 @@ public:
 		QPointF* sigval1 = (QPointF*) points;
 		int sigval2 = pointCount;
 
-		vtbl->drawPoints(vtbl, this, sigval1, sigval2);
+		vtbl->drawPoints(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawPoints(void* self, QPointF* points, int pointCount);
+	friend void QPaintEngine_virtualbase_drawPoints(VirtualQPaintEngine* self, QPointF* points, int pointCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPoints(const QPoint* points, int pointCount) override {
 		if (vtbl->drawPoints2 == 0) {
 			QPaintEngine::drawPoints(points, pointCount);
@@ -260,13 +243,12 @@ public:
 		QPoint* sigval1 = (QPoint*) points;
 		int sigval2 = pointCount;
 
-		vtbl->drawPoints2(vtbl, this, sigval1, sigval2);
+		vtbl->drawPoints2(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawPoints2(void* self, QPoint* points, int pointCount);
+	friend void QPaintEngine_virtualbase_drawPoints2(VirtualQPaintEngine* self, QPoint* points, int pointCount);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPolygon(const QPointF* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
 		if (vtbl->drawPolygon == 0) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
@@ -278,13 +260,12 @@ public:
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
 
-		vtbl->drawPolygon(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->drawPolygon(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawPolygon(void* self, QPointF* points, int pointCount, int mode);
+	friend void QPaintEngine_virtualbase_drawPolygon(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPolygon(const QPoint* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
 		if (vtbl->drawPolygon2 == 0) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
@@ -296,13 +277,12 @@ public:
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
 
-		vtbl->drawPolygon2(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->drawPolygon2(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawPolygon2(void* self, QPoint* points, int pointCount, int mode);
+	friend void QPaintEngine_virtualbase_drawPolygon2(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPixmap(const QRectF& r, const QPixmap& pm, const QRectF& sr) override {
 		if (vtbl->drawPixmap == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -318,11 +298,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&sr_ret);
 
-		vtbl->drawPixmap(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->drawPixmap(this, sigval1, sigval2, sigval3);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawTextItem(const QPointF& p, const QTextItem& textItem) override {
 		if (vtbl->drawTextItem == 0) {
 			QPaintEngine::drawTextItem(p, textItem);
@@ -336,13 +315,12 @@ public:
 		// Cast returned reference into pointer
 		QTextItem* sigval2 = const_cast<QTextItem*>(&textItem_ret);
 
-		vtbl->drawTextItem(vtbl, this, sigval1, sigval2);
+		vtbl->drawTextItem(this, sigval1, sigval2);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawTextItem(void* self, QPointF* p, QTextItem* textItem);
+	friend void QPaintEngine_virtualbase_drawTextItem(VirtualQPaintEngine* self, QPointF* p, QTextItem* textItem);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawTiledPixmap(const QRectF& r, const QPixmap& pixmap, const QPointF& s) override {
 		if (vtbl->drawTiledPixmap == 0) {
 			QPaintEngine::drawTiledPixmap(r, pixmap, s);
@@ -359,13 +337,12 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval3 = const_cast<QPointF*>(&s_ret);
 
-		vtbl->drawTiledPixmap(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->drawTiledPixmap(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pixmap, QPointF* s);
+	friend void QPaintEngine_virtualbase_drawTiledPixmap(VirtualQPaintEngine* self, QRectF* r, QPixmap* pixmap, QPointF* s);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawImage(const QRectF& r, const QImage& pm, const QRectF& sr, Qt::ImageConversionFlags flags) override {
 		if (vtbl->drawImage == 0) {
 			QPaintEngine::drawImage(r, pm, sr, flags);
@@ -384,41 +361,38 @@ public:
 		Qt::ImageConversionFlags flags_ret = flags;
 		int sigval4 = static_cast<int>(flags_ret);
 
-		vtbl->drawImage(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->drawImage(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
+	friend void QPaintEngine_virtualbase_drawImage(VirtualQPaintEngine* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPoint coordinateOffset() const override {
 		if (vtbl->coordinateOffset == 0) {
 			return QPaintEngine::coordinateOffset();
 		}
 
 
-		QPoint* callback_return_value = vtbl->coordinateOffset(vtbl, this);
+		QPoint* callback_return_value = vtbl->coordinateOffset(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self);
+	friend QPoint* QPaintEngine_virtualbase_coordinateOffset(const VirtualQPaintEngine* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine::Type type() const override {
 		if (vtbl->type == 0) {
 			return (QPaintEngine::Type)(0); // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<QPaintEngine::Type>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPixmap createPixmap(QSize size) override {
 		if (vtbl->createPixmap == 0) {
 			return QPaintEngine::createPixmap(size);
@@ -426,16 +400,15 @@ public:
 
 		QSize* sigval1 = new QSize(size);
 
-		QPixmap* callback_return_value = vtbl->createPixmap(vtbl, this, sigval1);
+		QPixmap* callback_return_value = vtbl->createPixmap(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPixmap* QPaintEngine_virtualbase_createPixmap(void* self, QSize* size);
+	friend QPixmap* QPaintEngine_virtualbase_createPixmap(VirtualQPaintEngine* self, QSize* size);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPixmap createPixmapFromImage(QImage image, Qt::ImageConversionFlags flags) override {
 		if (vtbl->createPixmapFromImage == 0) {
 			return QPaintEngine::createPixmapFromImage(image, flags);
@@ -445,23 +418,23 @@ public:
 		Qt::ImageConversionFlags flags_ret = flags;
 		int sigval2 = static_cast<int>(flags_ret);
 
-		QPixmap* callback_return_value = vtbl->createPixmapFromImage(vtbl, this, sigval1, sigval2);
+		QPixmap* callback_return_value = vtbl->createPixmapFromImage(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(void* self, QImage* image, int flags);
+	friend QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(VirtualQPaintEngine* self, QImage* image, int flags);
 
 };
 
-QPaintEngine* QPaintEngine_new(struct QPaintEngine_VTable* vtbl) {
-	return new VirtualQPaintEngine(vtbl);
+VirtualQPaintEngine* QPaintEngine_new(const QPaintEngine_VTable* vtbl, void* vdata) {
+	return new VirtualQPaintEngine(vtbl, vdata);
 }
 
-QPaintEngine* QPaintEngine_new2(struct QPaintEngine_VTable* vtbl, int features) {
-	return new VirtualQPaintEngine(vtbl, static_cast<QPaintEngine::PaintEngineFeatures>(features));
+VirtualQPaintEngine* QPaintEngine_new2(const QPaintEngine_VTable* vtbl, void* vdata, int features) {
+	return new VirtualQPaintEngine(vtbl, vdata, static_cast<QPaintEngine::PaintEngineFeatures>(features));
 }
 
 bool QPaintEngine_isActive(const QPaintEngine* self) {
@@ -617,107 +590,94 @@ QPixmap* QPaintEngine_createPixmapFromImage(QPaintEngine* self, QImage* image, i
 	return new QPixmap(self->createPixmapFromImage(*image, static_cast<Qt::ImageConversionFlags>(flags)));
 }
 
-void QPaintEngine_virtualbase_drawRects(void* self, QRect* rects, int rectCount) {
+void QPaintEngine_virtualbase_drawRects(VirtualQPaintEngine* self, QRect* rects, int rectCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
-
+	self->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_virtualbase_drawRects2(void* self, QRectF* rects, int rectCount) {
+void QPaintEngine_virtualbase_drawRects2(VirtualQPaintEngine* self, QRectF* rects, int rectCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
-
+	self->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_virtualbase_drawLines(void* self, QLine* lines, int lineCount) {
+void QPaintEngine_virtualbase_drawLines(VirtualQPaintEngine* self, QLine* lines, int lineCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
-
+	self->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_virtualbase_drawLines2(void* self, QLineF* lines, int lineCount) {
+void QPaintEngine_virtualbase_drawLines2(VirtualQPaintEngine* self, QLineF* lines, int lineCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
-
+	self->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_virtualbase_drawEllipse(void* self, QRectF* r) {
+void QPaintEngine_virtualbase_drawEllipse(VirtualQPaintEngine* self, QRectF* r) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawEllipse(*r);
-
+	self->QPaintEngine::drawEllipse(*r);
 }
 
-void QPaintEngine_virtualbase_drawEllipseWithQRect(void* self, QRect* r) {
+void QPaintEngine_virtualbase_drawEllipseWithQRect(VirtualQPaintEngine* self, QRect* r) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawEllipse(*r);
-
+	self->QPaintEngine::drawEllipse(*r);
 }
 
-void QPaintEngine_virtualbase_drawPath(void* self, QPainterPath* path) {
+void QPaintEngine_virtualbase_drawPath(VirtualQPaintEngine* self, QPainterPath* path) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawPath(*path);
-
+	self->QPaintEngine::drawPath(*path);
 }
 
-void QPaintEngine_virtualbase_drawPoints(void* self, QPointF* points, int pointCount) {
+void QPaintEngine_virtualbase_drawPoints(VirtualQPaintEngine* self, QPointF* points, int pointCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
-
+	self->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_virtualbase_drawPoints2(void* self, QPoint* points, int pointCount) {
+void QPaintEngine_virtualbase_drawPoints2(VirtualQPaintEngine* self, QPoint* points, int pointCount) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
-
+	self->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_virtualbase_drawPolygon(void* self, QPointF* points, int pointCount, int mode) {
+void QPaintEngine_virtualbase_drawPolygon(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
-
+	self->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
 }
 
-void QPaintEngine_virtualbase_drawPolygon2(void* self, QPoint* points, int pointCount, int mode) {
+void QPaintEngine_virtualbase_drawPolygon2(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
-
+	self->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
 }
 
-void QPaintEngine_virtualbase_drawTextItem(void* self, QPointF* p, QTextItem* textItem) {
+void QPaintEngine_virtualbase_drawTextItem(VirtualQPaintEngine* self, QPointF* p, QTextItem* textItem) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawTextItem(*p, *textItem);
-
+	self->QPaintEngine::drawTextItem(*p, *textItem);
 }
 
-void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pixmap, QPointF* s) {
+void QPaintEngine_virtualbase_drawTiledPixmap(VirtualQPaintEngine* self, QRectF* r, QPixmap* pixmap, QPointF* s) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawTiledPixmap(*r, *pixmap, *s);
-
+	self->QPaintEngine::drawTiledPixmap(*r, *pixmap, *s);
 }
 
-void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRectF* sr, int flags) {
+void QPaintEngine_virtualbase_drawImage(VirtualQPaintEngine* self, QRectF* r, QImage* pm, QRectF* sr, int flags) {
 
-	( (VirtualQPaintEngine*)(self) )->QPaintEngine::drawImage(*r, *pm, *sr, static_cast<Qt::ImageConversionFlags>(flags));
-
+	self->QPaintEngine::drawImage(*r, *pm, *sr, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
-QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self) {
+QPoint* QPaintEngine_virtualbase_coordinateOffset(const VirtualQPaintEngine* self) {
 
-	return new QPoint(( (const VirtualQPaintEngine*)(self) )->QPaintEngine::coordinateOffset());
-
+	return new QPoint(self->QPaintEngine::coordinateOffset());
 }
 
-QPixmap* QPaintEngine_virtualbase_createPixmap(void* self, QSize* size) {
+QPixmap* QPaintEngine_virtualbase_createPixmap(VirtualQPaintEngine* self, QSize* size) {
 
-	return new QPixmap(( (VirtualQPaintEngine*)(self) )->QPaintEngine::createPixmap(*size));
-
+	return new QPixmap(self->QPaintEngine::createPixmap(*size));
 }
 
-QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(void* self, QImage* image, int flags) {
+QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(VirtualQPaintEngine* self, QImage* image, int flags) {
 
-	return new QPixmap(( (VirtualQPaintEngine*)(self) )->QPaintEngine::createPixmapFromImage(*image, static_cast<Qt::ImageConversionFlags>(flags)));
-
+	return new QPixmap(self->QPaintEngine::createPixmapFromImage(*image, static_cast<Qt::ImageConversionFlags>(flags)));
 }
+
+const QPaintEngine_VTable* QPaintEngine_vtbl(const VirtualQPaintEngine* self) { return self->vtbl; }
+void* QPaintEngine_vdata(const VirtualQPaintEngine* self) { return self->vdata; }
+void QPaintEngine_setVdata(VirtualQPaintEngine* self, void* vdata) { self->vdata = vdata; }
 
 void QPaintEngine_delete(QPaintEngine* self) {
 	delete self;

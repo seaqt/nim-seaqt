@@ -1,15 +1,6 @@
 #include <QQuickGraphicsDevice>
 #include <qquickgraphicsdevice.h>
 #include "gen_qquickgraphicsdevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQuickGraphicsDevice* QQuickGraphicsDevice_new() {
 	return new QQuickGraphicsDevice();
 }

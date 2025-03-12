@@ -23,6 +23,7 @@ typedef struct QWebEngineFileSystemAccessRequest QWebEngineFileSystemAccessReque
 #endif
 
 QWebEngineFileSystemAccessRequest* QWebEngineFileSystemAccessRequest_new(QWebEngineFileSystemAccessRequest* other);
+
 void QWebEngineFileSystemAccessRequest_operatorAssign(QWebEngineFileSystemAccessRequest* self, QWebEngineFileSystemAccessRequest* other);
 void QWebEngineFileSystemAccessRequest_swap(QWebEngineFileSystemAccessRequest* self, QWebEngineFileSystemAccessRequest* other);
 void QWebEngineFileSystemAccessRequest_accept(QWebEngineFileSystemAccessRequest* self);
@@ -31,6 +32,7 @@ QUrl* QWebEngineFileSystemAccessRequest_origin(const QWebEngineFileSystemAccessR
 QUrl* QWebEngineFileSystemAccessRequest_filePath(const QWebEngineFileSystemAccessRequest* self);
 int QWebEngineFileSystemAccessRequest_handleType(const QWebEngineFileSystemAccessRequest* self);
 int QWebEngineFileSystemAccessRequest_accessFlags(const QWebEngineFileSystemAccessRequest* self);
+
 const QMetaObject* QWebEngineFileSystemAccessRequest_staticMetaObject();
 void QWebEngineFileSystemAccessRequest_delete(QWebEngineFileSystemAccessRequest* self);
 

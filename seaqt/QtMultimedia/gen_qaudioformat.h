@@ -22,6 +22,7 @@ typedef struct QAudioFormat QAudioFormat;
 
 QAudioFormat* QAudioFormat_new();
 QAudioFormat* QAudioFormat_new2(QAudioFormat* param1);
+
 bool QAudioFormat_isValid(const QAudioFormat* self);
 void QAudioFormat_setSampleRate(QAudioFormat* self, int sampleRate);
 int QAudioFormat_sampleRate(const QAudioFormat* self);
@@ -42,6 +43,7 @@ int QAudioFormat_bytesPerFrame(const QAudioFormat* self);
 int QAudioFormat_bytesPerSample(const QAudioFormat* self);
 float QAudioFormat_normalizedSampleValue(const QAudioFormat* self, const void* sample);
 uint32_t QAudioFormat_defaultChannelConfigForChannelCount(int channelCount);
+
 void QAudioFormat_delete(QAudioFormat* self);
 
 #ifdef __cplusplus

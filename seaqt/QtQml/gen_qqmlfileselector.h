@@ -36,21 +36,28 @@ typedef struct QQmlFileSelector QQmlFileSelector;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QQmlFileSelector_VTable {
-	void (*destructor)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self);
-	QMetaObject* (*metaObject)(struct QQmlFileSelector_VTable* vtbl, const QQmlFileSelector* self);
-	void* (*metacast)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, const char* param1);
-	int (*metacall)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, int param1, int param2, void** param3);
-	bool (*event)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QEvent* event);
-	bool (*eventFilter)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QTimerEvent* event);
-	void (*childEvent)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QChildEvent* event);
-	void (*customEvent)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QEvent* event);
-	void (*connectNotify)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QQmlFileSelector_VTable* vtbl, QQmlFileSelector* self, QMetaMethod* signal);
-};
-QQmlFileSelector* QQmlFileSelector_new(struct QQmlFileSelector_VTable* vtbl, QQmlEngine* engine);
-QQmlFileSelector* QQmlFileSelector_new2(struct QQmlFileSelector_VTable* vtbl, QQmlEngine* engine, QObject* parent);
+typedef struct VirtualQQmlFileSelector VirtualQQmlFileSelector;
+typedef struct QQmlFileSelector_VTable{
+	void (*destructor)(VirtualQQmlFileSelector* self);
+	QMetaObject* (*metaObject)(const VirtualQQmlFileSelector* self);
+	void* (*metacast)(VirtualQQmlFileSelector* self, const char* param1);
+	int (*metacall)(VirtualQQmlFileSelector* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQQmlFileSelector* self, QEvent* event);
+	bool (*eventFilter)(VirtualQQmlFileSelector* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQQmlFileSelector* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQQmlFileSelector* self, QChildEvent* event);
+	void (*customEvent)(VirtualQQmlFileSelector* self, QEvent* event);
+	void (*connectNotify)(VirtualQQmlFileSelector* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQQmlFileSelector* self, QMetaMethod* signal);
+}QQmlFileSelector_VTable;
+
+const QQmlFileSelector_VTable* QQmlFileSelector_vtbl(const VirtualQQmlFileSelector* self);
+void* QQmlFileSelector_vdata(const VirtualQQmlFileSelector* self);
+void QQmlFileSelector_setVdata(VirtualQQmlFileSelector* self, void* vdata);
+
+VirtualQQmlFileSelector* QQmlFileSelector_new(const QQmlFileSelector_VTable* vtbl, void* vdata, QQmlEngine* engine);
+VirtualQQmlFileSelector* QQmlFileSelector_new2(const QQmlFileSelector_VTable* vtbl, void* vdata, QQmlEngine* engine, QObject* parent);
+
 void QQmlFileSelector_virtbase(QQmlFileSelector* src, QObject** outptr_QObject);
 QMetaObject* QQmlFileSelector_metaObject(const QQmlFileSelector* self);
 void* QQmlFileSelector_metacast(QQmlFileSelector* self, const char* param1);
@@ -62,20 +69,23 @@ void QQmlFileSelector_setExtraSelectors(QQmlFileSelector* self, struct miqt_arra
 QQmlFileSelector* QQmlFileSelector_get(QQmlEngine* param1);
 struct miqt_string QQmlFileSelector_tr2(const char* s, const char* c);
 struct miqt_string QQmlFileSelector_tr3(const char* s, const char* c, int n);
-QMetaObject* QQmlFileSelector_virtualbase_metaObject(const void* self);
-void* QQmlFileSelector_virtualbase_metacast(void* self, const char* param1);
-int QQmlFileSelector_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QQmlFileSelector_virtualbase_event(void* self, QEvent* event);
-bool QQmlFileSelector_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QQmlFileSelector_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QQmlFileSelector_virtualbase_childEvent(void* self, QChildEvent* event);
-void QQmlFileSelector_virtualbase_customEvent(void* self, QEvent* event);
-void QQmlFileSelector_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QQmlFileSelector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlFileSelector_protectedbase_sender(const void* self);
-int QQmlFileSelector_protectedbase_senderSignalIndex(const void* self);
-int QQmlFileSelector_protectedbase_receivers(const void* self, const char* signal);
-bool QQmlFileSelector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QQmlFileSelector_virtualbase_metaObject(const VirtualQQmlFileSelector* self);
+void* QQmlFileSelector_virtualbase_metacast(VirtualQQmlFileSelector* self, const char* param1);
+int QQmlFileSelector_virtualbase_metacall(VirtualQQmlFileSelector* self, int param1, int param2, void** param3);
+bool QQmlFileSelector_virtualbase_event(VirtualQQmlFileSelector* self, QEvent* event);
+bool QQmlFileSelector_virtualbase_eventFilter(VirtualQQmlFileSelector* self, QObject* watched, QEvent* event);
+void QQmlFileSelector_virtualbase_timerEvent(VirtualQQmlFileSelector* self, QTimerEvent* event);
+void QQmlFileSelector_virtualbase_childEvent(VirtualQQmlFileSelector* self, QChildEvent* event);
+void QQmlFileSelector_virtualbase_customEvent(VirtualQQmlFileSelector* self, QEvent* event);
+void QQmlFileSelector_virtualbase_connectNotify(VirtualQQmlFileSelector* self, QMetaMethod* signal);
+void QQmlFileSelector_virtualbase_disconnectNotify(VirtualQQmlFileSelector* self, QMetaMethod* signal);
+
+QObject* QQmlFileSelector_protectedbase_sender(const VirtualQQmlFileSelector* self);
+int QQmlFileSelector_protectedbase_senderSignalIndex(const VirtualQQmlFileSelector* self);
+int QQmlFileSelector_protectedbase_receivers(const VirtualQQmlFileSelector* self, const char* signal);
+bool QQmlFileSelector_protectedbase_isSignalConnected(const VirtualQQmlFileSelector* self, QMetaMethod* signal);
+
 const QMetaObject* QQmlFileSelector_staticMetaObject();
 void QQmlFileSelector_delete(QQmlFileSelector* self);
 

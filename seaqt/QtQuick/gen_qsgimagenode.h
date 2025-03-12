@@ -52,6 +52,7 @@ int QSGImageNode_textureCoordinatesTransform(const QSGImageNode* self);
 void QSGImageNode_setOwnsTexture(QSGImageNode* self, bool owns);
 bool QSGImageNode_ownsTexture(const QSGImageNode* self);
 void QSGImageNode_rebuildGeometry(QSGGeometry* g, QSGTexture* texture, QRectF* rect, QRectF* sourceRect, int texCoordMode);
+
 void QSGImageNode_delete(QSGImageNode* self);
 
 #ifdef __cplusplus

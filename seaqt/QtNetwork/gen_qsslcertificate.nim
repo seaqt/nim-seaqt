@@ -71,34 +71,34 @@ proc fcQSslCertificate_operatorAssign(self: pointer, other: pointer): void {.imp
 proc fcQSslCertificate_swap(self: pointer, other: pointer): void {.importc: "QSslCertificate_swap".}
 proc fcQSslCertificate_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCertificate_operatorEqual".}
 proc fcQSslCertificate_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslCertificate_operatorNotEqual".}
-proc fcQSslCertificate_isNull(self: pointer, ): bool {.importc: "QSslCertificate_isNull".}
-proc fcQSslCertificate_isBlacklisted(self: pointer, ): bool {.importc: "QSslCertificate_isBlacklisted".}
-proc fcQSslCertificate_isSelfSigned(self: pointer, ): bool {.importc: "QSslCertificate_isSelfSigned".}
-proc fcQSslCertificate_clear(self: pointer, ): void {.importc: "QSslCertificate_clear".}
-proc fcQSslCertificate_version(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_version".}
-proc fcQSslCertificate_serialNumber(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_serialNumber".}
-proc fcQSslCertificate_digest(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_digest".}
+proc fcQSslCertificate_isNull(self: pointer): bool {.importc: "QSslCertificate_isNull".}
+proc fcQSslCertificate_isBlacklisted(self: pointer): bool {.importc: "QSslCertificate_isBlacklisted".}
+proc fcQSslCertificate_isSelfSigned(self: pointer): bool {.importc: "QSslCertificate_isSelfSigned".}
+proc fcQSslCertificate_clear(self: pointer): void {.importc: "QSslCertificate_clear".}
+proc fcQSslCertificate_version(self: pointer): struct_miqt_string {.importc: "QSslCertificate_version".}
+proc fcQSslCertificate_serialNumber(self: pointer): struct_miqt_string {.importc: "QSslCertificate_serialNumber".}
+proc fcQSslCertificate_digest(self: pointer): struct_miqt_string {.importc: "QSslCertificate_digest".}
 proc fcQSslCertificate_issuerInfo(self: pointer, info: cint): struct_miqt_array {.importc: "QSslCertificate_issuerInfo".}
 proc fcQSslCertificate_issuerInfoWithAttribute(self: pointer, attribute: struct_miqt_string): struct_miqt_array {.importc: "QSslCertificate_issuerInfoWithAttribute".}
 proc fcQSslCertificate_subjectInfo(self: pointer, info: cint): struct_miqt_array {.importc: "QSslCertificate_subjectInfo".}
 proc fcQSslCertificate_subjectInfoWithAttribute(self: pointer, attribute: struct_miqt_string): struct_miqt_array {.importc: "QSslCertificate_subjectInfoWithAttribute".}
-proc fcQSslCertificate_issuerDisplayName(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_issuerDisplayName".}
-proc fcQSslCertificate_subjectDisplayName(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_subjectDisplayName".}
-proc fcQSslCertificate_subjectInfoAttributes(self: pointer, ): struct_miqt_array {.importc: "QSslCertificate_subjectInfoAttributes".}
-proc fcQSslCertificate_issuerInfoAttributes(self: pointer, ): struct_miqt_array {.importc: "QSslCertificate_issuerInfoAttributes".}
-proc fcQSslCertificate_effectiveDate(self: pointer, ): pointer {.importc: "QSslCertificate_effectiveDate".}
-proc fcQSslCertificate_expiryDate(self: pointer, ): pointer {.importc: "QSslCertificate_expiryDate".}
-proc fcQSslCertificate_publicKey(self: pointer, ): pointer {.importc: "QSslCertificate_publicKey".}
-proc fcQSslCertificate_extensions(self: pointer, ): struct_miqt_array {.importc: "QSslCertificate_extensions".}
-proc fcQSslCertificate_toPem(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_toPem".}
-proc fcQSslCertificate_toDer(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_toDer".}
-proc fcQSslCertificate_toText(self: pointer, ): struct_miqt_string {.importc: "QSslCertificate_toText".}
+proc fcQSslCertificate_issuerDisplayName(self: pointer): struct_miqt_string {.importc: "QSslCertificate_issuerDisplayName".}
+proc fcQSslCertificate_subjectDisplayName(self: pointer): struct_miqt_string {.importc: "QSslCertificate_subjectDisplayName".}
+proc fcQSslCertificate_subjectInfoAttributes(self: pointer): struct_miqt_array {.importc: "QSslCertificate_subjectInfoAttributes".}
+proc fcQSslCertificate_issuerInfoAttributes(self: pointer): struct_miqt_array {.importc: "QSslCertificate_issuerInfoAttributes".}
+proc fcQSslCertificate_effectiveDate(self: pointer): pointer {.importc: "QSslCertificate_effectiveDate".}
+proc fcQSslCertificate_expiryDate(self: pointer): pointer {.importc: "QSslCertificate_expiryDate".}
+proc fcQSslCertificate_publicKey(self: pointer): pointer {.importc: "QSslCertificate_publicKey".}
+proc fcQSslCertificate_extensions(self: pointer): struct_miqt_array {.importc: "QSslCertificate_extensions".}
+proc fcQSslCertificate_toPem(self: pointer): struct_miqt_string {.importc: "QSslCertificate_toPem".}
+proc fcQSslCertificate_toDer(self: pointer): struct_miqt_string {.importc: "QSslCertificate_toDer".}
+proc fcQSslCertificate_toText(self: pointer): struct_miqt_string {.importc: "QSslCertificate_toText".}
 proc fcQSslCertificate_fromPath(path: struct_miqt_string): struct_miqt_array {.importc: "QSslCertificate_fromPath".}
 proc fcQSslCertificate_fromDevice(device: pointer): struct_miqt_array {.importc: "QSslCertificate_fromDevice".}
 proc fcQSslCertificate_fromData(data: struct_miqt_string): struct_miqt_array {.importc: "QSslCertificate_fromData".}
 proc fcQSslCertificate_verify(certificateChain: struct_miqt_array): struct_miqt_array {.importc: "QSslCertificate_verify".}
 proc fcQSslCertificate_importPkcs12(device: pointer, key: pointer, cert: pointer): bool {.importc: "QSslCertificate_importPkcs12".}
-proc fcQSslCertificate_handle(self: pointer, ): pointer {.importc: "QSslCertificate_handle".}
+proc fcQSslCertificate_handle(self: pointer): pointer {.importc: "QSslCertificate_handle".}
 proc fcQSslCertificate_digest1(self: pointer, algorithm: cint): struct_miqt_string {.importc: "QSslCertificate_digest1".}
 proc fcQSslCertificate_fromPath2(path: struct_miqt_string, format: cint): struct_miqt_array {.importc: "QSslCertificate_fromPath2".}
 proc fcQSslCertificate_fromPath3(path: struct_miqt_string, format: cint, syntax: cint): struct_miqt_array {.importc: "QSslCertificate_fromPath3".}
@@ -126,31 +126,31 @@ proc operatorEqual*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_
 proc operatorNotEqual*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): bool =
   fcQSslCertificate_operatorNotEqual(self.h, other.h)
 
-proc isNull*(self: gen_qsslcertificate_types.QSslCertificate, ): bool =
+proc isNull*(self: gen_qsslcertificate_types.QSslCertificate): bool =
   fcQSslCertificate_isNull(self.h)
 
-proc isBlacklisted*(self: gen_qsslcertificate_types.QSslCertificate, ): bool =
+proc isBlacklisted*(self: gen_qsslcertificate_types.QSslCertificate): bool =
   fcQSslCertificate_isBlacklisted(self.h)
 
-proc isSelfSigned*(self: gen_qsslcertificate_types.QSslCertificate, ): bool =
+proc isSelfSigned*(self: gen_qsslcertificate_types.QSslCertificate): bool =
   fcQSslCertificate_isSelfSigned(self.h)
 
-proc clear*(self: gen_qsslcertificate_types.QSslCertificate, ): void =
+proc clear*(self: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslCertificate_clear(self.h)
 
-proc version*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[byte] =
+proc version*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   var v_bytearray = fcQSslCertificate_version(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc serialNumber*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[byte] =
+proc serialNumber*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   var v_bytearray = fcQSslCertificate_serialNumber(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc digest*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[byte] =
+proc digest*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   var v_bytearray = fcQSslCertificate_digest(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -204,19 +204,19 @@ proc subjectInfo*(self: gen_qsslcertificate_types.QSslCertificate, attribute: se
   c_free(v_ma.data)
   vx_ret
 
-proc issuerDisplayName*(self: gen_qsslcertificate_types.QSslCertificate, ): string =
+proc issuerDisplayName*(self: gen_qsslcertificate_types.QSslCertificate): string =
   let v_ms = fcQSslCertificate_issuerDisplayName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc subjectDisplayName*(self: gen_qsslcertificate_types.QSslCertificate, ): string =
+proc subjectDisplayName*(self: gen_qsslcertificate_types.QSslCertificate): string =
   let v_ms = fcQSslCertificate_subjectDisplayName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc subjectInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[seq[byte]] =
+proc subjectInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate): seq[seq[byte]] =
   var v_ma = fcQSslCertificate_subjectInfoAttributes(self.h)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -228,7 +228,7 @@ proc subjectInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate, ): 
   c_free(v_ma.data)
   vx_ret
 
-proc issuerInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[seq[byte]] =
+proc issuerInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate): seq[seq[byte]] =
   var v_ma = fcQSslCertificate_issuerInfoAttributes(self.h)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -240,16 +240,16 @@ proc issuerInfoAttributes*(self: gen_qsslcertificate_types.QSslCertificate, ): s
   c_free(v_ma.data)
   vx_ret
 
-proc effectiveDate*(self: gen_qsslcertificate_types.QSslCertificate, ): gen_qdatetime_types.QDateTime =
+proc effectiveDate*(self: gen_qsslcertificate_types.QSslCertificate): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQSslCertificate_effectiveDate(self.h), owned: true)
 
-proc expiryDate*(self: gen_qsslcertificate_types.QSslCertificate, ): gen_qdatetime_types.QDateTime =
+proc expiryDate*(self: gen_qsslcertificate_types.QSslCertificate): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQSslCertificate_expiryDate(self.h), owned: true)
 
-proc publicKey*(self: gen_qsslcertificate_types.QSslCertificate, ): gen_qsslkey_types.QSslKey =
+proc publicKey*(self: gen_qsslcertificate_types.QSslCertificate): gen_qsslkey_types.QSslKey =
   gen_qsslkey_types.QSslKey(h: fcQSslCertificate_publicKey(self.h), owned: true)
 
-proc extensions*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[gen_qsslcertificateextension_types.QSslCertificateExtension] =
+proc extensions*(self: gen_qsslcertificate_types.QSslCertificate): seq[gen_qsslcertificateextension_types.QSslCertificateExtension] =
   var v_ma = fcQSslCertificate_extensions(self.h)
   var vx_ret = newSeq[gen_qsslcertificateextension_types.QSslCertificateExtension](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -258,19 +258,19 @@ proc extensions*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[gen_qss
   c_free(v_ma.data)
   vx_ret
 
-proc toPem*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[byte] =
+proc toPem*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   var v_bytearray = fcQSslCertificate_toPem(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toDer*(self: gen_qsslcertificate_types.QSslCertificate, ): seq[byte] =
+proc toDer*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   var v_bytearray = fcQSslCertificate_toDer(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toText*(self: gen_qsslcertificate_types.QSslCertificate, ): string =
+proc toText*(self: gen_qsslcertificate_types.QSslCertificate): string =
   let v_ms = fcQSslCertificate_toText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -319,7 +319,7 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
 proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice, key: gen_qsslkey_types.QSslKey, cert: gen_qsslcertificate_types.QSslCertificate): bool =
   fcQSslCertificate_importPkcs12(device.h, key.h, cert.h)
 
-proc handle*(self: gen_qsslcertificate_types.QSslCertificate, ): pointer =
+proc handle*(self: gen_qsslcertificate_types.QSslCertificate): pointer =
   fcQSslCertificate_handle(self.h)
 
 proc digest*(self: gen_qsslcertificate_types.QSslCertificate, algorithm: cint): seq[byte] =

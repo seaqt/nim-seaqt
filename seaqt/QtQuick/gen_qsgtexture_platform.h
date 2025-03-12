@@ -32,7 +32,9 @@ typedef struct QNativeInterface__QSGVulkanTexture QNativeInterface__QSGVulkanTex
 
 QNativeInterface__QSGOpenGLTexture* QNativeInterface__QSGOpenGLTexture_new();
 
+
 QNativeInterface__QSGVulkanTexture* QNativeInterface__QSGVulkanTexture_new();
+
 
 #ifdef __cplusplus
 } /* extern C */

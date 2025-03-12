@@ -43,6 +43,7 @@ QJSManagedValue* QJSManagedValue_new2(QJSValue* value, QJSEngine* engine);
 QJSManagedValue* QJSManagedValue_new3(QJSPrimitiveValue* value, QJSEngine* engine);
 QJSManagedValue* QJSManagedValue_new4(QVariant* variant, QJSEngine* engine);
 QJSManagedValue* QJSManagedValue_new5(struct miqt_string string, QJSEngine* engine);
+
 bool QJSManagedValue_equals(const QJSManagedValue* self, QJSManagedValue* other);
 bool QJSManagedValue_strictlyEquals(const QJSManagedValue* self, QJSManagedValue* other);
 QJSEngine* QJSManagedValue_engine(const QJSManagedValue* self);
@@ -99,6 +100,7 @@ QJSValue* QJSManagedValue_call1(const QJSManagedValue* self, struct miqt_array /
 QJSValue* QJSManagedValue_callWithInstance2(const QJSManagedValue* self, QJSValue* instance, struct miqt_array /* of QJSValue* */  arguments);
 QJSValue* QJSManagedValue_callAsConstructor1(const QJSManagedValue* self, struct miqt_array /* of QJSValue* */  arguments);
 QJSManagedValue* QJSManagedValue_jsMetaInstantiate1(const QJSManagedValue* self, struct miqt_array /* of QJSValue* */  values);
+
 void QJSManagedValue_delete(QJSManagedValue* self);
 
 #ifdef __cplusplus

@@ -36,22 +36,29 @@ typedef struct QWidget QWidget;
 typedef struct QWidgetAction QWidgetAction;
 #endif
 
-struct QWidgetAction_VTable {
-	void (*destructor)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self);
-	QMetaObject* (*metaObject)(struct QWidgetAction_VTable* vtbl, const QWidgetAction* self);
-	void* (*metacast)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, const char* param1);
-	int (*metacall)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, int param1, int param2, void** param3);
-	bool (*event)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QEvent* param1);
-	bool (*eventFilter)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QObject* param1, QEvent* param2);
-	QWidget* (*createWidget)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QWidget* parent);
-	void (*deleteWidget)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QWidget* widget);
-	void (*timerEvent)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QTimerEvent* event);
-	void (*childEvent)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QChildEvent* event);
-	void (*customEvent)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QEvent* event);
-	void (*connectNotify)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QWidgetAction_VTable* vtbl, QWidgetAction* self, QMetaMethod* signal);
-};
-QWidgetAction* QWidgetAction_new(struct QWidgetAction_VTable* vtbl, QObject* parent);
+typedef struct VirtualQWidgetAction VirtualQWidgetAction;
+typedef struct QWidgetAction_VTable{
+	void (*destructor)(VirtualQWidgetAction* self);
+	QMetaObject* (*metaObject)(const VirtualQWidgetAction* self);
+	void* (*metacast)(VirtualQWidgetAction* self, const char* param1);
+	int (*metacall)(VirtualQWidgetAction* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQWidgetAction* self, QEvent* param1);
+	bool (*eventFilter)(VirtualQWidgetAction* self, QObject* param1, QEvent* param2);
+	QWidget* (*createWidget)(VirtualQWidgetAction* self, QWidget* parent);
+	void (*deleteWidget)(VirtualQWidgetAction* self, QWidget* widget);
+	void (*timerEvent)(VirtualQWidgetAction* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQWidgetAction* self, QChildEvent* event);
+	void (*customEvent)(VirtualQWidgetAction* self, QEvent* event);
+	void (*connectNotify)(VirtualQWidgetAction* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQWidgetAction* self, QMetaMethod* signal);
+}QWidgetAction_VTable;
+
+const QWidgetAction_VTable* QWidgetAction_vtbl(const VirtualQWidgetAction* self);
+void* QWidgetAction_vdata(const VirtualQWidgetAction* self);
+void QWidgetAction_setVdata(VirtualQWidgetAction* self, void* vdata);
+
+VirtualQWidgetAction* QWidgetAction_new(const QWidgetAction_VTable* vtbl, void* vdata, QObject* parent);
+
 void QWidgetAction_virtbase(QWidgetAction* src, QAction** outptr_QAction);
 QMetaObject* QWidgetAction_metaObject(const QWidgetAction* self);
 void* QWidgetAction_metacast(QWidgetAction* self, const char* param1);
@@ -67,23 +74,26 @@ QWidget* QWidgetAction_createWidget(QWidgetAction* self, QWidget* parent);
 void QWidgetAction_deleteWidget(QWidgetAction* self, QWidget* widget);
 struct miqt_string QWidgetAction_tr2(const char* s, const char* c);
 struct miqt_string QWidgetAction_tr3(const char* s, const char* c, int n);
-QMetaObject* QWidgetAction_virtualbase_metaObject(const void* self);
-void* QWidgetAction_virtualbase_metacast(void* self, const char* param1);
-int QWidgetAction_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QWidgetAction_virtualbase_event(void* self, QEvent* param1);
-bool QWidgetAction_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
-QWidget* QWidgetAction_virtualbase_createWidget(void* self, QWidget* parent);
-void QWidgetAction_virtualbase_deleteWidget(void* self, QWidget* widget);
-void QWidgetAction_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QWidgetAction_virtualbase_childEvent(void* self, QChildEvent* event);
-void QWidgetAction_virtualbase_customEvent(void* self, QEvent* event);
-void QWidgetAction_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QWidgetAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(const void* self);
-QObject* QWidgetAction_protectedbase_sender(const void* self);
-int QWidgetAction_protectedbase_senderSignalIndex(const void* self);
-int QWidgetAction_protectedbase_receivers(const void* self, const char* signal);
-bool QWidgetAction_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QWidgetAction_virtualbase_metaObject(const VirtualQWidgetAction* self);
+void* QWidgetAction_virtualbase_metacast(VirtualQWidgetAction* self, const char* param1);
+int QWidgetAction_virtualbase_metacall(VirtualQWidgetAction* self, int param1, int param2, void** param3);
+bool QWidgetAction_virtualbase_event(VirtualQWidgetAction* self, QEvent* param1);
+bool QWidgetAction_virtualbase_eventFilter(VirtualQWidgetAction* self, QObject* param1, QEvent* param2);
+QWidget* QWidgetAction_virtualbase_createWidget(VirtualQWidgetAction* self, QWidget* parent);
+void QWidgetAction_virtualbase_deleteWidget(VirtualQWidgetAction* self, QWidget* widget);
+void QWidgetAction_virtualbase_timerEvent(VirtualQWidgetAction* self, QTimerEvent* event);
+void QWidgetAction_virtualbase_childEvent(VirtualQWidgetAction* self, QChildEvent* event);
+void QWidgetAction_virtualbase_customEvent(VirtualQWidgetAction* self, QEvent* event);
+void QWidgetAction_virtualbase_connectNotify(VirtualQWidgetAction* self, QMetaMethod* signal);
+void QWidgetAction_virtualbase_disconnectNotify(VirtualQWidgetAction* self, QMetaMethod* signal);
+
+struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(const VirtualQWidgetAction* self);
+QObject* QWidgetAction_protectedbase_sender(const VirtualQWidgetAction* self);
+int QWidgetAction_protectedbase_senderSignalIndex(const VirtualQWidgetAction* self);
+int QWidgetAction_protectedbase_receivers(const VirtualQWidgetAction* self, const char* signal);
+bool QWidgetAction_protectedbase_isSignalConnected(const VirtualQWidgetAction* self, QMetaMethod* signal);
+
 const QMetaObject* QWidgetAction_staticMetaObject();
 void QWidgetAction_delete(QWidgetAction* self);
 

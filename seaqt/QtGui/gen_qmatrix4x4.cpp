@@ -10,15 +10,6 @@
 #include <QVector4D>
 #include <qmatrix4x4.h>
 #include "gen_qmatrix4x4.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMatrix4x4* QMatrix4x4_new() {
 	return new QMatrix4x4();
 }

@@ -36,15 +36,6 @@
 #include <QVariantConstPointer>
 #include <qvariant.h>
 #include "gen_qvariant.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVariant* QVariant_new() {
 	return new QVariant();
 }

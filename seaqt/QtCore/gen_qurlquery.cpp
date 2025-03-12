@@ -8,15 +8,6 @@
 #include <QUrlQuery>
 #include <qurlquery.h>
 #include "gen_qurlquery.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QUrlQuery* QUrlQuery_new() {
 	return new QUrlQuery();
 }

@@ -12,42 +12,35 @@
 #include <QTimerEvent>
 #include <qinputdevice.h>
 #include "gen_qinputdevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQInputDevice final : public QInputDevice {
-	struct QInputDevice_VTable* vtbl;
+	const QInputDevice_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QInputDevice_VTable* QInputDevice_vtbl(const VirtualQInputDevice* self);
+	friend void* QInputDevice_vdata(const VirtualQInputDevice* self);
+	friend void QInputDevice_setVdata(VirtualQInputDevice* self, void* vdata);
 
-	VirtualQInputDevice(struct QInputDevice_VTable* vtbl): QInputDevice(), vtbl(vtbl) {};
-	VirtualQInputDevice(struct QInputDevice_VTable* vtbl, const QString& name, qint64 systemId, QInputDevice::DeviceType type): QInputDevice(name, systemId, type), vtbl(vtbl) {};
-	VirtualQInputDevice(struct QInputDevice_VTable* vtbl, QObject* parent): QInputDevice(parent), vtbl(vtbl) {};
-	VirtualQInputDevice(struct QInputDevice_VTable* vtbl, const QString& name, qint64 systemId, QInputDevice::DeviceType type, const QString& seatName): QInputDevice(name, systemId, type, seatName), vtbl(vtbl) {};
-	VirtualQInputDevice(struct QInputDevice_VTable* vtbl, const QString& name, qint64 systemId, QInputDevice::DeviceType type, const QString& seatName, QObject* parent): QInputDevice(name, systemId, type, seatName, parent), vtbl(vtbl) {};
+	VirtualQInputDevice(const QInputDevice_VTable* vtbl, void* vdata): QInputDevice(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputDevice(const QInputDevice_VTable* vtbl, void* vdata, const QString& name, qint64 systemId, QInputDevice::DeviceType type): QInputDevice(name, systemId, type), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputDevice(const QInputDevice_VTable* vtbl, void* vdata, QObject* parent): QInputDevice(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputDevice(const QInputDevice_VTable* vtbl, void* vdata, const QString& name, qint64 systemId, QInputDevice::DeviceType type, const QString& seatName): QInputDevice(name, systemId, type, seatName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQInputDevice(const QInputDevice_VTable* vtbl, void* vdata, const QString& name, qint64 systemId, QInputDevice::DeviceType type, const QString& seatName, QObject* parent): QInputDevice(name, systemId, type, seatName, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQInputDevice() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQInputDevice() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QInputDevice::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QInputDevice_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QInputDevice_virtualbase_metaObject(const VirtualQInputDevice* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QInputDevice::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QInputDevice_virtualbase_metacast(void* self, const char* param1);
+	friend void* QInputDevice_virtualbase_metacast(VirtualQInputDevice* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QInputDevice::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QInputDevice_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QInputDevice_virtualbase_metacall(VirtualQInputDevice* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QInputDevice::event(event);
@@ -88,14 +79,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QInputDevice_virtualbase_event(void* self, QEvent* event);
+	friend bool QInputDevice_virtualbase_event(VirtualQInputDevice* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QInputDevice::eventFilter(watched, event);
@@ -104,14 +94,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QInputDevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QInputDevice_virtualbase_eventFilter(VirtualQInputDevice* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QInputDevice::timerEvent(event);
@@ -120,13 +109,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QInputDevice_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QInputDevice_virtualbase_timerEvent(VirtualQInputDevice* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QInputDevice::childEvent(event);
@@ -135,13 +123,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QInputDevice_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QInputDevice_virtualbase_childEvent(VirtualQInputDevice* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QInputDevice::customEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QInputDevice_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QInputDevice_virtualbase_customEvent(VirtualQInputDevice* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QInputDevice::connectNotify(signal);
@@ -167,13 +153,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QInputDevice_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QInputDevice_virtualbase_connectNotify(VirtualQInputDevice* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QInputDevice::disconnectNotify(signal);
@@ -184,42 +169,42 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QInputDevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QInputDevice_virtualbase_disconnectNotify(VirtualQInputDevice* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QInputDevice_protectedbase_sender(const void* self);
-	friend int QInputDevice_protectedbase_senderSignalIndex(const void* self);
-	friend int QInputDevice_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QInputDevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QInputDevice_protectedbase_sender(const VirtualQInputDevice* self);
+	friend int QInputDevice_protectedbase_senderSignalIndex(const VirtualQInputDevice* self);
+	friend int QInputDevice_protectedbase_receivers(const VirtualQInputDevice* self, const char* signal);
+	friend bool QInputDevice_protectedbase_isSignalConnected(const VirtualQInputDevice* self, QMetaMethod* signal);
 };
 
-QInputDevice* QInputDevice_new(struct QInputDevice_VTable* vtbl) {
-	return new VirtualQInputDevice(vtbl);
+VirtualQInputDevice* QInputDevice_new(const QInputDevice_VTable* vtbl, void* vdata) {
+	return new VirtualQInputDevice(vtbl, vdata);
 }
 
-QInputDevice* QInputDevice_new2(struct QInputDevice_VTable* vtbl, struct miqt_string name, long long systemId, int type) {
+VirtualQInputDevice* QInputDevice_new2(const QInputDevice_VTable* vtbl, void* vdata, struct miqt_string name, long long systemId, int type) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new VirtualQInputDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type));
+	return new VirtualQInputDevice(vtbl, vdata, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type));
 }
 
-QInputDevice* QInputDevice_new3(struct QInputDevice_VTable* vtbl, QObject* parent) {
-	return new VirtualQInputDevice(vtbl, parent);
+VirtualQInputDevice* QInputDevice_new3(const QInputDevice_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQInputDevice(vtbl, vdata, parent);
 }
 
-QInputDevice* QInputDevice_new4(struct QInputDevice_VTable* vtbl, struct miqt_string name, long long systemId, int type, struct miqt_string seatName) {
-	QString name_QString = QString::fromUtf8(name.data, name.len);
-	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
-	return new VirtualQInputDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type), seatName_QString);
-}
-
-QInputDevice* QInputDevice_new5(struct QInputDevice_VTable* vtbl, struct miqt_string name, long long systemId, int type, struct miqt_string seatName, QObject* parent) {
+VirtualQInputDevice* QInputDevice_new4(const QInputDevice_VTable* vtbl, void* vdata, struct miqt_string name, long long systemId, int type, struct miqt_string seatName) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
-	return new VirtualQInputDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type), seatName_QString, parent);
+	return new VirtualQInputDevice(vtbl, vdata, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type), seatName_QString);
+}
+
+VirtualQInputDevice* QInputDevice_new5(const QInputDevice_VTable* vtbl, void* vdata, struct miqt_string name, long long systemId, int type, struct miqt_string seatName, QObject* parent) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
+	return new VirtualQInputDevice(vtbl, vdata, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type), seatName_QString, parent);
 }
 
 void QInputDevice_virtbase(QInputDevice* src, QObject** outptr_QObject) {
@@ -339,7 +324,7 @@ void QInputDevice_availableVirtualGeometryChanged(QInputDevice* self, QRect* are
 	self->availableVirtualGeometryChanged(*area);
 }
 
-void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
+void QInputDevice_connect_availableVirtualGeometryChanged(VirtualQInputDevice* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QRect*);
@@ -378,93 +363,76 @@ QInputDevice* QInputDevice_primaryKeyboard1(struct miqt_string seatName) {
 	return (QInputDevice*) QInputDevice::primaryKeyboard(seatName_QString);
 }
 
-QMetaObject* QInputDevice_virtualbase_metaObject(const void* self) {
+QMetaObject* QInputDevice_virtualbase_metaObject(const VirtualQInputDevice* self) {
 
-	return (QMetaObject*) ( (const VirtualQInputDevice*)(self) )->QInputDevice::metaObject();
-
+	return (QMetaObject*) self->QInputDevice::metaObject();
 }
 
-void* QInputDevice_virtualbase_metacast(void* self, const char* param1) {
+void* QInputDevice_virtualbase_metacast(VirtualQInputDevice* self, const char* param1) {
 
-	return ( (VirtualQInputDevice*)(self) )->QInputDevice::qt_metacast(param1);
-
+	return self->QInputDevice::qt_metacast(param1);
 }
 
-int QInputDevice_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QInputDevice_virtualbase_metacall(VirtualQInputDevice* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQInputDevice*)(self) )->QInputDevice::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QInputDevice::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QInputDevice_virtualbase_event(void* self, QEvent* event) {
+bool QInputDevice_virtualbase_event(VirtualQInputDevice* self, QEvent* event) {
 
-	return ( (VirtualQInputDevice*)(self) )->QInputDevice::event(event);
-
+	return self->QInputDevice::event(event);
 }
 
-bool QInputDevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QInputDevice_virtualbase_eventFilter(VirtualQInputDevice* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQInputDevice*)(self) )->QInputDevice::eventFilter(watched, event);
-
+	return self->QInputDevice::eventFilter(watched, event);
 }
 
-void QInputDevice_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QInputDevice_virtualbase_timerEvent(VirtualQInputDevice* self, QTimerEvent* event) {
 
-	( (VirtualQInputDevice*)(self) )->QInputDevice::timerEvent(event);
-
+	self->QInputDevice::timerEvent(event);
 }
 
-void QInputDevice_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QInputDevice_virtualbase_childEvent(VirtualQInputDevice* self, QChildEvent* event) {
 
-	( (VirtualQInputDevice*)(self) )->QInputDevice::childEvent(event);
-
+	self->QInputDevice::childEvent(event);
 }
 
-void QInputDevice_virtualbase_customEvent(void* self, QEvent* event) {
+void QInputDevice_virtualbase_customEvent(VirtualQInputDevice* self, QEvent* event) {
 
-	( (VirtualQInputDevice*)(self) )->QInputDevice::customEvent(event);
-
+	self->QInputDevice::customEvent(event);
 }
 
-void QInputDevice_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QInputDevice_virtualbase_connectNotify(VirtualQInputDevice* self, QMetaMethod* signal) {
 
-	( (VirtualQInputDevice*)(self) )->QInputDevice::connectNotify(*signal);
-
+	self->QInputDevice::connectNotify(*signal);
 }
 
-void QInputDevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QInputDevice_virtualbase_disconnectNotify(VirtualQInputDevice* self, QMetaMethod* signal) {
 
-	( (VirtualQInputDevice*)(self) )->QInputDevice::disconnectNotify(*signal);
-
+	self->QInputDevice::disconnectNotify(*signal);
 }
 
 const QMetaObject* QInputDevice_staticMetaObject() { return &QInputDevice::staticMetaObject; }
-QObject* QInputDevice_protectedbase_sender(const void* self) {
-	VirtualQInputDevice* self_cast = static_cast<VirtualQInputDevice*>( (QInputDevice*)(self) );
-	
-	return self_cast->sender();
 
+const QInputDevice_VTable* QInputDevice_vtbl(const VirtualQInputDevice* self) { return self->vtbl; }
+void* QInputDevice_vdata(const VirtualQInputDevice* self) { return self->vdata; }
+void QInputDevice_setVdata(VirtualQInputDevice* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QInputDevice_protectedbase_sender(const VirtualQInputDevice* self) {
+	return self->sender();
 }
 
-int QInputDevice_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQInputDevice* self_cast = static_cast<VirtualQInputDevice*>( (QInputDevice*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QInputDevice_protectedbase_senderSignalIndex(const VirtualQInputDevice* self) {
+	return self->senderSignalIndex();
 }
 
-int QInputDevice_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQInputDevice* self_cast = static_cast<VirtualQInputDevice*>( (QInputDevice*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QInputDevice_protectedbase_receivers(const VirtualQInputDevice* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QInputDevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQInputDevice* self_cast = static_cast<VirtualQInputDevice*>( (QInputDevice*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QInputDevice_protectedbase_isSignalConnected(const VirtualQInputDevice* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QInputDevice_delete(QInputDevice* self) {

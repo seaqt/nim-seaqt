@@ -44,21 +44,21 @@ type cQStorageInfo*{.exportc: "QStorageInfo", incompleteStruct.} = object
 proc fcQStorageInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QStorageInfo_operatorAssign".}
 proc fcQStorageInfo_swap(self: pointer, other: pointer): void {.importc: "QStorageInfo_swap".}
 proc fcQStorageInfo_setPath(self: pointer, path: struct_miqt_string): void {.importc: "QStorageInfo_setPath".}
-proc fcQStorageInfo_rootPath(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_rootPath".}
-proc fcQStorageInfo_device(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_device".}
-proc fcQStorageInfo_subvolume(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_subvolume".}
-proc fcQStorageInfo_fileSystemType(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_fileSystemType".}
-proc fcQStorageInfo_name(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_name".}
-proc fcQStorageInfo_displayName(self: pointer, ): struct_miqt_string {.importc: "QStorageInfo_displayName".}
-proc fcQStorageInfo_bytesTotal(self: pointer, ): clonglong {.importc: "QStorageInfo_bytesTotal".}
-proc fcQStorageInfo_bytesFree(self: pointer, ): clonglong {.importc: "QStorageInfo_bytesFree".}
-proc fcQStorageInfo_bytesAvailable(self: pointer, ): clonglong {.importc: "QStorageInfo_bytesAvailable".}
-proc fcQStorageInfo_blockSize(self: pointer, ): cint {.importc: "QStorageInfo_blockSize".}
-proc fcQStorageInfo_isRoot(self: pointer, ): bool {.importc: "QStorageInfo_isRoot".}
-proc fcQStorageInfo_isReadOnly(self: pointer, ): bool {.importc: "QStorageInfo_isReadOnly".}
-proc fcQStorageInfo_isReady(self: pointer, ): bool {.importc: "QStorageInfo_isReady".}
-proc fcQStorageInfo_isValid(self: pointer, ): bool {.importc: "QStorageInfo_isValid".}
-proc fcQStorageInfo_refresh(self: pointer, ): void {.importc: "QStorageInfo_refresh".}
+proc fcQStorageInfo_rootPath(self: pointer): struct_miqt_string {.importc: "QStorageInfo_rootPath".}
+proc fcQStorageInfo_device(self: pointer): struct_miqt_string {.importc: "QStorageInfo_device".}
+proc fcQStorageInfo_subvolume(self: pointer): struct_miqt_string {.importc: "QStorageInfo_subvolume".}
+proc fcQStorageInfo_fileSystemType(self: pointer): struct_miqt_string {.importc: "QStorageInfo_fileSystemType".}
+proc fcQStorageInfo_name(self: pointer): struct_miqt_string {.importc: "QStorageInfo_name".}
+proc fcQStorageInfo_displayName(self: pointer): struct_miqt_string {.importc: "QStorageInfo_displayName".}
+proc fcQStorageInfo_bytesTotal(self: pointer): clonglong {.importc: "QStorageInfo_bytesTotal".}
+proc fcQStorageInfo_bytesFree(self: pointer): clonglong {.importc: "QStorageInfo_bytesFree".}
+proc fcQStorageInfo_bytesAvailable(self: pointer): clonglong {.importc: "QStorageInfo_bytesAvailable".}
+proc fcQStorageInfo_blockSize(self: pointer): cint {.importc: "QStorageInfo_blockSize".}
+proc fcQStorageInfo_isRoot(self: pointer): bool {.importc: "QStorageInfo_isRoot".}
+proc fcQStorageInfo_isReadOnly(self: pointer): bool {.importc: "QStorageInfo_isReadOnly".}
+proc fcQStorageInfo_isReady(self: pointer): bool {.importc: "QStorageInfo_isReady".}
+proc fcQStorageInfo_isValid(self: pointer): bool {.importc: "QStorageInfo_isValid".}
+proc fcQStorageInfo_refresh(self: pointer): void {.importc: "QStorageInfo_refresh".}
 proc fcQStorageInfo_mountedVolumes(): struct_miqt_array {.importc: "QStorageInfo_mountedVolumes".}
 proc fcQStorageInfo_root(): pointer {.importc: "QStorageInfo_root".}
 proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
@@ -75,70 +75,70 @@ proc swap*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_ty
 proc setPath*(self: gen_qstorageinfo_types.QStorageInfo, path: string): void =
   fcQStorageInfo_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
 
-proc rootPath*(self: gen_qstorageinfo_types.QStorageInfo, ): string =
+proc rootPath*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_rootPath(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc device*(self: gen_qstorageinfo_types.QStorageInfo, ): seq[byte] =
+proc device*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_device(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc subvolume*(self: gen_qstorageinfo_types.QStorageInfo, ): seq[byte] =
+proc subvolume*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_subvolume(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc fileSystemType*(self: gen_qstorageinfo_types.QStorageInfo, ): seq[byte] =
+proc fileSystemType*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_fileSystemType(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc name*(self: gen_qstorageinfo_types.QStorageInfo, ): string =
+proc name*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc displayName*(self: gen_qstorageinfo_types.QStorageInfo, ): string =
+proc displayName*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_displayName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc bytesTotal*(self: gen_qstorageinfo_types.QStorageInfo, ): clonglong =
+proc bytesTotal*(self: gen_qstorageinfo_types.QStorageInfo): clonglong =
   fcQStorageInfo_bytesTotal(self.h)
 
-proc bytesFree*(self: gen_qstorageinfo_types.QStorageInfo, ): clonglong =
+proc bytesFree*(self: gen_qstorageinfo_types.QStorageInfo): clonglong =
   fcQStorageInfo_bytesFree(self.h)
 
-proc bytesAvailable*(self: gen_qstorageinfo_types.QStorageInfo, ): clonglong =
+proc bytesAvailable*(self: gen_qstorageinfo_types.QStorageInfo): clonglong =
   fcQStorageInfo_bytesAvailable(self.h)
 
-proc blockSize*(self: gen_qstorageinfo_types.QStorageInfo, ): cint =
+proc blockSize*(self: gen_qstorageinfo_types.QStorageInfo): cint =
   fcQStorageInfo_blockSize(self.h)
 
-proc isRoot*(self: gen_qstorageinfo_types.QStorageInfo, ): bool =
+proc isRoot*(self: gen_qstorageinfo_types.QStorageInfo): bool =
   fcQStorageInfo_isRoot(self.h)
 
-proc isReadOnly*(self: gen_qstorageinfo_types.QStorageInfo, ): bool =
+proc isReadOnly*(self: gen_qstorageinfo_types.QStorageInfo): bool =
   fcQStorageInfo_isReadOnly(self.h)
 
-proc isReady*(self: gen_qstorageinfo_types.QStorageInfo, ): bool =
+proc isReady*(self: gen_qstorageinfo_types.QStorageInfo): bool =
   fcQStorageInfo_isReady(self.h)
 
-proc isValid*(self: gen_qstorageinfo_types.QStorageInfo, ): bool =
+proc isValid*(self: gen_qstorageinfo_types.QStorageInfo): bool =
   fcQStorageInfo_isValid(self.h)
 
-proc refresh*(self: gen_qstorageinfo_types.QStorageInfo, ): void =
+proc refresh*(self: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_refresh(self.h)
 
-proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo, ): seq[gen_qstorageinfo_types.QStorageInfo] =
+proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo): seq[gen_qstorageinfo_types.QStorageInfo] =
   var v_ma = fcQStorageInfo_mountedVolumes()
   var vx_ret = newSeq[gen_qstorageinfo_types.QStorageInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -147,7 +147,7 @@ proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo, ): seq[gen_qst
   c_free(v_ma.data)
   vx_ret
 
-proc root*(_: type gen_qstorageinfo_types.QStorageInfo, ): gen_qstorageinfo_types.QStorageInfo =
+proc root*(_: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
   gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root(), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =

@@ -4,24 +4,18 @@
 #include <QQmlTypesExtensionInterface>
 #include <qqmlextensioninterface.h>
 #include "gen_qqmlextensioninterface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQmlTypesExtensionInterface final : public QQmlTypesExtensionInterface {
-	struct QQmlTypesExtensionInterface_VTable* vtbl;
+	const QQmlTypesExtensionInterface_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlTypesExtensionInterface_VTable* QQmlTypesExtensionInterface_vtbl(const VirtualQQmlTypesExtensionInterface* self);
+	friend void* QQmlTypesExtensionInterface_vdata(const VirtualQQmlTypesExtensionInterface* self);
+	friend void QQmlTypesExtensionInterface_setVdata(VirtualQQmlTypesExtensionInterface* self, void* vdata);
 
-	VirtualQQmlTypesExtensionInterface(struct QQmlTypesExtensionInterface_VTable* vtbl, const QQmlTypesExtensionInterface& param1): QQmlTypesExtensionInterface(param1), vtbl(vtbl) {};
+	VirtualQQmlTypesExtensionInterface(const QQmlTypesExtensionInterface_VTable* vtbl, void* vdata, const QQmlTypesExtensionInterface& param1): QQmlTypesExtensionInterface(param1), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlTypesExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlTypesExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
 		if (vtbl->registerTypes == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -29,14 +23,14 @@ public:
 
 		const char* sigval1 = (const char*) uri;
 
-		vtbl->registerTypes(vtbl, this, sigval1);
+		vtbl->registerTypes(this, sigval1);
 
 	}
 
 };
 
-QQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(struct QQmlTypesExtensionInterface_VTable* vtbl, QQmlTypesExtensionInterface* param1) {
-	return new VirtualQQmlTypesExtensionInterface(vtbl, *param1);
+VirtualQQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(const QQmlTypesExtensionInterface_VTable* vtbl, void* vdata, QQmlTypesExtensionInterface* param1) {
+	return new VirtualQQmlTypesExtensionInterface(vtbl, vdata, *param1);
 }
 
 void QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface* self, const char* uri) {
@@ -47,19 +41,26 @@ void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* sel
 	self->operator=(*param1);
 }
 
+const QQmlTypesExtensionInterface_VTable* QQmlTypesExtensionInterface_vtbl(const VirtualQQmlTypesExtensionInterface* self) { return self->vtbl; }
+void* QQmlTypesExtensionInterface_vdata(const VirtualQQmlTypesExtensionInterface* self) { return self->vdata; }
+void QQmlTypesExtensionInterface_setVdata(VirtualQQmlTypesExtensionInterface* self, void* vdata) { self->vdata = vdata; }
+
 void QQmlTypesExtensionInterface_delete(QQmlTypesExtensionInterface* self) {
 	delete self;
 }
 
 class VirtualQQmlExtensionInterface final : public QQmlExtensionInterface {
-	struct QQmlExtensionInterface_VTable* vtbl;
+	const QQmlExtensionInterface_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlExtensionInterface_VTable* QQmlExtensionInterface_vtbl(const VirtualQQmlExtensionInterface* self);
+	friend void* QQmlExtensionInterface_vdata(const VirtualQQmlExtensionInterface* self);
+	friend void QQmlExtensionInterface_setVdata(VirtualQQmlExtensionInterface* self, void* vdata);
 
-	VirtualQQmlExtensionInterface(struct QQmlExtensionInterface_VTable* vtbl, const QQmlExtensionInterface& param1): QQmlExtensionInterface(param1), vtbl(vtbl) {};
+	VirtualQQmlExtensionInterface(const QQmlExtensionInterface_VTable* vtbl, void* vdata, const QQmlExtensionInterface& param1): QQmlExtensionInterface(param1), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void initializeEngine(QQmlEngine* engine, const char* uri) override {
 		if (vtbl->initializeEngine == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -68,11 +69,10 @@ public:
 		QQmlEngine* sigval1 = engine;
 		const char* sigval2 = (const char*) uri;
 
-		vtbl->initializeEngine(vtbl, this, sigval1, sigval2);
+		vtbl->initializeEngine(this, sigval1, sigval2);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
 		if (vtbl->registerTypes == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -80,14 +80,14 @@ public:
 
 		const char* sigval1 = (const char*) uri;
 
-		vtbl->registerTypes(vtbl, this, sigval1);
+		vtbl->registerTypes(this, sigval1);
 
 	}
 
 };
 
-QQmlExtensionInterface* QQmlExtensionInterface_new(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* param1) {
-	return new VirtualQQmlExtensionInterface(vtbl, *param1);
+VirtualQQmlExtensionInterface* QQmlExtensionInterface_new(const QQmlExtensionInterface_VTable* vtbl, void* vdata, QQmlExtensionInterface* param1) {
+	return new VirtualQQmlExtensionInterface(vtbl, vdata, *param1);
 }
 
 void QQmlExtensionInterface_virtbase(QQmlExtensionInterface* src, QQmlTypesExtensionInterface** outptr_QQmlTypesExtensionInterface) {
@@ -101,6 +101,10 @@ void QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface* self, QQmlE
 void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* param1) {
 	self->operator=(*param1);
 }
+
+const QQmlExtensionInterface_VTable* QQmlExtensionInterface_vtbl(const VirtualQQmlExtensionInterface* self) { return self->vtbl; }
+void* QQmlExtensionInterface_vdata(const VirtualQQmlExtensionInterface* self) { return self->vdata; }
+void QQmlExtensionInterface_setVdata(VirtualQQmlExtensionInterface* self, void* vdata) { self->vdata = vdata; }
 
 void QQmlExtensionInterface_delete(QQmlExtensionInterface* self) {
 	delete self;

@@ -2,15 +2,6 @@
 #include <QBitRef>
 #include <qbitarray.h>
 #include "gen_qbitarray.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QBitArray* QBitArray_new() {
 	return new QBitArray();
 }

@@ -41,26 +41,26 @@ export
 
 type cQJSValueIterator*{.exportc: "QJSValueIterator", incompleteStruct.} = object
 
-proc fcQJSValueIterator_hasNext(self: pointer, ): bool {.importc: "QJSValueIterator_hasNext".}
-proc fcQJSValueIterator_next(self: pointer, ): bool {.importc: "QJSValueIterator_next".}
-proc fcQJSValueIterator_name(self: pointer, ): struct_miqt_string {.importc: "QJSValueIterator_name".}
-proc fcQJSValueIterator_value(self: pointer, ): pointer {.importc: "QJSValueIterator_value".}
+proc fcQJSValueIterator_hasNext(self: pointer): bool {.importc: "QJSValueIterator_hasNext".}
+proc fcQJSValueIterator_next(self: pointer): bool {.importc: "QJSValueIterator_next".}
+proc fcQJSValueIterator_name(self: pointer): struct_miqt_string {.importc: "QJSValueIterator_name".}
+proc fcQJSValueIterator_value(self: pointer): pointer {.importc: "QJSValueIterator_value".}
 proc fcQJSValueIterator_operatorAssign(self: pointer, value: pointer): void {.importc: "QJSValueIterator_operatorAssign".}
 proc fcQJSValueIterator_new(value: pointer): ptr cQJSValueIterator {.importc: "QJSValueIterator_new".}
 
-proc hasNext*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): bool =
+proc hasNext*(self: gen_qjsvalueiterator_types.QJSValueIterator): bool =
   fcQJSValueIterator_hasNext(self.h)
 
-proc next*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): bool =
+proc next*(self: gen_qjsvalueiterator_types.QJSValueIterator): bool =
   fcQJSValueIterator_next(self.h)
 
-proc name*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): string =
+proc name*(self: gen_qjsvalueiterator_types.QJSValueIterator): string =
   let v_ms = fcQJSValueIterator_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc value*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): gen_qjsvalue_types.QJSValue =
+proc value*(self: gen_qjsvalueiterator_types.QJSValueIterator): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSValueIterator_value(self.h), owned: true)
 
 proc operatorAssign*(self: gen_qjsvalueiterator_types.QJSValueIterator, value: gen_qjsvalue_types.QJSValue): void =

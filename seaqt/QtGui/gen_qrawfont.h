@@ -40,6 +40,7 @@ QRawFont* QRawFont_new3(struct miqt_string fontData, double pixelSize);
 QRawFont* QRawFont_new4(QRawFont* other);
 QRawFont* QRawFont_new5(struct miqt_string fileName, double pixelSize, int hintingPreference);
 QRawFont* QRawFont_new6(struct miqt_string fontData, double pixelSize, int hintingPreference);
+
 void QRawFont_operatorAssign(QRawFont* self, QRawFont* other);
 void QRawFont_swap(QRawFont* self, QRawFont* other);
 bool QRawFont_isValid(const QRawFont* self);
@@ -81,6 +82,7 @@ QRawFont* QRawFont_fromFont(QFont* font);
 QImage* QRawFont_alphaMapForGlyph2(const QRawFont* self, unsigned int glyphIndex, int antialiasingType);
 QImage* QRawFont_alphaMapForGlyph3(const QRawFont* self, unsigned int glyphIndex, int antialiasingType, QTransform* transform);
 QRawFont* QRawFont_fromFont2(QFont* font, int writingSystem);
+
 void QRawFont_delete(QRawFont* self);
 
 #ifdef __cplusplus

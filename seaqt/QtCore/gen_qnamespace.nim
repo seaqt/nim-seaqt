@@ -1516,11 +1516,11 @@ type cQKeyCombination*{.exportc: "QKeyCombination", incompleteStruct.} = object
 proc fcDisambiguated_t_new(): ptr cDisambiguated_t {.importc: "Disambiguated_t_new".}
 proc fcDisambiguated_t_new2(param1: pointer): ptr cDisambiguated_t {.importc: "Disambiguated_t_new2".}
 proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
-proc fcQKeyCombination_keyboardModifiers(self: pointer, ): cint {.importc: "QKeyCombination_keyboardModifiers".}
-proc fcQKeyCombination_key(self: pointer, ): cint {.importc: "QKeyCombination_key".}
+proc fcQKeyCombination_keyboardModifiers(self: pointer): cint {.importc: "QKeyCombination_keyboardModifiers".}
+proc fcQKeyCombination_key(self: pointer): cint {.importc: "QKeyCombination_key".}
 proc fcQKeyCombination_fromCombined(combined: cint): pointer {.importc: "QKeyCombination_fromCombined".}
-proc fcQKeyCombination_toCombined(self: pointer, ): cint {.importc: "QKeyCombination_toCombined".}
-proc fcQKeyCombination_ToInt(self: pointer, ): cint {.importc: "QKeyCombination_ToInt".}
+proc fcQKeyCombination_toCombined(self: pointer): cint {.importc: "QKeyCombination_toCombined".}
+proc fcQKeyCombination_ToInt(self: pointer): cint {.importc: "QKeyCombination_ToInt".}
 proc fcQKeyCombination_new(): ptr cQKeyCombination {.importc: "QKeyCombination_new".}
 proc fcQKeyCombination_new2(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new2".}
 proc fcQKeyCombination_new3(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new3".}
@@ -1539,19 +1539,19 @@ proc create*(T: type gen_qnamespace_types.Disambiguated_t,
 proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
   fcQInternal_activateCallbacks(cint(param1), param2)
 
-proc keyboardModifiers*(self: gen_qnamespace_types.QKeyCombination, ): cint =
+proc keyboardModifiers*(self: gen_qnamespace_types.QKeyCombination): cint =
   cint(fcQKeyCombination_keyboardModifiers(self.h))
 
-proc key*(self: gen_qnamespace_types.QKeyCombination, ): cint =
+proc key*(self: gen_qnamespace_types.QKeyCombination): cint =
   cint(fcQKeyCombination_key(self.h))
 
 proc fromCombined*(_: type gen_qnamespace_types.QKeyCombination, combined: cint): gen_qnamespace_types.QKeyCombination =
   gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_fromCombined(combined), owned: true)
 
-proc toCombined*(self: gen_qnamespace_types.QKeyCombination, ): cint =
+proc toCombined*(self: gen_qnamespace_types.QKeyCombination): cint =
   fcQKeyCombination_toCombined(self.h)
 
-proc ToInt*(self: gen_qnamespace_types.QKeyCombination, ): cint =
+proc ToInt*(self: gen_qnamespace_types.QKeyCombination): cint =
   fcQKeyCombination_ToInt(self.h)
 
 proc create*(T: type gen_qnamespace_types.QKeyCombination): gen_qnamespace_types.QKeyCombination =

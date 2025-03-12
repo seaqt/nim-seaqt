@@ -50,7 +50,7 @@ export
 
 type cQSignalMapper*{.exportc: "QSignalMapper", incompleteStruct.} = object
 
-proc fcQSignalMapper_metaObject(self: pointer, ): pointer {.importc: "QSignalMapper_metaObject".}
+proc fcQSignalMapper_metaObject(self: pointer): pointer {.importc: "QSignalMapper_metaObject".}
 proc fcQSignalMapper_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalMapper_metacast".}
 proc fcQSignalMapper_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalMapper_metacall".}
 proc fcQSignalMapper_tr(s: cstring): struct_miqt_string {.importc: "QSignalMapper_tr".}
@@ -67,23 +67,25 @@ proc fcQSignalMapper_mappedString(self: pointer, param1: struct_miqt_string): vo
 proc fcQSignalMapper_connect_mappedString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedString".}
 proc fcQSignalMapper_mappedObject(self: pointer, param1: pointer): void {.importc: "QSignalMapper_mappedObject".}
 proc fcQSignalMapper_connect_mappedObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedObject".}
-proc fcQSignalMapper_map(self: pointer, ): void {.importc: "QSignalMapper_map".}
+proc fcQSignalMapper_map(self: pointer): void {.importc: "QSignalMapper_map".}
 proc fcQSignalMapper_mapWithSender(self: pointer, sender: pointer): void {.importc: "QSignalMapper_mapWithSender".}
 proc fcQSignalMapper_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSignalMapper_tr2".}
 proc fcQSignalMapper_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSignalMapper_tr3".}
+proc fcQSignalMapper_vtbl(self: pointer): pointer {.importc: "QSignalMapper_vtbl".}
+proc fcQSignalMapper_vdata(self: pointer): pointer {.importc: "QSignalMapper_vdata".}
 type cQSignalMapperVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQSignalMapperVTable, self: ptr cQSignalMapper) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQSignalMapper_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSignalMapper_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSignalMapper_virtualbase_metaObject(self: pointer): pointer {.importc: "QSignalMapper_virtualbase_metaObject".}
 proc fcQSignalMapper_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalMapper_virtualbase_metacast".}
 proc fcQSignalMapper_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalMapper_virtualbase_metacall".}
 proc fcQSignalMapper_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSignalMapper_virtualbase_event".}
@@ -93,15 +95,15 @@ proc fcQSignalMapper_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSignalMapper_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSignalMapper_virtualbase_customEvent".}
 proc fcQSignalMapper_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSignalMapper_virtualbase_connectNotify".}
 proc fcQSignalMapper_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSignalMapper_virtualbase_disconnectNotify".}
-proc fcQSignalMapper_protectedbase_sender(self: pointer, ): pointer {.importc: "QSignalMapper_protectedbase_sender".}
-proc fcQSignalMapper_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSignalMapper_protectedbase_senderSignalIndex".}
+proc fcQSignalMapper_protectedbase_sender(self: pointer): pointer {.importc: "QSignalMapper_protectedbase_sender".}
+proc fcQSignalMapper_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSignalMapper_protectedbase_senderSignalIndex".}
 proc fcQSignalMapper_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSignalMapper_protectedbase_receivers".}
 proc fcQSignalMapper_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSignalMapper_protectedbase_isSignalConnected".}
-proc fcQSignalMapper_new(vtbl: pointer, ): ptr cQSignalMapper {.importc: "QSignalMapper_new".}
-proc fcQSignalMapper_new2(vtbl: pointer, parent: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new2".}
+proc fcQSignalMapper_new(vtbl, vdata: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new".}
+proc fcQSignalMapper_new2(vtbl, vdata: pointer, parent: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new2".}
 proc fcQSignalMapper_staticMetaObject(): pointer {.importc: "QSignalMapper_staticMetaObject".}
 
-proc metaObject*(self: gen_qsignalmapper_types.QSignalMapper, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qsignalmapper_types.QSignalMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalMapper_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsignalmapper_types.QSignalMapper, param1: cstring): pointer =
@@ -141,13 +143,13 @@ proc mappedInt*(self: gen_qsignalmapper_types.QSignalMapper, param1: cint): void
   fcQSignalMapper_mappedInt(self.h, param1)
 
 type QSignalMappermappedIntSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQSignalMapper_mappedInt(slot: int, param1: cint) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedInt(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSignalMappermappedIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQSignalMapper_mappedInt_release(slot: int) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedInt_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSignalMappermappedIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -155,13 +157,13 @@ proc onmappedInt*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMapp
   var tmp = new QSignalMappermappedIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mappedInt(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSignalMapper_mappedInt, miqt_exec_callback_cQSignalMapper_mappedInt_release)
+  fcQSignalMapper_connect_mappedInt(self.h, cast[int](addr tmp[]), cQSignalMapper_slot_callback_mappedInt, cQSignalMapper_slot_callback_mappedInt_release)
 
 proc mappedString*(self: gen_qsignalmapper_types.QSignalMapper, param1: string): void =
   fcQSignalMapper_mappedString(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QSignalMappermappedStringSlot* = proc(param1: string)
-proc miqt_exec_callback_cQSignalMapper_mappedString(slot: int, param1: struct_miqt_string) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedString(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSignalMappermappedStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -170,7 +172,7 @@ proc miqt_exec_callback_cQSignalMapper_mappedString(slot: int, param1: struct_mi
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQSignalMapper_mappedString_release(slot: int) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedString_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSignalMappermappedStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -178,19 +180,19 @@ proc onmappedString*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalM
   var tmp = new QSignalMappermappedStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mappedString(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSignalMapper_mappedString, miqt_exec_callback_cQSignalMapper_mappedString_release)
+  fcQSignalMapper_connect_mappedString(self.h, cast[int](addr tmp[]), cQSignalMapper_slot_callback_mappedString, cQSignalMapper_slot_callback_mappedString_release)
 
 proc mappedObject*(self: gen_qsignalmapper_types.QSignalMapper, param1: gen_qobject_types.QObject): void =
   fcQSignalMapper_mappedObject(self.h, param1.h)
 
 type QSignalMappermappedObjectSlot* = proc(param1: gen_qobject_types.QObject)
-proc miqt_exec_callback_cQSignalMapper_mappedObject(slot: int, param1: pointer) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedObject(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QSignalMappermappedObjectSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQSignalMapper_mappedObject_release(slot: int) {.cdecl.} =
+proc cQSignalMapper_slot_callback_mappedObject_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSignalMappermappedObjectSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -198,9 +200,9 @@ proc onmappedObject*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalM
   var tmp = new QSignalMappermappedObjectSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mappedObject(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSignalMapper_mappedObject, miqt_exec_callback_cQSignalMapper_mappedObject_release)
+  fcQSignalMapper_connect_mappedObject(self.h, cast[int](addr tmp[]), cQSignalMapper_slot_callback_mappedObject, cQSignalMapper_slot_callback_mappedObject_release)
 
-proc map*(self: gen_qsignalmapper_types.QSignalMapper, ): void =
+proc map*(self: gen_qsignalmapper_types.QSignalMapper): void =
   fcQSignalMapper_map(self.h)
 
 proc map*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject): void =
@@ -240,11 +242,11 @@ type QSignalMapperVTable* {.inheritable, pure.} = object
   customEvent*: QSignalMappercustomEventProc
   connectNotify*: QSignalMapperconnectNotifyProc
   disconnectNotify*: QSignalMapperdisconnectNotifyProc
-proc QSignalMappermetaObject*(self: gen_qsignalmapper_types.QSignalMapper, ): gen_qobjectdefs_types.QMetaObject =
+proc QSignalMappermetaObject*(self: gen_qsignalmapper_types.QSignalMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalMapper_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQSignalMapper_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -255,8 +257,8 @@ proc miqt_exec_callback_cQSignalMapper_metaObject(vtbl: pointer, self: pointer):
 proc QSignalMappermetacast*(self: gen_qsignalmapper_types.QSignalMapper, param1: cstring): pointer =
   fcQSignalMapper_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQSignalMapper_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -265,8 +267,8 @@ proc miqt_exec_callback_cQSignalMapper_metacast(vtbl: pointer, self: pointer, pa
 proc QSignalMappermetacall*(self: gen_qsignalmapper_types.QSignalMapper, param1: cint, param2: cint, param3: pointer): cint =
   fcQSignalMapper_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQSignalMapper_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -277,8 +279,8 @@ proc miqt_exec_callback_cQSignalMapper_metacall(vtbl: pointer, self: pointer, pa
 proc QSignalMapperevent*(self: gen_qsignalmapper_types.QSignalMapper, event: gen_qcoreevent_types.QEvent): bool =
   fcQSignalMapper_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalMapper_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -287,8 +289,8 @@ proc miqt_exec_callback_cQSignalMapper_event(vtbl: pointer, self: pointer, event
 proc QSignalMappereventFilter*(self: gen_qsignalmapper_types.QSignalMapper, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQSignalMapper_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQSignalMapper_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -298,8 +300,8 @@ proc miqt_exec_callback_cQSignalMapper_eventFilter(vtbl: pointer, self: pointer,
 proc QSignalMappertimerEvent*(self: gen_qsignalmapper_types.QSignalMapper, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQSignalMapper_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalMapper_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -307,8 +309,8 @@ proc miqt_exec_callback_cQSignalMapper_timerEvent(vtbl: pointer, self: pointer, 
 proc QSignalMapperchildEvent*(self: gen_qsignalmapper_types.QSignalMapper, event: gen_qcoreevent_types.QChildEvent): void =
   fcQSignalMapper_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalMapper_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -316,8 +318,8 @@ proc miqt_exec_callback_cQSignalMapper_childEvent(vtbl: pointer, self: pointer, 
 proc QSignalMappercustomEvent*(self: gen_qsignalmapper_types.QSignalMapper, event: gen_qcoreevent_types.QEvent): void =
   fcQSignalMapper_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalMapper_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -325,8 +327,8 @@ proc miqt_exec_callback_cQSignalMapper_customEvent(vtbl: pointer, self: pointer,
 proc QSignalMapperconnectNotify*(self: gen_qsignalmapper_types.QSignalMapper, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSignalMapper_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSignalMapper_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -334,19 +336,19 @@ proc miqt_exec_callback_cQSignalMapper_connectNotify(vtbl: pointer, self: pointe
 proc QSignalMapperdisconnectNotify*(self: gen_qsignalmapper_types.QSignalMapper, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSignalMapper_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSignalMapper_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalMapperVTable](vtbl)
+proc cQSignalMapper_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalMapperVTable](fcQSignalMapper_vdata(self))
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSignalMapper* {.inheritable.} = ref object of QSignalMapper
   vtbl*: cQSignalMapperVTable
-method metaObject*(self: VirtualQSignalMapper, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQSignalMapper): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSignalMappermetaObject(self[])
-proc miqt_exec_method_cQSignalMapper_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQSignalMapper_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -354,78 +356,78 @@ proc miqt_exec_method_cQSignalMapper_metaObject(vtbl: pointer, inst: pointer): p
 
 method metacast*(self: VirtualQSignalMapper, param1: cstring): pointer {.base.} =
   QSignalMappermetacast(self[], param1)
-proc miqt_exec_method_cQSignalMapper_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQSignalMapper, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QSignalMappermetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQSignalMapper_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQSignalMapper, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSignalMapperevent(self[], event)
-proc miqt_exec_method_cQSignalMapper_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQSignalMapper, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSignalMappereventFilter(self[], watched, event)
-proc miqt_exec_method_cQSignalMapper_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQSignalMapper, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QSignalMappertimerEvent(self[], event)
-proc miqt_exec_method_cQSignalMapper_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSignalMapper, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSignalMapperchildEvent(self[], event)
-proc miqt_exec_method_cQSignalMapper_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSignalMapper, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSignalMappercustomEvent(self[], event)
-proc miqt_exec_method_cQSignalMapper_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSignalMapper, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSignalMapperconnectNotify(self[], signal)
-proc miqt_exec_method_cQSignalMapper_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSignalMapper, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSignalMapperdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQSignalMapper_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalMapper](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
+proc cQSignalMapper_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalMapper](fcQSignalMapper_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qsignalmapper_types.QSignalMapper, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qsignalmapper_types.QSignalMapper): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSignalMapper_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qsignalmapper_types.QSignalMapper, ): cint =
+proc senderSignalIndex*(self: gen_qsignalmapper_types.QSignalMapper): cint =
   fcQSignalMapper_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qsignalmapper_types.QSignalMapper, signal: cstring): cint =
@@ -438,103 +440,89 @@ proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
     vtbl: ref QSignalMapperVTable = nil): gen_qsignalmapper_types.QSignalMapper =
   let vtbl = if vtbl == nil: new QSignalMapperVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalMapperVTable, _: ptr cQSignalMapper) {.cdecl.} =
-    let vtbl = cast[ref QSignalMapperVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalMapperVTable](fcQSignalMapper_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalMapper_metaObject
+    vtbl[].vtbl.metaObject = cQSignalMapper_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalMapper_metacast
+    vtbl[].vtbl.metacast = cQSignalMapper_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalMapper_metacall
+    vtbl[].vtbl.metacall = cQSignalMapper_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalMapper_event
+    vtbl[].vtbl.event = cQSignalMapper_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalMapper_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalMapper_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalMapper_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalMapper_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalMapper_childEvent
+    vtbl[].vtbl.childEvent = cQSignalMapper_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalMapper_customEvent
+    vtbl[].vtbl.customEvent = cQSignalMapper_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalMapper_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalMapper_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalMapper_disconnectNotify
-  gen_qsignalmapper_types.QSignalMapper(h: fcQSignalMapper_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalMapper_vtable_callback_disconnectNotify
+  gen_qsignalmapper_types.QSignalMapper(h: fcQSignalMapper_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
     parent: gen_qobject_types.QObject,
     vtbl: ref QSignalMapperVTable = nil): gen_qsignalmapper_types.QSignalMapper =
   let vtbl = if vtbl == nil: new QSignalMapperVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalMapperVTable, _: ptr cQSignalMapper) {.cdecl.} =
-    let vtbl = cast[ref QSignalMapperVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalMapperVTable](fcQSignalMapper_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalMapper_metaObject
+    vtbl[].vtbl.metaObject = cQSignalMapper_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalMapper_metacast
+    vtbl[].vtbl.metacast = cQSignalMapper_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalMapper_metacall
+    vtbl[].vtbl.metacall = cQSignalMapper_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalMapper_event
+    vtbl[].vtbl.event = cQSignalMapper_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalMapper_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalMapper_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalMapper_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalMapper_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalMapper_childEvent
+    vtbl[].vtbl.childEvent = cQSignalMapper_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalMapper_customEvent
+    vtbl[].vtbl.customEvent = cQSignalMapper_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalMapper_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalMapper_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalMapper_disconnectNotify
-  gen_qsignalmapper_types.QSignalMapper(h: fcQSignalMapper_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalMapper_vtable_callback_disconnectNotify
+  gen_qsignalmapper_types.QSignalMapper(h: fcQSignalMapper_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQSignalMapper_mvtbl = cQSignalMapperVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQSignalMapper()[])](self.fcQSignalMapper_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQSignalMapper_method_callback_metaObject,
+  metacast: cQSignalMapper_method_callback_metacast,
+  metacall: cQSignalMapper_method_callback_metacall,
+  event: cQSignalMapper_method_callback_event,
+  eventFilter: cQSignalMapper_method_callback_eventFilter,
+  timerEvent: cQSignalMapper_method_callback_timerEvent,
+  childEvent: cQSignalMapper_method_callback_childEvent,
+  customEvent: cQSignalMapper_method_callback_customEvent,
+  connectNotify: cQSignalMapper_method_callback_connectNotify,
+  disconnectNotify: cQSignalMapper_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
-    vtbl: VirtualQSignalMapper) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalMapperVTable, _: ptr cQSignalMapper) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalMapper()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalMapper_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalMapper_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalMapper_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalMapper_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalMapper_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalMapper_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalMapper_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalMapper_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalMapper_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalMapper_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalMapper_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQSignalMapper) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalMapper_new(addr(cQSignalMapper_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQSignalMapper) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalMapperVTable, _: ptr cQSignalMapper) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalMapper()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalMapper, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalMapper_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalMapper_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalMapper_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalMapper_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalMapper_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalMapper_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalMapper_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalMapper_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalMapper_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalMapper_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalMapper_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQSignalMapper) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalMapper_new2(addr(cQSignalMapper_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsignalmapper_types.QSignalMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalMapper_staticMetaObject())

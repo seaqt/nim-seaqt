@@ -47,6 +47,7 @@ typedef struct QVariant QVariant;
 #endif
 
 struct miqt_string QCborParserError_errorString(const QCborParserError* self);
+
 void QCborParserError_delete(QCborParserError* self);
 
 QCborValue* QCborValue_new();
@@ -71,6 +72,7 @@ QCborValue* QCborValue_new19(QUuid* uuid);
 QCborValue* QCborValue_new20(QCborValue* other);
 QCborValue* QCborValue_new21(uint64_t tag, QCborValue* taggedValue);
 QCborValue* QCborValue_new22(int t_, QCborValue* tv);
+
 void QCborValue_operatorAssign(QCborValue* self, QCborValue* other);
 void QCborValue_swap(QCborValue* self, QCborValue* other);
 int QCborValue_type(const QCborValue* self);
@@ -147,10 +149,12 @@ QCborValue* QCborValue_fromCbor33(const unsigned char* data, ptrdiff_t len, QCbo
 struct miqt_string QCborValue_toCbor1(const QCborValue* self, int opt);
 void QCborValue_toCbor2(const QCborValue* self, QCborStreamWriter* writer, int opt);
 struct miqt_string QCborValue_toDiagnosticNotation1(const QCborValue* self, int opts);
+
 const QMetaObject* QCborValue_staticMetaObject();
 void QCborValue_delete(QCborValue* self);
 
 QCborValueConstRef* QCborValueConstRef_new(QCborValueConstRef* param1);
+
 QCborValue* QCborValueConstRef_ToQCborValue(const QCborValueConstRef* self);
 int QCborValueConstRef_type(const QCborValueConstRef* self);
 bool QCborValueConstRef_isInteger(const QCborValueConstRef* self);
@@ -215,9 +219,11 @@ QUuid* QCborValueConstRef_toUuid1(const QCborValueConstRef* self, QUuid* default
 struct miqt_string QCborValueConstRef_toCbor1(const QCborValueConstRef* self, int opt);
 void QCborValueConstRef_toCbor2(const QCborValueConstRef* self, QCborStreamWriter* writer, int opt);
 struct miqt_string QCborValueConstRef_toDiagnosticNotation1(const QCborValueConstRef* self, int opt);
+
 void QCborValueConstRef_delete(QCborValueConstRef* self);
 
 QCborValueRef* QCborValueRef_new(QCborValueRef* param1);
+
 void QCborValueRef_virtbase(QCborValueRef* src, QCborValueConstRef** outptr_QCborValueConstRef);
 void QCborValueRef_operatorAssign(QCborValueRef* self, QCborValue* other);
 void QCborValueRef_operatorAssignWithOther(QCborValueRef* self, QCborValueRef* other);
@@ -287,6 +293,7 @@ QUuid* QCborValueRef_toUuid1(const QCborValueRef* self, QUuid* defaultValue);
 struct miqt_string QCborValueRef_toCbor1(QCborValueRef* self, int opt);
 void QCborValueRef_toCbor2(QCborValueRef* self, QCborStreamWriter* writer, int opt);
 struct miqt_string QCborValueRef_toDiagnosticNotation1(QCborValueRef* self, int opt);
+
 void QCborValueRef_delete(QCborValueRef* self);
 
 #ifdef __cplusplus

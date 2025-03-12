@@ -64,8 +64,8 @@ type cQMetaObjectConnection*{.exportc: "QMetaObject__Connection", incompleteStru
 type cQMetaObjectSuperData*{.exportc: "QMetaObject__SuperData", incompleteStruct.} = object
 type cQMetaObjectData*{.exportc: "QMetaObject__Data", incompleteStruct.} = object
 
-proc fcQGenericArgument_data(self: pointer, ): pointer {.importc: "QGenericArgument_data".}
-proc fcQGenericArgument_name(self: pointer, ): cstring {.importc: "QGenericArgument_name".}
+proc fcQGenericArgument_data(self: pointer): pointer {.importc: "QGenericArgument_data".}
+proc fcQGenericArgument_name(self: pointer): cstring {.importc: "QGenericArgument_name".}
 proc fcQGenericArgument_new(): ptr cQGenericArgument {.importc: "QGenericArgument_new".}
 proc fcQGenericArgument_new2(param1: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new2".}
 proc fcQGenericArgument_new3(aName: cstring): ptr cQGenericArgument {.importc: "QGenericArgument_new3".}
@@ -74,22 +74,22 @@ proc fcQGenericReturnArgument_new(): ptr cQGenericReturnArgument {.importc: "QGe
 proc fcQGenericReturnArgument_new2(param1: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new2".}
 proc fcQGenericReturnArgument_new3(aName: cstring): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new3".}
 proc fcQGenericReturnArgument_new4(aName: cstring, aData: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new4".}
-proc fcQMetaObject_className(self: pointer, ): cstring {.importc: "QMetaObject_className".}
-proc fcQMetaObject_superClass(self: pointer, ): pointer {.importc: "QMetaObject_superClass".}
+proc fcQMetaObject_className(self: pointer): cstring {.importc: "QMetaObject_className".}
+proc fcQMetaObject_superClass(self: pointer): pointer {.importc: "QMetaObject_superClass".}
 proc fcQMetaObject_inherits(self: pointer, metaObject: pointer): bool {.importc: "QMetaObject_inherits".}
 proc fcQMetaObject_castX(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_cast".}
 proc fcQMetaObject_castWithObj(self: pointer, obj: pointer): pointer {.importc: "QMetaObject_castWithObj".}
 proc fcQMetaObject_tr(self: pointer, s: cstring, c: cstring): struct_miqt_string {.importc: "QMetaObject_tr".}
-proc fcQMetaObject_metaType(self: pointer, ): pointer {.importc: "QMetaObject_metaType".}
-proc fcQMetaObject_methodOffset(self: pointer, ): cint {.importc: "QMetaObject_methodOffset".}
-proc fcQMetaObject_enumeratorOffset(self: pointer, ): cint {.importc: "QMetaObject_enumeratorOffset".}
-proc fcQMetaObject_propertyOffset(self: pointer, ): cint {.importc: "QMetaObject_propertyOffset".}
-proc fcQMetaObject_classInfoOffset(self: pointer, ): cint {.importc: "QMetaObject_classInfoOffset".}
-proc fcQMetaObject_constructorCount(self: pointer, ): cint {.importc: "QMetaObject_constructorCount".}
-proc fcQMetaObject_methodCount(self: pointer, ): cint {.importc: "QMetaObject_methodCount".}
-proc fcQMetaObject_enumeratorCount(self: pointer, ): cint {.importc: "QMetaObject_enumeratorCount".}
-proc fcQMetaObject_propertyCount(self: pointer, ): cint {.importc: "QMetaObject_propertyCount".}
-proc fcQMetaObject_classInfoCount(self: pointer, ): cint {.importc: "QMetaObject_classInfoCount".}
+proc fcQMetaObject_metaType(self: pointer): pointer {.importc: "QMetaObject_metaType".}
+proc fcQMetaObject_methodOffset(self: pointer): cint {.importc: "QMetaObject_methodOffset".}
+proc fcQMetaObject_enumeratorOffset(self: pointer): cint {.importc: "QMetaObject_enumeratorOffset".}
+proc fcQMetaObject_propertyOffset(self: pointer): cint {.importc: "QMetaObject_propertyOffset".}
+proc fcQMetaObject_classInfoOffset(self: pointer): cint {.importc: "QMetaObject_classInfoOffset".}
+proc fcQMetaObject_constructorCount(self: pointer): cint {.importc: "QMetaObject_constructorCount".}
+proc fcQMetaObject_methodCount(self: pointer): cint {.importc: "QMetaObject_methodCount".}
+proc fcQMetaObject_enumeratorCount(self: pointer): cint {.importc: "QMetaObject_enumeratorCount".}
+proc fcQMetaObject_propertyCount(self: pointer): cint {.importc: "QMetaObject_propertyCount".}
+proc fcQMetaObject_classInfoCount(self: pointer): cint {.importc: "QMetaObject_classInfoCount".}
 proc fcQMetaObject_indexOfConstructor(self: pointer, constructor: cstring): cint {.importc: "QMetaObject_indexOfConstructor".}
 proc fcQMetaObject_indexOfMethod(self: pointer, methodVal: cstring): cint {.importc: "QMetaObject_indexOfMethod".}
 proc fcQMetaObject_indexOfSignal(self: pointer, signal: cstring): cint {.importc: "QMetaObject_indexOfSignal".}
@@ -102,7 +102,7 @@ proc fcQMetaObject_methodX(self: pointer, index: cint): pointer {.importc: "QMet
 proc fcQMetaObject_enumerator(self: pointer, index: cint): pointer {.importc: "QMetaObject_enumerator".}
 proc fcQMetaObject_property(self: pointer, index: cint): pointer {.importc: "QMetaObject_property".}
 proc fcQMetaObject_classInfo(self: pointer, index: cint): pointer {.importc: "QMetaObject_classInfo".}
-proc fcQMetaObject_userProperty(self: pointer, ): pointer {.importc: "QMetaObject_userProperty".}
+proc fcQMetaObject_userProperty(self: pointer): pointer {.importc: "QMetaObject_userProperty".}
 proc fcQMetaObject_checkConnectArgs(signal: cstring, methodVal: cstring): bool {.importc: "QMetaObject_checkConnectArgs".}
 proc fcQMetaObject_checkConnectArgs2(signal: pointer, methodVal: pointer): bool {.importc: "QMetaObject_checkConnectArgs2".}
 proc fcQMetaObject_normalizedSignature(methodVal: cstring): struct_miqt_string {.importc: "QMetaObject_normalizedSignature".}
@@ -118,7 +118,7 @@ proc fcQMetaObject_invokeMethod(obj: pointer, member: cstring, param3: cint, ret
 proc fcQMetaObject_invokeMethod2(obj: pointer, member: cstring, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod2".}
 proc fcQMetaObject_invokeMethod3(obj: pointer, member: cstring, typeVal: cint): bool {.importc: "QMetaObject_invokeMethod3".}
 proc fcQMetaObject_invokeMethod4(obj: pointer, member: cstring): bool {.importc: "QMetaObject_invokeMethod4".}
-proc fcQMetaObject_newInstance(self: pointer, ): pointer {.importc: "QMetaObject_newInstance".}
+proc fcQMetaObject_newInstance(self: pointer): pointer {.importc: "QMetaObject_newInstance".}
 proc fcQMetaObject_staticMetacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaObject_staticMetacall".}
 proc fcQMetaObject_metacall(param1: pointer, param2: cint, param3: cint, param4: pointer): cint {.importc: "QMetaObject_metacall".}
 proc fcQMetaObject_tr3(self: pointer, s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaObject_tr3".}
@@ -180,8 +180,8 @@ proc fcQMetaObjectConnection_operatorAssign(self: pointer, other: pointer): void
 proc fcQMetaObjectConnection_swap(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_swap".}
 proc fcQMetaObjectConnection_new(): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new".}
 proc fcQMetaObjectConnection_new2(other: pointer): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new2".}
-proc fcQMetaObjectSuperData_operatorMinusGreater(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_operatorMinusGreater".}
-proc fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_ToConstQMetaObjectMultiply".}
+proc fcQMetaObjectSuperData_operatorMinusGreater(self: pointer): pointer {.importc: "QMetaObject__SuperData_operatorMinusGreater".}
+proc fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self: pointer): pointer {.importc: "QMetaObject__SuperData_ToConstQMetaObjectMultiply".}
 proc fcQMetaObjectSuperData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__SuperData_operatorAssign".}
 proc fcQMetaObjectSuperData_new(): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new".}
 proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new2".}
@@ -190,10 +190,10 @@ proc fcQMetaObjectData_operatorAssign(self: pointer, param1: pointer): void {.im
 proc fcQMetaObjectData_new(): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new".}
 proc fcQMetaObjectData_new2(param1: pointer): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new2".}
 
-proc data*(self: gen_qobjectdefs_types.QGenericArgument, ): pointer =
+proc data*(self: gen_qobjectdefs_types.QGenericArgument): pointer =
   fcQGenericArgument_data(self.h)
 
-proc name*(self: gen_qobjectdefs_types.QGenericArgument, ): cstring =
+proc name*(self: gen_qobjectdefs_types.QGenericArgument): cstring =
   (fcQGenericArgument_name(self.h))
 
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
@@ -226,10 +226,10 @@ proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
     aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericReturnArgument =
   gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new4(aName, aData), owned: true)
 
-proc className*(self: gen_qobjectdefs_types.QMetaObject, ): cstring =
+proc className*(self: gen_qobjectdefs_types.QMetaObject): cstring =
   (fcQMetaObject_className(self.h))
 
-proc superClass*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qobjectdefs_types.QMetaObject =
+proc superClass*(self: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_superClass(self.h), owned: false)
 
 proc inherits*(self: gen_qobjectdefs_types.QMetaObject, metaObject: gen_qobjectdefs_types.QMetaObject): bool =
@@ -247,34 +247,34 @@ proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring): strin
   c_free(v_ms.data)
   vx_ret
 
-proc metaType*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qmetatype_types.QMetaType =
+proc metaType*(self: gen_qobjectdefs_types.QMetaObject): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaObject_metaType(self.h), owned: true)
 
-proc methodOffset*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc methodOffset*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_methodOffset(self.h)
 
-proc enumeratorOffset*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc enumeratorOffset*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_enumeratorOffset(self.h)
 
-proc propertyOffset*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc propertyOffset*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_propertyOffset(self.h)
 
-proc classInfoOffset*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc classInfoOffset*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_classInfoOffset(self.h)
 
-proc constructorCount*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc constructorCount*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_constructorCount(self.h)
 
-proc methodCount*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc methodCount*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_methodCount(self.h)
 
-proc enumeratorCount*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc enumeratorCount*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_enumeratorCount(self.h)
 
-proc propertyCount*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc propertyCount*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_propertyCount(self.h)
 
-proc classInfoCount*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
+proc classInfoCount*(self: gen_qobjectdefs_types.QMetaObject): cint =
   fcQMetaObject_classInfoCount(self.h)
 
 proc indexOfConstructor*(self: gen_qobjectdefs_types.QMetaObject, constructor: cstring): cint =
@@ -313,7 +313,7 @@ proc property*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetao
 proc classInfo*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaClassInfo =
   gen_qmetaobject_types.QMetaClassInfo(h: fcQMetaObject_classInfo(self.h, index), owned: true)
 
-proc userProperty*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qmetaobject_types.QMetaProperty =
+proc userProperty*(self: gen_qobjectdefs_types.QMetaObject): gen_qmetaobject_types.QMetaProperty =
   gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_userProperty(self.h), owned: true)
 
 proc checkConnectArgs*(_: type gen_qobjectdefs_types.QMetaObject, signal: cstring, methodVal: cstring): bool =
@@ -367,7 +367,7 @@ proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_t
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring): bool =
   fcQMetaObject_invokeMethod4(obj.h, member)
 
-proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qobject_types.QObject =
+proc newInstance*(self: gen_qobjectdefs_types.QMetaObject): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMetaObject_newInstance(self.h), owned: false)
 
 proc staticMetacall*(self: gen_qobjectdefs_types.QMetaObject, param1: cint, param2: cint, param3: pointer): cint =
@@ -558,10 +558,10 @@ proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection,
     other: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
   gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(other.h), owned: true)
 
-proc operatorMinusGreater*(self: gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObject =
+proc operatorMinusGreater*(self: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_operatorMinusGreater(self.h), owned: false)
 
-proc ToConstQMetaObjectMultiply*(self: gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObject =
+proc ToConstQMetaObjectMultiply*(self: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self.h), owned: false)
 
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectSuperData, param1: gen_qobjectdefs_types.QMetaObjectSuperData): void =

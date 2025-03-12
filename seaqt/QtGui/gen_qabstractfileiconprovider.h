@@ -24,25 +24,34 @@ typedef struct QFileInfo QFileInfo;
 typedef struct QIcon QIcon;
 #endif
 
-struct QAbstractFileIconProvider_VTable {
-	void (*destructor)(struct QAbstractFileIconProvider_VTable* vtbl, QAbstractFileIconProvider* self);
-	QIcon* (*icon)(struct QAbstractFileIconProvider_VTable* vtbl, const QAbstractFileIconProvider* self, int param1);
-	QIcon* (*iconWithQFileInfo)(struct QAbstractFileIconProvider_VTable* vtbl, const QAbstractFileIconProvider* self, QFileInfo* param1);
-	struct miqt_string (*type)(struct QAbstractFileIconProvider_VTable* vtbl, const QAbstractFileIconProvider* self, QFileInfo* param1);
-	void (*setOptions)(struct QAbstractFileIconProvider_VTable* vtbl, QAbstractFileIconProvider* self, int options);
-	int (*options)(struct QAbstractFileIconProvider_VTable* vtbl, const QAbstractFileIconProvider* self);
-};
-QAbstractFileIconProvider* QAbstractFileIconProvider_new(struct QAbstractFileIconProvider_VTable* vtbl);
+typedef struct VirtualQAbstractFileIconProvider VirtualQAbstractFileIconProvider;
+typedef struct QAbstractFileIconProvider_VTable{
+	void (*destructor)(VirtualQAbstractFileIconProvider* self);
+	QIcon* (*icon)(const VirtualQAbstractFileIconProvider* self, int param1);
+	QIcon* (*iconWithQFileInfo)(const VirtualQAbstractFileIconProvider* self, QFileInfo* param1);
+	struct miqt_string (*type)(const VirtualQAbstractFileIconProvider* self, QFileInfo* param1);
+	void (*setOptions)(VirtualQAbstractFileIconProvider* self, int options);
+	int (*options)(const VirtualQAbstractFileIconProvider* self);
+}QAbstractFileIconProvider_VTable;
+
+const QAbstractFileIconProvider_VTable* QAbstractFileIconProvider_vtbl(const VirtualQAbstractFileIconProvider* self);
+void* QAbstractFileIconProvider_vdata(const VirtualQAbstractFileIconProvider* self);
+void QAbstractFileIconProvider_setVdata(VirtualQAbstractFileIconProvider* self, void* vdata);
+
+VirtualQAbstractFileIconProvider* QAbstractFileIconProvider_new(const QAbstractFileIconProvider_VTable* vtbl, void* vdata);
+
 QIcon* QAbstractFileIconProvider_icon(const QAbstractFileIconProvider* self, int param1);
 QIcon* QAbstractFileIconProvider_iconWithQFileInfo(const QAbstractFileIconProvider* self, QFileInfo* param1);
 struct miqt_string QAbstractFileIconProvider_type(const QAbstractFileIconProvider* self, QFileInfo* param1);
 void QAbstractFileIconProvider_setOptions(QAbstractFileIconProvider* self, int options);
 int QAbstractFileIconProvider_options(const QAbstractFileIconProvider* self);
-QIcon* QAbstractFileIconProvider_virtualbase_icon(const void* self, int param1);
-QIcon* QAbstractFileIconProvider_virtualbase_iconWithQFileInfo(const void* self, QFileInfo* param1);
-struct miqt_string QAbstractFileIconProvider_virtualbase_type(const void* self, QFileInfo* param1);
-void QAbstractFileIconProvider_virtualbase_setOptions(void* self, int options);
-int QAbstractFileIconProvider_virtualbase_options(const void* self);
+
+QIcon* QAbstractFileIconProvider_virtualbase_icon(const VirtualQAbstractFileIconProvider* self, int param1);
+QIcon* QAbstractFileIconProvider_virtualbase_iconWithQFileInfo(const VirtualQAbstractFileIconProvider* self, QFileInfo* param1);
+struct miqt_string QAbstractFileIconProvider_virtualbase_type(const VirtualQAbstractFileIconProvider* self, QFileInfo* param1);
+void QAbstractFileIconProvider_virtualbase_setOptions(VirtualQAbstractFileIconProvider* self, int options);
+int QAbstractFileIconProvider_virtualbase_options(const VirtualQAbstractFileIconProvider* self);
+
 void QAbstractFileIconProvider_delete(QAbstractFileIconProvider* self);
 
 #ifdef __cplusplus

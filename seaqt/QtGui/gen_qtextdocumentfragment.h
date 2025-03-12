@@ -28,6 +28,7 @@ QTextDocumentFragment* QTextDocumentFragment_new();
 QTextDocumentFragment* QTextDocumentFragment_new2(QTextDocument* document);
 QTextDocumentFragment* QTextDocumentFragment_new3(QTextCursor* range);
 QTextDocumentFragment* QTextDocumentFragment_new4(QTextDocumentFragment* rhs);
+
 void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* rhs);
 bool QTextDocumentFragment_isEmpty(const QTextDocumentFragment* self);
 struct miqt_string QTextDocumentFragment_toPlainText(const QTextDocumentFragment* self);
@@ -40,6 +41,7 @@ QTextDocumentFragment* QTextDocumentFragment_fromMarkdown(struct miqt_string mar
 struct miqt_string QTextDocumentFragment_toMarkdown1(const QTextDocumentFragment* self, int features);
 QTextDocumentFragment* QTextDocumentFragment_fromHtml2(struct miqt_string html, QTextDocument* resourceProvider);
 QTextDocumentFragment* QTextDocumentFragment_fromMarkdown2(struct miqt_string markdown, int features);
+
 void QTextDocumentFragment_delete(QTextDocumentFragment* self);
 
 #ifdef __cplusplus

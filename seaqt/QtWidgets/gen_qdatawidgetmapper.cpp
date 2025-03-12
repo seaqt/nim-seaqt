@@ -15,39 +15,32 @@
 #include <QWidget>
 #include <qdatawidgetmapper.h>
 #include "gen_qdatawidgetmapper.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDataWidgetMapper final : public QDataWidgetMapper {
-	struct QDataWidgetMapper_VTable* vtbl;
+	const QDataWidgetMapper_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDataWidgetMapper_VTable* QDataWidgetMapper_vtbl(const VirtualQDataWidgetMapper* self);
+	friend void* QDataWidgetMapper_vdata(const VirtualQDataWidgetMapper* self);
+	friend void QDataWidgetMapper_setVdata(VirtualQDataWidgetMapper* self, void* vdata);
 
-	VirtualQDataWidgetMapper(struct QDataWidgetMapper_VTable* vtbl): QDataWidgetMapper(), vtbl(vtbl) {};
-	VirtualQDataWidgetMapper(struct QDataWidgetMapper_VTable* vtbl, QObject* parent): QDataWidgetMapper(parent), vtbl(vtbl) {};
+	VirtualQDataWidgetMapper(const QDataWidgetMapper_VTable* vtbl, void* vdata): QDataWidgetMapper(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDataWidgetMapper(const QDataWidgetMapper_VTable* vtbl, void* vdata, QObject* parent): QDataWidgetMapper(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDataWidgetMapper() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDataWidgetMapper() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDataWidgetMapper::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const VirtualQDataWidgetMapper* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDataWidgetMapper::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDataWidgetMapper_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDataWidgetMapper_virtualbase_metacast(VirtualQDataWidgetMapper* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDataWidgetMapper::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDataWidgetMapper_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDataWidgetMapper_virtualbase_metacall(VirtualQDataWidgetMapper* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setCurrentIndex(int index) override {
 		if (vtbl->setCurrentIndex == 0) {
 			QDataWidgetMapper::setCurrentIndex(index);
@@ -89,13 +80,12 @@ public:
 
 		int sigval1 = index;
 
-		vtbl->setCurrentIndex(vtbl, this, sigval1);
+		vtbl->setCurrentIndex(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_setCurrentIndex(void* self, int index);
+	friend void QDataWidgetMapper_virtualbase_setCurrentIndex(VirtualQDataWidgetMapper* self, int index);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDataWidgetMapper::event(event);
@@ -103,14 +93,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDataWidgetMapper_virtualbase_event(void* self, QEvent* event);
+	friend bool QDataWidgetMapper_virtualbase_event(VirtualQDataWidgetMapper* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDataWidgetMapper::eventFilter(watched, event);
@@ -119,14 +108,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDataWidgetMapper_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDataWidgetMapper_virtualbase_eventFilter(VirtualQDataWidgetMapper* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDataWidgetMapper::timerEvent(event);
@@ -135,13 +123,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDataWidgetMapper_virtualbase_timerEvent(VirtualQDataWidgetMapper* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDataWidgetMapper::childEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDataWidgetMapper_virtualbase_childEvent(VirtualQDataWidgetMapper* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDataWidgetMapper::customEvent(event);
@@ -165,13 +151,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDataWidgetMapper_virtualbase_customEvent(VirtualQDataWidgetMapper* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDataWidgetMapper::connectNotify(signal);
@@ -182,13 +167,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDataWidgetMapper_virtualbase_connectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDataWidgetMapper::disconnectNotify(signal);
@@ -199,25 +183,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDataWidgetMapper_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDataWidgetMapper_virtualbase_disconnectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDataWidgetMapper_protectedbase_sender(const void* self);
-	friend int QDataWidgetMapper_protectedbase_senderSignalIndex(const void* self);
-	friend int QDataWidgetMapper_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDataWidgetMapper_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QDataWidgetMapper_protectedbase_sender(const VirtualQDataWidgetMapper* self);
+	friend int QDataWidgetMapper_protectedbase_senderSignalIndex(const VirtualQDataWidgetMapper* self);
+	friend int QDataWidgetMapper_protectedbase_receivers(const VirtualQDataWidgetMapper* self, const char* signal);
+	friend bool QDataWidgetMapper_protectedbase_isSignalConnected(const VirtualQDataWidgetMapper* self, QMetaMethod* signal);
 };
 
-QDataWidgetMapper* QDataWidgetMapper_new(struct QDataWidgetMapper_VTable* vtbl) {
-	return new VirtualQDataWidgetMapper(vtbl);
+VirtualQDataWidgetMapper* QDataWidgetMapper_new(const QDataWidgetMapper_VTable* vtbl, void* vdata) {
+	return new VirtualQDataWidgetMapper(vtbl, vdata);
 }
 
-QDataWidgetMapper* QDataWidgetMapper_new2(struct QDataWidgetMapper_VTable* vtbl, QObject* parent) {
-	return new VirtualQDataWidgetMapper(vtbl, parent);
+VirtualQDataWidgetMapper* QDataWidgetMapper_new2(const QDataWidgetMapper_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQDataWidgetMapper(vtbl, vdata, parent);
 }
 
 void QDataWidgetMapper_virtbase(QDataWidgetMapper* src, QObject** outptr_QObject) {
@@ -363,7 +347,7 @@ void QDataWidgetMapper_currentIndexChanged(QDataWidgetMapper* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QDataWidgetMapper_connect_currentIndexChanged(VirtualQDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -397,99 +381,81 @@ struct miqt_string QDataWidgetMapper_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const void* self) {
+QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const VirtualQDataWidgetMapper* self) {
 
-	return (QMetaObject*) ( (const VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::metaObject();
-
+	return (QMetaObject*) self->QDataWidgetMapper::metaObject();
 }
 
-void* QDataWidgetMapper_virtualbase_metacast(void* self, const char* param1) {
+void* QDataWidgetMapper_virtualbase_metacast(VirtualQDataWidgetMapper* self, const char* param1) {
 
-	return ( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::qt_metacast(param1);
-
+	return self->QDataWidgetMapper::qt_metacast(param1);
 }
 
-int QDataWidgetMapper_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDataWidgetMapper_virtualbase_metacall(VirtualQDataWidgetMapper* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDataWidgetMapper::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QDataWidgetMapper_virtualbase_setCurrentIndex(void* self, int index) {
+void QDataWidgetMapper_virtualbase_setCurrentIndex(VirtualQDataWidgetMapper* self, int index) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::setCurrentIndex(static_cast<int>(index));
-
+	self->QDataWidgetMapper::setCurrentIndex(static_cast<int>(index));
 }
 
-bool QDataWidgetMapper_virtualbase_event(void* self, QEvent* event) {
+bool QDataWidgetMapper_virtualbase_event(VirtualQDataWidgetMapper* self, QEvent* event) {
 
-	return ( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::event(event);
-
+	return self->QDataWidgetMapper::event(event);
 }
 
-bool QDataWidgetMapper_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDataWidgetMapper_virtualbase_eventFilter(VirtualQDataWidgetMapper* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::eventFilter(watched, event);
-
+	return self->QDataWidgetMapper::eventFilter(watched, event);
 }
 
-void QDataWidgetMapper_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDataWidgetMapper_virtualbase_timerEvent(VirtualQDataWidgetMapper* self, QTimerEvent* event) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::timerEvent(event);
-
+	self->QDataWidgetMapper::timerEvent(event);
 }
 
-void QDataWidgetMapper_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDataWidgetMapper_virtualbase_childEvent(VirtualQDataWidgetMapper* self, QChildEvent* event) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::childEvent(event);
-
+	self->QDataWidgetMapper::childEvent(event);
 }
 
-void QDataWidgetMapper_virtualbase_customEvent(void* self, QEvent* event) {
+void QDataWidgetMapper_virtualbase_customEvent(VirtualQDataWidgetMapper* self, QEvent* event) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::customEvent(event);
-
+	self->QDataWidgetMapper::customEvent(event);
 }
 
-void QDataWidgetMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDataWidgetMapper_virtualbase_connectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::connectNotify(*signal);
-
+	self->QDataWidgetMapper::connectNotify(*signal);
 }
 
-void QDataWidgetMapper_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDataWidgetMapper_virtualbase_disconnectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal) {
 
-	( (VirtualQDataWidgetMapper*)(self) )->QDataWidgetMapper::disconnectNotify(*signal);
-
+	self->QDataWidgetMapper::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDataWidgetMapper_staticMetaObject() { return &QDataWidgetMapper::staticMetaObject; }
-QObject* QDataWidgetMapper_protectedbase_sender(const void* self) {
-	VirtualQDataWidgetMapper* self_cast = static_cast<VirtualQDataWidgetMapper*>( (QDataWidgetMapper*)(self) );
-	
-	return self_cast->sender();
 
+const QDataWidgetMapper_VTable* QDataWidgetMapper_vtbl(const VirtualQDataWidgetMapper* self) { return self->vtbl; }
+void* QDataWidgetMapper_vdata(const VirtualQDataWidgetMapper* self) { return self->vdata; }
+void QDataWidgetMapper_setVdata(VirtualQDataWidgetMapper* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QDataWidgetMapper_protectedbase_sender(const VirtualQDataWidgetMapper* self) {
+	return self->sender();
 }
 
-int QDataWidgetMapper_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDataWidgetMapper* self_cast = static_cast<VirtualQDataWidgetMapper*>( (QDataWidgetMapper*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDataWidgetMapper_protectedbase_senderSignalIndex(const VirtualQDataWidgetMapper* self) {
+	return self->senderSignalIndex();
 }
 
-int QDataWidgetMapper_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDataWidgetMapper* self_cast = static_cast<VirtualQDataWidgetMapper*>( (QDataWidgetMapper*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDataWidgetMapper_protectedbase_receivers(const VirtualQDataWidgetMapper* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDataWidgetMapper_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDataWidgetMapper* self_cast = static_cast<VirtualQDataWidgetMapper*>( (QDataWidgetMapper*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDataWidgetMapper_protectedbase_isSignalConnected(const VirtualQDataWidgetMapper* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDataWidgetMapper_delete(QDataWidgetMapper* self) {

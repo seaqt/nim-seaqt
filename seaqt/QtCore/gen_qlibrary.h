@@ -32,27 +32,34 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QLibrary_VTable {
-	void (*destructor)(struct QLibrary_VTable* vtbl, QLibrary* self);
-	QMetaObject* (*metaObject)(struct QLibrary_VTable* vtbl, const QLibrary* self);
-	void* (*metacast)(struct QLibrary_VTable* vtbl, QLibrary* self, const char* param1);
-	int (*metacall)(struct QLibrary_VTable* vtbl, QLibrary* self, int param1, int param2, void** param3);
-	bool (*event)(struct QLibrary_VTable* vtbl, QLibrary* self, QEvent* event);
-	bool (*eventFilter)(struct QLibrary_VTable* vtbl, QLibrary* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QLibrary_VTable* vtbl, QLibrary* self, QTimerEvent* event);
-	void (*childEvent)(struct QLibrary_VTable* vtbl, QLibrary* self, QChildEvent* event);
-	void (*customEvent)(struct QLibrary_VTable* vtbl, QLibrary* self, QEvent* event);
-	void (*connectNotify)(struct QLibrary_VTable* vtbl, QLibrary* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QLibrary_VTable* vtbl, QLibrary* self, QMetaMethod* signal);
-};
-QLibrary* QLibrary_new(struct QLibrary_VTable* vtbl);
-QLibrary* QLibrary_new2(struct QLibrary_VTable* vtbl, struct miqt_string fileName);
-QLibrary* QLibrary_new3(struct QLibrary_VTable* vtbl, struct miqt_string fileName, int verNum);
-QLibrary* QLibrary_new4(struct QLibrary_VTable* vtbl, struct miqt_string fileName, struct miqt_string version);
-QLibrary* QLibrary_new5(struct QLibrary_VTable* vtbl, QObject* parent);
-QLibrary* QLibrary_new6(struct QLibrary_VTable* vtbl, struct miqt_string fileName, QObject* parent);
-QLibrary* QLibrary_new7(struct QLibrary_VTable* vtbl, struct miqt_string fileName, int verNum, QObject* parent);
-QLibrary* QLibrary_new8(struct QLibrary_VTable* vtbl, struct miqt_string fileName, struct miqt_string version, QObject* parent);
+typedef struct VirtualQLibrary VirtualQLibrary;
+typedef struct QLibrary_VTable{
+	void (*destructor)(VirtualQLibrary* self);
+	QMetaObject* (*metaObject)(const VirtualQLibrary* self);
+	void* (*metacast)(VirtualQLibrary* self, const char* param1);
+	int (*metacall)(VirtualQLibrary* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQLibrary* self, QEvent* event);
+	bool (*eventFilter)(VirtualQLibrary* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQLibrary* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQLibrary* self, QChildEvent* event);
+	void (*customEvent)(VirtualQLibrary* self, QEvent* event);
+	void (*connectNotify)(VirtualQLibrary* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQLibrary* self, QMetaMethod* signal);
+}QLibrary_VTable;
+
+const QLibrary_VTable* QLibrary_vtbl(const VirtualQLibrary* self);
+void* QLibrary_vdata(const VirtualQLibrary* self);
+void QLibrary_setVdata(VirtualQLibrary* self, void* vdata);
+
+VirtualQLibrary* QLibrary_new(const QLibrary_VTable* vtbl, void* vdata);
+VirtualQLibrary* QLibrary_new2(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName);
+VirtualQLibrary* QLibrary_new3(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, int verNum);
+VirtualQLibrary* QLibrary_new4(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, struct miqt_string version);
+VirtualQLibrary* QLibrary_new5(const QLibrary_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQLibrary* QLibrary_new6(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, QObject* parent);
+VirtualQLibrary* QLibrary_new7(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, int verNum, QObject* parent);
+VirtualQLibrary* QLibrary_new8(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, struct miqt_string version, QObject* parent);
+
 void QLibrary_virtbase(QLibrary* src, QObject** outptr_QObject);
 QMetaObject* QLibrary_metaObject(const QLibrary* self);
 void* QLibrary_metacast(QLibrary* self, const char* param1);
@@ -71,20 +78,23 @@ void QLibrary_setLoadHints(QLibrary* self, int hints);
 int QLibrary_loadHints(const QLibrary* self);
 struct miqt_string QLibrary_tr2(const char* s, const char* c);
 struct miqt_string QLibrary_tr3(const char* s, const char* c, int n);
-QMetaObject* QLibrary_virtualbase_metaObject(const void* self);
-void* QLibrary_virtualbase_metacast(void* self, const char* param1);
-int QLibrary_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QLibrary_virtualbase_event(void* self, QEvent* event);
-bool QLibrary_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QLibrary_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QLibrary_virtualbase_childEvent(void* self, QChildEvent* event);
-void QLibrary_virtualbase_customEvent(void* self, QEvent* event);
-void QLibrary_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QLibrary_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QLibrary_protectedbase_sender(const void* self);
-int QLibrary_protectedbase_senderSignalIndex(const void* self);
-int QLibrary_protectedbase_receivers(const void* self, const char* signal);
-bool QLibrary_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QLibrary_virtualbase_metaObject(const VirtualQLibrary* self);
+void* QLibrary_virtualbase_metacast(VirtualQLibrary* self, const char* param1);
+int QLibrary_virtualbase_metacall(VirtualQLibrary* self, int param1, int param2, void** param3);
+bool QLibrary_virtualbase_event(VirtualQLibrary* self, QEvent* event);
+bool QLibrary_virtualbase_eventFilter(VirtualQLibrary* self, QObject* watched, QEvent* event);
+void QLibrary_virtualbase_timerEvent(VirtualQLibrary* self, QTimerEvent* event);
+void QLibrary_virtualbase_childEvent(VirtualQLibrary* self, QChildEvent* event);
+void QLibrary_virtualbase_customEvent(VirtualQLibrary* self, QEvent* event);
+void QLibrary_virtualbase_connectNotify(VirtualQLibrary* self, QMetaMethod* signal);
+void QLibrary_virtualbase_disconnectNotify(VirtualQLibrary* self, QMetaMethod* signal);
+
+QObject* QLibrary_protectedbase_sender(const VirtualQLibrary* self);
+int QLibrary_protectedbase_senderSignalIndex(const VirtualQLibrary* self);
+int QLibrary_protectedbase_receivers(const VirtualQLibrary* self, const char* signal);
+bool QLibrary_protectedbase_isSignalConnected(const VirtualQLibrary* self, QMetaMethod* signal);
+
 const QMetaObject* QLibrary_staticMetaObject();
 void QLibrary_delete(QLibrary* self);
 

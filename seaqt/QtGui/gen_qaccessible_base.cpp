@@ -8,15 +8,6 @@
 #include <QTextCursor>
 #include <qaccessible_base.h>
 #include "gen_qaccessible_base.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAccessible_installActivationObserver(QAccessible__ActivationObserver* param1) {
 	QAccessible::installActivationObserver(param1);
 }
@@ -82,12 +73,13 @@ struct miqt_map /* tuple of int and int */  QAccessible_qAccessibleTextBoundaryH
 }
 
 const QMetaObject* QAccessible_staticMetaObject() { return &QAccessible::staticMetaObject; }
+
 void QAccessible_delete(QAccessible* self) {
 	delete self;
 }
 
 QAccessible__State* QAccessible__State_new() {
-	return new QAccessible::State();
+	return new QAccessible__State();
 }
 
 void QAccessible__State_delete(QAccessible__State* self) {

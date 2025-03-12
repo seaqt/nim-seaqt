@@ -5,15 +5,6 @@
 #include <QVariant>
 #include <qregion.h>
 #include "gen_qregion.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRegion* QRegion_new() {
 	return new QRegion();
 }

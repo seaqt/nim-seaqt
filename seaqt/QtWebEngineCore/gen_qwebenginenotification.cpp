@@ -9,15 +9,6 @@
 #include <QWebEngineNotification>
 #include <qwebenginenotification.h>
 #include "gen_qwebenginenotification.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineNotification_virtbase(QWebEngineNotification* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -156,6 +147,7 @@ struct miqt_string QWebEngineNotification_tr3(const char* s, const char* c, int 
 }
 
 const QMetaObject* QWebEngineNotification_staticMetaObject() { return &QWebEngineNotification::staticMetaObject; }
+
 void QWebEngineNotification_delete(QWebEngineNotification* self) {
 	delete self;
 }

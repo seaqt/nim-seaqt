@@ -24,6 +24,7 @@ typedef struct QVariant QVariant;
 
 QMediaMetaData* QMediaMetaData_new(QMediaMetaData* param1);
 QMediaMetaData* QMediaMetaData_new2();
+
 QVariant* QMediaMetaData_value(const QMediaMetaData* self, int k);
 void QMediaMetaData_insert(QMediaMetaData* self, int k, QVariant* value);
 void QMediaMetaData_remove(QMediaMetaData* self, int k);
@@ -33,6 +34,7 @@ void QMediaMetaData_clear(QMediaMetaData* self);
 bool QMediaMetaData_isEmpty(const QMediaMetaData* self);
 struct miqt_string QMediaMetaData_stringValue(const QMediaMetaData* self, int k);
 struct miqt_string QMediaMetaData_metaDataKeyToString(int k);
+
 const QMetaObject* QMediaMetaData_staticMetaObject();
 void QMediaMetaData_delete(QMediaMetaData* self);
 

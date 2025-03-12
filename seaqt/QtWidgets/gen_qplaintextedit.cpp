@@ -62,41 +62,34 @@
 #include <QWidget>
 #include <qplaintextedit.h>
 #include "gen_qplaintextedit.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPlainTextEdit final : public QPlainTextEdit {
-	struct QPlainTextEdit_VTable* vtbl;
+	const QPlainTextEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPlainTextEdit_VTable* QPlainTextEdit_vtbl(const VirtualQPlainTextEdit* self);
+	friend void* QPlainTextEdit_vdata(const VirtualQPlainTextEdit* self);
+	friend void QPlainTextEdit_setVdata(VirtualQPlainTextEdit* self, void* vdata);
 
-	VirtualQPlainTextEdit(struct QPlainTextEdit_VTable* vtbl, QWidget* parent): QPlainTextEdit(parent), vtbl(vtbl) {};
-	VirtualQPlainTextEdit(struct QPlainTextEdit_VTable* vtbl): QPlainTextEdit(), vtbl(vtbl) {};
-	VirtualQPlainTextEdit(struct QPlainTextEdit_VTable* vtbl, const QString& text): QPlainTextEdit(text), vtbl(vtbl) {};
-	VirtualQPlainTextEdit(struct QPlainTextEdit_VTable* vtbl, const QString& text, QWidget* parent): QPlainTextEdit(text, parent), vtbl(vtbl) {};
+	VirtualQPlainTextEdit(const QPlainTextEdit_VTable* vtbl, void* vdata, QWidget* parent): QPlainTextEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPlainTextEdit(const QPlainTextEdit_VTable* vtbl, void* vdata): QPlainTextEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPlainTextEdit(const QPlainTextEdit_VTable* vtbl, void* vdata, const QString& text): QPlainTextEdit(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPlainTextEdit(const QPlainTextEdit_VTable* vtbl, void* vdata, const QString& text, QWidget* parent): QPlainTextEdit(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPlainTextEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPlainTextEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPlainTextEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPlainTextEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPlainTextEdit_virtualbase_metaObject(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPlainTextEdit::qt_metacast(param1);
@@ -104,14 +97,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPlainTextEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPlainTextEdit_virtualbase_metacast(VirtualQPlainTextEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPlainTextEdit::qt_metacall(param1, param2, param3);
@@ -122,14 +114,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPlainTextEdit_virtualbase_metacall(VirtualQPlainTextEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant loadResource(int type, const QUrl& name) override {
 		if (vtbl->loadResource == 0) {
 			return QPlainTextEdit::loadResource(type, name);
@@ -140,16 +131,15 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval2 = const_cast<QUrl*>(&name_ret);
 
-		QVariant* callback_return_value = vtbl->loadResource(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->loadResource(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QPlainTextEdit_virtualbase_loadResource(void* self, int type, QUrl* name);
+	friend QVariant* QPlainTextEdit_virtualbase_loadResource(VirtualQPlainTextEdit* self, int type, QUrl* name);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery property) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QPlainTextEdit::inputMethodQuery(property);
@@ -158,16 +148,15 @@ public:
 		Qt::InputMethodQuery property_ret = property;
 		int sigval1 = static_cast<int>(property_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QPlainTextEdit_virtualbase_inputMethodQuery(const void* self, int property);
+	friend QVariant* QPlainTextEdit_virtualbase_inputMethodQuery(const VirtualQPlainTextEdit* self, int property);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QPlainTextEdit::event(e);
@@ -175,14 +164,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_event(void* self, QEvent* e);
+	friend bool QPlainTextEdit_virtualbase_event(VirtualQPlainTextEdit* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QPlainTextEdit::timerEvent(e);
@@ -191,13 +179,12 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QPlainTextEdit_virtualbase_timerEvent(VirtualQPlainTextEdit* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QPlainTextEdit::keyPressEvent(e);
@@ -206,13 +193,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QPlainTextEdit_virtualbase_keyPressEvent(VirtualQPlainTextEdit* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QPlainTextEdit::keyReleaseEvent(e);
@@ -221,13 +207,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QPlainTextEdit_virtualbase_keyReleaseEvent(VirtualQPlainTextEdit* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
 		if (vtbl->resizeEvent == 0) {
 			QPlainTextEdit::resizeEvent(e);
@@ -236,13 +221,12 @@ public:
 
 		QResizeEvent* sigval1 = e;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_resizeEvent(void* self, QResizeEvent* e);
+	friend void QPlainTextEdit_virtualbase_resizeEvent(VirtualQPlainTextEdit* self, QResizeEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			QPlainTextEdit::paintEvent(e);
@@ -251,13 +235,12 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_paintEvent(void* self, QPaintEvent* e);
+	friend void QPlainTextEdit_virtualbase_paintEvent(VirtualQPlainTextEdit* self, QPaintEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QPlainTextEdit::mousePressEvent(e);
@@ -266,13 +249,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QPlainTextEdit_virtualbase_mousePressEvent(VirtualQPlainTextEdit* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QPlainTextEdit::mouseMoveEvent(e);
@@ -281,13 +263,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
+	friend void QPlainTextEdit_virtualbase_mouseMoveEvent(VirtualQPlainTextEdit* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QPlainTextEdit::mouseReleaseEvent(e);
@@ -296,13 +277,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QPlainTextEdit_virtualbase_mouseReleaseEvent(VirtualQPlainTextEdit* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* e) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QPlainTextEdit::mouseDoubleClickEvent(e);
@@ -311,13 +291,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* e);
+	friend void QPlainTextEdit_virtualbase_mouseDoubleClickEvent(VirtualQPlainTextEdit* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QPlainTextEdit::focusNextPrevChild(next);
@@ -325,14 +304,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QPlainTextEdit_virtualbase_focusNextPrevChild(VirtualQPlainTextEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* e) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QPlainTextEdit::contextMenuEvent(e);
@@ -341,13 +319,12 @@ public:
 
 		QContextMenuEvent* sigval1 = e;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e);
+	friend void QPlainTextEdit_virtualbase_contextMenuEvent(VirtualQPlainTextEdit* self, QContextMenuEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* e) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QPlainTextEdit::dragEnterEvent(e);
@@ -356,13 +333,12 @@ public:
 
 		QDragEnterEvent* sigval1 = e;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* e);
+	friend void QPlainTextEdit_virtualbase_dragEnterEvent(VirtualQPlainTextEdit* self, QDragEnterEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* e) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QPlainTextEdit::dragLeaveEvent(e);
@@ -371,13 +347,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = e;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e);
+	friend void QPlainTextEdit_virtualbase_dragLeaveEvent(VirtualQPlainTextEdit* self, QDragLeaveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* e) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QPlainTextEdit::dragMoveEvent(e);
@@ -386,13 +361,12 @@ public:
 
 		QDragMoveEvent* sigval1 = e;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e);
+	friend void QPlainTextEdit_virtualbase_dragMoveEvent(VirtualQPlainTextEdit* self, QDragMoveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* e) override {
 		if (vtbl->dropEvent == 0) {
 			QPlainTextEdit::dropEvent(e);
@@ -401,13 +375,12 @@ public:
 
 		QDropEvent* sigval1 = e;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_dropEvent(void* self, QDropEvent* e);
+	friend void QPlainTextEdit_virtualbase_dropEvent(VirtualQPlainTextEdit* self, QDropEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QPlainTextEdit::focusInEvent(e);
@@ -416,13 +389,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QPlainTextEdit_virtualbase_focusInEvent(VirtualQPlainTextEdit* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QPlainTextEdit::focusOutEvent(e);
@@ -431,13 +403,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QPlainTextEdit_virtualbase_focusOutEvent(VirtualQPlainTextEdit* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QPlainTextEdit::showEvent(param1);
@@ -446,13 +417,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QPlainTextEdit_virtualbase_showEvent(VirtualQPlainTextEdit* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QPlainTextEdit::changeEvent(e);
@@ -461,13 +431,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QPlainTextEdit_virtualbase_changeEvent(VirtualQPlainTextEdit* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QPlainTextEdit::wheelEvent(e);
@@ -476,27 +445,25 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QPlainTextEdit_virtualbase_wheelEvent(VirtualQPlainTextEdit* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMimeData* createMimeDataFromSelection() const override {
 		if (vtbl->createMimeDataFromSelection == 0) {
 			return QPlainTextEdit::createMimeDataFromSelection();
 		}
 
 
-		QMimeData* callback_return_value = vtbl->createMimeDataFromSelection(vtbl, this);
+		QMimeData* callback_return_value = vtbl->createMimeDataFromSelection(this);
 
 		return callback_return_value;
 	}
 
-	friend QMimeData* QPlainTextEdit_virtualbase_createMimeDataFromSelection(const void* self);
+	friend QMimeData* QPlainTextEdit_virtualbase_createMimeDataFromSelection(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool canInsertFromMimeData(const QMimeData* source) const override {
 		if (vtbl->canInsertFromMimeData == 0) {
 			return QPlainTextEdit::canInsertFromMimeData(source);
@@ -504,14 +471,13 @@ public:
 
 		QMimeData* sigval1 = (QMimeData*) source;
 
-		bool callback_return_value = vtbl->canInsertFromMimeData(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->canInsertFromMimeData(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_canInsertFromMimeData(const void* self, QMimeData* source);
+	friend bool QPlainTextEdit_virtualbase_canInsertFromMimeData(const VirtualQPlainTextEdit* self, QMimeData* source);
 
-	// Subclass to allow providing a Go implementation
 	virtual void insertFromMimeData(const QMimeData* source) override {
 		if (vtbl->insertFromMimeData == 0) {
 			QPlainTextEdit::insertFromMimeData(source);
@@ -520,13 +486,12 @@ public:
 
 		QMimeData* sigval1 = (QMimeData*) source;
 
-		vtbl->insertFromMimeData(vtbl, this, sigval1);
+		vtbl->insertFromMimeData(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_insertFromMimeData(void* self, QMimeData* source);
+	friend void QPlainTextEdit_virtualbase_insertFromMimeData(VirtualQPlainTextEdit* self, QMimeData* source);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QPlainTextEdit::inputMethodEvent(param1);
@@ -535,13 +500,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QPlainTextEdit_virtualbase_inputMethodEvent(VirtualQPlainTextEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
 		if (vtbl->scrollContentsBy == 0) {
 			QPlainTextEdit::scrollContentsBy(dx, dy);
@@ -551,13 +515,12 @@ public:
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
+		vtbl->scrollContentsBy(this, sigval1, sigval2);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_scrollContentsBy(void* self, int dx, int dy);
+	friend void QPlainTextEdit_virtualbase_scrollContentsBy(VirtualQPlainTextEdit* self, int dx, int dy);
 
-	// Subclass to allow providing a Go implementation
 	virtual void doSetTextCursor(const QTextCursor& cursor) override {
 		if (vtbl->doSetTextCursor == 0) {
 			QPlainTextEdit::doSetTextCursor(cursor);
@@ -568,45 +531,42 @@ public:
 		// Cast returned reference into pointer
 		QTextCursor* sigval1 = const_cast<QTextCursor*>(&cursor_ret);
 
-		vtbl->doSetTextCursor(vtbl, this, sigval1);
+		vtbl->doSetTextCursor(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_doSetTextCursor(void* self, QTextCursor* cursor);
+	friend void QPlainTextEdit_virtualbase_doSetTextCursor(VirtualQPlainTextEdit* self, QTextCursor* cursor);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QPlainTextEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPlainTextEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QPlainTextEdit_virtualbase_minimumSizeHint(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QPlainTextEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPlainTextEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QPlainTextEdit_virtualbase_sizeHint(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
 		if (vtbl->setupViewport == 0) {
 			QPlainTextEdit::setupViewport(viewport);
@@ -615,13 +575,12 @@ public:
 
 		QWidget* sigval1 = viewport;
 
-		vtbl->setupViewport(vtbl, this, sigval1);
+		vtbl->setupViewport(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_setupViewport(void* self, QWidget* viewport);
+	friend void QPlainTextEdit_virtualbase_setupViewport(VirtualQPlainTextEdit* self, QWidget* viewport);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QPlainTextEdit::eventFilter(param1, param2);
@@ -630,14 +589,13 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QPlainTextEdit_virtualbase_eventFilter(VirtualQPlainTextEdit* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* param1) override {
 		if (vtbl->viewportEvent == 0) {
 			return QPlainTextEdit::viewportEvent(param1);
@@ -645,30 +603,28 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_viewportEvent(void* self, QEvent* param1);
+	friend bool QPlainTextEdit_virtualbase_viewportEvent(VirtualQPlainTextEdit* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
 		if (vtbl->viewportSizeHint == 0) {
 			return QPlainTextEdit::viewportSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->viewportSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPlainTextEdit_virtualbase_viewportSizeHint(const void* self);
+	friend QSize* QPlainTextEdit_virtualbase_viewportSizeHint(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QPlainTextEdit::initStyleOption(option);
@@ -677,27 +633,25 @@ public:
 
 		QStyleOptionFrame* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QPlainTextEdit_virtualbase_initStyleOption(const VirtualQPlainTextEdit* self, QStyleOptionFrame* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPlainTextEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextEdit_virtualbase_devType(const void* self);
+	friend int QPlainTextEdit_virtualbase_devType(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QPlainTextEdit::setVisible(visible);
@@ -706,13 +660,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QPlainTextEdit_virtualbase_setVisible(VirtualQPlainTextEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QPlainTextEdit::heightForWidth(param1);
@@ -720,42 +673,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QPlainTextEdit_virtualbase_heightForWidth(const VirtualQPlainTextEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QPlainTextEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QPlainTextEdit_virtualbase_hasHeightForWidth(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QPlainTextEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QPlainTextEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QPlainTextEdit_virtualbase_paintEngine(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QPlainTextEdit::enterEvent(event);
@@ -764,13 +714,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QPlainTextEdit_virtualbase_enterEvent(VirtualQPlainTextEdit* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QPlainTextEdit::leaveEvent(event);
@@ -779,13 +728,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QPlainTextEdit_virtualbase_leaveEvent(VirtualQPlainTextEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QPlainTextEdit::moveEvent(event);
@@ -794,13 +742,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QPlainTextEdit_virtualbase_moveEvent(VirtualQPlainTextEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QPlainTextEdit::closeEvent(event);
@@ -809,13 +756,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QPlainTextEdit_virtualbase_closeEvent(VirtualQPlainTextEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QPlainTextEdit::tabletEvent(event);
@@ -824,13 +770,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QPlainTextEdit_virtualbase_tabletEvent(VirtualQPlainTextEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QPlainTextEdit::actionEvent(event);
@@ -839,13 +784,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QPlainTextEdit_virtualbase_actionEvent(VirtualQPlainTextEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QPlainTextEdit::hideEvent(event);
@@ -854,13 +798,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QPlainTextEdit_virtualbase_hideEvent(VirtualQPlainTextEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QPlainTextEdit::nativeEvent(eventType, message, result);
@@ -876,14 +819,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QPlainTextEdit_virtualbase_nativeEvent(VirtualQPlainTextEdit* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QPlainTextEdit::metric(param1);
@@ -892,14 +834,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextEdit_virtualbase_metric(const void* self, int param1);
+	friend int QPlainTextEdit_virtualbase_metric(const VirtualQPlainTextEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPlainTextEdit::initPainter(painter);
@@ -908,13 +849,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPlainTextEdit_virtualbase_initPainter(const VirtualQPlainTextEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPlainTextEdit::redirected(offset);
@@ -922,28 +862,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPlainTextEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPlainTextEdit_virtualbase_redirected(const VirtualQPlainTextEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPlainTextEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPlainTextEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPlainTextEdit_virtualbase_sharedPainter(const VirtualQPlainTextEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPlainTextEdit::childEvent(event);
@@ -952,13 +890,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPlainTextEdit_virtualbase_childEvent(VirtualQPlainTextEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPlainTextEdit::customEvent(event);
@@ -967,13 +904,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPlainTextEdit_virtualbase_customEvent(VirtualQPlainTextEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPlainTextEdit::connectNotify(signal);
@@ -984,13 +920,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPlainTextEdit_virtualbase_connectNotify(VirtualQPlainTextEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPlainTextEdit::disconnectNotify(signal);
@@ -1001,49 +936,49 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPlainTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPlainTextEdit_virtualbase_disconnectNotify(VirtualQPlainTextEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const void* self);
-	friend QPointF* QPlainTextEdit_protectedbase_contentOffset(const void* self);
-	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const void* self, QTextBlock* block);
-	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const void* self, QTextBlock* block);
-	friend QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const void* self);
-	friend void QPlainTextEdit_protectedbase_zoomInF(void* self, float range);
-	friend void QPlainTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
-	friend QMargins* QPlainTextEdit_protectedbase_viewportMargins(const void* self);
-	friend void QPlainTextEdit_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QPlainTextEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QPlainTextEdit_protectedbase_create(void* self);
-	friend void QPlainTextEdit_protectedbase_destroy(void* self);
-	friend bool QPlainTextEdit_protectedbase_focusNextChild(void* self);
-	friend bool QPlainTextEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QPlainTextEdit_protectedbase_sender(const void* self);
-	friend int QPlainTextEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QPlainTextEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPlainTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const VirtualQPlainTextEdit* self);
+	friend QPointF* QPlainTextEdit_protectedbase_contentOffset(const VirtualQPlainTextEdit* self);
+	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const VirtualQPlainTextEdit* self, QTextBlock* block);
+	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const VirtualQPlainTextEdit* self, QTextBlock* block);
+	friend QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const VirtualQPlainTextEdit* self);
+	friend void QPlainTextEdit_protectedbase_zoomInF(VirtualQPlainTextEdit* self, float range);
+	friend void QPlainTextEdit_protectedbase_setViewportMargins(VirtualQPlainTextEdit* self, int left, int top, int right, int bottom);
+	friend QMargins* QPlainTextEdit_protectedbase_viewportMargins(const VirtualQPlainTextEdit* self);
+	friend void QPlainTextEdit_protectedbase_drawFrame(VirtualQPlainTextEdit* self, QPainter* param1);
+	friend void QPlainTextEdit_protectedbase_updateMicroFocus(VirtualQPlainTextEdit* self);
+	friend void QPlainTextEdit_protectedbase_create(VirtualQPlainTextEdit* self);
+	friend void QPlainTextEdit_protectedbase_destroy(VirtualQPlainTextEdit* self);
+	friend bool QPlainTextEdit_protectedbase_focusNextChild(VirtualQPlainTextEdit* self);
+	friend bool QPlainTextEdit_protectedbase_focusPreviousChild(VirtualQPlainTextEdit* self);
+	friend QObject* QPlainTextEdit_protectedbase_sender(const VirtualQPlainTextEdit* self);
+	friend int QPlainTextEdit_protectedbase_senderSignalIndex(const VirtualQPlainTextEdit* self);
+	friend int QPlainTextEdit_protectedbase_receivers(const VirtualQPlainTextEdit* self, const char* signal);
+	friend bool QPlainTextEdit_protectedbase_isSignalConnected(const VirtualQPlainTextEdit* self, QMetaMethod* signal);
 };
 
-QPlainTextEdit* QPlainTextEdit_new(struct QPlainTextEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQPlainTextEdit(vtbl, parent);
+VirtualQPlainTextEdit* QPlainTextEdit_new(const QPlainTextEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQPlainTextEdit(vtbl, vdata, parent);
 }
 
-QPlainTextEdit* QPlainTextEdit_new2(struct QPlainTextEdit_VTable* vtbl) {
-	return new VirtualQPlainTextEdit(vtbl);
+VirtualQPlainTextEdit* QPlainTextEdit_new2(const QPlainTextEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQPlainTextEdit(vtbl, vdata);
 }
 
-QPlainTextEdit* QPlainTextEdit_new3(struct QPlainTextEdit_VTable* vtbl, struct miqt_string text) {
+VirtualQPlainTextEdit* QPlainTextEdit_new3(const QPlainTextEdit_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPlainTextEdit(vtbl, text_QString);
+	return new VirtualQPlainTextEdit(vtbl, vdata, text_QString);
 }
 
-QPlainTextEdit* QPlainTextEdit_new4(struct QPlainTextEdit_VTable* vtbl, struct miqt_string text, QWidget* parent) {
+VirtualQPlainTextEdit* QPlainTextEdit_new4(const QPlainTextEdit_VTable* vtbl, void* vdata, struct miqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPlainTextEdit(vtbl, text_QString, parent);
+	return new VirtualQPlainTextEdit(vtbl, vdata, text_QString, parent);
 }
 
 void QPlainTextEdit_virtbase(QPlainTextEdit* src, QAbstractScrollArea** outptr_QAbstractScrollArea) {
@@ -1403,7 +1338,7 @@ void QPlainTextEdit_textChanged(QPlainTextEdit* self) {
 	self->textChanged();
 }
 
-void QPlainTextEdit_connect_textChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_textChanged(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1418,7 +1353,7 @@ void QPlainTextEdit_undoAvailable(QPlainTextEdit* self, bool b) {
 	self->undoAvailable(b);
 }
 
-void QPlainTextEdit_connect_undoAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_undoAvailable(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1434,7 +1369,7 @@ void QPlainTextEdit_redoAvailable(QPlainTextEdit* self, bool b) {
 	self->redoAvailable(b);
 }
 
-void QPlainTextEdit_connect_redoAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_redoAvailable(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1450,7 +1385,7 @@ void QPlainTextEdit_copyAvailable(QPlainTextEdit* self, bool b) {
 	self->copyAvailable(b);
 }
 
-void QPlainTextEdit_connect_copyAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_copyAvailable(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1466,7 +1401,7 @@ void QPlainTextEdit_selectionChanged(QPlainTextEdit* self) {
 	self->selectionChanged();
 }
 
-void QPlainTextEdit_connect_selectionChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_selectionChanged(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1481,7 +1416,7 @@ void QPlainTextEdit_cursorPositionChanged(QPlainTextEdit* self) {
 	self->cursorPositionChanged();
 }
 
-void QPlainTextEdit_connect_cursorPositionChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_cursorPositionChanged(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1496,7 +1431,7 @@ void QPlainTextEdit_updateRequest(QPlainTextEdit* self, QRect* rect, int dy) {
 	self->updateRequest(*rect, static_cast<int>(dy));
 }
 
-void QPlainTextEdit_connect_updateRequest(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, QRect*, int), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_updateRequest(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, QRect*, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QRect*, int);
@@ -1515,7 +1450,7 @@ void QPlainTextEdit_blockCountChanged(QPlainTextEdit* self, int newBlockCount) {
 	self->blockCountChanged(static_cast<int>(newBlockCount));
 }
 
-void QPlainTextEdit_connect_blockCountChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_blockCountChanged(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1531,7 +1466,7 @@ void QPlainTextEdit_modificationChanged(QPlainTextEdit* self, bool param1) {
 	self->modificationChanged(param1);
 }
 
-void QPlainTextEdit_connect_modificationChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QPlainTextEdit_connect_modificationChanged(VirtualQPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1586,492 +1521,383 @@ void QPlainTextEdit_zoomOut1(QPlainTextEdit* self, int range) {
 	self->zoomOut(static_cast<int>(range));
 }
 
-QMetaObject* QPlainTextEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QPlainTextEdit_virtualbase_metaObject(const VirtualQPlainTextEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::metaObject();
-
+	return (QMetaObject*) self->QPlainTextEdit::metaObject();
 }
 
-void* QPlainTextEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QPlainTextEdit_virtualbase_metacast(VirtualQPlainTextEdit* self, const char* param1) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::qt_metacast(param1);
-
+	return self->QPlainTextEdit::qt_metacast(param1);
 }
 
-int QPlainTextEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPlainTextEdit_virtualbase_metacall(VirtualQPlainTextEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPlainTextEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QVariant* QPlainTextEdit_virtualbase_loadResource(void* self, int type, QUrl* name) {
+QVariant* QPlainTextEdit_virtualbase_loadResource(VirtualQPlainTextEdit* self, int type, QUrl* name) {
 
-	return new QVariant(( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::loadResource(static_cast<int>(type), *name));
-
+	return new QVariant(self->QPlainTextEdit::loadResource(static_cast<int>(type), *name));
 }
 
-QVariant* QPlainTextEdit_virtualbase_inputMethodQuery(const void* self, int property) {
+QVariant* QPlainTextEdit_virtualbase_inputMethodQuery(const VirtualQPlainTextEdit* self, int property) {
 
-	return new QVariant(( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
-
+	return new QVariant(self->QPlainTextEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
 }
 
-bool QPlainTextEdit_virtualbase_event(void* self, QEvent* e) {
+bool QPlainTextEdit_virtualbase_event(VirtualQPlainTextEdit* self, QEvent* e) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::event(e);
-
+	return self->QPlainTextEdit::event(e);
 }
 
-void QPlainTextEdit_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QPlainTextEdit_virtualbase_timerEvent(VirtualQPlainTextEdit* self, QTimerEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::timerEvent(e);
-
+	self->QPlainTextEdit::timerEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QPlainTextEdit_virtualbase_keyPressEvent(VirtualQPlainTextEdit* self, QKeyEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::keyPressEvent(e);
-
+	self->QPlainTextEdit::keyPressEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QPlainTextEdit_virtualbase_keyReleaseEvent(VirtualQPlainTextEdit* self, QKeyEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::keyReleaseEvent(e);
-
+	self->QPlainTextEdit::keyReleaseEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
+void QPlainTextEdit_virtualbase_resizeEvent(VirtualQPlainTextEdit* self, QResizeEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::resizeEvent(e);
-
+	self->QPlainTextEdit::resizeEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_paintEvent(void* self, QPaintEvent* e) {
+void QPlainTextEdit_virtualbase_paintEvent(VirtualQPlainTextEdit* self, QPaintEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::paintEvent(e);
-
+	self->QPlainTextEdit::paintEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QPlainTextEdit_virtualbase_mousePressEvent(VirtualQPlainTextEdit* self, QMouseEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::mousePressEvent(e);
-
+	self->QPlainTextEdit::mousePressEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
+void QPlainTextEdit_virtualbase_mouseMoveEvent(VirtualQPlainTextEdit* self, QMouseEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::mouseMoveEvent(e);
-
+	self->QPlainTextEdit::mouseMoveEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QPlainTextEdit_virtualbase_mouseReleaseEvent(VirtualQPlainTextEdit* self, QMouseEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::mouseReleaseEvent(e);
-
+	self->QPlainTextEdit::mouseReleaseEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* e) {
+void QPlainTextEdit_virtualbase_mouseDoubleClickEvent(VirtualQPlainTextEdit* self, QMouseEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::mouseDoubleClickEvent(e);
-
+	self->QPlainTextEdit::mouseDoubleClickEvent(e);
 }
 
-bool QPlainTextEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QPlainTextEdit_virtualbase_focusNextPrevChild(VirtualQPlainTextEdit* self, bool next) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::focusNextPrevChild(next);
-
+	return self->QPlainTextEdit::focusNextPrevChild(next);
 }
 
-void QPlainTextEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e) {
+void QPlainTextEdit_virtualbase_contextMenuEvent(VirtualQPlainTextEdit* self, QContextMenuEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::contextMenuEvent(e);
-
+	self->QPlainTextEdit::contextMenuEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* e) {
+void QPlainTextEdit_virtualbase_dragEnterEvent(VirtualQPlainTextEdit* self, QDragEnterEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::dragEnterEvent(e);
-
+	self->QPlainTextEdit::dragEnterEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e) {
+void QPlainTextEdit_virtualbase_dragLeaveEvent(VirtualQPlainTextEdit* self, QDragLeaveEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::dragLeaveEvent(e);
-
+	self->QPlainTextEdit::dragLeaveEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e) {
+void QPlainTextEdit_virtualbase_dragMoveEvent(VirtualQPlainTextEdit* self, QDragMoveEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::dragMoveEvent(e);
-
+	self->QPlainTextEdit::dragMoveEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_dropEvent(void* self, QDropEvent* e) {
+void QPlainTextEdit_virtualbase_dropEvent(VirtualQPlainTextEdit* self, QDropEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::dropEvent(e);
-
+	self->QPlainTextEdit::dropEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QPlainTextEdit_virtualbase_focusInEvent(VirtualQPlainTextEdit* self, QFocusEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::focusInEvent(e);
-
+	self->QPlainTextEdit::focusInEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QPlainTextEdit_virtualbase_focusOutEvent(VirtualQPlainTextEdit* self, QFocusEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::focusOutEvent(e);
-
+	self->QPlainTextEdit::focusOutEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QPlainTextEdit_virtualbase_showEvent(VirtualQPlainTextEdit* self, QShowEvent* param1) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::showEvent(param1);
-
+	self->QPlainTextEdit::showEvent(param1);
 }
 
-void QPlainTextEdit_virtualbase_changeEvent(void* self, QEvent* e) {
+void QPlainTextEdit_virtualbase_changeEvent(VirtualQPlainTextEdit* self, QEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::changeEvent(e);
-
+	self->QPlainTextEdit::changeEvent(e);
 }
 
-void QPlainTextEdit_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QPlainTextEdit_virtualbase_wheelEvent(VirtualQPlainTextEdit* self, QWheelEvent* e) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::wheelEvent(e);
-
+	self->QPlainTextEdit::wheelEvent(e);
 }
 
-QMimeData* QPlainTextEdit_virtualbase_createMimeDataFromSelection(const void* self) {
+QMimeData* QPlainTextEdit_virtualbase_createMimeDataFromSelection(const VirtualQPlainTextEdit* self) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::createMimeDataFromSelection();
-
+	return self->QPlainTextEdit::createMimeDataFromSelection();
 }
 
-bool QPlainTextEdit_virtualbase_canInsertFromMimeData(const void* self, QMimeData* source) {
+bool QPlainTextEdit_virtualbase_canInsertFromMimeData(const VirtualQPlainTextEdit* self, QMimeData* source) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::canInsertFromMimeData(source);
-
+	return self->QPlainTextEdit::canInsertFromMimeData(source);
 }
 
-void QPlainTextEdit_virtualbase_insertFromMimeData(void* self, QMimeData* source) {
+void QPlainTextEdit_virtualbase_insertFromMimeData(VirtualQPlainTextEdit* self, QMimeData* source) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::insertFromMimeData(source);
-
+	self->QPlainTextEdit::insertFromMimeData(source);
 }
 
-void QPlainTextEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QPlainTextEdit_virtualbase_inputMethodEvent(VirtualQPlainTextEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::inputMethodEvent(param1);
-
+	self->QPlainTextEdit::inputMethodEvent(param1);
 }
 
-void QPlainTextEdit_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
+void QPlainTextEdit_virtualbase_scrollContentsBy(VirtualQPlainTextEdit* self, int dx, int dy) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
-
+	self->QPlainTextEdit::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QPlainTextEdit_virtualbase_doSetTextCursor(void* self, QTextCursor* cursor) {
+void QPlainTextEdit_virtualbase_doSetTextCursor(VirtualQPlainTextEdit* self, QTextCursor* cursor) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::doSetTextCursor(*cursor);
-
+	self->QPlainTextEdit::doSetTextCursor(*cursor);
 }
 
-QSize* QPlainTextEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QPlainTextEdit_virtualbase_minimumSizeHint(const VirtualQPlainTextEdit* self) {
 
-	return new QSize(( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::minimumSizeHint());
-
+	return new QSize(self->QPlainTextEdit::minimumSizeHint());
 }
 
-QSize* QPlainTextEdit_virtualbase_sizeHint(const void* self) {
+QSize* QPlainTextEdit_virtualbase_sizeHint(const VirtualQPlainTextEdit* self) {
 
-	return new QSize(( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::sizeHint());
-
+	return new QSize(self->QPlainTextEdit::sizeHint());
 }
 
-void QPlainTextEdit_virtualbase_setupViewport(void* self, QWidget* viewport) {
+void QPlainTextEdit_virtualbase_setupViewport(VirtualQPlainTextEdit* self, QWidget* viewport) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::setupViewport(viewport);
-
+	self->QPlainTextEdit::setupViewport(viewport);
 }
 
-bool QPlainTextEdit_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QPlainTextEdit_virtualbase_eventFilter(VirtualQPlainTextEdit* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::eventFilter(param1, param2);
-
+	return self->QPlainTextEdit::eventFilter(param1, param2);
 }
 
-bool QPlainTextEdit_virtualbase_viewportEvent(void* self, QEvent* param1) {
+bool QPlainTextEdit_virtualbase_viewportEvent(VirtualQPlainTextEdit* self, QEvent* param1) {
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::viewportEvent(param1);
-
+	return self->QPlainTextEdit::viewportEvent(param1);
 }
 
-QSize* QPlainTextEdit_virtualbase_viewportSizeHint(const void* self) {
+QSize* QPlainTextEdit_virtualbase_viewportSizeHint(const VirtualQPlainTextEdit* self) {
 
-	return new QSize(( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::viewportSizeHint());
-
+	return new QSize(self->QPlainTextEdit::viewportSizeHint());
 }
 
-void QPlainTextEdit_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+void QPlainTextEdit_virtualbase_initStyleOption(const VirtualQPlainTextEdit* self, QStyleOptionFrame* option) {
 
-	( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::initStyleOption(option);
-
+	self->QPlainTextEdit::initStyleOption(option);
 }
 
-int QPlainTextEdit_virtualbase_devType(const void* self) {
+int QPlainTextEdit_virtualbase_devType(const VirtualQPlainTextEdit* self) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::devType();
-
+	return self->QPlainTextEdit::devType();
 }
 
-void QPlainTextEdit_virtualbase_setVisible(void* self, bool visible) {
+void QPlainTextEdit_virtualbase_setVisible(VirtualQPlainTextEdit* self, bool visible) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::setVisible(visible);
-
+	self->QPlainTextEdit::setVisible(visible);
 }
 
-int QPlainTextEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QPlainTextEdit_virtualbase_heightForWidth(const VirtualQPlainTextEdit* self, int param1) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QPlainTextEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QPlainTextEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QPlainTextEdit_virtualbase_hasHeightForWidth(const VirtualQPlainTextEdit* self) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::hasHeightForWidth();
-
+	return self->QPlainTextEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QPlainTextEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QPlainTextEdit_virtualbase_paintEngine(const VirtualQPlainTextEdit* self) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::paintEngine();
-
+	return self->QPlainTextEdit::paintEngine();
 }
 
-void QPlainTextEdit_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QPlainTextEdit_virtualbase_enterEvent(VirtualQPlainTextEdit* self, QEnterEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::enterEvent(event);
-
+	self->QPlainTextEdit::enterEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QPlainTextEdit_virtualbase_leaveEvent(VirtualQPlainTextEdit* self, QEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::leaveEvent(event);
-
+	self->QPlainTextEdit::leaveEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QPlainTextEdit_virtualbase_moveEvent(VirtualQPlainTextEdit* self, QMoveEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::moveEvent(event);
-
+	self->QPlainTextEdit::moveEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QPlainTextEdit_virtualbase_closeEvent(VirtualQPlainTextEdit* self, QCloseEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::closeEvent(event);
-
+	self->QPlainTextEdit::closeEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QPlainTextEdit_virtualbase_tabletEvent(VirtualQPlainTextEdit* self, QTabletEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::tabletEvent(event);
-
+	self->QPlainTextEdit::tabletEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QPlainTextEdit_virtualbase_actionEvent(VirtualQPlainTextEdit* self, QActionEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::actionEvent(event);
-
+	self->QPlainTextEdit::actionEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QPlainTextEdit_virtualbase_hideEvent(VirtualQPlainTextEdit* self, QHideEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::hideEvent(event);
-
+	self->QPlainTextEdit::hideEvent(event);
 }
 
-bool QPlainTextEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QPlainTextEdit_virtualbase_nativeEvent(VirtualQPlainTextEdit* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QPlainTextEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QPlainTextEdit_virtualbase_metric(const void* self, int param1) {
+int QPlainTextEdit_virtualbase_metric(const VirtualQPlainTextEdit* self, int param1) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::metric(static_cast<VirtualQPlainTextEdit::PaintDeviceMetric>(param1));
-
+	return self->QPlainTextEdit::metric(static_cast<VirtualQPlainTextEdit::PaintDeviceMetric>(param1));
 }
 
-void QPlainTextEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPlainTextEdit_virtualbase_initPainter(const VirtualQPlainTextEdit* self, QPainter* painter) {
 
-	( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::initPainter(painter);
-
+	self->QPlainTextEdit::initPainter(painter);
 }
 
-QPaintDevice* QPlainTextEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPlainTextEdit_virtualbase_redirected(const VirtualQPlainTextEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::redirected(offset);
-
+	return self->QPlainTextEdit::redirected(offset);
 }
 
-QPainter* QPlainTextEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QPlainTextEdit_virtualbase_sharedPainter(const VirtualQPlainTextEdit* self) {
 
-	return ( (const VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::sharedPainter();
-
+	return self->QPlainTextEdit::sharedPainter();
 }
 
-void QPlainTextEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPlainTextEdit_virtualbase_childEvent(VirtualQPlainTextEdit* self, QChildEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::childEvent(event);
-
+	self->QPlainTextEdit::childEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QPlainTextEdit_virtualbase_customEvent(VirtualQPlainTextEdit* self, QEvent* event) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::customEvent(event);
-
+	self->QPlainTextEdit::customEvent(event);
 }
 
-void QPlainTextEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPlainTextEdit_virtualbase_connectNotify(VirtualQPlainTextEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::connectNotify(*signal);
-
+	self->QPlainTextEdit::connectNotify(*signal);
 }
 
-void QPlainTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPlainTextEdit_virtualbase_disconnectNotify(VirtualQPlainTextEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQPlainTextEdit*)(self) )->QPlainTextEdit::disconnectNotify(*signal);
-
+	self->QPlainTextEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPlainTextEdit_staticMetaObject() { return &QPlainTextEdit::staticMetaObject; }
-QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QTextBlock(self_cast->firstVisibleBlock());
 
+const QPlainTextEdit_VTable* QPlainTextEdit_vtbl(const VirtualQPlainTextEdit* self) { return self->vtbl; }
+void* QPlainTextEdit_vdata(const VirtualQPlainTextEdit* self) { return self->vdata; }
+void QPlainTextEdit_setVdata(VirtualQPlainTextEdit* self, void* vdata) { self->vdata = vdata; }
+
+QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const VirtualQPlainTextEdit* self) {
+	return new QTextBlock(self->firstVisibleBlock());
 }
 
-QPointF* QPlainTextEdit_protectedbase_contentOffset(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QPointF(self_cast->contentOffset());
-
+QPointF* QPlainTextEdit_protectedbase_contentOffset(const VirtualQPlainTextEdit* self) {
+	return new QPointF(self->contentOffset());
 }
 
-QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const void* self, QTextBlock* block) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QRectF(self_cast->blockBoundingRect(*block));
-
+QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const VirtualQPlainTextEdit* self, QTextBlock* block) {
+	return new QRectF(self->blockBoundingRect(*block));
 }
 
-QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const void* self, QTextBlock* block) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QRectF(self_cast->blockBoundingGeometry(*block));
-
+QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const VirtualQPlainTextEdit* self, QTextBlock* block) {
+	return new QRectF(self->blockBoundingGeometry(*block));
 }
 
-QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QAbstractTextDocumentLayout::PaintContext(self_cast->getPaintContext());
-
+QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const VirtualQPlainTextEdit* self) {
+	return new QAbstractTextDocumentLayout::PaintContext(self->getPaintContext());
 }
 
-void QPlainTextEdit_protectedbase_zoomInF(void* self, float range) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->zoomInF(static_cast<float>(range));
-
+void QPlainTextEdit_protectedbase_zoomInF(VirtualQPlainTextEdit* self, float range) {
+	self->zoomInF(static_cast<float>(range));
 }
 
-void QPlainTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
-
+void QPlainTextEdit_protectedbase_setViewportMargins(VirtualQPlainTextEdit* self, int left, int top, int right, int bottom) {
+	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QPlainTextEdit_protectedbase_viewportMargins(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return new QMargins(self_cast->viewportMargins());
-
+QMargins* QPlainTextEdit_protectedbase_viewportMargins(const VirtualQPlainTextEdit* self) {
+	return new QMargins(self->viewportMargins());
 }
 
-void QPlainTextEdit_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->drawFrame(param1);
-
+void QPlainTextEdit_protectedbase_drawFrame(VirtualQPlainTextEdit* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QPlainTextEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QPlainTextEdit_protectedbase_updateMicroFocus(VirtualQPlainTextEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QPlainTextEdit_protectedbase_create(void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->create();
-
+void QPlainTextEdit_protectedbase_create(VirtualQPlainTextEdit* self) {
+	self->create();
 }
 
-void QPlainTextEdit_protectedbase_destroy(void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QPlainTextEdit_protectedbase_destroy(VirtualQPlainTextEdit* self) {
+	self->destroy();
 }
 
-bool QPlainTextEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QPlainTextEdit_protectedbase_focusNextChild(VirtualQPlainTextEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QPlainTextEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QPlainTextEdit_protectedbase_focusPreviousChild(VirtualQPlainTextEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QPlainTextEdit_protectedbase_sender(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QPlainTextEdit_protectedbase_sender(const VirtualQPlainTextEdit* self) {
+	return self->sender();
 }
 
-int QPlainTextEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPlainTextEdit_protectedbase_senderSignalIndex(const VirtualQPlainTextEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QPlainTextEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPlainTextEdit_protectedbase_receivers(const VirtualQPlainTextEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPlainTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPlainTextEdit_protectedbase_isSignalConnected(const VirtualQPlainTextEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPlainTextEdit_delete(QPlainTextEdit* self) {
@@ -2079,28 +1905,30 @@ void QPlainTextEdit_delete(QPlainTextEdit* self) {
 }
 
 class VirtualQPlainTextDocumentLayout final : public QPlainTextDocumentLayout {
-	struct QPlainTextDocumentLayout_VTable* vtbl;
+	const QPlainTextDocumentLayout_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPlainTextDocumentLayout_VTable* QPlainTextDocumentLayout_vtbl(const VirtualQPlainTextDocumentLayout* self);
+	friend void* QPlainTextDocumentLayout_vdata(const VirtualQPlainTextDocumentLayout* self);
+	friend void QPlainTextDocumentLayout_setVdata(VirtualQPlainTextDocumentLayout* self, void* vdata);
 
-	VirtualQPlainTextDocumentLayout(struct QPlainTextDocumentLayout_VTable* vtbl, QTextDocument* document): QPlainTextDocumentLayout(document), vtbl(vtbl) {};
+	VirtualQPlainTextDocumentLayout(const QPlainTextDocumentLayout_VTable* vtbl, void* vdata, QTextDocument* document): QPlainTextDocumentLayout(document), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPlainTextDocumentLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPlainTextDocumentLayout() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPlainTextDocumentLayout::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPlainTextDocumentLayout_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPlainTextDocumentLayout_virtualbase_metaObject(const VirtualQPlainTextDocumentLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPlainTextDocumentLayout::qt_metacast(param1);
@@ -2108,14 +1936,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPlainTextDocumentLayout_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPlainTextDocumentLayout_virtualbase_metacast(VirtualQPlainTextDocumentLayout* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPlainTextDocumentLayout::qt_metacall(param1, param2, param3);
@@ -2126,14 +1953,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextDocumentLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPlainTextDocumentLayout_virtualbase_metacall(VirtualQPlainTextDocumentLayout* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, const QAbstractTextDocumentLayout::PaintContext& param2) override {
 		if (vtbl->draw == 0) {
 			QPlainTextDocumentLayout::draw(param1, param2);
@@ -2145,13 +1971,12 @@ public:
 		// Cast returned reference into pointer
 		QAbstractTextDocumentLayout__PaintContext* sigval2 = const_cast<QAbstractTextDocumentLayout::PaintContext*>(&param2_ret);
 
-		vtbl->draw(vtbl, this, sigval1, sigval2);
+		vtbl->draw(this, sigval1, sigval2);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_draw(void* self, QPainter* param1, QAbstractTextDocumentLayout__PaintContext* param2);
+	friend void QPlainTextDocumentLayout_virtualbase_draw(VirtualQPlainTextDocumentLayout* self, QPainter* param1, QAbstractTextDocumentLayout__PaintContext* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int hitTest(const QPointF& param1, Qt::HitTestAccuracy param2) const override {
 		if (vtbl->hitTest == 0) {
 			return QPlainTextDocumentLayout::hitTest(param1, param2);
@@ -2163,44 +1988,41 @@ public:
 		Qt::HitTestAccuracy param2_ret = param2;
 		int sigval2 = static_cast<int>(param2_ret);
 
-		int callback_return_value = vtbl->hitTest(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->hitTest(this, sigval1, sigval2);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextDocumentLayout_virtualbase_hitTest(const void* self, QPointF* param1, int param2);
+	friend int QPlainTextDocumentLayout_virtualbase_hitTest(const VirtualQPlainTextDocumentLayout* self, QPointF* param1, int param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int pageCount() const override {
 		if (vtbl->pageCount == 0) {
 			return QPlainTextDocumentLayout::pageCount();
 		}
 
 
-		int callback_return_value = vtbl->pageCount(vtbl, this);
+		int callback_return_value = vtbl->pageCount(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPlainTextDocumentLayout_virtualbase_pageCount(const void* self);
+	friend int QPlainTextDocumentLayout_virtualbase_pageCount(const VirtualQPlainTextDocumentLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizeF documentSize() const override {
 		if (vtbl->documentSize == 0) {
 			return QPlainTextDocumentLayout::documentSize();
 		}
 
 
-		QSizeF* callback_return_value = vtbl->documentSize(vtbl, this);
+		QSizeF* callback_return_value = vtbl->documentSize(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSizeF* QPlainTextDocumentLayout_virtualbase_documentSize(const void* self);
+	friend QSizeF* QPlainTextDocumentLayout_virtualbase_documentSize(const VirtualQPlainTextDocumentLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF frameBoundingRect(QTextFrame* param1) const override {
 		if (vtbl->frameBoundingRect == 0) {
 			return QPlainTextDocumentLayout::frameBoundingRect(param1);
@@ -2208,16 +2030,15 @@ public:
 
 		QTextFrame* sigval1 = param1;
 
-		QRectF* callback_return_value = vtbl->frameBoundingRect(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->frameBoundingRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QPlainTextDocumentLayout_virtualbase_frameBoundingRect(const void* self, QTextFrame* param1);
+	friend QRectF* QPlainTextDocumentLayout_virtualbase_frameBoundingRect(const VirtualQPlainTextDocumentLayout* self, QTextFrame* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF blockBoundingRect(const QTextBlock& block) const override {
 		if (vtbl->blockBoundingRect == 0) {
 			return QPlainTextDocumentLayout::blockBoundingRect(block);
@@ -2227,16 +2048,15 @@ public:
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 
-		QRectF* callback_return_value = vtbl->blockBoundingRect(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->blockBoundingRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QPlainTextDocumentLayout_virtualbase_blockBoundingRect(const void* self, QTextBlock* block);
+	friend QRectF* QPlainTextDocumentLayout_virtualbase_blockBoundingRect(const VirtualQPlainTextDocumentLayout* self, QTextBlock* block);
 
-	// Subclass to allow providing a Go implementation
 	virtual void documentChanged(int from, int param2, int charsAdded) override {
 		if (vtbl->documentChanged == 0) {
 			QPlainTextDocumentLayout::documentChanged(from, param2, charsAdded);
@@ -2247,13 +2067,12 @@ public:
 		int sigval2 = param2;
 		int sigval3 = charsAdded;
 
-		vtbl->documentChanged(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->documentChanged(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_documentChanged(void* self, int from, int param2, int charsAdded);
+	friend void QPlainTextDocumentLayout_virtualbase_documentChanged(VirtualQPlainTextDocumentLayout* self, int from, int param2, int charsAdded);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->resizeInlineObject == 0) {
 			QPlainTextDocumentLayout::resizeInlineObject(item, posInDocument, format);
@@ -2266,13 +2085,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->resizeInlineObject(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->resizeInlineObject(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	friend void QPlainTextDocumentLayout_virtualbase_resizeInlineObject(VirtualQPlainTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual void positionInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->positionInlineObject == 0) {
 			QPlainTextDocumentLayout::positionInlineObject(item, posInDocument, format);
@@ -2285,13 +2103,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->positionInlineObject(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->positionInlineObject(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
+	friend void QPlainTextDocumentLayout_virtualbase_positionInlineObject(VirtualQPlainTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawInlineObject(QPainter* painter, const QRectF& rect, QTextInlineObject object, int posInDocument, const QTextFormat& format) override {
 		if (vtbl->drawInlineObject == 0) {
 			QPlainTextDocumentLayout::drawInlineObject(painter, rect, object, posInDocument, format);
@@ -2308,13 +2125,12 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval5 = const_cast<QTextFormat*>(&format_ret);
 
-		vtbl->drawInlineObject(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
+		vtbl->drawInlineObject(this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
+	friend void QPlainTextDocumentLayout_virtualbase_drawInlineObject(VirtualQPlainTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QPlainTextDocumentLayout::event(event);
@@ -2322,14 +2138,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextDocumentLayout_virtualbase_event(void* self, QEvent* event);
+	friend bool QPlainTextDocumentLayout_virtualbase_event(VirtualQPlainTextDocumentLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QPlainTextDocumentLayout::eventFilter(watched, event);
@@ -2338,14 +2153,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPlainTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QPlainTextDocumentLayout_virtualbase_eventFilter(VirtualQPlainTextDocumentLayout* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QPlainTextDocumentLayout::timerEvent(event);
@@ -2354,13 +2168,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QPlainTextDocumentLayout_virtualbase_timerEvent(VirtualQPlainTextDocumentLayout* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPlainTextDocumentLayout::childEvent(event);
@@ -2369,13 +2182,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPlainTextDocumentLayout_virtualbase_childEvent(VirtualQPlainTextDocumentLayout* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPlainTextDocumentLayout::customEvent(event);
@@ -2384,13 +2196,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPlainTextDocumentLayout_virtualbase_customEvent(VirtualQPlainTextDocumentLayout* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPlainTextDocumentLayout::connectNotify(signal);
@@ -2401,13 +2212,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPlainTextDocumentLayout_virtualbase_connectNotify(VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPlainTextDocumentLayout::disconnectNotify(signal);
@@ -2418,23 +2228,23 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPlainTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPlainTextDocumentLayout_virtualbase_disconnectNotify(VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend int QPlainTextDocumentLayout_protectedbase_formatIndex(void* self, int pos);
-	friend QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(void* self, int pos);
-	friend QObject* QPlainTextDocumentLayout_protectedbase_sender(const void* self);
-	friend int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const void* self);
-	friend int QPlainTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend int QPlainTextDocumentLayout_protectedbase_formatIndex(VirtualQPlainTextDocumentLayout* self, int pos);
+	friend QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(VirtualQPlainTextDocumentLayout* self, int pos);
+	friend QObject* QPlainTextDocumentLayout_protectedbase_sender(const VirtualQPlainTextDocumentLayout* self);
+	friend int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQPlainTextDocumentLayout* self);
+	friend int QPlainTextDocumentLayout_protectedbase_receivers(const VirtualQPlainTextDocumentLayout* self, const char* signal);
+	friend bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal);
 };
 
-QPlainTextDocumentLayout* QPlainTextDocumentLayout_new(struct QPlainTextDocumentLayout_VTable* vtbl, QTextDocument* document) {
-	return new VirtualQPlainTextDocumentLayout(vtbl, document);
+VirtualQPlainTextDocumentLayout* QPlainTextDocumentLayout_new(const QPlainTextDocumentLayout_VTable* vtbl, void* vdata, QTextDocument* document) {
+	return new VirtualQPlainTextDocumentLayout(vtbl, vdata, document);
 }
 
 void QPlainTextDocumentLayout_virtbase(QPlainTextDocumentLayout* src, QAbstractTextDocumentLayout** outptr_QAbstractTextDocumentLayout) {
@@ -2526,167 +2336,134 @@ struct miqt_string QPlainTextDocumentLayout_tr3(const char* s, const char* c, in
 	return _ms;
 }
 
-QMetaObject* QPlainTextDocumentLayout_virtualbase_metaObject(const void* self) {
+QMetaObject* QPlainTextDocumentLayout_virtualbase_metaObject(const VirtualQPlainTextDocumentLayout* self) {
 
-	return (QMetaObject*) ( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::metaObject();
-
+	return (QMetaObject*) self->QPlainTextDocumentLayout::metaObject();
 }
 
-void* QPlainTextDocumentLayout_virtualbase_metacast(void* self, const char* param1) {
+void* QPlainTextDocumentLayout_virtualbase_metacast(VirtualQPlainTextDocumentLayout* self, const char* param1) {
 
-	return ( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::qt_metacast(param1);
-
+	return self->QPlainTextDocumentLayout::qt_metacast(param1);
 }
 
-int QPlainTextDocumentLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPlainTextDocumentLayout_virtualbase_metacall(VirtualQPlainTextDocumentLayout* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPlainTextDocumentLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QPlainTextDocumentLayout_virtualbase_draw(void* self, QPainter* param1, QAbstractTextDocumentLayout__PaintContext* param2) {
+void QPlainTextDocumentLayout_virtualbase_draw(VirtualQPlainTextDocumentLayout* self, QPainter* param1, QAbstractTextDocumentLayout__PaintContext* param2) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::draw(param1, *param2);
-
+	self->QPlainTextDocumentLayout::draw(param1, *param2);
 }
 
-int QPlainTextDocumentLayout_virtualbase_hitTest(const void* self, QPointF* param1, int param2) {
+int QPlainTextDocumentLayout_virtualbase_hitTest(const VirtualQPlainTextDocumentLayout* self, QPointF* param1, int param2) {
 
-	return ( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::hitTest(*param1, static_cast<Qt::HitTestAccuracy>(param2));
-
+	return self->QPlainTextDocumentLayout::hitTest(*param1, static_cast<Qt::HitTestAccuracy>(param2));
 }
 
-int QPlainTextDocumentLayout_virtualbase_pageCount(const void* self) {
+int QPlainTextDocumentLayout_virtualbase_pageCount(const VirtualQPlainTextDocumentLayout* self) {
 
-	return ( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::pageCount();
-
+	return self->QPlainTextDocumentLayout::pageCount();
 }
 
-QSizeF* QPlainTextDocumentLayout_virtualbase_documentSize(const void* self) {
+QSizeF* QPlainTextDocumentLayout_virtualbase_documentSize(const VirtualQPlainTextDocumentLayout* self) {
 
-	return new QSizeF(( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::documentSize());
-
+	return new QSizeF(self->QPlainTextDocumentLayout::documentSize());
 }
 
-QRectF* QPlainTextDocumentLayout_virtualbase_frameBoundingRect(const void* self, QTextFrame* param1) {
+QRectF* QPlainTextDocumentLayout_virtualbase_frameBoundingRect(const VirtualQPlainTextDocumentLayout* self, QTextFrame* param1) {
 
-	return new QRectF(( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::frameBoundingRect(param1));
-
+	return new QRectF(self->QPlainTextDocumentLayout::frameBoundingRect(param1));
 }
 
-QRectF* QPlainTextDocumentLayout_virtualbase_blockBoundingRect(const void* self, QTextBlock* block) {
+QRectF* QPlainTextDocumentLayout_virtualbase_blockBoundingRect(const VirtualQPlainTextDocumentLayout* self, QTextBlock* block) {
 
-	return new QRectF(( (const VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::blockBoundingRect(*block));
-
+	return new QRectF(self->QPlainTextDocumentLayout::blockBoundingRect(*block));
 }
 
-void QPlainTextDocumentLayout_virtualbase_documentChanged(void* self, int from, int param2, int charsAdded) {
+void QPlainTextDocumentLayout_virtualbase_documentChanged(VirtualQPlainTextDocumentLayout* self, int from, int param2, int charsAdded) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::documentChanged(static_cast<int>(from), static_cast<int>(param2), static_cast<int>(charsAdded));
-
+	self->QPlainTextDocumentLayout::documentChanged(static_cast<int>(from), static_cast<int>(param2), static_cast<int>(charsAdded));
 }
 
-void QPlainTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
+void QPlainTextDocumentLayout_virtualbase_resizeInlineObject(VirtualQPlainTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::resizeInlineObject(*item, static_cast<int>(posInDocument), *format);
-
+	self->QPlainTextDocumentLayout::resizeInlineObject(*item, static_cast<int>(posInDocument), *format);
 }
 
-void QPlainTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
+void QPlainTextDocumentLayout_virtualbase_positionInlineObject(VirtualQPlainTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::positionInlineObject(*item, static_cast<int>(posInDocument), *format);
-
+	self->QPlainTextDocumentLayout::positionInlineObject(*item, static_cast<int>(posInDocument), *format);
 }
 
-void QPlainTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format) {
+void QPlainTextDocumentLayout_virtualbase_drawInlineObject(VirtualQPlainTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::drawInlineObject(painter, *rect, *object, static_cast<int>(posInDocument), *format);
-
+	self->QPlainTextDocumentLayout::drawInlineObject(painter, *rect, *object, static_cast<int>(posInDocument), *format);
 }
 
-bool QPlainTextDocumentLayout_virtualbase_event(void* self, QEvent* event) {
+bool QPlainTextDocumentLayout_virtualbase_event(VirtualQPlainTextDocumentLayout* self, QEvent* event) {
 
-	return ( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::event(event);
-
+	return self->QPlainTextDocumentLayout::event(event);
 }
 
-bool QPlainTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QPlainTextDocumentLayout_virtualbase_eventFilter(VirtualQPlainTextDocumentLayout* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::eventFilter(watched, event);
-
+	return self->QPlainTextDocumentLayout::eventFilter(watched, event);
 }
 
-void QPlainTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QPlainTextDocumentLayout_virtualbase_timerEvent(VirtualQPlainTextDocumentLayout* self, QTimerEvent* event) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::timerEvent(event);
-
+	self->QPlainTextDocumentLayout::timerEvent(event);
 }
 
-void QPlainTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPlainTextDocumentLayout_virtualbase_childEvent(VirtualQPlainTextDocumentLayout* self, QChildEvent* event) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::childEvent(event);
-
+	self->QPlainTextDocumentLayout::childEvent(event);
 }
 
-void QPlainTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event) {
+void QPlainTextDocumentLayout_virtualbase_customEvent(VirtualQPlainTextDocumentLayout* self, QEvent* event) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::customEvent(event);
-
+	self->QPlainTextDocumentLayout::customEvent(event);
 }
 
-void QPlainTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPlainTextDocumentLayout_virtualbase_connectNotify(VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::connectNotify(*signal);
-
+	self->QPlainTextDocumentLayout::connectNotify(*signal);
 }
 
-void QPlainTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPlainTextDocumentLayout_virtualbase_disconnectNotify(VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal) {
 
-	( (VirtualQPlainTextDocumentLayout*)(self) )->QPlainTextDocumentLayout::disconnectNotify(*signal);
-
+	self->QPlainTextDocumentLayout::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPlainTextDocumentLayout_staticMetaObject() { return &QPlainTextDocumentLayout::staticMetaObject; }
-int QPlainTextDocumentLayout_protectedbase_formatIndex(void* self, int pos) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return self_cast->formatIndex(static_cast<int>(pos));
 
+const QPlainTextDocumentLayout_VTable* QPlainTextDocumentLayout_vtbl(const VirtualQPlainTextDocumentLayout* self) { return self->vtbl; }
+void* QPlainTextDocumentLayout_vdata(const VirtualQPlainTextDocumentLayout* self) { return self->vdata; }
+void QPlainTextDocumentLayout_setVdata(VirtualQPlainTextDocumentLayout* self, void* vdata) { self->vdata = vdata; }
+
+int QPlainTextDocumentLayout_protectedbase_formatIndex(VirtualQPlainTextDocumentLayout* self, int pos) {
+	return self->formatIndex(static_cast<int>(pos));
 }
 
-QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(void* self, int pos) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return new QTextCharFormat(self_cast->format(static_cast<int>(pos)));
-
+QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(VirtualQPlainTextDocumentLayout* self, int pos) {
+	return new QTextCharFormat(self->format(static_cast<int>(pos)));
 }
 
-QObject* QPlainTextDocumentLayout_protectedbase_sender(const void* self) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QPlainTextDocumentLayout_protectedbase_sender(const VirtualQPlainTextDocumentLayout* self) {
+	return self->sender();
 }
 
-int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQPlainTextDocumentLayout* self) {
+	return self->senderSignalIndex();
 }
 
-int QPlainTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPlainTextDocumentLayout_protectedbase_receivers(const VirtualQPlainTextDocumentLayout* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPlainTextDocumentLayout_delete(QPlainTextDocumentLayout* self) {

@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qpageranges.h>
 #include "gen_qpageranges.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPageRanges* QPageRanges_new() {
 	return new QPageRanges();
 }
@@ -97,11 +88,11 @@ void QPageRanges_delete(QPageRanges* self) {
 }
 
 QPageRanges__Range* QPageRanges__Range_new() {
-	return new QPageRanges::Range();
+	return new QPageRanges__Range();
 }
 
 QPageRanges__Range* QPageRanges__Range_new2(QPageRanges__Range* param1) {
-	return new QPageRanges::Range(*param1);
+	return new QPageRanges__Range(*param1);
 }
 
 bool QPageRanges__Range_contains(const QPageRanges__Range* self, int pageNumber) {

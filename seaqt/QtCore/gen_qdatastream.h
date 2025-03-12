@@ -27,6 +27,7 @@ typedef struct QIODeviceBase QIODeviceBase;
 QDataStream* QDataStream_new();
 QDataStream* QDataStream_new2(QIODevice* param1);
 QDataStream* QDataStream_new3(struct miqt_string param1);
+
 void QDataStream_virtbase(QDataStream* src, QIODeviceBase** outptr_QIODeviceBase);
 QIODevice* QDataStream_device(const QDataStream* self);
 void QDataStream_setDevice(QDataStream* self, QIODevice* device);
@@ -76,6 +77,7 @@ bool QDataStream_commitTransaction(QDataStream* self);
 void QDataStream_rollbackTransaction(QDataStream* self);
 void QDataStream_abortTransaction(QDataStream* self);
 bool QDataStream_isDeviceTransactionStarted(const QDataStream* self);
+
 void QDataStream_delete(QDataStream* self);
 
 #ifdef __cplusplus

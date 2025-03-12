@@ -52,7 +52,7 @@ export
 type cQAbstractEventDispatcher*{.exportc: "QAbstractEventDispatcher", incompleteStruct.} = object
 type cQAbstractEventDispatcherTimerInfo*{.exportc: "QAbstractEventDispatcher__TimerInfo", incompleteStruct.} = object
 
-proc fcQAbstractEventDispatcher_metaObject(self: pointer, ): pointer {.importc: "QAbstractEventDispatcher_metaObject".}
+proc fcQAbstractEventDispatcher_metaObject(self: pointer): pointer {.importc: "QAbstractEventDispatcher_metaObject".}
 proc fcQAbstractEventDispatcher_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractEventDispatcher_metacast".}
 proc fcQAbstractEventDispatcher_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractEventDispatcher_metacall".}
 proc fcQAbstractEventDispatcher_tr(s: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr".}
@@ -66,28 +66,28 @@ proc fcQAbstractEventDispatcher_unregisterTimer(self: pointer, timerId: cint): b
 proc fcQAbstractEventDispatcher_unregisterTimers(self: pointer, objectVal: pointer): bool {.importc: "QAbstractEventDispatcher_unregisterTimers".}
 proc fcQAbstractEventDispatcher_registeredTimers(self: pointer, objectVal: pointer): struct_miqt_array {.importc: "QAbstractEventDispatcher_registeredTimers".}
 proc fcQAbstractEventDispatcher_remainingTime(self: pointer, timerId: cint): cint {.importc: "QAbstractEventDispatcher_remainingTime".}
-proc fcQAbstractEventDispatcher_wakeUp(self: pointer, ): void {.importc: "QAbstractEventDispatcher_wakeUp".}
-proc fcQAbstractEventDispatcher_interrupt(self: pointer, ): void {.importc: "QAbstractEventDispatcher_interrupt".}
-proc fcQAbstractEventDispatcher_startingUp(self: pointer, ): void {.importc: "QAbstractEventDispatcher_startingUp".}
-proc fcQAbstractEventDispatcher_closingDown(self: pointer, ): void {.importc: "QAbstractEventDispatcher_closingDown".}
+proc fcQAbstractEventDispatcher_wakeUp(self: pointer): void {.importc: "QAbstractEventDispatcher_wakeUp".}
+proc fcQAbstractEventDispatcher_interrupt(self: pointer): void {.importc: "QAbstractEventDispatcher_interrupt".}
+proc fcQAbstractEventDispatcher_startingUp(self: pointer): void {.importc: "QAbstractEventDispatcher_startingUp".}
+proc fcQAbstractEventDispatcher_closingDown(self: pointer): void {.importc: "QAbstractEventDispatcher_closingDown".}
 proc fcQAbstractEventDispatcher_installNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QAbstractEventDispatcher_installNativeEventFilter".}
 proc fcQAbstractEventDispatcher_removeNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QAbstractEventDispatcher_removeNativeEventFilter".}
 proc fcQAbstractEventDispatcher_filterNativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.importc: "QAbstractEventDispatcher_filterNativeEvent".}
-proc fcQAbstractEventDispatcher_aboutToBlock(self: pointer, ): void {.importc: "QAbstractEventDispatcher_aboutToBlock".}
+proc fcQAbstractEventDispatcher_aboutToBlock(self: pointer): void {.importc: "QAbstractEventDispatcher_aboutToBlock".}
 proc fcQAbstractEventDispatcher_connect_aboutToBlock(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_aboutToBlock".}
-proc fcQAbstractEventDispatcher_awake(self: pointer, ): void {.importc: "QAbstractEventDispatcher_awake".}
+proc fcQAbstractEventDispatcher_awake(self: pointer): void {.importc: "QAbstractEventDispatcher_awake".}
 proc fcQAbstractEventDispatcher_connect_awake(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_awake".}
 proc fcQAbstractEventDispatcher_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr2".}
 proc fcQAbstractEventDispatcher_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr3".}
 proc fcQAbstractEventDispatcher_instance1(thread: pointer): pointer {.importc: "QAbstractEventDispatcher_instance1".}
-proc fcQAbstractEventDispatcher_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractEventDispatcher_protectedbase_sender".}
-proc fcQAbstractEventDispatcher_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractEventDispatcher_protectedbase_senderSignalIndex".}
+proc fcQAbstractEventDispatcher_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractEventDispatcher_protectedbase_sender".}
+proc fcQAbstractEventDispatcher_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractEventDispatcher_protectedbase_senderSignalIndex".}
 proc fcQAbstractEventDispatcher_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractEventDispatcher_protectedbase_receivers".}
 proc fcQAbstractEventDispatcher_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractEventDispatcher_protectedbase_isSignalConnected".}
 proc fcQAbstractEventDispatcher_staticMetaObject(): pointer {.importc: "QAbstractEventDispatcher_staticMetaObject".}
 proc fcQAbstractEventDispatcherTimerInfo_new(id: cint, i: cint, t: cint): ptr cQAbstractEventDispatcherTimerInfo {.importc: "QAbstractEventDispatcher__TimerInfo_new".}
 
-proc metaObject*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractEventDispatcher_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, param1: cstring): pointer =
@@ -102,7 +102,7 @@ proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s:
   c_free(v_ms.data)
   vx_ret
 
-proc instance*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
+proc instance*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
   gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQAbstractEventDispatcher_instance(), owned: false)
 
 proc processEvents*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, flags: cint): bool =
@@ -138,16 +138,16 @@ proc registeredTimers*(self: gen_qabstracteventdispatcher_types.QAbstractEventDi
 proc remainingTime*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, timerId: cint): cint =
   fcQAbstractEventDispatcher_remainingTime(self.h, timerId)
 
-proc wakeUp*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc wakeUp*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_wakeUp(self.h)
 
-proc interrupt*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc interrupt*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_interrupt(self.h)
 
-proc startingUp*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc startingUp*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_startingUp(self.h)
 
-proc closingDown*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc closingDown*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_closingDown(self.h)
 
 proc installNativeEventFilter*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter): void =
@@ -159,15 +159,15 @@ proc removeNativeEventFilter*(self: gen_qabstracteventdispatcher_types.QAbstract
 proc filterNativeEvent*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractEventDispatcher_filterNativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc aboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc aboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_aboutToBlock(self.h)
 
 type QAbstractEventDispatcheraboutToBlockSlot* = proc()
-proc miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock(slot: int) {.cdecl.} =
+proc cQAbstractEventDispatcher_slot_callback_aboutToBlock(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock_release(slot: int) {.cdecl.} =
+proc cQAbstractEventDispatcher_slot_callback_aboutToBlock_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -175,17 +175,17 @@ proc onaboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDisp
   var tmp = new QAbstractEventDispatcheraboutToBlockSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock, miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock_release)
+  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]), cQAbstractEventDispatcher_slot_callback_aboutToBlock, cQAbstractEventDispatcher_slot_callback_aboutToBlock_release)
 
-proc awake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
+proc awake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_awake(self.h)
 
 type QAbstractEventDispatcherawakeSlot* = proc()
-proc miqt_exec_callback_cQAbstractEventDispatcher_awake(slot: int) {.cdecl.} =
+proc cQAbstractEventDispatcher_slot_callback_awake(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractEventDispatcher_awake_release(slot: int) {.cdecl.} =
+proc cQAbstractEventDispatcher_slot_callback_awake_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -193,7 +193,7 @@ proc onawake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher,
   var tmp = new QAbstractEventDispatcherawakeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractEventDispatcher_awake, miqt_exec_callback_cQAbstractEventDispatcher_awake_release)
+  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), cQAbstractEventDispatcher_slot_callback_awake, cQAbstractEventDispatcher_slot_callback_awake_release)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractEventDispatcher_tr2(s, c)
@@ -210,10 +210,10 @@ proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s:
 proc instance*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, thread: gen_qthread_types.QThread): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
   gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQAbstractEventDispatcher_instance1(thread.h), owned: false)
 
-proc sender*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractEventDispatcher_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): cint =
+proc senderSignalIndex*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): cint =
   fcQAbstractEventDispatcher_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, signal: cstring): cint =

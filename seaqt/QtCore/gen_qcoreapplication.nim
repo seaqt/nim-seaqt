@@ -62,7 +62,7 @@ export
 
 type cQCoreApplication*{.exportc: "QCoreApplication", incompleteStruct.} = object
 
-proc fcQCoreApplication_metaObject(self: pointer, ): pointer {.importc: "QCoreApplication_metaObject".}
+proc fcQCoreApplication_metaObject(self: pointer): pointer {.importc: "QCoreApplication_metaObject".}
 proc fcQCoreApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QCoreApplication_metacast".}
 proc fcQCoreApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCoreApplication_metacall".}
 proc fcQCoreApplication_tr(s: cstring): struct_miqt_string {.importc: "QCoreApplication_tr".}
@@ -110,13 +110,13 @@ proc fcQCoreApplication_isQuitLockEnabled(): bool {.importc: "QCoreApplication_i
 proc fcQCoreApplication_setQuitLockEnabled(enabled: bool): void {.importc: "QCoreApplication_setQuitLockEnabled".}
 proc fcQCoreApplication_quit(): void {.importc: "QCoreApplication_quit".}
 proc fcQCoreApplication_exit(): void {.importc: "QCoreApplication_exit".}
-proc fcQCoreApplication_organizationNameChanged(self: pointer, ): void {.importc: "QCoreApplication_organizationNameChanged".}
+proc fcQCoreApplication_organizationNameChanged(self: pointer): void {.importc: "QCoreApplication_organizationNameChanged".}
 proc fcQCoreApplication_connect_organizationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationNameChanged".}
-proc fcQCoreApplication_organizationDomainChanged(self: pointer, ): void {.importc: "QCoreApplication_organizationDomainChanged".}
+proc fcQCoreApplication_organizationDomainChanged(self: pointer): void {.importc: "QCoreApplication_organizationDomainChanged".}
 proc fcQCoreApplication_connect_organizationDomainChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationDomainChanged".}
-proc fcQCoreApplication_applicationNameChanged(self: pointer, ): void {.importc: "QCoreApplication_applicationNameChanged".}
+proc fcQCoreApplication_applicationNameChanged(self: pointer): void {.importc: "QCoreApplication_applicationNameChanged".}
 proc fcQCoreApplication_connect_applicationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationNameChanged".}
-proc fcQCoreApplication_applicationVersionChanged(self: pointer, ): void {.importc: "QCoreApplication_applicationVersionChanged".}
+proc fcQCoreApplication_applicationVersionChanged(self: pointer): void {.importc: "QCoreApplication_applicationVersionChanged".}
 proc fcQCoreApplication_connect_applicationVersionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationVersionChanged".}
 proc fcQCoreApplication_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCoreApplication_tr2".}
 proc fcQCoreApplication_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCoreApplication_tr3".}
@@ -129,20 +129,22 @@ proc fcQCoreApplication_removePostedEvents2(receiver: pointer, eventType: cint):
 proc fcQCoreApplication_translate3(context: cstring, key: cstring, disambiguation: cstring): struct_miqt_string {.importc: "QCoreApplication_translate3".}
 proc fcQCoreApplication_translate4(context: cstring, key: cstring, disambiguation: cstring, n: cint): struct_miqt_string {.importc: "QCoreApplication_translate4".}
 proc fcQCoreApplication_exit1(retcode: cint): void {.importc: "QCoreApplication_exit1".}
+proc fcQCoreApplication_vtbl(self: pointer): pointer {.importc: "QCoreApplication_vtbl".}
+proc fcQCoreApplication_vdata(self: pointer): pointer {.importc: "QCoreApplication_vdata".}
 type cQCoreApplicationVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQCoreApplicationVTable, self: ptr cQCoreApplication) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  notify*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQCoreApplication_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QCoreApplication_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  notify*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQCoreApplication_virtualbase_metaObject(self: pointer): pointer {.importc: "QCoreApplication_virtualbase_metaObject".}
 proc fcQCoreApplication_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QCoreApplication_virtualbase_metacast".}
 proc fcQCoreApplication_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCoreApplication_virtualbase_metacall".}
 proc fcQCoreApplication_virtualbase_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QCoreApplication_virtualbase_notify".}
@@ -154,15 +156,15 @@ proc fcQCoreApplication_virtualbase_customEvent(self: pointer, event: pointer): 
 proc fcQCoreApplication_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_connectNotify".}
 proc fcQCoreApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_disconnectNotify".}
 proc fcQCoreApplication_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QCoreApplication_protectedbase_resolveInterface".}
-proc fcQCoreApplication_protectedbase_sender(self: pointer, ): pointer {.importc: "QCoreApplication_protectedbase_sender".}
-proc fcQCoreApplication_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCoreApplication_protectedbase_senderSignalIndex".}
+proc fcQCoreApplication_protectedbase_sender(self: pointer): pointer {.importc: "QCoreApplication_protectedbase_sender".}
+proc fcQCoreApplication_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCoreApplication_protectedbase_senderSignalIndex".}
 proc fcQCoreApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCoreApplication_protectedbase_receivers".}
 proc fcQCoreApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCoreApplication_protectedbase_isSignalConnected".}
-proc fcQCoreApplication_new(vtbl: pointer, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new".}
-proc fcQCoreApplication_new2(vtbl: pointer, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new2".}
+proc fcQCoreApplication_new(vtbl, vdata: pointer, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new".}
+proc fcQCoreApplication_new2(vtbl, vdata: pointer, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new2".}
 proc fcQCoreApplication_staticMetaObject(): pointer {.importc: "QCoreApplication_staticMetaObject".}
 
-proc metaObject*(self: gen_qcoreapplication_types.QCoreApplication, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcoreapplication_types.QCoreApplication, param1: cstring): pointer =
@@ -177,7 +179,7 @@ proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring): strin
   c_free(v_ms.data)
   vx_ret
 
-proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication, ): seq[string] =
+proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string] =
   var v_ma = fcQCoreApplication_arguments()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -198,7 +200,7 @@ proc testAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribu
 proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: string): void =
   fcQCoreApplication_setOrganizationDomain(struct_miqt_string(data: orgDomain, len: csize_t(len(orgDomain))))
 
-proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_organizationDomain()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -207,7 +209,7 @@ proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, ):
 proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: string): void =
   fcQCoreApplication_setOrganizationName(struct_miqt_string(data: orgName, len: csize_t(len(orgName))))
 
-proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_organizationName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -216,7 +218,7 @@ proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication, ): s
 proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: string): void =
   fcQCoreApplication_setApplicationName(struct_miqt_string(data: application, len: csize_t(len(application))))
 
-proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -225,7 +227,7 @@ proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication, ): st
 proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: string): void =
   fcQCoreApplication_setApplicationVersion(struct_miqt_string(data: version, len: csize_t(len(version))))
 
-proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationVersion()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -234,16 +236,16 @@ proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, ):
 proc setSetuidAllowed*(_: type gen_qcoreapplication_types.QCoreApplication, allow: bool): void =
   fcQCoreApplication_setSetuidAllowed(allow)
 
-proc isSetuidAllowed*(_: type gen_qcoreapplication_types.QCoreApplication, ): bool =
+proc isSetuidAllowed*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
   fcQCoreApplication_isSetuidAllowed()
 
-proc instance*(_: type gen_qcoreapplication_types.QCoreApplication, ): gen_qcoreapplication_types.QCoreApplication =
+proc instance*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qcoreapplication_types.QCoreApplication =
   gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_instance(), owned: false)
 
-proc exec*(_: type gen_qcoreapplication_types.QCoreApplication, ): cint =
+proc exec*(_: type gen_qcoreapplication_types.QCoreApplication): cint =
   fcQCoreApplication_exec()
 
-proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, ): void =
+proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_processEvents()
 
 proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint, maxtime: cint): void =
@@ -255,13 +257,13 @@ proc sendEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: g
 proc postEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): void =
   fcQCoreApplication_postEvent(receiver.h, event.h)
 
-proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, ): void =
+proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_sendPostedEvents()
 
 proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject): void =
   fcQCoreApplication_removePostedEvents(receiver.h)
 
-proc eventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication, ): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
+proc eventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
   gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQCoreApplication_eventDispatcher(), owned: false)
 
 proc setEventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication, eventDispatcher: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
@@ -270,25 +272,25 @@ proc setEventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication, ev
 proc notify*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
   fcQCoreApplication_notify(self.h, param1.h, param2.h)
 
-proc startingUp*(_: type gen_qcoreapplication_types.QCoreApplication, ): bool =
+proc startingUp*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
   fcQCoreApplication_startingUp()
 
-proc closingDown*(_: type gen_qcoreapplication_types.QCoreApplication, ): bool =
+proc closingDown*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
   fcQCoreApplication_closingDown()
 
-proc applicationDirPath*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc applicationDirPath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationDirPath()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc applicationFilePath*(_: type gen_qcoreapplication_types.QCoreApplication, ): string =
+proc applicationFilePath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationFilePath()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc applicationPid*(_: type gen_qcoreapplication_types.QCoreApplication, ): clonglong =
+proc applicationPid*(_: type gen_qcoreapplication_types.QCoreApplication): clonglong =
   fcQCoreApplication_applicationPid()
 
 proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: seq[string]): void =
@@ -298,7 +300,7 @@ proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libra
 
   fcQCoreApplication_setLibraryPaths(struct_miqt_array(len: csize_t(len(libraryPaths)), data: if len(libraryPaths) == 0: nil else: addr(libraryPaths_CArray[0])))
 
-proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, ): seq[string] =
+proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string] =
   var v_ma = fcQCoreApplication_libraryPaths()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -332,13 +334,13 @@ proc installNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication
   fcQCoreApplication_installNativeEventFilter(self.h, filterObj.h)
 
 type QCoreApplicationinstallNativeEventFilterSlot* = proc(filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter)
-proc miqt_exec_callback_cQCoreApplication_installNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
+proc cQCoreApplication_slot_callback_installNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationinstallNativeEventFilterSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: filterObj, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCoreApplication_installNativeEventFilter_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_installNativeEventFilter_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationinstallNativeEventFilterSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -346,19 +348,19 @@ proc oninstallNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplicati
   var tmp = new QCoreApplicationinstallNativeEventFilterSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_installNativeEventFilter(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_installNativeEventFilter, miqt_exec_callback_cQCoreApplication_installNativeEventFilter_release)
+  fcQCoreApplication_connect_installNativeEventFilter(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_installNativeEventFilter, cQCoreApplication_slot_callback_installNativeEventFilter_release)
 
 proc removeNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplication, filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter): void =
   fcQCoreApplication_removeNativeEventFilter(self.h, filterObj.h)
 
 type QCoreApplicationremoveNativeEventFilterSlot* = proc(filterObj: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter)
-proc miqt_exec_callback_cQCoreApplication_removeNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
+proc cQCoreApplication_slot_callback_removeNativeEventFilter(slot: int, filterObj: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationremoveNativeEventFilterSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: filterObj, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCoreApplication_removeNativeEventFilter_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_removeNativeEventFilter_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationremoveNativeEventFilterSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -366,29 +368,29 @@ proc onremoveNativeEventFilter*(self: gen_qcoreapplication_types.QCoreApplicatio
   var tmp = new QCoreApplicationremoveNativeEventFilterSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_removeNativeEventFilter(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_removeNativeEventFilter, miqt_exec_callback_cQCoreApplication_removeNativeEventFilter_release)
+  fcQCoreApplication_connect_removeNativeEventFilter(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_removeNativeEventFilter, cQCoreApplication_slot_callback_removeNativeEventFilter_release)
 
-proc isQuitLockEnabled*(_: type gen_qcoreapplication_types.QCoreApplication, ): bool =
+proc isQuitLockEnabled*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
   fcQCoreApplication_isQuitLockEnabled()
 
 proc setQuitLockEnabled*(_: type gen_qcoreapplication_types.QCoreApplication, enabled: bool): void =
   fcQCoreApplication_setQuitLockEnabled(enabled)
 
-proc quit*(_: type gen_qcoreapplication_types.QCoreApplication, ): void =
+proc quit*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_quit()
 
-proc exit*(_: type gen_qcoreapplication_types.QCoreApplication, ): void =
+proc exit*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_exit()
 
-proc organizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
+proc organizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_organizationNameChanged(self.h)
 
 type QCoreApplicationorganizationNameChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_organizationNameChanged(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_organizationNameChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQCoreApplication_organizationNameChanged_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_organizationNameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -396,17 +398,17 @@ proc onorganizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplicatio
   var tmp = new QCoreApplicationorganizationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_organizationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_organizationNameChanged, miqt_exec_callback_cQCoreApplication_organizationNameChanged_release)
+  fcQCoreApplication_connect_organizationNameChanged(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_organizationNameChanged, cQCoreApplication_slot_callback_organizationNameChanged_release)
 
-proc organizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
+proc organizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_organizationDomainChanged(self.h)
 
 type QCoreApplicationorganizationDomainChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_organizationDomainChanged(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_organizationDomainChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQCoreApplication_organizationDomainChanged_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_organizationDomainChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -414,17 +416,17 @@ proc onorganizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplicat
   var tmp = new QCoreApplicationorganizationDomainChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_organizationDomainChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_organizationDomainChanged, miqt_exec_callback_cQCoreApplication_organizationDomainChanged_release)
+  fcQCoreApplication_connect_organizationDomainChanged(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_organizationDomainChanged, cQCoreApplication_slot_callback_organizationDomainChanged_release)
 
-proc applicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
+proc applicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_applicationNameChanged(self.h)
 
 type QCoreApplicationapplicationNameChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_applicationNameChanged(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_applicationNameChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQCoreApplication_applicationNameChanged_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_applicationNameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -432,17 +434,17 @@ proc onapplicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication
   var tmp = new QCoreApplicationapplicationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_applicationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_applicationNameChanged, miqt_exec_callback_cQCoreApplication_applicationNameChanged_release)
+  fcQCoreApplication_connect_applicationNameChanged(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_applicationNameChanged, cQCoreApplication_slot_callback_applicationNameChanged_release)
 
-proc applicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
+proc applicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_applicationVersionChanged(self.h)
 
 type QCoreApplicationapplicationVersionChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_applicationVersionChanged(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_applicationVersionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQCoreApplication_applicationVersionChanged_release(slot: int) {.cdecl.} =
+proc cQCoreApplication_slot_callback_applicationVersionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -450,7 +452,7 @@ proc onapplicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplicat
   var tmp = new QCoreApplicationapplicationVersionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_applicationVersionChanged, miqt_exec_callback_cQCoreApplication_applicationVersionChanged_release)
+  fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]), cQCoreApplication_slot_callback_applicationVersionChanged, cQCoreApplication_slot_callback_applicationVersionChanged_release)
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
   let v_ms = fcQCoreApplication_tr2(s, c)
@@ -521,11 +523,11 @@ type QCoreApplicationVTable* {.inheritable, pure.} = object
   customEvent*: QCoreApplicationcustomEventProc
   connectNotify*: QCoreApplicationconnectNotifyProc
   disconnectNotify*: QCoreApplicationdisconnectNotifyProc
-proc QCoreApplicationmetaObject*(self: gen_qcoreapplication_types.QCoreApplication, ): gen_qobjectdefs_types.QMetaObject =
+proc QCoreApplicationmetaObject*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQCoreApplication_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -536,8 +538,8 @@ proc miqt_exec_callback_cQCoreApplication_metaObject(vtbl: pointer, self: pointe
 proc QCoreApplicationmetacast*(self: gen_qcoreapplication_types.QCoreApplication, param1: cstring): pointer =
   fcQCoreApplication_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQCoreApplication_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -546,8 +548,8 @@ proc miqt_exec_callback_cQCoreApplication_metacast(vtbl: pointer, self: pointer,
 proc QCoreApplicationmetacall*(self: gen_qcoreapplication_types.QCoreApplication, param1: cint, param2: cint, param3: pointer): cint =
   fcQCoreApplication_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQCoreApplication_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -558,8 +560,8 @@ proc miqt_exec_callback_cQCoreApplication_metacall(vtbl: pointer, self: pointer,
 proc QCoreApplicationnotify*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
   fcQCoreApplication_virtualbase_notify(self.h, param1.h, param2.h)
 
-proc miqt_exec_callback_cQCoreApplication_notify(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
@@ -569,8 +571,8 @@ proc miqt_exec_callback_cQCoreApplication_notify(vtbl: pointer, self: pointer, p
 proc QCoreApplicationevent*(self: gen_qcoreapplication_types.QCoreApplication, param1: gen_qcoreevent_types.QEvent): bool =
   fcQCoreApplication_virtualbase_event(self.h, param1.h)
 
-proc miqt_exec_callback_cQCoreApplication_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -579,8 +581,8 @@ proc miqt_exec_callback_cQCoreApplication_event(vtbl: pointer, self: pointer, pa
 proc QCoreApplicationeventFilter*(self: gen_qcoreapplication_types.QCoreApplication, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQCoreApplication_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQCoreApplication_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -590,8 +592,8 @@ proc miqt_exec_callback_cQCoreApplication_eventFilter(vtbl: pointer, self: point
 proc QCoreApplicationtimerEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQCoreApplication_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCoreApplication_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -599,8 +601,8 @@ proc miqt_exec_callback_cQCoreApplication_timerEvent(vtbl: pointer, self: pointe
 proc QCoreApplicationchildEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QChildEvent): void =
   fcQCoreApplication_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCoreApplication_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -608,8 +610,8 @@ proc miqt_exec_callback_cQCoreApplication_childEvent(vtbl: pointer, self: pointe
 proc QCoreApplicationcustomEvent*(self: gen_qcoreapplication_types.QCoreApplication, event: gen_qcoreevent_types.QEvent): void =
   fcQCoreApplication_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCoreApplication_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -617,8 +619,8 @@ proc miqt_exec_callback_cQCoreApplication_customEvent(vtbl: pointer, self: point
 proc QCoreApplicationconnectNotify*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQCoreApplication_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQCoreApplication_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -626,19 +628,19 @@ proc miqt_exec_callback_cQCoreApplication_connectNotify(vtbl: pointer, self: poi
 proc QCoreApplicationdisconnectNotify*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQCoreApplication_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQCoreApplication_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCoreApplicationVTable](vtbl)
+proc cQCoreApplication_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCoreApplicationVTable](fcQCoreApplication_vdata(self))
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQCoreApplication* {.inheritable.} = ref object of QCoreApplication
   vtbl*: cQCoreApplicationVTable
-method metaObject*(self: VirtualQCoreApplication, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQCoreApplication): gen_qobjectdefs_types.QMetaObject {.base.} =
   QCoreApplicationmetaObject(self[])
-proc miqt_exec_method_cQCoreApplication_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQCoreApplication_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -646,90 +648,90 @@ proc miqt_exec_method_cQCoreApplication_metaObject(vtbl: pointer, inst: pointer)
 
 method metacast*(self: VirtualQCoreApplication, param1: cstring): pointer {.base.} =
   QCoreApplicationmetacast(self[], param1)
-proc miqt_exec_method_cQCoreApplication_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQCoreApplication, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QCoreApplicationmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQCoreApplication_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method notify*(self: VirtualQCoreApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QCoreApplicationnotify(self[], param1, param2)
-proc miqt_exec_method_cQCoreApplication_notify(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
-  var virtualReturn = vtbl.notify(slotval1, slotval2)
+  var virtualReturn = inst.notify(slotval1, slotval2)
   virtualReturn
 
 method event*(self: VirtualQCoreApplication, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QCoreApplicationevent(self[], param1)
-proc miqt_exec_method_cQCoreApplication_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQCoreApplication, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QCoreApplicationeventFilter(self[], watched, event)
-proc miqt_exec_method_cQCoreApplication_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QCoreApplicationtimerEvent(self[], event)
-proc miqt_exec_method_cQCoreApplication_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QCoreApplicationchildEvent(self[], event)
-proc miqt_exec_method_cQCoreApplication_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQCoreApplication, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QCoreApplicationcustomEvent(self[], event)
-proc miqt_exec_method_cQCoreApplication_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QCoreApplicationconnectNotify(self[], signal)
-proc miqt_exec_method_cQCoreApplication_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QCoreApplicationdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQCoreApplication_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCoreApplication](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
+proc cQCoreApplication_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCoreApplication](fcQCoreApplication_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc resolveInterface*(self: gen_qcoreapplication_types.QCoreApplication, name: cstring, revision: cint): pointer =
   fcQCoreApplication_protectedbase_resolveInterface(self.h, name, revision)
 
-proc sender*(self: gen_qcoreapplication_types.QCoreApplication, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQCoreApplication_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qcoreapplication_types.QCoreApplication, ): cint =
+proc senderSignalIndex*(self: gen_qcoreapplication_types.QCoreApplication): cint =
   fcQCoreApplication_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qcoreapplication_types.QCoreApplication, signal: cstring): cint =
@@ -748,32 +750,32 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
   argc = args2.len.cint
   let vtbl = if vtbl == nil: new QCoreApplicationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCoreApplicationVTable, _: ptr cQCoreApplication) {.cdecl.} =
-    let vtbl = cast[ref QCoreApplicationVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCoreApplicationVTable](fcQCoreApplication_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCoreApplication_metaObject
+    vtbl[].vtbl.metaObject = cQCoreApplication_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCoreApplication_metacast
+    vtbl[].vtbl.metacast = cQCoreApplication_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCoreApplication_metacall
+    vtbl[].vtbl.metacall = cQCoreApplication_vtable_callback_metacall
   if not isNil(vtbl[].notify):
-    vtbl[].vtbl.notify = miqt_exec_callback_cQCoreApplication_notify
+    vtbl[].vtbl.notify = cQCoreApplication_vtable_callback_notify
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCoreApplication_event
+    vtbl[].vtbl.event = cQCoreApplication_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCoreApplication_eventFilter
+    vtbl[].vtbl.eventFilter = cQCoreApplication_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCoreApplication_timerEvent
+    vtbl[].vtbl.timerEvent = cQCoreApplication_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCoreApplication_childEvent
+    vtbl[].vtbl.childEvent = cQCoreApplication_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCoreApplication_customEvent
+    vtbl[].vtbl.customEvent = cQCoreApplication_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCoreApplication_connectNotify
+    vtbl[].vtbl.connectNotify = cQCoreApplication_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCoreApplication_disconnectNotify
-  gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new(addr(vtbl[].vtbl), addr argc, argv), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCoreApplication_vtable_callback_disconnectNotify
+  gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new(addr(vtbl[].vtbl), addr(vtbl[]), addr argc, argv), owned: true)
 
 proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     param3: cint,
@@ -786,89 +788,74 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
   argc = args2.len.cint
   let vtbl = if vtbl == nil: new QCoreApplicationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCoreApplicationVTable, _: ptr cQCoreApplication) {.cdecl.} =
-    let vtbl = cast[ref QCoreApplicationVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCoreApplicationVTable](fcQCoreApplication_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCoreApplication_metaObject
+    vtbl[].vtbl.metaObject = cQCoreApplication_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCoreApplication_metacast
+    vtbl[].vtbl.metacast = cQCoreApplication_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCoreApplication_metacall
+    vtbl[].vtbl.metacall = cQCoreApplication_vtable_callback_metacall
   if not isNil(vtbl[].notify):
-    vtbl[].vtbl.notify = miqt_exec_callback_cQCoreApplication_notify
+    vtbl[].vtbl.notify = cQCoreApplication_vtable_callback_notify
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCoreApplication_event
+    vtbl[].vtbl.event = cQCoreApplication_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCoreApplication_eventFilter
+    vtbl[].vtbl.eventFilter = cQCoreApplication_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCoreApplication_timerEvent
+    vtbl[].vtbl.timerEvent = cQCoreApplication_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCoreApplication_childEvent
+    vtbl[].vtbl.childEvent = cQCoreApplication_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCoreApplication_customEvent
+    vtbl[].vtbl.customEvent = cQCoreApplication_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCoreApplication_connectNotify
+    vtbl[].vtbl.connectNotify = cQCoreApplication_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCoreApplication_disconnectNotify
-  gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new2(addr(vtbl[].vtbl), addr argc, argv, param3), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCoreApplication_vtable_callback_disconnectNotify
+  gen_qcoreapplication_types.QCoreApplication(h: fcQCoreApplication_new2(addr(vtbl[].vtbl), addr(vtbl[]), addr argc, argv, param3), owned: true)
 
+const cQCoreApplication_mvtbl = cQCoreApplicationVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQCoreApplication()[])](self.fcQCoreApplication_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQCoreApplication_method_callback_metaObject,
+  metacast: cQCoreApplication_method_callback_metacast,
+  metacall: cQCoreApplication_method_callback_metacall,
+  notify: cQCoreApplication_method_callback_notify,
+  event: cQCoreApplication_method_callback_event,
+  eventFilter: cQCoreApplication_method_callback_eventFilter,
+  timerEvent: cQCoreApplication_method_callback_timerEvent,
+  childEvent: cQCoreApplication_method_callback_childEvent,
+  customEvent: cQCoreApplication_method_callback_customEvent,
+  connectNotify: cQCoreApplication_method_callback_connectNotify,
+  disconnectNotify: cQCoreApplication_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
-    vtbl: VirtualQCoreApplication) =
+    inst: VirtualQCoreApplication) =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
   args2.add commandLineParams()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCoreApplicationVTable, _: ptr cQCoreApplication) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCoreApplication()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCoreApplication_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCoreApplication_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCoreApplication_metacall
-  vtbl[].vtbl.notify = miqt_exec_method_cQCoreApplication_notify
-  vtbl[].vtbl.event = miqt_exec_method_cQCoreApplication_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCoreApplication_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCoreApplication_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCoreApplication_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCoreApplication_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCoreApplication_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCoreApplication_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCoreApplication_new(addr(vtbl[].vtbl), addr argc, argv)
-  vtbl[].owned = true
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCoreApplication_new(addr(cQCoreApplication_mvtbl), addr(inst[]), addr argc, argv)
+  inst[].owned = true
 
 proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     param3: cint,
-    vtbl: VirtualQCoreApplication) =
+    inst: VirtualQCoreApplication) =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
   args2.add commandLineParams()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCoreApplicationVTable, _: ptr cQCoreApplication) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCoreApplication()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCoreApplication, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCoreApplication_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCoreApplication_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCoreApplication_metacall
-  vtbl[].vtbl.notify = miqt_exec_method_cQCoreApplication_notify
-  vtbl[].vtbl.event = miqt_exec_method_cQCoreApplication_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCoreApplication_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCoreApplication_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCoreApplication_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCoreApplication_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCoreApplication_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCoreApplication_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCoreApplication_new2(addr(vtbl[].vtbl), addr argc, argv, param3)
-  vtbl[].owned = true
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCoreApplication_new2(addr(cQCoreApplication_mvtbl), addr(inst[]), addr argc, argv, param3)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCoreApplication_staticMetaObject())

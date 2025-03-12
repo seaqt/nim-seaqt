@@ -41,6 +41,7 @@ typedef struct QRegion QRegion;
 QPainterPath* QPainterPath_new();
 QPainterPath* QPainterPath_new2(QPointF* startPoint);
 QPainterPath* QPainterPath_new3(QPainterPath* other);
+
 void QPainterPath_operatorAssign(QPainterPath* self, QPainterPath* other);
 void QPainterPath_swap(QPainterPath* self, QPainterPath* other);
 void QPainterPath_clear(QPainterPath* self);
@@ -111,10 +112,12 @@ QPainterPath* QPainterPath_operatorPlusAssign(QPainterPath* self, QPainterPath* 
 QPainterPath* QPainterPath_operatorMinusAssign(QPainterPath* self, QPainterPath* other);
 void QPainterPath_addRoundedRect4(QPainterPath* self, QRectF* rect, double xRadius, double yRadius, int mode);
 void QPainterPath_addRoundedRect7(QPainterPath* self, double x, double y, double w, double h, double xRadius, double yRadius, int mode);
+
 void QPainterPath_delete(QPainterPath* self);
 
 QPainterPathStroker* QPainterPathStroker_new();
 QPainterPathStroker* QPainterPathStroker_new2(QPen* pen);
+
 void QPainterPathStroker_setWidth(QPainterPathStroker* self, double width);
 double QPainterPathStroker_width(const QPainterPathStroker* self);
 void QPainterPathStroker_setCapStyle(QPainterPathStroker* self, int style);
@@ -131,6 +134,7 @@ struct miqt_array /* of double */  QPainterPathStroker_dashPattern(const QPainte
 void QPainterPathStroker_setDashOffset(QPainterPathStroker* self, double offset);
 double QPainterPathStroker_dashOffset(const QPainterPathStroker* self);
 QPainterPath* QPainterPathStroker_createStroke(const QPainterPathStroker* self, QPainterPath* path);
+
 void QPainterPathStroker_delete(QPainterPathStroker* self);
 
 bool QPainterPath__Element_isMoveTo(const QPainterPath__Element* self);
@@ -139,6 +143,7 @@ bool QPainterPath__Element_isCurveTo(const QPainterPath__Element* self);
 QPointF* QPainterPath__Element_ToQPointF(const QPainterPath__Element* self);
 bool QPainterPath__Element_operatorEqual(const QPainterPath__Element* self, QPainterPath__Element* e);
 bool QPainterPath__Element_operatorNotEqual(const QPainterPath__Element* self, QPainterPath__Element* e);
+
 void QPainterPath__Element_delete(QPainterPath__Element* self);
 
 #ifdef __cplusplus

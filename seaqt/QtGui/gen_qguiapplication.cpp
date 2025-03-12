@@ -23,39 +23,32 @@
 #include <QWindow>
 #include <qguiapplication.h>
 #include "gen_qguiapplication.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGuiApplication final : public QGuiApplication {
-	struct QGuiApplication_VTable* vtbl;
+	const QGuiApplication_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGuiApplication_VTable* QGuiApplication_vtbl(const VirtualQGuiApplication* self);
+	friend void* QGuiApplication_vdata(const VirtualQGuiApplication* self);
+	friend void QGuiApplication_setVdata(VirtualQGuiApplication* self, void* vdata);
 
-	VirtualQGuiApplication(struct QGuiApplication_VTable* vtbl, int& argc, char** argv): QGuiApplication(argc, argv), vtbl(vtbl) {};
-	VirtualQGuiApplication(struct QGuiApplication_VTable* vtbl, int& argc, char** argv, int param3): QGuiApplication(argc, argv, param3), vtbl(vtbl) {};
+	VirtualQGuiApplication(const QGuiApplication_VTable* vtbl, void* vdata, int& argc, char** argv): QGuiApplication(argc, argv), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGuiApplication(const QGuiApplication_VTable* vtbl, void* vdata, int& argc, char** argv, int param3): QGuiApplication(argc, argv, param3), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGuiApplication() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGuiApplication() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGuiApplication::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGuiApplication_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGuiApplication_virtualbase_metaObject(const VirtualQGuiApplication* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGuiApplication::qt_metacast(param1);
@@ -63,14 +56,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGuiApplication_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGuiApplication_virtualbase_metacast(VirtualQGuiApplication* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGuiApplication::qt_metacall(param1, param2, param3);
@@ -81,14 +73,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGuiApplication_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGuiApplication_virtualbase_metacall(VirtualQGuiApplication* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool notify(QObject* param1, QEvent* param2) override {
 		if (vtbl->notify == 0) {
 			return QGuiApplication::notify(param1, param2);
@@ -97,14 +88,13 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->notify(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->notify(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGuiApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2);
+	friend bool QGuiApplication_virtualbase_notify(VirtualQGuiApplication* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QGuiApplication::event(param1);
@@ -112,14 +102,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGuiApplication_virtualbase_event(void* self, QEvent* param1);
+	friend bool QGuiApplication_virtualbase_event(VirtualQGuiApplication* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGuiApplication::eventFilter(watched, event);
@@ -128,14 +117,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGuiApplication_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGuiApplication_virtualbase_eventFilter(VirtualQGuiApplication* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGuiApplication::timerEvent(event);
@@ -144,13 +132,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGuiApplication_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGuiApplication_virtualbase_timerEvent(VirtualQGuiApplication* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGuiApplication::childEvent(event);
@@ -159,13 +146,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGuiApplication_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGuiApplication_virtualbase_childEvent(VirtualQGuiApplication* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGuiApplication::customEvent(event);
@@ -174,13 +160,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGuiApplication_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGuiApplication_virtualbase_customEvent(VirtualQGuiApplication* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGuiApplication::connectNotify(signal);
@@ -191,13 +176,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGuiApplication_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGuiApplication_virtualbase_connectNotify(VirtualQGuiApplication* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGuiApplication::disconnectNotify(signal);
@@ -208,26 +192,26 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGuiApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGuiApplication_virtualbase_disconnectNotify(VirtualQGuiApplication* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QGuiApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision);
-	friend QObject* QGuiApplication_protectedbase_sender(const void* self);
-	friend int QGuiApplication_protectedbase_senderSignalIndex(const void* self);
-	friend int QGuiApplication_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGuiApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void* QGuiApplication_protectedbase_resolveInterface(const VirtualQGuiApplication* self, const char* name, int revision);
+	friend QObject* QGuiApplication_protectedbase_sender(const VirtualQGuiApplication* self);
+	friend int QGuiApplication_protectedbase_senderSignalIndex(const VirtualQGuiApplication* self);
+	friend int QGuiApplication_protectedbase_receivers(const VirtualQGuiApplication* self, const char* signal);
+	friend bool QGuiApplication_protectedbase_isSignalConnected(const VirtualQGuiApplication* self, QMetaMethod* signal);
 };
 
-QGuiApplication* QGuiApplication_new(struct QGuiApplication_VTable* vtbl, int* argc, char** argv) {
-	return new VirtualQGuiApplication(vtbl, static_cast<int&>(*argc), argv);
+VirtualQGuiApplication* QGuiApplication_new(const QGuiApplication_VTable* vtbl, void* vdata, int* argc, char** argv) {
+	return new VirtualQGuiApplication(vtbl, vdata, static_cast<int&>(*argc), argv);
 }
 
-QGuiApplication* QGuiApplication_new2(struct QGuiApplication_VTable* vtbl, int* argc, char** argv, int param3) {
-	return new VirtualQGuiApplication(vtbl, static_cast<int&>(*argc), argv, static_cast<int>(param3));
+VirtualQGuiApplication* QGuiApplication_new2(const QGuiApplication_VTable* vtbl, void* vdata, int* argc, char** argv, int param3) {
+	return new VirtualQGuiApplication(vtbl, vdata, static_cast<int&>(*argc), argv, static_cast<int>(param3));
 }
 
 void QGuiApplication_virtbase(QGuiApplication* src, QCoreApplication** outptr_QCoreApplication) {
@@ -528,7 +512,7 @@ void QGuiApplication_fontDatabaseChanged(QGuiApplication* self) {
 	self->fontDatabaseChanged();
 }
 
-void QGuiApplication_connect_fontDatabaseChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGuiApplication_connect_fontDatabaseChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -543,7 +527,7 @@ void QGuiApplication_screenAdded(QGuiApplication* self, QScreen* screen) {
 	self->screenAdded(screen);
 }
 
-void QGuiApplication_connect_screenAdded(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_screenAdded(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QScreen*);
@@ -559,7 +543,7 @@ void QGuiApplication_screenRemoved(QGuiApplication* self, QScreen* screen) {
 	self->screenRemoved(screen);
 }
 
-void QGuiApplication_connect_screenRemoved(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_screenRemoved(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QScreen*);
@@ -575,7 +559,7 @@ void QGuiApplication_primaryScreenChanged(QGuiApplication* self, QScreen* screen
 	self->primaryScreenChanged(screen);
 }
 
-void QGuiApplication_connect_primaryScreenChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_primaryScreenChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QScreen*);
@@ -591,7 +575,7 @@ void QGuiApplication_lastWindowClosed(QGuiApplication* self) {
 	self->lastWindowClosed();
 }
 
-void QGuiApplication_connect_lastWindowClosed(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGuiApplication_connect_lastWindowClosed(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -606,7 +590,7 @@ void QGuiApplication_focusObjectChanged(QGuiApplication* self, QObject* focusObj
 	self->focusObjectChanged(focusObject);
 }
 
-void QGuiApplication_connect_focusObjectChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_focusObjectChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QObject*);
@@ -622,7 +606,7 @@ void QGuiApplication_focusWindowChanged(QGuiApplication* self, QWindow* focusWin
 	self->focusWindowChanged(focusWindow);
 }
 
-void QGuiApplication_connect_focusWindowChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_focusWindowChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWindow*);
@@ -638,7 +622,7 @@ void QGuiApplication_applicationStateChanged(QGuiApplication* self, int state) {
 	self->applicationStateChanged(static_cast<Qt::ApplicationState>(state));
 }
 
-void QGuiApplication_connect_applicationStateChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QGuiApplication_connect_applicationStateChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -655,7 +639,7 @@ void QGuiApplication_layoutDirectionChanged(QGuiApplication* self, int direction
 	self->layoutDirectionChanged(static_cast<Qt::LayoutDirection>(direction));
 }
 
-void QGuiApplication_connect_layoutDirectionChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QGuiApplication_connect_layoutDirectionChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -672,7 +656,7 @@ void QGuiApplication_commitDataRequest(QGuiApplication* self, QSessionManager* s
 	self->commitDataRequest(*sessionManager);
 }
 
-void QGuiApplication_connect_commitDataRequest(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_commitDataRequest(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSessionManager*);
@@ -690,7 +674,7 @@ void QGuiApplication_saveStateRequest(QGuiApplication* self, QSessionManager* se
 	self->saveStateRequest(*sessionManager);
 }
 
-void QGuiApplication_connect_saveStateRequest(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_saveStateRequest(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSessionManager*);
@@ -708,7 +692,7 @@ void QGuiApplication_applicationDisplayNameChanged(QGuiApplication* self) {
 	self->applicationDisplayNameChanged();
 }
 
-void QGuiApplication_connect_applicationDisplayNameChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGuiApplication_connect_applicationDisplayNameChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -723,7 +707,7 @@ void QGuiApplication_paletteChanged(QGuiApplication* self, QPalette* pal) {
 	self->paletteChanged(*pal);
 }
 
-void QGuiApplication_connect_paletteChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QPalette*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_paletteChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QPalette*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPalette*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QPalette*);
@@ -741,7 +725,7 @@ void QGuiApplication_fontChanged(QGuiApplication* self, QFont* font) {
 	self->fontChanged(*font);
 }
 
-void QGuiApplication_connect_fontChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+void QGuiApplication_connect_fontChanged(VirtualQGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QFont*);
@@ -777,106 +761,85 @@ struct miqt_string QGuiApplication_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QGuiApplication_virtualbase_metaObject(const void* self) {
+QMetaObject* QGuiApplication_virtualbase_metaObject(const VirtualQGuiApplication* self) {
 
-	return (QMetaObject*) ( (const VirtualQGuiApplication*)(self) )->QGuiApplication::metaObject();
-
+	return (QMetaObject*) self->QGuiApplication::metaObject();
 }
 
-void* QGuiApplication_virtualbase_metacast(void* self, const char* param1) {
+void* QGuiApplication_virtualbase_metacast(VirtualQGuiApplication* self, const char* param1) {
 
-	return ( (VirtualQGuiApplication*)(self) )->QGuiApplication::qt_metacast(param1);
-
+	return self->QGuiApplication::qt_metacast(param1);
 }
 
-int QGuiApplication_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGuiApplication_virtualbase_metacall(VirtualQGuiApplication* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGuiApplication*)(self) )->QGuiApplication::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGuiApplication::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QGuiApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2) {
+bool QGuiApplication_virtualbase_notify(VirtualQGuiApplication* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQGuiApplication*)(self) )->QGuiApplication::notify(param1, param2);
-
+	return self->QGuiApplication::notify(param1, param2);
 }
 
-bool QGuiApplication_virtualbase_event(void* self, QEvent* param1) {
+bool QGuiApplication_virtualbase_event(VirtualQGuiApplication* self, QEvent* param1) {
 
-	return ( (VirtualQGuiApplication*)(self) )->QGuiApplication::event(param1);
-
+	return self->QGuiApplication::event(param1);
 }
 
-bool QGuiApplication_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGuiApplication_virtualbase_eventFilter(VirtualQGuiApplication* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGuiApplication*)(self) )->QGuiApplication::eventFilter(watched, event);
-
+	return self->QGuiApplication::eventFilter(watched, event);
 }
 
-void QGuiApplication_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGuiApplication_virtualbase_timerEvent(VirtualQGuiApplication* self, QTimerEvent* event) {
 
-	( (VirtualQGuiApplication*)(self) )->QGuiApplication::timerEvent(event);
-
+	self->QGuiApplication::timerEvent(event);
 }
 
-void QGuiApplication_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGuiApplication_virtualbase_childEvent(VirtualQGuiApplication* self, QChildEvent* event) {
 
-	( (VirtualQGuiApplication*)(self) )->QGuiApplication::childEvent(event);
-
+	self->QGuiApplication::childEvent(event);
 }
 
-void QGuiApplication_virtualbase_customEvent(void* self, QEvent* event) {
+void QGuiApplication_virtualbase_customEvent(VirtualQGuiApplication* self, QEvent* event) {
 
-	( (VirtualQGuiApplication*)(self) )->QGuiApplication::customEvent(event);
-
+	self->QGuiApplication::customEvent(event);
 }
 
-void QGuiApplication_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGuiApplication_virtualbase_connectNotify(VirtualQGuiApplication* self, QMetaMethod* signal) {
 
-	( (VirtualQGuiApplication*)(self) )->QGuiApplication::connectNotify(*signal);
-
+	self->QGuiApplication::connectNotify(*signal);
 }
 
-void QGuiApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGuiApplication_virtualbase_disconnectNotify(VirtualQGuiApplication* self, QMetaMethod* signal) {
 
-	( (VirtualQGuiApplication*)(self) )->QGuiApplication::disconnectNotify(*signal);
-
+	self->QGuiApplication::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGuiApplication_staticMetaObject() { return &QGuiApplication::staticMetaObject; }
-void* QGuiApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
-	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	
-	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
+const QGuiApplication_VTable* QGuiApplication_vtbl(const VirtualQGuiApplication* self) { return self->vtbl; }
+void* QGuiApplication_vdata(const VirtualQGuiApplication* self) { return self->vdata; }
+void QGuiApplication_setVdata(VirtualQGuiApplication* self, void* vdata) { self->vdata = vdata; }
+
+void* QGuiApplication_protectedbase_resolveInterface(const VirtualQGuiApplication* self, const char* name, int revision) {
+	return self->resolveInterface(name, static_cast<int>(revision));
 }
 
-QObject* QGuiApplication_protectedbase_sender(const void* self) {
-	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGuiApplication_protectedbase_sender(const VirtualQGuiApplication* self) {
+	return self->sender();
 }
 
-int QGuiApplication_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGuiApplication_protectedbase_senderSignalIndex(const VirtualQGuiApplication* self) {
+	return self->senderSignalIndex();
 }
 
-int QGuiApplication_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGuiApplication_protectedbase_receivers(const VirtualQGuiApplication* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGuiApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGuiApplication_protectedbase_isSignalConnected(const VirtualQGuiApplication* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGuiApplication_delete(QGuiApplication* self) {

@@ -20,39 +20,32 @@
 #include <QUdpSocket>
 #include <qdtls.h>
 #include "gen_qdtls.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDtlsClientVerifier final : public QDtlsClientVerifier {
-	struct QDtlsClientVerifier_VTable* vtbl;
+	const QDtlsClientVerifier_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDtlsClientVerifier_VTable* QDtlsClientVerifier_vtbl(const VirtualQDtlsClientVerifier* self);
+	friend void* QDtlsClientVerifier_vdata(const VirtualQDtlsClientVerifier* self);
+	friend void QDtlsClientVerifier_setVdata(VirtualQDtlsClientVerifier* self, void* vdata);
 
-	VirtualQDtlsClientVerifier(struct QDtlsClientVerifier_VTable* vtbl): QDtlsClientVerifier(), vtbl(vtbl) {};
-	VirtualQDtlsClientVerifier(struct QDtlsClientVerifier_VTable* vtbl, QObject* parent): QDtlsClientVerifier(parent), vtbl(vtbl) {};
+	VirtualQDtlsClientVerifier(const QDtlsClientVerifier_VTable* vtbl, void* vdata): QDtlsClientVerifier(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDtlsClientVerifier(const QDtlsClientVerifier_VTable* vtbl, void* vdata, QObject* parent): QDtlsClientVerifier(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDtlsClientVerifier() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDtlsClientVerifier() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDtlsClientVerifier::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const VirtualQDtlsClientVerifier* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDtlsClientVerifier::qt_metacast(param1);
@@ -60,14 +53,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDtlsClientVerifier_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDtlsClientVerifier_virtualbase_metacast(VirtualQDtlsClientVerifier* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDtlsClientVerifier::qt_metacall(param1, param2, param3);
@@ -78,14 +70,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDtlsClientVerifier_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDtlsClientVerifier_virtualbase_metacall(VirtualQDtlsClientVerifier* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDtlsClientVerifier::event(event);
@@ -93,14 +84,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDtlsClientVerifier_virtualbase_event(void* self, QEvent* event);
+	friend bool QDtlsClientVerifier_virtualbase_event(VirtualQDtlsClientVerifier* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDtlsClientVerifier::eventFilter(watched, event);
@@ -109,14 +99,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDtlsClientVerifier_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDtlsClientVerifier_virtualbase_eventFilter(VirtualQDtlsClientVerifier* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDtlsClientVerifier::timerEvent(event);
@@ -125,13 +114,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDtlsClientVerifier_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDtlsClientVerifier_virtualbase_timerEvent(VirtualQDtlsClientVerifier* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDtlsClientVerifier::childEvent(event);
@@ -140,13 +128,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDtlsClientVerifier_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDtlsClientVerifier_virtualbase_childEvent(VirtualQDtlsClientVerifier* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDtlsClientVerifier::customEvent(event);
@@ -155,13 +142,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDtlsClientVerifier_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDtlsClientVerifier_virtualbase_customEvent(VirtualQDtlsClientVerifier* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDtlsClientVerifier::connectNotify(signal);
@@ -172,13 +158,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDtlsClientVerifier_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDtlsClientVerifier_virtualbase_connectNotify(VirtualQDtlsClientVerifier* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDtlsClientVerifier::disconnectNotify(signal);
@@ -189,25 +174,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDtlsClientVerifier_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDtlsClientVerifier_virtualbase_disconnectNotify(VirtualQDtlsClientVerifier* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDtlsClientVerifier_protectedbase_sender(const void* self);
-	friend int QDtlsClientVerifier_protectedbase_senderSignalIndex(const void* self);
-	friend int QDtlsClientVerifier_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDtlsClientVerifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QDtlsClientVerifier_protectedbase_sender(const VirtualQDtlsClientVerifier* self);
+	friend int QDtlsClientVerifier_protectedbase_senderSignalIndex(const VirtualQDtlsClientVerifier* self);
+	friend int QDtlsClientVerifier_protectedbase_receivers(const VirtualQDtlsClientVerifier* self, const char* signal);
+	friend bool QDtlsClientVerifier_protectedbase_isSignalConnected(const VirtualQDtlsClientVerifier* self, QMetaMethod* signal);
 };
 
-QDtlsClientVerifier* QDtlsClientVerifier_new(struct QDtlsClientVerifier_VTable* vtbl) {
-	return new VirtualQDtlsClientVerifier(vtbl);
+VirtualQDtlsClientVerifier* QDtlsClientVerifier_new(const QDtlsClientVerifier_VTable* vtbl, void* vdata) {
+	return new VirtualQDtlsClientVerifier(vtbl, vdata);
 }
 
-QDtlsClientVerifier* QDtlsClientVerifier_new2(struct QDtlsClientVerifier_VTable* vtbl, QObject* parent) {
-	return new VirtualQDtlsClientVerifier(vtbl, parent);
+VirtualQDtlsClientVerifier* QDtlsClientVerifier_new2(const QDtlsClientVerifier_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQDtlsClientVerifier(vtbl, vdata, parent);
 }
 
 void QDtlsClientVerifier_virtbase(QDtlsClientVerifier* src, QObject** outptr_QObject) {
@@ -297,93 +282,76 @@ struct miqt_string QDtlsClientVerifier_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const void* self) {
+QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const VirtualQDtlsClientVerifier* self) {
 
-	return (QMetaObject*) ( (const VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::metaObject();
-
+	return (QMetaObject*) self->QDtlsClientVerifier::metaObject();
 }
 
-void* QDtlsClientVerifier_virtualbase_metacast(void* self, const char* param1) {
+void* QDtlsClientVerifier_virtualbase_metacast(VirtualQDtlsClientVerifier* self, const char* param1) {
 
-	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::qt_metacast(param1);
-
+	return self->QDtlsClientVerifier::qt_metacast(param1);
 }
 
-int QDtlsClientVerifier_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDtlsClientVerifier_virtualbase_metacall(VirtualQDtlsClientVerifier* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDtlsClientVerifier::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QDtlsClientVerifier_virtualbase_event(void* self, QEvent* event) {
+bool QDtlsClientVerifier_virtualbase_event(VirtualQDtlsClientVerifier* self, QEvent* event) {
 
-	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::event(event);
-
+	return self->QDtlsClientVerifier::event(event);
 }
 
-bool QDtlsClientVerifier_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDtlsClientVerifier_virtualbase_eventFilter(VirtualQDtlsClientVerifier* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::eventFilter(watched, event);
-
+	return self->QDtlsClientVerifier::eventFilter(watched, event);
 }
 
-void QDtlsClientVerifier_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDtlsClientVerifier_virtualbase_timerEvent(VirtualQDtlsClientVerifier* self, QTimerEvent* event) {
 
-	( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::timerEvent(event);
-
+	self->QDtlsClientVerifier::timerEvent(event);
 }
 
-void QDtlsClientVerifier_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDtlsClientVerifier_virtualbase_childEvent(VirtualQDtlsClientVerifier* self, QChildEvent* event) {
 
-	( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::childEvent(event);
-
+	self->QDtlsClientVerifier::childEvent(event);
 }
 
-void QDtlsClientVerifier_virtualbase_customEvent(void* self, QEvent* event) {
+void QDtlsClientVerifier_virtualbase_customEvent(VirtualQDtlsClientVerifier* self, QEvent* event) {
 
-	( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::customEvent(event);
-
+	self->QDtlsClientVerifier::customEvent(event);
 }
 
-void QDtlsClientVerifier_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDtlsClientVerifier_virtualbase_connectNotify(VirtualQDtlsClientVerifier* self, QMetaMethod* signal) {
 
-	( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::connectNotify(*signal);
-
+	self->QDtlsClientVerifier::connectNotify(*signal);
 }
 
-void QDtlsClientVerifier_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDtlsClientVerifier_virtualbase_disconnectNotify(VirtualQDtlsClientVerifier* self, QMetaMethod* signal) {
 
-	( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::disconnectNotify(*signal);
-
+	self->QDtlsClientVerifier::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDtlsClientVerifier_staticMetaObject() { return &QDtlsClientVerifier::staticMetaObject; }
-QObject* QDtlsClientVerifier_protectedbase_sender(const void* self) {
-	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	
-	return self_cast->sender();
 
+const QDtlsClientVerifier_VTable* QDtlsClientVerifier_vtbl(const VirtualQDtlsClientVerifier* self) { return self->vtbl; }
+void* QDtlsClientVerifier_vdata(const VirtualQDtlsClientVerifier* self) { return self->vdata; }
+void QDtlsClientVerifier_setVdata(VirtualQDtlsClientVerifier* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QDtlsClientVerifier_protectedbase_sender(const VirtualQDtlsClientVerifier* self) {
+	return self->sender();
 }
 
-int QDtlsClientVerifier_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDtlsClientVerifier_protectedbase_senderSignalIndex(const VirtualQDtlsClientVerifier* self) {
+	return self->senderSignalIndex();
 }
 
-int QDtlsClientVerifier_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDtlsClientVerifier_protectedbase_receivers(const VirtualQDtlsClientVerifier* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDtlsClientVerifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDtlsClientVerifier_protectedbase_isSignalConnected(const VirtualQDtlsClientVerifier* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDtlsClientVerifier_delete(QDtlsClientVerifier* self) {
@@ -391,29 +359,31 @@ void QDtlsClientVerifier_delete(QDtlsClientVerifier* self) {
 }
 
 class VirtualQDtls final : public QDtls {
-	struct QDtls_VTable* vtbl;
+	const QDtls_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDtls_VTable* QDtls_vtbl(const VirtualQDtls* self);
+	friend void* QDtls_vdata(const VirtualQDtls* self);
+	friend void QDtls_setVdata(VirtualQDtls* self, void* vdata);
 
-	VirtualQDtls(struct QDtls_VTable* vtbl, QSslSocket::SslMode mode): QDtls(mode), vtbl(vtbl) {};
-	VirtualQDtls(struct QDtls_VTable* vtbl, QSslSocket::SslMode mode, QObject* parent): QDtls(mode, parent), vtbl(vtbl) {};
+	VirtualQDtls(const QDtls_VTable* vtbl, void* vdata, QSslSocket::SslMode mode): QDtls(mode), vtbl(vtbl), vdata(vdata) {}
+	VirtualQDtls(const QDtls_VTable* vtbl, void* vdata, QSslSocket::SslMode mode, QObject* parent): QDtls(mode, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDtls() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDtls() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDtls::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDtls_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDtls_virtualbase_metaObject(const VirtualQDtls* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDtls::qt_metacast(param1);
@@ -421,14 +391,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDtls_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDtls_virtualbase_metacast(VirtualQDtls* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDtls::qt_metacall(param1, param2, param3);
@@ -439,14 +408,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDtls_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDtls_virtualbase_metacall(VirtualQDtls* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDtls::event(event);
@@ -454,14 +422,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDtls_virtualbase_event(void* self, QEvent* event);
+	friend bool QDtls_virtualbase_event(VirtualQDtls* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDtls::eventFilter(watched, event);
@@ -470,14 +437,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDtls_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDtls_virtualbase_eventFilter(VirtualQDtls* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDtls::timerEvent(event);
@@ -486,13 +452,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDtls_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDtls_virtualbase_timerEvent(VirtualQDtls* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDtls::childEvent(event);
@@ -501,13 +466,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDtls_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDtls_virtualbase_childEvent(VirtualQDtls* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDtls::customEvent(event);
@@ -516,13 +480,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDtls_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDtls_virtualbase_customEvent(VirtualQDtls* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDtls::connectNotify(signal);
@@ -533,13 +496,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDtls_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDtls_virtualbase_connectNotify(VirtualQDtls* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDtls::disconnectNotify(signal);
@@ -550,25 +512,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDtls_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDtls_virtualbase_disconnectNotify(VirtualQDtls* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDtls_protectedbase_sender(const void* self);
-	friend int QDtls_protectedbase_senderSignalIndex(const void* self);
-	friend int QDtls_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDtls_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QDtls_protectedbase_sender(const VirtualQDtls* self);
+	friend int QDtls_protectedbase_senderSignalIndex(const VirtualQDtls* self);
+	friend int QDtls_protectedbase_receivers(const VirtualQDtls* self, const char* signal);
+	friend bool QDtls_protectedbase_isSignalConnected(const VirtualQDtls* self, QMetaMethod* signal);
 };
 
-QDtls* QDtls_new(struct QDtls_VTable* vtbl, int mode) {
-	return new VirtualQDtls(vtbl, static_cast<QSslSocket::SslMode>(mode));
+VirtualQDtls* QDtls_new(const QDtls_VTable* vtbl, void* vdata, int mode) {
+	return new VirtualQDtls(vtbl, vdata, static_cast<QSslSocket::SslMode>(mode));
 }
 
-QDtls* QDtls_new2(struct QDtls_VTable* vtbl, int mode, QObject* parent) {
-	return new VirtualQDtls(vtbl, static_cast<QSslSocket::SslMode>(mode), parent);
+VirtualQDtls* QDtls_new2(const QDtls_VTable* vtbl, void* vdata, int mode, QObject* parent) {
+	return new VirtualQDtls(vtbl, vdata, static_cast<QSslSocket::SslMode>(mode), parent);
 }
 
 void QDtls_virtbase(QDtls* src, QObject** outptr_QObject) {
@@ -754,7 +716,7 @@ void QDtls_pskRequired(QDtls* self, QSslPreSharedKeyAuthenticator* authenticator
 	self->pskRequired(authenticator);
 }
 
-void QDtls_connect_pskRequired(QDtls* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
+void QDtls_connect_pskRequired(VirtualQDtls* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*);
@@ -770,7 +732,7 @@ void QDtls_handshakeTimeout(QDtls* self) {
 	self->handshakeTimeout();
 }
 
-void QDtls_connect_handshakeTimeout(QDtls* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QDtls_connect_handshakeTimeout(VirtualQDtls* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -813,93 +775,76 @@ bool QDtls_doHandshake2(QDtls* self, QUdpSocket* socket, struct miqt_string dgra
 	return self->doHandshake(socket, dgram_QByteArray);
 }
 
-QMetaObject* QDtls_virtualbase_metaObject(const void* self) {
+QMetaObject* QDtls_virtualbase_metaObject(const VirtualQDtls* self) {
 
-	return (QMetaObject*) ( (const VirtualQDtls*)(self) )->QDtls::metaObject();
-
+	return (QMetaObject*) self->QDtls::metaObject();
 }
 
-void* QDtls_virtualbase_metacast(void* self, const char* param1) {
+void* QDtls_virtualbase_metacast(VirtualQDtls* self, const char* param1) {
 
-	return ( (VirtualQDtls*)(self) )->QDtls::qt_metacast(param1);
-
+	return self->QDtls::qt_metacast(param1);
 }
 
-int QDtls_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDtls_virtualbase_metacall(VirtualQDtls* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDtls*)(self) )->QDtls::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDtls::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QDtls_virtualbase_event(void* self, QEvent* event) {
+bool QDtls_virtualbase_event(VirtualQDtls* self, QEvent* event) {
 
-	return ( (VirtualQDtls*)(self) )->QDtls::event(event);
-
+	return self->QDtls::event(event);
 }
 
-bool QDtls_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDtls_virtualbase_eventFilter(VirtualQDtls* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDtls*)(self) )->QDtls::eventFilter(watched, event);
-
+	return self->QDtls::eventFilter(watched, event);
 }
 
-void QDtls_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDtls_virtualbase_timerEvent(VirtualQDtls* self, QTimerEvent* event) {
 
-	( (VirtualQDtls*)(self) )->QDtls::timerEvent(event);
-
+	self->QDtls::timerEvent(event);
 }
 
-void QDtls_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDtls_virtualbase_childEvent(VirtualQDtls* self, QChildEvent* event) {
 
-	( (VirtualQDtls*)(self) )->QDtls::childEvent(event);
-
+	self->QDtls::childEvent(event);
 }
 
-void QDtls_virtualbase_customEvent(void* self, QEvent* event) {
+void QDtls_virtualbase_customEvent(VirtualQDtls* self, QEvent* event) {
 
-	( (VirtualQDtls*)(self) )->QDtls::customEvent(event);
-
+	self->QDtls::customEvent(event);
 }
 
-void QDtls_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDtls_virtualbase_connectNotify(VirtualQDtls* self, QMetaMethod* signal) {
 
-	( (VirtualQDtls*)(self) )->QDtls::connectNotify(*signal);
-
+	self->QDtls::connectNotify(*signal);
 }
 
-void QDtls_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDtls_virtualbase_disconnectNotify(VirtualQDtls* self, QMetaMethod* signal) {
 
-	( (VirtualQDtls*)(self) )->QDtls::disconnectNotify(*signal);
-
+	self->QDtls::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDtls_staticMetaObject() { return &QDtls::staticMetaObject; }
-QObject* QDtls_protectedbase_sender(const void* self) {
-	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
-	
-	return self_cast->sender();
 
+const QDtls_VTable* QDtls_vtbl(const VirtualQDtls* self) { return self->vtbl; }
+void* QDtls_vdata(const VirtualQDtls* self) { return self->vdata; }
+void QDtls_setVdata(VirtualQDtls* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QDtls_protectedbase_sender(const VirtualQDtls* self) {
+	return self->sender();
 }
 
-int QDtls_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDtls_protectedbase_senderSignalIndex(const VirtualQDtls* self) {
+	return self->senderSignalIndex();
 }
 
-int QDtls_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDtls_protectedbase_receivers(const VirtualQDtls* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDtls_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDtls_protectedbase_isSignalConnected(const VirtualQDtls* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDtls_delete(QDtls* self) {
@@ -907,16 +852,16 @@ void QDtls_delete(QDtls* self) {
 }
 
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new() {
-	return new QDtlsClientVerifier::GeneratorParameters();
+	return new QDtlsClientVerifier__GeneratorParameters();
 }
 
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new2(int a, struct miqt_string s) {
 	QByteArray s_QByteArray(s.data, s.len);
-	return new QDtlsClientVerifier::GeneratorParameters(static_cast<QCryptographicHash::Algorithm>(a), s_QByteArray);
+	return new QDtlsClientVerifier__GeneratorParameters(static_cast<QCryptographicHash::Algorithm>(a), s_QByteArray);
 }
 
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new3(QDtlsClientVerifier__GeneratorParameters* param1) {
-	return new QDtlsClientVerifier::GeneratorParameters(*param1);
+	return new QDtlsClientVerifier__GeneratorParameters(*param1);
 }
 
 void QDtlsClientVerifier__GeneratorParameters_operatorAssign(QDtlsClientVerifier__GeneratorParameters* self, QDtlsClientVerifier__GeneratorParameters* param1) {

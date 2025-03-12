@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qloggingcategory.h>
 #include "gen_qloggingcategory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QLoggingCategory* QLoggingCategory_new(const char* category) {
 	return new QLoggingCategory(category);
 }

@@ -39,41 +39,34 @@
 #include <QWidget>
 #include <qcheckbox.h>
 #include "gen_qcheckbox.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQCheckBox final : public QCheckBox {
-	struct QCheckBox_VTable* vtbl;
+	const QCheckBox_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QCheckBox_VTable* QCheckBox_vtbl(const VirtualQCheckBox* self);
+	friend void* QCheckBox_vdata(const VirtualQCheckBox* self);
+	friend void QCheckBox_setVdata(VirtualQCheckBox* self, void* vdata);
 
-	VirtualQCheckBox(struct QCheckBox_VTable* vtbl, QWidget* parent): QCheckBox(parent), vtbl(vtbl) {};
-	VirtualQCheckBox(struct QCheckBox_VTable* vtbl): QCheckBox(), vtbl(vtbl) {};
-	VirtualQCheckBox(struct QCheckBox_VTable* vtbl, const QString& text): QCheckBox(text), vtbl(vtbl) {};
-	VirtualQCheckBox(struct QCheckBox_VTable* vtbl, const QString& text, QWidget* parent): QCheckBox(text, parent), vtbl(vtbl) {};
+	VirtualQCheckBox(const QCheckBox_VTable* vtbl, void* vdata, QWidget* parent): QCheckBox(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCheckBox(const QCheckBox_VTable* vtbl, void* vdata): QCheckBox(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCheckBox(const QCheckBox_VTable* vtbl, void* vdata, const QString& text): QCheckBox(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCheckBox(const QCheckBox_VTable* vtbl, void* vdata, const QString& text, QWidget* parent): QCheckBox(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQCheckBox() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQCheckBox() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QCheckBox::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QCheckBox_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QCheckBox_virtualbase_metaObject(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QCheckBox::qt_metacast(param1);
@@ -81,14 +74,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QCheckBox_virtualbase_metacast(void* self, const char* param1);
+	friend void* QCheckBox_virtualbase_metacast(VirtualQCheckBox* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QCheckBox::qt_metacall(param1, param2, param3);
@@ -99,46 +91,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCheckBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QCheckBox_virtualbase_metacall(VirtualQCheckBox* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QCheckBox::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QCheckBox_virtualbase_sizeHint(const void* self);
+	friend QSize* QCheckBox_virtualbase_sizeHint(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QCheckBox::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QCheckBox_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QCheckBox_virtualbase_minimumSizeHint(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QCheckBox::event(e);
@@ -146,14 +135,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_event(void* self, QEvent* e);
+	friend bool QCheckBox_virtualbase_event(VirtualQCheckBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hitButton(const QPoint& pos) const override {
 		if (vtbl->hitButton == 0) {
 			return QCheckBox::hitButton(pos);
@@ -163,14 +151,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
 
-		bool callback_return_value = vtbl->hitButton(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hitButton(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_hitButton(const void* self, QPoint* pos);
+	friend bool QCheckBox_virtualbase_hitButton(const VirtualQCheckBox* self, QPoint* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void checkStateSet() override {
 		if (vtbl->checkStateSet == 0) {
 			QCheckBox::checkStateSet();
@@ -178,13 +165,12 @@ public:
 		}
 
 
-		vtbl->checkStateSet(vtbl, this);
+		vtbl->checkStateSet(this);
 
 	}
 
-	friend void QCheckBox_virtualbase_checkStateSet(void* self);
+	friend void QCheckBox_virtualbase_checkStateSet(VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void nextCheckState() override {
 		if (vtbl->nextCheckState == 0) {
 			QCheckBox::nextCheckState();
@@ -192,13 +178,12 @@ public:
 		}
 
 
-		vtbl->nextCheckState(vtbl, this);
+		vtbl->nextCheckState(this);
 
 	}
 
-	friend void QCheckBox_virtualbase_nextCheckState(void* self);
+	friend void QCheckBox_virtualbase_nextCheckState(VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QCheckBox::paintEvent(param1);
@@ -207,13 +192,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QCheckBox_virtualbase_paintEvent(VirtualQCheckBox* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QCheckBox::mouseMoveEvent(param1);
@@ -222,13 +206,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QCheckBox_virtualbase_mouseMoveEvent(VirtualQCheckBox* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionButton* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QCheckBox::initStyleOption(option);
@@ -237,13 +220,12 @@ public:
 
 		QStyleOptionButton* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_initStyleOption(const void* self, QStyleOptionButton* option);
+	friend void QCheckBox_virtualbase_initStyleOption(const VirtualQCheckBox* self, QStyleOptionButton* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QCheckBox::keyPressEvent(e);
@@ -252,13 +234,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QCheckBox_virtualbase_keyPressEvent(VirtualQCheckBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QCheckBox::keyReleaseEvent(e);
@@ -267,13 +248,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QCheckBox_virtualbase_keyReleaseEvent(VirtualQCheckBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QCheckBox::mousePressEvent(e);
@@ -282,13 +262,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QCheckBox_virtualbase_mousePressEvent(VirtualQCheckBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QCheckBox::mouseReleaseEvent(e);
@@ -297,13 +276,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QCheckBox_virtualbase_mouseReleaseEvent(VirtualQCheckBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QCheckBox::focusInEvent(e);
@@ -312,13 +290,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QCheckBox_virtualbase_focusInEvent(VirtualQCheckBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QCheckBox::focusOutEvent(e);
@@ -327,13 +304,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QCheckBox_virtualbase_focusOutEvent(VirtualQCheckBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QCheckBox::changeEvent(e);
@@ -342,13 +318,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QCheckBox_virtualbase_changeEvent(VirtualQCheckBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QCheckBox::timerEvent(e);
@@ -357,27 +332,25 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QCheckBox_virtualbase_timerEvent(VirtualQCheckBox* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QCheckBox::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCheckBox_virtualbase_devType(const void* self);
+	friend int QCheckBox_virtualbase_devType(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QCheckBox::setVisible(visible);
@@ -386,13 +359,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_setVisible(void* self, bool visible);
+	friend void QCheckBox_virtualbase_setVisible(VirtualQCheckBox* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QCheckBox::heightForWidth(param1);
@@ -400,42 +372,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCheckBox_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QCheckBox_virtualbase_heightForWidth(const VirtualQCheckBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QCheckBox::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QCheckBox_virtualbase_hasHeightForWidth(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QCheckBox::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QCheckBox_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QCheckBox_virtualbase_paintEngine(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QCheckBox::mouseDoubleClickEvent(event);
@@ -444,13 +413,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QCheckBox_virtualbase_mouseDoubleClickEvent(VirtualQCheckBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QCheckBox::wheelEvent(event);
@@ -459,13 +427,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QCheckBox_virtualbase_wheelEvent(VirtualQCheckBox* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QCheckBox::enterEvent(event);
@@ -474,13 +441,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QCheckBox_virtualbase_enterEvent(VirtualQCheckBox* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QCheckBox::leaveEvent(event);
@@ -489,13 +455,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QCheckBox_virtualbase_leaveEvent(VirtualQCheckBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QCheckBox::moveEvent(event);
@@ -504,13 +469,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QCheckBox_virtualbase_moveEvent(VirtualQCheckBox* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QCheckBox::resizeEvent(event);
@@ -519,13 +483,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QCheckBox_virtualbase_resizeEvent(VirtualQCheckBox* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QCheckBox::closeEvent(event);
@@ -534,13 +497,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QCheckBox_virtualbase_closeEvent(VirtualQCheckBox* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QCheckBox::contextMenuEvent(event);
@@ -549,13 +511,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QCheckBox_virtualbase_contextMenuEvent(VirtualQCheckBox* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QCheckBox::tabletEvent(event);
@@ -564,13 +525,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QCheckBox_virtualbase_tabletEvent(VirtualQCheckBox* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QCheckBox::actionEvent(event);
@@ -579,13 +539,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QCheckBox_virtualbase_actionEvent(VirtualQCheckBox* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QCheckBox::dragEnterEvent(event);
@@ -594,13 +553,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QCheckBox_virtualbase_dragEnterEvent(VirtualQCheckBox* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QCheckBox::dragMoveEvent(event);
@@ -609,13 +567,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QCheckBox_virtualbase_dragMoveEvent(VirtualQCheckBox* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QCheckBox::dragLeaveEvent(event);
@@ -624,13 +581,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QCheckBox_virtualbase_dragLeaveEvent(VirtualQCheckBox* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QCheckBox::dropEvent(event);
@@ -639,13 +595,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QCheckBox_virtualbase_dropEvent(VirtualQCheckBox* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QCheckBox::showEvent(event);
@@ -654,13 +609,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QCheckBox_virtualbase_showEvent(VirtualQCheckBox* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QCheckBox::hideEvent(event);
@@ -669,13 +623,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QCheckBox_virtualbase_hideEvent(VirtualQCheckBox* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QCheckBox::nativeEvent(eventType, message, result);
@@ -691,14 +644,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QCheckBox_virtualbase_nativeEvent(VirtualQCheckBox* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QCheckBox::metric(param1);
@@ -707,14 +659,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCheckBox_virtualbase_metric(const void* self, int param1);
+	friend int QCheckBox_virtualbase_metric(const VirtualQCheckBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QCheckBox::initPainter(painter);
@@ -723,13 +674,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QCheckBox_virtualbase_initPainter(const VirtualQCheckBox* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QCheckBox::redirected(offset);
@@ -737,28 +687,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QCheckBox_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QCheckBox_virtualbase_redirected(const VirtualQCheckBox* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QCheckBox::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QCheckBox_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QCheckBox_virtualbase_sharedPainter(const VirtualQCheckBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QCheckBox::inputMethodEvent(param1);
@@ -767,13 +715,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QCheckBox_virtualbase_inputMethodEvent(VirtualQCheckBox* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QCheckBox::inputMethodQuery(param1);
@@ -782,16 +729,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QCheckBox_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QCheckBox_virtualbase_inputMethodQuery(const VirtualQCheckBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QCheckBox::focusNextPrevChild(next);
@@ -799,14 +745,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QCheckBox_virtualbase_focusNextPrevChild(VirtualQCheckBox* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QCheckBox::eventFilter(watched, event);
@@ -815,14 +760,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QCheckBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QCheckBox_virtualbase_eventFilter(VirtualQCheckBox* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QCheckBox::childEvent(event);
@@ -831,13 +775,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QCheckBox_virtualbase_childEvent(VirtualQCheckBox* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QCheckBox::customEvent(event);
@@ -846,13 +789,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QCheckBox_virtualbase_customEvent(VirtualQCheckBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QCheckBox::connectNotify(signal);
@@ -863,13 +805,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QCheckBox_virtualbase_connectNotify(VirtualQCheckBox* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QCheckBox::disconnectNotify(signal);
@@ -880,40 +821,40 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QCheckBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QCheckBox_virtualbase_disconnectNotify(VirtualQCheckBox* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QCheckBox_protectedbase_updateMicroFocus(void* self);
-	friend void QCheckBox_protectedbase_create(void* self);
-	friend void QCheckBox_protectedbase_destroy(void* self);
-	friend bool QCheckBox_protectedbase_focusNextChild(void* self);
-	friend bool QCheckBox_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QCheckBox_protectedbase_sender(const void* self);
-	friend int QCheckBox_protectedbase_senderSignalIndex(const void* self);
-	friend int QCheckBox_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QCheckBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QCheckBox_protectedbase_updateMicroFocus(VirtualQCheckBox* self);
+	friend void QCheckBox_protectedbase_create(VirtualQCheckBox* self);
+	friend void QCheckBox_protectedbase_destroy(VirtualQCheckBox* self);
+	friend bool QCheckBox_protectedbase_focusNextChild(VirtualQCheckBox* self);
+	friend bool QCheckBox_protectedbase_focusPreviousChild(VirtualQCheckBox* self);
+	friend QObject* QCheckBox_protectedbase_sender(const VirtualQCheckBox* self);
+	friend int QCheckBox_protectedbase_senderSignalIndex(const VirtualQCheckBox* self);
+	friend int QCheckBox_protectedbase_receivers(const VirtualQCheckBox* self, const char* signal);
+	friend bool QCheckBox_protectedbase_isSignalConnected(const VirtualQCheckBox* self, QMetaMethod* signal);
 };
 
-QCheckBox* QCheckBox_new(struct QCheckBox_VTable* vtbl, QWidget* parent) {
-	return new VirtualQCheckBox(vtbl, parent);
+VirtualQCheckBox* QCheckBox_new(const QCheckBox_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQCheckBox(vtbl, vdata, parent);
 }
 
-QCheckBox* QCheckBox_new2(struct QCheckBox_VTable* vtbl) {
-	return new VirtualQCheckBox(vtbl);
+VirtualQCheckBox* QCheckBox_new2(const QCheckBox_VTable* vtbl, void* vdata) {
+	return new VirtualQCheckBox(vtbl, vdata);
 }
 
-QCheckBox* QCheckBox_new3(struct QCheckBox_VTable* vtbl, struct miqt_string text) {
+VirtualQCheckBox* QCheckBox_new3(const QCheckBox_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQCheckBox(vtbl, text_QString);
+	return new VirtualQCheckBox(vtbl, vdata, text_QString);
 }
 
-QCheckBox* QCheckBox_new4(struct QCheckBox_VTable* vtbl, struct miqt_string text, QWidget* parent) {
+VirtualQCheckBox* QCheckBox_new4(const QCheckBox_VTable* vtbl, void* vdata, struct miqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQCheckBox(vtbl, text_QString, parent);
+	return new VirtualQCheckBox(vtbl, vdata, text_QString, parent);
 }
 
 void QCheckBox_virtbase(QCheckBox* src, QAbstractButton** outptr_QAbstractButton) {
@@ -972,7 +913,7 @@ void QCheckBox_stateChanged(QCheckBox* self, int param1) {
 	self->stateChanged(static_cast<int>(param1));
 }
 
-void QCheckBox_connect_stateChanged(QCheckBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCheckBox_connect_stateChanged(VirtualQCheckBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1010,393 +951,317 @@ void QCheckBox_setTristate1(QCheckBox* self, bool y) {
 	self->setTristate(y);
 }
 
-QMetaObject* QCheckBox_virtualbase_metaObject(const void* self) {
+QMetaObject* QCheckBox_virtualbase_metaObject(const VirtualQCheckBox* self) {
 
-	return (QMetaObject*) ( (const VirtualQCheckBox*)(self) )->QCheckBox::metaObject();
-
+	return (QMetaObject*) self->QCheckBox::metaObject();
 }
 
-void* QCheckBox_virtualbase_metacast(void* self, const char* param1) {
+void* QCheckBox_virtualbase_metacast(VirtualQCheckBox* self, const char* param1) {
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::qt_metacast(param1);
-
+	return self->QCheckBox::qt_metacast(param1);
 }
 
-int QCheckBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QCheckBox_virtualbase_metacall(VirtualQCheckBox* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QCheckBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QCheckBox_virtualbase_sizeHint(const void* self) {
+QSize* QCheckBox_virtualbase_sizeHint(const VirtualQCheckBox* self) {
 
-	return new QSize(( (const VirtualQCheckBox*)(self) )->QCheckBox::sizeHint());
-
+	return new QSize(self->QCheckBox::sizeHint());
 }
 
-QSize* QCheckBox_virtualbase_minimumSizeHint(const void* self) {
+QSize* QCheckBox_virtualbase_minimumSizeHint(const VirtualQCheckBox* self) {
 
-	return new QSize(( (const VirtualQCheckBox*)(self) )->QCheckBox::minimumSizeHint());
-
+	return new QSize(self->QCheckBox::minimumSizeHint());
 }
 
-bool QCheckBox_virtualbase_event(void* self, QEvent* e) {
+bool QCheckBox_virtualbase_event(VirtualQCheckBox* self, QEvent* e) {
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::event(e);
-
+	return self->QCheckBox::event(e);
 }
 
-bool QCheckBox_virtualbase_hitButton(const void* self, QPoint* pos) {
+bool QCheckBox_virtualbase_hitButton(const VirtualQCheckBox* self, QPoint* pos) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::hitButton(*pos);
-
+	return self->QCheckBox::hitButton(*pos);
 }
 
-void QCheckBox_virtualbase_checkStateSet(void* self) {
+void QCheckBox_virtualbase_checkStateSet(VirtualQCheckBox* self) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::checkStateSet();
-
+	self->QCheckBox::checkStateSet();
 }
 
-void QCheckBox_virtualbase_nextCheckState(void* self) {
+void QCheckBox_virtualbase_nextCheckState(VirtualQCheckBox* self) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::nextCheckState();
-
+	self->QCheckBox::nextCheckState();
 }
 
-void QCheckBox_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QCheckBox_virtualbase_paintEvent(VirtualQCheckBox* self, QPaintEvent* param1) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::paintEvent(param1);
-
+	self->QCheckBox::paintEvent(param1);
 }
 
-void QCheckBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QCheckBox_virtualbase_mouseMoveEvent(VirtualQCheckBox* self, QMouseEvent* param1) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::mouseMoveEvent(param1);
-
+	self->QCheckBox::mouseMoveEvent(param1);
 }
 
-void QCheckBox_virtualbase_initStyleOption(const void* self, QStyleOptionButton* option) {
+void QCheckBox_virtualbase_initStyleOption(const VirtualQCheckBox* self, QStyleOptionButton* option) {
 
-	( (const VirtualQCheckBox*)(self) )->QCheckBox::initStyleOption(option);
-
+	self->QCheckBox::initStyleOption(option);
 }
 
-void QCheckBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QCheckBox_virtualbase_keyPressEvent(VirtualQCheckBox* self, QKeyEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::keyPressEvent(e);
-
+	self->QCheckBox::keyPressEvent(e);
 }
 
-void QCheckBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QCheckBox_virtualbase_keyReleaseEvent(VirtualQCheckBox* self, QKeyEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::keyReleaseEvent(e);
-
+	self->QCheckBox::keyReleaseEvent(e);
 }
 
-void QCheckBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QCheckBox_virtualbase_mousePressEvent(VirtualQCheckBox* self, QMouseEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::mousePressEvent(e);
-
+	self->QCheckBox::mousePressEvent(e);
 }
 
-void QCheckBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QCheckBox_virtualbase_mouseReleaseEvent(VirtualQCheckBox* self, QMouseEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::mouseReleaseEvent(e);
-
+	self->QCheckBox::mouseReleaseEvent(e);
 }
 
-void QCheckBox_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QCheckBox_virtualbase_focusInEvent(VirtualQCheckBox* self, QFocusEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::focusInEvent(e);
-
+	self->QCheckBox::focusInEvent(e);
 }
 
-void QCheckBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QCheckBox_virtualbase_focusOutEvent(VirtualQCheckBox* self, QFocusEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::focusOutEvent(e);
-
+	self->QCheckBox::focusOutEvent(e);
 }
 
-void QCheckBox_virtualbase_changeEvent(void* self, QEvent* e) {
+void QCheckBox_virtualbase_changeEvent(VirtualQCheckBox* self, QEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::changeEvent(e);
-
+	self->QCheckBox::changeEvent(e);
 }
 
-void QCheckBox_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QCheckBox_virtualbase_timerEvent(VirtualQCheckBox* self, QTimerEvent* e) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::timerEvent(e);
-
+	self->QCheckBox::timerEvent(e);
 }
 
-int QCheckBox_virtualbase_devType(const void* self) {
+int QCheckBox_virtualbase_devType(const VirtualQCheckBox* self) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::devType();
-
+	return self->QCheckBox::devType();
 }
 
-void QCheckBox_virtualbase_setVisible(void* self, bool visible) {
+void QCheckBox_virtualbase_setVisible(VirtualQCheckBox* self, bool visible) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::setVisible(visible);
-
+	self->QCheckBox::setVisible(visible);
 }
 
-int QCheckBox_virtualbase_heightForWidth(const void* self, int param1) {
+int QCheckBox_virtualbase_heightForWidth(const VirtualQCheckBox* self, int param1) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::heightForWidth(static_cast<int>(param1));
-
+	return self->QCheckBox::heightForWidth(static_cast<int>(param1));
 }
 
-bool QCheckBox_virtualbase_hasHeightForWidth(const void* self) {
+bool QCheckBox_virtualbase_hasHeightForWidth(const VirtualQCheckBox* self) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::hasHeightForWidth();
-
+	return self->QCheckBox::hasHeightForWidth();
 }
 
-QPaintEngine* QCheckBox_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QCheckBox_virtualbase_paintEngine(const VirtualQCheckBox* self) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::paintEngine();
-
+	return self->QCheckBox::paintEngine();
 }
 
-void QCheckBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QCheckBox_virtualbase_mouseDoubleClickEvent(VirtualQCheckBox* self, QMouseEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::mouseDoubleClickEvent(event);
-
+	self->QCheckBox::mouseDoubleClickEvent(event);
 }
 
-void QCheckBox_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QCheckBox_virtualbase_wheelEvent(VirtualQCheckBox* self, QWheelEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::wheelEvent(event);
-
+	self->QCheckBox::wheelEvent(event);
 }
 
-void QCheckBox_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QCheckBox_virtualbase_enterEvent(VirtualQCheckBox* self, QEnterEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::enterEvent(event);
-
+	self->QCheckBox::enterEvent(event);
 }
 
-void QCheckBox_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QCheckBox_virtualbase_leaveEvent(VirtualQCheckBox* self, QEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::leaveEvent(event);
-
+	self->QCheckBox::leaveEvent(event);
 }
 
-void QCheckBox_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QCheckBox_virtualbase_moveEvent(VirtualQCheckBox* self, QMoveEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::moveEvent(event);
-
+	self->QCheckBox::moveEvent(event);
 }
 
-void QCheckBox_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QCheckBox_virtualbase_resizeEvent(VirtualQCheckBox* self, QResizeEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::resizeEvent(event);
-
+	self->QCheckBox::resizeEvent(event);
 }
 
-void QCheckBox_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QCheckBox_virtualbase_closeEvent(VirtualQCheckBox* self, QCloseEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::closeEvent(event);
-
+	self->QCheckBox::closeEvent(event);
 }
 
-void QCheckBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QCheckBox_virtualbase_contextMenuEvent(VirtualQCheckBox* self, QContextMenuEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::contextMenuEvent(event);
-
+	self->QCheckBox::contextMenuEvent(event);
 }
 
-void QCheckBox_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QCheckBox_virtualbase_tabletEvent(VirtualQCheckBox* self, QTabletEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::tabletEvent(event);
-
+	self->QCheckBox::tabletEvent(event);
 }
 
-void QCheckBox_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QCheckBox_virtualbase_actionEvent(VirtualQCheckBox* self, QActionEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::actionEvent(event);
-
+	self->QCheckBox::actionEvent(event);
 }
 
-void QCheckBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QCheckBox_virtualbase_dragEnterEvent(VirtualQCheckBox* self, QDragEnterEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::dragEnterEvent(event);
-
+	self->QCheckBox::dragEnterEvent(event);
 }
 
-void QCheckBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QCheckBox_virtualbase_dragMoveEvent(VirtualQCheckBox* self, QDragMoveEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::dragMoveEvent(event);
-
+	self->QCheckBox::dragMoveEvent(event);
 }
 
-void QCheckBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QCheckBox_virtualbase_dragLeaveEvent(VirtualQCheckBox* self, QDragLeaveEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::dragLeaveEvent(event);
-
+	self->QCheckBox::dragLeaveEvent(event);
 }
 
-void QCheckBox_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QCheckBox_virtualbase_dropEvent(VirtualQCheckBox* self, QDropEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::dropEvent(event);
-
+	self->QCheckBox::dropEvent(event);
 }
 
-void QCheckBox_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QCheckBox_virtualbase_showEvent(VirtualQCheckBox* self, QShowEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::showEvent(event);
-
+	self->QCheckBox::showEvent(event);
 }
 
-void QCheckBox_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QCheckBox_virtualbase_hideEvent(VirtualQCheckBox* self, QHideEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::hideEvent(event);
-
+	self->QCheckBox::hideEvent(event);
 }
 
-bool QCheckBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QCheckBox_virtualbase_nativeEvent(VirtualQCheckBox* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QCheckBox::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-int QCheckBox_virtualbase_metric(const void* self, int param1) {
+int QCheckBox_virtualbase_metric(const VirtualQCheckBox* self, int param1) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::metric(static_cast<VirtualQCheckBox::PaintDeviceMetric>(param1));
-
+	return self->QCheckBox::metric(static_cast<VirtualQCheckBox::PaintDeviceMetric>(param1));
 }
 
-void QCheckBox_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QCheckBox_virtualbase_initPainter(const VirtualQCheckBox* self, QPainter* painter) {
 
-	( (const VirtualQCheckBox*)(self) )->QCheckBox::initPainter(painter);
-
+	self->QCheckBox::initPainter(painter);
 }
 
-QPaintDevice* QCheckBox_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QCheckBox_virtualbase_redirected(const VirtualQCheckBox* self, QPoint* offset) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::redirected(offset);
-
+	return self->QCheckBox::redirected(offset);
 }
 
-QPainter* QCheckBox_virtualbase_sharedPainter(const void* self) {
+QPainter* QCheckBox_virtualbase_sharedPainter(const VirtualQCheckBox* self) {
 
-	return ( (const VirtualQCheckBox*)(self) )->QCheckBox::sharedPainter();
-
+	return self->QCheckBox::sharedPainter();
 }
 
-void QCheckBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QCheckBox_virtualbase_inputMethodEvent(VirtualQCheckBox* self, QInputMethodEvent* param1) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::inputMethodEvent(param1);
-
+	self->QCheckBox::inputMethodEvent(param1);
 }
 
-QVariant* QCheckBox_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QCheckBox_virtualbase_inputMethodQuery(const VirtualQCheckBox* self, int param1) {
 
-	return new QVariant(( (const VirtualQCheckBox*)(self) )->QCheckBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QCheckBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QCheckBox_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QCheckBox_virtualbase_focusNextPrevChild(VirtualQCheckBox* self, bool next) {
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::focusNextPrevChild(next);
-
+	return self->QCheckBox::focusNextPrevChild(next);
 }
 
-bool QCheckBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QCheckBox_virtualbase_eventFilter(VirtualQCheckBox* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQCheckBox*)(self) )->QCheckBox::eventFilter(watched, event);
-
+	return self->QCheckBox::eventFilter(watched, event);
 }
 
-void QCheckBox_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QCheckBox_virtualbase_childEvent(VirtualQCheckBox* self, QChildEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::childEvent(event);
-
+	self->QCheckBox::childEvent(event);
 }
 
-void QCheckBox_virtualbase_customEvent(void* self, QEvent* event) {
+void QCheckBox_virtualbase_customEvent(VirtualQCheckBox* self, QEvent* event) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::customEvent(event);
-
+	self->QCheckBox::customEvent(event);
 }
 
-void QCheckBox_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QCheckBox_virtualbase_connectNotify(VirtualQCheckBox* self, QMetaMethod* signal) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::connectNotify(*signal);
-
+	self->QCheckBox::connectNotify(*signal);
 }
 
-void QCheckBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QCheckBox_virtualbase_disconnectNotify(VirtualQCheckBox* self, QMetaMethod* signal) {
 
-	( (VirtualQCheckBox*)(self) )->QCheckBox::disconnectNotify(*signal);
-
+	self->QCheckBox::disconnectNotify(*signal);
 }
 
 const QMetaObject* QCheckBox_staticMetaObject() { return &QCheckBox::staticMetaObject; }
-void QCheckBox_protectedbase_updateMicroFocus(void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QCheckBox_VTable* QCheckBox_vtbl(const VirtualQCheckBox* self) { return self->vtbl; }
+void* QCheckBox_vdata(const VirtualQCheckBox* self) { return self->vdata; }
+void QCheckBox_setVdata(VirtualQCheckBox* self, void* vdata) { self->vdata = vdata; }
+
+void QCheckBox_protectedbase_updateMicroFocus(VirtualQCheckBox* self) {
+	self->updateMicroFocus();
 }
 
-void QCheckBox_protectedbase_create(void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	self_cast->create();
-
+void QCheckBox_protectedbase_create(VirtualQCheckBox* self) {
+	self->create();
 }
 
-void QCheckBox_protectedbase_destroy(void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	self_cast->destroy();
-
+void QCheckBox_protectedbase_destroy(VirtualQCheckBox* self) {
+	self->destroy();
 }
 
-bool QCheckBox_protectedbase_focusNextChild(void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QCheckBox_protectedbase_focusNextChild(VirtualQCheckBox* self) {
+	return self->focusNextChild();
 }
 
-bool QCheckBox_protectedbase_focusPreviousChild(void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QCheckBox_protectedbase_focusPreviousChild(VirtualQCheckBox* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QCheckBox_protectedbase_sender(const void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QCheckBox_protectedbase_sender(const VirtualQCheckBox* self) {
+	return self->sender();
 }
 
-int QCheckBox_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QCheckBox_protectedbase_senderSignalIndex(const VirtualQCheckBox* self) {
+	return self->senderSignalIndex();
 }
 
-int QCheckBox_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QCheckBox_protectedbase_receivers(const VirtualQCheckBox* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QCheckBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QCheckBox_protectedbase_isSignalConnected(const VirtualQCheckBox* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QCheckBox_delete(QCheckBox* self) {

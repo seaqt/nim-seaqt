@@ -7,15 +7,6 @@
 #include <QUrlQuery>
 #include <qurl.h>
 #include "gen_qurl.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QUrl* QUrl_new() {
 	return new QUrl();
 }

@@ -6,15 +6,6 @@
 #include <QTextDocumentFragment>
 #include <qtextdocumentfragment.h>
 #include "gen_qtextdocumentfragment.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextDocumentFragment* QTextDocumentFragment_new() {
 	return new QTextDocumentFragment();
 }

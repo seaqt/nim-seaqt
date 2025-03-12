@@ -3,15 +3,6 @@
 #include <QRgba64>
 #include <qcolortransform.h>
 #include "gen_qcolortransform.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QColorTransform* QColorTransform_new() {
 	return new QColorTransform();
 }

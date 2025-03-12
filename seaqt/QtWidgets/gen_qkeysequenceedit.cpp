@@ -38,41 +38,34 @@
 #include <QWidget>
 #include <qkeysequenceedit.h>
 #include "gen_qkeysequenceedit.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQKeySequenceEdit final : public QKeySequenceEdit {
-	struct QKeySequenceEdit_VTable* vtbl;
+	const QKeySequenceEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QKeySequenceEdit_VTable* QKeySequenceEdit_vtbl(const VirtualQKeySequenceEdit* self);
+	friend void* QKeySequenceEdit_vdata(const VirtualQKeySequenceEdit* self);
+	friend void QKeySequenceEdit_setVdata(VirtualQKeySequenceEdit* self, void* vdata);
 
-	VirtualQKeySequenceEdit(struct QKeySequenceEdit_VTable* vtbl, QWidget* parent): QKeySequenceEdit(parent), vtbl(vtbl) {};
-	VirtualQKeySequenceEdit(struct QKeySequenceEdit_VTable* vtbl): QKeySequenceEdit(), vtbl(vtbl) {};
-	VirtualQKeySequenceEdit(struct QKeySequenceEdit_VTable* vtbl, const QKeySequence& keySequence): QKeySequenceEdit(keySequence), vtbl(vtbl) {};
-	VirtualQKeySequenceEdit(struct QKeySequenceEdit_VTable* vtbl, const QKeySequence& keySequence, QWidget* parent): QKeySequenceEdit(keySequence, parent), vtbl(vtbl) {};
+	VirtualQKeySequenceEdit(const QKeySequenceEdit_VTable* vtbl, void* vdata, QWidget* parent): QKeySequenceEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeySequenceEdit(const QKeySequenceEdit_VTable* vtbl, void* vdata): QKeySequenceEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeySequenceEdit(const QKeySequenceEdit_VTable* vtbl, void* vdata, const QKeySequence& keySequence): QKeySequenceEdit(keySequence), vtbl(vtbl), vdata(vdata) {}
+	VirtualQKeySequenceEdit(const QKeySequenceEdit_VTable* vtbl, void* vdata, const QKeySequence& keySequence, QWidget* parent): QKeySequenceEdit(keySequence, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQKeySequenceEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQKeySequenceEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QKeySequenceEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QKeySequenceEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QKeySequenceEdit_virtualbase_metaObject(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QKeySequenceEdit::qt_metacast(param1);
@@ -80,14 +73,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QKeySequenceEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QKeySequenceEdit_virtualbase_metacast(VirtualQKeySequenceEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QKeySequenceEdit::qt_metacall(param1, param2, param3);
@@ -98,14 +90,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QKeySequenceEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QKeySequenceEdit_virtualbase_metacall(VirtualQKeySequenceEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QKeySequenceEdit::event(param1);
@@ -113,14 +104,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QKeySequenceEdit_virtualbase_event(void* self, QEvent* param1);
+	friend bool QKeySequenceEdit_virtualbase_event(VirtualQKeySequenceEdit* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QKeySequenceEdit::keyPressEvent(param1);
@@ -129,13 +119,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_keyPressEvent(VirtualQKeySequenceEdit* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* param1) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QKeySequenceEdit::keyReleaseEvent(param1);
@@ -144,13 +133,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_keyReleaseEvent(VirtualQKeySequenceEdit* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QKeySequenceEdit::timerEvent(param1);
@@ -159,13 +147,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_timerEvent(VirtualQKeySequenceEdit* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QKeySequenceEdit::focusOutEvent(param1);
@@ -174,27 +161,25 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_focusOutEvent(VirtualQKeySequenceEdit* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QKeySequenceEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QKeySequenceEdit_virtualbase_devType(const void* self);
+	friend int QKeySequenceEdit_virtualbase_devType(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QKeySequenceEdit::setVisible(visible);
@@ -203,45 +188,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QKeySequenceEdit_virtualbase_setVisible(VirtualQKeySequenceEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QKeySequenceEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QKeySequenceEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QKeySequenceEdit_virtualbase_sizeHint(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QKeySequenceEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QKeySequenceEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QKeySequenceEdit_virtualbase_minimumSizeHint(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QKeySequenceEdit::heightForWidth(param1);
@@ -249,42 +231,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QKeySequenceEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QKeySequenceEdit_virtualbase_heightForWidth(const VirtualQKeySequenceEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QKeySequenceEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QKeySequenceEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QKeySequenceEdit_virtualbase_hasHeightForWidth(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QKeySequenceEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QKeySequenceEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QKeySequenceEdit_virtualbase_paintEngine(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QKeySequenceEdit::mousePressEvent(event);
@@ -293,13 +272,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QKeySequenceEdit_virtualbase_mousePressEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QKeySequenceEdit::mouseReleaseEvent(event);
@@ -308,13 +286,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QKeySequenceEdit_virtualbase_mouseReleaseEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QKeySequenceEdit::mouseDoubleClickEvent(event);
@@ -323,13 +300,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QKeySequenceEdit_virtualbase_mouseDoubleClickEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QKeySequenceEdit::mouseMoveEvent(event);
@@ -338,13 +314,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QKeySequenceEdit_virtualbase_mouseMoveEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QKeySequenceEdit::wheelEvent(event);
@@ -353,13 +328,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QKeySequenceEdit_virtualbase_wheelEvent(VirtualQKeySequenceEdit* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QKeySequenceEdit::focusInEvent(event);
@@ -368,13 +342,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QKeySequenceEdit_virtualbase_focusInEvent(VirtualQKeySequenceEdit* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QKeySequenceEdit::enterEvent(event);
@@ -383,13 +356,12 @@ public:
 
 		QEnterEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_enterEvent(void* self, QEnterEvent* event);
+	friend void QKeySequenceEdit_virtualbase_enterEvent(VirtualQKeySequenceEdit* self, QEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QKeySequenceEdit::leaveEvent(event);
@@ -398,13 +370,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QKeySequenceEdit_virtualbase_leaveEvent(VirtualQKeySequenceEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QKeySequenceEdit::paintEvent(event);
@@ -413,13 +384,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QKeySequenceEdit_virtualbase_paintEvent(VirtualQKeySequenceEdit* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QKeySequenceEdit::moveEvent(event);
@@ -428,13 +398,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QKeySequenceEdit_virtualbase_moveEvent(VirtualQKeySequenceEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QKeySequenceEdit::resizeEvent(event);
@@ -443,13 +412,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QKeySequenceEdit_virtualbase_resizeEvent(VirtualQKeySequenceEdit* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QKeySequenceEdit::closeEvent(event);
@@ -458,13 +426,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QKeySequenceEdit_virtualbase_closeEvent(VirtualQKeySequenceEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QKeySequenceEdit::contextMenuEvent(event);
@@ -473,13 +440,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QKeySequenceEdit_virtualbase_contextMenuEvent(VirtualQKeySequenceEdit* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QKeySequenceEdit::tabletEvent(event);
@@ -488,13 +454,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QKeySequenceEdit_virtualbase_tabletEvent(VirtualQKeySequenceEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QKeySequenceEdit::actionEvent(event);
@@ -503,13 +468,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QKeySequenceEdit_virtualbase_actionEvent(VirtualQKeySequenceEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QKeySequenceEdit::dragEnterEvent(event);
@@ -518,13 +482,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QKeySequenceEdit_virtualbase_dragEnterEvent(VirtualQKeySequenceEdit* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QKeySequenceEdit::dragMoveEvent(event);
@@ -533,13 +496,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QKeySequenceEdit_virtualbase_dragMoveEvent(VirtualQKeySequenceEdit* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QKeySequenceEdit::dragLeaveEvent(event);
@@ -548,13 +510,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QKeySequenceEdit_virtualbase_dragLeaveEvent(VirtualQKeySequenceEdit* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QKeySequenceEdit::dropEvent(event);
@@ -563,13 +524,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QKeySequenceEdit_virtualbase_dropEvent(VirtualQKeySequenceEdit* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QKeySequenceEdit::showEvent(event);
@@ -578,13 +538,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QKeySequenceEdit_virtualbase_showEvent(VirtualQKeySequenceEdit* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QKeySequenceEdit::hideEvent(event);
@@ -593,13 +552,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QKeySequenceEdit_virtualbase_hideEvent(VirtualQKeySequenceEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QKeySequenceEdit::nativeEvent(eventType, message, result);
@@ -615,14 +573,13 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QKeySequenceEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
+	friend bool QKeySequenceEdit_virtualbase_nativeEvent(VirtualQKeySequenceEdit* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QKeySequenceEdit::changeEvent(param1);
@@ -631,13 +588,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_changeEvent(VirtualQKeySequenceEdit* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QKeySequenceEdit::metric(param1);
@@ -646,14 +602,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QKeySequenceEdit_virtualbase_metric(const void* self, int param1);
+	friend int QKeySequenceEdit_virtualbase_metric(const VirtualQKeySequenceEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QKeySequenceEdit::initPainter(painter);
@@ -662,13 +617,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QKeySequenceEdit_virtualbase_initPainter(const VirtualQKeySequenceEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QKeySequenceEdit::redirected(offset);
@@ -676,28 +630,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QKeySequenceEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QKeySequenceEdit_virtualbase_redirected(const VirtualQKeySequenceEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QKeySequenceEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QKeySequenceEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QKeySequenceEdit_virtualbase_sharedPainter(const VirtualQKeySequenceEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QKeySequenceEdit::inputMethodEvent(param1);
@@ -706,13 +658,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QKeySequenceEdit_virtualbase_inputMethodEvent(VirtualQKeySequenceEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QKeySequenceEdit::inputMethodQuery(param1);
@@ -721,16 +672,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QKeySequenceEdit_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QKeySequenceEdit_virtualbase_inputMethodQuery(const VirtualQKeySequenceEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QKeySequenceEdit::focusNextPrevChild(next);
@@ -738,14 +688,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QKeySequenceEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QKeySequenceEdit_virtualbase_focusNextPrevChild(VirtualQKeySequenceEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QKeySequenceEdit::eventFilter(watched, event);
@@ -754,14 +703,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QKeySequenceEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QKeySequenceEdit_virtualbase_eventFilter(VirtualQKeySequenceEdit* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QKeySequenceEdit::childEvent(event);
@@ -770,13 +718,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QKeySequenceEdit_virtualbase_childEvent(VirtualQKeySequenceEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QKeySequenceEdit::customEvent(event);
@@ -785,13 +732,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QKeySequenceEdit_virtualbase_customEvent(VirtualQKeySequenceEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QKeySequenceEdit::connectNotify(signal);
@@ -802,13 +748,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QKeySequenceEdit_virtualbase_connectNotify(VirtualQKeySequenceEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QKeySequenceEdit::disconnectNotify(signal);
@@ -819,38 +764,38 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QKeySequenceEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QKeySequenceEdit_virtualbase_disconnectNotify(VirtualQKeySequenceEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QKeySequenceEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QKeySequenceEdit_protectedbase_create(void* self);
-	friend void QKeySequenceEdit_protectedbase_destroy(void* self);
-	friend bool QKeySequenceEdit_protectedbase_focusNextChild(void* self);
-	friend bool QKeySequenceEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QKeySequenceEdit_protectedbase_sender(const void* self);
-	friend int QKeySequenceEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QKeySequenceEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QKeySequenceEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QKeySequenceEdit_protectedbase_updateMicroFocus(VirtualQKeySequenceEdit* self);
+	friend void QKeySequenceEdit_protectedbase_create(VirtualQKeySequenceEdit* self);
+	friend void QKeySequenceEdit_protectedbase_destroy(VirtualQKeySequenceEdit* self);
+	friend bool QKeySequenceEdit_protectedbase_focusNextChild(VirtualQKeySequenceEdit* self);
+	friend bool QKeySequenceEdit_protectedbase_focusPreviousChild(VirtualQKeySequenceEdit* self);
+	friend QObject* QKeySequenceEdit_protectedbase_sender(const VirtualQKeySequenceEdit* self);
+	friend int QKeySequenceEdit_protectedbase_senderSignalIndex(const VirtualQKeySequenceEdit* self);
+	friend int QKeySequenceEdit_protectedbase_receivers(const VirtualQKeySequenceEdit* self, const char* signal);
+	friend bool QKeySequenceEdit_protectedbase_isSignalConnected(const VirtualQKeySequenceEdit* self, QMetaMethod* signal);
 };
 
-QKeySequenceEdit* QKeySequenceEdit_new(struct QKeySequenceEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQKeySequenceEdit(vtbl, parent);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new(const QKeySequenceEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQKeySequenceEdit(vtbl, vdata, parent);
 }
 
-QKeySequenceEdit* QKeySequenceEdit_new2(struct QKeySequenceEdit_VTable* vtbl) {
-	return new VirtualQKeySequenceEdit(vtbl);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new2(const QKeySequenceEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQKeySequenceEdit(vtbl, vdata);
 }
 
-QKeySequenceEdit* QKeySequenceEdit_new3(struct QKeySequenceEdit_VTable* vtbl, QKeySequence* keySequence) {
-	return new VirtualQKeySequenceEdit(vtbl, *keySequence);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new3(const QKeySequenceEdit_VTable* vtbl, void* vdata, QKeySequence* keySequence) {
+	return new VirtualQKeySequenceEdit(vtbl, vdata, *keySequence);
 }
 
-QKeySequenceEdit* QKeySequenceEdit_new4(struct QKeySequenceEdit_VTable* vtbl, QKeySequence* keySequence, QWidget* parent) {
-	return new VirtualQKeySequenceEdit(vtbl, *keySequence, parent);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new4(const QKeySequenceEdit_VTable* vtbl, void* vdata, QKeySequence* keySequence, QWidget* parent) {
+	return new VirtualQKeySequenceEdit(vtbl, vdata, *keySequence, parent);
 }
 
 void QKeySequenceEdit_virtbase(QKeySequenceEdit* src, QWidget** outptr_QWidget) {
@@ -904,7 +849,7 @@ void QKeySequenceEdit_editingFinished(QKeySequenceEdit* self) {
 	self->editingFinished();
 }
 
-void QKeySequenceEdit_connect_editingFinished(QKeySequenceEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QKeySequenceEdit_connect_editingFinished(VirtualQKeySequenceEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -919,7 +864,7 @@ void QKeySequenceEdit_keySequenceChanged(QKeySequenceEdit* self, QKeySequence* k
 	self->keySequenceChanged(*keySequence);
 }
 
-void QKeySequenceEdit_connect_keySequenceChanged(QKeySequenceEdit* self, intptr_t slot, void (*callback)(intptr_t, QKeySequence*), void (*release)(intptr_t)) {
+void QKeySequenceEdit_connect_keySequenceChanged(VirtualQKeySequenceEdit* self, intptr_t slot, void (*callback)(intptr_t, QKeySequence*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QKeySequence*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QKeySequence*);
@@ -955,369 +900,297 @@ struct miqt_string QKeySequenceEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QKeySequenceEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QKeySequenceEdit_virtualbase_metaObject(const VirtualQKeySequenceEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::metaObject();
-
+	return (QMetaObject*) self->QKeySequenceEdit::metaObject();
 }
 
-void* QKeySequenceEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QKeySequenceEdit_virtualbase_metacast(VirtualQKeySequenceEdit* self, const char* param1) {
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::qt_metacast(param1);
-
+	return self->QKeySequenceEdit::qt_metacast(param1);
 }
 
-int QKeySequenceEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QKeySequenceEdit_virtualbase_metacall(VirtualQKeySequenceEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QKeySequenceEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QKeySequenceEdit_virtualbase_event(void* self, QEvent* param1) {
+bool QKeySequenceEdit_virtualbase_event(VirtualQKeySequenceEdit* self, QEvent* param1) {
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::event(param1);
-
+	return self->QKeySequenceEdit::event(param1);
 }
 
-void QKeySequenceEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QKeySequenceEdit_virtualbase_keyPressEvent(VirtualQKeySequenceEdit* self, QKeyEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::keyPressEvent(param1);
-
+	self->QKeySequenceEdit::keyPressEvent(param1);
 }
 
-void QKeySequenceEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1) {
+void QKeySequenceEdit_virtualbase_keyReleaseEvent(VirtualQKeySequenceEdit* self, QKeyEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::keyReleaseEvent(param1);
-
+	self->QKeySequenceEdit::keyReleaseEvent(param1);
 }
 
-void QKeySequenceEdit_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QKeySequenceEdit_virtualbase_timerEvent(VirtualQKeySequenceEdit* self, QTimerEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::timerEvent(param1);
-
+	self->QKeySequenceEdit::timerEvent(param1);
 }
 
-void QKeySequenceEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QKeySequenceEdit_virtualbase_focusOutEvent(VirtualQKeySequenceEdit* self, QFocusEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::focusOutEvent(param1);
-
+	self->QKeySequenceEdit::focusOutEvent(param1);
 }
 
-int QKeySequenceEdit_virtualbase_devType(const void* self) {
+int QKeySequenceEdit_virtualbase_devType(const VirtualQKeySequenceEdit* self) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::devType();
-
+	return self->QKeySequenceEdit::devType();
 }
 
-void QKeySequenceEdit_virtualbase_setVisible(void* self, bool visible) {
+void QKeySequenceEdit_virtualbase_setVisible(VirtualQKeySequenceEdit* self, bool visible) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::setVisible(visible);
-
+	self->QKeySequenceEdit::setVisible(visible);
 }
 
-QSize* QKeySequenceEdit_virtualbase_sizeHint(const void* self) {
+QSize* QKeySequenceEdit_virtualbase_sizeHint(const VirtualQKeySequenceEdit* self) {
 
-	return new QSize(( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::sizeHint());
-
+	return new QSize(self->QKeySequenceEdit::sizeHint());
 }
 
-QSize* QKeySequenceEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QKeySequenceEdit_virtualbase_minimumSizeHint(const VirtualQKeySequenceEdit* self) {
 
-	return new QSize(( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::minimumSizeHint());
-
+	return new QSize(self->QKeySequenceEdit::minimumSizeHint());
 }
 
-int QKeySequenceEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QKeySequenceEdit_virtualbase_heightForWidth(const VirtualQKeySequenceEdit* self, int param1) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QKeySequenceEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QKeySequenceEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QKeySequenceEdit_virtualbase_hasHeightForWidth(const VirtualQKeySequenceEdit* self) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::hasHeightForWidth();
-
+	return self->QKeySequenceEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QKeySequenceEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QKeySequenceEdit_virtualbase_paintEngine(const VirtualQKeySequenceEdit* self) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::paintEngine();
-
+	return self->QKeySequenceEdit::paintEngine();
 }
 
-void QKeySequenceEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QKeySequenceEdit_virtualbase_mousePressEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::mousePressEvent(event);
-
+	self->QKeySequenceEdit::mousePressEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QKeySequenceEdit_virtualbase_mouseReleaseEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::mouseReleaseEvent(event);
-
+	self->QKeySequenceEdit::mouseReleaseEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QKeySequenceEdit_virtualbase_mouseDoubleClickEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::mouseDoubleClickEvent(event);
-
+	self->QKeySequenceEdit::mouseDoubleClickEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QKeySequenceEdit_virtualbase_mouseMoveEvent(VirtualQKeySequenceEdit* self, QMouseEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::mouseMoveEvent(event);
-
+	self->QKeySequenceEdit::mouseMoveEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QKeySequenceEdit_virtualbase_wheelEvent(VirtualQKeySequenceEdit* self, QWheelEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::wheelEvent(event);
-
+	self->QKeySequenceEdit::wheelEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QKeySequenceEdit_virtualbase_focusInEvent(VirtualQKeySequenceEdit* self, QFocusEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::focusInEvent(event);
-
+	self->QKeySequenceEdit::focusInEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_enterEvent(void* self, QEnterEvent* event) {
+void QKeySequenceEdit_virtualbase_enterEvent(VirtualQKeySequenceEdit* self, QEnterEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::enterEvent(event);
-
+	self->QKeySequenceEdit::enterEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QKeySequenceEdit_virtualbase_leaveEvent(VirtualQKeySequenceEdit* self, QEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::leaveEvent(event);
-
+	self->QKeySequenceEdit::leaveEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QKeySequenceEdit_virtualbase_paintEvent(VirtualQKeySequenceEdit* self, QPaintEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::paintEvent(event);
-
+	self->QKeySequenceEdit::paintEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QKeySequenceEdit_virtualbase_moveEvent(VirtualQKeySequenceEdit* self, QMoveEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::moveEvent(event);
-
+	self->QKeySequenceEdit::moveEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QKeySequenceEdit_virtualbase_resizeEvent(VirtualQKeySequenceEdit* self, QResizeEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::resizeEvent(event);
-
+	self->QKeySequenceEdit::resizeEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QKeySequenceEdit_virtualbase_closeEvent(VirtualQKeySequenceEdit* self, QCloseEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::closeEvent(event);
-
+	self->QKeySequenceEdit::closeEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QKeySequenceEdit_virtualbase_contextMenuEvent(VirtualQKeySequenceEdit* self, QContextMenuEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::contextMenuEvent(event);
-
+	self->QKeySequenceEdit::contextMenuEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QKeySequenceEdit_virtualbase_tabletEvent(VirtualQKeySequenceEdit* self, QTabletEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::tabletEvent(event);
-
+	self->QKeySequenceEdit::tabletEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QKeySequenceEdit_virtualbase_actionEvent(VirtualQKeySequenceEdit* self, QActionEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::actionEvent(event);
-
+	self->QKeySequenceEdit::actionEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QKeySequenceEdit_virtualbase_dragEnterEvent(VirtualQKeySequenceEdit* self, QDragEnterEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::dragEnterEvent(event);
-
+	self->QKeySequenceEdit::dragEnterEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QKeySequenceEdit_virtualbase_dragMoveEvent(VirtualQKeySequenceEdit* self, QDragMoveEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::dragMoveEvent(event);
-
+	self->QKeySequenceEdit::dragMoveEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QKeySequenceEdit_virtualbase_dragLeaveEvent(VirtualQKeySequenceEdit* self, QDragLeaveEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::dragLeaveEvent(event);
-
+	self->QKeySequenceEdit::dragLeaveEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QKeySequenceEdit_virtualbase_dropEvent(VirtualQKeySequenceEdit* self, QDropEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::dropEvent(event);
-
+	self->QKeySequenceEdit::dropEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QKeySequenceEdit_virtualbase_showEvent(VirtualQKeySequenceEdit* self, QShowEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::showEvent(event);
-
+	self->QKeySequenceEdit::showEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QKeySequenceEdit_virtualbase_hideEvent(VirtualQKeySequenceEdit* self, QHideEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::hideEvent(event);
-
+	self->QKeySequenceEdit::hideEvent(event);
 }
 
-bool QKeySequenceEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
+bool QKeySequenceEdit_virtualbase_nativeEvent(VirtualQKeySequenceEdit* self, struct miqt_string eventType, void* message, intptr_t* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
-
+	return self->QKeySequenceEdit::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
 }
 
-void QKeySequenceEdit_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QKeySequenceEdit_virtualbase_changeEvent(VirtualQKeySequenceEdit* self, QEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::changeEvent(param1);
-
+	self->QKeySequenceEdit::changeEvent(param1);
 }
 
-int QKeySequenceEdit_virtualbase_metric(const void* self, int param1) {
+int QKeySequenceEdit_virtualbase_metric(const VirtualQKeySequenceEdit* self, int param1) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::metric(static_cast<VirtualQKeySequenceEdit::PaintDeviceMetric>(param1));
-
+	return self->QKeySequenceEdit::metric(static_cast<VirtualQKeySequenceEdit::PaintDeviceMetric>(param1));
 }
 
-void QKeySequenceEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QKeySequenceEdit_virtualbase_initPainter(const VirtualQKeySequenceEdit* self, QPainter* painter) {
 
-	( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::initPainter(painter);
-
+	self->QKeySequenceEdit::initPainter(painter);
 }
 
-QPaintDevice* QKeySequenceEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QKeySequenceEdit_virtualbase_redirected(const VirtualQKeySequenceEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::redirected(offset);
-
+	return self->QKeySequenceEdit::redirected(offset);
 }
 
-QPainter* QKeySequenceEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QKeySequenceEdit_virtualbase_sharedPainter(const VirtualQKeySequenceEdit* self) {
 
-	return ( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::sharedPainter();
-
+	return self->QKeySequenceEdit::sharedPainter();
 }
 
-void QKeySequenceEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QKeySequenceEdit_virtualbase_inputMethodEvent(VirtualQKeySequenceEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::inputMethodEvent(param1);
-
+	self->QKeySequenceEdit::inputMethodEvent(param1);
 }
 
-QVariant* QKeySequenceEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QKeySequenceEdit_virtualbase_inputMethodQuery(const VirtualQKeySequenceEdit* self, int param1) {
 
-	return new QVariant(( (const VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QKeySequenceEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QKeySequenceEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QKeySequenceEdit_virtualbase_focusNextPrevChild(VirtualQKeySequenceEdit* self, bool next) {
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::focusNextPrevChild(next);
-
+	return self->QKeySequenceEdit::focusNextPrevChild(next);
 }
 
-bool QKeySequenceEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QKeySequenceEdit_virtualbase_eventFilter(VirtualQKeySequenceEdit* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::eventFilter(watched, event);
-
+	return self->QKeySequenceEdit::eventFilter(watched, event);
 }
 
-void QKeySequenceEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QKeySequenceEdit_virtualbase_childEvent(VirtualQKeySequenceEdit* self, QChildEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::childEvent(event);
-
+	self->QKeySequenceEdit::childEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QKeySequenceEdit_virtualbase_customEvent(VirtualQKeySequenceEdit* self, QEvent* event) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::customEvent(event);
-
+	self->QKeySequenceEdit::customEvent(event);
 }
 
-void QKeySequenceEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QKeySequenceEdit_virtualbase_connectNotify(VirtualQKeySequenceEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::connectNotify(*signal);
-
+	self->QKeySequenceEdit::connectNotify(*signal);
 }
 
-void QKeySequenceEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QKeySequenceEdit_virtualbase_disconnectNotify(VirtualQKeySequenceEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQKeySequenceEdit*)(self) )->QKeySequenceEdit::disconnectNotify(*signal);
-
+	self->QKeySequenceEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QKeySequenceEdit_staticMetaObject() { return &QKeySequenceEdit::staticMetaObject; }
-void QKeySequenceEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QKeySequenceEdit_VTable* QKeySequenceEdit_vtbl(const VirtualQKeySequenceEdit* self) { return self->vtbl; }
+void* QKeySequenceEdit_vdata(const VirtualQKeySequenceEdit* self) { return self->vdata; }
+void QKeySequenceEdit_setVdata(VirtualQKeySequenceEdit* self, void* vdata) { self->vdata = vdata; }
+
+void QKeySequenceEdit_protectedbase_updateMicroFocus(VirtualQKeySequenceEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QKeySequenceEdit_protectedbase_create(void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	self_cast->create();
-
+void QKeySequenceEdit_protectedbase_create(VirtualQKeySequenceEdit* self) {
+	self->create();
 }
 
-void QKeySequenceEdit_protectedbase_destroy(void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QKeySequenceEdit_protectedbase_destroy(VirtualQKeySequenceEdit* self) {
+	self->destroy();
 }
 
-bool QKeySequenceEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QKeySequenceEdit_protectedbase_focusNextChild(VirtualQKeySequenceEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QKeySequenceEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QKeySequenceEdit_protectedbase_focusPreviousChild(VirtualQKeySequenceEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QKeySequenceEdit_protectedbase_sender(const void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QKeySequenceEdit_protectedbase_sender(const VirtualQKeySequenceEdit* self) {
+	return self->sender();
 }
 
-int QKeySequenceEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QKeySequenceEdit_protectedbase_senderSignalIndex(const VirtualQKeySequenceEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QKeySequenceEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QKeySequenceEdit_protectedbase_receivers(const VirtualQKeySequenceEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QKeySequenceEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQKeySequenceEdit* self_cast = static_cast<VirtualQKeySequenceEdit*>( (QKeySequenceEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QKeySequenceEdit_protectedbase_isSignalConnected(const VirtualQKeySequenceEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QKeySequenceEdit_delete(QKeySequenceEdit* self) {

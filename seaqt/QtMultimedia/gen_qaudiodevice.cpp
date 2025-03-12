@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qaudiodevice.h>
 #include "gen_qaudiodevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAudioDevice* QAudioDevice_new() {
 	return new QAudioDevice();
 }
@@ -117,6 +108,7 @@ uint32_t QAudioDevice_channelConfiguration(const QAudioDevice* self) {
 }
 
 const QMetaObject* QAudioDevice_staticMetaObject() { return &QAudioDevice::staticMetaObject; }
+
 void QAudioDevice_delete(QAudioDevice* self) {
 	delete self;
 }

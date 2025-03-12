@@ -281,7 +281,7 @@ proc deleteAccessibleInterface*(_: type gen_qaccessible_base_types.QAccessible, 
 proc updateAccessibility*(_: type gen_qaccessible_base_types.QAccessible, event: gen_qaccessible_types.QAccessibleEvent): void =
   fcQAccessible_updateAccessibility(event.h)
 
-proc isActive*(_: type gen_qaccessible_base_types.QAccessible, ): bool =
+proc isActive*(_: type gen_qaccessible_base_types.QAccessible): bool =
   fcQAccessible_isActive()
 
 proc setActive*(_: type gen_qaccessible_base_types.QAccessible, active: bool): void =
@@ -290,7 +290,7 @@ proc setActive*(_: type gen_qaccessible_base_types.QAccessible, active: bool): v
 proc setRootObject*(_: type gen_qaccessible_base_types.QAccessible, objectVal: gen_qobject_types.QObject): void =
   fcQAccessible_setRootObject(objectVal.h)
 
-proc cleanup*(_: type gen_qaccessible_base_types.QAccessible, ): void =
+proc cleanup*(_: type gen_qaccessible_base_types.QAccessible): void =
   fcQAccessible_cleanup()
 
 proc qAccessibleTextBoundaryHelper*(_: type gen_qaccessible_base_types.QAccessible, cursor: gen_qtextcursor_types.QTextCursor, boundaryType: cint): tuple[first: cint, second: cint] =

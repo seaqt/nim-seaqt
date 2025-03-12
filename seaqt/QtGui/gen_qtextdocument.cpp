@@ -28,15 +28,6 @@
 #include <QVariant>
 #include <qtextdocument.h>
 #include "gen_qtextdocument.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAbstractUndoItem_undo(QAbstractUndoItem* self) {
 	self->undo();
 }
@@ -54,31 +45,33 @@ void QAbstractUndoItem_delete(QAbstractUndoItem* self) {
 }
 
 class VirtualQTextDocument final : public QTextDocument {
-	struct QTextDocument_VTable* vtbl;
+	const QTextDocument_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTextDocument_VTable* QTextDocument_vtbl(const VirtualQTextDocument* self);
+	friend void* QTextDocument_vdata(const VirtualQTextDocument* self);
+	friend void QTextDocument_setVdata(VirtualQTextDocument* self, void* vdata);
 
-	VirtualQTextDocument(struct QTextDocument_VTable* vtbl): QTextDocument(), vtbl(vtbl) {};
-	VirtualQTextDocument(struct QTextDocument_VTable* vtbl, const QString& text): QTextDocument(text), vtbl(vtbl) {};
-	VirtualQTextDocument(struct QTextDocument_VTable* vtbl, QObject* parent): QTextDocument(parent), vtbl(vtbl) {};
-	VirtualQTextDocument(struct QTextDocument_VTable* vtbl, const QString& text, QObject* parent): QTextDocument(text, parent), vtbl(vtbl) {};
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, void* vdata): QTextDocument(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, void* vdata, const QString& text): QTextDocument(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, void* vdata, QObject* parent): QTextDocument(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTextDocument(const QTextDocument_VTable* vtbl, void* vdata, const QString& text, QObject* parent): QTextDocument(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTextDocument() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTextDocument() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTextDocument::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTextDocument_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTextDocument_virtualbase_metaObject(const VirtualQTextDocument* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTextDocument::qt_metacast(param1);
@@ -86,14 +79,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTextDocument_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTextDocument_virtualbase_metacast(VirtualQTextDocument* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTextDocument::qt_metacall(param1, param2, param3);
@@ -104,14 +96,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTextDocument_virtualbase_metacall(VirtualQTextDocument* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
 		if (vtbl->clear == 0) {
 			QTextDocument::clear();
@@ -119,13 +110,12 @@ public:
 		}
 
 
-		vtbl->clear(vtbl, this);
+		vtbl->clear(this);
 
 	}
 
-	friend void QTextDocument_virtualbase_clear(void* self);
+	friend void QTextDocument_virtualbase_clear(VirtualQTextDocument* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QTextObject* createObject(const QTextFormat& f) override {
 		if (vtbl->createObject == 0) {
 			return QTextDocument::createObject(f);
@@ -135,14 +125,13 @@ public:
 		// Cast returned reference into pointer
 		QTextFormat* sigval1 = const_cast<QTextFormat*>(&f_ret);
 
-		QTextObject* callback_return_value = vtbl->createObject(vtbl, this, sigval1);
+		QTextObject* callback_return_value = vtbl->createObject(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QTextObject* QTextDocument_virtualbase_createObject(void* self, QTextFormat* f);
+	friend QTextObject* QTextDocument_virtualbase_createObject(VirtualQTextDocument* self, QTextFormat* f);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant loadResource(int type, const QUrl& name) override {
 		if (vtbl->loadResource == 0) {
 			return QTextDocument::loadResource(type, name);
@@ -153,16 +142,15 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval2 = const_cast<QUrl*>(&name_ret);
 
-		QVariant* callback_return_value = vtbl->loadResource(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->loadResource(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* name);
+	friend QVariant* QTextDocument_virtualbase_loadResource(VirtualQTextDocument* self, int type, QUrl* name);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTextDocument::event(event);
@@ -170,14 +158,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTextDocument_virtualbase_event(void* self, QEvent* event);
+	friend bool QTextDocument_virtualbase_event(VirtualQTextDocument* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTextDocument::eventFilter(watched, event);
@@ -186,14 +173,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTextDocument_virtualbase_eventFilter(VirtualQTextDocument* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTextDocument::timerEvent(event);
@@ -202,13 +188,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTextDocument_virtualbase_timerEvent(VirtualQTextDocument* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTextDocument::childEvent(event);
@@ -217,13 +202,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTextDocument_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTextDocument_virtualbase_childEvent(VirtualQTextDocument* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTextDocument::customEvent(event);
@@ -232,13 +216,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTextDocument_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTextDocument_virtualbase_customEvent(VirtualQTextDocument* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTextDocument::connectNotify(signal);
@@ -249,13 +232,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTextDocument_virtualbase_connectNotify(VirtualQTextDocument* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTextDocument::disconnectNotify(signal);
@@ -266,35 +248,35 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTextDocument_virtualbase_disconnectNotify(VirtualQTextDocument* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QTextDocument_protectedbase_sender(const void* self);
-	friend int QTextDocument_protectedbase_senderSignalIndex(const void* self);
-	friend int QTextDocument_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QTextDocument_protectedbase_sender(const VirtualQTextDocument* self);
+	friend int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* self);
+	friend int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal);
+	friend bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal);
 };
 
-QTextDocument* QTextDocument_new(struct QTextDocument_VTable* vtbl) {
-	return new VirtualQTextDocument(vtbl);
+VirtualQTextDocument* QTextDocument_new(const QTextDocument_VTable* vtbl, void* vdata) {
+	return new VirtualQTextDocument(vtbl, vdata);
 }
 
-QTextDocument* QTextDocument_new2(struct QTextDocument_VTable* vtbl, struct miqt_string text) {
+VirtualQTextDocument* QTextDocument_new2(const QTextDocument_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTextDocument(vtbl, text_QString);
+	return new VirtualQTextDocument(vtbl, vdata, text_QString);
 }
 
-QTextDocument* QTextDocument_new3(struct QTextDocument_VTable* vtbl, QObject* parent) {
-	return new VirtualQTextDocument(vtbl, parent);
+VirtualQTextDocument* QTextDocument_new3(const QTextDocument_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQTextDocument(vtbl, vdata, parent);
 }
 
-QTextDocument* QTextDocument_new4(struct QTextDocument_VTable* vtbl, struct miqt_string text, QObject* parent) {
+VirtualQTextDocument* QTextDocument_new4(const QTextDocument_VTable* vtbl, void* vdata, struct miqt_string text, QObject* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQTextDocument(vtbl, text_QString, parent);
+	return new VirtualQTextDocument(vtbl, vdata, text_QString, parent);
 }
 
 void QTextDocument_virtbase(QTextDocument* src, QObject** outptr_QObject) {
@@ -730,7 +712,7 @@ void QTextDocument_contentsChange(QTextDocument* self, int from, int charsRemove
 	self->contentsChange(static_cast<int>(from), static_cast<int>(charsRemoved), static_cast<int>(charsAdded));
 }
 
-void QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+void QTextDocument_connect_contentsChange(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int, int);
@@ -748,7 +730,7 @@ void QTextDocument_contentsChanged(QTextDocument* self) {
 	self->contentsChanged();
 }
 
-void QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QTextDocument_connect_contentsChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -763,7 +745,7 @@ void QTextDocument_undoAvailable(QTextDocument* self, bool param1) {
 	self->undoAvailable(param1);
 }
 
-void QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QTextDocument_connect_undoAvailable(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -779,7 +761,7 @@ void QTextDocument_redoAvailable(QTextDocument* self, bool param1) {
 	self->redoAvailable(param1);
 }
 
-void QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QTextDocument_connect_redoAvailable(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -795,7 +777,7 @@ void QTextDocument_undoCommandAdded(QTextDocument* self) {
 	self->undoCommandAdded();
 }
 
-void QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QTextDocument_connect_undoCommandAdded(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -810,7 +792,7 @@ void QTextDocument_modificationChanged(QTextDocument* self, bool m) {
 	self->modificationChanged(m);
 }
 
-void QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QTextDocument_connect_modificationChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -826,7 +808,7 @@ void QTextDocument_cursorPositionChanged(QTextDocument* self, QTextCursor* curso
 	self->cursorPositionChanged(*cursor);
 }
 
-void QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) {
+void QTextDocument_connect_cursorPositionChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QTextCursor*);
@@ -844,7 +826,7 @@ void QTextDocument_blockCountChanged(QTextDocument* self, int newBlockCount) {
 	self->blockCountChanged(static_cast<int>(newBlockCount));
 }
 
-void QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTextDocument_connect_blockCountChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -860,7 +842,7 @@ void QTextDocument_baseUrlChanged(QTextDocument* self, QUrl* url) {
 	self->baseUrlChanged(*url);
 }
 
-void QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+void QTextDocument_connect_baseUrlChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QUrl*);
@@ -878,7 +860,7 @@ void QTextDocument_documentLayoutChanged(QTextDocument* self) {
 	self->documentLayoutChanged();
 }
 
-void QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QTextDocument_connect_documentLayoutChanged(VirtualQTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -986,111 +968,91 @@ void QTextDocument_setModified1(QTextDocument* self, bool m) {
 	self->setModified(m);
 }
 
-QMetaObject* QTextDocument_virtualbase_metaObject(const void* self) {
+QMetaObject* QTextDocument_virtualbase_metaObject(const VirtualQTextDocument* self) {
 
-	return (QMetaObject*) ( (const VirtualQTextDocument*)(self) )->QTextDocument::metaObject();
-
+	return (QMetaObject*) self->QTextDocument::metaObject();
 }
 
-void* QTextDocument_virtualbase_metacast(void* self, const char* param1) {
+void* QTextDocument_virtualbase_metacast(VirtualQTextDocument* self, const char* param1) {
 
-	return ( (VirtualQTextDocument*)(self) )->QTextDocument::qt_metacast(param1);
-
+	return self->QTextDocument::qt_metacast(param1);
 }
 
-int QTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTextDocument_virtualbase_metacall(VirtualQTextDocument* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTextDocument*)(self) )->QTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QTextDocument_virtualbase_clear(void* self) {
+void QTextDocument_virtualbase_clear(VirtualQTextDocument* self) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::clear();
-
+	self->QTextDocument::clear();
 }
 
-QTextObject* QTextDocument_virtualbase_createObject(void* self, QTextFormat* f) {
+QTextObject* QTextDocument_virtualbase_createObject(VirtualQTextDocument* self, QTextFormat* f) {
 
-	return ( (VirtualQTextDocument*)(self) )->QTextDocument::createObject(*f);
-
+	return self->QTextDocument::createObject(*f);
 }
 
-QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* name) {
+QVariant* QTextDocument_virtualbase_loadResource(VirtualQTextDocument* self, int type, QUrl* name) {
 
-	return new QVariant(( (VirtualQTextDocument*)(self) )->QTextDocument::loadResource(static_cast<int>(type), *name));
-
+	return new QVariant(self->QTextDocument::loadResource(static_cast<int>(type), *name));
 }
 
-bool QTextDocument_virtualbase_event(void* self, QEvent* event) {
+bool QTextDocument_virtualbase_event(VirtualQTextDocument* self, QEvent* event) {
 
-	return ( (VirtualQTextDocument*)(self) )->QTextDocument::event(event);
-
+	return self->QTextDocument::event(event);
 }
 
-bool QTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTextDocument_virtualbase_eventFilter(VirtualQTextDocument* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTextDocument*)(self) )->QTextDocument::eventFilter(watched, event);
-
+	return self->QTextDocument::eventFilter(watched, event);
 }
 
-void QTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTextDocument_virtualbase_timerEvent(VirtualQTextDocument* self, QTimerEvent* event) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::timerEvent(event);
-
+	self->QTextDocument::timerEvent(event);
 }
 
-void QTextDocument_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTextDocument_virtualbase_childEvent(VirtualQTextDocument* self, QChildEvent* event) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::childEvent(event);
-
+	self->QTextDocument::childEvent(event);
 }
 
-void QTextDocument_virtualbase_customEvent(void* self, QEvent* event) {
+void QTextDocument_virtualbase_customEvent(VirtualQTextDocument* self, QEvent* event) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::customEvent(event);
-
+	self->QTextDocument::customEvent(event);
 }
 
-void QTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTextDocument_virtualbase_connectNotify(VirtualQTextDocument* self, QMetaMethod* signal) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::connectNotify(*signal);
-
+	self->QTextDocument::connectNotify(*signal);
 }
 
-void QTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTextDocument_virtualbase_disconnectNotify(VirtualQTextDocument* self, QMetaMethod* signal) {
 
-	( (VirtualQTextDocument*)(self) )->QTextDocument::disconnectNotify(*signal);
-
+	self->QTextDocument::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTextDocument_staticMetaObject() { return &QTextDocument::staticMetaObject; }
-QObject* QTextDocument_protectedbase_sender(const void* self) {
-	VirtualQTextDocument* self_cast = static_cast<VirtualQTextDocument*>( (QTextDocument*)(self) );
-	
-	return self_cast->sender();
 
+const QTextDocument_VTable* QTextDocument_vtbl(const VirtualQTextDocument* self) { return self->vtbl; }
+void* QTextDocument_vdata(const VirtualQTextDocument* self) { return self->vdata; }
+void QTextDocument_setVdata(VirtualQTextDocument* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QTextDocument_protectedbase_sender(const VirtualQTextDocument* self) {
+	return self->sender();
 }
 
-int QTextDocument_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTextDocument* self_cast = static_cast<VirtualQTextDocument*>( (QTextDocument*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* self) {
+	return self->senderSignalIndex();
 }
 
-int QTextDocument_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTextDocument* self_cast = static_cast<VirtualQTextDocument*>( (QTextDocument*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTextDocument* self_cast = static_cast<VirtualQTextDocument*>( (QTextDocument*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTextDocument_delete(QTextDocument* self) {

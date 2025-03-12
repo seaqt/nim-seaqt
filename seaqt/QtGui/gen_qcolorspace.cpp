@@ -9,15 +9,6 @@
 #include <QVariant>
 #include <qcolorspace.h>
 #include "gen_qcolorspace.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QColorSpace* QColorSpace_new() {
 	return new QColorSpace();
 }
@@ -249,6 +240,7 @@ QColorSpace* QColorSpace_withTransferFunction2(const QColorSpace* self, int tran
 }
 
 const QMetaObject* QColorSpace_staticMetaObject() { return &QColorSpace::staticMetaObject; }
+
 void QColorSpace_delete(QColorSpace* self) {
 	delete self;
 }

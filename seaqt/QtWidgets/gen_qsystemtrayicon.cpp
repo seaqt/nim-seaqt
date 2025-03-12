@@ -13,41 +13,34 @@
 #include <QTimerEvent>
 #include <qsystemtrayicon.h>
 #include "gen_qsystemtrayicon.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSystemTrayIcon final : public QSystemTrayIcon {
-	struct QSystemTrayIcon_VTable* vtbl;
+	const QSystemTrayIcon_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSystemTrayIcon_VTable* QSystemTrayIcon_vtbl(const VirtualQSystemTrayIcon* self);
+	friend void* QSystemTrayIcon_vdata(const VirtualQSystemTrayIcon* self);
+	friend void QSystemTrayIcon_setVdata(VirtualQSystemTrayIcon* self, void* vdata);
 
-	VirtualQSystemTrayIcon(struct QSystemTrayIcon_VTable* vtbl): QSystemTrayIcon(), vtbl(vtbl) {};
-	VirtualQSystemTrayIcon(struct QSystemTrayIcon_VTable* vtbl, const QIcon& icon): QSystemTrayIcon(icon), vtbl(vtbl) {};
-	VirtualQSystemTrayIcon(struct QSystemTrayIcon_VTable* vtbl, QObject* parent): QSystemTrayIcon(parent), vtbl(vtbl) {};
-	VirtualQSystemTrayIcon(struct QSystemTrayIcon_VTable* vtbl, const QIcon& icon, QObject* parent): QSystemTrayIcon(icon, parent), vtbl(vtbl) {};
+	VirtualQSystemTrayIcon(const QSystemTrayIcon_VTable* vtbl, void* vdata): QSystemTrayIcon(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSystemTrayIcon(const QSystemTrayIcon_VTable* vtbl, void* vdata, const QIcon& icon): QSystemTrayIcon(icon), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSystemTrayIcon(const QSystemTrayIcon_VTable* vtbl, void* vdata, QObject* parent): QSystemTrayIcon(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQSystemTrayIcon(const QSystemTrayIcon_VTable* vtbl, void* vdata, const QIcon& icon, QObject* parent): QSystemTrayIcon(icon, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSystemTrayIcon() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSystemTrayIcon() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QSystemTrayIcon::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const VirtualQSystemTrayIcon* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QSystemTrayIcon::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QSystemTrayIcon_virtualbase_metacast(void* self, const char* param1);
+	friend void* QSystemTrayIcon_virtualbase_metacast(VirtualQSystemTrayIcon* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QSystemTrayIcon::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSystemTrayIcon_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QSystemTrayIcon_virtualbase_metacall(VirtualQSystemTrayIcon* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QSystemTrayIcon::event(event);
@@ -88,14 +79,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event);
+	friend bool QSystemTrayIcon_virtualbase_event(VirtualQSystemTrayIcon* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QSystemTrayIcon::eventFilter(watched, event);
@@ -104,14 +94,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QSystemTrayIcon_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QSystemTrayIcon_virtualbase_eventFilter(VirtualQSystemTrayIcon* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QSystemTrayIcon::timerEvent(event);
@@ -120,13 +109,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QSystemTrayIcon_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QSystemTrayIcon_virtualbase_timerEvent(VirtualQSystemTrayIcon* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QSystemTrayIcon::childEvent(event);
@@ -135,13 +123,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QSystemTrayIcon_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QSystemTrayIcon_virtualbase_childEvent(VirtualQSystemTrayIcon* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QSystemTrayIcon::customEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QSystemTrayIcon_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QSystemTrayIcon_virtualbase_customEvent(VirtualQSystemTrayIcon* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QSystemTrayIcon::connectNotify(signal);
@@ -167,13 +153,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QSystemTrayIcon_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QSystemTrayIcon_virtualbase_connectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QSystemTrayIcon::disconnectNotify(signal);
@@ -184,33 +169,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QSystemTrayIcon_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QSystemTrayIcon_virtualbase_disconnectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSystemTrayIcon_protectedbase_sender(const void* self);
-	friend int QSystemTrayIcon_protectedbase_senderSignalIndex(const void* self);
-	friend int QSystemTrayIcon_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QSystemTrayIcon_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QSystemTrayIcon_protectedbase_sender(const VirtualQSystemTrayIcon* self);
+	friend int QSystemTrayIcon_protectedbase_senderSignalIndex(const VirtualQSystemTrayIcon* self);
+	friend int QSystemTrayIcon_protectedbase_receivers(const VirtualQSystemTrayIcon* self, const char* signal);
+	friend bool QSystemTrayIcon_protectedbase_isSignalConnected(const VirtualQSystemTrayIcon* self, QMetaMethod* signal);
 };
 
-QSystemTrayIcon* QSystemTrayIcon_new(struct QSystemTrayIcon_VTable* vtbl) {
-	return new VirtualQSystemTrayIcon(vtbl);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new(const QSystemTrayIcon_VTable* vtbl, void* vdata) {
+	return new VirtualQSystemTrayIcon(vtbl, vdata);
 }
 
-QSystemTrayIcon* QSystemTrayIcon_new2(struct QSystemTrayIcon_VTable* vtbl, QIcon* icon) {
-	return new VirtualQSystemTrayIcon(vtbl, *icon);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new2(const QSystemTrayIcon_VTable* vtbl, void* vdata, QIcon* icon) {
+	return new VirtualQSystemTrayIcon(vtbl, vdata, *icon);
 }
 
-QSystemTrayIcon* QSystemTrayIcon_new3(struct QSystemTrayIcon_VTable* vtbl, QObject* parent) {
-	return new VirtualQSystemTrayIcon(vtbl, parent);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new3(const QSystemTrayIcon_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQSystemTrayIcon(vtbl, vdata, parent);
 }
 
-QSystemTrayIcon* QSystemTrayIcon_new4(struct QSystemTrayIcon_VTable* vtbl, QIcon* icon, QObject* parent) {
-	return new VirtualQSystemTrayIcon(vtbl, *icon, parent);
+VirtualQSystemTrayIcon* QSystemTrayIcon_new4(const QSystemTrayIcon_VTable* vtbl, void* vdata, QIcon* icon, QObject* parent) {
+	return new VirtualQSystemTrayIcon(vtbl, vdata, *icon, parent);
 }
 
 void QSystemTrayIcon_virtbase(QSystemTrayIcon* src, QObject** outptr_QObject) {
@@ -316,7 +301,7 @@ void QSystemTrayIcon_activated(QSystemTrayIcon* self, int reason) {
 	self->activated(static_cast<QSystemTrayIcon::ActivationReason>(reason));
 }
 
-void QSystemTrayIcon_connect_activated(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QSystemTrayIcon_connect_activated(VirtualQSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -333,7 +318,7 @@ void QSystemTrayIcon_messageClicked(QSystemTrayIcon* self) {
 	self->messageClicked();
 }
 
-void QSystemTrayIcon_connect_messageClicked(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QSystemTrayIcon_connect_messageClicked(VirtualQSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -384,93 +369,76 @@ void QSystemTrayIcon_showMessage42(QSystemTrayIcon* self, struct miqt_string tit
 	self->showMessage(title_QString, msg_QString, static_cast<QSystemTrayIcon::MessageIcon>(icon), static_cast<int>(msecs));
 }
 
-QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const void* self) {
+QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const VirtualQSystemTrayIcon* self) {
 
-	return (QMetaObject*) ( (const VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::metaObject();
-
+	return (QMetaObject*) self->QSystemTrayIcon::metaObject();
 }
 
-void* QSystemTrayIcon_virtualbase_metacast(void* self, const char* param1) {
+void* QSystemTrayIcon_virtualbase_metacast(VirtualQSystemTrayIcon* self, const char* param1) {
 
-	return ( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::qt_metacast(param1);
-
+	return self->QSystemTrayIcon::qt_metacast(param1);
 }
 
-int QSystemTrayIcon_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QSystemTrayIcon_virtualbase_metacall(VirtualQSystemTrayIcon* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QSystemTrayIcon::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event) {
+bool QSystemTrayIcon_virtualbase_event(VirtualQSystemTrayIcon* self, QEvent* event) {
 
-	return ( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::event(event);
-
+	return self->QSystemTrayIcon::event(event);
 }
 
-bool QSystemTrayIcon_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QSystemTrayIcon_virtualbase_eventFilter(VirtualQSystemTrayIcon* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::eventFilter(watched, event);
-
+	return self->QSystemTrayIcon::eventFilter(watched, event);
 }
 
-void QSystemTrayIcon_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QSystemTrayIcon_virtualbase_timerEvent(VirtualQSystemTrayIcon* self, QTimerEvent* event) {
 
-	( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::timerEvent(event);
-
+	self->QSystemTrayIcon::timerEvent(event);
 }
 
-void QSystemTrayIcon_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QSystemTrayIcon_virtualbase_childEvent(VirtualQSystemTrayIcon* self, QChildEvent* event) {
 
-	( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::childEvent(event);
-
+	self->QSystemTrayIcon::childEvent(event);
 }
 
-void QSystemTrayIcon_virtualbase_customEvent(void* self, QEvent* event) {
+void QSystemTrayIcon_virtualbase_customEvent(VirtualQSystemTrayIcon* self, QEvent* event) {
 
-	( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::customEvent(event);
-
+	self->QSystemTrayIcon::customEvent(event);
 }
 
-void QSystemTrayIcon_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QSystemTrayIcon_virtualbase_connectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal) {
 
-	( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::connectNotify(*signal);
-
+	self->QSystemTrayIcon::connectNotify(*signal);
 }
 
-void QSystemTrayIcon_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QSystemTrayIcon_virtualbase_disconnectNotify(VirtualQSystemTrayIcon* self, QMetaMethod* signal) {
 
-	( (VirtualQSystemTrayIcon*)(self) )->QSystemTrayIcon::disconnectNotify(*signal);
-
+	self->QSystemTrayIcon::disconnectNotify(*signal);
 }
 
 const QMetaObject* QSystemTrayIcon_staticMetaObject() { return &QSystemTrayIcon::staticMetaObject; }
-QObject* QSystemTrayIcon_protectedbase_sender(const void* self) {
-	VirtualQSystemTrayIcon* self_cast = static_cast<VirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
-	
-	return self_cast->sender();
 
+const QSystemTrayIcon_VTable* QSystemTrayIcon_vtbl(const VirtualQSystemTrayIcon* self) { return self->vtbl; }
+void* QSystemTrayIcon_vdata(const VirtualQSystemTrayIcon* self) { return self->vdata; }
+void QSystemTrayIcon_setVdata(VirtualQSystemTrayIcon* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QSystemTrayIcon_protectedbase_sender(const VirtualQSystemTrayIcon* self) {
+	return self->sender();
 }
 
-int QSystemTrayIcon_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQSystemTrayIcon* self_cast = static_cast<VirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QSystemTrayIcon_protectedbase_senderSignalIndex(const VirtualQSystemTrayIcon* self) {
+	return self->senderSignalIndex();
 }
 
-int QSystemTrayIcon_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQSystemTrayIcon* self_cast = static_cast<VirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QSystemTrayIcon_protectedbase_receivers(const VirtualQSystemTrayIcon* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QSystemTrayIcon_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQSystemTrayIcon* self_cast = static_cast<VirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QSystemTrayIcon_protectedbase_isSignalConnected(const VirtualQSystemTrayIcon* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QSystemTrayIcon_delete(QSystemTrayIcon* self) {

@@ -38,6 +38,7 @@ bool QTest__QTouchEventSequence_commit(QTest__QTouchEventSequence* self, bool pr
 QTest__QTouchEventSequence* QTest__QTouchEventSequence_press3(QTest__QTouchEventSequence* self, int touchId, QPoint* pt, QWindow* window);
 QTest__QTouchEventSequence* QTest__QTouchEventSequence_move3(QTest__QTouchEventSequence* self, int touchId, QPoint* pt, QWindow* window);
 QTest__QTouchEventSequence* QTest__QTouchEventSequence_release3(QTest__QTouchEventSequence* self, int touchId, QPoint* pt, QWindow* window);
+
 void QTest__QTouchEventSequence_delete(QTest__QTouchEventSequence* self);
 
 #ifdef __cplusplus

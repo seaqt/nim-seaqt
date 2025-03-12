@@ -30,15 +30,6 @@
 #include <QTransform>
 #include <qpainter.h>
 #include "gen_qpainter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPainter* QPainter_new() {
 	return new QPainter();
 }
@@ -996,6 +987,7 @@ void QPainter_setRenderHints2(QPainter* self, int hints, bool on) {
 }
 
 const QMetaObject* QPainter_staticMetaObject() { return &QPainter::staticMetaObject; }
+
 void QPainter_delete(QPainter* self) {
 	delete self;
 }

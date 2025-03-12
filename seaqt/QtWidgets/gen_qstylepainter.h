@@ -41,6 +41,7 @@ typedef struct QWidget QWidget;
 QStylePainter* QStylePainter_new(QWidget* w);
 QStylePainter* QStylePainter_new2();
 QStylePainter* QStylePainter_new3(QPaintDevice* pd, QWidget* w);
+
 void QStylePainter_virtbase(QStylePainter* src, QPainter** outptr_QPainter);
 bool QStylePainter_begin(QStylePainter* self, QWidget* w);
 bool QStylePainter_begin2(QStylePainter* self, QPaintDevice* pd, QWidget* w);
@@ -51,6 +52,7 @@ void QStylePainter_drawItemText(QStylePainter* self, QRect* r, int flags, QPalet
 void QStylePainter_drawItemPixmap(QStylePainter* self, QRect* r, int flags, QPixmap* pixmap);
 QStyle* QStylePainter_style(const QStylePainter* self);
 void QStylePainter_drawItemText6(QStylePainter* self, QRect* r, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole);
+
 void QStylePainter_delete(QStylePainter* self);
 
 #ifdef __cplusplus

@@ -69,40 +69,40 @@ type cQJSManagedValue*{.exportc: "QJSManagedValue", incompleteStruct.} = object
 
 proc fcQJSManagedValue_equals(self: pointer, other: pointer): bool {.importc: "QJSManagedValue_equals".}
 proc fcQJSManagedValue_strictlyEquals(self: pointer, other: pointer): bool {.importc: "QJSManagedValue_strictlyEquals".}
-proc fcQJSManagedValue_engine(self: pointer, ): pointer {.importc: "QJSManagedValue_engine".}
-proc fcQJSManagedValue_prototype(self: pointer, ): pointer {.importc: "QJSManagedValue_prototype".}
+proc fcQJSManagedValue_engine(self: pointer): pointer {.importc: "QJSManagedValue_engine".}
+proc fcQJSManagedValue_prototype(self: pointer): pointer {.importc: "QJSManagedValue_prototype".}
 proc fcQJSManagedValue_setPrototype(self: pointer, prototype: pointer): void {.importc: "QJSManagedValue_setPrototype".}
-proc fcQJSManagedValue_typeX(self: pointer, ): cint {.importc: "QJSManagedValue_type".}
-proc fcQJSManagedValue_isUndefined(self: pointer, ): bool {.importc: "QJSManagedValue_isUndefined".}
-proc fcQJSManagedValue_isBoolean(self: pointer, ): bool {.importc: "QJSManagedValue_isBoolean".}
-proc fcQJSManagedValue_isNumber(self: pointer, ): bool {.importc: "QJSManagedValue_isNumber".}
-proc fcQJSManagedValue_isString(self: pointer, ): bool {.importc: "QJSManagedValue_isString".}
-proc fcQJSManagedValue_isObject(self: pointer, ): bool {.importc: "QJSManagedValue_isObject".}
-proc fcQJSManagedValue_isSymbol(self: pointer, ): bool {.importc: "QJSManagedValue_isSymbol".}
-proc fcQJSManagedValue_isFunction(self: pointer, ): bool {.importc: "QJSManagedValue_isFunction".}
-proc fcQJSManagedValue_isInteger(self: pointer, ): bool {.importc: "QJSManagedValue_isInteger".}
-proc fcQJSManagedValue_isNull(self: pointer, ): bool {.importc: "QJSManagedValue_isNull".}
-proc fcQJSManagedValue_isRegularExpression(self: pointer, ): bool {.importc: "QJSManagedValue_isRegularExpression".}
-proc fcQJSManagedValue_isArray(self: pointer, ): bool {.importc: "QJSManagedValue_isArray".}
-proc fcQJSManagedValue_isUrl(self: pointer, ): bool {.importc: "QJSManagedValue_isUrl".}
-proc fcQJSManagedValue_isVariant(self: pointer, ): bool {.importc: "QJSManagedValue_isVariant".}
-proc fcQJSManagedValue_isQObject(self: pointer, ): bool {.importc: "QJSManagedValue_isQObject".}
-proc fcQJSManagedValue_isQMetaObject(self: pointer, ): bool {.importc: "QJSManagedValue_isQMetaObject".}
-proc fcQJSManagedValue_isDate(self: pointer, ): bool {.importc: "QJSManagedValue_isDate".}
-proc fcQJSManagedValue_isError(self: pointer, ): bool {.importc: "QJSManagedValue_isError".}
-proc fcQJSManagedValue_isJsMetaType(self: pointer, ): bool {.importc: "QJSManagedValue_isJsMetaType".}
-proc fcQJSManagedValue_toString(self: pointer, ): struct_miqt_string {.importc: "QJSManagedValue_toString".}
-proc fcQJSManagedValue_toNumber(self: pointer, ): float64 {.importc: "QJSManagedValue_toNumber".}
-proc fcQJSManagedValue_toBoolean(self: pointer, ): bool {.importc: "QJSManagedValue_toBoolean".}
-proc fcQJSManagedValue_toPrimitive(self: pointer, ): pointer {.importc: "QJSManagedValue_toPrimitive".}
-proc fcQJSManagedValue_toJSValue(self: pointer, ): pointer {.importc: "QJSManagedValue_toJSValue".}
-proc fcQJSManagedValue_toVariant(self: pointer, ): pointer {.importc: "QJSManagedValue_toVariant".}
-proc fcQJSManagedValue_toInteger(self: pointer, ): cint {.importc: "QJSManagedValue_toInteger".}
-proc fcQJSManagedValue_toRegularExpression(self: pointer, ): pointer {.importc: "QJSManagedValue_toRegularExpression".}
-proc fcQJSManagedValue_toUrl(self: pointer, ): pointer {.importc: "QJSManagedValue_toUrl".}
-proc fcQJSManagedValue_toQObject(self: pointer, ): pointer {.importc: "QJSManagedValue_toQObject".}
-proc fcQJSManagedValue_toQMetaObject(self: pointer, ): pointer {.importc: "QJSManagedValue_toQMetaObject".}
-proc fcQJSManagedValue_toDateTime(self: pointer, ): pointer {.importc: "QJSManagedValue_toDateTime".}
+proc fcQJSManagedValue_typeX(self: pointer): cint {.importc: "QJSManagedValue_type".}
+proc fcQJSManagedValue_isUndefined(self: pointer): bool {.importc: "QJSManagedValue_isUndefined".}
+proc fcQJSManagedValue_isBoolean(self: pointer): bool {.importc: "QJSManagedValue_isBoolean".}
+proc fcQJSManagedValue_isNumber(self: pointer): bool {.importc: "QJSManagedValue_isNumber".}
+proc fcQJSManagedValue_isString(self: pointer): bool {.importc: "QJSManagedValue_isString".}
+proc fcQJSManagedValue_isObject(self: pointer): bool {.importc: "QJSManagedValue_isObject".}
+proc fcQJSManagedValue_isSymbol(self: pointer): bool {.importc: "QJSManagedValue_isSymbol".}
+proc fcQJSManagedValue_isFunction(self: pointer): bool {.importc: "QJSManagedValue_isFunction".}
+proc fcQJSManagedValue_isInteger(self: pointer): bool {.importc: "QJSManagedValue_isInteger".}
+proc fcQJSManagedValue_isNull(self: pointer): bool {.importc: "QJSManagedValue_isNull".}
+proc fcQJSManagedValue_isRegularExpression(self: pointer): bool {.importc: "QJSManagedValue_isRegularExpression".}
+proc fcQJSManagedValue_isArray(self: pointer): bool {.importc: "QJSManagedValue_isArray".}
+proc fcQJSManagedValue_isUrl(self: pointer): bool {.importc: "QJSManagedValue_isUrl".}
+proc fcQJSManagedValue_isVariant(self: pointer): bool {.importc: "QJSManagedValue_isVariant".}
+proc fcQJSManagedValue_isQObject(self: pointer): bool {.importc: "QJSManagedValue_isQObject".}
+proc fcQJSManagedValue_isQMetaObject(self: pointer): bool {.importc: "QJSManagedValue_isQMetaObject".}
+proc fcQJSManagedValue_isDate(self: pointer): bool {.importc: "QJSManagedValue_isDate".}
+proc fcQJSManagedValue_isError(self: pointer): bool {.importc: "QJSManagedValue_isError".}
+proc fcQJSManagedValue_isJsMetaType(self: pointer): bool {.importc: "QJSManagedValue_isJsMetaType".}
+proc fcQJSManagedValue_toString(self: pointer): struct_miqt_string {.importc: "QJSManagedValue_toString".}
+proc fcQJSManagedValue_toNumber(self: pointer): float64 {.importc: "QJSManagedValue_toNumber".}
+proc fcQJSManagedValue_toBoolean(self: pointer): bool {.importc: "QJSManagedValue_toBoolean".}
+proc fcQJSManagedValue_toPrimitive(self: pointer): pointer {.importc: "QJSManagedValue_toPrimitive".}
+proc fcQJSManagedValue_toJSValue(self: pointer): pointer {.importc: "QJSManagedValue_toJSValue".}
+proc fcQJSManagedValue_toVariant(self: pointer): pointer {.importc: "QJSManagedValue_toVariant".}
+proc fcQJSManagedValue_toInteger(self: pointer): cint {.importc: "QJSManagedValue_toInteger".}
+proc fcQJSManagedValue_toRegularExpression(self: pointer): pointer {.importc: "QJSManagedValue_toRegularExpression".}
+proc fcQJSManagedValue_toUrl(self: pointer): pointer {.importc: "QJSManagedValue_toUrl".}
+proc fcQJSManagedValue_toQObject(self: pointer): pointer {.importc: "QJSManagedValue_toQObject".}
+proc fcQJSManagedValue_toQMetaObject(self: pointer): pointer {.importc: "QJSManagedValue_toQMetaObject".}
+proc fcQJSManagedValue_toDateTime(self: pointer): pointer {.importc: "QJSManagedValue_toDateTime".}
 proc fcQJSManagedValue_hasProperty(self: pointer, name: struct_miqt_string): bool {.importc: "QJSManagedValue_hasProperty".}
 proc fcQJSManagedValue_hasOwnProperty(self: pointer, name: struct_miqt_string): bool {.importc: "QJSManagedValue_hasOwnProperty".}
 proc fcQJSManagedValue_property(self: pointer, name: struct_miqt_string): pointer {.importc: "QJSManagedValue_property".}
@@ -113,12 +113,12 @@ proc fcQJSManagedValue_hasOwnPropertyWithArrayIndex(self: pointer, arrayIndex: c
 proc fcQJSManagedValue_propertyWithArrayIndex(self: pointer, arrayIndex: cuint): pointer {.importc: "QJSManagedValue_propertyWithArrayIndex".}
 proc fcQJSManagedValue_setProperty2(self: pointer, arrayIndex: cuint, value: pointer): void {.importc: "QJSManagedValue_setProperty2".}
 proc fcQJSManagedValue_deletePropertyWithArrayIndex(self: pointer, arrayIndex: cuint): bool {.importc: "QJSManagedValue_deletePropertyWithArrayIndex".}
-proc fcQJSManagedValue_call(self: pointer, ): pointer {.importc: "QJSManagedValue_call".}
+proc fcQJSManagedValue_call(self: pointer): pointer {.importc: "QJSManagedValue_call".}
 proc fcQJSManagedValue_callWithInstance(self: pointer, instance: pointer): pointer {.importc: "QJSManagedValue_callWithInstance".}
-proc fcQJSManagedValue_callAsConstructor(self: pointer, ): pointer {.importc: "QJSManagedValue_callAsConstructor".}
-proc fcQJSManagedValue_jsMetaType(self: pointer, ): pointer {.importc: "QJSManagedValue_jsMetaType".}
-proc fcQJSManagedValue_jsMetaMembers(self: pointer, ): struct_miqt_array {.importc: "QJSManagedValue_jsMetaMembers".}
-proc fcQJSManagedValue_jsMetaInstantiate(self: pointer, ): pointer {.importc: "QJSManagedValue_jsMetaInstantiate".}
+proc fcQJSManagedValue_callAsConstructor(self: pointer): pointer {.importc: "QJSManagedValue_callAsConstructor".}
+proc fcQJSManagedValue_jsMetaType(self: pointer): pointer {.importc: "QJSManagedValue_jsMetaType".}
+proc fcQJSManagedValue_jsMetaMembers(self: pointer): struct_miqt_array {.importc: "QJSManagedValue_jsMetaMembers".}
+proc fcQJSManagedValue_jsMetaInstantiate(self: pointer): pointer {.importc: "QJSManagedValue_jsMetaInstantiate".}
 proc fcQJSManagedValue_call1(self: pointer, arguments: struct_miqt_array): pointer {.importc: "QJSManagedValue_call1".}
 proc fcQJSManagedValue_callWithInstance2(self: pointer, instance: pointer, arguments: struct_miqt_array): pointer {.importc: "QJSManagedValue_callWithInstance2".}
 proc fcQJSManagedValue_callAsConstructor1(self: pointer, arguments: struct_miqt_array): pointer {.importc: "QJSManagedValue_callAsConstructor1".}
@@ -135,109 +135,109 @@ proc equals*(self: gen_qjsmanagedvalue_types.QJSManagedValue, other: gen_qjsmana
 proc strictlyEquals*(self: gen_qjsmanagedvalue_types.QJSManagedValue, other: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_strictlyEquals(self.h, other.h)
 
-proc engine*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsengine_types.QJSEngine =
+proc engine*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsengine_types.QJSEngine =
   gen_qjsengine_types.QJSEngine(h: fcQJSManagedValue_engine(self.h), owned: false)
 
-proc prototype*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsmanagedvalue_types.QJSManagedValue =
+proc prototype*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsmanagedvalue_types.QJSManagedValue =
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_prototype(self.h), owned: true)
 
 proc setPrototype*(self: gen_qjsmanagedvalue_types.QJSManagedValue, prototype: gen_qjsmanagedvalue_types.QJSManagedValue): void =
   fcQJSManagedValue_setPrototype(self.h, prototype.h)
 
-proc typeX*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): cint =
+proc typeX*(self: gen_qjsmanagedvalue_types.QJSManagedValue): cint =
   cint(fcQJSManagedValue_typeX(self.h))
 
-proc isUndefined*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isUndefined*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isUndefined(self.h)
 
-proc isBoolean*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isBoolean*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isBoolean(self.h)
 
-proc isNumber*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isNumber*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isNumber(self.h)
 
-proc isString*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isString*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isString(self.h)
 
-proc isObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isObject(self.h)
 
-proc isSymbol*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isSymbol*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isSymbol(self.h)
 
-proc isFunction*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isFunction*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isFunction(self.h)
 
-proc isInteger*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isInteger*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isInteger(self.h)
 
-proc isNull*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isNull*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isNull(self.h)
 
-proc isRegularExpression*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isRegularExpression*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isRegularExpression(self.h)
 
-proc isArray*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isArray*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isArray(self.h)
 
-proc isUrl*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isUrl*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isUrl(self.h)
 
-proc isVariant*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isVariant*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isVariant(self.h)
 
-proc isQObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isQObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isQObject(self.h)
 
-proc isQMetaObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isQMetaObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isQMetaObject(self.h)
 
-proc isDate*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isDate*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isDate(self.h)
 
-proc isError*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isError*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isError(self.h)
 
-proc isJsMetaType*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc isJsMetaType*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_isJsMetaType(self.h)
 
-proc toString*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): string =
+proc toString*(self: gen_qjsmanagedvalue_types.QJSManagedValue): string =
   let v_ms = fcQJSManagedValue_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc toNumber*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): float64 =
+proc toNumber*(self: gen_qjsmanagedvalue_types.QJSManagedValue): float64 =
   fcQJSManagedValue_toNumber(self.h)
 
-proc toBoolean*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): bool =
+proc toBoolean*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_toBoolean(self.h)
 
-proc toPrimitive*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+proc toPrimitive*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSManagedValue_toPrimitive(self.h), owned: true)
 
-proc toJSValue*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsvalue_types.QJSValue =
+proc toJSValue*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_toJSValue(self.h), owned: true)
 
-proc toVariant*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qvariant_types.QVariant =
+proc toVariant*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQJSManagedValue_toVariant(self.h), owned: true)
 
-proc toInteger*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): cint =
+proc toInteger*(self: gen_qjsmanagedvalue_types.QJSManagedValue): cint =
   fcQJSManagedValue_toInteger(self.h)
 
-proc toRegularExpression*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qregularexpression_types.QRegularExpression =
+proc toRegularExpression*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qregularexpression_types.QRegularExpression =
   gen_qregularexpression_types.QRegularExpression(h: fcQJSManagedValue_toRegularExpression(self.h), owned: true)
 
-proc toUrl*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qurl_types.QUrl =
+proc toUrl*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQJSManagedValue_toUrl(self.h), owned: true)
 
-proc toQObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qobject_types.QObject =
+proc toQObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQJSManagedValue_toQObject(self.h), owned: false)
 
-proc toQMetaObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qobjectdefs_types.QMetaObject =
+proc toQMetaObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQJSManagedValue_toQMetaObject(self.h), owned: false)
 
-proc toDateTime*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qdatetime_types.QDateTime =
+proc toDateTime*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQJSManagedValue_toDateTime(self.h), owned: true)
 
 proc hasProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string): bool =
@@ -270,19 +270,19 @@ proc setProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: c
 proc deleteProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: cuint): bool =
   fcQJSManagedValue_deletePropertyWithArrayIndex(self.h, arrayIndex)
 
-proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsvalue_types.QJSValue =
+proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_call(self.h), owned: true)
 
 proc callWithInstance*(self: gen_qjsmanagedvalue_types.QJSManagedValue, instance: gen_qjsvalue_types.QJSValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callWithInstance(self.h, instance.h), owned: true)
 
-proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsvalue_types.QJSValue =
+proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callAsConstructor(self.h), owned: true)
 
-proc jsMetaType*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsmanagedvalue_types.QJSManagedValue =
+proc jsMetaType*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsmanagedvalue_types.QJSManagedValue =
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_jsMetaType(self.h), owned: true)
 
-proc jsMetaMembers*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): seq[string] =
+proc jsMetaMembers*(self: gen_qjsmanagedvalue_types.QJSManagedValue): seq[string] =
   var v_ma = fcQJSManagedValue_jsMetaMembers(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -294,7 +294,7 @@ proc jsMetaMembers*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): seq[stri
   c_free(v_ma.data)
   vx_ret
 
-proc jsMetaInstantiate*(self: gen_qjsmanagedvalue_types.QJSManagedValue, ): gen_qjsmanagedvalue_types.QJSManagedValue =
+proc jsMetaInstantiate*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsmanagedvalue_types.QJSManagedValue =
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_jsMetaInstantiate(self.h), owned: true)
 
 proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =

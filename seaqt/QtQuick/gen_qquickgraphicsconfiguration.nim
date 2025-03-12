@@ -39,7 +39,7 @@ type cQQuickGraphicsConfiguration*{.exportc: "QQuickGraphicsConfiguration", inco
 
 proc fcQQuickGraphicsConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QQuickGraphicsConfiguration_operatorAssign".}
 proc fcQQuickGraphicsConfiguration_setDepthBufferFor2D(self: pointer, enable: bool): void {.importc: "QQuickGraphicsConfiguration_setDepthBufferFor2D".}
-proc fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self: pointer, ): bool {.importc: "QQuickGraphicsConfiguration_isDepthBufferEnabledFor2D".}
+proc fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self: pointer): bool {.importc: "QQuickGraphicsConfiguration_isDepthBufferEnabledFor2D".}
 proc fcQQuickGraphicsConfiguration_new(): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new".}
 proc fcQQuickGraphicsConfiguration_new2(other: pointer): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new2".}
 
@@ -49,7 +49,7 @@ proc operatorAssign*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsC
 proc setDepthBufferFor2D*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration, enable: bool): void =
   fcQQuickGraphicsConfiguration_setDepthBufferFor2D(self.h, enable)
 
-proc isDepthBufferEnabledFor2D*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration, ): bool =
+proc isDepthBufferEnabledFor2D*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): bool =
   fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self.h)
 
 proc create*(T: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration =

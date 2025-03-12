@@ -23,6 +23,7 @@ typedef struct QIPv6Address QIPv6Address;
 #endif
 
 unsigned char QIPv6Address_operatorSubscript(const QIPv6Address* self, int index);
+
 void QIPv6Address_delete(QIPv6Address* self);
 
 QHostAddress* QHostAddress_new();
@@ -32,6 +33,7 @@ QHostAddress* QHostAddress_new4(QIPv6Address* ip6Addr);
 QHostAddress* QHostAddress_new5(struct miqt_string address);
 QHostAddress* QHostAddress_new6(QHostAddress* copy);
 QHostAddress* QHostAddress_new7(int address);
+
 void QHostAddress_operatorAssign(QHostAddress* self, QHostAddress* other);
 void QHostAddress_operatorAssignWithAddress(QHostAddress* self, int address);
 void QHostAddress_swap(QHostAddress* self, QHostAddress* other);
@@ -65,6 +67,7 @@ bool QHostAddress_isBroadcast(const QHostAddress* self);
 struct miqt_map /* tuple of QHostAddress* and int */  QHostAddress_parseSubnet(struct miqt_string subnet);
 unsigned int QHostAddress_toIPv4Address1(const QHostAddress* self, bool* ok);
 bool QHostAddress_isEqual2(const QHostAddress* self, QHostAddress* address, int mode);
+
 const QMetaObject* QHostAddress_staticMetaObject();
 void QHostAddress_delete(QHostAddress* self);
 

@@ -37,18 +37,20 @@ export gen_qrunnable_types
 
 type cQRunnable*{.exportc: "QRunnable", incompleteStruct.} = object
 
-proc fcQRunnable_run(self: pointer, ): void {.importc: "QRunnable_run".}
-proc fcQRunnable_autoDelete(self: pointer, ): bool {.importc: "QRunnable_autoDelete".}
+proc fcQRunnable_run(self: pointer): void {.importc: "QRunnable_run".}
+proc fcQRunnable_autoDelete(self: pointer): bool {.importc: "QRunnable_autoDelete".}
 proc fcQRunnable_setAutoDelete(self: pointer, autoDelete: bool): void {.importc: "QRunnable_setAutoDelete".}
+proc fcQRunnable_vtbl(self: pointer): pointer {.importc: "QRunnable_vtbl".}
+proc fcQRunnable_vdata(self: pointer): pointer {.importc: "QRunnable_vdata".}
 type cQRunnableVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQRunnableVTable, self: ptr cQRunnable) {.cdecl, raises:[], gcsafe.}
-  run*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-proc fcQRunnable_new(vtbl: pointer, ): ptr cQRunnable {.importc: "QRunnable_new".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  run*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQRunnable_new(vtbl, vdata: pointer): ptr cQRunnable {.importc: "QRunnable_new".}
 
-proc run*(self: gen_qrunnable_types.QRunnable, ): void =
+proc run*(self: gen_qrunnable_types.QRunnable): void =
   fcQRunnable_run(self.h)
 
-proc autoDelete*(self: gen_qrunnable_types.QRunnable, ): bool =
+proc autoDelete*(self: gen_qrunnable_types.QRunnable): bool =
   fcQRunnable_autoDelete(self.h)
 
 proc setAutoDelete*(self: gen_qrunnable_types.QRunnable, autoDelete: bool): void =
@@ -58,39 +60,40 @@ type QRunnablerunProc* = proc(self: QRunnable): void {.raises: [], gcsafe.}
 type QRunnableVTable* {.inheritable, pure.} = object
   vtbl: cQRunnableVTable
   run*: QRunnablerunProc
-proc miqt_exec_callback_cQRunnable_run(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRunnableVTable](vtbl)
+proc cQRunnable_vtable_callback_run(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRunnableVTable](fcQRunnable_vdata(self))
   let self = QRunnable(h: self)
   vtbl[].run(self)
 
 type VirtualQRunnable* {.inheritable.} = ref object of QRunnable
   vtbl*: cQRunnableVTable
-method run*(self: VirtualQRunnable, ): void {.base.} =
+method run*(self: VirtualQRunnable): void {.base.} =
   raiseAssert("missing implementation of QRunnable_virtualbase_run")
-proc miqt_exec_method_cQRunnable_run(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRunnable](cast[uint](vtbl) - uint(offsetOf(VirtualQRunnable, vtbl)))
-  vtbl.run()
+proc cQRunnable_method_callback_run(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRunnable](fcQRunnable_vdata(self))
+  inst.run()
 
 proc create*(T: type gen_qrunnable_types.QRunnable,
     vtbl: ref QRunnableVTable = nil): gen_qrunnable_types.QRunnable =
   let vtbl = if vtbl == nil: new QRunnableVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRunnableVTable, _: ptr cQRunnable) {.cdecl.} =
-    let vtbl = cast[ref QRunnableVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRunnableVTable](fcQRunnable_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].run):
-    vtbl[].vtbl.run = miqt_exec_callback_cQRunnable_run
-  gen_qrunnable_types.QRunnable(h: fcQRunnable_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.run = cQRunnable_vtable_callback_run
+  gen_qrunnable_types.QRunnable(h: fcQRunnable_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQRunnable_mvtbl = cQRunnableVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQRunnable()[])](self.fcQRunnable_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  run: cQRunnable_method_callback_run,
+)
 proc create*(T: type gen_qrunnable_types.QRunnable,
-    vtbl: VirtualQRunnable) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRunnableVTable, _: ptr cQRunnable) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRunnable()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRunnable, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.run = miqt_exec_method_cQRunnable_run
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRunnable_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQRunnable) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRunnable_new(addr(cQRunnable_mvtbl), addr(inst[]))
+  inst[].owned = true
 

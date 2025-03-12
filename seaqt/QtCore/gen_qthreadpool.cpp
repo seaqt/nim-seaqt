@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qthreadpool.h>
 #include "gen_qthreadpool.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQThreadPool final : public QThreadPool {
-	struct QThreadPool_VTable* vtbl;
+	const QThreadPool_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QThreadPool_VTable* QThreadPool_vtbl(const VirtualQThreadPool* self);
+	friend void* QThreadPool_vdata(const VirtualQThreadPool* self);
+	friend void QThreadPool_setVdata(VirtualQThreadPool* self, void* vdata);
 
-	VirtualQThreadPool(struct QThreadPool_VTable* vtbl): QThreadPool(), vtbl(vtbl) {};
-	VirtualQThreadPool(struct QThreadPool_VTable* vtbl, QObject* parent): QThreadPool(parent), vtbl(vtbl) {};
+	VirtualQThreadPool(const QThreadPool_VTable* vtbl, void* vdata): QThreadPool(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQThreadPool(const QThreadPool_VTable* vtbl, void* vdata, QObject* parent): QThreadPool(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQThreadPool() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQThreadPool() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QThreadPool::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QThreadPool_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QThreadPool_virtualbase_metaObject(const VirtualQThreadPool* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QThreadPool::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QThreadPool_virtualbase_metacast(void* self, const char* param1);
+	friend void* QThreadPool_virtualbase_metacast(VirtualQThreadPool* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QThreadPool::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QThreadPool_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QThreadPool_virtualbase_metacall(VirtualQThreadPool* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QThreadPool::event(event);
@@ -85,14 +76,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QThreadPool_virtualbase_event(void* self, QEvent* event);
+	friend bool QThreadPool_virtualbase_event(VirtualQThreadPool* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QThreadPool::eventFilter(watched, event);
@@ -101,14 +91,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QThreadPool_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QThreadPool_virtualbase_eventFilter(VirtualQThreadPool* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QThreadPool::timerEvent(event);
@@ -117,13 +106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QThreadPool_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QThreadPool_virtualbase_timerEvent(VirtualQThreadPool* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QThreadPool::childEvent(event);
@@ -132,13 +120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QThreadPool_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QThreadPool_virtualbase_childEvent(VirtualQThreadPool* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QThreadPool::customEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QThreadPool_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QThreadPool_virtualbase_customEvent(VirtualQThreadPool* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QThreadPool::connectNotify(signal);
@@ -164,13 +150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QThreadPool_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QThreadPool_virtualbase_connectNotify(VirtualQThreadPool* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QThreadPool::disconnectNotify(signal);
@@ -181,25 +166,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QThreadPool_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QThreadPool_virtualbase_disconnectNotify(VirtualQThreadPool* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QThreadPool_protectedbase_sender(const void* self);
-	friend int QThreadPool_protectedbase_senderSignalIndex(const void* self);
-	friend int QThreadPool_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QThreadPool_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QThreadPool_protectedbase_sender(const VirtualQThreadPool* self);
+	friend int QThreadPool_protectedbase_senderSignalIndex(const VirtualQThreadPool* self);
+	friend int QThreadPool_protectedbase_receivers(const VirtualQThreadPool* self, const char* signal);
+	friend bool QThreadPool_protectedbase_isSignalConnected(const VirtualQThreadPool* self, QMetaMethod* signal);
 };
 
-QThreadPool* QThreadPool_new(struct QThreadPool_VTable* vtbl) {
-	return new VirtualQThreadPool(vtbl);
+VirtualQThreadPool* QThreadPool_new(const QThreadPool_VTable* vtbl, void* vdata) {
+	return new VirtualQThreadPool(vtbl, vdata);
 }
 
-QThreadPool* QThreadPool_new2(struct QThreadPool_VTable* vtbl, QObject* parent) {
-	return new VirtualQThreadPool(vtbl, parent);
+VirtualQThreadPool* QThreadPool_new2(const QThreadPool_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQThreadPool(vtbl, vdata, parent);
 }
 
 void QThreadPool_virtbase(QThreadPool* src, QObject** outptr_QObject) {
@@ -337,93 +322,76 @@ bool QThreadPool_waitForDone1(QThreadPool* self, int msecs) {
 	return self->waitForDone(static_cast<int>(msecs));
 }
 
-QMetaObject* QThreadPool_virtualbase_metaObject(const void* self) {
+QMetaObject* QThreadPool_virtualbase_metaObject(const VirtualQThreadPool* self) {
 
-	return (QMetaObject*) ( (const VirtualQThreadPool*)(self) )->QThreadPool::metaObject();
-
+	return (QMetaObject*) self->QThreadPool::metaObject();
 }
 
-void* QThreadPool_virtualbase_metacast(void* self, const char* param1) {
+void* QThreadPool_virtualbase_metacast(VirtualQThreadPool* self, const char* param1) {
 
-	return ( (VirtualQThreadPool*)(self) )->QThreadPool::qt_metacast(param1);
-
+	return self->QThreadPool::qt_metacast(param1);
 }
 
-int QThreadPool_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QThreadPool_virtualbase_metacall(VirtualQThreadPool* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQThreadPool*)(self) )->QThreadPool::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QThreadPool::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QThreadPool_virtualbase_event(void* self, QEvent* event) {
+bool QThreadPool_virtualbase_event(VirtualQThreadPool* self, QEvent* event) {
 
-	return ( (VirtualQThreadPool*)(self) )->QThreadPool::event(event);
-
+	return self->QThreadPool::event(event);
 }
 
-bool QThreadPool_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QThreadPool_virtualbase_eventFilter(VirtualQThreadPool* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQThreadPool*)(self) )->QThreadPool::eventFilter(watched, event);
-
+	return self->QThreadPool::eventFilter(watched, event);
 }
 
-void QThreadPool_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QThreadPool_virtualbase_timerEvent(VirtualQThreadPool* self, QTimerEvent* event) {
 
-	( (VirtualQThreadPool*)(self) )->QThreadPool::timerEvent(event);
-
+	self->QThreadPool::timerEvent(event);
 }
 
-void QThreadPool_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QThreadPool_virtualbase_childEvent(VirtualQThreadPool* self, QChildEvent* event) {
 
-	( (VirtualQThreadPool*)(self) )->QThreadPool::childEvent(event);
-
+	self->QThreadPool::childEvent(event);
 }
 
-void QThreadPool_virtualbase_customEvent(void* self, QEvent* event) {
+void QThreadPool_virtualbase_customEvent(VirtualQThreadPool* self, QEvent* event) {
 
-	( (VirtualQThreadPool*)(self) )->QThreadPool::customEvent(event);
-
+	self->QThreadPool::customEvent(event);
 }
 
-void QThreadPool_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QThreadPool_virtualbase_connectNotify(VirtualQThreadPool* self, QMetaMethod* signal) {
 
-	( (VirtualQThreadPool*)(self) )->QThreadPool::connectNotify(*signal);
-
+	self->QThreadPool::connectNotify(*signal);
 }
 
-void QThreadPool_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QThreadPool_virtualbase_disconnectNotify(VirtualQThreadPool* self, QMetaMethod* signal) {
 
-	( (VirtualQThreadPool*)(self) )->QThreadPool::disconnectNotify(*signal);
-
+	self->QThreadPool::disconnectNotify(*signal);
 }
 
 const QMetaObject* QThreadPool_staticMetaObject() { return &QThreadPool::staticMetaObject; }
-QObject* QThreadPool_protectedbase_sender(const void* self) {
-	VirtualQThreadPool* self_cast = static_cast<VirtualQThreadPool*>( (QThreadPool*)(self) );
-	
-	return self_cast->sender();
 
+const QThreadPool_VTable* QThreadPool_vtbl(const VirtualQThreadPool* self) { return self->vtbl; }
+void* QThreadPool_vdata(const VirtualQThreadPool* self) { return self->vdata; }
+void QThreadPool_setVdata(VirtualQThreadPool* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QThreadPool_protectedbase_sender(const VirtualQThreadPool* self) {
+	return self->sender();
 }
 
-int QThreadPool_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQThreadPool* self_cast = static_cast<VirtualQThreadPool*>( (QThreadPool*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QThreadPool_protectedbase_senderSignalIndex(const VirtualQThreadPool* self) {
+	return self->senderSignalIndex();
 }
 
-int QThreadPool_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQThreadPool* self_cast = static_cast<VirtualQThreadPool*>( (QThreadPool*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QThreadPool_protectedbase_receivers(const VirtualQThreadPool* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QThreadPool_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQThreadPool* self_cast = static_cast<VirtualQThreadPool*>( (QThreadPool*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QThreadPool_protectedbase_isSignalConnected(const VirtualQThreadPool* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QThreadPool_delete(QThreadPool* self) {

@@ -9,15 +9,6 @@
 #include <QVariant>
 #include <qjsonvalue.h>
 #include "gen_qjsonvalue.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJsonValue* QJsonValue_new() {
 	return new QJsonValue();
 }

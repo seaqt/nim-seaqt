@@ -2,15 +2,6 @@
 #include <QWebEngineFileSystemAccessRequest>
 #include <qwebenginefilesystemaccessrequest.h>
 #include "gen_qwebenginefilesystemaccessrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineFileSystemAccessRequest* QWebEngineFileSystemAccessRequest_new(QWebEngineFileSystemAccessRequest* other) {
 	return new QWebEngineFileSystemAccessRequest(*other);
 }
@@ -50,6 +41,7 @@ int QWebEngineFileSystemAccessRequest_accessFlags(const QWebEngineFileSystemAcce
 }
 
 const QMetaObject* QWebEngineFileSystemAccessRequest_staticMetaObject() { return &QWebEngineFileSystemAccessRequest::staticMetaObject; }
+
 void QWebEngineFileSystemAccessRequest_delete(QWebEngineFileSystemAccessRequest* self) {
 	delete self;
 }

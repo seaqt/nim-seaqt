@@ -15,15 +15,6 @@
 #include <QWindow>
 #include <qaccessiblewidget.h>
 #include "gen_qaccessiblewidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAccessibleWidget* QAccessibleWidget_new(QWidget* o) {
 	return new QAccessibleWidget(o);
 }

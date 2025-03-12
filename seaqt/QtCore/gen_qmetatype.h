@@ -33,6 +33,7 @@ typedef struct QPartialOrdering QPartialOrdering;
 QMetaType* QMetaType_new(int type);
 QMetaType* QMetaType_new2();
 QMetaType* QMetaType_new3(QMetaType* param1);
+
 void QMetaType_registerNormalizedTypedef(struct miqt_string normalizedTypeName, QMetaType* type);
 int QMetaType_type(const char* typeName);
 int QMetaType_typeWithTypeName(struct miqt_string typeName);
@@ -87,6 +88,7 @@ void* QMetaType_create22(int type, const void* copy);
 int QMetaType_id1(const QMetaType* self, int param1);
 void* QMetaType_create1(const QMetaType* self, const void* copy);
 void* QMetaType_construct2(const QMetaType* self, void* where, const void* copy);
+
 void QMetaType_delete(QMetaType* self);
 
 #ifdef __cplusplus

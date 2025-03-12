@@ -43,14 +43,14 @@ type cQAudioBuffer*{.exportc: "QAudioBuffer", incompleteStruct.} = object
 
 proc fcQAudioBuffer_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioBuffer_operatorAssign".}
 proc fcQAudioBuffer_swap(self: pointer, other: pointer): void {.importc: "QAudioBuffer_swap".}
-proc fcQAudioBuffer_isValid(self: pointer, ): bool {.importc: "QAudioBuffer_isValid".}
-proc fcQAudioBuffer_detach(self: pointer, ): void {.importc: "QAudioBuffer_detach".}
-proc fcQAudioBuffer_format(self: pointer, ): pointer {.importc: "QAudioBuffer_format".}
-proc fcQAudioBuffer_frameCount(self: pointer, ): int64 {.importc: "QAudioBuffer_frameCount".}
-proc fcQAudioBuffer_sampleCount(self: pointer, ): int64 {.importc: "QAudioBuffer_sampleCount".}
-proc fcQAudioBuffer_byteCount(self: pointer, ): int64 {.importc: "QAudioBuffer_byteCount".}
-proc fcQAudioBuffer_duration(self: pointer, ): clonglong {.importc: "QAudioBuffer_duration".}
-proc fcQAudioBuffer_startTime(self: pointer, ): clonglong {.importc: "QAudioBuffer_startTime".}
+proc fcQAudioBuffer_isValid(self: pointer): bool {.importc: "QAudioBuffer_isValid".}
+proc fcQAudioBuffer_detach(self: pointer): void {.importc: "QAudioBuffer_detach".}
+proc fcQAudioBuffer_format(self: pointer): pointer {.importc: "QAudioBuffer_format".}
+proc fcQAudioBuffer_frameCount(self: pointer): int64 {.importc: "QAudioBuffer_frameCount".}
+proc fcQAudioBuffer_sampleCount(self: pointer): int64 {.importc: "QAudioBuffer_sampleCount".}
+proc fcQAudioBuffer_byteCount(self: pointer): int64 {.importc: "QAudioBuffer_byteCount".}
+proc fcQAudioBuffer_duration(self: pointer): clonglong {.importc: "QAudioBuffer_duration".}
+proc fcQAudioBuffer_startTime(self: pointer): clonglong {.importc: "QAudioBuffer_startTime".}
 proc fcQAudioBuffer_new(): ptr cQAudioBuffer {.importc: "QAudioBuffer_new".}
 proc fcQAudioBuffer_new2(other: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new2".}
 proc fcQAudioBuffer_new3(data: struct_miqt_string, format: pointer): ptr cQAudioBuffer {.importc: "QAudioBuffer_new3".}
@@ -64,28 +64,28 @@ proc operatorAssign*(self: gen_qaudiobuffer_types.QAudioBuffer, other: gen_qaudi
 proc swap*(self: gen_qaudiobuffer_types.QAudioBuffer, other: gen_qaudiobuffer_types.QAudioBuffer): void =
   fcQAudioBuffer_swap(self.h, other.h)
 
-proc isValid*(self: gen_qaudiobuffer_types.QAudioBuffer, ): bool =
+proc isValid*(self: gen_qaudiobuffer_types.QAudioBuffer): bool =
   fcQAudioBuffer_isValid(self.h)
 
-proc detach*(self: gen_qaudiobuffer_types.QAudioBuffer, ): void =
+proc detach*(self: gen_qaudiobuffer_types.QAudioBuffer): void =
   fcQAudioBuffer_detach(self.h)
 
-proc format*(self: gen_qaudiobuffer_types.QAudioBuffer, ): gen_qaudioformat_types.QAudioFormat =
+proc format*(self: gen_qaudiobuffer_types.QAudioBuffer): gen_qaudioformat_types.QAudioFormat =
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioBuffer_format(self.h), owned: true)
 
-proc frameCount*(self: gen_qaudiobuffer_types.QAudioBuffer, ): int64 =
+proc frameCount*(self: gen_qaudiobuffer_types.QAudioBuffer): int64 =
   fcQAudioBuffer_frameCount(self.h)
 
-proc sampleCount*(self: gen_qaudiobuffer_types.QAudioBuffer, ): int64 =
+proc sampleCount*(self: gen_qaudiobuffer_types.QAudioBuffer): int64 =
   fcQAudioBuffer_sampleCount(self.h)
 
-proc byteCount*(self: gen_qaudiobuffer_types.QAudioBuffer, ): int64 =
+proc byteCount*(self: gen_qaudiobuffer_types.QAudioBuffer): int64 =
   fcQAudioBuffer_byteCount(self.h)
 
-proc duration*(self: gen_qaudiobuffer_types.QAudioBuffer, ): clonglong =
+proc duration*(self: gen_qaudiobuffer_types.QAudioBuffer): clonglong =
   fcQAudioBuffer_duration(self.h)
 
-proc startTime*(self: gen_qaudiobuffer_types.QAudioBuffer, ): clonglong =
+proc startTime*(self: gen_qaudiobuffer_types.QAudioBuffer): clonglong =
   fcQAudioBuffer_startTime(self.h)
 
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer): gen_qaudiobuffer_types.QAudioBuffer =

@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qcborcommon.h>
 #include "gen_qcborcommon.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 int QCborError_ToQCborError__Code(const QCborError* self) {
 	QCborError::Code _ret = self->operator QCborError::Code();
 	return static_cast<int>(_ret);
@@ -30,6 +21,7 @@ struct miqt_string QCborError_toString(const QCborError* self) {
 }
 
 const QMetaObject* QCborError_staticMetaObject() { return &QCborError::staticMetaObject; }
+
 void QCborError_delete(QCborError* self) {
 	delete self;
 }

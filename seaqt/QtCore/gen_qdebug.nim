@@ -57,18 +57,18 @@ type cQNoDebug*{.exportc: "QNoDebug", incompleteStruct.} = object
 
 proc fcQDebug_operatorAssign(self: pointer, other: pointer): void {.importc: "QDebug_operatorAssign".}
 proc fcQDebug_swap(self: pointer, other: pointer): void {.importc: "QDebug_swap".}
-proc fcQDebug_resetFormat(self: pointer, ): pointer {.importc: "QDebug_resetFormat".}
-proc fcQDebug_space(self: pointer, ): pointer {.importc: "QDebug_space".}
-proc fcQDebug_nospace(self: pointer, ): pointer {.importc: "QDebug_nospace".}
-proc fcQDebug_maybeSpace(self: pointer, ): pointer {.importc: "QDebug_maybeSpace".}
+proc fcQDebug_resetFormat(self: pointer): pointer {.importc: "QDebug_resetFormat".}
+proc fcQDebug_space(self: pointer): pointer {.importc: "QDebug_space".}
+proc fcQDebug_nospace(self: pointer): pointer {.importc: "QDebug_nospace".}
+proc fcQDebug_maybeSpace(self: pointer): pointer {.importc: "QDebug_maybeSpace".}
 proc fcQDebug_verbosity(self: pointer, verbosityLevel: cint): pointer {.importc: "QDebug_verbosity".}
-proc fcQDebug_verbosity2(self: pointer, ): cint {.importc: "QDebug_verbosity2".}
+proc fcQDebug_verbosity2(self: pointer): cint {.importc: "QDebug_verbosity2".}
 proc fcQDebug_setVerbosity(self: pointer, verbosityLevel: cint): void {.importc: "QDebug_setVerbosity".}
-proc fcQDebug_autoInsertSpaces(self: pointer, ): bool {.importc: "QDebug_autoInsertSpaces".}
+proc fcQDebug_autoInsertSpaces(self: pointer): bool {.importc: "QDebug_autoInsertSpaces".}
 proc fcQDebug_setAutoInsertSpaces(self: pointer, b: bool): void {.importc: "QDebug_setAutoInsertSpaces".}
-proc fcQDebug_quote(self: pointer, ): pointer {.importc: "QDebug_quote".}
-proc fcQDebug_noquote(self: pointer, ): pointer {.importc: "QDebug_noquote".}
-proc fcQDebug_maybeQuote(self: pointer, ): pointer {.importc: "QDebug_maybeQuote".}
+proc fcQDebug_quote(self: pointer): pointer {.importc: "QDebug_quote".}
+proc fcQDebug_noquote(self: pointer): pointer {.importc: "QDebug_noquote".}
+proc fcQDebug_maybeQuote(self: pointer): pointer {.importc: "QDebug_maybeQuote".}
 proc fcQDebug_operatorShiftLeft(self: pointer, t: pointer): pointer {.importc: "QDebug_operatorShiftLeft".}
 proc fcQDebug_operatorShiftLeftWithBool(self: pointer, t: bool): pointer {.importc: "QDebug_operatorShiftLeftWithBool".}
 proc fcQDebug_operatorShiftLeftWithChar(self: pointer, t: cchar): pointer {.importc: "QDebug_operatorShiftLeftWithChar".}
@@ -91,12 +91,12 @@ proc fcQDebug_maybeQuote1(self: pointer, c: cchar): pointer {.importc: "QDebug_m
 proc fcQDebug_new(device: pointer): ptr cQDebug {.importc: "QDebug_new".}
 proc fcQDebug_new2(o: pointer): ptr cQDebug {.importc: "QDebug_new2".}
 proc fcQDebugStateSaver_new(dbg: pointer): ptr cQDebugStateSaver {.importc: "QDebugStateSaver_new".}
-proc fcQNoDebug_space(self: pointer, ): pointer {.importc: "QNoDebug_space".}
-proc fcQNoDebug_nospace(self: pointer, ): pointer {.importc: "QNoDebug_nospace".}
-proc fcQNoDebug_maybeSpace(self: pointer, ): pointer {.importc: "QNoDebug_maybeSpace".}
-proc fcQNoDebug_quote(self: pointer, ): pointer {.importc: "QNoDebug_quote".}
-proc fcQNoDebug_noquote(self: pointer, ): pointer {.importc: "QNoDebug_noquote".}
-proc fcQNoDebug_maybeQuote(self: pointer, ): pointer {.importc: "QNoDebug_maybeQuote".}
+proc fcQNoDebug_space(self: pointer): pointer {.importc: "QNoDebug_space".}
+proc fcQNoDebug_nospace(self: pointer): pointer {.importc: "QNoDebug_nospace".}
+proc fcQNoDebug_maybeSpace(self: pointer): pointer {.importc: "QNoDebug_maybeSpace".}
+proc fcQNoDebug_quote(self: pointer): pointer {.importc: "QNoDebug_quote".}
+proc fcQNoDebug_noquote(self: pointer): pointer {.importc: "QNoDebug_noquote".}
+proc fcQNoDebug_maybeQuote(self: pointer): pointer {.importc: "QNoDebug_maybeQuote".}
 proc fcQNoDebug_verbosity(self: pointer, param1: cint): pointer {.importc: "QNoDebug_verbosity".}
 proc fcQNoDebug_maybeQuote1(self: pointer, param1: cchar): pointer {.importc: "QNoDebug_maybeQuote1".}
 
@@ -106,40 +106,40 @@ proc operatorAssign*(self: gen_qdebug_types.QDebug, other: gen_qdebug_types.QDeb
 proc swap*(self: gen_qdebug_types.QDebug, other: gen_qdebug_types.QDebug): void =
   fcQDebug_swap(self.h, other.h)
 
-proc resetFormat*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc resetFormat*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_resetFormat(self.h), owned: false)
 
-proc space*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc space*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_space(self.h), owned: false)
 
-proc nospace*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc nospace*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_nospace(self.h), owned: false)
 
-proc maybeSpace*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc maybeSpace*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_maybeSpace(self.h), owned: false)
 
 proc verbosity*(self: gen_qdebug_types.QDebug, verbosityLevel: cint): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_verbosity(self.h, verbosityLevel), owned: false)
 
-proc verbosity*(self: gen_qdebug_types.QDebug, ): cint =
+proc verbosity*(self: gen_qdebug_types.QDebug): cint =
   fcQDebug_verbosity2(self.h)
 
 proc setVerbosity*(self: gen_qdebug_types.QDebug, verbosityLevel: cint): void =
   fcQDebug_setVerbosity(self.h, verbosityLevel)
 
-proc autoInsertSpaces*(self: gen_qdebug_types.QDebug, ): bool =
+proc autoInsertSpaces*(self: gen_qdebug_types.QDebug): bool =
   fcQDebug_autoInsertSpaces(self.h)
 
 proc setAutoInsertSpaces*(self: gen_qdebug_types.QDebug, b: bool): void =
   fcQDebug_setAutoInsertSpaces(self.h, b)
 
-proc quote*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc quote*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_quote(self.h), owned: false)
 
-proc noquote*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc noquote*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_noquote(self.h), owned: false)
 
-proc maybeQuote*(self: gen_qdebug_types.QDebug, ): gen_qdebug_types.QDebug =
+proc maybeQuote*(self: gen_qdebug_types.QDebug): gen_qdebug_types.QDebug =
   gen_qdebug_types.QDebug(h: fcQDebug_maybeQuote(self.h), owned: false)
 
 proc operatorShiftLeft*(self: gen_qdebug_types.QDebug, t: gen_qchar_types.QChar): gen_qdebug_types.QDebug =
@@ -211,22 +211,22 @@ proc create*(T: type gen_qdebug_types.QDebugStateSaver,
     dbg: gen_qdebug_types.QDebug): gen_qdebug_types.QDebugStateSaver =
   gen_qdebug_types.QDebugStateSaver(h: fcQDebugStateSaver_new(dbg.h), owned: true)
 
-proc space*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc space*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_space(self.h), owned: false)
 
-proc nospace*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc nospace*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_nospace(self.h), owned: false)
 
-proc maybeSpace*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc maybeSpace*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_maybeSpace(self.h), owned: false)
 
-proc quote*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc quote*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_quote(self.h), owned: false)
 
-proc noquote*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc noquote*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_noquote(self.h), owned: false)
 
-proc maybeQuote*(self: gen_qdebug_types.QNoDebug, ): gen_qdebug_types.QNoDebug =
+proc maybeQuote*(self: gen_qdebug_types.QNoDebug): gen_qdebug_types.QNoDebug =
   gen_qdebug_types.QNoDebug(h: fcQNoDebug_maybeQuote(self.h), owned: false)
 
 proc verbosity*(self: gen_qdebug_types.QNoDebug, param1: cint): gen_qdebug_types.QNoDebug =

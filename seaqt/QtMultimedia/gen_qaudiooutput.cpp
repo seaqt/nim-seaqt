@@ -11,41 +11,34 @@
 #include <QTimerEvent>
 #include <qaudiooutput.h>
 #include "gen_qaudiooutput.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAudioOutput final : public QAudioOutput {
-	struct QAudioOutput_VTable* vtbl;
+	const QAudioOutput_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAudioOutput_VTable* QAudioOutput_vtbl(const VirtualQAudioOutput* self);
+	friend void* QAudioOutput_vdata(const VirtualQAudioOutput* self);
+	friend void QAudioOutput_setVdata(VirtualQAudioOutput* self, void* vdata);
 
-	VirtualQAudioOutput(struct QAudioOutput_VTable* vtbl): QAudioOutput(), vtbl(vtbl) {};
-	VirtualQAudioOutput(struct QAudioOutput_VTable* vtbl, const QAudioDevice& device): QAudioOutput(device), vtbl(vtbl) {};
-	VirtualQAudioOutput(struct QAudioOutput_VTable* vtbl, QObject* parent): QAudioOutput(parent), vtbl(vtbl) {};
-	VirtualQAudioOutput(struct QAudioOutput_VTable* vtbl, const QAudioDevice& device, QObject* parent): QAudioOutput(device, parent), vtbl(vtbl) {};
+	VirtualQAudioOutput(const QAudioOutput_VTable* vtbl, void* vdata): QAudioOutput(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAudioOutput(const QAudioOutput_VTable* vtbl, void* vdata, const QAudioDevice& device): QAudioOutput(device), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAudioOutput(const QAudioOutput_VTable* vtbl, void* vdata, QObject* parent): QAudioOutput(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAudioOutput(const QAudioOutput_VTable* vtbl, void* vdata, const QAudioDevice& device, QObject* parent): QAudioOutput(device, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAudioOutput() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAudioOutput() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAudioOutput::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAudioOutput_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAudioOutput_virtualbase_metaObject(const VirtualQAudioOutput* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAudioOutput::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAudioOutput_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAudioOutput_virtualbase_metacast(VirtualQAudioOutput* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAudioOutput::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAudioOutput_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAudioOutput_virtualbase_metacall(VirtualQAudioOutput* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAudioOutput::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioOutput_virtualbase_event(void* self, QEvent* event);
+	friend bool QAudioOutput_virtualbase_event(VirtualQAudioOutput* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAudioOutput::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioOutput_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAudioOutput_virtualbase_eventFilter(VirtualQAudioOutput* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAudioOutput::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAudioOutput_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAudioOutput_virtualbase_timerEvent(VirtualQAudioOutput* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAudioOutput::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAudioOutput_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAudioOutput_virtualbase_childEvent(VirtualQAudioOutput* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAudioOutput::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAudioOutput_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAudioOutput_virtualbase_customEvent(VirtualQAudioOutput* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAudioOutput::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioOutput_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioOutput_virtualbase_connectNotify(VirtualQAudioOutput* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAudioOutput::disconnectNotify(signal);
@@ -182,33 +167,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioOutput_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioOutput_virtualbase_disconnectNotify(VirtualQAudioOutput* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAudioOutput_protectedbase_sender(const void* self);
-	friend int QAudioOutput_protectedbase_senderSignalIndex(const void* self);
-	friend int QAudioOutput_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAudioOutput_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAudioOutput_protectedbase_sender(const VirtualQAudioOutput* self);
+	friend int QAudioOutput_protectedbase_senderSignalIndex(const VirtualQAudioOutput* self);
+	friend int QAudioOutput_protectedbase_receivers(const VirtualQAudioOutput* self, const char* signal);
+	friend bool QAudioOutput_protectedbase_isSignalConnected(const VirtualQAudioOutput* self, QMetaMethod* signal);
 };
 
-QAudioOutput* QAudioOutput_new(struct QAudioOutput_VTable* vtbl) {
-	return new VirtualQAudioOutput(vtbl);
+VirtualQAudioOutput* QAudioOutput_new(const QAudioOutput_VTable* vtbl, void* vdata) {
+	return new VirtualQAudioOutput(vtbl, vdata);
 }
 
-QAudioOutput* QAudioOutput_new2(struct QAudioOutput_VTable* vtbl, QAudioDevice* device) {
-	return new VirtualQAudioOutput(vtbl, *device);
+VirtualQAudioOutput* QAudioOutput_new2(const QAudioOutput_VTable* vtbl, void* vdata, QAudioDevice* device) {
+	return new VirtualQAudioOutput(vtbl, vdata, *device);
 }
 
-QAudioOutput* QAudioOutput_new3(struct QAudioOutput_VTable* vtbl, QObject* parent) {
-	return new VirtualQAudioOutput(vtbl, parent);
+VirtualQAudioOutput* QAudioOutput_new3(const QAudioOutput_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAudioOutput(vtbl, vdata, parent);
 }
 
-QAudioOutput* QAudioOutput_new4(struct QAudioOutput_VTable* vtbl, QAudioDevice* device, QObject* parent) {
-	return new VirtualQAudioOutput(vtbl, *device, parent);
+VirtualQAudioOutput* QAudioOutput_new4(const QAudioOutput_VTable* vtbl, void* vdata, QAudioDevice* device, QObject* parent) {
+	return new VirtualQAudioOutput(vtbl, vdata, *device, parent);
 }
 
 void QAudioOutput_virtbase(QAudioOutput* src, QObject** outptr_QObject) {
@@ -266,7 +251,7 @@ void QAudioOutput_deviceChanged(QAudioOutput* self) {
 	self->deviceChanged();
 }
 
-void QAudioOutput_connect_deviceChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAudioOutput_connect_deviceChanged(VirtualQAudioOutput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -281,7 +266,7 @@ void QAudioOutput_volumeChanged(QAudioOutput* self, float volume) {
 	self->volumeChanged(static_cast<float>(volume));
 }
 
-void QAudioOutput_connect_volumeChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t)) {
+void QAudioOutput_connect_volumeChanged(VirtualQAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, float);
@@ -297,7 +282,7 @@ void QAudioOutput_mutedChanged(QAudioOutput* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QAudioOutput_connect_mutedChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAudioOutput_connect_mutedChanged(VirtualQAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -331,93 +316,76 @@ struct miqt_string QAudioOutput_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QAudioOutput_virtualbase_metaObject(const void* self) {
+QMetaObject* QAudioOutput_virtualbase_metaObject(const VirtualQAudioOutput* self) {
 
-	return (QMetaObject*) ( (const VirtualQAudioOutput*)(self) )->QAudioOutput::metaObject();
-
+	return (QMetaObject*) self->QAudioOutput::metaObject();
 }
 
-void* QAudioOutput_virtualbase_metacast(void* self, const char* param1) {
+void* QAudioOutput_virtualbase_metacast(VirtualQAudioOutput* self, const char* param1) {
 
-	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::qt_metacast(param1);
-
+	return self->QAudioOutput::qt_metacast(param1);
 }
 
-int QAudioOutput_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAudioOutput_virtualbase_metacall(VirtualQAudioOutput* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAudioOutput::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAudioOutput_virtualbase_event(void* self, QEvent* event) {
+bool QAudioOutput_virtualbase_event(VirtualQAudioOutput* self, QEvent* event) {
 
-	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::event(event);
-
+	return self->QAudioOutput::event(event);
 }
 
-bool QAudioOutput_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAudioOutput_virtualbase_eventFilter(VirtualQAudioOutput* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::eventFilter(watched, event);
-
+	return self->QAudioOutput::eventFilter(watched, event);
 }
 
-void QAudioOutput_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAudioOutput_virtualbase_timerEvent(VirtualQAudioOutput* self, QTimerEvent* event) {
 
-	( (VirtualQAudioOutput*)(self) )->QAudioOutput::timerEvent(event);
-
+	self->QAudioOutput::timerEvent(event);
 }
 
-void QAudioOutput_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAudioOutput_virtualbase_childEvent(VirtualQAudioOutput* self, QChildEvent* event) {
 
-	( (VirtualQAudioOutput*)(self) )->QAudioOutput::childEvent(event);
-
+	self->QAudioOutput::childEvent(event);
 }
 
-void QAudioOutput_virtualbase_customEvent(void* self, QEvent* event) {
+void QAudioOutput_virtualbase_customEvent(VirtualQAudioOutput* self, QEvent* event) {
 
-	( (VirtualQAudioOutput*)(self) )->QAudioOutput::customEvent(event);
-
+	self->QAudioOutput::customEvent(event);
 }
 
-void QAudioOutput_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAudioOutput_virtualbase_connectNotify(VirtualQAudioOutput* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioOutput*)(self) )->QAudioOutput::connectNotify(*signal);
-
+	self->QAudioOutput::connectNotify(*signal);
 }
 
-void QAudioOutput_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAudioOutput_virtualbase_disconnectNotify(VirtualQAudioOutput* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioOutput*)(self) )->QAudioOutput::disconnectNotify(*signal);
-
+	self->QAudioOutput::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAudioOutput_staticMetaObject() { return &QAudioOutput::staticMetaObject; }
-QObject* QAudioOutput_protectedbase_sender(const void* self) {
-	VirtualQAudioOutput* self_cast = static_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
-	
-	return self_cast->sender();
 
+const QAudioOutput_VTable* QAudioOutput_vtbl(const VirtualQAudioOutput* self) { return self->vtbl; }
+void* QAudioOutput_vdata(const VirtualQAudioOutput* self) { return self->vdata; }
+void QAudioOutput_setVdata(VirtualQAudioOutput* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAudioOutput_protectedbase_sender(const VirtualQAudioOutput* self) {
+	return self->sender();
 }
 
-int QAudioOutput_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAudioOutput* self_cast = static_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAudioOutput_protectedbase_senderSignalIndex(const VirtualQAudioOutput* self) {
+	return self->senderSignalIndex();
 }
 
-int QAudioOutput_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAudioOutput* self_cast = static_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAudioOutput_protectedbase_receivers(const VirtualQAudioOutput* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAudioOutput_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAudioOutput* self_cast = static_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAudioOutput_protectedbase_isSignalConnected(const VirtualQAudioOutput* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAudioOutput_delete(QAudioOutput* self) {

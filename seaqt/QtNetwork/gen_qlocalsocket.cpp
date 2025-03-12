@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qlocalsocket.h>
 #include "gen_qlocalsocket.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQLocalSocket final : public QLocalSocket {
-	struct QLocalSocket_VTable* vtbl;
+	const QLocalSocket_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QLocalSocket_VTable* QLocalSocket_vtbl(const VirtualQLocalSocket* self);
+	friend void* QLocalSocket_vdata(const VirtualQLocalSocket* self);
+	friend void QLocalSocket_setVdata(VirtualQLocalSocket* self, void* vdata);
 
-	VirtualQLocalSocket(struct QLocalSocket_VTable* vtbl): QLocalSocket(), vtbl(vtbl) {};
-	VirtualQLocalSocket(struct QLocalSocket_VTable* vtbl, QObject* parent): QLocalSocket(parent), vtbl(vtbl) {};
+	VirtualQLocalSocket(const QLocalSocket_VTable* vtbl, void* vdata): QLocalSocket(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLocalSocket(const QLocalSocket_VTable* vtbl, void* vdata, QObject* parent): QLocalSocket(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQLocalSocket() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQLocalSocket() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QLocalSocket::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QLocalSocket_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QLocalSocket_virtualbase_metaObject(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QLocalSocket::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QLocalSocket_virtualbase_metacast(void* self, const char* param1);
+	friend void* QLocalSocket_virtualbase_metacast(VirtualQLocalSocket* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QLocalSocket::qt_metacall(param1, param2, param3);
@@ -70,70 +62,65 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLocalSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QLocalSocket_virtualbase_metacall(VirtualQLocalSocket* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
 		if (vtbl->isSequential == 0) {
 			return QLocalSocket::isSequential();
 		}
 
 
-		bool callback_return_value = vtbl->isSequential(vtbl, this);
+		bool callback_return_value = vtbl->isSequential(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_isSequential(const void* self);
+	friend bool QLocalSocket_virtualbase_isSequential(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
 		if (vtbl->bytesAvailable == 0) {
 			return QLocalSocket::bytesAvailable();
 		}
 
 
-		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
+		long long callback_return_value = vtbl->bytesAvailable(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_bytesAvailable(const void* self);
+	friend long long QLocalSocket_virtualbase_bytesAvailable(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
 		if (vtbl->bytesToWrite == 0) {
 			return QLocalSocket::bytesToWrite();
 		}
 
 
-		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
+		long long callback_return_value = vtbl->bytesToWrite(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_bytesToWrite(const void* self);
+	friend long long QLocalSocket_virtualbase_bytesToWrite(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
 		if (vtbl->canReadLine == 0) {
 			return QLocalSocket::canReadLine();
 		}
 
 
-		bool callback_return_value = vtbl->canReadLine(vtbl, this);
+		bool callback_return_value = vtbl->canReadLine(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_canReadLine(const void* self);
+	friend bool QLocalSocket_virtualbase_canReadLine(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODeviceBase::OpenMode openMode) override {
 		if (vtbl->open == 0) {
 			return QLocalSocket::open(openMode);
@@ -142,14 +129,13 @@ public:
 		QIODeviceBase::OpenMode openMode_ret = openMode;
 		int sigval1 = static_cast<int>(openMode_ret);
 
-		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->open(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_open(void* self, int openMode);
+	friend bool QLocalSocket_virtualbase_open(VirtualQLocalSocket* self, int openMode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void close() override {
 		if (vtbl->close == 0) {
 			QLocalSocket::close();
@@ -157,13 +143,12 @@ public:
 		}
 
 
-		vtbl->close(vtbl, this);
+		vtbl->close(this);
 
 	}
 
-	friend void QLocalSocket_virtualbase_close(void* self);
+	friend void QLocalSocket_virtualbase_close(VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
 		if (vtbl->waitForBytesWritten == 0) {
 			return QLocalSocket::waitForBytesWritten(msecs);
@@ -171,14 +156,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_waitForBytesWritten(void* self, int msecs);
+	friend bool QLocalSocket_virtualbase_waitForBytesWritten(VirtualQLocalSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
 		if (vtbl->waitForReadyRead == 0) {
 			return QLocalSocket::waitForReadyRead(msecs);
@@ -186,14 +170,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_waitForReadyRead(void* self, int msecs);
+	friend bool QLocalSocket_virtualbase_waitForReadyRead(VirtualQLocalSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* param1, qint64 param2) override {
 		if (vtbl->readData == 0) {
 			return QLocalSocket::readData(param1, param2);
@@ -203,14 +186,13 @@ public:
 		qint64 param2_ret = param2;
 		long long sigval2 = static_cast<long long>(param2_ret);
 
-		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_readData(void* self, char* param1, long long param2);
+	friend long long QLocalSocket_virtualbase_readData(VirtualQLocalSocket* self, char* param1, long long param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxSize) override {
 		if (vtbl->readLineData == 0) {
 			return QLocalSocket::readLineData(data, maxSize);
@@ -220,14 +202,13 @@ public:
 		qint64 maxSize_ret = maxSize;
 		long long sigval2 = static_cast<long long>(maxSize_ret);
 
-		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_readLineData(void* self, char* data, long long maxSize);
+	friend long long QLocalSocket_virtualbase_readLineData(VirtualQLocalSocket* self, char* data, long long maxSize);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 skipData(qint64 maxSize) override {
 		if (vtbl->skipData == 0) {
 			return QLocalSocket::skipData(maxSize);
@@ -236,14 +217,13 @@ public:
 		qint64 maxSize_ret = maxSize;
 		long long sigval1 = static_cast<long long>(maxSize_ret);
 
-		long long callback_return_value = vtbl->skipData(vtbl, this, sigval1);
+		long long callback_return_value = vtbl->skipData(this, sigval1);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_skipData(void* self, long long maxSize);
+	friend long long QLocalSocket_virtualbase_skipData(VirtualQLocalSocket* self, long long maxSize);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* param1, qint64 param2) override {
 		if (vtbl->writeData == 0) {
 			return QLocalSocket::writeData(param1, param2);
@@ -253,42 +233,39 @@ public:
 		qint64 param2_ret = param2;
 		long long sigval2 = static_cast<long long>(param2_ret);
 
-		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_writeData(void* self, const char* param1, long long param2);
+	friend long long QLocalSocket_virtualbase_writeData(VirtualQLocalSocket* self, const char* param1, long long param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
 		if (vtbl->pos == 0) {
 			return QLocalSocket::pos();
 		}
 
 
-		long long callback_return_value = vtbl->pos(vtbl, this);
+		long long callback_return_value = vtbl->pos(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_pos(const void* self);
+	friend long long QLocalSocket_virtualbase_pos(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
 			return QLocalSocket::size();
 		}
 
 
-		long long callback_return_value = vtbl->size(vtbl, this);
+		long long callback_return_value = vtbl->size(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QLocalSocket_virtualbase_size(const void* self);
+	friend long long QLocalSocket_virtualbase_size(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
 		if (vtbl->seek == 0) {
 			return QLocalSocket::seek(pos);
@@ -297,42 +274,39 @@ public:
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
 
-		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->seek(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_seek(void* self, long long pos);
+	friend bool QLocalSocket_virtualbase_seek(VirtualQLocalSocket* self, long long pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
 		if (vtbl->atEnd == 0) {
 			return QLocalSocket::atEnd();
 		}
 
 
-		bool callback_return_value = vtbl->atEnd(vtbl, this);
+		bool callback_return_value = vtbl->atEnd(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_atEnd(const void* self);
+	friend bool QLocalSocket_virtualbase_atEnd(const VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
 		if (vtbl->reset == 0) {
 			return QLocalSocket::reset();
 		}
 
 
-		bool callback_return_value = vtbl->reset(vtbl, this);
+		bool callback_return_value = vtbl->reset(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_reset(void* self);
+	friend bool QLocalSocket_virtualbase_reset(VirtualQLocalSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QLocalSocket::event(event);
@@ -340,14 +314,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_event(void* self, QEvent* event);
+	friend bool QLocalSocket_virtualbase_event(VirtualQLocalSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QLocalSocket::eventFilter(watched, event);
@@ -356,14 +329,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QLocalSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QLocalSocket_virtualbase_eventFilter(VirtualQLocalSocket* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QLocalSocket::timerEvent(event);
@@ -372,13 +344,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QLocalSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QLocalSocket_virtualbase_timerEvent(VirtualQLocalSocket* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QLocalSocket::childEvent(event);
@@ -387,13 +358,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QLocalSocket_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QLocalSocket_virtualbase_childEvent(VirtualQLocalSocket* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QLocalSocket::customEvent(event);
@@ -402,13 +372,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QLocalSocket_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QLocalSocket_virtualbase_customEvent(VirtualQLocalSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QLocalSocket::connectNotify(signal);
@@ -419,13 +388,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QLocalSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QLocalSocket_virtualbase_connectNotify(VirtualQLocalSocket* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QLocalSocket::disconnectNotify(signal);
@@ -436,27 +404,27 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QLocalSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QLocalSocket_virtualbase_disconnectNotify(VirtualQLocalSocket* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLocalSocket_protectedbase_setOpenMode(void* self, int openMode);
-	friend void QLocalSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString);
-	friend QObject* QLocalSocket_protectedbase_sender(const void* self);
-	friend int QLocalSocket_protectedbase_senderSignalIndex(const void* self);
-	friend int QLocalSocket_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QLocalSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QLocalSocket_protectedbase_setOpenMode(VirtualQLocalSocket* self, int openMode);
+	friend void QLocalSocket_protectedbase_setErrorString(VirtualQLocalSocket* self, struct miqt_string errorString);
+	friend QObject* QLocalSocket_protectedbase_sender(const VirtualQLocalSocket* self);
+	friend int QLocalSocket_protectedbase_senderSignalIndex(const VirtualQLocalSocket* self);
+	friend int QLocalSocket_protectedbase_receivers(const VirtualQLocalSocket* self, const char* signal);
+	friend bool QLocalSocket_protectedbase_isSignalConnected(const VirtualQLocalSocket* self, QMetaMethod* signal);
 };
 
-QLocalSocket* QLocalSocket_new(struct QLocalSocket_VTable* vtbl) {
-	return new VirtualQLocalSocket(vtbl);
+VirtualQLocalSocket* QLocalSocket_new(const QLocalSocket_VTable* vtbl, void* vdata) {
+	return new VirtualQLocalSocket(vtbl, vdata);
 }
 
-QLocalSocket* QLocalSocket_new2(struct QLocalSocket_VTable* vtbl, QObject* parent) {
-	return new VirtualQLocalSocket(vtbl, parent);
+VirtualQLocalSocket* QLocalSocket_new2(const QLocalSocket_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQLocalSocket(vtbl, vdata, parent);
 }
 
 void QLocalSocket_virtbase(QLocalSocket* src, QIODevice** outptr_QIODevice) {
@@ -621,7 +589,7 @@ void QLocalSocket_connected(QLocalSocket* self) {
 	self->connected();
 }
 
-void QLocalSocket_connect_connected(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLocalSocket_connect_connected(VirtualQLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -636,7 +604,7 @@ void QLocalSocket_disconnected(QLocalSocket* self) {
 	self->disconnected();
 }
 
-void QLocalSocket_connect_disconnected(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLocalSocket_connect_disconnected(VirtualQLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -651,7 +619,7 @@ void QLocalSocket_errorOccurred(QLocalSocket* self, int socketError) {
 	self->errorOccurred(static_cast<QLocalSocket::LocalSocketError>(socketError));
 }
 
-void QLocalSocket_connect_errorOccurred(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QLocalSocket_connect_errorOccurred(VirtualQLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -668,7 +636,7 @@ void QLocalSocket_stateChanged(QLocalSocket* self, int socketState) {
 	self->stateChanged(static_cast<QLocalSocket::LocalSocketState>(socketState));
 }
 
-void QLocalSocket_connect_stateChanged(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QLocalSocket_connect_stateChanged(VirtualQLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -728,218 +696,178 @@ bool QLocalSocket_waitForDisconnected1(QLocalSocket* self, int msecs) {
 	return self->waitForDisconnected(static_cast<int>(msecs));
 }
 
-QMetaObject* QLocalSocket_virtualbase_metaObject(const void* self) {
+QMetaObject* QLocalSocket_virtualbase_metaObject(const VirtualQLocalSocket* self) {
 
-	return (QMetaObject*) ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::metaObject();
-
+	return (QMetaObject*) self->QLocalSocket::metaObject();
 }
 
-void* QLocalSocket_virtualbase_metacast(void* self, const char* param1) {
+void* QLocalSocket_virtualbase_metacast(VirtualQLocalSocket* self, const char* param1) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::qt_metacast(param1);
-
+	return self->QLocalSocket::qt_metacast(param1);
 }
 
-int QLocalSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QLocalSocket_virtualbase_metacall(VirtualQLocalSocket* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QLocalSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QLocalSocket_virtualbase_isSequential(const void* self) {
+bool QLocalSocket_virtualbase_isSequential(const VirtualQLocalSocket* self) {
 
-	return ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::isSequential();
-
+	return self->QLocalSocket::isSequential();
 }
 
-long long QLocalSocket_virtualbase_bytesAvailable(const void* self) {
+long long QLocalSocket_virtualbase_bytesAvailable(const VirtualQLocalSocket* self) {
 
-	qint64 _ret = ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::bytesAvailable();
+	qint64 _ret = self->QLocalSocket::bytesAvailable();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_bytesToWrite(const void* self) {
+long long QLocalSocket_virtualbase_bytesToWrite(const VirtualQLocalSocket* self) {
 
-	qint64 _ret = ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::bytesToWrite();
+	qint64 _ret = self->QLocalSocket::bytesToWrite();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QLocalSocket_virtualbase_canReadLine(const void* self) {
+bool QLocalSocket_virtualbase_canReadLine(const VirtualQLocalSocket* self) {
 
-	return ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::canReadLine();
-
+	return self->QLocalSocket::canReadLine();
 }
 
-bool QLocalSocket_virtualbase_open(void* self, int openMode) {
+bool QLocalSocket_virtualbase_open(VirtualQLocalSocket* self, int openMode) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::open(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
-
+	return self->QLocalSocket::open(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
 }
 
-void QLocalSocket_virtualbase_close(void* self) {
+void QLocalSocket_virtualbase_close(VirtualQLocalSocket* self) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::close();
-
+	self->QLocalSocket::close();
 }
 
-bool QLocalSocket_virtualbase_waitForBytesWritten(void* self, int msecs) {
+bool QLocalSocket_virtualbase_waitForBytesWritten(VirtualQLocalSocket* self, int msecs) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::waitForBytesWritten(static_cast<int>(msecs));
-
+	return self->QLocalSocket::waitForBytesWritten(static_cast<int>(msecs));
 }
 
-bool QLocalSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
+bool QLocalSocket_virtualbase_waitForReadyRead(VirtualQLocalSocket* self, int msecs) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::waitForReadyRead(static_cast<int>(msecs));
-
+	return self->QLocalSocket::waitForReadyRead(static_cast<int>(msecs));
 }
 
-long long QLocalSocket_virtualbase_readData(void* self, char* param1, long long param2) {
+long long QLocalSocket_virtualbase_readData(VirtualQLocalSocket* self, char* param1, long long param2) {
 
-	qint64 _ret = ( (VirtualQLocalSocket*)(self) )->QLocalSocket::readData(param1, static_cast<qint64>(param2));
+	qint64 _ret = self->QLocalSocket::readData(param1, static_cast<qint64>(param2));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_readLineData(void* self, char* data, long long maxSize) {
+long long QLocalSocket_virtualbase_readLineData(VirtualQLocalSocket* self, char* data, long long maxSize) {
 
-	qint64 _ret = ( (VirtualQLocalSocket*)(self) )->QLocalSocket::readLineData(data, static_cast<qint64>(maxSize));
+	qint64 _ret = self->QLocalSocket::readLineData(data, static_cast<qint64>(maxSize));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_skipData(void* self, long long maxSize) {
+long long QLocalSocket_virtualbase_skipData(VirtualQLocalSocket* self, long long maxSize) {
 
-	qint64 _ret = ( (VirtualQLocalSocket*)(self) )->QLocalSocket::skipData(static_cast<qint64>(maxSize));
+	qint64 _ret = self->QLocalSocket::skipData(static_cast<qint64>(maxSize));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_writeData(void* self, const char* param1, long long param2) {
+long long QLocalSocket_virtualbase_writeData(VirtualQLocalSocket* self, const char* param1, long long param2) {
 
-	qint64 _ret = ( (VirtualQLocalSocket*)(self) )->QLocalSocket::writeData(param1, static_cast<qint64>(param2));
+	qint64 _ret = self->QLocalSocket::writeData(param1, static_cast<qint64>(param2));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_pos(const void* self) {
+long long QLocalSocket_virtualbase_pos(const VirtualQLocalSocket* self) {
 
-	qint64 _ret = ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::pos();
+	qint64 _ret = self->QLocalSocket::pos();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QLocalSocket_virtualbase_size(const void* self) {
+long long QLocalSocket_virtualbase_size(const VirtualQLocalSocket* self) {
 
-	qint64 _ret = ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::size();
+	qint64 _ret = self->QLocalSocket::size();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QLocalSocket_virtualbase_seek(void* self, long long pos) {
+bool QLocalSocket_virtualbase_seek(VirtualQLocalSocket* self, long long pos) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::seek(static_cast<qint64>(pos));
-
+	return self->QLocalSocket::seek(static_cast<qint64>(pos));
 }
 
-bool QLocalSocket_virtualbase_atEnd(const void* self) {
+bool QLocalSocket_virtualbase_atEnd(const VirtualQLocalSocket* self) {
 
-	return ( (const VirtualQLocalSocket*)(self) )->QLocalSocket::atEnd();
-
+	return self->QLocalSocket::atEnd();
 }
 
-bool QLocalSocket_virtualbase_reset(void* self) {
+bool QLocalSocket_virtualbase_reset(VirtualQLocalSocket* self) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::reset();
-
+	return self->QLocalSocket::reset();
 }
 
-bool QLocalSocket_virtualbase_event(void* self, QEvent* event) {
+bool QLocalSocket_virtualbase_event(VirtualQLocalSocket* self, QEvent* event) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::event(event);
-
+	return self->QLocalSocket::event(event);
 }
 
-bool QLocalSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QLocalSocket_virtualbase_eventFilter(VirtualQLocalSocket* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQLocalSocket*)(self) )->QLocalSocket::eventFilter(watched, event);
-
+	return self->QLocalSocket::eventFilter(watched, event);
 }
 
-void QLocalSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QLocalSocket_virtualbase_timerEvent(VirtualQLocalSocket* self, QTimerEvent* event) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::timerEvent(event);
-
+	self->QLocalSocket::timerEvent(event);
 }
 
-void QLocalSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QLocalSocket_virtualbase_childEvent(VirtualQLocalSocket* self, QChildEvent* event) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::childEvent(event);
-
+	self->QLocalSocket::childEvent(event);
 }
 
-void QLocalSocket_virtualbase_customEvent(void* self, QEvent* event) {
+void QLocalSocket_virtualbase_customEvent(VirtualQLocalSocket* self, QEvent* event) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::customEvent(event);
-
+	self->QLocalSocket::customEvent(event);
 }
 
-void QLocalSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QLocalSocket_virtualbase_connectNotify(VirtualQLocalSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::connectNotify(*signal);
-
+	self->QLocalSocket::connectNotify(*signal);
 }
 
-void QLocalSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QLocalSocket_virtualbase_disconnectNotify(VirtualQLocalSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQLocalSocket*)(self) )->QLocalSocket::disconnectNotify(*signal);
-
+	self->QLocalSocket::disconnectNotify(*signal);
 }
 
 const QMetaObject* QLocalSocket_staticMetaObject() { return &QLocalSocket::staticMetaObject; }
-void QLocalSocket_protectedbase_setOpenMode(void* self, int openMode) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-	
-	self_cast->setOpenMode(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
 
+const QLocalSocket_VTable* QLocalSocket_vtbl(const VirtualQLocalSocket* self) { return self->vtbl; }
+void* QLocalSocket_vdata(const VirtualQLocalSocket* self) { return self->vdata; }
+void QLocalSocket_setVdata(VirtualQLocalSocket* self, void* vdata) { self->vdata = vdata; }
+
+void QLocalSocket_protectedbase_setOpenMode(VirtualQLocalSocket* self, int openMode) {
+	self->setOpenMode(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
 }
 
-void QLocalSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-
-	self_cast->setErrorString(errorString_QString);
-
+void QLocalSocket_protectedbase_setErrorString(VirtualQLocalSocket* self, struct miqt_string errorString) {
+		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
+	self->setErrorString(errorString_QString);
 }
 
-QObject* QLocalSocket_protectedbase_sender(const void* self) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QLocalSocket_protectedbase_sender(const VirtualQLocalSocket* self) {
+	return self->sender();
 }
 
-int QLocalSocket_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QLocalSocket_protectedbase_senderSignalIndex(const VirtualQLocalSocket* self) {
+	return self->senderSignalIndex();
 }
 
-int QLocalSocket_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QLocalSocket_protectedbase_receivers(const VirtualQLocalSocket* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QLocalSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQLocalSocket* self_cast = static_cast<VirtualQLocalSocket*>( (QLocalSocket*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QLocalSocket_protectedbase_isSignalConnected(const VirtualQLocalSocket* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QLocalSocket_delete(QLocalSocket* self) {

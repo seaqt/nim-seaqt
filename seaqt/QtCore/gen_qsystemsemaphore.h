@@ -23,6 +23,7 @@ typedef struct QSystemSemaphore QSystemSemaphore;
 QSystemSemaphore* QSystemSemaphore_new(struct miqt_string key);
 QSystemSemaphore* QSystemSemaphore_new2(struct miqt_string key, int initialValue);
 QSystemSemaphore* QSystemSemaphore_new3(struct miqt_string key, int initialValue, int mode);
+
 struct miqt_string QSystemSemaphore_tr(const char* sourceText);
 void QSystemSemaphore_setKey(QSystemSemaphore* self, struct miqt_string key);
 struct miqt_string QSystemSemaphore_key(const QSystemSemaphore* self);
@@ -35,6 +36,7 @@ struct miqt_string QSystemSemaphore_tr3(const char* sourceText, const char* disa
 void QSystemSemaphore_setKey2(QSystemSemaphore* self, struct miqt_string key, int initialValue);
 void QSystemSemaphore_setKey3(QSystemSemaphore* self, struct miqt_string key, int initialValue, int mode);
 bool QSystemSemaphore_release1(QSystemSemaphore* self, int n);
+
 void QSystemSemaphore_delete(QSystemSemaphore* self);
 
 #ifdef __cplusplus

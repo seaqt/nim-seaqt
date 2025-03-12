@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcameradevice.h>
 #include "gen_qcameradevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCameraFormat* QCameraFormat_new() {
 	return new QCameraFormat();
 }
@@ -59,6 +50,7 @@ bool QCameraFormat_operatorNotEqual(const QCameraFormat* self, QCameraFormat* ot
 }
 
 const QMetaObject* QCameraFormat_staticMetaObject() { return &QCameraFormat::staticMetaObject; }
+
 void QCameraFormat_delete(QCameraFormat* self) {
 	delete self;
 }
@@ -143,6 +135,7 @@ struct miqt_array /* of QCameraFormat* */  QCameraDevice_videoFormats(const QCam
 }
 
 const QMetaObject* QCameraDevice_staticMetaObject() { return &QCameraDevice::staticMetaObject; }
+
 void QCameraDevice_delete(QCameraDevice* self) {
 	delete self;
 }

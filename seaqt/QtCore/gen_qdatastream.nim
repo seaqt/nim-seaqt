@@ -104,17 +104,17 @@ export
 
 type cQDataStream*{.exportc: "QDataStream", incompleteStruct.} = object
 
-proc fcQDataStream_device(self: pointer, ): pointer {.importc: "QDataStream_device".}
+proc fcQDataStream_device(self: pointer): pointer {.importc: "QDataStream_device".}
 proc fcQDataStream_setDevice(self: pointer, device: pointer): void {.importc: "QDataStream_setDevice".}
-proc fcQDataStream_atEnd(self: pointer, ): bool {.importc: "QDataStream_atEnd".}
-proc fcQDataStream_status(self: pointer, ): cint {.importc: "QDataStream_status".}
+proc fcQDataStream_atEnd(self: pointer): bool {.importc: "QDataStream_atEnd".}
+proc fcQDataStream_status(self: pointer): cint {.importc: "QDataStream_status".}
 proc fcQDataStream_setStatus(self: pointer, status: cint): void {.importc: "QDataStream_setStatus".}
-proc fcQDataStream_resetStatus(self: pointer, ): void {.importc: "QDataStream_resetStatus".}
-proc fcQDataStream_floatingPointPrecision(self: pointer, ): cint {.importc: "QDataStream_floatingPointPrecision".}
+proc fcQDataStream_resetStatus(self: pointer): void {.importc: "QDataStream_resetStatus".}
+proc fcQDataStream_floatingPointPrecision(self: pointer): cint {.importc: "QDataStream_floatingPointPrecision".}
 proc fcQDataStream_setFloatingPointPrecision(self: pointer, precision: cint): void {.importc: "QDataStream_setFloatingPointPrecision".}
-proc fcQDataStream_byteOrder(self: pointer, ): cint {.importc: "QDataStream_byteOrder".}
+proc fcQDataStream_byteOrder(self: pointer): cint {.importc: "QDataStream_byteOrder".}
 proc fcQDataStream_setByteOrder(self: pointer, byteOrder: cint): void {.importc: "QDataStream_setByteOrder".}
-proc fcQDataStream_version(self: pointer, ): cint {.importc: "QDataStream_version".}
+proc fcQDataStream_version(self: pointer): cint {.importc: "QDataStream_version".}
 proc fcQDataStream_setVersion(self: pointer, version: cint): void {.importc: "QDataStream_setVersion".}
 proc fcQDataStream_operatorShiftRight(self: pointer, i: ptr cchar): void {.importc: "QDataStream_operatorShiftRight".}
 proc fcQDataStream_operatorShiftRightWithQint8(self: pointer, i: ptr cschar): void {.importc: "QDataStream_operatorShiftRightWithQint8".}
@@ -147,46 +147,46 @@ proc fcQDataStream_readRawData(self: pointer, param1: cstring, len: cint): cint 
 proc fcQDataStream_writeBytes(self: pointer, param1: cstring, len: cuint): void {.importc: "QDataStream_writeBytes".}
 proc fcQDataStream_writeRawData(self: pointer, param1: cstring, len: cint): cint {.importc: "QDataStream_writeRawData".}
 proc fcQDataStream_skipRawData(self: pointer, len: cint): cint {.importc: "QDataStream_skipRawData".}
-proc fcQDataStream_startTransaction(self: pointer, ): void {.importc: "QDataStream_startTransaction".}
-proc fcQDataStream_commitTransaction(self: pointer, ): bool {.importc: "QDataStream_commitTransaction".}
-proc fcQDataStream_rollbackTransaction(self: pointer, ): void {.importc: "QDataStream_rollbackTransaction".}
-proc fcQDataStream_abortTransaction(self: pointer, ): void {.importc: "QDataStream_abortTransaction".}
-proc fcQDataStream_isDeviceTransactionStarted(self: pointer, ): bool {.importc: "QDataStream_isDeviceTransactionStarted".}
+proc fcQDataStream_startTransaction(self: pointer): void {.importc: "QDataStream_startTransaction".}
+proc fcQDataStream_commitTransaction(self: pointer): bool {.importc: "QDataStream_commitTransaction".}
+proc fcQDataStream_rollbackTransaction(self: pointer): void {.importc: "QDataStream_rollbackTransaction".}
+proc fcQDataStream_abortTransaction(self: pointer): void {.importc: "QDataStream_abortTransaction".}
+proc fcQDataStream_isDeviceTransactionStarted(self: pointer): bool {.importc: "QDataStream_isDeviceTransactionStarted".}
 proc fcQDataStream_new(): ptr cQDataStream {.importc: "QDataStream_new".}
 proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new2".}
 proc fcQDataStream_new3(param1: struct_miqt_string): ptr cQDataStream {.importc: "QDataStream_new3".}
 
-proc device*(self: gen_qdatastream_types.QDataStream, ): gen_qiodevice_types.QIODevice =
+proc device*(self: gen_qdatastream_types.QDataStream): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQDataStream_device(self.h), owned: false)
 
 proc setDevice*(self: gen_qdatastream_types.QDataStream, device: gen_qiodevice_types.QIODevice): void =
   fcQDataStream_setDevice(self.h, device.h)
 
-proc atEnd*(self: gen_qdatastream_types.QDataStream, ): bool =
+proc atEnd*(self: gen_qdatastream_types.QDataStream): bool =
   fcQDataStream_atEnd(self.h)
 
-proc status*(self: gen_qdatastream_types.QDataStream, ): cint =
+proc status*(self: gen_qdatastream_types.QDataStream): cint =
   cint(fcQDataStream_status(self.h))
 
 proc setStatus*(self: gen_qdatastream_types.QDataStream, status: cint): void =
   fcQDataStream_setStatus(self.h, cint(status))
 
-proc resetStatus*(self: gen_qdatastream_types.QDataStream, ): void =
+proc resetStatus*(self: gen_qdatastream_types.QDataStream): void =
   fcQDataStream_resetStatus(self.h)
 
-proc floatingPointPrecision*(self: gen_qdatastream_types.QDataStream, ): cint =
+proc floatingPointPrecision*(self: gen_qdatastream_types.QDataStream): cint =
   cint(fcQDataStream_floatingPointPrecision(self.h))
 
 proc setFloatingPointPrecision*(self: gen_qdatastream_types.QDataStream, precision: cint): void =
   fcQDataStream_setFloatingPointPrecision(self.h, cint(precision))
 
-proc byteOrder*(self: gen_qdatastream_types.QDataStream, ): cint =
+proc byteOrder*(self: gen_qdatastream_types.QDataStream): cint =
   cint(fcQDataStream_byteOrder(self.h))
 
 proc setByteOrder*(self: gen_qdatastream_types.QDataStream, byteOrder: cint): void =
   fcQDataStream_setByteOrder(self.h, cint(byteOrder))
 
-proc version*(self: gen_qdatastream_types.QDataStream, ): cint =
+proc version*(self: gen_qdatastream_types.QDataStream): cint =
   fcQDataStream_version(self.h)
 
 proc setVersion*(self: gen_qdatastream_types.QDataStream, version: cint): void =
@@ -285,19 +285,19 @@ proc writeRawData*(self: gen_qdatastream_types.QDataStream, param1: cstring, len
 proc skipRawData*(self: gen_qdatastream_types.QDataStream, len: cint): cint =
   fcQDataStream_skipRawData(self.h, len)
 
-proc startTransaction*(self: gen_qdatastream_types.QDataStream, ): void =
+proc startTransaction*(self: gen_qdatastream_types.QDataStream): void =
   fcQDataStream_startTransaction(self.h)
 
-proc commitTransaction*(self: gen_qdatastream_types.QDataStream, ): bool =
+proc commitTransaction*(self: gen_qdatastream_types.QDataStream): bool =
   fcQDataStream_commitTransaction(self.h)
 
-proc rollbackTransaction*(self: gen_qdatastream_types.QDataStream, ): void =
+proc rollbackTransaction*(self: gen_qdatastream_types.QDataStream): void =
   fcQDataStream_rollbackTransaction(self.h)
 
-proc abortTransaction*(self: gen_qdatastream_types.QDataStream, ): void =
+proc abortTransaction*(self: gen_qdatastream_types.QDataStream): void =
   fcQDataStream_abortTransaction(self.h)
 
-proc isDeviceTransactionStarted*(self: gen_qdatastream_types.QDataStream, ): bool =
+proc isDeviceTransactionStarted*(self: gen_qdatastream_types.QDataStream): bool =
   fcQDataStream_isDeviceTransactionStarted(self.h)
 
 proc create*(T: type gen_qdatastream_types.QDataStream): gen_qdatastream_types.QDataStream =

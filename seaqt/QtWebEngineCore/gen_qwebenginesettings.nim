@@ -106,10 +106,10 @@ proc fcQWebEngineSettings_setAttribute(self: pointer, attr: cint, on: bool): voi
 proc fcQWebEngineSettings_testAttribute(self: pointer, attr: cint): bool {.importc: "QWebEngineSettings_testAttribute".}
 proc fcQWebEngineSettings_resetAttribute(self: pointer, attr: cint): void {.importc: "QWebEngineSettings_resetAttribute".}
 proc fcQWebEngineSettings_setDefaultTextEncoding(self: pointer, encoding: struct_miqt_string): void {.importc: "QWebEngineSettings_setDefaultTextEncoding".}
-proc fcQWebEngineSettings_defaultTextEncoding(self: pointer, ): struct_miqt_string {.importc: "QWebEngineSettings_defaultTextEncoding".}
-proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer, ): cint {.importc: "QWebEngineSettings_unknownUrlSchemePolicy".}
+proc fcQWebEngineSettings_defaultTextEncoding(self: pointer): struct_miqt_string {.importc: "QWebEngineSettings_defaultTextEncoding".}
+proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer): cint {.importc: "QWebEngineSettings_unknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint): void {.importc: "QWebEngineSettings_setUnknownUrlSchemePolicy".}
-proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer, ): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
+proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
 
 proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: string): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: family, len: csize_t(len(family))))
@@ -144,18 +144,18 @@ proc resetAttribute*(self: gen_qwebenginesettings_types.QWebEngineSettings, attr
 proc setDefaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, encoding: string): void =
   fcQWebEngineSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: encoding, len: csize_t(len(encoding))))
 
-proc defaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, ): string =
+proc defaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings): string =
   let v_ms = fcQWebEngineSettings_defaultTextEncoding(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc unknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings, ): cint =
+proc unknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings): cint =
   cint(fcQWebEngineSettings_unknownUrlSchemePolicy(self.h))
 
 proc setUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings, policy: cint): void =
   fcQWebEngineSettings_setUnknownUrlSchemePolicy(self.h, cint(policy))
 
-proc resetUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings, ): void =
+proc resetUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings): void =
   fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self.h)
 

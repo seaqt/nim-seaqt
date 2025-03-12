@@ -113,58 +113,58 @@ export
 
 type cQFileDialog*{.exportc: "QFileDialog", incompleteStruct.} = object
 
-proc fcQFileDialog_metaObject(self: pointer, ): pointer {.importc: "QFileDialog_metaObject".}
+proc fcQFileDialog_metaObject(self: pointer): pointer {.importc: "QFileDialog_metaObject".}
 proc fcQFileDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileDialog_metacast".}
 proc fcQFileDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileDialog_metacall".}
 proc fcQFileDialog_tr(s: cstring): struct_miqt_string {.importc: "QFileDialog_tr".}
 proc fcQFileDialog_setDirectory(self: pointer, directory: struct_miqt_string): void {.importc: "QFileDialog_setDirectory".}
 proc fcQFileDialog_setDirectoryWithDirectory(self: pointer, directory: pointer): void {.importc: "QFileDialog_setDirectoryWithDirectory".}
-proc fcQFileDialog_directory(self: pointer, ): pointer {.importc: "QFileDialog_directory".}
+proc fcQFileDialog_directory(self: pointer): pointer {.importc: "QFileDialog_directory".}
 proc fcQFileDialog_setDirectoryUrl(self: pointer, directory: pointer): void {.importc: "QFileDialog_setDirectoryUrl".}
-proc fcQFileDialog_directoryUrl(self: pointer, ): pointer {.importc: "QFileDialog_directoryUrl".}
+proc fcQFileDialog_directoryUrl(self: pointer): pointer {.importc: "QFileDialog_directoryUrl".}
 proc fcQFileDialog_selectFile(self: pointer, filename: struct_miqt_string): void {.importc: "QFileDialog_selectFile".}
-proc fcQFileDialog_selectedFiles(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_selectedFiles".}
+proc fcQFileDialog_selectedFiles(self: pointer): struct_miqt_array {.importc: "QFileDialog_selectedFiles".}
 proc fcQFileDialog_selectUrl(self: pointer, url: pointer): void {.importc: "QFileDialog_selectUrl".}
-proc fcQFileDialog_selectedUrls(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_selectedUrls".}
+proc fcQFileDialog_selectedUrls(self: pointer): struct_miqt_array {.importc: "QFileDialog_selectedUrls".}
 proc fcQFileDialog_setNameFilter(self: pointer, filter: struct_miqt_string): void {.importc: "QFileDialog_setNameFilter".}
 proc fcQFileDialog_setNameFilters(self: pointer, filters: struct_miqt_array): void {.importc: "QFileDialog_setNameFilters".}
-proc fcQFileDialog_nameFilters(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_nameFilters".}
+proc fcQFileDialog_nameFilters(self: pointer): struct_miqt_array {.importc: "QFileDialog_nameFilters".}
 proc fcQFileDialog_selectNameFilter(self: pointer, filter: struct_miqt_string): void {.importc: "QFileDialog_selectNameFilter".}
-proc fcQFileDialog_selectedMimeTypeFilter(self: pointer, ): struct_miqt_string {.importc: "QFileDialog_selectedMimeTypeFilter".}
-proc fcQFileDialog_selectedNameFilter(self: pointer, ): struct_miqt_string {.importc: "QFileDialog_selectedNameFilter".}
+proc fcQFileDialog_selectedMimeTypeFilter(self: pointer): struct_miqt_string {.importc: "QFileDialog_selectedMimeTypeFilter".}
+proc fcQFileDialog_selectedNameFilter(self: pointer): struct_miqt_string {.importc: "QFileDialog_selectedNameFilter".}
 proc fcQFileDialog_setMimeTypeFilters(self: pointer, filters: struct_miqt_array): void {.importc: "QFileDialog_setMimeTypeFilters".}
-proc fcQFileDialog_mimeTypeFilters(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_mimeTypeFilters".}
+proc fcQFileDialog_mimeTypeFilters(self: pointer): struct_miqt_array {.importc: "QFileDialog_mimeTypeFilters".}
 proc fcQFileDialog_selectMimeTypeFilter(self: pointer, filter: struct_miqt_string): void {.importc: "QFileDialog_selectMimeTypeFilter".}
-proc fcQFileDialog_filter(self: pointer, ): cint {.importc: "QFileDialog_filter".}
+proc fcQFileDialog_filter(self: pointer): cint {.importc: "QFileDialog_filter".}
 proc fcQFileDialog_setFilter(self: pointer, filters: cint): void {.importc: "QFileDialog_setFilter".}
 proc fcQFileDialog_setViewMode(self: pointer, mode: cint): void {.importc: "QFileDialog_setViewMode".}
-proc fcQFileDialog_viewMode(self: pointer, ): cint {.importc: "QFileDialog_viewMode".}
+proc fcQFileDialog_viewMode(self: pointer): cint {.importc: "QFileDialog_viewMode".}
 proc fcQFileDialog_setFileMode(self: pointer, mode: cint): void {.importc: "QFileDialog_setFileMode".}
-proc fcQFileDialog_fileMode(self: pointer, ): cint {.importc: "QFileDialog_fileMode".}
+proc fcQFileDialog_fileMode(self: pointer): cint {.importc: "QFileDialog_fileMode".}
 proc fcQFileDialog_setAcceptMode(self: pointer, mode: cint): void {.importc: "QFileDialog_setAcceptMode".}
-proc fcQFileDialog_acceptMode(self: pointer, ): cint {.importc: "QFileDialog_acceptMode".}
+proc fcQFileDialog_acceptMode(self: pointer): cint {.importc: "QFileDialog_acceptMode".}
 proc fcQFileDialog_setSidebarUrls(self: pointer, urls: struct_miqt_array): void {.importc: "QFileDialog_setSidebarUrls".}
-proc fcQFileDialog_sidebarUrls(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_sidebarUrls".}
-proc fcQFileDialog_saveState(self: pointer, ): struct_miqt_string {.importc: "QFileDialog_saveState".}
+proc fcQFileDialog_sidebarUrls(self: pointer): struct_miqt_array {.importc: "QFileDialog_sidebarUrls".}
+proc fcQFileDialog_saveState(self: pointer): struct_miqt_string {.importc: "QFileDialog_saveState".}
 proc fcQFileDialog_restoreState(self: pointer, state: struct_miqt_string): bool {.importc: "QFileDialog_restoreState".}
 proc fcQFileDialog_setDefaultSuffix(self: pointer, suffix: struct_miqt_string): void {.importc: "QFileDialog_setDefaultSuffix".}
-proc fcQFileDialog_defaultSuffix(self: pointer, ): struct_miqt_string {.importc: "QFileDialog_defaultSuffix".}
+proc fcQFileDialog_defaultSuffix(self: pointer): struct_miqt_string {.importc: "QFileDialog_defaultSuffix".}
 proc fcQFileDialog_setHistory(self: pointer, paths: struct_miqt_array): void {.importc: "QFileDialog_setHistory".}
-proc fcQFileDialog_history(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_history".}
+proc fcQFileDialog_history(self: pointer): struct_miqt_array {.importc: "QFileDialog_history".}
 proc fcQFileDialog_setItemDelegate(self: pointer, delegate: pointer): void {.importc: "QFileDialog_setItemDelegate".}
-proc fcQFileDialog_itemDelegate(self: pointer, ): pointer {.importc: "QFileDialog_itemDelegate".}
+proc fcQFileDialog_itemDelegate(self: pointer): pointer {.importc: "QFileDialog_itemDelegate".}
 proc fcQFileDialog_setIconProvider(self: pointer, provider: pointer): void {.importc: "QFileDialog_setIconProvider".}
-proc fcQFileDialog_iconProvider(self: pointer, ): pointer {.importc: "QFileDialog_iconProvider".}
+proc fcQFileDialog_iconProvider(self: pointer): pointer {.importc: "QFileDialog_iconProvider".}
 proc fcQFileDialog_setLabelText(self: pointer, label: cint, text: struct_miqt_string): void {.importc: "QFileDialog_setLabelText".}
 proc fcQFileDialog_labelText(self: pointer, label: cint): struct_miqt_string {.importc: "QFileDialog_labelText".}
 proc fcQFileDialog_setSupportedSchemes(self: pointer, schemes: struct_miqt_array): void {.importc: "QFileDialog_setSupportedSchemes".}
-proc fcQFileDialog_supportedSchemes(self: pointer, ): struct_miqt_array {.importc: "QFileDialog_supportedSchemes".}
+proc fcQFileDialog_supportedSchemes(self: pointer): struct_miqt_array {.importc: "QFileDialog_supportedSchemes".}
 proc fcQFileDialog_setProxyModel(self: pointer, model: pointer): void {.importc: "QFileDialog_setProxyModel".}
-proc fcQFileDialog_proxyModel(self: pointer, ): pointer {.importc: "QFileDialog_proxyModel".}
+proc fcQFileDialog_proxyModel(self: pointer): pointer {.importc: "QFileDialog_proxyModel".}
 proc fcQFileDialog_setOption(self: pointer, option: cint): void {.importc: "QFileDialog_setOption".}
 proc fcQFileDialog_testOption(self: pointer, option: cint): bool {.importc: "QFileDialog_testOption".}
 proc fcQFileDialog_setOptions(self: pointer, options: cint): void {.importc: "QFileDialog_setOptions".}
-proc fcQFileDialog_options(self: pointer, ): cint {.importc: "QFileDialog_options".}
+proc fcQFileDialog_options(self: pointer): cint {.importc: "QFileDialog_options".}
 proc fcQFileDialog_setVisible(self: pointer, visible: bool): void {.importc: "QFileDialog_setVisible".}
 proc fcQFileDialog_fileSelected(self: pointer, file: struct_miqt_string): void {.importc: "QFileDialog_fileSelected".}
 proc fcQFileDialog_connect_fileSelected(self: pointer, slot: int, callback: proc (slot: int, file: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileDialog_connect_fileSelected".}
@@ -229,85 +229,87 @@ proc fcQFileDialog_getOpenFileUrls1(parent: pointer): struct_miqt_array {.import
 proc fcQFileDialog_getOpenFileUrls2(parent: pointer, caption: struct_miqt_string): struct_miqt_array {.importc: "QFileDialog_getOpenFileUrls2".}
 proc fcQFileDialog_getOpenFileUrls3(parent: pointer, caption: struct_miqt_string, dir: pointer): struct_miqt_array {.importc: "QFileDialog_getOpenFileUrls3".}
 proc fcQFileDialog_getOpenFileUrls4(parent: pointer, caption: struct_miqt_string, dir: pointer, filter: struct_miqt_string): struct_miqt_array {.importc: "QFileDialog_getOpenFileUrls4".}
+proc fcQFileDialog_vtbl(self: pointer): pointer {.importc: "QFileDialog_vtbl".}
+proc fcQFileDialog_vdata(self: pointer): pointer {.importc: "QFileDialog_vdata".}
 type cQFileDialogVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQFileDialogVTable, self: ptr cQFileDialog) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  done*: proc(vtbl, self: pointer, resultVal: cint): void {.cdecl, raises: [], gcsafe.}
-  accept*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  open*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  exec*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  reject*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQFileDialog_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QFileDialog_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  done*: proc(self: pointer, resultVal: cint): void {.cdecl, raises: [], gcsafe.}
+  accept*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  open*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  exec*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  reject*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQFileDialog_virtualbase_metaObject(self: pointer): pointer {.importc: "QFileDialog_virtualbase_metaObject".}
 proc fcQFileDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileDialog_virtualbase_metacast".}
 proc fcQFileDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileDialog_virtualbase_metacall".}
 proc fcQFileDialog_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QFileDialog_virtualbase_setVisible".}
 proc fcQFileDialog_virtualbase_done(self: pointer, resultVal: cint): void {.importc: "QFileDialog_virtualbase_done".}
-proc fcQFileDialog_virtualbase_accept(self: pointer, ): void {.importc: "QFileDialog_virtualbase_accept".}
+proc fcQFileDialog_virtualbase_accept(self: pointer): void {.importc: "QFileDialog_virtualbase_accept".}
 proc fcQFileDialog_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QFileDialog_virtualbase_changeEvent".}
-proc fcQFileDialog_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QFileDialog_virtualbase_sizeHint".}
-proc fcQFileDialog_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QFileDialog_virtualbase_minimumSizeHint".}
-proc fcQFileDialog_virtualbase_open(self: pointer, ): void {.importc: "QFileDialog_virtualbase_open".}
-proc fcQFileDialog_virtualbase_exec(self: pointer, ): cint {.importc: "QFileDialog_virtualbase_exec".}
-proc fcQFileDialog_virtualbase_reject(self: pointer, ): void {.importc: "QFileDialog_virtualbase_reject".}
+proc fcQFileDialog_virtualbase_sizeHint(self: pointer): pointer {.importc: "QFileDialog_virtualbase_sizeHint".}
+proc fcQFileDialog_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QFileDialog_virtualbase_minimumSizeHint".}
+proc fcQFileDialog_virtualbase_open(self: pointer): void {.importc: "QFileDialog_virtualbase_open".}
+proc fcQFileDialog_virtualbase_exec(self: pointer): cint {.importc: "QFileDialog_virtualbase_exec".}
+proc fcQFileDialog_virtualbase_reject(self: pointer): void {.importc: "QFileDialog_virtualbase_reject".}
 proc fcQFileDialog_virtualbase_keyPressEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_keyPressEvent".}
 proc fcQFileDialog_virtualbase_closeEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_closeEvent".}
 proc fcQFileDialog_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_showEvent".}
 proc fcQFileDialog_virtualbase_resizeEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_resizeEvent".}
 proc fcQFileDialog_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_contextMenuEvent".}
 proc fcQFileDialog_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QFileDialog_virtualbase_eventFilter".}
-proc fcQFileDialog_virtualbase_devType(self: pointer, ): cint {.importc: "QFileDialog_virtualbase_devType".}
+proc fcQFileDialog_virtualbase_devType(self: pointer): cint {.importc: "QFileDialog_virtualbase_devType".}
 proc fcQFileDialog_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QFileDialog_virtualbase_heightForWidth".}
-proc fcQFileDialog_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QFileDialog_virtualbase_hasHeightForWidth".}
-proc fcQFileDialog_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QFileDialog_virtualbase_paintEngine".}
+proc fcQFileDialog_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QFileDialog_virtualbase_hasHeightForWidth".}
+proc fcQFileDialog_virtualbase_paintEngine(self: pointer): pointer {.importc: "QFileDialog_virtualbase_paintEngine".}
 proc fcQFileDialog_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QFileDialog_virtualbase_event".}
 proc fcQFileDialog_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QFileDialog_virtualbase_mousePressEvent".}
 proc fcQFileDialog_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QFileDialog_virtualbase_mouseReleaseEvent".}
@@ -332,7 +334,7 @@ proc fcQFileDialog_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt
 proc fcQFileDialog_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QFileDialog_virtualbase_metric".}
 proc fcQFileDialog_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QFileDialog_virtualbase_initPainter".}
 proc fcQFileDialog_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QFileDialog_virtualbase_redirected".}
-proc fcQFileDialog_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QFileDialog_virtualbase_sharedPainter".}
+proc fcQFileDialog_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QFileDialog_virtualbase_sharedPainter".}
 proc fcQFileDialog_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QFileDialog_virtualbase_inputMethodEvent".}
 proc fcQFileDialog_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QFileDialog_virtualbase_inputMethodQuery".}
 proc fcQFileDialog_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QFileDialog_virtualbase_focusNextPrevChild".}
@@ -342,24 +344,24 @@ proc fcQFileDialog_virtualbase_customEvent(self: pointer, event: pointer): void 
 proc fcQFileDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFileDialog_virtualbase_connectNotify".}
 proc fcQFileDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFileDialog_virtualbase_disconnectNotify".}
 proc fcQFileDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QFileDialog_protectedbase_adjustPosition".}
-proc fcQFileDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QFileDialog_protectedbase_updateMicroFocus".}
-proc fcQFileDialog_protectedbase_create(self: pointer, ): void {.importc: "QFileDialog_protectedbase_create".}
-proc fcQFileDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QFileDialog_protectedbase_destroy".}
-proc fcQFileDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QFileDialog_protectedbase_focusNextChild".}
-proc fcQFileDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QFileDialog_protectedbase_focusPreviousChild".}
-proc fcQFileDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QFileDialog_protectedbase_sender".}
-proc fcQFileDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFileDialog_protectedbase_senderSignalIndex".}
+proc fcQFileDialog_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QFileDialog_protectedbase_updateMicroFocus".}
+proc fcQFileDialog_protectedbase_create(self: pointer): void {.importc: "QFileDialog_protectedbase_create".}
+proc fcQFileDialog_protectedbase_destroy(self: pointer): void {.importc: "QFileDialog_protectedbase_destroy".}
+proc fcQFileDialog_protectedbase_focusNextChild(self: pointer): bool {.importc: "QFileDialog_protectedbase_focusNextChild".}
+proc fcQFileDialog_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QFileDialog_protectedbase_focusPreviousChild".}
+proc fcQFileDialog_protectedbase_sender(self: pointer): pointer {.importc: "QFileDialog_protectedbase_sender".}
+proc fcQFileDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFileDialog_protectedbase_senderSignalIndex".}
 proc fcQFileDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDialog_protectedbase_receivers".}
 proc fcQFileDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDialog_protectedbase_isSignalConnected".}
-proc fcQFileDialog_new(vtbl: pointer, parent: pointer): ptr cQFileDialog {.importc: "QFileDialog_new".}
-proc fcQFileDialog_new2(vtbl: pointer, parent: pointer, f: cint): ptr cQFileDialog {.importc: "QFileDialog_new2".}
-proc fcQFileDialog_new3(vtbl: pointer, ): ptr cQFileDialog {.importc: "QFileDialog_new3".}
-proc fcQFileDialog_new4(vtbl: pointer, parent: pointer, caption: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new4".}
-proc fcQFileDialog_new5(vtbl: pointer, parent: pointer, caption: struct_miqt_string, directory: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new5".}
-proc fcQFileDialog_new6(vtbl: pointer, parent: pointer, caption: struct_miqt_string, directory: struct_miqt_string, filter: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new6".}
+proc fcQFileDialog_new(vtbl, vdata: pointer, parent: pointer): ptr cQFileDialog {.importc: "QFileDialog_new".}
+proc fcQFileDialog_new2(vtbl, vdata: pointer, parent: pointer, f: cint): ptr cQFileDialog {.importc: "QFileDialog_new2".}
+proc fcQFileDialog_new3(vtbl, vdata: pointer): ptr cQFileDialog {.importc: "QFileDialog_new3".}
+proc fcQFileDialog_new4(vtbl, vdata: pointer, parent: pointer, caption: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new4".}
+proc fcQFileDialog_new5(vtbl, vdata: pointer, parent: pointer, caption: struct_miqt_string, directory: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new5".}
+proc fcQFileDialog_new6(vtbl, vdata: pointer, parent: pointer, caption: struct_miqt_string, directory: struct_miqt_string, filter: struct_miqt_string): ptr cQFileDialog {.importc: "QFileDialog_new6".}
 proc fcQFileDialog_staticMetaObject(): pointer {.importc: "QFileDialog_staticMetaObject".}
 
-proc metaObject*(self: gen_qfiledialog_types.QFileDialog, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qfiledialog_types.QFileDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDialog_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfiledialog_types.QFileDialog, param1: cstring): pointer =
@@ -380,19 +382,19 @@ proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: string): 
 proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qdir_types.QDir): void =
   fcQFileDialog_setDirectoryWithDirectory(self.h, directory.h)
 
-proc directory*(self: gen_qfiledialog_types.QFileDialog, ): gen_qdir_types.QDir =
+proc directory*(self: gen_qfiledialog_types.QFileDialog): gen_qdir_types.QDir =
   gen_qdir_types.QDir(h: fcQFileDialog_directory(self.h), owned: true)
 
 proc setDirectoryUrl*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qurl_types.QUrl): void =
   fcQFileDialog_setDirectoryUrl(self.h, directory.h)
 
-proc directoryUrl*(self: gen_qfiledialog_types.QFileDialog, ): gen_qurl_types.QUrl =
+proc directoryUrl*(self: gen_qfiledialog_types.QFileDialog): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_directoryUrl(self.h), owned: true)
 
 proc selectFile*(self: gen_qfiledialog_types.QFileDialog, filename: string): void =
   fcQFileDialog_selectFile(self.h, struct_miqt_string(data: filename, len: csize_t(len(filename))))
 
-proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_selectedFiles(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -407,7 +409,7 @@ proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
 proc selectUrl*(self: gen_qfiledialog_types.QFileDialog, url: gen_qurl_types.QUrl): void =
   fcQFileDialog_selectUrl(self.h, url.h)
 
-proc selectedUrls*(self: gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types.QUrl] =
+proc selectedUrls*(self: gen_qfiledialog_types.QFileDialog): seq[gen_qurl_types.QUrl] =
   var v_ma = fcQFileDialog_selectedUrls(self.h)
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -426,7 +428,7 @@ proc setNameFilters*(self: gen_qfiledialog_types.QFileDialog, filters: seq[strin
 
   fcQFileDialog_setNameFilters(self.h, struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])))
 
-proc nameFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc nameFilters*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_nameFilters(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -441,13 +443,13 @@ proc nameFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
 proc selectNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
   fcQFileDialog_selectNameFilter(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
 
-proc selectedMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog, ): string =
+proc selectedMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_selectedMimeTypeFilter(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc selectedNameFilter*(self: gen_qfiledialog_types.QFileDialog, ): string =
+proc selectedNameFilter*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_selectedNameFilter(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -460,7 +462,7 @@ proc setMimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, filters: seq[s
 
   fcQFileDialog_setMimeTypeFilters(self.h, struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])))
 
-proc mimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc mimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_mimeTypeFilters(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -475,7 +477,7 @@ proc mimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
 proc selectMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
   fcQFileDialog_selectMimeTypeFilter(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
 
-proc filter*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc filter*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_filter(self.h))
 
 proc setFilter*(self: gen_qfiledialog_types.QFileDialog, filters: cint): void =
@@ -484,19 +486,19 @@ proc setFilter*(self: gen_qfiledialog_types.QFileDialog, filters: cint): void =
 proc setViewMode*(self: gen_qfiledialog_types.QFileDialog, mode: cint): void =
   fcQFileDialog_setViewMode(self.h, cint(mode))
 
-proc viewMode*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc viewMode*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_viewMode(self.h))
 
 proc setFileMode*(self: gen_qfiledialog_types.QFileDialog, mode: cint): void =
   fcQFileDialog_setFileMode(self.h, cint(mode))
 
-proc fileMode*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc fileMode*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_fileMode(self.h))
 
 proc setAcceptMode*(self: gen_qfiledialog_types.QFileDialog, mode: cint): void =
   fcQFileDialog_setAcceptMode(self.h, cint(mode))
 
-proc acceptMode*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc acceptMode*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_acceptMode(self.h))
 
 proc setSidebarUrls*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl_types.QUrl]): void =
@@ -506,7 +508,7 @@ proc setSidebarUrls*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl
 
   fcQFileDialog_setSidebarUrls(self.h, struct_miqt_array(len: csize_t(len(urls)), data: if len(urls) == 0: nil else: addr(urls_CArray[0])))
 
-proc sidebarUrls*(self: gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types.QUrl] =
+proc sidebarUrls*(self: gen_qfiledialog_types.QFileDialog): seq[gen_qurl_types.QUrl] =
   var v_ma = fcQFileDialog_sidebarUrls(self.h)
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -515,7 +517,7 @@ proc sidebarUrls*(self: gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types
   c_free(v_ma.data)
   vx_ret
 
-proc saveState*(self: gen_qfiledialog_types.QFileDialog, ): seq[byte] =
+proc saveState*(self: gen_qfiledialog_types.QFileDialog): seq[byte] =
   var v_bytearray = fcQFileDialog_saveState(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -527,7 +529,7 @@ proc restoreState*(self: gen_qfiledialog_types.QFileDialog, state: seq[byte]): b
 proc setDefaultSuffix*(self: gen_qfiledialog_types.QFileDialog, suffix: string): void =
   fcQFileDialog_setDefaultSuffix(self.h, struct_miqt_string(data: suffix, len: csize_t(len(suffix))))
 
-proc defaultSuffix*(self: gen_qfiledialog_types.QFileDialog, ): string =
+proc defaultSuffix*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_defaultSuffix(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -540,7 +542,7 @@ proc setHistory*(self: gen_qfiledialog_types.QFileDialog, paths: seq[string]): v
 
   fcQFileDialog_setHistory(self.h, struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
-proc history*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc history*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_history(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -555,13 +557,13 @@ proc history*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
 proc setItemDelegate*(self: gen_qfiledialog_types.QFileDialog, delegate: gen_qabstractitemdelegate_types.QAbstractItemDelegate): void =
   fcQFileDialog_setItemDelegate(self.h, delegate.h)
 
-proc itemDelegate*(self: gen_qfiledialog_types.QFileDialog, ): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
+proc itemDelegate*(self: gen_qfiledialog_types.QFileDialog): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
   gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQFileDialog_itemDelegate(self.h), owned: false)
 
 proc setIconProvider*(self: gen_qfiledialog_types.QFileDialog, provider: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider): void =
   fcQFileDialog_setIconProvider(self.h, provider.h)
 
-proc iconProvider*(self: gen_qfiledialog_types.QFileDialog, ): gen_qabstractfileiconprovider_types.QAbstractFileIconProvider =
+proc iconProvider*(self: gen_qfiledialog_types.QFileDialog): gen_qabstractfileiconprovider_types.QAbstractFileIconProvider =
   gen_qabstractfileiconprovider_types.QAbstractFileIconProvider(h: fcQFileDialog_iconProvider(self.h), owned: false)
 
 proc setLabelText*(self: gen_qfiledialog_types.QFileDialog, label: cint, text: string): void =
@@ -580,7 +582,7 @@ proc setSupportedSchemes*(self: gen_qfiledialog_types.QFileDialog, schemes: seq[
 
   fcQFileDialog_setSupportedSchemes(self.h, struct_miqt_array(len: csize_t(len(schemes)), data: if len(schemes) == 0: nil else: addr(schemes_CArray[0])))
 
-proc supportedSchemes*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc supportedSchemes*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_supportedSchemes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -595,7 +597,7 @@ proc supportedSchemes*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
 proc setProxyModel*(self: gen_qfiledialog_types.QFileDialog, model: gen_qabstractproxymodel_types.QAbstractProxyModel): void =
   fcQFileDialog_setProxyModel(self.h, model.h)
 
-proc proxyModel*(self: gen_qfiledialog_types.QFileDialog, ): gen_qabstractproxymodel_types.QAbstractProxyModel =
+proc proxyModel*(self: gen_qfiledialog_types.QFileDialog): gen_qabstractproxymodel_types.QAbstractProxyModel =
   gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQFileDialog_proxyModel(self.h), owned: false)
 
 proc setOption*(self: gen_qfiledialog_types.QFileDialog, option: cint): void =
@@ -607,7 +609,7 @@ proc testOption*(self: gen_qfiledialog_types.QFileDialog, option: cint): bool =
 proc setOptions*(self: gen_qfiledialog_types.QFileDialog, options: cint): void =
   fcQFileDialog_setOptions(self.h, cint(options))
 
-proc options*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc options*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_options(self.h))
 
 proc setVisible*(self: gen_qfiledialog_types.QFileDialog, visible: bool): void =
@@ -617,7 +619,7 @@ proc fileSelected*(self: gen_qfiledialog_types.QFileDialog, file: string): void 
   fcQFileDialog_fileSelected(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
 
 type QFileDialogfileSelectedSlot* = proc(file: string)
-proc miqt_exec_callback_cQFileDialog_fileSelected(slot: int, file: struct_miqt_string) {.cdecl.} =
+proc cQFileDialog_slot_callback_fileSelected(slot: int, file: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfileSelectedSlot](cast[pointer](slot))
   let vfile_ms = file
   let vfilex_ret = string.fromBytes(toOpenArrayByte(vfile_ms.data, 0, int(vfile_ms.len)-1))
@@ -626,7 +628,7 @@ proc miqt_exec_callback_cQFileDialog_fileSelected(slot: int, file: struct_miqt_s
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_fileSelected_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_fileSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogfileSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -634,7 +636,7 @@ proc onfileSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialogf
   var tmp = new QFileDialogfileSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_fileSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_fileSelected, miqt_exec_callback_cQFileDialog_fileSelected_release)
+  fcQFileDialog_connect_fileSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_fileSelected, cQFileDialog_slot_callback_fileSelected_release)
 
 proc filesSelected*(self: gen_qfiledialog_types.QFileDialog, files: seq[string]): void =
   var files_CArray = newSeq[struct_miqt_string](len(files))
@@ -644,7 +646,7 @@ proc filesSelected*(self: gen_qfiledialog_types.QFileDialog, files: seq[string])
   fcQFileDialog_filesSelected(self.h, struct_miqt_array(len: csize_t(len(files)), data: if len(files) == 0: nil else: addr(files_CArray[0])))
 
 type QFileDialogfilesSelectedSlot* = proc(files: seq[string])
-proc miqt_exec_callback_cQFileDialog_filesSelected(slot: int, files: struct_miqt_array) {.cdecl.} =
+proc cQFileDialog_slot_callback_filesSelected(slot: int, files: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfilesSelectedSlot](cast[pointer](slot))
   var vfiles_ma = files
   var vfilesx_ret = newSeq[string](int(vfiles_ma.len))
@@ -659,7 +661,7 @@ proc miqt_exec_callback_cQFileDialog_filesSelected(slot: int, files: struct_miqt
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_filesSelected_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_filesSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogfilesSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -667,13 +669,13 @@ proc onfilesSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialog
   var tmp = new QFileDialogfilesSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_filesSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_filesSelected, miqt_exec_callback_cQFileDialog_filesSelected_release)
+  fcQFileDialog_connect_filesSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_filesSelected, cQFileDialog_slot_callback_filesSelected_release)
 
 proc currentChanged*(self: gen_qfiledialog_types.QFileDialog, path: string): void =
   fcQFileDialog_currentChanged(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
 
 type QFileDialogcurrentChangedSlot* = proc(path: string)
-proc miqt_exec_callback_cQFileDialog_currentChanged(slot: int, path: struct_miqt_string) {.cdecl.} =
+proc cQFileDialog_slot_callback_currentChanged(slot: int, path: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogcurrentChangedSlot](cast[pointer](slot))
   let vpath_ms = path
   let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
@@ -682,7 +684,7 @@ proc miqt_exec_callback_cQFileDialog_currentChanged(slot: int, path: struct_miqt
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_currentChanged_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_currentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogcurrentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -690,13 +692,13 @@ proc oncurrentChanged*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialo
   var tmp = new QFileDialogcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_currentChanged, miqt_exec_callback_cQFileDialog_currentChanged_release)
+  fcQFileDialog_connect_currentChanged(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_currentChanged, cQFileDialog_slot_callback_currentChanged_release)
 
 proc directoryEntered*(self: gen_qfiledialog_types.QFileDialog, directory: string): void =
   fcQFileDialog_directoryEntered(self.h, struct_miqt_string(data: directory, len: csize_t(len(directory))))
 
 type QFileDialogdirectoryEnteredSlot* = proc(directory: string)
-proc miqt_exec_callback_cQFileDialog_directoryEntered(slot: int, directory: struct_miqt_string) {.cdecl.} =
+proc cQFileDialog_slot_callback_directoryEntered(slot: int, directory: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogdirectoryEnteredSlot](cast[pointer](slot))
   let vdirectory_ms = directory
   let vdirectoryx_ret = string.fromBytes(toOpenArrayByte(vdirectory_ms.data, 0, int(vdirectory_ms.len)-1))
@@ -705,7 +707,7 @@ proc miqt_exec_callback_cQFileDialog_directoryEntered(slot: int, directory: stru
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_directoryEntered_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_directoryEntered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogdirectoryEnteredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -713,19 +715,19 @@ proc ondirectoryEntered*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDia
   var tmp = new QFileDialogdirectoryEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_directoryEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_directoryEntered, miqt_exec_callback_cQFileDialog_directoryEntered_release)
+  fcQFileDialog_connect_directoryEntered(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_directoryEntered, cQFileDialog_slot_callback_directoryEntered_release)
 
 proc urlSelected*(self: gen_qfiledialog_types.QFileDialog, url: gen_qurl_types.QUrl): void =
   fcQFileDialog_urlSelected(self.h, url.h)
 
 type QFileDialogurlSelectedSlot* = proc(url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQFileDialog_urlSelected(slot: int, url: pointer) {.cdecl.} =
+proc cQFileDialog_slot_callback_urlSelected(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogurlSelectedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_urlSelected_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_urlSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogurlSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -733,7 +735,7 @@ proc onurlSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialogur
   var tmp = new QFileDialogurlSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_urlSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_urlSelected, miqt_exec_callback_cQFileDialog_urlSelected_release)
+  fcQFileDialog_connect_urlSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_urlSelected, cQFileDialog_slot_callback_urlSelected_release)
 
 proc urlsSelected*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl_types.QUrl]): void =
   var urls_CArray = newSeq[pointer](len(urls))
@@ -743,7 +745,7 @@ proc urlsSelected*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl_t
   fcQFileDialog_urlsSelected(self.h, struct_miqt_array(len: csize_t(len(urls)), data: if len(urls) == 0: nil else: addr(urls_CArray[0])))
 
 type QFileDialogurlsSelectedSlot* = proc(urls: seq[gen_qurl_types.QUrl])
-proc miqt_exec_callback_cQFileDialog_urlsSelected(slot: int, urls: struct_miqt_array) {.cdecl.} =
+proc cQFileDialog_slot_callback_urlsSelected(slot: int, urls: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogurlsSelectedSlot](cast[pointer](slot))
   var vurls_ma = urls
   var vurlsx_ret = newSeq[gen_qurl_types.QUrl](int(vurls_ma.len))
@@ -755,7 +757,7 @@ proc miqt_exec_callback_cQFileDialog_urlsSelected(slot: int, urls: struct_miqt_a
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_urlsSelected_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_urlsSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogurlsSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -763,19 +765,19 @@ proc onurlsSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialogu
   var tmp = new QFileDialogurlsSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_urlsSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_urlsSelected, miqt_exec_callback_cQFileDialog_urlsSelected_release)
+  fcQFileDialog_connect_urlsSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_urlsSelected, cQFileDialog_slot_callback_urlsSelected_release)
 
 proc currentUrlChanged*(self: gen_qfiledialog_types.QFileDialog, url: gen_qurl_types.QUrl): void =
   fcQFileDialog_currentUrlChanged(self.h, url.h)
 
 type QFileDialogcurrentUrlChangedSlot* = proc(url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQFileDialog_currentUrlChanged(slot: int, url: pointer) {.cdecl.} =
+proc cQFileDialog_slot_callback_currentUrlChanged(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogcurrentUrlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_currentUrlChanged_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_currentUrlChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogcurrentUrlChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -783,19 +785,19 @@ proc oncurrentUrlChanged*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDi
   var tmp = new QFileDialogcurrentUrlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_currentUrlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_currentUrlChanged, miqt_exec_callback_cQFileDialog_currentUrlChanged_release)
+  fcQFileDialog_connect_currentUrlChanged(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_currentUrlChanged, cQFileDialog_slot_callback_currentUrlChanged_release)
 
 proc directoryUrlEntered*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qurl_types.QUrl): void =
   fcQFileDialog_directoryUrlEntered(self.h, directory.h)
 
 type QFileDialogdirectoryUrlEnteredSlot* = proc(directory: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQFileDialog_directoryUrlEntered(slot: int, directory: pointer) {.cdecl.} =
+proc cQFileDialog_slot_callback_directoryUrlEntered(slot: int, directory: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogdirectoryUrlEnteredSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: directory, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_directoryUrlEntered_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_directoryUrlEntered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogdirectoryUrlEnteredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -803,13 +805,13 @@ proc ondirectoryUrlEntered*(self: gen_qfiledialog_types.QFileDialog, slot: QFile
   var tmp = new QFileDialogdirectoryUrlEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_directoryUrlEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_directoryUrlEntered, miqt_exec_callback_cQFileDialog_directoryUrlEntered_release)
+  fcQFileDialog_connect_directoryUrlEntered(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_directoryUrlEntered, cQFileDialog_slot_callback_directoryUrlEntered_release)
 
 proc filterSelected*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
   fcQFileDialog_filterSelected(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
 
 type QFileDialogfilterSelectedSlot* = proc(filter: string)
-proc miqt_exec_callback_cQFileDialog_filterSelected(slot: int, filter: struct_miqt_string) {.cdecl.} =
+proc cQFileDialog_slot_callback_filterSelected(slot: int, filter: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfilterSelectedSlot](cast[pointer](slot))
   let vfilter_ms = filter
   let vfilterx_ret = string.fromBytes(toOpenArrayByte(vfilter_ms.data, 0, int(vfilter_ms.len)-1))
@@ -818,7 +820,7 @@ proc miqt_exec_callback_cQFileDialog_filterSelected(slot: int, filter: struct_mi
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQFileDialog_filterSelected_release(slot: int) {.cdecl.} =
+proc cQFileDialog_slot_callback_filterSelected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QFileDialogfilterSelectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -826,36 +828,36 @@ proc onfilterSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialo
   var tmp = new QFileDialogfilterSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileDialog_connect_filterSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileDialog_filterSelected, miqt_exec_callback_cQFileDialog_filterSelected_release)
+  fcQFileDialog_connect_filterSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_filterSelected, cQFileDialog_slot_callback_filterSelected_release)
 
-proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, ): string =
+proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getOpenFileName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, ): gen_qurl_types.QUrl =
+proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl(), owned: true)
 
-proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, ): string =
+proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getSaveFileName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, ): gen_qurl_types.QUrl =
+proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl(), owned: true)
 
-proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, ): string =
+proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getExistingDirectory()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, ): gen_qurl_types.QUrl =
+proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl(), owned: true)
 
-proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, ): seq[string] =
+proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_getOpenFileNames()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -867,7 +869,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, ): seq[string]
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types.QUrl] =
+proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog): seq[gen_qurl_types.QUrl] =
   var v_ma = fcQFileDialog_getOpenFileUrls()
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1205,11 +1207,11 @@ type QFileDialogVTable* {.inheritable, pure.} = object
   customEvent*: QFileDialogcustomEventProc
   connectNotify*: QFileDialogconnectNotifyProc
   disconnectNotify*: QFileDialogdisconnectNotifyProc
-proc QFileDialogmetaObject*(self: gen_qfiledialog_types.QFileDialog, ): gen_qobjectdefs_types.QMetaObject =
+proc QFileDialogmetaObject*(self: gen_qfiledialog_types.QFileDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDialog_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQFileDialog_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -1220,8 +1222,8 @@ proc miqt_exec_callback_cQFileDialog_metaObject(vtbl: pointer, self: pointer): p
 proc QFileDialogmetacast*(self: gen_qfiledialog_types.QFileDialog, param1: cstring): pointer =
   fcQFileDialog_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQFileDialog_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -1230,8 +1232,8 @@ proc miqt_exec_callback_cQFileDialog_metacast(vtbl: pointer, self: pointer, para
 proc QFileDialogmetacall*(self: gen_qfiledialog_types.QFileDialog, param1: cint, param2: cint, param3: pointer): cint =
   fcQFileDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQFileDialog_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1242,8 +1244,8 @@ proc miqt_exec_callback_cQFileDialog_metacall(vtbl: pointer, self: pointer, para
 proc QFileDialogsetVisible*(self: gen_qfiledialog_types.QFileDialog, visible: bool): void =
   fcQFileDialog_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQFileDialog_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
@@ -1251,34 +1253,34 @@ proc miqt_exec_callback_cQFileDialog_setVisible(vtbl: pointer, self: pointer, vi
 proc QFileDialogdone*(self: gen_qfiledialog_types.QFileDialog, resultVal: cint): void =
   fcQFileDialog_virtualbase_done(self.h, resultVal)
 
-proc miqt_exec_callback_cQFileDialog_done(vtbl: pointer, self: pointer, resultVal: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = resultVal
   vtbl[].done(self, slotval1)
 
-proc QFileDialogaccept*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc QFileDialogaccept*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_virtualbase_accept(self.h)
 
-proc miqt_exec_callback_cQFileDialog_accept(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_accept(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   vtbl[].accept(self)
 
 proc QFileDialogchangeEvent*(self: gen_qfiledialog_types.QFileDialog, e: gen_qcoreevent_types.QEvent): void =
   fcQFileDialog_virtualbase_changeEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQFileDialog_changeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QFileDialogsizeHint*(self: gen_qfiledialog_types.QFileDialog, ): gen_qsize_types.QSize =
+proc QFileDialogsizeHint*(self: gen_qfiledialog_types.QFileDialog): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQFileDialog_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQFileDialog_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -1286,11 +1288,11 @@ proc miqt_exec_callback_cQFileDialog_sizeHint(vtbl: pointer, self: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileDialogminimumSizeHint*(self: gen_qfiledialog_types.QFileDialog, ): gen_qsize_types.QSize =
+proc QFileDialogminimumSizeHint*(self: gen_qfiledialog_types.QFileDialog): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQFileDialog_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQFileDialog_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -1298,36 +1300,36 @@ proc miqt_exec_callback_cQFileDialog_minimumSizeHint(vtbl: pointer, self: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileDialogopen*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc QFileDialogopen*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_virtualbase_open(self.h)
 
-proc miqt_exec_callback_cQFileDialog_open(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   vtbl[].open(self)
 
-proc QFileDialogexec*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc QFileDialogexec*(self: gen_qfiledialog_types.QFileDialog): cint =
   fcQFileDialog_virtualbase_exec(self.h)
 
-proc miqt_exec_callback_cQFileDialog_exec(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_exec(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
 
-proc QFileDialogreject*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc QFileDialogreject*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_virtualbase_reject(self.h)
 
-proc miqt_exec_callback_cQFileDialog_reject(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   vtbl[].reject(self)
 
 proc QFileDialogkeyPressEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QKeyEvent): void =
   fcQFileDialog_virtualbase_keyPressEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -1335,8 +1337,8 @@ proc miqt_exec_callback_cQFileDialog_keyPressEvent(vtbl: pointer, self: pointer,
 proc QFileDialogcloseEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QCloseEvent): void =
   fcQFileDialog_virtualbase_closeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_closeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -1344,8 +1346,8 @@ proc miqt_exec_callback_cQFileDialog_closeEvent(vtbl: pointer, self: pointer, pa
 proc QFileDialogshowEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QShowEvent): void =
   fcQFileDialog_virtualbase_showEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_showEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -1353,8 +1355,8 @@ proc miqt_exec_callback_cQFileDialog_showEvent(vtbl: pointer, self: pointer, par
 proc QFileDialogresizeEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QResizeEvent): void =
   fcQFileDialog_virtualbase_resizeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_resizeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -1362,8 +1364,8 @@ proc miqt_exec_callback_cQFileDialog_resizeEvent(vtbl: pointer, self: pointer, p
 proc QFileDialogcontextMenuEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QContextMenuEvent): void =
   fcQFileDialog_virtualbase_contextMenuEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -1371,19 +1373,19 @@ proc miqt_exec_callback_cQFileDialog_contextMenuEvent(vtbl: pointer, self: point
 proc QFileDialogeventFilter*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
   fcQFileDialog_virtualbase_eventFilter(self.h, param1.h, param2.h)
 
-proc miqt_exec_callback_cQFileDialog_eventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFileDialogdevType*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc QFileDialogdevType*(self: gen_qfiledialog_types.QFileDialog): cint =
   fcQFileDialog_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQFileDialog_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -1391,27 +1393,27 @@ proc miqt_exec_callback_cQFileDialog_devType(vtbl: pointer, self: pointer): cint
 proc QFileDialogheightForWidth*(self: gen_qfiledialog_types.QFileDialog, param1: cint): cint =
   fcQFileDialog_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQFileDialog_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QFileDialoghasHeightForWidth*(self: gen_qfiledialog_types.QFileDialog, ): bool =
+proc QFileDialoghasHeightForWidth*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQFileDialog_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QFileDialogpaintEngine*(self: gen_qfiledialog_types.QFileDialog, ): gen_qpaintengine_types.QPaintEngine =
+proc QFileDialogpaintEngine*(self: gen_qfiledialog_types.QFileDialog): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQFileDialog_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQFileDialog_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -1422,8 +1424,8 @@ proc miqt_exec_callback_cQFileDialog_paintEngine(vtbl: pointer, self: pointer): 
 proc QFileDialogevent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qcoreevent_types.QEvent): bool =
   fcQFileDialog_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -1432,8 +1434,8 @@ proc miqt_exec_callback_cQFileDialog_event(vtbl: pointer, self: pointer, event: 
 proc QFileDialogmousePressEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QMouseEvent): void =
   fcQFileDialog_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -1441,8 +1443,8 @@ proc miqt_exec_callback_cQFileDialog_mousePressEvent(vtbl: pointer, self: pointe
 proc QFileDialogmouseReleaseEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QMouseEvent): void =
   fcQFileDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -1450,8 +1452,8 @@ proc miqt_exec_callback_cQFileDialog_mouseReleaseEvent(vtbl: pointer, self: poin
 proc QFileDialogmouseDoubleClickEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QMouseEvent): void =
   fcQFileDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -1459,8 +1461,8 @@ proc miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent(vtbl: pointer, self: 
 proc QFileDialogmouseMoveEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QMouseEvent): void =
   fcQFileDialog_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -1468,8 +1470,8 @@ proc miqt_exec_callback_cQFileDialog_mouseMoveEvent(vtbl: pointer, self: pointer
 proc QFileDialogwheelEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QWheelEvent): void =
   fcQFileDialog_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -1477,8 +1479,8 @@ proc miqt_exec_callback_cQFileDialog_wheelEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogkeyReleaseEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QKeyEvent): void =
   fcQFileDialog_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -1486,8 +1488,8 @@ proc miqt_exec_callback_cQFileDialog_keyReleaseEvent(vtbl: pointer, self: pointe
 proc QFileDialogfocusInEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QFocusEvent): void =
   fcQFileDialog_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -1495,8 +1497,8 @@ proc miqt_exec_callback_cQFileDialog_focusInEvent(vtbl: pointer, self: pointer, 
 proc QFileDialogfocusOutEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QFocusEvent): void =
   fcQFileDialog_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -1504,8 +1506,8 @@ proc miqt_exec_callback_cQFileDialog_focusOutEvent(vtbl: pointer, self: pointer,
 proc QFileDialogenterEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QEnterEvent): void =
   fcQFileDialog_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -1513,8 +1515,8 @@ proc miqt_exec_callback_cQFileDialog_enterEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogleaveEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qcoreevent_types.QEvent): void =
   fcQFileDialog_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -1522,8 +1524,8 @@ proc miqt_exec_callback_cQFileDialog_leaveEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogpaintEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QPaintEvent): void =
   fcQFileDialog_virtualbase_paintEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
@@ -1531,8 +1533,8 @@ proc miqt_exec_callback_cQFileDialog_paintEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogmoveEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QMoveEvent): void =
   fcQFileDialog_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -1540,8 +1542,8 @@ proc miqt_exec_callback_cQFileDialog_moveEvent(vtbl: pointer, self: pointer, eve
 proc QFileDialogtabletEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QTabletEvent): void =
   fcQFileDialog_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -1549,8 +1551,8 @@ proc miqt_exec_callback_cQFileDialog_tabletEvent(vtbl: pointer, self: pointer, e
 proc QFileDialogactionEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QActionEvent): void =
   fcQFileDialog_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -1558,8 +1560,8 @@ proc miqt_exec_callback_cQFileDialog_actionEvent(vtbl: pointer, self: pointer, e
 proc QFileDialogdragEnterEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QDragEnterEvent): void =
   fcQFileDialog_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -1567,8 +1569,8 @@ proc miqt_exec_callback_cQFileDialog_dragEnterEvent(vtbl: pointer, self: pointer
 proc QFileDialogdragMoveEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QDragMoveEvent): void =
   fcQFileDialog_virtualbase_dragMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -1576,8 +1578,8 @@ proc miqt_exec_callback_cQFileDialog_dragMoveEvent(vtbl: pointer, self: pointer,
 proc QFileDialogdragLeaveEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QDragLeaveEvent): void =
   fcQFileDialog_virtualbase_dragLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -1585,8 +1587,8 @@ proc miqt_exec_callback_cQFileDialog_dragLeaveEvent(vtbl: pointer, self: pointer
 proc QFileDialogdropEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QDropEvent): void =
   fcQFileDialog_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -1594,8 +1596,8 @@ proc miqt_exec_callback_cQFileDialog_dropEvent(vtbl: pointer, self: pointer, eve
 proc QFileDialoghideEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qevent_types.QHideEvent): void =
   fcQFileDialog_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -1603,8 +1605,8 @@ proc miqt_exec_callback_cQFileDialog_hideEvent(vtbl: pointer, self: pointer, eve
 proc QFileDialognativeEvent*(self: gen_qfiledialog_types.QFileDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
   fcQFileDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQFileDialog_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -1618,8 +1620,8 @@ proc miqt_exec_callback_cQFileDialog_nativeEvent(vtbl: pointer, self: pointer, e
 proc QFileDialogmetric*(self: gen_qfiledialog_types.QFileDialog, param1: cint): cint =
   fcQFileDialog_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQFileDialog_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -1628,8 +1630,8 @@ proc miqt_exec_callback_cQFileDialog_metric(vtbl: pointer, self: pointer, param1
 proc QFileDialoginitPainter*(self: gen_qfiledialog_types.QFileDialog, painter: gen_qpainter_types.QPainter): void =
   fcQFileDialog_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQFileDialog_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -1637,8 +1639,8 @@ proc miqt_exec_callback_cQFileDialog_initPainter(vtbl: pointer, self: pointer, p
 proc QFileDialogredirected*(self: gen_qfiledialog_types.QFileDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQFileDialog_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQFileDialog_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -1647,11 +1649,11 @@ proc miqt_exec_callback_cQFileDialog_redirected(vtbl: pointer, self: pointer, of
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFileDialogsharedPainter*(self: gen_qfiledialog_types.QFileDialog, ): gen_qpainter_types.QPainter =
+proc QFileDialogsharedPainter*(self: gen_qfiledialog_types.QFileDialog): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQFileDialog_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQFileDialog_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -1662,8 +1664,8 @@ proc miqt_exec_callback_cQFileDialog_sharedPainter(vtbl: pointer, self: pointer)
 proc QFileDialoginputMethodEvent*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQFileDialog_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQFileDialog_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -1671,8 +1673,8 @@ proc miqt_exec_callback_cQFileDialog_inputMethodEvent(vtbl: pointer, self: point
 proc QFileDialoginputMethodQuery*(self: gen_qfiledialog_types.QFileDialog, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQFileDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
-proc miqt_exec_callback_cQFileDialog_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -1684,8 +1686,8 @@ proc miqt_exec_callback_cQFileDialog_inputMethodQuery(vtbl: pointer, self: point
 proc QFileDialogfocusNextPrevChild*(self: gen_qfiledialog_types.QFileDialog, next: bool): bool =
   fcQFileDialog_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQFileDialog_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -1694,8 +1696,8 @@ proc miqt_exec_callback_cQFileDialog_focusNextPrevChild(vtbl: pointer, self: poi
 proc QFileDialogtimerEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQFileDialog_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1703,8 +1705,8 @@ proc miqt_exec_callback_cQFileDialog_timerEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogchildEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qcoreevent_types.QChildEvent): void =
   fcQFileDialog_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1712,8 +1714,8 @@ proc miqt_exec_callback_cQFileDialog_childEvent(vtbl: pointer, self: pointer, ev
 proc QFileDialogcustomEvent*(self: gen_qfiledialog_types.QFileDialog, event: gen_qcoreevent_types.QEvent): void =
   fcQFileDialog_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQFileDialog_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1721,8 +1723,8 @@ proc miqt_exec_callback_cQFileDialog_customEvent(vtbl: pointer, self: pointer, e
 proc QFileDialogconnectNotify*(self: gen_qfiledialog_types.QFileDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQFileDialog_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQFileDialog_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1730,19 +1732,19 @@ proc miqt_exec_callback_cQFileDialog_connectNotify(vtbl: pointer, self: pointer,
 proc QFileDialogdisconnectNotify*(self: gen_qfiledialog_types.QFileDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQFileDialog_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQFileDialog_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QFileDialogVTable](vtbl)
+proc cQFileDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQFileDialog* {.inheritable.} = ref object of QFileDialog
   vtbl*: cQFileDialogVTable
-method metaObject*(self: VirtualQFileDialog, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQFileDialog): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFileDialogmetaObject(self[])
-proc miqt_exec_method_cQFileDialog_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQFileDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1750,159 +1752,159 @@ proc miqt_exec_method_cQFileDialog_metaObject(vtbl: pointer, inst: pointer): poi
 
 method metacast*(self: VirtualQFileDialog, param1: cstring): pointer {.base.} =
   QFileDialogmetacast(self[], param1)
-proc miqt_exec_method_cQFileDialog_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQFileDialog, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QFileDialogmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQFileDialog_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method setVisible*(self: VirtualQFileDialog, visible: bool): void {.base.} =
   QFileDialogsetVisible(self[], visible)
-proc miqt_exec_method_cQFileDialog_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
 method done*(self: VirtualQFileDialog, resultVal: cint): void {.base.} =
   QFileDialogdone(self[], resultVal)
-proc miqt_exec_method_cQFileDialog_done(vtbl: pointer, inst: pointer, resultVal: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = resultVal
-  vtbl.done(slotval1)
+  inst.done(slotval1)
 
-method accept*(self: VirtualQFileDialog, ): void {.base.} =
+method accept*(self: VirtualQFileDialog): void {.base.} =
   QFileDialogaccept(self[])
-proc miqt_exec_method_cQFileDialog_accept(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  vtbl.accept()
+proc cQFileDialog_method_callback_accept(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  inst.accept()
 
 method changeEvent*(self: VirtualQFileDialog, e: gen_qcoreevent_types.QEvent): void {.base.} =
   QFileDialogchangeEvent(self[], e)
-proc miqt_exec_method_cQFileDialog_changeEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
-method sizeHint*(self: VirtualQFileDialog, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQFileDialog): gen_qsize_types.QSize {.base.} =
   QFileDialogsizeHint(self[])
-proc miqt_exec_method_cQFileDialog_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQFileDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQFileDialog, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQFileDialog): gen_qsize_types.QSize {.base.} =
   QFileDialogminimumSizeHint(self[])
-proc miqt_exec_method_cQFileDialog_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQFileDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method open*(self: VirtualQFileDialog, ): void {.base.} =
+method open*(self: VirtualQFileDialog): void {.base.} =
   QFileDialogopen(self[])
-proc miqt_exec_method_cQFileDialog_open(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  vtbl.open()
+proc cQFileDialog_method_callback_open(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  inst.open()
 
-method exec*(self: VirtualQFileDialog, ): cint {.base.} =
+method exec*(self: VirtualQFileDialog): cint {.base.} =
   QFileDialogexec(self[])
-proc miqt_exec_method_cQFileDialog_exec(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.exec()
+proc cQFileDialog_method_callback_exec(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.exec()
   virtualReturn
 
-method reject*(self: VirtualQFileDialog, ): void {.base.} =
+method reject*(self: VirtualQFileDialog): void {.base.} =
   QFileDialogreject(self[])
-proc miqt_exec_method_cQFileDialog_reject(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  vtbl.reject()
+proc cQFileDialog_method_callback_reject(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  inst.reject()
 
 method keyPressEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QFileDialogkeyPressEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method closeEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QCloseEvent): void {.base.} =
   QFileDialogcloseEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_closeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method showEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QShowEvent): void {.base.} =
   QFileDialogshowEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_showEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method resizeEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QResizeEvent): void {.base.} =
   QFileDialogresizeEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_resizeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_resizeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QFileDialogcontextMenuEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method eventFilter*(self: VirtualQFileDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QFileDialogeventFilter(self[], param1, param2)
-proc miqt_exec_method_cQFileDialog_eventFilter(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method devType*(self: VirtualQFileDialog, ): cint {.base.} =
+method devType*(self: VirtualQFileDialog): cint {.base.} =
   QFileDialogdevType(self[])
-proc miqt_exec_method_cQFileDialog_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQFileDialog_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method heightForWidth*(self: VirtualQFileDialog, param1: cint): cint {.base.} =
   QFileDialogheightForWidth(self[], param1)
-proc miqt_exec_method_cQFileDialog_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQFileDialog, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQFileDialog): bool {.base.} =
   QFileDialoghasHeightForWidth(self[])
-proc miqt_exec_method_cQFileDialog_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQFileDialog_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQFileDialog, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQFileDialog): gen_qpaintengine_types.QPaintEngine {.base.} =
   QFileDialogpaintEngine(self[])
-proc miqt_exec_method_cQFileDialog_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQFileDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1910,189 +1912,189 @@ proc miqt_exec_method_cQFileDialog_paintEngine(vtbl: pointer, inst: pointer): po
 
 method event*(self: VirtualQFileDialog, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QFileDialogevent(self[], event)
-proc miqt_exec_method_cQFileDialog_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method mousePressEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFileDialogmousePressEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFileDialogmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFileDialogmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QFileDialogmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QFileDialogwheelEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QFileDialogkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method focusInEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QFileDialogfocusInEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QFileDialogfocusOutEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method enterEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
   QFileDialogenterEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQFileDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QFileDialogleaveEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method paintEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
   QFileDialogpaintEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
 method moveEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QFileDialogmoveEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method tabletEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QFileDialogtabletEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
   QFileDialogactionEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QFileDialogdragEnterEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QFileDialogdragMoveEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QFileDialogdragLeaveEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
   QFileDialogdropEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method hideEvent*(self: VirtualQFileDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
   QFileDialoghideEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQFileDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QFileDialognativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQFileDialog_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQFileDialog, param1: cint): cint {.base.} =
   QFileDialogmetric(self[], param1)
-proc miqt_exec_method_cQFileDialog_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQFileDialog, painter: gen_qpainter_types.QPainter): void {.base.} =
   QFileDialoginitPainter(self[], painter)
-proc miqt_exec_method_cQFileDialog_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQFileDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QFileDialogredirected(self[], offset)
-proc miqt_exec_method_cQFileDialog_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQFileDialog, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQFileDialog): gen_qpainter_types.QPainter {.base.} =
   QFileDialogsharedPainter(self[])
-proc miqt_exec_method_cQFileDialog_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQFileDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2100,17 +2102,17 @@ proc miqt_exec_method_cQFileDialog_sharedPainter(vtbl: pointer, inst: pointer): 
 
 method inputMethodEvent*(self: VirtualQFileDialog, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QFileDialoginputMethodEvent(self[], param1)
-proc miqt_exec_method_cQFileDialog_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method inputMethodQuery*(self: VirtualQFileDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
   QFileDialoginputMethodQuery(self[], param1)
-proc miqt_exec_method_cQFileDialog_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2118,69 +2120,69 @@ proc miqt_exec_method_cQFileDialog_inputMethodQuery(vtbl: pointer, inst: pointer
 
 method focusNextPrevChild*(self: VirtualQFileDialog, next: bool): bool {.base.} =
   QFileDialogfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQFileDialog_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method timerEvent*(self: VirtualQFileDialog, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QFileDialogtimerEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQFileDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QFileDialogchildEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQFileDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QFileDialogcustomEvent(self[], event)
-proc miqt_exec_method_cQFileDialog_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQFileDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QFileDialogconnectNotify(self[], signal)
-proc miqt_exec_method_cQFileDialog_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQFileDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QFileDialogdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQFileDialog_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQFileDialog](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
+proc cQFileDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc adjustPosition*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qwidget_types.QWidget): void =
   fcQFileDialog_protectedbase_adjustPosition(self.h, param1.h)
 
-proc updateMicroFocus*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc updateMicroFocus*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc create*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qfiledialog_types.QFileDialog, ): void =
+proc destroy*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qfiledialog_types.QFileDialog, ): bool =
+proc focusNextChild*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qfiledialog_types.QFileDialog, ): bool =
+proc focusPreviousChild*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qfiledialog_types.QFileDialog, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qfiledialog_types.QFileDialog): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQFileDialog_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+proc senderSignalIndex*(self: gen_qfiledialog_types.QFileDialog): cint =
   fcQFileDialog_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qfiledialog_types.QFileDialog, signal: cstring): cint =
@@ -2194,1120 +2196,821 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, f: cint,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new2(addr(vtbl[].vtbl), parent.h, cint(f)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, cint(f)), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new3(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new3(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new4(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string, directory: string,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new5(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory)))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory)))), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string, directory: string, filter: string,
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ref QFileDialogVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QFileDialogVTable](fcQFileDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileDialog_metaObject
+    vtbl[].vtbl.metaObject = cQFileDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQFileDialog_metacast
+    vtbl[].vtbl.metacast = cQFileDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQFileDialog_metacall
+    vtbl[].vtbl.metacall = cQFileDialog_vtable_callback_metacall
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQFileDialog_setVisible
+    vtbl[].vtbl.setVisible = cQFileDialog_vtable_callback_setVisible
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = miqt_exec_callback_cQFileDialog_done
+    vtbl[].vtbl.done = cQFileDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = miqt_exec_callback_cQFileDialog_accept
+    vtbl[].vtbl.accept = cQFileDialog_vtable_callback_accept
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQFileDialog_changeEvent
+    vtbl[].vtbl.changeEvent = cQFileDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQFileDialog_sizeHint
+    vtbl[].vtbl.sizeHint = cQFileDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQFileDialog_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQFileDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQFileDialog_open
+    vtbl[].vtbl.open = cQFileDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = miqt_exec_callback_cQFileDialog_exec
+    vtbl[].vtbl.exec = cQFileDialog_vtable_callback_exec
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = miqt_exec_callback_cQFileDialog_reject
+    vtbl[].vtbl.reject = cQFileDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQFileDialog_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQFileDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQFileDialog_closeEvent
+    vtbl[].vtbl.closeEvent = cQFileDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQFileDialog_showEvent
+    vtbl[].vtbl.showEvent = cQFileDialog_vtable_callback_showEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQFileDialog_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQFileDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQFileDialog_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQFileDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileDialog_eventFilter
+    vtbl[].vtbl.eventFilter = cQFileDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQFileDialog_devType
+    vtbl[].vtbl.devType = cQFileDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQFileDialog_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQFileDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQFileDialog_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQFileDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQFileDialog_paintEngine
+    vtbl[].vtbl.paintEngine = cQFileDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQFileDialog_event
+    vtbl[].vtbl.event = cQFileDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQFileDialog_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQFileDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQFileDialog_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQFileDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQFileDialog_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQFileDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQFileDialog_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQFileDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQFileDialog_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQFileDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQFileDialog_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQFileDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQFileDialog_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQFileDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQFileDialog_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQFileDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQFileDialog_enterEvent
+    vtbl[].vtbl.enterEvent = cQFileDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQFileDialog_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQFileDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQFileDialog_paintEvent
+    vtbl[].vtbl.paintEvent = cQFileDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQFileDialog_moveEvent
+    vtbl[].vtbl.moveEvent = cQFileDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQFileDialog_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQFileDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQFileDialog_actionEvent
+    vtbl[].vtbl.actionEvent = cQFileDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQFileDialog_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQFileDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQFileDialog_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQFileDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQFileDialog_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQFileDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQFileDialog_dropEvent
+    vtbl[].vtbl.dropEvent = cQFileDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQFileDialog_hideEvent
+    vtbl[].vtbl.hideEvent = cQFileDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQFileDialog_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQFileDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQFileDialog_metric
+    vtbl[].vtbl.metric = cQFileDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQFileDialog_initPainter
+    vtbl[].vtbl.initPainter = cQFileDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQFileDialog_redirected
+    vtbl[].vtbl.redirected = cQFileDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQFileDialog_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQFileDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQFileDialog_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQFileDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQFileDialog_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQFileDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQFileDialog_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQFileDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileDialog_timerEvent
+    vtbl[].vtbl.timerEvent = cQFileDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileDialog_childEvent
+    vtbl[].vtbl.childEvent = cQFileDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileDialog_customEvent
+    vtbl[].vtbl.customEvent = cQFileDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileDialog_connectNotify
+    vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileDialog_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new6(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter)))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter)))), owned: true)
 
+const cQFileDialog_mvtbl = cQFileDialogVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQFileDialog()[])](self.fcQFileDialog_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQFileDialog_method_callback_metaObject,
+  metacast: cQFileDialog_method_callback_metacast,
+  metacall: cQFileDialog_method_callback_metacall,
+  setVisible: cQFileDialog_method_callback_setVisible,
+  done: cQFileDialog_method_callback_done,
+  accept: cQFileDialog_method_callback_accept,
+  changeEvent: cQFileDialog_method_callback_changeEvent,
+  sizeHint: cQFileDialog_method_callback_sizeHint,
+  minimumSizeHint: cQFileDialog_method_callback_minimumSizeHint,
+  open: cQFileDialog_method_callback_open,
+  exec: cQFileDialog_method_callback_exec,
+  reject: cQFileDialog_method_callback_reject,
+  keyPressEvent: cQFileDialog_method_callback_keyPressEvent,
+  closeEvent: cQFileDialog_method_callback_closeEvent,
+  showEvent: cQFileDialog_method_callback_showEvent,
+  resizeEvent: cQFileDialog_method_callback_resizeEvent,
+  contextMenuEvent: cQFileDialog_method_callback_contextMenuEvent,
+  eventFilter: cQFileDialog_method_callback_eventFilter,
+  devType: cQFileDialog_method_callback_devType,
+  heightForWidth: cQFileDialog_method_callback_heightForWidth,
+  hasHeightForWidth: cQFileDialog_method_callback_hasHeightForWidth,
+  paintEngine: cQFileDialog_method_callback_paintEngine,
+  event: cQFileDialog_method_callback_event,
+  mousePressEvent: cQFileDialog_method_callback_mousePressEvent,
+  mouseReleaseEvent: cQFileDialog_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQFileDialog_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: cQFileDialog_method_callback_mouseMoveEvent,
+  wheelEvent: cQFileDialog_method_callback_wheelEvent,
+  keyReleaseEvent: cQFileDialog_method_callback_keyReleaseEvent,
+  focusInEvent: cQFileDialog_method_callback_focusInEvent,
+  focusOutEvent: cQFileDialog_method_callback_focusOutEvent,
+  enterEvent: cQFileDialog_method_callback_enterEvent,
+  leaveEvent: cQFileDialog_method_callback_leaveEvent,
+  paintEvent: cQFileDialog_method_callback_paintEvent,
+  moveEvent: cQFileDialog_method_callback_moveEvent,
+  tabletEvent: cQFileDialog_method_callback_tabletEvent,
+  actionEvent: cQFileDialog_method_callback_actionEvent,
+  dragEnterEvent: cQFileDialog_method_callback_dragEnterEvent,
+  dragMoveEvent: cQFileDialog_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQFileDialog_method_callback_dragLeaveEvent,
+  dropEvent: cQFileDialog_method_callback_dropEvent,
+  hideEvent: cQFileDialog_method_callback_hideEvent,
+  nativeEvent: cQFileDialog_method_callback_nativeEvent,
+  metric: cQFileDialog_method_callback_metric,
+  initPainter: cQFileDialog_method_callback_initPainter,
+  redirected: cQFileDialog_method_callback_redirected,
+  sharedPainter: cQFileDialog_method_callback_sharedPainter,
+  inputMethodEvent: cQFileDialog_method_callback_inputMethodEvent,
+  inputMethodQuery: cQFileDialog_method_callback_inputMethodQuery,
+  focusNextPrevChild: cQFileDialog_method_callback_focusNextPrevChild,
+  timerEvent: cQFileDialog_method_callback_timerEvent,
+  childEvent: cQFileDialog_method_callback_childEvent,
+  customEvent: cQFileDialog_method_callback_customEvent,
+  connectNotify: cQFileDialog_method_callback_connectNotify,
+  disconnectNotify: cQFileDialog_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, f: cint,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new2(addr(vtbl[].vtbl), parent.h, cint(f))
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new2(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, cint(f))
+  inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new3(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new3(addr(cQFileDialog_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new4(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new4(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
+  inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string, directory: string,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new5(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))))
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new5(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))))
+  inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget, caption: string, directory: string, filter: string,
-    vtbl: VirtualQFileDialog) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileDialogVTable, _: ptr cQFileDialog) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQFileDialog()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileDialog, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileDialog_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQFileDialog_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQFileDialog_metacall
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQFileDialog_setVisible
-  vtbl[].vtbl.done = miqt_exec_method_cQFileDialog_done
-  vtbl[].vtbl.accept = miqt_exec_method_cQFileDialog_accept
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQFileDialog_changeEvent
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQFileDialog_sizeHint
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQFileDialog_minimumSizeHint
-  vtbl[].vtbl.open = miqt_exec_method_cQFileDialog_open
-  vtbl[].vtbl.exec = miqt_exec_method_cQFileDialog_exec
-  vtbl[].vtbl.reject = miqt_exec_method_cQFileDialog_reject
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQFileDialog_keyPressEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQFileDialog_closeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQFileDialog_showEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQFileDialog_resizeEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQFileDialog_contextMenuEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileDialog_eventFilter
-  vtbl[].vtbl.devType = miqt_exec_method_cQFileDialog_devType
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQFileDialog_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQFileDialog_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQFileDialog_paintEngine
-  vtbl[].vtbl.event = miqt_exec_method_cQFileDialog_event
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQFileDialog_mousePressEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQFileDialog_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQFileDialog_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQFileDialog_mouseMoveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQFileDialog_wheelEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQFileDialog_keyReleaseEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQFileDialog_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQFileDialog_focusOutEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQFileDialog_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQFileDialog_leaveEvent
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQFileDialog_paintEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQFileDialog_moveEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQFileDialog_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQFileDialog_actionEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQFileDialog_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQFileDialog_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQFileDialog_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQFileDialog_dropEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQFileDialog_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQFileDialog_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQFileDialog_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQFileDialog_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQFileDialog_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQFileDialog_sharedPainter
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQFileDialog_inputMethodEvent
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQFileDialog_inputMethodQuery
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQFileDialog_focusNextPrevChild
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileDialog_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileDialog_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileDialog_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileDialog_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileDialog_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQFileDialog_new6(addr(vtbl[].vtbl), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
-  vtbl[].owned = true
+    inst: VirtualQFileDialog) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQFileDialog_new6(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfiledialog_types.QFileDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDialog_staticMetaObject())

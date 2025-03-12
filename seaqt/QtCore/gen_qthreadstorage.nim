@@ -37,12 +37,12 @@ export gen_qthreadstorage_types
 
 type cQThreadStorageData*{.exportc: "QThreadStorageData", incompleteStruct.} = object
 
-proc fcQThreadStorageData_get(self: pointer, ): pointer {.importc: "QThreadStorageData_get".}
+proc fcQThreadStorageData_get(self: pointer): pointer {.importc: "QThreadStorageData_get".}
 proc fcQThreadStorageData_set(self: pointer, p: pointer): pointer {.importc: "QThreadStorageData_set".}
 proc fcQThreadStorageData_finish(param1: pointer): void {.importc: "QThreadStorageData_finish".}
 proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
 
-proc get*(self: gen_qthreadstorage_types.QThreadStorageData, ): pointer =
+proc get*(self: gen_qthreadstorage_types.QThreadStorageData): pointer =
   fcQThreadStorageData_get(self.h)
 
 proc set*(self: gen_qthreadstorage_types.QThreadStorageData, p: pointer): pointer =

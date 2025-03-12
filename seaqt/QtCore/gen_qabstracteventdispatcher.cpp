@@ -13,15 +13,6 @@
 #include <QThread>
 #include <qabstracteventdispatcher.h>
 #include "gen_qabstracteventdispatcher.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAbstractEventDispatcher_virtbase(QAbstractEventDispatcher* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -184,12 +175,13 @@ QAbstractEventDispatcher* QAbstractEventDispatcher_instance1(QThread* thread) {
 }
 
 const QMetaObject* QAbstractEventDispatcher_staticMetaObject() { return &QAbstractEventDispatcher::staticMetaObject; }
+
 void QAbstractEventDispatcher_delete(QAbstractEventDispatcher* self) {
 	delete self;
 }
 
 QAbstractEventDispatcher__TimerInfo* QAbstractEventDispatcher__TimerInfo_new(int id, int i, int t) {
-	return new QAbstractEventDispatcher::TimerInfo(static_cast<int>(id), static_cast<int>(i), static_cast<Qt::TimerType>(t));
+	return new QAbstractEventDispatcher__TimerInfo(static_cast<int>(id), static_cast<int>(i), static_cast<Qt::TimerType>(t));
 }
 
 void QAbstractEventDispatcher__TimerInfo_delete(QAbstractEventDispatcher__TimerInfo* self) {

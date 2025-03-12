@@ -7,15 +7,6 @@
 #include <QVariant>
 #include <qkeysequence.h>
 #include "gen_qkeysequence.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QKeySequence* QKeySequence_new() {
 	return new QKeySequence();
 }
@@ -240,6 +231,7 @@ struct miqt_string QKeySequence_listToString2(struct miqt_array /* of QKeySequen
 }
 
 const QMetaObject* QKeySequence_staticMetaObject() { return &QKeySequence::staticMetaObject; }
+
 void QKeySequence_delete(QKeySequence* self) {
 	delete self;
 }

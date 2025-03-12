@@ -30,13 +30,20 @@ typedef struct QSGTexture QSGTexture;
 typedef struct QSGTextureMaterial QSGTextureMaterial;
 #endif
 
-struct QSGOpaqueTextureMaterial_VTable {
-	void (*destructor)(struct QSGOpaqueTextureMaterial_VTable* vtbl, QSGOpaqueTextureMaterial* self);
-	QSGMaterialType* (*type)(struct QSGOpaqueTextureMaterial_VTable* vtbl, const QSGOpaqueTextureMaterial* self);
-	QSGMaterialShader* (*createShader)(struct QSGOpaqueTextureMaterial_VTable* vtbl, const QSGOpaqueTextureMaterial* self, int renderMode);
-	int (*compare)(struct QSGOpaqueTextureMaterial_VTable* vtbl, const QSGOpaqueTextureMaterial* self, QSGMaterial* other);
-};
-QSGOpaqueTextureMaterial* QSGOpaqueTextureMaterial_new(struct QSGOpaqueTextureMaterial_VTable* vtbl);
+typedef struct VirtualQSGOpaqueTextureMaterial VirtualQSGOpaqueTextureMaterial;
+typedef struct QSGOpaqueTextureMaterial_VTable{
+	void (*destructor)(VirtualQSGOpaqueTextureMaterial* self);
+	QSGMaterialType* (*type)(const VirtualQSGOpaqueTextureMaterial* self);
+	QSGMaterialShader* (*createShader)(const VirtualQSGOpaqueTextureMaterial* self, int renderMode);
+	int (*compare)(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other);
+}QSGOpaqueTextureMaterial_VTable;
+
+const QSGOpaqueTextureMaterial_VTable* QSGOpaqueTextureMaterial_vtbl(const VirtualQSGOpaqueTextureMaterial* self);
+void* QSGOpaqueTextureMaterial_vdata(const VirtualQSGOpaqueTextureMaterial* self);
+void QSGOpaqueTextureMaterial_setVdata(VirtualQSGOpaqueTextureMaterial* self, void* vdata);
+
+VirtualQSGOpaqueTextureMaterial* QSGOpaqueTextureMaterial_new(const QSGOpaqueTextureMaterial_VTable* vtbl, void* vdata);
+
 void QSGOpaqueTextureMaterial_virtbase(QSGOpaqueTextureMaterial* src, QSGMaterial** outptr_QSGMaterial);
 QSGMaterialType* QSGOpaqueTextureMaterial_type(const QSGOpaqueTextureMaterial* self);
 QSGMaterialShader* QSGOpaqueTextureMaterial_createShader(const QSGOpaqueTextureMaterial* self, int renderMode);
@@ -53,14 +60,17 @@ void QSGOpaqueTextureMaterial_setVerticalWrapMode(QSGOpaqueTextureMaterial* self
 int QSGOpaqueTextureMaterial_verticalWrapMode(const QSGOpaqueTextureMaterial* self);
 void QSGOpaqueTextureMaterial_setAnisotropyLevel(QSGOpaqueTextureMaterial* self, int level);
 int QSGOpaqueTextureMaterial_anisotropyLevel(const QSGOpaqueTextureMaterial* self);
-QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const void* self);
-QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const void* self, int renderMode);
-int QSGOpaqueTextureMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+
+QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const VirtualQSGOpaqueTextureMaterial* self);
+QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const VirtualQSGOpaqueTextureMaterial* self, int renderMode);
+int QSGOpaqueTextureMaterial_virtualbase_compare(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other);
+
 void QSGOpaqueTextureMaterial_delete(QSGOpaqueTextureMaterial* self);
 
 void QSGTextureMaterial_virtbase(QSGTextureMaterial* src, QSGOpaqueTextureMaterial** outptr_QSGOpaqueTextureMaterial);
 QSGMaterialType* QSGTextureMaterial_type(const QSGTextureMaterial* self);
 QSGMaterialShader* QSGTextureMaterial_createShader(const QSGTextureMaterial* self, int renderMode);
+
 void QSGTextureMaterial_delete(QSGTextureMaterial* self);
 
 #ifdef __cplusplus

@@ -3,15 +3,6 @@
 #include <QRecursiveMutex>
 #include <qmutex.h>
 #include "gen_qmutex.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QBasicMutex* QBasicMutex_new() {
 	return new QBasicMutex();
 }

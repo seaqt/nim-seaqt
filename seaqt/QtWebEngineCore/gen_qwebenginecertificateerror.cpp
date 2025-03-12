@@ -7,15 +7,6 @@
 #include <QWebEngineCertificateError>
 #include <qwebenginecertificateerror.h>
 #include "gen_qwebenginecertificateerror.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineCertificateError* QWebEngineCertificateError_new(QWebEngineCertificateError* other) {
 	return new QWebEngineCertificateError(*other);
 }
@@ -74,6 +65,7 @@ struct miqt_array /* of QSslCertificate* */  QWebEngineCertificateError_certific
 }
 
 const QMetaObject* QWebEngineCertificateError_staticMetaObject() { return &QWebEngineCertificateError::staticMetaObject; }
+
 void QWebEngineCertificateError_delete(QWebEngineCertificateError* self) {
 	delete self;
 }

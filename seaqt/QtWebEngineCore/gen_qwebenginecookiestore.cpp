@@ -10,15 +10,6 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QWebEngineCookieStore__FilterRequest
 #include <qwebenginecookiestore.h>
 #include "gen_qwebenginecookiestore.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineCookieStore_virtbase(QWebEngineCookieStore* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -133,12 +124,13 @@ void QWebEngineCookieStore_deleteCookie2(QWebEngineCookieStore* self, QNetworkCo
 }
 
 const QMetaObject* QWebEngineCookieStore_staticMetaObject() { return &QWebEngineCookieStore::staticMetaObject; }
+
 void QWebEngineCookieStore_delete(QWebEngineCookieStore* self) {
 	delete self;
 }
 
 QWebEngineCookieStore__FilterRequest* QWebEngineCookieStore__FilterRequest_new(QWebEngineCookieStore__FilterRequest* param1) {
-	return new QWebEngineCookieStore::FilterRequest(*param1);
+	return new QWebEngineCookieStore__FilterRequest(*param1);
 }
 
 void QWebEngineCookieStore__FilterRequest_operatorAssign(QWebEngineCookieStore__FilterRequest* self, QWebEngineCookieStore__FilterRequest* param1) {

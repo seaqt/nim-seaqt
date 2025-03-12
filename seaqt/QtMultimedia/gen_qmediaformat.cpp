@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qmediaformat.h>
 #include "gen_qmediaformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaFormat* QMediaFormat_new() {
 	return new QMediaFormat();
 }
@@ -191,6 +182,7 @@ void QMediaFormat_resolveForEncoding(QMediaFormat* self, int flags) {
 }
 
 const QMetaObject* QMediaFormat_staticMetaObject() { return &QMediaFormat::staticMetaObject; }
+
 void QMediaFormat_delete(QMediaFormat* self) {
 	delete self;
 }

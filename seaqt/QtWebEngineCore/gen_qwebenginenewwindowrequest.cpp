@@ -10,15 +10,6 @@
 #include <QWebEnginePage>
 #include <qwebenginenewwindowrequest.h>
 #include "gen_qwebenginenewwindowrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineNewWindowRequest_virtbase(QWebEngineNewWindowRequest* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -90,6 +81,7 @@ struct miqt_string QWebEngineNewWindowRequest_tr3(const char* s, const char* c, 
 }
 
 const QMetaObject* QWebEngineNewWindowRequest_staticMetaObject() { return &QWebEngineNewWindowRequest::staticMetaObject; }
+
 void QWebEngineNewWindowRequest_delete(QWebEngineNewWindowRequest* self) {
 	delete self;
 }

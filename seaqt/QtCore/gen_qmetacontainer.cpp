@@ -4,15 +4,6 @@
 #include <QMetaType>
 #include <qmetacontainer.h>
 #include "gen_qmetacontainer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMetaContainer* QMetaContainer_new() {
 	return new QMetaContainer();
 }

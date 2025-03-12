@@ -8,15 +8,6 @@
 #include <QUrl>
 #include <qqmlfile.h>
 #include "gen_qqmlfile.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlFile* QQmlFile_new() {
 	return new QQmlFile();
 }

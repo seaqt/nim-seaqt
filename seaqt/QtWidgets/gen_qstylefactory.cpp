@@ -6,15 +6,6 @@
 #include <QStyleFactory>
 #include <qstylefactory.h>
 #include "gen_qstylefactory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 struct miqt_array /* of struct miqt_string */  QStyleFactory_keys() {
 	QStringList _ret = QStyleFactory::keys();
 	// Convert QList<> from C++ memory to manually-managed C memory

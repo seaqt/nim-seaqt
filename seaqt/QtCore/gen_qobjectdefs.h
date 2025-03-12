@@ -62,19 +62,23 @@ QGenericArgument* QGenericArgument_new();
 QGenericArgument* QGenericArgument_new2(QGenericArgument* param1);
 QGenericArgument* QGenericArgument_new3(const char* aName);
 QGenericArgument* QGenericArgument_new4(const char* aName, const void* aData);
+
 void* QGenericArgument_data(const QGenericArgument* self);
 const char* QGenericArgument_name(const QGenericArgument* self);
+
 void QGenericArgument_delete(QGenericArgument* self);
 
 QGenericReturnArgument* QGenericReturnArgument_new();
 QGenericReturnArgument* QGenericReturnArgument_new2(QGenericReturnArgument* param1);
 QGenericReturnArgument* QGenericReturnArgument_new3(const char* aName);
 QGenericReturnArgument* QGenericReturnArgument_new4(const char* aName, void* aData);
+
 void QGenericReturnArgument_virtbase(QGenericReturnArgument* src, QGenericArgument** outptr_QGenericArgument);
 void QGenericReturnArgument_delete(QGenericReturnArgument* self);
 
 QMetaObject* QMetaObject_new();
 QMetaObject* QMetaObject_new2(QMetaObject* param1);
+
 const char* QMetaObject_className(const QMetaObject* self);
 QMetaObject* QMetaObject_superClass(const QMetaObject* self);
 bool QMetaObject_inherits(const QMetaObject* self, QMetaObject* metaObject);
@@ -175,25 +179,32 @@ QObject* QMetaObject_newInstance7(const QMetaObject* self, QGenericArgument* val
 QObject* QMetaObject_newInstance8(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7);
 QObject* QMetaObject_newInstance9(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8);
 QObject* QMetaObject_newInstance10(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9);
+
 void QMetaObject_delete(QMetaObject* self);
 
 QMetaObject__Connection* QMetaObject__Connection_new();
 QMetaObject__Connection* QMetaObject__Connection_new2(QMetaObject__Connection* other);
+
 void QMetaObject__Connection_operatorAssign(QMetaObject__Connection* self, QMetaObject__Connection* other);
 void QMetaObject__Connection_swap(QMetaObject__Connection* self, QMetaObject__Connection* other);
+
 void QMetaObject__Connection_delete(QMetaObject__Connection* self);
 
 QMetaObject__SuperData* QMetaObject__SuperData_new();
 QMetaObject__SuperData* QMetaObject__SuperData_new2(QMetaObject* mo);
 QMetaObject__SuperData* QMetaObject__SuperData_new3(QMetaObject__SuperData* param1);
+
 QMetaObject* QMetaObject__SuperData_operatorMinusGreater(const QMetaObject__SuperData* self);
 QMetaObject* QMetaObject__SuperData_ToConstQMetaObjectMultiply(const QMetaObject__SuperData* self);
 void QMetaObject__SuperData_operatorAssign(QMetaObject__SuperData* self, QMetaObject__SuperData* param1);
+
 void QMetaObject__SuperData_delete(QMetaObject__SuperData* self);
 
 QMetaObject__Data* QMetaObject__Data_new();
 QMetaObject__Data* QMetaObject__Data_new2(QMetaObject__Data* param1);
+
 void QMetaObject__Data_operatorAssign(QMetaObject__Data* self, QMetaObject__Data* param1);
+
 void QMetaObject__Data_delete(QMetaObject__Data* self);
 
 #ifdef __cplusplus
