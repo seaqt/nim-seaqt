@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qbuffer.cpp", cflags).}
@@ -149,23 +151,23 @@ proc metacall*(self: gen_qbuffer_types.QBuffer, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring): string =
   let v_ms = fcQBuffer_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc buffer*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   var v_bytearray = fcQBuffer_buffer(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc buffer2*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   var v_bytearray = fcQBuffer_buffer2(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setData*(self: gen_qbuffer_types.QBuffer, data: seq[byte]): void =
+proc setData*(self: gen_qbuffer_types.QBuffer, data: openArray[byte]): void =
   fcQBuffer_setData(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc setData*(self: gen_qbuffer_types.QBuffer, data: cstring, len: cint): void =
@@ -173,7 +175,7 @@ proc setData*(self: gen_qbuffer_types.QBuffer, data: cstring, len: cint): void =
 
 proc data*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   var v_bytearray = fcQBuffer_data(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -200,13 +202,13 @@ proc canReadLine*(self: gen_qbuffer_types.QBuffer): bool =
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring, c: cstring): string =
   let v_ms = fcQBuffer_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQBuffer_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -743,8 +745,8 @@ proc cQBuffer_method_callback_customEvent(self: pointer, event: pointer): void {
 proc setOpenMode*(self: gen_qbuffer_types.QBuffer, openMode: cint): void =
   fcQBuffer_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: string): void =
-  fcQBuffer_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: openArray[char]): void =
+  fcQBuffer_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qbuffer_types.QBuffer): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQBuffer_protectedbase_sender(self.h), owned: false)

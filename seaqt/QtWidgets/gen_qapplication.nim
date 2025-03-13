@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qapplication.cpp", cflags).}
@@ -170,7 +172,7 @@ proc metacall*(self: gen_qapplication_types.QApplication, param1: cint, param2: 
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring): string =
   let v_ms = fcQApplication_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -180,8 +182,8 @@ proc style*(_: type gen_qapplication_types.QApplication): gen_qstyle_types.QStyl
 proc setStyle*(_: type gen_qapplication_types.QApplication, style: gen_qstyle_types.QStyle): void =
   fcQApplication_setStyle(style.h)
 
-proc setStyle*(_: type gen_qapplication_types.QApplication, style: string): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQApplication_setStyleWithStyle(struct_miqt_string(data: style, len: csize_t(len(style)))), owned: false)
+proc setStyle*(_: type gen_qapplication_types.QApplication, style: openArray[char]): gen_qstyle_types.QStyle =
+  gen_qstyle_types.QStyle(h: fcQApplication_setStyleWithStyle(struct_miqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style)))), owned: false)
 
 proc palette*(_: type gen_qapplication_types.QApplication, param1: gen_qwidget_types.QWidget): gen_qpalette_types.QPalette =
   gen_qpalette_types.QPalette(h: fcQApplication_palette(param1.h), owned: true)
@@ -330,12 +332,12 @@ proc onfocusChanged*(self: gen_qapplication_types.QApplication, slot: QApplicati
 
 proc styleSheet*(self: gen_qapplication_types.QApplication): string =
   let v_ms = fcQApplication_styleSheet(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setStyleSheet*(self: gen_qapplication_types.QApplication, sheet: string): void =
-  fcQApplication_setStyleSheet(self.h, struct_miqt_string(data: sheet, len: csize_t(len(sheet))))
+proc setStyleSheet*(self: gen_qapplication_types.QApplication, sheet: openArray[char]): void =
+  fcQApplication_setStyleSheet(self.h, struct_miqt_string(data: if len(sheet) > 0: addr sheet[0] else: nil, len: csize_t(len(sheet))))
 
 proc setAutoSipEnabled*(self: gen_qapplication_types.QApplication, enabled: bool): void =
   fcQApplication_setAutoSipEnabled(self.h, enabled)
@@ -351,13 +353,13 @@ proc aboutQt*(_: type gen_qapplication_types.QApplication): void =
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring): string =
   let v_ms = fcQApplication_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQApplication_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

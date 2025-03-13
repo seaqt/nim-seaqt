@@ -1,4 +1,7 @@
 #include <QAnyStringView>
+#include <QString>
+#include <QByteArray>
+#include <QAnyStringView>
 #include <QList>
 #include <QString>
 #include <QByteArray>
@@ -106,12 +109,14 @@ struct miqt_string QVersionNumber_toString(const QVersionNumber* self) {
 	return _ms;
 }
 
-QVersionNumber* QVersionNumber_fromString(QAnyStringView* string) {
-	return new QVersionNumber(QVersionNumber::fromString(*string));
+QVersionNumber* QVersionNumber_fromString(struct miqt_string string) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new QVersionNumber(QVersionNumber::fromString(string_QString));
 }
 
-QVersionNumber* QVersionNumber_fromString2(QAnyStringView* string, ptrdiff_t* suffixIndex) {
-	return new QVersionNumber(QVersionNumber::fromString(*string, (qsizetype*)(suffixIndex)));
+QVersionNumber* QVersionNumber_fromString2(struct miqt_string string, ptrdiff_t* suffixIndex) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new QVersionNumber(QVersionNumber::fromString(string_QString, (qsizetype*)(suffixIndex)));
 }
 
 void QVersionNumber_delete(QVersionNumber* self) {

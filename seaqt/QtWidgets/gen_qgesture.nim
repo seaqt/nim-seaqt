@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qgesture.cpp", cflags).}
@@ -385,7 +387,7 @@ proc metacall*(self: gen_qgesture_types.QGesture, param1: cint, param2: cint, pa
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring): string =
   let v_ms = fcQGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -415,13 +417,13 @@ proc gestureCancelPolicy*(self: gen_qgesture_types.QGesture): cint =
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring): string =
   let v_ms = fcQGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -742,7 +744,7 @@ proc metacall*(self: gen_qgesture_types.QPanGesture, param1: cint, param2: cint,
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring): string =
   let v_ms = fcQPanGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -769,13 +771,13 @@ proc setAcceleration*(self: gen_qgesture_types.QPanGesture, value: float64): voi
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring): string =
   let v_ms = fcQPanGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QPanGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPanGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1096,7 +1098,7 @@ proc metacall*(self: gen_qgesture_types.QPinchGesture, param1: cint, param2: cin
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring): string =
   let v_ms = fcQPinchGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1168,13 +1170,13 @@ proc setRotationAngle*(self: gen_qgesture_types.QPinchGesture, value: float64): 
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring): string =
   let v_ms = fcQPinchGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QPinchGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPinchGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1495,7 +1497,7 @@ proc metacall*(self: gen_qgesture_types.QSwipeGesture, param1: cint, param2: cin
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring): string =
   let v_ms = fcQSwipeGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1513,13 +1515,13 @@ proc setSwipeAngle*(self: gen_qgesture_types.QSwipeGesture, value: float64): voi
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring): string =
   let v_ms = fcQSwipeGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QSwipeGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSwipeGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1840,7 +1842,7 @@ proc metacall*(self: gen_qgesture_types.QTapGesture, param1: cint, param2: cint,
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring): string =
   let v_ms = fcQTapGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1852,13 +1854,13 @@ proc setPosition*(self: gen_qgesture_types.QTapGesture, pos: gen_qpoint_types.QP
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring): string =
   let v_ms = fcQTapGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QTapGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTapGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2179,7 +2181,7 @@ proc metacall*(self: gen_qgesture_types.QTapAndHoldGesture, param1: cint, param2
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring): string =
   let v_ms = fcQTapAndHoldGesture_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2197,13 +2199,13 @@ proc timeout*(_: type gen_qgesture_types.QTapAndHoldGesture): cint =
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring): string =
   let v_ms = fcQTapAndHoldGesture_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgesture_types.QTapAndHoldGesture, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTapAndHoldGesture_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2623,7 +2625,7 @@ proc cQGestureEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   virtualReturn_h
 
 proc create*(T: type gen_qgesture_types.QGestureEvent,
-    gestures: seq[gen_qgesture_types.QGesture],
+    gestures: openArray[gen_qgesture_types.QGesture],
     vtbl: ref QGestureEventVTable = nil): gen_qgesture_types.QGestureEvent =
   var gestures_CArray = newSeq[pointer](len(gestures))
   for i in 0..<len(gestures):
@@ -2663,7 +2665,7 @@ const cQGestureEvent_mvtbl = cQGestureEventVTable(
   clone: cQGestureEvent_method_callback_clone,
 )
 proc create*(T: type gen_qgesture_types.QGestureEvent,
-    gestures: seq[gen_qgesture_types.QGesture],
+    gestures: openArray[gen_qgesture_types.QGesture],
     inst: VirtualQGestureEvent) =
   var gestures_CArray = newSeq[pointer](len(gestures))
   for i in 0..<len(gestures):

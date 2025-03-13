@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qiodevice.cpp", cflags).}
@@ -190,7 +192,7 @@ proc metacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring): string =
   let v_ms = fcQIODevice_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -265,13 +267,13 @@ proc read*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong
 
 proc read*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
   var v_bytearray = fcQIODevice_readWithMaxlen(self.h, maxlen)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc readAll*(self: gen_qiodevice_types.QIODevice): seq[byte] =
   var v_bytearray = fcQIODevice_readAll(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -280,7 +282,7 @@ proc readLine*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clong
 
 proc readLine*(self: gen_qiodevice_types.QIODevice): seq[byte] =
   var v_bytearray = fcQIODevice_readLine2(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -305,7 +307,7 @@ proc write*(self: gen_qiodevice_types.QIODevice, data: cstring, len: clonglong):
 proc write*(self: gen_qiodevice_types.QIODevice, data: cstring): clonglong =
   fcQIODevice_writeWithData(self.h, data)
 
-proc write*(self: gen_qiodevice_types.QIODevice, data: seq[byte]): clonglong =
+proc write*(self: gen_qiodevice_types.QIODevice, data: openArray[byte]): clonglong =
   fcQIODevice_write2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc peek*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
@@ -313,7 +315,7 @@ proc peek*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong
 
 proc peek*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
   var v_bytearray = fcQIODevice_peekWithMaxlen(self.h, maxlen)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -337,7 +339,7 @@ proc getChar*(self: gen_qiodevice_types.QIODevice, c: cstring): bool =
 
 proc errorString*(self: gen_qiodevice_types.QIODevice): string =
   let v_ms = fcQIODevice_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -459,19 +461,19 @@ proc onreadChannelFinished*(self: gen_qiodevice_types.QIODevice, slot: QIODevice
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring): string =
   let v_ms = fcQIODevice_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQIODevice_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc readLine*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
   var v_bytearray = fcQIODevice_readLine1(self.h, maxlen)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -1002,8 +1004,8 @@ proc cQIODevice_method_callback_disconnectNotify(self: pointer, signal: pointer)
 proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
   fcQIODevice_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: string): void =
-  fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: openArray[char]): void =
+  fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qiodevice_types.QIODevice): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h), owned: false)

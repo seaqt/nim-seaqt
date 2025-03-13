@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QNetworkCookieRawFormEnum* = distinct cint
@@ -130,43 +132,43 @@ proc setExpirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie, date: gen
 
 proc domain*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   let v_ms = fcQNetworkCookie_domain(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDomain*(self: gen_qnetworkcookie_types.QNetworkCookie, domain: string): void =
-  fcQNetworkCookie_setDomain(self.h, struct_miqt_string(data: domain, len: csize_t(len(domain))))
+proc setDomain*(self: gen_qnetworkcookie_types.QNetworkCookie, domain: openArray[char]): void =
+  fcQNetworkCookie_setDomain(self.h, struct_miqt_string(data: if len(domain) > 0: addr domain[0] else: nil, len: csize_t(len(domain))))
 
 proc path*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   let v_ms = fcQNetworkCookie_path(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPath*(self: gen_qnetworkcookie_types.QNetworkCookie, path: string): void =
-  fcQNetworkCookie_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setPath*(self: gen_qnetworkcookie_types.QNetworkCookie, path: openArray[char]): void =
+  fcQNetworkCookie_setPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc name*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_name(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setName*(self: gen_qnetworkcookie_types.QNetworkCookie, cookieName: seq[byte]): void =
+proc setName*(self: gen_qnetworkcookie_types.QNetworkCookie, cookieName: openArray[byte]): void =
   fcQNetworkCookie_setName(self.h, struct_miqt_string(data: cast[cstring](if len(cookieName) == 0: nil else: unsafeAddr cookieName[0]), len: csize_t(len(cookieName))))
 
 proc value*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_value(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setValue*(self: gen_qnetworkcookie_types.QNetworkCookie, value: seq[byte]): void =
+proc setValue*(self: gen_qnetworkcookie_types.QNetworkCookie, value: openArray[byte]): void =
   fcQNetworkCookie_setValue(self.h, struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value))))
 
 proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_toRawForm(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -176,7 +178,7 @@ proc hasSameIdentifier*(self: gen_qnetworkcookie_types.QNetworkCookie, other: ge
 proc normalize*(self: gen_qnetworkcookie_types.QNetworkCookie, url: gen_qurl_types.QUrl): void =
   fcQNetworkCookie_normalize(self.h, url.h)
 
-proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString: seq[byte]): seq[gen_qnetworkcookie_types.QNetworkCookie] =
+proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString: openArray[byte]): seq[gen_qnetworkcookie_types.QNetworkCookie] =
   var v_ma = fcQNetworkCookie_parseCookies(struct_miqt_string(data: cast[cstring](if len(cookieString) == 0: nil else: unsafeAddr cookieString[0]), len: csize_t(len(cookieString))))
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -187,7 +189,7 @@ proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString
 
 proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie, form: cint): seq[byte] =
   var v_bytearray = fcQNetworkCookie_toRawForm1(self.h, cint(form))
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -199,11 +201,11 @@ proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
   gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(other.h), owned: true)
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
-    name: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
+    name: openArray[byte]): gen_qnetworkcookie_types.QNetworkCookie =
   gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new3(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
-    name: seq[byte], value: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
+    name: openArray[byte], value: openArray[byte]): gen_qnetworkcookie_types.QNetworkCookie =
   gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new4(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))), struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value)))), owned: true)
 
 proc staticMetaObject*(_: type gen_qnetworkcookie_types.QNetworkCookie): gen_qobjectdefs_types.QMetaObject =

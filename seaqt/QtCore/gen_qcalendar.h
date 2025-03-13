@@ -40,7 +40,7 @@ typedef struct QLocale QLocale;
 
 QCalendar* QCalendar_new();
 QCalendar* QCalendar_new2(int system);
-QCalendar* QCalendar_new3(QAnyStringView* name);
+QCalendar* QCalendar_new3(struct miqt_string name);
 QCalendar* QCalendar_new4(QCalendar__SystemId* id);
 
 bool QCalendar_isValid(const QCalendar* self);

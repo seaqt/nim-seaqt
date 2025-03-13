@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QRegularExpressionPatternOptionEnum* = distinct cint
@@ -151,12 +153,12 @@ proc swap*(self: gen_qregularexpression_types.QRegularExpression, other: gen_qre
 
 proc pattern*(self: gen_qregularexpression_types.QRegularExpression): string =
   let v_ms = fcQRegularExpression_pattern(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPattern*(self: gen_qregularexpression_types.QRegularExpression, pattern: string): void =
-  fcQRegularExpression_setPattern(self.h, struct_miqt_string(data: pattern, len: csize_t(len(pattern))))
+proc setPattern*(self: gen_qregularexpression_types.QRegularExpression, pattern: openArray[char]): void =
+  fcQRegularExpression_setPattern(self.h, struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc isValid*(self: gen_qregularexpression_types.QRegularExpression): bool =
   fcQRegularExpression_isValid(self.h)
@@ -166,7 +168,7 @@ proc patternErrorOffset*(self: gen_qregularexpression_types.QRegularExpression):
 
 proc errorString*(self: gen_qregularexpression_types.QRegularExpression): string =
   let v_ms = fcQRegularExpression_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -179,36 +181,36 @@ proc namedCaptureGroups*(self: gen_qregularexpression_types.QRegularExpression):
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: string): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject)))), owned: true)
+proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char]): gen_qregularexpression_types.QRegularExpressionMatch =
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))), owned: true)
 
-proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: string): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject)))), owned: true)
+proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char]): gen_qregularexpression_types.QRegularExpressionMatchIterator =
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))), owned: true)
 
 proc optimize*(self: gen_qregularexpression_types.QRegularExpression): void =
   fcQRegularExpression_optimize(self.h)
 
-proc escape*(_: type gen_qregularexpression_types.QRegularExpression, str: string): string =
-  let v_ms = fcQRegularExpression_escape(struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc escape*(_: type gen_qregularexpression_types.QRegularExpression, str: openArray[char]): string =
+  let v_ms = fcQRegularExpression_escape(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc wildcardToRegularExpression*(_: type gen_qregularexpression_types.QRegularExpression, str: string): string =
-  let v_ms = fcQRegularExpression_wildcardToRegularExpression(struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc wildcardToRegularExpression*(_: type gen_qregularexpression_types.QRegularExpression, str: openArray[char]): string =
+  let v_ms = fcQRegularExpression_wildcardToRegularExpression(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc anchoredPattern*(_: type gen_qregularexpression_types.QRegularExpression, expression: string): string =
-  let v_ms = fcQRegularExpression_anchoredPattern(struct_miqt_string(data: expression, len: csize_t(len(expression))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc anchoredPattern*(_: type gen_qregularexpression_types.QRegularExpression, expression: openArray[char]): string =
+  let v_ms = fcQRegularExpression_anchoredPattern(struct_miqt_string(data: if len(expression) > 0: addr expression[0] else: nil, len: csize_t(len(expression))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -218,27 +220,27 @@ proc operatorEqual*(self: gen_qregularexpression_types.QRegularExpression, re: g
 proc operatorNotEqual*(self: gen_qregularexpression_types.QRegularExpression, re: gen_qregularexpression_types.QRegularExpression): bool =
   fcQRegularExpression_operatorNotEqual(self.h, re.h)
 
-proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match2(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset), owned: true)
+proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64): gen_qregularexpression_types.QRegularExpressionMatch =
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match2(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset), owned: true)
 
-proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match3(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
+proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatch =
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match3(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
 
-proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match4(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
+proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatch =
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match4(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
 
-proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch2(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset), owned: true)
+proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64): gen_qregularexpression_types.QRegularExpressionMatchIterator =
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch2(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset), owned: true)
 
-proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch3(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
+proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch3(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
 
-proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: string, offset: int64, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch4(self.h, struct_miqt_string(data: subject, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
+proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: int64, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch4(self.h, struct_miqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
 
-proc wildcardToRegularExpression*(_: type gen_qregularexpression_types.QRegularExpression, str: string, options: cint): string =
-  let v_ms = fcQRegularExpression_wildcardToRegularExpression2(struct_miqt_string(data: str, len: csize_t(len(str))), cint(options))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc wildcardToRegularExpression*(_: type gen_qregularexpression_types.QRegularExpression, str: openArray[char], options: cint): string =
+  let v_ms = fcQRegularExpression_wildcardToRegularExpression2(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(options))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -246,16 +248,16 @@ proc create*(T: type gen_qregularexpression_types.QRegularExpression): gen_qregu
   gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new(), owned: true)
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
-    pattern: string): gen_qregularexpression_types.QRegularExpression =
-  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))), owned: true)
+    pattern: openArray[char]): gen_qregularexpression_types.QRegularExpression =
+  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
     re: gen_qregularexpression_types.QRegularExpression): gen_qregularexpression_types.QRegularExpression =
   gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new3(re.h), owned: true)
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
-    pattern: string, options: cint): gen_qregularexpression_types.QRegularExpression =
-  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(options)), owned: true)
+    pattern: openArray[char], options: cint): gen_qregularexpression_types.QRegularExpression =
+  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new4(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(options)), owned: true)
 
 proc operatorAssign*(self: gen_qregularexpression_types.QRegularExpressionMatch, match: gen_qregularexpression_types.QRegularExpressionMatch): void =
   fcQRegularExpressionMatch_operatorAssign(self.h, match.h)
@@ -284,21 +286,21 @@ proc isValid*(self: gen_qregularexpression_types.QRegularExpressionMatch): bool 
 proc lastCapturedIndex*(self: gen_qregularexpression_types.QRegularExpressionMatch): cint =
   fcQRegularExpressionMatch_lastCapturedIndex(self.h)
 
-proc hasCaptured*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: string): bool =
-  fcQRegularExpressionMatch_hasCaptured(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasCaptured*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: openArray[char]): bool =
+  fcQRegularExpressionMatch_hasCaptured(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc hasCaptured*(self: gen_qregularexpression_types.QRegularExpressionMatch, nth: cint): bool =
   fcQRegularExpressionMatch_hasCapturedWithNth(self.h, nth)
 
 proc captured*(self: gen_qregularexpression_types.QRegularExpressionMatch): string =
   let v_ms = fcQRegularExpressionMatch_captured(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc captured*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: string): string =
-  let v_ms = fcQRegularExpressionMatch_capturedWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc captured*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: openArray[char]): string =
+  let v_ms = fcQRegularExpressionMatch_capturedWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -308,7 +310,7 @@ proc capturedTexts*(self: gen_qregularexpression_types.QRegularExpressionMatch):
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -323,18 +325,18 @@ proc capturedLength*(self: gen_qregularexpression_types.QRegularExpressionMatch)
 proc capturedEnd*(self: gen_qregularexpression_types.QRegularExpressionMatch): int64 =
   fcQRegularExpressionMatch_capturedEnd(self.h)
 
-proc capturedStart*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: string): int64 =
-  fcQRegularExpressionMatch_capturedStartWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc capturedStart*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: openArray[char]): int64 =
+  fcQRegularExpressionMatch_capturedStartWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc capturedLength*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: string): int64 =
-  fcQRegularExpressionMatch_capturedLengthWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc capturedLength*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: openArray[char]): int64 =
+  fcQRegularExpressionMatch_capturedLengthWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc capturedEnd*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: string): int64 =
-  fcQRegularExpressionMatch_capturedEndWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc capturedEnd*(self: gen_qregularexpression_types.QRegularExpressionMatch, name: openArray[char]): int64 =
+  fcQRegularExpressionMatch_capturedEndWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc captured*(self: gen_qregularexpression_types.QRegularExpressionMatch, nth: cint): string =
   let v_ms = fcQRegularExpressionMatch_captured1(self.h, nth)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

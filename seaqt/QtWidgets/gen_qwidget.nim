@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWidgetRenderFlagEnum* = distinct cint
@@ -541,7 +543,7 @@ proc metacall*(self: gen_qwidget_types.QWidget, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring): string =
   let v_ms = fcQWidget_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -839,21 +841,21 @@ proc grabGesture*(self: gen_qwidget_types.QWidget, typeVal: cint): void =
 proc ungrabGesture*(self: gen_qwidget_types.QWidget, typeVal: cint): void =
   fcQWidget_ungrabGesture(self.h, cint(typeVal))
 
-proc setWindowTitle*(self: gen_qwidget_types.QWidget, windowTitle: string): void =
-  fcQWidget_setWindowTitle(self.h, struct_miqt_string(data: windowTitle, len: csize_t(len(windowTitle))))
+proc setWindowTitle*(self: gen_qwidget_types.QWidget, windowTitle: openArray[char]): void =
+  fcQWidget_setWindowTitle(self.h, struct_miqt_string(data: if len(windowTitle) > 0: addr windowTitle[0] else: nil, len: csize_t(len(windowTitle))))
 
-proc setStyleSheet*(self: gen_qwidget_types.QWidget, styleSheet: string): void =
-  fcQWidget_setStyleSheet(self.h, struct_miqt_string(data: styleSheet, len: csize_t(len(styleSheet))))
+proc setStyleSheet*(self: gen_qwidget_types.QWidget, styleSheet: openArray[char]): void =
+  fcQWidget_setStyleSheet(self.h, struct_miqt_string(data: if len(styleSheet) > 0: addr styleSheet[0] else: nil, len: csize_t(len(styleSheet))))
 
 proc styleSheet*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_styleSheet(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc windowTitle*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_windowTitle(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -863,30 +865,30 @@ proc setWindowIcon*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon
 proc windowIcon*(self: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQWidget_windowIcon(self.h), owned: true)
 
-proc setWindowIconText*(self: gen_qwidget_types.QWidget, windowIconText: string): void =
-  fcQWidget_setWindowIconText(self.h, struct_miqt_string(data: windowIconText, len: csize_t(len(windowIconText))))
+proc setWindowIconText*(self: gen_qwidget_types.QWidget, windowIconText: openArray[char]): void =
+  fcQWidget_setWindowIconText(self.h, struct_miqt_string(data: if len(windowIconText) > 0: addr windowIconText[0] else: nil, len: csize_t(len(windowIconText))))
 
 proc windowIconText*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_windowIconText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setWindowRole*(self: gen_qwidget_types.QWidget, windowRole: string): void =
-  fcQWidget_setWindowRole(self.h, struct_miqt_string(data: windowRole, len: csize_t(len(windowRole))))
+proc setWindowRole*(self: gen_qwidget_types.QWidget, windowRole: openArray[char]): void =
+  fcQWidget_setWindowRole(self.h, struct_miqt_string(data: if len(windowRole) > 0: addr windowRole[0] else: nil, len: csize_t(len(windowRole))))
 
 proc windowRole*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_windowRole(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setWindowFilePath*(self: gen_qwidget_types.QWidget, filePath: string): void =
-  fcQWidget_setWindowFilePath(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))))
+proc setWindowFilePath*(self: gen_qwidget_types.QWidget, filePath: openArray[char]): void =
+  fcQWidget_setWindowFilePath(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc windowFilePath*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_windowFilePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -899,12 +901,12 @@ proc windowOpacity*(self: gen_qwidget_types.QWidget): float64 =
 proc isWindowModified*(self: gen_qwidget_types.QWidget): bool =
   fcQWidget_isWindowModified(self.h)
 
-proc setToolTip*(self: gen_qwidget_types.QWidget, toolTip: string): void =
-  fcQWidget_setToolTip(self.h, struct_miqt_string(data: toolTip, len: csize_t(len(toolTip))))
+proc setToolTip*(self: gen_qwidget_types.QWidget, toolTip: openArray[char]): void =
+  fcQWidget_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc toolTip*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_toolTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -914,41 +916,41 @@ proc setToolTipDuration*(self: gen_qwidget_types.QWidget, msec: cint): void =
 proc toolTipDuration*(self: gen_qwidget_types.QWidget): cint =
   fcQWidget_toolTipDuration(self.h)
 
-proc setStatusTip*(self: gen_qwidget_types.QWidget, statusTip: string): void =
-  fcQWidget_setStatusTip(self.h, struct_miqt_string(data: statusTip, len: csize_t(len(statusTip))))
+proc setStatusTip*(self: gen_qwidget_types.QWidget, statusTip: openArray[char]): void =
+  fcQWidget_setStatusTip(self.h, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc statusTip*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_statusTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qwidget_types.QWidget, whatsThis: string): void =
-  fcQWidget_setWhatsThis(self.h, struct_miqt_string(data: whatsThis, len: csize_t(len(whatsThis))))
+proc setWhatsThis*(self: gen_qwidget_types.QWidget, whatsThis: openArray[char]): void =
+  fcQWidget_setWhatsThis(self.h, struct_miqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc whatsThis*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_whatsThis(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc accessibleName*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_accessibleName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setAccessibleName*(self: gen_qwidget_types.QWidget, name: string): void =
-  fcQWidget_setAccessibleName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setAccessibleName*(self: gen_qwidget_types.QWidget, name: openArray[char]): void =
+  fcQWidget_setAccessibleName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc accessibleDescription*(self: gen_qwidget_types.QWidget): string =
   let v_ms = fcQWidget_accessibleDescription(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setAccessibleDescription*(self: gen_qwidget_types.QWidget, description: string): void =
-  fcQWidget_setAccessibleDescription(self.h, struct_miqt_string(data: description, len: csize_t(len(description))))
+proc setAccessibleDescription*(self: gen_qwidget_types.QWidget, description: openArray[char]): void =
+  fcQWidget_setAccessibleDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc setLayoutDirection*(self: gen_qwidget_types.QWidget, direction: cint): void =
   fcQWidget_setLayoutDirection(self.h, cint(direction))
@@ -1135,11 +1137,11 @@ proc setGeometry*(self: gen_qwidget_types.QWidget, geometry: gen_qrect_types.QRe
 
 proc saveGeometry*(self: gen_qwidget_types.QWidget): seq[byte] =
   var v_bytearray = fcQWidget_saveGeometry(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc restoreGeometry*(self: gen_qwidget_types.QWidget, geometry: seq[byte]): bool =
+proc restoreGeometry*(self: gen_qwidget_types.QWidget, geometry: openArray[byte]): bool =
   fcQWidget_restoreGeometry(self.h, struct_miqt_string(data: cast[cstring](if len(geometry) == 0: nil else: unsafeAddr geometry[0]), len: csize_t(len(geometry))))
 
 proc adjustSize*(self: gen_qwidget_types.QWidget): void =
@@ -1247,14 +1249,14 @@ proc setAcceptDrops*(self: gen_qwidget_types.QWidget, on: bool): void =
 proc addAction*(self: gen_qwidget_types.QWidget, action: gen_qaction_types.QAction): void =
   fcQWidget_addAction(self.h, action.h)
 
-proc addActions*(self: gen_qwidget_types.QWidget, actions: seq[gen_qaction_types.QAction]): void =
+proc addActions*(self: gen_qwidget_types.QWidget, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
   fcQWidget_addActions(self.h, struct_miqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])))
 
-proc insertActions*(self: gen_qwidget_types.QWidget, before: gen_qaction_types.QAction, actions: seq[gen_qaction_types.QAction]): void =
+proc insertActions*(self: gen_qwidget_types.QWidget, before: gen_qaction_types.QAction, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
@@ -1276,17 +1278,17 @@ proc actions*(self: gen_qwidget_types.QWidget): seq[gen_qaction_types.QAction] =
   c_free(v_ma.data)
   vx_ret
 
-proc addAction*(self: gen_qwidget_types.QWidget, text: string): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addActionWithText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: false)
+proc addAction*(self: gen_qwidget_types.QWidget, text: openArray[char]): gen_qaction_types.QAction =
+  gen_qaction_types.QAction(h: fcQWidget_addActionWithText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: string): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction2(self.h, icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: false)
+proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
+  gen_qaction_types.QAction(h: fcQWidget_addAction2(self.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
-proc addAction*(self: gen_qwidget_types.QWidget, text: string, shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction3(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), shortcut.h), owned: false)
+proc addAction*(self: gen_qwidget_types.QWidget, text: openArray[char], shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
+  gen_qaction_types.QAction(h: fcQWidget_addAction3(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
 
-proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: string, shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWidget_addAction4(self.h, icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), shortcut.h), owned: false)
+proc addAction*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char], shortcut: gen_qkeysequence_types.QKeySequence): gen_qaction_types.QAction =
+  gen_qaction_types.QAction(h: fcQWidget_addAction4(self.h, icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), shortcut.h), owned: false)
 
 proc parentWidget*(self: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_parentWidget(self.h), owned: false)
@@ -1351,14 +1353,14 @@ proc setScreen*(self: gen_qwidget_types.QWidget, screen: gen_qscreen_types.QScre
 proc createWindowContainer*(_: type gen_qwidget_types.QWidget, window: gen_qwindow_types.QWindow): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQWidget_createWindowContainer(window.h), owned: false)
 
-proc windowTitleChanged*(self: gen_qwidget_types.QWidget, title: string): void =
-  fcQWidget_windowTitleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc windowTitleChanged*(self: gen_qwidget_types.QWidget, title: openArray[char]): void =
+  fcQWidget_windowTitleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWidgetwindowTitleChangedSlot* = proc(title: string)
+type QWidgetwindowTitleChangedSlot* = proc(title: openArray[char])
 proc cQWidget_slot_callback_windowTitleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetwindowTitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval1 = vtitlex_ret
 
@@ -1394,14 +1396,14 @@ proc onwindowIconChanged*(self: gen_qwidget_types.QWidget, slot: QWidgetwindowIc
   GC_ref(tmp)
   fcQWidget_connect_windowIconChanged(self.h, cast[int](addr tmp[]), cQWidget_slot_callback_windowIconChanged, cQWidget_slot_callback_windowIconChanged_release)
 
-proc windowIconTextChanged*(self: gen_qwidget_types.QWidget, iconText: string): void =
-  fcQWidget_windowIconTextChanged(self.h, struct_miqt_string(data: iconText, len: csize_t(len(iconText))))
+proc windowIconTextChanged*(self: gen_qwidget_types.QWidget, iconText: openArray[char]): void =
+  fcQWidget_windowIconTextChanged(self.h, struct_miqt_string(data: if len(iconText) > 0: addr iconText[0] else: nil, len: csize_t(len(iconText))))
 
-type QWidgetwindowIconTextChangedSlot* = proc(iconText: string)
+type QWidgetwindowIconTextChangedSlot* = proc(iconText: openArray[char])
 proc cQWidget_slot_callback_windowIconTextChanged(slot: int, iconText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetwindowIconTextChangedSlot](cast[pointer](slot))
   let viconText_ms = iconText
-  let viconTextx_ret = string.fromBytes(toOpenArrayByte(viconText_ms.data, 0, int(viconText_ms.len)-1))
+  let viconTextx_ret = string.fromBytes(viconText_ms)
   c_free(viconText_ms.data)
   let slotval1 = viconTextx_ret
 
@@ -1448,13 +1450,13 @@ proc setInputMethodHints*(self: gen_qwidget_types.QWidget, hints: cint): void =
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring, c: cstring): string =
   let v_ms = fcQWidget_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwidget_types.QWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWidget_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1538,7 +1540,7 @@ type QWidgetdragLeaveEventProc* = proc(self: QWidget, event: gen_qevent_types.QD
 type QWidgetdropEventProc* = proc(self: QWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QWidgetshowEventProc* = proc(self: QWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QWidgethideEventProc* = proc(self: QWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWidgetnativeEventProc* = proc(self: QWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWidgetnativeEventProc* = proc(self: QWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWidgetchangeEventProc* = proc(self: QWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWidgetmetricProc* = proc(self: QWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QWidgetinitPainterProc* = proc(self: QWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -1938,14 +1940,14 @@ proc cQWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWidgetnativeEvent*(self: gen_qwidget_types.QWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWidgetnativeEvent*(self: gen_qwidget_types.QWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QWidgetVTable](fcQWidget_vdata(self))
   let self = QWidget(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2359,12 +2361,12 @@ proc cQWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWidgetnativeEvent(self[], eventType, message, resultVal)
 proc cQWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWidget](fcQWidget_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

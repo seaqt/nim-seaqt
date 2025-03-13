@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qfilesystemwatcher.cpp", cflags).}
@@ -107,43 +109,43 @@ proc metacall*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, param1: ci
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring): string =
   let v_ms = fcQFileSystemWatcher_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc addPath*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, file: string): bool =
-  fcQFileSystemWatcher_addPath(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc addPath*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, file: openArray[char]): bool =
+  fcQFileSystemWatcher_addPath(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
-proc addPaths*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, files: seq[string]): seq[string] =
+proc addPaths*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, files: openArray[string]): seq[string] =
   var files_CArray = newSeq[struct_miqt_string](len(files))
   for i in 0..<len(files):
-    files_CArray[i] = struct_miqt_string(data: files[i], len: csize_t(len(files[i])))
+    files_CArray[i] = struct_miqt_string(data: if len(files[i]) > 0: addr files[i][0] else: nil, len: csize_t(len(files[i])))
 
   var v_ma = fcQFileSystemWatcher_addPaths(self.h, struct_miqt_array(len: csize_t(len(files)), data: if len(files) == 0: nil else: addr(files_CArray[0])))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc removePath*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, file: string): bool =
-  fcQFileSystemWatcher_removePath(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc removePath*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, file: openArray[char]): bool =
+  fcQFileSystemWatcher_removePath(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
-proc removePaths*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, files: seq[string]): seq[string] =
+proc removePaths*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, files: openArray[string]): seq[string] =
   var files_CArray = newSeq[struct_miqt_string](len(files))
   for i in 0..<len(files):
-    files_CArray[i] = struct_miqt_string(data: files[i], len: csize_t(len(files[i])))
+    files_CArray[i] = struct_miqt_string(data: if len(files[i]) > 0: addr files[i][0] else: nil, len: csize_t(len(files[i])))
 
   var v_ma = fcQFileSystemWatcher_removePaths(self.h, struct_miqt_array(len: csize_t(len(files)), data: if len(files) == 0: nil else: addr(files_CArray[0])))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -155,7 +157,7 @@ proc files*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): seq[string] 
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -167,7 +169,7 @@ proc directories*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): seq[st
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -175,13 +177,13 @@ proc directories*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): seq[st
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring): string =
   let v_ms = fcQFileSystemWatcher_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFileSystemWatcher_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -431,11 +433,11 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
   gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
-    paths: seq[string],
+    paths: openArray[string],
     vtbl: ref QFileSystemWatcherVTable = nil): gen_qfilesystemwatcher_types.QFileSystemWatcher =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   let vtbl = if vtbl == nil: new QFileSystemWatcherVTable else: vtbl
   GC_ref(vtbl)
@@ -495,11 +497,11 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
   gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
-    paths: seq[string], parent: gen_qobject_types.QObject,
+    paths: openArray[string], parent: gen_qobject_types.QObject,
     vtbl: ref QFileSystemWatcherVTable = nil): gen_qfilesystemwatcher_types.QFileSystemWatcher =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   let vtbl = if vtbl == nil: new QFileSystemWatcherVTable else: vtbl
   GC_ref(vtbl)
@@ -551,11 +553,11 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
   inst[].owned = true
 
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
-    paths: seq[string],
+    paths: openArray[string],
     inst: VirtualQFileSystemWatcher) =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSystemWatcher_new2(addr(cQFileSystemWatcher_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
@@ -569,11 +571,11 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
   inst[].owned = true
 
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
-    paths: seq[string], parent: gen_qobject_types.QObject,
+    paths: openArray[string], parent: gen_qobject_types.QObject,
     inst: VirtualQFileSystemWatcher) =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQFileSystemWatcher_new4(addr(cQFileSystemWatcher_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])), parent.h)

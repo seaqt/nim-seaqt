@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QJSManagedValueTypeEnum* = distinct cint
@@ -203,7 +205,7 @@ proc isJsMetaType*(self: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
 
 proc toString*(self: gen_qjsmanagedvalue_types.QJSManagedValue): string =
   let v_ms = fcQJSManagedValue_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -240,20 +242,20 @@ proc toQMetaObject*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qobjec
 proc toDateTime*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQJSManagedValue_toDateTime(self.h), owned: true)
 
-proc hasProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string): bool =
-  fcQJSManagedValue_hasProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): bool =
+  fcQJSManagedValue_hasProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc hasOwnProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string): bool =
-  fcQJSManagedValue_hasOwnProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasOwnProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): bool =
+  fcQJSManagedValue_hasOwnProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc property*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_property(self.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc property*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_property(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
-proc setProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string, value: gen_qjsvalue_types.QJSValue): void =
-  fcQJSManagedValue_setProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), value.h)
+proc setProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char], value: gen_qjsvalue_types.QJSValue): void =
+  fcQJSManagedValue_setProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc deleteProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: string): bool =
-  fcQJSManagedValue_deleteProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc deleteProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): bool =
+  fcQJSManagedValue_deleteProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc hasProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: cuint): bool =
   fcQJSManagedValue_hasPropertyWithArrayIndex(self.h, arrayIndex)
@@ -288,7 +290,7 @@ proc jsMetaMembers*(self: gen_qjsmanagedvalue_types.QJSManagedValue): seq[string
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -297,28 +299,28 @@ proc jsMetaMembers*(self: gen_qjsmanagedvalue_types.QJSManagedValue): seq[string
 proc jsMetaInstantiate*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsmanagedvalue_types.QJSManagedValue =
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_jsMetaInstantiate(self.h), owned: true)
 
-proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var arguments_CArray = newSeq[pointer](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = arguments[i].h
 
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_call1(self.h, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
 
-proc callWithInstance*(self: gen_qjsmanagedvalue_types.QJSManagedValue, instance: gen_qjsvalue_types.QJSValue, arguments: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc callWithInstance*(self: gen_qjsmanagedvalue_types.QJSManagedValue, instance: gen_qjsvalue_types.QJSValue, arguments: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var arguments_CArray = newSeq[pointer](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = arguments[i].h
 
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callWithInstance2(self.h, instance.h, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
 
-proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: seq[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
+proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var arguments_CArray = newSeq[pointer](len(arguments))
   for i in 0..<len(arguments):
     arguments_CArray[i] = arguments[i].h
 
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callAsConstructor1(self.h, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
 
-proc jsMetaInstantiate*(self: gen_qjsmanagedvalue_types.QJSManagedValue, values: seq[gen_qjsvalue_types.QJSValue]): gen_qjsmanagedvalue_types.QJSManagedValue =
+proc jsMetaInstantiate*(self: gen_qjsmanagedvalue_types.QJSManagedValue, values: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsmanagedvalue_types.QJSManagedValue =
   var values_CArray = newSeq[pointer](len(values))
   for i in 0..<len(values):
     values_CArray[i] = values[i].h
@@ -341,6 +343,6 @@ proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new4(variant.h, engine.h), owned: true)
 
 proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
-    string: string, engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
-  gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new5(struct_miqt_string(data: string, len: csize_t(len(string))), engine.h), owned: true)
+    string: openArray[char], engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
+  gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new5(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), engine.h), owned: true)
 

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QColorSpaceNamedColorSpaceEnum* = distinct cint
@@ -124,24 +126,24 @@ proc gamma*(self: gen_qcolorspace_types.QColorSpace): float32 =
 
 proc description*(self: gen_qcolorspace_types.QColorSpace): string =
   let v_ms = fcQColorSpace_description(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qcolorspace_types.QColorSpace, description: string): void =
-  fcQColorSpace_setDescription(self.h, struct_miqt_string(data: description, len: csize_t(len(description))))
+proc setDescription*(self: gen_qcolorspace_types.QColorSpace, description: openArray[char]): void =
+  fcQColorSpace_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint): void =
   fcQColorSpace_setTransferFunction(self.h, cint(transferFunction))
 
-proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunctionTable: seq[uint16]): void =
+proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunctionTable: openArray[uint16]): void =
   var transferFunctionTable_CArray = newSeq[uint16](len(transferFunctionTable))
   for i in 0..<len(transferFunctionTable):
     transferFunctionTable_CArray[i] = transferFunctionTable[i]
 
   fcQColorSpace_setTransferFunctionWithTransferFunctionTable(self.h, struct_miqt_array(len: csize_t(len(transferFunctionTable)), data: if len(transferFunctionTable) == 0: nil else: addr(transferFunctionTable_CArray[0])))
 
-proc setTransferFunctions*(self: gen_qcolorspace_types.QColorSpace, redTransferFunctionTable: seq[uint16], greenTransferFunctionTable: seq[uint16], blueTransferFunctionTable: seq[uint16]): void =
+proc setTransferFunctions*(self: gen_qcolorspace_types.QColorSpace, redTransferFunctionTable: openArray[uint16], greenTransferFunctionTable: openArray[uint16], blueTransferFunctionTable: openArray[uint16]): void =
   var redTransferFunctionTable_CArray = newSeq[uint16](len(redTransferFunctionTable))
   for i in 0..<len(redTransferFunctionTable):
     redTransferFunctionTable_CArray[i] = redTransferFunctionTable[i]
@@ -159,14 +161,14 @@ proc setTransferFunctions*(self: gen_qcolorspace_types.QColorSpace, redTransferF
 proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint): gen_qcolorspace_types.QColorSpace =
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunction(self.h, cint(transferFunction)), owned: true)
 
-proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunctionTable: seq[uint16]): gen_qcolorspace_types.QColorSpace =
+proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunctionTable: openArray[uint16]): gen_qcolorspace_types.QColorSpace =
   var transferFunctionTable_CArray = newSeq[uint16](len(transferFunctionTable))
   for i in 0..<len(transferFunctionTable):
     transferFunctionTable_CArray[i] = transferFunctionTable[i]
 
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunctionWithTransferFunctionTable(self.h, struct_miqt_array(len: csize_t(len(transferFunctionTable)), data: if len(transferFunctionTable) == 0: nil else: addr(transferFunctionTable_CArray[0]))), owned: true)
 
-proc withTransferFunctions*(self: gen_qcolorspace_types.QColorSpace, redTransferFunctionTable: seq[uint16], greenTransferFunctionTable: seq[uint16], blueTransferFunctionTable: seq[uint16]): gen_qcolorspace_types.QColorSpace =
+proc withTransferFunctions*(self: gen_qcolorspace_types.QColorSpace, redTransferFunctionTable: openArray[uint16], greenTransferFunctionTable: openArray[uint16], blueTransferFunctionTable: openArray[uint16]): gen_qcolorspace_types.QColorSpace =
   var redTransferFunctionTable_CArray = newSeq[uint16](len(redTransferFunctionTable))
   for i in 0..<len(redTransferFunctionTable):
     redTransferFunctionTable_CArray[i] = redTransferFunctionTable[i]
@@ -193,12 +195,12 @@ proc detach*(self: gen_qcolorspace_types.QColorSpace): void =
 proc isValid*(self: gen_qcolorspace_types.QColorSpace): bool =
   fcQColorSpace_isValid(self.h)
 
-proc fromIccProfile*(_: type gen_qcolorspace_types.QColorSpace, iccProfile: seq[byte]): gen_qcolorspace_types.QColorSpace =
+proc fromIccProfile*(_: type gen_qcolorspace_types.QColorSpace, iccProfile: openArray[byte]): gen_qcolorspace_types.QColorSpace =
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_fromIccProfile(struct_miqt_string(data: cast[cstring](if len(iccProfile) == 0: nil else: unsafeAddr iccProfile[0]), len: csize_t(len(iccProfile)))), owned: true)
 
 proc iccProfile*(self: gen_qcolorspace_types.QColorSpace): seq[byte] =
   var v_bytearray = fcQColorSpace_iccProfile(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -230,7 +232,7 @@ proc create*(T: type gen_qcolorspace_types.QColorSpace,
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new4(cint(primaries), gamma), owned: true)
 
 proc create*(T: type gen_qcolorspace_types.QColorSpace,
-    primaries: cint, transferFunctionTable: seq[uint16]): gen_qcolorspace_types.QColorSpace =
+    primaries: cint, transferFunctionTable: openArray[uint16]): gen_qcolorspace_types.QColorSpace =
   var transferFunctionTable_CArray = newSeq[uint16](len(transferFunctionTable))
   for i in 0..<len(transferFunctionTable):
     transferFunctionTable_CArray[i] = transferFunctionTable[i]
@@ -242,7 +244,7 @@ proc create*(T: type gen_qcolorspace_types.QColorSpace,
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new6(whitePoint.h, redPoint.h, greenPoint.h, bluePoint.h, cint(transferFunction)), owned: true)
 
 proc create*(T: type gen_qcolorspace_types.QColorSpace,
-    whitePoint: gen_qpoint_types.QPointF, redPoint: gen_qpoint_types.QPointF, greenPoint: gen_qpoint_types.QPointF, bluePoint: gen_qpoint_types.QPointF, transferFunctionTable: seq[uint16]): gen_qcolorspace_types.QColorSpace =
+    whitePoint: gen_qpoint_types.QPointF, redPoint: gen_qpoint_types.QPointF, greenPoint: gen_qpoint_types.QPointF, bluePoint: gen_qpoint_types.QPointF, transferFunctionTable: openArray[uint16]): gen_qcolorspace_types.QColorSpace =
   var transferFunctionTable_CArray = newSeq[uint16](len(transferFunctionTable))
   for i in 0..<len(transferFunctionTable):
     transferFunctionTable_CArray[i] = transferFunctionTable[i]
@@ -250,7 +252,7 @@ proc create*(T: type gen_qcolorspace_types.QColorSpace,
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new7(whitePoint.h, redPoint.h, greenPoint.h, bluePoint.h, struct_miqt_array(len: csize_t(len(transferFunctionTable)), data: if len(transferFunctionTable) == 0: nil else: addr(transferFunctionTable_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qcolorspace_types.QColorSpace,
-    whitePoint: gen_qpoint_types.QPointF, redPoint: gen_qpoint_types.QPointF, greenPoint: gen_qpoint_types.QPointF, bluePoint: gen_qpoint_types.QPointF, redTransferFunctionTable: seq[uint16], greenTransferFunctionTable: seq[uint16], blueTransferFunctionTable: seq[uint16]): gen_qcolorspace_types.QColorSpace =
+    whitePoint: gen_qpoint_types.QPointF, redPoint: gen_qpoint_types.QPointF, greenPoint: gen_qpoint_types.QPointF, bluePoint: gen_qpoint_types.QPointF, redTransferFunctionTable: openArray[uint16], greenTransferFunctionTable: openArray[uint16], blueTransferFunctionTable: openArray[uint16]): gen_qcolorspace_types.QColorSpace =
   var redTransferFunctionTable_CArray = newSeq[uint16](len(redTransferFunctionTable))
   for i in 0..<len(redTransferFunctionTable):
     redTransferFunctionTable_CArray[i] = redTransferFunctionTable[i]

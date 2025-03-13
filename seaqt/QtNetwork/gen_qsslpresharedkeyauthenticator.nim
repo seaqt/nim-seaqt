@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qsslpresharedkeyauthenticator_types
@@ -57,28 +59,28 @@ proc swap*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthent
 
 proc identityHint*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): seq[byte] =
   var v_bytearray = fcQSslPreSharedKeyAuthenticator_identityHint(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setIdentity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, identity: seq[byte]): void =
+proc setIdentity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, identity: openArray[byte]): void =
   fcQSslPreSharedKeyAuthenticator_setIdentity(self.h, struct_miqt_string(data: cast[cstring](if len(identity) == 0: nil else: unsafeAddr identity[0]), len: csize_t(len(identity))))
 
 proc identity*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): seq[byte] =
   var v_bytearray = fcQSslPreSharedKeyAuthenticator_identity(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc maximumIdentityLength*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): cint =
   fcQSslPreSharedKeyAuthenticator_maximumIdentityLength(self.h)
 
-proc setPreSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, preSharedKey: seq[byte]): void =
+proc setPreSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, preSharedKey: openArray[byte]): void =
   fcQSslPreSharedKeyAuthenticator_setPreSharedKey(self.h, struct_miqt_string(data: cast[cstring](if len(preSharedKey) == 0: nil else: unsafeAddr preSharedKey[0]), len: csize_t(len(preSharedKey))))
 
 proc preSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): seq[byte] =
   var v_bytearray = fcQSslPreSharedKeyAuthenticator_preSharedKey(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 

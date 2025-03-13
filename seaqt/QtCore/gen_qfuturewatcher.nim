@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qfuturewatcher.cpp", cflags).}
@@ -122,7 +124,7 @@ proc metacall*(self: gen_qfuturewatcher_types.QFutureWatcherBase, param1: cint, 
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring): string =
   let v_ms = fcQFutureWatcherBase_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -137,7 +139,7 @@ proc progressMaximum*(self: gen_qfuturewatcher_types.QFutureWatcherBase): cint =
 
 proc progressText*(self: gen_qfuturewatcher_types.QFutureWatcherBase): string =
   let v_ms = fcQFutureWatcherBase_progressText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -381,14 +383,14 @@ proc onprogressValueChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, 
   GC_ref(tmp)
   fcQFutureWatcherBase_connect_progressValueChanged(self.h, cast[int](addr tmp[]), cQFutureWatcherBase_slot_callback_progressValueChanged, cQFutureWatcherBase_slot_callback_progressValueChanged_release)
 
-proc progressTextChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, progressText: string): void =
-  fcQFutureWatcherBase_progressTextChanged(self.h, struct_miqt_string(data: progressText, len: csize_t(len(progressText))))
+proc progressTextChanged*(self: gen_qfuturewatcher_types.QFutureWatcherBase, progressText: openArray[char]): void =
+  fcQFutureWatcherBase_progressTextChanged(self.h, struct_miqt_string(data: if len(progressText) > 0: addr progressText[0] else: nil, len: csize_t(len(progressText))))
 
-type QFutureWatcherBaseprogressTextChangedSlot* = proc(progressText: string)
+type QFutureWatcherBaseprogressTextChangedSlot* = proc(progressText: openArray[char])
 proc cQFutureWatcherBase_slot_callback_progressTextChanged(slot: int, progressText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFutureWatcherBaseprogressTextChangedSlot](cast[pointer](slot))
   let vprogressText_ms = progressText
-  let vprogressTextx_ret = string.fromBytes(toOpenArrayByte(vprogressText_ms.data, 0, int(vprogressText_ms.len)-1))
+  let vprogressTextx_ret = string.fromBytes(vprogressText_ms)
   c_free(vprogressText_ms.data)
   let slotval1 = vprogressTextx_ret
 
@@ -430,13 +432,13 @@ proc togglePaused*(self: gen_qfuturewatcher_types.QFutureWatcherBase): void =
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c: cstring): string =
   let v_ms = fcQFutureWatcherBase_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFutureWatcherBase_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qwindow.cpp", cflags).}
@@ -335,7 +337,7 @@ proc metacall*(self: gen_qwindow_types.QWindow, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring): string =
   let v_ms = fcQWindow_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -401,7 +403,7 @@ proc typeX*(self: gen_qwindow_types.QWindow): cint =
 
 proc title*(self: gen_qwindow_types.QWindow): string =
   let v_ms = fcQWindow_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -534,12 +536,12 @@ proc resize*(self: gen_qwindow_types.QWindow, newSize: gen_qsize_types.QSize): v
 proc resize*(self: gen_qwindow_types.QWindow, w: cint, h: cint): void =
   fcQWindow_resize2(self.h, w, h)
 
-proc setFilePath*(self: gen_qwindow_types.QWindow, filePath: string): void =
-  fcQWindow_setFilePath(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))))
+proc setFilePath*(self: gen_qwindow_types.QWindow, filePath: openArray[char]): void =
+  fcQWindow_setFilePath(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc filePath*(self: gen_qwindow_types.QWindow): string =
   let v_ms = fcQWindow_filePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -633,8 +635,8 @@ proc startSystemResize*(self: gen_qwindow_types.QWindow, edges: cint): bool =
 proc startSystemMove*(self: gen_qwindow_types.QWindow): bool =
   fcQWindow_startSystemMove(self.h)
 
-proc setTitle*(self: gen_qwindow_types.QWindow, title: string): void =
-  fcQWindow_setTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc setTitle*(self: gen_qwindow_types.QWindow, title: openArray[char]): void =
+  fcQWindow_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc setX*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_setX(self.h, arg)
@@ -732,14 +734,14 @@ proc onwindowStateChanged*(self: gen_qwindow_types.QWindow, slot: QWindowwindowS
   GC_ref(tmp)
   fcQWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]), cQWindow_slot_callback_windowStateChanged, cQWindow_slot_callback_windowStateChanged_release)
 
-proc windowTitleChanged*(self: gen_qwindow_types.QWindow, title: string): void =
-  fcQWindow_windowTitleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc windowTitleChanged*(self: gen_qwindow_types.QWindow, title: openArray[char]): void =
+  fcQWindow_windowTitleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWindowwindowTitleChangedSlot* = proc(title: string)
+type QWindowwindowTitleChangedSlot* = proc(title: openArray[char])
 proc cQWindow_slot_callback_windowTitleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWindowwindowTitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval1 = vtitlex_ret
 
@@ -1055,13 +1057,13 @@ proc ontransientParentChanged*(self: gen_qwindow_types.QWindow, slot: QWindowtra
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring): string =
   let v_ms = fcQWindow_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWindow_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1101,7 +1103,7 @@ type QWindowmouseMoveEventProc* = proc(self: QWindow, param1: gen_qevent_types.Q
 type QWindowwheelEventProc* = proc(self: QWindow, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QWindowtouchEventProc* = proc(self: QWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
 type QWindowtabletEventProc* = proc(self: QWindow, param1: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
-type QWindownativeEventProc* = proc(self: QWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWindownativeEventProc* = proc(self: QWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWindoweventFilterProc* = proc(self: QWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWindowtimerEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QWindowchildEventProc* = proc(self: QWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
@@ -1407,14 +1409,14 @@ proc cQWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer): void 
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QWindownativeEvent*(self: gen_qwindow_types.QWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWindownativeEvent*(self: gen_qwindow_types.QWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QWindowVTable](fcQWindow_vdata(self))
   let self = QWindow(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1689,12 +1691,12 @@ proc cQWindow_method_callback_tabletEvent(self: pointer, param1: pointer): void 
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWindownativeEvent(self[], eventType, message, resultVal)
 proc cQWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWindow](fcQWindow_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

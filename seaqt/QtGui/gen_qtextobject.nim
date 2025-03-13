@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qtextobject_types
@@ -235,7 +237,7 @@ proc metacall*(self: gen_qtextobject_types.QTextObject, param1: cint, param2: ci
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring): string =
   let v_ms = fcQTextObject_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -253,13 +255,13 @@ proc objectIndex*(self: gen_qtextobject_types.QTextObject): cint =
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring): string =
   let v_ms = fcQTextObject_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTextObject_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -291,19 +293,19 @@ proc metacall*(self: gen_qtextobject_types.QTextBlockGroup, param1: cint, param2
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring): string =
   let v_ms = fcQTextBlockGroup_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring): string =
   let v_ms = fcQTextBlockGroup_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTextBlockGroup_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -347,7 +349,7 @@ proc metacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cin
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring): string =
   let v_ms = fcQTextFrame_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -395,13 +397,13 @@ proc endX*(self: gen_qtextobject_types.QTextFrame): gen_qtextobject_types.QTextF
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring): string =
   let v_ms = fcQTextFrame_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTextFrame_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -729,7 +731,7 @@ proc textDirection*(self: gen_qtextobject_types.QTextBlock): cint =
 
 proc text*(self: gen_qtextobject_types.QTextBlock): string =
   let v_ms = fcQTextBlock_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -838,7 +840,7 @@ proc charFormatIndex*(self: gen_qtextobject_types.QTextFragment): cint =
 
 proc text*(self: gen_qtextobject_types.QTextFragment): string =
   let v_ms = fcQTextFragment_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

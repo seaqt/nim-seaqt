@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QNetworkProxyQueryQueryTypeEnum* = distinct cint
@@ -176,12 +178,12 @@ proc setPeerPort*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, port: cint):
 
 proc peerHostName*(self: gen_qnetworkproxy_types.QNetworkProxyQuery): string =
   let v_ms = fcQNetworkProxyQuery_peerHostName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPeerHostName*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, hostname: string): void =
-  fcQNetworkProxyQuery_setPeerHostName(self.h, struct_miqt_string(data: hostname, len: csize_t(len(hostname))))
+proc setPeerHostName*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, hostname: openArray[char]): void =
+  fcQNetworkProxyQuery_setPeerHostName(self.h, struct_miqt_string(data: if len(hostname) > 0: addr hostname[0] else: nil, len: csize_t(len(hostname))))
 
 proc localPort*(self: gen_qnetworkproxy_types.QNetworkProxyQuery): cint =
   fcQNetworkProxyQuery_localPort(self.h)
@@ -191,12 +193,12 @@ proc setLocalPort*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, port: cint)
 
 proc protocolTag*(self: gen_qnetworkproxy_types.QNetworkProxyQuery): string =
   let v_ms = fcQNetworkProxyQuery_protocolTag(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setProtocolTag*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, protocolTag: string): void =
-  fcQNetworkProxyQuery_setProtocolTag(self.h, struct_miqt_string(data: protocolTag, len: csize_t(len(protocolTag))))
+proc setProtocolTag*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, protocolTag: openArray[char]): void =
+  fcQNetworkProxyQuery_setProtocolTag(self.h, struct_miqt_string(data: if len(protocolTag) > 0: addr protocolTag[0] else: nil, len: csize_t(len(protocolTag))))
 
 proc url*(self: gen_qnetworkproxy_types.QNetworkProxyQuery): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQNetworkProxyQuery_url(self.h), owned: true)
@@ -212,8 +214,8 @@ proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
   gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new2(requestUrl.h), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
-    hostname: string, port: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
-  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new3(struct_miqt_string(data: hostname, len: csize_t(len(hostname))), port), owned: true)
+    hostname: openArray[char], port: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
+  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new3(struct_miqt_string(data: if len(hostname) > 0: addr hostname[0] else: nil, len: csize_t(len(hostname))), port), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
     bindPort: cushort): gen_qnetworkproxy_types.QNetworkProxyQuery =
@@ -228,20 +230,20 @@ proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
   gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new6(requestUrl.h, cint(queryType)), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
-    hostname: string, port: cint, protocolTag: string): gen_qnetworkproxy_types.QNetworkProxyQuery =
-  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new7(struct_miqt_string(data: hostname, len: csize_t(len(hostname))), port, struct_miqt_string(data: protocolTag, len: csize_t(len(protocolTag)))), owned: true)
+    hostname: openArray[char], port: cint, protocolTag: openArray[char]): gen_qnetworkproxy_types.QNetworkProxyQuery =
+  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new7(struct_miqt_string(data: if len(hostname) > 0: addr hostname[0] else: nil, len: csize_t(len(hostname))), port, struct_miqt_string(data: if len(protocolTag) > 0: addr protocolTag[0] else: nil, len: csize_t(len(protocolTag)))), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
-    hostname: string, port: cint, protocolTag: string, queryType: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
-  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new8(struct_miqt_string(data: hostname, len: csize_t(len(hostname))), port, struct_miqt_string(data: protocolTag, len: csize_t(len(protocolTag))), cint(queryType)), owned: true)
+    hostname: openArray[char], port: cint, protocolTag: openArray[char], queryType: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
+  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new8(struct_miqt_string(data: if len(hostname) > 0: addr hostname[0] else: nil, len: csize_t(len(hostname))), port, struct_miqt_string(data: if len(protocolTag) > 0: addr protocolTag[0] else: nil, len: csize_t(len(protocolTag))), cint(queryType)), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
-    bindPort: cushort, protocolTag: string): gen_qnetworkproxy_types.QNetworkProxyQuery =
-  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new9(bindPort, struct_miqt_string(data: protocolTag, len: csize_t(len(protocolTag)))), owned: true)
+    bindPort: cushort, protocolTag: openArray[char]): gen_qnetworkproxy_types.QNetworkProxyQuery =
+  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new9(bindPort, struct_miqt_string(data: if len(protocolTag) > 0: addr protocolTag[0] else: nil, len: csize_t(len(protocolTag)))), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyQuery,
-    bindPort: cushort, protocolTag: string, queryType: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
-  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new10(bindPort, struct_miqt_string(data: protocolTag, len: csize_t(len(protocolTag))), cint(queryType)), owned: true)
+    bindPort: cushort, protocolTag: openArray[char], queryType: cint): gen_qnetworkproxy_types.QNetworkProxyQuery =
+  gen_qnetworkproxy_types.QNetworkProxyQuery(h: fcQNetworkProxyQuery_new10(bindPort, struct_miqt_string(data: if len(protocolTag) > 0: addr protocolTag[0] else: nil, len: csize_t(len(protocolTag))), cint(queryType)), owned: true)
 
 proc staticMetaObject*(_: type gen_qnetworkproxy_types.QNetworkProxyQuery): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkProxyQuery_staticMetaObject())
@@ -275,30 +277,30 @@ proc isCachingProxy*(self: gen_qnetworkproxy_types.QNetworkProxy): bool =
 proc isTransparentProxy*(self: gen_qnetworkproxy_types.QNetworkProxy): bool =
   fcQNetworkProxy_isTransparentProxy(self.h)
 
-proc setUser*(self: gen_qnetworkproxy_types.QNetworkProxy, userName: string): void =
-  fcQNetworkProxy_setUser(self.h, struct_miqt_string(data: userName, len: csize_t(len(userName))))
+proc setUser*(self: gen_qnetworkproxy_types.QNetworkProxy, userName: openArray[char]): void =
+  fcQNetworkProxy_setUser(self.h, struct_miqt_string(data: if len(userName) > 0: addr userName[0] else: nil, len: csize_t(len(userName))))
 
 proc user*(self: gen_qnetworkproxy_types.QNetworkProxy): string =
   let v_ms = fcQNetworkProxy_user(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPassword*(self: gen_qnetworkproxy_types.QNetworkProxy, password: string): void =
-  fcQNetworkProxy_setPassword(self.h, struct_miqt_string(data: password, len: csize_t(len(password))))
+proc setPassword*(self: gen_qnetworkproxy_types.QNetworkProxy, password: openArray[char]): void =
+  fcQNetworkProxy_setPassword(self.h, struct_miqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))))
 
 proc password*(self: gen_qnetworkproxy_types.QNetworkProxy): string =
   let v_ms = fcQNetworkProxy_password(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHostName*(self: gen_qnetworkproxy_types.QNetworkProxy, hostName: string): void =
-  fcQNetworkProxy_setHostName(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))))
+proc setHostName*(self: gen_qnetworkproxy_types.QNetworkProxy, hostName: openArray[char]): void =
+  fcQNetworkProxy_setHostName(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
 
 proc hostName*(self: gen_qnetworkproxy_types.QNetworkProxy): string =
   let v_ms = fcQNetworkProxy_hostName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -320,7 +322,7 @@ proc header*(self: gen_qnetworkproxy_types.QNetworkProxy, header: cint): gen_qva
 proc setHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, header: cint, value: gen_qvariant_types.QVariant): void =
   fcQNetworkProxy_setHeader(self.h, cint(header), value.h)
 
-proc hasRawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: seq[byte]): bool =
+proc hasRawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: openArray[byte]): bool =
   fcQNetworkProxy_hasRawHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))))
 
 proc rawHeaderList*(self: gen_qnetworkproxy_types.QNetworkProxy): seq[seq[byte]] =
@@ -329,19 +331,19 @@ proc rawHeaderList*(self: gen_qnetworkproxy_types.QNetworkProxy): seq[seq[byte]]
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc rawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: seq[byte]): seq[byte] =
+proc rawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: openArray[byte]): seq[byte] =
   var v_bytearray = fcQNetworkProxy_rawHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))))
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setRawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: seq[byte], value: seq[byte]): void =
+proc setRawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: openArray[byte], value: openArray[byte]): void =
   fcQNetworkProxy_setRawHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))), struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value))))
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy): gen_qnetworkproxy_types.QNetworkProxy =
@@ -356,20 +358,20 @@ proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy,
   gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new3(other.h), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy,
-    typeVal: cint, hostName: string): gen_qnetworkproxy_types.QNetworkProxy =
-  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new4(cint(typeVal), struct_miqt_string(data: hostName, len: csize_t(len(hostName)))), owned: true)
+    typeVal: cint, hostName: openArray[char]): gen_qnetworkproxy_types.QNetworkProxy =
+  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new4(cint(typeVal), struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName)))), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy,
-    typeVal: cint, hostName: string, port: cushort): gen_qnetworkproxy_types.QNetworkProxy =
-  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new5(cint(typeVal), struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port), owned: true)
+    typeVal: cint, hostName: openArray[char], port: cushort): gen_qnetworkproxy_types.QNetworkProxy =
+  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new5(cint(typeVal), struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy,
-    typeVal: cint, hostName: string, port: cushort, user: string): gen_qnetworkproxy_types.QNetworkProxy =
-  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new6(cint(typeVal), struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, struct_miqt_string(data: user, len: csize_t(len(user)))), owned: true)
+    typeVal: cint, hostName: openArray[char], port: cushort, user: openArray[char]): gen_qnetworkproxy_types.QNetworkProxy =
+  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new6(cint(typeVal), struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_miqt_string(data: if len(user) > 0: addr user[0] else: nil, len: csize_t(len(user)))), owned: true)
 
 proc create*(T: type gen_qnetworkproxy_types.QNetworkProxy,
-    typeVal: cint, hostName: string, port: cushort, user: string, password: string): gen_qnetworkproxy_types.QNetworkProxy =
-  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new7(cint(typeVal), struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, struct_miqt_string(data: user, len: csize_t(len(user))), struct_miqt_string(data: password, len: csize_t(len(password)))), owned: true)
+    typeVal: cint, hostName: openArray[char], port: cushort, user: openArray[char], password: openArray[char]): gen_qnetworkproxy_types.QNetworkProxy =
+  gen_qnetworkproxy_types.QNetworkProxy(h: fcQNetworkProxy_new7(cint(typeVal), struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_miqt_string(data: if len(user) > 0: addr user[0] else: nil, len: csize_t(len(user))), struct_miqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password)))), owned: true)
 
 proc queryProxy*(self: gen_qnetworkproxy_types.QNetworkProxyFactory, query: gen_qnetworkproxy_types.QNetworkProxyQuery): seq[gen_qnetworkproxy_types.QNetworkProxy] =
   var v_ma = fcQNetworkProxyFactory_queryProxy(self.h, query.h)

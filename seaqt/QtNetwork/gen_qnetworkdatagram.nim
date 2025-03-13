@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qnetworkdatagram_types
@@ -113,14 +115,14 @@ proc setHopLimit*(self: gen_qnetworkdatagram_types.QNetworkDatagram, count: cint
 
 proc data*(self: gen_qnetworkdatagram_types.QNetworkDatagram): seq[byte] =
   var v_bytearray = fcQNetworkDatagram_data(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setData*(self: gen_qnetworkdatagram_types.QNetworkDatagram, data: seq[byte]): void =
+proc setData*(self: gen_qnetworkdatagram_types.QNetworkDatagram, data: openArray[byte]): void =
   fcQNetworkDatagram_setData(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
-proc makeReply*(self: gen_qnetworkdatagram_types.QNetworkDatagram, payload: seq[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
+proc makeReply*(self: gen_qnetworkdatagram_types.QNetworkDatagram, payload: openArray[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_makeReply(self.h, struct_miqt_string(data: cast[cstring](if len(payload) == 0: nil else: unsafeAddr payload[0]), len: csize_t(len(payload)))), owned: true)
 
 proc setSender*(self: gen_qnetworkdatagram_types.QNetworkDatagram, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
@@ -130,7 +132,7 @@ proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram): gen_qnetworkd
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new(), owned: true)
 
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte]): gen_qnetworkdatagram_types.QNetworkDatagram =
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new2(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))), owned: true)
 
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
@@ -138,10 +140,10 @@ proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new3(other.h), owned: true)
 
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte], destinationAddress: gen_qhostaddress_types.QHostAddress): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte], destinationAddress: gen_qhostaddress_types.QHostAddress): gen_qnetworkdatagram_types.QNetworkDatagram =
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new4(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), destinationAddress.h), owned: true)
 
 proc create*(T: type gen_qnetworkdatagram_types.QNetworkDatagram,
-    data: seq[byte], destinationAddress: gen_qhostaddress_types.QHostAddress, port: cushort): gen_qnetworkdatagram_types.QNetworkDatagram =
+    data: openArray[byte], destinationAddress: gen_qhostaddress_types.QHostAddress, port: cushort): gen_qnetworkdatagram_types.QNetworkDatagram =
   gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQNetworkDatagram_new5(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), destinationAddress.h, port), owned: true)
 

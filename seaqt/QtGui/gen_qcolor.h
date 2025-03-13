@@ -39,7 +39,7 @@ QColor* QColor_new10(QColor* param1);
 QColor* QColor_new11(int r, int g, int b, int a);
 QColor* QColor_new12(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4, uint16_t a5);
 
-QColor* QColor_fromString(QAnyStringView* name);
+QColor* QColor_fromString(struct miqt_string name);
 void QColor_operatorAssign(QColor* self, int color);
 bool QColor_isValid(const QColor* self);
 struct miqt_string QColor_name(const QColor* self);
@@ -132,7 +132,7 @@ bool QColor_operatorEqual(const QColor* self, QColor* c);
 bool QColor_operatorNotEqual(const QColor* self, QColor* c);
 QVariant* QColor_ToQVariant(const QColor* self);
 bool QColor_isValidColor(struct miqt_string name);
-bool QColor_isValidColorName(QAnyStringView* param1);
+bool QColor_isValidColorName(struct miqt_string param1);
 struct miqt_string QColor_name1(const QColor* self, int format);
 void QColor_getRgb4(const QColor* self, int* r, int* g, int* b, int* a);
 void QColor_setRgb4(QColor* self, int r, int g, int b, int a);

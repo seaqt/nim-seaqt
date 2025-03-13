@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qnetworkcookiejar.cpp", cflags).}
@@ -122,7 +124,7 @@ proc metacall*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, param1: cint
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring): string =
   let v_ms = fcQNetworkCookieJar_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -135,7 +137,7 @@ proc cookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, url: ge
   c_free(v_ma.data)
   vx_ret
 
-proc setCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
+proc setCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h
@@ -153,13 +155,13 @@ proc deleteCookie*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookie: 
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring): string =
   let v_ms = fcQNetworkCookieJar_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQNetworkCookieJar_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -167,7 +169,7 @@ type QNetworkCookieJarmetaObjectProc* = proc(self: QNetworkCookieJar): gen_qobje
 type QNetworkCookieJarmetacastProc* = proc(self: QNetworkCookieJar, param1: cstring): pointer {.raises: [], gcsafe.}
 type QNetworkCookieJarmetacallProc* = proc(self: QNetworkCookieJar, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QNetworkCookieJarcookiesForUrlProc* = proc(self: QNetworkCookieJar, url: gen_qurl_types.QUrl): seq[gen_qnetworkcookie_types.QNetworkCookie] {.raises: [], gcsafe.}
-type QNetworkCookieJarsetCookiesFromUrlProc* = proc(self: QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.raises: [], gcsafe.}
+type QNetworkCookieJarsetCookiesFromUrlProc* = proc(self: QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.raises: [], gcsafe.}
 type QNetworkCookieJarinsertCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
 type QNetworkCookieJarupdateCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
 type QNetworkCookieJardeleteCookieProc* = proc(self: QNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.raises: [], gcsafe.}
@@ -254,7 +256,7 @@ proc cQNetworkCookieJar_vtable_callback_cookiesForUrl(self: pointer, url: pointe
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QNetworkCookieJarsetCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
+proc QNetworkCookieJarsetCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h
@@ -427,7 +429,7 @@ proc cQNetworkCookieJar_method_callback_cookiesForUrl(self: pointer, url: pointe
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method setCookiesFromUrl*(self: VirtualQNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.base.} =
+method setCookiesFromUrl*(self: VirtualQNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.base.} =
   QNetworkCookieJarsetCookiesFromUrl(self[], cookieList, url)
 proc cQNetworkCookieJar_method_callback_setCookiesFromUrl(self: pointer, cookieList: struct_miqt_array, url: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNetworkCookieJar](fcQNetworkCookieJar_vdata(self))
@@ -536,7 +538,7 @@ proc allCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar): seq[gen_q
   c_free(v_ma.data)
   vx_ret
 
-proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie]): void =
+proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: openArray[gen_qnetworkcookie_types.QNetworkCookie]): void =
   var cookieList_CArray = newSeq[pointer](len(cookieList))
   for i in 0..<len(cookieList):
     cookieList_CArray[i] = cookieList[i].h

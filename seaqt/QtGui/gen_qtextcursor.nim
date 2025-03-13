@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QTextCursorMoveModeEnum* = distinct cint
@@ -200,11 +202,11 @@ proc positionInBlock*(self: gen_qtextcursor_types.QTextCursor): cint =
 proc anchor*(self: gen_qtextcursor_types.QTextCursor): cint =
   fcQTextCursor_anchor(self.h)
 
-proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: string): void =
-  fcQTextCursor_insertText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char]): void =
+  fcQTextCursor_insertText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: string, format: gen_qtextformat_types.QTextCharFormat): void =
-  fcQTextCursor_insertText2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), format.h)
+proc insertText*(self: gen_qtextcursor_types.QTextCursor, text: openArray[char], format: gen_qtextformat_types.QTextCharFormat): void =
+  fcQTextCursor_insertText2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), format.h)
 
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint): bool =
   fcQTextCursor_movePosition(self.h, cint(op))
@@ -256,7 +258,7 @@ proc selectionEnd*(self: gen_qtextcursor_types.QTextCursor): cint =
 
 proc selectedText*(self: gen_qtextcursor_types.QTextCursor): string =
   let v_ms = fcQTextCursor_selectedText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -350,11 +352,11 @@ proc currentFrame*(self: gen_qtextcursor_types.QTextCursor): gen_qtextobject_typ
 proc insertFragment*(self: gen_qtextcursor_types.QTextCursor, fragment: gen_qtextdocumentfragment_types.QTextDocumentFragment): void =
   fcQTextCursor_insertFragment(self.h, fragment.h)
 
-proc insertHtml*(self: gen_qtextcursor_types.QTextCursor, html: string): void =
-  fcQTextCursor_insertHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc insertHtml*(self: gen_qtextcursor_types.QTextCursor, html: openArray[char]): void =
+  fcQTextCursor_insertHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: string): void =
-  fcQTextCursor_insertMarkdown(self.h, struct_miqt_string(data: markdown, len: csize_t(len(markdown))))
+proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: openArray[char]): void =
+  fcQTextCursor_insertMarkdown(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat, alignment: cint): void =
   fcQTextCursor_insertImage(self.h, format.h, cint(alignment))
@@ -362,8 +364,8 @@ proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextform
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, format: gen_qtextformat_types.QTextImageFormat): void =
   fcQTextCursor_insertImageWithFormat(self.h, format.h)
 
-proc insertImage*(self: gen_qtextcursor_types.QTextCursor, name: string): void =
-  fcQTextCursor_insertImageWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc insertImage*(self: gen_qtextcursor_types.QTextCursor, name: openArray[char]): void =
+  fcQTextCursor_insertImageWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage): void =
   fcQTextCursor_insertImageWithImage(self.h, image.h)
@@ -416,11 +418,11 @@ proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: ci
 proc movePosition*(self: gen_qtextcursor_types.QTextCursor, op: cint, param2: cint, n: cint): bool =
   fcQTextCursor_movePosition3(self.h, cint(op), cint(param2), n)
 
-proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: string, features: cint): void =
-  fcQTextCursor_insertMarkdown2(self.h, struct_miqt_string(data: markdown, len: csize_t(len(markdown))), cint(features))
+proc insertMarkdown*(self: gen_qtextcursor_types.QTextCursor, markdown: openArray[char], features: cint): void =
+  fcQTextCursor_insertMarkdown2(self.h, struct_miqt_string(data: if len(markdown) > 0: addr markdown[0] else: nil, len: csize_t(len(markdown))), cint(features))
 
-proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage, name: string): void =
-  fcQTextCursor_insertImage2(self.h, image.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc insertImage*(self: gen_qtextcursor_types.QTextCursor, image: gen_qimage_types.QImage, name: openArray[char]): void =
+  fcQTextCursor_insertImage2(self.h, image.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc create*(T: type gen_qtextcursor_types.QTextCursor): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQTextCursor_new(), owned: true)

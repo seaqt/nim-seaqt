@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWebEngineSettingsFontFamilyEnum* = distinct cint
@@ -111,12 +113,12 @@ proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer): cint {.importc:
 proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint): void {.importc: "QWebEngineSettings_setUnknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
 
-proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: string): void =
-  fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: family, len: csize_t(len(family))))
+proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: openArray[char]): void =
+  fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc fontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint): string =
   let v_ms = fcQWebEngineSettings_fontFamily(self.h, cint(which))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -141,12 +143,12 @@ proc testAttribute*(self: gen_qwebenginesettings_types.QWebEngineSettings, attr:
 proc resetAttribute*(self: gen_qwebenginesettings_types.QWebEngineSettings, attr: cint): void =
   fcQWebEngineSettings_resetAttribute(self.h, cint(attr))
 
-proc setDefaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, encoding: string): void =
-  fcQWebEngineSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: encoding, len: csize_t(len(encoding))))
+proc setDefaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings, encoding: openArray[char]): void =
+  fcQWebEngineSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: if len(encoding) > 0: addr encoding[0] else: nil, len: csize_t(len(encoding))))
 
 proc defaultTextEncoding*(self: gen_qwebenginesettings_types.QWebEngineSettings): string =
   let v_ms = fcQWebEngineSettings_defaultTextEncoding(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

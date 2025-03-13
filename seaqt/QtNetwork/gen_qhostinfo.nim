@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QHostInfoHostInfoErrorEnum* = distinct cint
@@ -75,12 +77,12 @@ proc swap*(self: gen_qhostinfo_types.QHostInfo, other: gen_qhostinfo_types.QHost
 
 proc hostName*(self: gen_qhostinfo_types.QHostInfo): string =
   let v_ms = fcQHostInfo_hostName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHostName*(self: gen_qhostinfo_types.QHostInfo, name: string): void =
-  fcQHostInfo_setHostName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setHostName*(self: gen_qhostinfo_types.QHostInfo, name: openArray[char]): void =
+  fcQHostInfo_setHostName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc addresses*(self: gen_qhostinfo_types.QHostInfo): seq[gen_qhostaddress_types.QHostAddress] =
   var v_ma = fcQHostInfo_addresses(self.h)
@@ -91,7 +93,7 @@ proc addresses*(self: gen_qhostinfo_types.QHostInfo): seq[gen_qhostaddress_types
   c_free(v_ma.data)
   vx_ret
 
-proc setAddresses*(self: gen_qhostinfo_types.QHostInfo, addresses: seq[gen_qhostaddress_types.QHostAddress]): void =
+proc setAddresses*(self: gen_qhostinfo_types.QHostInfo, addresses: openArray[gen_qhostaddress_types.QHostAddress]): void =
   var addresses_CArray = newSeq[pointer](len(addresses))
   for i in 0..<len(addresses):
     addresses_CArray[i] = addresses[i].h
@@ -106,12 +108,12 @@ proc setError*(self: gen_qhostinfo_types.QHostInfo, error: cint): void =
 
 proc errorString*(self: gen_qhostinfo_types.QHostInfo): string =
   let v_ms = fcQHostInfo_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setErrorString*(self: gen_qhostinfo_types.QHostInfo, errorString: string): void =
-  fcQHostInfo_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qhostinfo_types.QHostInfo, errorString: openArray[char]): void =
+  fcQHostInfo_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc setLookupId*(self: gen_qhostinfo_types.QHostInfo, id: cint): void =
   fcQHostInfo_setLookupId(self.h, id)
@@ -122,18 +124,18 @@ proc lookupId*(self: gen_qhostinfo_types.QHostInfo): cint =
 proc abortHostLookup*(_: type gen_qhostinfo_types.QHostInfo, lookupId: cint): void =
   fcQHostInfo_abortHostLookup(lookupId)
 
-proc fromName*(_: type gen_qhostinfo_types.QHostInfo, name: string): gen_qhostinfo_types.QHostInfo =
-  gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_fromName(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc fromName*(_: type gen_qhostinfo_types.QHostInfo, name: openArray[char]): gen_qhostinfo_types.QHostInfo =
+  gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_fromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc localHostName*(_: type gen_qhostinfo_types.QHostInfo): string =
   let v_ms = fcQHostInfo_localHostName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc localDomainName*(_: type gen_qhostinfo_types.QHostInfo): string =
   let v_ms = fcQHostInfo_localDomainName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

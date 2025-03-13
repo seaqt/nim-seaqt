@@ -1,4 +1,7 @@
 #include <QAnyStringView>
+#include <QString>
+#include <QByteArray>
+#include <QAnyStringView>
 #include <QCalendar>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QCalendar__SystemId
 #define WORKAROUND_INNER_CLASS_DEFINITION_QCalendar__YearMonthDay
@@ -18,8 +21,9 @@ QCalendar* QCalendar_new2(int system) {
 	return new QCalendar(static_cast<QCalendar::System>(system));
 }
 
-QCalendar* QCalendar_new3(QAnyStringView* name) {
-	return new QCalendar(*name);
+QCalendar* QCalendar_new3(struct miqt_string name) {
+	QAnyStringView name_QString = QAnyStringView(name.data, name.len);
+	return new QCalendar(name_QString);
 }
 
 QCalendar* QCalendar_new4(QCalendar__SystemId* id) {

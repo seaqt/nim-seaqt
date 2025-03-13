@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qprogressdialog.cpp", cflags).}
@@ -249,7 +251,7 @@ proc metacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, pa
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring): string =
   let v_ms = fcQProgressDialog_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -279,7 +281,7 @@ proc sizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types
 
 proc labelText*(self: gen_qprogressdialog_types.QProgressDialog): string =
   let v_ms = fcQProgressDialog_labelText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -316,11 +318,11 @@ proc setRange*(self: gen_qprogressdialog_types.QProgressDialog, minimum: cint, m
 proc setValue*(self: gen_qprogressdialog_types.QProgressDialog, progress: cint): void =
   fcQProgressDialog_setValue(self.h, progress)
 
-proc setLabelText*(self: gen_qprogressdialog_types.QProgressDialog, text: string): void =
-  fcQProgressDialog_setLabelText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setLabelText*(self: gen_qprogressdialog_types.QProgressDialog, text: openArray[char]): void =
+  fcQProgressDialog_setLabelText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc setCancelButtonText*(self: gen_qprogressdialog_types.QProgressDialog, text: string): void =
-  fcQProgressDialog_setCancelButtonText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setCancelButtonText*(self: gen_qprogressdialog_types.QProgressDialog, text: openArray[char]): void =
+  fcQProgressDialog_setCancelButtonText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc setMinimumDuration*(self: gen_qprogressdialog_types.QProgressDialog, ms: cint): void =
   fcQProgressDialog_setMinimumDuration(self.h, ms)
@@ -345,13 +347,13 @@ proc oncanceled*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgres
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring): string =
   let v_ms = fcQProgressDialog_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQProgressDialog_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -397,7 +399,7 @@ type QProgressDialogdragMoveEventProc* = proc(self: QProgressDialog, event: gen_
 type QProgressDialogdragLeaveEventProc* = proc(self: QProgressDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QProgressDialogdropEventProc* = proc(self: QProgressDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QProgressDialoghideEventProc* = proc(self: QProgressDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QProgressDialognativeEventProc* = proc(self: QProgressDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QProgressDialognativeEventProc* = proc(self: QProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QProgressDialogmetricProc* = proc(self: QProgressDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QProgressDialoginitPainterProc* = proc(self: QProgressDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QProgressDialogredirectedProc* = proc(self: QProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -862,14 +864,14 @@ proc cQProgressDialog_vtable_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QProgressDialognativeEvent*(self: gen_qprogressdialog_types.QProgressDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QProgressDialognativeEvent*(self: gen_qprogressdialog_types.QProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQProgressDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQProgressDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1311,12 +1313,12 @@ proc cQProgressDialog_method_callback_hideEvent(self: pointer, event: pointer): 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQProgressDialog, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QProgressDialognativeEvent(self[], eventType, message, resultVal)
 proc cQProgressDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1694,7 +1696,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint,
     vtbl: ref QProgressDialogVTable = nil): gen_qprogressdialog_types.QProgressDialog =
   let vtbl = if vtbl == nil: new QProgressDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -1811,7 +1813,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
-  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum), owned: true)
+  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -1934,7 +1936,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QProgressDialogVTable = nil): gen_qprogressdialog_types.QProgressDialog =
   let vtbl = if vtbl == nil: new QProgressDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -2051,10 +2053,10 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
-  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h), owned: true)
+  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget, flags: cint,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QProgressDialogVTable = nil): gen_qprogressdialog_types.QProgressDialog =
   let vtbl = if vtbl == nil: new QProgressDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -2171,7 +2173,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
-  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags)), owned: true)
+  gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags)), owned: true)
 
 const cQProgressDialog_mvtbl = cQProgressDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -2248,10 +2250,10 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
   inst[].owned = true
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint,
     inst: VirtualQProgressDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQProgressDialog_new3(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum)
+  inst[].h = fcQProgressDialog_new3(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum)
   inst[].owned = true
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -2262,17 +2264,17 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
   inst[].owned = true
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget,
     inst: VirtualQProgressDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQProgressDialog_new5(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h)
+  inst[].h = fcQProgressDialog_new5(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
-    labelText: string, cancelButtonText: string, minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget, flags: cint,
+    labelText: openArray[char], cancelButtonText: openArray[char], minimum: cint, maximum: cint, parent: gen_qwidget_types.QWidget, flags: cint,
     inst: VirtualQProgressDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQProgressDialog_new6(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: labelText, len: csize_t(len(labelText))), struct_miqt_string(data: cancelButtonText, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags))
+  inst[].h = fcQProgressDialog_new6(addr(cQProgressDialog_mvtbl), addr(inst[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags))
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =

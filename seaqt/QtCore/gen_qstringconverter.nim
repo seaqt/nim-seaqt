@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qstringconverter.cpp", cflags).}
@@ -38,11 +40,9 @@ import ./gen_qstringconverter_types
 export gen_qstringconverter_types
 
 import
-  ./gen_qbytearrayview_types,
   ./gen_qchar_types,
   ./gen_qstringconverter_base
 export
-  gen_qbytearrayview_types,
   gen_qchar_types,
   gen_qstringconverter_base
 
@@ -56,8 +56,8 @@ proc fcQStringEncoder_new3(name: cstring): ptr cQStringEncoder {.importc: "QStri
 proc fcQStringEncoder_new4(encoding: cint, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new4".}
 proc fcQStringEncoder_new5(name: cstring, flags: cint): ptr cQStringEncoder {.importc: "QStringEncoder_new5".}
 proc fcQStringDecoder_requiredSpace(self: pointer, inputLength: int64): int64 {.importc: "QStringDecoder_requiredSpace".}
-proc fcQStringDecoder_appendToBuffer(self: pointer, outVal: pointer, ba: pointer): pointer {.importc: "QStringDecoder_appendToBuffer".}
-proc fcQStringDecoder_decoderForHtml(data: pointer): pointer {.importc: "QStringDecoder_decoderForHtml".}
+proc fcQStringDecoder_appendToBuffer(self: pointer, outVal: pointer, ba: struct_miqt_string): pointer {.importc: "QStringDecoder_appendToBuffer".}
+proc fcQStringDecoder_decoderForHtml(data: struct_miqt_string): pointer {.importc: "QStringDecoder_decoderForHtml".}
 proc fcQStringDecoder_new(encoding: cint): ptr cQStringDecoder {.importc: "QStringDecoder_new".}
 proc fcQStringDecoder_new2(): ptr cQStringDecoder {.importc: "QStringDecoder_new2".}
 proc fcQStringDecoder_new3(name: cstring): ptr cQStringDecoder {.importc: "QStringDecoder_new3".}
@@ -89,11 +89,11 @@ proc create*(T: type gen_qstringconverter_types.QStringEncoder,
 proc requiredSpace*(self: gen_qstringconverter_types.QStringDecoder, inputLength: int64): int64 =
   fcQStringDecoder_requiredSpace(self.h, inputLength)
 
-proc appendToBuffer*(self: gen_qstringconverter_types.QStringDecoder, outVal: gen_qchar_types.QChar, ba: gen_qbytearrayview_types.QByteArrayView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringDecoder_appendToBuffer(self.h, outVal.h, ba.h), owned: false)
+proc appendToBuffer*(self: gen_qstringconverter_types.QStringDecoder, outVal: gen_qchar_types.QChar, ba: openArray[byte]): gen_qchar_types.QChar =
+  gen_qchar_types.QChar(h: fcQStringDecoder_appendToBuffer(self.h, outVal.h, struct_miqt_string(data: cast[cstring](if len(ba) == 0: nil else: unsafeAddr ba[0]), len: csize_t(len(ba)))), owned: false)
 
-proc decoderForHtml*(_: type gen_qstringconverter_types.QStringDecoder, data: gen_qbytearrayview_types.QByteArrayView): gen_qstringconverter_types.QStringDecoder =
-  gen_qstringconverter_types.QStringDecoder(h: fcQStringDecoder_decoderForHtml(data.h), owned: true)
+proc decoderForHtml*(_: type gen_qstringconverter_types.QStringDecoder, data: openArray[byte]): gen_qstringconverter_types.QStringDecoder =
+  gen_qstringconverter_types.QStringDecoder(h: fcQStringDecoder_decoderForHtml(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))), owned: true)
 
 proc create*(T: type gen_qstringconverter_types.QStringDecoder,
     encoding: cint): gen_qstringconverter_types.QStringDecoder =

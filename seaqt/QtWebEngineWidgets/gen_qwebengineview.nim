@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6WebEngineWidgets") & " -fPIC"
 {.compile("gen_qwebengineview.cpp", cflags).}
@@ -291,7 +293,7 @@ proc metacall*(self: gen_qwebengineview_types.QWebEngineView, param1: cint, para
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring): string =
   let v_ms = fcQWebEngineView_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -310,10 +312,10 @@ proc load*(self: gen_qwebengineview_types.QWebEngineView, url: gen_qurl_types.QU
 proc load*(self: gen_qwebengineview_types.QWebEngineView, request: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
   fcQWebEngineView_loadWithRequest(self.h, request.h)
 
-proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: string): void =
-  fcQWebEngineView_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: openArray[char]): void =
+  fcQWebEngineView_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: seq[byte]): void =
+proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte]): void =
   fcQWebEngineView_setContent(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc history*(self: gen_qwebengineview_types.QWebEngineView): gen_qwebenginehistory_types.QWebEngineHistory =
@@ -321,7 +323,7 @@ proc history*(self: gen_qwebengineview_types.QWebEngineView): gen_qwebenginehist
 
 proc title*(self: gen_qwebengineview_types.QWebEngineView): string =
   let v_ms = fcQWebEngineView_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -342,7 +344,7 @@ proc hasSelection*(self: gen_qwebengineview_types.QWebEngineView): bool =
 
 proc selectedText*(self: gen_qwebengineview_types.QWebEngineView): string =
   let v_ms = fcQWebEngineView_selectedText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -370,8 +372,8 @@ proc createStandardContextMenu*(self: gen_qwebengineview_types.QWebEngineView): 
 proc lastContextMenuRequest*(self: gen_qwebengineview_types.QWebEngineView): gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest =
   gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest(h: fcQWebEngineView_lastContextMenuRequest(self.h), owned: false)
 
-proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: string): void =
-  fcQWebEngineView_printToPdf(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))))
+proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: openArray[char]): void =
+  fcQWebEngineView_printToPdf(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc print*(self: gen_qwebengineview_types.QWebEngineView, printer: gen_qprinter_types.QPrinter): void =
   fcQWebEngineView_print(self.h, printer.h)
@@ -446,14 +448,14 @@ proc onloadFinished*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEn
   GC_ref(tmp)
   fcQWebEngineView_connect_loadFinished(self.h, cast[int](addr tmp[]), cQWebEngineView_slot_callback_loadFinished, cQWebEngineView_slot_callback_loadFinished_release)
 
-proc titleChanged*(self: gen_qwebengineview_types.QWebEngineView, title: string): void =
-  fcQWebEngineView_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc titleChanged*(self: gen_qwebengineview_types.QWebEngineView, title: openArray[char]): void =
+  fcQWebEngineView_titleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWebEngineViewtitleChangedSlot* = proc(title: string)
+type QWebEngineViewtitleChangedSlot* = proc(title: openArray[char])
 proc cQWebEngineView_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewtitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval1 = vtitlex_ret
 
@@ -569,14 +571,14 @@ proc onrenderProcessTerminated*(self: gen_qwebengineview_types.QWebEngineView, s
   GC_ref(tmp)
   fcQWebEngineView_connect_renderProcessTerminated(self.h, cast[int](addr tmp[]), cQWebEngineView_slot_callback_renderProcessTerminated, cQWebEngineView_slot_callback_renderProcessTerminated_release)
 
-proc pdfPrintingFinished*(self: gen_qwebengineview_types.QWebEngineView, filePath: string, success: bool): void =
-  fcQWebEngineView_pdfPrintingFinished(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), success)
+proc pdfPrintingFinished*(self: gen_qwebengineview_types.QWebEngineView, filePath: openArray[char], success: bool): void =
+  fcQWebEngineView_pdfPrintingFinished(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), success)
 
-type QWebEngineViewpdfPrintingFinishedSlot* = proc(filePath: string, success: bool)
+type QWebEngineViewpdfPrintingFinishedSlot* = proc(filePath: openArray[char], success: bool)
 proc cQWebEngineView_slot_callback_pdfPrintingFinished(slot: int, filePath: struct_miqt_string, success: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewpdfPrintingFinishedSlot](cast[pointer](slot))
   let vfilePath_ms = filePath
-  let vfilePathx_ret = string.fromBytes(toOpenArrayByte(vfilePath_ms.data, 0, int(vfilePath_ms.len)-1))
+  let vfilePathx_ret = string.fromBytes(vfilePath_ms)
   c_free(vfilePath_ms.data)
   let slotval1 = vfilePathx_ret
 
@@ -634,33 +636,33 @@ proc onprintFinished*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebE
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineView_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebEngineView_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEngineView_setHtml2(self.h, struct_miqt_string(data: html, len: csize_t(len(html))), baseUrl.h)
+proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebEngineView_setHtml2(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
-proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: seq[byte], mimeType: string): void =
-  fcQWebEngineView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte], mimeType: openArray[char]): void =
+  fcQWebEngineView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
-proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: seq[byte], mimeType: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEngineView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), baseUrl.h)
+proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebEngineView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qwebengineview_types.QWebEngineView, action: cint, checked: bool): void =
   fcQWebEngineView_triggerPageAction2(self.h, cint(action), checked)
 
-proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: string, layout: gen_qpagelayout_types.QPageLayout): void =
-  fcQWebEngineView_printToPdf2(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), layout.h)
+proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout): void =
+  fcQWebEngineView_printToPdf2(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h)
 
-proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: string, layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
-  fcQWebEngineView_printToPdf3(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), layout.h, ranges.h)
+proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
+  fcQWebEngineView_printToPdf3(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h, ranges.h)
 
 type QWebEngineViewmetaObjectProc* = proc(self: QWebEngineView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebEngineViewmetacastProc* = proc(self: QWebEngineView, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -698,7 +700,7 @@ type QWebEngineViewmoveEventProc* = proc(self: QWebEngineView, event: gen_qevent
 type QWebEngineViewresizeEventProc* = proc(self: QWebEngineView, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
 type QWebEngineViewtabletEventProc* = proc(self: QWebEngineView, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QWebEngineViewactionEventProc* = proc(self: QWebEngineView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
-type QWebEngineViewnativeEventProc* = proc(self: QWebEngineView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QWebEngineViewnativeEventProc* = proc(self: QWebEngineView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QWebEngineViewchangeEventProc* = proc(self: QWebEngineView, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebEngineViewmetricProc* = proc(self: QWebEngineView, param1: cint): cint {.raises: [], gcsafe.}
 type QWebEngineViewinitPainterProc* = proc(self: QWebEngineView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -1112,14 +1114,14 @@ proc cQWebEngineView_vtable_callback_actionEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QWebEngineViewnativeEvent*(self: gen_qwebengineview_types.QWebEngineView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QWebEngineViewnativeEvent*(self: gen_qwebengineview_types.QWebEngineView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQWebEngineView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWebEngineView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineViewVTable](fcQWebEngineView_vdata(self))
   let self = QWebEngineView(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1544,12 +1546,12 @@ proc cQWebEngineView_method_callback_actionEvent(self: pointer, event: pointer):
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWebEngineView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQWebEngineView, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QWebEngineViewnativeEvent(self[], eventType, message, resultVal)
 proc cQWebEngineView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineView](fcQWebEngineView_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

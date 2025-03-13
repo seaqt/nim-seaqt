@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginedownloadrequest.cpp", cflags).}
@@ -158,7 +160,7 @@ proc metacall*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadReque
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring): string =
   let v_ms = fcQWebEngineDownloadRequest_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -179,7 +181,7 @@ proc url*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): 
 
 proc mimeType*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
   let v_ms = fcQWebEngineDownloadRequest_mimeType(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -200,7 +202,7 @@ proc interruptReason*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownlo
 
 proc interruptReasonString*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
   let v_ms = fcQWebEngineDownloadRequest_interruptReasonString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -209,27 +211,27 @@ proc isSavePageDownload*(self: gen_qwebenginedownloadrequest_types.QWebEngineDow
 
 proc suggestedFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
   let v_ms = fcQWebEngineDownloadRequest_suggestedFileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc downloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
   let v_ms = fcQWebEngineDownloadRequest_downloadDirectory(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, directory: string): void =
-  fcQWebEngineDownloadRequest_setDownloadDirectory(self.h, struct_miqt_string(data: directory, len: csize_t(len(directory))))
+proc setDownloadDirectory*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, directory: openArray[char]): void =
+  fcQWebEngineDownloadRequest_setDownloadDirectory(self.h, struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc downloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): string =
   let v_ms = fcQWebEngineDownloadRequest_downloadFileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, fileName: string): void =
-  fcQWebEngineDownloadRequest_setDownloadFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc setDownloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, fileName: openArray[char]): void =
+  fcQWebEngineDownloadRequest_setDownloadFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc page*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): gen_qwebenginepage_types.QWebEnginePage =
   gen_qwebenginepage_types.QWebEnginePage(h: fcQWebEngineDownloadRequest_page(self.h), owned: false)
@@ -412,13 +414,13 @@ proc ondownloadFileNameChanged*(self: gen_qwebenginedownloadrequest_types.QWebEn
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineDownloadRequest_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebEngineDownloadRequest_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

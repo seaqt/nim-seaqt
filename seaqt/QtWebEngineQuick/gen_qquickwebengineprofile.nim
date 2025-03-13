@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6WebEngineQuick") & " -fPIC"
 {.compile("gen_qquickwebengineprofile.cpp", cflags).}
@@ -181,18 +183,18 @@ proc metacall*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, pa
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring): string =
   let v_ms = fcQQuickWebEngineProfile_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc storageName*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_storageName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setStorageName*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, name: string): void =
-  fcQQuickWebEngineProfile_setStorageName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setStorageName*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, name: openArray[char]): void =
+  fcQQuickWebEngineProfile_setStorageName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc isOffTheRecord*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): bool =
   fcQQuickWebEngineProfile_isOffTheRecord(self.h)
@@ -202,30 +204,30 @@ proc setOffTheRecord*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProf
 
 proc persistentStoragePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_persistentStoragePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPersistentStoragePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: string): void =
-  fcQQuickWebEngineProfile_setPersistentStoragePath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setPersistentStoragePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: openArray[char]): void =
+  fcQQuickWebEngineProfile_setPersistentStoragePath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc cachePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_cachePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCachePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: string): void =
-  fcQQuickWebEngineProfile_setCachePath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setCachePath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: openArray[char]): void =
+  fcQQuickWebEngineProfile_setCachePath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc httpUserAgent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_httpUserAgent(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHttpUserAgent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, userAgent: string): void =
-  fcQQuickWebEngineProfile_setHttpUserAgent(self.h, struct_miqt_string(data: userAgent, len: csize_t(len(userAgent))))
+proc setHttpUserAgent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, userAgent: openArray[char]): void =
+  fcQQuickWebEngineProfile_setHttpUserAgent(self.h, struct_miqt_string(data: if len(userAgent) > 0: addr userAgent[0] else: nil, len: csize_t(len(userAgent))))
 
 proc httpCacheType*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): cint =
   cint(fcQQuickWebEngineProfile_httpCacheType(self.h))
@@ -247,12 +249,12 @@ proc setHttpCacheMaximumSize*(self: gen_qquickwebengineprofile_types.QQuickWebEn
 
 proc httpAcceptLanguage*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_httpAcceptLanguage(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHttpAcceptLanguage*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, httpAcceptLanguage: string): void =
-  fcQQuickWebEngineProfile_setHttpAcceptLanguage(self.h, struct_miqt_string(data: httpAcceptLanguage, len: csize_t(len(httpAcceptLanguage))))
+proc setHttpAcceptLanguage*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, httpAcceptLanguage: openArray[char]): void =
+  fcQQuickWebEngineProfile_setHttpAcceptLanguage(self.h, struct_miqt_string(data: if len(httpAcceptLanguage) > 0: addr httpAcceptLanguage[0] else: nil, len: csize_t(len(httpAcceptLanguage))))
 
 proc cookieStore*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): gen_qwebenginecookiestore_types.QWebEngineCookieStore =
   gen_qwebenginecookiestore_types.QWebEngineCookieStore(h: fcQQuickWebEngineProfile_cookieStore(self.h), owned: false)
@@ -260,13 +262,13 @@ proc cookieStore*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile)
 proc setUrlRequestInterceptor*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, interceptor: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor): void =
   fcQQuickWebEngineProfile_setUrlRequestInterceptor(self.h, interceptor.h)
 
-proc urlSchemeHandler*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: seq[byte]): gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler =
+proc urlSchemeHandler*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: openArray[byte]): gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler =
   gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler(h: fcQQuickWebEngineProfile_urlSchemeHandler(self.h, struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))), owned: false)
 
-proc installUrlSchemeHandler*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, scheme: seq[byte], param2: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
+proc installUrlSchemeHandler*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, scheme: openArray[byte], param2: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
   fcQQuickWebEngineProfile_installUrlSchemeHandler(self.h, struct_miqt_string(data: cast[cstring](if len(scheme) == 0: nil else: unsafeAddr scheme[0]), len: csize_t(len(scheme))), param2.h)
 
-proc removeUrlScheme*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, scheme: seq[byte]): void =
+proc removeUrlScheme*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, scheme: openArray[byte]): void =
   fcQQuickWebEngineProfile_removeUrlScheme(self.h, struct_miqt_string(data: cast[cstring](if len(scheme) == 0: nil else: unsafeAddr scheme[0]), len: csize_t(len(scheme))))
 
 proc removeUrlSchemeHandler*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): void =
@@ -278,10 +280,10 @@ proc removeAllUrlSchemeHandlers*(self: gen_qquickwebengineprofile_types.QQuickWe
 proc clearHttpCache*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_clearHttpCache(self.h)
 
-proc setSpellCheckLanguages*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, languages: seq[string]): void =
+proc setSpellCheckLanguages*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, languages: openArray[string]): void =
   var languages_CArray = newSeq[struct_miqt_string](len(languages))
   for i in 0..<len(languages):
-    languages_CArray[i] = struct_miqt_string(data: languages[i], len: csize_t(len(languages[i])))
+    languages_CArray[i] = struct_miqt_string(data: if len(languages[i]) > 0: addr languages[i][0] else: nil, len: csize_t(len(languages[i])))
 
   fcQQuickWebEngineProfile_setSpellCheckLanguages(self.h, struct_miqt_array(len: csize_t(len(languages)), data: if len(languages) == 0: nil else: addr(languages_CArray[0])))
 
@@ -291,7 +293,7 @@ proc spellCheckLanguages*(self: gen_qquickwebengineprofile_types.QQuickWebEngine
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -305,12 +307,12 @@ proc isSpellCheckEnabled*(self: gen_qquickwebengineprofile_types.QQuickWebEngine
 
 proc downloadPath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): string =
   let v_ms = fcQQuickWebEngineProfile_downloadPath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDownloadPath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: string): void =
-  fcQQuickWebEngineProfile_setDownloadPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setDownloadPath*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, path: openArray[char]): void =
+  fcQQuickWebEngineProfile_setDownloadPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc clientCertificateStore*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore =
   gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore(h: fcQQuickWebEngineProfile_clientCertificateStore(self.h), owned: false)
@@ -556,13 +558,13 @@ proc onpresentNotification*(self: gen_qquickwebengineprofile_types.QQuickWebEngi
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring, c: cstring): string =
   let v_ms = fcQQuickWebEngineProfile_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQuickWebEngineProfile_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

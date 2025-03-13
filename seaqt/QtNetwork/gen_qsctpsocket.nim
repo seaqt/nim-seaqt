@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qsctpsocket.cpp", cflags).}
@@ -179,7 +181,7 @@ proc metacall*(self: gen_qsctpsocket_types.QSctpSocket, param1: cint, param2: ci
 
 proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring): string =
   let v_ms = fcQSctpSocket_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -206,13 +208,13 @@ proc writeDatagram*(self: gen_qsctpsocket_types.QSctpSocket, datagram: gen_qnetw
 
 proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring, c: cstring): string =
   let v_ms = fcQSctpSocket_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSctpSocket_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -225,7 +227,7 @@ type QSctpSocketreadDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: c
 type QSctpSocketreadLineDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
 type QSctpSocketresumeProc* = proc(self: QSctpSocket): void {.raises: [], gcsafe.}
 type QSctpSocketbindXProc* = proc(self: QSctpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QSctpSocketconnectToHostProc* = proc(self: QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QSctpSocketconnectToHostProc* = proc(self: QSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QSctpSocketbytesAvailableProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
 type QSctpSocketbytesToWriteProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
 type QSctpSocketsetReadBufferSizeProc* = proc(self: QSctpSocket, size: clonglong): void {.raises: [], gcsafe.}
@@ -386,14 +388,14 @@ proc cQSctpSocket_vtable_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSctpSocketconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
-  fcQSctpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+proc QSctpSocketconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
+  fcQSctpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc cQSctpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QSctpSocketVTable](fcQSctpSocket_vdata(self))
   let self = QSctpSocket(h: self)
   let vhostName_ms = hostName
-  let vhostNamex_ret = string.fromBytes(toOpenArrayByte(vhostName_ms.data, 0, int(vhostName_ms.len)-1))
+  let vhostNamex_ret = string.fromBytes(vhostName_ms)
   c_free(vhostName_ms.data)
   let slotval1 = vhostNamex_ret
   let slotval2 = port
@@ -749,12 +751,12 @@ proc cQSctpSocket_method_callback_bindX(self: pointer, address: pointer, port: c
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-method connectToHost*(self: VirtualQSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQSctpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QSctpSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc cQSctpSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQSctpSocket](fcQSctpSocket_vdata(self))
   let vhostName_ms = hostName
-  let vhostNamex_ret = string.fromBytes(toOpenArrayByte(vhostName_ms.data, 0, int(vhostName_ms.len)-1))
+  let vhostNamex_ret = string.fromBytes(vhostName_ms)
   c_free(vhostName_ms.data)
   let slotval1 = vhostNamex_ret
   let slotval2 = port
@@ -996,14 +998,14 @@ proc setPeerPort*(self: gen_qsctpsocket_types.QSctpSocket, port: cushort): void 
 proc setPeerAddress*(self: gen_qsctpsocket_types.QSctpSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQSctpSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qsctpsocket_types.QSctpSocket, name: string): void =
-  fcQSctpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setPeerName*(self: gen_qsctpsocket_types.QSctpSocket, name: openArray[char]): void =
+  fcQSctpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qsctpsocket_types.QSctpSocket, openMode: cint): void =
   fcQSctpSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qsctpsocket_types.QSctpSocket, errorString: string): void =
-  fcQSctpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qsctpsocket_types.QSctpSocket, errorString: openArray[char]): void =
+  fcQSctpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qsctpsocket_types.QSctpSocket): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSctpSocket_protectedbase_sender(self.h), owned: false)

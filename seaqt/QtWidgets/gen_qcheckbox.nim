@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qcheckbox.cpp", cflags).}
@@ -223,7 +225,7 @@ proc metacall*(self: gen_qcheckbox_types.QCheckBox, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring): string =
   let v_ms = fcQCheckBox_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -267,13 +269,13 @@ proc onstateChanged*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxstateCh
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring): string =
   let v_ms = fcQCheckBox_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCheckBox_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -321,7 +323,7 @@ type QCheckBoxdragLeaveEventProc* = proc(self: QCheckBox, event: gen_qevent_type
 type QCheckBoxdropEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QCheckBoxshowEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QCheckBoxhideEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QCheckBoxnativeEventProc* = proc(self: QCheckBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QCheckBoxnativeEventProc* = proc(self: QCheckBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QCheckBoxmetricProc* = proc(self: QCheckBox, param1: cint): cint {.raises: [], gcsafe.}
 type QCheckBoxinitPainterProc* = proc(self: QCheckBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QCheckBoxredirectedProc* = proc(self: QCheckBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -776,14 +778,14 @@ proc cQCheckBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QCheckBoxnativeEvent*(self: gen_qcheckbox_types.QCheckBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QCheckBoxnativeEvent*(self: gen_qcheckbox_types.QCheckBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQCheckBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQCheckBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QCheckBoxVTable](fcQCheckBox_vdata(self))
   let self = QCheckBox(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1220,12 +1222,12 @@ proc cQCheckBox_method_callback_hideEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQCheckBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQCheckBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QCheckBoxnativeEvent(self[], eventType, message, resultVal)
 proc cQCheckBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQCheckBox](fcQCheckBox_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1595,7 +1597,7 @@ proc create*(T: type gen_qcheckbox_types.QCheckBox,
   gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qcheckbox_types.QCheckBox,
-    text: string,
+    text: openArray[char],
     vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
   let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -1710,10 +1712,10 @@ proc create*(T: type gen_qcheckbox_types.QCheckBox,
     vtbl[].vtbl.connectNotify = cQCheckBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQCheckBox_vtable_callback_disconnectNotify
-  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qcheckbox_types.QCheckBox,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
   let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
   GC_ref(vtbl)
@@ -1828,7 +1830,7 @@ proc create*(T: type gen_qcheckbox_types.QCheckBox,
     vtbl[].vtbl.connectNotify = cQCheckBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQCheckBox_vtable_callback_disconnectNotify
-  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQCheckBox_mvtbl = cQCheckBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1904,17 +1906,17 @@ proc create*(T: type gen_qcheckbox_types.QCheckBox,
   inst[].owned = true
 
 proc create*(T: type gen_qcheckbox_types.QCheckBox,
-    text: string,
+    text: openArray[char],
     inst: VirtualQCheckBox) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQCheckBox_new3(addr(cQCheckBox_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQCheckBox_new3(addr(cQCheckBox_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qcheckbox_types.QCheckBox,
-    text: string, parent: gen_qwidget_types.QWidget,
+    text: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQCheckBox) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQCheckBox_new4(addr(cQCheckBox_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  inst[].h = fcQCheckBox_new4(addr(cQCheckBox_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcheckbox_types.QCheckBox): gen_qobjectdefs_types.QMetaObject =

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qpdfwriter.cpp", cflags).}
@@ -154,7 +156,7 @@ proc metacall*(self: gen_qpdfwriter_types.QPdfWriter, param1: cint, param2: cint
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring): string =
   let v_ms = fcQPdfWriter_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -166,21 +168,21 @@ proc pdfVersion*(self: gen_qpdfwriter_types.QPdfWriter): cint =
 
 proc title*(self: gen_qpdfwriter_types.QPdfWriter): string =
   let v_ms = fcQPdfWriter_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qpdfwriter_types.QPdfWriter, title: string): void =
-  fcQPdfWriter_setTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc setTitle*(self: gen_qpdfwriter_types.QPdfWriter, title: openArray[char]): void =
+  fcQPdfWriter_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc creator*(self: gen_qpdfwriter_types.QPdfWriter): string =
   let v_ms = fcQPdfWriter_creator(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCreator*(self: gen_qpdfwriter_types.QPdfWriter, creator: string): void =
-  fcQPdfWriter_setCreator(self.h, struct_miqt_string(data: creator, len: csize_t(len(creator))))
+proc setCreator*(self: gen_qpdfwriter_types.QPdfWriter, creator: openArray[char]): void =
+  fcQPdfWriter_setCreator(self.h, struct_miqt_string(data: if len(creator) > 0: addr creator[0] else: nil, len: csize_t(len(creator))))
 
 proc newPage*(self: gen_qpdfwriter_types.QPdfWriter): bool =
   fcQPdfWriter_newPage(self.h)
@@ -191,32 +193,32 @@ proc setResolution*(self: gen_qpdfwriter_types.QPdfWriter, resolution: cint): vo
 proc resolution*(self: gen_qpdfwriter_types.QPdfWriter): cint =
   fcQPdfWriter_resolution(self.h)
 
-proc setDocumentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter, xmpMetadata: seq[byte]): void =
+proc setDocumentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter, xmpMetadata: openArray[byte]): void =
   fcQPdfWriter_setDocumentXmpMetadata(self.h, struct_miqt_string(data: cast[cstring](if len(xmpMetadata) == 0: nil else: unsafeAddr xmpMetadata[0]), len: csize_t(len(xmpMetadata))))
 
 proc documentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter): seq[byte] =
   var v_bytearray = fcQPdfWriter_documentXmpMetadata(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: string, data: seq[byte]): void =
-  fcQPdfWriter_addFileAttachment(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
+proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte]): void =
+  fcQPdfWriter_addFileAttachment(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring): string =
   let v_ms = fcQPdfWriter_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPdfWriter_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: string, data: seq[byte], mimeType: string): void =
-  fcQPdfWriter_addFileAttachment3(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte], mimeType: openArray[char]): void =
+  fcQPdfWriter_addFileAttachment3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 type QPdfWritermetaObjectProc* = proc(self: QPdfWriter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfWritermetacastProc* = proc(self: QPdfWriter, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -683,7 +685,7 @@ proc isSignalConnected*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmeta
   fcQPdfWriter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
-    filename: string,
+    filename: openArray[char],
     vtbl: ref QPdfWriterVTable = nil): gen_qpdfwriter_types.QPdfWriter =
   let vtbl = if vtbl == nil: new QPdfWriterVTable else: vtbl
   GC_ref(vtbl)
@@ -734,7 +736,7 @@ proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     vtbl[].vtbl.redirected = cQPdfWriter_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = cQPdfWriter_vtable_callback_sharedPainter
-  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: filename, len: csize_t(len(filename)))), owned: true)
+  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: true)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     device: gen_qiodevice_types.QIODevice,
@@ -819,10 +821,10 @@ const cQPdfWriter_mvtbl = cQPdfWriterVTable(
   sharedPainter: cQPdfWriter_method_callback_sharedPainter,
 )
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
-    filename: string,
+    filename: openArray[char],
     inst: VirtualQPdfWriter) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQPdfWriter_new(addr(cQPdfWriter_mvtbl), addr(inst[]), struct_miqt_string(data: filename, len: csize_t(len(filename))))
+  inst[].h = fcQPdfWriter_new(addr(cQPdfWriter_mvtbl), addr(inst[]), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
   inst[].owned = true
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,

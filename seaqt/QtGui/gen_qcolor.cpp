@@ -1,4 +1,7 @@
 #include <QAnyStringView>
+#include <QString>
+#include <QByteArray>
+#include <QAnyStringView>
 #include <QColor>
 #include <QList>
 #include <QRgba64>
@@ -57,8 +60,9 @@ QColor* QColor_new12(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a
 	return new QColor(static_cast<QColor::Spec>(spec), static_cast<ushort>(a1), static_cast<ushort>(a2), static_cast<ushort>(a3), static_cast<ushort>(a4), static_cast<ushort>(a5));
 }
 
-QColor* QColor_fromString(QAnyStringView* name) {
-	return new QColor(QColor::fromString(*name));
+QColor* QColor_fromString(struct miqt_string name) {
+	QAnyStringView name_QString = QAnyStringView(name.data, name.len);
+	return new QColor(QColor::fromString(name_QString));
 }
 
 void QColor_operatorAssign(QColor* self, int color) {
@@ -457,8 +461,9 @@ bool QColor_isValidColor(struct miqt_string name) {
 	return QColor::isValidColor(name_QString);
 }
 
-bool QColor_isValidColorName(QAnyStringView* param1) {
-	return QColor::isValidColorName(*param1);
+bool QColor_isValidColorName(struct miqt_string param1) {
+	QAnyStringView param1_QString = QAnyStringView(param1.data, param1.len);
+	return QColor::isValidColorName(param1_QString);
 }
 
 struct miqt_string QColor_name1(const QColor* self, int format) {

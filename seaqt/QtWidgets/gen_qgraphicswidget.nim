@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qgraphicswidget.cpp", cflags).}
@@ -325,7 +327,7 @@ proc metacall*(self: gen_qgraphicswidget_types.QGraphicsWidget, param1: cint, pa
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring): string =
   let v_ms = fcQGraphicsWidget_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -428,12 +430,12 @@ proc setWindowFlags*(self: gen_qgraphicswidget_types.QGraphicsWidget, wFlags: ci
 proc isActiveWindow*(self: gen_qgraphicswidget_types.QGraphicsWidget): bool =
   fcQGraphicsWidget_isActiveWindow(self.h)
 
-proc setWindowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget, title: string): void =
-  fcQGraphicsWidget_setWindowTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc setWindowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget, title: openArray[char]): void =
+  fcQGraphicsWidget_setWindowTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc windowTitle*(self: gen_qgraphicswidget_types.QGraphicsWidget): string =
   let v_ms = fcQGraphicsWidget_windowTitle(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -464,14 +466,14 @@ proc setShortcutAutoRepeat*(self: gen_qgraphicswidget_types.QGraphicsWidget, id:
 proc addAction*(self: gen_qgraphicswidget_types.QGraphicsWidget, action: gen_qaction_types.QAction): void =
   fcQGraphicsWidget_addAction(self.h, action.h)
 
-proc addActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, actions: seq[gen_qaction_types.QAction]): void =
+proc addActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
   fcQGraphicsWidget_addActions(self.h, struct_miqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])))
 
-proc insertActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, before: gen_qaction_types.QAction, actions: seq[gen_qaction_types.QAction]): void =
+proc insertActions*(self: gen_qgraphicswidget_types.QGraphicsWidget, before: gen_qaction_types.QAction, actions: openArray[gen_qaction_types.QAction]): void =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
@@ -555,13 +557,13 @@ proc close*(self: gen_qgraphicswidget_types.QGraphicsWidget): bool =
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsWidget_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicswidget_types.QGraphicsWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsWidget_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -591,7 +593,7 @@ type QGraphicsWidgetinitStyleOptionProc* = proc(self: QGraphicsWidget, option: g
 type QGraphicsWidgetsizeHintProc* = proc(self: QGraphicsWidget, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
 type QGraphicsWidgetupdateGeometryProc* = proc(self: QGraphicsWidget): void {.raises: [], gcsafe.}
 type QGraphicsWidgetitemChangeProc* = proc(self: QGraphicsWidget, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QGraphicsWidgetpropertyChangeProc* = proc(self: QGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsWidgetpropertyChangeProc* = proc(self: QGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsWidgetsceneEventProc* = proc(self: QGraphicsWidget, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsWidgetwindowFrameEventProc* = proc(self: QGraphicsWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsWidgetwindowFrameSectionAtProc* = proc(self: QGraphicsWidget, pos: gen_qpoint_types.QPointF): cint {.raises: [], gcsafe.}
@@ -868,14 +870,14 @@ proc cQGraphicsWidget_vtable_callback_itemChange(self: pointer, change: cint, va
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsWidgetpropertyChange*(self: gen_qgraphicswidget_types.QGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: propertyName, len: csize_t(len(propertyName))), value.h), owned: true)
+proc QGraphicsWidgetpropertyChange*(self: gen_qgraphicswidget_types.QGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQGraphicsWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc cQGraphicsWidget_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsWidgetVTable](fcQGraphicsWidget_vdata(self))
   let self = QGraphicsWidget(h: self)
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1509,12 +1511,12 @@ proc cQGraphicsWidget_method_callback_itemChange(self: pointer, change: cint, va
   virtualReturn.h = nil
   virtualReturn_h
 
-method propertyChange*(self: VirtualQGraphicsWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method propertyChange*(self: VirtualQGraphicsWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWidgetpropertyChange(self[], propertyName, value)
 proc cQGraphicsWidget_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsWidget](fcQGraphicsWidget_vdata(self))
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qspinbox.cpp", cflags).}
@@ -413,7 +415,7 @@ proc metacall*(self: gen_qspinbox_types.QSpinBox, param1: cint, param2: cint, pa
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring): string =
   let v_ms = fcQSpinBox_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -422,25 +424,25 @@ proc value*(self: gen_qspinbox_types.QSpinBox): cint =
 
 proc prefix*(self: gen_qspinbox_types.QSpinBox): string =
   let v_ms = fcQSpinBox_prefix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPrefix*(self: gen_qspinbox_types.QSpinBox, prefix: string): void =
-  fcQSpinBox_setPrefix(self.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix))))
+proc setPrefix*(self: gen_qspinbox_types.QSpinBox, prefix: openArray[char]): void =
+  fcQSpinBox_setPrefix(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc suffix*(self: gen_qspinbox_types.QSpinBox): string =
   let v_ms = fcQSpinBox_suffix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSuffix*(self: gen_qspinbox_types.QSpinBox, suffix: string): void =
-  fcQSpinBox_setSuffix(self.h, struct_miqt_string(data: suffix, len: csize_t(len(suffix))))
+proc setSuffix*(self: gen_qspinbox_types.QSpinBox, suffix: openArray[char]): void =
+  fcQSpinBox_setSuffix(self.h, struct_miqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
 proc cleanText*(self: gen_qspinbox_types.QSpinBox): string =
   let v_ms = fcQSpinBox_cleanText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -500,14 +502,14 @@ proc onvalueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChang
   GC_ref(tmp)
   fcQSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), cQSpinBox_slot_callback_valueChanged, cQSpinBox_slot_callback_valueChanged_release)
 
-proc textChanged*(self: gen_qspinbox_types.QSpinBox, param1: string): void =
-  fcQSpinBox_textChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc textChanged*(self: gen_qspinbox_types.QSpinBox, param1: openArray[char]): void =
+  fcQSpinBox_textChanged(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QSpinBoxtextChangedSlot* = proc(param1: string)
+type QSpinBoxtextChangedSlot* = proc(param1: openArray[char])
 proc cQSpinBox_slot_callback_textChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSpinBoxtextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -525,13 +527,13 @@ proc ontextChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxtextChanged
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring): string =
   let v_ms = fcQSpinBox_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSpinBox_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -539,10 +541,10 @@ type QSpinBoxmetaObjectProc* = proc(self: QSpinBox): gen_qobjectdefs_types.QMeta
 type QSpinBoxmetacastProc* = proc(self: QSpinBox, param1: cstring): pointer {.raises: [], gcsafe.}
 type QSpinBoxmetacallProc* = proc(self: QSpinBox, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QSpinBoxeventProc* = proc(self: QSpinBox, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
-type QSpinBoxvalidateProc* = proc(self: QSpinBox, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QSpinBoxvalueFromTextProc* = proc(self: QSpinBox, text: string): cint {.raises: [], gcsafe.}
+type QSpinBoxvalidateProc* = proc(self: QSpinBox, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QSpinBoxvalueFromTextProc* = proc(self: QSpinBox, text: openArray[char]): cint {.raises: [], gcsafe.}
 type QSpinBoxtextFromValueProc* = proc(self: QSpinBox, val: cint): string {.raises: [], gcsafe.}
-type QSpinBoxfixupProc* = proc(self: QSpinBox, str: string): void {.raises: [], gcsafe.}
+type QSpinBoxfixupProc* = proc(self: QSpinBox, str: openArray[char]): void {.raises: [], gcsafe.}
 type QSpinBoxsizeHintProc* = proc(self: QSpinBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QSpinBoxminimumSizeHintProc* = proc(self: QSpinBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QSpinBoxinputMethodQueryProc* = proc(self: QSpinBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
@@ -581,7 +583,7 @@ type QSpinBoxdragEnterEventProc* = proc(self: QSpinBox, event: gen_qevent_types.
 type QSpinBoxdragMoveEventProc* = proc(self: QSpinBox, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QSpinBoxdragLeaveEventProc* = proc(self: QSpinBox, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QSpinBoxdropEventProc* = proc(self: QSpinBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QSpinBoxnativeEventProc* = proc(self: QSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSpinBoxnativeEventProc* = proc(self: QSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSpinBoxmetricProc* = proc(self: QSpinBox, param1: cint): cint {.raises: [], gcsafe.}
 type QSpinBoxinitPainterProc* = proc(self: QSpinBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QSpinBoxredirectedProc* = proc(self: QSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -697,28 +699,28 @@ proc cQSpinBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdec
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSpinBoxvalidate*(self: gen_qspinbox_types.QSpinBox, input: string, pos: ptr cint): cint =
-  cint(fcQSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc QSpinBoxvalidate*(self: gen_qspinbox_types.QSpinBox, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc cQSpinBox_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self))
   let self = QSpinBox(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QSpinBoxvalueFromText*(self: gen_qspinbox_types.QSpinBox, text: string): cint =
-  fcQSpinBox_virtualbase_valueFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc QSpinBoxvalueFromText*(self: gen_qspinbox_types.QSpinBox, text: openArray[char]): cint =
+  fcQSpinBox_virtualbase_valueFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc cQSpinBox_vtable_callback_valueFromText(self: pointer, text: struct_miqt_string): cint {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self))
   let self = QSpinBox(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].valueFromText(self, slotval1)
@@ -726,7 +728,7 @@ proc cQSpinBox_vtable_callback_valueFromText(self: pointer, text: struct_miqt_st
 
 proc QSpinBoxtextFromValue*(self: gen_qspinbox_types.QSpinBox, val: cint): string =
   let v_ms = fcQSpinBox_virtualbase_textFromValue(self.h, val)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -739,14 +741,14 @@ proc cQSpinBox_vtable_callback_textFromValue(self: pointer, val: cint): struct_m
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc QSpinBoxfixup*(self: gen_qspinbox_types.QSpinBox, str: string): void =
-  fcQSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc QSpinBoxfixup*(self: gen_qspinbox_types.QSpinBox, str: openArray[char]): void =
+  fcQSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc cQSpinBox_vtable_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self))
   let self = QSpinBox(h: self)
   let vstr_ms = str
-  let vstrx_ret = string.fromBytes(toOpenArrayByte(vstr_ms.data, 0, int(vstr_ms.len)-1))
+  let vstrx_ret = string.fromBytes(vstr_ms)
   c_free(vstr_ms.data)
   let slotval1 = vstrx_ret
   vtbl[].fixup(self, slotval1)
@@ -1106,14 +1108,14 @@ proc cQSpinBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QSpinBoxnativeEvent*(self: gen_qspinbox_types.QSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSpinBoxnativeEvent*(self: gen_qspinbox_types.QSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSpinBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self))
   let self = QSpinBox(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1269,24 +1271,24 @@ proc cQSpinBox_method_callback_event(self: pointer, event: pointer): bool {.cdec
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method validate*(self: VirtualQSpinBox, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQSpinBox, input: openArray[char], pos: ptr cint): cint {.base.} =
   QSpinBoxvalidate(self[], input, pos)
 proc cQSpinBox_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method valueFromText*(self: VirtualQSpinBox, text: string): cint {.base.} =
+method valueFromText*(self: VirtualQSpinBox, text: openArray[char]): cint {.base.} =
   QSpinBoxvalueFromText(self[], text)
 proc cQSpinBox_method_callback_valueFromText(self: pointer, text: struct_miqt_string): cint {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.valueFromText(slotval1)
@@ -1302,12 +1304,12 @@ proc cQSpinBox_method_callback_textFromValue(self: pointer, val: cint): struct_m
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-method fixup*(self: VirtualQSpinBox, str: string): void {.base.} =
+method fixup*(self: VirtualQSpinBox, str: openArray[char]): void {.base.} =
   QSpinBoxfixup(self[], str)
 proc cQSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self))
   let vstr_ms = str
-  let vstrx_ret = string.fromBytes(toOpenArrayByte(vstr_ms.data, 0, int(vstr_ms.len)-1))
+  let vstrx_ret = string.fromBytes(vstr_ms)
   c_free(vstr_ms.data)
   let slotval1 = vstrx_ret
   inst.fixup(slotval1)
@@ -1591,12 +1593,12 @@ proc cQSpinBox_method_callback_dropEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSpinBoxnativeEvent(self[], eventType, message, resultVal)
 proc cQSpinBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2066,7 +2068,7 @@ proc metacall*(self: gen_qspinbox_types.QDoubleSpinBox, param1: cint, param2: ci
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring): string =
   let v_ms = fcQDoubleSpinBox_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2075,25 +2077,25 @@ proc value*(self: gen_qspinbox_types.QDoubleSpinBox): float64 =
 
 proc prefix*(self: gen_qspinbox_types.QDoubleSpinBox): string =
   let v_ms = fcQDoubleSpinBox_prefix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPrefix*(self: gen_qspinbox_types.QDoubleSpinBox, prefix: string): void =
-  fcQDoubleSpinBox_setPrefix(self.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix))))
+proc setPrefix*(self: gen_qspinbox_types.QDoubleSpinBox, prefix: openArray[char]): void =
+  fcQDoubleSpinBox_setPrefix(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc suffix*(self: gen_qspinbox_types.QDoubleSpinBox): string =
   let v_ms = fcQDoubleSpinBox_suffix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSuffix*(self: gen_qspinbox_types.QDoubleSpinBox, suffix: string): void =
-  fcQDoubleSpinBox_setSuffix(self.h, struct_miqt_string(data: suffix, len: csize_t(len(suffix))))
+proc setSuffix*(self: gen_qspinbox_types.QDoubleSpinBox, suffix: openArray[char]): void =
+  fcQDoubleSpinBox_setSuffix(self.h, struct_miqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
 proc cleanText*(self: gen_qspinbox_types.QDoubleSpinBox): string =
   let v_ms = fcQDoubleSpinBox_cleanText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2130,20 +2132,20 @@ proc decimals*(self: gen_qspinbox_types.QDoubleSpinBox): cint =
 proc setDecimals*(self: gen_qspinbox_types.QDoubleSpinBox, prec: cint): void =
   fcQDoubleSpinBox_setDecimals(self.h, prec)
 
-proc validate*(self: gen_qspinbox_types.QDoubleSpinBox, input: string, pos: ptr cint): cint =
-  cint(fcQDoubleSpinBox_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc validate*(self: gen_qspinbox_types.QDoubleSpinBox, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQDoubleSpinBox_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
-proc valueFromText*(self: gen_qspinbox_types.QDoubleSpinBox, text: string): float64 =
-  fcQDoubleSpinBox_valueFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc valueFromText*(self: gen_qspinbox_types.QDoubleSpinBox, text: openArray[char]): float64 =
+  fcQDoubleSpinBox_valueFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc textFromValue*(self: gen_qspinbox_types.QDoubleSpinBox, val: float64): string =
   let v_ms = fcQDoubleSpinBox_textFromValue(self.h, val)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: string): void =
-  fcQDoubleSpinBox_fixup(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc fixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: openArray[char]): void =
+  fcQDoubleSpinBox_fixup(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc setValue*(self: gen_qspinbox_types.QDoubleSpinBox, val: float64): void =
   fcQDoubleSpinBox_setValue(self.h, val)
@@ -2168,14 +2170,14 @@ proc onvalueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinB
   GC_ref(tmp)
   fcQDoubleSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), cQDoubleSpinBox_slot_callback_valueChanged, cQDoubleSpinBox_slot_callback_valueChanged_release)
 
-proc textChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: string): void =
-  fcQDoubleSpinBox_textChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc textChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: openArray[char]): void =
+  fcQDoubleSpinBox_textChanged(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QDoubleSpinBoxtextChangedSlot* = proc(param1: string)
+type QDoubleSpinBoxtextChangedSlot* = proc(param1: openArray[char])
 proc cQDoubleSpinBox_slot_callback_textChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleSpinBoxtextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -2193,23 +2195,23 @@ proc ontextChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBo
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring): string =
   let v_ms = fcQDoubleSpinBox_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDoubleSpinBox_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QDoubleSpinBoxmetaObjectProc* = proc(self: QDoubleSpinBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDoubleSpinBoxmetacastProc* = proc(self: QDoubleSpinBox, param1: cstring): pointer {.raises: [], gcsafe.}
 type QDoubleSpinBoxmetacallProc* = proc(self: QDoubleSpinBox, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QDoubleSpinBoxvalidateProc* = proc(self: QDoubleSpinBox, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QDoubleSpinBoxvalueFromTextProc* = proc(self: QDoubleSpinBox, text: string): float64 {.raises: [], gcsafe.}
+type QDoubleSpinBoxvalidateProc* = proc(self: QDoubleSpinBox, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QDoubleSpinBoxvalueFromTextProc* = proc(self: QDoubleSpinBox, text: openArray[char]): float64 {.raises: [], gcsafe.}
 type QDoubleSpinBoxtextFromValueProc* = proc(self: QDoubleSpinBox, val: float64): string {.raises: [], gcsafe.}
-type QDoubleSpinBoxfixupProc* = proc(self: QDoubleSpinBox, str: string): void {.raises: [], gcsafe.}
+type QDoubleSpinBoxfixupProc* = proc(self: QDoubleSpinBox, str: openArray[char]): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxsizeHintProc* = proc(self: QDoubleSpinBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QDoubleSpinBoxminimumSizeHintProc* = proc(self: QDoubleSpinBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QDoubleSpinBoxeventProc* = proc(self: QDoubleSpinBox, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -2249,7 +2251,7 @@ type QDoubleSpinBoxdragEnterEventProc* = proc(self: QDoubleSpinBox, event: gen_q
 type QDoubleSpinBoxdragMoveEventProc* = proc(self: QDoubleSpinBox, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxdragLeaveEventProc* = proc(self: QDoubleSpinBox, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxdropEventProc* = proc(self: QDoubleSpinBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QDoubleSpinBoxnativeEventProc* = proc(self: QDoubleSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QDoubleSpinBoxnativeEventProc* = proc(self: QDoubleSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QDoubleSpinBoxmetricProc* = proc(self: QDoubleSpinBox, param1: cint): cint {.raises: [], gcsafe.}
 type QDoubleSpinBoxinitPainterProc* = proc(self: QDoubleSpinBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxredirectedProc* = proc(self: QDoubleSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -2355,28 +2357,28 @@ proc cQDoubleSpinBox_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDoubleSpinBoxvalidate*(self: gen_qspinbox_types.QDoubleSpinBox, input: string, pos: ptr cint): cint =
-  cint(fcQDoubleSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc QDoubleSpinBoxvalidate*(self: gen_qspinbox_types.QDoubleSpinBox, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQDoubleSpinBox_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc cQDoubleSpinBox_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self))
   let self = QDoubleSpinBox(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QDoubleSpinBoxvalueFromText*(self: gen_qspinbox_types.QDoubleSpinBox, text: string): float64 =
-  fcQDoubleSpinBox_virtualbase_valueFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc QDoubleSpinBoxvalueFromText*(self: gen_qspinbox_types.QDoubleSpinBox, text: openArray[char]): float64 =
+  fcQDoubleSpinBox_virtualbase_valueFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc cQDoubleSpinBox_vtable_callback_valueFromText(self: pointer, text: struct_miqt_string): float64 {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self))
   let self = QDoubleSpinBox(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].valueFromText(self, slotval1)
@@ -2384,7 +2386,7 @@ proc cQDoubleSpinBox_vtable_callback_valueFromText(self: pointer, text: struct_m
 
 proc QDoubleSpinBoxtextFromValue*(self: gen_qspinbox_types.QDoubleSpinBox, val: float64): string =
   let v_ms = fcQDoubleSpinBox_virtualbase_textFromValue(self.h, val)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2397,14 +2399,14 @@ proc cQDoubleSpinBox_vtable_callback_textFromValue(self: pointer, val: float64):
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc QDoubleSpinBoxfixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: string): void =
-  fcQDoubleSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc QDoubleSpinBoxfixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: openArray[char]): void =
+  fcQDoubleSpinBox_virtualbase_fixup(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc cQDoubleSpinBox_vtable_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self))
   let self = QDoubleSpinBox(h: self)
   let vstr_ms = str
-  let vstrx_ret = string.fromBytes(toOpenArrayByte(vstr_ms.data, 0, int(vstr_ms.len)-1))
+  let vstrx_ret = string.fromBytes(vstr_ms)
   c_free(vstr_ms.data)
   let slotval1 = vstrx_ret
   vtbl[].fixup(self, slotval1)
@@ -2774,14 +2776,14 @@ proc cQDoubleSpinBox_vtable_callback_dropEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QDoubleSpinBoxnativeEvent*(self: gen_qspinbox_types.QDoubleSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QDoubleSpinBoxnativeEvent*(self: gen_qspinbox_types.QDoubleSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQDoubleSpinBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQDoubleSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self))
   let self = QDoubleSpinBox(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2929,24 +2931,24 @@ proc cQDoubleSpinBox_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method validate*(self: VirtualQDoubleSpinBox, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQDoubleSpinBox, input: openArray[char], pos: ptr cint): cint {.base.} =
   QDoubleSpinBoxvalidate(self[], input, pos)
 proc cQDoubleSpinBox_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method valueFromText*(self: VirtualQDoubleSpinBox, text: string): float64 {.base.} =
+method valueFromText*(self: VirtualQDoubleSpinBox, text: openArray[char]): float64 {.base.} =
   QDoubleSpinBoxvalueFromText(self[], text)
 proc cQDoubleSpinBox_method_callback_valueFromText(self: pointer, text: struct_miqt_string): float64 {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.valueFromText(slotval1)
@@ -2962,12 +2964,12 @@ proc cQDoubleSpinBox_method_callback_textFromValue(self: pointer, val: float64):
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-method fixup*(self: VirtualQDoubleSpinBox, str: string): void {.base.} =
+method fixup*(self: VirtualQDoubleSpinBox, str: openArray[char]): void {.base.} =
   QDoubleSpinBoxfixup(self[], str)
 proc cQDoubleSpinBox_method_callback_fixup(self: pointer, str: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self))
   let vstr_ms = str
-  let vstrx_ret = string.fromBytes(toOpenArrayByte(vstr_ms.data, 0, int(vstr_ms.len)-1))
+  let vstrx_ret = string.fromBytes(vstr_ms)
   c_free(vstr_ms.data)
   let slotval1 = vstrx_ret
   inst.fixup(slotval1)
@@ -3259,12 +3261,12 @@ proc cQDoubleSpinBox_method_callback_dropEvent(self: pointer, event: pointer): v
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDoubleSpinBox, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQDoubleSpinBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QDoubleSpinBoxnativeEvent(self[], eventType, message, resultVal)
 proc cQDoubleSpinBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

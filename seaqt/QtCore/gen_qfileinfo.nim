@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qfileinfo_types
@@ -121,93 +123,93 @@ proc operatorEqual*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo
 proc operatorNotEqual*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo_types.QFileInfo): bool =
   fcQFileInfo_operatorNotEqual(self.h, fileinfo.h)
 
-proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: string): void =
-  fcQFileInfo_setFile(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: openArray[char]): void =
+  fcQFileInfo_setFile(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: gen_qfiledevice_types.QFileDevice): void =
   fcQFileInfo_setFileWithFile(self.h, file.h)
 
-proc setFile*(self: gen_qfileinfo_types.QFileInfo, dir: gen_qdir_types.QDir, file: string): void =
-  fcQFileInfo_setFile2(self.h, dir.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc setFile*(self: gen_qfileinfo_types.QFileInfo, dir: gen_qdir_types.QDir, file: openArray[char]): void =
+  fcQFileInfo_setFile2(self.h, dir.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc exists*(self: gen_qfileinfo_types.QFileInfo): bool =
   fcQFileInfo_exists(self.h)
 
-proc exists*(_: type gen_qfileinfo_types.QFileInfo, file: string): bool =
-  fcQFileInfo_existsWithFile(struct_miqt_string(data: file, len: csize_t(len(file))))
+proc exists*(_: type gen_qfileinfo_types.QFileInfo, file: openArray[char]): bool =
+  fcQFileInfo_existsWithFile(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc refresh*(self: gen_qfileinfo_types.QFileInfo): void =
   fcQFileInfo_refresh(self.h)
 
 proc filePath*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_filePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc absoluteFilePath*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_absoluteFilePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc canonicalFilePath*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_canonicalFilePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fileName*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc baseName*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_baseName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc completeBaseName*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_completeBaseName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc suffix*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_suffix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc bundleName*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_bundleName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc completeSuffix*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_completeSuffix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc path*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_path(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc absolutePath*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_absolutePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc canonicalPath*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_canonicalPath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -270,19 +272,19 @@ proc isBundle*(self: gen_qfileinfo_types.QFileInfo): bool =
 
 proc symLinkTarget*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_symLinkTarget(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc junctionTarget*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_junctionTarget(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc owner*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_owner(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -291,7 +293,7 @@ proc ownerId*(self: gen_qfileinfo_types.QFileInfo): cuint =
 
 proc group*(self: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQFileInfo_group(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -335,16 +337,16 @@ proc create*(T: type gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileIn
   gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new(), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
-    file: string): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new2(struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
+    file: openArray[char]): gen_qfileinfo_types.QFileInfo =
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new2(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     file: gen_qfiledevice_types.QFileDevice): gen_qfileinfo_types.QFileInfo =
   gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new3(file.h), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
-    dir: gen_qdir_types.QDir, file: string): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
+    dir: gen_qdir_types.QDir, file: openArray[char]): gen_qfileinfo_types.QFileInfo =
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     fileinfo: gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileInfo =

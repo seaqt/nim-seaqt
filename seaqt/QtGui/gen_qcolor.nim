@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QColorSpecEnum* = distinct cint
@@ -49,17 +51,15 @@ import ./gen_qcolor_types
 export gen_qcolor_types
 
 import
-  ../QtCore/gen_qanystringview_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qrgba64_types
 export
-  gen_qanystringview_types,
   gen_qvariant_types,
   gen_qrgba64_types
 
 type cQColor*{.exportc: "QColor", incompleteStruct.} = object
 
-proc fcQColor_fromString(name: pointer): pointer {.importc: "QColor_fromString".}
+proc fcQColor_fromString(name: struct_miqt_string): pointer {.importc: "QColor_fromString".}
 proc fcQColor_operatorAssign(self: pointer, color: cint): void {.importc: "QColor_operatorAssign".}
 proc fcQColor_isValid(self: pointer): bool {.importc: "QColor_isValid".}
 proc fcQColor_name(self: pointer): struct_miqt_string {.importc: "QColor_name".}
@@ -152,7 +152,7 @@ proc fcQColor_operatorEqual(self: pointer, c: pointer): bool {.importc: "QColor_
 proc fcQColor_operatorNotEqual(self: pointer, c: pointer): bool {.importc: "QColor_operatorNotEqual".}
 proc fcQColor_ToQVariant(self: pointer): pointer {.importc: "QColor_ToQVariant".}
 proc fcQColor_isValidColor(name: struct_miqt_string): bool {.importc: "QColor_isValidColor".}
-proc fcQColor_isValidColorName(param1: pointer): bool {.importc: "QColor_isValidColorName".}
+proc fcQColor_isValidColorName(param1: struct_miqt_string): bool {.importc: "QColor_isValidColorName".}
 proc fcQColor_name1(self: pointer, format: cint): struct_miqt_string {.importc: "QColor_name1".}
 proc fcQColor_getRgb4(self: pointer, r: ptr cint, g: ptr cint, b: ptr cint, a: ptr cint): void {.importc: "QColor_getRgb4".}
 proc fcQColor_setRgb4(self: pointer, r: cint, g: cint, b: cint, a: cint): void {.importc: "QColor_setRgb4".}
@@ -194,8 +194,8 @@ proc fcQColor_new10(param1: pointer): ptr cQColor {.importc: "QColor_new10".}
 proc fcQColor_new11(r: cint, g: cint, b: cint, a: cint): ptr cQColor {.importc: "QColor_new11".}
 proc fcQColor_new12(spec: cint, a1: cushort, a2: cushort, a3: cushort, a4: cushort, a5: cushort): ptr cQColor {.importc: "QColor_new12".}
 
-proc fromString*(_: type gen_qcolor_types.QColor, name: gen_qanystringview_types.QAnyStringView): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColor_fromString(name.h), owned: true)
+proc fromString*(_: type gen_qcolor_types.QColor, name: openArray[char]): gen_qcolor_types.QColor =
+  gen_qcolor_types.QColor(h: fcQColor_fromString(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc operatorAssign*(self: gen_qcolor_types.QColor, color: cint): void =
   fcQColor_operatorAssign(self.h, cint(color))
@@ -205,12 +205,12 @@ proc isValid*(self: gen_qcolor_types.QColor): bool =
 
 proc name*(self: gen_qcolor_types.QColor): string =
   let v_ms = fcQColor_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setNamedColor*(self: gen_qcolor_types.QColor, name: string): void =
-  fcQColor_setNamedColor(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setNamedColor*(self: gen_qcolor_types.QColor, name: openArray[char]): void =
+  fcQColor_setNamedColor(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc colorNames*(_: type gen_qcolor_types.QColor): seq[string] =
   var v_ma = fcQColor_colorNames()
@@ -218,7 +218,7 @@ proc colorNames*(_: type gen_qcolor_types.QColor): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -482,15 +482,15 @@ proc operatorNotEqual*(self: gen_qcolor_types.QColor, c: gen_qcolor_types.QColor
 proc ToQVariant*(self: gen_qcolor_types.QColor): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQColor_ToQVariant(self.h), owned: true)
 
-proc isValidColor*(_: type gen_qcolor_types.QColor, name: string): bool =
-  fcQColor_isValidColor(struct_miqt_string(data: name, len: csize_t(len(name))))
+proc isValidColor*(_: type gen_qcolor_types.QColor, name: openArray[char]): bool =
+  fcQColor_isValidColor(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc isValidColorName*(_: type gen_qcolor_types.QColor, param1: gen_qanystringview_types.QAnyStringView): bool =
-  fcQColor_isValidColorName(param1.h)
+proc isValidColorName*(_: type gen_qcolor_types.QColor, param1: openArray[char]): bool =
+  fcQColor_isValidColorName(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc name*(self: gen_qcolor_types.QColor, format: cint): string =
   let v_ms = fcQColor_name1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -595,8 +595,8 @@ proc create*(T: type gen_qcolor_types.QColor,
   gen_qcolor_types.QColor(h: fcQColor_new5(rgba64.h), owned: true)
 
 proc create*(T: type gen_qcolor_types.QColor,
-    name: string): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColor_new6(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+    name: openArray[char]): gen_qcolor_types.QColor =
+  gen_qcolor_types.QColor(h: fcQColor_new6(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qcolor_types.QColor,
     aname: cstring): gen_qcolor_types.QColor =

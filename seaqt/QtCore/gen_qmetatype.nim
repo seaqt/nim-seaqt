@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QMetaTypeTypeEnum* = distinct cint
@@ -147,13 +149,11 @@ import ./gen_qmetatype_types
 export gen_qmetatype_types
 
 import
-  ./gen_qbytearrayview_types,
   ./gen_qcompare_types,
   ./gen_qdatastream_types,
   ./gen_qdebug_types,
   ./gen_qobjectdefs_types
 export
-  gen_qbytearrayview_types,
   gen_qcompare_types,
   gen_qdatastream_types,
   gen_qdebug_types,
@@ -194,7 +194,7 @@ proc fcQMetaType_load(self: pointer, stream: pointer, data: pointer): bool {.imp
 proc fcQMetaType_hasRegisteredDataStreamOperators(self: pointer): bool {.importc: "QMetaType_hasRegisteredDataStreamOperators".}
 proc fcQMetaType_save2(stream: pointer, typeVal: cint, data: pointer): bool {.importc: "QMetaType_save2".}
 proc fcQMetaType_load2(stream: pointer, typeVal: cint, data: pointer): bool {.importc: "QMetaType_load2".}
-proc fcQMetaType_fromName(name: pointer): pointer {.importc: "QMetaType_fromName".}
+proc fcQMetaType_fromName(name: struct_miqt_string): pointer {.importc: "QMetaType_fromName".}
 proc fcQMetaType_debugStream(self: pointer, dbg: pointer, rhs: pointer): bool {.importc: "QMetaType_debugStream".}
 proc fcQMetaType_hasRegisteredDebugStreamOperator(self: pointer): bool {.importc: "QMetaType_hasRegisteredDebugStreamOperator".}
 proc fcQMetaType_debugStream2(dbg: pointer, rhs: pointer, typeId: cint): bool {.importc: "QMetaType_debugStream2".}
@@ -219,13 +219,13 @@ proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
 proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
 proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
 
-proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: seq[byte], typeVal: gen_qmetatype_types.QMetaType): void =
+proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: openArray[byte], typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: cast[cstring](if len(normalizedTypeName) == 0: nil else: unsafeAddr normalizedTypeName[0]), len: csize_t(len(normalizedTypeName))), typeVal.h)
 
 proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: cstring): cint =
   fcQMetaType_typeX(typeName)
 
-proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: seq[byte]): cint =
+proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: openArray[byte]): cint =
   fcQMetaType_typeWithTypeName(struct_miqt_string(data: cast[cstring](if len(typeName) == 0: nil else: unsafeAddr typeName[0]), len: csize_t(len(typeName))))
 
 proc typeName*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cstring =
@@ -318,8 +318,8 @@ proc save*(_: type gen_qmetatype_types.QMetaType, stream: gen_qdatastream_types.
 proc load*(_: type gen_qmetatype_types.QMetaType, stream: gen_qdatastream_types.QDataStream, typeVal: cint, data: pointer): bool =
   fcQMetaType_load2(stream.h, typeVal, data)
 
-proc fromName*(_: type gen_qmetatype_types.QMetaType, name: gen_qbytearrayview_types.QByteArrayView): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(name.h), owned: true)
+proc fromName*(_: type gen_qmetatype_types.QMetaType, name: openArray[byte]): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc debugStream*(self: gen_qmetatype_types.QMetaType, dbg: gen_qdebug_types.QDebug, rhs: pointer): bool =
   fcQMetaType_debugStream(self.h, dbg.h, rhs)

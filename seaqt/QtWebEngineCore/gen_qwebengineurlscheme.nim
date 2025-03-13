@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWebEngineUrlSchemeSyntaxEnum* = distinct cint
@@ -92,11 +94,11 @@ proc operatorNotEqual*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, 
 
 proc name*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): seq[byte] =
   var v_bytearray = fcQWebEngineUrlScheme_name(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setName*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: seq[byte]): void =
+proc setName*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: openArray[byte]): void =
   fcQWebEngineUrlScheme_setName(self.h, struct_miqt_string(data: cast[cstring](if len(newValue) == 0: nil else: unsafeAddr newValue[0]), len: csize_t(len(newValue))))
 
 proc syntax*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): cint =
@@ -120,14 +122,14 @@ proc setFlags*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue
 proc registerScheme*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, scheme: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): void =
   fcQWebEngineUrlScheme_registerScheme(scheme.h)
 
-proc schemeByName*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
+proc schemeByName*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, name: openArray[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_schemeByName(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new(), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
-    name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
+    name: openArray[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
   gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new2(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,

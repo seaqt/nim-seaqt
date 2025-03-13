@@ -541,8 +541,9 @@ bool QImage_loadWithFileName(QImage* self, struct miqt_string fileName) {
 	return self->load(fileName_QString);
 }
 
-bool QImage_loadFromData(QImage* self, QByteArrayView* data) {
-	return self->loadFromData(*data);
+bool QImage_loadFromData(QImage* self, struct miqt_string data) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	return self->loadFromData(data_QByteArray);
 }
 
 bool QImage_loadFromData2(QImage* self, const unsigned char* buf, int len) {
@@ -563,8 +564,9 @@ bool QImage_saveWithDevice(const QImage* self, QIODevice* device) {
 	return self->save(device);
 }
 
-QImage* QImage_fromData(QByteArrayView* data) {
-	return new QImage(QImage::fromData(*data));
+QImage* QImage_fromData(struct miqt_string data) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	return new QImage(QImage::fromData(data_QByteArray));
 }
 
 QImage* QImage_fromData2(const unsigned char* data, int size) {
@@ -750,8 +752,9 @@ bool QImage_load2(QImage* self, struct miqt_string fileName, const char* format)
 	return self->load(fileName_QString, format);
 }
 
-bool QImage_loadFromData22(QImage* self, QByteArrayView* data, const char* format) {
-	return self->loadFromData(*data, format);
+bool QImage_loadFromData22(QImage* self, struct miqt_string data, const char* format) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	return self->loadFromData(data_QByteArray, format);
 }
 
 bool QImage_loadFromData3(QImage* self, const unsigned char* buf, int len, const char* format) {
@@ -781,8 +784,9 @@ bool QImage_save32(const QImage* self, QIODevice* device, const char* format, in
 	return self->save(device, format, static_cast<int>(quality));
 }
 
-QImage* QImage_fromData22(QByteArrayView* data, const char* format) {
-	return new QImage(QImage::fromData(*data, format));
+QImage* QImage_fromData22(struct miqt_string data, const char* format) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	return new QImage(QImage::fromData(data_QByteArray, format));
 }
 
 QImage* QImage_fromData3(const unsigned char* data, int size, const char* format) {

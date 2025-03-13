@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qsslserver.cpp", cflags).}
@@ -138,7 +140,7 @@ proc metacall*(self: gen_qsslserver_types.QSslServer, param1: cint, param2: cint
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring): string =
   let v_ms = fcQSslServer_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -154,14 +156,14 @@ proc setHandshakeTimeout*(self: gen_qsslserver_types.QSslServer, timeout: cint):
 proc handshakeTimeout*(self: gen_qsslserver_types.QSslServer): cint =
   fcQSslServer_handshakeTimeout(self.h)
 
-proc sslErrors*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, errors: seq[gen_qsslerror_types.QSslError]): void =
+proc sslErrors*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, errors: openArray[gen_qsslerror_types.QSslError]): void =
   var errors_CArray = newSeq[pointer](len(errors))
   for i in 0..<len(errors):
     errors_CArray[i] = errors[i].h
 
   fcQSslServer_sslErrors(self.h, socket.h, struct_miqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
 
-type QSslServersslErrorsSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, errors: seq[gen_qsslerror_types.QSslError])
+type QSslServersslErrorsSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, errors: openArray[gen_qsslerror_types.QSslError])
 proc cQSslServer_slot_callback_sslErrors(slot: int, socket: pointer, errors: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QSslServersslErrorsSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -252,10 +254,10 @@ proc onpreSharedKeyAuthenticationRequired*(self: gen_qsslserver_types.QSslServer
   GC_ref(tmp)
   fcQSslServer_connect_preSharedKeyAuthenticationRequired(self.h, cast[int](addr tmp[]), cQSslServer_slot_callback_preSharedKeyAuthenticationRequired, cQSslServer_slot_callback_preSharedKeyAuthenticationRequired_release)
 
-proc alertSent*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string): void =
-  fcQSslServer_alertSent(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: description, len: csize_t(len(description))))
+proc alertSent*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char]): void =
+  fcQSslServer_alertSent(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
-type QSslServeralertSentSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string)
+type QSslServeralertSentSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char])
 proc cQSslServer_slot_callback_alertSent(slot: int, socket: pointer, level: cint, typeVal: cint, description: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSslServeralertSentSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -265,7 +267,7 @@ proc cQSslServer_slot_callback_alertSent(slot: int, socket: pointer, level: cint
   let slotval3 = cint(typeVal)
 
   let vdescription_ms = description
-  let vdescriptionx_ret = string.fromBytes(toOpenArrayByte(vdescription_ms.data, 0, int(vdescription_ms.len)-1))
+  let vdescriptionx_ret = string.fromBytes(vdescription_ms)
   c_free(vdescription_ms.data)
   let slotval4 = vdescriptionx_ret
 
@@ -281,10 +283,10 @@ proc onalertSent*(self: gen_qsslserver_types.QSslServer, slot: QSslServeralertSe
   GC_ref(tmp)
   fcQSslServer_connect_alertSent(self.h, cast[int](addr tmp[]), cQSslServer_slot_callback_alertSent, cQSslServer_slot_callback_alertSent_release)
 
-proc alertReceived*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string): void =
-  fcQSslServer_alertReceived(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: description, len: csize_t(len(description))))
+proc alertReceived*(self: gen_qsslserver_types.QSslServer, socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char]): void =
+  fcQSslServer_alertReceived(self.h, socket.h, cint(level), cint(typeVal), struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
-type QSslServeralertReceivedSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: string)
+type QSslServeralertReceivedSlot* = proc(socket: gen_qsslsocket_types.QSslSocket, level: cint, typeVal: cint, description: openArray[char])
 proc cQSslServer_slot_callback_alertReceived(slot: int, socket: pointer, level: cint, typeVal: cint, description: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSslServeralertReceivedSlot](cast[pointer](slot))
   let slotval1 = gen_qsslsocket_types.QSslSocket(h: socket, owned: false)
@@ -294,7 +296,7 @@ proc cQSslServer_slot_callback_alertReceived(slot: int, socket: pointer, level: 
   let slotval3 = cint(typeVal)
 
   let vdescription_ms = description
-  let vdescriptionx_ret = string.fromBytes(toOpenArrayByte(vdescription_ms.data, 0, int(vdescription_ms.len)-1))
+  let vdescriptionx_ret = string.fromBytes(vdescription_ms)
   c_free(vdescription_ms.data)
   let slotval4 = vdescriptionx_ret
 
@@ -354,13 +356,13 @@ proc onstartedEncryptionHandshake*(self: gen_qsslserver_types.QSslServer, slot: 
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring, c: cstring): string =
   let v_ms = fcQSslServer_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSslServer_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

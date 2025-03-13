@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qtextdocumentwriter_types
@@ -59,12 +61,12 @@ proc fcQTextDocumentWriter_new2(device: pointer, format: struct_miqt_string): pt
 proc fcQTextDocumentWriter_new3(fileName: struct_miqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new3".}
 proc fcQTextDocumentWriter_new4(fileName: struct_miqt_string, format: struct_miqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new4".}
 
-proc setFormat*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, format: seq[byte]): void =
+proc setFormat*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, format: openArray[byte]): void =
   fcQTextDocumentWriter_setFormat(self.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format))))
 
 proc format*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): seq[byte] =
   var v_bytearray = fcQTextDocumentWriter_format(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -74,12 +76,12 @@ proc setDevice*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, device:
 proc device*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQTextDocumentWriter_device(self.h), owned: false)
 
-proc setFileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fileName: string): void =
-  fcQTextDocumentWriter_setFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc setFileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fileName: openArray[char]): void =
+  fcQTextDocumentWriter_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc fileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): string =
   let v_ms = fcQTextDocumentWriter_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -95,7 +97,7 @@ proc supportedDocumentFormats*(_: type gen_qtextdocumentwriter_types.QTextDocume
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -105,14 +107,14 @@ proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qte
   gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new(), owned: true)
 
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
-    device: gen_qiodevice_types.QIODevice, format: seq[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
+    device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
   gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new2(device.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format)))), owned: true)
 
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
-    fileName: string): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new3(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+    fileName: openArray[char]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
+  gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new3(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
-    fileName: string, format: seq[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format)))), owned: true)
+    fileName: openArray[char], format: openArray[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
+  gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new4(struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format)))), owned: true)
 

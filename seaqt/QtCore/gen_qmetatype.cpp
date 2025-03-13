@@ -157,8 +157,9 @@ bool QMetaType_load2(QDataStream* stream, int type, void* data) {
 	return QMetaType::load(*stream, static_cast<int>(type), data);
 }
 
-QMetaType* QMetaType_fromName(QByteArrayView* name) {
-	return new QMetaType(QMetaType::fromName(*name));
+QMetaType* QMetaType_fromName(struct miqt_string name) {
+	QByteArrayView name_QByteArray(name.data, name.len);
+	return new QMetaType(QMetaType::fromName(name_QByteArray));
 }
 
 bool QMetaType_debugStream(QMetaType* self, QDebug* dbg, const void* rhs) {

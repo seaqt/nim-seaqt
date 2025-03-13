@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qstatusbar.cpp", cflags).}
@@ -219,7 +221,7 @@ proc metacall*(self: gen_qstatusbar_types.QStatusBar, param1: cint, param2: cint
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring): string =
   let v_ms = fcQStatusBar_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -246,24 +248,24 @@ proc isSizeGripEnabled*(self: gen_qstatusbar_types.QStatusBar): bool =
 
 proc currentMessage*(self: gen_qstatusbar_types.QStatusBar): string =
   let v_ms = fcQStatusBar_currentMessage(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: string): void =
-  fcQStatusBar_showMessage(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char]): void =
+  fcQStatusBar_showMessage(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc clearMessage*(self: gen_qstatusbar_types.QStatusBar): void =
   fcQStatusBar_clearMessage(self.h)
 
-proc messageChanged*(self: gen_qstatusbar_types.QStatusBar, text: string): void =
-  fcQStatusBar_messageChanged(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc messageChanged*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char]): void =
+  fcQStatusBar_messageChanged(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QStatusBarmessageChangedSlot* = proc(text: string)
+type QStatusBarmessageChangedSlot* = proc(text: openArray[char])
 proc cQStatusBar_slot_callback_messageChanged(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QStatusBarmessageChangedSlot](cast[pointer](slot))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
 
@@ -281,13 +283,13 @@ proc onmessageChanged*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarme
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring, c: cstring): string =
   let v_ms = fcQStatusBar_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQStatusBar_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -303,8 +305,8 @@ proc addPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwid
 proc insertPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint): cint =
   fcQStatusBar_insertPermanentWidget3(self.h, index, widget.h, stretch)
 
-proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: string, timeout: cint): void =
-  fcQStatusBar_showMessage2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), timeout)
+proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char], timeout: cint): void =
+  fcQStatusBar_showMessage2(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), timeout)
 
 type QStatusBarmetaObjectProc* = proc(self: QStatusBar): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStatusBarmetacastProc* = proc(self: QStatusBar, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -341,7 +343,7 @@ type QStatusBardragMoveEventProc* = proc(self: QStatusBar, event: gen_qevent_typ
 type QStatusBardragLeaveEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QStatusBardropEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QStatusBarhideEventProc* = proc(self: QStatusBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QStatusBarnativeEventProc* = proc(self: QStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QStatusBarnativeEventProc* = proc(self: QStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QStatusBarchangeEventProc* = proc(self: QStatusBar, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStatusBarmetricProc* = proc(self: QStatusBar, param1: cint): cint {.raises: [], gcsafe.}
 type QStatusBarinitPainterProc* = proc(self: QStatusBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -741,14 +743,14 @@ proc cQStatusBar_vtable_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QStatusBarnativeEvent*(self: gen_qstatusbar_types.QStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QStatusBarnativeEvent*(self: gen_qstatusbar_types.QStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQStatusBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQStatusBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QStatusBarVTable](fcQStatusBar_vdata(self))
   let self = QStatusBar(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1162,12 +1164,12 @@ proc cQStatusBar_method_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQStatusBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQStatusBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QStatusBarnativeEvent(self[], eventType, message, resultVal)
 proc cQStatusBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQStatusBar](fcQStatusBar_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

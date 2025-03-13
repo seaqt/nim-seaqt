@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qsettings.cpp", cflags).}
@@ -71,14 +73,12 @@ import ./gen_qsettings_types
 export gen_qsettings_types
 
 import
-  ./gen_qanystringview_types,
   ./gen_qcoreevent_types,
   ./gen_qmetaobject_types,
   ./gen_qobject,
   ./gen_qobjectdefs_types,
   ./gen_qvariant_types
 export
-  gen_qanystringview_types,
   gen_qcoreevent_types,
   gen_qmetaobject_types,
   gen_qobject,
@@ -96,22 +96,22 @@ proc fcQSettings_sync(self: pointer): void {.importc: "QSettings_sync".}
 proc fcQSettings_status(self: pointer): cint {.importc: "QSettings_status".}
 proc fcQSettings_isAtomicSyncRequired(self: pointer): bool {.importc: "QSettings_isAtomicSyncRequired".}
 proc fcQSettings_setAtomicSyncRequired(self: pointer, enable: bool): void {.importc: "QSettings_setAtomicSyncRequired".}
-proc fcQSettings_beginGroup(self: pointer, prefix: pointer): void {.importc: "QSettings_beginGroup".}
+proc fcQSettings_beginGroup(self: pointer, prefix: struct_miqt_string): void {.importc: "QSettings_beginGroup".}
 proc fcQSettings_endGroup(self: pointer): void {.importc: "QSettings_endGroup".}
 proc fcQSettings_group(self: pointer): struct_miqt_string {.importc: "QSettings_group".}
-proc fcQSettings_beginReadArray(self: pointer, prefix: pointer): cint {.importc: "QSettings_beginReadArray".}
-proc fcQSettings_beginWriteArray(self: pointer, prefix: pointer): void {.importc: "QSettings_beginWriteArray".}
+proc fcQSettings_beginReadArray(self: pointer, prefix: struct_miqt_string): cint {.importc: "QSettings_beginReadArray".}
+proc fcQSettings_beginWriteArray(self: pointer, prefix: struct_miqt_string): void {.importc: "QSettings_beginWriteArray".}
 proc fcQSettings_endArray(self: pointer): void {.importc: "QSettings_endArray".}
 proc fcQSettings_setArrayIndex(self: pointer, i: cint): void {.importc: "QSettings_setArrayIndex".}
 proc fcQSettings_allKeys(self: pointer): struct_miqt_array {.importc: "QSettings_allKeys".}
 proc fcQSettings_childKeys(self: pointer): struct_miqt_array {.importc: "QSettings_childKeys".}
 proc fcQSettings_childGroups(self: pointer): struct_miqt_array {.importc: "QSettings_childGroups".}
 proc fcQSettings_isWritable(self: pointer): bool {.importc: "QSettings_isWritable".}
-proc fcQSettings_setValue(self: pointer, key: pointer, value: pointer): void {.importc: "QSettings_setValue".}
-proc fcQSettings_value(self: pointer, key: pointer, defaultValue: pointer): pointer {.importc: "QSettings_value".}
-proc fcQSettings_valueWithKey(self: pointer, key: pointer): pointer {.importc: "QSettings_valueWithKey".}
-proc fcQSettings_remove(self: pointer, key: pointer): void {.importc: "QSettings_remove".}
-proc fcQSettings_contains(self: pointer, key: pointer): bool {.importc: "QSettings_contains".}
+proc fcQSettings_setValue(self: pointer, key: struct_miqt_string, value: pointer): void {.importc: "QSettings_setValue".}
+proc fcQSettings_value(self: pointer, key: struct_miqt_string, defaultValue: pointer): pointer {.importc: "QSettings_value".}
+proc fcQSettings_valueWithKey(self: pointer, key: struct_miqt_string): pointer {.importc: "QSettings_valueWithKey".}
+proc fcQSettings_remove(self: pointer, key: struct_miqt_string): void {.importc: "QSettings_remove".}
+proc fcQSettings_contains(self: pointer, key: struct_miqt_string): bool {.importc: "QSettings_contains".}
 proc fcQSettings_setFallbacksEnabled(self: pointer, b: bool): void {.importc: "QSettings_setFallbacksEnabled".}
 proc fcQSettings_fallbacksEnabled(self: pointer): bool {.importc: "QSettings_fallbacksEnabled".}
 proc fcQSettings_fileName(self: pointer): struct_miqt_string {.importc: "QSettings_fileName".}
@@ -124,7 +124,7 @@ proc fcQSettings_defaultFormat(): cint {.importc: "QSettings_defaultFormat".}
 proc fcQSettings_setPath(format: cint, scope: cint, path: struct_miqt_string): void {.importc: "QSettings_setPath".}
 proc fcQSettings_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSettings_tr2".}
 proc fcQSettings_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSettings_tr3".}
-proc fcQSettings_beginWriteArray2(self: pointer, prefix: pointer, size: cint): void {.importc: "QSettings_beginWriteArray2".}
+proc fcQSettings_beginWriteArray2(self: pointer, prefix: struct_miqt_string, size: cint): void {.importc: "QSettings_beginWriteArray2".}
 proc fcQSettings_vtbl(self: pointer): pointer {.importc: "QSettings_vtbl".}
 proc fcQSettings_vdata(self: pointer): pointer {.importc: "QSettings_vdata".}
 type cQSettingsVTable {.pure.} = object
@@ -181,7 +181,7 @@ proc metacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring): string =
   let v_ms = fcQSettings_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -200,23 +200,23 @@ proc isAtomicSyncRequired*(self: gen_qsettings_types.QSettings): bool =
 proc setAtomicSyncRequired*(self: gen_qsettings_types.QSettings, enable: bool): void =
   fcQSettings_setAtomicSyncRequired(self.h, enable)
 
-proc beginGroup*(self: gen_qsettings_types.QSettings, prefix: gen_qanystringview_types.QAnyStringView): void =
-  fcQSettings_beginGroup(self.h, prefix.h)
+proc beginGroup*(self: gen_qsettings_types.QSettings, prefix: openArray[char]): void =
+  fcQSettings_beginGroup(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc endGroup*(self: gen_qsettings_types.QSettings): void =
   fcQSettings_endGroup(self.h)
 
 proc group*(self: gen_qsettings_types.QSettings): string =
   let v_ms = fcQSettings_group(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc beginReadArray*(self: gen_qsettings_types.QSettings, prefix: gen_qanystringview_types.QAnyStringView): cint =
-  fcQSettings_beginReadArray(self.h, prefix.h)
+proc beginReadArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char]): cint =
+  fcQSettings_beginReadArray(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
-proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: gen_qanystringview_types.QAnyStringView): void =
-  fcQSettings_beginWriteArray(self.h, prefix.h)
+proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char]): void =
+  fcQSettings_beginWriteArray(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc endArray*(self: gen_qsettings_types.QSettings): void =
   fcQSettings_endArray(self.h)
@@ -230,7 +230,7 @@ proc allKeys*(self: gen_qsettings_types.QSettings): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -242,7 +242,7 @@ proc childKeys*(self: gen_qsettings_types.QSettings): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -254,7 +254,7 @@ proc childGroups*(self: gen_qsettings_types.QSettings): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -263,20 +263,20 @@ proc childGroups*(self: gen_qsettings_types.QSettings): seq[string] =
 proc isWritable*(self: gen_qsettings_types.QSettings): bool =
   fcQSettings_isWritable(self.h)
 
-proc setValue*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView, value: gen_qvariant_types.QVariant): void =
-  fcQSettings_setValue(self.h, key.h, value.h)
+proc setValue*(self: gen_qsettings_types.QSettings, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQSettings_setValue(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-proc value*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView, defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, key.h, defaultValue.h), owned: true)
+proc value*(self: gen_qsettings_types.QSettings, key: openArray[char], defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), defaultValue.h), owned: true)
 
-proc value*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_valueWithKey(self.h, key.h), owned: true)
+proc value*(self: gen_qsettings_types.QSettings, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSettings_valueWithKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc remove*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView): void =
-  fcQSettings_remove(self.h, key.h)
+proc remove*(self: gen_qsettings_types.QSettings, key: openArray[char]): void =
+  fcQSettings_remove(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc contains*(self: gen_qsettings_types.QSettings, key: gen_qanystringview_types.QAnyStringView): bool =
-  fcQSettings_contains(self.h, key.h)
+proc contains*(self: gen_qsettings_types.QSettings, key: openArray[char]): bool =
+  fcQSettings_contains(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc setFallbacksEnabled*(self: gen_qsettings_types.QSettings, b: bool): void =
   fcQSettings_setFallbacksEnabled(self.h, b)
@@ -286,7 +286,7 @@ proc fallbacksEnabled*(self: gen_qsettings_types.QSettings): bool =
 
 proc fileName*(self: gen_qsettings_types.QSettings): string =
   let v_ms = fcQSettings_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -298,13 +298,13 @@ proc scope*(self: gen_qsettings_types.QSettings): cint =
 
 proc organizationName*(self: gen_qsettings_types.QSettings): string =
   let v_ms = fcQSettings_organizationName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc applicationName*(self: gen_qsettings_types.QSettings): string =
   let v_ms = fcQSettings_applicationName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -314,23 +314,23 @@ proc setDefaultFormat*(_: type gen_qsettings_types.QSettings, format: cint): voi
 proc defaultFormat*(_: type gen_qsettings_types.QSettings): cint =
   cint(fcQSettings_defaultFormat())
 
-proc setPath*(_: type gen_qsettings_types.QSettings, format: cint, scope: cint, path: string): void =
-  fcQSettings_setPath(cint(format), cint(scope), struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setPath*(_: type gen_qsettings_types.QSettings, format: cint, scope: cint, path: openArray[char]): void =
+  fcQSettings_setPath(cint(format), cint(scope), struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring): string =
   let v_ms = fcQSettings_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSettings_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: gen_qanystringview_types.QAnyStringView, size: cint): void =
-  fcQSettings_beginWriteArray2(self.h, prefix.h, size)
+proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char], size: cint): void =
+  fcQSettings_beginWriteArray2(self.h, struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), size)
 
 type QSettingsmetaObjectProc* = proc(self: QSettings): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSettingsmetacastProc* = proc(self: QSettings, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -549,7 +549,7 @@ proc isSignalConnected*(self: gen_qsettings_types.QSettings, signal: gen_qmetaob
   fcQSettings_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string,
+    organization: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -576,10 +576,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string,
+    scope: cint, organization: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -606,10 +606,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string,
+    format: cint, scope: cint, organization: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -636,10 +636,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    fileName: string, format: cint,
+    fileName: openArray[char], format: cint,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -666,7 +666,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format)), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format)), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
@@ -728,7 +728,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
   gen_qsettings_types.QSettings(h: fcQSettings_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope)), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string, application: string,
+    organization: openArray[char], application: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -755,10 +755,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string, application: string, parent: gen_qobject_types.QObject,
+    organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -785,10 +785,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string, application: string,
+    scope: cint, organization: openArray[char], application: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -815,10 +815,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    scope: cint, organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -845,10 +845,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[].vtbl), addr(vtbl[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string, application: string,
+    format: cint, scope: cint, organization: openArray[char], application: openArray[char],
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -875,10 +875,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    format: cint, scope: cint, organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -905,10 +905,10 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[].vtbl), addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    fileName: string, format: cint, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], format: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
@@ -935,7 +935,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl[].vtbl.connectNotify = cQSettings_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSettings_vtable_callback_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format), parent.h), owned: true)
+  gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     parent: gen_qobject_types.QObject,
@@ -1014,31 +1014,31 @@ const cQSettings_mvtbl = cQSettingsVTable(
   disconnectNotify: cQSettings_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string,
+    organization: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  inst[].h = fcQSettings_new(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string,
+    scope: cint, organization: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new2(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  inst[].h = fcQSettings_new2(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string,
+    format: cint, scope: cint, organization: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new3(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  inst[].h = fcQSettings_new3(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    fileName: string, format: cint,
+    fileName: openArray[char], format: cint,
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new4(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format))
+  inst[].h = fcQSettings_new4(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
@@ -1055,52 +1055,52 @@ proc create*(T: type gen_qsettings_types.QSettings,
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string, application: string,
+    organization: openArray[char], application: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new7(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  inst[].h = fcQSettings_new7(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    organization: string, application: string, parent: gen_qobject_types.QObject,
+    organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new8(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  inst[].h = fcQSettings_new8(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string, application: string,
+    scope: cint, organization: openArray[char], application: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new9(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  inst[].h = fcQSettings_new9(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    scope: cint, organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new10(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  inst[].h = fcQSettings_new10(addr(cQSettings_mvtbl), addr(inst[]), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string, application: string,
+    format: cint, scope: cint, organization: openArray[char], application: openArray[char],
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new11(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  inst[].h = fcQSettings_new11(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    format: cint, scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    format: cint, scope: cint, organization: openArray[char], application: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new12(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  inst[].h = fcQSettings_new12(addr(cQSettings_mvtbl), addr(inst[]), cint(format), cint(scope), struct_miqt_string(data: if len(organization) > 0: addr organization[0] else: nil, len: csize_t(len(organization))), struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,
-    fileName: string, format: cint, parent: gen_qobject_types.QObject,
+    fileName: openArray[char], format: cint, parent: gen_qobject_types.QObject,
     inst: VirtualQSettings) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSettings_new13(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format), parent.h)
+  inst[].h = fcQSettings_new13(addr(cQSettings_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qsettings_types.QSettings,

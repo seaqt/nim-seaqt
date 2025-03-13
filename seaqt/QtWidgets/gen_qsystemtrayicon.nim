@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qsystemtrayicon.cpp", cflags).}
@@ -144,7 +146,7 @@ proc metacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, pa
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring): string =
   let v_ms = fcQSystemTrayIcon_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -162,12 +164,12 @@ proc setIcon*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, icon: gen_qicon_t
 
 proc toolTip*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): string =
   let v_ms = fcQSystemTrayIcon_toolTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, tip: string): void =
-  fcQSystemTrayIcon_setToolTip(self.h, struct_miqt_string(data: tip, len: csize_t(len(tip))))
+proc setToolTip*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, tip: openArray[char]): void =
+  fcQSystemTrayIcon_setToolTip(self.h, struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
 
 proc isSystemTrayAvailable*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon): bool =
   fcQSystemTrayIcon_isSystemTrayAvailable()
@@ -190,11 +192,11 @@ proc show*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): void =
 proc hide*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): void =
   fcQSystemTrayIcon_hide(self.h)
 
-proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string, icon: gen_qicon_types.QIcon): void =
-  fcQSystemTrayIcon_showMessage(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))), icon.h)
+proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: gen_qicon_types.QIcon): void =
+  fcQSystemTrayIcon_showMessage(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h)
 
-proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string): void =
-  fcQSystemTrayIcon_showMessage2(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))))
+proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char]): void =
+  fcQSystemTrayIcon_showMessage2(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc activated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, reason: cint): void =
   fcQSystemTrayIcon_activated(self.h, cint(reason))
@@ -236,24 +238,24 @@ proc onmessageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QS
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring, c: cstring): string =
   let v_ms = fcQSystemTrayIcon_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSystemTrayIcon_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string, icon: gen_qicon_types.QIcon, msecs: cint): void =
-  fcQSystemTrayIcon_showMessage4(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))), icon.h, msecs)
+proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: gen_qicon_types.QIcon, msecs: cint): void =
+  fcQSystemTrayIcon_showMessage4(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h, msecs)
 
-proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string, icon: cint): void =
-  fcQSystemTrayIcon_showMessage3(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))), cint(icon))
+proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: cint): void =
+  fcQSystemTrayIcon_showMessage3(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon))
 
-proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string, icon: cint, msecs: cint): void =
-  fcQSystemTrayIcon_showMessage42(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))), cint(icon), msecs)
+proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: cint, msecs: cint): void =
+  fcQSystemTrayIcon_showMessage42(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon), msecs)
 
 type QSystemTrayIconmetaObjectProc* = proc(self: QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSystemTrayIconmetacastProc* = proc(self: QSystemTrayIcon, param1: cstring): pointer {.raises: [], gcsafe.}

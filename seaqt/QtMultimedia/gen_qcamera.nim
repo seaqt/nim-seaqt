@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
 {.compile("gen_qcamera.cpp", cflags).}
@@ -287,7 +289,7 @@ proc metacall*(self: gen_qcamera_types.QCamera, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring): string =
   let v_ms = fcQCamera_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -317,7 +319,7 @@ proc error*(self: gen_qcamera_types.QCamera): cint =
 
 proc errorString*(self: gen_qcamera_types.QCamera): string =
   let v_ms = fcQCamera_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -497,16 +499,16 @@ proc onerrorChanged*(self: gen_qcamera_types.QCamera, slot: QCameraerrorChangedS
   GC_ref(tmp)
   fcQCamera_connect_errorChanged(self.h, cast[int](addr tmp[]), cQCamera_slot_callback_errorChanged, cQCamera_slot_callback_errorChanged_release)
 
-proc errorOccurred*(self: gen_qcamera_types.QCamera, error: cint, errorString: string): void =
-  fcQCamera_errorOccurred(self.h, cint(error), struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc errorOccurred*(self: gen_qcamera_types.QCamera, error: cint, errorString: openArray[char]): void =
+  fcQCamera_errorOccurred(self.h, cint(error), struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QCameraerrorOccurredSlot* = proc(error: cint, errorString: string)
+type QCameraerrorOccurredSlot* = proc(error: cint, errorString: openArray[char])
 proc cQCamera_slot_callback_errorOccurred(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCameraerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   let verrorString_ms = errorString
-  let verrorStringx_ret = string.fromBytes(toOpenArrayByte(verrorString_ms.data, 0, int(verrorString_ms.len)-1))
+  let verrorStringx_ret = string.fromBytes(verrorString_ms)
   c_free(verrorString_ms.data)
   let slotval2 = verrorStringx_ret
 
@@ -994,13 +996,13 @@ proc onhueChanged*(self: gen_qcamera_types.QCamera, slot: QCamerahueChangedSlot)
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring): string =
   let v_ms = fcQCamera_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCamera_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

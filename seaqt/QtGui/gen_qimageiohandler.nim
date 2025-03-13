@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QImageIOHandlerImageOptionEnum* = distinct cint
@@ -193,15 +195,15 @@ proc setDevice*(self: gen_qimageiohandler_types.QImageIOHandler, device: gen_qio
 proc device*(self: gen_qimageiohandler_types.QImageIOHandler): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQImageIOHandler_device(self.h), owned: false)
 
-proc setFormat*(self: gen_qimageiohandler_types.QImageIOHandler, format: seq[byte]): void =
+proc setFormat*(self: gen_qimageiohandler_types.QImageIOHandler, format: openArray[byte]): void =
   fcQImageIOHandler_setFormat(self.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format))))
 
-proc setFormat2*(self: gen_qimageiohandler_types.QImageIOHandler, format: seq[byte]): void =
+proc setFormat2*(self: gen_qimageiohandler_types.QImageIOHandler, format: openArray[byte]): void =
   fcQImageIOHandler_setFormatWithFormat(self.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format))))
 
 proc format*(self: gen_qimageiohandler_types.QImageIOHandler): seq[byte] =
   var v_bytearray = fcQImageIOHandler_format(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -574,33 +576,33 @@ proc metacall*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cint, par
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring): string =
   let v_ms = fcQImageIOPlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc capabilities*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): cint =
+proc capabilities*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): cint =
   cint(fcQImageIOPlugin_capabilities(self.h, device.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format)))))
 
-proc create*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): gen_qimageiohandler_types.QImageIOHandler =
+proc create*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qimageiohandler_types.QImageIOHandler =
   gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOPlugin_create(self.h, device.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format)))), owned: false)
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQImageIOPlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQImageIOPlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QImageIOPluginmetaObjectProc* = proc(self: QImageIOPlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QImageIOPluginmetacastProc* = proc(self: QImageIOPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QImageIOPluginmetacallProc* = proc(self: QImageIOPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QImageIOPlugincapabilitiesProc* = proc(self: QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): cint {.raises: [], gcsafe.}
-type QImageIOPlugincreateProc* = proc(self: QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): gen_qimageiohandler_types.QImageIOHandler {.raises: [], gcsafe.}
+type QImageIOPlugincapabilitiesProc* = proc(self: QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): cint {.raises: [], gcsafe.}
+type QImageIOPlugincreateProc* = proc(self: QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qimageiohandler_types.QImageIOHandler {.raises: [], gcsafe.}
 type QImageIOPlugineventProc* = proc(self: QImageIOPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QImageIOPlugineventFilterProc* = proc(self: QImageIOPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QImageIOPlugintimerEventProc* = proc(self: QImageIOPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -661,7 +663,7 @@ proc cQImageIOPlugin_vtable_callback_capabilities(self: pointer, device: pointer
   let self = QImageIOPlugin(h: self)
   let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
-  var vformatx_ret = @(toOpenArrayByte(vformat_bytearray.data, 0, int(vformat_bytearray.len)-1))
+  var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = vtbl[].capabilities(self, slotval1, slotval2)
@@ -672,7 +674,7 @@ proc cQImageIOPlugin_vtable_callback_create(self: pointer, device: pointer, form
   let self = QImageIOPlugin(h: self)
   let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
-  var vformatx_ret = @(toOpenArrayByte(vformat_bytearray.data, 0, int(vformat_bytearray.len)-1))
+  var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = vtbl[].create(self, slotval1, slotval2)
@@ -777,25 +779,25 @@ proc cQImageIOPlugin_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method capabilities*(self: VirtualQImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): cint {.base.} =
+method capabilities*(self: VirtualQImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): cint {.base.} =
   raiseAssert("missing implementation of QImageIOPlugin_virtualbase_capabilities")
 proc cQImageIOPlugin_method_callback_capabilities(self: pointer, device: pointer, format: struct_miqt_string): cint {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self))
   let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
-  var vformatx_ret = @(toOpenArrayByte(vformat_bytearray.data, 0, int(vformat_bytearray.len)-1))
+  var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = inst.capabilities(slotval1, slotval2)
   cint(virtualReturn)
 
-method create*(self: VirtualQImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: seq[byte]): gen_qimageiohandler_types.QImageIOHandler {.base.} =
+method create*(self: VirtualQImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qimageiohandler_types.QImageIOHandler {.base.} =
   raiseAssert("missing implementation of QImageIOPlugin_virtualbase_create")
 proc cQImageIOPlugin_method_callback_create(self: pointer, device: pointer, format: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self))
   let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
-  var vformatx_ret = @(toOpenArrayByte(vformat_bytearray.data, 0, int(vformat_bytearray.len)-1))
+  var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = inst.create(slotval1, slotval2)

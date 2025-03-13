@@ -193,8 +193,9 @@ QDebug* QDebug_operatorShiftLeftWithQByteArray(QDebug* self, struct miqt_string 
 	return &_ret;
 }
 
-QDebug* QDebug_operatorShiftLeftWithQByteArrayView(QDebug* self, QByteArrayView* t) {
-	QDebug& _ret = self->operator<<(*t);
+QDebug* QDebug_operatorShiftLeftWithQByteArrayView(QDebug* self, struct miqt_string t) {
+	QByteArrayView t_QByteArray(t.data, t.len);
+	QDebug& _ret = self->operator<<(t_QByteArray);
 	// Cast returned reference into pointer
 	return &_ret;
 }

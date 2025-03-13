@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QDnsLookupErrorEnum* = distinct cint
@@ -192,7 +194,7 @@ proc swap*(self: gen_qdnslookup_types.QDnsDomainNameRecord, other: gen_qdnslooku
 
 proc name*(self: gen_qdnslookup_types.QDnsDomainNameRecord): string =
   let v_ms = fcQDnsDomainNameRecord_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -201,7 +203,7 @@ proc timeToLive*(self: gen_qdnslookup_types.QDnsDomainNameRecord): cuint =
 
 proc value*(self: gen_qdnslookup_types.QDnsDomainNameRecord): string =
   let v_ms = fcQDnsDomainNameRecord_value(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -220,7 +222,7 @@ proc swap*(self: gen_qdnslookup_types.QDnsHostAddressRecord, other: gen_qdnslook
 
 proc name*(self: gen_qdnslookup_types.QDnsHostAddressRecord): string =
   let v_ms = fcQDnsHostAddressRecord_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -245,13 +247,13 @@ proc swap*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, other: gen_qdnsloo
 
 proc exchange*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): string =
   let v_ms = fcQDnsMailExchangeRecord_exchange(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc name*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): string =
   let v_ms = fcQDnsMailExchangeRecord_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -276,7 +278,7 @@ proc swap*(self: gen_qdnslookup_types.QDnsServiceRecord, other: gen_qdnslookup_t
 
 proc name*(self: gen_qdnslookup_types.QDnsServiceRecord): string =
   let v_ms = fcQDnsServiceRecord_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -288,7 +290,7 @@ proc priority*(self: gen_qdnslookup_types.QDnsServiceRecord): cushort =
 
 proc target*(self: gen_qdnslookup_types.QDnsServiceRecord): string =
   let v_ms = fcQDnsServiceRecord_target(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -313,7 +315,7 @@ proc swap*(self: gen_qdnslookup_types.QDnsTextRecord, other: gen_qdnslookup_type
 
 proc name*(self: gen_qdnslookup_types.QDnsTextRecord): string =
   let v_ms = fcQDnsTextRecord_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -326,7 +328,7 @@ proc values*(self: gen_qdnslookup_types.QDnsTextRecord): seq[seq[byte]] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -350,7 +352,7 @@ proc metacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring): string =
   let v_ms = fcQDnsLookup_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -359,7 +361,7 @@ proc error*(self: gen_qdnslookup_types.QDnsLookup): cint =
 
 proc errorString*(self: gen_qdnslookup_types.QDnsLookup): string =
   let v_ms = fcQDnsLookup_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -368,12 +370,12 @@ proc isFinished*(self: gen_qdnslookup_types.QDnsLookup): bool =
 
 proc name*(self: gen_qdnslookup_types.QDnsLookup): string =
   let v_ms = fcQDnsLookup_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setName*(self: gen_qdnslookup_types.QDnsLookup, name: string): void =
-  fcQDnsLookup_setName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setName*(self: gen_qdnslookup_types.QDnsLookup, name: openArray[char]): void =
+  fcQDnsLookup_setName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc typeX*(self: gen_qdnslookup_types.QDnsLookup): cint =
   cint(fcQDnsLookup_typeX(self.h))
@@ -474,14 +476,14 @@ proc onfinished*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupfinished
   GC_ref(tmp)
   fcQDnsLookup_connect_finished(self.h, cast[int](addr tmp[]), cQDnsLookup_slot_callback_finished, cQDnsLookup_slot_callback_finished_release)
 
-proc nameChanged*(self: gen_qdnslookup_types.QDnsLookup, name: string): void =
-  fcQDnsLookup_nameChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc nameChanged*(self: gen_qdnslookup_types.QDnsLookup, name: openArray[char]): void =
+  fcQDnsLookup_nameChanged(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-type QDnsLookupnameChangedSlot* = proc(name: string)
+type QDnsLookupnameChangedSlot* = proc(name: openArray[char])
 proc cQDnsLookup_slot_callback_nameChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QDnsLookupnameChangedSlot](cast[pointer](slot))
   let vname_ms = name
-  let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
+  let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
 
@@ -539,13 +541,13 @@ proc onnameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLooku
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring): string =
   let v_ms = fcQDnsLookup_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDnsLookup_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -795,7 +797,7 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
   gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string,
+    typeVal: cint, name: openArray[char],
     vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
   let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
   GC_ref(vtbl)
@@ -822,10 +824,10 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
     vtbl[].vtbl.connectNotify = cQDnsLookup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDnsLookup_vtable_callback_disconnectNotify
-  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new2(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, nameserver: gen_qhostaddress_types.QHostAddress,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress,
     vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
   let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
   GC_ref(vtbl)
@@ -852,7 +854,7 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
     vtbl[].vtbl.connectNotify = cQDnsLookup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDnsLookup_vtable_callback_disconnectNotify
-  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), nameserver.h), owned: true)
+  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h), owned: true)
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
     parent: gen_qobject_types.QObject,
@@ -885,7 +887,7 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
   gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, parent: gen_qobject_types.QObject,
+    typeVal: cint, name: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
   let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
   GC_ref(vtbl)
@@ -912,10 +914,10 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
     vtbl[].vtbl.connectNotify = cQDnsLookup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDnsLookup_vtable_callback_disconnectNotify
-  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new5(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h), owned: true)
+  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new5(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h), owned: true)
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
     vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
   let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
   GC_ref(vtbl)
@@ -942,7 +944,7 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
     vtbl[].vtbl.connectNotify = cQDnsLookup_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDnsLookup_vtable_callback_disconnectNotify
-  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), nameserver.h, parent.h), owned: true)
+  gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, parent.h), owned: true)
 
 const cQDnsLookup_mvtbl = cQDnsLookupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -967,17 +969,17 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
   inst[].owned = true
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string,
+    typeVal: cint, name: openArray[char],
     inst: VirtualQDnsLookup) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDnsLookup_new2(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))))
+  inst[].h = fcQDnsLookup_new2(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   inst[].owned = true
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, nameserver: gen_qhostaddress_types.QHostAddress,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress,
     inst: VirtualQDnsLookup) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDnsLookup_new3(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), nameserver.h)
+  inst[].h = fcQDnsLookup_new3(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h)
   inst[].owned = true
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
@@ -988,17 +990,17 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
   inst[].owned = true
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, parent: gen_qobject_types.QObject,
+    typeVal: cint, name: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQDnsLookup) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDnsLookup_new5(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h)
+  inst[].h = fcQDnsLookup_new5(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qdnslookup_types.QDnsLookup,
-    typeVal: cint, name: string, nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
     inst: VirtualQDnsLookup) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDnsLookup_new6(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: name, len: csize_t(len(name))), nameserver.h, parent.h)
+  inst[].h = fcQDnsLookup_new6(addr(cQDnsLookup_mvtbl), addr(inst[]), cint(typeVal), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qsyntaxhighlighter.cpp", cflags).}
@@ -124,7 +126,7 @@ proc metacall*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: ci
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring): string =
   let v_ms = fcQSyntaxHighlighter_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -142,20 +144,20 @@ proc rehighlightBlock*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, bl
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring, c: cstring): string =
   let v_ms = fcQSyntaxHighlighter_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSyntaxHighlighter_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QSyntaxHighlightermetaObjectProc* = proc(self: QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSyntaxHighlightermetacastProc* = proc(self: QSyntaxHighlighter, param1: cstring): pointer {.raises: [], gcsafe.}
 type QSyntaxHighlightermetacallProc* = proc(self: QSyntaxHighlighter, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QSyntaxHighlighterhighlightBlockProc* = proc(self: QSyntaxHighlighter, text: string): void {.raises: [], gcsafe.}
+type QSyntaxHighlighterhighlightBlockProc* = proc(self: QSyntaxHighlighter, text: openArray[char]): void {.raises: [], gcsafe.}
 type QSyntaxHighlightereventProc* = proc(self: QSyntaxHighlighter, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QSyntaxHighlightereventFilterProc* = proc(self: QSyntaxHighlighter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QSyntaxHighlightertimerEventProc* = proc(self: QSyntaxHighlighter, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -214,7 +216,7 @@ proc cQSyntaxHighlighter_vtable_callback_highlightBlock(self: pointer, text: str
   let vtbl = cast[ptr QSyntaxHighlighterVTable](fcQSyntaxHighlighter_vdata(self))
   let self = QSyntaxHighlighter(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   vtbl[].highlightBlock(self, slotval1)
@@ -315,12 +317,12 @@ proc cQSyntaxHighlighter_method_callback_metacall(self: pointer, param1: cint, p
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method highlightBlock*(self: VirtualQSyntaxHighlighter, text: string): void {.base.} =
+method highlightBlock*(self: VirtualQSyntaxHighlighter, text: openArray[char]): void {.base.} =
   raiseAssert("missing implementation of QSyntaxHighlighter_virtualbase_highlightBlock")
 proc cQSyntaxHighlighter_method_callback_highlightBlock(self: pointer, text: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQSyntaxHighlighter](fcQSyntaxHighlighter_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   inst.highlightBlock(slotval1)

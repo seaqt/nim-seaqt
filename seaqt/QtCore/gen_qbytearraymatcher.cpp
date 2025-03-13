@@ -13,8 +13,9 @@ QByteArrayMatcher* QByteArrayMatcher_new2(struct miqt_string pattern) {
 	return new QByteArrayMatcher(pattern_QByteArray);
 }
 
-QByteArrayMatcher* QByteArrayMatcher_new3(QByteArrayView* pattern) {
-	return new QByteArrayMatcher(*pattern);
+QByteArrayMatcher* QByteArrayMatcher_new3(struct miqt_string pattern) {
+	QByteArrayView pattern_QByteArray(pattern.data, pattern.len);
+	return new QByteArrayMatcher(pattern_QByteArray);
 }
 
 QByteArrayMatcher* QByteArrayMatcher_new4(const char* pattern) {
@@ -43,8 +44,9 @@ ptrdiff_t QByteArrayMatcher_indexIn(const QByteArrayMatcher* self, const char* s
 	return static_cast<ptrdiff_t>(_ret);
 }
 
-ptrdiff_t QByteArrayMatcher_indexInWithData(const QByteArrayMatcher* self, QByteArrayView* data) {
-	qsizetype _ret = self->indexIn(*data);
+ptrdiff_t QByteArrayMatcher_indexInWithData(const QByteArrayMatcher* self, struct miqt_string data) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	qsizetype _ret = self->indexIn(data_QByteArray);
 	return static_cast<ptrdiff_t>(_ret);
 }
 
@@ -62,8 +64,9 @@ ptrdiff_t QByteArrayMatcher_indexIn3(const QByteArrayMatcher* self, const char* 
 	return static_cast<ptrdiff_t>(_ret);
 }
 
-ptrdiff_t QByteArrayMatcher_indexIn2(const QByteArrayMatcher* self, QByteArrayView* data, ptrdiff_t from) {
-	qsizetype _ret = self->indexIn(*data, (qsizetype)(from));
+ptrdiff_t QByteArrayMatcher_indexIn2(const QByteArrayMatcher* self, struct miqt_string data, ptrdiff_t from) {
+	QByteArrayView data_QByteArray(data.data, data.len);
+	qsizetype _ret = self->indexIn(data_QByteArray, (qsizetype)(from));
 	return static_cast<ptrdiff_t>(_ret);
 }
 

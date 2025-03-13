@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qmimedata.cpp", cflags).}
@@ -131,7 +133,7 @@ proc metacall*(self: gen_qmimedata_types.QMimeData, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring): string =
   let v_ms = fcQMimeData_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -144,7 +146,7 @@ proc urls*(self: gen_qmimedata_types.QMimeData): seq[gen_qurl_types.QUrl] =
   c_free(v_ma.data)
   vx_ret
 
-proc setUrls*(self: gen_qmimedata_types.QMimeData, urls: seq[gen_qurl_types.QUrl]): void =
+proc setUrls*(self: gen_qmimedata_types.QMimeData, urls: openArray[gen_qurl_types.QUrl]): void =
   var urls_CArray = newSeq[pointer](len(urls))
   for i in 0..<len(urls):
     urls_CArray[i] = urls[i].h
@@ -156,24 +158,24 @@ proc hasUrls*(self: gen_qmimedata_types.QMimeData): bool =
 
 proc text*(self: gen_qmimedata_types.QMimeData): string =
   let v_ms = fcQMimeData_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qmimedata_types.QMimeData, text: string): void =
-  fcQMimeData_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qmimedata_types.QMimeData, text: openArray[char]): void =
+  fcQMimeData_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc hasText*(self: gen_qmimedata_types.QMimeData): bool =
   fcQMimeData_hasText(self.h)
 
 proc html*(self: gen_qmimedata_types.QMimeData): string =
   let v_ms = fcQMimeData_html(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHtml*(self: gen_qmimedata_types.QMimeData, html: string): void =
-  fcQMimeData_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qmimedata_types.QMimeData, html: openArray[char]): void =
+  fcQMimeData_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc hasHtml*(self: gen_qmimedata_types.QMimeData): bool =
   fcQMimeData_hasHtml(self.h)
@@ -196,20 +198,20 @@ proc setColorData*(self: gen_qmimedata_types.QMimeData, color: gen_qvariant_type
 proc hasColor*(self: gen_qmimedata_types.QMimeData): bool =
   fcQMimeData_hasColor(self.h)
 
-proc data*(self: gen_qmimedata_types.QMimeData, mimetype: string): seq[byte] =
-  var v_bytearray = fcQMimeData_data(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))))
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+proc data*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char]): seq[byte] =
+  var v_bytearray = fcQMimeData_data(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setData*(self: gen_qmimedata_types.QMimeData, mimetype: string, data: seq[byte]): void =
-  fcQMimeData_setData(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
+proc setData*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char], data: openArray[byte]): void =
+  fcQMimeData_setData(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
-proc removeFormat*(self: gen_qmimedata_types.QMimeData, mimetype: string): void =
-  fcQMimeData_removeFormat(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))))
+proc removeFormat*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char]): void =
+  fcQMimeData_removeFormat(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))))
 
-proc hasFormat*(self: gen_qmimedata_types.QMimeData, mimetype: string): bool =
-  fcQMimeData_hasFormat(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))))
+proc hasFormat*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char]): bool =
+  fcQMimeData_hasFormat(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))))
 
 proc formats*(self: gen_qmimedata_types.QMimeData): seq[string] =
   var v_ma = fcQMimeData_formats(self.h)
@@ -217,7 +219,7 @@ proc formats*(self: gen_qmimedata_types.QMimeData): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -228,22 +230,22 @@ proc clear*(self: gen_qmimedata_types.QMimeData): void =
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring): string =
   let v_ms = fcQMimeData_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMimeData_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QMimeDatametaObjectProc* = proc(self: QMimeData): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMimeDatametacastProc* = proc(self: QMimeData, param1: cstring): pointer {.raises: [], gcsafe.}
 type QMimeDatametacallProc* = proc(self: QMimeData, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QMimeDatahasFormatProc* = proc(self: QMimeData, mimetype: string): bool {.raises: [], gcsafe.}
+type QMimeDatahasFormatProc* = proc(self: QMimeData, mimetype: openArray[char]): bool {.raises: [], gcsafe.}
 type QMimeDataformatsProc* = proc(self: QMimeData): seq[string] {.raises: [], gcsafe.}
-type QMimeDataretrieveDataProc* = proc(self: QMimeData, mimetype: string, preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QMimeDataretrieveDataProc* = proc(self: QMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QMimeDataeventProc* = proc(self: QMimeData, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QMimeDataeventFilterProc* = proc(self: QMimeData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QMimeDatatimerEventProc* = proc(self: QMimeData, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -300,14 +302,14 @@ proc cQMimeData_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QMimeDatahasFormat*(self: gen_qmimedata_types.QMimeData, mimetype: string): bool =
-  fcQMimeData_virtualbase_hasFormat(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))))
+proc QMimeDatahasFormat*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char]): bool =
+  fcQMimeData_virtualbase_hasFormat(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))))
 
 proc cQMimeData_vtable_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let vmimetype_ms = mimetype
-  let vmimetypex_ret = string.fromBytes(toOpenArrayByte(vmimetype_ms.data, 0, int(vmimetype_ms.len)-1))
+  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
   c_free(vmimetype_ms.data)
   let slotval1 = vmimetypex_ret
   var virtualReturn = vtbl[].hasFormat(self, slotval1)
@@ -319,7 +321,7 @@ proc QMimeDataformats*(self: gen_qmimedata_types.QMimeData): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -337,14 +339,14 @@ proc cQMimeData_vtable_callback_formats(self: pointer): struct_miqt_array {.cdec
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QMimeDataretrieveData*(self: gen_qmimedata_types.QMimeData, mimetype: string, preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMimeData_virtualbase_retrieveData(self.h, struct_miqt_string(data: mimetype, len: csize_t(len(mimetype))), preferredType.h), owned: true)
+proc QMimeDataretrieveData*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQMimeData_virtualbase_retrieveData(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))), preferredType.h), owned: true)
 
 proc cQMimeData_vtable_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let vmimetype_ms = mimetype
-  let vmimetypex_ret = string.fromBytes(toOpenArrayByte(vmimetype_ms.data, 0, int(vmimetype_ms.len)-1))
+  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
   c_free(vmimetype_ms.data)
   let slotval1 = vmimetypex_ret
   let slotval2 = gen_qmetatype_types.QMetaType(h: preferredType, owned: true)
@@ -450,12 +452,12 @@ proc cQMimeData_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method hasFormat*(self: VirtualQMimeData, mimetype: string): bool {.base.} =
+method hasFormat*(self: VirtualQMimeData, mimetype: openArray[char]): bool {.base.} =
   QMimeDatahasFormat(self[], mimetype)
 proc cQMimeData_method_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let vmimetype_ms = mimetype
-  let vmimetypex_ret = string.fromBytes(toOpenArrayByte(vmimetype_ms.data, 0, int(vmimetype_ms.len)-1))
+  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
   c_free(vmimetype_ms.data)
   let slotval1 = vmimetypex_ret
   var virtualReturn = inst.hasFormat(slotval1)
@@ -474,12 +476,12 @@ proc cQMimeData_method_callback_formats(self: pointer): struct_miqt_array {.cdec
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method retrieveData*(self: VirtualQMimeData, mimetype: string, preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.base.} =
+method retrieveData*(self: VirtualQMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.base.} =
   QMimeDataretrieveData(self[], mimetype, preferredType)
 proc cQMimeData_method_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let vmimetype_ms = mimetype
-  let vmimetypex_ret = string.fromBytes(toOpenArrayByte(vmimetype_ms.data, 0, int(vmimetype_ms.len)-1))
+  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
   c_free(vmimetype_ms.data)
   let slotval1 = vmimetypex_ret
   let slotval2 = gen_qmetatype_types.QMetaType(h: preferredType, owned: true)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6SvgWidgets") & " -fPIC"
 {.compile("gen_qsvgwidget.cpp", cflags).}
@@ -208,7 +210,7 @@ proc metacall*(self: gen_qsvgwidget_types.QSvgWidget, param1: cint, param2: cint
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring): string =
   let v_ms = fcQSvgWidget_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -218,21 +220,21 @@ proc renderer*(self: gen_qsvgwidget_types.QSvgWidget): gen_qsvgrenderer_types.QS
 proc sizeHint*(self: gen_qsvgwidget_types.QSvgWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSvgWidget_sizeHint(self.h), owned: true)
 
-proc load*(self: gen_qsvgwidget_types.QSvgWidget, file: string): void =
-  fcQSvgWidget_load(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc load*(self: gen_qsvgwidget_types.QSvgWidget, file: openArray[char]): void =
+  fcQSvgWidget_load(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
-proc load*(self: gen_qsvgwidget_types.QSvgWidget, contents: seq[byte]): void =
+proc load*(self: gen_qsvgwidget_types.QSvgWidget, contents: openArray[byte]): void =
   fcQSvgWidget_loadWithContents(self.h, struct_miqt_string(data: cast[cstring](if len(contents) == 0: nil else: unsafeAddr contents[0]), len: csize_t(len(contents))))
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring): string =
   let v_ms = fcQSvgWidget_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSvgWidget_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -271,7 +273,7 @@ type QSvgWidgetdragLeaveEventProc* = proc(self: QSvgWidget, event: gen_qevent_ty
 type QSvgWidgetdropEventProc* = proc(self: QSvgWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QSvgWidgetshowEventProc* = proc(self: QSvgWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QSvgWidgethideEventProc* = proc(self: QSvgWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QSvgWidgetnativeEventProc* = proc(self: QSvgWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QSvgWidgetnativeEventProc* = proc(self: QSvgWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QSvgWidgetchangeEventProc* = proc(self: QSvgWidget, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSvgWidgetmetricProc* = proc(self: QSvgWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QSvgWidgetinitPainterProc* = proc(self: QSvgWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -671,14 +673,14 @@ proc cQSvgWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QSvgWidgetnativeEvent*(self: gen_qsvgwidget_types.QSvgWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QSvgWidgetnativeEvent*(self: gen_qsvgwidget_types.QSvgWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQSvgWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQSvgWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QSvgWidgetVTable](fcQSvgWidget_vdata(self))
   let self = QSvgWidget(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1092,12 +1094,12 @@ proc cQSvgWidget_method_callback_hideEvent(self: pointer, event: pointer): void 
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQSvgWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQSvgWidget, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QSvgWidgetnativeEvent(self[], eventType, message, resultVal)
 proc cQSvgWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQSvgWidget](fcQSvgWidget_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1465,7 +1467,7 @@ proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
   gen_qsvgwidget_types.QSvgWidget(h: fcQSvgWidget_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
-    file: string,
+    file: openArray[char],
     vtbl: ref QSvgWidgetVTable = nil): gen_qsvgwidget_types.QSvgWidget =
   let vtbl = if vtbl == nil: new QSvgWidgetVTable else: vtbl
   GC_ref(vtbl)
@@ -1572,10 +1574,10 @@ proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
     vtbl[].vtbl.connectNotify = cQSvgWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSvgWidget_vtable_callback_disconnectNotify
-  gen_qsvgwidget_types.QSvgWidget(h: fcQSvgWidget_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
+  gen_qsvgwidget_types.QSvgWidget(h: fcQSvgWidget_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
-    file: string, parent: gen_qwidget_types.QWidget,
+    file: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QSvgWidgetVTable = nil): gen_qsvgwidget_types.QSvgWidget =
   let vtbl = if vtbl == nil: new QSvgWidgetVTable else: vtbl
   GC_ref(vtbl)
@@ -1682,7 +1684,7 @@ proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
     vtbl[].vtbl.connectNotify = cQSvgWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSvgWidget_vtable_callback_disconnectNotify
-  gen_qsvgwidget_types.QSvgWidget(h: fcQSvgWidget_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: file, len: csize_t(len(file))), parent.h), owned: true)
+  gen_qsvgwidget_types.QSvgWidget(h: fcQSvgWidget_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), parent.h), owned: true)
 
 const cQSvgWidget_mvtbl = cQSvgWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1754,17 +1756,17 @@ proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
   inst[].owned = true
 
 proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
-    file: string,
+    file: openArray[char],
     inst: VirtualQSvgWidget) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSvgWidget_new3(addr(cQSvgWidget_mvtbl), addr(inst[]), struct_miqt_string(data: file, len: csize_t(len(file))))
+  inst[].h = fcQSvgWidget_new3(addr(cQSvgWidget_mvtbl), addr(inst[]), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
   inst[].owned = true
 
 proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
-    file: string, parent: gen_qwidget_types.QWidget,
+    file: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQSvgWidget) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSvgWidget_new4(addr(cQSvgWidget_mvtbl), addr(inst[]), struct_miqt_string(data: file, len: csize_t(len(file))), parent.h)
+  inst[].h = fcQSvgWidget_new4(addr(cQSvgWidget_mvtbl), addr(inst[]), struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsvgwidget_types.QSvgWidget): gen_qobjectdefs_types.QMetaObject =

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6PrintSupport") & " -fPIC"
 {.compile("gen_qprinter.cpp", cflags).}
@@ -237,51 +239,51 @@ proc setPdfVersion*(self: gen_qprinter_types.QPrinter, version: cint): void =
 proc pdfVersion*(self: gen_qprinter_types.QPrinter): cint =
   cint(fcQPrinter_pdfVersion(self.h))
 
-proc setPrinterName*(self: gen_qprinter_types.QPrinter, printerName: string): void =
-  fcQPrinter_setPrinterName(self.h, struct_miqt_string(data: printerName, len: csize_t(len(printerName))))
+proc setPrinterName*(self: gen_qprinter_types.QPrinter, printerName: openArray[char]): void =
+  fcQPrinter_setPrinterName(self.h, struct_miqt_string(data: if len(printerName) > 0: addr printerName[0] else: nil, len: csize_t(len(printerName))))
 
 proc printerName*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_printerName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc isValid*(self: gen_qprinter_types.QPrinter): bool =
   fcQPrinter_isValid(self.h)
 
-proc setOutputFileName*(self: gen_qprinter_types.QPrinter, outputFileName: string): void =
-  fcQPrinter_setOutputFileName(self.h, struct_miqt_string(data: outputFileName, len: csize_t(len(outputFileName))))
+proc setOutputFileName*(self: gen_qprinter_types.QPrinter, outputFileName: openArray[char]): void =
+  fcQPrinter_setOutputFileName(self.h, struct_miqt_string(data: if len(outputFileName) > 0: addr outputFileName[0] else: nil, len: csize_t(len(outputFileName))))
 
 proc outputFileName*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_outputFileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPrintProgram*(self: gen_qprinter_types.QPrinter, printProgram: string): void =
-  fcQPrinter_setPrintProgram(self.h, struct_miqt_string(data: printProgram, len: csize_t(len(printProgram))))
+proc setPrintProgram*(self: gen_qprinter_types.QPrinter, printProgram: openArray[char]): void =
+  fcQPrinter_setPrintProgram(self.h, struct_miqt_string(data: if len(printProgram) > 0: addr printProgram[0] else: nil, len: csize_t(len(printProgram))))
 
 proc printProgram*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_printProgram(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDocName*(self: gen_qprinter_types.QPrinter, docName: string): void =
-  fcQPrinter_setDocName(self.h, struct_miqt_string(data: docName, len: csize_t(len(docName))))
+proc setDocName*(self: gen_qprinter_types.QPrinter, docName: openArray[char]): void =
+  fcQPrinter_setDocName(self.h, struct_miqt_string(data: if len(docName) > 0: addr docName[0] else: nil, len: csize_t(len(docName))))
 
 proc docName*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_docName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCreator*(self: gen_qprinter_types.QPrinter, creator: string): void =
-  fcQPrinter_setCreator(self.h, struct_miqt_string(data: creator, len: csize_t(len(creator))))
+proc setCreator*(self: gen_qprinter_types.QPrinter, creator: openArray[char]): void =
+  fcQPrinter_setCreator(self.h, struct_miqt_string(data: if len(creator) > 0: addr creator[0] else: nil, len: csize_t(len(creator))))
 
 proc creator*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_creator(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -359,12 +361,12 @@ proc pageRect*(self: gen_qprinter_types.QPrinter, param1: cint): gen_qrect_types
 
 proc printerSelectionOption*(self: gen_qprinter_types.QPrinter): string =
   let v_ms = fcQPrinter_printerSelectionOption(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPrinterSelectionOption*(self: gen_qprinter_types.QPrinter, printerSelectionOption: string): void =
-  fcQPrinter_setPrinterSelectionOption(self.h, struct_miqt_string(data: printerSelectionOption, len: csize_t(len(printerSelectionOption))))
+proc setPrinterSelectionOption*(self: gen_qprinter_types.QPrinter, printerSelectionOption: openArray[char]): void =
+  fcQPrinter_setPrinterSelectionOption(self.h, struct_miqt_string(data: if len(printerSelectionOption) > 0: addr printerSelectionOption[0] else: nil, len: csize_t(len(printerSelectionOption))))
 
 proc newPage*(self: gen_qprinter_types.QPrinter): bool =
   fcQPrinter_newPage(self.h)

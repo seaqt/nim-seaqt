@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QQmlFileStatusEnum* = distinct cint
@@ -100,7 +102,7 @@ proc status*(self: gen_qqmlfile_types.QQmlFile): cint =
 
 proc error*(self: gen_qqmlfile_types.QQmlFile): string =
   let v_ms = fcQQmlFile_error(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -112,15 +114,15 @@ proc data*(self: gen_qqmlfile_types.QQmlFile): cstring =
 
 proc dataByteArray*(self: gen_qqmlfile_types.QQmlFile): seq[byte] =
   var v_bytearray = fcQQmlFile_dataByteArray(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: gen_qurl_types.QUrl): void =
   fcQQmlFile_load(self.h, param1.h, param2.h)
 
-proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: string): void =
-  fcQQmlFile_load2(self.h, param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))))
+proc load*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: openArray[char]): void =
+  fcQQmlFile_load2(self.h, param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
 proc clear*(self: gen_qqmlfile_types.QQmlFile): void =
   fcQQmlFile_clear(self.h)
@@ -140,27 +142,27 @@ proc connectDownloadProgress*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qob
 proc connectDownloadProgress*(self: gen_qqmlfile_types.QQmlFile, param1: gen_qobject_types.QObject, param2: cint): bool =
   fcQQmlFile_connectDownloadProgress2(self.h, param1.h, param2)
 
-proc isSynchronous*(_: type gen_qqmlfile_types.QQmlFile, url: string): bool =
-  fcQQmlFile_isSynchronous(struct_miqt_string(data: url, len: csize_t(len(url))))
+proc isSynchronous*(_: type gen_qqmlfile_types.QQmlFile, url: openArray[char]): bool =
+  fcQQmlFile_isSynchronous(struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc isSynchronous*(_: type gen_qqmlfile_types.QQmlFile, url: gen_qurl_types.QUrl): bool =
   fcQQmlFile_isSynchronousWithUrl(url.h)
 
-proc isLocalFile*(_: type gen_qqmlfile_types.QQmlFile, url: string): bool =
-  fcQQmlFile_isLocalFile(struct_miqt_string(data: url, len: csize_t(len(url))))
+proc isLocalFile*(_: type gen_qqmlfile_types.QQmlFile, url: openArray[char]): bool =
+  fcQQmlFile_isLocalFile(struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc isLocalFile*(_: type gen_qqmlfile_types.QQmlFile, url: gen_qurl_types.QUrl): bool =
   fcQQmlFile_isLocalFileWithUrl(url.h)
 
-proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: string): string =
-  let v_ms = fcQQmlFile_urlToLocalFileOrQrc(struct_miqt_string(data: param1, len: csize_t(len(param1))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: openArray[char]): string =
+  let v_ms = fcQQmlFile_urlToLocalFileOrQrc(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: gen_qurl_types.QUrl): string =
   let v_ms = fcQQmlFile_urlToLocalFileOrQrcWithQUrl(param1.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -172,6 +174,6 @@ proc create*(T: type gen_qqmlfile_types.QQmlFile,
   gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new2(param1.h, param2.h), owned: true)
 
 proc create*(T: type gen_qqmlfile_types.QQmlFile,
-    param1: gen_qqmlengine_types.QQmlEngine, param2: string): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))), owned: true)
+    param1: gen_qqmlengine_types.QQmlEngine, param2: openArray[char]): gen_qqmlfile_types.QQmlFile =
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new3(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: true)
 

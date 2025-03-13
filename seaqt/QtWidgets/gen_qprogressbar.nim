@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qprogressbar.cpp", cflags).}
@@ -237,7 +239,7 @@ proc metacall*(self: gen_qprogressbar_types.QProgressBar, param1: cint, param2: 
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring): string =
   let v_ms = fcQProgressBar_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -252,7 +254,7 @@ proc value*(self: gen_qprogressbar_types.QProgressBar): cint =
 
 proc text*(self: gen_qprogressbar_types.QProgressBar): string =
   let v_ms = fcQProgressBar_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -289,15 +291,15 @@ proc setTextDirection*(self: gen_qprogressbar_types.QProgressBar, textDirection:
 proc textDirection*(self: gen_qprogressbar_types.QProgressBar): cint =
   cint(fcQProgressBar_textDirection(self.h))
 
-proc setFormat*(self: gen_qprogressbar_types.QProgressBar, format: string): void =
-  fcQProgressBar_setFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
+proc setFormat*(self: gen_qprogressbar_types.QProgressBar, format: openArray[char]): void =
+  fcQProgressBar_setFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc resetFormat*(self: gen_qprogressbar_types.QProgressBar): void =
   fcQProgressBar_resetFormat(self.h)
 
 proc format*(self: gen_qprogressbar_types.QProgressBar): string =
   let v_ms = fcQProgressBar_format(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -341,13 +343,13 @@ proc onvalueChanged*(self: gen_qprogressbar_types.QProgressBar, slot: QProgressB
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring): string =
   let v_ms = fcQProgressBar_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQProgressBar_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -388,7 +390,7 @@ type QProgressBardragLeaveEventProc* = proc(self: QProgressBar, event: gen_qeven
 type QProgressBardropEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QProgressBarshowEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QProgressBarhideEventProc* = proc(self: QProgressBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QProgressBarnativeEventProc* = proc(self: QProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QProgressBarnativeEventProc* = proc(self: QProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QProgressBarchangeEventProc* = proc(self: QProgressBar, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProgressBarmetricProc* = proc(self: QProgressBar, param1: cint): cint {.raises: [], gcsafe.}
 type QProgressBarinitPainterProc* = proc(self: QProgressBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -493,7 +495,7 @@ proc cQProgressBar_vtable_callback_metacall(self: pointer, param1: cint, param2:
 
 proc QProgressBartext*(self: gen_qprogressbar_types.QProgressBar): string =
   let v_ms = fcQProgressBar_virtualbase_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -813,14 +815,14 @@ proc cQProgressBar_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QProgressBarnativeEvent*(self: gen_qprogressbar_types.QProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QProgressBarnativeEvent*(self: gen_qprogressbar_types.QProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQProgressBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQProgressBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressBarVTable](fcQProgressBar_vdata(self))
   let self = QProgressBar(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1250,12 +1252,12 @@ proc cQProgressBar_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQProgressBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQProgressBar, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QProgressBarnativeEvent(self[], eventType, message, resultVal)
 proc cQProgressBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQProgressBar](fcQProgressBar_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

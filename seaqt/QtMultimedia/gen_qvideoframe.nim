@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QVideoFrameHandleTypeEnum* = distinct cint
@@ -206,12 +208,12 @@ proc toImage*(self: gen_qvideoframe_types.QVideoFrame): gen_qimage_types.QImage 
 
 proc subtitleText*(self: gen_qvideoframe_types.QVideoFrame): string =
   let v_ms = fcQVideoFrame_subtitleText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSubtitleText*(self: gen_qvideoframe_types.QVideoFrame, text: string): void =
-  fcQVideoFrame_setSubtitleText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setSubtitleText*(self: gen_qvideoframe_types.QVideoFrame, text: openArray[char]): void =
+  fcQVideoFrame_setSubtitleText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc paint*(self: gen_qvideoframe_types.QVideoFrame, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, options: gen_qvideoframe_types.QVideoFramePaintOptions): void =
   fcQVideoFrame_paint(self.h, painter.h, rect.h, options.h)

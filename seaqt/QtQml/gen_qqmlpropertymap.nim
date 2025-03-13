@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
 {.compile("gen_qqmlpropertymap.cpp", cflags).}
@@ -118,22 +120,22 @@ proc metacall*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, param1: cint, pa
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring): string =
   let v_ms = fcQQmlPropertyMap_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc value*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_value(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+proc value*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_value(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQQmlPropertyMap_insert(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQQmlPropertyMap_insert(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[string,gen_qvariant_types.QVariant]): void =
   var values_Keys_CArray = newSeq[struct_miqt_string](len(values))
   var values_Values_CArray = newSeq[pointer](len(values))
   var values_ctr = 0
   for values_k in values.keys():
-    values_Keys_CArray[values_ctr] = struct_miqt_string(data: values_k, len: csize_t(len(values_k)))
+    values_Keys_CArray[values_ctr] = struct_miqt_string(data: if len(values_k) > 0: addr values_k[0] else: nil, len: csize_t(len(values_k)))
     values_ctr += 1
   values_ctr = 0
   for values_v in values.values():
@@ -142,8 +144,8 @@ proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[stri
 
   fcQQmlPropertyMap_insertWithValues(self.h, struct_miqt_map(len: csize_t(len(values)),keys: if len(values) == 0: nil else: addr(values_Keys_CArray[0]), values: if len(values) == 0: nil else: addr(values_Values_CArray[0]),))
 
-proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): void =
-  fcQQmlPropertyMap_clear(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
+proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): void =
+  fcQQmlPropertyMap_clear(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc freeze*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): void =
   fcQQmlPropertyMap_freeze(self.h)
@@ -154,7 +156,7 @@ proc keys*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -169,23 +171,23 @@ proc size*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): cint =
 proc isEmpty*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): bool =
   fcQQmlPropertyMap_isEmpty(self.h)
 
-proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): bool =
-  fcQQmlPropertyMap_contains(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
+proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): bool =
+  fcQQmlPropertyMap_contains(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
-proc operatorSubscript*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscript(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: false)
+proc operatorSubscript*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscript(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
-proc operatorSubscript2*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptWithKey(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+proc operatorSubscript2*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptWithKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQQmlPropertyMap_valueChanged(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQQmlPropertyMap_valueChanged(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QQmlPropertyMapvalueChangedSlot* = proc(key: string, value: gen_qvariant_types.QVariant)
+type QQmlPropertyMapvalueChangedSlot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
 proc cQQmlPropertyMap_slot_callback_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
@@ -205,20 +207,20 @@ proc onvalueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, slot: QQml
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring): string =
   let v_ms = fcQQmlPropertyMap_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQmlPropertyMap_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QQmlPropertyMapmetaObjectProc* = proc(self: QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQmlPropertyMapmetacastProc* = proc(self: QQmlPropertyMap, param1: cstring): pointer {.raises: [], gcsafe.}
 type QQmlPropertyMapmetacallProc* = proc(self: QQmlPropertyMap, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QQmlPropertyMapupdateValueProc* = proc(self: QQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QQmlPropertyMapupdateValueProc* = proc(self: QQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QQmlPropertyMapeventProc* = proc(self: QQmlPropertyMap, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQmlPropertyMapeventFilterProc* = proc(self: QQmlPropertyMap, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QQmlPropertyMaptimerEventProc* = proc(self: QQmlPropertyMap, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -273,14 +275,14 @@ proc cQQmlPropertyMap_vtable_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QQmlPropertyMapupdateValue*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_virtualbase_updateValue(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), input.h), owned: true)
+proc QQmlPropertyMapupdateValue*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_virtualbase_updateValue(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), input.h), owned: true)
 
 proc cQQmlPropertyMap_vtable_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   let slotval2 = gen_qvariant_types.QVariant(h: input, owned: false)
@@ -386,12 +388,12 @@ proc cQQmlPropertyMap_method_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method updateValue*(self: VirtualQQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method updateValue*(self: VirtualQQmlPropertyMap, key: openArray[char], input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QQmlPropertyMapupdateValue(self[], key, input)
 proc cQQmlPropertyMap_method_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   let slotval2 = gen_qvariant_types.QVariant(h: input, owned: false)

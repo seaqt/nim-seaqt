@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginepage.cpp", cflags).}
@@ -414,7 +416,7 @@ proc metacall*(self: gen_qwebenginepage_types.QWebEnginePage, param1: cint, para
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring): string =
   let v_ms = fcQWebEnginePage_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -426,7 +428,7 @@ proc hasSelection*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
 
 proc selectedText*(self: gen_qwebenginepage_types.QWebEnginePage): string =
   let v_ms = fcQWebEnginePage_selectedText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -439,8 +441,8 @@ proc action*(self: gen_qwebenginepage_types.QWebEnginePage, action: cint): gen_q
 proc triggerAction*(self: gen_qwebenginepage_types.QWebEnginePage, action: cint, checked: bool): void =
   fcQWebEnginePage_triggerAction(self.h, cint(action), checked)
 
-proc replaceMisspelledWord*(self: gen_qwebenginepage_types.QWebEnginePage, replacement: string): void =
-  fcQWebEnginePage_replaceMisspelledWord(self.h, struct_miqt_string(data: replacement, len: csize_t(len(replacement))))
+proc replaceMisspelledWord*(self: gen_qwebenginepage_types.QWebEnginePage, replacement: openArray[char]): void =
+  fcQWebEnginePage_replaceMisspelledWord(self.h, struct_miqt_string(data: if len(replacement) > 0: addr replacement[0] else: nil, len: csize_t(len(replacement))))
 
 proc event*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebEnginePage_event(self.h, param1.h)
@@ -460,15 +462,15 @@ proc load*(self: gen_qwebenginepage_types.QWebEnginePage, request: gen_qwebengin
 proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl): void =
   fcQWebEnginePage_download(self.h, url.h)
 
-proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: string): void =
-  fcQWebEnginePage_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char]): void =
+  fcQWebEnginePage_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte]): void =
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte]): void =
   fcQWebEnginePage_setContent(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc title*(self: gen_qwebenginepage_types.QWebEnginePage): string =
   let v_ms = fcQWebEnginePage_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -517,8 +519,8 @@ proc backgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qcolor
 proc setBackgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage, color: gen_qcolor_types.QColor): void =
   fcQWebEnginePage_setBackgroundColor(self.h, color.h)
 
-proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string): void =
-  fcQWebEnginePage_save(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))))
+proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
+  fcQWebEnginePage_save(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc isAudioMuted*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
   fcQWebEnginePage_isAudioMuted(self.h)
@@ -532,8 +534,8 @@ proc recentlyAudible*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
 proc renderProcessPid*(self: gen_qwebenginepage_types.QWebEnginePage): clonglong =
   fcQWebEnginePage_renderProcessPid(self.h)
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string): void =
-  fcQWebEnginePage_printToPdf(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))))
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
+  fcQWebEnginePage_printToPdf(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc setInspectedPage*(self: gen_qwebenginepage_types.QWebEnginePage, page: gen_qwebenginepage_types.QWebEnginePage): void =
   fcQWebEnginePage_setInspectedPage(self.h, page.h)
@@ -646,14 +648,14 @@ proc onloadingChanged*(self: gen_qwebenginepage_types.QWebEnginePage, slot: QWeb
   GC_ref(tmp)
   fcQWebEnginePage_connect_loadingChanged(self.h, cast[int](addr tmp[]), cQWebEnginePage_slot_callback_loadingChanged, cQWebEnginePage_slot_callback_loadingChanged_release)
 
-proc linkHovered*(self: gen_qwebenginepage_types.QWebEnginePage, url: string): void =
-  fcQWebEnginePage_linkHovered(self.h, struct_miqt_string(data: url, len: csize_t(len(url))))
+proc linkHovered*(self: gen_qwebenginepage_types.QWebEnginePage, url: openArray[char]): void =
+  fcQWebEnginePage_linkHovered(self.h, struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
-type QWebEnginePagelinkHoveredSlot* = proc(url: string)
+type QWebEnginePagelinkHoveredSlot* = proc(url: openArray[char])
 proc cQWebEnginePage_slot_callback_linkHovered(slot: int, url: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagelinkHoveredSlot](cast[pointer](slot))
   let vurl_ms = url
-  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  let vurlx_ret = string.fromBytes(vurl_ms)
   c_free(vurl_ms.data)
   let slotval1 = vurlx_ret
 
@@ -891,10 +893,10 @@ proc onauthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, sl
   GC_ref(tmp)
   fcQWebEnginePage_connect_authenticationRequired(self.h, cast[int](addr tmp[]), cQWebEnginePage_slot_callback_authenticationRequired, cQWebEnginePage_slot_callback_authenticationRequired_release)
 
-proc proxyAuthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: string): void =
-  fcQWebEnginePage_proxyAuthenticationRequired(self.h, requestUrl.h, authenticator.h, struct_miqt_string(data: proxyHost, len: csize_t(len(proxyHost))))
+proc proxyAuthenticationRequired*(self: gen_qwebenginepage_types.QWebEnginePage, requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: openArray[char]): void =
+  fcQWebEnginePage_proxyAuthenticationRequired(self.h, requestUrl.h, authenticator.h, struct_miqt_string(data: if len(proxyHost) > 0: addr proxyHost[0] else: nil, len: csize_t(len(proxyHost))))
 
-type QWebEnginePageproxyAuthenticationRequiredSlot* = proc(requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: string)
+type QWebEnginePageproxyAuthenticationRequiredSlot* = proc(requestUrl: gen_qurl_types.QUrl, authenticator: gen_qauthenticator_types.QAuthenticator, proxyHost: openArray[char])
 proc cQWebEnginePage_slot_callback_proxyAuthenticationRequired(slot: int, requestUrl: pointer, authenticator: pointer, proxyHost: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePageproxyAuthenticationRequiredSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: requestUrl, owned: false)
@@ -902,7 +904,7 @@ proc cQWebEnginePage_slot_callback_proxyAuthenticationRequired(slot: int, reques
   let slotval2 = gen_qauthenticator_types.QAuthenticator(h: authenticator, owned: false)
 
   let vproxyHost_ms = proxyHost
-  let vproxyHostx_ret = string.fromBytes(toOpenArrayByte(vproxyHost_ms.data, 0, int(vproxyHost_ms.len)-1))
+  let vproxyHostx_ret = string.fromBytes(vproxyHost_ms)
   c_free(vproxyHost_ms.data)
   let slotval3 = vproxyHostx_ret
 
@@ -1000,14 +1002,14 @@ proc onnewWindowRequested*(self: gen_qwebenginepage_types.QWebEnginePage, slot: 
   GC_ref(tmp)
   fcQWebEnginePage_connect_newWindowRequested(self.h, cast[int](addr tmp[]), cQWebEnginePage_slot_callback_newWindowRequested, cQWebEnginePage_slot_callback_newWindowRequested_release)
 
-proc titleChanged*(self: gen_qwebenginepage_types.QWebEnginePage, title: string): void =
-  fcQWebEnginePage_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc titleChanged*(self: gen_qwebenginepage_types.QWebEnginePage, title: openArray[char]): void =
+  fcQWebEnginePage_titleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWebEnginePagetitleChangedSlot* = proc(title: string)
+type QWebEnginePagetitleChangedSlot* = proc(title: openArray[char])
 proc cQWebEnginePage_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagetitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval1 = vtitlex_ret
 
@@ -1183,14 +1185,14 @@ proc onrenderProcessPidChanged*(self: gen_qwebenginepage_types.QWebEnginePage, s
   GC_ref(tmp)
   fcQWebEnginePage_connect_renderProcessPidChanged(self.h, cast[int](addr tmp[]), cQWebEnginePage_slot_callback_renderProcessPidChanged, cQWebEnginePage_slot_callback_renderProcessPidChanged_release)
 
-proc pdfPrintingFinished*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, success: bool): void =
-  fcQWebEnginePage_pdfPrintingFinished(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), success)
+proc pdfPrintingFinished*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], success: bool): void =
+  fcQWebEnginePage_pdfPrintingFinished(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), success)
 
-type QWebEnginePagepdfPrintingFinishedSlot* = proc(filePath: string, success: bool)
+type QWebEnginePagepdfPrintingFinishedSlot* = proc(filePath: openArray[char], success: bool)
 proc cQWebEnginePage_slot_callback_pdfPrintingFinished(slot: int, filePath: struct_miqt_string, success: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEnginePagepdfPrintingFinishedSlot](cast[pointer](slot))
   let vfilePath_ms = filePath
-  let vfilePathx_ret = string.fromBytes(toOpenArrayByte(vfilePath_ms.data, 0, int(vfilePath_ms.len)-1))
+  let vfilePathx_ret = string.fromBytes(vfilePath_ms)
   c_free(vfilePath_ms.data)
   let slotval1 = vfilePathx_ret
 
@@ -1326,39 +1328,39 @@ proc onQAboutToDelete*(self: gen_qwebenginepage_types.QWebEnginePage, slot: QWeb
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring): string =
   let v_ms = fcQWebEnginePage_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebEnginePage_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl, filename: string): void =
-  fcQWebEnginePage_download2(self.h, url.h, struct_miqt_string(data: filename, len: csize_t(len(filename))))
+proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl, filename: openArray[char]): void =
+  fcQWebEnginePage_download2(self.h, url.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
-proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_setHtml2(self.h, struct_miqt_string(data: html, len: csize_t(len(html))), baseUrl.h)
+proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebEnginePage_setHtml2(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte], mimeType: string): void =
-  fcQWebEnginePage_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char]): void =
+  fcQWebEnginePage_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
-proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: seq[byte], mimeType: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), baseUrl.h)
+proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebEnginePage_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc setWebChannel*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qwebchannel_types.QWebChannel, worldId: cuint): void =
   fcQWebEnginePage_setWebChannel2(self.h, param1.h, worldId)
 
-proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, format: cint): void =
-  fcQWebEnginePage_save2(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), cint(format))
+proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], format: cint): void =
+  fcQWebEnginePage_save2(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), cint(format))
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, layout: gen_qpagelayout_types.QPageLayout): void =
-  fcQWebEnginePage_printToPdf2(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), layout.h)
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout): void =
+  fcQWebEnginePage_printToPdf2(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h)
 
-proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: string, layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
-  fcQWebEnginePage_printToPdf3(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), layout.h, ranges.h)
+proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
+  fcQWebEnginePage_printToPdf3(self.h, struct_miqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h, ranges.h)
 
 type QWebEnginePagemetaObjectProc* = proc(self: QWebEnginePage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebEnginePagemetacastProc* = proc(self: QWebEnginePage, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1366,10 +1368,10 @@ type QWebEnginePagemetacallProc* = proc(self: QWebEnginePage, param1: cint, para
 type QWebEnginePagetriggerActionProc* = proc(self: QWebEnginePage, action: cint, checked: bool): void {.raises: [], gcsafe.}
 type QWebEnginePageeventProc* = proc(self: QWebEnginePage, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebEnginePagecreateWindowProc* = proc(self: QWebEnginePage, typeVal: cint): gen_qwebenginepage_types.QWebEnginePage {.raises: [], gcsafe.}
-type QWebEnginePagechooseFilesProc* = proc(self: QWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptAlertProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptConfirmProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool {.raises: [], gcsafe.}
-type QWebEnginePagejavaScriptConsoleMessageProc* = proc(self: QWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void {.raises: [], gcsafe.}
+type QWebEnginePagechooseFilesProc* = proc(self: QWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptAlertProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptConfirmProc* = proc(self: QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool {.raises: [], gcsafe.}
+type QWebEnginePagejavaScriptConsoleMessageProc* = proc(self: QWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.raises: [], gcsafe.}
 type QWebEnginePageacceptNavigationRequestProc* = proc(self: QWebEnginePage, url: gen_qurl_types.QUrl, typeVal: cint, isMainFrame: bool): bool {.raises: [], gcsafe.}
 type QWebEnginePageeventFilterProc* = proc(self: QWebEnginePage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebEnginePagetimerEventProc* = proc(self: QWebEnginePage, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -1463,21 +1465,21 @@ proc cQWebEnginePage_vtable_callback_createWindow(self: pointer, typeVal: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebEnginePagechooseFiles*(self: gen_qwebenginepage_types.QWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] =
+proc QWebEnginePagechooseFiles*(self: gen_qwebenginepage_types.QWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] =
   var oldFiles_CArray = newSeq[struct_miqt_string](len(oldFiles))
   for i in 0..<len(oldFiles):
-    oldFiles_CArray[i] = struct_miqt_string(data: oldFiles[i], len: csize_t(len(oldFiles[i])))
+    oldFiles_CArray[i] = struct_miqt_string(data: if len(oldFiles[i]) > 0: addr oldFiles[i][0] else: nil, len: csize_t(len(oldFiles[i])))
 
   var acceptedMimeTypes_CArray = newSeq[struct_miqt_string](len(acceptedMimeTypes))
   for i in 0..<len(acceptedMimeTypes):
-    acceptedMimeTypes_CArray[i] = struct_miqt_string(data: acceptedMimeTypes[i], len: csize_t(len(acceptedMimeTypes[i])))
+    acceptedMimeTypes_CArray[i] = struct_miqt_string(data: if len(acceptedMimeTypes[i]) > 0: addr acceptedMimeTypes[i][0] else: nil, len: csize_t(len(acceptedMimeTypes[i])))
 
   var v_ma = fcQWebEnginePage_virtualbase_chooseFiles(self.h, cint(mode), struct_miqt_array(len: csize_t(len(oldFiles)), data: if len(oldFiles) == 0: nil else: addr(oldFiles_CArray[0])), struct_miqt_array(len: csize_t(len(acceptedMimeTypes)), data: if len(acceptedMimeTypes) == 0: nil else: addr(acceptedMimeTypes_CArray[0])))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -1492,7 +1494,7 @@ proc cQWebEnginePage_vtable_callback_chooseFiles(self: pointer, mode: cint, oldF
   let voldFiles_outCast = cast[ptr UncheckedArray[struct_miqt_string]](voldFiles_ma.data)
   for i in 0 ..< voldFiles_ma.len:
     let voldFiles_lv_ms = voldFiles_outCast[i]
-    let voldFiles_lvx_ret = string.fromBytes(toOpenArrayByte(voldFiles_lv_ms.data, 0, int(voldFiles_lv_ms.len)-1))
+    let voldFiles_lvx_ret = string.fromBytes(voldFiles_lv_ms)
     c_free(voldFiles_lv_ms.data)
     voldFilesx_ret[i] = voldFiles_lvx_ret
   c_free(voldFiles_ma.data)
@@ -1502,7 +1504,7 @@ proc cQWebEnginePage_vtable_callback_chooseFiles(self: pointer, mode: cint, oldF
   let vacceptedMimeTypes_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vacceptedMimeTypes_ma.data)
   for i in 0 ..< vacceptedMimeTypes_ma.len:
     let vacceptedMimeTypes_lv_ms = vacceptedMimeTypes_outCast[i]
-    let vacceptedMimeTypes_lvx_ret = string.fromBytes(toOpenArrayByte(vacceptedMimeTypes_lv_ms.data, 0, int(vacceptedMimeTypes_lv_ms.len)-1))
+    let vacceptedMimeTypes_lvx_ret = string.fromBytes(vacceptedMimeTypes_lv_ms)
     c_free(vacceptedMimeTypes_lv_ms.data)
     vacceptedMimeTypesx_ret[i] = vacceptedMimeTypes_lvx_ret
   c_free(vacceptedMimeTypes_ma.data)
@@ -1516,47 +1518,47 @@ proc cQWebEnginePage_vtable_callback_chooseFiles(self: pointer, mode: cint, oldF
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QWebEnginePagejavaScriptAlert*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void =
-  fcQWebEnginePage_virtualbase_javaScriptAlert(self.h, securityOrigin.h, struct_miqt_string(data: msg, len: csize_t(len(msg))))
+proc QWebEnginePagejavaScriptAlert*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void =
+  fcQWebEnginePage_virtualbase_javaScriptAlert(self.h, securityOrigin.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc cQWebEnginePage_vtable_callback_javaScriptAlert(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QWebEnginePageVTable](fcQWebEnginePage_vdata(self))
   let self = QWebEnginePage(h: self)
   let slotval1 = gen_qurl_types.QUrl(h: securityOrigin, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   vtbl[].javaScriptAlert(self, slotval1, slotval2)
 
-proc QWebEnginePagejavaScriptConfirm*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool =
-  fcQWebEnginePage_virtualbase_javaScriptConfirm(self.h, securityOrigin.h, struct_miqt_string(data: msg, len: csize_t(len(msg))))
+proc QWebEnginePagejavaScriptConfirm*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool =
+  fcQWebEnginePage_virtualbase_javaScriptConfirm(self.h, securityOrigin.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc cQWebEnginePage_vtable_callback_javaScriptConfirm(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEnginePageVTable](fcQWebEnginePage_vdata(self))
   let self = QWebEnginePage(h: self)
   let slotval1 = gen_qurl_types.QUrl(h: securityOrigin, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   var virtualReturn = vtbl[].javaScriptConfirm(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebEnginePagejavaScriptConsoleMessage*(self: gen_qwebenginepage_types.QWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void =
-  fcQWebEnginePage_virtualbase_javaScriptConsoleMessage(self.h, cint(level), struct_miqt_string(data: message, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: sourceID, len: csize_t(len(sourceID))))
+proc QWebEnginePagejavaScriptConsoleMessage*(self: gen_qwebenginepage_types.QWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void =
+  fcQWebEnginePage_virtualbase_javaScriptConsoleMessage(self.h, cint(level), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: if len(sourceID) > 0: addr sourceID[0] else: nil, len: csize_t(len(sourceID))))
 
 proc cQWebEnginePage_vtable_callback_javaScriptConsoleMessage(self: pointer, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QWebEnginePageVTable](fcQWebEnginePage_vdata(self))
   let self = QWebEnginePage(h: self)
   let slotval1 = cint(level)
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval2 = vmessagex_ret
   let slotval3 = lineNumber
   let vsourceID_ms = sourceID
-  let vsourceIDx_ret = string.fromBytes(toOpenArrayByte(vsourceID_ms.data, 0, int(vsourceID_ms.len)-1))
+  let vsourceIDx_ret = string.fromBytes(vsourceID_ms)
   c_free(vsourceID_ms.data)
   let slotval4 = vsourceIDx_ret
   vtbl[].javaScriptConsoleMessage(self, slotval1, slotval2, slotval3, slotval4)
@@ -1686,7 +1688,7 @@ proc cQWebEnginePage_method_callback_createWindow(self: pointer, typeVal: cint):
   virtualReturn.h = nil
   virtualReturn_h
 
-method chooseFiles*(self: VirtualQWebEnginePage, mode: cint, oldFiles: seq[string], acceptedMimeTypes: seq[string]): seq[string] {.base.} =
+method chooseFiles*(self: VirtualQWebEnginePage, mode: cint, oldFiles: openArray[string], acceptedMimeTypes: openArray[string]): seq[string] {.base.} =
   QWebEnginePagechooseFiles(self[], mode, oldFiles, acceptedMimeTypes)
 proc cQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldFiles: struct_miqt_array, acceptedMimeTypes: struct_miqt_array): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self))
@@ -1696,7 +1698,7 @@ proc cQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldF
   let voldFiles_outCast = cast[ptr UncheckedArray[struct_miqt_string]](voldFiles_ma.data)
   for i in 0 ..< voldFiles_ma.len:
     let voldFiles_lv_ms = voldFiles_outCast[i]
-    let voldFiles_lvx_ret = string.fromBytes(toOpenArrayByte(voldFiles_lv_ms.data, 0, int(voldFiles_lv_ms.len)-1))
+    let voldFiles_lvx_ret = string.fromBytes(voldFiles_lv_ms)
     c_free(voldFiles_lv_ms.data)
     voldFilesx_ret[i] = voldFiles_lvx_ret
   c_free(voldFiles_ma.data)
@@ -1706,7 +1708,7 @@ proc cQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldF
   let vacceptedMimeTypes_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vacceptedMimeTypes_ma.data)
   for i in 0 ..< vacceptedMimeTypes_ma.len:
     let vacceptedMimeTypes_lv_ms = vacceptedMimeTypes_outCast[i]
-    let vacceptedMimeTypes_lvx_ret = string.fromBytes(toOpenArrayByte(vacceptedMimeTypes_lv_ms.data, 0, int(vacceptedMimeTypes_lv_ms.len)-1))
+    let vacceptedMimeTypes_lvx_ret = string.fromBytes(vacceptedMimeTypes_lv_ms)
     c_free(vacceptedMimeTypes_lv_ms.data)
     vacceptedMimeTypesx_ret[i] = vacceptedMimeTypes_lvx_ret
   c_free(vacceptedMimeTypes_ma.data)
@@ -1720,41 +1722,41 @@ proc cQWebEnginePage_method_callback_chooseFiles(self: pointer, mode: cint, oldF
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method javaScriptAlert*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): void {.base.} =
+method javaScriptAlert*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): void {.base.} =
   QWebEnginePagejavaScriptAlert(self[], securityOrigin, msg)
 proc cQWebEnginePage_method_callback_javaScriptAlert(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self))
   let slotval1 = gen_qurl_types.QUrl(h: securityOrigin, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   inst.javaScriptAlert(slotval1, slotval2)
 
-method javaScriptConfirm*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: string): bool {.base.} =
+method javaScriptConfirm*(self: VirtualQWebEnginePage, securityOrigin: gen_qurl_types.QUrl, msg: openArray[char]): bool {.base.} =
   QWebEnginePagejavaScriptConfirm(self[], securityOrigin, msg)
 proc cQWebEnginePage_method_callback_javaScriptConfirm(self: pointer, securityOrigin: pointer, msg: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self))
   let slotval1 = gen_qurl_types.QUrl(h: securityOrigin, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   var virtualReturn = inst.javaScriptConfirm(slotval1, slotval2)
   virtualReturn
 
-method javaScriptConsoleMessage*(self: VirtualQWebEnginePage, level: cint, message: string, lineNumber: cint, sourceID: string): void {.base.} =
+method javaScriptConsoleMessage*(self: VirtualQWebEnginePage, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.base.} =
   QWebEnginePagejavaScriptConsoleMessage(self[], level, message, lineNumber, sourceID)
 proc cQWebEnginePage_method_callback_javaScriptConsoleMessage(self: pointer, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebEnginePage](fcQWebEnginePage_vdata(self))
   let slotval1 = cint(level)
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval2 = vmessagex_ret
   let slotval3 = lineNumber
   let vsourceID_ms = sourceID
-  let vsourceIDx_ret = string.fromBytes(toOpenArrayByte(vsourceID_ms.data, 0, int(vsourceID_ms.len)-1))
+  let vsourceIDx_ret = string.fromBytes(vsourceID_ms)
   c_free(vsourceID_ms.data)
   let slotval4 = vsourceIDx_ret
   inst.javaScriptConsoleMessage(slotval1, slotval2, slotval3, slotval4)

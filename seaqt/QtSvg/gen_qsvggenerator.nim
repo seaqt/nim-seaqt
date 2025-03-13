@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Svg") & " -fPIC"
 {.compile("gen_qsvggenerator.cpp", cflags).}
@@ -92,21 +94,21 @@ proc fcQSvgGenerator_new(vtbl, vdata: pointer): ptr cQSvgGenerator {.importc: "Q
 
 proc title*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   let v_ms = fcQSvgGenerator_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qsvggenerator_types.QSvgGenerator, title: string): void =
-  fcQSvgGenerator_setTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc setTitle*(self: gen_qsvggenerator_types.QSvgGenerator, title: openArray[char]): void =
+  fcQSvgGenerator_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc description*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   let v_ms = fcQSvgGenerator_description(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDescription*(self: gen_qsvggenerator_types.QSvgGenerator, description: string): void =
-  fcQSvgGenerator_setDescription(self.h, struct_miqt_string(data: description, len: csize_t(len(description))))
+proc setDescription*(self: gen_qsvggenerator_types.QSvgGenerator, description: openArray[char]): void =
+  fcQSvgGenerator_setDescription(self.h, struct_miqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
 
 proc size*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSvgGenerator_size(self.h), owned: true)
@@ -128,12 +130,12 @@ proc setViewBox*(self: gen_qsvggenerator_types.QSvgGenerator, viewBox: gen_qrect
 
 proc fileName*(self: gen_qsvggenerator_types.QSvgGenerator): string =
   let v_ms = fcQSvgGenerator_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setFileName*(self: gen_qsvggenerator_types.QSvgGenerator, fileName: string): void =
-  fcQSvgGenerator_setFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc setFileName*(self: gen_qsvggenerator_types.QSvgGenerator, fileName: openArray[char]): void =
+  fcQSvgGenerator_setFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc outputDevice*(self: gen_qsvggenerator_types.QSvgGenerator): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQSvgGenerator_outputDevice(self.h), owned: false)

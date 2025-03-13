@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qstorageinfo_types
@@ -72,42 +74,42 @@ proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstor
 proc swap*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_swap(self.h, other.h)
 
-proc setPath*(self: gen_qstorageinfo_types.QStorageInfo, path: string): void =
-  fcQStorageInfo_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setPath*(self: gen_qstorageinfo_types.QStorageInfo, path: openArray[char]): void =
+  fcQStorageInfo_setPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc rootPath*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_rootPath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc device*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_device(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc subvolume*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_subvolume(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc fileSystemType*(self: gen_qstorageinfo_types.QStorageInfo): seq[byte] =
   var v_bytearray = fcQStorageInfo_fileSystemType(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc name*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayName*(self: gen_qstorageinfo_types.QStorageInfo): string =
   let v_ms = fcQStorageInfo_displayName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -154,8 +156,8 @@ proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_type
   gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new(), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
-    path: string): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: path, len: csize_t(len(path)))), owned: true)
+    path: openArray[char]): gen_qstorageinfo_types.QStorageInfo =
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     dir: gen_qdir_types.QDir): gen_qstorageinfo_types.QStorageInfo =

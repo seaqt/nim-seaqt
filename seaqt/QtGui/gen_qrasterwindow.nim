@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qrasterwindow.cpp", cflags).}
@@ -176,19 +178,19 @@ proc metacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring): string =
   let v_ms = fcQRasterWindow_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring): string =
   let v_ms = fcQRasterWindow_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQRasterWindow_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -221,7 +223,7 @@ type QRasterWindowmouseMoveEventProc* = proc(self: QRasterWindow, param1: gen_qe
 type QRasterWindowwheelEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QRasterWindowtouchEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
 type QRasterWindowtabletEventProc* = proc(self: QRasterWindow, param1: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
-type QRasterWindownativeEventProc* = proc(self: QRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
+type QRasterWindownativeEventProc* = proc(self: QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
 type QRasterWindoweventFilterProc* = proc(self: QRasterWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QRasterWindowtimerEventProc* = proc(self: QRasterWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QRasterWindowchildEventProc* = proc(self: QRasterWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
@@ -558,14 +560,14 @@ proc cQRasterWindow_vtable_callback_tabletEvent(self: pointer, param1: pointer):
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
+proc QRasterWindownativeEvent*(self: gen_qrasterwindow_types.QRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQRasterWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQRasterWindow_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QRasterWindowVTable](fcQRasterWindow_vdata(self))
   let self = QRasterWindow(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -889,12 +891,12 @@ proc cQRasterWindow_method_callback_tabletEvent(self: pointer, param1: pointer):
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   inst.tabletEvent(slotval1)
 
-method nativeEvent*(self: VirtualQRasterWindow, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+method nativeEvent*(self: VirtualQRasterWindow, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
   QRasterWindownativeEvent(self[], eventType, message, resultVal)
 proc cQRasterWindow_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQRasterWindow](fcQRasterWindow_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

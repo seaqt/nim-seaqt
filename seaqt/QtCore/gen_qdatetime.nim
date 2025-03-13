@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QDateTimeYearRangeEnum* = distinct cint
@@ -255,13 +257,13 @@ proc endOfDay*(self: gen_qdatetime_types.QDate, zone: gen_qtimezone_types.QTimeZ
 
 proc toString*(self: gen_qdatetime_types.QDate): string =
   let v_ms = fcQDate_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qdatetime_types.QDate, format: string): string =
-  let v_ms = fcQDate_toStringWithFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qdatetime_types.QDate, format: openArray[char]): string =
+  let v_ms = fcQDate_toStringWithFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -295,11 +297,11 @@ proc daysTo*(self: gen_qdatetime_types.QDate, d: gen_qdatetime_types.QDate): clo
 proc currentDate*(_: type gen_qdatetime_types.QDate): gen_qdatetime_types.QDate =
   gen_qdatetime_types.QDate(h: fcQDate_currentDate(), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDate, string: string): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromStringWithString(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDate, string: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQDate_fromStringWithString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDate, string: string, format: string): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString4(struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDate, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQDate_fromString4(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QDate, y: cint, m: cint, d: cint): bool =
   fcQDate_isValid2(y, m, d)
@@ -330,21 +332,21 @@ proc endOfDay*(self: gen_qdatetime_types.QDate, spec: cint, offsetSeconds: cint)
 
 proc toString*(self: gen_qdatetime_types.QDate, format: cint): string =
   let v_ms = fcQDate_toString1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qdatetime_types.QDate, format: string, cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQDate_toString22(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), cal.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qdatetime_types.QDate, format: openArray[char], cal: gen_qcalendar_types.QCalendar): string =
+  let v_ms = fcQDate_toString22(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qdatetime_types.QDate, string: string, format: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString23(struct_miqt_string(data: string, len: csize_t(len(string))), cint(format)), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDate, string: openArray[char], format: cint): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQDate_fromString23(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format)), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDate, string: string, format: string, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDate_fromString34(struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format))), cal.h), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDate, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQDate_fromString34(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc create*(T: type gen_qdatetime_types.QDate): gen_qdatetime_types.QDate =
   gen_qdatetime_types.QDate(h: fcQDate_new(), owned: true)
@@ -381,13 +383,13 @@ proc msec*(self: gen_qdatetime_types.QTime): cint =
 
 proc toString*(self: gen_qdatetime_types.QTime): string =
   let v_ms = fcQTime_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qdatetime_types.QTime, format: string): string =
-  let v_ms = fcQTime_toStringWithFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qdatetime_types.QTime, format: openArray[char]): string =
+  let v_ms = fcQTime_toStringWithFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -415,26 +417,26 @@ proc msecsSinceStartOfDay*(self: gen_qdatetime_types.QTime): cint =
 proc currentTime*(_: type gen_qdatetime_types.QTime): gen_qdatetime_types.QTime =
   gen_qdatetime_types.QTime(h: fcQTime_currentTime(), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QTime, string: string): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromStringWithString(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QTime, string: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQTime_fromStringWithString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QTime, string: string, format: string): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromString4(struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QTime, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQTime_fromString4(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QTime, h: cint, m: cint, s: cint): bool =
   fcQTime_isValid2(h, m, s)
 
 proc toString*(self: gen_qdatetime_types.QTime, f: cint): string =
   let v_ms = fcQTime_toString1(self.h, cint(f))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setHMS*(self: gen_qdatetime_types.QTime, h: cint, m: cint, s: cint, ms: cint): bool =
   fcQTime_setHMS4(self.h, h, m, s, ms)
 
-proc fromString*(_: type gen_qdatetime_types.QTime, string: string, format: cint): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQTime_fromString23(struct_miqt_string(data: string, len: csize_t(len(string))), cint(format)), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QTime, string: openArray[char], format: cint): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQTime_fromString23(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format)), owned: true)
 
 proc isValid*(_: type gen_qdatetime_types.QTime, h: cint, m: cint, s: cint, ms: cint): bool =
   fcQTime_isValid4(h, m, s, ms)
@@ -487,7 +489,7 @@ proc timeZone*(self: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZo
 
 proc timeZoneAbbreviation*(self: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateTime_timeZoneAbbreviation(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -523,13 +525,13 @@ proc setSecsSinceEpoch*(self: gen_qdatetime_types.QDateTime, secs: clonglong): v
 
 proc toString*(self: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateTime_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qdatetime_types.QDateTime, format: string): string =
-  let v_ms = fcQDateTime_toStringWithFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qdatetime_types.QDateTime, format: openArray[char]): string =
+  let v_ms = fcQDateTime_toStringWithFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -578,11 +580,11 @@ proc currentDateTime*(_: type gen_qdatetime_types.QDateTime): gen_qdatetime_type
 proc currentDateTimeUtc*(_: type gen_qdatetime_types.QDateTime): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQDateTime_currentDateTimeUtc(), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDateTime, string: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromStringWithString(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDateTime, string: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromStringWithString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDateTime, string: string, format: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString4(struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDateTime, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString4(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch(msecs), owned: true)
@@ -604,21 +606,21 @@ proc currentSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime): clonglong =
 
 proc toString*(self: gen_qdatetime_types.QDateTime, format: cint): string =
   let v_ms = fcQDateTime_toString1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qdatetime_types.QDateTime, format: string, cal: gen_qcalendar_types.QCalendar): string =
-  let v_ms = fcQDateTime_toString22(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), cal.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qdatetime_types.QDateTime, format: openArray[char], cal: gen_qcalendar_types.QCalendar): string =
+  let v_ms = fcQDateTime_toString22(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h)
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qdatetime_types.QDateTime, string: string, format: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString23(struct_miqt_string(data: string, len: csize_t(len(string))), cint(format)), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDateTime, string: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString23(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format)), owned: true)
 
-proc fromString*(_: type gen_qdatetime_types.QDateTime, string: string, format: string, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString34(struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format))), cal.h), owned: true)
+proc fromString*(_: type gen_qdatetime_types.QDateTime, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateTime_fromString34(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc fromMSecsSinceEpoch*(_: type gen_qdatetime_types.QDateTime, msecs: clonglong, spec: cint): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQDateTime_fromMSecsSinceEpoch22(msecs, cint(spec)), owned: true)

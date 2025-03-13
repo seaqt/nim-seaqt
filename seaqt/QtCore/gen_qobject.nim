@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const qtversion = gorge("pkg-config --modversion Qt6Core")
 const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
@@ -72,7 +74,6 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 import
-  ./gen_qanystringview_types,
   ./gen_qbindingstorage_types,
   ./gen_qcoreevent_types,
   ./gen_qmetaobject_types,
@@ -80,7 +81,6 @@ import
   ./gen_qthread_types,
   ./gen_qvariant_types
 export
-  gen_qanystringview_types,
   gen_qbindingstorage_types,
   gen_qcoreevent_types,
   gen_qmetaobject_types,
@@ -100,7 +100,7 @@ proc fcQObject_tr(s: cstring): struct_miqt_string {.importc: "QObject_tr".}
 proc fcQObject_event(self: pointer, event: pointer): bool {.importc: "QObject_event".}
 proc fcQObject_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QObject_eventFilter".}
 proc fcQObject_objectName(self: pointer): struct_miqt_string {.importc: "QObject_objectName".}
-proc fcQObject_setObjectName(self: pointer, name: pointer): void {.importc: "QObject_setObjectName".}
+proc fcQObject_setObjectName(self: pointer, name: struct_miqt_string): void {.importc: "QObject_setObjectName".}
 proc fcQObject_isWidgetType(self: pointer): bool {.importc: "QObject_isWidgetType".}
 proc fcQObject_isWindowType(self: pointer): bool {.importc: "QObject_isWindowType".}
 proc fcQObject_isQuickItemType(self: pointer): bool {.importc: "QObject_isQuickItemType".}
@@ -186,7 +186,7 @@ proc metacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring): string =
   let v_ms = fcQObject_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -198,12 +198,12 @@ proc eventFilter*(self: gen_qobject_types.QObject, watched: gen_qobject_types.QO
 
 proc objectName*(self: gen_qobject_types.QObject): string =
   let v_ms = fcQObject_objectName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setObjectName*(self: gen_qobject_types.QObject, name: gen_qanystringview_types.QAnyStringView): void =
-  fcQObject_setObjectName(self.h, name.h)
+proc setObjectName*(self: gen_qobject_types.QObject, name: openArray[char]): void =
+  fcQObject_setObjectName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc isWidgetType*(self: gen_qobject_types.QObject): bool =
   fcQObject_isWidgetType(self.h)
@@ -280,7 +280,7 @@ proc dynamicPropertyNames*(self: gen_qobject_types.QObject): seq[seq[byte]] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -318,13 +318,13 @@ proc inherits*(self: gen_qobject_types.QObject, classname: cstring): bool =
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring, c: cstring): string =
   let v_ms = fcQObject_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQObject_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

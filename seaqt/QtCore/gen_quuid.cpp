@@ -1,4 +1,7 @@
 #include <QAnyStringView>
+#include <QString>
+#include <QByteArray>
+#include <QAnyStringView>
 #include <QByteArray>
 #include <QByteArrayView>
 #include <QString>
@@ -15,16 +18,18 @@ QUuid* QUuid_new2(unsigned int l, uint16_t w1, uint16_t w2, unsigned char b1, un
 	return new QUuid(static_cast<uint>(l), static_cast<ushort>(w1), static_cast<ushort>(w2), static_cast<uchar>(b1), static_cast<uchar>(b2), static_cast<uchar>(b3), static_cast<uchar>(b4), static_cast<uchar>(b5), static_cast<uchar>(b6), static_cast<uchar>(b7), static_cast<uchar>(b8));
 }
 
-QUuid* QUuid_new3(QAnyStringView* string) {
-	return new QUuid(*string);
+QUuid* QUuid_new3(struct miqt_string string) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new QUuid(string_QString);
 }
 
 QUuid* QUuid_new4(QUuid* param1) {
 	return new QUuid(*param1);
 }
 
-QUuid* QUuid_fromString(QAnyStringView* string) {
-	return new QUuid(QUuid::fromString(*string));
+QUuid* QUuid_fromString(struct miqt_string string) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new QUuid(QUuid::fromString(string_QString));
 }
 
 struct miqt_string QUuid_toString(const QUuid* self) {
@@ -56,8 +61,9 @@ struct miqt_string QUuid_toRfc4122(const QUuid* self) {
 	return _ms;
 }
 
-QUuid* QUuid_fromRfc4122(QByteArrayView* param1) {
-	return new QUuid(QUuid::fromRfc4122(*param1));
+QUuid* QUuid_fromRfc4122(struct miqt_string param1) {
+	QByteArrayView param1_QByteArray(param1.data, param1.len);
+	return new QUuid(QUuid::fromRfc4122(param1_QByteArray));
 }
 
 bool QUuid_isNull(const QUuid* self) {

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qiconengineplugin.cpp", cflags).}
@@ -103,29 +105,29 @@ proc metacall*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cint
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring): string =
   let v_ms = fcQIconEnginePlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine =
-  gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_create(self.h, struct_miqt_string(data: filename, len: csize_t(len(filename)))), owned: false)
+proc create*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine =
+  gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_create(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: false)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQIconEnginePlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQIconEnginePlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QIconEnginePluginmetaObjectProc* = proc(self: QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QIconEnginePluginmetacastProc* = proc(self: QIconEnginePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QIconEnginePluginmetacallProc* = proc(self: QIconEnginePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QIconEnginePlugincreateProc* = proc(self: QIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine {.raises: [], gcsafe.}
+type QIconEnginePlugincreateProc* = proc(self: QIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine {.raises: [], gcsafe.}
 type QIconEnginePlugineventProc* = proc(self: QIconEnginePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIconEnginePlugineventFilterProc* = proc(self: QIconEnginePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QIconEnginePlugintimerEventProc* = proc(self: QIconEnginePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -184,7 +186,7 @@ proc cQIconEnginePlugin_vtable_callback_create(self: pointer, filename: struct_m
   let vtbl = cast[ptr QIconEnginePluginVTable](fcQIconEnginePlugin_vdata(self))
   let self = QIconEnginePlugin(h: self)
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval1 = vfilenamex_ret
   var virtualReturn = vtbl[].create(self, slotval1)
@@ -289,12 +291,12 @@ proc cQIconEnginePlugin_method_callback_metacall(self: pointer, param1: cint, pa
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine {.base.} =
+method create*(self: VirtualQIconEnginePlugin, filename: openArray[char]): gen_qiconengine_types.QIconEngine {.base.} =
   raiseAssert("missing implementation of QIconEnginePlugin_virtualbase_create")
 proc cQIconEnginePlugin_method_callback_create(self: pointer, filename: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQIconEnginePlugin](fcQIconEnginePlugin_vdata(self))
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval1 = vfilenamex_ret
   var virtualReturn = inst.create(slotval1)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QGraphicsItemGraphicsItemFlagEnum* = distinct cint
@@ -1678,12 +1680,12 @@ proc isBlockedByModalPanel*(self: gen_qgraphicsitem_types.QGraphicsItem): bool =
 
 proc toolTip*(self: gen_qgraphicsitem_types.QGraphicsItem): string =
   let v_ms = fcQGraphicsItem_toolTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qgraphicsitem_types.QGraphicsItem, toolTip: string): void =
-  fcQGraphicsItem_setToolTip(self.h, struct_miqt_string(data: toolTip, len: csize_t(len(toolTip))))
+proc setToolTip*(self: gen_qgraphicsitem_types.QGraphicsItem, toolTip: openArray[char]): void =
+  fcQGraphicsItem_setToolTip(self.h, struct_miqt_string(data: if len(toolTip) > 0: addr toolTip[0] else: nil, len: csize_t(len(toolTip))))
 
 proc cursor*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qcursor_types.QCursor =
   gen_qcursor_types.QCursor(h: fcQGraphicsItem_cursor(self.h), owned: true)
@@ -1886,7 +1888,7 @@ proc transformations*(self: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgra
   c_free(v_ma.data)
   vx_ret
 
-proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transformations: seq[gen_qgraphicstransform_types.QGraphicsTransform]): void =
+proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transformations: openArray[gen_qgraphicstransform_types.QGraphicsTransform]): void =
   var transformations_CArray = newSeq[pointer](len(transformations))
   for i in 0..<len(transformations):
     transformations_CArray[i] = transformations[i].h
@@ -3085,7 +3087,7 @@ proc metacall*(self: gen_qgraphicsitem_types.QGraphicsObject, param1: cint, para
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring): string =
   let v_ms = fcQGraphicsObject_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -3313,13 +3315,13 @@ proc onheightChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGrap
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsObject_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsObject_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -12641,27 +12643,27 @@ proc metacall*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: cint, pa
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring): string =
   let v_ms = fcQGraphicsTextItem_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem): string =
   let v_ms = fcQGraphicsTextItem_toHtml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem, html: string): void =
-  fcQGraphicsTextItem_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qgraphicsitem_types.QGraphicsTextItem, html: openArray[char]): void =
+  fcQGraphicsTextItem_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc toPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem): string =
   let v_ms = fcQGraphicsTextItem_toPlainText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem, text: string): void =
-  fcQGraphicsTextItem_setPlainText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setPlainText*(self: gen_qgraphicsitem_types.QGraphicsTextItem, text: openArray[char]): void =
+  fcQGraphicsTextItem_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc font*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQGraphicsTextItem_font(self.h), owned: true)
@@ -12735,14 +12737,14 @@ proc setTextCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem, cursor: gen
 proc textCursor*(self: gen_qgraphicsitem_types.QGraphicsTextItem): gen_qtextcursor_types.QTextCursor =
   gen_qtextcursor_types.QTextCursor(h: fcQGraphicsTextItem_textCursor(self.h), owned: true)
 
-proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
-  fcQGraphicsTextItem_linkActivated(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: openArray[char]): void =
+  fcQGraphicsTextItem_linkActivated(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QGraphicsTextItemlinkActivatedSlot* = proc(param1: string)
+type QGraphicsTextItemlinkActivatedSlot* = proc(param1: openArray[char])
 proc cQGraphicsTextItem_slot_callback_linkActivated(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkActivatedSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -12758,14 +12760,14 @@ proc onlinkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGr
   GC_ref(tmp)
   fcQGraphicsTextItem_connect_linkActivated(self.h, cast[int](addr tmp[]), cQGraphicsTextItem_slot_callback_linkActivated, cQGraphicsTextItem_slot_callback_linkActivated_release)
 
-proc linkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
-  fcQGraphicsTextItem_linkHovered(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc linkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: openArray[char]): void =
+  fcQGraphicsTextItem_linkHovered(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QGraphicsTextItemlinkHoveredSlot* = proc(param1: string)
+type QGraphicsTextItemlinkHoveredSlot* = proc(param1: openArray[char])
 proc cQGraphicsTextItem_slot_callback_linkHovered(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkHoveredSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -12783,13 +12785,13 @@ proc onlinkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGrap
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsTextItem_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsTextItem_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -13821,7 +13823,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QGraphicsTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsTextItem =
   let vtbl = if vtbl == nil: new QGraphicsTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -13918,7 +13920,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = cQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = cQGraphicsTextItem_vtable_callback_itemChange
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -14021,7 +14023,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsTextItem =
   let vtbl = if vtbl == nil: new QGraphicsTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -14118,7 +14120,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl[].vtbl.wheelEvent = cQGraphicsTextItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = cQGraphicsTextItem_vtable_callback_itemChange
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsTextItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQGraphicsTextItem_mvtbl = cQGraphicsTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -14178,10 +14180,10 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQGraphicsTextItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsTextItem_new2(addr(cQGraphicsTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQGraphicsTextItem_new2(addr(cQGraphicsTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
@@ -14192,20 +14194,20 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsTextItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsTextItem_new4(addr(cQGraphicsTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  inst[].h = fcQGraphicsTextItem_new4(addr(cQGraphicsTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsitem_types.QGraphicsTextItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTextItem_staticMetaObject())
-proc setText*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, text: string): void =
-  fcQGraphicsSimpleTextItem_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, text: openArray[char]): void =
+  fcQGraphicsSimpleTextItem_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem): string =
   let v_ms = fcQGraphicsSimpleTextItem_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -15032,7 +15034,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string,
+    text: openArray[char],
     vtbl: ref QGraphicsSimpleTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   let vtbl = if vtbl == nil: new QGraphicsSimpleTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -15109,7 +15111,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = cQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = cQGraphicsSimpleTextItem_vtable_callback_itemChange
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
@@ -15192,7 +15194,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsSimpleTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   let vtbl = if vtbl == nil: new QGraphicsSimpleTextItemVTable else: vtbl
   GC_ref(vtbl)
@@ -15269,7 +15271,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl[].vtbl.inputMethodQuery = cQGraphicsSimpleTextItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = cQGraphicsSimpleTextItem_vtable_callback_itemChange
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsSimpleTextItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQGraphicsSimpleTextItem_mvtbl = cQGraphicsSimpleTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -15319,10 +15321,10 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string,
+    text: openArray[char],
     inst: VirtualQGraphicsSimpleTextItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsSimpleTextItem_new2(addr(cQGraphicsSimpleTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQGraphicsSimpleTextItem_new2(addr(cQGraphicsSimpleTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
@@ -15333,10 +15335,10 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
-    text: string, parent: gen_qgraphicsitem_types.QGraphicsItem,
+    text: openArray[char], parent: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsSimpleTextItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsSimpleTextItem_new4(addr(cQGraphicsSimpleTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  inst[].h = fcQGraphicsSimpleTextItem_new4(addr(cQGraphicsSimpleTextItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   inst[].owned = true
 
 proc addToGroup*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, item: gen_qgraphicsitem_types.QGraphicsItem): void =

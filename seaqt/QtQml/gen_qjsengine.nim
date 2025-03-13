@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
 {.compile("gen_qjsengine.cpp", cflags).}
@@ -145,27 +147,27 @@ proc metacall*(self: gen_qjsengine_types.QJSEngine, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring): string =
   let v_ms = fcQJSEngine_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc globalObject*(self: gen_qjsengine_types.QJSEngine): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_globalObject(self.h), owned: true)
 
-proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate(self.h, struct_miqt_string(data: program, len: csize_t(len(program)))), owned: true)
+proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
 
-proc importModule*(self: gen_qjsengine_types.QJSEngine, fileName: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_importModule(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+proc importModule*(self: gen_qjsengine_types.QJSEngine, fileName: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_importModule(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
-proc registerModule*(self: gen_qjsengine_types.QJSEngine, moduleName: string, value: gen_qjsvalue_types.QJSValue): bool =
-  fcQJSEngine_registerModule(self.h, struct_miqt_string(data: moduleName, len: csize_t(len(moduleName))), value.h)
+proc registerModule*(self: gen_qjsengine_types.QJSEngine, moduleName: openArray[char], value: gen_qjsvalue_types.QJSValue): bool =
+  fcQJSEngine_registerModule(self.h, struct_miqt_string(data: if len(moduleName) > 0: addr moduleName[0] else: nil, len: csize_t(len(moduleName))), value.h)
 
 proc newObject*(self: gen_qjsengine_types.QJSEngine): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newObject(self.h), owned: true)
 
-proc newSymbol*(self: gen_qjsengine_types.QJSEngine, name: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newSymbol(self.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc newSymbol*(self: gen_qjsengine_types.QJSEngine, name: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newSymbol(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc newArray*(self: gen_qjsengine_types.QJSEngine): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray(self.h), owned: true)
@@ -197,8 +199,8 @@ proc setInterrupted*(self: gen_qjsengine_types.QJSEngine, interrupted: bool): vo
 proc isInterrupted*(self: gen_qjsengine_types.QJSEngine): bool =
   fcQJSEngine_isInterrupted(self.h)
 
-proc throwError*(self: gen_qjsengine_types.QJSEngine, message: string): void =
-  fcQJSEngine_throwError(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
+proc throwError*(self: gen_qjsengine_types.QJSEngine, message: openArray[char]): void =
+  fcQJSEngine_throwError(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint): void =
   fcQJSEngine_throwErrorWithErrorType(self.h, cint(errorType))
@@ -214,12 +216,12 @@ proc catchError*(self: gen_qjsengine_types.QJSEngine): gen_qjsvalue_types.QJSVal
 
 proc uiLanguage*(self: gen_qjsengine_types.QJSEngine): string =
   let v_ms = fcQJSEngine_uiLanguage(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setUiLanguage*(self: gen_qjsengine_types.QJSEngine, language: string): void =
-  fcQJSEngine_setUiLanguage(self.h, struct_miqt_string(data: language, len: csize_t(len(language))))
+proc setUiLanguage*(self: gen_qjsengine_types.QJSEngine, language: openArray[char]): void =
+  fcQJSEngine_setUiLanguage(self.h, struct_miqt_string(data: if len(language) > 0: addr language[0] else: nil, len: csize_t(len(language))))
 
 proc uiLanguageChanged*(self: gen_qjsengine_types.QJSEngine): void =
   fcQJSEngine_uiLanguageChanged(self.h)
@@ -241,40 +243,40 @@ proc onuiLanguageChanged*(self: gen_qjsengine_types.QJSEngine, slot: QJSEngineui
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring): string =
   let v_ms = fcQJSEngine_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQJSEngine_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string, fileName: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate2(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate2(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
-proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string, fileName: string, lineNumber: cint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate3(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), lineNumber), owned: true)
+proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char], lineNumber: cint): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate3(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber), owned: true)
 
-proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string, fileName: string, lineNumber: cint, exceptionStackTrace: seq[string]): gen_qjsvalue_types.QJSValue =
+proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char], lineNumber: cint, exceptionStackTrace: openArray[string]): gen_qjsvalue_types.QJSValue =
   var exceptionStackTrace_CArray = newSeq[struct_miqt_string](len(exceptionStackTrace))
   for i in 0..<len(exceptionStackTrace):
-    exceptionStackTrace_CArray[i] = struct_miqt_string(data: exceptionStackTrace[i], len: csize_t(len(exceptionStackTrace[i])))
+    exceptionStackTrace_CArray[i] = struct_miqt_string(data: if len(exceptionStackTrace[i]) > 0: addr exceptionStackTrace[i][0] else: nil, len: csize_t(len(exceptionStackTrace[i])))
 
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate4(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), lineNumber, struct_miqt_array(len: csize_t(len(exceptionStackTrace)), data: if len(exceptionStackTrace) == 0: nil else: addr(exceptionStackTrace_CArray[0]))), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate4(self.h, struct_miqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber, struct_miqt_array(len: csize_t(len(exceptionStackTrace)), data: if len(exceptionStackTrace) == 0: nil else: addr(exceptionStackTrace_CArray[0]))), owned: true)
 
 proc newArray*(self: gen_qjsengine_types.QJSEngine, length: cuint): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray1(self.h, length), owned: true)
 
-proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject2(self.h, cint(errorType), struct_miqt_string(data: message, len: csize_t(len(message)))), owned: true)
+proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): gen_qjsvalue_types.QJSValue =
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject2(self.h, cint(errorType), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message)))), owned: true)
 
 proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint, objectVal: gen_qjsvalue_types.QJSValue): void =
   fcQJSEngine_installExtensions2(self.h, cint(extensions), objectVal.h)
 
-proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: string): void =
-  fcQJSEngine_throwError2(self.h, cint(errorType), struct_miqt_string(data: message, len: csize_t(len(message))))
+proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): void =
+  fcQJSEngine_throwError2(self.h, cint(errorType), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 type QJSEnginemetaObjectProc* = proc(self: QJSEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QJSEnginemetacastProc* = proc(self: QJSEngine, param1: cstring): pointer {.raises: [], gcsafe.}

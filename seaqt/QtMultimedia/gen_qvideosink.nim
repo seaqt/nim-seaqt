@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
 {.compile("gen_qvideosink.cpp", cflags).}
@@ -114,7 +116,7 @@ proc metacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring): string =
   let v_ms = fcQVideoSink_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -123,12 +125,12 @@ proc videoSize*(self: gen_qvideosink_types.QVideoSink): gen_qsize_types.QSize =
 
 proc subtitleText*(self: gen_qvideosink_types.QVideoSink): string =
   let v_ms = fcQVideoSink_subtitleText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSubtitleText*(self: gen_qvideosink_types.QVideoSink, subtitle: string): void =
-  fcQVideoSink_setSubtitleText(self.h, struct_miqt_string(data: subtitle, len: csize_t(len(subtitle))))
+proc setSubtitleText*(self: gen_qvideosink_types.QVideoSink, subtitle: openArray[char]): void =
+  fcQVideoSink_setSubtitleText(self.h, struct_miqt_string(data: if len(subtitle) > 0: addr subtitle[0] else: nil, len: csize_t(len(subtitle))))
 
 proc setVideoFrame*(self: gen_qvideosink_types.QVideoSink, frame: gen_qvideoframe_types.QVideoFrame): void =
   fcQVideoSink_setVideoFrame(self.h, frame.h)
@@ -156,14 +158,14 @@ proc onvideoFrameChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSin
   GC_ref(tmp)
   fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]), cQVideoSink_slot_callback_videoFrameChanged, cQVideoSink_slot_callback_videoFrameChanged_release)
 
-proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: string): void =
-  fcQVideoSink_subtitleTextChanged(self.h, struct_miqt_string(data: subtitleText, len: csize_t(len(subtitleText))))
+proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: openArray[char]): void =
+  fcQVideoSink_subtitleTextChanged(self.h, struct_miqt_string(data: if len(subtitleText) > 0: addr subtitleText[0] else: nil, len: csize_t(len(subtitleText))))
 
-type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: string)
+type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: openArray[char])
 proc cQVideoSink_slot_callback_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
   let vsubtitleText_ms = subtitleText
-  let vsubtitleTextx_ret = string.fromBytes(toOpenArrayByte(vsubtitleText_ms.data, 0, int(vsubtitleText_ms.len)-1))
+  let vsubtitleTextx_ret = string.fromBytes(vsubtitleText_ms)
   c_free(vsubtitleText_ms.data)
   let slotval1 = vsubtitleTextx_ret
 
@@ -199,13 +201,13 @@ proc onvideoSizeChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSink
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring): string =
   let v_ms = fcQVideoSink_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQVideoSink_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
