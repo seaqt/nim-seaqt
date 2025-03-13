@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QHttpMultiPartContentTypeEnum* = distinct cint
@@ -131,10 +133,10 @@ proc operatorNotEqual*(self: gen_qhttpmultipart_types.QHttpPart, other: gen_qhtt
 proc setHeader*(self: gen_qhttpmultipart_types.QHttpPart, header: cint, value: gen_qvariant_types.QVariant): void =
   fcQHttpPart_setHeader(self.h, cint(header), value.h)
 
-proc setRawHeader*(self: gen_qhttpmultipart_types.QHttpPart, headerName: seq[byte], headerValue: seq[byte]): void =
+proc setRawHeader*(self: gen_qhttpmultipart_types.QHttpPart, headerName: openArray[byte], headerValue: openArray[byte]): void =
   fcQHttpPart_setRawHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))), struct_miqt_string(data: cast[cstring](if len(headerValue) == 0: nil else: unsafeAddr headerValue[0]), len: csize_t(len(headerValue))))
 
-proc setBody*(self: gen_qhttpmultipart_types.QHttpPart, body: seq[byte]): void =
+proc setBody*(self: gen_qhttpmultipart_types.QHttpPart, body: openArray[byte]): void =
   fcQHttpPart_setBody(self.h, struct_miqt_string(data: cast[cstring](if len(body) == 0: nil else: unsafeAddr body[0]), len: csize_t(len(body))))
 
 proc setBodyDevice*(self: gen_qhttpmultipart_types.QHttpPart, device: gen_qiodevice_types.QIODevice): void =
@@ -158,13 +160,13 @@ proc metacall*(self: gen_qhttpmultipart_types.QHttpMultiPart, param1: cint, para
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring): string =
   let v_ms = fcQHttpMultiPart_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring): string =
   let v_ms = fcQHttpMultiPart_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -176,34 +178,34 @@ proc setContentType*(self: gen_qhttpmultipart_types.QHttpMultiPart, contentType:
 
 proc boundary*(self: gen_qhttpmultipart_types.QHttpMultiPart): seq[byte] =
   var v_bytearray = fcQHttpMultiPart_boundary(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc setBoundary*(self: gen_qhttpmultipart_types.QHttpMultiPart, boundary: seq[byte]): void =
+proc setBoundary*(self: gen_qhttpmultipart_types.QHttpMultiPart, boundary: openArray[byte]): void =
   fcQHttpMultiPart_setBoundary(self.h, struct_miqt_string(data: cast[cstring](if len(boundary) == 0: nil else: unsafeAddr boundary[0]), len: csize_t(len(boundary))))
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring): string =
   let v_ms = fcQHttpMultiPart_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQHttpMultiPart_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring): string =
   let v_ms = fcQHttpMultiPart_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQHttpMultiPart_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

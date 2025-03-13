@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QNetworkAddressEntryDnsEligibilityStatusEnum* = distinct cschar
@@ -210,13 +212,13 @@ proc maximumTransmissionUnit*(self: gen_qnetworkinterface_types.QNetworkInterfac
 
 proc name*(self: gen_qnetworkinterface_types.QNetworkInterface): string =
   let v_ms = fcQNetworkInterface_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc humanReadableName*(self: gen_qnetworkinterface_types.QNetworkInterface): string =
   let v_ms = fcQNetworkInterface_humanReadableName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -228,7 +230,7 @@ proc typeX*(self: gen_qnetworkinterface_types.QNetworkInterface): cint =
 
 proc hardwareAddress*(self: gen_qnetworkinterface_types.QNetworkInterface): string =
   let v_ms = fcQNetworkInterface_hardwareAddress(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -241,18 +243,18 @@ proc addressEntries*(self: gen_qnetworkinterface_types.QNetworkInterface): seq[g
   c_free(v_ma.data)
   vx_ret
 
-proc interfaceIndexFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: string): cint =
-  fcQNetworkInterface_interfaceIndexFromName(struct_miqt_string(data: name, len: csize_t(len(name))))
+proc interfaceIndexFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: openArray[char]): cint =
+  fcQNetworkInterface_interfaceIndexFromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc interfaceFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: string): gen_qnetworkinterface_types.QNetworkInterface =
-  gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_interfaceFromName(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc interfaceFromName*(_: type gen_qnetworkinterface_types.QNetworkInterface, name: openArray[char]): gen_qnetworkinterface_types.QNetworkInterface =
+  gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_interfaceFromName(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc interfaceFromIndex*(_: type gen_qnetworkinterface_types.QNetworkInterface, index: cint): gen_qnetworkinterface_types.QNetworkInterface =
   gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_interfaceFromIndex(index), owned: true)
 
 proc interfaceNameFromIndex*(_: type gen_qnetworkinterface_types.QNetworkInterface, index: cint): string =
   let v_ms = fcQNetworkInterface_interfaceNameFromIndex(index)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

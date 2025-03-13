@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QTouchDeviceDeviceTypeEnum* = distinct cint
@@ -79,7 +81,7 @@ proc devices*(_: type gen_qtouchdevice_types.QTouchDevice): seq[gen_qtouchdevice
 
 proc name*(self: gen_qtouchdevice_types.QTouchDevice): string =
   let v_ms = fcQTouchDevice_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -92,8 +94,8 @@ proc capabilities*(self: gen_qtouchdevice_types.QTouchDevice): cint =
 proc maximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice): cint =
   fcQTouchDevice_maximumTouchPoints(self.h)
 
-proc setName*(self: gen_qtouchdevice_types.QTouchDevice, name: string): void =
-  fcQTouchDevice_setName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setName*(self: gen_qtouchdevice_types.QTouchDevice, name: openArray[char]): void =
+  fcQTouchDevice_setName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setType*(self: gen_qtouchdevice_types.QTouchDevice, devType: cint): void =
   fcQTouchDevice_setType(self.h, cint(devType))

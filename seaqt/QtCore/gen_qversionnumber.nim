@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qversionnumber_types
@@ -102,21 +104,21 @@ proc commonPrefix*(_: type gen_qversionnumber_types.QVersionNumber, v1: gen_qver
 
 proc toString*(self: gen_qversionnumber_types.QVersionNumber): string =
   let v_ms = fcQVersionNumber_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: string): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: openArray[char]): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: string, suffixIndex: ptr cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString22(struct_miqt_string(data: string, len: csize_t(len(string))), suffixIndex), owned: true)
+proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: openArray[char], suffixIndex: ptr cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString22(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), suffixIndex), owned: true)
 
 proc create*(T: type gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
   gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new(), owned: true)
 
 proc create*(T: type gen_qversionnumber_types.QVersionNumber,
-    seg: seq[cint]): gen_qversionnumber_types.QVersionNumber =
+    seg: openArray[cint]): gen_qversionnumber_types.QVersionNumber =
   var seg_CArray = newSeq[cint](len(seg))
   for i in 0..<len(seg):
     seg_CArray[i] = seg[i]

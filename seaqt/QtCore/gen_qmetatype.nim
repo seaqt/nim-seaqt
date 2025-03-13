@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QtMetaTypePrivateIteratorCapabilityEnum* = distinct cint
@@ -213,13 +215,13 @@ proc unregisterType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): bool
 proc registerTypedef*(_: type gen_qmetatype_types.QMetaType, typeName: cstring, aliasId: cint): cint =
   fcQMetaType_registerTypedef(typeName, aliasId)
 
-proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: seq[byte], aliasId: cint): cint =
+proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: openArray[byte], aliasId: cint): cint =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: cast[cstring](if len(normalizedTypeName) == 0: nil else: unsafeAddr normalizedTypeName[0]), len: csize_t(len(normalizedTypeName))), aliasId)
 
 proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: cstring): cint =
   fcQMetaType_typeX(typeName)
 
-proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: seq[byte]): cint =
+proc typeX*(_: type gen_qmetatype_types.QMetaType, typeName: openArray[byte]): cint =
   fcQMetaType_typeWithTypeName(struct_miqt_string(data: cast[cstring](if len(typeName) == 0: nil else: unsafeAddr typeName[0]), len: csize_t(len(typeName))))
 
 proc typeName*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cstring =
@@ -275,7 +277,7 @@ proc metaObject*(self: gen_qmetatype_types.QMetaType): gen_qobjectdefs_types.QMe
 
 proc name*(self: gen_qmetatype_types.QMetaType): seq[byte] =
   var v_bytearray = fcQMetaType_name(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 

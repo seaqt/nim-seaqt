@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWebElementStyleResolveStrategyEnum* = distinct cint
@@ -190,68 +192,68 @@ proc operatorNotEqual*(self: gen_qwebelement_types.QWebElement, o: gen_qwebeleme
 proc isNull*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_isNull(self.h)
 
-proc findAll*(self: gen_qwebelement_types.QWebElement, selectorQuery: string): gen_qwebelement_types.QWebElementCollection =
-  gen_qwebelement_types.QWebElementCollection(h: fcQWebElement_findAll(self.h, struct_miqt_string(data: selectorQuery, len: csize_t(len(selectorQuery)))), owned: true)
+proc findAll*(self: gen_qwebelement_types.QWebElement, selectorQuery: openArray[char]): gen_qwebelement_types.QWebElementCollection =
+  gen_qwebelement_types.QWebElementCollection(h: fcQWebElement_findAll(self.h, struct_miqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))), owned: true)
 
-proc findFirst*(self: gen_qwebelement_types.QWebElement, selectorQuery: string): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebElement_findFirst(self.h, struct_miqt_string(data: selectorQuery, len: csize_t(len(selectorQuery)))), owned: true)
+proc findFirst*(self: gen_qwebelement_types.QWebElement, selectorQuery: openArray[char]): gen_qwebelement_types.QWebElement =
+  gen_qwebelement_types.QWebElement(h: fcQWebElement_findFirst(self.h, struct_miqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))), owned: true)
 
-proc setPlainText*(self: gen_qwebelement_types.QWebElement, text: string): void =
-  fcQWebElement_setPlainText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setPlainText*(self: gen_qwebelement_types.QWebElement, text: openArray[char]): void =
+  fcQWebElement_setPlainText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc toPlainText*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toPlainText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setOuterXml*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_setOuterXml(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc setOuterXml*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_setOuterXml(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc toOuterXml*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toOuterXml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setInnerXml*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_setInnerXml(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc setInnerXml*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_setInnerXml(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc toInnerXml*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toInnerXml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setAttribute*(self: gen_qwebelement_types.QWebElement, name: string, value: string): void =
-  fcQWebElement_setAttribute(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: value, len: csize_t(len(value))))
+proc setAttribute*(self: gen_qwebelement_types.QWebElement, name: openArray[char], value: openArray[char]): void =
+  fcQWebElement_setAttribute(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc setAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string, value: string): void =
-  fcQWebElement_setAttributeNS(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: value, len: csize_t(len(value))))
+proc setAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char], name: openArray[char], value: openArray[char]): void =
+  fcQWebElement_setAttributeNS(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
-proc attribute*(self: gen_qwebelement_types.QWebElement, name: string): string =
-  let v_ms = fcQWebElement_attribute(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc attribute*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): string =
+  let v_ms = fcQWebElement_attribute(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc attributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string): string =
-  let v_ms = fcQWebElement_attributeNS(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc attributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char], name: openArray[char]): string =
+  let v_ms = fcQWebElement_attributeNS(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc hasAttribute*(self: gen_qwebelement_types.QWebElement, name: string): bool =
-  fcQWebElement_hasAttribute(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasAttribute*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): bool =
+  fcQWebElement_hasAttribute(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc hasAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string): bool =
-  fcQWebElement_hasAttributeNS(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char], name: openArray[char]): bool =
+  fcQWebElement_hasAttributeNS(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc removeAttribute*(self: gen_qwebelement_types.QWebElement, name: string): void =
-  fcQWebElement_removeAttribute(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc removeAttribute*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): void =
+  fcQWebElement_removeAttribute(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc removeAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string): void =
-  fcQWebElement_removeAttributeNS(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))))
+proc removeAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char], name: openArray[char]): void =
+  fcQWebElement_removeAttributeNS(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc hasAttributes*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_hasAttributes(self.h)
@@ -262,7 +264,7 @@ proc attributeNames*(self: gen_qwebelement_types.QWebElement): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -274,23 +276,23 @@ proc classes*(self: gen_qwebelement_types.QWebElement): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc hasClass*(self: gen_qwebelement_types.QWebElement, name: string): bool =
-  fcQWebElement_hasClass(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc hasClass*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): bool =
+  fcQWebElement_hasClass(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc addClass*(self: gen_qwebelement_types.QWebElement, name: string): void =
-  fcQWebElement_addClass(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc addClass*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): void =
+  fcQWebElement_addClass(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc removeClass*(self: gen_qwebelement_types.QWebElement, name: string): void =
-  fcQWebElement_removeClass(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc removeClass*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): void =
+  fcQWebElement_removeClass(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc toggleClass*(self: gen_qwebelement_types.QWebElement, name: string): void =
-  fcQWebElement_toggleClass(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc toggleClass*(self: gen_qwebelement_types.QWebElement, name: openArray[char]): void =
+  fcQWebElement_toggleClass(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc hasFocus*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_hasFocus(self.h)
@@ -303,25 +305,25 @@ proc geometry*(self: gen_qwebelement_types.QWebElement): gen_qrect_types.QRect =
 
 proc tagName*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_tagName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc prefix*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_prefix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc localName*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_localName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc namespaceUri*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_namespaceUri(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -343,26 +345,26 @@ proc previousSibling*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_
 proc document*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_document(self.h), owned: true)
 
-proc appendInside*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_appendInside(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc appendInside*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_appendInside(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc appendInside*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_appendInsideWithElement(self.h, element.h)
 
-proc prependInside*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_prependInside(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc prependInside*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_prependInside(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc prependInside*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_prependInsideWithElement(self.h, element.h)
 
-proc appendOutside*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_appendOutside(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc appendOutside*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_appendOutside(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc appendOutside*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_appendOutsideWithElement(self.h, element.h)
 
-proc prependOutside*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_prependOutside(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc prependOutside*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_prependOutside(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc prependOutside*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_prependOutsideWithElement(self.h, element.h)
@@ -370,17 +372,17 @@ proc prependOutside*(self: gen_qwebelement_types.QWebElement, element: gen_qwebe
 proc encloseContentsWith*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_encloseContentsWith(self.h, element.h)
 
-proc encloseContentsWith*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_encloseContentsWithWithMarkup(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc encloseContentsWith*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_encloseContentsWithWithMarkup(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
-proc encloseWith*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_encloseWith(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc encloseWith*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_encloseWith(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc encloseWith*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_encloseWithWithElement(self.h, element.h)
 
-proc replace*(self: gen_qwebelement_types.QWebElement, markup: string): void =
-  fcQWebElement_replace(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
+proc replace*(self: gen_qwebelement_types.QWebElement, markup: openArray[char]): void =
+  fcQWebElement_replace(self.h, struct_miqt_string(data: if len(markup) > 0: addr markup[0] else: nil, len: csize_t(len(markup))))
 
 proc replace*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_replaceWithElement(self.h, element.h)
@@ -397,17 +399,17 @@ proc removeFromDocument*(self: gen_qwebelement_types.QWebElement): void =
 proc removeAllChildren*(self: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_removeAllChildren(self.h)
 
-proc evaluateJavaScript*(self: gen_qwebelement_types.QWebElement, scriptSource: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWebElement_evaluateJavaScript(self.h, struct_miqt_string(data: scriptSource, len: csize_t(len(scriptSource)))), owned: true)
+proc evaluateJavaScript*(self: gen_qwebelement_types.QWebElement, scriptSource: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWebElement_evaluateJavaScript(self.h, struct_miqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource)))), owned: true)
 
-proc styleProperty*(self: gen_qwebelement_types.QWebElement, name: string, strategy: cint): string =
-  let v_ms = fcQWebElement_styleProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), cint(strategy))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc styleProperty*(self: gen_qwebelement_types.QWebElement, name: openArray[char], strategy: cint): string =
+  let v_ms = fcQWebElement_styleProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(strategy))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setStyleProperty*(self: gen_qwebelement_types.QWebElement, name: string, value: string): void =
-  fcQWebElement_setStyleProperty(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: value, len: csize_t(len(value))))
+proc setStyleProperty*(self: gen_qwebelement_types.QWebElement, name: openArray[char], value: openArray[char]): void =
+  fcQWebElement_setStyleProperty(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc render*(self: gen_qwebelement_types.QWebElement, painter: gen_qpainter_types.QPainter): void =
   fcQWebElement_render(self.h, painter.h)
@@ -415,25 +417,25 @@ proc render*(self: gen_qwebelement_types.QWebElement, painter: gen_qpainter_type
 proc render*(self: gen_qwebelement_types.QWebElement, painter: gen_qpainter_types.QPainter, clipRect: gen_qrect_types.QRect): void =
   fcQWebElement_render2(self.h, painter.h, clipRect.h)
 
-proc attribute*(self: gen_qwebelement_types.QWebElement, name: string, defaultValue: string): string =
-  let v_ms = fcQWebElement_attribute2(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: defaultValue, len: csize_t(len(defaultValue))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc attribute*(self: gen_qwebelement_types.QWebElement, name: openArray[char], defaultValue: openArray[char]): string =
+  let v_ms = fcQWebElement_attribute2(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc attributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string, defaultValue: string): string =
-  let v_ms = fcQWebElement_attributeNS3(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: defaultValue, len: csize_t(len(defaultValue))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc attributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char], name: openArray[char], defaultValue: openArray[char]): string =
+  let v_ms = fcQWebElement_attributeNS3(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(defaultValue) > 0: addr defaultValue[0] else: nil, len: csize_t(len(defaultValue))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc attributeNames*(self: gen_qwebelement_types.QWebElement, namespaceUri: string): seq[string] =
-  var v_ma = fcQWebElement_attributeNames1(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))))
+proc attributeNames*(self: gen_qwebelement_types.QWebElement, namespaceUri: openArray[char]): seq[string] =
+  var v_ma = fcQWebElement_attributeNames1(self.h, struct_miqt_string(data: if len(namespaceUri) > 0: addr namespaceUri[0] else: nil, len: csize_t(len(namespaceUri))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -504,8 +506,8 @@ proc create*(T: type gen_qwebelement_types.QWebElementCollection): gen_qwebeleme
   gen_qwebelement_types.QWebElementCollection(h: fcQWebElementCollection_new(), owned: true)
 
 proc create*(T: type gen_qwebelement_types.QWebElementCollection,
-    contextElement: gen_qwebelement_types.QWebElement, query: string): gen_qwebelement_types.QWebElementCollection =
-  gen_qwebelement_types.QWebElementCollection(h: fcQWebElementCollection_new2(contextElement.h, struct_miqt_string(data: query, len: csize_t(len(query)))), owned: true)
+    contextElement: gen_qwebelement_types.QWebElement, query: openArray[char]): gen_qwebelement_types.QWebElementCollection =
+  gen_qwebelement_types.QWebElementCollection(h: fcQWebElementCollection_new2(contextElement.h, struct_miqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query)))), owned: true)
 
 proc create*(T: type gen_qwebelement_types.QWebElementCollection,
     param1: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollection =

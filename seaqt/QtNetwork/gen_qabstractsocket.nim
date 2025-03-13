@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
 {.compile("gen_qabstractsocket.cpp", cflags).}
@@ -305,13 +307,13 @@ proc metacall*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint, pa
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring): string =
   let v_ms = fcQAbstractSocket_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring): string =
   let v_ms = fcQAbstractSocket_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -330,8 +332,8 @@ proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhosta
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
   fcQAbstractSocket_bind2(self.h)
 
-proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
-  fcQAbstractSocket_connectToHost(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
+  fcQAbstractSocket_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void =
   fcQAbstractSocket_connectToHost2(self.h, address.h, port, cint(mode))
@@ -365,7 +367,7 @@ proc peerAddress*(self: gen_qabstractsocket_types.QAbstractSocket): gen_qhostadd
 
 proc peerName*(self: gen_qabstractsocket_types.QAbstractSocket): string =
   let v_ms = fcQAbstractSocket_peerName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -431,12 +433,12 @@ proc proxy*(self: gen_qabstractsocket_types.QAbstractSocket): gen_qnetworkproxy_
 
 proc protocolTag*(self: gen_qabstractsocket_types.QAbstractSocket): string =
   let v_ms = fcQAbstractSocket_protocolTag(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setProtocolTag*(self: gen_qabstractsocket_types.QAbstractSocket, tag: string): void =
-  fcQAbstractSocket_setProtocolTag(self.h, struct_miqt_string(data: tag, len: csize_t(len(tag))))
+proc setProtocolTag*(self: gen_qabstractsocket_types.QAbstractSocket, tag: openArray[char]): void =
+  fcQAbstractSocket_setProtocolTag(self.h, struct_miqt_string(data: if len(tag) > 0: addr tag[0] else: nil, len: csize_t(len(tag))))
 
 proc hostFound*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_hostFound(self.h)
@@ -576,25 +578,25 @@ proc onproxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSoc
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSocket_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAbstractSocket_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSocket_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAbstractSocket_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -614,7 +616,7 @@ type QAbstractSocketmetaObjectProc* = proc(self: QAbstractSocket): gen_qobjectde
 type QAbstractSocketmetacastProc* = proc(self: QAbstractSocket, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAbstractSocketmetacallProc* = proc(self: QAbstractSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QAbstractSocketresumeProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
-type QAbstractSocketconnectToHostProc* = proc(self: QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QAbstractSocketconnectToHostProc* = proc(self: QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QAbstractSocketconnectToHost2Proc* = proc(self: QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void {.raises: [], gcsafe.}
 type QAbstractSocketdisconnectFromHostProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
 type QAbstractSocketbytesAvailableProc* = proc(self: QAbstractSocket): clonglong {.raises: [], gcsafe.}
@@ -728,14 +730,14 @@ proc cQAbstractSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let self = QAbstractSocket(h: self)
   vtbl[].resume(self)
 
-proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
-  fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
+  fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc cQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self))
   let self = QAbstractSocket(h: self)
   let vhostName_ms = hostName
-  let vhostNamex_ret = string.fromBytes(toOpenArrayByte(vhostName_ms.data, 0, int(vhostName_ms.len)-1))
+  let vhostNamex_ret = string.fromBytes(vhostName_ms)
   c_free(vhostName_ms.data)
   let slotval1 = vhostNamex_ret
   let slotval2 = port
@@ -1090,12 +1092,12 @@ proc cQAbstractSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   inst.resume()
 
-method connectToHost*(self: VirtualQAbstractSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.base.} =
+method connectToHost*(self: VirtualQAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.base.} =
   QAbstractSocketconnectToHost(self[], hostName, port, mode, protocol)
 proc cQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self))
   let vhostName_ms = hostName
-  let vhostNamex_ret = string.fromBytes(toOpenArrayByte(vhostName_ms.data, 0, int(vhostName_ms.len)-1))
+  let vhostNamex_ret = string.fromBytes(vhostName_ms)
   c_free(vhostName_ms.data)
   let slotval1 = vhostNamex_ret
   let slotval2 = port
@@ -1368,14 +1370,14 @@ proc setPeerPort*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort
 proc setPeerAddress*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress): void =
   fcQAbstractSocket_protectedbase_setPeerAddress(self.h, address.h)
 
-proc setPeerName*(self: gen_qabstractsocket_types.QAbstractSocket, name: string): void =
-  fcQAbstractSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setPeerName*(self: gen_qabstractsocket_types.QAbstractSocket, name: openArray[char]): void =
+  fcQAbstractSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc setOpenMode*(self: gen_qabstractsocket_types.QAbstractSocket, openMode: cint): void =
   fcQAbstractSocket_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qabstractsocket_types.QAbstractSocket, errorString: string): void =
-  fcQAbstractSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qabstractsocket_types.QAbstractSocket, errorString: openArray[char]): void =
+  fcQAbstractSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qabstractsocket_types.QAbstractSocket): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractSocket_protectedbase_sender(self.h), owned: false)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qcommonstyle.cpp", cflags).}
@@ -189,13 +191,13 @@ proc metacall*(self: gen_qcommonstyle_types.QCommonStyle, param1: cint, param2: 
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring): string =
   let v_ms = fcQCommonStyle_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring): string =
   let v_ms = fcQCommonStyle_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -255,25 +257,25 @@ proc unpolish*(self: gen_qcommonstyle_types.QCommonStyle, application: gen_qappl
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring): string =
   let v_ms = fcQCommonStyle_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCommonStyle_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring): string =
   let v_ms = fcQCommonStyle_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCommonStyle_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -298,9 +300,9 @@ type QCommonStylepolishWithAppProc* = proc(self: QCommonStyle, app: gen_qapplica
 type QCommonStylepolishWithWidgetProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QCommonStyleunpolishProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QCommonStyleunpolishWithApplicationProc* = proc(self: QCommonStyle, application: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
-type QCommonStyleitemTextRectProc* = proc(self: QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QCommonStyleitemTextRectProc* = proc(self: QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QCommonStyleitemPixmapRectProc* = proc(self: QCommonStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QCommonStyledrawItemTextProc* = proc(self: QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.raises: [], gcsafe.}
+type QCommonStyledrawItemTextProc* = proc(self: QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.raises: [], gcsafe.}
 type QCommonStyledrawItemPixmapProc* = proc(self: QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.raises: [], gcsafe.}
 type QCommonStylestandardPaletteProc* = proc(self: QCommonStyle): gen_qpalette_types.QPalette {.raises: [], gcsafe.}
 type QCommonStyleeventProc* = proc(self: QCommonStyle, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -604,8 +606,8 @@ proc cQCommonStyle_vtable_callback_unpolishWithApplication(self: pointer, applic
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   vtbl[].unpolishWithApplication(self, slotval1)
 
-proc QCommonStyleitemTextRect*(self: gen_qcommonstyle_types.QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc QCommonStyleitemTextRect*(self: gen_qcommonstyle_types.QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc cQCommonStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self))
@@ -615,7 +617,7 @@ proc cQCommonStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: p
   let slotval3 = flags
   let slotval4 = enabled
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
   var virtualReturn = vtbl[].itemTextRect(self, slotval1, slotval2, slotval3, slotval4, slotval5)
@@ -639,8 +641,8 @@ proc cQCommonStyle_vtable_callback_itemPixmapRect(self: pointer, r: pointer, fla
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QCommonStyledrawItemText*(self: gen_qcommonstyle_types.QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
-  fcQCommonStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: text, len: csize_t(len(text))), cint(textRole))
+proc QCommonStyledrawItemText*(self: gen_qcommonstyle_types.QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
+  fcQCommonStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc cQCommonStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self))
@@ -651,7 +653,7 @@ proc cQCommonStyle_vtable_callback_drawItemText(self: pointer, painter: pointer,
   let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
   let slotval5 = enabled
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval6 = vtextx_ret
   let slotval7 = cint(textRole)
@@ -966,7 +968,7 @@ proc cQCommonStyle_method_callback_unpolishWithApplication(self: pointer, applic
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   inst.unpolish(slotval1)
 
-method itemTextRect*(self: VirtualQCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.base.} =
+method itemTextRect*(self: VirtualQCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.base.} =
   QCommonStyleitemTextRect(self[], fm, r, flags, enabled, text)
 proc cQCommonStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self))
@@ -975,7 +977,7 @@ proc cQCommonStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: p
   let slotval3 = flags
   let slotval4 = enabled
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
   var virtualReturn = inst.itemTextRect(slotval1, slotval2, slotval3, slotval4, slotval5)
@@ -997,7 +999,7 @@ proc cQCommonStyle_method_callback_itemPixmapRect(self: pointer, r: pointer, fla
   virtualReturn.h = nil
   virtualReturn_h
 
-method drawItemText*(self: VirtualQCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.base.} =
+method drawItemText*(self: VirtualQCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.base.} =
   QCommonStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
 proc cQCommonStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self))
@@ -1007,7 +1009,7 @@ proc cQCommonStyle_method_callback_drawItemText(self: pointer, painter: pointer,
   let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
   let slotval5 = enabled
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval6 = vtextx_ret
   let slotval7 = cint(textRole)

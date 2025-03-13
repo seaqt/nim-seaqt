@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qfiledialog.cpp", cflags).}
@@ -385,18 +387,18 @@ proc metacall*(self: gen_qfiledialog_types.QFileDialog, param1: cint, param2: ci
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring): string =
   let v_ms = fcQFileDialog_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring): string =
   let v_ms = fcQFileDialog_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: string): void =
-  fcQFileDialog_setDirectory(self.h, struct_miqt_string(data: directory, len: csize_t(len(directory))))
+proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: openArray[char]): void =
+  fcQFileDialog_setDirectory(self.h, struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qdir_types.QDir): void =
   fcQFileDialog_setDirectoryWithDirectory(self.h, directory.h)
@@ -410,8 +412,8 @@ proc setDirectoryUrl*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qu
 proc directoryUrl*(self: gen_qfiledialog_types.QFileDialog): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_directoryUrl(self.h), owned: true)
 
-proc selectFile*(self: gen_qfiledialog_types.QFileDialog, filename: string): void =
-  fcQFileDialog_selectFile(self.h, struct_miqt_string(data: filename, len: csize_t(len(filename))))
+proc selectFile*(self: gen_qfiledialog_types.QFileDialog, filename: openArray[char]): void =
+  fcQFileDialog_selectFile(self.h, struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   var v_ma = fcQFileDialog_selectedFiles(self.h)
@@ -419,7 +421,7 @@ proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -443,13 +445,13 @@ proc setNameFilterDetailsVisible*(self: gen_qfiledialog_types.QFileDialog, enabl
 proc isNameFilterDetailsVisible*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_isNameFilterDetailsVisible(self.h)
 
-proc setNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
-  fcQFileDialog_setNameFilter(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc setNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: openArray[char]): void =
+  fcQFileDialog_setNameFilter(self.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
 
-proc setNameFilters*(self: gen_qfiledialog_types.QFileDialog, filters: seq[string]): void =
+proc setNameFilters*(self: gen_qfiledialog_types.QFileDialog, filters: openArray[string]): void =
   var filters_CArray = newSeq[struct_miqt_string](len(filters))
   for i in 0..<len(filters):
-    filters_CArray[i] = struct_miqt_string(data: filters[i], len: csize_t(len(filters[i])))
+    filters_CArray[i] = struct_miqt_string(data: if len(filters[i]) > 0: addr filters[i][0] else: nil, len: csize_t(len(filters[i])))
 
   fcQFileDialog_setNameFilters(self.h, struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])))
 
@@ -459,31 +461,31 @@ proc nameFilters*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc selectNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
-  fcQFileDialog_selectNameFilter(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc selectNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: openArray[char]): void =
+  fcQFileDialog_selectNameFilter(self.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
 
 proc selectedMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_selectedMimeTypeFilter(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc selectedNameFilter*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_selectedNameFilter(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setMimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, filters: seq[string]): void =
+proc setMimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, filters: openArray[string]): void =
   var filters_CArray = newSeq[struct_miqt_string](len(filters))
   for i in 0..<len(filters):
-    filters_CArray[i] = struct_miqt_string(data: filters[i], len: csize_t(len(filters[i])))
+    filters_CArray[i] = struct_miqt_string(data: if len(filters[i]) > 0: addr filters[i][0] else: nil, len: csize_t(len(filters[i])))
 
   fcQFileDialog_setMimeTypeFilters(self.h, struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])))
 
@@ -493,14 +495,14 @@ proc mimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc selectMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
-  fcQFileDialog_selectMimeTypeFilter(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc selectMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog, filter: openArray[char]): void =
+  fcQFileDialog_selectMimeTypeFilter(self.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
 
 proc filter*(self: gen_qfiledialog_types.QFileDialog): cint =
   cint(fcQFileDialog_filter(self.h))
@@ -538,7 +540,7 @@ proc setResolveSymlinks*(self: gen_qfiledialog_types.QFileDialog, enabled: bool)
 proc resolveSymlinks*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_resolveSymlinks(self.h)
 
-proc setSidebarUrls*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl_types.QUrl]): void =
+proc setSidebarUrls*(self: gen_qfiledialog_types.QFileDialog, urls: openArray[gen_qurl_types.QUrl]): void =
   var urls_CArray = newSeq[pointer](len(urls))
   for i in 0..<len(urls):
     urls_CArray[i] = urls[i].h
@@ -556,11 +558,11 @@ proc sidebarUrls*(self: gen_qfiledialog_types.QFileDialog): seq[gen_qurl_types.Q
 
 proc saveState*(self: gen_qfiledialog_types.QFileDialog): seq[byte] =
   var v_bytearray = fcQFileDialog_saveState(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc restoreState*(self: gen_qfiledialog_types.QFileDialog, state: seq[byte]): bool =
+proc restoreState*(self: gen_qfiledialog_types.QFileDialog, state: openArray[byte]): bool =
   fcQFileDialog_restoreState(self.h, struct_miqt_string(data: cast[cstring](if len(state) == 0: nil else: unsafeAddr state[0]), len: csize_t(len(state))))
 
 proc setConfirmOverwrite*(self: gen_qfiledialog_types.QFileDialog, enabled: bool): void =
@@ -569,19 +571,19 @@ proc setConfirmOverwrite*(self: gen_qfiledialog_types.QFileDialog, enabled: bool
 proc confirmOverwrite*(self: gen_qfiledialog_types.QFileDialog): bool =
   fcQFileDialog_confirmOverwrite(self.h)
 
-proc setDefaultSuffix*(self: gen_qfiledialog_types.QFileDialog, suffix: string): void =
-  fcQFileDialog_setDefaultSuffix(self.h, struct_miqt_string(data: suffix, len: csize_t(len(suffix))))
+proc setDefaultSuffix*(self: gen_qfiledialog_types.QFileDialog, suffix: openArray[char]): void =
+  fcQFileDialog_setDefaultSuffix(self.h, struct_miqt_string(data: if len(suffix) > 0: addr suffix[0] else: nil, len: csize_t(len(suffix))))
 
 proc defaultSuffix*(self: gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_defaultSuffix(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setHistory*(self: gen_qfiledialog_types.QFileDialog, paths: seq[string]): void =
+proc setHistory*(self: gen_qfiledialog_types.QFileDialog, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   fcQFileDialog_setHistory(self.h, struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
@@ -591,7 +593,7 @@ proc history*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -609,19 +611,19 @@ proc setIconProvider*(self: gen_qfiledialog_types.QFileDialog, provider: gen_qfi
 proc iconProvider*(self: gen_qfiledialog_types.QFileDialog): gen_qfileiconprovider_types.QFileIconProvider =
   gen_qfileiconprovider_types.QFileIconProvider(h: fcQFileDialog_iconProvider(self.h), owned: false)
 
-proc setLabelText*(self: gen_qfiledialog_types.QFileDialog, label: cint, text: string): void =
-  fcQFileDialog_setLabelText(self.h, cint(label), struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setLabelText*(self: gen_qfiledialog_types.QFileDialog, label: cint, text: openArray[char]): void =
+  fcQFileDialog_setLabelText(self.h, cint(label), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc labelText*(self: gen_qfiledialog_types.QFileDialog, label: cint): string =
   let v_ms = fcQFileDialog_labelText(self.h, cint(label))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSupportedSchemes*(self: gen_qfiledialog_types.QFileDialog, schemes: seq[string]): void =
+proc setSupportedSchemes*(self: gen_qfiledialog_types.QFileDialog, schemes: openArray[string]): void =
   var schemes_CArray = newSeq[struct_miqt_string](len(schemes))
   for i in 0..<len(schemes):
-    schemes_CArray[i] = struct_miqt_string(data: schemes[i], len: csize_t(len(schemes[i])))
+    schemes_CArray[i] = struct_miqt_string(data: if len(schemes[i]) > 0: addr schemes[i][0] else: nil, len: csize_t(len(schemes[i])))
 
   fcQFileDialog_setSupportedSchemes(self.h, struct_miqt_array(len: csize_t(len(schemes)), data: if len(schemes) == 0: nil else: addr(schemes_CArray[0])))
 
@@ -631,7 +633,7 @@ proc supportedSchemes*(self: gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -658,14 +660,14 @@ proc options*(self: gen_qfiledialog_types.QFileDialog): cint =
 proc setVisible*(self: gen_qfiledialog_types.QFileDialog, visible: bool): void =
   fcQFileDialog_setVisible(self.h, visible)
 
-proc fileSelected*(self: gen_qfiledialog_types.QFileDialog, file: string): void =
-  fcQFileDialog_fileSelected(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc fileSelected*(self: gen_qfiledialog_types.QFileDialog, file: openArray[char]): void =
+  fcQFileDialog_fileSelected(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
-type QFileDialogfileSelectedSlot* = proc(file: string)
+type QFileDialogfileSelectedSlot* = proc(file: openArray[char])
 proc cQFileDialog_slot_callback_fileSelected(slot: int, file: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfileSelectedSlot](cast[pointer](slot))
   let vfile_ms = file
-  let vfilex_ret = string.fromBytes(toOpenArrayByte(vfile_ms.data, 0, int(vfile_ms.len)-1))
+  let vfilex_ret = string.fromBytes(vfile_ms)
   c_free(vfile_ms.data)
   let slotval1 = vfilex_ret
 
@@ -681,14 +683,14 @@ proc onfileSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialogf
   GC_ref(tmp)
   fcQFileDialog_connect_fileSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_fileSelected, cQFileDialog_slot_callback_fileSelected_release)
 
-proc filesSelected*(self: gen_qfiledialog_types.QFileDialog, files: seq[string]): void =
+proc filesSelected*(self: gen_qfiledialog_types.QFileDialog, files: openArray[string]): void =
   var files_CArray = newSeq[struct_miqt_string](len(files))
   for i in 0..<len(files):
-    files_CArray[i] = struct_miqt_string(data: files[i], len: csize_t(len(files[i])))
+    files_CArray[i] = struct_miqt_string(data: if len(files[i]) > 0: addr files[i][0] else: nil, len: csize_t(len(files[i])))
 
   fcQFileDialog_filesSelected(self.h, struct_miqt_array(len: csize_t(len(files)), data: if len(files) == 0: nil else: addr(files_CArray[0])))
 
-type QFileDialogfilesSelectedSlot* = proc(files: seq[string])
+type QFileDialogfilesSelectedSlot* = proc(files: openArray[string])
 proc cQFileDialog_slot_callback_filesSelected(slot: int, files: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfilesSelectedSlot](cast[pointer](slot))
   var vfiles_ma = files
@@ -696,7 +698,7 @@ proc cQFileDialog_slot_callback_filesSelected(slot: int, files: struct_miqt_arra
   let vfiles_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vfiles_ma.data)
   for i in 0 ..< vfiles_ma.len:
     let vfiles_lv_ms = vfiles_outCast[i]
-    let vfiles_lvx_ret = string.fromBytes(toOpenArrayByte(vfiles_lv_ms.data, 0, int(vfiles_lv_ms.len)-1))
+    let vfiles_lvx_ret = string.fromBytes(vfiles_lv_ms)
     c_free(vfiles_lv_ms.data)
     vfilesx_ret[i] = vfiles_lvx_ret
   c_free(vfiles_ma.data)
@@ -714,14 +716,14 @@ proc onfilesSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialog
   GC_ref(tmp)
   fcQFileDialog_connect_filesSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_filesSelected, cQFileDialog_slot_callback_filesSelected_release)
 
-proc currentChanged*(self: gen_qfiledialog_types.QFileDialog, path: string): void =
-  fcQFileDialog_currentChanged(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc currentChanged*(self: gen_qfiledialog_types.QFileDialog, path: openArray[char]): void =
+  fcQFileDialog_currentChanged(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
-type QFileDialogcurrentChangedSlot* = proc(path: string)
+type QFileDialogcurrentChangedSlot* = proc(path: openArray[char])
 proc cQFileDialog_slot_callback_currentChanged(slot: int, path: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogcurrentChangedSlot](cast[pointer](slot))
   let vpath_ms = path
-  let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
+  let vpathx_ret = string.fromBytes(vpath_ms)
   c_free(vpath_ms.data)
   let slotval1 = vpathx_ret
 
@@ -737,14 +739,14 @@ proc oncurrentChanged*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialo
   GC_ref(tmp)
   fcQFileDialog_connect_currentChanged(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_currentChanged, cQFileDialog_slot_callback_currentChanged_release)
 
-proc directoryEntered*(self: gen_qfiledialog_types.QFileDialog, directory: string): void =
-  fcQFileDialog_directoryEntered(self.h, struct_miqt_string(data: directory, len: csize_t(len(directory))))
+proc directoryEntered*(self: gen_qfiledialog_types.QFileDialog, directory: openArray[char]): void =
+  fcQFileDialog_directoryEntered(self.h, struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
-type QFileDialogdirectoryEnteredSlot* = proc(directory: string)
+type QFileDialogdirectoryEnteredSlot* = proc(directory: openArray[char])
 proc cQFileDialog_slot_callback_directoryEntered(slot: int, directory: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogdirectoryEnteredSlot](cast[pointer](slot))
   let vdirectory_ms = directory
-  let vdirectoryx_ret = string.fromBytes(toOpenArrayByte(vdirectory_ms.data, 0, int(vdirectory_ms.len)-1))
+  let vdirectoryx_ret = string.fromBytes(vdirectory_ms)
   c_free(vdirectory_ms.data)
   let slotval1 = vdirectoryx_ret
 
@@ -780,14 +782,14 @@ proc onurlSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialogur
   GC_ref(tmp)
   fcQFileDialog_connect_urlSelected(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_urlSelected, cQFileDialog_slot_callback_urlSelected_release)
 
-proc urlsSelected*(self: gen_qfiledialog_types.QFileDialog, urls: seq[gen_qurl_types.QUrl]): void =
+proc urlsSelected*(self: gen_qfiledialog_types.QFileDialog, urls: openArray[gen_qurl_types.QUrl]): void =
   var urls_CArray = newSeq[pointer](len(urls))
   for i in 0..<len(urls):
     urls_CArray[i] = urls[i].h
 
   fcQFileDialog_urlsSelected(self.h, struct_miqt_array(len: csize_t(len(urls)), data: if len(urls) == 0: nil else: addr(urls_CArray[0])))
 
-type QFileDialogurlsSelectedSlot* = proc(urls: seq[gen_qurl_types.QUrl])
+type QFileDialogurlsSelectedSlot* = proc(urls: openArray[gen_qurl_types.QUrl])
 proc cQFileDialog_slot_callback_urlsSelected(slot: int, urls: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogurlsSelectedSlot](cast[pointer](slot))
   var vurls_ma = urls
@@ -850,14 +852,14 @@ proc ondirectoryUrlEntered*(self: gen_qfiledialog_types.QFileDialog, slot: QFile
   GC_ref(tmp)
   fcQFileDialog_connect_directoryUrlEntered(self.h, cast[int](addr tmp[]), cQFileDialog_slot_callback_directoryUrlEntered, cQFileDialog_slot_callback_directoryUrlEntered_release)
 
-proc filterSelected*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
-  fcQFileDialog_filterSelected(self.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc filterSelected*(self: gen_qfiledialog_types.QFileDialog, filter: openArray[char]): void =
+  fcQFileDialog_filterSelected(self.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
 
-type QFileDialogfilterSelectedSlot* = proc(filter: string)
+type QFileDialogfilterSelectedSlot* = proc(filter: openArray[char])
 proc cQFileDialog_slot_callback_filterSelected(slot: int, filter: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileDialogfilterSelectedSlot](cast[pointer](slot))
   let vfilter_ms = filter
-  let vfilterx_ret = string.fromBytes(toOpenArrayByte(vfilter_ms.data, 0, int(vfilter_ms.len)-1))
+  let vfilterx_ret = string.fromBytes(vfilter_ms)
   c_free(vfilter_ms.data)
   let slotval1 = vfilterx_ret
 
@@ -875,7 +877,7 @@ proc onfilterSelected*(self: gen_qfiledialog_types.QFileDialog, slot: QFileDialo
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getOpenFileName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -884,7 +886,7 @@ proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog): gen_qurl_types.
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getSaveFileName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -893,7 +895,7 @@ proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog): gen_qurl_types.
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog): string =
   let v_ms = fcQFileDialog_getExistingDirectory()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -906,7 +908,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -921,30 +923,30 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog): seq[gen_qurl_t
   c_free(v_ma.data)
   vx_ret
 
-proc saveFileContent*(_: type gen_qfiledialog_types.QFileDialog, fileContent: seq[byte], fileNameHint: string): void =
-  fcQFileDialog_saveFileContent(struct_miqt_string(data: cast[cstring](if len(fileContent) == 0: nil else: unsafeAddr fileContent[0]), len: csize_t(len(fileContent))), struct_miqt_string(data: fileNameHint, len: csize_t(len(fileNameHint))))
+proc saveFileContent*(_: type gen_qfiledialog_types.QFileDialog, fileContent: openArray[byte], fileNameHint: openArray[char]): void =
+  fcQFileDialog_saveFileContent(struct_miqt_string(data: cast[cstring](if len(fileContent) == 0: nil else: unsafeAddr fileContent[0]), len: csize_t(len(fileContent))), struct_miqt_string(data: if len(fileNameHint) > 0: addr fileNameHint[0] else: nil, len: csize_t(len(fileNameHint))))
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring): string =
   let v_ms = fcQFileDialog_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFileDialog_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring): string =
   let v_ms = fcQFileDialog_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFileDialog_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -953,118 +955,118 @@ proc setOption*(self: gen_qfiledialog_types.QFileDialog, option: cint, on: bool)
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
   let v_ms = fcQFileDialog_getOpenFileName1(parent.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): string =
-  let v_ms = fcQFileDialog_getOpenFileName2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
+  let v_ms = fcQFileDialog_getOpenFileName2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string): string =
-  let v_ms = fcQFileDialog_getOpenFileName3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
+  let v_ms = fcQFileDialog_getOpenFileName3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string, filter: string): string =
-  let v_ms = fcQFileDialog_getOpenFileName4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): string =
+  let v_ms = fcQFileDialog_getOpenFileName4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl1(parent.h), owned: true)
 
-proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
+proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
-proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h), owned: true)
+proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
-proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, filter: string): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: filter, len: csize_t(len(filter)))), owned: true)
+proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
   let v_ms = fcQFileDialog_getSaveFileName1(parent.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): string =
-  let v_ms = fcQFileDialog_getSaveFileName2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
+  let v_ms = fcQFileDialog_getSaveFileName2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string): string =
-  let v_ms = fcQFileDialog_getSaveFileName3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
+  let v_ms = fcQFileDialog_getSaveFileName3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string, filter: string): string =
-  let v_ms = fcQFileDialog_getSaveFileName4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): string =
+  let v_ms = fcQFileDialog_getSaveFileName4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl1(parent.h), owned: true)
 
-proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
+proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
-proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h), owned: true)
+proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
-proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, filter: string): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: filter, len: csize_t(len(filter)))), owned: true)
+proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
   let v_ms = fcQFileDialog_getExistingDirectory1(parent.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): string =
-  let v_ms = fcQFileDialog_getExistingDirectory2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
+  let v_ms = fcQFileDialog_getExistingDirectory2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string): string =
-  let v_ms = fcQFileDialog_getExistingDirectory3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
+  let v_ms = fcQFileDialog_getExistingDirectory3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string, options: cint): string =
-  let v_ms = fcQFileDialog_getExistingDirectory4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))), cint(options))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], options: cint): string =
+  let v_ms = fcQFileDialog_getExistingDirectory4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), cint(options))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl1(parent.h), owned: true)
 
-proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
+proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
-proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h), owned: true)
+proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
-proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, options: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h, cint(options)), owned: true)
+proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, options: cint): gen_qurl_types.QUrl =
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options)), owned: true)
 
-proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, options: cint, supportedSchemes: seq[string]): gen_qurl_types.QUrl =
+proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, options: cint, supportedSchemes: openArray[string]): gen_qurl_types.QUrl =
   var supportedSchemes_CArray = newSeq[struct_miqt_string](len(supportedSchemes))
   for i in 0..<len(supportedSchemes):
-    supportedSchemes_CArray[i] = struct_miqt_string(data: supportedSchemes[i], len: csize_t(len(supportedSchemes[i])))
+    supportedSchemes_CArray[i] = struct_miqt_string(data: if len(supportedSchemes[i]) > 0: addr supportedSchemes[i][0] else: nil, len: csize_t(len(supportedSchemes[i])))
 
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl5(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h, cint(options), struct_miqt_array(len: csize_t(len(supportedSchemes)), data: if len(supportedSchemes) == 0: nil else: addr(supportedSchemes_CArray[0]))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl5(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options), struct_miqt_array(len: csize_t(len(supportedSchemes)), data: if len(supportedSchemes) == 0: nil else: addr(supportedSchemes_CArray[0]))), owned: true)
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): seq[string] =
   var v_ma = fcQFileDialog_getOpenFileNames1(parent.h)
@@ -1072,43 +1074,43 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
+proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): seq[string] =
+  var v_ma = fcQFileDialog_getOpenFileNames2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))))
+proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): seq[string] =
+  var v_ma = fcQFileDialog_getOpenFileNames3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string, filter: string): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: dir, len: csize_t(len(dir))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): seq[string] =
+  var v_ma = fcQFileDialog_getOpenFileNames4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -1123,8 +1125,8 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls2(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
+proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): seq[gen_qurl_types.QUrl] =
+  var v_ma = fcQFileDialog_getOpenFileUrls2(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1132,8 +1134,8 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls3(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h)
+proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): seq[gen_qurl_types.QUrl] =
+  var v_ma = fcQFileDialog_getOpenFileUrls3(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h)
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1141,8 +1143,8 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   c_free(v_ma.data)
   vx_ret
 
-proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, filter: string): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls4(parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: filter, len: csize_t(len(filter))))
+proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): seq[gen_qurl_types.QUrl] =
+  var v_ma = fcQFileDialog_getOpenFileUrls4(parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1192,7 +1194,7 @@ type QFileDialogdragMoveEventProc* = proc(self: QFileDialog, event: gen_qevent_t
 type QFileDialogdragLeaveEventProc* = proc(self: QFileDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QFileDialogdropEventProc* = proc(self: QFileDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QFileDialoghideEventProc* = proc(self: QFileDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QFileDialognativeEventProc* = proc(self: QFileDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QFileDialognativeEventProc* = proc(self: QFileDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QFileDialogmetricProc* = proc(self: QFileDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QFileDialoginitPainterProc* = proc(self: QFileDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QFileDialogredirectedProc* = proc(self: QFileDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1657,14 +1659,14 @@ proc cQFileDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QFileDialognativeEvent*(self: gen_qfiledialog_types.QFileDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QFileDialognativeEvent*(self: gen_qfiledialog_types.QFileDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQFileDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQFileDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QFileDialogVTable](fcQFileDialog_vdata(self))
   let self = QFileDialog(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2106,12 +2108,12 @@ proc cQFileDialog_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQFileDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQFileDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QFileDialognativeEvent(self[], eventType, message, resultVal)
 proc cQFileDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQFileDialog](fcQFileDialog_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2606,7 +2608,7 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
   gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new3(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char],
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -2723,10 +2725,10 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
     vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption)))), owned: true)
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string, directory: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char], directory: openArray[char],
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -2843,10 +2845,10 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
     vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory)))), owned: true)
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory)))), owned: true)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string, directory: string, filter: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char], directory: openArray[char], filter: openArray[char],
     vtbl: ref QFileDialogVTable = nil): gen_qfiledialog_types.QFileDialog =
   let vtbl = if vtbl == nil: new QFileDialogVTable else: vtbl
   GC_ref(vtbl)
@@ -2963,7 +2965,7 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
     vtbl[].vtbl.connectNotify = cQFileDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQFileDialog_vtable_callback_disconnectNotify
-  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter)))), owned: true)
+  gen_qfiledialog_types.QFileDialog(h: fcQFileDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
 
 const cQFileDialog_mvtbl = cQFileDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -3047,24 +3049,24 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
   inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char],
     inst: VirtualQFileDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQFileDialog_new4(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))))
+  inst[].h = fcQFileDialog_new4(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string, directory: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char], directory: openArray[char],
     inst: VirtualQFileDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQFileDialog_new5(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))))
+  inst[].h = fcQFileDialog_new5(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
   inst[].owned = true
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
-    parent: gen_qwidget_types.QWidget, caption: string, directory: string, filter: string,
+    parent: gen_qwidget_types.QWidget, caption: openArray[char], directory: openArray[char], filter: openArray[char],
     inst: VirtualQFileDialog) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQFileDialog_new6(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: caption, len: csize_t(len(caption))), struct_miqt_string(data: directory, len: csize_t(len(directory))), struct_miqt_string(data: filter, len: csize_t(len(filter))))
+  inst[].h = fcQFileDialog_new6(addr(cQFileDialog_mvtbl), addr(inst[]), parent.h, struct_miqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_miqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))), struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qfiledialog_types.QFileDialog): gen_qobjectdefs_types.QMetaObject =

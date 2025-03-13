@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QVideoFrameFieldTypeEnum* = distinct cint
@@ -231,7 +233,7 @@ proc availableMetaData*(self: gen_qvideoframe_types.QVideoFrame): Table[string,g
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -242,11 +244,11 @@ proc availableMetaData*(self: gen_qvideoframe_types.QVideoFrame): Table[string,g
   c_free(v_mm.values)
   vx_ret
 
-proc metaData*(self: gen_qvideoframe_types.QVideoFrame, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVideoFrame_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+proc metaData*(self: gen_qvideoframe_types.QVideoFrame, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQVideoFrame_metaData(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc setMetaData*(self: gen_qvideoframe_types.QVideoFrame, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQVideoFrame_setMetaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc setMetaData*(self: gen_qvideoframe_types.QVideoFrame, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQVideoFrame_setMetaData(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc image*(self: gen_qvideoframe_types.QVideoFrame): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQVideoFrame_image(self.h), owned: true)

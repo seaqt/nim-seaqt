@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicsproxywidget.cpp", cflags).}
@@ -257,13 +259,13 @@ proc metacall*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -290,25 +292,25 @@ proc createProxyForChildWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsPr
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsProxyWidget_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsProxyWidget_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -353,7 +355,7 @@ type QGraphicsProxyWidgetboundingRectProc* = proc(self: QGraphicsProxyWidget): g
 type QGraphicsProxyWidgetshapeProc* = proc(self: QGraphicsProxyWidget): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetinitStyleOptionProc* = proc(self: QGraphicsProxyWidget, option: gen_qstyleoption_types.QStyleOption): void {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetupdateGeometryProc* = proc(self: QGraphicsProxyWidget): void {.raises: [], gcsafe.}
-type QGraphicsProxyWidgetpropertyChangeProc* = proc(self: QGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsProxyWidgetpropertyChangeProc* = proc(self: QGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetsceneEventProc* = proc(self: QGraphicsProxyWidget, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetwindowFrameEventProc* = proc(self: QGraphicsProxyWidget, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsProxyWidgetwindowFrameSectionAtProc* = proc(self: QGraphicsProxyWidget, pos: gen_qpoint_types.QPointF): cint {.raises: [], gcsafe.}
@@ -852,14 +854,14 @@ proc cQGraphicsProxyWidget_vtable_callback_updateGeometry(self: pointer): void {
   let self = QGraphicsProxyWidget(h: self)
   vtbl[].updateGeometry(self)
 
-proc QGraphicsProxyWidgetpropertyChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: propertyName, len: csize_t(len(propertyName))), value.h), owned: true)
+proc QGraphicsProxyWidgetpropertyChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQGraphicsProxyWidget_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc cQGraphicsProxyWidget_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsProxyWidgetVTable](fcQGraphicsProxyWidget_vdata(self))
   let self = QGraphicsProxyWidget(h: self)
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1430,12 +1432,12 @@ proc cQGraphicsProxyWidget_method_callback_updateGeometry(self: pointer): void {
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self))
   inst.updateGeometry()
 
-method propertyChange*(self: VirtualQGraphicsProxyWidget, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method propertyChange*(self: VirtualQGraphicsProxyWidget, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsProxyWidgetpropertyChange(self[], propertyName, value)
 proc cQGraphicsProxyWidget_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsProxyWidget](fcQGraphicsProxyWidget_vdata(self))
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)

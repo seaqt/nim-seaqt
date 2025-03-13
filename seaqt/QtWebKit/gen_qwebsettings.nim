@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
 {.compile("gen_qwebsettings.cpp", cflags).}
@@ -171,12 +173,12 @@ proc fcQWebSettings_enablePersistentStorage1(path: struct_miqt_string): void {.i
 proc globalSettings*(_: type gen_qwebsettings_types.QWebSettings): gen_qwebsettings_types.QWebSettings =
   gen_qwebsettings_types.QWebSettings(h: fcQWebSettings_globalSettings(), owned: false)
 
-proc setFontFamily*(self: gen_qwebsettings_types.QWebSettings, which: cint, family: string): void =
-  fcQWebSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: family, len: csize_t(len(family))))
+proc setFontFamily*(self: gen_qwebsettings_types.QWebSettings, which: cint, family: openArray[char]): void =
+  fcQWebSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc fontFamily*(self: gen_qwebsettings_types.QWebSettings, which: cint): string =
   let v_ms = fcQWebSettings_fontFamily(self.h, cint(which))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -207,21 +209,21 @@ proc setUserStyleSheetUrl*(self: gen_qwebsettings_types.QWebSettings, location: 
 proc userStyleSheetUrl*(self: gen_qwebsettings_types.QWebSettings): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebSettings_userStyleSheetUrl(self.h), owned: true)
 
-proc setDefaultTextEncoding*(self: gen_qwebsettings_types.QWebSettings, encoding: string): void =
-  fcQWebSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: encoding, len: csize_t(len(encoding))))
+proc setDefaultTextEncoding*(self: gen_qwebsettings_types.QWebSettings, encoding: openArray[char]): void =
+  fcQWebSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: if len(encoding) > 0: addr encoding[0] else: nil, len: csize_t(len(encoding))))
 
 proc defaultTextEncoding*(self: gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_defaultTextEncoding(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setIconDatabasePath*(_: type gen_qwebsettings_types.QWebSettings, location: string): void =
-  fcQWebSettings_setIconDatabasePath(struct_miqt_string(data: location, len: csize_t(len(location))))
+proc setIconDatabasePath*(_: type gen_qwebsettings_types.QWebSettings, location: openArray[char]): void =
+  fcQWebSettings_setIconDatabasePath(struct_miqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
 
 proc iconDatabasePath*(_: type gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_iconDatabasePath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -231,10 +233,10 @@ proc clearIconDatabase*(_: type gen_qwebsettings_types.QWebSettings): void =
 proc iconForUrl*(_: type gen_qwebsettings_types.QWebSettings, url: gen_qurl_types.QUrl): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQWebSettings_iconForUrl(url.h), owned: true)
 
-proc setPluginSearchPaths*(_: type gen_qwebsettings_types.QWebSettings, paths: seq[string]): void =
+proc setPluginSearchPaths*(_: type gen_qwebsettings_types.QWebSettings, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   fcQWebSettings_setPluginSearchPaths(struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
@@ -244,7 +246,7 @@ proc pluginSearchPaths*(_: type gen_qwebsettings_types.QWebSettings): seq[string
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -265,12 +267,12 @@ proc maximumPagesInCache*(_: type gen_qwebsettings_types.QWebSettings): cint =
 proc setObjectCacheCapacities*(_: type gen_qwebsettings_types.QWebSettings, cacheMinDeadCapacity: cint, cacheMaxDead: cint, totalCapacity: cint): void =
   fcQWebSettings_setObjectCacheCapacities(cacheMinDeadCapacity, cacheMaxDead, totalCapacity)
 
-proc setOfflineStoragePath*(_: type gen_qwebsettings_types.QWebSettings, path: string): void =
-  fcQWebSettings_setOfflineStoragePath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setOfflineStoragePath*(_: type gen_qwebsettings_types.QWebSettings, path: openArray[char]): void =
+  fcQWebSettings_setOfflineStoragePath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc offlineStoragePath*(_: type gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_offlineStoragePath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -280,12 +282,12 @@ proc setOfflineStorageDefaultQuota*(_: type gen_qwebsettings_types.QWebSettings,
 proc offlineStorageDefaultQuota*(_: type gen_qwebsettings_types.QWebSettings): clonglong =
   fcQWebSettings_offlineStorageDefaultQuota()
 
-proc setOfflineWebApplicationCachePath*(_: type gen_qwebsettings_types.QWebSettings, path: string): void =
-  fcQWebSettings_setOfflineWebApplicationCachePath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setOfflineWebApplicationCachePath*(_: type gen_qwebsettings_types.QWebSettings, path: openArray[char]): void =
+  fcQWebSettings_setOfflineWebApplicationCachePath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc offlineWebApplicationCachePath*(_: type gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_offlineWebApplicationCachePath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -295,12 +297,12 @@ proc setOfflineWebApplicationCacheQuota*(_: type gen_qwebsettings_types.QWebSett
 proc offlineWebApplicationCacheQuota*(_: type gen_qwebsettings_types.QWebSettings): clonglong =
   fcQWebSettings_offlineWebApplicationCacheQuota()
 
-proc setLocalStoragePath*(self: gen_qwebsettings_types.QWebSettings, path: string): void =
-  fcQWebSettings_setLocalStoragePath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setLocalStoragePath*(self: gen_qwebsettings_types.QWebSettings, path: openArray[char]): void =
+  fcQWebSettings_setLocalStoragePath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc localStoragePath*(self: gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_localStoragePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -316,15 +318,15 @@ proc setThirdPartyCookiePolicy*(self: gen_qwebsettings_types.QWebSettings, third
 proc thirdPartyCookiePolicy*(self: gen_qwebsettings_types.QWebSettings): cint =
   cint(fcQWebSettings_thirdPartyCookiePolicy(self.h))
 
-proc setCSSMediaType*(self: gen_qwebsettings_types.QWebSettings, cSSMediaType: string): void =
-  fcQWebSettings_setCSSMediaType(self.h, struct_miqt_string(data: cSSMediaType, len: csize_t(len(cSSMediaType))))
+proc setCSSMediaType*(self: gen_qwebsettings_types.QWebSettings, cSSMediaType: openArray[char]): void =
+  fcQWebSettings_setCSSMediaType(self.h, struct_miqt_string(data: if len(cSSMediaType) > 0: addr cSSMediaType[0] else: nil, len: csize_t(len(cSSMediaType))))
 
 proc cssMediaType*(self: gen_qwebsettings_types.QWebSettings): string =
   let v_ms = fcQWebSettings_cssMediaType(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc enablePersistentStorage*(_: type gen_qwebsettings_types.QWebSettings, path: string): void =
-  fcQWebSettings_enablePersistentStorage1(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc enablePersistentStorage*(_: type gen_qwebsettings_types.QWebSettings, path: openArray[char]): void =
+  fcQWebSettings_enablePersistentStorage1(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 

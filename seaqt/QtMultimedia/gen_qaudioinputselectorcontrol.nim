@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudioinputselectorcontrol.cpp", cflags).}
@@ -85,13 +87,13 @@ proc metacall*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorCon
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring): string =
   let v_ms = fcQAudioInputSelectorControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring): string =
   let v_ms = fcQAudioInputSelectorControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -101,41 +103,41 @@ proc availableInputs*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSele
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc inputDescription*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: string): string =
-  let v_ms = fcQAudioInputSelectorControl_inputDescription(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc inputDescription*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: openArray[char]): string =
+  let v_ms = fcQAudioInputSelectorControl_inputDescription(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc defaultInput*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl): string =
   let v_ms = fcQAudioInputSelectorControl_defaultInput(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc activeInput*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl): string =
   let v_ms = fcQAudioInputSelectorControl_activeInput(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setActiveInput*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: string): void =
-  fcQAudioInputSelectorControl_setActiveInput(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setActiveInput*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: openArray[char]): void =
+  fcQAudioInputSelectorControl_setActiveInput(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-proc activeInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: string): void =
-  fcQAudioInputSelectorControl_activeInputChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc activeInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, name: openArray[char]): void =
+  fcQAudioInputSelectorControl_activeInputChanged(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-type QAudioInputSelectorControlactiveInputChangedSlot* = proc(name: string)
+type QAudioInputSelectorControlactiveInputChangedSlot* = proc(name: openArray[char])
 proc cQAudioInputSelectorControl_slot_callback_activeInputChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputSelectorControlactiveInputChangedSlot](cast[pointer](slot))
   let vname_ms = name
-  let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
+  let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
 
@@ -171,25 +173,25 @@ proc onavailableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudio
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring): string =
   let v_ms = fcQAudioInputSelectorControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioInputSelectorControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring): string =
   let v_ms = fcQAudioInputSelectorControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioInputSelectorControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

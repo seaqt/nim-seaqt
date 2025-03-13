@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qwhatsthis_types
@@ -65,8 +67,8 @@ proc inWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): bool =
 proc leaveWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_leaveWhatsThisMode()
 
-proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string): void =
-  fcQWhatsThis_showText(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: openArray[char]): void =
+  fcQWhatsThis_showText(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis): void =
   fcQWhatsThis_hideText()
@@ -74,8 +76,8 @@ proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis): void =
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQWhatsThis_createAction(), owned: false)
 
-proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget): void =
-  fcQWhatsThis_showText3(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))), w.h)
+proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget): void =
+  fcQWhatsThis_showText3(pos.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h)
 
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQWhatsThis_createAction1(parent.h), owned: false)

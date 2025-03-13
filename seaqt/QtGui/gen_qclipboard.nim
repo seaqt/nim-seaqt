@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qclipboard.cpp", cflags).}
@@ -120,13 +122,13 @@ proc metacall*(self: gen_qclipboard_types.QClipboard, param1: cint, param2: cint
 
 proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring): string =
   let v_ms = fcQClipboard_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qclipboard_types.QClipboard, s: cstring): string =
   let v_ms = fcQClipboard_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -150,18 +152,18 @@ proc ownsFindBuffer*(self: gen_qclipboard_types.QClipboard): bool =
 
 proc text*(self: gen_qclipboard_types.QClipboard): string =
   let v_ms = fcQClipboard_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc text*(self: gen_qclipboard_types.QClipboard, subtype: string): string =
-  let v_ms = fcQClipboard_textWithSubtype(self.h, struct_miqt_string(data: subtype, len: csize_t(len(subtype))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc text*(self: gen_qclipboard_types.QClipboard, subtype: openArray[char]): string =
+  let v_ms = fcQClipboard_textWithSubtype(self.h, struct_miqt_string(data: if len(subtype) > 0: addr subtype[0] else: nil, len: csize_t(len(subtype))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qclipboard_types.QClipboard, param1: string): void =
-  fcQClipboard_setText(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char]): void =
+  fcQClipboard_setText(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard): gen_qmimedata_types.QMimeData =
   gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeData(self.h), owned: false)
@@ -257,25 +259,25 @@ proc ondataChanged*(self: gen_qclipboard_types.QClipboard, slot: QClipboarddataC
 
 proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring, c: cstring): string =
   let v_ms = fcQClipboard_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQClipboard_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qclipboard_types.QClipboard, s: cstring, c: cstring): string =
   let v_ms = fcQClipboard_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qclipboard_types.QClipboard, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQClipboard_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -284,18 +286,18 @@ proc clear*(self: gen_qclipboard_types.QClipboard, mode: cint): void =
 
 proc text*(self: gen_qclipboard_types.QClipboard, mode: cint): string =
   let v_ms = fcQClipboard_text1(self.h, cint(mode))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc text*(self: gen_qclipboard_types.QClipboard, subtype: string, mode: cint): string =
-  let v_ms = fcQClipboard_text2(self.h, struct_miqt_string(data: subtype, len: csize_t(len(subtype))), cint(mode))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc text*(self: gen_qclipboard_types.QClipboard, subtype: openArray[char], mode: cint): string =
+  let v_ms = fcQClipboard_text2(self.h, struct_miqt_string(data: if len(subtype) > 0: addr subtype[0] else: nil, len: csize_t(len(subtype))), cint(mode))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qclipboard_types.QClipboard, param1: string, mode: cint): void =
-  fcQClipboard_setText2(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), cint(mode))
+proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char], mode: cint): void =
+  fcQClipboard_setText2(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), cint(mode))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard, mode: cint): gen_qmimedata_types.QMimeData =
   gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeData1(self.h, cint(mode)), owned: false)

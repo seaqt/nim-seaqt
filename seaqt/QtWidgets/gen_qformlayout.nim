@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QFormLayoutFieldGrowthPolicyEnum* = distinct cint
@@ -223,13 +225,13 @@ proc metacall*(self: gen_qformlayout_types.QFormLayout, param1: cint, param2: ci
 
 proc tr*(_: type gen_qformlayout_types.QFormLayout, s: cstring): string =
   let v_ms = fcQFormLayout_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qformlayout_types.QFormLayout, s: cstring): string =
   let v_ms = fcQFormLayout_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -281,11 +283,11 @@ proc addRow*(self: gen_qformlayout_types.QFormLayout, label: gen_qwidget_types.Q
 proc addRow*(self: gen_qformlayout_types.QFormLayout, label: gen_qwidget_types.QWidget, field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_addRow2(self.h, label.h, field.h)
 
-proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: string, field: gen_qwidget_types.QWidget): void =
-  fcQFormLayout_addRow3(self.h, struct_miqt_string(data: labelText, len: csize_t(len(labelText))), field.h)
+proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: openArray[char], field: gen_qwidget_types.QWidget): void =
+  fcQFormLayout_addRow3(self.h, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
-proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: string, field: gen_qlayout_types.QLayout): void =
-  fcQFormLayout_addRow4(self.h, struct_miqt_string(data: labelText, len: csize_t(len(labelText))), field.h)
+proc addRow*(self: gen_qformlayout_types.QFormLayout, labelText: openArray[char], field: gen_qlayout_types.QLayout): void =
+  fcQFormLayout_addRow4(self.h, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
 proc addRow*(self: gen_qformlayout_types.QFormLayout, widget: gen_qwidget_types.QWidget): void =
   fcQFormLayout_addRowWithWidget(self.h, widget.h)
@@ -299,11 +301,11 @@ proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, label: gen_q
 proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, label: gen_qwidget_types.QWidget, field: gen_qlayout_types.QLayout): void =
   fcQFormLayout_insertRow2(self.h, row, label.h, field.h)
 
-proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: string, field: gen_qwidget_types.QWidget): void =
-  fcQFormLayout_insertRow3(self.h, row, struct_miqt_string(data: labelText, len: csize_t(len(labelText))), field.h)
+proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: openArray[char], field: gen_qwidget_types.QWidget): void =
+  fcQFormLayout_insertRow3(self.h, row, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
-proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: string, field: gen_qlayout_types.QLayout): void =
-  fcQFormLayout_insertRow4(self.h, row, struct_miqt_string(data: labelText, len: csize_t(len(labelText))), field.h)
+proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, labelText: openArray[char], field: gen_qlayout_types.QLayout): void =
+  fcQFormLayout_insertRow4(self.h, row, struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), field.h)
 
 proc insertRow*(self: gen_qformlayout_types.QFormLayout, row: cint, widget: gen_qwidget_types.QWidget): void =
   fcQFormLayout_insertRow5(self.h, row, widget.h)
@@ -385,25 +387,25 @@ proc rowCount*(self: gen_qformlayout_types.QFormLayout): cint =
 
 proc tr*(_: type gen_qformlayout_types.QFormLayout, s: cstring, c: cstring): string =
   let v_ms = fcQFormLayout_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qformlayout_types.QFormLayout, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFormLayout_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qformlayout_types.QFormLayout, s: cstring, c: cstring): string =
   let v_ms = fcQFormLayout_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qformlayout_types.QFormLayout, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQFormLayout_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

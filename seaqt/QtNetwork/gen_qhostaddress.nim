@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QHostAddressSpecialAddressEnum* = distinct cint
@@ -108,8 +110,8 @@ proc operatorSubscript*(self: gen_qhostaddress_types.QIPv6Address, index: cint):
 proc operatorAssign*(self: gen_qhostaddress_types.QHostAddress, other: gen_qhostaddress_types.QHostAddress): void =
   fcQHostAddress_operatorAssign(self.h, other.h)
 
-proc operatorAssign*(self: gen_qhostaddress_types.QHostAddress, address: string): void =
-  fcQHostAddress_operatorAssignWithAddress(self.h, struct_miqt_string(data: address, len: csize_t(len(address))))
+proc operatorAssign*(self: gen_qhostaddress_types.QHostAddress, address: openArray[char]): void =
+  fcQHostAddress_operatorAssignWithAddress(self.h, struct_miqt_string(data: if len(address) > 0: addr address[0] else: nil, len: csize_t(len(address))))
 
 proc operatorAssign*(self: gen_qhostaddress_types.QHostAddress, address: cint): void =
   fcQHostAddress_operatorAssign2(self.h, cint(address))
@@ -129,8 +131,8 @@ proc setAddress2*(self: gen_qhostaddress_types.QHostAddress, ip6Addr: ptr uint8)
 proc setAddress*(self: gen_qhostaddress_types.QHostAddress, ip6Addr: gen_qhostaddress_types.QIPv6Address): void =
   fcQHostAddress_setAddress3(self.h, ip6Addr.h)
 
-proc setAddress*(self: gen_qhostaddress_types.QHostAddress, address: string): bool =
-  fcQHostAddress_setAddress4(self.h, struct_miqt_string(data: address, len: csize_t(len(address))))
+proc setAddress*(self: gen_qhostaddress_types.QHostAddress, address: openArray[char]): bool =
+  fcQHostAddress_setAddress4(self.h, struct_miqt_string(data: if len(address) > 0: addr address[0] else: nil, len: csize_t(len(address))))
 
 proc setAddress*(self: gen_qhostaddress_types.QHostAddress, address: cint): void =
   fcQHostAddress_setAddress5(self.h, cint(address))
@@ -149,18 +151,18 @@ proc toIPv6Address*(self: gen_qhostaddress_types.QHostAddress): gen_qhostaddress
 
 proc toString*(self: gen_qhostaddress_types.QHostAddress): string =
   let v_ms = fcQHostAddress_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scopeId*(self: gen_qhostaddress_types.QHostAddress): string =
   let v_ms = fcQHostAddress_scopeId(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setScopeId*(self: gen_qhostaddress_types.QHostAddress, id: string): void =
-  fcQHostAddress_setScopeId(self.h, struct_miqt_string(data: id, len: csize_t(len(id))))
+proc setScopeId*(self: gen_qhostaddress_types.QHostAddress, id: openArray[char]): void =
+  fcQHostAddress_setScopeId(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))))
 
 proc isEqual*(self: gen_qhostaddress_types.QHostAddress, address: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isEqual(self.h, address.h)
@@ -214,8 +216,8 @@ proc isMulticast*(self: gen_qhostaddress_types.QHostAddress): bool =
 proc isBroadcast*(self: gen_qhostaddress_types.QHostAddress): bool =
   fcQHostAddress_isBroadcast(self.h)
 
-proc parseSubnet*(_: type gen_qhostaddress_types.QHostAddress, subnet: string): tuple[first: gen_qhostaddress_types.QHostAddress, second: cint] =
-  var v_mm = fcQHostAddress_parseSubnet(struct_miqt_string(data: subnet, len: csize_t(len(subnet))))
+proc parseSubnet*(_: type gen_qhostaddress_types.QHostAddress, subnet: openArray[char]): tuple[first: gen_qhostaddress_types.QHostAddress, second: cint] =
+  var v_mm = fcQHostAddress_parseSubnet(struct_miqt_string(data: if len(subnet) > 0: addr subnet[0] else: nil, len: csize_t(len(subnet))))
   var v_First_CArray = cast[ptr UncheckedArray[pointer]](v_mm.keys)
   var v_Second_CArray = cast[ptr UncheckedArray[cint]](v_mm.values)
   var v_entry_First = gen_qhostaddress_types.QHostAddress(h: v_First_CArray[0], owned: true)
@@ -249,8 +251,8 @@ proc create*(T: type gen_qhostaddress_types.QHostAddress,
   gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new5(ip6Addr.h), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
-    address: string): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new6(struct_miqt_string(data: address, len: csize_t(len(address)))), owned: true)
+    address: openArray[char]): gen_qhostaddress_types.QHostAddress =
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new6(struct_miqt_string(data: if len(address) > 0: addr address[0] else: nil, len: csize_t(len(address)))), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     copy: gen_qhostaddress_types.QHostAddress): gen_qhostaddress_types.QHostAddress =

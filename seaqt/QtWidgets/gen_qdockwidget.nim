@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qdockwidget.cpp", cflags).}
@@ -245,13 +247,13 @@ proc metacall*(self: gen_qdockwidget_types.QDockWidget, param1: cint, param2: ci
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
   let v_ms = fcQDockWidget_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
   let v_ms = fcQDockWidget_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -393,25 +395,25 @@ proc ondockLocationChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDock
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring): string =
   let v_ms = fcQDockWidget_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDockWidget_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring): string =
   let v_ms = fcQDockWidget_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDockWidget_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -451,7 +453,7 @@ type QDockWidgetdragLeaveEventProc* = proc(self: QDockWidget, event: gen_qevent_
 type QDockWidgetdropEventProc* = proc(self: QDockWidget, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QDockWidgetshowEventProc* = proc(self: QDockWidget, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QDockWidgethideEventProc* = proc(self: QDockWidget, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QDockWidgetnativeEventProc* = proc(self: QDockWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QDockWidgetnativeEventProc* = proc(self: QDockWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QDockWidgetmetricProc* = proc(self: QDockWidget, param1: cint): cint {.raises: [], gcsafe.}
 type QDockWidgetinitPainterProc* = proc(self: QDockWidget, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDockWidgetredirectedProc* = proc(self: QDockWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -859,14 +861,14 @@ proc cQDockWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDockWidgetnativeEvent*(self: gen_qdockwidget_types.QDockWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QDockWidgetnativeEvent*(self: gen_qdockwidget_types.QDockWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQDockWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQDockWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QDockWidgetVTable](fcQDockWidget_vdata(self))
   let self = QDockWidget(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1278,12 +1280,12 @@ proc cQDockWidget_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDockWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQDockWidget, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QDockWidgetnativeEvent(self[], eventType, message, resultVal)
 proc cQDockWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQDockWidget](fcQDockWidget_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1538,7 +1540,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
   gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string,
+    title: openArray[char],
     vtbl: ref QDockWidgetVTable = nil): gen_qdockwidget_types.QDockWidget =
   let vtbl = if vtbl == nil: new QDockWidgetVTable else: vtbl
   GC_ref(vtbl)
@@ -1645,7 +1647,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = cQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDockWidget_vtable_callback_disconnectNotify
-  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title)))), owned: true)
+  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl: ref QDockWidgetVTable = nil): gen_qdockwidget_types.QDockWidget =
@@ -1757,7 +1759,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
   gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new3(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     vtbl: ref QDockWidgetVTable = nil): gen_qdockwidget_types.QDockWidget =
   let vtbl = if vtbl == nil: new QDockWidgetVTable else: vtbl
   GC_ref(vtbl)
@@ -1864,10 +1866,10 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = cQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDockWidget_vtable_callback_disconnectNotify
-  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title))), parent.h), owned: true)
+  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h), owned: true)
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string, parent: gen_qwidget_types.QWidget, flags: cint,
+    title: openArray[char], parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QDockWidgetVTable = nil): gen_qdockwidget_types.QDockWidget =
   let vtbl = if vtbl == nil: new QDockWidgetVTable else: vtbl
   GC_ref(vtbl)
@@ -1974,7 +1976,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
     vtbl[].vtbl.connectNotify = cQDockWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQDockWidget_vtable_callback_disconnectNotify
-  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: title, len: csize_t(len(title))), parent.h, cint(flags)), owned: true)
+  gen_qdockwidget_types.QDockWidget(h: fcQDockWidget_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
     parent: gen_qwidget_types.QWidget, flags: cint,
@@ -2150,10 +2152,10 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
   inst[].owned = true
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string,
+    title: openArray[char],
     inst: VirtualQDockWidget) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDockWidget_new2(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))))
+  inst[].h = fcQDockWidget_new2(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
   inst[].owned = true
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
@@ -2163,17 +2165,17 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
   inst[].owned = true
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string, parent: gen_qwidget_types.QWidget,
+    title: openArray[char], parent: gen_qwidget_types.QWidget,
     inst: VirtualQDockWidget) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDockWidget_new4(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))), parent.h)
+  inst[].h = fcQDockWidget_new4(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,
-    title: string, parent: gen_qwidget_types.QWidget, flags: cint,
+    title: openArray[char], parent: gen_qwidget_types.QWidget, flags: cint,
     inst: VirtualQDockWidget) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQDockWidget_new5(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: title, len: csize_t(len(title))), parent.h, cint(flags))
+  inst[].h = fcQDockWidget_new5(addr(cQDockWidget_mvtbl), addr(inst[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h, cint(flags))
   inst[].owned = true
 
 proc create*(T: type gen_qdockwidget_types.QDockWidget,

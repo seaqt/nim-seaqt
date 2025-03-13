@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
 {.compile("gen_qprintdialog.cpp", cflags).}
@@ -231,13 +233,13 @@ proc metacall*(self: gen_qprintdialog_types.QPrintDialog, param1: cint, param2: 
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring): string =
   let v_ms = fcQPrintDialog_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring): string =
   let v_ms = fcQPrintDialog_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -287,25 +289,25 @@ proc onaccepted*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogac
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring): string =
   let v_ms = fcQPrintDialog_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPrintDialog_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring): string =
   let v_ms = fcQPrintDialog_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPrintDialog_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -353,7 +355,7 @@ type QPrintDialogdragMoveEventProc* = proc(self: QPrintDialog, event: gen_qevent
 type QPrintDialogdragLeaveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QPrintDialogdropEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QPrintDialoghideEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QPrintDialognativeEventProc* = proc(self: QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QPrintDialognativeEventProc* = proc(self: QPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QPrintDialogchangeEventProc* = proc(self: QPrintDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPrintDialogmetricProc* = proc(self: QPrintDialog, param1: cint): cint {.raises: [], gcsafe.}
 type QPrintDialoginitPainterProc* = proc(self: QPrintDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -810,14 +812,14 @@ proc cQPrintDialog_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QPrintDialognativeEvent*(self: gen_qprintdialog_types.QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QPrintDialognativeEvent*(self: gen_qprintdialog_types.QPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQPrintDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQPrintDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QPrintDialogVTable](fcQPrintDialog_vdata(self))
   let self = QPrintDialog(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1261,12 +1263,12 @@ proc cQPrintDialog_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQPrintDialog, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QPrintDialognativeEvent(self[], eventType, message, resultVal)
 proc cQPrintDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQPrintDialog](fcQPrintDialog_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QCalendarEnumEnum* = distinct cint
@@ -148,7 +150,7 @@ proc maximumMonthsInYear*(self: gen_qcalendar_types.QCalendar): cint =
 
 proc name*(self: gen_qcalendar_types.QCalendar): string =
   let v_ms = fcQCalendar_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -166,25 +168,25 @@ proc dayOfWeek*(self: gen_qcalendar_types.QCalendar, date: gen_qdatetime_types.Q
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint): string =
   let v_ms = fcQCalendar_monthName(self.h, locale.h, month)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint): string =
   let v_ms = fcQCalendar_standaloneMonthName(self.h, locale.h, month)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc weekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint): string =
   let v_ms = fcQCalendar_weekDayName(self.h, locale.h, day)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneWeekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint): string =
   let v_ms = fcQCalendar_standaloneWeekDayName(self.h, locale.h, day)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -194,7 +196,7 @@ proc availableCalendars*(_: type gen_qcalendar_types.QCalendar): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -205,37 +207,37 @@ proc daysInMonth*(self: gen_qcalendar_types.QCalendar, month: cint, year: cint):
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint): string =
   let v_ms = fcQCalendar_monthName3(self.h, locale.h, month, year)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint, format: cint): string =
   let v_ms = fcQCalendar_monthName4(self.h, locale.h, month, year, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint): string =
   let v_ms = fcQCalendar_standaloneMonthName3(self.h, locale.h, month, year)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint, format: cint): string =
   let v_ms = fcQCalendar_standaloneMonthName4(self.h, locale.h, month, year, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc weekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint, format: cint): string =
   let v_ms = fcQCalendar_weekDayName3(self.h, locale.h, day, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneWeekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint, format: cint): string =
   let v_ms = fcQCalendar_standaloneWeekDayName3(self.h, locale.h, day, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

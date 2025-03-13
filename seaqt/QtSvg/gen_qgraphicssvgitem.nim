@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Svg") & " -fPIC"
 {.compile("gen_qgraphicssvgitem.cpp", cflags).}
@@ -217,13 +219,13 @@ proc metacall*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, param1: cint, 
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring): string =
   let v_ms = fcQGraphicsSvgItem_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring): string =
   let v_ms = fcQGraphicsSvgItem_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -233,12 +235,12 @@ proc setSharedRenderer*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, rende
 proc renderer*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qsvgrenderer_types.QSvgRenderer =
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQGraphicsSvgItem_renderer(self.h), owned: false)
 
-proc setElementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, id: string): void =
-  fcQGraphicsSvgItem_setElementId(self.h, struct_miqt_string(data: id, len: csize_t(len(id))))
+proc setElementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, id: openArray[char]): void =
+  fcQGraphicsSvgItem_setElementId(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))))
 
 proc elementId*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): string =
   let v_ms = fcQGraphicsSvgItem_elementId(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -265,25 +267,25 @@ proc typeX*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem): cint =
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsSvgItem_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsSvgItem_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsSvgItem_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsSvgItem_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1315,7 +1317,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
   let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1412,7 +1414,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
     vtbl[].vtbl.setExtension = cQGraphicsSvgItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = cQGraphicsSvgItem_vtable_callback_extension
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
     parentItem: gen_qgraphicsitem_types.QGraphicsItem,
@@ -1515,7 +1517,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new3(addr(vtbl[].vtbl), addr(vtbl[]), parentItem.h), owned: true)
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    fileName: openArray[char], parentItem: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
   let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1612,7 +1614,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
     vtbl[].vtbl.setExtension = cQGraphicsSvgItem_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = cQGraphicsSvgItem_vtable_callback_extension
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parentItem.h), owned: true)
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parentItem.h), owned: true)
 
 const cQGraphicsSvgItem_mvtbl = cQGraphicsSvgItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1672,10 +1674,10 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQGraphicsSvgItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsSvgItem_new2(addr(cQGraphicsSvgItem_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+  inst[].h = fcQGraphicsSvgItem_new2(addr(cQGraphicsSvgItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
@@ -1686,10 +1688,10 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
   inst[].owned = true
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
-    fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    fileName: openArray[char], parentItem: gen_qgraphicsitem_types.QGraphicsItem,
     inst: VirtualQGraphicsSvgItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQGraphicsSvgItem_new4(addr(cQGraphicsSvgItem_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parentItem.h)
+  inst[].h = fcQGraphicsSvgItem_new4(addr(cQGraphicsSvgItem_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parentItem.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qobjectdefs_types.QMetaObject =

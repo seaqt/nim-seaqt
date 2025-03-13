@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
 {.compile("gen_qwebhistoryinterface.cpp", cflags).}
@@ -108,13 +110,13 @@ proc metacall*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, param1
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring): string =
   let v_ms = fcQWebHistoryInterface_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring): string =
   let v_ms = fcQWebHistoryInterface_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -124,41 +126,41 @@ proc setDefaultInterface*(_: type gen_qwebhistoryinterface_types.QWebHistoryInte
 proc defaultInterface*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface): gen_qwebhistoryinterface_types.QWebHistoryInterface =
   gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_defaultInterface(), owned: false)
 
-proc historyContains*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, url: string): bool =
-  fcQWebHistoryInterface_historyContains(self.h, struct_miqt_string(data: url, len: csize_t(len(url))))
+proc historyContains*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, url: openArray[char]): bool =
+  fcQWebHistoryInterface_historyContains(self.h, struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
-proc addHistoryEntry*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, url: string): void =
-  fcQWebHistoryInterface_addHistoryEntry(self.h, struct_miqt_string(data: url, len: csize_t(len(url))))
+proc addHistoryEntry*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, url: openArray[char]): void =
+  fcQWebHistoryInterface_addHistoryEntry(self.h, struct_miqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring): string =
   let v_ms = fcQWebHistoryInterface_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebHistoryInterface_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring): string =
   let v_ms = fcQWebHistoryInterface_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebHistoryInterface_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QWebHistoryInterfacemetaObjectProc* = proc(self: QWebHistoryInterface): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebHistoryInterfacemetacastProc* = proc(self: QWebHistoryInterface, param1: cstring): pointer {.raises: [], gcsafe.}
 type QWebHistoryInterfacemetacallProc* = proc(self: QWebHistoryInterface, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QWebHistoryInterfacehistoryContainsProc* = proc(self: QWebHistoryInterface, url: string): bool {.raises: [], gcsafe.}
-type QWebHistoryInterfaceaddHistoryEntryProc* = proc(self: QWebHistoryInterface, url: string): void {.raises: [], gcsafe.}
+type QWebHistoryInterfacehistoryContainsProc* = proc(self: QWebHistoryInterface, url: openArray[char]): bool {.raises: [], gcsafe.}
+type QWebHistoryInterfaceaddHistoryEntryProc* = proc(self: QWebHistoryInterface, url: openArray[char]): void {.raises: [], gcsafe.}
 type QWebHistoryInterfaceeventProc* = proc(self: QWebHistoryInterface, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebHistoryInterfaceeventFilterProc* = proc(self: QWebHistoryInterface, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebHistoryInterfacetimerEventProc* = proc(self: QWebHistoryInterface, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -218,7 +220,7 @@ proc cQWebHistoryInterface_vtable_callback_historyContains(self: pointer, url: s
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](fcQWebHistoryInterface_vdata(self))
   let self = QWebHistoryInterface(h: self)
   let vurl_ms = url
-  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  let vurlx_ret = string.fromBytes(vurl_ms)
   c_free(vurl_ms.data)
   let slotval1 = vurlx_ret
   var virtualReturn = vtbl[].historyContains(self, slotval1)
@@ -228,7 +230,7 @@ proc cQWebHistoryInterface_vtable_callback_addHistoryEntry(self: pointer, url: s
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](fcQWebHistoryInterface_vdata(self))
   let self = QWebHistoryInterface(h: self)
   let vurl_ms = url
-  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  let vurlx_ret = string.fromBytes(vurl_ms)
   c_free(vurl_ms.data)
   let slotval1 = vurlx_ret
   vtbl[].addHistoryEntry(self, slotval1)
@@ -329,23 +331,23 @@ proc cQWebHistoryInterface_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method historyContains*(self: VirtualQWebHistoryInterface, url: string): bool {.base.} =
+method historyContains*(self: VirtualQWebHistoryInterface, url: openArray[char]): bool {.base.} =
   raiseAssert("missing implementation of QWebHistoryInterface_virtualbase_historyContains")
 proc cQWebHistoryInterface_method_callback_historyContains(self: pointer, url: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQWebHistoryInterface](fcQWebHistoryInterface_vdata(self))
   let vurl_ms = url
-  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  let vurlx_ret = string.fromBytes(vurl_ms)
   c_free(vurl_ms.data)
   let slotval1 = vurlx_ret
   var virtualReturn = inst.historyContains(slotval1)
   virtualReturn
 
-method addHistoryEntry*(self: VirtualQWebHistoryInterface, url: string): void {.base.} =
+method addHistoryEntry*(self: VirtualQWebHistoryInterface, url: openArray[char]): void {.base.} =
   raiseAssert("missing implementation of QWebHistoryInterface_virtualbase_addHistoryEntry")
 proc cQWebHistoryInterface_method_callback_addHistoryEntry(self: pointer, url: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebHistoryInterface](fcQWebHistoryInterface_vdata(self))
   let vurl_ms = url
-  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  let vurlx_ret = string.fromBytes(vurl_ms)
   c_free(vurl_ms.data)
   let slotval1 = vurlx_ret
   inst.addHistoryEntry(slotval1)

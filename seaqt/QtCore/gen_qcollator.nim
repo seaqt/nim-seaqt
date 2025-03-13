@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qcollator_types
@@ -109,17 +111,17 @@ proc setIgnorePunctuation*(self: gen_qcollator_types.QCollator, on: bool): void 
 proc ignorePunctuation*(self: gen_qcollator_types.QCollator): bool =
   fcQCollator_ignorePunctuation(self.h)
 
-proc compare*(self: gen_qcollator_types.QCollator, s1: string, s2: string): cint =
-  fcQCollator_compare(self.h, struct_miqt_string(data: s1, len: csize_t(len(s1))), struct_miqt_string(data: s2, len: csize_t(len(s2))))
+proc compare*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): cint =
+  fcQCollator_compare(self.h, struct_miqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_miqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
 proc compare*(self: gen_qcollator_types.QCollator, s1: gen_qchar_types.QChar, len1: cint, s2: gen_qchar_types.QChar, len2: cint): cint =
   fcQCollator_compare3(self.h, s1.h, len1, s2.h, len2)
 
-proc operatorCall*(self: gen_qcollator_types.QCollator, s1: string, s2: string): bool =
-  fcQCollator_operatorCall(self.h, struct_miqt_string(data: s1, len: csize_t(len(s1))), struct_miqt_string(data: s2, len: csize_t(len(s2))))
+proc operatorCall*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): bool =
+  fcQCollator_operatorCall(self.h, struct_miqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_miqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
-proc sortKey*(self: gen_qcollator_types.QCollator, string: string): gen_qcollator_types.QCollatorSortKey =
-  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc sortKey*(self: gen_qcollator_types.QCollator, string: openArray[char]): gen_qcollator_types.QCollatorSortKey =
+  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
   gen_qcollator_types.QCollator(h: fcQCollator_new(), owned: true)

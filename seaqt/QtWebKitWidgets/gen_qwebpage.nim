@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWebPageNavigationTypeEnum* = distinct cint
@@ -474,13 +476,13 @@ proc metacall*(self: gen_qwebpage_types.QWebPage, param1: cint, param2: cint, pa
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring): string =
   let v_ms = fcQWebPage_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring): string =
   let v_ms = fcQWebPage_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -543,13 +545,13 @@ proc hasSelection*(self: gen_qwebpage_types.QWebPage): bool =
 
 proc selectedText*(self: gen_qwebpage_types.QWebPage): string =
   let v_ms = fcQWebPage_selectedText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc selectedHtml*(self: gen_qwebpage_types.QWebPage): string =
   let v_ms = fcQWebPage_selectedHtml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -598,8 +600,8 @@ proc focusNextPrevChild*(self: gen_qwebpage_types.QWebPage, next: bool): bool =
 proc inputMethodQuery*(self: gen_qwebpage_types.QWebPage, property: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQWebPage_inputMethodQuery(self.h, cint(property)), owned: true)
 
-proc findText*(self: gen_qwebpage_types.QWebPage, subString: string): bool =
-  fcQWebPage_findText(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))))
+proc findText*(self: gen_qwebpage_types.QWebPage, subString: openArray[char]): bool =
+  fcQWebPage_findText(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc setForwardUnsupportedContent*(self: gen_qwebpage_types.QWebPage, forward: bool): void =
   fcQWebPage_setForwardUnsupportedContent(self.h, forward)
@@ -643,14 +645,14 @@ proc supportedContentTypes*(self: gen_qwebpage_types.QWebPage): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc supportsContentType*(self: gen_qwebpage_types.QWebPage, mimeType: string): bool =
-  fcQWebPage_supportsContentType(self.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc supportsContentType*(self: gen_qwebpage_types.QWebPage, mimeType: openArray[char]): bool =
+  fcQWebPage_supportsContentType(self.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc extension*(self: gen_qwebpage_types.QWebPage, extension: cint, option: gen_qwebpage_types.QWebPageExtensionOption, output: gen_qwebpage_types.QWebPageExtensionReturn): bool =
   fcQWebPage_extension(self.h, cint(extension), option.h, output.h)
@@ -719,24 +721,24 @@ proc onloadFinished*(self: gen_qwebpage_types.QWebPage, slot: QWebPageloadFinish
   GC_ref(tmp)
   fcQWebPage_connect_loadFinished(self.h, cast[int](addr tmp[]), cQWebPage_slot_callback_loadFinished, cQWebPage_slot_callback_loadFinished_release)
 
-proc linkHovered*(self: gen_qwebpage_types.QWebPage, link: string, title: string, textContent: string): void =
-  fcQWebPage_linkHovered(self.h, struct_miqt_string(data: link, len: csize_t(len(link))), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: textContent, len: csize_t(len(textContent))))
+proc linkHovered*(self: gen_qwebpage_types.QWebPage, link: openArray[char], title: openArray[char], textContent: openArray[char]): void =
+  fcQWebPage_linkHovered(self.h, struct_miqt_string(data: if len(link) > 0: addr link[0] else: nil, len: csize_t(len(link))), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_miqt_string(data: if len(textContent) > 0: addr textContent[0] else: nil, len: csize_t(len(textContent))))
 
-type QWebPagelinkHoveredSlot* = proc(link: string, title: string, textContent: string)
+type QWebPagelinkHoveredSlot* = proc(link: openArray[char], title: openArray[char], textContent: openArray[char])
 proc cQWebPage_slot_callback_linkHovered(slot: int, link: struct_miqt_string, title: struct_miqt_string, textContent: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagelinkHoveredSlot](cast[pointer](slot))
   let vlink_ms = link
-  let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
+  let vlinkx_ret = string.fromBytes(vlink_ms)
   c_free(vlink_ms.data)
   let slotval1 = vlinkx_ret
 
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval2 = vtitlex_ret
 
   let vtextContent_ms = textContent
-  let vtextContentx_ret = string.fromBytes(toOpenArrayByte(vtextContent_ms.data, 0, int(vtextContent_ms.len)-1))
+  let vtextContentx_ret = string.fromBytes(vtextContent_ms)
   c_free(vtextContent_ms.data)
   let slotval3 = vtextContentx_ret
 
@@ -752,14 +754,14 @@ proc onlinkHovered*(self: gen_qwebpage_types.QWebPage, slot: QWebPagelinkHovered
   GC_ref(tmp)
   fcQWebPage_connect_linkHovered(self.h, cast[int](addr tmp[]), cQWebPage_slot_callback_linkHovered, cQWebPage_slot_callback_linkHovered_release)
 
-proc statusBarMessage*(self: gen_qwebpage_types.QWebPage, text: string): void =
-  fcQWebPage_statusBarMessage(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc statusBarMessage*(self: gen_qwebpage_types.QWebPage, text: openArray[char]): void =
+  fcQWebPage_statusBarMessage(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QWebPagestatusBarMessageSlot* = proc(text: string)
+type QWebPagestatusBarMessageSlot* = proc(text: openArray[char])
 proc cQWebPage_slot_callback_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagestatusBarMessageSlot](cast[pointer](slot))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
 
@@ -1091,16 +1093,16 @@ proc oncontentsChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPagecontent
   GC_ref(tmp)
   fcQWebPage_connect_contentsChanged(self.h, cast[int](addr tmp[]), cQWebPage_slot_callback_contentsChanged, cQWebPage_slot_callback_contentsChanged_release)
 
-proc databaseQuotaExceeded*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, databaseName: string): void =
-  fcQWebPage_databaseQuotaExceeded(self.h, frame.h, struct_miqt_string(data: databaseName, len: csize_t(len(databaseName))))
+proc databaseQuotaExceeded*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, databaseName: openArray[char]): void =
+  fcQWebPage_databaseQuotaExceeded(self.h, frame.h, struct_miqt_string(data: if len(databaseName) > 0: addr databaseName[0] else: nil, len: csize_t(len(databaseName))))
 
-type QWebPagedatabaseQuotaExceededSlot* = proc(frame: gen_qwebframe_types.QWebFrame, databaseName: string)
+type QWebPagedatabaseQuotaExceededSlot* = proc(frame: gen_qwebframe_types.QWebFrame, databaseName: openArray[char])
 proc cQWebPage_slot_callback_databaseQuotaExceeded(slot: int, frame: pointer, databaseName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagedatabaseQuotaExceededSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame, owned: false)
 
   let vdatabaseName_ms = databaseName
-  let vdatabaseNamex_ret = string.fromBytes(toOpenArrayByte(vdatabaseName_ms.data, 0, int(vdatabaseName_ms.len)-1))
+  let vdatabaseNamex_ret = string.fromBytes(vdatabaseName_ms)
   c_free(vdatabaseName_ms.data)
   let slotval2 = vdatabaseNamex_ret
 
@@ -1264,10 +1266,10 @@ proc onfullScreenRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPageful
   GC_ref(tmp)
   fcQWebPage_connect_fullScreenRequested(self.h, cast[int](addr tmp[]), cQWebPage_slot_callback_fullScreenRequested, cQWebPage_slot_callback_fullScreenRequested_release)
 
-proc consoleMessageReceived*(self: gen_qwebpage_types.QWebPage, source: cint, level: cint, message: string, lineNumber: cint, sourceID: string): void =
-  fcQWebPage_consoleMessageReceived(self.h, cint(source), cint(level), struct_miqt_string(data: message, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: sourceID, len: csize_t(len(sourceID))))
+proc consoleMessageReceived*(self: gen_qwebpage_types.QWebPage, source: cint, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void =
+  fcQWebPage_consoleMessageReceived(self.h, cint(source), cint(level), struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: if len(sourceID) > 0: addr sourceID[0] else: nil, len: csize_t(len(sourceID))))
 
-type QWebPageconsoleMessageReceivedSlot* = proc(source: cint, level: cint, message: string, lineNumber: cint, sourceID: string)
+type QWebPageconsoleMessageReceivedSlot* = proc(source: cint, level: cint, message: openArray[char], lineNumber: cint, sourceID: openArray[char])
 proc cQWebPage_slot_callback_consoleMessageReceived(slot: int, source: cint, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageconsoleMessageReceivedSlot](cast[pointer](slot))
   let slotval1 = cint(source)
@@ -1275,14 +1277,14 @@ proc cQWebPage_slot_callback_consoleMessageReceived(slot: int, source: cint, lev
   let slotval2 = cint(level)
 
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval3 = vmessagex_ret
 
   let slotval4 = lineNumber
 
   let vsourceID_ms = sourceID
-  let vsourceIDx_ret = string.fromBytes(toOpenArrayByte(vsourceID_ms.data, 0, int(vsourceID_ms.len)-1))
+  let vsourceIDx_ret = string.fromBytes(vsourceID_ms)
   c_free(vsourceID_ms.data)
   let slotval5 = vsourceIDx_ret
 
@@ -1320,30 +1322,30 @@ proc onrecentlyAudibleChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPage
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring): string =
   let v_ms = fcQWebPage_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebPage_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring): string =
   let v_ms = fcQWebPage_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebPage_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc findText*(self: gen_qwebpage_types.QWebPage, subString: string, options: cint): bool =
-  fcQWebPage_findText2(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))), cint(options))
+proc findText*(self: gen_qwebpage_types.QWebPage, subString: openArray[char], options: cint): bool =
+  fcQWebPage_findText2(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 type QWebPagemetaObjectProc* = proc(self: QWebPage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebPagemetacastProc* = proc(self: QWebPage, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1354,12 +1356,12 @@ type QWebPageextensionProc* = proc(self: QWebPage, extension: cint, option: gen_
 type QWebPagesupportsExtensionProc* = proc(self: QWebPage, extension: cint): bool {.raises: [], gcsafe.}
 type QWebPageshouldInterruptJavaScriptProc* = proc(self: QWebPage): bool {.raises: [], gcsafe.}
 type QWebPagecreateWindowProc* = proc(self: QWebPage, typeVal: cint): gen_qwebpage_types.QWebPage {.raises: [], gcsafe.}
-type QWebPagecreatePluginProc* = proc(self: QWebPage, classid: string, url: gen_qurl_types.QUrl, paramNames: seq[string], paramValues: seq[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QWebPagecreatePluginProc* = proc(self: QWebPage, classid: openArray[char], url: gen_qurl_types.QUrl, paramNames: openArray[string], paramValues: openArray[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QWebPageacceptNavigationRequestProc* = proc(self: QWebPage, frame: gen_qwebframe_types.QWebFrame, request: gen_qnetworkrequest_types.QNetworkRequest, typeVal: cint): bool {.raises: [], gcsafe.}
-type QWebPagechooseFileProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: string): string {.raises: [], gcsafe.}
-type QWebPagejavaScriptAlertProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): void {.raises: [], gcsafe.}
-type QWebPagejavaScriptConfirmProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): bool {.raises: [], gcsafe.}
-type QWebPagejavaScriptConsoleMessageProc* = proc(self: QWebPage, message: string, lineNumber: cint, sourceID: string): void {.raises: [], gcsafe.}
+type QWebPagechooseFileProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: openArray[char]): string {.raises: [], gcsafe.}
+type QWebPagejavaScriptAlertProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): void {.raises: [], gcsafe.}
+type QWebPagejavaScriptConfirmProc* = proc(self: QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): bool {.raises: [], gcsafe.}
+type QWebPagejavaScriptConsoleMessageProc* = proc(self: QWebPage, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.raises: [], gcsafe.}
 type QWebPageuserAgentForUrlProc* = proc(self: QWebPage, url: gen_qurl_types.QUrl): string {.raises: [], gcsafe.}
 type QWebPageeventFilterProc* = proc(self: QWebPage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QWebPagetimerEventProc* = proc(self: QWebPage, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -1489,22 +1491,22 @@ proc cQWebPage_vtable_callback_createWindow(self: pointer, typeVal: cint): point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebPagecreatePlugin*(self: gen_qwebpage_types.QWebPage, classid: string, url: gen_qurl_types.QUrl, paramNames: seq[string], paramValues: seq[string]): gen_qobject_types.QObject =
+proc QWebPagecreatePlugin*(self: gen_qwebpage_types.QWebPage, classid: openArray[char], url: gen_qurl_types.QUrl, paramNames: openArray[string], paramValues: openArray[string]): gen_qobject_types.QObject =
   var paramNames_CArray = newSeq[struct_miqt_string](len(paramNames))
   for i in 0..<len(paramNames):
-    paramNames_CArray[i] = struct_miqt_string(data: paramNames[i], len: csize_t(len(paramNames[i])))
+    paramNames_CArray[i] = struct_miqt_string(data: if len(paramNames[i]) > 0: addr paramNames[i][0] else: nil, len: csize_t(len(paramNames[i])))
 
   var paramValues_CArray = newSeq[struct_miqt_string](len(paramValues))
   for i in 0..<len(paramValues):
-    paramValues_CArray[i] = struct_miqt_string(data: paramValues[i], len: csize_t(len(paramValues[i])))
+    paramValues_CArray[i] = struct_miqt_string(data: if len(paramValues[i]) > 0: addr paramValues[i][0] else: nil, len: csize_t(len(paramValues[i])))
 
-  gen_qobject_types.QObject(h: fcQWebPage_virtualbase_createPlugin(self.h, struct_miqt_string(data: classid, len: csize_t(len(classid))), url.h, struct_miqt_array(len: csize_t(len(paramNames)), data: if len(paramNames) == 0: nil else: addr(paramNames_CArray[0])), struct_miqt_array(len: csize_t(len(paramValues)), data: if len(paramValues) == 0: nil else: addr(paramValues_CArray[0]))), owned: false)
+  gen_qobject_types.QObject(h: fcQWebPage_virtualbase_createPlugin(self.h, struct_miqt_string(data: if len(classid) > 0: addr classid[0] else: nil, len: csize_t(len(classid))), url.h, struct_miqt_array(len: csize_t(len(paramNames)), data: if len(paramNames) == 0: nil else: addr(paramNames_CArray[0])), struct_miqt_array(len: csize_t(len(paramValues)), data: if len(paramValues) == 0: nil else: addr(paramValues_CArray[0]))), owned: false)
 
 proc cQWebPage_vtable_callback_createPlugin(self: pointer, classid: struct_miqt_string, url: pointer, paramNames: struct_miqt_array, paramValues: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebPageVTable](fcQWebPage_vdata(self))
   let self = QWebPage(h: self)
   let vclassid_ms = classid
-  let vclassidx_ret = string.fromBytes(toOpenArrayByte(vclassid_ms.data, 0, int(vclassid_ms.len)-1))
+  let vclassidx_ret = string.fromBytes(vclassid_ms)
   c_free(vclassid_ms.data)
   let slotval1 = vclassidx_ret
   let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
@@ -1513,7 +1515,7 @@ proc cQWebPage_vtable_callback_createPlugin(self: pointer, classid: struct_miqt_
   let vparamNames_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vparamNames_ma.data)
   for i in 0 ..< vparamNames_ma.len:
     let vparamNames_lv_ms = vparamNames_outCast[i]
-    let vparamNames_lvx_ret = string.fromBytes(toOpenArrayByte(vparamNames_lv_ms.data, 0, int(vparamNames_lv_ms.len)-1))
+    let vparamNames_lvx_ret = string.fromBytes(vparamNames_lv_ms)
     c_free(vparamNames_lv_ms.data)
     vparamNamesx_ret[i] = vparamNames_lvx_ret
   c_free(vparamNames_ma.data)
@@ -1523,7 +1525,7 @@ proc cQWebPage_vtable_callback_createPlugin(self: pointer, classid: struct_miqt_
   let vparamValues_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vparamValues_ma.data)
   for i in 0 ..< vparamValues_ma.len:
     let vparamValues_lv_ms = vparamValues_outCast[i]
-    let vparamValues_lvx_ret = string.fromBytes(toOpenArrayByte(vparamValues_lv_ms.data, 0, int(vparamValues_lv_ms.len)-1))
+    let vparamValues_lvx_ret = string.fromBytes(vparamValues_lv_ms)
     c_free(vparamValues_lv_ms.data)
     vparamValuesx_ret[i] = vparamValues_lvx_ret
   c_free(vparamValues_ma.data)
@@ -1546,9 +1548,9 @@ proc cQWebPage_vtable_callback_acceptNavigationRequest(self: pointer, frame: poi
   var virtualReturn = vtbl[].acceptNavigationRequest(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QWebPagechooseFile*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: string): string =
-  let v_ms = fcQWebPage_virtualbase_chooseFile(self.h, originatingFrame.h, struct_miqt_string(data: oldFile, len: csize_t(len(oldFile))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc QWebPagechooseFile*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: openArray[char]): string =
+  let v_ms = fcQWebPage_virtualbase_chooseFile(self.h, originatingFrame.h, struct_miqt_string(data: if len(oldFile) > 0: addr oldFile[0] else: nil, len: csize_t(len(oldFile))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1557,7 +1559,7 @@ proc cQWebPage_vtable_callback_chooseFile(self: pointer, originatingFrame: point
   let self = QWebPage(h: self)
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let voldFile_ms = oldFile
-  let voldFilex_ret = string.fromBytes(toOpenArrayByte(voldFile_ms.data, 0, int(voldFile_ms.len)-1))
+  let voldFilex_ret = string.fromBytes(voldFile_ms)
   c_free(voldFile_ms.data)
   let slotval2 = voldFilex_ret
   var virtualReturn = vtbl[].chooseFile(self, slotval1, slotval2)
@@ -1565,53 +1567,53 @@ proc cQWebPage_vtable_callback_chooseFile(self: pointer, originatingFrame: point
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc QWebPagejavaScriptAlert*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): void =
-  fcQWebPage_virtualbase_javaScriptAlert(self.h, originatingFrame.h, struct_miqt_string(data: msg, len: csize_t(len(msg))))
+proc QWebPagejavaScriptAlert*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): void =
+  fcQWebPage_virtualbase_javaScriptAlert(self.h, originatingFrame.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc cQWebPage_vtable_callback_javaScriptAlert(self: pointer, originatingFrame: pointer, msg: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QWebPageVTable](fcQWebPage_vdata(self))
   let self = QWebPage(h: self)
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   vtbl[].javaScriptAlert(self, slotval1, slotval2)
 
-proc QWebPagejavaScriptConfirm*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): bool =
-  fcQWebPage_virtualbase_javaScriptConfirm(self.h, originatingFrame.h, struct_miqt_string(data: msg, len: csize_t(len(msg))))
+proc QWebPagejavaScriptConfirm*(self: gen_qwebpage_types.QWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): bool =
+  fcQWebPage_virtualbase_javaScriptConfirm(self.h, originatingFrame.h, struct_miqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc cQWebPage_vtable_callback_javaScriptConfirm(self: pointer, originatingFrame: pointer, msg: struct_miqt_string): bool {.cdecl.} =
   let vtbl = cast[ptr QWebPageVTable](fcQWebPage_vdata(self))
   let self = QWebPage(h: self)
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   var virtualReturn = vtbl[].javaScriptConfirm(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebPagejavaScriptConsoleMessage*(self: gen_qwebpage_types.QWebPage, message: string, lineNumber: cint, sourceID: string): void =
-  fcQWebPage_virtualbase_javaScriptConsoleMessage(self.h, struct_miqt_string(data: message, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: sourceID, len: csize_t(len(sourceID))))
+proc QWebPagejavaScriptConsoleMessage*(self: gen_qwebpage_types.QWebPage, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void =
+  fcQWebPage_virtualbase_javaScriptConsoleMessage(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: if len(sourceID) > 0: addr sourceID[0] else: nil, len: csize_t(len(sourceID))))
 
 proc cQWebPage_vtable_callback_javaScriptConsoleMessage(self: pointer, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QWebPageVTable](fcQWebPage_vdata(self))
   let self = QWebPage(h: self)
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval1 = vmessagex_ret
   let slotval2 = lineNumber
   let vsourceID_ms = sourceID
-  let vsourceIDx_ret = string.fromBytes(toOpenArrayByte(vsourceID_ms.data, 0, int(vsourceID_ms.len)-1))
+  let vsourceIDx_ret = string.fromBytes(vsourceID_ms)
   c_free(vsourceID_ms.data)
   let slotval3 = vsourceIDx_ret
   vtbl[].javaScriptConsoleMessage(self, slotval1, slotval2, slotval3)
 
 proc QWebPageuserAgentForUrl*(self: gen_qwebpage_types.QWebPage, url: gen_qurl_types.QUrl): string =
   let v_ms = fcQWebPage_virtualbase_userAgentForUrl(self.h, url.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1762,12 +1764,12 @@ proc cQWebPage_method_callback_createWindow(self: pointer, typeVal: cint): point
   virtualReturn.h = nil
   virtualReturn_h
 
-method createPlugin*(self: VirtualQWebPage, classid: string, url: gen_qurl_types.QUrl, paramNames: seq[string], paramValues: seq[string]): gen_qobject_types.QObject {.base.} =
+method createPlugin*(self: VirtualQWebPage, classid: openArray[char], url: gen_qurl_types.QUrl, paramNames: openArray[string], paramValues: openArray[string]): gen_qobject_types.QObject {.base.} =
   QWebPagecreatePlugin(self[], classid, url, paramNames, paramValues)
 proc cQWebPage_method_callback_createPlugin(self: pointer, classid: struct_miqt_string, url: pointer, paramNames: struct_miqt_array, paramValues: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPage](fcQWebPage_vdata(self))
   let vclassid_ms = classid
-  let vclassidx_ret = string.fromBytes(toOpenArrayByte(vclassid_ms.data, 0, int(vclassid_ms.len)-1))
+  let vclassidx_ret = string.fromBytes(vclassid_ms)
   c_free(vclassid_ms.data)
   let slotval1 = vclassidx_ret
   let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
@@ -1776,7 +1778,7 @@ proc cQWebPage_method_callback_createPlugin(self: pointer, classid: struct_miqt_
   let vparamNames_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vparamNames_ma.data)
   for i in 0 ..< vparamNames_ma.len:
     let vparamNames_lv_ms = vparamNames_outCast[i]
-    let vparamNames_lvx_ret = string.fromBytes(toOpenArrayByte(vparamNames_lv_ms.data, 0, int(vparamNames_lv_ms.len)-1))
+    let vparamNames_lvx_ret = string.fromBytes(vparamNames_lv_ms)
     c_free(vparamNames_lv_ms.data)
     vparamNamesx_ret[i] = vparamNames_lvx_ret
   c_free(vparamNames_ma.data)
@@ -1786,7 +1788,7 @@ proc cQWebPage_method_callback_createPlugin(self: pointer, classid: struct_miqt_
   let vparamValues_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vparamValues_ma.data)
   for i in 0 ..< vparamValues_ma.len:
     let vparamValues_lv_ms = vparamValues_outCast[i]
-    let vparamValues_lvx_ret = string.fromBytes(toOpenArrayByte(vparamValues_lv_ms.data, 0, int(vparamValues_lv_ms.len)-1))
+    let vparamValues_lvx_ret = string.fromBytes(vparamValues_lv_ms)
     c_free(vparamValues_lv_ms.data)
     vparamValuesx_ret[i] = vparamValues_lvx_ret
   c_free(vparamValues_ma.data)
@@ -1807,13 +1809,13 @@ proc cQWebPage_method_callback_acceptNavigationRequest(self: pointer, frame: poi
   var virtualReturn = inst.acceptNavigationRequest(slotval1, slotval2, slotval3)
   virtualReturn
 
-method chooseFile*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: string): string {.base.} =
+method chooseFile*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, oldFile: openArray[char]): string {.base.} =
   QWebPagechooseFile(self[], originatingFrame, oldFile)
 proc cQWebPage_method_callback_chooseFile(self: pointer, originatingFrame: pointer, oldFile: struct_miqt_string): struct_miqt_string {.cdecl.} =
   let inst = cast[VirtualQWebPage](fcQWebPage_vdata(self))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let voldFile_ms = oldFile
-  let voldFilex_ret = string.fromBytes(toOpenArrayByte(voldFile_ms.data, 0, int(voldFile_ms.len)-1))
+  let voldFilex_ret = string.fromBytes(voldFile_ms)
   c_free(voldFile_ms.data)
   let slotval2 = voldFilex_ret
   var virtualReturn = inst.chooseFile(slotval1, slotval2)
@@ -1821,40 +1823,40 @@ proc cQWebPage_method_callback_chooseFile(self: pointer, originatingFrame: point
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-method javaScriptAlert*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): void {.base.} =
+method javaScriptAlert*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): void {.base.} =
   QWebPagejavaScriptAlert(self[], originatingFrame, msg)
 proc cQWebPage_method_callback_javaScriptAlert(self: pointer, originatingFrame: pointer, msg: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebPage](fcQWebPage_vdata(self))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   inst.javaScriptAlert(slotval1, slotval2)
 
-method javaScriptConfirm*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: string): bool {.base.} =
+method javaScriptConfirm*(self: VirtualQWebPage, originatingFrame: gen_qwebframe_types.QWebFrame, msg: openArray[char]): bool {.base.} =
   QWebPagejavaScriptConfirm(self[], originatingFrame, msg)
 proc cQWebPage_method_callback_javaScriptConfirm(self: pointer, originatingFrame: pointer, msg: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQWebPage](fcQWebPage_vdata(self))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: originatingFrame, owned: false)
   let vmsg_ms = msg
-  let vmsgx_ret = string.fromBytes(toOpenArrayByte(vmsg_ms.data, 0, int(vmsg_ms.len)-1))
+  let vmsgx_ret = string.fromBytes(vmsg_ms)
   c_free(vmsg_ms.data)
   let slotval2 = vmsgx_ret
   var virtualReturn = inst.javaScriptConfirm(slotval1, slotval2)
   virtualReturn
 
-method javaScriptConsoleMessage*(self: VirtualQWebPage, message: string, lineNumber: cint, sourceID: string): void {.base.} =
+method javaScriptConsoleMessage*(self: VirtualQWebPage, message: openArray[char], lineNumber: cint, sourceID: openArray[char]): void {.base.} =
   QWebPagejavaScriptConsoleMessage(self[], message, lineNumber, sourceID)
 proc cQWebPage_method_callback_javaScriptConsoleMessage(self: pointer, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQWebPage](fcQWebPage_vdata(self))
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval1 = vmessagex_ret
   let slotval2 = lineNumber
   let vsourceID_ms = sourceID
-  let vsourceIDx_ret = string.fromBytes(toOpenArrayByte(vsourceID_ms.data, 0, int(vsourceID_ms.len)-1))
+  let vsourceIDx_ret = string.fromBytes(vsourceID_ms)
   c_free(vsourceID_ms.data)
   let slotval3 = vsourceIDx_ret
   inst.javaScriptConsoleMessage(slotval1, slotval2, slotval3)

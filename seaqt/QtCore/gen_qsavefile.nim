@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qsavefile.cpp", cflags).}
@@ -153,24 +155,24 @@ proc metacall*(self: gen_qsavefile_types.QSaveFile, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring): string =
   let v_ms = fcQSaveFile_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsavefile_types.QSaveFile, s: cstring): string =
   let v_ms = fcQSaveFile_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fileName*(self: gen_qsavefile_types.QSaveFile): string =
   let v_ms = fcQSaveFile_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setFileName*(self: gen_qsavefile_types.QSaveFile, name: string): void =
-  fcQSaveFile_setFileName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setFileName*(self: gen_qsavefile_types.QSaveFile, name: openArray[char]): void =
+  fcQSaveFile_setFileName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc open*(self: gen_qsavefile_types.QSaveFile, flags: cint): bool =
   fcQSaveFile_open(self.h, cint(flags))
@@ -189,25 +191,25 @@ proc directWriteFallback*(self: gen_qsavefile_types.QSaveFile): bool =
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring): string =
   let v_ms = fcQSaveFile_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSaveFile_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring): string =
   let v_ms = fcQSaveFile_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSaveFile_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -307,7 +309,7 @@ proc cQSaveFile_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
 
 proc QSaveFilefileName*(self: gen_qsavefile_types.QSaveFile): string =
   let v_ms = fcQSaveFile_virtualbase_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -791,8 +793,8 @@ proc cQSaveFile_method_callback_disconnectNotify(self: pointer, signal: pointer)
 proc setOpenMode*(self: gen_qsavefile_types.QSaveFile, openMode: cint): void =
   fcQSaveFile_protectedbase_setOpenMode(self.h, cint(openMode))
 
-proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: string): void =
-  fcQSaveFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: openArray[char]): void =
+  fcQSaveFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qsavefile_types.QSaveFile): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSaveFile_protectedbase_sender(self.h), owned: false)
@@ -807,7 +809,7 @@ proc isSignalConnected*(self: gen_qsavefile_types.QSaveFile, signal: gen_qmetaob
   fcQSaveFile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string,
+    name: openArray[char],
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
@@ -872,7 +874,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
@@ -942,7 +944,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
   gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
@@ -1007,7 +1009,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h), owned: true)
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     parent: gen_qobject_types.QObject,
@@ -1113,10 +1115,10 @@ const cQSaveFile_mvtbl = cQSaveFileVTable(
   disconnectNotify: cQSaveFile_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string,
+    name: openArray[char],
     inst: VirtualQSaveFile) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSaveFile_new(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: name, len: csize_t(len(name))))
+  inst[].h = fcQSaveFile_new(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
@@ -1126,10 +1128,10 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
   inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    name: string, parent: gen_qobject_types.QObject,
+    name: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSaveFile) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSaveFile_new3(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h)
+  inst[].h = fcQSaveFile_new3(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,

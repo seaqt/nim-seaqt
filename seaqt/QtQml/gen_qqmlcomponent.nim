@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
 {.compile("gen_qqmlcomponent.cpp", cflags).}
@@ -170,13 +172,13 @@ proc metacall*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint, param2
 
 proc tr*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring): string =
   let v_ms = fcQQmlComponent_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring): string =
   let v_ms = fcQQmlComponent_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -206,7 +208,7 @@ proc errors*(self: gen_qqmlcomponent_types.QQmlComponent): seq[gen_qqmlerror_typ
 
 proc errorString*(self: gen_qqmlcomponent_types.QQmlComponent): string =
   let v_ms = fcQQmlComponent_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -224,7 +226,7 @@ proc createWithInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, i
   var initialProperties_Values_CArray = newSeq[pointer](len(initialProperties))
   var initialProperties_ctr = 0
   for initialProperties_k in initialProperties.keys():
-    initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: initialProperties_k, len: csize_t(len(initialProperties_k)))
+    initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: if len(initialProperties_k) > 0: addr initialProperties_k[0] else: nil, len: csize_t(len(initialProperties_k)))
     initialProperties_ctr += 1
   initialProperties_ctr = 0
   for initialProperties_v in initialProperties.values():
@@ -238,7 +240,7 @@ proc setInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, componen
   var properties_Values_CArray = newSeq[pointer](len(properties))
   var properties_ctr = 0
   for properties_k in properties.keys():
-    properties_Keys_CArray[properties_ctr] = struct_miqt_string(data: properties_k, len: csize_t(len(properties_k)))
+    properties_Keys_CArray[properties_ctr] = struct_miqt_string(data: if len(properties_k) > 0: addr properties_k[0] else: nil, len: csize_t(len(properties_k)))
     properties_ctr += 1
   properties_ctr = 0
   for properties_v in properties.values():
@@ -268,7 +270,7 @@ proc loadUrl*(self: gen_qqmlcomponent_types.QQmlComponent, url: gen_qurl_types.Q
 proc loadUrl*(self: gen_qqmlcomponent_types.QQmlComponent, url: gen_qurl_types.QUrl, mode: cint): void =
   fcQQmlComponent_loadUrl2(self.h, url.h, cint(mode))
 
-proc setData*(self: gen_qqmlcomponent_types.QQmlComponent, param1: seq[byte], baseUrl: gen_qurl_types.QUrl): void =
+proc setData*(self: gen_qqmlcomponent_types.QQmlComponent, param1: openArray[byte], baseUrl: gen_qurl_types.QUrl): void =
   fcQQmlComponent_setData(self.h, struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1))), baseUrl.h)
 
 proc statusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint): void =
@@ -313,25 +315,25 @@ proc onprogressChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlC
 
 proc tr*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring, c: cstring): string =
   let v_ms = fcQQmlComponent_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQmlComponent_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring, c: cstring): string =
   let v_ms = fcQQmlComponent_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQmlComponent_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -340,7 +342,7 @@ proc createWithInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, i
   var initialProperties_Values_CArray = newSeq[pointer](len(initialProperties))
   var initialProperties_ctr = 0
   for initialProperties_k in initialProperties.keys():
-    initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: initialProperties_k, len: csize_t(len(initialProperties_k)))
+    initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: if len(initialProperties_k) > 0: addr initialProperties_k[0] else: nil, len: csize_t(len(initialProperties_k)))
     initialProperties_ctr += 1
   initialProperties_ctr = 0
   for initialProperties_v in initialProperties.values():
@@ -711,7 +713,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new2(addr(vtbl[].vtbl), addr(vtbl[]), param1.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char],
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -744,10 +746,10 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl[].vtbl.connectNotify = cQQmlComponent_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQQmlComponent_vtable_callback_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new3(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new3(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -780,7 +782,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl[].vtbl.connectNotify = cQQmlComponent_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQQmlComponent_vtable_callback_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new4(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode)), owned: true)
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new4(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode)), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl,
@@ -927,7 +929,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new8(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -960,10 +962,10 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl[].vtbl.connectNotify = cQQmlComponent_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQQmlComponent_vtable_callback_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new9(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h), owned: true)
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new9(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
@@ -996,7 +998,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl[].vtbl.connectNotify = cQQmlComponent_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQQmlComponent_vtable_callback_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new10(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode), parent.h), owned: true)
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new10(addr(vtbl[].vtbl), addr(vtbl[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode), parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, parent: gen_qobject_types.QObject,
@@ -1103,17 +1105,17 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char],
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlComponent_new3(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+  inst[].h = fcQQmlComponent_new3(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlComponent_new4(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode))
+  inst[].h = fcQQmlComponent_new4(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode))
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
@@ -1145,17 +1147,17 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlComponent_new9(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h)
+  inst[].h = fcQQmlComponent_new9(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
-    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: openArray[char], mode: cint, parent: gen_qobject_types.QObject,
     inst: VirtualQQmlComponent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQQmlComponent_new10(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode), parent.h)
+  inst[].h = fcQQmlComponent_new10(addr(cQQmlComponent_mvtbl), addr(inst[]), param1.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(mode), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,

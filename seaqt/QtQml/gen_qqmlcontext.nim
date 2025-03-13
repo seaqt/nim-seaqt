@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qqmlcontext_types
@@ -123,13 +125,13 @@ proc metacall*(self: gen_qqmlcontext_types.QQmlContext, param1: cint, param2: ci
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring): string =
   let v_ms = fcQQmlContext_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring): string =
   let v_ms = fcQQmlContext_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -148,16 +150,16 @@ proc contextObject*(self: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.
 proc setContextObject*(self: gen_qqmlcontext_types.QQmlContext, contextObject: gen_qobject_types.QObject): void =
   fcQQmlContext_setContextObject(self.h, contextObject.h)
 
-proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1)))), owned: true)
+proc contextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlContext_contextProperty(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
 
-proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string, param2: gen_qobject_types.QObject): void =
-  fcQQmlContext_setContextProperty(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), param2.h)
+proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qobject_types.QObject): void =
+  fcQQmlContext_setContextProperty(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
-proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: string, param2: gen_qvariant_types.QVariant): void =
-  fcQQmlContext_setContextProperty2(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), param2.h)
+proc setContextProperty*(self: gen_qqmlcontext_types.QQmlContext, param1: openArray[char], param2: gen_qvariant_types.QVariant): void =
+  fcQQmlContext_setContextProperty2(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), param2.h)
 
-proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: seq[gen_qqmlcontext_types.QQmlContextPropertyPair]): void =
+proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: openArray[gen_qqmlcontext_types.QQmlContextPropertyPair]): void =
   var properties_CArray = newSeq[pointer](len(properties))
   for i in 0..<len(properties):
     properties_CArray[i] = properties[i].h
@@ -166,7 +168,7 @@ proc setContextProperties*(self: gen_qqmlcontext_types.QQmlContext, properties: 
 
 proc nameForObject*(self: gen_qqmlcontext_types.QQmlContext, param1: gen_qobject_types.QObject): string =
   let v_ms = fcQQmlContext_nameForObject(self.h, param1.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -181,25 +183,25 @@ proc baseUrl*(self: gen_qqmlcontext_types.QQmlContext): gen_qurl_types.QUrl =
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring): string =
   let v_ms = fcQQmlContext_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQmlContext_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring): string =
   let v_ms = fcQQmlContext_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQmlContext_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

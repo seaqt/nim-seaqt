@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
 {.compile("gen_qgraphicswebview.cpp", cflags).}
@@ -318,13 +320,13 @@ proc metacall*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint, 
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring): string =
   let v_ms = fcQGraphicsWebView_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring): string =
   let v_ms = fcQGraphicsWebView_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -342,7 +344,7 @@ proc setUrl*(self: gen_qgraphicswebview_types.QGraphicsWebView, url: gen_qurl_ty
 
 proc title*(self: gen_qgraphicswebview_types.QGraphicsWebView): string =
   let v_ms = fcQGraphicsWebView_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -364,10 +366,10 @@ proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, url: gen_qurl_type
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest): void =
   fcQGraphicsWebView_loadWithRequest(self.h, request.h)
 
-proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: string): void =
-  fcQGraphicsWebView_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: openArray[char]): void =
+  fcQGraphicsWebView_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: seq[byte]): void =
+proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte]): void =
   fcQGraphicsWebView_setContent(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc history*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qwebhistory_types.QWebHistory =
@@ -382,8 +384,8 @@ proc pageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint
 proc triggerPageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint): void =
   fcQGraphicsWebView_triggerPageAction(self.h, cint(action))
 
-proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: string): bool =
-  fcQGraphicsWebView_findText(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))))
+proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: openArray[char]): bool =
+  fcQGraphicsWebView_findText(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc resizesToContents*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_resizesToContents(self.h)
@@ -517,14 +519,14 @@ proc onurlChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGra
   GC_ref(tmp)
   fcQGraphicsWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_urlChanged, cQGraphicsWebView_slot_callback_urlChanged_release)
 
-proc titleChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: string): void =
-  fcQGraphicsWebView_titleChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc titleChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: openArray[char]): void =
+  fcQGraphicsWebView_titleChanged(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QGraphicsWebViewtitleChangedSlot* = proc(param1: string)
+type QGraphicsWebViewtitleChangedSlot* = proc(param1: openArray[char])
 proc cQGraphicsWebView_slot_callback_titleChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewtitleChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -558,14 +560,14 @@ proc oniconChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
   GC_ref(tmp)
   fcQGraphicsWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_iconChanged, cQGraphicsWebView_slot_callback_iconChanged_release)
 
-proc statusBarMessage*(self: gen_qgraphicswebview_types.QGraphicsWebView, message: string): void =
-  fcQGraphicsWebView_statusBarMessage(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
+proc statusBarMessage*(self: gen_qgraphicswebview_types.QGraphicsWebView, message: openArray[char]): void =
+  fcQGraphicsWebView_statusBarMessage(self.h, struct_miqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
-type QGraphicsWebViewstatusBarMessageSlot* = proc(message: string)
+type QGraphicsWebViewstatusBarMessageSlot* = proc(message: openArray[char])
 proc cQGraphicsWebView_slot_callback_statusBarMessage(slot: int, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewstatusBarMessageSlot](cast[pointer](slot))
   let vmessage_ms = message
-  let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
+  let vmessagex_ret = string.fromBytes(vmessage_ms)
   c_free(vmessage_ms.data)
   let slotval1 = vmessagex_ret
 
@@ -603,48 +605,48 @@ proc onlinkClicked*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsWebView_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsWebView_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsWebView_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsWebView_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint): void =
   fcQGraphicsWebView_load2(self.h, request.h, cint(operation))
 
-proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: seq[byte]): void =
+proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: openArray[byte]): void =
   fcQGraphicsWebView_load3(self.h, request.h, cint(operation), struct_miqt_string(data: cast[cstring](if len(body) == 0: nil else: unsafeAddr body[0]), len: csize_t(len(body))))
 
-proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQGraphicsWebView_setHtml2(self.h, struct_miqt_string(data: html, len: csize_t(len(html))), baseUrl.h)
+proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQGraphicsWebView_setHtml2(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
-proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: seq[byte], mimeType: string): void =
-  fcQGraphicsWebView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte], mimeType: openArray[char]): void =
+  fcQGraphicsWebView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
-proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: seq[byte], mimeType: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQGraphicsWebView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), baseUrl.h)
+proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQGraphicsWebView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint, checked: bool): void =
   fcQGraphicsWebView_triggerPageAction2(self.h, cint(action), checked)
 
-proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: string, options: cint): bool =
-  fcQGraphicsWebView_findText2(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))), cint(options))
+proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: openArray[char], options: cint): bool =
+  fcQGraphicsWebView_findText2(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 proc setRenderHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint, enabled: bool): void =
   fcQGraphicsWebView_setRenderHint2(self.h, cint(param1), enabled)
@@ -684,7 +686,7 @@ type QGraphicsWebViewpaintWindowFrameProc* = proc(self: QGraphicsWebView, painte
 type QGraphicsWebViewboundingRectProc* = proc(self: QGraphicsWebView): gen_qrect_types.QRectF {.raises: [], gcsafe.}
 type QGraphicsWebViewshapeProc* = proc(self: QGraphicsWebView): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
 type QGraphicsWebViewinitStyleOptionProc* = proc(self: QGraphicsWebView, option: gen_qstyleoption_types.QStyleOption): void {.raises: [], gcsafe.}
-type QGraphicsWebViewpropertyChangeProc* = proc(self: QGraphicsWebView, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsWebViewpropertyChangeProc* = proc(self: QGraphicsWebView, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QGraphicsWebViewwindowFrameEventProc* = proc(self: QGraphicsWebView, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGraphicsWebViewwindowFrameSectionAtProc* = proc(self: QGraphicsWebView, pos: gen_qpoint_types.QPointF): cint {.raises: [], gcsafe.}
 type QGraphicsWebViewchangeEventProc* = proc(self: QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
@@ -1134,14 +1136,14 @@ proc cQGraphicsWebView_vtable_callback_initStyleOption(self: pointer, option: po
   let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QGraphicsWebViewpropertyChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_propertyChange(self.h, struct_miqt_string(data: propertyName, len: csize_t(len(propertyName))), value.h), owned: true)
+proc QGraphicsWebViewpropertyChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_propertyChange(self.h, struct_miqt_string(data: if len(propertyName) > 0: addr propertyName[0] else: nil, len: csize_t(len(propertyName))), value.h), owned: true)
 
 proc cQGraphicsWebView_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1724,12 +1726,12 @@ proc cQGraphicsWebView_method_callback_initStyleOption(self: pointer, option: po
   let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method propertyChange*(self: VirtualQGraphicsWebView, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
+method propertyChange*(self: VirtualQGraphicsWebView, propertyName: openArray[char], value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWebViewpropertyChange(self[], propertyName, value)
 proc cQGraphicsWebView_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let vpropertyName_ms = propertyName
-  let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
+  let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)

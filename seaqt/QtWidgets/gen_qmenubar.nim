@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qmenubar.cpp", cflags).}
@@ -242,27 +244,27 @@ proc metacall*(self: gen_qmenubar_types.QMenuBar, param1: cint, param2: cint, pa
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
   let v_ms = fcQMenuBar_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
   let v_ms = fcQMenuBar_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc addAction*(self: gen_qmenubar_types.QMenuBar, text: string): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenuBar_addAction(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: false)
+proc addAction*(self: gen_qmenubar_types.QMenuBar, text: openArray[char]): gen_qaction_types.QAction =
+  gen_qaction_types.QAction(h: fcQMenuBar_addAction(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addMenu*(self: gen_qmenubar_types.QMenuBar, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenuBar_addMenu(self.h, menu.h), owned: false)
 
-proc addMenu*(self: gen_qmenubar_types.QMenuBar, title: string): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuWithTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title)))), owned: false)
+proc addMenu*(self: gen_qmenubar_types.QMenuBar, title: openArray[char]): gen_qmenu_types.QMenu =
+  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuWithTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
-proc addMenu*(self: gen_qmenubar_types.QMenuBar, icon: gen_qicon_types.QIcon, title: string): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenu2(self.h, icon.h, struct_miqt_string(data: title, len: csize_t(len(title)))), owned: false)
+proc addMenu*(self: gen_qmenubar_types.QMenuBar, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
+  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenu2(self.h, icon.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenubar_types.QMenuBar): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenuBar_addSeparator(self.h), owned: false)
@@ -360,25 +362,25 @@ proc onhovered*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarhoveredSlot) =
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring): string =
   let v_ms = fcQMenuBar_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMenuBar_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring): string =
   let v_ms = fcQMenuBar_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMenuBar_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -426,7 +428,7 @@ type QMenuBardragLeaveEventProc* = proc(self: QMenuBar, event: gen_qevent_types.
 type QMenuBardropEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QMenuBarshowEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QMenuBarhideEventProc* = proc(self: QMenuBar, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QMenuBarnativeEventProc* = proc(self: QMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QMenuBarnativeEventProc* = proc(self: QMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QMenuBarmetricProc* = proc(self: QMenuBar, param1: cint): cint {.raises: [], gcsafe.}
 type QMenuBarinitPainterProc* = proc(self: QMenuBar, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QMenuBarredirectedProc* = proc(self: QMenuBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -852,14 +854,14 @@ proc cQMenuBar_vtable_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QMenuBarnativeEvent*(self: gen_qmenubar_types.QMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QMenuBarnativeEvent*(self: gen_qmenubar_types.QMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQMenuBar_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQMenuBar_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QMenuBarVTable](fcQMenuBar_vdata(self))
   let self = QMenuBar(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1267,12 +1269,12 @@ proc cQMenuBar_method_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQMenuBar, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQMenuBar, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QMenuBarnativeEvent(self[], eventType, message, resultVal)
 proc cQMenuBar_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQMenuBar](fcQMenuBar_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QCborStreamReaderTypeEnum* = distinct uint8
@@ -132,7 +134,7 @@ proc setDevice*(self: gen_qcborstreamreader_types.QCborStreamReader, device: gen
 proc device*(self: gen_qcborstreamreader_types.QCborStreamReader): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQCborStreamReader_device(self.h), owned: false)
 
-proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: seq[byte]): void =
+proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: openArray[byte]): void =
   fcQCborStreamReader_addData(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: cstring, len: int64): void =
@@ -288,7 +290,7 @@ proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
   gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new3(data, len), owned: true)
 
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,
-    data: seq[byte]): gen_qcborstreamreader_types.QCborStreamReader =
+    data: openArray[byte]): gen_qcborstreamreader_types.QCborStreamReader =
   gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new4(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))), owned: true)
 
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader,

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QQmlPropertyPropertyTypeCategoryEnum* = distinct cint
@@ -130,33 +132,33 @@ proc propertyTypeName*(self: gen_qqmlproperty_types.QQmlProperty): cstring =
 
 proc name*(self: gen_qqmlproperty_types.QQmlProperty): string =
   let v_ms = fcQQmlProperty_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc read*(self: gen_qqmlproperty_types.QQmlProperty): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlProperty_read(self.h), owned: true)
 
-proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read2(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))), owned: true)
+proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read2(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: true)
 
-proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlcontext_types.QQmlContext): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h), owned: true)
+proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlcontext_types.QQmlContext): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read3(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
-proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlengine_types.QQmlEngine): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read4(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h), owned: true)
+proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlengine_types.QQmlEngine): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read4(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
 proc write*(self: gen_qqmlproperty_types.QQmlProperty, param1: gen_qvariant_types.QVariant): bool =
   fcQQmlProperty_write(self.h, param1.h)
 
-proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qvariant_types.QVariant): bool =
-  fcQQmlProperty_write2(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h)
+proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant): bool =
+  fcQQmlProperty_write2(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h)
 
-proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qvariant_types.QVariant, param4: gen_qqmlcontext_types.QQmlContext): bool =
-  fcQQmlProperty_write3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h, param4.h)
+proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant, param4: gen_qqmlcontext_types.QQmlContext): bool =
+  fcQQmlProperty_write3(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
 
-proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qvariant_types.QVariant, param4: gen_qqmlengine_types.QQmlEngine): bool =
-  fcQQmlProperty_write4(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h, param4.h)
+proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant, param4: gen_qqmlengine_types.QQmlEngine): bool =
+  fcQQmlProperty_write4(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
 
 proc reset*(self: gen_qqmlproperty_types.QQmlProperty): bool =
   fcQQmlProperty_reset(self.h)
@@ -210,16 +212,16 @@ proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
   gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new4(param1.h, param2.h), owned: true)
 
 proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
-    param1: gen_qobject_types.QObject, param2: string): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new5(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))), owned: true)
+    param1: gen_qobject_types.QObject, param2: openArray[char]): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new5(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: true)
 
 proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
-    param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new6(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h), owned: true)
+    param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new6(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
 proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
-    param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new7(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h), owned: true)
+    param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new7(param1.h, struct_miqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
 proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
     param1: gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =

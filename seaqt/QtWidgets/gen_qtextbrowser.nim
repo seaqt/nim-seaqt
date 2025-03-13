@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qtextbrowser.cpp", cflags).}
@@ -286,13 +288,13 @@ proc metacall*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint, param2: 
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
   let v_ms = fcQTextBrowser_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
   let v_ms = fcQTextBrowser_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -308,16 +310,16 @@ proc searchPaths*(self: gen_qtextbrowser_types.QTextBrowser): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc setSearchPaths*(self: gen_qtextbrowser_types.QTextBrowser, paths: seq[string]): void =
+proc setSearchPaths*(self: gen_qtextbrowser_types.QTextBrowser, paths: openArray[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
   for i in 0..<len(paths):
-    paths_CArray[i] = struct_miqt_string(data: paths[i], len: csize_t(len(paths[i])))
+    paths_CArray[i] = struct_miqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
   fcQTextBrowser_setSearchPaths(self.h, struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
@@ -335,7 +337,7 @@ proc clearHistory*(self: gen_qtextbrowser_types.QTextBrowser): void =
 
 proc historyTitle*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint): string =
   let v_ms = fcQTextBrowser_historyTitle(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -476,14 +478,14 @@ proc onhighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowse
   GC_ref(tmp)
   fcQTextBrowser_connect_highlighted(self.h, cast[int](addr tmp[]), cQTextBrowser_slot_callback_highlighted, cQTextBrowser_slot_callback_highlighted_release)
 
-proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: string): void =
-  fcQTextBrowser_highlightedWithQString(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: openArray[char]): void =
+  fcQTextBrowser_highlightedWithQString(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QTextBrowserhighlightedWithQStringSlot* = proc(param1: string)
+type QTextBrowserhighlightedWithQStringSlot* = proc(param1: openArray[char])
 proc cQTextBrowser_slot_callback_highlightedWithQString(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserhighlightedWithQStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -521,25 +523,25 @@ proc onanchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrow
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring): string =
   let v_ms = fcQTextBrowser_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTextBrowser_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring): string =
   let v_ms = fcQTextBrowser_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTextBrowser_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -598,7 +600,7 @@ type QTextBrowsercloseEventProc* = proc(self: QTextBrowser, event: gen_qevent_ty
 type QTextBrowsertabletEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QTextBrowseractionEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QTextBrowserhideEventProc* = proc(self: QTextBrowser, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QTextBrowsernativeEventProc* = proc(self: QTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QTextBrowsernativeEventProc* = proc(self: QTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QTextBrowsermetricProc* = proc(self: QTextBrowser, param1: cint): cint {.raises: [], gcsafe.}
 type QTextBrowserinitPainterProc* = proc(self: QTextBrowser, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTextBrowserredirectedProc* = proc(self: QTextBrowser, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1203,14 +1205,14 @@ proc cQTextBrowser_vtable_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QTextBrowsernativeEvent*(self: gen_qtextbrowser_types.QTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QTextBrowsernativeEvent*(self: gen_qtextbrowser_types.QTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQTextBrowser_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQTextBrowser_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self))
   let self = QTextBrowser(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1720,12 +1722,12 @@ proc cQTextBrowser_method_callback_hideEvent(self: pointer, event: pointer): voi
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTextBrowser, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQTextBrowser, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QTextBrowsernativeEvent(self[], eventType, message, resultVal)
 proc cQTextBrowser_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

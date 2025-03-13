@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QSGMaterialRhiShaderFlagEnum* = distinct cint
@@ -355,19 +357,19 @@ proc cQSGMaterialRhiShader_method_callback_fragmentShader(self: pointer): cstrin
   var virtualReturn = inst.fragmentShader()
   virtualReturn
 
-proc setShaderFileName*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, stage: cint, filename: string): void =
-  fcQSGMaterialRhiShader_protectedbase_setShaderFileName(self.h, cint(stage), struct_miqt_string(data: filename, len: csize_t(len(filename))))
+proc setShaderFileName*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, stage: cint, filename: openArray[char]): void =
+  fcQSGMaterialRhiShader_protectedbase_setShaderFileName(self.h, cint(stage), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc setShader*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, stage: cint, shader: ptr QShader): void =
   fcQSGMaterialRhiShader_protectedbase_setShader(self.h, cint(stage), shader)
 
-proc setShaderSourceFile*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, typeVal: QOpenGLShaderShaderType, sourceFile: string): void =
-  fcQSGMaterialRhiShader_protectedbase_setShaderSourceFile(self.h, typeVal, struct_miqt_string(data: sourceFile, len: csize_t(len(sourceFile))))
+proc setShaderSourceFile*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, typeVal: QOpenGLShaderShaderType, sourceFile: openArray[char]): void =
+  fcQSGMaterialRhiShader_protectedbase_setShaderSourceFile(self.h, typeVal, struct_miqt_string(data: if len(sourceFile) > 0: addr sourceFile[0] else: nil, len: csize_t(len(sourceFile))))
 
-proc setShaderSourceFiles*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, typeVal: QOpenGLShaderShaderType, sourceFiles: seq[string]): void =
+proc setShaderSourceFiles*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, typeVal: QOpenGLShaderShaderType, sourceFiles: openArray[string]): void =
   var sourceFiles_CArray = newSeq[struct_miqt_string](len(sourceFiles))
   for i in 0..<len(sourceFiles):
-    sourceFiles_CArray[i] = struct_miqt_string(data: sourceFiles[i], len: csize_t(len(sourceFiles[i])))
+    sourceFiles_CArray[i] = struct_miqt_string(data: if len(sourceFiles[i]) > 0: addr sourceFiles[i][0] else: nil, len: csize_t(len(sourceFiles[i])))
 
   fcQSGMaterialRhiShader_protectedbase_setShaderSourceFiles(self.h, typeVal, struct_miqt_array(len: csize_t(len(sourceFiles)), data: if len(sourceFiles) == 0: nil else: addr(sourceFiles_CArray[0])))
 
@@ -457,7 +459,7 @@ proc devicePixelRatio*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader
 
 proc uniformData*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState): seq[byte] =
   var v_bytearray = fcQSGMaterialRhiShaderRenderState_uniformData(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 

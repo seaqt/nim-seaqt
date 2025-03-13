@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qcoreapplication.cpp", cflags).}
@@ -177,13 +179,13 @@ proc metacall*(self: gen_qcoreapplication_types.QCoreApplication, param1: cint, 
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring): string =
   let v_ms = fcQCoreApplication_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring): string =
   let v_ms = fcQCoreApplication_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -193,7 +195,7 @@ proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -205,39 +207,39 @@ proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribut
 proc testAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): bool =
   fcQCoreApplication_testAttribute(cint(attribute))
 
-proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: string): void =
-  fcQCoreApplication_setOrganizationDomain(struct_miqt_string(data: orgDomain, len: csize_t(len(orgDomain))))
+proc setOrganizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication, orgDomain: openArray[char]): void =
+  fcQCoreApplication_setOrganizationDomain(struct_miqt_string(data: if len(orgDomain) > 0: addr orgDomain[0] else: nil, len: csize_t(len(orgDomain))))
 
 proc organizationDomain*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_organizationDomain()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: string): void =
-  fcQCoreApplication_setOrganizationName(struct_miqt_string(data: orgName, len: csize_t(len(orgName))))
+proc setOrganizationName*(_: type gen_qcoreapplication_types.QCoreApplication, orgName: openArray[char]): void =
+  fcQCoreApplication_setOrganizationName(struct_miqt_string(data: if len(orgName) > 0: addr orgName[0] else: nil, len: csize_t(len(orgName))))
 
 proc organizationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_organizationName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: string): void =
-  fcQCoreApplication_setApplicationName(struct_miqt_string(data: application, len: csize_t(len(application))))
+proc setApplicationName*(_: type gen_qcoreapplication_types.QCoreApplication, application: openArray[char]): void =
+  fcQCoreApplication_setApplicationName(struct_miqt_string(data: if len(application) > 0: addr application[0] else: nil, len: csize_t(len(application))))
 
 proc applicationName*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationName()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: string): void =
-  fcQCoreApplication_setApplicationVersion(struct_miqt_string(data: version, len: csize_t(len(version))))
+proc setApplicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication, version: openArray[char]): void =
+  fcQCoreApplication_setApplicationVersion(struct_miqt_string(data: if len(version) > 0: addr version[0] else: nil, len: csize_t(len(version))))
 
 proc applicationVersion*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationVersion()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -294,23 +296,23 @@ proc closingDown*(_: type gen_qcoreapplication_types.QCoreApplication): bool =
 
 proc applicationDirPath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationDirPath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc applicationFilePath*(_: type gen_qcoreapplication_types.QCoreApplication): string =
   let v_ms = fcQCoreApplication_applicationFilePath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc applicationPid*(_: type gen_qcoreapplication_types.QCoreApplication): clonglong =
   fcQCoreApplication_applicationPid()
 
-proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: seq[string]): void =
+proc setLibraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, libraryPaths: openArray[string]): void =
   var libraryPaths_CArray = newSeq[struct_miqt_string](len(libraryPaths))
   for i in 0..<len(libraryPaths):
-    libraryPaths_CArray[i] = struct_miqt_string(data: libraryPaths[i], len: csize_t(len(libraryPaths[i])))
+    libraryPaths_CArray[i] = struct_miqt_string(data: if len(libraryPaths[i]) > 0: addr libraryPaths[i][0] else: nil, len: csize_t(len(libraryPaths[i])))
 
   fcQCoreApplication_setLibraryPaths(struct_miqt_array(len: csize_t(len(libraryPaths)), data: if len(libraryPaths) == 0: nil else: addr(libraryPaths_CArray[0])))
 
@@ -320,17 +322,17 @@ proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication): seq[str
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: string): void =
-  fcQCoreApplication_addLibraryPath(struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
+  fcQCoreApplication_addLibraryPath(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-proc removeLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: string): void =
-  fcQCoreApplication_removeLibraryPath(struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc removeLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: openArray[char]): void =
+  fcQCoreApplication_removeLibraryPath(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc installTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, messageFile: gen_qtranslator_types.QTranslator): bool =
   fcQCoreApplication_installTranslator(messageFile.h)
@@ -340,7 +342,7 @@ proc removeTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, mess
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring): string =
   let v_ms = fcQCoreApplication_translate(context, key)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -436,25 +438,25 @@ proc onapplicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplicat
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
   let v_ms = fcQCoreApplication_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCoreApplication_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
   let v_ms = fcQCoreApplication_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCoreApplication_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -481,13 +483,13 @@ proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, re
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring): string =
   let v_ms = fcQCoreApplication_translate3(context, key, disambiguation)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring, n: cint): string =
   let v_ms = fcQCoreApplication_translate4(context, key, disambiguation, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

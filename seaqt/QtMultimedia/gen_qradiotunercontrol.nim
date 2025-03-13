@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qradiotunercontrol.cpp", cflags).}
@@ -124,13 +126,13 @@ proc metacall*(self: gen_qradiotunercontrol_types.QRadioTunerControl, param1: ci
 
 proc tr*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring): string =
   let v_ms = fcQRadioTunerControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring): string =
   let v_ms = fcQRadioTunerControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -220,7 +222,7 @@ proc error*(self: gen_qradiotunercontrol_types.QRadioTunerControl): cint =
 
 proc errorString*(self: gen_qradiotunercontrol_types.QRadioTunerControl): string =
   let v_ms = fcQRadioTunerControl_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -404,16 +406,16 @@ proc onerror*(self: gen_qradiotunercontrol_types.QRadioTunerControl, slot: QRadi
   GC_ref(tmp)
   fcQRadioTunerControl_connect_errorWithErr(self.h, cast[int](addr tmp[]), cQRadioTunerControl_slot_callback_errorWithErr, cQRadioTunerControl_slot_callback_errorWithErr_release)
 
-proc stationFound*(self: gen_qradiotunercontrol_types.QRadioTunerControl, frequency: cint, stationId: string): void =
-  fcQRadioTunerControl_stationFound(self.h, frequency, struct_miqt_string(data: stationId, len: csize_t(len(stationId))))
+proc stationFound*(self: gen_qradiotunercontrol_types.QRadioTunerControl, frequency: cint, stationId: openArray[char]): void =
+  fcQRadioTunerControl_stationFound(self.h, frequency, struct_miqt_string(data: if len(stationId) > 0: addr stationId[0] else: nil, len: csize_t(len(stationId))))
 
-type QRadioTunerControlstationFoundSlot* = proc(frequency: cint, stationId: string)
+type QRadioTunerControlstationFoundSlot* = proc(frequency: cint, stationId: openArray[char])
 proc cQRadioTunerControl_slot_callback_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerControlstationFoundSlot](cast[pointer](slot))
   let slotval1 = frequency
 
   let vstationId_ms = stationId
-  let vstationIdx_ret = string.fromBytes(toOpenArrayByte(vstationId_ms.data, 0, int(vstationId_ms.len)-1))
+  let vstationIdx_ret = string.fromBytes(vstationId_ms)
   c_free(vstationId_ms.data)
   let slotval2 = vstationIdx_ret
 
@@ -451,25 +453,25 @@ proc onantennaConnectedChanged*(self: gen_qradiotunercontrol_types.QRadioTunerCo
 
 proc tr*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring, c: cstring): string =
   let v_ms = fcQRadioTunerControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQRadioTunerControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring, c: cstring): string =
   let v_ms = fcQRadioTunerControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQRadioTunerControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

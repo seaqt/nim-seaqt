@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QAudioFormatSampleTypeEnum* = distinct cint
@@ -105,12 +107,12 @@ proc setSampleSize*(self: gen_qaudioformat_types.QAudioFormat, sampleSize: cint)
 proc sampleSize*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_sampleSize(self.h)
 
-proc setCodec*(self: gen_qaudioformat_types.QAudioFormat, codec: string): void =
-  fcQAudioFormat_setCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setCodec*(self: gen_qaudioformat_types.QAudioFormat, codec: openArray[char]): void =
+  fcQAudioFormat_setCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc codec*(self: gen_qaudioformat_types.QAudioFormat): string =
   let v_ms = fcQAudioFormat_codec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

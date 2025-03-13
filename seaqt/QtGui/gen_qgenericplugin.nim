@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qgenericplugin.cpp", cflags).}
@@ -104,47 +106,47 @@ proc metacall*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cint, para
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring): string =
   let v_ms = fcQGenericPlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring): string =
   let v_ms = fcQGenericPlugin_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qgenericplugin_types.QGenericPlugin, name: string, spec: string): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGenericPlugin_create(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: spec, len: csize_t(len(spec)))), owned: false)
+proc create*(self: gen_qgenericplugin_types.QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGenericPlugin_create(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(spec) > 0: addr spec[0] else: nil, len: csize_t(len(spec)))), owned: false)
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQGenericPlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGenericPlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQGenericPlugin_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGenericPlugin_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QGenericPluginmetaObjectProc* = proc(self: QGenericPlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGenericPluginmetacastProc* = proc(self: QGenericPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QGenericPluginmetacallProc* = proc(self: QGenericPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QGenericPlugincreateProc* = proc(self: QGenericPlugin, name: string, spec: string): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QGenericPlugincreateProc* = proc(self: QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QGenericPlugineventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugineventFilterProc* = proc(self: QGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugintimerEventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -203,11 +205,11 @@ proc cQGenericPlugin_vtable_callback_create(self: pointer, name: struct_miqt_str
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let vname_ms = name
-  let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
+  let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   let vspec_ms = spec
-  let vspecx_ret = string.fromBytes(toOpenArrayByte(vspec_ms.data, 0, int(vspec_ms.len)-1))
+  let vspecx_ret = string.fromBytes(vspec_ms)
   c_free(vspec_ms.data)
   let slotval2 = vspecx_ret
   var virtualReturn = vtbl[].create(self, slotval1, slotval2)
@@ -312,16 +314,16 @@ proc cQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQGenericPlugin, name: string, spec: string): gen_qobject_types.QObject {.base.} =
+method create*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
   raiseAssert("missing implementation of QGenericPlugin_virtualbase_create")
 proc cQGenericPlugin_method_callback_create(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let vname_ms = name
-  let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
+  let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   let vspec_ms = spec
-  let vspecx_ret = string.fromBytes(toOpenArrayByte(vspec_ms.data, 0, int(vspec_ms.len)-1))
+  let vspecx_ret = string.fromBytes(vspec_ms)
   c_free(vspec_ms.data)
   let slotval2 = vspecx_ret
   var virtualReturn = inst.create(slotval1, slotval2)

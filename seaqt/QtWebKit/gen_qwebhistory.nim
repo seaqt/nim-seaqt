@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qwebhistory_types
@@ -92,7 +94,7 @@ proc url*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qurl_types.QUrl =
 
 proc title*(self: gen_qwebhistory_types.QWebHistoryItem): string =
   let v_ms = fcQWebHistoryItem_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -118,7 +120,7 @@ proc toMap*(self: gen_qwebhistory_types.QWebHistoryItem): Table[string,gen_qvari
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -134,7 +136,7 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistoryItem, map: Table[string
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
   for map_k in map.keys():
-    map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
+    map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_ctr += 1
   map_ctr = 0
   for map_v in map.values():
@@ -223,7 +225,7 @@ proc toMap*(self: gen_qwebhistory_types.QWebHistory): Table[string,gen_qvariant_
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -239,7 +241,7 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistory, map: Table[string,gen
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
   for map_k in map.keys():
-    map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
+    map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_ctr += 1
   map_ctr = 0
   for map_v in map.values():

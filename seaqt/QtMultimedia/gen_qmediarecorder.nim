@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediarecorder.cpp", cflags).}
@@ -213,13 +215,13 @@ proc metacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, para
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring): string =
   let v_ms = fcQMediaRecorder_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring): string =
   let v_ms = fcQMediaRecorder_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -252,7 +254,7 @@ proc error*(self: gen_qmediarecorder_types.QMediaRecorder): cint =
 
 proc errorString*(self: gen_qmediarecorder_types.QMediaRecorder): string =
   let v_ms = fcQMediaRecorder_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -271,15 +273,15 @@ proc supportedContainers*(self: gen_qmediarecorder_types.QMediaRecorder): seq[st
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc containerDescription*(self: gen_qmediarecorder_types.QMediaRecorder, format: string): string =
-  let v_ms = fcQMediaRecorder_containerDescription(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc containerDescription*(self: gen_qmediarecorder_types.QMediaRecorder, format: openArray[char]): string =
+  let v_ms = fcQMediaRecorder_containerDescription(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -289,15 +291,15 @@ proc supportedAudioCodecs*(self: gen_qmediarecorder_types.QMediaRecorder): seq[s
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc audioCodecDescription*(self: gen_qmediarecorder_types.QMediaRecorder, codecName: string): string =
-  let v_ms = fcQMediaRecorder_audioCodecDescription(self.h, struct_miqt_string(data: codecName, len: csize_t(len(codecName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc audioCodecDescription*(self: gen_qmediarecorder_types.QMediaRecorder, codecName: openArray[char]): string =
+  let v_ms = fcQMediaRecorder_audioCodecDescription(self.h, struct_miqt_string(data: if len(codecName) > 0: addr codecName[0] else: nil, len: csize_t(len(codecName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -316,15 +318,15 @@ proc supportedVideoCodecs*(self: gen_qmediarecorder_types.QMediaRecorder): seq[s
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc videoCodecDescription*(self: gen_qmediarecorder_types.QMediaRecorder, codecName: string): string =
-  let v_ms = fcQMediaRecorder_videoCodecDescription(self.h, struct_miqt_string(data: codecName, len: csize_t(len(codecName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc videoCodecDescription*(self: gen_qmediarecorder_types.QMediaRecorder, codecName: openArray[char]): string =
+  let v_ms = fcQMediaRecorder_videoCodecDescription(self.h, struct_miqt_string(data: if len(codecName) > 0: addr codecName[0] else: nil, len: csize_t(len(codecName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -354,7 +356,7 @@ proc videoSettings*(self: gen_qmediarecorder_types.QMediaRecorder): gen_qmediaen
 
 proc containerFormat*(self: gen_qmediarecorder_types.QMediaRecorder): string =
   let v_ms = fcQMediaRecorder_containerFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -364,8 +366,8 @@ proc setAudioSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSetti
 proc setVideoSettings*(self: gen_qmediarecorder_types.QMediaRecorder, videoSettings: gen_qmediaencodersettings_types.QVideoEncoderSettings): void =
   fcQMediaRecorder_setVideoSettings(self.h, videoSettings.h)
 
-proc setContainerFormat*(self: gen_qmediarecorder_types.QMediaRecorder, container: string): void =
-  fcQMediaRecorder_setContainerFormat(self.h, struct_miqt_string(data: container, len: csize_t(len(container))))
+proc setContainerFormat*(self: gen_qmediarecorder_types.QMediaRecorder, container: openArray[char]): void =
+  fcQMediaRecorder_setContainerFormat(self.h, struct_miqt_string(data: if len(container) > 0: addr container[0] else: nil, len: csize_t(len(container))))
 
 proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSettings: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
   fcQMediaRecorder_setEncodingSettings(self.h, audioSettings.h)
@@ -376,11 +378,11 @@ proc isMetaDataAvailable*(self: gen_qmediarecorder_types.QMediaRecorder): bool =
 proc isMetaDataWritable*(self: gen_qmediarecorder_types.QMediaRecorder): bool =
   fcQMediaRecorder_isMetaDataWritable(self.h)
 
-proc metaData*(self: gen_qmediarecorder_types.QMediaRecorder, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMediaRecorder_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+proc metaData*(self: gen_qmediarecorder_types.QMediaRecorder, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQMediaRecorder_metaData(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
-proc setMetaData*(self: gen_qmediarecorder_types.QMediaRecorder, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQMediaRecorder_setMetaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc setMetaData*(self: gen_qmediarecorder_types.QMediaRecorder, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQMediaRecorder_setMetaData(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc availableMetaData*(self: gen_qmediarecorder_types.QMediaRecorder): seq[string] =
   var v_ma = fcQMediaRecorder_availableMetaData(self.h)
@@ -388,7 +390,7 @@ proc availableMetaData*(self: gen_qmediarecorder_types.QMediaRecorder): seq[stri
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -607,14 +609,14 @@ proc onmetaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMe
   GC_ref(tmp)
   fcQMediaRecorder_connect_metaDataChanged(self.h, cast[int](addr tmp[]), cQMediaRecorder_slot_callback_metaDataChanged, cQMediaRecorder_slot_callback_metaDataChanged_release)
 
-proc metaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQMediaRecorder_metaDataChanged2(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc metaDataChanged*(self: gen_qmediarecorder_types.QMediaRecorder, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQMediaRecorder_metaDataChanged2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QMediaRecordermetaDataChanged2Slot* = proc(key: string, value: gen_qvariant_types.QVariant)
+type QMediaRecordermetaDataChanged2Slot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
 proc cQMediaRecorder_slot_callback_metaDataChanged2(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecordermetaDataChanged2Slot](cast[pointer](slot))
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
@@ -674,25 +676,25 @@ proc onavailabilityChanged*(self: gen_qmediarecorder_types.QMediaRecorder, slot:
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring): string =
   let v_ms = fcQMediaRecorder_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaRecorder_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring): string =
   let v_ms = fcQMediaRecorder_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaRecorder_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -753,8 +755,8 @@ proc supportedFrameRates*(self: gen_qmediarecorder_types.QMediaRecorder, setting
 proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSettings: gen_qmediaencodersettings_types.QAudioEncoderSettings, videoSettings: gen_qmediaencodersettings_types.QVideoEncoderSettings): void =
   fcQMediaRecorder_setEncodingSettings2(self.h, audioSettings.h, videoSettings.h)
 
-proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSettings: gen_qmediaencodersettings_types.QAudioEncoderSettings, videoSettings: gen_qmediaencodersettings_types.QVideoEncoderSettings, containerMimeType: string): void =
-  fcQMediaRecorder_setEncodingSettings3(self.h, audioSettings.h, videoSettings.h, struct_miqt_string(data: containerMimeType, len: csize_t(len(containerMimeType))))
+proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSettings: gen_qmediaencodersettings_types.QAudioEncoderSettings, videoSettings: gen_qmediaencodersettings_types.QVideoEncoderSettings, containerMimeType: openArray[char]): void =
+  fcQMediaRecorder_setEncodingSettings3(self.h, audioSettings.h, videoSettings.h, struct_miqt_string(data: if len(containerMimeType) > 0: addr containerMimeType[0] else: nil, len: csize_t(len(containerMimeType))))
 
 type QMediaRecordermetaObjectProc* = proc(self: QMediaRecorder): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMediaRecordermetacastProc* = proc(self: QMediaRecorder, param1: cstring): pointer {.raises: [], gcsafe.}

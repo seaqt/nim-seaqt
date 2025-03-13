@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaplayercontrol.cpp", cflags).}
@@ -132,13 +134,13 @@ proc metacall*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, param1: 
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring): string =
   let v_ms = fcQMediaPlayerControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring): string =
   let v_ms = fcQMediaPlayerControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -468,16 +470,16 @@ proc onplaybackRateChanged*(self: gen_qmediaplayercontrol_types.QMediaPlayerCont
   GC_ref(tmp)
   fcQMediaPlayerControl_connect_playbackRateChanged(self.h, cast[int](addr tmp[]), cQMediaPlayerControl_slot_callback_playbackRateChanged, cQMediaPlayerControl_slot_callback_playbackRateChanged_release)
 
-proc error*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, error: cint, errorString: string): void =
-  fcQMediaPlayerControl_error(self.h, error, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc error*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, error: cint, errorString: openArray[char]): void =
+  fcQMediaPlayerControl_error(self.h, error, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QMediaPlayerControlerrorSlot* = proc(error: cint, errorString: string)
+type QMediaPlayerControlerrorSlot* = proc(error: cint, errorString: openArray[char])
 proc cQMediaPlayerControl_slot_callback_error(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlayerControlerrorSlot](cast[pointer](slot))
   let slotval1 = error
 
   let verrorString_ms = errorString
-  let verrorStringx_ret = string.fromBytes(toOpenArrayByte(verrorString_ms.data, 0, int(verrorString_ms.len)-1))
+  let verrorStringx_ret = string.fromBytes(verrorString_ms)
   c_free(verrorString_ms.data)
   let slotval2 = verrorStringx_ret
 
@@ -495,25 +497,25 @@ proc onerror*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, slot: QMe
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlayerControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlayerControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlayerControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlayerControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

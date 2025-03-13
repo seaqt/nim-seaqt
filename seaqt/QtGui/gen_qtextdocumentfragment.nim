@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qtextdocumentfragment_types
@@ -64,28 +66,28 @@ proc isEmpty*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment): bool
 
 proc toPlainText*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment): string =
   let v_ms = fcQTextDocumentFragment_toPlainText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toHtml*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment): string =
   let v_ms = fcQTextDocumentFragment_toHtml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fromPlainText*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, plainText: string): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromPlainText(struct_miqt_string(data: plainText, len: csize_t(len(plainText)))), owned: true)
+proc fromPlainText*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, plainText: openArray[char]): gen_qtextdocumentfragment_types.QTextDocumentFragment =
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromPlainText(struct_miqt_string(data: if len(plainText) > 0: addr plainText[0] else: nil, len: csize_t(len(plainText)))), owned: true)
 
-proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: string): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml(struct_miqt_string(data: html, len: csize_t(len(html)))), owned: true)
+proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: openArray[char]): gen_qtextdocumentfragment_types.QTextDocumentFragment =
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml(struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html)))), owned: true)
 
-proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: string, resourceProvider: gen_qtextdocument_types.QTextDocument): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml2(struct_miqt_string(data: html, len: csize_t(len(html))), resourceProvider.h), owned: true)
+proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: openArray[char], resourceProvider: gen_qtextdocument_types.QTextDocument): gen_qtextdocumentfragment_types.QTextDocumentFragment =
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml2(struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), resourceProvider.h), owned: true)
 
-proc toHtml*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, encoding: seq[byte]): string =
+proc toHtml*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, encoding: openArray[byte]): string =
   let v_ms = fcQTextDocumentFragment_toHtml1(self.h, struct_miqt_string(data: cast[cstring](if len(encoding) == 0: nil else: unsafeAddr encoding[0]), len: csize_t(len(encoding))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qaudiosystemplugin_types
@@ -110,19 +112,19 @@ proc availableDevices*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInt
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc createInput*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioInput =
+proc createInput*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioInput =
   gen_qaudiosystem_types.QAbstractAudioInput(h: fcQAudioSystemFactoryInterface_createInput(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))), owned: false)
 
-proc createOutput*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioOutput =
+proc createOutput*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioOutput =
   gen_qaudiosystem_types.QAbstractAudioOutput(h: fcQAudioSystemFactoryInterface_createOutput(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))), owned: false)
 
-proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: seq[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo =
+proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, device: openArray[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo =
   gen_qaudiosystem_types.QAbstractAudioDeviceInfo(h: fcQAudioSystemFactoryInterface_createDeviceInfo(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device))), cint(mode)), owned: false)
 
 proc operatorAssign*(self: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface, param1: gen_qaudiosystemplugin_types.QAudioSystemFactoryInterface): void =
@@ -139,13 +141,13 @@ proc metacall*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, param1: ci
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring): string =
   let v_ms = fcQAudioSystemPlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring): string =
   let v_ms = fcQAudioSystemPlugin_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -155,42 +157,42 @@ proc availableDevices*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, pa
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc createInput*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioInput =
+proc createInput*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioInput =
   gen_qaudiosystem_types.QAbstractAudioInput(h: fcQAudioSystemPlugin_createInput(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))), owned: false)
 
-proc createOutput*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioOutput =
+proc createOutput*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioOutput =
   gen_qaudiosystem_types.QAbstractAudioOutput(h: fcQAudioSystemPlugin_createOutput(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))), owned: false)
 
-proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: seq[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo =
+proc createDeviceInfo*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, device: openArray[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo =
   gen_qaudiosystem_types.QAbstractAudioDeviceInfo(h: fcQAudioSystemPlugin_createDeviceInfo(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device))), cint(mode)), owned: false)
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAudioSystemPlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioSystemPlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAudioSystemPlugin_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiosystemplugin_types.QAudioSystemPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioSystemPlugin_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -198,9 +200,9 @@ type QAudioSystemPluginmetaObjectProc* = proc(self: QAudioSystemPlugin): gen_qob
 type QAudioSystemPluginmetacastProc* = proc(self: QAudioSystemPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAudioSystemPluginmetacallProc* = proc(self: QAudioSystemPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QAudioSystemPluginavailableDevicesProc* = proc(self: QAudioSystemPlugin, param1: cint): seq[seq[byte]] {.raises: [], gcsafe.}
-type QAudioSystemPlugincreateInputProc* = proc(self: QAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioInput {.raises: [], gcsafe.}
-type QAudioSystemPlugincreateOutputProc* = proc(self: QAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioOutput {.raises: [], gcsafe.}
-type QAudioSystemPlugincreateDeviceInfoProc* = proc(self: QAudioSystemPlugin, device: seq[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo {.raises: [], gcsafe.}
+type QAudioSystemPlugincreateInputProc* = proc(self: QAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioInput {.raises: [], gcsafe.}
+type QAudioSystemPlugincreateOutputProc* = proc(self: QAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioOutput {.raises: [], gcsafe.}
+type QAudioSystemPlugincreateDeviceInfoProc* = proc(self: QAudioSystemPlugin, device: openArray[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo {.raises: [], gcsafe.}
 type QAudioSystemPlugineventProc* = proc(self: QAudioSystemPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAudioSystemPlugineventFilterProc* = proc(self: QAudioSystemPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAudioSystemPlugintimerEventProc* = proc(self: QAudioSystemPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -275,7 +277,7 @@ proc cQAudioSystemPlugin_vtable_callback_createInput(self: pointer, device: stru
   let vtbl = cast[ptr QAudioSystemPluginVTable](fcQAudioSystemPlugin_vdata(self))
   let self = QAudioSystemPlugin(h: self)
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   var virtualReturn = vtbl[].createInput(self, slotval1)
@@ -288,7 +290,7 @@ proc cQAudioSystemPlugin_vtable_callback_createOutput(self: pointer, device: str
   let vtbl = cast[ptr QAudioSystemPluginVTable](fcQAudioSystemPlugin_vdata(self))
   let self = QAudioSystemPlugin(h: self)
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   var virtualReturn = vtbl[].createOutput(self, slotval1)
@@ -301,7 +303,7 @@ proc cQAudioSystemPlugin_vtable_callback_createDeviceInfo(self: pointer, device:
   let vtbl = cast[ptr QAudioSystemPluginVTable](fcQAudioSystemPlugin_vdata(self))
   let self = QAudioSystemPlugin(h: self)
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   let slotval2 = cint(mode)
@@ -421,12 +423,12 @@ proc cQAudioSystemPlugin_method_callback_availableDevices(self: pointer, param1:
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method createInput*(self: VirtualQAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioInput {.base.} =
+method createInput*(self: VirtualQAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioInput {.base.} =
   raiseAssert("missing implementation of QAudioSystemPlugin_virtualbase_createInput")
 proc cQAudioSystemPlugin_method_callback_createInput(self: pointer, device: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSystemPlugin](fcQAudioSystemPlugin_vdata(self))
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   var virtualReturn = inst.createInput(slotval1)
@@ -435,12 +437,12 @@ proc cQAudioSystemPlugin_method_callback_createInput(self: pointer, device: stru
   virtualReturn.h = nil
   virtualReturn_h
 
-method createOutput*(self: VirtualQAudioSystemPlugin, device: seq[byte]): gen_qaudiosystem_types.QAbstractAudioOutput {.base.} =
+method createOutput*(self: VirtualQAudioSystemPlugin, device: openArray[byte]): gen_qaudiosystem_types.QAbstractAudioOutput {.base.} =
   raiseAssert("missing implementation of QAudioSystemPlugin_virtualbase_createOutput")
 proc cQAudioSystemPlugin_method_callback_createOutput(self: pointer, device: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSystemPlugin](fcQAudioSystemPlugin_vdata(self))
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   var virtualReturn = inst.createOutput(slotval1)
@@ -449,12 +451,12 @@ proc cQAudioSystemPlugin_method_callback_createOutput(self: pointer, device: str
   virtualReturn.h = nil
   virtualReturn_h
 
-method createDeviceInfo*(self: VirtualQAudioSystemPlugin, device: seq[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo {.base.} =
+method createDeviceInfo*(self: VirtualQAudioSystemPlugin, device: openArray[byte], mode: cint): gen_qaudiosystem_types.QAbstractAudioDeviceInfo {.base.} =
   raiseAssert("missing implementation of QAudioSystemPlugin_virtualbase_createDeviceInfo")
 proc cQAudioSystemPlugin_method_callback_createDeviceInfo(self: pointer, device: struct_miqt_string, mode: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSystemPlugin](fcQAudioSystemPlugin_vdata(self))
   var vdevice_bytearray = device
-  var vdevicex_ret = @(toOpenArrayByte(vdevice_bytearray.data, 0, int(vdevice_bytearray.len)-1))
+  var vdevicex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vdevice_bytearray.data), 0, int(vdevice_bytearray.len)-1))
   c_free(vdevice_bytearray.data)
   let slotval1 = vdevicex_ret
   let slotval2 = cint(mode)

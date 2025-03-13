@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QCameraStatusEnum* = distinct cint
@@ -254,13 +256,13 @@ proc metacall*(self: gen_qcamera_types.QCamera, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring): string =
   let v_ms = fcQCamera_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamera_types.QCamera, s: cstring): string =
   let v_ms = fcQCamera_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -270,15 +272,15 @@ proc availableDevices*(_: type gen_qcamera_types.QCamera): seq[seq[byte]] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     var vx_lv_bytearray = v_outCast[i]
-    var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc deviceDescription*(_: type gen_qcamera_types.QCamera, device: seq[byte]): string =
+proc deviceDescription*(_: type gen_qcamera_types.QCamera, device: openArray[byte]): string =
   let v_ms = fcQCamera_deviceDescription(struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -362,7 +364,7 @@ proc error*(self: gen_qcamera_types.QCamera): cint =
 
 proc errorString*(self: gen_qcamera_types.QCamera): string =
   let v_ms = fcQCamera_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -589,25 +591,25 @@ proc onerrorOccurred*(self: gen_qcamera_types.QCamera, slot: QCameraerrorOccurre
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring): string =
   let v_ms = fcQCamera_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCamera_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring): string =
   let v_ms = fcQCamera_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQCamera_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -949,10 +951,10 @@ proc cQCamera_method_callback_disconnectNotify(self: pointer, signal: pointer): 
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-proc addPropertyWatch*(self: gen_qcamera_types.QCamera, name: seq[byte]): void =
+proc addPropertyWatch*(self: gen_qcamera_types.QCamera, name: openArray[byte]): void =
   fcQCamera_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
-proc removePropertyWatch*(self: gen_qcamera_types.QCamera, name: seq[byte]): void =
+proc removePropertyWatch*(self: gen_qcamera_types.QCamera, name: openArray[byte]): void =
   fcQCamera_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
 proc sender*(self: gen_qcamera_types.QCamera): gen_qobject_types.QObject =
@@ -1007,7 +1009,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   gen_qcamera_types.QCamera(h: fcQCamera_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qcamera_types.QCamera,
-    deviceName: seq[byte],
+    deviceName: openArray[byte],
     vtbl: ref QCameraVTable = nil): gen_qcamera_types.QCamera =
   let vtbl = if vtbl == nil: new QCameraVTable else: vtbl
   GC_ref(vtbl)
@@ -1167,7 +1169,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   gen_qcamera_types.QCamera(h: fcQCamera_new5(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qcamera_types.QCamera,
-    deviceName: seq[byte], parent: gen_qobject_types.QObject,
+    deviceName: openArray[byte], parent: gen_qobject_types.QObject,
     vtbl: ref QCameraVTable = nil): gen_qcamera_types.QCamera =
   let vtbl = if vtbl == nil: new QCameraVTable else: vtbl
   GC_ref(vtbl)
@@ -1314,7 +1316,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
-    deviceName: seq[byte],
+    deviceName: openArray[byte],
     inst: VirtualQCamera) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new2(addr(cQCamera_mvtbl), addr(inst[]), struct_miqt_string(data: cast[cstring](if len(deviceName) == 0: nil else: unsafeAddr deviceName[0]), len: csize_t(len(deviceName))))
@@ -1342,7 +1344,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
   inst[].owned = true
 
 proc create*(T: type gen_qcamera_types.QCamera,
-    deviceName: seq[byte], parent: gen_qobject_types.QObject,
+    deviceName: openArray[byte], parent: gen_qobject_types.QObject,
     inst: VirtualQCamera) =
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQCamera_new6(addr(cQCamera_mvtbl), addr(inst[]), struct_miqt_string(data: cast[cstring](if len(deviceName) == 0: nil else: unsafeAddr deviceName[0]), len: csize_t(len(deviceName))), parent.h)

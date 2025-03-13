@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qaction.cpp", cflags).}
@@ -210,13 +212,13 @@ proc metacall*(self: gen_qaction_types.QAction, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring): string =
   let v_ms = fcQAction_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring): string =
   let v_ms = fcQAction_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -232,48 +234,48 @@ proc setIcon*(self: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon): voi
 proc icon*(self: gen_qaction_types.QAction): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQAction_icon(self.h), owned: true)
 
-proc setText*(self: gen_qaction_types.QAction, text: string): void =
-  fcQAction_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qaction_types.QAction, text: openArray[char]): void =
+  fcQAction_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qaction_types.QAction): string =
   let v_ms = fcQAction_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setIconText*(self: gen_qaction_types.QAction, text: string): void =
-  fcQAction_setIconText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setIconText*(self: gen_qaction_types.QAction, text: openArray[char]): void =
+  fcQAction_setIconText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc iconText*(self: gen_qaction_types.QAction): string =
   let v_ms = fcQAction_iconText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setToolTip*(self: gen_qaction_types.QAction, tip: string): void =
-  fcQAction_setToolTip(self.h, struct_miqt_string(data: tip, len: csize_t(len(tip))))
+proc setToolTip*(self: gen_qaction_types.QAction, tip: openArray[char]): void =
+  fcQAction_setToolTip(self.h, struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip))))
 
 proc toolTip*(self: gen_qaction_types.QAction): string =
   let v_ms = fcQAction_toolTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setStatusTip*(self: gen_qaction_types.QAction, statusTip: string): void =
-  fcQAction_setStatusTip(self.h, struct_miqt_string(data: statusTip, len: csize_t(len(statusTip))))
+proc setStatusTip*(self: gen_qaction_types.QAction, statusTip: openArray[char]): void =
+  fcQAction_setStatusTip(self.h, struct_miqt_string(data: if len(statusTip) > 0: addr statusTip[0] else: nil, len: csize_t(len(statusTip))))
 
 proc statusTip*(self: gen_qaction_types.QAction): string =
   let v_ms = fcQAction_statusTip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setWhatsThis*(self: gen_qaction_types.QAction, what: string): void =
-  fcQAction_setWhatsThis(self.h, struct_miqt_string(data: what, len: csize_t(len(what))))
+proc setWhatsThis*(self: gen_qaction_types.QAction, what: openArray[char]): void =
+  fcQAction_setWhatsThis(self.h, struct_miqt_string(data: if len(what) > 0: addr what[0] else: nil, len: csize_t(len(what))))
 
 proc whatsThis*(self: gen_qaction_types.QAction): string =
   let v_ms = fcQAction_whatsThis(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -301,7 +303,7 @@ proc setShortcut*(self: gen_qaction_types.QAction, shortcut: gen_qkeysequence_ty
 proc shortcut*(self: gen_qaction_types.QAction): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQAction_shortcut(self.h), owned: true)
 
-proc setShortcuts*(self: gen_qaction_types.QAction, shortcuts: seq[gen_qkeysequence_types.QKeySequence]): void =
+proc setShortcuts*(self: gen_qaction_types.QAction, shortcuts: openArray[gen_qkeysequence_types.QKeySequence]): void =
   var shortcuts_CArray = newSeq[pointer](len(shortcuts))
   for i in 0..<len(shortcuts):
     shortcuts_CArray[i] = shortcuts[i].h
@@ -501,25 +503,25 @@ proc ontoggled*(self: gen_qaction_types.QAction, slot: QActiontoggledSlot) =
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring, c: cstring): string =
   let v_ms = fcQAction_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAction_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring, c: cstring): string =
   let v_ms = fcQAction_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAction_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -792,7 +794,7 @@ proc create*(T: type gen_qaction_types.QAction,
   gen_qaction_types.QAction(h: fcQAction_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
-    text: string,
+    text: openArray[char],
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
@@ -819,10 +821,10 @@ proc create*(T: type gen_qaction_types.QAction,
     vtbl[].vtbl.connectNotify = cQAction_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQAction_vtable_callback_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaction_types.QAction(h: fcQAction_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
@@ -849,7 +851,7 @@ proc create*(T: type gen_qaction_types.QAction,
     vtbl[].vtbl.connectNotify = cQAction_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQAction_vtable_callback_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new3(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaction_types.QAction(h: fcQAction_new3(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     parent: gen_qobject_types.QObject,
@@ -882,7 +884,7 @@ proc create*(T: type gen_qaction_types.QAction,
   gen_qaction_types.QAction(h: fcQAction_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
-    text: string, parent: gen_qobject_types.QObject,
+    text: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
@@ -909,10 +911,10 @@ proc create*(T: type gen_qaction_types.QAction,
     vtbl[].vtbl.connectNotify = cQAction_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQAction_vtable_callback_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+  gen_qaction_types.QAction(h: fcQAction_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
-    icon: gen_qicon_types.QIcon, text: string, parent: gen_qobject_types.QObject,
+    icon: gen_qicon_types.QIcon, text: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
@@ -939,7 +941,7 @@ proc create*(T: type gen_qaction_types.QAction,
     vtbl[].vtbl.connectNotify = cQAction_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQAction_vtable_callback_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new6(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+  gen_qaction_types.QAction(h: fcQAction_new6(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQAction_mvtbl = cQActionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -964,17 +966,17 @@ proc create*(T: type gen_qaction_types.QAction,
   inst[].owned = true
 
 proc create*(T: type gen_qaction_types.QAction,
-    text: string,
+    text: openArray[char],
     inst: VirtualQAction) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAction_new2(addr(cQAction_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAction_new2(addr(cQAction_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qaction_types.QAction,
-    icon: gen_qicon_types.QIcon, text: string,
+    icon: gen_qicon_types.QIcon, text: openArray[char],
     inst: VirtualQAction) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAction_new3(addr(cQAction_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAction_new3(addr(cQAction_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qaction_types.QAction,
@@ -985,17 +987,17 @@ proc create*(T: type gen_qaction_types.QAction,
   inst[].owned = true
 
 proc create*(T: type gen_qaction_types.QAction,
-    text: string, parent: gen_qobject_types.QObject,
+    text: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQAction) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAction_new5(addr(cQAction_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  inst[].h = fcQAction_new5(addr(cQAction_mvtbl), addr(inst[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   inst[].owned = true
 
 proc create*(T: type gen_qaction_types.QAction,
-    icon: gen_qicon_types.QIcon, text: string, parent: gen_qobject_types.QObject,
+    icon: gen_qicon_types.QIcon, text: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQAction) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAction_new6(addr(cQAction_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  inst[].h = fcQAction_new6(addr(cQAction_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qaction_types.QAction): gen_qobjectdefs_types.QMetaObject =

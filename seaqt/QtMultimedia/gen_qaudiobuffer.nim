@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qaudiobuffer_types
@@ -100,7 +102,7 @@ proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
   gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new2(other.h), owned: true)
 
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
-    data: seq[byte], format: gen_qaudioformat_types.QAudioFormat): gen_qaudiobuffer_types.QAudioBuffer =
+    data: openArray[byte], format: gen_qaudioformat_types.QAudioFormat): gen_qaudiobuffer_types.QAudioBuffer =
   gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new3(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), format.h), owned: true)
 
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
@@ -108,7 +110,7 @@ proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
   gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new4(numFrames, format.h), owned: true)
 
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,
-    data: seq[byte], format: gen_qaudioformat_types.QAudioFormat, startTime: clonglong): gen_qaudiobuffer_types.QAudioBuffer =
+    data: openArray[byte], format: gen_qaudioformat_types.QAudioFormat, startTime: clonglong): gen_qaudiobuffer_types.QAudioBuffer =
   gen_qaudiobuffer_types.QAudioBuffer(h: fcQAudioBuffer_new5(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), format.h, startTime), owned: true)
 
 proc create*(T: type gen_qaudiobuffer_types.QAudioBuffer,

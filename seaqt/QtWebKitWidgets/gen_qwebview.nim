@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
 {.compile("gen_qwebview.cpp", cflags).}
@@ -281,13 +283,13 @@ proc metacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, pa
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring): string =
   let v_ms = fcQWebView_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring): string =
   let v_ms = fcQWebView_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -303,10 +305,10 @@ proc load*(self: gen_qwebview_types.QWebView, url: gen_qurl_types.QUrl): void =
 proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest): void =
   fcQWebView_loadWithRequest(self.h, request.h)
 
-proc setHtml*(self: gen_qwebview_types.QWebView, html: string): void =
-  fcQWebView_setHtml(self.h, struct_miqt_string(data: html, len: csize_t(len(html))))
+proc setHtml*(self: gen_qwebview_types.QWebView, html: openArray[char]): void =
+  fcQWebView_setHtml(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
-proc setContent*(self: gen_qwebview_types.QWebView, data: seq[byte]): void =
+proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte]): void =
   fcQWebView_setContent(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
 proc history*(self: gen_qwebview_types.QWebView): gen_qwebhistory_types.QWebHistory =
@@ -317,7 +319,7 @@ proc settings*(self: gen_qwebview_types.QWebView): gen_qwebsettings_types.QWebSe
 
 proc title*(self: gen_qwebview_types.QWebView): string =
   let v_ms = fcQWebView_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -335,13 +337,13 @@ proc hasSelection*(self: gen_qwebview_types.QWebView): bool =
 
 proc selectedText*(self: gen_qwebview_types.QWebView): string =
   let v_ms = fcQWebView_selectedText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc selectedHtml*(self: gen_qwebview_types.QWebView): string =
   let v_ms = fcQWebView_selectedHtml(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -381,8 +383,8 @@ proc setRenderHints*(self: gen_qwebview_types.QWebView, hints: cint): void =
 proc setRenderHint*(self: gen_qwebview_types.QWebView, hint: cint): void =
   fcQWebView_setRenderHint(self.h, cint(hint))
 
-proc findText*(self: gen_qwebview_types.QWebView, subString: string): bool =
-  fcQWebView_findText(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))))
+proc findText*(self: gen_qwebview_types.QWebView, subString: openArray[char]): bool =
+  fcQWebView_findText(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc event*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebView_event(self.h, param1.h)
@@ -460,14 +462,14 @@ proc onloadFinished*(self: gen_qwebview_types.QWebView, slot: QWebViewloadFinish
   GC_ref(tmp)
   fcQWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_loadFinished, cQWebView_slot_callback_loadFinished_release)
 
-proc titleChanged*(self: gen_qwebview_types.QWebView, title: string): void =
-  fcQWebView_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc titleChanged*(self: gen_qwebview_types.QWebView, title: openArray[char]): void =
+  fcQWebView_titleChanged(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
-type QWebViewtitleChangedSlot* = proc(title: string)
+type QWebViewtitleChangedSlot* = proc(title: openArray[char])
 proc cQWebView_slot_callback_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewtitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
-  let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
+  let vtitlex_ret = string.fromBytes(vtitle_ms)
   c_free(vtitle_ms.data)
   let slotval1 = vtitlex_ret
 
@@ -483,14 +485,14 @@ proc ontitleChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewtitleChang
   GC_ref(tmp)
   fcQWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), cQWebView_slot_callback_titleChanged, cQWebView_slot_callback_titleChanged_release)
 
-proc statusBarMessage*(self: gen_qwebview_types.QWebView, text: string): void =
-  fcQWebView_statusBarMessage(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc statusBarMessage*(self: gen_qwebview_types.QWebView, text: openArray[char]): void =
+  fcQWebView_statusBarMessage(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QWebViewstatusBarMessageSlot* = proc(text: string)
+type QWebViewstatusBarMessageSlot* = proc(text: openArray[char])
 proc cQWebView_slot_callback_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewstatusBarMessageSlot](cast[pointer](slot))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
 
@@ -584,42 +586,42 @@ proc onurlChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewurlChangedSl
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
   let v_ms = fcQWebView_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebView_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
   let v_ms = fcQWebView_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebView_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint): void =
   fcQWebView_load2(self.h, request.h, cint(operation))
 
-proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: seq[byte]): void =
+proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: openArray[byte]): void =
   fcQWebView_load3(self.h, request.h, cint(operation), struct_miqt_string(data: cast[cstring](if len(body) == 0: nil else: unsafeAddr body[0]), len: csize_t(len(body))))
 
-proc setHtml*(self: gen_qwebview_types.QWebView, html: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebView_setHtml2(self.h, struct_miqt_string(data: html, len: csize_t(len(html))), baseUrl.h)
+proc setHtml*(self: gen_qwebview_types.QWebView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebView_setHtml2(self.h, struct_miqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
-proc setContent*(self: gen_qwebview_types.QWebView, data: seq[byte], mimeType: string): void =
-  fcQWebView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
+proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte], mimeType: openArray[char]): void =
+  fcQWebView_setContent2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
-proc setContent*(self: gen_qwebview_types.QWebView, data: seq[byte], mimeType: string, baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), baseUrl.h)
+proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
+  fcQWebView_setContent3(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qwebview_types.QWebView, action: cint, checked: bool): void =
   fcQWebView_triggerPageAction2(self.h, cint(action), checked)
@@ -627,8 +629,8 @@ proc triggerPageAction*(self: gen_qwebview_types.QWebView, action: cint, checked
 proc setRenderHint*(self: gen_qwebview_types.QWebView, hint: cint, enabled: bool): void =
   fcQWebView_setRenderHint2(self.h, cint(hint), enabled)
 
-proc findText*(self: gen_qwebview_types.QWebView, subString: string, options: cint): bool =
-  fcQWebView_findText2(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))), cint(options))
+proc findText*(self: gen_qwebview_types.QWebView, subString: openArray[char], options: cint): bool =
+  fcQWebView_findText2(self.h, struct_miqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 type QWebViewmetaObjectProc* = proc(self: QWebView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebViewmetacastProc* = proc(self: QWebView, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -670,7 +672,7 @@ type QWebViewtabletEventProc* = proc(self: QWebView, event: gen_qevent_types.QTa
 type QWebViewactionEventProc* = proc(self: QWebView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QWebViewshowEventProc* = proc(self: QWebView, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QWebViewhideEventProc* = proc(self: QWebView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWebViewnativeEventProc* = proc(self: QWebView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QWebViewnativeEventProc* = proc(self: QWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QWebViewmetricProc* = proc(self: QWebView, param1: cint): cint {.raises: [], gcsafe.}
 type QWebViewinitPainterProc* = proc(self: QWebView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QWebViewredirectedProc* = proc(self: QWebView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1121,14 +1123,14 @@ proc cQWebView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWebViewnativeEvent*(self: gen_qwebview_types.QWebView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QWebViewnativeEvent*(self: gen_qwebview_types.QWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQWebView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWebView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QWebViewVTable](fcQWebView_vdata(self))
   let self = QWebView(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1545,12 +1547,12 @@ proc cQWebView_method_callback_hideEvent(self: pointer, event: pointer): void {.
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWebView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQWebView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QWebViewnativeEvent(self[], eventType, message, resultVal)
 proc cQWebView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQWebView](fcQWebView_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

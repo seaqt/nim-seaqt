@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaplaylist.cpp", cflags).}
@@ -188,13 +190,13 @@ proc metacall*(self: gen_qmediaplaylist_types.QMediaPlaylist, param1: cint, para
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring): string =
   let v_ms = fcQMediaPlaylist_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring): string =
   let v_ms = fcQMediaPlaylist_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -234,7 +236,7 @@ proc isReadOnly*(self: gen_qmediaplaylist_types.QMediaPlaylist): bool =
 proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, content: gen_qmediacontent_types.QMediaContent): bool =
   fcQMediaPlaylist_addMedia(self.h, content.h)
 
-proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, items: seq[gen_qmediacontent_types.QMediaContent]): bool =
+proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, items: openArray[gen_qmediacontent_types.QMediaContent]): bool =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -244,7 +246,7 @@ proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, items: seq[gen_qme
 proc insertMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: cint, content: gen_qmediacontent_types.QMediaContent): bool =
   fcQMediaPlaylist_insertMedia(self.h, index, content.h)
 
-proc insertMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: cint, items: seq[gen_qmediacontent_types.QMediaContent]): bool =
+proc insertMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: cint, items: openArray[gen_qmediacontent_types.QMediaContent]): bool =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
@@ -283,7 +285,7 @@ proc error*(self: gen_qmediaplaylist_types.QMediaPlaylist): cint =
 
 proc errorString*(self: gen_qmediaplaylist_types.QMediaPlaylist): string =
   let v_ms = fcQMediaPlaylist_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -507,25 +509,25 @@ proc onloadFailed*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPl
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlaylist_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlaylist_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlaylist_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlaylist_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

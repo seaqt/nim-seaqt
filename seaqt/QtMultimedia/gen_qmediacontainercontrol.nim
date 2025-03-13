@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediacontainercontrol.cpp", cflags).}
@@ -80,13 +82,13 @@ proc metacall*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, pa
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring): string =
   let v_ms = fcQMediaContainerControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring): string =
   let v_ms = fcQMediaContainerControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -96,7 +98,7 @@ proc supportedContainers*(self: gen_qmediacontainercontrol_types.QMediaContainer
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -104,40 +106,40 @@ proc supportedContainers*(self: gen_qmediacontainercontrol_types.QMediaContainer
 
 proc containerFormat*(self: gen_qmediacontainercontrol_types.QMediaContainerControl): string =
   let v_ms = fcQMediaContainerControl_containerFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setContainerFormat*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, format: string): void =
-  fcQMediaContainerControl_setContainerFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
+proc setContainerFormat*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, format: openArray[char]): void =
+  fcQMediaContainerControl_setContainerFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
-proc containerDescription*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, formatMimeType: string): string =
-  let v_ms = fcQMediaContainerControl_containerDescription(self.h, struct_miqt_string(data: formatMimeType, len: csize_t(len(formatMimeType))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc containerDescription*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, formatMimeType: openArray[char]): string =
+  let v_ms = fcQMediaContainerControl_containerDescription(self.h, struct_miqt_string(data: if len(formatMimeType) > 0: addr formatMimeType[0] else: nil, len: csize_t(len(formatMimeType))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaContainerControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaContainerControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaContainerControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaContainerControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

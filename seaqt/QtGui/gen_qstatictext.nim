@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QStaticTextPerformanceHintEnum* = distinct cint
@@ -80,12 +82,12 @@ proc operatorAssign*(self: gen_qstatictext_types.QStaticText, param1: gen_qstati
 proc swap*(self: gen_qstatictext_types.QStaticText, other: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_swap(self.h, other.h)
 
-proc setText*(self: gen_qstatictext_types.QStaticText, text: string): void =
-  fcQStaticText_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qstatictext_types.QStaticText, text: openArray[char]): void =
+  fcQStaticText_setText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc text*(self: gen_qstatictext_types.QStaticText): string =
   let v_ms = fcQStaticText_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -135,8 +137,8 @@ proc create*(T: type gen_qstatictext_types.QStaticText): gen_qstatictext_types.Q
   gen_qstatictext_types.QStaticText(h: fcQStaticText_new(), owned: true)
 
 proc create*(T: type gen_qstatictext_types.QStaticText,
-    text: string): gen_qstatictext_types.QStaticText =
-  gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    text: openArray[char]): gen_qstatictext_types.QStaticText =
+  gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qstatictext_types.QStaticText,
     other: gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =

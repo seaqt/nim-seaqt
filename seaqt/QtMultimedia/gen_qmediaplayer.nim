@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaplayer.cpp", cflags).}
@@ -242,18 +244,18 @@ proc metacall*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cint, param2: 
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring): string =
   let v_ms = fcQMediaPlayer_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring): string =
   let v_ms = fcQMediaPlayer_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: string): cint =
-  cint(fcQMediaPlayer_hasSupport(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))))
+proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArray[char]): cint =
+  cint(fcQMediaPlayer_hasSupport(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
 
 proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer): seq[string] =
   var v_ma = fcQMediaPlayer_supportedMimeTypes()
@@ -261,7 +263,7 @@ proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer): seq[strin
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -270,7 +272,7 @@ proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer): seq[strin
 proc setVideoOutput*(self: gen_qmediaplayer_types.QMediaPlayer, surface: gen_qabstractvideosurface_types.QAbstractVideoSurface): void =
   fcQMediaPlayer_setVideoOutput(self.h, surface.h)
 
-proc setVideoOutput*(self: gen_qmediaplayer_types.QMediaPlayer, surfaces: seq[gen_qabstractvideosurface_types.QAbstractVideoSurface]): void =
+proc setVideoOutput*(self: gen_qmediaplayer_types.QMediaPlayer, surfaces: openArray[gen_qabstractvideosurface_types.QAbstractVideoSurface]): void =
   var surfaces_CArray = newSeq[pointer](len(surfaces))
   for i in 0..<len(surfaces):
     surfaces_CArray[i] = surfaces[i].h
@@ -327,7 +329,7 @@ proc error*(self: gen_qmediaplayer_types.QMediaPlayer): cint =
 
 proc errorString*(self: gen_qmediaplayer_types.QMediaPlayer): string =
   let v_ms = fcQMediaPlayer_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -354,12 +356,12 @@ proc supportedAudioRoles*(self: gen_qmediaplayer_types.QMediaPlayer): seq[cint] 
 
 proc customAudioRole*(self: gen_qmediaplayer_types.QMediaPlayer): string =
   let v_ms = fcQMediaPlayer_customAudioRole(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCustomAudioRole*(self: gen_qmediaplayer_types.QMediaPlayer, audioRole: string): void =
-  fcQMediaPlayer_setCustomAudioRole(self.h, struct_miqt_string(data: audioRole, len: csize_t(len(audioRole))))
+proc setCustomAudioRole*(self: gen_qmediaplayer_types.QMediaPlayer, audioRole: openArray[char]): void =
+  fcQMediaPlayer_setCustomAudioRole(self.h, struct_miqt_string(data: if len(audioRole) > 0: addr audioRole[0] else: nil, len: csize_t(len(audioRole))))
 
 proc supportedCustomAudioRoles*(self: gen_qmediaplayer_types.QMediaPlayer): seq[string] =
   var v_ma = fcQMediaPlayer_supportedCustomAudioRoles(self.h)
@@ -367,7 +369,7 @@ proc supportedCustomAudioRoles*(self: gen_qmediaplayer_types.QMediaPlayer): seq[
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -400,7 +402,7 @@ proc setMedia*(self: gen_qmediaplayer_types.QMediaPlayer, media: gen_qmediaconte
 proc setPlaylist*(self: gen_qmediaplayer_types.QMediaPlayer, playlist: gen_qmediaplaylist_types.QMediaPlaylist): void =
   fcQMediaPlayer_setPlaylist(self.h, playlist.h)
 
-proc setNetworkConfigurations*(self: gen_qmediaplayer_types.QMediaPlayer, configurations: seq[gen_qnetworkconfiguration_types.QNetworkConfiguration]): void =
+proc setNetworkConfigurations*(self: gen_qmediaplayer_types.QMediaPlayer, configurations: openArray[gen_qnetworkconfiguration_types.QNetworkConfiguration]): void =
   var configurations_CArray = newSeq[pointer](len(configurations))
   for i in 0..<len(configurations):
     configurations_CArray[i] = configurations[i].h
@@ -687,14 +689,14 @@ proc onaudioRoleChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMedia
   GC_ref(tmp)
   fcQMediaPlayer_connect_audioRoleChanged(self.h, cast[int](addr tmp[]), cQMediaPlayer_slot_callback_audioRoleChanged, cQMediaPlayer_slot_callback_audioRoleChanged_release)
 
-proc customAudioRoleChanged*(self: gen_qmediaplayer_types.QMediaPlayer, role: string): void =
-  fcQMediaPlayer_customAudioRoleChanged(self.h, struct_miqt_string(data: role, len: csize_t(len(role))))
+proc customAudioRoleChanged*(self: gen_qmediaplayer_types.QMediaPlayer, role: openArray[char]): void =
+  fcQMediaPlayer_customAudioRoleChanged(self.h, struct_miqt_string(data: if len(role) > 0: addr role[0] else: nil, len: csize_t(len(role))))
 
-type QMediaPlayercustomAudioRoleChangedSlot* = proc(role: string)
+type QMediaPlayercustomAudioRoleChangedSlot* = proc(role: openArray[char])
 proc cQMediaPlayer_slot_callback_customAudioRoleChanged(slot: int, role: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlayercustomAudioRoleChangedSlot](cast[pointer](slot))
   let vrole_ms = role
-  let vrolex_ret = string.fromBytes(toOpenArrayByte(vrole_ms.data, 0, int(vrole_ms.len)-1))
+  let vrolex_ret = string.fromBytes(vrole_ms)
   c_free(vrole_ms.data)
   let slotval1 = vrolex_ret
 
@@ -758,41 +760,41 @@ proc unbind*(self: gen_qmediaplayer_types.QMediaPlayer, param1: gen_qobject_type
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlayer_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlayer_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlayer_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaPlayer_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: string, codecs: seq[string]): cint =
+proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArray[char], codecs: openArray[string]): cint =
   var codecs_CArray = newSeq[struct_miqt_string](len(codecs))
   for i in 0..<len(codecs):
-    codecs_CArray[i] = struct_miqt_string(data: codecs[i], len: csize_t(len(codecs[i])))
+    codecs_CArray[i] = struct_miqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQMediaPlayer_hasSupport2(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
+  cint(fcQMediaPlayer_hasSupport2(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
 
-proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: string, codecs: seq[string], flags: cint): cint =
+proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArray[char], codecs: openArray[string], flags: cint): cint =
   var codecs_CArray = newSeq[struct_miqt_string](len(codecs))
   for i in 0..<len(codecs):
-    codecs_CArray[i] = struct_miqt_string(data: codecs[i], len: csize_t(len(codecs[i])))
+    codecs_CArray[i] = struct_miqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQMediaPlayer_hasSupport3(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0])), cint(flags)))
+  cint(fcQMediaPlayer_hasSupport3(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0])), cint(flags)))
 
 proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer, flags: cint): seq[string] =
   var v_ma = fcQMediaPlayer_supportedMimeTypes1(cint(flags))
@@ -800,7 +802,7 @@ proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer, flags: cin
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -1111,10 +1113,10 @@ proc cQMediaPlayer_method_callback_disconnectNotify(self: pointer, signal: point
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-proc addPropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: seq[byte]): void =
+proc addPropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: openArray[byte]): void =
   fcQMediaPlayer_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
-proc removePropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: seq[byte]): void =
+proc removePropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: openArray[byte]): void =
   fcQMediaPlayer_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
 proc sender*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qobject_types.QObject =

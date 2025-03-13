@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qimage.cpp", cflags).}
@@ -313,7 +315,7 @@ proc format*(self: gen_qimage_types.QImage): cint =
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_convertToFormat(self.h, cint(f)), owned: true)
 
-proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: seq[cuint]): gen_qimage_types.QImage =
+proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: openArray[cuint]): gen_qimage_types.QImage =
   var colorTable_CArray = newSeq[cuint](len(colorTable))
   for i in 0..<len(colorTable):
     colorTable_CArray[i] = colorTable[i]
@@ -434,7 +436,7 @@ proc colorTable*(self: gen_qimage_types.QImage): seq[cuint] =
   c_free(v_ma.data)
   vx_ret
 
-proc setColorTable*(self: gen_qimage_types.QImage, colors: seq[cuint]): void =
+proc setColorTable*(self: gen_qimage_types.QImage, colors: openArray[cuint]): void =
   var colors_CArray = newSeq[cuint](len(colors))
   for i in 0..<len(colors):
     colors_CArray[i] = colors[i]
@@ -525,17 +527,17 @@ proc applyColorTransform*(self: gen_qimage_types.QImage, transform: gen_qcolortr
 proc load*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
   fcQImage_load(self.h, device.h, format)
 
-proc load*(self: gen_qimage_types.QImage, fileName: string): bool =
-  fcQImage_loadWithFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc load*(self: gen_qimage_types.QImage, fileName: openArray[char]): bool =
+  fcQImage_loadWithFileName(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc loadFromData*(self: gen_qimage_types.QImage, buf: ptr uint8, len: cint): bool =
   fcQImage_loadFromData(self.h, buf, len)
 
-proc loadFromData*(self: gen_qimage_types.QImage, data: seq[byte]): bool =
+proc loadFromData*(self: gen_qimage_types.QImage, data: openArray[byte]): bool =
   fcQImage_loadFromDataWithData(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
-proc save*(self: gen_qimage_types.QImage, fileName: string): bool =
-  fcQImage_save(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc save*(self: gen_qimage_types.QImage, fileName: openArray[char]): bool =
+  fcQImage_save(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice): bool =
   fcQImage_saveWithDevice(self.h, device.h)
@@ -543,7 +545,7 @@ proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice)
 proc fromData*(_: type gen_qimage_types.QImage, data: ptr uint8, size: cint): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_fromData(data, size), owned: true)
 
-proc fromData*(_: type gen_qimage_types.QImage, data: seq[byte]): gen_qimage_types.QImage =
+proc fromData*(_: type gen_qimage_types.QImage, data: openArray[byte]): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_fromDataWithData(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))), owned: true)
 
 proc cacheKey*(self: gen_qimage_types.QImage): clonglong =
@@ -576,7 +578,7 @@ proc textKeys*(self: gen_qimage_types.QImage): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -584,12 +586,12 @@ proc textKeys*(self: gen_qimage_types.QImage): seq[string] =
 
 proc text*(self: gen_qimage_types.QImage): string =
   let v_ms = fcQImage_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qimage_types.QImage, key: string, value: string): void =
-  fcQImage_setText(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), struct_miqt_string(data: value, len: csize_t(len(value))))
+proc setText*(self: gen_qimage_types.QImage, key: openArray[char], value: openArray[char]): void =
+  fcQImage_setText(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), struct_miqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value))))
 
 proc pixelFormat*(self: gen_qimage_types.QImage): gen_qpixelformat_types.QPixelFormat =
   gen_qpixelformat_types.QPixelFormat(h: fcQImage_pixelFormat(self.h), owned: true)
@@ -606,7 +608,7 @@ proc copy*(self: gen_qimage_types.QImage, rect: gen_qrect_types.QRect): gen_qima
 proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, flags: cint): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_convertToFormat22(self.h, cint(f), cint(flags)), owned: true)
 
-proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: seq[cuint], flags: cint): gen_qimage_types.QImage =
+proc convertToFormat*(self: gen_qimage_types.QImage, f: cint, colorTable: openArray[cuint], flags: cint): gen_qimage_types.QImage =
   var colorTable_CArray = newSeq[cuint](len(colorTable))
   for i in 0..<len(colorTable):
     colorTable_CArray[i] = colorTable[i]
@@ -658,20 +660,20 @@ proc mirrored*(self: gen_qimage_types.QImage, horizontally: bool, vertically: bo
 proc invertPixels*(self: gen_qimage_types.QImage, param1: cint): void =
   fcQImage_invertPixels1(self.h, cint(param1))
 
-proc load*(self: gen_qimage_types.QImage, fileName: string, format: cstring): bool =
-  fcQImage_load2(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format)
+proc load*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring): bool =
+  fcQImage_load2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
 proc loadFromData*(self: gen_qimage_types.QImage, buf: ptr uint8, len: cint, format: cstring): bool =
   fcQImage_loadFromData3(self.h, buf, len, format)
 
-proc loadFromData*(self: gen_qimage_types.QImage, data: seq[byte], aformat: cstring): bool =
+proc loadFromData*(self: gen_qimage_types.QImage, data: openArray[byte], aformat: cstring): bool =
   fcQImage_loadFromData2(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), aformat)
 
-proc save*(self: gen_qimage_types.QImage, fileName: string, format: cstring): bool =
-  fcQImage_save2(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format)
+proc save*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring): bool =
+  fcQImage_save2(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
 
-proc save*(self: gen_qimage_types.QImage, fileName: string, format: cstring, quality: cint): bool =
-  fcQImage_save3(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format, quality)
+proc save*(self: gen_qimage_types.QImage, fileName: openArray[char], format: cstring, quality: cint): bool =
+  fcQImage_save3(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format, quality)
 
 proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
   fcQImage_save22(self.h, device.h, format)
@@ -682,12 +684,12 @@ proc save*(self: gen_qimage_types.QImage, device: gen_qiodevice_types.QIODevice,
 proc fromData*(_: type gen_qimage_types.QImage, data: ptr uint8, size: cint, format: cstring): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_fromData3(data, size, format), owned: true)
 
-proc fromData*(_: type gen_qimage_types.QImage, data: seq[byte], format: cstring): gen_qimage_types.QImage =
+proc fromData*(_: type gen_qimage_types.QImage, data: openArray[byte], format: cstring): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImage_fromData2(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), format), owned: true)
 
-proc text*(self: gen_qimage_types.QImage, key: string): string =
-  let v_ms = fcQImage_text1(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc text*(self: gen_qimage_types.QImage, key: openArray[char]): string =
+  let v_ms = fcQImage_text1(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1000,7 +1002,7 @@ proc create2*(T: type gen_qimage_types.QImage,
   gen_qimage_types.QImage(h: fcQImage_new7(addr(vtbl[].vtbl), addr(vtbl[]), data, width, height, bytesPerLine, cint(format)), owned: true)
 
 proc create*(T: type gen_qimage_types.QImage,
-    fileName: string,
+    fileName: openArray[char],
     vtbl: ref QImageVTable = nil): gen_qimage_types.QImage =
   let vtbl = if vtbl == nil: new QImageVTable else: vtbl
   GC_ref(vtbl)
@@ -1019,7 +1021,7 @@ proc create*(T: type gen_qimage_types.QImage,
     vtbl[].vtbl.redirected = cQImage_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = cQImage_vtable_callback_sharedPainter
-  gen_qimage_types.QImage(h: fcQImage_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qimage_types.QImage,
     param1: gen_qimage_types.QImage,
@@ -1044,7 +1046,7 @@ proc create*(T: type gen_qimage_types.QImage,
   gen_qimage_types.QImage(h: fcQImage_new9(addr(vtbl[].vtbl), addr(vtbl[]), param1.h), owned: true)
 
 proc create*(T: type gen_qimage_types.QImage,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     vtbl: ref QImageVTable = nil): gen_qimage_types.QImage =
   let vtbl = if vtbl == nil: new QImageVTable else: vtbl
   GC_ref(vtbl)
@@ -1063,7 +1065,7 @@ proc create*(T: type gen_qimage_types.QImage,
     vtbl[].vtbl.redirected = cQImage_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = cQImage_vtable_callback_sharedPainter
-  gen_qimage_types.QImage(h: fcQImage_new10(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format), owned: true)
+  gen_qimage_types.QImage(h: fcQImage_new10(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format), owned: true)
 
 const cQImage_mvtbl = cQImageVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1126,10 +1128,10 @@ proc create2*(T: type gen_qimage_types.QImage,
   inst[].owned = true
 
 proc create*(T: type gen_qimage_types.QImage,
-    fileName: string,
+    fileName: openArray[char],
     inst: VirtualQImage) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQImage_new8(addr(cQImage_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+  inst[].h = fcQImage_new8(addr(cQImage_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   inst[].owned = true
 
 proc create*(T: type gen_qimage_types.QImage,
@@ -1140,10 +1142,10 @@ proc create*(T: type gen_qimage_types.QImage,
   inst[].owned = true
 
 proc create*(T: type gen_qimage_types.QImage,
-    fileName: string, format: cstring,
+    fileName: openArray[char], format: cstring,
     inst: VirtualQImage) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQImage_new10(addr(cQImage_mvtbl), addr(inst[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format)
+  inst[].h = fcQImage_new10(addr(cQImage_mvtbl), addr(inst[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), format)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qimage_types.QImage): gen_qobjectdefs_types.QMetaObject =

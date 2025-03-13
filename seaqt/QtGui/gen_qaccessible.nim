@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QAccessibleEventEnum* = distinct cint
@@ -603,12 +605,12 @@ proc indexOfChild*(self: gen_qaccessible_types.QAccessibleInterface, param1: gen
 
 proc text*(self: gen_qaccessible_types.QAccessibleInterface, t: cint): string =
   let v_ms = fcQAccessibleInterface_text(self.h, cint(t))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setText*(self: gen_qaccessible_types.QAccessibleInterface, t: cint, text: string): void =
-  fcQAccessibleInterface_setText(self.h, cint(t), struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qaccessible_types.QAccessibleInterface, t: cint, text: openArray[char]): void =
+  fcQAccessibleInterface_setText(self.h, cint(t), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc rect*(self: gen_qaccessible_types.QAccessibleInterface): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQAccessibleInterface_rect(self.h), owned: true)
@@ -675,25 +677,25 @@ proc setCursorPosition*(self: gen_qaccessible_types.QAccessibleTextInterface, po
 
 proc text*(self: gen_qaccessible_types.QAccessibleTextInterface, startOffset: cint, endOffset: cint): string =
   let v_ms = fcQAccessibleTextInterface_text(self.h, startOffset, endOffset)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc textBeforeOffset*(self: gen_qaccessible_types.QAccessibleTextInterface, offset: cint, boundaryType: cint, startOffset: ptr cint, endOffset: ptr cint): string =
   let v_ms = fcQAccessibleTextInterface_textBeforeOffset(self.h, offset, cint(boundaryType), startOffset, endOffset)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc textAfterOffset*(self: gen_qaccessible_types.QAccessibleTextInterface, offset: cint, boundaryType: cint, startOffset: ptr cint, endOffset: ptr cint): string =
   let v_ms = fcQAccessibleTextInterface_textAfterOffset(self.h, offset, cint(boundaryType), startOffset, endOffset)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc textAtOffset*(self: gen_qaccessible_types.QAccessibleTextInterface, offset: cint, boundaryType: cint, startOffset: ptr cint, endOffset: ptr cint): string =
   let v_ms = fcQAccessibleTextInterface_textAtOffset(self.h, offset, cint(boundaryType), startOffset, endOffset)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -711,7 +713,7 @@ proc scrollToSubstring*(self: gen_qaccessible_types.QAccessibleTextInterface, st
 
 proc attributes*(self: gen_qaccessible_types.QAccessibleTextInterface, offset: cint, startOffset: ptr cint, endOffset: ptr cint): string =
   let v_ms = fcQAccessibleTextInterface_attributes(self.h, offset, startOffset, endOffset)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -721,11 +723,11 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTextInterface, param
 proc deleteText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint): void =
   fcQAccessibleEditableTextInterface_deleteText(self.h, startOffset, endOffset)
 
-proc insertText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, offset: cint, text: string): void =
-  fcQAccessibleEditableTextInterface_insertText(self.h, offset, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc insertText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, offset: cint, text: openArray[char]): void =
+  fcQAccessibleEditableTextInterface_insertText(self.h, offset, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc replaceText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint, text: string): void =
-  fcQAccessibleEditableTextInterface_replaceText(self.h, startOffset, endOffset, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc replaceText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint, text: openArray[char]): void =
+  fcQAccessibleEditableTextInterface_replaceText(self.h, startOffset, endOffset, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc operatorAssign*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, param1: gen_qaccessible_types.QAccessibleEditableTextInterface): void =
   fcQAccessibleEditableTextInterface_operatorAssign(self.h, param1.h)
@@ -810,13 +812,13 @@ proc selectedCells*(self: gen_qaccessible_types.QAccessibleTableInterface): seq[
 
 proc columnDescription*(self: gen_qaccessible_types.QAccessibleTableInterface, column: cint): string =
   let v_ms = fcQAccessibleTableInterface_columnDescription(self.h, column)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc rowDescription*(self: gen_qaccessible_types.QAccessibleTableInterface, row: cint): string =
   let v_ms = fcQAccessibleTableInterface_rowDescription(self.h, row)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -873,13 +875,13 @@ proc modelChange*(self: gen_qaccessible_types.QAccessibleTableInterface, event: 
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring): string =
   let v_ms = fcQAccessibleActionInterface_tr(sourceText)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring): string =
   let v_ms = fcQAccessibleActionInterface_trUtf8(sourceText)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -889,34 +891,34 @@ proc actionNames*(self: gen_qaccessible_types.QAccessibleActionInterface): seq[s
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc localizedActionName*(self: gen_qaccessible_types.QAccessibleActionInterface, name: string): string =
-  let v_ms = fcQAccessibleActionInterface_localizedActionName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc localizedActionName*(self: gen_qaccessible_types.QAccessibleActionInterface, name: openArray[char]): string =
+  let v_ms = fcQAccessibleActionInterface_localizedActionName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc localizedActionDescription*(self: gen_qaccessible_types.QAccessibleActionInterface, name: string): string =
-  let v_ms = fcQAccessibleActionInterface_localizedActionDescription(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc localizedActionDescription*(self: gen_qaccessible_types.QAccessibleActionInterface, name: openArray[char]): string =
+  let v_ms = fcQAccessibleActionInterface_localizedActionDescription(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc doAction*(self: gen_qaccessible_types.QAccessibleActionInterface, actionName: string): void =
-  fcQAccessibleActionInterface_doAction(self.h, struct_miqt_string(data: actionName, len: csize_t(len(actionName))))
+proc doAction*(self: gen_qaccessible_types.QAccessibleActionInterface, actionName: openArray[char]): void =
+  fcQAccessibleActionInterface_doAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
 
-proc keyBindingsForAction*(self: gen_qaccessible_types.QAccessibleActionInterface, actionName: string): seq[string] =
-  var v_ma = fcQAccessibleActionInterface_keyBindingsForAction(self.h, struct_miqt_string(data: actionName, len: csize_t(len(actionName))))
+proc keyBindingsForAction*(self: gen_qaccessible_types.QAccessibleActionInterface, actionName: openArray[char]): seq[string] =
+  var v_ma = fcQAccessibleActionInterface_keyBindingsForAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -924,73 +926,73 @@ proc keyBindingsForAction*(self: gen_qaccessible_types.QAccessibleActionInterfac
 
 proc pressAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_pressAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc increaseAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_increaseAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc decreaseAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_decreaseAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc showMenuAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_showMenuAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setFocusAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_setFocusAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toggleAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_toggleAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scrollLeftAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_scrollLeftAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scrollRightAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_scrollRightAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scrollUpAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_scrollUpAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scrollDownAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_scrollDownAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc nextPageAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_nextPageAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc previousPageAction*(_: type gen_qaccessible_types.QAccessibleActionInterface): string =
   let v_ms = fcQAccessibleActionInterface_previousPageAction()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -999,31 +1001,31 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleActionInterface, par
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring): string =
   let v_ms = fcQAccessibleActionInterface_tr2(sourceText, disambiguation)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring, n: cint): string =
   let v_ms = fcQAccessibleActionInterface_tr3(sourceText, disambiguation, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring): string =
   let v_ms = fcQAccessibleActionInterface_trUtf82(sourceText, disambiguation)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring, disambiguation: cstring, n: cint): string =
   let v_ms = fcQAccessibleActionInterface_trUtf83(sourceText, disambiguation, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc imageDescription*(self: gen_qaccessible_types.QAccessibleImageInterface): string =
   let v_ms = fcQAccessibleImageInterface_imageDescription(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1366,7 +1368,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
 
 proc textInserted*(self: gen_qaccessible_types.QAccessibleTextInsertEvent): string =
   let v_ms = fcQAccessibleTextInsertEvent_textInserted(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1402,7 +1404,7 @@ proc cQAccessibleTextInsertEvent_method_callback_accessibleInterface(self: point
   virtualReturn_h
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
-    obj: gen_qobject_types.QObject, position: cint, text: string,
+    obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
     vtbl: ref QAccessibleTextInsertEventVTable = nil): gen_qaccessible_types.QAccessibleTextInsertEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextInsertEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1411,10 +1413,10 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextInsertEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: openArray[char],
     vtbl: ref QAccessibleTextInsertEventVTable = nil): gen_qaccessible_types.QAccessibleTextInsertEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextInsertEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1423,7 +1425,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextInsertEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 const cQAccessibleTextInsertEvent_mvtbl = cQAccessibleTextInsertEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1433,22 +1435,22 @@ const cQAccessibleTextInsertEvent_mvtbl = cQAccessibleTextInsertEventVTable(
   accessibleInterface: cQAccessibleTextInsertEvent_method_callback_accessibleInterface,
 )
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
-    obj: gen_qobject_types.QObject, position: cint, text: string,
+    obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
     inst: VirtualQAccessibleTextInsertEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextInsertEvent_new(addr(cQAccessibleTextInsertEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextInsertEvent_new(addr(cQAccessibleTextInsertEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: openArray[char],
     inst: VirtualQAccessibleTextInsertEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextInsertEvent_new2(addr(cQAccessibleTextInsertEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextInsertEvent_new2(addr(cQAccessibleTextInsertEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc textRemoved*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent): string =
   let v_ms = fcQAccessibleTextRemoveEvent_textRemoved(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1484,7 +1486,7 @@ proc cQAccessibleTextRemoveEvent_method_callback_accessibleInterface(self: point
   virtualReturn_h
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
-    obj: gen_qobject_types.QObject, position: cint, text: string,
+    obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
     vtbl: ref QAccessibleTextRemoveEventVTable = nil): gen_qaccessible_types.QAccessibleTextRemoveEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextRemoveEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1493,10 +1495,10 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextRemoveEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: openArray[char],
     vtbl: ref QAccessibleTextRemoveEventVTable = nil): gen_qaccessible_types.QAccessibleTextRemoveEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextRemoveEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1505,7 +1507,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextRemoveEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 const cQAccessibleTextRemoveEvent_mvtbl = cQAccessibleTextRemoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1515,28 +1517,28 @@ const cQAccessibleTextRemoveEvent_mvtbl = cQAccessibleTextRemoveEventVTable(
   accessibleInterface: cQAccessibleTextRemoveEvent_method_callback_accessibleInterface,
 )
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
-    obj: gen_qobject_types.QObject, position: cint, text: string,
+    obj: gen_qobject_types.QObject, position: cint, text: openArray[char],
     inst: VirtualQAccessibleTextRemoveEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextRemoveEvent_new(addr(cQAccessibleTextRemoveEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextRemoveEvent_new(addr(cQAccessibleTextRemoveEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: openArray[char],
     inst: VirtualQAccessibleTextRemoveEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextRemoveEvent_new2(addr(cQAccessibleTextRemoveEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextRemoveEvent_new2(addr(cQAccessibleTextRemoveEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc textRemoved*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent): string =
   let v_ms = fcQAccessibleTextUpdateEvent_textRemoved(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc textInserted*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent): string =
   let v_ms = fcQAccessibleTextUpdateEvent_textInserted(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1572,7 +1574,7 @@ proc cQAccessibleTextUpdateEvent_method_callback_accessibleInterface(self: point
   virtualReturn_h
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
-    obj: gen_qobject_types.QObject, position: cint, oldText: string, text: string,
+    obj: gen_qobject_types.QObject, position: cint, oldText: openArray[char], text: openArray[char],
     vtbl: ref QAccessibleTextUpdateEventVTable = nil): gen_qaccessible_types.QAccessibleTextUpdateEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextUpdateEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1581,10 +1583,10 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextUpdateEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new(addr(vtbl[].vtbl), addr(vtbl[]), obj.h, position, struct_miqt_string(data: if len(oldText) > 0: addr oldText[0] else: nil, len: csize_t(len(oldText))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: string, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: openArray[char], text: openArray[char],
     vtbl: ref QAccessibleTextUpdateEventVTable = nil): gen_qaccessible_types.QAccessibleTextUpdateEvent =
   let vtbl = if vtbl == nil: new QAccessibleTextUpdateEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1593,7 +1595,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
     GC_unref(vtbl)
   if not isNil(vtbl[].accessibleInterface):
     vtbl[].vtbl.accessibleInterface = cQAccessibleTextUpdateEvent_vtable_callback_accessibleInterface
-  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new2(addr(vtbl[].vtbl), addr(vtbl[]), iface.h, position, struct_miqt_string(data: if len(oldText) > 0: addr oldText[0] else: nil, len: csize_t(len(oldText))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 const cQAccessibleTextUpdateEvent_mvtbl = cQAccessibleTextUpdateEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -1603,17 +1605,17 @@ const cQAccessibleTextUpdateEvent_mvtbl = cQAccessibleTextUpdateEventVTable(
   accessibleInterface: cQAccessibleTextUpdateEvent_method_callback_accessibleInterface,
 )
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
-    obj: gen_qobject_types.QObject, position: cint, oldText: string, text: string,
+    obj: gen_qobject_types.QObject, position: cint, oldText: openArray[char], text: openArray[char],
     inst: VirtualQAccessibleTextUpdateEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextUpdateEvent_new(addr(cQAccessibleTextUpdateEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextUpdateEvent_new(addr(cQAccessibleTextUpdateEvent_mvtbl), addr(inst[]), obj.h, position, struct_miqt_string(data: if len(oldText) > 0: addr oldText[0] else: nil, len: csize_t(len(oldText))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
-    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: string, text: string,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: openArray[char], text: openArray[char],
     inst: VirtualQAccessibleTextUpdateEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQAccessibleTextUpdateEvent_new2(addr(cQAccessibleTextUpdateEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].h = fcQAccessibleTextUpdateEvent_new2(addr(cQAccessibleTextUpdateEvent_mvtbl), addr(inst[]), iface.h, position, struct_miqt_string(data: if len(oldText) > 0: addr oldText[0] else: nil, len: csize_t(len(oldText))), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   inst[].owned = true
 
 proc setValue*(self: gen_qaccessible_types.QAccessibleValueChangeEvent, val: gen_qvariant_types.QVariant): void =

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qpictureformatplugin.cpp", cflags).}
@@ -112,55 +114,55 @@ proc metacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring): string =
   let v_ms = fcQPictureFormatPlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring): string =
   let v_ms = fcQPictureFormatPlugin_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc loadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_loadPicture(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), struct_miqt_string(data: filename, len: csize_t(len(filename))), pic.h)
+proc loadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_loadPicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
 
-proc savePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_savePicture(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), struct_miqt_string(data: filename, len: csize_t(len(filename))), pic.h)
+proc savePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_savePicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
 
-proc installIOHandler*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string): bool =
-  fcQPictureFormatPlugin_installIOHandler(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
+proc installIOHandler*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char]): bool =
+  fcQPictureFormatPlugin_installIOHandler(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQPictureFormatPlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPictureFormatPlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQPictureFormatPlugin_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQPictureFormatPlugin_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QPictureFormatPluginmetaObjectProc* = proc(self: QPictureFormatPlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPictureFormatPluginmetacastProc* = proc(self: QPictureFormatPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QPictureFormatPluginmetacallProc* = proc(self: QPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QPictureFormatPluginloadPictureProc* = proc(self: QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool {.raises: [], gcsafe.}
-type QPictureFormatPluginsavePictureProc* = proc(self: QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool {.raises: [], gcsafe.}
-type QPictureFormatPlugininstallIOHandlerProc* = proc(self: QPictureFormatPlugin, format: string): bool {.raises: [], gcsafe.}
+type QPictureFormatPluginloadPictureProc* = proc(self: QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.raises: [], gcsafe.}
+type QPictureFormatPluginsavePictureProc* = proc(self: QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.raises: [], gcsafe.}
+type QPictureFormatPlugininstallIOHandlerProc* = proc(self: QPictureFormatPlugin, format: openArray[char]): bool {.raises: [], gcsafe.}
 type QPictureFormatPlugineventProc* = proc(self: QPictureFormatPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QPictureFormatPlugineventFilterProc* = proc(self: QPictureFormatPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QPictureFormatPlugintimerEventProc* = proc(self: QPictureFormatPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -217,36 +219,36 @@ proc cQPictureFormatPlugin_vtable_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPictureFormatPluginloadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_virtualbase_loadPicture(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), struct_miqt_string(data: filename, len: csize_t(len(filename))), pic.h)
+proc QPictureFormatPluginloadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_virtualbase_loadPicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
 
 proc cQPictureFormatPlugin_vtable_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval2 = vfilenamex_ret
   let slotval3 = gen_qpicture_types.QPicture(h: pic, owned: false)
   var virtualReturn = vtbl[].loadPicture(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPictureFormatPluginsavePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool =
-  fcQPictureFormatPlugin_virtualbase_savePicture(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), struct_miqt_string(data: filename, len: csize_t(len(filename))), pic.h)
+proc QPictureFormatPluginsavePicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool =
+  fcQPictureFormatPlugin_virtualbase_savePicture(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), pic.h)
 
 proc cQPictureFormatPlugin_vtable_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval2 = vfilenamex_ret
   let slotval3 = gen_qpicture_types.QPicture(h: pic, owned: false)
@@ -257,7 +259,7 @@ proc cQPictureFormatPlugin_vtable_callback_installIOHandler(self: pointer, forma
   let vtbl = cast[ptr QPictureFormatPluginVTable](fcQPictureFormatPlugin_vdata(self))
   let self = QPictureFormatPlugin(h: self)
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   var virtualReturn = vtbl[].installIOHandler(self, slotval1)
@@ -359,44 +361,44 @@ proc cQPictureFormatPlugin_method_callback_metacall(self: pointer, param1: cint,
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method loadPicture*(self: VirtualQPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool {.base.} =
+method loadPicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
   QPictureFormatPluginloadPicture(self[], format, filename, pic)
 proc cQPictureFormatPlugin_method_callback_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval2 = vfilenamex_ret
   let slotval3 = gen_qpicture_types.QPicture(h: pic, owned: false)
   var virtualReturn = inst.loadPicture(slotval1, slotval2, slotval3)
   virtualReturn
 
-method savePicture*(self: VirtualQPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool {.base.} =
+method savePicture*(self: VirtualQPictureFormatPlugin, format: openArray[char], filename: openArray[char], pic: gen_qpicture_types.QPicture): bool {.base.} =
   QPictureFormatPluginsavePicture(self[], format, filename, pic)
 proc cQPictureFormatPlugin_method_callback_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   let vfilename_ms = filename
-  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  let vfilenamex_ret = string.fromBytes(vfilename_ms)
   c_free(vfilename_ms.data)
   let slotval2 = vfilenamex_ret
   let slotval3 = gen_qpicture_types.QPicture(h: pic, owned: false)
   var virtualReturn = inst.savePicture(slotval1, slotval2, slotval3)
   virtualReturn
 
-method installIOHandler*(self: VirtualQPictureFormatPlugin, format: string): bool {.base.} =
+method installIOHandler*(self: VirtualQPictureFormatPlugin, format: openArray[char]): bool {.base.} =
   raiseAssert("missing implementation of QPictureFormatPlugin_virtualbase_installIOHandler")
 proc cQPictureFormatPlugin_method_callback_installIOHandler(self: pointer, format: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQPictureFormatPlugin](fcQPictureFormatPlugin_vdata(self))
   let vformat_ms = format
-  let vformatx_ret = string.fromBytes(toOpenArrayByte(vformat_ms.data, 0, int(vformat_ms.len)-1))
+  let vformatx_ret = string.fromBytes(vformat_ms)
   c_free(vformat_ms.data)
   let slotval1 = vformatx_ret
   var virtualReturn = inst.installIOHandler(slotval1)

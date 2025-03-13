@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QTextStreamRealNumberNotationEnum* = distinct cint
@@ -185,7 +187,7 @@ proc device*(self: gen_qtextstream_types.QTextStream): gen_qiodevice_types.QIODe
 
 proc string*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_string(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -218,19 +220,19 @@ proc skipWhiteSpace*(self: gen_qtextstream_types.QTextStream): void =
 
 proc readLine*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_readLine(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc readAll*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_readAll(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc read*(self: gen_qtextstream_types.QTextStream, maxlen: clonglong): string =
   let v_ms = fcQTextStream_read(self.h, maxlen)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -312,10 +314,10 @@ proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, f: ptr float32
 proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, f: ptr float64): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithDouble(self.h, f), owned: false)
 
-proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, s: string): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithQString(self.h, struct_miqt_string(data: s, len: csize_t(len(s)))), owned: false)
+proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, s: openArray[char]): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithQString(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: false)
 
-proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, array: seq[byte]): gen_qtextstream_types.QTextStream =
+proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, array: openArray[byte]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftRightWithArray(self.h, struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array)))), owned: false)
 
 proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, c: cstring): gen_qtextstream_types.QTextStream =
@@ -357,10 +359,10 @@ proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, f: float32): ge
 proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, f: float64): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithDouble(self.h, f), owned: false)
 
-proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, s: string): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithQString(self.h, struct_miqt_string(data: s, len: csize_t(len(s)))), owned: false)
+proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, s: openArray[char]): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithQString(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: false)
 
-proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, array: seq[byte]): gen_qtextstream_types.QTextStream =
+proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, array: openArray[byte]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_operatorShiftLeftWithArray(self.h, struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array)))), owned: false)
 
 proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, c: cstring): gen_qtextstream_types.QTextStream =
@@ -371,7 +373,7 @@ proc operatorShiftLeft*(self: gen_qtextstream_types.QTextStream, ptrVal: pointer
 
 proc readLine*(self: gen_qtextstream_types.QTextStream, maxlen: clonglong): string =
   let v_ms = fcQTextStream_readLine1(self.h, maxlen)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -383,10 +385,10 @@ proc create*(T: type gen_qtextstream_types.QTextStream,
   gen_qtextstream_types.QTextStream(h: fcQTextStream_new2(device.h), owned: true)
 
 proc create*(T: type gen_qtextstream_types.QTextStream,
-    array: seq[byte]): gen_qtextstream_types.QTextStream =
+    array: openArray[byte]): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_new3(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array)))), owned: true)
 
 proc create*(T: type gen_qtextstream_types.QTextStream,
-    array: seq[byte], openMode: cint): gen_qtextstream_types.QTextStream =
+    array: openArray[byte], openMode: cint): gen_qtextstream_types.QTextStream =
   gen_qtextstream_types.QTextStream(h: fcQTextStream_new4(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array))), cint(openMode)), owned: true)
 

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicsview.cpp", cflags).}
@@ -370,13 +372,13 @@ proc metacall*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint, param2
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring): string =
   let v_ms = fcQGraphicsView_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring): string =
   let v_ms = fcQGraphicsView_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -629,7 +631,7 @@ proc foregroundBrush*(self: gen_qgraphicsview_types.QGraphicsView): gen_qbrush_t
 proc setForegroundBrush*(self: gen_qgraphicsview_types.QGraphicsView, brush: gen_qbrush_types.QBrush): void =
   fcQGraphicsView_setForegroundBrush(self.h, brush.h)
 
-proc updateScene*(self: gen_qgraphicsview_types.QGraphicsView, rects: seq[gen_qrect_types.QRectF]): void =
+proc updateScene*(self: gen_qgraphicsview_types.QGraphicsView, rects: openArray[gen_qrect_types.QRectF]): void =
   var rects_CArray = newSeq[pointer](len(rects))
   for i in 0..<len(rects):
     rects_CArray[i] = rects[i].h
@@ -668,25 +670,25 @@ proc onrubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, slot: QGr
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsView_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsView_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsView_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQGraphicsView_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -817,7 +819,7 @@ type QGraphicsViewcloseEventProc* = proc(self: QGraphicsView, event: gen_qevent_
 type QGraphicsViewtabletEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
 type QGraphicsViewactionEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
 type QGraphicsViewhideEventProc* = proc(self: QGraphicsView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QGraphicsViewnativeEventProc* = proc(self: QGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QGraphicsViewnativeEventProc* = proc(self: QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QGraphicsViewmetricProc* = proc(self: QGraphicsView, param1: cint): cint {.raises: [], gcsafe.}
 type QGraphicsViewinitPainterProc* = proc(self: QGraphicsView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QGraphicsViewredirectedProc* = proc(self: QGraphicsView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1331,14 +1333,14 @@ proc cQGraphicsView_vtable_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QGraphicsViewnativeEvent*(self: gen_qgraphicsview_types.QGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQGraphicsView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQGraphicsView_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsViewVTable](fcQGraphicsView_vdata(self))
   let self = QGraphicsView(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1791,12 +1793,12 @@ proc cQGraphicsView_method_callback_hideEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQGraphicsView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQGraphicsView, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QGraphicsViewnativeEvent(self[], eventType, message, resultVal)
 proc cQGraphicsView_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQGraphicsView](fcQGraphicsView_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

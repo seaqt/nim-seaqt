@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QLibraryInfoLibraryLocationEnum* = distinct cint
@@ -72,13 +74,13 @@ proc fcQLibraryInfo_platformPluginArguments(platformName: struct_miqt_string): s
 
 proc licensee*(_: type gen_qlibraryinfo_types.QLibraryInfo): string =
   let v_ms = fcQLibraryInfo_licensee()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc licensedProducts*(_: type gen_qlibraryinfo_types.QLibraryInfo): string =
   let v_ms = fcQLibraryInfo_licensedProducts()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -96,17 +98,17 @@ proc version*(_: type gen_qlibraryinfo_types.QLibraryInfo): gen_qversionnumber_t
 
 proc location*(_: type gen_qlibraryinfo_types.QLibraryInfo, param1: cint): string =
   let v_ms = fcQLibraryInfo_location(cint(param1))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platformName: string): seq[string] =
-  var v_ma = fcQLibraryInfo_platformPluginArguments(struct_miqt_string(data: platformName, len: csize_t(len(platformName))))
+proc platformPluginArguments*(_: type gen_qlibraryinfo_types.QLibraryInfo, platformName: openArray[char]): seq[string] =
+  var v_ma = fcQLibraryInfo_platformPluginArguments(struct_miqt_string(data: if len(platformName) > 0: addr platformName[0] else: nil, len: csize_t(len(platformName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)

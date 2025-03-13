@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWebSelectDataItemTypeEnum* = distinct cint
@@ -218,13 +220,13 @@ proc itemType*(self: gen_qwebkitplatformplugin_types.QWebSelectData, param1: cin
 
 proc itemText*(self: gen_qwebkitplatformplugin_types.QWebSelectData, index: cint): string =
   let v_ms = fcQWebSelectData_itemText(self.h, index)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc itemToolTip*(self: gen_qwebkitplatformplugin_types.QWebSelectData, index: cint): string =
   let v_ms = fcQWebSelectData_itemToolTip(self.h, index)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -266,13 +268,13 @@ proc metacall*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, param1: c
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring): string =
   let v_ms = fcQWebSelectMethod_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring): string =
   let v_ms = fcQWebSelectMethod_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -332,25 +334,25 @@ proc ondidHide*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, slot: QW
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring, c: cstring): string =
   let v_ms = fcQWebSelectMethod_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebSelectMethod_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring, c: cstring): string =
   let v_ms = fcQWebSelectMethod_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebSelectMethod_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -370,13 +372,13 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod)
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSelectMethod_staticMetaObject())
 proc title*(self: gen_qwebkitplatformplugin_types.QWebNotificationData): string =
   let v_ms = fcQWebNotificationData_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc message*(self: gen_qwebkitplatformplugin_types.QWebNotificationData): string =
   let v_ms = fcQWebNotificationData_message(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -400,13 +402,13 @@ proc metacall*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, 
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring): string =
   let v_ms = fcQWebNotificationPresenter_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring): string =
   let v_ms = fcQWebNotificationPresenter_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -451,25 +453,25 @@ proc onnotificationClicked*(self: gen_qwebkitplatformplugin_types.QWebNotificati
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring, c: cstring): string =
   let v_ms = fcQWebNotificationPresenter_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebNotificationPresenter_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring, c: cstring): string =
   let v_ms = fcQWebNotificationPresenter_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebNotificationPresenter_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -498,40 +500,40 @@ proc metacall*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, p
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring): string =
   let v_ms = fcQWebHapticFeedbackPlayer_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring): string =
   let v_ms = fcQWebHapticFeedbackPlayer_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc playHapticFeedback*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, param1: cint, hapticType: string, param3: cint): void =
-  fcQWebHapticFeedbackPlayer_playHapticFeedback(self.h, cint(param1), struct_miqt_string(data: hapticType, len: csize_t(len(hapticType))), cint(param3))
+proc playHapticFeedback*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, param1: cint, hapticType: openArray[char], param3: cint): void =
+  fcQWebHapticFeedbackPlayer_playHapticFeedback(self.h, cint(param1), struct_miqt_string(data: if len(hapticType) > 0: addr hapticType[0] else: nil, len: csize_t(len(hapticType))), cint(param3))
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring, c: cstring): string =
   let v_ms = fcQWebHapticFeedbackPlayer_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebHapticFeedbackPlayer_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring, c: cstring): string =
   let v_ms = fcQWebHapticFeedbackPlayer_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebHapticFeedbackPlayer_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -560,13 +562,13 @@ proc metacall*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, param1: 
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring): string =
   let v_ms = fcQWebTouchModifier_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring): string =
   let v_ms = fcQWebTouchModifier_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -575,25 +577,25 @@ proc hitTestPaddingForTouch*(self: gen_qwebkitplatformplugin_types.QWebTouchModi
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring, c: cstring): string =
   let v_ms = fcQWebTouchModifier_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebTouchModifier_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring, c: cstring): string =
   let v_ms = fcQWebTouchModifier_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebTouchModifier_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -622,13 +624,13 @@ proc metacall*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, param1: c
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring): string =
   let v_ms = fcQWebSpellChecker_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring): string =
   let v_ms = fcQWebSpellChecker_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -638,27 +640,27 @@ proc isContinousSpellCheckingEnabled*(self: gen_qwebkitplatformplugin_types.QWeb
 proc toggleContinousSpellChecking*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker): void =
   fcQWebSpellChecker_toggleContinousSpellChecking(self.h)
 
-proc learnWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: string): void =
-  fcQWebSpellChecker_learnWord(self.h, struct_miqt_string(data: word, len: csize_t(len(word))))
+proc learnWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: openArray[char]): void =
+  fcQWebSpellChecker_learnWord(self.h, struct_miqt_string(data: if len(word) > 0: addr word[0] else: nil, len: csize_t(len(word))))
 
-proc ignoreWordInSpellDocument*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: string): void =
-  fcQWebSpellChecker_ignoreWordInSpellDocument(self.h, struct_miqt_string(data: word, len: csize_t(len(word))))
+proc ignoreWordInSpellDocument*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: openArray[char]): void =
+  fcQWebSpellChecker_ignoreWordInSpellDocument(self.h, struct_miqt_string(data: if len(word) > 0: addr word[0] else: nil, len: csize_t(len(word))))
 
-proc checkSpellingOfString*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: string, misspellingLocation: ptr cint, misspellingLength: ptr cint): void =
-  fcQWebSpellChecker_checkSpellingOfString(self.h, struct_miqt_string(data: word, len: csize_t(len(word))), misspellingLocation, misspellingLength)
+proc checkSpellingOfString*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: openArray[char], misspellingLocation: ptr cint, misspellingLength: ptr cint): void =
+  fcQWebSpellChecker_checkSpellingOfString(self.h, struct_miqt_string(data: if len(word) > 0: addr word[0] else: nil, len: csize_t(len(word))), misspellingLocation, misspellingLength)
 
-proc autoCorrectSuggestionForMisspelledWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: string): string =
-  let v_ms = fcQWebSpellChecker_autoCorrectSuggestionForMisspelledWord(self.h, struct_miqt_string(data: word, len: csize_t(len(word))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc autoCorrectSuggestionForMisspelledWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: openArray[char]): string =
+  let v_ms = fcQWebSpellChecker_autoCorrectSuggestionForMisspelledWord(self.h, struct_miqt_string(data: if len(word) > 0: addr word[0] else: nil, len: csize_t(len(word))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc guessesForWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: string, context: string, guesses: seq[string]): void =
+proc guessesForWord*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, word: openArray[char], context: openArray[char], guesses: openArray[string]): void =
   var guesses_CArray = newSeq[struct_miqt_string](len(guesses))
   for i in 0..<len(guesses):
-    guesses_CArray[i] = struct_miqt_string(data: guesses[i], len: csize_t(len(guesses[i])))
+    guesses_CArray[i] = struct_miqt_string(data: if len(guesses[i]) > 0: addr guesses[i][0] else: nil, len: csize_t(len(guesses[i])))
 
-  fcQWebSpellChecker_guessesForWord(self.h, struct_miqt_string(data: word, len: csize_t(len(word))), struct_miqt_string(data: context, len: csize_t(len(context))), struct_miqt_array(len: csize_t(len(guesses)), data: if len(guesses) == 0: nil else: addr(guesses_CArray[0])))
+  fcQWebSpellChecker_guessesForWord(self.h, struct_miqt_string(data: if len(word) > 0: addr word[0] else: nil, len: csize_t(len(word))), struct_miqt_string(data: if len(context) > 0: addr context[0] else: nil, len: csize_t(len(context))), struct_miqt_array(len: csize_t(len(guesses)), data: if len(guesses) == 0: nil else: addr(guesses_CArray[0])))
 
 proc isGrammarCheckingEnabled*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker): bool =
   fcQWebSpellChecker_isGrammarCheckingEnabled(self.h)
@@ -666,34 +668,34 @@ proc isGrammarCheckingEnabled*(self: gen_qwebkitplatformplugin_types.QWebSpellCh
 proc toggleGrammarChecking*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker): void =
   fcQWebSpellChecker_toggleGrammarChecking(self.h)
 
-proc checkGrammarOfString*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, param1: string, param2: seq[gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail], badGrammarLocation: ptr cint, badGrammarLength: ptr cint): void =
+proc checkGrammarOfString*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, param1: openArray[char], param2: openArray[gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail], badGrammarLocation: ptr cint, badGrammarLength: ptr cint): void =
   var param2_CArray = newSeq[pointer](len(param2))
   for i in 0..<len(param2):
     param2_CArray[i] = param2[i].h
 
-  fcQWebSpellChecker_checkGrammarOfString(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))), struct_miqt_array(len: csize_t(len(param2)), data: if len(param2) == 0: nil else: addr(param2_CArray[0])), badGrammarLocation, badGrammarLength)
+  fcQWebSpellChecker_checkGrammarOfString(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_miqt_array(len: csize_t(len(param2)), data: if len(param2) == 0: nil else: addr(param2_CArray[0])), badGrammarLocation, badGrammarLength)
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring, c: cstring): string =
   let v_ms = fcQWebSpellChecker_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebSpellChecker_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring, c: cstring): string =
   let v_ms = fcQWebSpellChecker_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebSpellChecker_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

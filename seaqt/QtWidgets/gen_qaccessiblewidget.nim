@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qaccessiblewidget.cpp", cflags).}
@@ -125,7 +127,7 @@ proc child*(self: gen_qaccessiblewidget_types.QAccessibleWidget, index: cint): g
 
 proc text*(self: gen_qaccessiblewidget_types.QAccessibleWidget, t: cint): string =
   let v_ms = fcQAccessibleWidget_text(self.h, cint(t))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -150,22 +152,22 @@ proc actionNames*(self: gen_qaccessiblewidget_types.QAccessibleWidget): seq[stri
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc doAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: string): void =
-  fcQAccessibleWidget_doAction(self.h, struct_miqt_string(data: actionName, len: csize_t(len(actionName))))
+proc doAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: openArray[char]): void =
+  fcQAccessibleWidget_doAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
 
-proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: string): seq[string] =
-  var v_ma = fcQAccessibleWidget_keyBindingsForAction(self.h, struct_miqt_string(data: actionName, len: csize_t(len(actionName))))
+proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: openArray[char]): seq[string] =
+  var v_ma = fcQAccessibleWidget_keyBindingsForAction(self.h, struct_miqt_string(data: if len(actionName) > 0: addr actionName[0] else: nil, len: csize_t(len(actionName))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -177,8 +179,8 @@ proc widget*(self: gen_qaccessiblewidget_types.QAccessibleWidget): gen_qwidget_t
 proc parentObject*(self: gen_qaccessiblewidget_types.QAccessibleWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAccessibleWidget_protectedbase_parentObject(self.h), owned: false)
 
-proc addControllingSignal*(self: gen_qaccessiblewidget_types.QAccessibleWidget, signal: string): void =
-  fcQAccessibleWidget_protectedbase_addControllingSignal(self.h, struct_miqt_string(data: signal, len: csize_t(len(signal))))
+proc addControllingSignal*(self: gen_qaccessiblewidget_types.QAccessibleWidget, signal: openArray[char]): void =
+  fcQAccessibleWidget_protectedbase_addControllingSignal(self.h, struct_miqt_string(data: if len(signal) > 0: addr signal[0] else: nil, len: csize_t(len(signal))))
 
 proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
     o: gen_qwidget_types.QWidget): gen_qaccessiblewidget_types.QAccessibleWidget =
@@ -189,6 +191,6 @@ proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
   gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new2(o.h, cint(r)), owned: true)
 
 proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
-    o: gen_qwidget_types.QWidget, r: cint, name: string): gen_qaccessiblewidget_types.QAccessibleWidget =
-  gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new3(o.h, cint(r), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+    o: gen_qwidget_types.QWidget, r: cint, name: openArray[char]): gen_qaccessiblewidget_types.QAccessibleWidget =
+  gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new3(o.h, cint(r), struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 

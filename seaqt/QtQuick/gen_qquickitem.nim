@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QQuickItemFlagEnum* = distinct cint
@@ -452,13 +454,13 @@ proc metacall*(self: gen_qquickitem_types.QQuickTransform, param1: cint, param2:
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring): string =
   let v_ms = fcQQuickTransform_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickTransform, s: cstring): string =
   let v_ms = fcQQuickTransform_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -473,25 +475,25 @@ proc applyTo*(self: gen_qquickitem_types.QQuickTransform, matrix: gen_qmatrix4x4
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring): string =
   let v_ms = fcQQuickTransform_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQuickTransform_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring): string =
   let v_ms = fcQQuickTransform_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickTransform, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQuickTransform_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -835,13 +837,13 @@ proc metacall*(self: gen_qquickitem_types.QQuickItem, param1: cint, param2: cint
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring): string =
   let v_ms = fcQQuickItem_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickItem, s: cstring): string =
   let v_ms = fcQQuickItem_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -880,12 +882,12 @@ proc setClip*(self: gen_qquickitem_types.QQuickItem, clip: bool): void =
 
 proc state*(self: gen_qquickitem_types.QQuickItem): string =
   let v_ms = fcQQuickItem_state(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setState*(self: gen_qquickitem_types.QQuickItem, state: string): void =
-  fcQQuickItem_setState(self.h, struct_miqt_string(data: state, len: csize_t(len(state))))
+proc setState*(self: gen_qquickitem_types.QQuickItem, state: openArray[char]): void =
+  fcQQuickItem_setState(self.h, struct_miqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
 
 proc baselineOffset*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_baselineOffset(self.h)
@@ -1100,7 +1102,7 @@ proc filtersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem): bool =
 proc setFiltersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem, filter: bool): void =
   fcQQuickItem_setFiltersChildMouseEvents(self.h, filter)
 
-proc grabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ids: seq[cint]): void =
+proc grabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ids: openArray[cint]): void =
   var ids_CArray = newSeq[cint](len(ids))
   for i in 0..<len(ids):
     ids_CArray[i] = ids[i]
@@ -1228,14 +1230,14 @@ proc onbaselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuic
   GC_ref(tmp)
   fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_baselineOffsetChanged, cQQuickItem_slot_callback_baselineOffsetChanged_release)
 
-proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: string): void =
-  fcQQuickItem_stateChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
+proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: openArray[char]): void =
+  fcQQuickItem_stateChanged(self.h, struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QQuickItemstateChangedSlot* = proc(param1: string)
+type QQuickItemstateChangedSlot* = proc(param1: openArray[char])
 proc cQQuickItem_slot_callback_stateChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemstateChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
-  let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
+  let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
   let slotval1 = vparam1x_ret
 
@@ -1703,25 +1705,25 @@ proc oncontainmentMaskChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQui
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItem_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQuickItem_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItem_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQQuickItem_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

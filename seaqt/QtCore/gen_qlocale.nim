@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QLocaleLanguageEnum* = distinct cint
@@ -1071,219 +1073,219 @@ proc country*(self: gen_qlocale_types.QLocale): cint =
 
 proc name*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc bcp47Name*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_bcp47Name(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc nativeLanguageName*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_nativeLanguageName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc nativeCountryName*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_nativeCountryName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toShort*(self: gen_qlocale_types.QLocale, s: string): cshort =
-  fcQLocale_toShort(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toShort*(self: gen_qlocale_types.QLocale, s: openArray[char]): cshort =
+  fcQLocale_toShort(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toUShort*(self: gen_qlocale_types.QLocale, s: string): cushort =
-  fcQLocale_toUShort(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toUShort*(self: gen_qlocale_types.QLocale, s: openArray[char]): cushort =
+  fcQLocale_toUShort(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toInt*(self: gen_qlocale_types.QLocale, s: string): cint =
-  fcQLocale_toInt(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toInt*(self: gen_qlocale_types.QLocale, s: openArray[char]): cint =
+  fcQLocale_toInt(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toUInt*(self: gen_qlocale_types.QLocale, s: string): cuint =
-  fcQLocale_toUInt(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toUInt*(self: gen_qlocale_types.QLocale, s: openArray[char]): cuint =
+  fcQLocale_toUInt(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toLong*(self: gen_qlocale_types.QLocale, s: string): clong =
-  fcQLocale_toLong(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): clong =
+  fcQLocale_toLong(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toULong*(self: gen_qlocale_types.QLocale, s: string): culong =
-  fcQLocale_toULong(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toULong*(self: gen_qlocale_types.QLocale, s: openArray[char]): culong =
+  fcQLocale_toULong(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toLongLong*(self: gen_qlocale_types.QLocale, s: string): clonglong =
-  fcQLocale_toLongLong(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toLongLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): clonglong =
+  fcQLocale_toLongLong(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toULongLong*(self: gen_qlocale_types.QLocale, s: string): culonglong =
-  fcQLocale_toULongLong(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toULongLong*(self: gen_qlocale_types.QLocale, s: openArray[char]): culonglong =
+  fcQLocale_toULongLong(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toFloat*(self: gen_qlocale_types.QLocale, s: string): float32 =
-  fcQLocale_toFloat(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toFloat*(self: gen_qlocale_types.QLocale, s: openArray[char]): float32 =
+  fcQLocale_toFloat(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc toDouble*(self: gen_qlocale_types.QLocale, s: string): float64 =
-  fcQLocale_toDouble(self.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc toDouble*(self: gen_qlocale_types.QLocale, s: openArray[char]): float64 =
+  fcQLocale_toDouble(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc toString*(self: gen_qlocale_types.QLocale, i: clonglong): string =
   let v_ms = fcQLocale_toString(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: culonglong): string =
   let v_ms = fcQLocale_toStringWithQulonglong(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: clong): string =
   let v_ms = fcQLocale_toStringWithLong(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: culong): string =
   let v_ms = fcQLocale_toStringWithUlong(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cshort): string =
   let v_ms = fcQLocale_toStringWithShort(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cushort): string =
   let v_ms = fcQLocale_toStringWithUshort(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cint): string =
   let v_ms = fcQLocale_toStringWithInt(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: cuint): string =
   let v_ms = fcQLocale_toStringWithUint(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float64): string =
   let v_ms = fcQLocale_toStringWithDouble(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float32): string =
   let v_ms = fcQLocale_toStringWithFloat(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, formatStr: string): string =
-  let v_ms = fcQLocale_toString2(self.h, date.h, struct_miqt_string(data: formatStr, len: csize_t(len(formatStr))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, formatStr: openArray[char]): string =
+  let v_ms = fcQLocale_toString2(self.h, date.h, struct_miqt_string(data: if len(formatStr) > 0: addr formatStr[0] else: nil, len: csize_t(len(formatStr))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime, formatStr: string): string =
-  let v_ms = fcQLocale_toString3(self.h, time.h, struct_miqt_string(data: formatStr, len: csize_t(len(formatStr))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime, formatStr: openArray[char]): string =
+  let v_ms = fcQLocale_toString3(self.h, time.h, struct_miqt_string(data: if len(formatStr) > 0: addr formatStr[0] else: nil, len: csize_t(len(formatStr))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: string): string =
-  let v_ms = fcQLocale_toString4(self.h, dateTime.h, struct_miqt_string(data: format, len: csize_t(len(format))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: openArray[char]): string =
+  let v_ms = fcQLocale_toString4(self.h, dateTime.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate): string =
   let v_ms = fcQLocale_toStringWithDate(self.h, date.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime): string =
   let v_ms = fcQLocale_toStringWithTime(self.h, time.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQLocale_toStringWithDateTime(self.h, dateTime.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, format: cint, cal: gen_qcalendar_types.QCalendar): string =
   let v_ms = fcQLocale_toString9(self.h, date.h, cint(format), cal.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: cint, cal: gen_qcalendar_types.QCalendar): string =
   let v_ms = fcQLocale_toString10(self.h, dateTime.h, cint(format), cal.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateFormat*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_dateFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc timeFormat*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_timeFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateTimeFormat*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_dateTimeFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: string): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: string): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: string, format: string): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate2(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: string, format: string): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime2(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: string, format: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime2(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format)))), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime2(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: string, format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate3(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(format), cal.h), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate3(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format), cal.h), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: string, format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime3(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(format), cal.h), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime3(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format), cal.h), owned: true)
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: string, format: string, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate4(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format))), cal.h), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate4(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: string, format: string, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime4(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format))), cal.h), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime4(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: string, format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime3(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(format), cal.h), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime3(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format), cal.h), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: string, format: string, cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime4(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), struct_miqt_string(data: format, len: csize_t(len(format))), cal.h), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: openArray[char], cal: gen_qcalendar_types.QCalendar): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime4(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))), cal.h), owned: true)
 
 proc decimalPoint*(self: gen_qlocale_types.QLocale): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQLocale_decimalPoint(self.h), owned: true)
@@ -1308,25 +1310,25 @@ proc exponential*(self: gen_qlocale_types.QLocale): gen_qchar_types.QChar =
 
 proc monthName*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_monthName(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_standaloneMonthName(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dayName*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_dayName(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneDayName*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_standaloneDayName(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1344,13 +1346,13 @@ proc weekdays*(self: gen_qlocale_types.QLocale): seq[cint] =
 
 proc amText*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_amText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc pmText*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_pmText(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1363,93 +1365,93 @@ proc collation*(self: gen_qlocale_types.QLocale): gen_qlocale_types.QLocale =
 proc textDirection*(self: gen_qlocale_types.QLocale): cint =
   cint(fcQLocale_textDirection(self.h))
 
-proc toUpper*(self: gen_qlocale_types.QLocale, str: string): string =
-  let v_ms = fcQLocale_toUpper(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toUpper*(self: gen_qlocale_types.QLocale, str: openArray[char]): string =
+  let v_ms = fcQLocale_toUpper(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toLower*(self: gen_qlocale_types.QLocale, str: string): string =
-  let v_ms = fcQLocale_toLower(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toLower*(self: gen_qlocale_types.QLocale, str: openArray[char]): string =
+  let v_ms = fcQLocale_toLower(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc currencySymbol*(self: gen_qlocale_types.QLocale): string =
   let v_ms = fcQLocale_currencySymbol(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: clonglong): string =
   let v_ms = fcQLocale_toCurrencyString(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: culonglong): string =
   let v_ms = fcQLocale_toCurrencyStringWithQulonglong(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cshort): string =
   let v_ms = fcQLocale_toCurrencyStringWithShort(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cushort): string =
   let v_ms = fcQLocale_toCurrencyStringWithUshort(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_toCurrencyStringWithInt(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cuint): string =
   let v_ms = fcQLocale_toCurrencyStringWithUint(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64): string =
   let v_ms = fcQLocale_toCurrencyStringWithDouble(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: string, precision: cint): string =
-  let v_ms = fcQLocale_toCurrencyString2(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))), precision)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: openArray[char], precision: cint): string =
+  let v_ms = fcQLocale_toCurrencyString2(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32): string =
   let v_ms = fcQLocale_toCurrencyStringWithFloat(self.h, i)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: string, precision: cint): string =
-  let v_ms = fcQLocale_toCurrencyString3(self.h, i, struct_miqt_string(data: symbol, len: csize_t(len(symbol))), precision)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: openArray[char], precision: cint): string =
+  let v_ms = fcQLocale_toCurrencyString3(self.h, i, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))), precision)
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong): string =
   let v_ms = fcQLocale_formattedDataSize(self.h, bytes)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize2*(self: gen_qlocale_types.QLocale, bytes: clonglong): string =
   let v_ms = fcQLocale_formattedDataSizeWithBytes(self.h, bytes)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1459,7 +1461,7 @@ proc uiLanguages*(self: gen_qlocale_types.QLocale): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -1473,19 +1475,19 @@ proc operatorNotEqual*(self: gen_qlocale_types.QLocale, other: gen_qlocale_types
 
 proc languageToString*(_: type gen_qlocale_types.QLocale, language: cint): string =
   let v_ms = fcQLocale_languageToString(cint(language))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc countryToString*(_: type gen_qlocale_types.QLocale, country: cint): string =
   let v_ms = fcQLocale_countryToString(cint(country))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc scriptToString*(_: type gen_qlocale_types.QLocale, script: cint): string =
   let v_ms = fcQLocale_scriptToString(cint(script))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1522,226 +1524,226 @@ proc setNumberOptions*(self: gen_qlocale_types.QLocale, options: cint): void =
 proc numberOptions*(self: gen_qlocale_types.QLocale): cint =
   cint(fcQLocale_numberOptions(self.h))
 
-proc quoteString*(self: gen_qlocale_types.QLocale, str: string): string =
-  let v_ms = fcQLocale_quoteString(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc quoteString*(self: gen_qlocale_types.QLocale, str: openArray[char]): string =
+  let v_ms = fcQLocale_quoteString(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc createSeparatedList*(self: gen_qlocale_types.QLocale, strl: seq[string]): string =
+proc createSeparatedList*(self: gen_qlocale_types.QLocale, strl: openArray[string]): string =
   var strl_CArray = newSeq[struct_miqt_string](len(strl))
   for i in 0..<len(strl):
-    strl_CArray[i] = struct_miqt_string(data: strl[i], len: csize_t(len(strl[i])))
+    strl_CArray[i] = struct_miqt_string(data: if len(strl[i]) > 0: addr strl[i][0] else: nil, len: csize_t(len(strl[i])))
 
   let v_ms = fcQLocale_createSeparatedList(self.h, struct_miqt_array(len: csize_t(len(strl)), data: if len(strl) == 0: nil else: addr(strl_CArray[0])))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toShort*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): cshort =
-  fcQLocale_toShort2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toShort*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cshort =
+  fcQLocale_toShort2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toUShort*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): cushort =
-  fcQLocale_toUShort2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toUShort*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cushort =
+  fcQLocale_toUShort2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toInt*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): cint =
-  fcQLocale_toInt2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toInt*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cint =
+  fcQLocale_toInt2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toUInt*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): cuint =
-  fcQLocale_toUInt2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toUInt*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): cuint =
+  fcQLocale_toUInt2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toLong*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): clong =
-  fcQLocale_toLong2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): clong =
+  fcQLocale_toLong2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toULong*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): culong =
-  fcQLocale_toULong2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toULong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): culong =
+  fcQLocale_toULong2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toLongLong*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): clonglong =
-  fcQLocale_toLongLong2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toLongLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): clonglong =
+  fcQLocale_toLongLong2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toULongLong*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): culonglong =
-  fcQLocale_toULongLong2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toULongLong*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): culonglong =
+  fcQLocale_toULongLong2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toFloat*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): float32 =
-  fcQLocale_toFloat2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toFloat*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): float32 =
+  fcQLocale_toFloat2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
-proc toDouble*(self: gen_qlocale_types.QLocale, s: string, ok: ptr bool): float64 =
-  fcQLocale_toDouble2(self.h, struct_miqt_string(data: s, len: csize_t(len(s))), ok)
+proc toDouble*(self: gen_qlocale_types.QLocale, s: openArray[char], ok: ptr bool): float64 =
+  fcQLocale_toDouble2(self.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))), ok)
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float64, f: cchar): string =
   let v_ms = fcQLocale_toString22(self.h, i, f)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float64, f: cchar, prec: cint): string =
   let v_ms = fcQLocale_toString32(self.h, i, f, prec)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float32, f: cchar): string =
   let v_ms = fcQLocale_toString23(self.h, i, f)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, i: float32, f: cchar, prec: cint): string =
   let v_ms = fcQLocale_toString33(self.h, i, f, prec)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, date: gen_qdatetime_types.QDate, format: cint): string =
   let v_ms = fcQLocale_toString24(self.h, date.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, time: gen_qdatetime_types.QTime, format: cint): string =
   let v_ms = fcQLocale_toString25(self.h, time.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_qlocale_types.QLocale, dateTime: gen_qdatetime_types.QDateTime, format: cint): string =
   let v_ms = fcQLocale_toString26(self.h, dateTime.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
   let v_ms = fcQLocale_dateFormat1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc timeFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
   let v_ms = fcQLocale_timeFormat1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dateTimeFormat*(self: gen_qlocale_types.QLocale, format: cint): string =
   let v_ms = fcQLocale_dateTimeFormat1(self.h, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toDate*(self: gen_qlocale_types.QLocale, string: string, param2: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQLocale_toDate22(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(param2)), owned: true)
+proc toDate*(self: gen_qlocale_types.QLocale, string: openArray[char], param2: cint): gen_qdatetime_types.QDate =
+  gen_qdatetime_types.QDate(h: fcQLocale_toDate22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(param2)), owned: true)
 
-proc toTime*(self: gen_qlocale_types.QLocale, string: string, param2: cint): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQLocale_toTime22(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(param2)), owned: true)
+proc toTime*(self: gen_qlocale_types.QLocale, string: openArray[char], param2: cint): gen_qdatetime_types.QTime =
+  gen_qdatetime_types.QTime(h: fcQLocale_toTime22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(param2)), owned: true)
 
-proc toDateTime*(self: gen_qlocale_types.QLocale, string: string, format: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime22(self.h, struct_miqt_string(data: string, len: csize_t(len(string))), cint(format)), owned: true)
+proc toDateTime*(self: gen_qlocale_types.QLocale, string: openArray[char], format: cint): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQLocale_toDateTime22(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), cint(format)), owned: true)
 
 proc monthName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
   let v_ms = fcQLocale_monthName2(self.h, param1, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
   let v_ms = fcQLocale_standaloneMonthName2(self.h, param1, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc dayName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
   let v_ms = fcQLocale_dayName2(self.h, param1, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneDayName*(self: gen_qlocale_types.QLocale, param1: cint, format: cint): string =
   let v_ms = fcQLocale_standaloneDayName2(self.h, param1, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc currencySymbol*(self: gen_qlocale_types.QLocale, param1: cint): string =
   let v_ms = fcQLocale_currencySymbol1(self.h, cint(param1))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: clonglong, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString22(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: clonglong, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString22(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: culonglong, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString23(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: culonglong, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString23(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cshort, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString24(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cshort, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString24(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cushort, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString25(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cushort, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString25(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cint, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString26(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cint, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString26(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cuint, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString27(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: cuint, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString27(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString28(self.h, param1, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, param1: float64, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString28(self.h, param1, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: string): string =
-  let v_ms = fcQLocale_toCurrencyString29(self.h, i, struct_miqt_string(data: symbol, len: csize_t(len(symbol))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toCurrencyString*(self: gen_qlocale_types.QLocale, i: float32, symbol: openArray[char]): string =
+  let v_ms = fcQLocale_toCurrencyString29(self.h, i, struct_miqt_string(data: if len(symbol) > 0: addr symbol[0] else: nil, len: csize_t(len(symbol))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint): string =
   let v_ms = fcQLocale_formattedDataSize2(self.h, bytes, precision)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint, format: cint): string =
   let v_ms = fcQLocale_formattedDataSize3(self.h, bytes, precision, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize2*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint): string =
   let v_ms = fcQLocale_formattedDataSize22(self.h, bytes, precision)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc formattedDataSize2*(self: gen_qlocale_types.QLocale, bytes: clonglong, precision: cint, format: cint): string =
   let v_ms = fcQLocale_formattedDataSize32(self.h, bytes, precision, cint(format))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc quoteString*(self: gen_qlocale_types.QLocale, str: string, style: cint): string =
-  let v_ms = fcQLocale_quoteString2(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), cint(style))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc quoteString*(self: gen_qlocale_types.QLocale, str: openArray[char], style: cint): string =
+  let v_ms = fcQLocale_quoteString2(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(style))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1749,8 +1751,8 @@ proc create*(T: type gen_qlocale_types.QLocale): gen_qlocale_types.QLocale =
   gen_qlocale_types.QLocale(h: fcQLocale_new(), owned: true)
 
 proc create*(T: type gen_qlocale_types.QLocale,
-    name: string): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQLocale_new2(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+    name: openArray[char]): gen_qlocale_types.QLocale =
+  gen_qlocale_types.QLocale(h: fcQLocale_new2(struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qlocale_types.QLocale,
     language: cint): gen_qlocale_types.QLocale =

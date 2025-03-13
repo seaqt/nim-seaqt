@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qdatetimeedit.cpp", cflags).}
@@ -602,13 +604,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: cint, param2
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring): string =
   let v_ms = fcQDateTimeEdit_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring): string =
   let v_ms = fcQDateTimeEdit_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -722,18 +724,18 @@ proc setSelectedSection*(self: gen_qdatetimeedit_types.QDateTimeEdit, section: c
 
 proc sectionText*(self: gen_qdatetimeedit_types.QDateTimeEdit, section: cint): string =
   let v_ms = fcQDateTimeEdit_sectionText(self.h, cint(section))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc displayFormat*(self: gen_qdatetimeedit_types.QDateTimeEdit): string =
   let v_ms = fcQDateTimeEdit_displayFormat(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setDisplayFormat*(self: gen_qdatetimeedit_types.QDateTimeEdit, format: string): void =
-  fcQDateTimeEdit_setDisplayFormat(self.h, struct_miqt_string(data: format, len: csize_t(len(format))))
+proc setDisplayFormat*(self: gen_qdatetimeedit_types.QDateTimeEdit, format: openArray[char]): void =
+  fcQDateTimeEdit_setDisplayFormat(self.h, struct_miqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
 
 proc calendarPopup*(self: gen_qdatetimeedit_types.QDateTimeEdit): bool =
   fcQDateTimeEdit_calendarPopup(self.h)
@@ -830,25 +832,25 @@ proc setTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, time: gen_qdatetime_t
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring): string =
   let v_ms = fcQDateTimeEdit_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDateTimeEdit_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring): string =
   let v_ms = fcQDateTimeEdit_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDateTimeEdit_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -863,9 +865,9 @@ type QDateTimeEditkeyPressEventProc* = proc(self: QDateTimeEdit, event: gen_qeve
 type QDateTimeEditwheelEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QDateTimeEditfocusInEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QDateTimeEditfocusNextPrevChildProc* = proc(self: QDateTimeEdit, next: bool): bool {.raises: [], gcsafe.}
-type QDateTimeEditvalidateProc* = proc(self: QDateTimeEdit, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QDateTimeEditfixupProc* = proc(self: QDateTimeEdit, input: string): void {.raises: [], gcsafe.}
-type QDateTimeEditdateTimeFromTextProc* = proc(self: QDateTimeEdit, text: string): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
+type QDateTimeEditvalidateProc* = proc(self: QDateTimeEdit, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QDateTimeEditfixupProc* = proc(self: QDateTimeEdit, input: openArray[char]): void {.raises: [], gcsafe.}
+type QDateTimeEditdateTimeFromTextProc* = proc(self: QDateTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
 type QDateTimeEdittextFromDateTimeProc* = proc(self: QDateTimeEdit, dt: gen_qdatetime_types.QDateTime): string {.raises: [], gcsafe.}
 type QDateTimeEditstepEnabledProc* = proc(self: QDateTimeEdit): cint {.raises: [], gcsafe.}
 type QDateTimeEditmousePressEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
@@ -898,7 +900,7 @@ type QDateTimeEditdragEnterEventProc* = proc(self: QDateTimeEdit, event: gen_qev
 type QDateTimeEditdragMoveEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QDateTimeEditdragLeaveEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QDateTimeEditdropEventProc* = proc(self: QDateTimeEdit, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QDateTimeEditnativeEventProc* = proc(self: QDateTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QDateTimeEditnativeEventProc* = proc(self: QDateTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QDateTimeEditmetricProc* = proc(self: QDateTimeEdit, param1: cint): cint {.raises: [], gcsafe.}
 type QDateTimeEditinitPainterProc* = proc(self: QDateTimeEdit, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDateTimeEditredirectedProc* = proc(self: QDateTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -1078,40 +1080,40 @@ proc cQDateTimeEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QDateTimeEditvalidate*(self: gen_qdatetimeedit_types.QDateTimeEdit, input: string, pos: ptr cint): cint =
-  cint(fcQDateTimeEdit_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc QDateTimeEditvalidate*(self: gen_qdatetimeedit_types.QDateTimeEdit, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQDateTimeEdit_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc cQDateTimeEdit_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](fcQDateTimeEdit_vdata(self))
   let self = QDateTimeEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QDateTimeEditfixup*(self: gen_qdatetimeedit_types.QDateTimeEdit, input: string): void =
-  fcQDateTimeEdit_virtualbase_fixup(self.h, struct_miqt_string(data: input, len: csize_t(len(input))))
+proc QDateTimeEditfixup*(self: gen_qdatetimeedit_types.QDateTimeEdit, input: openArray[char]): void =
+  fcQDateTimeEdit_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc cQDateTimeEdit_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](fcQDateTimeEdit_vdata(self))
   let self = QDateTimeEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   vtbl[].fixup(self, slotval1)
 
-proc QDateTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateTimeEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc QDateTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc cQDateTimeEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](fcQDateTimeEdit_vdata(self))
   let self = QDateTimeEdit(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
@@ -1122,7 +1124,7 @@ proc cQDateTimeEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct
 
 proc QDateTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateTimeEdit_virtualbase_textFromDateTime(self.h, dt.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1425,14 +1427,14 @@ proc cQDateTimeEdit_vtable_callback_dropEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QDateTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QDateTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQDateTimeEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQDateTimeEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](fcQDateTimeEdit_vdata(self))
   let self = QDateTimeEdit(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1630,34 +1632,34 @@ proc cQDateTimeEdit_method_callback_focusNextPrevChild(self: pointer, next: bool
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method validate*(self: VirtualQDateTimeEdit, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQDateTimeEdit, input: openArray[char], pos: ptr cint): cint {.base.} =
   QDateTimeEditvalidate(self[], input, pos)
 proc cQDateTimeEdit_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQDateTimeEdit, input: string): void {.base.} =
+method fixup*(self: VirtualQDateTimeEdit, input: openArray[char]): void {.base.} =
   QDateTimeEditfixup(self[], input)
 proc cQDateTimeEdit_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   inst.fixup(slotval1)
 
-method dateTimeFromText*(self: VirtualQDateTimeEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+method dateTimeFromText*(self: VirtualQDateTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.base.} =
   QDateTimeEditdateTimeFromText(self[], text)
 proc cQDateTimeEdit_method_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
@@ -1904,12 +1906,12 @@ proc cQDateTimeEdit_method_callback_dropEvent(self: pointer, event: pointer): vo
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDateTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQDateTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QDateTimeEditnativeEvent(self[], eventType, message, resultVal)
 proc cQDateTimeEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQDateTimeEdit](fcQDateTimeEdit_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -3155,13 +3157,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QTimeEdit, param1: cint, param2: ci
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring): string =
   let v_ms = fcQTimeEdit_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring): string =
   let v_ms = fcQTimeEdit_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -3187,25 +3189,25 @@ proc onuserTimeChanged*(self: gen_qdatetimeedit_types.QTimeEdit, slot: QTimeEdit
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring): string =
   let v_ms = fcQTimeEdit_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTimeEdit_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring): string =
   let v_ms = fcQTimeEdit_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQTimeEdit_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -3220,9 +3222,9 @@ type QTimeEditkeyPressEventProc* = proc(self: QTimeEdit, event: gen_qevent_types
 type QTimeEditwheelEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QTimeEditfocusInEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QTimeEditfocusNextPrevChildProc* = proc(self: QTimeEdit, next: bool): bool {.raises: [], gcsafe.}
-type QTimeEditvalidateProc* = proc(self: QTimeEdit, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QTimeEditfixupProc* = proc(self: QTimeEdit, input: string): void {.raises: [], gcsafe.}
-type QTimeEditdateTimeFromTextProc* = proc(self: QTimeEdit, text: string): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
+type QTimeEditvalidateProc* = proc(self: QTimeEdit, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QTimeEditfixupProc* = proc(self: QTimeEdit, input: openArray[char]): void {.raises: [], gcsafe.}
+type QTimeEditdateTimeFromTextProc* = proc(self: QTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
 type QTimeEdittextFromDateTimeProc* = proc(self: QTimeEdit, dt: gen_qdatetime_types.QDateTime): string {.raises: [], gcsafe.}
 type QTimeEditstepEnabledProc* = proc(self: QTimeEdit): cint {.raises: [], gcsafe.}
 type QTimeEditmousePressEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
@@ -3255,7 +3257,7 @@ type QTimeEditdragEnterEventProc* = proc(self: QTimeEdit, event: gen_qevent_type
 type QTimeEditdragMoveEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QTimeEditdragLeaveEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QTimeEditdropEventProc* = proc(self: QTimeEdit, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QTimeEditnativeEventProc* = proc(self: QTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QTimeEditnativeEventProc* = proc(self: QTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QTimeEditmetricProc* = proc(self: QTimeEdit, param1: cint): cint {.raises: [], gcsafe.}
 type QTimeEditinitPainterProc* = proc(self: QTimeEdit, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QTimeEditredirectedProc* = proc(self: QTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -3435,40 +3437,40 @@ proc cQTimeEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): b
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QTimeEditvalidate*(self: gen_qdatetimeedit_types.QTimeEdit, input: string, pos: ptr cint): cint =
-  cint(fcQTimeEdit_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc QTimeEditvalidate*(self: gen_qdatetimeedit_types.QTimeEdit, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQTimeEdit_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc cQTimeEdit_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](fcQTimeEdit_vdata(self))
   let self = QTimeEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QTimeEditfixup*(self: gen_qdatetimeedit_types.QTimeEdit, input: string): void =
-  fcQTimeEdit_virtualbase_fixup(self.h, struct_miqt_string(data: input, len: csize_t(len(input))))
+proc QTimeEditfixup*(self: gen_qdatetimeedit_types.QTimeEdit, input: openArray[char]): void =
+  fcQTimeEdit_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc cQTimeEdit_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](fcQTimeEdit_vdata(self))
   let self = QTimeEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   vtbl[].fixup(self, slotval1)
 
-proc QTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QTimeEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc QTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc cQTimeEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](fcQTimeEdit_vdata(self))
   let self = QTimeEdit(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
@@ -3479,7 +3481,7 @@ proc cQTimeEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct_miq
 
 proc QTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QTimeEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQTimeEdit_virtualbase_textFromDateTime(self.h, dt.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -3782,14 +3784,14 @@ proc cQTimeEdit_vtable_callback_dropEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQTimeEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQTimeEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](fcQTimeEdit_vdata(self))
   let self = QTimeEdit(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -3987,34 +3989,34 @@ proc cQTimeEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): b
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method validate*(self: VirtualQTimeEdit, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQTimeEdit, input: openArray[char], pos: ptr cint): cint {.base.} =
   QTimeEditvalidate(self[], input, pos)
 proc cQTimeEdit_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQTimeEdit, input: string): void {.base.} =
+method fixup*(self: VirtualQTimeEdit, input: openArray[char]): void {.base.} =
   QTimeEditfixup(self[], input)
 proc cQTimeEdit_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   inst.fixup(slotval1)
 
-method dateTimeFromText*(self: VirtualQTimeEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+method dateTimeFromText*(self: VirtualQTimeEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.base.} =
   QTimeEditdateTimeFromText(self[], text)
 proc cQTimeEdit_method_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
@@ -4261,12 +4263,12 @@ proc cQTimeEdit_method_callback_dropEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQTimeEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QTimeEditnativeEvent(self[], eventType, message, resultVal)
 proc cQTimeEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQTimeEdit](fcQTimeEdit_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -4988,13 +4990,13 @@ proc metacall*(self: gen_qdatetimeedit_types.QDateEdit, param1: cint, param2: ci
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring): string =
   let v_ms = fcQDateEdit_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring): string =
   let v_ms = fcQDateEdit_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -5020,25 +5022,25 @@ proc onuserDateChanged*(self: gen_qdatetimeedit_types.QDateEdit, slot: QDateEdit
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring): string =
   let v_ms = fcQDateEdit_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDateEdit_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring): string =
   let v_ms = fcQDateEdit_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDateEdit_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -5053,9 +5055,9 @@ type QDateEditkeyPressEventProc* = proc(self: QDateEdit, event: gen_qevent_types
 type QDateEditwheelEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
 type QDateEditfocusInEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QDateEditfocusNextPrevChildProc* = proc(self: QDateEdit, next: bool): bool {.raises: [], gcsafe.}
-type QDateEditvalidateProc* = proc(self: QDateEdit, input: string, pos: ptr cint): cint {.raises: [], gcsafe.}
-type QDateEditfixupProc* = proc(self: QDateEdit, input: string): void {.raises: [], gcsafe.}
-type QDateEditdateTimeFromTextProc* = proc(self: QDateEdit, text: string): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
+type QDateEditvalidateProc* = proc(self: QDateEdit, input: openArray[char], pos: ptr cint): cint {.raises: [], gcsafe.}
+type QDateEditfixupProc* = proc(self: QDateEdit, input: openArray[char]): void {.raises: [], gcsafe.}
+type QDateEditdateTimeFromTextProc* = proc(self: QDateEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.raises: [], gcsafe.}
 type QDateEdittextFromDateTimeProc* = proc(self: QDateEdit, dt: gen_qdatetime_types.QDateTime): string {.raises: [], gcsafe.}
 type QDateEditstepEnabledProc* = proc(self: QDateEdit): cint {.raises: [], gcsafe.}
 type QDateEditmousePressEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
@@ -5088,7 +5090,7 @@ type QDateEditdragEnterEventProc* = proc(self: QDateEdit, event: gen_qevent_type
 type QDateEditdragMoveEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
 type QDateEditdragLeaveEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QDateEditdropEventProc* = proc(self: QDateEdit, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
-type QDateEditnativeEventProc* = proc(self: QDateEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QDateEditnativeEventProc* = proc(self: QDateEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QDateEditmetricProc* = proc(self: QDateEdit, param1: cint): cint {.raises: [], gcsafe.}
 type QDateEditinitPainterProc* = proc(self: QDateEdit, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QDateEditredirectedProc* = proc(self: QDateEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
@@ -5268,40 +5270,40 @@ proc cQDateEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): b
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QDateEditvalidate*(self: gen_qdatetimeedit_types.QDateEdit, input: string, pos: ptr cint): cint =
-  cint(fcQDateEdit_virtualbase_validate(self.h, struct_miqt_string(data: input, len: csize_t(len(input))), pos))
+proc QDateEditvalidate*(self: gen_qdatetimeedit_types.QDateEdit, input: openArray[char], pos: ptr cint): cint =
+  cint(fcQDateEdit_virtualbase_validate(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))), pos))
 
 proc cQDateEdit_vtable_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](fcQDateEdit_vdata(self))
   let self = QDateEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = vtbl[].validate(self, slotval1, slotval2)
   cint(virtualReturn)
 
-proc QDateEditfixup*(self: gen_qdatetimeedit_types.QDateEdit, input: string): void =
-  fcQDateEdit_virtualbase_fixup(self.h, struct_miqt_string(data: input, len: csize_t(len(input))))
+proc QDateEditfixup*(self: gen_qdatetimeedit_types.QDateEdit, input: openArray[char]): void =
+  fcQDateEdit_virtualbase_fixup(self.h, struct_miqt_string(data: if len(input) > 0: addr input[0] else: nil, len: csize_t(len(input))))
 
 proc cQDateEdit_vtable_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](fcQDateEdit_vdata(self))
   let self = QDateEdit(h: self)
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   vtbl[].fixup(self, slotval1)
 
-proc QDateEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc QDateEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateEdit, text: openArray[char]): gen_qdatetime_types.QDateTime =
+  gen_qdatetime_types.QDateTime(h: fcQDateEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc cQDateEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](fcQDateEdit_vdata(self))
   let self = QDateEdit(h: self)
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
@@ -5312,7 +5314,7 @@ proc cQDateEdit_vtable_callback_dateTimeFromText(self: pointer, text: struct_miq
 
 proc QDateEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateEdit_virtualbase_textFromDateTime(self.h, dt.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -5615,14 +5617,14 @@ proc cQDateEdit_vtable_callback_dropEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QDateEditnativeEvent*(self: gen_qdatetimeedit_types.QDateEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QDateEditnativeEvent*(self: gen_qdatetimeedit_types.QDateEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQDateEdit_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQDateEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](fcQDateEdit_vdata(self))
   let self = QDateEdit(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -5820,34 +5822,34 @@ proc cQDateEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): b
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method validate*(self: VirtualQDateEdit, input: string, pos: ptr cint): cint {.base.} =
+method validate*(self: VirtualQDateEdit, input: openArray[char], pos: ptr cint): cint {.base.} =
   QDateEditvalidate(self[], input, pos)
 proc cQDateEdit_method_callback_validate(self: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   let slotval2 = pos
   var virtualReturn = inst.validate(slotval1, slotval2)
   cint(virtualReturn)
 
-method fixup*(self: VirtualQDateEdit, input: string): void {.base.} =
+method fixup*(self: VirtualQDateEdit, input: openArray[char]): void {.base.} =
   QDateEditfixup(self[], input)
 proc cQDateEdit_method_callback_fixup(self: pointer, input: struct_miqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self))
   let vinput_ms = input
-  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  let vinputx_ret = string.fromBytes(vinput_ms)
   c_free(vinput_ms.data)
   let slotval1 = vinputx_ret
   inst.fixup(slotval1)
 
-method dateTimeFromText*(self: VirtualQDateEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+method dateTimeFromText*(self: VirtualQDateEdit, text: openArray[char]): gen_qdatetime_types.QDateTime {.base.} =
   QDateEditdateTimeFromText(self[], text)
 proc cQDateEdit_method_callback_dateTimeFromText(self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self))
   let vtext_ms = text
-  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = inst.dateTimeFromText(slotval1)
@@ -6094,12 +6096,12 @@ proc cQDateEdit_method_callback_dropEvent(self: pointer, event: pointer): void {
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDateEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQDateEdit, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QDateEditnativeEvent(self[], eventType, message, resultVal)
 proc cQDateEdit_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQDateEdit](fcQDateEdit_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qcborarray_types
@@ -301,10 +303,10 @@ proc operatorPlusAssign*(self: gen_qcborarray_types.QCborArray, v: gen_qcborvalu
 proc operatorShiftLeft*(self: gen_qcborarray_types.QCborArray, v: gen_qcborvalue_types.QCborValue): gen_qcborarray_types.QCborArray =
   gen_qcborarray_types.QCborArray(h: fcQCborArray_operatorShiftLeft(self.h, v.h), owned: false)
 
-proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: seq[string]): gen_qcborarray_types.QCborArray =
+proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: openArray[string]): gen_qcborarray_types.QCborArray =
   var list_CArray = newSeq[struct_miqt_string](len(list))
   for i in 0..<len(list):
-    list_CArray[i] = struct_miqt_string(data: list[i], len: csize_t(len(list[i])))
+    list_CArray[i] = struct_miqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
 
   gen_qcborarray_types.QCborArray(h: fcQCborArray_fromStringList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 

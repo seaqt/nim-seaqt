@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qdirmodel.cpp", cflags).}
@@ -256,13 +258,13 @@ proc metacall*(self: gen_qdirmodel_types.QDirModel, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring): string =
   let v_ms = fcQDirModel_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring): string =
   let v_ms = fcQDirModel_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -302,13 +304,13 @@ proc mimeTypes*(self: gen_qdirmodel_types.QDirModel): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc mimeData*(self: gen_qdirmodel_types.QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc mimeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -327,10 +329,10 @@ proc setIconProvider*(self: gen_qdirmodel_types.QDirModel, provider: gen_qfileic
 proc iconProvider*(self: gen_qdirmodel_types.QDirModel): gen_qfileiconprovider_types.QFileIconProvider =
   gen_qfileiconprovider_types.QFileIconProvider(h: fcQDirModel_iconProvider(self.h), owned: false)
 
-proc setNameFilters*(self: gen_qdirmodel_types.QDirModel, filters: seq[string]): void =
+proc setNameFilters*(self: gen_qdirmodel_types.QDirModel, filters: openArray[string]): void =
   var filters_CArray = newSeq[struct_miqt_string](len(filters))
   for i in 0..<len(filters):
-    filters_CArray[i] = struct_miqt_string(data: filters[i], len: csize_t(len(filters[i])))
+    filters_CArray[i] = struct_miqt_string(data: if len(filters[i]) > 0: addr filters[i][0] else: nil, len: csize_t(len(filters[i])))
 
   fcQDirModel_setNameFilters(self.h, struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])))
 
@@ -340,7 +342,7 @@ proc nameFilters*(self: gen_qdirmodel_types.QDirModel): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -376,14 +378,14 @@ proc setLazyChildCount*(self: gen_qdirmodel_types.QDirModel, enable: bool): void
 proc lazyChildCount*(self: gen_qdirmodel_types.QDirModel): bool =
   fcQDirModel_lazyChildCount(self.h)
 
-proc index*(self: gen_qdirmodel_types.QDirModel, path: string): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexWithPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path)))), owned: true)
+proc index*(self: gen_qdirmodel_types.QDirModel, path: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_indexWithPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc isDir*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQDirModel_isDir(self.h, index.h)
 
-proc mkdir*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, name: string): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_mkdir(self.h, parent.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc mkdir*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, name: openArray[char]): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_mkdir(self.h, parent.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc rmdir*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQDirModel_rmdir(self.h, index.h)
@@ -393,13 +395,13 @@ proc remove*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_
 
 proc filePath*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): string =
   let v_ms = fcQDirModel_filePath(self.h, index.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fileName*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): string =
   let v_ms = fcQDirModel_fileName(self.h, index.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -414,30 +416,30 @@ proc refresh*(self: gen_qdirmodel_types.QDirModel): void =
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring): string =
   let v_ms = fcQDirModel_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDirModel_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring): string =
   let v_ms = fcQDirModel_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdirmodel_types.QDirModel, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDirModel_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc index*(self: gen_qdirmodel_types.QDirModel, path: string, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_index2(self.h, struct_miqt_string(data: path, len: csize_t(len(path))), column), owned: true)
+proc index*(self: gen_qdirmodel_types.QDirModel, path: openArray[char], column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_index2(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), column), owned: true)
 
 proc refresh*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQDirModel_refresh1(self.h, parent.h)
@@ -456,7 +458,7 @@ type QDirModelhasChildrenProc* = proc(self: QDirModel, index: gen_qabstractitemm
 type QDirModelflagsProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
 type QDirModelsortProc* = proc(self: QDirModel, column: cint, order: cint): void {.raises: [], gcsafe.}
 type QDirModelmimeTypesProc* = proc(self: QDirModel): seq[string] {.raises: [], gcsafe.}
-type QDirModelmimeDataProc* = proc(self: QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QDirModelmimeDataProc* = proc(self: QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
 type QDirModeldropMimeDataProc* = proc(self: QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
 type QDirModelsupportedDropActionsProc* = proc(self: QDirModel): cint {.raises: [], gcsafe.}
 type QDirModelsiblingProc* = proc(self: QDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
@@ -691,7 +693,7 @@ proc QDirModelmimeTypes*(self: gen_qdirmodel_types.QDirModel): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -709,7 +711,7 @@ proc cQDirModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cd
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QDirModelmimeData*(self: gen_qdirmodel_types.QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
+proc QDirModelmimeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1033,7 +1035,7 @@ proc QDirModelroleNames*(self: gen_qdirmodel_types.QDirModel): Table[cint,seq[by
     var v_entry_Key = v_Keys[i]
 
     var vx_hashval_bytearray = v_Values[i]
-    var vx_hashvalx_ret = @(toOpenArrayByte(vx_hashval_bytearray.data, 0, int(vx_hashval_bytearray.len)-1))
+    var vx_hashvalx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_hashval_bytearray.data), 0, int(vx_hashval_bytearray.len)-1))
     c_free(vx_hashval_bytearray.data)
     var v_entry_Value = vx_hashvalx_ret
 
@@ -1286,7 +1288,7 @@ proc cQDirModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cd
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method mimeData*(self: VirtualQDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
+method mimeData*(self: VirtualQDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QDirModelmimeData(self[], indexes)
 proc cQDirModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQDirModel](fcQDirModel_vdata(self))
@@ -1619,7 +1621,7 @@ proc resetInternalData*(self: gen_qdirmodel_types.QDirModel): void =
 proc createIndex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
-proc encodeData*(self: gen_qdirmodel_types.QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+proc encodeData*(self: gen_qdirmodel_types.QDirModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
@@ -1674,7 +1676,7 @@ proc endResetModel*(self: gen_qdirmodel_types.QDirModel): void =
 proc changePersistentIndex*(self: gen_qdirmodel_types.QDirModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQDirModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
 
-proc changePersistentIndexList*(self: gen_qdirmodel_types.QDirModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+proc changePersistentIndexList*(self: gen_qdirmodel_types.QDirModel, fromVal: openArray[gen_qabstractitemmodel_types.QModelIndex], to: openArray[gen_qabstractitemmodel_types.QModelIndex]): void =
   var fromVal_CArray = newSeq[pointer](len(fromVal))
   for i in 0..<len(fromVal):
     fromVal_CArray[i] = fromVal[i].h
@@ -1707,11 +1709,11 @@ proc isSignalConnected*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaob
   fcQDirModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
-    nameFilters: seq[string], filters: cint, sort: cint,
+    nameFilters: openArray[string], filters: cint, sort: cint,
     vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
   GC_ref(vtbl)
@@ -1906,11 +1908,11 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
   gen_qdirmodel_types.QDirModel(h: fcQDirModel_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
-    nameFilters: seq[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject,
+    nameFilters: openArray[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
   GC_ref(vtbl)
@@ -2156,11 +2158,11 @@ const cQDirModel_mvtbl = cQDirModelVTable(
   disconnectNotify: cQDirModel_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qdirmodel_types.QDirModel,
-    nameFilters: seq[string], filters: cint, sort: cint,
+    nameFilters: openArray[string], filters: cint, sort: cint,
     inst: VirtualQDirModel) =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDirModel_new(addr(cQDirModel_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort))
@@ -2173,11 +2175,11 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
   inst[].owned = true
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
-    nameFilters: seq[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject,
+    nameFilters: openArray[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject,
     inst: VirtualQDirModel) =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   if inst[].h != nil: delete(move(inst[]))
   inst[].h = fcQDirModel_new3(addr(cQDirModel_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort), parent.h)

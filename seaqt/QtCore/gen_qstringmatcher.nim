@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qstringmatcher_types
@@ -60,29 +62,29 @@ proc fcQStringMatcher_new6(uc: pointer, len: cint, cs: cint): ptr cQStringMatche
 proc operatorAssign*(self: gen_qstringmatcher_types.QStringMatcher, other: gen_qstringmatcher_types.QStringMatcher): void =
   fcQStringMatcher_operatorAssign(self.h, other.h)
 
-proc setPattern*(self: gen_qstringmatcher_types.QStringMatcher, pattern: string): void =
-  fcQStringMatcher_setPattern(self.h, struct_miqt_string(data: pattern, len: csize_t(len(pattern))))
+proc setPattern*(self: gen_qstringmatcher_types.QStringMatcher, pattern: openArray[char]): void =
+  fcQStringMatcher_setPattern(self.h, struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc setCaseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher, cs: cint): void =
   fcQStringMatcher_setCaseSensitivity(self.h, cint(cs))
 
-proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string): cint =
-  fcQStringMatcher_indexIn(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: openArray[char]): cint =
+  fcQStringMatcher_indexIn(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_types.QChar, length: cint): cint =
   fcQStringMatcher_indexIn2(self.h, str.h, length)
 
 proc pattern*(self: gen_qstringmatcher_types.QStringMatcher): string =
   let v_ms = fcQStringMatcher_pattern(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc caseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher): cint =
   cint(fcQStringMatcher_caseSensitivity(self.h))
 
-proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string, fromVal: cint): cint =
-  fcQStringMatcher_indexIn22(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), fromVal)
+proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: openArray[char], fromVal: cint): cint =
+  fcQStringMatcher_indexIn22(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), fromVal)
 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_types.QChar, length: cint, fromVal: cint): cint =
   fcQStringMatcher_indexIn3(self.h, str.h, length, fromVal)
@@ -91,8 +93,8 @@ proc create*(T: type gen_qstringmatcher_types.QStringMatcher): gen_qstringmatche
   gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new(), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
-    pattern: string): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))), owned: true)
+    pattern: openArray[char]): gen_qstringmatcher_types.QStringMatcher =
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint): gen_qstringmatcher_types.QStringMatcher =
@@ -103,8 +105,8 @@ proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
   gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
-    pattern: string, cs: cint): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)), owned: true)
+    pattern: openArray[char], cs: cint): gen_qstringmatcher_types.QStringMatcher =
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint, cs: cint): gen_qstringmatcher_types.QStringMatcher =

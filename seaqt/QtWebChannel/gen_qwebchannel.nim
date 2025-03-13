@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5WebChannel") & " -fPIC"
 {.compile("gen_qwebchannel.cpp", cflags).}
@@ -115,13 +117,13 @@ proc metacall*(self: gen_qwebchannel_types.QWebChannel, param1: cint, param2: ci
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring): string =
   let v_ms = fcQWebChannel_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebchannel_types.QWebChannel, s: cstring): string =
   let v_ms = fcQWebChannel_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -130,7 +132,7 @@ proc registerObjects*(self: gen_qwebchannel_types.QWebChannel, objects: Table[st
   var objects_Values_CArray = newSeq[pointer](len(objects))
   var objects_ctr = 0
   for objects_k in objects.keys():
-    objects_Keys_CArray[objects_ctr] = struct_miqt_string(data: objects_k, len: csize_t(len(objects_k)))
+    objects_Keys_CArray[objects_ctr] = struct_miqt_string(data: if len(objects_k) > 0: addr objects_k[0] else: nil, len: csize_t(len(objects_k)))
     objects_ctr += 1
   objects_ctr = 0
   for objects_v in objects.values():
@@ -146,7 +148,7 @@ proc registeredObjects*(self: gen_qwebchannel_types.QWebChannel): Table[string,g
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_hashkey_ms = v_Keys[i]
-    let vx_hashkeyx_ret = string.fromBytes(toOpenArrayByte(vx_hashkey_ms.data, 0, int(vx_hashkey_ms.len)-1))
+    let vx_hashkeyx_ret = string.fromBytes(vx_hashkey_ms)
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
@@ -157,8 +159,8 @@ proc registeredObjects*(self: gen_qwebchannel_types.QWebChannel): Table[string,g
   c_free(v_mm.values)
   vx_ret
 
-proc registerObject*(self: gen_qwebchannel_types.QWebChannel, id: string, objectVal: gen_qobject_types.QObject): void =
-  fcQWebChannel_registerObject(self.h, struct_miqt_string(data: id, len: csize_t(len(id))), objectVal.h)
+proc registerObject*(self: gen_qwebchannel_types.QWebChannel, id: openArray[char], objectVal: gen_qobject_types.QObject): void =
+  fcQWebChannel_registerObject(self.h, struct_miqt_string(data: if len(id) > 0: addr id[0] else: nil, len: csize_t(len(id))), objectVal.h)
 
 proc deregisterObject*(self: gen_qwebchannel_types.QWebChannel, objectVal: gen_qobject_types.QObject): void =
   fcQWebChannel_deregisterObject(self.h, objectVal.h)
@@ -197,25 +199,25 @@ proc disconnectFrom*(self: gen_qwebchannel_types.QWebChannel, transport: gen_qwe
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring): string =
   let v_ms = fcQWebChannel_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebChannel_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring): string =
   let v_ms = fcQWebChannel_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebchannel_types.QWebChannel, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebChannel_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

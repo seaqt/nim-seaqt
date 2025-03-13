@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qwizard.cpp", cflags).}
@@ -494,13 +496,13 @@ proc metacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, para
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring): string =
   let v_ms = fcQWizard_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring): string =
   let v_ms = fcQWizard_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -564,11 +566,11 @@ proc validateCurrentPage*(self: gen_qwizard_types.QWizard): bool =
 proc nextId*(self: gen_qwizard_types.QWizard): cint =
   fcQWizard_nextId(self.h)
 
-proc setField*(self: gen_qwizard_types.QWizard, name: string, value: gen_qvariant_types.QVariant): void =
-  fcQWizard_setField(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), value.h)
+proc setField*(self: gen_qwizard_types.QWizard, name: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQWizard_setField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc field*(self: gen_qwizard_types.QWizard, name: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWizard_field(self.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc field*(self: gen_qwizard_types.QWizard, name: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizard_field(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setWizardStyle*(self: gen_qwizard_types.QWizard, style: cint): void =
   fcQWizard_setWizardStyle(self.h, cint(style))
@@ -588,16 +590,16 @@ proc setOptions*(self: gen_qwizard_types.QWizard, options: cint): void =
 proc options*(self: gen_qwizard_types.QWizard): cint =
   cint(fcQWizard_options(self.h))
 
-proc setButtonText*(self: gen_qwizard_types.QWizard, which: cint, text: string): void =
-  fcQWizard_setButtonText(self.h, cint(which), struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setButtonText*(self: gen_qwizard_types.QWizard, which: cint, text: openArray[char]): void =
+  fcQWizard_setButtonText(self.h, cint(which), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc buttonText*(self: gen_qwizard_types.QWizard, which: cint): string =
   let v_ms = fcQWizard_buttonText(self.h, cint(which))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setButtonLayout*(self: gen_qwizard_types.QWizard, layout: seq[cint]): void =
+proc setButtonLayout*(self: gen_qwizard_types.QWizard, layout: openArray[cint]): void =
   var layout_CArray = newSeq[cint](len(layout))
   for i in 0..<len(layout):
     layout_CArray[i] = cint(layout[i])
@@ -752,25 +754,25 @@ proc restart*(self: gen_qwizard_types.QWizard): void =
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
   let v_ms = fcQWizard_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWizard_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
   let v_ms = fcQWizard_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWizard_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -822,7 +824,7 @@ type QWizarddragMoveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDr
 type QWizarddragLeaveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
 type QWizarddropEventProc* = proc(self: QWizard, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QWizardhideEventProc* = proc(self: QWizard, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWizardnativeEventProc* = proc(self: QWizard, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QWizardnativeEventProc* = proc(self: QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QWizardchangeEventProc* = proc(self: QWizard, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWizardmetricProc* = proc(self: QWizard, param1: cint): cint {.raises: [], gcsafe.}
 type QWizardinitPainterProc* = proc(self: QWizard, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -1319,14 +1321,14 @@ proc cQWizard_vtable_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWizardnativeEvent*(self: gen_qwizard_types.QWizard, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QWizardnativeEvent*(self: gen_qwizard_types.QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQWizard_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWizard_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self))
   let self = QWizard(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -1798,12 +1800,12 @@ proc cQWizard_method_callback_hideEvent(self: pointer, event: pointer): void {.c
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWizard, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QWizardnativeEvent(self[], eventType, message, resultVal)
 proc cQWizard_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQWizard](fcQWizard_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -2426,31 +2428,31 @@ proc metacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, 
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
   let v_ms = fcQWizardPage_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
   let v_ms = fcQWizardPage_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setTitle*(self: gen_qwizard_types.QWizardPage, title: string): void =
-  fcQWizardPage_setTitle(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
+proc setTitle*(self: gen_qwizard_types.QWizardPage, title: openArray[char]): void =
+  fcQWizardPage_setTitle(self.h, struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc title*(self: gen_qwizard_types.QWizardPage): string =
   let v_ms = fcQWizardPage_title(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSubTitle*(self: gen_qwizard_types.QWizardPage, subTitle: string): void =
-  fcQWizardPage_setSubTitle(self.h, struct_miqt_string(data: subTitle, len: csize_t(len(subTitle))))
+proc setSubTitle*(self: gen_qwizard_types.QWizardPage, subTitle: openArray[char]): void =
+  fcQWizardPage_setSubTitle(self.h, struct_miqt_string(data: if len(subTitle) > 0: addr subTitle[0] else: nil, len: csize_t(len(subTitle))))
 
 proc subTitle*(self: gen_qwizard_types.QWizardPage): string =
   let v_ms = fcQWizardPage_subTitle(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2472,12 +2474,12 @@ proc setCommitPage*(self: gen_qwizard_types.QWizardPage, commitPage: bool): void
 proc isCommitPage*(self: gen_qwizard_types.QWizardPage): bool =
   fcQWizardPage_isCommitPage(self.h)
 
-proc setButtonText*(self: gen_qwizard_types.QWizardPage, which: cint, text: string): void =
-  fcQWizardPage_setButtonText(self.h, cint(which), struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setButtonText*(self: gen_qwizard_types.QWizardPage, which: cint, text: openArray[char]): void =
+  fcQWizardPage_setButtonText(self.h, cint(which), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc buttonText*(self: gen_qwizard_types.QWizardPage, which: cint): string =
   let v_ms = fcQWizardPage_buttonText(self.h, cint(which))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2516,25 +2518,25 @@ proc oncompleteChanged*(self: gen_qwizard_types.QWizardPage, slot: QWizardPageco
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
   let v_ms = fcQWizardPage_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWizardPage_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
   let v_ms = fcQWizardPage_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWizardPage_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -2578,7 +2580,7 @@ type QWizardPagedragLeaveEventProc* = proc(self: QWizardPage, event: gen_qevent_
 type QWizardPagedropEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
 type QWizardPageshowEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
 type QWizardPagehideEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
-type QWizardPagenativeEventProc* = proc(self: QWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QWizardPagenativeEventProc* = proc(self: QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
 type QWizardPagechangeEventProc* = proc(self: QWizardPage, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWizardPagemetricProc* = proc(self: QWizardPage, param1: cint): cint {.raises: [], gcsafe.}
 type QWizardPageinitPainterProc* = proc(self: QWizardPage, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
@@ -3026,14 +3028,14 @@ proc cQWizardPage_vtable_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QWizardPagenativeEvent*(self: gen_qwizard_types.QWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
+proc QWizardPagenativeEvent*(self: gen_qwizard_types.QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
   fcQWizardPage_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 proc cQWizardPage_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self))
   let self = QWizardPage(h: self)
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -3480,12 +3482,12 @@ proc cQWizardPage_method_callback_hideEvent(self: pointer, event: pointer): void
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQWizardPage, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+method nativeEvent*(self: VirtualQWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QWizardPagenativeEvent(self[], eventType, message, resultVal)
 proc cQWizardPage_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
   let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self))
   var veventType_bytearray = eventType
-  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
@@ -3606,23 +3608,23 @@ proc cQWizardPage_method_callback_disconnectNotify(self: pointer, signal: pointe
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-proc setField*(self: gen_qwizard_types.QWizardPage, name: string, value: gen_qvariant_types.QVariant): void =
-  fcQWizardPage_protectedbase_setField(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), value.h)
+proc setField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQWizardPage_protectedbase_setField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
-proc field*(self: gen_qwizard_types.QWizardPage, name: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+proc field*(self: gen_qwizard_types.QWizardPage, name: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget): void =
-  fcQWizardPage_protectedbase_registerField(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h)
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget): void =
+  fcQWizardPage_protectedbase_registerField(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h)
 
 proc wizard*(self: gen_qwizard_types.QWizardPage): gen_qwizard_types.QWizard =
   gen_qwizard_types.QWizard(h: fcQWizardPage_protectedbase_wizard(self.h), owned: false)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring): void =
-  fcQWizardPage_protectedbase_registerField3(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h, property)
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring): void =
+  fcQWizardPage_protectedbase_registerField3(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property)
 
-proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
-  fcQWizardPage_protectedbase_registerField4(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h, property, changedSignal)
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
+  fcQWizardPage_protectedbase_registerField4(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property, changedSignal)
 
 proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage): void =
   fcQWizardPage_protectedbase_updateMicroFocus(self.h)

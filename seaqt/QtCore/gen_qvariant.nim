@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QVariantTypeEnum* = distinct cint
@@ -361,7 +363,7 @@ proc toReal*(self: gen_qvariant_types.QVariant): float64 =
 
 proc toByteArray*(self: gen_qvariant_types.QVariant): seq[byte] =
   var v_bytearray = fcQVariant_toByteArray(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -370,7 +372,7 @@ proc toBitArray*(self: gen_qvariant_types.QVariant): gen_qbitarray_types.QBitArr
 
 proc toString*(self: gen_qvariant_types.QVariant): string =
   let v_ms = fcQVariant_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -380,7 +382,7 @@ proc toStringList*(self: gen_qvariant_types.QVariant): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -405,7 +407,7 @@ proc toMap*(self: gen_qvariant_types.QVariant): Table[string,gen_qvariant_types.
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -423,7 +425,7 @@ proc toHash*(self: gen_qvariant_types.QVariant): Table[string,gen_qvariant_types
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_hashkey_ms = v_Keys[i]
-    let vx_hashkeyx_ret = string.fromBytes(toOpenArrayByte(vx_hashkey_ms.data, 0, int(vx_hashkey_ms.len)-1))
+    let vx_hashkeyx_ret = string.fromBytes(vx_hashkey_ms)
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
@@ -625,7 +627,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   gen_qvariant_types.QVariant(h: fcQVariant_new14(str), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
-    bytearray: seq[byte]): gen_qvariant_types.QVariant =
+    bytearray: openArray[byte]): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_new15(struct_miqt_string(data: cast[cstring](if len(bytearray) == 0: nil else: unsafeAddr bytearray[0]), len: csize_t(len(bytearray)))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
@@ -633,14 +635,14 @@ proc create*(T: type gen_qvariant_types.QVariant,
   gen_qvariant_types.QVariant(h: fcQVariant_new16(bitarray.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
-    string: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
+    string: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
-    stringlist: seq[string]): gen_qvariant_types.QVariant =
+    stringlist: openArray[string]): gen_qvariant_types.QVariant =
   var stringlist_CArray = newSeq[struct_miqt_string](len(stringlist))
   for i in 0..<len(stringlist):
-    stringlist_CArray[i] = struct_miqt_string(data: stringlist[i], len: csize_t(len(stringlist[i])))
+    stringlist_CArray[i] = struct_miqt_string(data: if len(stringlist[i]) > 0: addr stringlist[i][0] else: nil, len: csize_t(len(stringlist[i])))
 
   gen_qvariant_types.QVariant(h: fcQVariant_new18(struct_miqt_array(len: csize_t(len(stringlist)), data: if len(stringlist) == 0: nil else: addr(stringlist_CArray[0]))), owned: true)
 
@@ -666,7 +668,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
   for map_k in map.keys():
-    map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
+    map_Keys_CArray[map_ctr] = struct_miqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
     map_ctr += 1
   map_ctr = 0
   for map_v in map.values():
@@ -681,7 +683,7 @@ proc create2*(T: type gen_qvariant_types.QVariant,
   var hash_Values_CArray = newSeq[pointer](len(hash))
   var hash_ctr = 0
   for hash_k in hash.keys():
-    hash_Keys_CArray[hash_ctr] = struct_miqt_string(data: hash_k, len: csize_t(len(hash_k)))
+    hash_Keys_CArray[hash_ctr] = struct_miqt_string(data: if len(hash_k) > 0: addr hash_k[0] else: nil, len: csize_t(len(hash_k)))
     hash_ctr += 1
   hash_ctr = 0
   for hash_v in hash.values():

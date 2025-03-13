@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QDirFilterEnum* = distinct cint
@@ -167,53 +169,53 @@ proc fcQDir_new6(path: struct_miqt_string, nameFilter: struct_miqt_string, sort:
 proc operatorAssign*(self: gen_qdir_types.QDir, param1: gen_qdir_types.QDir): void =
   fcQDir_operatorAssign(self.h, param1.h)
 
-proc operatorAssign*(self: gen_qdir_types.QDir, path: string): void =
-  fcQDir_operatorAssignWithPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc operatorAssign*(self: gen_qdir_types.QDir, path: openArray[char]): void =
+  fcQDir_operatorAssignWithPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc swap*(self: gen_qdir_types.QDir, other: gen_qdir_types.QDir): void =
   fcQDir_swap(self.h, other.h)
 
-proc setPath*(self: gen_qdir_types.QDir, path: string): void =
-  fcQDir_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setPath*(self: gen_qdir_types.QDir, path: openArray[char]): void =
+  fcQDir_setPath(self.h, struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc path*(self: gen_qdir_types.QDir): string =
   let v_ms = fcQDir_path(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc absolutePath*(self: gen_qdir_types.QDir): string =
   let v_ms = fcQDir_absolutePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc canonicalPath*(self: gen_qdir_types.QDir): string =
   let v_ms = fcQDir_canonicalPath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc addResourceSearchPath*(_: type gen_qdir_types.QDir, path: string): void =
-  fcQDir_addResourceSearchPath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc addResourceSearchPath*(_: type gen_qdir_types.QDir, path: openArray[char]): void =
+  fcQDir_addResourceSearchPath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
-proc setSearchPaths*(_: type gen_qdir_types.QDir, prefix: string, searchPaths: seq[string]): void =
+proc setSearchPaths*(_: type gen_qdir_types.QDir, prefix: openArray[char], searchPaths: openArray[string]): void =
   var searchPaths_CArray = newSeq[struct_miqt_string](len(searchPaths))
   for i in 0..<len(searchPaths):
-    searchPaths_CArray[i] = struct_miqt_string(data: searchPaths[i], len: csize_t(len(searchPaths[i])))
+    searchPaths_CArray[i] = struct_miqt_string(data: if len(searchPaths[i]) > 0: addr searchPaths[i][0] else: nil, len: csize_t(len(searchPaths[i])))
 
-  fcQDir_setSearchPaths(struct_miqt_string(data: prefix, len: csize_t(len(prefix))), struct_miqt_array(len: csize_t(len(searchPaths)), data: if len(searchPaths) == 0: nil else: addr(searchPaths_CArray[0])))
+  fcQDir_setSearchPaths(struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_array(len: csize_t(len(searchPaths)), data: if len(searchPaths) == 0: nil else: addr(searchPaths_CArray[0])))
 
-proc addSearchPath*(_: type gen_qdir_types.QDir, prefix: string, path: string): void =
-  fcQDir_addSearchPath(struct_miqt_string(data: prefix, len: csize_t(len(prefix))), struct_miqt_string(data: path, len: csize_t(len(path))))
+proc addSearchPath*(_: type gen_qdir_types.QDir, prefix: openArray[char], path: openArray[char]): void =
+  fcQDir_addSearchPath(struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
-proc searchPaths*(_: type gen_qdir_types.QDir, prefix: string): seq[string] =
-  var v_ma = fcQDir_searchPaths(struct_miqt_string(data: prefix, len: csize_t(len(prefix))))
+proc searchPaths*(_: type gen_qdir_types.QDir, prefix: openArray[char]): seq[string] =
+  var v_ma = fcQDir_searchPaths(struct_miqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -221,42 +223,42 @@ proc searchPaths*(_: type gen_qdir_types.QDir, prefix: string): seq[string] =
 
 proc dirName*(self: gen_qdir_types.QDir): string =
   let v_ms = fcQDir_dirName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc filePath*(self: gen_qdir_types.QDir, fileName: string): string =
-  let v_ms = fcQDir_filePath(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc filePath*(self: gen_qdir_types.QDir, fileName: openArray[char]): string =
+  let v_ms = fcQDir_filePath(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc absoluteFilePath*(self: gen_qdir_types.QDir, fileName: string): string =
-  let v_ms = fcQDir_absoluteFilePath(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc absoluteFilePath*(self: gen_qdir_types.QDir, fileName: openArray[char]): string =
+  let v_ms = fcQDir_absoluteFilePath(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc relativeFilePath*(self: gen_qdir_types.QDir, fileName: string): string =
-  let v_ms = fcQDir_relativeFilePath(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc relativeFilePath*(self: gen_qdir_types.QDir, fileName: openArray[char]): string =
+  let v_ms = fcQDir_relativeFilePath(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc toNativeSeparators*(_: type gen_qdir_types.QDir, pathName: string): string =
-  let v_ms = fcQDir_toNativeSeparators(struct_miqt_string(data: pathName, len: csize_t(len(pathName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc toNativeSeparators*(_: type gen_qdir_types.QDir, pathName: openArray[char]): string =
+  let v_ms = fcQDir_toNativeSeparators(struct_miqt_string(data: if len(pathName) > 0: addr pathName[0] else: nil, len: csize_t(len(pathName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc fromNativeSeparators*(_: type gen_qdir_types.QDir, pathName: string): string =
-  let v_ms = fcQDir_fromNativeSeparators(struct_miqt_string(data: pathName, len: csize_t(len(pathName))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc fromNativeSeparators*(_: type gen_qdir_types.QDir, pathName: openArray[char]): string =
+  let v_ms = fcQDir_fromNativeSeparators(struct_miqt_string(data: if len(pathName) > 0: addr pathName[0] else: nil, len: csize_t(len(pathName))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc cd*(self: gen_qdir_types.QDir, dirName: string): bool =
-  fcQDir_cd(self.h, struct_miqt_string(data: dirName, len: csize_t(len(dirName))))
+proc cd*(self: gen_qdir_types.QDir, dirName: openArray[char]): bool =
+  fcQDir_cd(self.h, struct_miqt_string(data: if len(dirName) > 0: addr dirName[0] else: nil, len: csize_t(len(dirName))))
 
 proc cdUp*(self: gen_qdir_types.QDir): bool =
   fcQDir_cdUp(self.h)
@@ -267,16 +269,16 @@ proc nameFilters*(self: gen_qdir_types.QDir): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc setNameFilters*(self: gen_qdir_types.QDir, nameFilters: seq[string]): void =
+proc setNameFilters*(self: gen_qdir_types.QDir, nameFilters: openArray[string]): void =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   fcQDir_setNameFilters(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])))
 
@@ -300,17 +302,17 @@ proc isEmpty*(self: gen_qdir_types.QDir): bool =
 
 proc operatorSubscript*(self: gen_qdir_types.QDir, param1: cint): string =
   let v_ms = fcQDir_operatorSubscript(self.h, param1)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc nameFiltersFromString*(_: type gen_qdir_types.QDir, nameFilter: string): seq[string] =
-  var v_ma = fcQDir_nameFiltersFromString(struct_miqt_string(data: nameFilter, len: csize_t(len(nameFilter))))
+proc nameFiltersFromString*(_: type gen_qdir_types.QDir, nameFilter: openArray[char]): seq[string] =
+  var v_ma = fcQDir_nameFiltersFromString(struct_miqt_string(data: if len(nameFilter) > 0: addr nameFilter[0] else: nil, len: csize_t(len(nameFilter))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -322,23 +324,23 @@ proc entryList*(self: gen_qdir_types.QDir): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[string] =
+proc entryList*(self: gen_qdir_types.QDir, nameFilters: openArray[string]): seq[string] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryListWithNameFilters(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -353,10 +355,10 @@ proc entryInfoList*(self: gen_qdir_types.QDir): seq[gen_qfileinfo_types.QFileInf
   c_free(v_ma.data)
   vx_ret
 
-proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[gen_qfileinfo_types.QFileInfo] =
+proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: openArray[string]): seq[gen_qfileinfo_types.QFileInfo] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryInfoListWithNameFilters(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])))
   var vx_ret = newSeq[gen_qfileinfo_types.QFileInfo](int(v_ma.len))
@@ -366,17 +368,17 @@ proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[ge
   c_free(v_ma.data)
   vx_ret
 
-proc mkdir*(self: gen_qdir_types.QDir, dirName: string): bool =
-  fcQDir_mkdir(self.h, struct_miqt_string(data: dirName, len: csize_t(len(dirName))))
+proc mkdir*(self: gen_qdir_types.QDir, dirName: openArray[char]): bool =
+  fcQDir_mkdir(self.h, struct_miqt_string(data: if len(dirName) > 0: addr dirName[0] else: nil, len: csize_t(len(dirName))))
 
-proc rmdir*(self: gen_qdir_types.QDir, dirName: string): bool =
-  fcQDir_rmdir(self.h, struct_miqt_string(data: dirName, len: csize_t(len(dirName))))
+proc rmdir*(self: gen_qdir_types.QDir, dirName: openArray[char]): bool =
+  fcQDir_rmdir(self.h, struct_miqt_string(data: if len(dirName) > 0: addr dirName[0] else: nil, len: csize_t(len(dirName))))
 
-proc mkpath*(self: gen_qdir_types.QDir, dirPath: string): bool =
-  fcQDir_mkpath(self.h, struct_miqt_string(data: dirPath, len: csize_t(len(dirPath))))
+proc mkpath*(self: gen_qdir_types.QDir, dirPath: openArray[char]): bool =
+  fcQDir_mkpath(self.h, struct_miqt_string(data: if len(dirPath) > 0: addr dirPath[0] else: nil, len: csize_t(len(dirPath))))
 
-proc rmpath*(self: gen_qdir_types.QDir, dirPath: string): bool =
-  fcQDir_rmpath(self.h, struct_miqt_string(data: dirPath, len: csize_t(len(dirPath))))
+proc rmpath*(self: gen_qdir_types.QDir, dirPath: openArray[char]): bool =
+  fcQDir_rmpath(self.h, struct_miqt_string(data: if len(dirPath) > 0: addr dirPath[0] else: nil, len: csize_t(len(dirPath))))
 
 proc removeRecursively*(self: gen_qdir_types.QDir): bool =
   fcQDir_removeRecursively(self.h)
@@ -390,11 +392,11 @@ proc exists*(self: gen_qdir_types.QDir): bool =
 proc isRoot*(self: gen_qdir_types.QDir): bool =
   fcQDir_isRoot(self.h)
 
-proc isRelativePath*(_: type gen_qdir_types.QDir, path: string): bool =
-  fcQDir_isRelativePath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc isRelativePath*(_: type gen_qdir_types.QDir, path: openArray[char]): bool =
+  fcQDir_isRelativePath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
-proc isAbsolutePath*(_: type gen_qdir_types.QDir, path: string): bool =
-  fcQDir_isAbsolutePath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc isAbsolutePath*(_: type gen_qdir_types.QDir, path: openArray[char]): bool =
+  fcQDir_isAbsolutePath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc isRelative*(self: gen_qdir_types.QDir): bool =
   fcQDir_isRelative(self.h)
@@ -411,14 +413,14 @@ proc operatorEqual*(self: gen_qdir_types.QDir, dir: gen_qdir_types.QDir): bool =
 proc operatorNotEqual*(self: gen_qdir_types.QDir, dir: gen_qdir_types.QDir): bool =
   fcQDir_operatorNotEqual(self.h, dir.h)
 
-proc remove*(self: gen_qdir_types.QDir, fileName: string): bool =
-  fcQDir_remove(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc remove*(self: gen_qdir_types.QDir, fileName: openArray[char]): bool =
+  fcQDir_remove(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc rename*(self: gen_qdir_types.QDir, oldName: string, newName: string): bool =
-  fcQDir_rename(self.h, struct_miqt_string(data: oldName, len: csize_t(len(oldName))), struct_miqt_string(data: newName, len: csize_t(len(newName))))
+proc rename*(self: gen_qdir_types.QDir, oldName: openArray[char], newName: openArray[char]): bool =
+  fcQDir_rename(self.h, struct_miqt_string(data: if len(oldName) > 0: addr oldName[0] else: nil, len: csize_t(len(oldName))), struct_miqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
-proc exists*(self: gen_qdir_types.QDir, name: string): bool =
-  fcQDir_existsWithName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc exists*(self: gen_qdir_types.QDir, name: openArray[char]): bool =
+  fcQDir_existsWithName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc drives*(_: type gen_qdir_types.QDir): seq[gen_qfileinfo_types.QFileInfo] =
   var v_ma = fcQDir_drives()
@@ -435,15 +437,15 @@ proc listSeparator*(_: type gen_qdir_types.QDir): gen_qchar_types.QChar =
 proc separator*(_: type gen_qdir_types.QDir): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQDir_separator(), owned: true)
 
-proc setCurrent*(_: type gen_qdir_types.QDir, path: string): bool =
-  fcQDir_setCurrent(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc setCurrent*(_: type gen_qdir_types.QDir, path: openArray[char]): bool =
+  fcQDir_setCurrent(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc current*(_: type gen_qdir_types.QDir): gen_qdir_types.QDir =
   gen_qdir_types.QDir(h: fcQDir_current(), owned: true)
 
 proc currentPath*(_: type gen_qdir_types.QDir): string =
   let v_ms = fcQDir_currentPath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -452,7 +454,7 @@ proc home*(_: type gen_qdir_types.QDir): gen_qdir_types.QDir =
 
 proc homePath*(_: type gen_qdir_types.QDir): string =
   let v_ms = fcQDir_homePath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -461,7 +463,7 @@ proc root*(_: type gen_qdir_types.QDir): gen_qdir_types.QDir =
 
 proc rootPath*(_: type gen_qdir_types.QDir): string =
   let v_ms = fcQDir_rootPath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -470,23 +472,23 @@ proc temp*(_: type gen_qdir_types.QDir): gen_qdir_types.QDir =
 
 proc tempPath*(_: type gen_qdir_types.QDir): string =
   let v_ms = fcQDir_tempPath()
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc match*(_: type gen_qdir_types.QDir, filters: seq[string], fileName: string): bool =
+proc match*(_: type gen_qdir_types.QDir, filters: openArray[string], fileName: openArray[char]): bool =
   var filters_CArray = newSeq[struct_miqt_string](len(filters))
   for i in 0..<len(filters):
-    filters_CArray[i] = struct_miqt_string(data: filters[i], len: csize_t(len(filters[i])))
+    filters_CArray[i] = struct_miqt_string(data: if len(filters[i]) > 0: addr filters[i][0] else: nil, len: csize_t(len(filters[i])))
 
-  fcQDir_match(struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])), struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+  fcQDir_match(struct_miqt_array(len: csize_t(len(filters)), data: if len(filters) == 0: nil else: addr(filters_CArray[0])), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc match*(_: type gen_qdir_types.QDir, filter: string, fileName: string): bool =
-  fcQDir_match2(struct_miqt_string(data: filter, len: csize_t(len(filter))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc match*(_: type gen_qdir_types.QDir, filter: openArray[char], fileName: openArray[char]): bool =
+  fcQDir_match2(struct_miqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
-proc cleanPath*(_: type gen_qdir_types.QDir, path: string): string =
-  let v_ms = fcQDir_cleanPath(struct_miqt_string(data: path, len: csize_t(len(path))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc cleanPath*(_: type gen_qdir_types.QDir, path: openArray[char]): string =
+  let v_ms = fcQDir_cleanPath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -502,7 +504,7 @@ proc entryList*(self: gen_qdir_types.QDir, filters: cint): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -514,39 +516,39 @@ proc entryList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[strin
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint): seq[string] =
+proc entryList*(self: gen_qdir_types.QDir, nameFilters: openArray[string], filters: cint): seq[string] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryList22(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
   vx_ret
 
-proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint, sort: cint): seq[string] =
+proc entryList*(self: gen_qdir_types.QDir, nameFilters: openArray[string], filters: cint, sort: cint): seq[string] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryList3(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -570,10 +572,10 @@ proc entryInfoList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[g
   c_free(v_ma.data)
   vx_ret
 
-proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint): seq[gen_qfileinfo_types.QFileInfo] =
+proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: openArray[string], filters: cint): seq[gen_qfileinfo_types.QFileInfo] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryInfoList22(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters))
   var vx_ret = newSeq[gen_qfileinfo_types.QFileInfo](int(v_ma.len))
@@ -583,10 +585,10 @@ proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters
   c_free(v_ma.data)
   vx_ret
 
-proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint, sort: cint): seq[gen_qfileinfo_types.QFileInfo] =
+proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: openArray[string], filters: cint, sort: cint): seq[gen_qfileinfo_types.QFileInfo] =
   var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
   for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+    nameFilters_CArray[i] = struct_miqt_string(data: if len(nameFilters[i]) > 0: addr nameFilters[i][0] else: nil, len: csize_t(len(nameFilters[i])))
 
   var v_ma = fcQDir_entryInfoList3(self.h, struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort))
   var vx_ret = newSeq[gen_qfileinfo_types.QFileInfo](int(v_ma.len))
@@ -604,18 +606,18 @@ proc create*(T: type gen_qdir_types.QDir): gen_qdir_types.QDir =
   gen_qdir_types.QDir(h: fcQDir_new2(), owned: true)
 
 proc create*(T: type gen_qdir_types.QDir,
-    path: string, nameFilter: string): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQDir_new3(struct_miqt_string(data: path, len: csize_t(len(path))), struct_miqt_string(data: nameFilter, len: csize_t(len(nameFilter)))), owned: true)
+    path: openArray[char], nameFilter: openArray[char]): gen_qdir_types.QDir =
+  gen_qdir_types.QDir(h: fcQDir_new3(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), struct_miqt_string(data: if len(nameFilter) > 0: addr nameFilter[0] else: nil, len: csize_t(len(nameFilter)))), owned: true)
 
 proc create*(T: type gen_qdir_types.QDir,
-    path: string): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQDir_new4(struct_miqt_string(data: path, len: csize_t(len(path)))), owned: true)
+    path: openArray[char]): gen_qdir_types.QDir =
+  gen_qdir_types.QDir(h: fcQDir_new4(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
 
 proc create*(T: type gen_qdir_types.QDir,
-    path: string, nameFilter: string, sort: cint): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQDir_new5(struct_miqt_string(data: path, len: csize_t(len(path))), struct_miqt_string(data: nameFilter, len: csize_t(len(nameFilter))), cint(sort)), owned: true)
+    path: openArray[char], nameFilter: openArray[char], sort: cint): gen_qdir_types.QDir =
+  gen_qdir_types.QDir(h: fcQDir_new5(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), struct_miqt_string(data: if len(nameFilter) > 0: addr nameFilter[0] else: nil, len: csize_t(len(nameFilter))), cint(sort)), owned: true)
 
 proc create*(T: type gen_qdir_types.QDir,
-    path: string, nameFilter: string, sort: cint, filter: cint): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQDir_new6(struct_miqt_string(data: path, len: csize_t(len(path))), struct_miqt_string(data: nameFilter, len: csize_t(len(nameFilter))), cint(sort), cint(filter)), owned: true)
+    path: openArray[char], nameFilter: openArray[char], sort: cint, filter: cint): gen_qdir_types.QDir =
+  gen_qdir_types.QDir(h: fcQDir_new6(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), struct_miqt_string(data: if len(nameFilter) > 0: addr nameFilter[0] else: nil, len: csize_t(len(nameFilter))), cint(sort), cint(filter)), owned: true)
 

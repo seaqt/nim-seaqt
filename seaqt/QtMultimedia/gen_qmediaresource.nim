@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qmediaresource_types
@@ -98,36 +100,36 @@ proc request*(self: gen_qmediaresource_types.QMediaResource): gen_qnetworkreques
 
 proc mimeType*(self: gen_qmediaresource_types.QMediaResource): string =
   let v_ms = fcQMediaResource_mimeType(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc language*(self: gen_qmediaresource_types.QMediaResource): string =
   let v_ms = fcQMediaResource_language(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setLanguage*(self: gen_qmediaresource_types.QMediaResource, language: string): void =
-  fcQMediaResource_setLanguage(self.h, struct_miqt_string(data: language, len: csize_t(len(language))))
+proc setLanguage*(self: gen_qmediaresource_types.QMediaResource, language: openArray[char]): void =
+  fcQMediaResource_setLanguage(self.h, struct_miqt_string(data: if len(language) > 0: addr language[0] else: nil, len: csize_t(len(language))))
 
 proc audioCodec*(self: gen_qmediaresource_types.QMediaResource): string =
   let v_ms = fcQMediaResource_audioCodec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setAudioCodec*(self: gen_qmediaresource_types.QMediaResource, codec: string): void =
-  fcQMediaResource_setAudioCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setAudioCodec*(self: gen_qmediaresource_types.QMediaResource, codec: openArray[char]): void =
+  fcQMediaResource_setAudioCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc videoCodec*(self: gen_qmediaresource_types.QMediaResource): string =
   let v_ms = fcQMediaResource_videoCodec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setVideoCodec*(self: gen_qmediaresource_types.QMediaResource, codec: string): void =
-  fcQMediaResource_setVideoCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setVideoCodec*(self: gen_qmediaresource_types.QMediaResource, codec: openArray[char]): void =
+  fcQMediaResource_setVideoCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc dataSize*(self: gen_qmediaresource_types.QMediaResource): clonglong =
   fcQMediaResource_dataSize(self.h)
@@ -184,10 +186,10 @@ proc create*(T: type gen_qmediaresource_types.QMediaResource,
   gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new4(other.h), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
-    url: gen_qurl_types.QUrl, mimeType: string): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new5(url.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))), owned: true)
+    url: gen_qurl_types.QUrl, mimeType: openArray[char]): gen_qmediaresource_types.QMediaResource =
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new5(url.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
-    request: gen_qnetworkrequest_types.QNetworkRequest, mimeType: string): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new6(request.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))), owned: true)
+    request: gen_qnetworkrequest_types.QNetworkRequest, mimeType: openArray[char]): gen_qmediaresource_types.QMediaResource =
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new6(request.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))), owned: true)
 

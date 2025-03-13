@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediarecordercontrol.cpp", cflags).}
@@ -103,13 +105,13 @@ proc metacall*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, para
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring): string =
   let v_ms = fcQMediaRecorderControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring): string =
   let v_ms = fcQMediaRecorderControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -257,16 +259,16 @@ proc onactualLocationChanged*(self: gen_qmediarecordercontrol_types.QMediaRecord
   GC_ref(tmp)
   fcQMediaRecorderControl_connect_actualLocationChanged(self.h, cast[int](addr tmp[]), cQMediaRecorderControl_slot_callback_actualLocationChanged, cQMediaRecorderControl_slot_callback_actualLocationChanged_release)
 
-proc error*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, error: cint, errorString: string): void =
-  fcQMediaRecorderControl_error(self.h, error, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+proc error*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, error: cint, errorString: openArray[char]): void =
+  fcQMediaRecorderControl_error(self.h, error, struct_miqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QMediaRecorderControlerrorSlot* = proc(error: cint, errorString: string)
+type QMediaRecorderControlerrorSlot* = proc(error: cint, errorString: openArray[char])
 proc cQMediaRecorderControl_slot_callback_error(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderControlerrorSlot](cast[pointer](slot))
   let slotval1 = error
 
   let verrorString_ms = errorString
-  let verrorStringx_ret = string.fromBytes(toOpenArrayByte(verrorString_ms.data, 0, int(verrorString_ms.len)-1))
+  let verrorStringx_ret = string.fromBytes(verrorString_ms)
   c_free(verrorString_ms.data)
   let slotval2 = verrorStringx_ret
 
@@ -293,25 +295,25 @@ proc setVolume*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, vol
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaRecorderControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaRecorderControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaRecorderControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMediaRecorderControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

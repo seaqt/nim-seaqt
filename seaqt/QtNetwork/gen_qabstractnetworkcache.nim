@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qabstractnetworkcache_types
@@ -127,12 +129,12 @@ proc rawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): s
     var vx_lv_First_CArray = cast[ptr UncheckedArray[struct_miqt_string]](vx_lv_mm.keys)
     var vx_lv_Second_CArray = cast[ptr UncheckedArray[struct_miqt_string]](vx_lv_mm.values)
     var vx_lv_first_bytearray = vx_lv_First_CArray[0]
-    var vx_lv_firstx_ret = @(toOpenArrayByte(vx_lv_first_bytearray.data, 0, int(vx_lv_first_bytearray.len)-1))
+    var vx_lv_firstx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_first_bytearray.data), 0, int(vx_lv_first_bytearray.len)-1))
     c_free(vx_lv_first_bytearray.data)
     var vx_lv_entry_First = vx_lv_firstx_ret
 
     var vx_lv_second_bytearray = vx_lv_Second_CArray[0]
-    var vx_lv_secondx_ret = @(toOpenArrayByte(vx_lv_second_bytearray.data, 0, int(vx_lv_second_bytearray.len)-1))
+    var vx_lv_secondx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_second_bytearray.data), 0, int(vx_lv_second_bytearray.len)-1))
     c_free(vx_lv_second_bytearray.data)
     var vx_lv_entry_Second = vx_lv_secondx_ret
 
@@ -142,7 +144,7 @@ proc rawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): s
   c_free(v_ma.data)
   vx_ret
 
-proc setRawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, headers: seq[tuple[first: seq[byte], second: seq[byte]]]): void =
+proc setRawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, headers: openArray[tuple[first: seq[byte], second: seq[byte]]]): void =
   var headers_CArray = newSeq[struct_miqt_map](len(headers))
   for i in 0..<len(headers):
     var headers_i_CArray_First: struct_miqt_string
@@ -218,13 +220,13 @@ proc metacall*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, para
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring): string =
   let v_ms = fcQAbstractNetworkCache_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring): string =
   let v_ms = fcQAbstractNetworkCache_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -254,25 +256,25 @@ proc clear*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache): void =
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractNetworkCache_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAbstractNetworkCache_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractNetworkCache_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAbstractNetworkCache_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

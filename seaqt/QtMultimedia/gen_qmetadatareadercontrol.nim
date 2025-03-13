@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmetadatareadercontrol.cpp", cflags).}
@@ -87,21 +89,21 @@ proc metacall*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, pa
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring): string =
   let v_ms = fcQMetaDataReaderControl_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring): string =
   let v_ms = fcQMetaDataReaderControl_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc isMetaDataAvailable*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl): bool =
   fcQMetaDataReaderControl_isMetaDataAvailable(self.h)
 
-proc metaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMetaDataReaderControl_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+proc metaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQMetaDataReaderControl_metaData(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc availableMetaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl): seq[string] =
   var v_ma = fcQMetaDataReaderControl_availableMetaData(self.h)
@@ -109,7 +111,7 @@ proc availableMetaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderCo
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -133,14 +135,14 @@ proc onmetaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderCo
   GC_ref(tmp)
   fcQMetaDataReaderControl_connect_metaDataChanged(self.h, cast[int](addr tmp[]), cQMetaDataReaderControl_slot_callback_metaDataChanged, cQMetaDataReaderControl_slot_callback_metaDataChanged_release)
 
-proc metaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: string, value: gen_qvariant_types.QVariant): void =
-  fcQMetaDataReaderControl_metaDataChanged2(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
+proc metaDataChanged*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQMetaDataReaderControl_metaDataChanged2(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
-type QMetaDataReaderControlmetaDataChanged2Slot* = proc(key: string, value: gen_qvariant_types.QVariant)
+type QMetaDataReaderControlmetaDataChanged2Slot* = proc(key: openArray[char], value: gen_qvariant_types.QVariant)
 proc cQMetaDataReaderControl_slot_callback_metaDataChanged2(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMetaDataReaderControlmetaDataChanged2Slot](cast[pointer](slot))
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
@@ -180,25 +182,25 @@ proc onmetaDataAvailableChanged*(self: gen_qmetadatareadercontrol_types.QMetaDat
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring): string =
   let v_ms = fcQMetaDataReaderControl_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMetaDataReaderControl_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring): string =
   let v_ms = fcQMetaDataReaderControl_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMetaDataReaderControl_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

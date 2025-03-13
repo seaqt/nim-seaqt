@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qbytearraymatcher_types
@@ -54,10 +56,10 @@ proc fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self: pointer, needle
 proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, other: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
   fcQByteArrayMatcher_operatorAssign(self.h, other.h)
 
-proc setPattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, pattern: seq[byte]): void =
+proc setPattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, pattern: openArray[byte]): void =
   fcQByteArrayMatcher_setPattern(self.h, struct_miqt_string(data: cast[cstring](if len(pattern) == 0: nil else: unsafeAddr pattern[0]), len: csize_t(len(pattern))))
 
-proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: seq[byte]): cint =
+proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: openArray[byte]): cint =
   fcQByteArrayMatcher_indexIn(self.h, struct_miqt_string(data: cast[cstring](if len(ba) == 0: nil else: unsafeAddr ba[0]), len: csize_t(len(ba))))
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring, len: cint): cint =
@@ -65,11 +67,11 @@ proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring,
 
 proc pattern*(self: gen_qbytearraymatcher_types.QByteArrayMatcher): seq[byte] =
   var v_bytearray = fcQByteArrayMatcher_pattern(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: seq[byte], fromVal: cint): cint =
+proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, ba: openArray[byte], fromVal: cint): cint =
   fcQByteArrayMatcher_indexIn22(self.h, struct_miqt_string(data: cast[cstring](if len(ba) == 0: nil else: unsafeAddr ba[0]), len: csize_t(len(ba))), fromVal)
 
 proc indexIn*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, str: cstring, len: cint, fromVal: cint): cint =
@@ -79,7 +81,7 @@ proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher): gen_qbytear
   gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new(), owned: true)
 
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
-    pattern: seq[byte]): gen_qbytearraymatcher_types.QByteArrayMatcher =
+    pattern: openArray[byte]): gen_qbytearraymatcher_types.QByteArrayMatcher =
   gen_qbytearraymatcher_types.QByteArrayMatcher(h: fcQByteArrayMatcher_new2(struct_miqt_string(data: cast[cstring](if len(pattern) == 0: nil else: unsafeAddr pattern[0]), len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,

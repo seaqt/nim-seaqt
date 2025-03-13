@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudiodecoder.cpp", cflags).}
@@ -174,30 +176,30 @@ proc metacall*(self: gen_qaudiodecoder_types.QAudioDecoder, param1: cint, param2
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring): string =
   let v_ms = fcQAudioDecoder_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring): string =
   let v_ms = fcQAudioDecoder_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: string): cint =
-  cint(fcQAudioDecoder_hasSupport(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))))
+proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: openArray[char]): cint =
+  cint(fcQAudioDecoder_hasSupport(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
 
 proc state*(self: gen_qaudiodecoder_types.QAudioDecoder): cint =
   cint(fcQAudioDecoder_state(self.h))
 
 proc sourceFilename*(self: gen_qaudiodecoder_types.QAudioDecoder): string =
   let v_ms = fcQAudioDecoder_sourceFilename(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setSourceFilename*(self: gen_qaudiodecoder_types.QAudioDecoder, fileName: string): void =
-  fcQAudioDecoder_setSourceFilename(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+proc setSourceFilename*(self: gen_qaudiodecoder_types.QAudioDecoder, fileName: openArray[char]): void =
+  fcQAudioDecoder_setSourceFilename(self.h, struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc sourceDevice*(self: gen_qaudiodecoder_types.QAudioDecoder): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQAudioDecoder_sourceDevice(self.h), owned: false)
@@ -216,7 +218,7 @@ proc error*(self: gen_qaudiodecoder_types.QAudioDecoder): cint =
 
 proc errorString*(self: gen_qaudiodecoder_types.QAudioDecoder): string =
   let v_ms = fcQAudioDecoder_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -420,34 +422,34 @@ proc unbind*(self: gen_qaudiodecoder_types.QAudioDecoder, param1: gen_qobject_ty
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring): string =
   let v_ms = fcQAudioDecoder_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioDecoder_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring): string =
   let v_ms = fcQAudioDecoder_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiodecoder_types.QAudioDecoder, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAudioDecoder_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: string, codecs: seq[string]): cint =
+proc hasSupport*(_: type gen_qaudiodecoder_types.QAudioDecoder, mimeType: openArray[char], codecs: openArray[string]): cint =
   var codecs_CArray = newSeq[struct_miqt_string](len(codecs))
   for i in 0..<len(codecs):
-    codecs_CArray[i] = struct_miqt_string(data: codecs[i], len: csize_t(len(codecs[i])))
+    codecs_CArray[i] = struct_miqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQAudioDecoder_hasSupport2(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
+  cint(fcQAudioDecoder_hasSupport2(struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
 
 type QAudioDecodermetaObjectProc* = proc(self: QAudioDecoder): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAudioDecodermetacastProc* = proc(self: QAudioDecoder, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -751,10 +753,10 @@ proc cQAudioDecoder_method_callback_disconnectNotify(self: pointer, signal: poin
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-proc addPropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: seq[byte]): void =
+proc addPropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: openArray[byte]): void =
   fcQAudioDecoder_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
-proc removePropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: seq[byte]): void =
+proc removePropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: openArray[byte]): void =
   fcQAudioDecoder_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
 proc sender*(self: gen_qaudiodecoder_types.QAudioDecoder): gen_qobject_types.QObject =

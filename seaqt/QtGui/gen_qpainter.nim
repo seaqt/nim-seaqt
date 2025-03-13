@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QPainterRenderHintEnum* = distinct cint
@@ -651,7 +653,7 @@ proc drawLine*(self: gen_qpainter_types.QPainter, p1: gen_qpoint_types.QPointF, 
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: gen_qline_types.QLineF, lineCount: cint): void =
   fcQPainter_drawLines(self.h, lines.h, lineCount)
 
-proc drawLines*(self: gen_qpainter_types.QPainter, lines: seq[gen_qline_types.QLineF]): void =
+proc drawLines*(self: gen_qpainter_types.QPainter, lines: openArray[gen_qline_types.QLineF]): void =
   var lines_CArray = newSeq[pointer](len(lines))
   for i in 0..<len(lines):
     lines_CArray[i] = lines[i].h
@@ -661,7 +663,7 @@ proc drawLines*(self: gen_qpainter_types.QPainter, lines: seq[gen_qline_types.QL
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: gen_qpoint_types.QPointF, lineCount: cint): void =
   fcQPainter_drawLines2(self.h, pointPairs.h, lineCount)
 
-proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: seq[gen_qpoint_types.QPointF]): void =
+proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: openArray[gen_qpoint_types.QPointF]): void =
   var pointPairs_CArray = newSeq[pointer](len(pointPairs))
   for i in 0..<len(pointPairs):
     pointPairs_CArray[i] = pointPairs[i].h
@@ -671,7 +673,7 @@ proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: seq[gen_qpoint_ty
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: gen_qline_types.QLine, lineCount: cint): void =
   fcQPainter_drawLines3(self.h, lines.h, lineCount)
 
-proc drawLines*(self: gen_qpainter_types.QPainter, lines: seq[gen_qline_types.QLine]): void =
+proc drawLines*(self: gen_qpainter_types.QPainter, lines: openArray[gen_qline_types.QLine]): void =
   var lines_CArray = newSeq[pointer](len(lines))
   for i in 0..<len(lines):
     lines_CArray[i] = lines[i].h
@@ -681,7 +683,7 @@ proc drawLines*(self: gen_qpainter_types.QPainter, lines: seq[gen_qline_types.QL
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: gen_qpoint_types.QPoint, lineCount: cint): void =
   fcQPainter_drawLines5(self.h, pointPairs.h, lineCount)
 
-proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: seq[gen_qpoint_types.QPoint]): void =
+proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: openArray[gen_qpoint_types.QPoint]): void =
   var pointPairs_CArray = newSeq[pointer](len(pointPairs))
   for i in 0..<len(pointPairs):
     pointPairs_CArray[i] = pointPairs[i].h
@@ -700,7 +702,7 @@ proc drawRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect): 
 proc drawRects*(self: gen_qpainter_types.QPainter, rects: gen_qrect_types.QRectF, rectCount: cint): void =
   fcQPainter_drawRects(self.h, rects.h, rectCount)
 
-proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: seq[gen_qrect_types.QRectF]): void =
+proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: openArray[gen_qrect_types.QRectF]): void =
   var rectangles_CArray = newSeq[pointer](len(rectangles))
   for i in 0..<len(rectangles):
     rectangles_CArray[i] = rectangles[i].h
@@ -710,7 +712,7 @@ proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: seq[gen_qrect_typ
 proc drawRects*(self: gen_qpainter_types.QPainter, rects: gen_qrect_types.QRect, rectCount: cint): void =
   fcQPainter_drawRects2(self.h, rects.h, rectCount)
 
-proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: seq[gen_qrect_types.QRect]): void =
+proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: openArray[gen_qrect_types.QRect]): void =
   var rectangles_CArray = newSeq[pointer](len(rectangles))
   for i in 0..<len(rectangles):
     rectangles_CArray[i] = rectangles[i].h
@@ -894,41 +896,41 @@ proc drawStaticText*(self: gen_qpainter_types.QPainter, topLeftPosition: gen_qpo
 proc drawStaticText*(self: gen_qpainter_types.QPainter, left: cint, top: cint, staticText: gen_qstatictext_types.QStaticText): void =
   fcQPainter_drawStaticText3(self.h, left, top, staticText.h)
 
-proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, s: string): void =
-  fcQPainter_drawText(self.h, p.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, s: openArray[char]): void =
+  fcQPainter_drawText(self.h, p.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, s: string): void =
-  fcQPainter_drawText2(self.h, p.h, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, s: openArray[char]): void =
+  fcQPainter_drawText2(self.h, p.h, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, s: string): void =
-  fcQPainter_drawText3(self.h, x, y, struct_miqt_string(data: s, len: csize_t(len(s))))
+proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, s: openArray[char]): void =
+  fcQPainter_drawText3(self.h, x, y, struct_miqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, str: string, tf: cint, justificationPadding: cint): void =
-  fcQPainter_drawText4(self.h, p.h, struct_miqt_string(data: str, len: csize_t(len(str))), tf, justificationPadding)
+proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, str: openArray[char], tf: cint, justificationPadding: cint): void =
+  fcQPainter_drawText4(self.h, p.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tf, justificationPadding)
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: string): void =
-  fcQPainter_drawText5(self.h, r.h, flags, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: openArray[char]): void =
+  fcQPainter_drawText5(self.h, r.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: string): void =
-  fcQPainter_drawText6(self.h, r.h, flags, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: openArray[char]): void =
+  fcQPainter_drawText6(self.h, r.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: string): void =
-  fcQPainter_drawText7(self.h, x, y, w, h, flags, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char]): void =
+  fcQPainter_drawText7(self.h, x, y, w, h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: string): void =
-  fcQPainter_drawText8(self.h, r.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: openArray[char]): void =
+  fcQPainter_drawText8(self.h, r.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, flags: cint, text: string): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, flags: cint, text: openArray[char]): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect(self.h, rect.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
-proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect2(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQPainter_boundingRect2(self.h, rect.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
-proc boundingRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect3(self.h, x, y, w, h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc boundingRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQPainter_boundingRect3(self.h, x, y, w, h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
-proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: string): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect4(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: openArray[char]): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect4(self.h, rect.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc drawTextItem*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, ti: gen_qpaintengine_types.QTextItem): void =
   fcQPainter_drawTextItem(self.h, p.h, ti.h)
@@ -1125,20 +1127,20 @@ proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint, sy: cint, sw: cint, sh: cint, flags: cint): void =
   fcQPainter_drawImage82(self.h, x, y, image.h, sx, sy, sw, sh, cint(flags))
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: string, br: gen_qrect_types.QRectF): void =
-  fcQPainter_drawText42(self.h, r.h, flags, struct_miqt_string(data: text, len: csize_t(len(text))), br.h)
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: openArray[char], br: gen_qrect_types.QRectF): void =
+  fcQPainter_drawText42(self.h, r.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: string, br: gen_qrect_types.QRect): void =
-  fcQPainter_drawText43(self.h, r.h, flags, struct_miqt_string(data: text, len: csize_t(len(text))), br.h)
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: openArray[char], br: gen_qrect_types.QRect): void =
+  fcQPainter_drawText43(self.h, r.h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
-proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: string, br: gen_qrect_types.QRect): void =
-  fcQPainter_drawText72(self.h, x, y, w, h, flags, struct_miqt_string(data: text, len: csize_t(len(text))), br.h)
+proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char], br: gen_qrect_types.QRect): void =
+  fcQPainter_drawText72(self.h, x, y, w, h, flags, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
-proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: string, o: gen_qtextoption_types.QTextOption): void =
-  fcQPainter_drawText32(self.h, r.h, struct_miqt_string(data: text, len: csize_t(len(text))), o.h)
+proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: openArray[char], o: gen_qtextoption_types.QTextOption): void =
+  fcQPainter_drawText32(self.h, r.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h)
 
-proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: string, o: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect32(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text))), o.h), owned: true)
+proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: openArray[char], o: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect32(self.h, rect.h, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h), owned: true)
 
 proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint, on: bool): void =
   fcQPainter_setRenderHint2(self.h, cint(hint), on)

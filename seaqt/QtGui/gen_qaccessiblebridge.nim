@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qaccessiblebridge_types
@@ -116,47 +118,47 @@ proc metacall*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, param1
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring): string =
   let v_ms = fcQAccessibleBridgePlugin_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring): string =
   let v_ms = fcQAccessibleBridgePlugin_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge =
-  gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: false)
+proc create*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge =
+  gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAccessibleBridgePlugin_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAccessibleBridgePlugin_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAccessibleBridgePlugin_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQAccessibleBridgePlugin_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 type QAccessibleBridgePluginmetaObjectProc* = proc(self: QAccessibleBridgePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacastProc* = proc(self: QAccessibleBridgePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacallProc* = proc(self: QAccessibleBridgePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QAccessibleBridgePlugincreateProc* = proc(self: QAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
+type QAccessibleBridgePlugincreateProc* = proc(self: QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventFilterProc* = proc(self: QAccessibleBridgePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugintimerEventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -215,7 +217,7 @@ proc cQAccessibleBridgePlugin_vtable_callback_create(self: pointer, key: struct_
   let vtbl = cast[ptr QAccessibleBridgePluginVTable](fcQAccessibleBridgePlugin_vdata(self))
   let self = QAccessibleBridgePlugin(h: self)
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   var virtualReturn = vtbl[].create(self, slotval1)
@@ -320,12 +322,12 @@ proc cQAccessibleBridgePlugin_method_callback_metacall(self: pointer, param1: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQAccessibleBridgePlugin, key: string): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
+method create*(self: VirtualQAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
   raiseAssert("missing implementation of QAccessibleBridgePlugin_virtualbase_create")
 proc cQAccessibleBridgePlugin_method_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleBridgePlugin](fcQAccessibleBridgePlugin_vdata(self))
   let vkey_ms = key
-  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   var virtualReturn = inst.create(slotval1)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QGlyphRunGlyphRunFlagEnum* = distinct cint
@@ -107,7 +109,7 @@ proc glyphIndexes*(self: gen_qglyphrun_types.QGlyphRun): seq[cuint] =
   c_free(v_ma.data)
   vx_ret
 
-proc setGlyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, glyphIndexes: seq[cuint]): void =
+proc setGlyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, glyphIndexes: openArray[cuint]): void =
   var glyphIndexes_CArray = newSeq[cuint](len(glyphIndexes))
   for i in 0..<len(glyphIndexes):
     glyphIndexes_CArray[i] = glyphIndexes[i]
@@ -123,7 +125,7 @@ proc positions*(self: gen_qglyphrun_types.QGlyphRun): seq[gen_qpoint_types.QPoin
   c_free(v_ma.data)
   vx_ret
 
-proc setPositions*(self: gen_qglyphrun_types.QGlyphRun, positions: seq[gen_qpoint_types.QPointF]): void =
+proc setPositions*(self: gen_qglyphrun_types.QGlyphRun, positions: openArray[gen_qpoint_types.QPointF]): void =
   var positions_CArray = newSeq[pointer](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i].h

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qwebpluginfactory_types
@@ -124,13 +126,13 @@ proc metacall*(self: gen_qwebpluginfactory_types.QWebPluginFactory, param1: cint
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring): string =
   let v_ms = fcQWebPluginFactory_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring): string =
   let v_ms = fcQWebPluginFactory_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -146,16 +148,16 @@ proc plugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): seq[gen_qweb
 proc refreshPlugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): void =
   fcQWebPluginFactory_refreshPlugins(self.h)
 
-proc create*(self: gen_qwebpluginfactory_types.QWebPluginFactory, mimeType: string, param2: gen_qurl_types.QUrl, argumentNames: seq[string], argumentValues: seq[string]): gen_qobject_types.QObject =
+proc create*(self: gen_qwebpluginfactory_types.QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject =
   var argumentNames_CArray = newSeq[struct_miqt_string](len(argumentNames))
   for i in 0..<len(argumentNames):
-    argumentNames_CArray[i] = struct_miqt_string(data: argumentNames[i], len: csize_t(len(argumentNames[i])))
+    argumentNames_CArray[i] = struct_miqt_string(data: if len(argumentNames[i]) > 0: addr argumentNames[i][0] else: nil, len: csize_t(len(argumentNames[i])))
 
   var argumentValues_CArray = newSeq[struct_miqt_string](len(argumentValues))
   for i in 0..<len(argumentValues):
-    argumentValues_CArray[i] = struct_miqt_string(data: argumentValues[i], len: csize_t(len(argumentValues[i])))
+    argumentValues_CArray[i] = struct_miqt_string(data: if len(argumentValues[i]) > 0: addr argumentValues[i][0] else: nil, len: csize_t(len(argumentValues[i])))
 
-  gen_qobject_types.QObject(h: fcQWebPluginFactory_create(self.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), param2.h, struct_miqt_array(len: csize_t(len(argumentNames)), data: if len(argumentNames) == 0: nil else: addr(argumentNames_CArray[0])), struct_miqt_array(len: csize_t(len(argumentValues)), data: if len(argumentValues) == 0: nil else: addr(argumentValues_CArray[0]))), owned: false)
+  gen_qobject_types.QObject(h: fcQWebPluginFactory_create(self.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), param2.h, struct_miqt_array(len: csize_t(len(argumentNames)), data: if len(argumentNames) == 0: nil else: addr(argumentNames_CArray[0])), struct_miqt_array(len: csize_t(len(argumentValues)), data: if len(argumentValues) == 0: nil else: addr(argumentValues_CArray[0]))), owned: false)
 
 proc extension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool =
   fcQWebPluginFactory_extension(self.h, cint(extension), option.h, output.h)
@@ -165,25 +167,25 @@ proc supportsExtension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, ext
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring): string =
   let v_ms = fcQWebPluginFactory_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebPluginFactory_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring): string =
   let v_ms = fcQWebPluginFactory_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebpluginfactory_types.QWebPluginFactory, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQWebPluginFactory_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -192,7 +194,7 @@ type QWebPluginFactorymetacastProc* = proc(self: QWebPluginFactory, param1: cstr
 type QWebPluginFactorymetacallProc* = proc(self: QWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QWebPluginFactorypluginsProc* = proc(self: QWebPluginFactory): seq[gen_qwebpluginfactory_types.QWebPluginFactoryPlugin] {.raises: [], gcsafe.}
 type QWebPluginFactoryrefreshPluginsProc* = proc(self: QWebPluginFactory): void {.raises: [], gcsafe.}
-type QWebPluginFactorycreateProc* = proc(self: QWebPluginFactory, mimeType: string, param2: gen_qurl_types.QUrl, argumentNames: seq[string], argumentValues: seq[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QWebPluginFactorycreateProc* = proc(self: QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QWebPluginFactoryextensionProc* = proc(self: QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool {.raises: [], gcsafe.}
 type QWebPluginFactorysupportsExtensionProc* = proc(self: QWebPluginFactory, extension: cint): bool {.raises: [], gcsafe.}
 type QWebPluginFactoryeventProc* = proc(self: QWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -278,7 +280,7 @@ proc cQWebPluginFactory_vtable_callback_create(self: pointer, mimeType: struct_m
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let vmimeType_ms = mimeType
-  let vmimeTypex_ret = string.fromBytes(toOpenArrayByte(vmimeType_ms.data, 0, int(vmimeType_ms.len)-1))
+  let vmimeTypex_ret = string.fromBytes(vmimeType_ms)
   c_free(vmimeType_ms.data)
   let slotval1 = vmimeTypex_ret
   let slotval2 = gen_qurl_types.QUrl(h: param2, owned: false)
@@ -287,7 +289,7 @@ proc cQWebPluginFactory_vtable_callback_create(self: pointer, mimeType: struct_m
   let vargumentNames_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vargumentNames_ma.data)
   for i in 0 ..< vargumentNames_ma.len:
     let vargumentNames_lv_ms = vargumentNames_outCast[i]
-    let vargumentNames_lvx_ret = string.fromBytes(toOpenArrayByte(vargumentNames_lv_ms.data, 0, int(vargumentNames_lv_ms.len)-1))
+    let vargumentNames_lvx_ret = string.fromBytes(vargumentNames_lv_ms)
     c_free(vargumentNames_lv_ms.data)
     vargumentNamesx_ret[i] = vargumentNames_lvx_ret
   c_free(vargumentNames_ma.data)
@@ -297,7 +299,7 @@ proc cQWebPluginFactory_vtable_callback_create(self: pointer, mimeType: struct_m
   let vargumentValues_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vargumentValues_ma.data)
   for i in 0 ..< vargumentValues_ma.len:
     let vargumentValues_lv_ms = vargumentValues_outCast[i]
-    let vargumentValues_lvx_ret = string.fromBytes(toOpenArrayByte(vargumentValues_lv_ms.data, 0, int(vargumentValues_lv_ms.len)-1))
+    let vargumentValues_lvx_ret = string.fromBytes(vargumentValues_lv_ms)
     c_free(vargumentValues_lv_ms.data)
     vargumentValuesx_ret[i] = vargumentValues_lvx_ret
   c_free(vargumentValues_ma.data)
@@ -446,12 +448,12 @@ proc cQWebPluginFactory_method_callback_refreshPlugins(self: pointer): void {.cd
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   inst.refreshPlugins()
 
-method create*(self: VirtualQWebPluginFactory, mimeType: string, param2: gen_qurl_types.QUrl, argumentNames: seq[string], argumentValues: seq[string]): gen_qobject_types.QObject {.base.} =
+method create*(self: VirtualQWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.base.} =
   raiseAssert("missing implementation of QWebPluginFactory_virtualbase_create")
 proc cQWebPluginFactory_method_callback_create(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let vmimeType_ms = mimeType
-  let vmimeTypex_ret = string.fromBytes(toOpenArrayByte(vmimeType_ms.data, 0, int(vmimeType_ms.len)-1))
+  let vmimeTypex_ret = string.fromBytes(vmimeType_ms)
   c_free(vmimeType_ms.data)
   let slotval1 = vmimeTypex_ret
   let slotval2 = gen_qurl_types.QUrl(h: param2, owned: false)
@@ -460,7 +462,7 @@ proc cQWebPluginFactory_method_callback_create(self: pointer, mimeType: struct_m
   let vargumentNames_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vargumentNames_ma.data)
   for i in 0 ..< vargumentNames_ma.len:
     let vargumentNames_lv_ms = vargumentNames_outCast[i]
-    let vargumentNames_lvx_ret = string.fromBytes(toOpenArrayByte(vargumentNames_lv_ms.data, 0, int(vargumentNames_lv_ms.len)-1))
+    let vargumentNames_lvx_ret = string.fromBytes(vargumentNames_lv_ms)
     c_free(vargumentNames_lv_ms.data)
     vargumentNamesx_ret[i] = vargumentNames_lvx_ret
   c_free(vargumentNames_ma.data)
@@ -470,7 +472,7 @@ proc cQWebPluginFactory_method_callback_create(self: pointer, mimeType: struct_m
   let vargumentValues_outCast = cast[ptr UncheckedArray[struct_miqt_string]](vargumentValues_ma.data)
   for i in 0 ..< vargumentValues_ma.len:
     let vargumentValues_lv_ms = vargumentValues_outCast[i]
-    let vargumentValues_lvx_ret = string.fromBytes(toOpenArrayByte(vargumentValues_lv_ms.data, 0, int(vargumentValues_lv_ms.len)-1))
+    let vargumentValues_lvx_ret = string.fromBytes(vargumentValues_lv_ms)
     c_free(vargumentValues_lv_ms.data)
     vargumentValuesx_ret[i] = vargumentValues_lvx_ret
   c_free(vargumentValues_ma.data)

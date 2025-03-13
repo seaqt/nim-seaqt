@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QResourceCompressionEnum* = distinct cint
@@ -79,18 +81,18 @@ proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
 proc fcQResource_new2(file: struct_miqt_string): ptr cQResource {.importc: "QResource_new2".}
 proc fcQResource_new3(file: struct_miqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
 
-proc setFileName*(self: gen_qresource_types.QResource, file: string): void =
-  fcQResource_setFileName(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
+proc setFileName*(self: gen_qresource_types.QResource, file: openArray[char]): void =
+  fcQResource_setFileName(self.h, struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc fileName*(self: gen_qresource_types.QResource): string =
   let v_ms = fcQResource_fileName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc absoluteFilePath*(self: gen_qresource_types.QResource): string =
   let v_ms = fcQResource_absoluteFilePath(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -117,15 +119,15 @@ proc uncompressedSize*(self: gen_qresource_types.QResource): clonglong =
 
 proc uncompressedData*(self: gen_qresource_types.QResource): seq[byte] =
   var v_bytearray = fcQResource_uncompressedData(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc lastModified*(self: gen_qresource_types.QResource): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h), owned: true)
 
-proc addSearchPath*(_: type gen_qresource_types.QResource, path: string): void =
-  fcQResource_addSearchPath(struct_miqt_string(data: path, len: csize_t(len(path))))
+proc addSearchPath*(_: type gen_qresource_types.QResource, path: openArray[char]): void =
+  fcQResource_addSearchPath(struct_miqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc searchPaths*(_: type gen_qresource_types.QResource): seq[string] =
   var v_ma = fcQResource_searchPaths()
@@ -133,7 +135,7 @@ proc searchPaths*(_: type gen_qresource_types.QResource): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -142,11 +144,11 @@ proc searchPaths*(_: type gen_qresource_types.QResource): seq[string] =
 proc isCompressed*(self: gen_qresource_types.QResource): bool =
   fcQResource_isCompressed(self.h)
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: string): bool =
-  fcQResource_registerResource(struct_miqt_string(data: rccFilename, len: csize_t(len(rccFilename))))
+proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
+  fcQResource_registerResource(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: string): bool =
-  fcQResource_unregisterResource(struct_miqt_string(data: rccFilename, len: csize_t(len(rccFilename))))
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
+  fcQResource_unregisterResource(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
   fcQResource_registerResourceWithRccData(rccData)
@@ -154,17 +156,17 @@ proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8): bool =
   fcQResource_unregisterResourceWithRccData(rccData)
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: string, resourceRoot: string): bool =
-  fcQResource_registerResource2(struct_miqt_string(data: rccFilename, len: csize_t(len(rccFilename))), struct_miqt_string(data: resourceRoot, len: csize_t(len(resourceRoot))))
+proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
+  fcQResource_registerResource2(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: string, resourceRoot: string): bool =
-  fcQResource_unregisterResource2(struct_miqt_string(data: rccFilename, len: csize_t(len(rccFilename))), struct_miqt_string(data: resourceRoot, len: csize_t(len(resourceRoot))))
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char], resourceRoot: openArray[char]): bool =
+  fcQResource_unregisterResource2(struct_miqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))), struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: string): bool =
-  fcQResource_registerResource22(rccData, struct_miqt_string(data: resourceRoot, len: csize_t(len(resourceRoot))))
+proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
+  fcQResource_registerResource22(rccData, struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
-proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: string): bool =
-  fcQResource_unregisterResource22(rccData, struct_miqt_string(data: resourceRoot, len: csize_t(len(resourceRoot))))
+proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: openArray[char]): bool =
+  fcQResource_unregisterResource22(rccData, struct_miqt_string(data: if len(resourceRoot) > 0: addr resourceRoot[0] else: nil, len: csize_t(len(resourceRoot))))
 
 proc isDir*(self: gen_qresource_types.QResource): bool =
   fcQResource_protectedbase_isDir(self.h)
@@ -178,7 +180,7 @@ proc children*(self: gen_qresource_types.QResource): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -188,10 +190,10 @@ proc create*(T: type gen_qresource_types.QResource): gen_qresource_types.QResour
   gen_qresource_types.QResource(h: fcQResource_new(), owned: true)
 
 proc create*(T: type gen_qresource_types.QResource,
-    file: string): gen_qresource_types.QResource =
-  gen_qresource_types.QResource(h: fcQResource_new2(struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
+    file: openArray[char]): gen_qresource_types.QResource =
+  gen_qresource_types.QResource(h: fcQResource_new2(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qresource_types.QResource,
-    file: string, locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
-  gen_qresource_types.QResource(h: fcQResource_new3(struct_miqt_string(data: file, len: csize_t(len(file))), locale.h), owned: true)
+    file: openArray[char], locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
+  gen_qresource_types.QResource(h: fcQResource_new3(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), locale.h), owned: true)
 

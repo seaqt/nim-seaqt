@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qmediaencodersettings_types
@@ -129,12 +131,12 @@ proc setEncodingMode*(self: gen_qmediaencodersettings_types.QAudioEncoderSetting
 
 proc codec*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings): string =
   let v_ms = fcQAudioEncoderSettings_codec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCodec*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, codec: string): void =
-  fcQAudioEncoderSettings_setCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setCodec*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, codec: openArray[char]): void =
+  fcQAudioEncoderSettings_setCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc bitRate*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings): cint =
   fcQAudioEncoderSettings_bitRate(self.h)
@@ -160,8 +162,8 @@ proc quality*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings): cint
 proc setQuality*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, quality: cint): void =
   fcQAudioEncoderSettings_setQuality(self.h, cint(quality))
 
-proc encodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAudioEncoderSettings_encodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option)))), owned: true)
+proc encodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQAudioEncoderSettings_encodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAudioEncoderSettings_encodingOptions(self.h)
@@ -170,7 +172,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSetting
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -181,15 +183,15 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSetting
   c_free(v_mm.values)
   vx_ret
 
-proc setEncodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
-  fcQAudioEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option))), value.h)
+proc setEncodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQAudioEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option))), value.h)
 
 proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, options: Table[string,gen_qvariant_types.QVariant]): void =
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
   for options_k in options.keys():
-    options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
+    options_Keys_CArray[options_ctr] = struct_miqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
     options_ctr += 1
   options_ctr = 0
   for options_v in options.values():
@@ -225,12 +227,12 @@ proc setEncodingMode*(self: gen_qmediaencodersettings_types.QVideoEncoderSetting
 
 proc codec*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): string =
   let v_ms = fcQVideoEncoderSettings_codec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCodec*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, codec: string): void =
-  fcQVideoEncoderSettings_setCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setCodec*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, codec: openArray[char]): void =
+  fcQVideoEncoderSettings_setCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc resolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQVideoEncoderSettings_resolution(self.h), owned: true)
@@ -259,8 +261,8 @@ proc quality*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): cint
 proc setQuality*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, quality: cint): void =
   fcQVideoEncoderSettings_setQuality(self.h, cint(quality))
 
-proc encodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVideoEncoderSettings_encodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option)))), owned: true)
+proc encodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQVideoEncoderSettings_encodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQVideoEncoderSettings_encodingOptions(self.h)
@@ -269,7 +271,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSetting
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -280,15 +282,15 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSetting
   c_free(v_mm.values)
   vx_ret
 
-proc setEncodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
-  fcQVideoEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option))), value.h)
+proc setEncodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQVideoEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option))), value.h)
 
 proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, options: Table[string,gen_qvariant_types.QVariant]): void =
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
   for options_k in options.keys():
-    options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
+    options_Keys_CArray[options_ctr] = struct_miqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
     options_ctr += 1
   options_ctr = 0
   for options_v in options.values():
@@ -318,12 +320,12 @@ proc isNull*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): bool 
 
 proc codec*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): string =
   let v_ms = fcQImageEncoderSettings_codec(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setCodec*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, codec: string): void =
-  fcQImageEncoderSettings_setCodec(self.h, struct_miqt_string(data: codec, len: csize_t(len(codec))))
+proc setCodec*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, codec: openArray[char]): void =
+  fcQImageEncoderSettings_setCodec(self.h, struct_miqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc resolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQImageEncoderSettings_resolution(self.h), owned: true)
@@ -340,8 +342,8 @@ proc quality*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): cint
 proc setQuality*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, quality: cint): void =
   fcQImageEncoderSettings_setQuality(self.h, cint(quality))
 
-proc encodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQImageEncoderSettings_encodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option)))), owned: true)
+proc encodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQImageEncoderSettings_encodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQImageEncoderSettings_encodingOptions(self.h)
@@ -350,7 +352,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSetting
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_mapkey_ms = v_Keys[i]
-    let vx_mapkeyx_ret = string.fromBytes(toOpenArrayByte(vx_mapkey_ms.data, 0, int(vx_mapkey_ms.len)-1))
+    let vx_mapkeyx_ret = string.fromBytes(vx_mapkey_ms)
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
@@ -361,15 +363,15 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSetting
   c_free(v_mm.values)
   vx_ret
 
-proc setEncodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
-  fcQImageEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: option, len: csize_t(len(option))), value.h)
+proc setEncodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQImageEncoderSettings_setEncodingOption(self.h, struct_miqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option))), value.h)
 
 proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, options: Table[string,gen_qvariant_types.QVariant]): void =
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
   for options_k in options.keys():
-    options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
+    options_Keys_CArray[options_ctr] = struct_miqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
     options_ctr += 1
   options_ctr = 0
   for options_v in options.values():

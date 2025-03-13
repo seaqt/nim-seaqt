@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QDtlsErrorEnum* = distinct uint8
@@ -215,13 +217,13 @@ proc metacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: 
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring): string =
   let v_ms = fcQDtlsClientVerifier_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring): string =
   let v_ms = fcQDtlsClientVerifier_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -231,12 +233,12 @@ proc setCookieGeneratorParameters*(self: gen_qdtls_types.QDtlsClientVerifier, pa
 proc cookieGeneratorParameters*(self: gen_qdtls_types.QDtlsClientVerifier): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
   gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifier_cookieGeneratorParameters(self.h), owned: true)
 
-proc verifyClient*(self: gen_qdtls_types.QDtlsClientVerifier, socket: gen_qudpsocket_types.QUdpSocket, dgram: seq[byte], address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
+proc verifyClient*(self: gen_qdtls_types.QDtlsClientVerifier, socket: gen_qudpsocket_types.QUdpSocket, dgram: openArray[byte], address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
   fcQDtlsClientVerifier_verifyClient(self.h, socket.h, struct_miqt_string(data: cast[cstring](if len(dgram) == 0: nil else: unsafeAddr dgram[0]), len: csize_t(len(dgram))), address.h, port)
 
 proc verifiedHello*(self: gen_qdtls_types.QDtlsClientVerifier): seq[byte] =
   var v_bytearray = fcQDtlsClientVerifier_verifiedHello(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -245,31 +247,31 @@ proc dtlsError*(self: gen_qdtls_types.QDtlsClientVerifier): cint =
 
 proc dtlsErrorString*(self: gen_qdtls_types.QDtlsClientVerifier): string =
   let v_ms = fcQDtlsClientVerifier_dtlsErrorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring): string =
   let v_ms = fcQDtlsClientVerifier_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDtlsClientVerifier_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring): string =
   let v_ms = fcQDtlsClientVerifier_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDtlsClientVerifier_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -590,21 +592,21 @@ proc metacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: 
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring): string =
   let v_ms = fcQDtls_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtls, s: cstring): string =
   let v_ms = fcQDtls_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
   fcQDtls_setPeer(self.h, address.h, port)
 
-proc setPeerVerificationName*(self: gen_qdtls_types.QDtls, name: string): bool =
-  fcQDtls_setPeerVerificationName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+proc setPeerVerificationName*(self: gen_qdtls_types.QDtls, name: openArray[char]): bool =
+  fcQDtls_setPeerVerificationName(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc peerAddress*(self: gen_qdtls_types.QDtls): gen_qhostaddress_types.QHostAddress =
   gen_qhostaddress_types.QHostAddress(h: fcQDtls_peerAddress(self.h), owned: true)
@@ -614,7 +616,7 @@ proc peerPort*(self: gen_qdtls_types.QDtls): cushort =
 
 proc peerVerificationName*(self: gen_qdtls_types.QDtls): string =
   let v_ms = fcQDtls_peerVerificationName(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -666,12 +668,12 @@ proc sessionCipher*(self: gen_qdtls_types.QDtls): gen_qsslcipher_types.QSslCiphe
 proc sessionProtocol*(self: gen_qdtls_types.QDtls): cint =
   cint(fcQDtls_sessionProtocol(self.h))
 
-proc writeDatagramEncrypted*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: seq[byte]): clonglong =
+proc writeDatagramEncrypted*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: openArray[byte]): clonglong =
   fcQDtls_writeDatagramEncrypted(self.h, socket.h, struct_miqt_string(data: cast[cstring](if len(dgram) == 0: nil else: unsafeAddr dgram[0]), len: csize_t(len(dgram))))
 
-proc decryptDatagram*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: seq[byte]): seq[byte] =
+proc decryptDatagram*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: openArray[byte]): seq[byte] =
   var v_bytearray = fcQDtls_decryptDatagram(self.h, socket.h, struct_miqt_string(data: cast[cstring](if len(dgram) == 0: nil else: unsafeAddr dgram[0]), len: csize_t(len(dgram))))
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
@@ -680,7 +682,7 @@ proc dtlsError*(self: gen_qdtls_types.QDtls): cint =
 
 proc dtlsErrorString*(self: gen_qdtls_types.QDtls): string =
   let v_ms = fcQDtls_dtlsErrorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -693,7 +695,7 @@ proc peerVerificationErrors*(self: gen_qdtls_types.QDtls): seq[gen_qsslerror_typ
   c_free(v_ma.data)
   vx_ret
 
-proc ignoreVerificationErrors*(self: gen_qdtls_types.QDtls, errorsToIgnore: seq[gen_qsslerror_types.QSslError]): void =
+proc ignoreVerificationErrors*(self: gen_qdtls_types.QDtls, errorsToIgnore: openArray[gen_qsslerror_types.QSslError]): void =
   var errorsToIgnore_CArray = newSeq[pointer](len(errorsToIgnore))
   for i in 0..<len(errorsToIgnore):
     errorsToIgnore_CArray[i] = errorsToIgnore[i].h
@@ -740,32 +742,32 @@ proc onhandshakeTimeout*(self: gen_qdtls_types.QDtls, slot: QDtlshandshakeTimeou
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring): string =
   let v_ms = fcQDtls_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDtls_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring): string =
   let v_ms = fcQDtls_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQDtls_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHostAddress, port: cushort, verificationName: string): bool =
-  fcQDtls_setPeer3(self.h, address.h, port, struct_miqt_string(data: verificationName, len: csize_t(len(verificationName))))
+proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHostAddress, port: cushort, verificationName: openArray[char]): bool =
+  fcQDtls_setPeer3(self.h, address.h, port, struct_miqt_string(data: if len(verificationName) > 0: addr verificationName[0] else: nil, len: csize_t(len(verificationName))))
 
-proc doHandshake*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: seq[byte]): bool =
+proc doHandshake*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: openArray[byte]): bool =
   fcQDtls_doHandshake2(self.h, socket.h, struct_miqt_string(data: cast[cstring](if len(dgram) == 0: nil else: unsafeAddr dgram[0]), len: csize_t(len(dgram))))
 
 type QDtlsmetaObjectProc* = proc(self: QDtls): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -1083,7 +1085,7 @@ proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): ge
   gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new(), owned: true)
 
 proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters,
-    a: cint, s: seq[byte]): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
+    a: cint, s: openArray[byte]): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
   gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new2(cint(a), struct_miqt_string(data: cast[cstring](if len(s) == 0: nil else: unsafeAddr s[0]), len: csize_t(len(s)))), owned: true)
 
 proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters,

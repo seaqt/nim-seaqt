@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QWheelEventEnumEnum* = distinct cint
@@ -891,7 +893,7 @@ proc modifiers*(self: gen_qevent_types.QKeyEvent): cint =
 
 proc text*(self: gen_qevent_types.QKeyEvent): string =
   let v_ms = fcQKeyEvent_text(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -923,28 +925,28 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
   gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new3(param1.h), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new4(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char]): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new4(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new5(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new5(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new6(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, text: openArray[char], autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new6(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new7(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char]): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new7(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new8(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new8(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep), owned: true)
 
 proc create*(T: type gen_qevent_types.QKeyEvent,
-    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new9(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count), owned: true)
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: openArray[char], autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new9(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), autorep, count), owned: true)
 
 proc gotFocus*(self: gen_qevent_types.QFocusEvent): bool =
   fcQFocusEvent_gotFocus(self.h)
@@ -1112,8 +1114,8 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
     param1: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
   gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new4(param1.h), owned: true)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string): void =
-  fcQInputMethodEvent_setCommitString(self.h, struct_miqt_string(data: commitString, len: csize_t(len(commitString))))
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char]): void =
+  fcQInputMethodEvent_setCommitString(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))))
 
 proc attributes*(self: gen_qevent_types.QInputMethodEvent): seq[gen_qevent_types.QInputMethodEventAttribute] =
   var v_ma = fcQInputMethodEvent_attributes(self.h)
@@ -1126,13 +1128,13 @@ proc attributes*(self: gen_qevent_types.QInputMethodEvent): seq[gen_qevent_types
 
 proc preeditString*(self: gen_qevent_types.QInputMethodEvent): string =
   let v_ms = fcQInputMethodEvent_preeditString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc commitString*(self: gen_qevent_types.QInputMethodEvent): string =
   let v_ms = fcQInputMethodEvent_commitString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1142,22 +1144,22 @@ proc replacementStart*(self: gen_qevent_types.QInputMethodEvent): cint =
 proc replacementLength*(self: gen_qevent_types.QInputMethodEvent): cint =
   fcQInputMethodEvent_replacementLength(self.h)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string, replaceFrom: cint): void =
-  fcQInputMethodEvent_setCommitString2(self.h, struct_miqt_string(data: commitString, len: csize_t(len(commitString))), replaceFrom)
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint): void =
+  fcQInputMethodEvent_setCommitString2(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom)
 
-proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string, replaceFrom: cint, replaceLength: cint): void =
-  fcQInputMethodEvent_setCommitString3(self.h, struct_miqt_string(data: commitString, len: csize_t(len(commitString))), replaceFrom, replaceLength)
+proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint, replaceLength: cint): void =
+  fcQInputMethodEvent_setCommitString3(self.h, struct_miqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom, replaceLength)
 
 proc create*(T: type gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
   gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new(), owned: true)
 
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
-    preeditText: string, attributes: seq[gen_qevent_types.QInputMethodEventAttribute]): gen_qevent_types.QInputMethodEvent =
+    preeditText: openArray[char], attributes: openArray[gen_qevent_types.QInputMethodEventAttribute]): gen_qevent_types.QInputMethodEvent =
   var attributes_CArray = newSeq[pointer](len(attributes))
   for i in 0..<len(attributes):
     attributes_CArray[i] = attributes[i].h
 
-  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new2(struct_miqt_string(data: preeditText, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))), owned: true)
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new2(struct_miqt_string(data: if len(preeditText) > 0: addr preeditText[0] else: nil, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qevent_types.QInputMethodEvent,
     other: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
@@ -1301,13 +1303,13 @@ proc create*(T: type gen_qevent_types.QHelpEvent,
 
 proc tip*(self: gen_qevent_types.QStatusTipEvent): string =
   let v_ms = fcQStatusTipEvent_tip(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc create*(T: type gen_qevent_types.QStatusTipEvent,
-    tip: string): gen_qevent_types.QStatusTipEvent =
-  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new(struct_miqt_string(data: tip, len: csize_t(len(tip)))), owned: true)
+    tip: openArray[char]): gen_qevent_types.QStatusTipEvent =
+  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new(struct_miqt_string(data: if len(tip) > 0: addr tip[0] else: nil, len: csize_t(len(tip)))), owned: true)
 
 proc create*(T: type gen_qevent_types.QStatusTipEvent,
     param1: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
@@ -1315,13 +1317,13 @@ proc create*(T: type gen_qevent_types.QStatusTipEvent,
 
 proc href*(self: gen_qevent_types.QWhatsThisClickedEvent): string =
   let v_ms = fcQWhatsThisClickedEvent_href(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
-    href: string): gen_qevent_types.QWhatsThisClickedEvent =
-  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new(struct_miqt_string(data: href, len: csize_t(len(href)))), owned: true)
+    href: openArray[char]): gen_qevent_types.QWhatsThisClickedEvent =
+  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new(struct_miqt_string(data: if len(href) > 0: addr href[0] else: nil, len: csize_t(len(href)))), owned: true)
 
 proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
     param1: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
@@ -1344,7 +1346,7 @@ proc create*(T: type gen_qevent_types.QActionEvent,
 
 proc file*(self: gen_qevent_types.QFileOpenEvent): string =
   let v_ms = fcQFileOpenEvent_file(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -1355,8 +1357,8 @@ proc openFile*(self: gen_qevent_types.QFileOpenEvent, file: gen_qfile_types.QFil
   fcQFileOpenEvent_openFile(self.h, file.h, cint(flags))
 
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
-    file: string): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new(struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
+    file: openArray[char]): gen_qevent_types.QFileOpenEvent =
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new(struct_miqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qevent_types.QFileOpenEvent,
     url: gen_qurl_types.QUrl): gen_qevent_types.QFileOpenEvent =
@@ -1464,7 +1466,7 @@ proc setTarget*(self: gen_qevent_types.QTouchEvent, atarget: gen_qobject_types.Q
 proc setTouchPointStates*(self: gen_qevent_types.QTouchEvent, aTouchPointStates: cint): void =
   fcQTouchEvent_setTouchPointStates(self.h, cint(aTouchPointStates))
 
-proc setTouchPoints*(self: gen_qevent_types.QTouchEvent, atouchPoints: seq[gen_qevent_types.QTouchEventTouchPoint]): void =
+proc setTouchPoints*(self: gen_qevent_types.QTouchEvent, atouchPoints: openArray[gen_qevent_types.QTouchEventTouchPoint]): void =
   var atouchPoints_CArray = newSeq[pointer](len(atouchPoints))
   for i in 0..<len(atouchPoints):
     atouchPoints_CArray[i] = atouchPoints[i].h
@@ -1495,7 +1497,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
   gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new5(cint(eventType), device.h, cint(modifiers), cint(touchPointStates)), owned: true)
 
 proc create*(T: type gen_qevent_types.QTouchEvent,
-    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint, touchPoints: seq[gen_qevent_types.QTouchEventTouchPoint]): gen_qevent_types.QTouchEvent =
+    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint, touchPoints: openArray[gen_qevent_types.QTouchEventTouchPoint]): gen_qevent_types.QTouchEvent =
   var touchPoints_CArray = newSeq[pointer](len(touchPoints))
   for i in 0..<len(touchPoints):
     touchPoints_CArray[i] = touchPoints[i].h
@@ -1741,7 +1743,7 @@ proc setVelocity*(self: gen_qevent_types.QTouchEventTouchPoint, v: gen_qvector2d
 proc setFlags*(self: gen_qevent_types.QTouchEventTouchPoint, flags: cint): void =
   fcQTouchEventTouchPoint_setFlags(self.h, cint(flags))
 
-proc setRawScreenPositions*(self: gen_qevent_types.QTouchEventTouchPoint, positions: seq[gen_qpoint_types.QPointF]): void =
+proc setRawScreenPositions*(self: gen_qevent_types.QTouchEventTouchPoint, positions: openArray[gen_qpoint_types.QPointF]): void =
   var positions_CArray = newSeq[pointer](len(positions))
   for i in 0..<len(positions):
     positions_CArray[i] = positions[i].h

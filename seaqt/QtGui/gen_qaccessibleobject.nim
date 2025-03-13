@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qaccessibleobject.cpp", cflags).}
@@ -76,8 +78,8 @@ proc objectX*(self: gen_qaccessibleobject_types.QAccessibleObject): gen_qobject_
 proc rect*(self: gen_qaccessibleobject_types.QAccessibleObject): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQAccessibleObject_rect(self.h), owned: true)
 
-proc setText*(self: gen_qaccessibleobject_types.QAccessibleObject, t: cint, text: string): void =
-  fcQAccessibleObject_setText(self.h, cint(t), struct_miqt_string(data: text, len: csize_t(len(text))))
+proc setText*(self: gen_qaccessibleobject_types.QAccessibleObject, t: cint, text: openArray[char]): void =
+  fcQAccessibleObject_setText(self.h, cint(t), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc childAt*(self: gen_qaccessibleobject_types.QAccessibleObject, x: cint, y: cint): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleObject_childAt(self.h, x, y), owned: false)
@@ -102,7 +104,7 @@ proc child*(self: gen_qaccessibleobject_types.QAccessibleApplication, index: cin
 
 proc text*(self: gen_qaccessibleobject_types.QAccessibleApplication, t: cint): string =
   let v_ms = fcQAccessibleApplication_text(self.h, cint(t))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 

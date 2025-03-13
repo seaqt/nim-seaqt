@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QRegExpPatternSyntaxEnum* = distinct cint
@@ -114,12 +116,12 @@ proc isValid*(self: gen_qregexp_types.QRegExp): bool =
 
 proc pattern*(self: gen_qregexp_types.QRegExp): string =
   let v_ms = fcQRegExp_pattern(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPattern*(self: gen_qregexp_types.QRegExp, pattern: string): void =
-  fcQRegExp_setPattern(self.h, struct_miqt_string(data: pattern, len: csize_t(len(pattern))))
+proc setPattern*(self: gen_qregexp_types.QRegExp, pattern: openArray[char]): void =
+  fcQRegExp_setPattern(self.h, struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))))
 
 proc caseSensitivity*(self: gen_qregexp_types.QRegExp): cint =
   cint(fcQRegExp_caseSensitivity(self.h))
@@ -139,14 +141,14 @@ proc isMinimal*(self: gen_qregexp_types.QRegExp): bool =
 proc setMinimal*(self: gen_qregexp_types.QRegExp, minimal: bool): void =
   fcQRegExp_setMinimal(self.h, minimal)
 
-proc exactMatch*(self: gen_qregexp_types.QRegExp, str: string): bool =
-  fcQRegExp_exactMatch(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc exactMatch*(self: gen_qregexp_types.QRegExp, str: openArray[char]): bool =
+  fcQRegExp_exactMatch(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
-proc indexIn*(self: gen_qregexp_types.QRegExp, str: string): cint =
-  fcQRegExp_indexIn(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc indexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char]): cint =
+  fcQRegExp_indexIn(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
-proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: string): cint =
-  fcQRegExp_lastIndexIn(self.h, struct_miqt_string(data: str, len: csize_t(len(str))))
+proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char]): cint =
+  fcQRegExp_lastIndexIn(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc matchedLength*(self: gen_qregexp_types.QRegExp): cint =
   fcQRegExp_matchedLength(self.h)
@@ -160,7 +162,7 @@ proc capturedTexts*(self: gen_qregexp_types.QRegExp): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -172,7 +174,7 @@ proc capturedTexts2*(self: gen_qregexp_types.QRegExp): seq[string] =
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
     let vx_lv_ms = v_outCast[i]
-    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    let vx_lvx_ret = string.fromBytes(vx_lv_ms)
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   c_free(v_ma.data)
@@ -180,13 +182,13 @@ proc capturedTexts2*(self: gen_qregexp_types.QRegExp): seq[string] =
 
 proc cap*(self: gen_qregexp_types.QRegExp): string =
   let v_ms = fcQRegExp_cap(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc cap2*(self: gen_qregexp_types.QRegExp): string =
   let v_ms = fcQRegExp_cap2(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -198,43 +200,43 @@ proc pos2*(self: gen_qregexp_types.QRegExp): cint =
 
 proc errorString*(self: gen_qregexp_types.QRegExp): string =
   let v_ms = fcQRegExp_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc errorString2*(self: gen_qregexp_types.QRegExp): string =
   let v_ms = fcQRegExp_errorString2(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc escape*(_: type gen_qregexp_types.QRegExp, str: string): string =
-  let v_ms = fcQRegExp_escape(struct_miqt_string(data: str, len: csize_t(len(str))))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+proc escape*(_: type gen_qregexp_types.QRegExp, str: openArray[char]): string =
+  let v_ms = fcQRegExp_escape(struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc indexIn*(self: gen_qregexp_types.QRegExp, str: string, offset: cint): cint =
-  fcQRegExp_indexIn2(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), offset)
+proc indexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char], offset: cint): cint =
+  fcQRegExp_indexIn2(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), offset)
 
-proc indexIn*(self: gen_qregexp_types.QRegExp, str: string, offset: cint, caretMode: cint): cint =
-  fcQRegExp_indexIn3(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), offset, cint(caretMode))
+proc indexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char], offset: cint, caretMode: cint): cint =
+  fcQRegExp_indexIn3(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), offset, cint(caretMode))
 
-proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: string, offset: cint): cint =
-  fcQRegExp_lastIndexIn2(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), offset)
+proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char], offset: cint): cint =
+  fcQRegExp_lastIndexIn2(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), offset)
 
-proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: string, offset: cint, caretMode: cint): cint =
-  fcQRegExp_lastIndexIn3(self.h, struct_miqt_string(data: str, len: csize_t(len(str))), offset, cint(caretMode))
+proc lastIndexIn*(self: gen_qregexp_types.QRegExp, str: openArray[char], offset: cint, caretMode: cint): cint =
+  fcQRegExp_lastIndexIn3(self.h, struct_miqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), offset, cint(caretMode))
 
 proc cap*(self: gen_qregexp_types.QRegExp, nth: cint): string =
   let v_ms = fcQRegExp_cap1(self.h, nth)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc cap2*(self: gen_qregexp_types.QRegExp, nth: cint): string =
   let v_ms = fcQRegExp_cap1WithNth(self.h, nth)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -248,18 +250,18 @@ proc create*(T: type gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
   gen_qregexp_types.QRegExp(h: fcQRegExp_new(), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
-    pattern: string): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))), owned: true)
+    pattern: openArray[char]): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
     rx: gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
   gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
-    pattern: string, cs: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)), owned: true)
+    pattern: openArray[char], cs: cint): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
-    pattern: string, cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs), cint(syntax)), owned: true)
+    pattern: openArray[char], cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_miqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs), cint(syntax)), owned: true)
 

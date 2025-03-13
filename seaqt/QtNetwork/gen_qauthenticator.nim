@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qauthenticator_types
@@ -70,33 +72,33 @@ proc operatorNotEqual*(self: gen_qauthenticator_types.QAuthenticator, other: gen
 
 proc user*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_user(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setUser*(self: gen_qauthenticator_types.QAuthenticator, user: string): void =
-  fcQAuthenticator_setUser(self.h, struct_miqt_string(data: user, len: csize_t(len(user))))
+proc setUser*(self: gen_qauthenticator_types.QAuthenticator, user: openArray[char]): void =
+  fcQAuthenticator_setUser(self.h, struct_miqt_string(data: if len(user) > 0: addr user[0] else: nil, len: csize_t(len(user))))
 
 proc password*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_password(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setPassword*(self: gen_qauthenticator_types.QAuthenticator, password: string): void =
-  fcQAuthenticator_setPassword(self.h, struct_miqt_string(data: password, len: csize_t(len(password))))
+proc setPassword*(self: gen_qauthenticator_types.QAuthenticator, password: openArray[char]): void =
+  fcQAuthenticator_setPassword(self.h, struct_miqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))))
 
 proc realm*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_realm(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setRealm*(self: gen_qauthenticator_types.QAuthenticator, realm: string): void =
-  fcQAuthenticator_setRealm(self.h, struct_miqt_string(data: realm, len: csize_t(len(realm))))
+proc setRealm*(self: gen_qauthenticator_types.QAuthenticator, realm: openArray[char]): void =
+  fcQAuthenticator_setRealm(self.h, struct_miqt_string(data: if len(realm) > 0: addr realm[0] else: nil, len: csize_t(len(realm))))
 
-proc option*(self: gen_qauthenticator_types.QAuthenticator, opt: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt)))), owned: true)
+proc option*(self: gen_qauthenticator_types.QAuthenticator, opt: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_miqt_string(data: if len(opt) > 0: addr opt[0] else: nil, len: csize_t(len(opt)))), owned: true)
 
 proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAuthenticator_options(self.h)
@@ -105,7 +107,7 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_q
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
     let vx_hashkey_ms = v_Keys[i]
-    let vx_hashkeyx_ret = string.fromBytes(toOpenArrayByte(vx_hashkey_ms.data, 0, int(vx_hashkey_ms.len)-1))
+    let vx_hashkeyx_ret = string.fromBytes(vx_hashkey_ms)
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
@@ -116,8 +118,8 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_q
   c_free(v_mm.values)
   vx_ret
 
-proc setOption*(self: gen_qauthenticator_types.QAuthenticator, opt: string, value: gen_qvariant_types.QVariant): void =
-  fcQAuthenticator_setOption(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt))), value.h)
+proc setOption*(self: gen_qauthenticator_types.QAuthenticator, opt: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQAuthenticator_setOption(self.h, struct_miqt_string(data: if len(opt) > 0: addr opt[0] else: nil, len: csize_t(len(opt))), value.h)
 
 proc isNull*(self: gen_qauthenticator_types.QAuthenticator): bool =
   fcQAuthenticator_isNull(self.h)

@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qsharedmemory.cpp", cflags).}
@@ -139,31 +141,31 @@ proc metacall*(self: gen_qsharedmemory_types.QSharedMemory, param1: cint, param2
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring): string =
   let v_ms = fcQSharedMemory_tr(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring): string =
   let v_ms = fcQSharedMemory_trUtf8(s)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setKey*(self: gen_qsharedmemory_types.QSharedMemory, key: string): void =
-  fcQSharedMemory_setKey(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
+proc setKey*(self: gen_qsharedmemory_types.QSharedMemory, key: openArray[char]): void =
+  fcQSharedMemory_setKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc key*(self: gen_qsharedmemory_types.QSharedMemory): string =
   let v_ms = fcQSharedMemory_key(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
-proc setNativeKey*(self: gen_qsharedmemory_types.QSharedMemory, key: string): void =
-  fcQSharedMemory_setNativeKey(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
+proc setNativeKey*(self: gen_qsharedmemory_types.QSharedMemory, key: openArray[char]): void =
+  fcQSharedMemory_setNativeKey(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc nativeKey*(self: gen_qsharedmemory_types.QSharedMemory): string =
   let v_ms = fcQSharedMemory_nativeKey(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -202,31 +204,31 @@ proc error*(self: gen_qsharedmemory_types.QSharedMemory): cint =
 
 proc errorString*(self: gen_qsharedmemory_types.QSharedMemory): string =
   let v_ms = fcQSharedMemory_errorString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring): string =
   let v_ms = fcQSharedMemory_tr2(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSharedMemory_tr3(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring): string =
   let v_ms = fcQSharedMemory_trUtf82(s, c)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQSharedMemory_trUtf83(s, c, n)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
@@ -482,7 +484,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string,
+    key: openArray[char],
     vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
   let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
   GC_ref(vtbl)
@@ -509,7 +511,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = cQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSharedMemory_vtable_callback_disconnectNotify
-  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     parent: gen_qobject_types.QObject,
@@ -542,7 +544,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string, parent: gen_qobject_types.QObject,
+    key: openArray[char], parent: gen_qobject_types.QObject,
     vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
   let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
   GC_ref(vtbl)
@@ -569,7 +571,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl[].vtbl.connectNotify = cQSharedMemory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = cQSharedMemory_vtable_callback_disconnectNotify
-  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key))), parent.h), owned: true)
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), parent.h), owned: true)
 
 const cQSharedMemory_mvtbl = cQSharedMemoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
@@ -594,10 +596,10 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string,
+    key: openArray[char],
     inst: VirtualQSharedMemory) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSharedMemory_new2(addr(cQSharedMemory_mvtbl), addr(inst[]), struct_miqt_string(data: key, len: csize_t(len(key))))
+  inst[].h = fcQSharedMemory_new2(addr(cQSharedMemory_mvtbl), addr(inst[]), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
   inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
@@ -608,10 +610,10 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
   inst[].owned = true
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
-    key: string, parent: gen_qobject_types.QObject,
+    key: openArray[char], parent: gen_qobject_types.QObject,
     inst: VirtualQSharedMemory) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSharedMemory_new4(addr(cQSharedMemory_mvtbl), addr(inst[]), struct_miqt_string(data: key, len: csize_t(len(key))), parent.h)
+  inst[].h = fcQSharedMemory_new4(addr(cQSharedMemory_mvtbl), addr(inst[]), struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), parent.h)
   inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =

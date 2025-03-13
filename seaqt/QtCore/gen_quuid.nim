@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 type QUuidVariantEnum* = distinct cint
@@ -88,35 +90,35 @@ proc fcQUuid_new6(param1: pointer): ptr cQUuid {.importc: "QUuid_new6".}
 
 proc toString*(self: gen_quuid_types.QUuid): string =
   let v_ms = fcQUuid_toString(self.h)
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toString*(self: gen_quuid_types.QUuid, mode: cint): string =
   let v_ms = fcQUuid_toStringWithMode(self.h, cint(mode))
-  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc toByteArray*(self: gen_quuid_types.QUuid): seq[byte] =
   var v_bytearray = fcQUuid_toByteArray(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc toByteArray*(self: gen_quuid_types.QUuid, mode: cint): seq[byte] =
   var v_bytearray = fcQUuid_toByteArrayWithMode(self.h, cint(mode))
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc toRfc4122*(self: gen_quuid_types.QUuid): seq[byte] =
   var v_bytearray = fcQUuid_toRfc4122(self.h)
-  var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc fromRfc4122*(_: type gen_quuid_types.QUuid, param1: seq[byte]): gen_quuid_types.QUuid =
+proc fromRfc4122*(_: type gen_quuid_types.QUuid, param1: openArray[byte]): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_fromRfc4122(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))), owned: true)
 
 proc isNull*(self: gen_quuid_types.QUuid): bool =
@@ -137,17 +139,17 @@ proc operatorGreater*(self: gen_quuid_types.QUuid, other: gen_quuid_types.QUuid)
 proc createUuid*(_: type gen_quuid_types.QUuid): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_createUuid(), owned: true)
 
-proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: seq[byte]): gen_quuid_types.QUuid =
+proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[byte]): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_createUuidV3(ns.h, struct_miqt_string(data: cast[cstring](if len(baseData) == 0: nil else: unsafeAddr baseData[0]), len: csize_t(len(baseData)))), owned: true)
 
-proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: seq[byte]): gen_quuid_types.QUuid =
+proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[byte]): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_createUuidV5(ns.h, struct_miqt_string(data: cast[cstring](if len(baseData) == 0: nil else: unsafeAddr baseData[0]), len: csize_t(len(baseData)))), owned: true)
 
-proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: string): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV32(ns.h, struct_miqt_string(data: baseData, len: csize_t(len(baseData)))), owned: true)
+proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[char]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV32(ns.h, struct_miqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
-proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: string): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV52(ns.h, struct_miqt_string(data: baseData, len: csize_t(len(baseData)))), owned: true)
+proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[char]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV52(ns.h, struct_miqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
 proc variant*(self: gen_quuid_types.QUuid): cint =
   cint(fcQUuid_variant(self.h))
@@ -163,15 +165,15 @@ proc create*(T: type gen_quuid_types.QUuid,
   gen_quuid_types.QUuid(h: fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,
-    param1: string): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_new3(struct_miqt_string(data: param1, len: csize_t(len(param1)))), owned: true)
+    param1: openArray[char]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new3(struct_miqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,
     param1: cstring): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_new4(param1), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,
-    param1: seq[byte]): gen_quuid_types.QUuid =
+    param1: openArray[byte]): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_new5(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,

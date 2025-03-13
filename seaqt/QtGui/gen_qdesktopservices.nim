@@ -7,7 +7,7 @@ from system/ansi_c import c_free, c_malloc
 type
   struct_miqt_string {.used.} = object
     len: csize_t
-    data: cstring
+    data: pointer
 
   struct_miqt_array {.used.} = object
     len: csize_t
@@ -21,14 +21,16 @@ type
   miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
   miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
 
-func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
+func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
   if v.len > 0:
-    result = newString(v.len)
+    let len = cast[int](v.len)
+    result = newString(len)
     when nimvm:
-      for i, c in v:
-        result[i] = cast[char](c)
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
     else:
-      copyMem(addr result[0], unsafeAddr v[0], v.len)
+      copyMem(addr result[0], v.data, len)
 
 
 import ./gen_qdesktopservices_types
@@ -50,9 +52,9 @@ proc fcQDesktopServices_unsetUrlHandler(scheme: struct_miqt_string): void {.impo
 proc openUrl*(_: type gen_qdesktopservices_types.QDesktopServices, url: gen_qurl_types.QUrl): bool =
   fcQDesktopServices_openUrl(url.h)
 
-proc setUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: string, receiver: gen_qobject_types.QObject, methodVal: cstring): void =
-  fcQDesktopServices_setUrlHandler(struct_miqt_string(data: scheme, len: csize_t(len(scheme))), receiver.h, methodVal)
+proc setUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: openArray[char], receiver: gen_qobject_types.QObject, methodVal: cstring): void =
+  fcQDesktopServices_setUrlHandler(struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))), receiver.h, methodVal)
 
-proc unsetUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: string): void =
-  fcQDesktopServices_unsetUrlHandler(struct_miqt_string(data: scheme, len: csize_t(len(scheme))))
+proc unsetUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: openArray[char]): void =
+  fcQDesktopServices_unsetUrlHandler(struct_miqt_string(data: if len(scheme) > 0: addr scheme[0] else: nil, len: csize_t(len(scheme))))
 
