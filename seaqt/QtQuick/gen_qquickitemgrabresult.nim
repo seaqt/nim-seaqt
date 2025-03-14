@@ -1,4 +1,4 @@
-import ./Qt5Quick_libs
+import ./qtquick_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qquickitemgrabresult.cpp", cflags).}
+
+{.compile("gen_qquickitemgrabresult.cpp", QtQuickCFlags).}
 
 
 import ./gen_qquickitemgrabresult_types

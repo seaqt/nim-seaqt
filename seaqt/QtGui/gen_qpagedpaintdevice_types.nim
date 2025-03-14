@@ -13,8 +13,9 @@ type QPagedPaintDeviceMargins* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qpagedpaintdevice.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpagedpaintdevice.cpp", QtGuiCFlags).}
 
 proc fcQPagedPaintDeviceMargins_delete(self: pointer) {.importc: "QPagedPaintDevice__Margins_delete".}
 proc `=destroy`(self: var QPagedPaintDeviceMargins) =

@@ -2,8 +2,9 @@ type QQuaternion* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qquaternion.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qquaternion.cpp", QtGuiCFlags).}
 
 proc fcQQuaternion_delete(self: pointer) {.importc: "QQuaternion_delete".}
 proc `=destroy`(self: var QQuaternion) =

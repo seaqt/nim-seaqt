@@ -2,8 +2,9 @@ type QPrintEngine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
-{.compile("gen_qprintengine.cpp", cflags).}
+import ./qtprintsupport_pkg
+
+{.compile("gen_qprintengine.cpp", QtPrintSupportCFlags).}
 
 proc fcQPrintEngine_delete(self: pointer) {.importc: "QPrintEngine_delete".}
 proc `=destroy`(self: var QPrintEngine) =

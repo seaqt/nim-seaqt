@@ -2,8 +2,9 @@ type QRgba64* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qrgba64.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qrgba64.cpp", QtGuiCFlags).}
 
 proc fcQRgba64_delete(self: pointer) {.importc: "QRgba64_delete".}
 proc `=destroy`(self: var QRgba64) =

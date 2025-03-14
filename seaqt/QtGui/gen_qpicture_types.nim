@@ -13,8 +13,9 @@ type QPictureIO* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qpicture.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpicture.cpp", QtGuiCFlags).}
 
 proc fcQPictureIO_delete(self: pointer) {.importc: "QPictureIO_delete".}
 proc `=destroy`(self: var QPictureIO) =

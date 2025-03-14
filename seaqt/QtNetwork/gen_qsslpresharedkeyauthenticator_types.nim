@@ -2,8 +2,9 @@ type QSslPreSharedKeyAuthenticator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qsslpresharedkeyauthenticator.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qsslpresharedkeyauthenticator.cpp", QtNetworkCFlags).}
 
 proc fcQSslPreSharedKeyAuthenticator_delete(self: pointer) {.importc: "QSslPreSharedKeyAuthenticator_delete".}
 proc `=destroy`(self: var QSslPreSharedKeyAuthenticator) =

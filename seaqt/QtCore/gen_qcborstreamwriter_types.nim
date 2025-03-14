@@ -2,8 +2,9 @@ type QCborStreamWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qcborstreamwriter.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcborstreamwriter.cpp", QtCoreCFlags).}
 
 proc fcQCborStreamWriter_delete(self: pointer) {.importc: "QCborStreamWriter_delete".}
 proc `=destroy`(self: var QCborStreamWriter) =

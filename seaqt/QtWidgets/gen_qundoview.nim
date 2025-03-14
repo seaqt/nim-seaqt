@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qundoview.cpp", cflags).}
+
+{.compile("gen_qundoview.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qundoview_types
@@ -2333,7 +2333,7 @@ proc initStyleOption*(self: gen_qundoview_types.QUndoView, option: gen_qstyleopt
 proc updateMicroFocus*(self: gen_qundoview_types.QUndoView): void =
   fcQUndoView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qundoview_types.QUndoView): void =
+proc createX*(self: gen_qundoview_types.QUndoView): void =
   fcQUndoView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qundoview_types.QUndoView): void =

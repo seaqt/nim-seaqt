@@ -2,8 +2,9 @@ type QWebHitTestResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
-{.compile("gen_qwebframe.cpp", cflags).}
+import ./qtwebkitwidgets_pkg
+
+{.compile("gen_qwebframe.cpp", QtWebKitWidgetsCFlags).}
 
 proc fcQWebHitTestResult_delete(self: pointer) {.importc: "QWebHitTestResult_delete".}
 proc `=destroy`(self: var QWebHitTestResult) =

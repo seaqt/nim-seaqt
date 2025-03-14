@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qsplitter.cpp", cflags).}
+
+{.compile("gen_qsplitter.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qsplitter_types
@@ -1553,7 +1553,7 @@ proc initStyleOption*(self: gen_qsplitter_types.QSplitter, option: gen_qstyleopt
 proc updateMicroFocus*(self: gen_qsplitter_types.QSplitter): void =
   fcQSplitter_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qsplitter_types.QSplitter): void =
+proc createX*(self: gen_qsplitter_types.QSplitter): void =
   fcQSplitter_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qsplitter_types.QSplitter): void =
@@ -3161,7 +3161,7 @@ proc closestLegalPosition*(self: gen_qsplitter_types.QSplitterHandle, p: cint): 
 proc updateMicroFocus*(self: gen_qsplitter_types.QSplitterHandle): void =
   fcQSplitterHandle_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qsplitter_types.QSplitterHandle): void =
+proc createX*(self: gen_qsplitter_types.QSplitterHandle): void =
   fcQSplitterHandle_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qsplitter_types.QSplitterHandle): void =

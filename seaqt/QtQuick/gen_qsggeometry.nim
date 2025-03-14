@@ -1,4 +1,4 @@
-import ./Qt5Quick_libs
+import ./qtquick_pkg
 
 {.push raises: [].}
 
@@ -130,7 +130,7 @@ proc fcQSGGeometry_allocate2(self: pointer, vertexCount: cint, indexCount: cint)
 proc fcQSGGeometry_new(attribs: pointer, vertexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new".}
 proc fcQSGGeometry_new2(attribs: pointer, vertexCount: cint, indexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new2".}
 proc fcQSGGeometry_new3(attribs: pointer, vertexCount: cint, indexCount: cint, indexType: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new3".}
-proc fcQSGGeometryAttribute_create(pos: cint, tupleSize: cint, primitiveType: cint): pointer {.importc: "QSGGeometry__Attribute_create".}
+proc fcQSGGeometryAttribute_createX(pos: cint, tupleSize: cint, primitiveType: cint): pointer {.importc: "QSGGeometry__Attribute_create".}
 proc fcQSGGeometryAttribute_createWithAttributeType(pos: cint, tupleSize: cint, primitiveType: cint, attributeType: cint): pointer {.importc: "QSGGeometry__Attribute_createWithAttributeType".}
 proc fcQSGGeometryAttribute_create4(pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): pointer {.importc: "QSGGeometry__Attribute_create4".}
 proc fcQSGGeometryPoint2D_set(self: pointer, nx: float32, ny: float32): void {.importc: "QSGGeometry__Point2D_set".}
@@ -266,13 +266,13 @@ proc create*(T: type gen_qsggeometry_types.QSGGeometry,
     attribs: gen_qsggeometry_types.QSGGeometryAttributeSet, vertexCount: cint, indexCount: cint, indexType: cint): gen_qsggeometry_types.QSGGeometry =
   gen_qsggeometry_types.QSGGeometry(h: fcQSGGeometry_new3(attribs.h, vertexCount, indexCount, indexType), owned: true)
 
-proc create*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint): gen_qsggeometry_types.QSGGeometryAttribute =
-  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_create(pos, tupleSize, primitiveType), owned: true)
+proc createX*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint): gen_qsggeometry_types.QSGGeometryAttribute =
+  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createX(pos, tupleSize, primitiveType), owned: true)
 
 proc createWithAttributeType*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint, attributeType: cint): gen_qsggeometry_types.QSGGeometryAttribute =
   gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createWithAttributeType(pos, tupleSize, primitiveType, cint(attributeType)), owned: true)
 
-proc create*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): gen_qsggeometry_types.QSGGeometryAttribute =
+proc createX*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): gen_qsggeometry_types.QSGGeometryAttribute =
   gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_create4(pos, tupleSize, primitiveType, isPosition), owned: true)
 
 proc set*(self: gen_qsggeometry_types.QSGGeometryPoint2D, nx: float32, ny: float32): void =

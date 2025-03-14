@@ -2,8 +2,9 @@ type QTextDocumentFragment* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qtextdocumentfragment.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextdocumentfragment.cpp", QtGuiCFlags).}
 
 proc fcQTextDocumentFragment_delete(self: pointer) {.importc: "QTextDocumentFragment_delete".}
 proc `=destroy`(self: var QTextDocumentFragment) =

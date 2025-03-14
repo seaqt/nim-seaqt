@@ -2,8 +2,9 @@ type QGraphicsItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qgraphicsitem.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qgraphicsitem.cpp", QtWidgetsCFlags).}
 
 proc fcQGraphicsItem_delete(self: pointer) {.importc: "QGraphicsItem_delete".}
 proc `=destroy`(self: var QGraphicsItem) =

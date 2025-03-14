@@ -1,4 +1,4 @@
-import ./Qt5WebKitWidgets_libs
+import ./qtwebkitwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
-{.compile("gen_qgraphicswebview.cpp", cflags).}
+
+{.compile("gen_qgraphicswebview.cpp", QtWebKitWidgetsCFlags).}
 
 
 import ./gen_qgraphicswebview_types

@@ -2,8 +2,9 @@ type QDebug* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qdebug.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdebug.cpp", QtCoreCFlags).}
 
 proc fcQDebug_delete(self: pointer) {.importc: "QDebug_delete".}
 proc `=destroy`(self: var QDebug) =

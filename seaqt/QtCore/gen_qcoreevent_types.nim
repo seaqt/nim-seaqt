@@ -2,8 +2,9 @@ type QEvent* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qcoreevent.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcoreevent.cpp", QtCoreCFlags).}
 
 proc fcQEvent_delete(self: pointer) {.importc: "QEvent_delete".}
 proc `=destroy`(self: var QEvent) =

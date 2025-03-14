@@ -2,8 +2,9 @@ type QWidgetData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qwidget.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qwidget.cpp", QtWidgetsCFlags).}
 
 proc fcQWidgetData_delete(self: pointer) {.importc: "QWidgetData_delete".}
 proc `=destroy`(self: var QWidgetData) =

@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qmessagebox.cpp", cflags).}
+
+{.compile("gen_qmessagebox.cpp", QtWidgetsCFlags).}
 
 
 type QMessageBoxIconEnum* = distinct cint
@@ -1783,7 +1783,7 @@ proc adjustPosition*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qwidge
 proc updateMicroFocus*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qmessagebox_types.QMessageBox): void =
+proc createX*(self: gen_qmessagebox_types.QMessageBox): void =
   fcQMessageBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qmessagebox_types.QMessageBox): void =

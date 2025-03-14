@@ -6,8 +6,9 @@ type QTextEncoder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qtextcodec.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qtextcodec.cpp", QtCoreCFlags).}
 
 proc fcQTextEncoder_delete(self: pointer) {.importc: "QTextEncoder_delete".}
 proc `=destroy`(self: var QTextEncoder) =

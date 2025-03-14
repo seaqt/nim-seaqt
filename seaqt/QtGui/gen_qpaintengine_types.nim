@@ -2,8 +2,9 @@ type QTextItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qpaintengine.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpaintengine.cpp", QtGuiCFlags).}
 
 proc fcQTextItem_delete(self: pointer) {.importc: "QTextItem_delete".}
 proc `=destroy`(self: var QTextItem) =

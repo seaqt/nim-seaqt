@@ -2,8 +2,9 @@ type QNetworkDatagram* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qnetworkdatagram.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qnetworkdatagram.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkDatagram_delete(self: pointer) {.importc: "QNetworkDatagram_delete".}
 proc `=destroy`(self: var QNetworkDatagram) =

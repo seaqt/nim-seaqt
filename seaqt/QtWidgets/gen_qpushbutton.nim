@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qpushbutton.cpp", cflags).}
+
+{.compile("gen_qpushbutton.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qpushbutton_types
@@ -1342,7 +1342,7 @@ proc initStyleOption*(self: gen_qpushbutton_types.QPushButton, option: gen_qstyl
 proc updateMicroFocus*(self: gen_qpushbutton_types.QPushButton): void =
   fcQPushButton_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qpushbutton_types.QPushButton): void =
+proc createX*(self: gen_qpushbutton_types.QPushButton): void =
   fcQPushButton_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qpushbutton_types.QPushButton): void =

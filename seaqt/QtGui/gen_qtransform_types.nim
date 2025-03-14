@@ -2,8 +2,9 @@ type QTransform* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qtransform.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtransform.cpp", QtGuiCFlags).}
 
 proc fcQTransform_delete(self: pointer) {.importc: "QTransform_delete".}
 proc `=destroy`(self: var QTransform) =

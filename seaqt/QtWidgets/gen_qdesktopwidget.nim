@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qdesktopwidget.cpp", cflags).}
+
+{.compile("gen_qdesktopwidget.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qdesktopwidget_types
@@ -1379,7 +1379,7 @@ proc cQDesktopWidget_method_callback_disconnectNotify(self: pointer, signal: poi
 proc updateMicroFocus*(self: gen_qdesktopwidget_types.QDesktopWidget): void =
   fcQDesktopWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qdesktopwidget_types.QDesktopWidget): void =
+proc createX*(self: gen_qdesktopwidget_types.QDesktopWidget): void =
   fcQDesktopWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qdesktopwidget_types.QDesktopWidget): void =

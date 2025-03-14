@@ -2,8 +2,9 @@ type QMediaBindableInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qmediabindableinterface.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qmediabindableinterface.cpp", QtMultimediaCFlags).}
 
 proc fcQMediaBindableInterface_delete(self: pointer) {.importc: "QMediaBindableInterface_delete".}
 proc `=destroy`(self: var QMediaBindableInterface) =

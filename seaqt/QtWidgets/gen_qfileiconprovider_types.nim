@@ -2,8 +2,9 @@ type QFileIconProvider* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qfileiconprovider.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qfileiconprovider.cpp", QtWidgetsCFlags).}
 
 proc fcQFileIconProvider_delete(self: pointer) {.importc: "QFileIconProvider_delete".}
 proc `=destroy`(self: var QFileIconProvider) =

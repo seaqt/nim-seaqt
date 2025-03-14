@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -32,18 +32,16 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const qtversion = gorge("pkg-config --modversion Qt5Core")
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
 import std/strutils
 const privateDir = block:
   var flag = ""
-  for path in cflags.split(" "):
+  for path in QtCoreCFlags.split(" "):
     if "QtCore" in path:
-      flag = " " & path & "/" & qtversion & " " & path & "/" & qtversion & "/QtCore"
+      flag = " " & path & "/" & QtCoreBuildVersion & " " & path & "/" & QtCoreBuildVersion & "/QtCore"
       break
   flag
 
-{.compile("../libseaqt/libseaqt.cpp", cflags & privateDir).}
+{.compile("../libseaqt/libseaqt.cpp", QtCoreCFlags & privateDir).}
 
 type QObject_connectSlot* = proc(args: pointer) {.gcsafe, raises: [].}
 

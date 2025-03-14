@@ -13,8 +13,9 @@ type QAbstractEventDispatcherTimerInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qabstracteventdispatcher.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qabstracteventdispatcher.cpp", QtCoreCFlags).}
 
 proc fcQAbstractEventDispatcherTimerInfo_delete(self: pointer) {.importc: "QAbstractEventDispatcher__TimerInfo_delete".}
 proc `=destroy`(self: var QAbstractEventDispatcherTimerInfo) =

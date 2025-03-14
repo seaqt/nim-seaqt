@@ -13,8 +13,9 @@ type QWebPluginFactoryMimeType* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebpluginfactory.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebpluginfactory.cpp", QtWebKitCFlags).}
 
 proc fcQWebPluginFactoryMimeType_delete(self: pointer) {.importc: "QWebPluginFactory__MimeType_delete".}
 proc `=destroy`(self: var QWebPluginFactoryMimeType) =

@@ -2,8 +2,9 @@ type QFontInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qfontinfo.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qfontinfo.cpp", QtGuiCFlags).}
 
 proc fcQFontInfo_delete(self: pointer) {.importc: "QFontInfo_delete".}
 proc `=destroy`(self: var QFontInfo) =

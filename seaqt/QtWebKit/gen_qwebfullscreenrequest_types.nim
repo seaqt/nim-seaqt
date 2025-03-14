@@ -2,8 +2,9 @@ type QWebFullScreenRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebfullscreenrequest.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebfullscreenrequest.cpp", QtWebKitCFlags).}
 
 proc fcQWebFullScreenRequest_delete(self: pointer) {.importc: "QWebFullScreenRequest_delete".}
 proc `=destroy`(self: var QWebFullScreenRequest) =

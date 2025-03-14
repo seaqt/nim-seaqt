@@ -2,8 +2,9 @@ type QPrinterInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
-{.compile("gen_qprinterinfo.cpp", cflags).}
+import ./qtprintsupport_pkg
+
+{.compile("gen_qprinterinfo.cpp", QtPrintSupportCFlags).}
 
 proc fcQPrinterInfo_delete(self: pointer) {.importc: "QPrinterInfo_delete".}
 proc `=destroy`(self: var QPrinterInfo) =

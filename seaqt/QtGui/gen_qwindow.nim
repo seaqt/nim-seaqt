@@ -1,4 +1,4 @@
-import ./Qt5Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qwindow.cpp", cflags).}
+
+{.compile("gen_qwindow.cpp", QtGuiCFlags).}
 
 
 type QWindowVisibilityEnum* = distinct cint
@@ -98,7 +98,7 @@ proc fcQWindow_surfaceType(self: pointer): cint {.importc: "QWindow_surfaceType"
 proc fcQWindow_isVisible(self: pointer): bool {.importc: "QWindow_isVisible".}
 proc fcQWindow_visibility(self: pointer): cint {.importc: "QWindow_visibility".}
 proc fcQWindow_setVisibility(self: pointer, v: cint): void {.importc: "QWindow_setVisibility".}
-proc fcQWindow_create(self: pointer): void {.importc: "QWindow_create".}
+proc fcQWindow_createX(self: pointer): void {.importc: "QWindow_create".}
 proc fcQWindow_winId(self: pointer): uint {.importc: "QWindow_winId".}
 proc fcQWindow_parent(self: pointer, mode: cint): pointer {.importc: "QWindow_parent".}
 proc fcQWindow_parent2(self: pointer): pointer {.importc: "QWindow_parent2".}
@@ -358,8 +358,8 @@ proc visibility*(self: gen_qwindow_types.QWindow): cint =
 proc setVisibility*(self: gen_qwindow_types.QWindow, v: cint): void =
   fcQWindow_setVisibility(self.h, cint(v))
 
-proc create*(self: gen_qwindow_types.QWindow): void =
-  fcQWindow_create(self.h)
+proc createX*(self: gen_qwindow_types.QWindow): void =
+  fcQWindow_createX(self.h)
 
 proc winId*(self: gen_qwindow_types.QWindow): uint =
   fcQWindow_winId(self.h)

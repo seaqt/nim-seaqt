@@ -1,4 +1,4 @@
-import ./Qt5Multimedia_libs
+import ./qtmultimedia_pkg
 
 {.push raises: [].}
 
@@ -87,7 +87,7 @@ proc fcQMediaServiceProviderHint_new3(device: struct_miqt_string): ptr cQMediaSe
 proc fcQMediaServiceProviderHint_new4(position: cint): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new4".}
 proc fcQMediaServiceProviderHint_new5(features: cint): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new5".}
 proc fcQMediaServiceProviderHint_new6(other: pointer): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new6".}
-proc fcQMediaServiceProviderFactoryInterface_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderFactoryInterface_create".}
+proc fcQMediaServiceProviderFactoryInterface_createX(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderFactoryInterface_create".}
 proc fcQMediaServiceProviderFactoryInterface_release(self: pointer, service: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_release".}
 proc fcQMediaServiceProviderFactoryInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_operatorAssign".}
 proc fcQMediaServiceSupportedFormatsInterface_hasSupport(self: pointer, mimeType: struct_miqt_string, codecs: struct_miqt_array): cint {.importc: "QMediaServiceSupportedFormatsInterface_hasSupport".}
@@ -108,7 +108,7 @@ proc fcQMediaServiceProviderPlugin_metacast(self: pointer, param1: cstring): poi
 proc fcQMediaServiceProviderPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaServiceProviderPlugin_metacall".}
 proc fcQMediaServiceProviderPlugin_tr(s: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr".}
 proc fcQMediaServiceProviderPlugin_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf8".}
-proc fcQMediaServiceProviderPlugin_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderPlugin_create".}
+proc fcQMediaServiceProviderPlugin_createX(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderPlugin_create".}
 proc fcQMediaServiceProviderPlugin_release(self: pointer, service: pointer): void {.importc: "QMediaServiceProviderPlugin_release".}
 proc fcQMediaServiceProviderPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr2".}
 proc fcQMediaServiceProviderPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr3".}
@@ -192,8 +192,8 @@ proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
     other: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
   gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new6(other.h), owned: true)
 
-proc create*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, key: openArray[char]): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderFactoryInterface_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
+proc createX*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, key: openArray[char]): gen_qmediaservice_types.QMediaService =
+  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderFactoryInterface_createX(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc release*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, service: gen_qmediaservice_types.QMediaService): void =
   fcQMediaServiceProviderFactoryInterface_release(self.h, service.h)
@@ -289,8 +289,8 @@ proc trUtf8*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, key: openArray[char]): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderPlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
+proc createX*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, key: openArray[char]): gen_qmediaservice_types.QMediaService =
+  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderPlugin_createX(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc release*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, service: gen_qmediaservice_types.QMediaService): void =
   fcQMediaServiceProviderPlugin_release(self.h, service.h)

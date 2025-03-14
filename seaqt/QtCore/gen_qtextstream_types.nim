@@ -2,8 +2,9 @@ type QTextStream* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qtextstream.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qtextstream.cpp", QtCoreCFlags).}
 
 proc fcQTextStream_delete(self: pointer) {.importc: "QTextStream_delete".}
 proc `=destroy`(self: var QTextStream) =

@@ -1,4 +1,4 @@
-import ./Qt5Svg_libs
+import ./qtsvg_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Svg") & " -fPIC"
-{.compile("gen_qsvggenerator.cpp", cflags).}
+
+{.compile("gen_qsvggenerator.cpp", QtSvgCFlags).}
 
 
 import ./gen_qsvggenerator_types

@@ -2,8 +2,9 @@ type QHstsPolicy* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qhstspolicy.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qhstspolicy.cpp", QtNetworkCFlags).}
 
 proc fcQHstsPolicy_delete(self: pointer) {.importc: "QHstsPolicy_delete".}
 proc `=destroy`(self: var QHstsPolicy) =

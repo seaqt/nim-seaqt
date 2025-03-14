@@ -1,4 +1,4 @@
-import ./Qt5PrintSupport_libs
+import ./qtprintsupport_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
-{.compile("gen_qpagesetupdialog.cpp", cflags).}
+
+{.compile("gen_qpagesetupdialog.cpp", QtPrintSupportCFlags).}
 
 
 import ./gen_qpagesetupdialog_types
@@ -1340,7 +1340,7 @@ proc adjustPosition*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: 
 proc updateMicroFocus*(self: gen_qpagesetupdialog_types.QPageSetupDialog): void =
   fcQPageSetupDialog_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qpagesetupdialog_types.QPageSetupDialog): void =
+proc createX*(self: gen_qpagesetupdialog_types.QPageSetupDialog): void =
   fcQPageSetupDialog_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qpagesetupdialog_types.QPageSetupDialog): void =

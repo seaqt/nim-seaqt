@@ -2,8 +2,9 @@ type QXmlStreamStringRef* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qxmlstream.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qxmlstream.cpp", QtCoreCFlags).}
 
 proc fcQXmlStreamStringRef_delete(self: pointer) {.importc: "QXmlStreamStringRef_delete".}
 proc `=destroy`(self: var QXmlStreamStringRef) =

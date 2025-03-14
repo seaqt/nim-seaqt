@@ -2,8 +2,9 @@ type QTimeZone* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qtimezone.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qtimezone.cpp", QtCoreCFlags).}
 
 proc fcQTimeZone_delete(self: pointer) {.importc: "QTimeZone_delete".}
 proc `=destroy`(self: var QTimeZone) =

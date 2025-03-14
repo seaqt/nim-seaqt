@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qlabel.cpp", cflags).}
+
+{.compile("gen_qlabel.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qlabel_types
@@ -1454,7 +1454,7 @@ proc initStyleOption*(self: gen_qlabel_types.QLabel, option: gen_qstyleoption_ty
 proc updateMicroFocus*(self: gen_qlabel_types.QLabel): void =
   fcQLabel_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qlabel_types.QLabel): void =
+proc createX*(self: gen_qlabel_types.QLabel): void =
   fcQLabel_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qlabel_types.QLabel): void =

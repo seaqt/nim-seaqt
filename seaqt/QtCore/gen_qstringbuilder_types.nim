@@ -2,8 +2,9 @@ type QAbstractConcatenable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qstringbuilder.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qstringbuilder.cpp", QtCoreCFlags).}
 
 proc fcQAbstractConcatenable_delete(self: pointer) {.importc: "QAbstractConcatenable_delete".}
 proc `=destroy`(self: var QAbstractConcatenable) =

@@ -2,8 +2,9 @@ type QItemSelectionRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qitemselectionmodel.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qitemselectionmodel.cpp", QtCoreCFlags).}
 
 proc fcQItemSelectionRange_delete(self: pointer) {.importc: "QItemSelectionRange_delete".}
 proc `=destroy`(self: var QItemSelectionRange) =

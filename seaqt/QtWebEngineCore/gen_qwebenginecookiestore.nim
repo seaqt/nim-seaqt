@@ -1,4 +1,4 @@
-import ./Qt5WebEngineCore_libs
+import ./qtwebenginecore_pkg
 
 {.push raises: [].}
 

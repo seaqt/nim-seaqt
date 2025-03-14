@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qdial.cpp", cflags).}
+
+{.compile("gen_qdial.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qdial_types
@@ -1296,7 +1296,7 @@ proc repeatAction*(self: gen_qdial_types.QDial): cint =
 proc updateMicroFocus*(self: gen_qdial_types.QDial): void =
   fcQDial_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qdial_types.QDial): void =
+proc createX*(self: gen_qdial_types.QDial): void =
   fcQDial_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qdial_types.QDial): void =

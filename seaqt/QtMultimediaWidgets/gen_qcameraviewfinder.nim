@@ -1,4 +1,4 @@
-import ./Qt5MultimediaWidgets_libs
+import ./qtmultimediawidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5MultimediaWidgets") & " -fPIC"
-{.compile("gen_qcameraviewfinder.cpp", cflags).}
+
+{.compile("gen_qcameraviewfinder.cpp", QtMultimediaWidgetsCFlags).}
 
 
 import ./gen_qcameraviewfinder_types
@@ -1280,7 +1280,7 @@ proc cQCameraViewfinder_method_callback_disconnectNotify(self: pointer, signal: 
 proc updateMicroFocus*(self: gen_qcameraviewfinder_types.QCameraViewfinder): void =
   fcQCameraViewfinder_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qcameraviewfinder_types.QCameraViewfinder): void =
+proc createX*(self: gen_qcameraviewfinder_types.QCameraViewfinder): void =
   fcQCameraViewfinder_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qcameraviewfinder_types.QCameraViewfinder): void =

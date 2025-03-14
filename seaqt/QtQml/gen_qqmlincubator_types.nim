@@ -2,8 +2,9 @@ type QQmlIncubator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlincubator.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlincubator.cpp", QtQmlCFlags).}
 
 proc fcQQmlIncubator_delete(self: pointer) {.importc: "QQmlIncubator_delete".}
 proc `=destroy`(self: var QQmlIncubator) =

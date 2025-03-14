@@ -2,8 +2,9 @@ type QWebHistoryItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebhistory.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebhistory.cpp", QtWebKitCFlags).}
 
 proc fcQWebHistoryItem_delete(self: pointer) {.importc: "QWebHistoryItem_delete".}
 proc `=destroy`(self: var QWebHistoryItem) =

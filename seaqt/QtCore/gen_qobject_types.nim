@@ -2,8 +2,9 @@ type QObjectData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qobject.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qobject.cpp", QtCoreCFlags).}
 
 proc fcQObjectData_delete(self: pointer) {.importc: "QObjectData_delete".}
 proc `=destroy`(self: var QObjectData) =

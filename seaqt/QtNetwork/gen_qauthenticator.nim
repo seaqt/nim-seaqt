@@ -1,4 +1,4 @@
-import ./Qt5Network_libs
+import ./qtnetwork_pkg
 
 {.push raises: [].}
 

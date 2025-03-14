@@ -2,8 +2,9 @@ type QStaticPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qplugin.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qplugin.cpp", QtCoreCFlags).}
 
 proc fcQStaticPlugin_delete(self: pointer) {.importc: "QStaticPlugin_delete".}
 proc `=destroy`(self: var QStaticPlugin) =

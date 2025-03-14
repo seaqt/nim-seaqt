@@ -1,4 +1,4 @@
-import ./Qt5WebKitWidgets_libs
+import ./qtwebkitwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
-{.compile("gen_qwebinspector.cpp", cflags).}
+
+{.compile("gen_qwebinspector.cpp", QtWebKitWidgetsCFlags).}
 
 
 import ./gen_qwebinspector_types
@@ -1242,7 +1242,7 @@ proc cQWebInspector_method_callback_disconnectNotify(self: pointer, signal: poin
 proc updateMicroFocus*(self: gen_qwebinspector_types.QWebInspector): void =
   fcQWebInspector_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qwebinspector_types.QWebInspector): void =
+proc createX*(self: gen_qwebinspector_types.QWebInspector): void =
   fcQWebInspector_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qwebinspector_types.QWebInspector): void =

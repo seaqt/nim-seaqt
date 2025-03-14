@@ -2,8 +2,9 @@ type QQmlModuleRegistration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlmoduleregistration.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlmoduleregistration.cpp", QtQmlCFlags).}
 
 proc fcQQmlModuleRegistration_delete(self: pointer) {.importc: "QQmlModuleRegistration_delete".}
 proc `=destroy`(self: var QQmlModuleRegistration) =

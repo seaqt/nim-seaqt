@@ -2,8 +2,9 @@ type QKeySequence* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qkeysequence.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qkeysequence.cpp", QtGuiCFlags).}
 
 proc fcQKeySequence_delete(self: pointer) {.importc: "QKeySequence_delete".}
 proc `=destroy`(self: var QKeySequence) =

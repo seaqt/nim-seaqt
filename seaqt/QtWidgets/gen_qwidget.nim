@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -2474,7 +2474,7 @@ proc cQWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): 
 proc updateMicroFocus*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qwidget_types.QWidget): void =
+proc createX*(self: gen_qwidget_types.QWidget): void =
   fcQWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qwidget_types.QWidget): void =
@@ -2486,13 +2486,13 @@ proc focusNextChild*(self: gen_qwidget_types.QWidget): bool =
 proc focusPreviousChild*(self: gen_qwidget_types.QWidget): bool =
   fcQWidget_protectedbase_focusPreviousChild(self.h)
 
-proc create*(self: gen_qwidget_types.QWidget, param1: uint): void =
+proc createX*(self: gen_qwidget_types.QWidget, param1: uint): void =
   fcQWidget_protectedbase_create1(self.h, param1)
 
-proc create*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool): void =
+proc createX*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool): void =
   fcQWidget_protectedbase_create2(self.h, param1, initializeWindow)
 
-proc create*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void =
+proc createX*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void =
   fcQWidget_protectedbase_create3(self.h, param1, initializeWindow, destroyOldWindow)
 
 proc destroy*(self: gen_qwidget_types.QWidget, destroyWindow: bool): void =

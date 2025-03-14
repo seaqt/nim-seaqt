@@ -2,8 +2,9 @@ type QSslError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qsslerror.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qsslerror.cpp", QtNetworkCFlags).}
 
 proc fcQSslError_delete(self: pointer) {.importc: "QSslError_delete".}
 proc `=destroy`(self: var QSslError) =

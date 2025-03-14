@@ -2,8 +2,9 @@ type QDeadlineTimer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qdeadlinetimer.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdeadlinetimer.cpp", QtCoreCFlags).}
 
 proc fcQDeadlineTimer_delete(self: pointer) {.importc: "QDeadlineTimer_delete".}
 proc `=destroy`(self: var QDeadlineTimer) =

@@ -2,8 +2,9 @@ type QQmlImageProviderBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlengine.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlengine.cpp", QtQmlCFlags).}
 
 proc fcQQmlImageProviderBase_delete(self: pointer) {.importc: "QQmlImageProviderBase_delete".}
 proc `=destroy`(self: var QQmlImageProviderBase) =

@@ -1,4 +1,4 @@
-import ./Qt5Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 
@@ -45,11 +45,11 @@ export
 
 type cQQmlNetworkAccessManagerFactory*{.exportc: "QQmlNetworkAccessManagerFactory", incompleteStruct.} = object
 
-proc fcQQmlNetworkAccessManagerFactory_create(self: pointer, parent: pointer): pointer {.importc: "QQmlNetworkAccessManagerFactory_create".}
+proc fcQQmlNetworkAccessManagerFactory_createX(self: pointer, parent: pointer): pointer {.importc: "QQmlNetworkAccessManagerFactory_create".}
 proc fcQQmlNetworkAccessManagerFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlNetworkAccessManagerFactory_operatorAssign".}
 
-proc create*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, parent: gen_qobject_types.QObject): gen_qnetworkaccessmanager_types.QNetworkAccessManager =
-  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQQmlNetworkAccessManagerFactory_create(self.h, parent.h), owned: false)
+proc createX*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, parent: gen_qobject_types.QObject): gen_qnetworkaccessmanager_types.QNetworkAccessManager =
+  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQQmlNetworkAccessManagerFactory_createX(self.h, parent.h), owned: false)
 
 proc operatorAssign*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, param1: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory): void =
   fcQQmlNetworkAccessManagerFactory_operatorAssign(self.h, param1.h)

@@ -13,8 +13,9 @@ type QQuickWindowGraphicsStateInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qquickwindow.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qquickwindow.cpp", QtQuickCFlags).}
 
 proc fcQQuickWindowGraphicsStateInfo_delete(self: pointer) {.importc: "QQuickWindow__GraphicsStateInfo_delete".}
 proc `=destroy`(self: var QQuickWindowGraphicsStateInfo) =

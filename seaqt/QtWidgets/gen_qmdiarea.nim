@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qmdiarea.cpp", cflags).}
+
+{.compile("gen_qmdiarea.cpp", QtWidgetsCFlags).}
 
 
 type QMdiAreaAreaOptionEnum* = distinct cint
@@ -1529,7 +1529,7 @@ proc initStyleOption*(self: gen_qmdiarea_types.QMdiArea, option: gen_qstyleoptio
 proc updateMicroFocus*(self: gen_qmdiarea_types.QMdiArea): void =
   fcQMdiArea_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qmdiarea_types.QMdiArea): void =
+proc createX*(self: gen_qmdiarea_types.QMdiArea): void =
   fcQMdiArea_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qmdiarea_types.QMdiArea): void =

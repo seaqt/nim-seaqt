@@ -1,4 +1,4 @@
-import ./Qt5Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 

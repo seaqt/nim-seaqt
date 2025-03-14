@@ -1,4 +1,4 @@
-import ./Qt5WebKit_libs
+import ./qtwebkit_pkg
 
 {.push raises: [].}
 
@@ -62,7 +62,7 @@ proc fcQWebPluginFactory_tr(s: cstring): struct_miqt_string {.importc: "QWebPlug
 proc fcQWebPluginFactory_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebPluginFactory_trUtf8".}
 proc fcQWebPluginFactory_plugins(self: pointer): struct_miqt_array {.importc: "QWebPluginFactory_plugins".}
 proc fcQWebPluginFactory_refreshPlugins(self: pointer): void {.importc: "QWebPluginFactory_refreshPlugins".}
-proc fcQWebPluginFactory_create(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.importc: "QWebPluginFactory_create".}
+proc fcQWebPluginFactory_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.importc: "QWebPluginFactory_create".}
 proc fcQWebPluginFactory_extension(self: pointer, extension: cint, option: pointer, output: pointer): bool {.importc: "QWebPluginFactory_extension".}
 proc fcQWebPluginFactory_supportsExtension(self: pointer, extension: cint): bool {.importc: "QWebPluginFactory_supportsExtension".}
 proc fcQWebPluginFactory_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebPluginFactory_tr2".}
@@ -78,7 +78,7 @@ type cQWebPluginFactoryVTable {.pure.} = object
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   plugins*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
   refreshPlugins*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  create*: proc(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  createX*: proc(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
   extension*: proc(self: pointer, extension: cint, option: pointer, output: pointer): bool {.cdecl, raises: [], gcsafe.}
   supportsExtension*: proc(self: pointer, extension: cint): bool {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -148,7 +148,7 @@ proc plugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): seq[gen_qweb
 proc refreshPlugins*(self: gen_qwebpluginfactory_types.QWebPluginFactory): void =
   fcQWebPluginFactory_refreshPlugins(self.h)
 
-proc create*(self: gen_qwebpluginfactory_types.QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject =
+proc createX*(self: gen_qwebpluginfactory_types.QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject =
   var argumentNames_CArray = newSeq[struct_miqt_string](len(argumentNames))
   for i in 0..<len(argumentNames):
     argumentNames_CArray[i] = struct_miqt_string(data: if len(argumentNames[i]) > 0: addr argumentNames[i][0] else: nil, len: csize_t(len(argumentNames[i])))
@@ -157,7 +157,7 @@ proc create*(self: gen_qwebpluginfactory_types.QWebPluginFactory, mimeType: open
   for i in 0..<len(argumentValues):
     argumentValues_CArray[i] = struct_miqt_string(data: if len(argumentValues[i]) > 0: addr argumentValues[i][0] else: nil, len: csize_t(len(argumentValues[i])))
 
-  gen_qobject_types.QObject(h: fcQWebPluginFactory_create(self.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), param2.h, struct_miqt_array(len: csize_t(len(argumentNames)), data: if len(argumentNames) == 0: nil else: addr(argumentNames_CArray[0])), struct_miqt_array(len: csize_t(len(argumentValues)), data: if len(argumentValues) == 0: nil else: addr(argumentValues_CArray[0]))), owned: false)
+  gen_qobject_types.QObject(h: fcQWebPluginFactory_createX(self.h, struct_miqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), param2.h, struct_miqt_array(len: csize_t(len(argumentNames)), data: if len(argumentNames) == 0: nil else: addr(argumentNames_CArray[0])), struct_miqt_array(len: csize_t(len(argumentValues)), data: if len(argumentValues) == 0: nil else: addr(argumentValues_CArray[0]))), owned: false)
 
 proc extension*(self: gen_qwebpluginfactory_types.QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool =
   fcQWebPluginFactory_extension(self.h, cint(extension), option.h, output.h)
@@ -194,7 +194,7 @@ type QWebPluginFactorymetacastProc* = proc(self: QWebPluginFactory, param1: cstr
 type QWebPluginFactorymetacallProc* = proc(self: QWebPluginFactory, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QWebPluginFactorypluginsProc* = proc(self: QWebPluginFactory): seq[gen_qwebpluginfactory_types.QWebPluginFactoryPlugin] {.raises: [], gcsafe.}
 type QWebPluginFactoryrefreshPluginsProc* = proc(self: QWebPluginFactory): void {.raises: [], gcsafe.}
-type QWebPluginFactorycreateProc* = proc(self: QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QWebPluginFactorycreateXProc* = proc(self: QWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QWebPluginFactoryextensionProc* = proc(self: QWebPluginFactory, extension: cint, option: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionOption, output: gen_qwebpluginfactory_types.QWebPluginFactoryExtensionReturn): bool {.raises: [], gcsafe.}
 type QWebPluginFactorysupportsExtensionProc* = proc(self: QWebPluginFactory, extension: cint): bool {.raises: [], gcsafe.}
 type QWebPluginFactoryeventProc* = proc(self: QWebPluginFactory, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -211,7 +211,7 @@ type QWebPluginFactoryVTable* {.inheritable, pure.} = object
   metacall*: QWebPluginFactorymetacallProc
   plugins*: QWebPluginFactorypluginsProc
   refreshPlugins*: QWebPluginFactoryrefreshPluginsProc
-  create*: QWebPluginFactorycreateProc
+  createX*: QWebPluginFactorycreateXProc
   extension*: QWebPluginFactoryextensionProc
   supportsExtension*: QWebPluginFactorysupportsExtensionProc
   event*: QWebPluginFactoryeventProc
@@ -276,7 +276,7 @@ proc cQWebPluginFactory_vtable_callback_refreshPlugins(self: pointer): void {.cd
   let self = QWebPluginFactory(h: self)
   vtbl[].refreshPlugins(self)
 
-proc cQWebPluginFactory_vtable_callback_create(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
+proc cQWebPluginFactory_vtable_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebPluginFactoryVTable](fcQWebPluginFactory_vdata(self))
   let self = QWebPluginFactory(h: self)
   let vmimeType_ms = mimeType
@@ -304,7 +304,7 @@ proc cQWebPluginFactory_vtable_callback_create(self: pointer, mimeType: struct_m
     vargumentValuesx_ret[i] = vargumentValues_lvx_ret
   c_free(vargumentValues_ma.data)
   let slotval4 = vargumentValuesx_ret
-  var virtualReturn = vtbl[].create(self, slotval1, slotval2, slotval3, slotval4)
+  var virtualReturn = vtbl[].createX(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -448,9 +448,9 @@ proc cQWebPluginFactory_method_callback_refreshPlugins(self: pointer): void {.cd
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   inst.refreshPlugins()
 
-method create*(self: VirtualQWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.base.} =
+method createX*(self: VirtualQWebPluginFactory, mimeType: openArray[char], param2: gen_qurl_types.QUrl, argumentNames: openArray[string], argumentValues: openArray[string]): gen_qobject_types.QObject {.base.} =
   raiseAssert("missing implementation of QWebPluginFactory_virtualbase_create")
-proc cQWebPluginFactory_method_callback_create(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
+proc cQWebPluginFactory_method_callback_createX(self: pointer, mimeType: struct_miqt_string, param2: pointer, argumentNames: struct_miqt_array, argumentValues: struct_miqt_array): pointer {.cdecl.} =
   let inst = cast[VirtualQWebPluginFactory](fcQWebPluginFactory_vdata(self))
   let vmimeType_ms = mimeType
   let vmimeTypex_ret = string.fromBytes(vmimeType_ms)
@@ -477,7 +477,7 @@ proc cQWebPluginFactory_method_callback_create(self: pointer, mimeType: struct_m
     vargumentValuesx_ret[i] = vargumentValues_lvx_ret
   c_free(vargumentValues_ma.data)
   let slotval4 = vargumentValuesx_ret
-  var virtualReturn = inst.create(slotval1, slotval2, slotval3, slotval4)
+  var virtualReturn = inst.createX(slotval1, slotval2, slotval3, slotval4)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -582,8 +582,8 @@ proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     vtbl[].vtbl.plugins = cQWebPluginFactory_vtable_callback_plugins
   if not isNil(vtbl[].refreshPlugins):
     vtbl[].vtbl.refreshPlugins = cQWebPluginFactory_vtable_callback_refreshPlugins
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQWebPluginFactory_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQWebPluginFactory_vtable_callback_createX
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = cQWebPluginFactory_vtable_callback_extension
   if not isNil(vtbl[].supportsExtension):
@@ -622,8 +622,8 @@ proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     vtbl[].vtbl.plugins = cQWebPluginFactory_vtable_callback_plugins
   if not isNil(vtbl[].refreshPlugins):
     vtbl[].vtbl.refreshPlugins = cQWebPluginFactory_vtable_callback_refreshPlugins
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQWebPluginFactory_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQWebPluginFactory_vtable_callback_createX
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = cQWebPluginFactory_vtable_callback_extension
   if not isNil(vtbl[].supportsExtension):
@@ -654,7 +654,7 @@ const cQWebPluginFactory_mvtbl = cQWebPluginFactoryVTable(
   metacall: cQWebPluginFactory_method_callback_metacall,
   plugins: cQWebPluginFactory_method_callback_plugins,
   refreshPlugins: cQWebPluginFactory_method_callback_refreshPlugins,
-  create: cQWebPluginFactory_method_callback_create,
+  createX: cQWebPluginFactory_method_callback_createX,
   extension: cQWebPluginFactory_method_callback_extension,
   supportsExtension: cQWebPluginFactory_method_callback_supportsExtension,
   event: cQWebPluginFactory_method_callback_event,

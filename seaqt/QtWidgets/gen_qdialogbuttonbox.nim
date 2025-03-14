@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qdialogbuttonbox.cpp", cflags).}
+
+{.compile("gen_qdialogbuttonbox.cpp", QtWidgetsCFlags).}
 
 
 type QDialogButtonBoxButtonRoleEnum* = distinct cint
@@ -1428,7 +1428,7 @@ proc cQDialogButtonBox_method_callback_disconnectNotify(self: pointer, signal: p
 proc updateMicroFocus*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
+proc createX*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =

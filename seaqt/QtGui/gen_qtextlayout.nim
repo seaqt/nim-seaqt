@@ -1,4 +1,4 @@
-import ./Qt5Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -96,7 +96,7 @@ proc fcQTextInlineObject_new(): ptr cQTextInlineObject {.importc: "QTextInlineOb
 proc fcQTextLayout_setFont(self: pointer, f: pointer): void {.importc: "QTextLayout_setFont".}
 proc fcQTextLayout_font(self: pointer): pointer {.importc: "QTextLayout_font".}
 proc fcQTextLayout_setRawFont(self: pointer, rawFont: pointer): void {.importc: "QTextLayout_setRawFont".}
-proc fcQTextLayout_setText(self: pointer, string: struct_miqt_string): void {.importc: "QTextLayout_setText".}
+proc fcQTextLayout_setText(self: pointer, stringVal: struct_miqt_string): void {.importc: "QTextLayout_setText".}
 proc fcQTextLayout_text(self: pointer): struct_miqt_string {.importc: "QTextLayout_text".}
 proc fcQTextLayout_setTextOption(self: pointer, option: pointer): void {.importc: "QTextLayout_setTextOption".}
 proc fcQTextLayout_textOption(self: pointer): pointer {.importc: "QTextLayout_textOption".}
@@ -232,8 +232,8 @@ proc font*(self: gen_qtextlayout_types.QTextLayout): gen_qfont_types.QFont =
 proc setRawFont*(self: gen_qtextlayout_types.QTextLayout, rawFont: gen_qrawfont_types.QRawFont): void =
   fcQTextLayout_setRawFont(self.h, rawFont.h)
 
-proc setText*(self: gen_qtextlayout_types.QTextLayout, string: openArray[char]): void =
-  fcQTextLayout_setText(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))))
+proc setText*(self: gen_qtextlayout_types.QTextLayout, stringVal: openArray[char]): void =
+  fcQTextLayout_setText(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))))
 
 proc text*(self: gen_qtextlayout_types.QTextLayout): string =
   let v_ms = fcQTextLayout_text(self.h)

@@ -13,8 +13,9 @@ type QQmlContextPropertyPair* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlcontext.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlcontext.cpp", QtQmlCFlags).}
 
 proc fcQQmlContextPropertyPair_delete(self: pointer) {.importc: "QQmlContext__PropertyPair_delete".}
 proc `=destroy`(self: var QQmlContextPropertyPair) =

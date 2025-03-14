@@ -2,8 +2,9 @@ type QQmlError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlerror.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlerror.cpp", QtQmlCFlags).}
 
 proc fcQQmlError_delete(self: pointer) {.importc: "QQmlError_delete".}
 proc `=destroy`(self: var QQmlError) =

@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qabstractitemdelegate.cpp", cflags).}
+
+{.compile("gen_qabstractitemdelegate.cpp", QtWidgetsCFlags).}
 
 
 type QAbstractItemDelegateEndEditHintEnum* = distinct cint

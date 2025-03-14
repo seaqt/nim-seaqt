@@ -2,8 +2,9 @@ type QLatin1Char* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qchar.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qchar.cpp", QtCoreCFlags).}
 
 proc fcQLatin1Char_delete(self: pointer) {.importc: "QLatin1Char_delete".}
 proc `=destroy`(self: var QLatin1Char) =

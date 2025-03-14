@@ -2,8 +2,9 @@ type QQmlAbstractUrlInterceptor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlabstracturlinterceptor.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlabstracturlinterceptor.cpp", QtQmlCFlags).}
 
 proc fcQQmlAbstractUrlInterceptor_delete(self: pointer) {.importc: "QQmlAbstractUrlInterceptor_delete".}
 proc `=destroy`(self: var QQmlAbstractUrlInterceptor) =

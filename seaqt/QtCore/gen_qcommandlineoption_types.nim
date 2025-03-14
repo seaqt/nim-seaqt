@@ -2,8 +2,9 @@ type QCommandLineOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qcommandlineoption.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcommandlineoption.cpp", QtCoreCFlags).}
 
 proc fcQCommandLineOption_delete(self: pointer) {.importc: "QCommandLineOption_delete".}
 proc `=destroy`(self: var QCommandLineOption) =

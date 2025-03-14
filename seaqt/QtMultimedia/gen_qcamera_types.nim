@@ -13,8 +13,9 @@ type QCameraFrameRateRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qcamera.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qcamera.cpp", QtMultimediaCFlags).}
 
 proc fcQCameraFrameRateRange_delete(self: pointer) {.importc: "QCamera__FrameRateRange_delete".}
 proc `=destroy`(self: var QCameraFrameRateRange) =

@@ -2,8 +2,9 @@ type QMetaMethod* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qmetaobject.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmetaobject.cpp", QtCoreCFlags).}
 
 proc fcQMetaMethod_delete(self: pointer) {.importc: "QMetaMethod_delete".}
 proc `=destroy`(self: var QMetaMethod) =

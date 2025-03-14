@@ -1,4 +1,4 @@
-import ./Qt5WebKit_libs
+import ./qtwebkit_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebhistoryinterface.cpp", cflags).}
+
+{.compile("gen_qwebhistoryinterface.cpp", QtWebKitCFlags).}
 
 
 import ./gen_qwebhistoryinterface_types

@@ -2,8 +2,9 @@ type QQmlScriptString* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlscriptstring.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlscriptstring.cpp", QtQmlCFlags).}
 
 proc fcQQmlScriptString_delete(self: pointer) {.importc: "QQmlScriptString_delete".}
 proc `=destroy`(self: var QQmlScriptString) =

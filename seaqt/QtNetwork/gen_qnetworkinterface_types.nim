@@ -2,8 +2,9 @@ type QNetworkAddressEntry* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qnetworkinterface.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qnetworkinterface.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkAddressEntry_delete(self: pointer) {.importc: "QNetworkAddressEntry_delete".}
 proc `=destroy`(self: var QNetworkAddressEntry) =

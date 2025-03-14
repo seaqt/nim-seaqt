@@ -269,8 +269,9 @@ type QPointingDeviceUniqueId* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qevent.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qevent.cpp", QtGuiCFlags).}
 
 proc fcQPointingDeviceUniqueId_delete(self: pointer) {.importc: "QPointingDeviceUniqueId_delete".}
 proc `=destroy`(self: var QPointingDeviceUniqueId) =

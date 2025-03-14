@@ -2,8 +2,9 @@ type QCameraInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qcamerainfo.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qcamerainfo.cpp", QtMultimediaCFlags).}
 
 proc fcQCameraInfo_delete(self: pointer) {.importc: "QCameraInfo_delete".}
 proc `=destroy`(self: var QCameraInfo) =

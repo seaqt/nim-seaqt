@@ -2,8 +2,9 @@ type QAudioEncoderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qmediaencodersettings.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qmediaencodersettings.cpp", QtMultimediaCFlags).}
 
 proc fcQAudioEncoderSettings_delete(self: pointer) {.importc: "QAudioEncoderSettings_delete".}
 proc `=destroy`(self: var QAudioEncoderSettings) =

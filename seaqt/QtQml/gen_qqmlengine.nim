@@ -1,4 +1,4 @@
-import ./Qt5Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 

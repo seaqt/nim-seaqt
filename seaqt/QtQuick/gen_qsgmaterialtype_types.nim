@@ -2,8 +2,9 @@ type QSGMaterialType* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qsgmaterialtype.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgmaterialtype.cpp", QtQuickCFlags).}
 
 proc fcQSGMaterialType_delete(self: pointer) {.importc: "QSGMaterialType_delete".}
 proc `=destroy`(self: var QSGMaterialType) =

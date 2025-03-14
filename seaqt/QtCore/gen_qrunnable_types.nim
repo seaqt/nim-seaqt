@@ -2,8 +2,9 @@ type QRunnable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qrunnable.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qrunnable.cpp", QtCoreCFlags).}
 
 proc fcQRunnable_delete(self: pointer) {.importc: "QRunnable_delete".}
 proc `=destroy`(self: var QRunnable) =

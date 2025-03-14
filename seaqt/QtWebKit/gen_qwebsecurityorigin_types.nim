@@ -2,8 +2,9 @@ type QWebSecurityOrigin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebsecurityorigin.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebsecurityorigin.cpp", QtWebKitCFlags).}
 
 proc fcQWebSecurityOrigin_delete(self: pointer) {.importc: "QWebSecurityOrigin_delete".}
 proc `=destroy`(self: var QWebSecurityOrigin) =

@@ -2,8 +2,9 @@ type QRegularExpression* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qregularexpression.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qregularexpression.cpp", QtCoreCFlags).}
 
 proc fcQRegularExpression_delete(self: pointer) {.importc: "QRegularExpression_delete".}
 proc `=destroy`(self: var QRegularExpression) =

@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -242,7 +242,7 @@ proc fcQVariant_new13(f: float32): ptr cQVariant {.importc: "QVariant_new13".}
 proc fcQVariant_new14(str: cstring): ptr cQVariant {.importc: "QVariant_new14".}
 proc fcQVariant_new15(bytearray: struct_miqt_string): ptr cQVariant {.importc: "QVariant_new15".}
 proc fcQVariant_new16(bitarray: pointer): ptr cQVariant {.importc: "QVariant_new16".}
-proc fcQVariant_new17(string: struct_miqt_string): ptr cQVariant {.importc: "QVariant_new17".}
+proc fcQVariant_new17(stringVal: struct_miqt_string): ptr cQVariant {.importc: "QVariant_new17".}
 proc fcQVariant_new18(stringlist: struct_miqt_array): ptr cQVariant {.importc: "QVariant_new18".}
 proc fcQVariant_new19(qchar: pointer): ptr cQVariant {.importc: "QVariant_new19".}
 proc fcQVariant_new20(date: pointer): ptr cQVariant {.importc: "QVariant_new20".}
@@ -559,7 +559,7 @@ proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h), owned: true)
 
-proc create*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
+proc createX*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
   fcQVariant_protectedbase_create(self.h, typeVal, copy)
 
 proc cmp*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): bool =
@@ -635,8 +635,8 @@ proc create*(T: type gen_qvariant_types.QVariant,
   gen_qvariant_types.QVariant(h: fcQVariant_new16(bitarray.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
-    string: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+    stringVal: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     stringlist: openArray[string]): gen_qvariant_types.QVariant =

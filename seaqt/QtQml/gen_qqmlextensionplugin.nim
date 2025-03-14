@@ -1,4 +1,4 @@
-import ./Qt5Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlextensionplugin.cpp", cflags).}
+
+{.compile("gen_qqmlextensionplugin.cpp", QtQmlCFlags).}
 
 
 import ./gen_qqmlextensionplugin_types

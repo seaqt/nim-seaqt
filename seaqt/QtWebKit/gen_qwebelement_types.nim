@@ -2,8 +2,9 @@ type QWebElement* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebelement.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebelement.cpp", QtWebKitCFlags).}
 
 proc fcQWebElement_delete(self: pointer) {.importc: "QWebElement_delete".}
 proc `=destroy`(self: var QWebElement) =

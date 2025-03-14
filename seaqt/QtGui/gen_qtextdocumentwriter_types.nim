@@ -2,8 +2,9 @@ type QTextDocumentWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qtextdocumentwriter.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextdocumentwriter.cpp", QtGuiCFlags).}
 
 proc fcQTextDocumentWriter_delete(self: pointer) {.importc: "QTextDocumentWriter_delete".}
 proc `=destroy`(self: var QTextDocumentWriter) =

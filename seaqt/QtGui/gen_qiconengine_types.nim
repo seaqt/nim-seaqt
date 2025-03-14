@@ -2,8 +2,9 @@ type QIconEngine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qiconengine.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qiconengine.cpp", QtGuiCFlags).}
 
 proc fcQIconEngine_delete(self: pointer) {.importc: "QIconEngine_delete".}
 proc `=destroy`(self: var QIconEngine) =

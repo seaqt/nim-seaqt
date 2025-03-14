@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qinputdialog.cpp", cflags).}
+
+{.compile("gen_qinputdialog.cpp", QtWidgetsCFlags).}
 
 
 type QInputDialogInputDialogOptionEnum* = distinct cint
@@ -1883,7 +1883,7 @@ proc adjustPosition*(self: gen_qinputdialog_types.QInputDialog, param1: gen_qwid
 proc updateMicroFocus*(self: gen_qinputdialog_types.QInputDialog): void =
   fcQInputDialog_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qinputdialog_types.QInputDialog): void =
+proc createX*(self: gen_qinputdialog_types.QInputDialog): void =
   fcQInputDialog_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qinputdialog_types.QInputDialog): void =

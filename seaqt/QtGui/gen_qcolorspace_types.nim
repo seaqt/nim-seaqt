@@ -2,8 +2,9 @@ type QColorSpace* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qcolorspace.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qcolorspace.cpp", QtGuiCFlags).}
 
 proc fcQColorSpace_delete(self: pointer) {.importc: "QColorSpace_delete".}
 proc `=destroy`(self: var QColorSpace) =

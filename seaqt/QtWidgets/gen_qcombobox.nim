@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qcombobox.cpp", cflags).}
+
+{.compile("gen_qcombobox.cpp", QtWidgetsCFlags).}
 
 
 type QComboBoxInsertPolicyEnum* = distinct cint
@@ -1883,7 +1883,7 @@ proc initStyleOption*(self: gen_qcombobox_types.QComboBox, option: gen_qstyleopt
 proc updateMicroFocus*(self: gen_qcombobox_types.QComboBox): void =
   fcQComboBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qcombobox_types.QComboBox): void =
+proc createX*(self: gen_qcombobox_types.QComboBox): void =
   fcQComboBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qcombobox_types.QComboBox): void =

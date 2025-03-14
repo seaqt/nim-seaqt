@@ -22,8 +22,9 @@ type QQuickItemItemChangeData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qquickitem.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qquickitem.cpp", QtQuickCFlags).}
 
 proc fcQQuickItemItemChangeData_delete(self: pointer) {.importc: "QQuickItem__ItemChangeData_delete".}
 proc `=destroy`(self: var QQuickItemItemChangeData) =

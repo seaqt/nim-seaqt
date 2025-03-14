@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -3994,7 +3994,7 @@ proc initStyleOption*(self: gen_qtreewidget_types.QTreeWidget, option: gen_qstyl
 proc updateMicroFocus*(self: gen_qtreewidget_types.QTreeWidget): void =
   fcQTreeWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtreewidget_types.QTreeWidget): void =
+proc createX*(self: gen_qtreewidget_types.QTreeWidget): void =
   fcQTreeWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtreewidget_types.QTreeWidget): void =

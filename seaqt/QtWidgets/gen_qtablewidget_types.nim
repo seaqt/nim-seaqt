@@ -2,8 +2,9 @@ type QTableWidgetSelectionRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qtablewidget.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qtablewidget.cpp", QtWidgetsCFlags).}
 
 proc fcQTableWidgetSelectionRange_delete(self: pointer) {.importc: "QTableWidgetSelectionRange_delete".}
 proc `=destroy`(self: var QTableWidgetSelectionRange) =

@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -2079,7 +2079,7 @@ proc initStyleOption*(self: gen_qtextedit_types.QTextEdit, option: gen_qstyleopt
 proc updateMicroFocus*(self: gen_qtextedit_types.QTextEdit): void =
   fcQTextEdit_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtextedit_types.QTextEdit): void =
+proc createX*(self: gen_qtextedit_types.QTextEdit): void =
   fcQTextEdit_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtextedit_types.QTextEdit): void =

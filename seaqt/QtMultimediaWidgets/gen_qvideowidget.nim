@@ -1,4 +1,4 @@
-import ./Qt5MultimediaWidgets_libs
+import ./qtmultimediawidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5MultimediaWidgets") & " -fPIC"
-{.compile("gen_qvideowidget.cpp", cflags).}
+
+{.compile("gen_qvideowidget.cpp", QtMultimediaWidgetsCFlags).}
 
 
 import ./gen_qvideowidget_types
@@ -1442,7 +1442,7 @@ proc cQVideoWidget_method_callback_disconnectNotify(self: pointer, signal: point
 proc updateMicroFocus*(self: gen_qvideowidget_types.QVideoWidget): void =
   fcQVideoWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qvideowidget_types.QVideoWidget): void =
+proc createX*(self: gen_qvideowidget_types.QVideoWidget): void =
   fcQVideoWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qvideowidget_types.QVideoWidget): void =

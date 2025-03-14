@@ -2,8 +2,9 @@ type QGenericArgument* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qobjectdefs.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qobjectdefs.cpp", QtCoreCFlags).}
 
 proc fcQGenericArgument_delete(self: pointer) {.importc: "QGenericArgument_delete".}
 proc `=destroy`(self: var QGenericArgument) =

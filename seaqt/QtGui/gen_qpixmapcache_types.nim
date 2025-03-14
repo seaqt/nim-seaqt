@@ -2,8 +2,9 @@ type QPixmapCache* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qpixmapcache.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpixmapcache.cpp", QtGuiCFlags).}
 
 proc fcQPixmapCache_delete(self: pointer) {.importc: "QPixmapCache_delete".}
 proc `=destroy`(self: var QPixmapCache) =

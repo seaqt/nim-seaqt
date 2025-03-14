@@ -2,8 +2,9 @@ type QCborParserError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qcborvalue.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcborvalue.cpp", QtCoreCFlags).}
 
 proc fcQCborParserError_delete(self: pointer) {.importc: "QCborParserError_delete".}
 proc `=destroy`(self: var QCborParserError) =

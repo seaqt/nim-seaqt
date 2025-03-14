@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -179,7 +179,7 @@ proc fcQMetaType_sizeOf(typeVal: cint): cint {.importc: "QMetaType_sizeOf".}
 proc fcQMetaType_typeFlags(typeVal: cint): cint {.importc: "QMetaType_typeFlags".}
 proc fcQMetaType_metaObjectForType(typeVal: cint): pointer {.importc: "QMetaType_metaObjectForType".}
 proc fcQMetaType_isRegistered(typeVal: cint): bool {.importc: "QMetaType_isRegistered".}
-proc fcQMetaType_create(typeVal: cint): pointer {.importc: "QMetaType_create".}
+proc fcQMetaType_createX(typeVal: cint): pointer {.importc: "QMetaType_create".}
 proc fcQMetaType_destroy(typeVal: cint, data: pointer): void {.importc: "QMetaType_destroy".}
 proc fcQMetaType_construct(typeVal: cint, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct".}
 proc fcQMetaType_destruct(typeVal: cint, where: pointer): void {.importc: "QMetaType_destruct".}
@@ -239,8 +239,8 @@ proc metaObjectForType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): g
 proc isRegistered*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): bool =
   fcQMetaType_isRegistered(typeVal)
 
-proc create*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): pointer =
-  fcQMetaType_create(typeVal)
+proc createX*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): pointer =
+  fcQMetaType_createX(typeVal)
 
 proc destroy*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, data: pointer): void =
   fcQMetaType_destroy(typeVal, data)
@@ -281,7 +281,7 @@ proc name*(self: gen_qmetatype_types.QMetaType): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc create*(self: gen_qmetatype_types.QMetaType): pointer =
+proc createX*(self: gen_qmetatype_types.QMetaType): pointer =
   fcQMetaType_create2(self.h)
 
 proc destroy*(self: gen_qmetatype_types.QMetaType, data: pointer): void =
@@ -314,10 +314,10 @@ proc debugStream*(_: type gen_qmetatype_types.QMetaType, dbg: gen_qdebug_types.Q
 proc hasRegisteredConverterFunction*(_: type gen_qmetatype_types.QMetaType, fromTypeId: cint, toTypeId: cint): bool =
   fcQMetaType_hasRegisteredConverterFunction(fromTypeId, toTypeId)
 
-proc create*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, copy: pointer): pointer =
+proc createX*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, copy: pointer): pointer =
   fcQMetaType_create22(typeVal, copy)
 
-proc create*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
+proc createX*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
   fcQMetaType_create1(self.h, copy)
 
 proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: pointer): pointer =

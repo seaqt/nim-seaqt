@@ -2,8 +2,9 @@ type QMargins* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qmargins.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmargins.cpp", QtCoreCFlags).}
 
 proc fcQMargins_delete(self: pointer) {.importc: "QMargins_delete".}
 proc `=destroy`(self: var QMargins) =

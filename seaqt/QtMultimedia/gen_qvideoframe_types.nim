@@ -2,8 +2,9 @@ type QVideoFrame* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qvideoframe.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qvideoframe.cpp", QtMultimediaCFlags).}
 
 proc fcQVideoFrame_delete(self: pointer) {.importc: "QVideoFrame_delete".}
 proc `=destroy`(self: var QVideoFrame) =

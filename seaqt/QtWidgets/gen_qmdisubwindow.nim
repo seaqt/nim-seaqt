@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qmdisubwindow.cpp", cflags).}
+
+{.compile("gen_qmdisubwindow.cpp", QtWidgetsCFlags).}
 
 
 type QMdiSubWindowSubWindowOptionEnum* = distinct cint
@@ -1356,7 +1356,7 @@ proc cQMdiSubWindow_method_callback_disconnectNotify(self: pointer, signal: poin
 proc updateMicroFocus*(self: gen_qmdisubwindow_types.QMdiSubWindow): void =
   fcQMdiSubWindow_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qmdisubwindow_types.QMdiSubWindow): void =
+proc createX*(self: gen_qmdisubwindow_types.QMdiSubWindow): void =
   fcQMdiSubWindow_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qmdisubwindow_types.QMdiSubWindow): void =

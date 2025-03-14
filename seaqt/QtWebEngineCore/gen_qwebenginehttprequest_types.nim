@@ -2,8 +2,9 @@ type QWebEngineHttpRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginehttprequest.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginehttprequest.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineHttpRequest_delete(self: pointer) {.importc: "QWebEngineHttpRequest_delete".}
 proc `=destroy`(self: var QWebEngineHttpRequest) =

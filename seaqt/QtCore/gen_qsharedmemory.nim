@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qsharedmemory.cpp", cflags).}
+
+{.compile("gen_qsharedmemory.cpp", QtCoreCFlags).}
 
 
 type QSharedMemoryAccessModeEnum* = distinct cint
@@ -78,7 +78,7 @@ proc fcQSharedMemory_setKey(self: pointer, key: struct_miqt_string): void {.impo
 proc fcQSharedMemory_key(self: pointer): struct_miqt_string {.importc: "QSharedMemory_key".}
 proc fcQSharedMemory_setNativeKey(self: pointer, key: struct_miqt_string): void {.importc: "QSharedMemory_setNativeKey".}
 proc fcQSharedMemory_nativeKey(self: pointer): struct_miqt_string {.importc: "QSharedMemory_nativeKey".}
-proc fcQSharedMemory_create(self: pointer, size: cint): bool {.importc: "QSharedMemory_create".}
+proc fcQSharedMemory_createX(self: pointer, size: cint): bool {.importc: "QSharedMemory_create".}
 proc fcQSharedMemory_size(self: pointer): cint {.importc: "QSharedMemory_size".}
 proc fcQSharedMemory_attach(self: pointer): bool {.importc: "QSharedMemory_attach".}
 proc fcQSharedMemory_isAttached(self: pointer): bool {.importc: "QSharedMemory_isAttached".}
@@ -169,8 +169,8 @@ proc nativeKey*(self: gen_qsharedmemory_types.QSharedMemory): string =
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qsharedmemory_types.QSharedMemory, size: cint): bool =
-  fcQSharedMemory_create(self.h, size)
+proc createX*(self: gen_qsharedmemory_types.QSharedMemory, size: cint): bool =
+  fcQSharedMemory_createX(self.h, size)
 
 proc size*(self: gen_qsharedmemory_types.QSharedMemory): cint =
   fcQSharedMemory_size(self.h)
@@ -232,7 +232,7 @@ proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qsharedmemory_types.QSharedMemory, size: cint, mode: cint): bool =
+proc createX*(self: gen_qsharedmemory_types.QSharedMemory, size: cint, mode: cint): bool =
   fcQSharedMemory_create2(self.h, size, cint(mode))
 
 proc attach*(self: gen_qsharedmemory_types.QSharedMemory, mode: cint): bool =

@@ -2,8 +2,9 @@ type QSGRendererInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qsgrendererinterface.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgrendererinterface.cpp", QtQuickCFlags).}
 
 proc fcQSGRendererInterface_delete(self: pointer) {.importc: "QSGRendererInterface_delete".}
 proc `=destroy`(self: var QSGRendererInterface) =

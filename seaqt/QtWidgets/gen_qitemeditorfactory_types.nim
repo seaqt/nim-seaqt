@@ -2,8 +2,9 @@ type QItemEditorCreatorBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qitemeditorfactory.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qitemeditorfactory.cpp", QtWidgetsCFlags).}
 
 proc fcQItemEditorCreatorBase_delete(self: pointer) {.importc: "QItemEditorCreatorBase_delete".}
 proc `=destroy`(self: var QItemEditorCreatorBase) =

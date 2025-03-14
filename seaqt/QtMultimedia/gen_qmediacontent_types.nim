@@ -2,8 +2,9 @@ type QMediaContent* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qmediacontent.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qmediacontent.cpp", QtMultimediaCFlags).}
 
 proc fcQMediaContent_delete(self: pointer) {.importc: "QMediaContent_delete".}
 proc `=destroy`(self: var QMediaContent) =

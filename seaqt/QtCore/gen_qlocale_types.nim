@@ -2,8 +2,9 @@ type QLocale* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qlocale.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qlocale.cpp", QtCoreCFlags).}
 
 proc fcQLocale_delete(self: pointer) {.importc: "QLocale_delete".}
 proc `=destroy`(self: var QLocale) =

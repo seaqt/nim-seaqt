@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -88,7 +88,7 @@ proc fcQTextStream_setLocale(self: pointer, locale: pointer): void {.importc: "Q
 proc fcQTextStream_locale(self: pointer): pointer {.importc: "QTextStream_locale".}
 proc fcQTextStream_setDevice(self: pointer, device: pointer): void {.importc: "QTextStream_setDevice".}
 proc fcQTextStream_device(self: pointer): pointer {.importc: "QTextStream_device".}
-proc fcQTextStream_string(self: pointer): struct_miqt_string {.importc: "QTextStream_string".}
+proc fcQTextStream_stringX(self: pointer): struct_miqt_string {.importc: "QTextStream_string".}
 proc fcQTextStream_status(self: pointer): cint {.importc: "QTextStream_status".}
 proc fcQTextStream_setStatus(self: pointer, status: cint): void {.importc: "QTextStream_setStatus".}
 proc fcQTextStream_resetStatus(self: pointer): void {.importc: "QTextStream_resetStatus".}
@@ -185,8 +185,8 @@ proc setDevice*(self: gen_qtextstream_types.QTextStream, device: gen_qiodevice_t
 proc device*(self: gen_qtextstream_types.QTextStream): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQTextStream_device(self.h), owned: false)
 
-proc string*(self: gen_qtextstream_types.QTextStream): string =
-  let v_ms = fcQTextStream_string(self.h)
+proc stringX*(self: gen_qtextstream_types.QTextStream): string =
+  let v_ms = fcQTextStream_stringX(self.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

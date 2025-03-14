@@ -2,8 +2,9 @@ type QCameraFocusZone* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qcamerafocus.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qcamerafocus.cpp", QtMultimediaCFlags).}
 
 proc fcQCameraFocusZone_delete(self: pointer) {.importc: "QCameraFocusZone_delete".}
 proc `=destroy`(self: var QCameraFocusZone) =

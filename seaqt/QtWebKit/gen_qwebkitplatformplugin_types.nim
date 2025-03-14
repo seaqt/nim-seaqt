@@ -2,8 +2,9 @@ type QWebSelectData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebkitplatformplugin.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebkitplatformplugin.cpp", QtWebKitCFlags).}
 
 proc fcQWebSelectData_delete(self: pointer) {.importc: "QWebSelectData_delete".}
 proc `=destroy`(self: var QWebSelectData) =

@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qlineedit.cpp", cflags).}
+
+{.compile("gen_qlineedit.cpp", QtWidgetsCFlags).}
 
 
 type QLineEditActionPositionEnum* = distinct cint
@@ -1719,7 +1719,7 @@ proc cursorRect*(self: gen_qlineedit_types.QLineEdit): gen_qrect_types.QRect =
 proc updateMicroFocus*(self: gen_qlineedit_types.QLineEdit): void =
   fcQLineEdit_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qlineedit_types.QLineEdit): void =
+proc createX*(self: gen_qlineedit_types.QLineEdit): void =
   fcQLineEdit_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qlineedit_types.QLineEdit): void =

@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -3631,7 +3631,7 @@ proc initStyleOption*(self: gen_qtablewidget_types.QTableWidget, option: gen_qst
 proc updateMicroFocus*(self: gen_qtablewidget_types.QTableWidget): void =
   fcQTableWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtablewidget_types.QTableWidget): void =
+proc createX*(self: gen_qtablewidget_types.QTableWidget): void =
   fcQTableWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtablewidget_types.QTableWidget): void =

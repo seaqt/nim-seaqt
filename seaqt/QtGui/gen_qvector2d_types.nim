@@ -2,8 +2,9 @@ type QVector2D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qvector2d.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qvector2d.cpp", QtGuiCFlags).}
 
 proc fcQVector2D_delete(self: pointer) {.importc: "QVector2D_delete".}
 proc `=destroy`(self: var QVector2D) =

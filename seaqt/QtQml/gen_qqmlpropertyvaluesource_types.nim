@@ -2,8 +2,9 @@ type QQmlPropertyValueSource* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
-{.compile("gen_qqmlpropertyvaluesource.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlpropertyvaluesource.cpp", QtQmlCFlags).}
 
 proc fcQQmlPropertyValueSource_delete(self: pointer) {.importc: "QQmlPropertyValueSource_delete".}
 proc `=destroy`(self: var QQmlPropertyValueSource) =

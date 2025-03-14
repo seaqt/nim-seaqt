@@ -2,8 +2,9 @@ type QCameraViewfinderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qcameraviewfindersettings.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qcameraviewfindersettings.cpp", QtMultimediaCFlags).}
 
 proc fcQCameraViewfinderSettings_delete(self: pointer) {.importc: "QCameraViewfinderSettings_delete".}
 proc `=destroy`(self: var QCameraViewfinderSettings) =

@@ -13,8 +13,9 @@ type QSGMaterialRhiShaderRenderState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qsgmaterialrhishader.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgmaterialrhishader.cpp", QtQuickCFlags).}
 
 proc fcQSGMaterialRhiShaderRenderState_delete(self: pointer) {.importc: "QSGMaterialRhiShader__RenderState_delete".}
 proc `=destroy`(self: var QSGMaterialRhiShaderRenderState) =

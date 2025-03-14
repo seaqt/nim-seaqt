@@ -2,8 +2,9 @@ type QIPv6Address* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qhostaddress.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qhostaddress.cpp", QtNetworkCFlags).}
 
 proc fcQIPv6Address_delete(self: pointer) {.importc: "QIPv6Address_delete".}
 proc `=destroy`(self: var QIPv6Address) =

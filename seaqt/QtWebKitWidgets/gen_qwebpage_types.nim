@@ -13,8 +13,9 @@ type QWebPageViewportAttributes* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
-{.compile("gen_qwebpage.cpp", cflags).}
+import ./qtwebkitwidgets_pkg
+
+{.compile("gen_qwebpage.cpp", QtWebKitWidgetsCFlags).}
 
 proc fcQWebPageViewportAttributes_delete(self: pointer) {.importc: "QWebPage__ViewportAttributes_delete".}
 proc `=destroy`(self: var QWebPageViewportAttributes) =

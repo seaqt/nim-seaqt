@@ -2,8 +2,9 @@ type QVideoSurfaceFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qvideosurfaceformat.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qvideosurfaceformat.cpp", QtMultimediaCFlags).}
 
 proc fcQVideoSurfaceFormat_delete(self: pointer) {.importc: "QVideoSurfaceFormat_delete".}
 proc `=destroy`(self: var QVideoSurfaceFormat) =

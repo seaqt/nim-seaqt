@@ -2,8 +2,9 @@ type QStyleOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qstyleoption.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qstyleoption.cpp", QtWidgetsCFlags).}
 
 proc fcQStyleOption_delete(self: pointer) {.importc: "QStyleOption_delete".}
 proc `=destroy`(self: var QStyleOption) =

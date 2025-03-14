@@ -1,4 +1,4 @@
-import ./Qt5Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qinputmethod.cpp", cflags).}
+
+{.compile("gen_qinputmethod.cpp", QtGuiCFlags).}
 
 
 type QInputMethodActionEnum* = distinct cint

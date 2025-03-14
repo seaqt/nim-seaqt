@@ -2,8 +2,9 @@ type QBackingStore* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qbackingstore.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qbackingstore.cpp", QtGuiCFlags).}
 
 proc fcQBackingStore_delete(self: pointer) {.importc: "QBackingStore_delete".}
 proc `=destroy`(self: var QBackingStore) =

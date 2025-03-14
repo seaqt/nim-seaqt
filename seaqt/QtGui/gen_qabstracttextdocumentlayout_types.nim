@@ -13,8 +13,9 @@ type QTextObjectInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qabstracttextdocumentlayout.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qabstracttextdocumentlayout.cpp", QtGuiCFlags).}
 
 proc fcQTextObjectInterface_delete(self: pointer) {.importc: "QTextObjectInterface_delete".}
 proc `=destroy`(self: var QTextObjectInterface) =

@@ -2,8 +2,9 @@ type QNetworkCacheMetaData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qabstractnetworkcache.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qabstractnetworkcache.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkCacheMetaData_delete(self: pointer) {.importc: "QNetworkCacheMetaData_delete".}
 proc `=destroy`(self: var QNetworkCacheMetaData) =

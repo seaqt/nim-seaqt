@@ -2,8 +2,9 @@ type QWebDatabase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
-{.compile("gen_qwebdatabase.cpp", cflags).}
+import ./qtwebkit_pkg
+
+{.compile("gen_qwebdatabase.cpp", QtWebKitCFlags).}
 
 proc fcQWebDatabase_delete(self: pointer) {.importc: "QWebDatabase_delete".}
 proc `=destroy`(self: var QWebDatabase) =

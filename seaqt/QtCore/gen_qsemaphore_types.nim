@@ -2,8 +2,9 @@ type QSemaphore* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qsemaphore.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qsemaphore.cpp", QtCoreCFlags).}
 
 proc fcQSemaphore_delete(self: pointer) {.importc: "QSemaphore_delete".}
 proc `=destroy`(self: var QSemaphore) =

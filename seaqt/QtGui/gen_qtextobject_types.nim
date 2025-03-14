@@ -21,8 +21,9 @@ type QTextFrameLayoutData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qtextobject.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextobject.cpp", QtGuiCFlags).}
 
 proc fcQTextFrameLayoutData_delete(self: pointer) {.importc: "QTextFrameLayoutData_delete".}
 proc `=destroy`(self: var QTextFrameLayoutData) =

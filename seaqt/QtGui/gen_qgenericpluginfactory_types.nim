@@ -2,8 +2,9 @@ type QGenericPluginFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qgenericpluginfactory.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qgenericpluginfactory.cpp", QtGuiCFlags).}
 
 proc fcQGenericPluginFactory_delete(self: pointer) {.importc: "QGenericPluginFactory_delete".}
 proc `=destroy`(self: var QGenericPluginFactory) =

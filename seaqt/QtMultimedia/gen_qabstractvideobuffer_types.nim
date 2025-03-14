@@ -2,8 +2,9 @@ type QAbstractVideoBuffer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qabstractvideobuffer.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qabstractvideobuffer.cpp", QtMultimediaCFlags).}
 
 proc fcQAbstractVideoBuffer_delete(self: pointer) {.importc: "QAbstractVideoBuffer_delete".}
 proc `=destroy`(self: var QAbstractVideoBuffer) =

@@ -2,8 +2,9 @@ type QAudioSystemFactoryInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qaudiosystemplugin.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qaudiosystemplugin.cpp", QtMultimediaCFlags).}
 
 proc fcQAudioSystemFactoryInterface_delete(self: pointer) {.importc: "QAudioSystemFactoryInterface_delete".}
 proc `=destroy`(self: var QAudioSystemFactoryInterface) =

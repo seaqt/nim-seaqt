@@ -2,8 +2,9 @@ type QScrollerProperties* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qscrollerproperties.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qscrollerproperties.cpp", QtWidgetsCFlags).}
 
 proc fcQScrollerProperties_delete(self: pointer) {.importc: "QScrollerProperties_delete".}
 proc `=destroy`(self: var QScrollerProperties) =

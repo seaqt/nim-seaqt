@@ -2,8 +2,9 @@ type QSGGeometry* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qsggeometry.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsggeometry.cpp", QtQuickCFlags).}
 
 proc fcQSGGeometry_delete(self: pointer) {.importc: "QSGGeometry_delete".}
 proc `=destroy`(self: var QSGGeometry) =

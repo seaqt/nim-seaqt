@@ -2,8 +2,9 @@ type QWhatsThis* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qwhatsthis.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qwhatsthis.cpp", QtWidgetsCFlags).}
 
 proc fcQWhatsThis_delete(self: pointer) {.importc: "QWhatsThis_delete".}
 proc `=destroy`(self: var QWhatsThis) =

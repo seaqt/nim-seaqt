@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qslider.cpp", cflags).}
+
+{.compile("gen_qslider.cpp", QtWidgetsCFlags).}
 
 
 type QSliderTickPositionEnum* = distinct cint
@@ -1299,7 +1299,7 @@ proc repeatAction*(self: gen_qslider_types.QSlider): cint =
 proc updateMicroFocus*(self: gen_qslider_types.QSlider): void =
   fcQSlider_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qslider_types.QSlider): void =
+proc createX*(self: gen_qslider_types.QSlider): void =
   fcQSlider_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qslider_types.QSlider): void =

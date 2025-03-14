@@ -2,8 +2,9 @@ type QHostInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qhostinfo.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qhostinfo.cpp", QtNetworkCFlags).}
 
 proc fcQHostInfo_delete(self: pointer) {.importc: "QHostInfo_delete".}
 proc `=destroy`(self: var QHostInfo) =

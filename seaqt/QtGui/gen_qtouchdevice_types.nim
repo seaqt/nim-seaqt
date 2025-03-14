@@ -2,8 +2,9 @@ type QTouchDevice* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qtouchdevice.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtouchdevice.cpp", QtGuiCFlags).}
 
 proc fcQTouchDevice_delete(self: pointer) {.importc: "QTouchDevice_delete".}
 proc `=destroy`(self: var QTouchDevice) =

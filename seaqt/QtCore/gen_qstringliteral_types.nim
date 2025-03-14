@@ -2,8 +2,9 @@ type QStringDataPtr* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qstringliteral.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qstringliteral.cpp", QtCoreCFlags).}
 
 proc fcQStringDataPtr_delete(self: pointer) {.importc: "QStringDataPtr_delete".}
 proc `=destroy`(self: var QStringDataPtr) =

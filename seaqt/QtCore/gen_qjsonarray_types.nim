@@ -2,8 +2,9 @@ type QJsonArray* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qjsonarray.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qjsonarray.cpp", QtCoreCFlags).}
 
 proc fcQJsonArray_delete(self: pointer) {.importc: "QJsonArray_delete".}
 proc `=destroy`(self: var QJsonArray) =

@@ -2,8 +2,9 @@ type QSurfaceFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qsurfaceformat.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qsurfaceformat.cpp", QtGuiCFlags).}
 
 proc fcQSurfaceFormat_delete(self: pointer) {.importc: "QSurfaceFormat_delete".}
 proc `=destroy`(self: var QSurfaceFormat) =

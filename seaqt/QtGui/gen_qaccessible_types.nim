@@ -2,8 +2,9 @@ type QAccessible* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qaccessible.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qaccessible.cpp", QtGuiCFlags).}
 
 proc fcQAccessible_delete(self: pointer) {.importc: "QAccessible_delete".}
 proc `=destroy`(self: var QAccessible) =

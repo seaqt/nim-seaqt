@@ -2,8 +2,9 @@ type QModelIndex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qabstractitemmodel.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qabstractitemmodel.cpp", QtCoreCFlags).}
 
 proc fcQModelIndex_delete(self: pointer) {.importc: "QModelIndex_delete".}
 proc `=destroy`(self: var QModelIndex) =

@@ -1,4 +1,4 @@
-import ./Qt5PrintSupport_libs
+import ./qtprintsupport_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
-{.compile("gen_qprintpreviewwidget.cpp", cflags).}
+
+{.compile("gen_qprintpreviewwidget.cpp", QtPrintSupportCFlags).}
 
 
 type QPrintPreviewWidgetViewModeEnum* = distinct cint
@@ -1384,7 +1384,7 @@ proc cQPrintPreviewWidget_method_callback_disconnectNotify(self: pointer, signal
 proc updateMicroFocus*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget): void =
   fcQPrintPreviewWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget): void =
+proc createX*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget): void =
   fcQPrintPreviewWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget): void =

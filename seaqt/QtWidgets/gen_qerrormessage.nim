@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qerrormessage.cpp", cflags).}
+
+{.compile("gen_qerrormessage.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qerrormessage_types
@@ -1336,7 +1336,7 @@ proc adjustPosition*(self: gen_qerrormessage_types.QErrorMessage, param1: gen_qw
 proc updateMicroFocus*(self: gen_qerrormessage_types.QErrorMessage): void =
   fcQErrorMessage_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qerrormessage_types.QErrorMessage): void =
+proc createX*(self: gen_qerrormessage_types.QErrorMessage): void =
   fcQErrorMessage_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qerrormessage_types.QErrorMessage): void =

@@ -1,4 +1,4 @@
-import ./Qt5Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -83,7 +83,7 @@ type cQXmlStreamWriter*{.exportc: "QXmlStreamWriter", incompleteStruct.} = objec
 proc fcQXmlStreamStringRef_operatorAssign(self: pointer, other: pointer): void {.importc: "QXmlStreamStringRef_operatorAssign".}
 proc fcQXmlStreamStringRef_swap(self: pointer, other: pointer): void {.importc: "QXmlStreamStringRef_swap".}
 proc fcQXmlStreamStringRef_clear(self: pointer): void {.importc: "QXmlStreamStringRef_clear".}
-proc fcQXmlStreamStringRef_string(self: pointer): struct_miqt_string {.importc: "QXmlStreamStringRef_string".}
+proc fcQXmlStreamStringRef_stringX(self: pointer): struct_miqt_string {.importc: "QXmlStreamStringRef_string".}
 proc fcQXmlStreamStringRef_position(self: pointer): cint {.importc: "QXmlStreamStringRef_position".}
 proc fcQXmlStreamStringRef_size(self: pointer): cint {.importc: "QXmlStreamStringRef_size".}
 proc fcQXmlStreamStringRef_new(): ptr cQXmlStreamStringRef {.importc: "QXmlStreamStringRef_new".}
@@ -212,8 +212,8 @@ proc swap*(self: gen_qxmlstream_types.QXmlStreamStringRef, other: gen_qxmlstream
 proc clear*(self: gen_qxmlstream_types.QXmlStreamStringRef): void =
   fcQXmlStreamStringRef_clear(self.h)
 
-proc string*(self: gen_qxmlstream_types.QXmlStreamStringRef): string =
-  let v_ms = fcQXmlStreamStringRef_string(self.h)
+proc stringX*(self: gen_qxmlstream_types.QXmlStreamStringRef): string =
+  let v_ms = fcQXmlStreamStringRef_stringX(self.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

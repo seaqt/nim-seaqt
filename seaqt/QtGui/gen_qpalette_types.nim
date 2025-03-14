@@ -2,8 +2,9 @@ type QPalette* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
-{.compile("gen_qpalette.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpalette.cpp", QtGuiCFlags).}
 
 proc fcQPalette_delete(self: pointer) {.importc: "QPalette_delete".}
 proc `=destroy`(self: var QPalette) =

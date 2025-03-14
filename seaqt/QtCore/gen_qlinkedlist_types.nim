@@ -2,8 +2,9 @@ type QLinkedListData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qlinkedlist.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qlinkedlist.cpp", QtCoreCFlags).}
 
 proc fcQLinkedListData_delete(self: pointer) {.importc: "QLinkedListData_delete".}
 proc `=destroy`(self: var QLinkedListData) =

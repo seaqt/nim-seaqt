@@ -13,8 +13,9 @@ type QWebEngineCookieStoreFilterRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginecookiestore.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginecookiestore.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineCookieStoreFilterRequest_delete(self: pointer) {.importc: "QWebEngineCookieStore__FilterRequest_delete".}
 proc `=destroy`(self: var QWebEngineCookieStoreFilterRequest) =

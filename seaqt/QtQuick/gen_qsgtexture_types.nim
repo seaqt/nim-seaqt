@@ -21,8 +21,9 @@ type QSGTextureNativeTexture* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
-{.compile("gen_qsgtexture.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgtexture.cpp", QtQuickCFlags).}
 
 proc fcQSGTextureNativeTexture_delete(self: pointer) {.importc: "QSGTexture__NativeTexture_delete".}
 proc `=destroy`(self: var QSGTextureNativeTexture) =

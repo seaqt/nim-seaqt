@@ -1,4 +1,4 @@
-import ./Qt5WebKit_libs
+import ./qtwebkit_pkg
 
 {.push raises: [].}
 

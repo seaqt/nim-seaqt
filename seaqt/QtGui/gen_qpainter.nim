@@ -1,4 +1,4 @@
-import ./Qt5Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -389,7 +389,7 @@ proc fcQPainter_redirected2(device: pointer, offset: pointer): pointer {.importc
 proc fcQPainter_new(): ptr cQPainter {.importc: "QPainter_new".}
 proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new2".}
 proc fcQPainter_staticMetaObject(): pointer {.importc: "QPainter_staticMetaObject".}
-proc fcQPainterPixmapFragment_create(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
+proc fcQPainterPixmapFragment_createX(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
 proc fcQPainterPixmapFragment_create3(pos: pointer, sourceRect: pointer, scaleX: float64): pointer {.importc: "QPainter__PixmapFragment_create3".}
 proc fcQPainterPixmapFragment_create4(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64): pointer {.importc: "QPainter__PixmapFragment_create4".}
 proc fcQPainterPixmapFragment_create5(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create5".}
@@ -1163,18 +1163,18 @@ proc create*(T: type gen_qpainter_types.QPainter,
 
 proc staticMetaObject*(_: type gen_qpainter_types.QPainter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPainter_staticMetaObject())
-proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create(pos.h, sourceRect.h), owned: true)
+proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF): gen_qpainter_types.QPainterPixmapFragment =
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createX(pos.h, sourceRect.h), owned: true)
 
-proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64): gen_qpainter_types.QPainterPixmapFragment =
+proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64): gen_qpainter_types.QPainterPixmapFragment =
   gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create3(pos.h, sourceRect.h, scaleX), owned: true)
 
-proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64): gen_qpainter_types.QPainterPixmapFragment =
+proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64): gen_qpainter_types.QPainterPixmapFragment =
   gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create4(pos.h, sourceRect.h, scaleX, scaleY), owned: true)
 
-proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64): gen_qpainter_types.QPainterPixmapFragment =
+proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64): gen_qpainter_types.QPainterPixmapFragment =
   gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create5(pos.h, sourceRect.h, scaleX, scaleY, rotation), owned: true)
 
-proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): gen_qpainter_types.QPainterPixmapFragment =
+proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): gen_qpainter_types.QPainterPixmapFragment =
   gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create6(pos.h, sourceRect.h, scaleX, scaleY, rotation, opacity), owned: true)
 

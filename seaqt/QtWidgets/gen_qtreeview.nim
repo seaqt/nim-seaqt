@@ -1,4 +1,4 @@
-import ./Qt5Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
-{.compile("gen_qtreeview.cpp", cflags).}
+
+{.compile("gen_qtreeview.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qtreeview_types
@@ -2658,7 +2658,7 @@ proc initStyleOption*(self: gen_qtreeview_types.QTreeView, option: gen_qstyleopt
 proc updateMicroFocus*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtreeview_types.QTreeView): void =
+proc createX*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtreeview_types.QTreeView): void =

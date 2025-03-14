@@ -1,4 +1,4 @@
-import ./Qt5Network_libs
+import ./qtnetwork_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qlocalsocket.cpp", cflags).}
+
+{.compile("gen_qlocalsocket.cpp", QtNetworkCFlags).}
 
 
 type QLocalSocketLocalSocketErrorEnum* = distinct cint

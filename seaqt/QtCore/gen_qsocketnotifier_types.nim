@@ -13,8 +13,9 @@ type QSocketDescriptor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
-{.compile("gen_qsocketnotifier.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qsocketnotifier.cpp", QtCoreCFlags).}
 
 proc fcQSocketDescriptor_delete(self: pointer) {.importc: "QSocketDescriptor_delete".}
 proc `=destroy`(self: var QSocketDescriptor) =

@@ -2,8 +2,9 @@ type QNetworkRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
-{.compile("gen_qnetworkrequest.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qnetworkrequest.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkRequest_delete(self: pointer) {.importc: "QNetworkRequest_delete".}
 proc `=destroy`(self: var QNetworkRequest) =

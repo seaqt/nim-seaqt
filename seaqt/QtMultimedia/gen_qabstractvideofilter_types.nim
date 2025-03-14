@@ -2,8 +2,9 @@ type QVideoFilterRunnable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
-{.compile("gen_qabstractvideofilter.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qabstractvideofilter.cpp", QtMultimediaCFlags).}
 
 proc fcQVideoFilterRunnable_delete(self: pointer) {.importc: "QVideoFilterRunnable_delete".}
 proc `=destroy`(self: var QVideoFilterRunnable) =
