@@ -2,8 +2,9 @@ type QToolTip* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qtooltip.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qtooltip.cpp", QtWidgetsCFlags).}
 
 proc fcQToolTip_delete(self: pointer) {.importc: "QToolTip_delete".}
 proc `=destroy`(self: var QToolTip) =

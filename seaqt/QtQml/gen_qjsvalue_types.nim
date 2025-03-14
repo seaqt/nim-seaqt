@@ -2,8 +2,9 @@ type QJSValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qjsvalue.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qjsvalue.cpp", QtQmlCFlags).}
 
 proc fcQJSValue_delete(self: pointer) {.importc: "QJSValue_delete".}
 proc `=destroy`(self: var QJSValue) =

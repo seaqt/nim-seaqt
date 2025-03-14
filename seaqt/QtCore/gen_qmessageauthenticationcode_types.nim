@@ -2,8 +2,9 @@ type QMessageAuthenticationCode* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qmessageauthenticationcode.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmessageauthenticationcode.cpp", QtCoreCFlags).}
 
 proc fcQMessageAuthenticationCode_delete(self: pointer) {.importc: "QMessageAuthenticationCode_delete".}
 proc `=destroy`(self: var QMessageAuthenticationCode) =

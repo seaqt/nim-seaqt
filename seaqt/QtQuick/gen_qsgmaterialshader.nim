@@ -1,4 +1,4 @@
-import ./Qt6Quick_libs
+import ./qtquick_pkg
 
 {.push raises: [].}
 

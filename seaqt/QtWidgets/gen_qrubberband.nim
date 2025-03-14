@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qrubberband.cpp", cflags).}
+
+{.compile("gen_qrubberband.cpp", QtWidgetsCFlags).}
 
 
 type QRubberBandShapeEnum* = distinct cint
@@ -1260,7 +1260,7 @@ proc cQRubberBand_method_callback_disconnectNotify(self: pointer, signal: pointe
 proc updateMicroFocus*(self: gen_qrubberband_types.QRubberBand): void =
   fcQRubberBand_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qrubberband_types.QRubberBand): void =
+proc createX*(self: gen_qrubberband_types.QRubberBand): void =
   fcQRubberBand_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qrubberband_types.QRubberBand): void =

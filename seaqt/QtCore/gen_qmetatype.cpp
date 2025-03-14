@@ -11,11 +11,15 @@ QMetaType* QMetaType_new(int type) {
 	return new QMetaType(static_cast<int>(type));
 }
 
-QMetaType* QMetaType_new2() {
+QMetaType* QMetaType_new2(const void* d) {
+	return new QMetaType(static_cast<const QtPrivate::QMetaTypeInterface*>(d));
+}
+
+QMetaType* QMetaType_new3() {
 	return new QMetaType();
 }
 
-QMetaType* QMetaType_new3(QMetaType* param1) {
+QMetaType* QMetaType_new4(QMetaType* param1) {
 	return new QMetaType(*param1);
 }
 
@@ -224,6 +228,14 @@ void QMetaType_unregisterMutableViewFunction(QMetaType* from, QMetaType* to) {
 
 void QMetaType_unregisterMetaType(QMetaType* type) {
 	QMetaType::unregisterMetaType(*type);
+}
+
+const void* QMetaType_iface(QMetaType* self) {
+	return (const void*) self->iface();
+}
+
+const void* QMetaType_iface2(const QMetaType* self) {
+	return (const void*) self->iface();
 }
 
 void* QMetaType_create22(int type, const void* copy) {

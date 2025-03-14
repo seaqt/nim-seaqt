@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -63,7 +63,7 @@ proc fcQCollator_ignorePunctuation(self: pointer): bool {.importc: "QCollator_ig
 proc fcQCollator_compare(self: pointer, s1: struct_miqt_string, s2: struct_miqt_string): cint {.importc: "QCollator_compare".}
 proc fcQCollator_compare2(self: pointer, s1: pointer, len1: int64, s2: pointer, len2: int64): cint {.importc: "QCollator_compare2".}
 proc fcQCollator_operatorCall(self: pointer, s1: struct_miqt_string, s2: struct_miqt_string): bool {.importc: "QCollator_operatorCall".}
-proc fcQCollator_sortKey(self: pointer, string: struct_miqt_string): pointer {.importc: "QCollator_sortKey".}
+proc fcQCollator_sortKey(self: pointer, stringVal: struct_miqt_string): pointer {.importc: "QCollator_sortKey".}
 proc fcQCollator_new(): ptr cQCollator {.importc: "QCollator_new".}
 proc fcQCollator_new2(locale: pointer): ptr cQCollator {.importc: "QCollator_new2".}
 proc fcQCollator_new3(param1: pointer): ptr cQCollator {.importc: "QCollator_new3".}
@@ -120,8 +120,8 @@ proc compare*(self: gen_qcollator_types.QCollator, s1: gen_qchar_types.QChar, le
 proc operatorCall*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): bool =
   fcQCollator_operatorCall(self.h, struct_miqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_miqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
-proc sortKey*(self: gen_qcollator_types.QCollator, string: openArray[char]): gen_qcollator_types.QCollatorSortKey =
-  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc sortKey*(self: gen_qcollator_types.QCollator, stringVal: openArray[char]): gen_qcollator_types.QCollatorSortKey =
+  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
   gen_qcollator_types.QCollator(h: fcQCollator_new(), owned: true)

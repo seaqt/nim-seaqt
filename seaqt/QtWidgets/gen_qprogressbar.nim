@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qprogressbar.cpp", cflags).}
+
+{.compile("gen_qprogressbar.cpp", QtWidgetsCFlags).}
 
 
 type QProgressBarDirectionEnum* = distinct cint
@@ -1381,7 +1381,7 @@ proc cQProgressBar_method_callback_disconnectNotify(self: pointer, signal: point
 proc updateMicroFocus*(self: gen_qprogressbar_types.QProgressBar): void =
   fcQProgressBar_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qprogressbar_types.QProgressBar): void =
+proc createX*(self: gen_qprogressbar_types.QProgressBar): void =
   fcQProgressBar_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qprogressbar_types.QProgressBar): void =

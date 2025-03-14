@@ -2,8 +2,9 @@ type QRect* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qrect.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qrect.cpp", QtCoreCFlags).}
 
 proc fcQRect_delete(self: pointer) {.importc: "QRect_delete".}
 proc `=destroy`(self: var QRect) =

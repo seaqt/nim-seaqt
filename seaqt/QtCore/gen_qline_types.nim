@@ -2,8 +2,9 @@ type QLine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qline.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qline.cpp", QtCoreCFlags).}
 
 proc fcQLine_delete(self: pointer) {.importc: "QLine_delete".}
 proc `=destroy`(self: var QLine) =

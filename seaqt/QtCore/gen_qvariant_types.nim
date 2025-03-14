@@ -2,8 +2,9 @@ type QVariant* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qvariant.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qvariant.cpp", QtCoreCFlags).}
 
 proc fcQVariant_delete(self: pointer) {.importc: "QVariant_delete".}
 proc `=destroy`(self: var QVariant) =

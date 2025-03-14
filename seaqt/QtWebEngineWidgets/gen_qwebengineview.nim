@@ -1,4 +1,4 @@
-import ./Qt6WebEngineWidgets_libs
+import ./qtwebenginewidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineWidgets") & " -fPIC"
-{.compile("gen_qwebengineview.cpp", cflags).}
+
+{.compile("gen_qwebengineview.cpp", QtWebEngineWidgetsCFlags).}
 
 
 import ./gen_qwebengineview_types
@@ -1675,7 +1675,7 @@ proc cQWebEngineView_method_callback_disconnectNotify(self: pointer, signal: poi
 proc updateMicroFocus*(self: gen_qwebengineview_types.QWebEngineView): void =
   fcQWebEngineView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qwebengineview_types.QWebEngineView): void =
+proc createX*(self: gen_qwebengineview_types.QWebEngineView): void =
   fcQWebEngineView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qwebengineview_types.QWebEngineView): void =

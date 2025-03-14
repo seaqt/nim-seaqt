@@ -1,4 +1,4 @@
-import ./Qt6WebChannel_libs
+import ./qtwebchannel_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebChannel") & " -fPIC"
-{.compile("gen_qwebchannel.cpp", cflags).}
+
+{.compile("gen_qwebchannel.cpp", QtWebChannelCFlags).}
 
 
 import ./gen_qwebchannel_types

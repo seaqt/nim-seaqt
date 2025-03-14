@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qdockwidget.cpp", cflags).}
+
+{.compile("gen_qdockwidget.cpp", QtWidgetsCFlags).}
 
 
 type QDockWidgetDockWidgetFeatureEnum* = distinct cint
@@ -1399,7 +1399,7 @@ proc cQDockWidget_method_callback_disconnectNotify(self: pointer, signal: pointe
 proc updateMicroFocus*(self: gen_qdockwidget_types.QDockWidget): void =
   fcQDockWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qdockwidget_types.QDockWidget): void =
+proc createX*(self: gen_qdockwidget_types.QDockWidget): void =
   fcQDockWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qdockwidget_types.QDockWidget): void =

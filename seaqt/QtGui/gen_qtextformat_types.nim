@@ -2,8 +2,9 @@ type QTextLength* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtextformat.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextformat.cpp", QtGuiCFlags).}
 
 proc fcQTextLength_delete(self: pointer) {.importc: "QTextLength_delete".}
 proc `=destroy`(self: var QTextLength) =

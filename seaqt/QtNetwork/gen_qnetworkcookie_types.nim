@@ -2,8 +2,9 @@ type QNetworkCookie* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qnetworkcookie.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qnetworkcookie.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkCookie_delete(self: pointer) {.importc: "QNetworkCookie_delete".}
 proc `=destroy`(self: var QNetworkCookie) =

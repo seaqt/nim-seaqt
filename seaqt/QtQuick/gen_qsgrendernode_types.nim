@@ -13,8 +13,9 @@ type QSGRenderNodeRenderState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qsgrendernode.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgrendernode.cpp", QtQuickCFlags).}
 
 proc fcQSGRenderNodeRenderState_delete(self: pointer) {.importc: "QSGRenderNode__RenderState_delete".}
 proc `=destroy`(self: var QSGRenderNodeRenderState) =

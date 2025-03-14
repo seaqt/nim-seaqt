@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -62,7 +62,7 @@ type cQTextBoundaryFinder*{.exportc: "QTextBoundaryFinder", incompleteStruct.} =
 proc fcQTextBoundaryFinder_operatorAssign(self: pointer, other: pointer): void {.importc: "QTextBoundaryFinder_operatorAssign".}
 proc fcQTextBoundaryFinder_isValid(self: pointer): bool {.importc: "QTextBoundaryFinder_isValid".}
 proc fcQTextBoundaryFinder_typeX(self: pointer): cint {.importc: "QTextBoundaryFinder_type".}
-proc fcQTextBoundaryFinder_string(self: pointer): struct_miqt_string {.importc: "QTextBoundaryFinder_string".}
+proc fcQTextBoundaryFinder_stringX(self: pointer): struct_miqt_string {.importc: "QTextBoundaryFinder_string".}
 proc fcQTextBoundaryFinder_toStart(self: pointer): void {.importc: "QTextBoundaryFinder_toStart".}
 proc fcQTextBoundaryFinder_toEnd(self: pointer): void {.importc: "QTextBoundaryFinder_toEnd".}
 proc fcQTextBoundaryFinder_position(self: pointer): int64 {.importc: "QTextBoundaryFinder_position".}
@@ -73,7 +73,7 @@ proc fcQTextBoundaryFinder_isAtBoundary(self: pointer): bool {.importc: "QTextBo
 proc fcQTextBoundaryFinder_boundaryReasons(self: pointer): cint {.importc: "QTextBoundaryFinder_boundaryReasons".}
 proc fcQTextBoundaryFinder_new(): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new".}
 proc fcQTextBoundaryFinder_new2(other: pointer): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new2".}
-proc fcQTextBoundaryFinder_new3(typeVal: cint, string: struct_miqt_string): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new3".}
+proc fcQTextBoundaryFinder_new3(typeVal: cint, stringVal: struct_miqt_string): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new3".}
 proc fcQTextBoundaryFinder_new4(typeVal: cint, chars: pointer, length: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new4".}
 proc fcQTextBoundaryFinder_new5(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new5".}
 proc fcQTextBoundaryFinder_new6(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8, bufferSize: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new6".}
@@ -87,8 +87,8 @@ proc isValid*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder): bool =
 proc typeX*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder): cint =
   cint(fcQTextBoundaryFinder_typeX(self.h))
 
-proc string*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder): string =
-  let v_ms = fcQTextBoundaryFinder_string(self.h)
+proc stringX*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder): string =
+  let v_ms = fcQTextBoundaryFinder_stringX(self.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -125,8 +125,8 @@ proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
   gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new2(other.h), owned: true)
 
 proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
-    typeVal: cint, string: openArray[char]): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new3(cint(typeVal), struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+    typeVal: cint, stringVal: openArray[char]): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new3(cint(typeVal), struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
     typeVal: cint, chars: gen_qchar_types.QChar, length: int64): gen_qtextboundaryfinder_types.QTextBoundaryFinder =

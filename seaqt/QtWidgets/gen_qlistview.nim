@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qlistview.cpp", cflags).}
+
+{.compile("gen_qlistview.cpp", QtWidgetsCFlags).}
 
 
 type QListViewMovementEnum* = distinct cint
@@ -2497,7 +2497,7 @@ proc drawFrame*(self: gen_qlistview_types.QListView, param1: gen_qpainter_types.
 proc updateMicroFocus*(self: gen_qlistview_types.QListView): void =
   fcQListView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qlistview_types.QListView): void =
+proc createX*(self: gen_qlistview_types.QListView): void =
   fcQListView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qlistview_types.QListView): void =

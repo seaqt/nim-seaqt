@@ -2,8 +2,9 @@ type QPixelFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qpixelformat.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qpixelformat.cpp", QtGuiCFlags).}
 
 proc fcQPixelFormat_delete(self: pointer) {.importc: "QPixelFormat_delete".}
 proc `=destroy`(self: var QPixelFormat) =

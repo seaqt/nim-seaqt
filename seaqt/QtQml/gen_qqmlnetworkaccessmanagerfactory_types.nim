@@ -2,8 +2,9 @@ type QQmlNetworkAccessManagerFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qqmlnetworkaccessmanagerfactory.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmlnetworkaccessmanagerfactory.cpp", QtQmlCFlags).}
 
 proc fcQQmlNetworkAccessManagerFactory_delete(self: pointer) {.importc: "QQmlNetworkAccessManagerFactory_delete".}
 proc `=destroy`(self: var QQmlNetworkAccessManagerFactory) =

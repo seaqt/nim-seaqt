@@ -2,8 +2,9 @@ type QStaticText* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qstatictext.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qstatictext.cpp", QtGuiCFlags).}
 
 proc fcQStaticText_delete(self: pointer) {.importc: "QStaticText_delete".}
 proc `=destroy`(self: var QStaticText) =

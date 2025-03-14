@@ -1,4 +1,4 @@
-import ./Qt6Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 
@@ -80,7 +80,7 @@ proc fcQJSPrimitiveValue_new3(null: pointer): ptr cQJSPrimitiveValue {.importc: 
 proc fcQJSPrimitiveValue_new4(value: bool): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new4".}
 proc fcQJSPrimitiveValue_new5(value: cint): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new5".}
 proc fcQJSPrimitiveValue_new6(value: float64): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new6".}
-proc fcQJSPrimitiveValue_new7(string: struct_miqt_string): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new7".}
+proc fcQJSPrimitiveValue_new7(stringVal: struct_miqt_string): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new7".}
 proc fcQJSPrimitiveValue_new8(typeVal: pointer, value: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new8".}
 proc fcQJSPrimitiveValue_new9(variant: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new9".}
 proc fcQJSPrimitiveValue_new10(param1: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new10".}
@@ -168,8 +168,8 @@ proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
   gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new6(value), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
-    string: openArray[char]): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new7(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+    stringVal: openArray[char]): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new7(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     typeVal: gen_qmetatype_types.QMetaType, value: pointer): gen_qjsprimitivevalue_types.QJSPrimitiveValue =

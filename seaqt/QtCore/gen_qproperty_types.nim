@@ -2,8 +2,9 @@ type QPropertyBindingSourceLocation* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qproperty.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qproperty.cpp", QtCoreCFlags).}
 
 proc fcQPropertyBindingSourceLocation_delete(self: pointer) {.importc: "QPropertyBindingSourceLocation_delete".}
 proc `=destroy`(self: var QPropertyBindingSourceLocation) =

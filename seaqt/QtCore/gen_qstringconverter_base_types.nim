@@ -14,8 +14,9 @@ type QStringConverterBaseState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qstringconverter_base.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qstringconverter_base.cpp", QtCoreCFlags).}
 
 proc fcQStringConverterBaseState_delete(self: pointer) {.importc: "QStringConverterBase__State_delete".}
 proc `=destroy`(self: var QStringConverterBaseState) =

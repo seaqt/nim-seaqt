@@ -1,4 +1,4 @@
-import ./Qt6Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qjsengine.cpp", cflags).}
+
+{.compile("gen_qjsengine.cpp", QtQmlCFlags).}
 
 
 type QJSEngineObjectOwnershipEnum* = distinct cint

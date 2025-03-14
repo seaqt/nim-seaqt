@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qthread.cpp", cflags).}
+
+{.compile("gen_qthread.cpp", QtCoreCFlags).}
 
 
 type QThreadPriorityEnum* = distinct cint

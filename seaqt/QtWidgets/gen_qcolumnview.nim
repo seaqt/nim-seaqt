@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qcolumnview.cpp", cflags).}
+
+{.compile("gen_qcolumnview.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qcolumnview_types
@@ -2395,7 +2395,7 @@ proc drawFrame*(self: gen_qcolumnview_types.QColumnView, param1: gen_qpainter_ty
 proc updateMicroFocus*(self: gen_qcolumnview_types.QColumnView): void =
   fcQColumnView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qcolumnview_types.QColumnView): void =
+proc createX*(self: gen_qcolumnview_types.QColumnView): void =
   fcQColumnView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qcolumnview_types.QColumnView): void =

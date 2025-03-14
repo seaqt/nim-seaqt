@@ -2,8 +2,9 @@ type QEventPoint* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qeventpoint.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qeventpoint.cpp", QtGuiCFlags).}
 
 proc fcQEventPoint_delete(self: pointer) {.importc: "QEventPoint_delete".}
 proc `=destroy`(self: var QEventPoint) =

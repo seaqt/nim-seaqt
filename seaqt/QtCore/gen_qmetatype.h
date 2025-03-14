@@ -29,8 +29,9 @@ typedef struct QPartialOrdering QPartialOrdering;
 #endif
 
 QMetaType* QMetaType_new(int type);
-QMetaType* QMetaType_new2();
-QMetaType* QMetaType_new3(QMetaType* param1);
+QMetaType* QMetaType_new2(const void* d);
+QMetaType* QMetaType_new3();
+QMetaType* QMetaType_new4(QMetaType* param1);
 
 void QMetaType_registerNormalizedTypedef(struct miqt_string normalizedTypeName, QMetaType* type);
 int QMetaType_type(const char* typeName);
@@ -82,6 +83,8 @@ bool QMetaType_hasRegisteredMutableViewFunction(QMetaType* fromType, QMetaType* 
 void QMetaType_unregisterConverterFunction(QMetaType* from, QMetaType* to);
 void QMetaType_unregisterMutableViewFunction(QMetaType* from, QMetaType* to);
 void QMetaType_unregisterMetaType(QMetaType* type);
+const void* QMetaType_iface(QMetaType* self);
+const void* QMetaType_iface2(const QMetaType* self);
 void* QMetaType_create22(int type, const void* copy);
 int QMetaType_id1(const QMetaType* self, int param1);
 void* QMetaType_create1(const QMetaType* self, const void* copy);

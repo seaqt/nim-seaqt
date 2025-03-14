@@ -325,8 +325,9 @@ type QInputMethodEventAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qevent.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qevent.cpp", QtGuiCFlags).}
 
 proc fcQInputMethodEventAttribute_delete(self: pointer) {.importc: "QInputMethodEvent__Attribute_delete".}
 proc `=destroy`(self: var QInputMethodEventAttribute) =

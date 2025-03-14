@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qwizard.cpp", cflags).}
+
+{.compile("gen_qwizard.cpp", QtWidgetsCFlags).}
 
 
 type QWizardWizardButtonEnum* = distinct cint
@@ -1893,7 +1893,7 @@ proc adjustPosition*(self: gen_qwizard_types.QWizard, param1: gen_qwidget_types.
 proc updateMicroFocus*(self: gen_qwizard_types.QWizard): void =
   fcQWizard_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qwizard_types.QWizard): void =
+proc createX*(self: gen_qwizard_types.QWizard): void =
   fcQWizard_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qwizard_types.QWizard): void =
@@ -3581,7 +3581,7 @@ proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], 
 proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage): void =
   fcQWizardPage_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qwizard_types.QWizardPage): void =
+proc createX*(self: gen_qwizard_types.QWizardPage): void =
   fcQWizardPage_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qwizard_types.QWizardPage): void =

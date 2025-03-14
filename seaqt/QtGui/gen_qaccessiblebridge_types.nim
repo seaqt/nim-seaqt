@@ -2,8 +2,9 @@ type QAccessibleBridge* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qaccessiblebridge.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qaccessiblebridge.cpp", QtGuiCFlags).}
 
 proc fcQAccessibleBridge_delete(self: pointer) {.importc: "QAccessibleBridge_delete".}
 proc `=destroy`(self: var QAccessibleBridge) =

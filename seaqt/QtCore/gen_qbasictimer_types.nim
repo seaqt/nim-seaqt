@@ -2,8 +2,9 @@ type QBasicTimer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qbasictimer.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qbasictimer.cpp", QtCoreCFlags).}
 
 proc fcQBasicTimer_delete(self: pointer) {.importc: "QBasicTimer_delete".}
 proc `=destroy`(self: var QBasicTimer) =

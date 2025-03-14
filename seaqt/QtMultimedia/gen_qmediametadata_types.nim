@@ -2,8 +2,9 @@ type QMediaMetaData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
-{.compile("gen_qmediametadata.cpp", cflags).}
+import ./qtmultimedia_pkg
+
+{.compile("gen_qmediametadata.cpp", QtMultimediaCFlags).}
 
 proc fcQMediaMetaData_delete(self: pointer) {.importc: "QMediaMetaData_delete".}
 proc `=destroy`(self: var QMediaMetaData) =

@@ -2,8 +2,9 @@ type QSslCertificateExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qsslcertificateextension.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qsslcertificateextension.cpp", QtNetworkCFlags).}
 
 proc fcQSslCertificateExtension_delete(self: pointer) {.importc: "QSslCertificateExtension_delete".}
 proc `=destroy`(self: var QSslCertificateExtension) =

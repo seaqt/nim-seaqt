@@ -2,8 +2,9 @@ type QTextTableCell* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtexttable.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtexttable.cpp", QtGuiCFlags).}
 
 proc fcQTextTableCell_delete(self: pointer) {.importc: "QTextTableCell_delete".}
 proc `=destroy`(self: var QTextTableCell) =

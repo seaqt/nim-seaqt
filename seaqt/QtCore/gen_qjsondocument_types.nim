@@ -2,8 +2,9 @@ type QJsonParseError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qjsondocument.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qjsondocument.cpp", QtCoreCFlags).}
 
 proc fcQJsonParseError_delete(self: pointer) {.importc: "QJsonParseError_delete".}
 proc `=destroy`(self: var QJsonParseError) =

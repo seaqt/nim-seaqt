@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qcheckbox.cpp", cflags).}
+
+{.compile("gen_qcheckbox.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qcheckbox_types
@@ -1337,7 +1337,7 @@ proc cQCheckBox_method_callback_disconnectNotify(self: pointer, signal: pointer)
 proc updateMicroFocus*(self: gen_qcheckbox_types.QCheckBox): void =
   fcQCheckBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qcheckbox_types.QCheckBox): void =
+proc createX*(self: gen_qcheckbox_types.QCheckBox): void =
   fcQCheckBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qcheckbox_types.QCheckBox): void =

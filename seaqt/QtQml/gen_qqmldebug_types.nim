@@ -2,8 +2,9 @@ type QQmlDebuggingEnabler* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qqmldebug.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qqmldebug.cpp", QtQmlCFlags).}
 
 proc fcQQmlDebuggingEnabler_delete(self: pointer) {.importc: "QQmlDebuggingEnabler_delete".}
 proc `=destroy`(self: var QQmlDebuggingEnabler) =

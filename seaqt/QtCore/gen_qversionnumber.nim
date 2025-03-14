@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -53,8 +53,8 @@ proc fcQVersionNumber_isPrefixOf(self: pointer, other: pointer): bool {.importc:
 proc fcQVersionNumber_compare(v1: pointer, v2: pointer): cint {.importc: "QVersionNumber_compare".}
 proc fcQVersionNumber_commonPrefix(v1: pointer, v2: pointer): pointer {.importc: "QVersionNumber_commonPrefix".}
 proc fcQVersionNumber_toString(self: pointer): struct_miqt_string {.importc: "QVersionNumber_toString".}
-proc fcQVersionNumber_fromString(string: struct_miqt_string): pointer {.importc: "QVersionNumber_fromString".}
-proc fcQVersionNumber_fromString2(string: struct_miqt_string, suffixIndex: ptr int64): pointer {.importc: "QVersionNumber_fromString2".}
+proc fcQVersionNumber_fromString(stringVal: struct_miqt_string): pointer {.importc: "QVersionNumber_fromString".}
+proc fcQVersionNumber_fromString2(stringVal: struct_miqt_string, suffixIndex: ptr int64): pointer {.importc: "QVersionNumber_fromString2".}
 proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
 proc fcQVersionNumber_new2(seg: struct_miqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
 proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
@@ -118,11 +118,11 @@ proc toString*(self: gen_qversionnumber_types.QVersionNumber): string =
   c_free(v_ms.data)
   vx_ret
 
-proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: openArray[char]): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, stringVal: openArray[char]): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
-proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: openArray[char], suffixIndex: ptr int64): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString2(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), suffixIndex), owned: true)
+proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, stringVal: openArray[char], suffixIndex: ptr int64): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString2(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), suffixIndex), owned: true)
 
 proc create*(T: type gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
   gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new(), owned: true)

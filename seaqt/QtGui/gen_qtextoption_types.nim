@@ -2,8 +2,9 @@ type QTextOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtextoption.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextoption.cpp", QtGuiCFlags).}
 
 proc fcQTextOption_delete(self: pointer) {.importc: "QTextOption_delete".}
 proc `=destroy`(self: var QTextOption) =

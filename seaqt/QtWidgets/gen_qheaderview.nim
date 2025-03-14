@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qheaderview.cpp", cflags).}
+
+{.compile("gen_qheaderview.cpp", QtWidgetsCFlags).}
 
 
 type QHeaderViewResizeModeEnum* = distinct cint
@@ -2920,7 +2920,7 @@ proc drawFrame*(self: gen_qheaderview_types.QHeaderView, param1: gen_qpainter_ty
 proc updateMicroFocus*(self: gen_qheaderview_types.QHeaderView): void =
   fcQHeaderView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qheaderview_types.QHeaderView): void =
+proc createX*(self: gen_qheaderview_types.QHeaderView): void =
   fcQHeaderView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qheaderview_types.QHeaderView): void =

@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -168,7 +168,7 @@ proc fcQMetaType_typeName(typeVal: cint): cstring {.importc: "QMetaType_typeName
 proc fcQMetaType_sizeOf(typeVal: cint): cint {.importc: "QMetaType_sizeOf".}
 proc fcQMetaType_typeFlags(typeVal: cint): cint {.importc: "QMetaType_typeFlags".}
 proc fcQMetaType_metaObjectForType(typeVal: cint): pointer {.importc: "QMetaType_metaObjectForType".}
-proc fcQMetaType_create(typeVal: cint): pointer {.importc: "QMetaType_create".}
+proc fcQMetaType_createX(typeVal: cint): pointer {.importc: "QMetaType_create".}
 proc fcQMetaType_destroy(typeVal: cint, data: pointer): void {.importc: "QMetaType_destroy".}
 proc fcQMetaType_construct(typeVal: cint, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct".}
 proc fcQMetaType_destruct(typeVal: cint, where: pointer): void {.importc: "QMetaType_destruct".}
@@ -211,13 +211,16 @@ proc fcQMetaType_hasRegisteredMutableViewFunction(fromType: pointer, toType: poi
 proc fcQMetaType_unregisterConverterFunction(fromVal: pointer, to: pointer): void {.importc: "QMetaType_unregisterConverterFunction".}
 proc fcQMetaType_unregisterMutableViewFunction(fromVal: pointer, to: pointer): void {.importc: "QMetaType_unregisterMutableViewFunction".}
 proc fcQMetaType_unregisterMetaType(typeVal: pointer): void {.importc: "QMetaType_unregisterMetaType".}
+proc fcQMetaType_iface(self: pointer): pointer {.importc: "QMetaType_iface".}
+proc fcQMetaType_iface2(self: pointer): pointer {.importc: "QMetaType_iface2".}
 proc fcQMetaType_create22(typeVal: cint, copy: pointer): pointer {.importc: "QMetaType_create22".}
 proc fcQMetaType_id1(self: pointer, param1: cint): cint {.importc: "QMetaType_id1".}
 proc fcQMetaType_create1(self: pointer, copy: pointer): pointer {.importc: "QMetaType_create1".}
 proc fcQMetaType_construct2(self: pointer, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct2".}
 proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
-proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
-proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
+proc fcQMetaType_new2(d: pointer): ptr cQMetaType {.importc: "QMetaType_new2".}
+proc fcQMetaType_new3(): ptr cQMetaType {.importc: "QMetaType_new3".}
+proc fcQMetaType_new4(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new4".}
 
 proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: openArray[byte], typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: cast[cstring](if len(normalizedTypeName) == 0: nil else: unsafeAddr normalizedTypeName[0]), len: csize_t(len(normalizedTypeName))), typeVal.h)
@@ -240,8 +243,8 @@ proc typeFlags*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cint =
 proc metaObjectForType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObjectForType(typeVal), owned: false)
 
-proc create*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): pointer =
-  fcQMetaType_create(typeVal)
+proc createX*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): pointer =
+  fcQMetaType_createX(typeVal)
 
 proc destroy*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, data: pointer): void =
   fcQMetaType_destroy(typeVal, data)
@@ -279,7 +282,7 @@ proc metaObject*(self: gen_qmetatype_types.QMetaType): gen_qobjectdefs_types.QMe
 proc name*(self: gen_qmetatype_types.QMetaType): cstring =
   (fcQMetaType_name(self.h))
 
-proc create*(self: gen_qmetatype_types.QMetaType): pointer =
+proc createX*(self: gen_qmetatype_types.QMetaType): pointer =
   fcQMetaType_create2(self.h)
 
 proc destroy*(self: gen_qmetatype_types.QMetaType, data: pointer): void =
@@ -369,13 +372,19 @@ proc unregisterMutableViewFunction*(_: type gen_qmetatype_types.QMetaType, fromV
 proc unregisterMetaType*(_: type gen_qmetatype_types.QMetaType, typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_unregisterMetaType(typeVal.h)
 
-proc create*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, copy: pointer): pointer =
+proc iface*(self: gen_qmetatype_types.QMetaType): pointer =
+  fcQMetaType_iface(self.h)
+
+proc iface2*(self: gen_qmetatype_types.QMetaType): pointer =
+  fcQMetaType_iface2(self.h)
+
+proc createX*(_: type gen_qmetatype_types.QMetaType, typeVal: cint, copy: pointer): pointer =
   fcQMetaType_create22(typeVal, copy)
 
 proc id*(self: gen_qmetatype_types.QMetaType, param1: cint): cint =
   fcQMetaType_id1(self.h, param1)
 
-proc create*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
+proc createX*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
   fcQMetaType_create1(self.h, copy)
 
 proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: pointer): pointer =
@@ -385,10 +394,14 @@ proc create*(T: type gen_qmetatype_types.QMetaType,
     typeVal: cint): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaType_new(typeVal), owned: true)
 
+proc create*(T: type gen_qmetatype_types.QMetaType,
+    d: pointer): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(d), owned: true)
+
 proc create*(T: type gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(), owned: true)
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new3(), owned: true)
 
 proc create*(T: type gen_qmetatype_types.QMetaType,
     param1: gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_new3(param1.h), owned: true)
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new4(param1.h), owned: true)
 

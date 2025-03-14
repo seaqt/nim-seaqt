@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qkeysequenceedit.cpp", cflags).}
+
+{.compile("gen_qkeysequenceedit.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qkeysequenceedit_types
@@ -1269,7 +1269,7 @@ proc cQKeySequenceEdit_method_callback_disconnectNotify(self: pointer, signal: p
 proc updateMicroFocus*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): void =
   fcQKeySequenceEdit_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): void =
+proc createX*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): void =
   fcQKeySequenceEdit_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): void =

@@ -2,8 +2,9 @@ type QCborStreamReader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcborstreamreader.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcborstreamreader.cpp", QtCoreCFlags).}
 
 proc fcQCborStreamReader_delete(self: pointer) {.importc: "QCborStreamReader_delete".}
 proc `=destroy`(self: var QCborStreamReader) =

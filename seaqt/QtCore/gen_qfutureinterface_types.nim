@@ -2,8 +2,9 @@ type QFutureInterfaceBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qfutureinterface.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qfutureinterface.cpp", QtCoreCFlags).}
 
 proc fcQFutureInterfaceBase_delete(self: pointer) {.importc: "QFutureInterfaceBase_delete".}
 proc `=destroy`(self: var QFutureInterfaceBase) =

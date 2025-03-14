@@ -2,8 +2,9 @@ type QImageReader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qimagereader.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qimagereader.cpp", QtGuiCFlags).}
 
 proc fcQImageReader_delete(self: pointer) {.importc: "QImageReader_delete".}
 proc `=destroy`(self: var QImageReader) =

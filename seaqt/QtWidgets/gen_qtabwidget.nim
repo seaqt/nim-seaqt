@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qtabwidget.cpp", cflags).}
+
+{.compile("gen_qtabwidget.cpp", QtWidgetsCFlags).}
 
 
 type QTabWidgetTabPositionEnum* = distinct cint
@@ -1590,7 +1590,7 @@ proc setTabBar*(self: gen_qtabwidget_types.QTabWidget, tabBar: gen_qtabbar_types
 proc updateMicroFocus*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtabwidget_types.QTabWidget): void =
+proc createX*(self: gen_qtabwidget_types.QTabWidget): void =
   fcQTabWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtabwidget_types.QTabWidget): void =

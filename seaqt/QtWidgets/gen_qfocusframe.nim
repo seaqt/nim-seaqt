@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qfocusframe.cpp", cflags).}
+
+{.compile("gen_qfocusframe.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qfocusframe_types
@@ -1233,7 +1233,7 @@ proc cQFocusFrame_method_callback_disconnectNotify(self: pointer, signal: pointe
 proc updateMicroFocus*(self: gen_qfocusframe_types.QFocusFrame): void =
   fcQFocusFrame_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qfocusframe_types.QFocusFrame): void =
+proc createX*(self: gen_qfocusframe_types.QFocusFrame): void =
   fcQFocusFrame_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qfocusframe_types.QFocusFrame): void =

@@ -2,8 +2,9 @@ type QUndoCommand* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qundostack.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qundostack.cpp", QtGuiCFlags).}
 
 proc fcQUndoCommand_delete(self: pointer) {.importc: "QUndoCommand_delete".}
 proc `=destroy`(self: var QUndoCommand) =

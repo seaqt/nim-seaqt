@@ -1,4 +1,4 @@
-import ./Qt6Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qgenericplugin.cpp", cflags).}
+
+{.compile("gen_qgenericplugin.cpp", QtGuiCFlags).}
 
 
 import ./gen_qgenericplugin_types
@@ -56,7 +56,7 @@ proc fcQGenericPlugin_metaObject(self: pointer): pointer {.importc: "QGenericPlu
 proc fcQGenericPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QGenericPlugin_metacast".}
 proc fcQGenericPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGenericPlugin_metacall".}
 proc fcQGenericPlugin_tr(s: cstring): struct_miqt_string {.importc: "QGenericPlugin_tr".}
-proc fcQGenericPlugin_create(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.importc: "QGenericPlugin_create".}
+proc fcQGenericPlugin_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.importc: "QGenericPlugin_create".}
 proc fcQGenericPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGenericPlugin_tr2".}
 proc fcQGenericPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGenericPlugin_tr3".}
 proc fcQGenericPlugin_vtbl(self: pointer): pointer {.importc: "QGenericPlugin_vtbl".}
@@ -66,7 +66,7 @@ type cQGenericPluginVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  create*: proc(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
+  createX*: proc(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -107,8 +107,8 @@ proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qgenericplugin_types.QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGenericPlugin_create(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(spec) > 0: addr spec[0] else: nil, len: csize_t(len(spec)))), owned: false)
+proc createX*(self: gen_qgenericplugin_types.QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGenericPlugin_createX(self.h, struct_miqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_miqt_string(data: if len(spec) > 0: addr spec[0] else: nil, len: csize_t(len(spec)))), owned: false)
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQGenericPlugin_tr2(s, c)
@@ -125,7 +125,7 @@ proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring
 type QGenericPluginmetaObjectProc* = proc(self: QGenericPlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGenericPluginmetacastProc* = proc(self: QGenericPlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QGenericPluginmetacallProc* = proc(self: QGenericPlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QGenericPlugincreateProc* = proc(self: QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QGenericPlugincreateXProc* = proc(self: QGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.raises: [], gcsafe.}
 type QGenericPlugineventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugineventFilterProc* = proc(self: QGenericPlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGenericPlugintimerEventProc* = proc(self: QGenericPlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -138,7 +138,7 @@ type QGenericPluginVTable* {.inheritable, pure.} = object
   metaObject*: QGenericPluginmetaObjectProc
   metacast*: QGenericPluginmetacastProc
   metacall*: QGenericPluginmetacallProc
-  create*: QGenericPlugincreateProc
+  createX*: QGenericPlugincreateXProc
   event*: QGenericPlugineventProc
   eventFilter*: QGenericPlugineventFilterProc
   timerEvent*: QGenericPlugintimerEventProc
@@ -180,7 +180,7 @@ proc cQGenericPlugin_vtable_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQGenericPlugin_vtable_callback_create(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
+proc cQGenericPlugin_vtable_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QGenericPluginVTable](fcQGenericPlugin_vdata(self))
   let self = QGenericPlugin(h: self)
   let vname_ms = name
@@ -191,7 +191,7 @@ proc cQGenericPlugin_vtable_callback_create(self: pointer, name: struct_miqt_str
   let vspecx_ret = string.fromBytes(vspec_ms)
   c_free(vspec_ms.data)
   let slotval2 = vspecx_ret
-  var virtualReturn = vtbl[].create(self, slotval1, slotval2)
+  var virtualReturn = vtbl[].createX(self, slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -293,9 +293,9 @@ proc cQGenericPlugin_method_callback_metacall(self: pointer, param1: cint, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
+method createX*(self: VirtualQGenericPlugin, name: openArray[char], spec: openArray[char]): gen_qobject_types.QObject {.base.} =
   raiseAssert("missing implementation of QGenericPlugin_virtualbase_create")
-proc cQGenericPlugin_method_callback_create(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
+proc cQGenericPlugin_method_callback_createX(self: pointer, name: struct_miqt_string, spec: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQGenericPlugin](fcQGenericPlugin_vdata(self))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
@@ -305,7 +305,7 @@ proc cQGenericPlugin_method_callback_create(self: pointer, name: struct_miqt_str
   let vspecx_ret = string.fromBytes(vspec_ms)
   c_free(vspec_ms.data)
   let slotval2 = vspecx_ret
-  var virtualReturn = inst.create(slotval1, slotval2)
+  var virtualReturn = inst.createX(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -388,8 +388,8 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     vtbl[].vtbl.metacast = cQGenericPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQGenericPlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQGenericPlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQGenericPlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQGenericPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -420,8 +420,8 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     vtbl[].vtbl.metacast = cQGenericPlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQGenericPlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQGenericPlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQGenericPlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQGenericPlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -446,7 +446,7 @@ const cQGenericPlugin_mvtbl = cQGenericPluginVTable(
   metaObject: cQGenericPlugin_method_callback_metaObject,
   metacast: cQGenericPlugin_method_callback_metacast,
   metacall: cQGenericPlugin_method_callback_metacall,
-  create: cQGenericPlugin_method_callback_create,
+  createX: cQGenericPlugin_method_callback_createX,
   event: cQGenericPlugin_method_callback_event,
   eventFilter: cQGenericPlugin_method_callback_eventFilter,
   timerEvent: cQGenericPlugin_method_callback_timerEvent,

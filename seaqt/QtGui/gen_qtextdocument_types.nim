@@ -2,8 +2,9 @@ type QAbstractUndoItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtextdocument.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtextdocument.cpp", QtGuiCFlags).}
 
 proc fcQAbstractUndoItem_delete(self: pointer) {.importc: "QAbstractUndoItem_delete".}
 proc `=destroy`(self: var QAbstractUndoItem) =

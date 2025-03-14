@@ -1,4 +1,4 @@
-import ./Qt6Quick_libs
+import ./qtquick_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qsgtexture.cpp", cflags).}
+
+{.compile("gen_qsgtexture.cpp", QtQuickCFlags).}
 
 
 type QSGTextureWrapModeEnum* = distinct cint

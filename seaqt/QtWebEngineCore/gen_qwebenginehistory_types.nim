@@ -2,8 +2,9 @@ type QWebEngineHistoryItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginehistory.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginehistory.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineHistoryItem_delete(self: pointer) {.importc: "QWebEngineHistoryItem_delete".}
 proc `=destroy`(self: var QWebEngineHistoryItem) =

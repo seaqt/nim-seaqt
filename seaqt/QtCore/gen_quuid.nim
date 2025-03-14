@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -63,7 +63,7 @@ export gen_quuid_types
 
 type cQUuid*{.exportc: "QUuid", incompleteStruct.} = object
 
-proc fcQUuid_fromString(string: struct_miqt_string): pointer {.importc: "QUuid_fromString".}
+proc fcQUuid_fromString(stringVal: struct_miqt_string): pointer {.importc: "QUuid_fromString".}
 proc fcQUuid_toString(self: pointer): struct_miqt_string {.importc: "QUuid_toString".}
 proc fcQUuid_toByteArray(self: pointer): struct_miqt_string {.importc: "QUuid_toByteArray".}
 proc fcQUuid_toRfc4122(self: pointer): struct_miqt_string {.importc: "QUuid_toRfc4122".}
@@ -84,11 +84,11 @@ proc fcQUuid_toString1(self: pointer, mode: cint): struct_miqt_string {.importc:
 proc fcQUuid_toByteArray1(self: pointer, mode: cint): struct_miqt_string {.importc: "QUuid_toByteArray1".}
 proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
 proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
-proc fcQUuid_new3(string: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new3".}
+proc fcQUuid_new3(stringVal: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new3".}
 proc fcQUuid_new4(param1: pointer): ptr cQUuid {.importc: "QUuid_new4".}
 
-proc fromString*(_: type gen_quuid_types.QUuid, string: openArray[char]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_fromString(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+proc fromString*(_: type gen_quuid_types.QUuid, stringVal: openArray[char]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_fromString(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc toString*(self: gen_quuid_types.QUuid): string =
   let v_ms = fcQUuid_toString(self.h)
@@ -167,8 +167,8 @@ proc create*(T: type gen_quuid_types.QUuid,
   gen_quuid_types.QUuid(h: fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,
-    string: openArray[char]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_new3(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string)))), owned: true)
+    stringVal: openArray[char]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new3(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
 
 proc create*(T: type gen_quuid_types.QUuid,
     param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =

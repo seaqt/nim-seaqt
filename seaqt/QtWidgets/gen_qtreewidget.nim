@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -3937,7 +3937,7 @@ proc drawFrame*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qpainter_ty
 proc updateMicroFocus*(self: gen_qtreewidget_types.QTreeWidget): void =
   fcQTreeWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtreewidget_types.QTreeWidget): void =
+proc createX*(self: gen_qtreewidget_types.QTreeWidget): void =
   fcQTreeWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtreewidget_types.QTreeWidget): void =

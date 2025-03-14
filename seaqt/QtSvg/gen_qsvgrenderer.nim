@@ -1,4 +1,4 @@
-import ./Qt6Svg_libs
+import ./qtsvg_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Svg") & " -fPIC"
-{.compile("gen_qsvgrenderer.cpp", cflags).}
+
+{.compile("gen_qsvgrenderer.cpp", QtSvgCFlags).}
 
 
 import ./gen_qsvgrenderer_types

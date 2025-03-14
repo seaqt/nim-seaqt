@@ -1,4 +1,4 @@
-import ./Qt6PrintSupport_libs
+import ./qtprintsupport_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6PrintSupport") & " -fPIC"
-{.compile("gen_qprintpreviewdialog.cpp", cflags).}
+
+{.compile("gen_qprintpreviewdialog.cpp", QtPrintSupportCFlags).}
 
 
 import ./gen_qprintpreviewdialog_types
@@ -1343,7 +1343,7 @@ proc adjustPosition*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog, pa
 proc updateMicroFocus*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog): void =
   fcQPrintPreviewDialog_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog): void =
+proc createX*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog): void =
   fcQPrintPreviewDialog_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog): void =

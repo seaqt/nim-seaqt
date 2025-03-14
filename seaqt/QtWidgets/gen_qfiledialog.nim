@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qfiledialog.cpp", cflags).}
+
+{.compile("gen_qfiledialog.cpp", QtWidgetsCFlags).}
 
 
 type QFileDialogViewModeEnum* = distinct cint
@@ -2169,7 +2169,7 @@ proc adjustPosition*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qwidge
 proc updateMicroFocus*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qfiledialog_types.QFileDialog): void =
+proc createX*(self: gen_qfiledialog_types.QFileDialog): void =
   fcQFileDialog_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qfiledialog_types.QFileDialog): void =

@@ -2,8 +2,9 @@ type QSslEllipticCurve* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qsslellipticcurve.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qsslellipticcurve.cpp", QtNetworkCFlags).}
 
 proc fcQSslEllipticCurve_delete(self: pointer) {.importc: "QSslEllipticCurve_delete".}
 proc `=destroy`(self: var QSslEllipticCurve) =

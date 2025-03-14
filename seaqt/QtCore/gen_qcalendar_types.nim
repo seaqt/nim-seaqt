@@ -2,8 +2,9 @@ type QCalendar* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qcalendar.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qcalendar.cpp", QtCoreCFlags).}
 
 proc fcQCalendar_delete(self: pointer) {.importc: "QCalendar_delete".}
 proc `=destroy`(self: var QCalendar) =

@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qtreeview.cpp", cflags).}
+
+{.compile("gen_qtreeview.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qtreeview_types
@@ -2657,7 +2657,7 @@ proc drawFrame*(self: gen_qtreeview_types.QTreeView, param1: gen_qpainter_types.
 proc updateMicroFocus*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtreeview_types.QTreeView): void =
+proc createX*(self: gen_qtreeview_types.QTreeView): void =
   fcQTreeView_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtreeview_types.QTreeView): void =

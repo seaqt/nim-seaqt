@@ -2,8 +2,9 @@ type QNetworkProxyQuery* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qnetworkproxy.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qnetworkproxy.cpp", QtNetworkCFlags).}
 
 proc fcQNetworkProxyQuery_delete(self: pointer) {.importc: "QNetworkProxyQuery_delete".}
 proc `=destroy`(self: var QNetworkProxyQuery) =

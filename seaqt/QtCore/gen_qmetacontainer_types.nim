@@ -2,8 +2,9 @@ type QMetaContainer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qmetacontainer.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qmetacontainer.cpp", QtCoreCFlags).}
 
 proc fcQMetaContainer_delete(self: pointer) {.importc: "QMetaContainer_delete".}
 proc `=destroy`(self: var QMetaContainer) =

@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qplaintextedit.cpp", cflags).}
+
+{.compile("gen_qplaintextedit.cpp", QtWidgetsCFlags).}
 
 
 type QPlainTextEditLineWrapModeEnum* = distinct cint
@@ -2083,7 +2083,7 @@ proc drawFrame*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qpain
 proc updateMicroFocus*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
+proc createX*(self: gen_qplaintextedit_types.QPlainTextEdit): void =
   fcQPlainTextEdit_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qplaintextedit_types.QPlainTextEdit): void =

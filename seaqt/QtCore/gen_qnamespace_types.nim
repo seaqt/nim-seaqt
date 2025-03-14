@@ -2,8 +2,9 @@ type Disambiguated_t* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qnamespace.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qnamespace.cpp", QtCoreCFlags).}
 
 proc fcDisambiguated_t_delete(self: pointer) {.importc: "Disambiguated_t_delete".}
 proc `=destroy`(self: var Disambiguated_t) =

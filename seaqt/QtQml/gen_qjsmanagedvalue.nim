@@ -1,4 +1,4 @@
-import ./Qt6Qml_libs
+import ./qtqml_pkg
 
 {.push raises: [].}
 
@@ -129,7 +129,7 @@ proc fcQJSManagedValue_new(): ptr cQJSManagedValue {.importc: "QJSManagedValue_n
 proc fcQJSManagedValue_new2(value: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new2".}
 proc fcQJSManagedValue_new3(value: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new3".}
 proc fcQJSManagedValue_new4(variant: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new4".}
-proc fcQJSManagedValue_new5(string: struct_miqt_string, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new5".}
+proc fcQJSManagedValue_new5(stringVal: struct_miqt_string, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new5".}
 
 proc equals*(self: gen_qjsmanagedvalue_types.QJSManagedValue, other: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_equals(self.h, other.h)
@@ -343,6 +343,6 @@ proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
   gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new4(variant.h, engine.h), owned: true)
 
 proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
-    string: openArray[char], engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
-  gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new5(struct_miqt_string(data: if len(string) > 0: addr string[0] else: nil, len: csize_t(len(string))), engine.h), owned: true)
+    stringVal: openArray[char], engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
+  gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new5(struct_miqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), engine.h), owned: true)
 

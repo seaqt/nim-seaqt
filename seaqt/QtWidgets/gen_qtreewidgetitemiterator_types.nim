@@ -2,8 +2,9 @@ type QTreeWidgetItemIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qtreewidgetitemiterator.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qtreewidgetitemiterator.cpp", QtWidgetsCFlags).}
 
 proc fcQTreeWidgetItemIterator_delete(self: pointer) {.importc: "QTreeWidgetItemIterator_delete".}
 proc `=destroy`(self: var QTreeWidgetItemIterator) =

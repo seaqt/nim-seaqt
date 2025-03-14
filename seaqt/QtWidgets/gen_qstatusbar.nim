@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qstatusbar.cpp", cflags).}
+
+{.compile("gen_qstatusbar.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qstatusbar_types
@@ -1299,7 +1299,7 @@ proc hideOrShow*(self: gen_qstatusbar_types.QStatusBar): void =
 proc updateMicroFocus*(self: gen_qstatusbar_types.QStatusBar): void =
   fcQStatusBar_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qstatusbar_types.QStatusBar): void =
+proc createX*(self: gen_qstatusbar_types.QStatusBar): void =
   fcQStatusBar_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qstatusbar_types.QStatusBar): void =

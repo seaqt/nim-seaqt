@@ -2,8 +2,9 @@ type QDirIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qdiriterator.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qdiriterator.cpp", QtCoreCFlags).}
 
 proc fcQDirIterator_delete(self: pointer) {.importc: "QDirIterator_delete".}
 proc `=destroy`(self: var QDirIterator) =

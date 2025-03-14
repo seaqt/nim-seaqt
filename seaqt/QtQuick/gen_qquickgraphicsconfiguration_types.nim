@@ -2,8 +2,9 @@ type QQuickGraphicsConfiguration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qquickgraphicsconfiguration.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qquickgraphicsconfiguration.cpp", QtQuickCFlags).}
 
 proc fcQQuickGraphicsConfiguration_delete(self: pointer) {.importc: "QQuickGraphicsConfiguration_delete".}
 proc `=destroy`(self: var QQuickGraphicsConfiguration) =

@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -86,7 +86,8 @@ proc fcQUntypedPropertyBinding_isNull(self: pointer): bool {.importc: "QUntypedP
 proc fcQUntypedPropertyBinding_error(self: pointer): pointer {.importc: "QUntypedPropertyBinding_error".}
 proc fcQUntypedPropertyBinding_valueMetaType(self: pointer): pointer {.importc: "QUntypedPropertyBinding_valueMetaType".}
 proc fcQUntypedPropertyBinding_new(): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new".}
-proc fcQUntypedPropertyBinding_new2(other: pointer): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new2".}
+proc fcQUntypedPropertyBinding_new2(metaType: pointer, vtable: pointer, function: pointer, location: pointer): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new2".}
+proc fcQUntypedPropertyBinding_new3(other: pointer): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new3".}
 proc fcQPropertyObserverBase_new(): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new".}
 proc fcQPropertyObserverBase_new2(param1: pointer): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new2".}
 proc fcQPropertyObserver_protectedbase_aliasedProperty(self: pointer): pointer {.importc: "QPropertyObserver_protectedbase_aliasedProperty".}
@@ -160,8 +161,12 @@ proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding): gen_qproperty
   gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new(), owned: true)
 
 proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding,
+    metaType: gen_qmetatype_types.QMetaType, vtable: pointer, function: pointer, location: gen_qproperty_types.QPropertyBindingSourceLocation): gen_qproperty_types.QUntypedPropertyBinding =
+  gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new2(metaType.h, vtable, function, location.h), owned: true)
+
+proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding,
     other: gen_qproperty_types.QUntypedPropertyBinding): gen_qproperty_types.QUntypedPropertyBinding =
-  gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new2(other.h), owned: true)
+  gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new3(other.h), owned: true)
 
 proc create*(T: type gen_qproperty_types.QPropertyObserverBase): gen_qproperty_types.QPropertyObserverBase =
   gen_qproperty_types.QPropertyObserverBase(h: fcQPropertyObserverBase_new(), owned: true)

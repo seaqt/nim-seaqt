@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -2056,7 +2056,7 @@ proc drawFrame*(self: gen_qtextedit_types.QTextEdit, param1: gen_qpainter_types.
 proc updateMicroFocus*(self: gen_qtextedit_types.QTextEdit): void =
   fcQTextEdit_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtextedit_types.QTextEdit): void =
+proc createX*(self: gen_qtextedit_types.QTextEdit): void =
   fcQTextEdit_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtextedit_types.QTextEdit): void =

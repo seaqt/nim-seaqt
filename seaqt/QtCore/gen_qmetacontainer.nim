@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -90,7 +90,8 @@ proc fcQMetaContainer_copyConstIterator(self: pointer, target: pointer, source: 
 proc fcQMetaContainer_advanceConstIterator(self: pointer, iteratorVal: pointer, step: int64): void {.importc: "QMetaContainer_advanceConstIterator".}
 proc fcQMetaContainer_diffConstIterator(self: pointer, i: pointer, j: pointer): int64 {.importc: "QMetaContainer_diffConstIterator".}
 proc fcQMetaContainer_new(): ptr cQMetaContainer {.importc: "QMetaContainer_new".}
-proc fcQMetaContainer_new2(param1: pointer): ptr cQMetaContainer {.importc: "QMetaContainer_new2".}
+proc fcQMetaContainer_new2(d: pointer): ptr cQMetaContainer {.importc: "QMetaContainer_new2".}
+proc fcQMetaContainer_new3(param1: pointer): ptr cQMetaContainer {.importc: "QMetaContainer_new3".}
 proc fcQMetaSequence_valueMetaType(self: pointer): pointer {.importc: "QMetaSequence_valueMetaType".}
 proc fcQMetaSequence_isSortable(self: pointer): bool {.importc: "QMetaSequence_isSortable".}
 proc fcQMetaSequence_canAddValueAtBegin(self: pointer): bool {.importc: "QMetaSequence_canAddValueAtBegin".}
@@ -122,6 +123,7 @@ proc fcQMetaSequence_eraseRangeAtIterator(self: pointer, container: pointer, ite
 proc fcQMetaSequence_canGetValueAtConstIterator(self: pointer): bool {.importc: "QMetaSequence_canGetValueAtConstIterator".}
 proc fcQMetaSequence_valueAtConstIterator(self: pointer, iteratorVal: pointer, resultVal: pointer): void {.importc: "QMetaSequence_valueAtConstIterator".}
 proc fcQMetaSequence_new(): ptr cQMetaSequence {.importc: "QMetaSequence_new".}
+proc fcQMetaSequence_new2(d: pointer): ptr cQMetaSequence {.importc: "QMetaSequence_new2".}
 proc fcQMetaAssociation_keyMetaType(self: pointer): pointer {.importc: "QMetaAssociation_keyMetaType".}
 proc fcQMetaAssociation_mappedMetaType(self: pointer): pointer {.importc: "QMetaAssociation_mappedMetaType".}
 proc fcQMetaAssociation_canInsertKey(self: pointer): bool {.importc: "QMetaAssociation_canInsertKey".}
@@ -149,6 +151,7 @@ proc fcQMetaAssociation_createIteratorAtKey(self: pointer, container: pointer, k
 proc fcQMetaAssociation_canCreateConstIteratorAtKey(self: pointer): bool {.importc: "QMetaAssociation_canCreateConstIteratorAtKey".}
 proc fcQMetaAssociation_createConstIteratorAtKey(self: pointer, container: pointer, key: pointer): pointer {.importc: "QMetaAssociation_createConstIteratorAtKey".}
 proc fcQMetaAssociation_new(): ptr cQMetaAssociation {.importc: "QMetaAssociation_new".}
+proc fcQMetaAssociation_new2(d: pointer): ptr cQMetaAssociation {.importc: "QMetaAssociation_new2".}
 
 proc hasInputIterator*(self: gen_qmetacontainer_types.QMetaContainer): bool =
   fcQMetaContainer_hasInputIterator(self.h)
@@ -226,8 +229,12 @@ proc create*(T: type gen_qmetacontainer_types.QMetaContainer): gen_qmetacontaine
   gen_qmetacontainer_types.QMetaContainer(h: fcQMetaContainer_new(), owned: true)
 
 proc create*(T: type gen_qmetacontainer_types.QMetaContainer,
+    d: pointer): gen_qmetacontainer_types.QMetaContainer =
+  gen_qmetacontainer_types.QMetaContainer(h: fcQMetaContainer_new2(d), owned: true)
+
+proc create*(T: type gen_qmetacontainer_types.QMetaContainer,
     param1: gen_qmetacontainer_types.QMetaContainer): gen_qmetacontainer_types.QMetaContainer =
-  gen_qmetacontainer_types.QMetaContainer(h: fcQMetaContainer_new2(param1.h), owned: true)
+  gen_qmetacontainer_types.QMetaContainer(h: fcQMetaContainer_new3(param1.h), owned: true)
 
 proc valueMetaType*(self: gen_qmetacontainer_types.QMetaSequence): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaSequence_valueMetaType(self.h), owned: true)
@@ -322,6 +329,10 @@ proc valueAtConstIterator*(self: gen_qmetacontainer_types.QMetaSequence, iterato
 proc create*(T: type gen_qmetacontainer_types.QMetaSequence): gen_qmetacontainer_types.QMetaSequence =
   gen_qmetacontainer_types.QMetaSequence(h: fcQMetaSequence_new(), owned: true)
 
+proc create*(T: type gen_qmetacontainer_types.QMetaSequence,
+    d: pointer): gen_qmetacontainer_types.QMetaSequence =
+  gen_qmetacontainer_types.QMetaSequence(h: fcQMetaSequence_new2(d), owned: true)
+
 proc keyMetaType*(self: gen_qmetacontainer_types.QMetaAssociation): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQMetaAssociation_keyMetaType(self.h), owned: true)
 
@@ -402,4 +413,8 @@ proc createConstIteratorAtKey*(self: gen_qmetacontainer_types.QMetaAssociation, 
 
 proc create*(T: type gen_qmetacontainer_types.QMetaAssociation): gen_qmetacontainer_types.QMetaAssociation =
   gen_qmetacontainer_types.QMetaAssociation(h: fcQMetaAssociation_new(), owned: true)
+
+proc create*(T: type gen_qmetacontainer_types.QMetaAssociation,
+    d: pointer): gen_qmetacontainer_types.QMetaAssociation =
+  gen_qmetacontainer_types.QMetaAssociation(h: fcQMetaAssociation_new2(d), owned: true)
 

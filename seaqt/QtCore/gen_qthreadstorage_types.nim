@@ -2,8 +2,9 @@ type QThreadStorageData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qthreadstorage.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qthreadstorage.cpp", QtCoreCFlags).}
 
 proc fcQThreadStorageData_delete(self: pointer) {.importc: "QThreadStorageData_delete".}
 proc `=destroy`(self: var QThreadStorageData) =

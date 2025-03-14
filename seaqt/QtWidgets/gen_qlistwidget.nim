@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -3444,7 +3444,7 @@ proc drawFrame*(self: gen_qlistwidget_types.QListWidget, param1: gen_qpainter_ty
 proc updateMicroFocus*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qlistwidget_types.QListWidget): void =
+proc createX*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qlistwidget_types.QListWidget): void =

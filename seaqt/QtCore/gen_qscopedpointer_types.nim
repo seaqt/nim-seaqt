@@ -2,8 +2,9 @@ type QScopedPointerPodDeleter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qscopedpointer.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qscopedpointer.cpp", QtCoreCFlags).}
 
 proc fcQScopedPointerPodDeleter_delete(self: pointer) {.importc: "QScopedPointerPodDeleter_delete".}
 proc `=destroy`(self: var QScopedPointerPodDeleter) =

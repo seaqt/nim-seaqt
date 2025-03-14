@@ -2,8 +2,9 @@ type QTestQTouchEventSequence* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qtestsupport_gui.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qtestsupport_gui.cpp", QtGuiCFlags).}
 
 proc fcQTestQTouchEventSequence_delete(self: pointer) {.importc: "QTest__QTouchEventSequence_delete".}
 proc `=destroy`(self: var QTestQTouchEventSequence) =

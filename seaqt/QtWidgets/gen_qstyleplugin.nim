@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qstyleplugin.cpp", cflags).}
+
+{.compile("gen_qstyleplugin.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qstyleplugin_types
@@ -58,7 +58,7 @@ proc fcQStylePlugin_metaObject(self: pointer): pointer {.importc: "QStylePlugin_
 proc fcQStylePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QStylePlugin_metacast".}
 proc fcQStylePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStylePlugin_metacall".}
 proc fcQStylePlugin_tr(s: cstring): struct_miqt_string {.importc: "QStylePlugin_tr".}
-proc fcQStylePlugin_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QStylePlugin_create".}
+proc fcQStylePlugin_createX(self: pointer, key: struct_miqt_string): pointer {.importc: "QStylePlugin_create".}
 proc fcQStylePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStylePlugin_tr2".}
 proc fcQStylePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStylePlugin_tr3".}
 proc fcQStylePlugin_vtbl(self: pointer): pointer {.importc: "QStylePlugin_vtbl".}
@@ -68,7 +68,7 @@ type cQStylePluginVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  create*: proc(self: pointer, key: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
+  createX*: proc(self: pointer, key: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -109,8 +109,8 @@ proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qstyleplugin_types.QStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQStylePlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
+proc createX*(self: gen_qstyleplugin_types.QStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle =
+  gen_qstyle_types.QStyle(h: fcQStylePlugin_createX(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQStylePlugin_tr2(s, c)
@@ -127,7 +127,7 @@ proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring, n:
 type QStylePluginmetaObjectProc* = proc(self: QStylePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStylePluginmetacastProc* = proc(self: QStylePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QStylePluginmetacallProc* = proc(self: QStylePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QStylePlugincreateProc* = proc(self: QStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.raises: [], gcsafe.}
+type QStylePlugincreateXProc* = proc(self: QStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.raises: [], gcsafe.}
 type QStylePlugineventProc* = proc(self: QStylePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QStylePlugineventFilterProc* = proc(self: QStylePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QStylePlugintimerEventProc* = proc(self: QStylePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -140,7 +140,7 @@ type QStylePluginVTable* {.inheritable, pure.} = object
   metaObject*: QStylePluginmetaObjectProc
   metacast*: QStylePluginmetacastProc
   metacall*: QStylePluginmetacallProc
-  create*: QStylePlugincreateProc
+  createX*: QStylePlugincreateXProc
   event*: QStylePlugineventProc
   eventFilter*: QStylePlugineventFilterProc
   timerEvent*: QStylePlugintimerEventProc
@@ -182,14 +182,14 @@ proc cQStylePlugin_vtable_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQStylePlugin_vtable_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
+proc cQStylePlugin_vtable_callback_createX(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QStylePluginVTable](fcQStylePlugin_vdata(self))
   let self = QStylePlugin(h: self)
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  var virtualReturn = vtbl[].create(self, slotval1)
+  var virtualReturn = vtbl[].createX(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -291,15 +291,15 @@ proc cQStylePlugin_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.base.} =
+method createX*(self: VirtualQStylePlugin, key: openArray[char]): gen_qstyle_types.QStyle {.base.} =
   raiseAssert("missing implementation of QStylePlugin_virtualbase_create")
-proc cQStylePlugin_method_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
+proc cQStylePlugin_method_callback_createX(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQStylePlugin](fcQStylePlugin_vdata(self))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  var virtualReturn = inst.create(slotval1)
+  var virtualReturn = inst.createX(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -382,8 +382,8 @@ proc create*(T: type gen_qstyleplugin_types.QStylePlugin,
     vtbl[].vtbl.metacast = cQStylePlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQStylePlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQStylePlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQStylePlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQStylePlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -414,8 +414,8 @@ proc create*(T: type gen_qstyleplugin_types.QStylePlugin,
     vtbl[].vtbl.metacast = cQStylePlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQStylePlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQStylePlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQStylePlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQStylePlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -440,7 +440,7 @@ const cQStylePlugin_mvtbl = cQStylePluginVTable(
   metaObject: cQStylePlugin_method_callback_metaObject,
   metacast: cQStylePlugin_method_callback_metacast,
   metacall: cQStylePlugin_method_callback_metacall,
-  create: cQStylePlugin_method_callback_create,
+  createX: cQStylePlugin_method_callback_createX,
   event: cQStylePlugin_method_callback_event,
   eventFilter: cQStylePlugin_method_callback_eventFilter,
   timerEvent: cQStylePlugin_method_callback_timerEvent,

@@ -2,8 +2,9 @@ type QElapsedTimer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qelapsedtimer.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qelapsedtimer.cpp", QtCoreCFlags).}
 
 proc fcQElapsedTimer_delete(self: pointer) {.importc: "QElapsedTimer_delete".}
 proc `=destroy`(self: var QElapsedTimer) =

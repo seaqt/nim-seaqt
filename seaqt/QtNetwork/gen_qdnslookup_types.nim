@@ -2,8 +2,9 @@ type QDnsDomainNameRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qdnslookup.cpp", cflags).}
+import ./qtnetwork_pkg
+
+{.compile("gen_qdnslookup.cpp", QtNetworkCFlags).}
 
 proc fcQDnsDomainNameRecord_delete(self: pointer) {.importc: "QDnsDomainNameRecord_delete".}
 proc `=destroy`(self: var QDnsDomainNameRecord) =

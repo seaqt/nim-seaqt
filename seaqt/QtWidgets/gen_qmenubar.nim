@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qmenubar.cpp", cflags).}
+
+{.compile("gen_qmenubar.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qmenubar_types
@@ -1371,7 +1371,7 @@ proc cQMenuBar_method_callback_disconnectNotify(self: pointer, signal: pointer):
 proc updateMicroFocus*(self: gen_qmenubar_types.QMenuBar): void =
   fcQMenuBar_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qmenubar_types.QMenuBar): void =
+proc createX*(self: gen_qmenubar_types.QMenuBar): void =
   fcQMenuBar_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qmenubar_types.QMenuBar): void =

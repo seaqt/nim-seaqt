@@ -1,4 +1,4 @@
-import ./Qt6MultimediaWidgets_libs
+import ./qtmultimediawidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6MultimediaWidgets") & " -fPIC"
-{.compile("gen_qgraphicsvideoitem.cpp", cflags).}
+
+{.compile("gen_qgraphicsvideoitem.cpp", QtMultimediaWidgetsCFlags).}
 
 
 type QGraphicsVideoItemEnumEnum* = distinct cint

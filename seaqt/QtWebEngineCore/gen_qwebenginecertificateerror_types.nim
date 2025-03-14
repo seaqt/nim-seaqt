@@ -2,8 +2,9 @@ type QWebEngineCertificateError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
-{.compile("gen_qwebenginecertificateerror.cpp", cflags).}
+import ./qtwebenginecore_pkg
+
+{.compile("gen_qwebenginecertificateerror.cpp", QtWebEngineCoreCFlags).}
 
 proc fcQWebEngineCertificateError_delete(self: pointer) {.importc: "QWebEngineCertificateError_delete".}
 proc `=destroy`(self: var QWebEngineCertificateError) =

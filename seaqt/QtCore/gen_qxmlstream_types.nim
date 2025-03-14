@@ -2,8 +2,9 @@ type QXmlStreamAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qxmlstream.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qxmlstream.cpp", QtCoreCFlags).}
 
 proc fcQXmlStreamAttribute_delete(self: pointer) {.importc: "QXmlStreamAttribute_delete".}
 proc `=destroy`(self: var QXmlStreamAttribute) =

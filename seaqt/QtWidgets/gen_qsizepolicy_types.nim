@@ -2,8 +2,9 @@ type QSizePolicy* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qsizepolicy.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qsizepolicy.cpp", QtWidgetsCFlags).}
 
 proc fcQSizePolicy_delete(self: pointer) {.importc: "QSizePolicy_delete".}
 proc `=destroy`(self: var QSizePolicy) =

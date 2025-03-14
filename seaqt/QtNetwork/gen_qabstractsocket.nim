@@ -1,4 +1,4 @@
-import ./Qt6Network_libs
+import ./qtnetwork_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
-{.compile("gen_qabstractsocket.cpp", cflags).}
+
+{.compile("gen_qabstractsocket.cpp", QtNetworkCFlags).}
 
 
 type QAbstractSocketSocketTypeEnum* = distinct cint

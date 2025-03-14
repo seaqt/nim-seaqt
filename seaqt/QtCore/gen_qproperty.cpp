@@ -73,7 +73,11 @@ QUntypedPropertyBinding* QUntypedPropertyBinding_new() {
 	return new QUntypedPropertyBinding();
 }
 
-QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QUntypedPropertyBinding* other) {
+QUntypedPropertyBinding* QUntypedPropertyBinding_new2(QMetaType* metaType, const void* vtable, void* function, QPropertyBindingSourceLocation* location) {
+	return new QUntypedPropertyBinding(*metaType, static_cast<const QUntypedPropertyBinding::BindingFunctionVTable*>(vtable), function, *location);
+}
+
+QUntypedPropertyBinding* QUntypedPropertyBinding_new3(QUntypedPropertyBinding* other) {
 	return new QUntypedPropertyBinding(*other);
 }
 

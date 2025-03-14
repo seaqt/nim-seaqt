@@ -2,8 +2,9 @@ type QRandomGenerator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qrandom.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qrandom.cpp", QtCoreCFlags).}
 
 proc fcQRandomGenerator_delete(self: pointer) {.importc: "QRandomGenerator_delete".}
 proc `=destroy`(self: var QRandomGenerator) =

@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -3603,7 +3603,7 @@ proc drawFrame*(self: gen_qtablewidget_types.QTableWidget, param1: gen_qpainter_
 proc updateMicroFocus*(self: gen_qtablewidget_types.QTableWidget): void =
   fcQTableWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qtablewidget_types.QTableWidget): void =
+proc createX*(self: gen_qtablewidget_types.QTableWidget): void =
   fcQTableWidget_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qtablewidget_types.QTableWidget): void =

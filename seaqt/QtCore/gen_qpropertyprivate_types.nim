@@ -2,8 +2,9 @@ type QUntypedPropertyData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qpropertyprivate.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qpropertyprivate.cpp", QtCoreCFlags).}
 
 proc fcQUntypedPropertyData_delete(self: pointer) {.importc: "QUntypedPropertyData_delete".}
 proc `=destroy`(self: var QUntypedPropertyData) =

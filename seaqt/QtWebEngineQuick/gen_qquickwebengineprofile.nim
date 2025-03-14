@@ -1,4 +1,4 @@
-import ./Qt6WebEngineQuick_libs
+import ./qtwebenginequick_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineQuick") & " -fPIC"
-{.compile("gen_qquickwebengineprofile.cpp", cflags).}
+
+{.compile("gen_qquickwebengineprofile.cpp", QtWebEngineQuickCFlags).}
 
 
 type QQuickWebEngineProfileHttpCacheTypeEnum* = distinct cint

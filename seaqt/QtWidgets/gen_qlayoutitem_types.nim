@@ -2,8 +2,9 @@ type QLayoutItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qlayoutitem.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qlayoutitem.cpp", QtWidgetsCFlags).}
 
 proc fcQLayoutItem_delete(self: pointer) {.importc: "QLayoutItem_delete".}
 proc `=destroy`(self: var QLayoutItem) =

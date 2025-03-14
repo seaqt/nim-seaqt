@@ -1,4 +1,4 @@
-import ./Qt6Gui_libs
+import ./qtgui_pkg
 
 {.push raises: [].}
 
@@ -59,7 +59,7 @@ proc fcQAccessibleBridgePlugin_metaObject(self: pointer): pointer {.importc: "QA
 proc fcQAccessibleBridgePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QAccessibleBridgePlugin_metacast".}
 proc fcQAccessibleBridgePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAccessibleBridgePlugin_metacall".}
 proc fcQAccessibleBridgePlugin_tr(s: cstring): struct_miqt_string {.importc: "QAccessibleBridgePlugin_tr".}
-proc fcQAccessibleBridgePlugin_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QAccessibleBridgePlugin_create".}
+proc fcQAccessibleBridgePlugin_createX(self: pointer, key: struct_miqt_string): pointer {.importc: "QAccessibleBridgePlugin_create".}
 proc fcQAccessibleBridgePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAccessibleBridgePlugin_tr2".}
 proc fcQAccessibleBridgePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAccessibleBridgePlugin_tr3".}
 proc fcQAccessibleBridgePlugin_vtbl(self: pointer): pointer {.importc: "QAccessibleBridgePlugin_vtbl".}
@@ -69,7 +69,7 @@ type cQAccessibleBridgePluginVTable {.pure.} = object
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  create*: proc(self: pointer, key: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
+  createX*: proc(self: pointer, key: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -119,8 +119,8 @@ proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring
   c_free(v_ms.data)
   vx_ret
 
-proc create*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge =
-  gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_create(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
+proc createX*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge =
+  gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_createX(self.h, struct_miqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAccessibleBridgePlugin_tr2(s, c)
@@ -137,7 +137,7 @@ proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring
 type QAccessibleBridgePluginmetaObjectProc* = proc(self: QAccessibleBridgePlugin): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacastProc* = proc(self: QAccessibleBridgePlugin, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAccessibleBridgePluginmetacallProc* = proc(self: QAccessibleBridgePlugin, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
-type QAccessibleBridgePlugincreateProc* = proc(self: QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
+type QAccessibleBridgePlugincreateXProc* = proc(self: QAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugineventFilterProc* = proc(self: QAccessibleBridgePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAccessibleBridgePlugintimerEventProc* = proc(self: QAccessibleBridgePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -150,7 +150,7 @@ type QAccessibleBridgePluginVTable* {.inheritable, pure.} = object
   metaObject*: QAccessibleBridgePluginmetaObjectProc
   metacast*: QAccessibleBridgePluginmetacastProc
   metacall*: QAccessibleBridgePluginmetacallProc
-  create*: QAccessibleBridgePlugincreateProc
+  createX*: QAccessibleBridgePlugincreateXProc
   event*: QAccessibleBridgePlugineventProc
   eventFilter*: QAccessibleBridgePlugineventFilterProc
   timerEvent*: QAccessibleBridgePlugintimerEventProc
@@ -192,14 +192,14 @@ proc cQAccessibleBridgePlugin_vtable_callback_metacall(self: pointer, param1: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQAccessibleBridgePlugin_vtable_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
+proc cQAccessibleBridgePlugin_vtable_callback_createX(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessibleBridgePluginVTable](fcQAccessibleBridgePlugin_vdata(self))
   let self = QAccessibleBridgePlugin(h: self)
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  var virtualReturn = vtbl[].create(self, slotval1)
+  var virtualReturn = vtbl[].createX(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -301,15 +301,15 @@ proc cQAccessibleBridgePlugin_method_callback_metacall(self: pointer, param1: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method create*(self: VirtualQAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
+method createX*(self: VirtualQAccessibleBridgePlugin, key: openArray[char]): gen_qaccessiblebridge_types.QAccessibleBridge {.base.} =
   raiseAssert("missing implementation of QAccessibleBridgePlugin_virtualbase_create")
-proc cQAccessibleBridgePlugin_method_callback_create(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
+proc cQAccessibleBridgePlugin_method_callback_createX(self: pointer, key: struct_miqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQAccessibleBridgePlugin](fcQAccessibleBridgePlugin_vdata(self))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  var virtualReturn = inst.create(slotval1)
+  var virtualReturn = inst.createX(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -392,8 +392,8 @@ proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
     vtbl[].vtbl.metacast = cQAccessibleBridgePlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQAccessibleBridgePlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQAccessibleBridgePlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQAccessibleBridgePlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQAccessibleBridgePlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -424,8 +424,8 @@ proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
     vtbl[].vtbl.metacast = cQAccessibleBridgePlugin_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = cQAccessibleBridgePlugin_vtable_callback_metacall
-  if not isNil(vtbl[].create):
-    vtbl[].vtbl.create = cQAccessibleBridgePlugin_vtable_callback_create
+  if not isNil(vtbl[].createX):
+    vtbl[].vtbl.createX = cQAccessibleBridgePlugin_vtable_callback_createX
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = cQAccessibleBridgePlugin_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -450,7 +450,7 @@ const cQAccessibleBridgePlugin_mvtbl = cQAccessibleBridgePluginVTable(
   metaObject: cQAccessibleBridgePlugin_method_callback_metaObject,
   metacast: cQAccessibleBridgePlugin_method_callback_metacast,
   metacall: cQAccessibleBridgePlugin_method_callback_metacall,
-  create: cQAccessibleBridgePlugin_method_callback_create,
+  createX: cQAccessibleBridgePlugin_method_callback_createX,
   event: cQAccessibleBridgePlugin_method_callback_event,
   eventFilter: cQAccessibleBridgePlugin_method_callback_eventFilter,
   timerEvent: cQAccessibleBridgePlugin_method_callback_timerEvent,

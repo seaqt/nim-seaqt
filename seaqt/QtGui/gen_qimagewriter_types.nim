@@ -2,8 +2,9 @@ type QImageWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
-{.compile("gen_qimagewriter.cpp", cflags).}
+import ./qtgui_pkg
+
+{.compile("gen_qimagewriter.cpp", QtGuiCFlags).}
 
 proc fcQImageWriter_delete(self: pointer) {.importc: "QImageWriter_delete".}
 proc `=destroy`(self: var QImageWriter) =

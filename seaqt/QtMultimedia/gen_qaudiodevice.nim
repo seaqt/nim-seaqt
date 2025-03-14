@@ -1,4 +1,4 @@
-import ./Qt6Multimedia_libs
+import ./qtmultimedia_pkg
 
 {.push raises: [].}
 

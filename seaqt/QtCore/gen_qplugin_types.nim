@@ -2,8 +2,9 @@ type QPluginMetaData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
-{.compile("gen_qplugin.cpp", cflags).}
+import ./qtcore_pkg
+
+{.compile("gen_qplugin.cpp", QtCoreCFlags).}
 
 proc fcQPluginMetaData_delete(self: pointer) {.importc: "QPluginMetaData_delete".}
 proc `=destroy`(self: var QPluginMetaData) =

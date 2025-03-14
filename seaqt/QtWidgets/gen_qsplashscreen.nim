@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qsplashscreen.cpp", cflags).}
+
+{.compile("gen_qsplashscreen.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qsplashscreen_types
@@ -1297,7 +1297,7 @@ proc cQSplashScreen_method_callback_disconnectNotify(self: pointer, signal: poin
 proc updateMicroFocus*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qsplashscreen_types.QSplashScreen): void =
+proc createX*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qsplashscreen_types.QSplashScreen): void =

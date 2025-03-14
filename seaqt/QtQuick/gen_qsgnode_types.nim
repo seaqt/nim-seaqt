@@ -2,8 +2,9 @@ type QSGNode* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
-{.compile("gen_qsgnode.cpp", cflags).}
+import ./qtquick_pkg
+
+{.compile("gen_qsgnode.cpp", QtQuickCFlags).}
 
 proc fcQSGNode_delete(self: pointer) {.importc: "QSGNode_delete".}
 proc `=destroy`(self: var QSGNode) =

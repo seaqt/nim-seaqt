@@ -1,4 +1,4 @@
-import ./Qt6Network_libs
+import ./qtnetwork_pkg
 
 {.push raises: [].}
 

@@ -1,4 +1,4 @@
-import ./Qt6Widgets_libs
+import ./qtwidgets_pkg
 
 {.push raises: [].}
 
@@ -32,8 +32,8 @@ func fromBytes(T: type string, v: struct_miqt_string): string {.used.} =
     else:
       copyMem(addr result[0], v.data, len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qspinbox.cpp", cflags).}
+
+{.compile("gen_qspinbox.cpp", QtWidgetsCFlags).}
 
 
 import ./gen_qspinbox_types
@@ -1703,7 +1703,7 @@ proc setLineEdit*(self: gen_qspinbox_types.QSpinBox, edit: gen_qlineedit_types.Q
 proc updateMicroFocus*(self: gen_qspinbox_types.QSpinBox): void =
   fcQSpinBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qspinbox_types.QSpinBox): void =
+proc createX*(self: gen_qspinbox_types.QSpinBox): void =
   fcQSpinBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qspinbox_types.QSpinBox): void =
@@ -3371,7 +3371,7 @@ proc setLineEdit*(self: gen_qspinbox_types.QDoubleSpinBox, edit: gen_qlineedit_t
 proc updateMicroFocus*(self: gen_qspinbox_types.QDoubleSpinBox): void =
   fcQDoubleSpinBox_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qspinbox_types.QDoubleSpinBox): void =
+proc createX*(self: gen_qspinbox_types.QDoubleSpinBox): void =
   fcQDoubleSpinBox_protectedbase_create(self.h)
 
 proc destroy*(self: gen_qspinbox_types.QDoubleSpinBox): void =

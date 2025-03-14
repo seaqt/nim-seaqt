@@ -2,8 +2,9 @@ type QColormap* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
-{.compile("gen_qcolormap.cpp", cflags).}
+import ./qtwidgets_pkg
+
+{.compile("gen_qcolormap.cpp", QtWidgetsCFlags).}
 
 proc fcQColormap_delete(self: pointer) {.importc: "QColormap_delete".}
 proc `=destroy`(self: var QColormap) =

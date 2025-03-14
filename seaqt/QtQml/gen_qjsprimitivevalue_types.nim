@@ -2,8 +2,9 @@ type QJSPrimitiveUndefined* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-const cflags = gorge("pkg-config --cflags Qt6Qml") & " -fPIC"
-{.compile("gen_qjsprimitivevalue.cpp", cflags).}
+import ./qtqml_pkg
+
+{.compile("gen_qjsprimitivevalue.cpp", QtQmlCFlags).}
 
 proc fcQJSPrimitiveUndefined_delete(self: pointer) {.importc: "QJSPrimitiveUndefined_delete".}
 proc `=destroy`(self: var QJSPrimitiveUndefined) =

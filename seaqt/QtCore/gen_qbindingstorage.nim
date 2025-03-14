@@ -1,4 +1,4 @@
-import ./Qt6Core_libs
+import ./qtcore_pkg
 
 {.push raises: [].}
 
@@ -47,6 +47,8 @@ type cQBindingStorage*{.exportc: "QBindingStorage", incompleteStruct.} = object
 proc fcQBindingStorage_isEmpty(self: pointer): bool {.importc: "QBindingStorage_isEmpty".}
 proc fcQBindingStorage_isValid(self: pointer): bool {.importc: "QBindingStorage_isValid".}
 proc fcQBindingStorage_registerDependency(self: pointer, data: pointer): void {.importc: "QBindingStorage_registerDependency".}
+proc fcQBindingStorage_bindingData(self: pointer, data: pointer): pointer {.importc: "QBindingStorage_bindingData".}
+proc fcQBindingStorage_bindingData2(self: pointer, data: pointer, createVal: bool): pointer {.importc: "QBindingStorage_bindingData2".}
 proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
 
 proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage): bool =
@@ -57,6 +59,12 @@ proc isValid*(self: gen_qbindingstorage_types.QBindingStorage): bool =
 
 proc registerDependency*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpropertyprivate_types.QUntypedPropertyData): void =
   fcQBindingStorage_registerDependency(self.h, data.h)
+
+proc bindingData*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpropertyprivate_types.QUntypedPropertyData): pointer =
+  fcQBindingStorage_bindingData(self.h, data.h)
+
+proc bindingData*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpropertyprivate_types.QUntypedPropertyData, createVal: bool): pointer =
+  fcQBindingStorage_bindingData2(self.h, data.h, createVal)
 
 proc create*(T: type gen_qbindingstorage_types.QBindingStorage): gen_qbindingstorage_types.QBindingStorage =
   gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new(), owned: true)
