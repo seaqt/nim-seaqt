@@ -1,7 +1,7 @@
 const
   QtSvgCFlags* =
     gorge("pkg-config --cflags Qt6Svg") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtSvgLibs* = gorge("pkg-config --libs Qt6Svg")
 

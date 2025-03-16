@@ -1,7 +1,7 @@
 const
   QtMultimediaWidgetsCFlags* =
     gorge("pkg-config --cflags Qt6MultimediaWidgets") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtMultimediaWidgetsLibs* = gorge("pkg-config --libs Qt6MultimediaWidgets")
 

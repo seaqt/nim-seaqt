@@ -1,7 +1,7 @@
 const
   QtWebChannelCFlags* =
     gorge("pkg-config --cflags Qt6WebChannel") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtWebChannelLibs* = gorge("pkg-config --libs Qt6WebChannel")
 

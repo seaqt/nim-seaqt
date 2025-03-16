@@ -1,7 +1,7 @@
 const
   QtSpatialAudioCFlags* =
     gorge("pkg-config --cflags Qt6SpatialAudio") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtSpatialAudioLibs* = gorge("pkg-config --libs Qt6SpatialAudio")
 

@@ -1,7 +1,7 @@
 const
   QtCoreCFlags* =
     gorge("pkg-config --cflags Qt6Core") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtCoreLibs* = gorge("pkg-config --libs Qt6Core")
 

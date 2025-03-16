@@ -1,7 +1,7 @@
 const
   QtQuickCFlags* =
     gorge("pkg-config --cflags Qt6Quick") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtQuickLibs* = gorge("pkg-config --libs Qt6Quick")
 

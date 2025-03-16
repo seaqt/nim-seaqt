@@ -1,7 +1,7 @@
 const
   QtNetworkCFlags* =
     gorge("pkg-config --cflags Qt6Network") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtNetworkLibs* = gorge("pkg-config --libs Qt6Network")
 
