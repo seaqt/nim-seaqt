@@ -1,7 +1,7 @@
 const
   QtWebKitWidgetsCFlags* =
     gorge("pkg-config --cflags Qt5WebKitWidgets") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtWebKitWidgetsLibs* = gorge("pkg-config --libs Qt5WebKitWidgets")
 

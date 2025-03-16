@@ -1,7 +1,7 @@
 const
   QtPrintSupportCFlags* =
     gorge("pkg-config --cflags Qt5PrintSupport") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtPrintSupportLibs* = gorge("pkg-config --libs Qt5PrintSupport")
 

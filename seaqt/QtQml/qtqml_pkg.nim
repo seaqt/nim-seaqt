@@ -1,7 +1,7 @@
 const
   QtQmlCFlags* =
     gorge("pkg-config --cflags Qt5Qml") &
-    (when declared(gcc) or declared(llvm): " -fPIC" else: "")
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
 
   QtQmlLibs* = gorge("pkg-config --libs Qt5Qml")
 
