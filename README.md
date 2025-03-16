@@ -80,7 +80,7 @@ Each bound Qt type is made of two parts - a C++-based implementation and a Nim-b
 
 The lifetime of the C++ instance generally follows that of the Nim instance - to gain better control over lifetimes, put the handle type in a `ref` wrapper.
 
-Some Qt functions take ownership of the instance passed to them - these are typically functions that make widgets part of the `QObject` / `QWidget` [ownership trees](https://doc.qt.io/qt-6/objecttrees.html). When calling such functions, you must reset the `owner` flag of the Nim instance or the instance will be deleted twice:
+Some Qt functions take ownership of the instance passed to them - these are typically functions that make widgets part of the `QObject` / `QWidget` [ownership trees](https://doc.qt.io/qt-6/objecttrees.html). When calling such functions, you must reset the `owned` flag of the Nim instance or the instance will be deleted twice:
 
 ```nim
 var
@@ -89,7 +89,7 @@ var
 
 # `adddWidget` "takes ownership" according to https://doc.qt.io/qt-6/qtoolbar.html#addWidget
 discard toolbar.addWidget(btn)
-btn.owner = false # Update `owner` flag of Nim instance
+btn.owned = false # Update `owned` flag of Nim instance
 ```
 
 ### Inheritance
