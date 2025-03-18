@@ -57,6 +57,7 @@ proc fcQSGSimpleRectNode_setColor(self: pointer, color: pointer): void {.importc
 proc fcQSGSimpleRectNode_color(self: pointer): pointer {.importc: "QSGSimpleRectNode_color".}
 proc fcQSGSimpleRectNode_vtbl(self: pointer): pointer {.importc: "QSGSimpleRectNode_vtbl".}
 proc fcQSGSimpleRectNode_vdata(self: pointer): pointer {.importc: "QSGSimpleRectNode_vdata".}
+
 type cQSGSimpleRectNodeVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -83,41 +84,47 @@ proc color*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): gen_qcolor_typ
 
 type QSGSimpleRectNodeisSubtreeBlockedProc* = proc(self: QSGSimpleRectNode): bool {.raises: [], gcsafe.}
 type QSGSimpleRectNodepreprocessProc* = proc(self: QSGSimpleRectNode): void {.raises: [], gcsafe.}
+
 type QSGSimpleRectNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGSimpleRectNodeVTable
   isSubtreeBlocked*: QSGSimpleRectNodeisSubtreeBlockedProc
   preprocess*: QSGSimpleRectNodepreprocessProc
+
 proc QSGSimpleRectNodeisSubtreeBlocked*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): bool =
   fcQSGSimpleRectNode_virtualbase_isSubtreeBlocked(self.h)
 
-proc cQSGSimpleRectNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+proc QSGSimpleRectNodepreprocess*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): void =
+  fcQSGSimpleRectNode_virtualbase_preprocess(self.h)
+
+
+proc fcQSGSimpleRectNode_vtable_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGSimpleRectNodeVTable](fcQSGSimpleRectNode_vdata(self))
   let self = QSGSimpleRectNode(h: self)
   var virtualReturn = vtbl[].isSubtreeBlocked(self)
   virtualReturn
 
-proc QSGSimpleRectNodepreprocess*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): void =
-  fcQSGSimpleRectNode_virtualbase_preprocess(self.h)
-
-proc cQSGSimpleRectNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGSimpleRectNode_vtable_callback_preprocess(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGSimpleRectNodeVTable](fcQSGSimpleRectNode_vdata(self))
   let self = QSGSimpleRectNode(h: self)
   vtbl[].preprocess(self)
 
 type VirtualQSGSimpleRectNode* {.inheritable.} = ref object of QSGSimpleRectNode
   vtbl*: cQSGSimpleRectNodeVTable
+
 method isSubtreeBlocked*(self: VirtualQSGSimpleRectNode): bool {.base.} =
   QSGSimpleRectNodeisSubtreeBlocked(self[])
-proc cQSGSimpleRectNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
+method preprocess*(self: VirtualQSGSimpleRectNode): void {.base.} =
+  QSGSimpleRectNodepreprocess(self[])
+
+proc fcQSGSimpleRectNode_method_callback_isSubtreeBlocked(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGSimpleRectNode](fcQSGSimpleRectNode_vdata(self))
   var virtualReturn = inst.isSubtreeBlocked()
   virtualReturn
 
-method preprocess*(self: VirtualQSGSimpleRectNode): void {.base.} =
-  QSGSimpleRectNodepreprocess(self[])
-proc cQSGSimpleRectNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
+proc fcQSGSimpleRectNode_method_callback_preprocess(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGSimpleRectNode](fcQSGSimpleRectNode_vdata(self))
   inst.preprocess()
+
 
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     rect: gen_qrect_types.QRectF, color: gen_qcolor_types.QColor,
@@ -128,9 +135,9 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     let vtbl = cast[ref QSGSimpleRectNodeVTable](fcQSGSimpleRectNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGSimpleRectNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGSimpleRectNode_vtable_callback_preprocess
   gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new(addr(vtbl[].vtbl), addr(vtbl[]), rect.h, color.h), owned: true)
 
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
@@ -141,9 +148,9 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     let vtbl = cast[ref QSGSimpleRectNodeVTable](fcQSGSimpleRectNode_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].isSubtreeBlocked):
-    vtbl[].vtbl.isSubtreeBlocked = cQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
+    vtbl[].vtbl.isSubtreeBlocked = fcQSGSimpleRectNode_vtable_callback_isSubtreeBlocked
   if not isNil(vtbl[].preprocess):
-    vtbl[].vtbl.preprocess = cQSGSimpleRectNode_vtable_callback_preprocess
+    vtbl[].vtbl.preprocess = fcQSGSimpleRectNode_vtable_callback_preprocess
   gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQSGSimpleRectNode_mvtbl = cQSGSimpleRectNodeVTable(
@@ -151,8 +158,9 @@ const cQSGSimpleRectNode_mvtbl = cQSGSimpleRectNodeVTable(
     let inst = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](self.fcQSGSimpleRectNode_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  isSubtreeBlocked: cQSGSimpleRectNode_method_callback_isSubtreeBlocked,
-  preprocess: cQSGSimpleRectNode_method_callback_preprocess,
+
+  isSubtreeBlocked: fcQSGSimpleRectNode_method_callback_isSubtreeBlocked,
+  preprocess: fcQSGSimpleRectNode_method_callback_preprocess,
 )
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     rect: gen_qrect_types.QRectF, color: gen_qcolor_types.QColor,

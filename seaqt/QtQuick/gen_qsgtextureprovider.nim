@@ -89,19 +89,19 @@ proc textureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider): voi
   fcQSGTextureProvider_textureChanged(self.h)
 
 type QSGTextureProvidertextureChangedSlot* = proc()
-proc cQSGTextureProvider_slot_callback_textureChanged(slot: int) {.cdecl.} =
+proc fcQSGTextureProvider_slot_callback_textureChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQSGTextureProvider_slot_callback_textureChanged_release(slot: int) {.cdecl.} =
+proc fcQSGTextureProvider_slot_callback_textureChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, slot: QSGTextureProvidertextureChangedSlot) =
+proc onTextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, slot: QSGTextureProvidertextureChangedSlot) =
   var tmp = new QSGTextureProvidertextureChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSGTextureProvider_connect_textureChanged(self.h, cast[int](addr tmp[]), cQSGTextureProvider_slot_callback_textureChanged, cQSGTextureProvider_slot_callback_textureChanged_release)
+  fcQSGTextureProvider_connect_textureChanged(self.h, cast[int](addr tmp[]), fcQSGTextureProvider_slot_callback_textureChanged, fcQSGTextureProvider_slot_callback_textureChanged_release)
 
 proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring, c: cstring): string =
   let v_ms = fcQSGTextureProvider_tr2(s, c)

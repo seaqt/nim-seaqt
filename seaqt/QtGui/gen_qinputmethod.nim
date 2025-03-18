@@ -190,147 +190,147 @@ proc cursorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_cursorRectangleChanged(self.h)
 
 type QInputMethodcursorRectangleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_cursorRectangleChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_cursorRectangleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodcursorRectangleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_cursorRectangleChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_cursorRectangleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodcursorRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncursorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodcursorRectangleChangedSlot) =
+proc onCursorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodcursorRectangleChangedSlot) =
   var tmp = new QInputMethodcursorRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_cursorRectangleChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_cursorRectangleChanged, cQInputMethod_slot_callback_cursorRectangleChanged_release)
+  fcQInputMethod_connect_cursorRectangleChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_cursorRectangleChanged, fcQInputMethod_slot_callback_cursorRectangleChanged_release)
 
 proc anchorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_anchorRectangleChanged(self.h)
 
 type QInputMethodanchorRectangleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_anchorRectangleChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_anchorRectangleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodanchorRectangleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_anchorRectangleChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_anchorRectangleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodanchorRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onanchorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanchorRectangleChangedSlot) =
+proc onAnchorRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanchorRectangleChangedSlot) =
   var tmp = new QInputMethodanchorRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_anchorRectangleChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_anchorRectangleChanged, cQInputMethod_slot_callback_anchorRectangleChanged_release)
+  fcQInputMethod_connect_anchorRectangleChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_anchorRectangleChanged, fcQInputMethod_slot_callback_anchorRectangleChanged_release)
 
 proc keyboardRectangleChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_keyboardRectangleChanged(self.h)
 
 type QInputMethodkeyboardRectangleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_keyboardRectangleChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_keyboardRectangleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodkeyboardRectangleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_keyboardRectangleChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_keyboardRectangleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodkeyboardRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onkeyboardRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodkeyboardRectangleChangedSlot) =
+proc onKeyboardRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodkeyboardRectangleChangedSlot) =
   var tmp = new QInputMethodkeyboardRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_keyboardRectangleChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_keyboardRectangleChanged, cQInputMethod_slot_callback_keyboardRectangleChanged_release)
+  fcQInputMethod_connect_keyboardRectangleChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_keyboardRectangleChanged, fcQInputMethod_slot_callback_keyboardRectangleChanged_release)
 
 proc inputItemClipRectangleChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_inputItemClipRectangleChanged(self.h)
 
 type QInputMethodinputItemClipRectangleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_inputItemClipRectangleChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_inputItemClipRectangleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodinputItemClipRectangleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_inputItemClipRectangleChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_inputItemClipRectangleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodinputItemClipRectangleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oninputItemClipRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputItemClipRectangleChangedSlot) =
+proc onInputItemClipRectangleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputItemClipRectangleChangedSlot) =
   var tmp = new QInputMethodinputItemClipRectangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_inputItemClipRectangleChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_inputItemClipRectangleChanged, cQInputMethod_slot_callback_inputItemClipRectangleChanged_release)
+  fcQInputMethod_connect_inputItemClipRectangleChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_inputItemClipRectangleChanged, fcQInputMethod_slot_callback_inputItemClipRectangleChanged_release)
 
 proc visibleChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_visibleChanged(self.h)
 
 type QInputMethodvisibleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_visibleChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_visibleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodvisibleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_visibleChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_visibleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodvisibleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvisibleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodvisibleChangedSlot) =
+proc onVisibleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodvisibleChangedSlot) =
   var tmp = new QInputMethodvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_visibleChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_visibleChanged, cQInputMethod_slot_callback_visibleChanged_release)
+  fcQInputMethod_connect_visibleChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_visibleChanged, fcQInputMethod_slot_callback_visibleChanged_release)
 
 proc animatingChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_animatingChanged(self.h)
 
 type QInputMethodanimatingChangedSlot* = proc()
-proc cQInputMethod_slot_callback_animatingChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_animatingChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodanimatingChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_animatingChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_animatingChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodanimatingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onanimatingChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanimatingChangedSlot) =
+proc onAnimatingChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodanimatingChangedSlot) =
   var tmp = new QInputMethodanimatingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_animatingChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_animatingChanged, cQInputMethod_slot_callback_animatingChanged_release)
+  fcQInputMethod_connect_animatingChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_animatingChanged, fcQInputMethod_slot_callback_animatingChanged_release)
 
 proc localeChanged*(self: gen_qinputmethod_types.QInputMethod): void =
   fcQInputMethod_localeChanged(self.h)
 
 type QInputMethodlocaleChangedSlot* = proc()
-proc cQInputMethod_slot_callback_localeChanged(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_localeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodlocaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQInputMethod_slot_callback_localeChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_localeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodlocaleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onlocaleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodlocaleChangedSlot) =
+proc onLocaleChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodlocaleChangedSlot) =
   var tmp = new QInputMethodlocaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_localeChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_localeChanged, cQInputMethod_slot_callback_localeChanged_release)
+  fcQInputMethod_connect_localeChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_localeChanged, fcQInputMethod_slot_callback_localeChanged_release)
 
 proc inputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, newDirection: cint): void =
   fcQInputMethod_inputDirectionChanged(self.h, cint(newDirection))
 
 type QInputMethodinputDirectionChangedSlot* = proc(newDirection: cint)
-proc cQInputMethod_slot_callback_inputDirectionChanged(slot: int, newDirection: cint) {.cdecl.} =
+proc fcQInputMethod_slot_callback_inputDirectionChanged(slot: int, newDirection: cint) {.cdecl.} =
   let nimfunc = cast[ptr QInputMethodinputDirectionChangedSlot](cast[pointer](slot))
   let slotval1 = cint(newDirection)
 
   nimfunc[](slotval1)
 
-proc cQInputMethod_slot_callback_inputDirectionChanged_release(slot: int) {.cdecl.} =
+proc fcQInputMethod_slot_callback_inputDirectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QInputMethodinputDirectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oninputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputDirectionChangedSlot) =
+proc onInputDirectionChanged*(self: gen_qinputmethod_types.QInputMethod, slot: QInputMethodinputDirectionChangedSlot) =
   var tmp = new QInputMethodinputDirectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputMethod_connect_inputDirectionChanged(self.h, cast[int](addr tmp[]), cQInputMethod_slot_callback_inputDirectionChanged, cQInputMethod_slot_callback_inputDirectionChanged_release)
+  fcQInputMethod_connect_inputDirectionChanged(self.h, cast[int](addr tmp[]), fcQInputMethod_slot_callback_inputDirectionChanged, fcQInputMethod_slot_callback_inputDirectionChanged_release)
 
 proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring): string =
   let v_ms = fcQInputMethod_tr2(s, c)

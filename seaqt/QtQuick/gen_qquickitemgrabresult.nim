@@ -103,19 +103,19 @@ proc ready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult): void =
   fcQQuickItemGrabResult_ready(self.h)
 
 type QQuickItemGrabResultreadySlot* = proc()
-proc cQQuickItemGrabResult_slot_callback_ready(slot: int) {.cdecl.} =
+proc fcQQuickItemGrabResult_slot_callback_ready(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemGrabResultreadySlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickItemGrabResult_slot_callback_ready_release(slot: int) {.cdecl.} =
+proc fcQQuickItemGrabResult_slot_callback_ready_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemGrabResultreadySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: QQuickItemGrabResultreadySlot) =
+proc onReady*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: QQuickItemGrabResultreadySlot) =
   var tmp = new QQuickItemGrabResultreadySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItemGrabResult_connect_ready(self.h, cast[int](addr tmp[]), cQQuickItemGrabResult_slot_callback_ready, cQQuickItemGrabResult_slot_callback_ready_release)
+  fcQQuickItemGrabResult_connect_ready(self.h, cast[int](addr tmp[]), fcQQuickItemGrabResult_slot_callback_ready, fcQQuickItemGrabResult_slot_callback_ready_release)
 
 proc tr*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItemGrabResult_tr2(s, c)

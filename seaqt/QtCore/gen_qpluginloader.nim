@@ -76,6 +76,7 @@ proc fcQPluginLoader_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQPluginLoader_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPluginLoader_tr3".}
 proc fcQPluginLoader_vtbl(self: pointer): pointer {.importc: "QPluginLoader_vtbl".}
 proc fcQPluginLoader_vdata(self: pointer): pointer {.importc: "QPluginLoader_vdata".}
+
 type cQPluginLoaderVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -199,6 +200,7 @@ type QPluginLoaderchildEventProc* = proc(self: QPluginLoader, event: gen_qcoreev
 type QPluginLoadercustomEventProc* = proc(self: QPluginLoader, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPluginLoaderconnectNotifyProc* = proc(self: QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPluginLoaderdisconnectNotifyProc* = proc(self: QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QPluginLoaderVTable* {.inheritable, pure.} = object
   vtbl: cQPluginLoaderVTable
   metaObject*: QPluginLoadermetaObjectProc
@@ -211,10 +213,39 @@ type QPluginLoaderVTable* {.inheritable, pure.} = object
   customEvent*: QPluginLoadercustomEventProc
   connectNotify*: QPluginLoaderconnectNotifyProc
   disconnectNotify*: QPluginLoaderdisconnectNotifyProc
+
 proc QPluginLoadermetaObject*(self: gen_qpluginloader_types.QPluginLoader): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPluginLoader_virtualbase_metaObject(self.h), owned: false)
 
-proc cQPluginLoader_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QPluginLoadermetacast*(self: gen_qpluginloader_types.QPluginLoader, param1: cstring): pointer =
+  fcQPluginLoader_virtualbase_metacast(self.h, param1)
+
+proc QPluginLoadermetacall*(self: gen_qpluginloader_types.QPluginLoader, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPluginLoader_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QPluginLoaderevent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPluginLoader_virtualbase_event(self.h, event.h)
+
+proc QPluginLoadereventFilter*(self: gen_qpluginloader_types.QPluginLoader, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQPluginLoader_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QPluginLoadertimerEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQPluginLoader_virtualbase_timerEvent(self.h, event.h)
+
+proc QPluginLoaderchildEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQPluginLoader_virtualbase_childEvent(self.h, event.h)
+
+proc QPluginLoadercustomEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QEvent): void =
+  fcQPluginLoader_virtualbase_customEvent(self.h, event.h)
+
+proc QPluginLoaderconnectNotify*(self: gen_qpluginloader_types.QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPluginLoader_virtualbase_connectNotify(self.h, signal.h)
+
+proc QPluginLoaderdisconnectNotify*(self: gen_qpluginloader_types.QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQPluginLoader_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQPluginLoader_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -223,20 +254,14 @@ proc cQPluginLoader_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QPluginLoadermetacast*(self: gen_qpluginloader_types.QPluginLoader, param1: cstring): pointer =
-  fcQPluginLoader_virtualbase_metacast(self.h, param1)
-
-proc cQPluginLoader_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QPluginLoadermetacall*(self: gen_qpluginloader_types.QPluginLoader, param1: cint, param2: cint, param3: pointer): cint =
-  fcQPluginLoader_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQPluginLoader_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = cint(param1)
@@ -245,20 +270,14 @@ proc cQPluginLoader_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QPluginLoaderevent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPluginLoader_virtualbase_event(self.h, event.h)
-
-proc cQPluginLoader_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QPluginLoadereventFilter*(self: gen_qpluginloader_types.QPluginLoader, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQPluginLoader_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQPluginLoader_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -266,46 +285,31 @@ proc cQPluginLoader_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QPluginLoadertimerEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQPluginLoader_virtualbase_timerEvent(self.h, event.h)
-
-proc cQPluginLoader_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QPluginLoaderchildEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQPluginLoader_virtualbase_childEvent(self.h, event.h)
-
-proc cQPluginLoader_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QPluginLoadercustomEvent*(self: gen_qpluginloader_types.QPluginLoader, event: gen_qcoreevent_types.QEvent): void =
-  fcQPluginLoader_virtualbase_customEvent(self.h, event.h)
-
-proc cQPluginLoader_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QPluginLoaderconnectNotify*(self: gen_qpluginloader_types.QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPluginLoader_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQPluginLoader_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QPluginLoaderdisconnectNotify*(self: gen_qpluginloader_types.QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQPluginLoader_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQPluginLoader_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPluginLoader_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPluginLoaderVTable](fcQPluginLoader_vdata(self))
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -313,9 +317,29 @@ proc cQPluginLoader_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQPluginLoader* {.inheritable.} = ref object of QPluginLoader
   vtbl*: cQPluginLoaderVTable
+
 method metaObject*(self: VirtualQPluginLoader): gen_qobjectdefs_types.QMetaObject {.base.} =
   QPluginLoadermetaObject(self[])
-proc cQPluginLoader_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQPluginLoader, param1: cstring): pointer {.base.} =
+  QPluginLoadermetacast(self[], param1)
+method metacall*(self: VirtualQPluginLoader, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPluginLoadermetacall(self[], param1, param2, param3)
+method event*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPluginLoaderevent(self[], event)
+method eventFilter*(self: VirtualQPluginLoader, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPluginLoadereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPluginLoadertimerEvent(self[], event)
+method childEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPluginLoaderchildEvent(self[], event)
+method customEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPluginLoadercustomEvent(self[], event)
+method connectNotify*(self: VirtualQPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPluginLoaderconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPluginLoaderdisconnectNotify(self[], signal)
+
+proc fcQPluginLoader_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -323,17 +347,13 @@ proc cQPluginLoader_method_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQPluginLoader, param1: cstring): pointer {.base.} =
-  QPluginLoadermetacast(self[], param1)
-proc cQPluginLoader_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQPluginLoader_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQPluginLoader, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QPluginLoadermetacall(self[], param1, param2, param3)
-proc cQPluginLoader_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQPluginLoader_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -341,57 +361,44 @@ proc cQPluginLoader_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPluginLoaderevent(self[], event)
-proc cQPluginLoader_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPluginLoader_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQPluginLoader, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QPluginLoadereventFilter(self[], watched, event)
-proc cQPluginLoader_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQPluginLoader_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QPluginLoadertimerEvent(self[], event)
-proc cQPluginLoader_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QPluginLoaderchildEvent(self[], event)
-proc cQPluginLoader_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQPluginLoader, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QPluginLoadercustomEvent(self[], event)
-proc cQPluginLoader_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQPluginLoader_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPluginLoaderconnectNotify(self[], signal)
-proc cQPluginLoader_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPluginLoader_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QPluginLoaderdisconnectNotify(self[], signal)
-proc cQPluginLoader_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQPluginLoader_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPluginLoader](fcQPluginLoader_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qpluginloader_types.QPluginLoader): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQPluginLoader_protectedbase_sender(self.h), owned: false)
@@ -413,25 +420,25 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     let vtbl = cast[ref QPluginLoaderVTable](fcQPluginLoader_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPluginLoader_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPluginLoader_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPluginLoader_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPluginLoader_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPluginLoader_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPluginLoader_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPluginLoader_vtable_callback_event
+    vtbl[].vtbl.event = fcQPluginLoader_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPluginLoader_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPluginLoader_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPluginLoader_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPluginLoader_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPluginLoader_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPluginLoader_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPluginLoader_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPluginLoader_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPluginLoader_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPluginLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPluginLoader_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPluginLoader_vtable_callback_disconnectNotify
   gen_qpluginloader_types.QPluginLoader(h: fcQPluginLoader_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
@@ -443,25 +450,25 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     let vtbl = cast[ref QPluginLoaderVTable](fcQPluginLoader_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPluginLoader_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPluginLoader_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPluginLoader_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPluginLoader_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPluginLoader_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPluginLoader_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPluginLoader_vtable_callback_event
+    vtbl[].vtbl.event = fcQPluginLoader_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPluginLoader_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPluginLoader_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPluginLoader_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPluginLoader_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPluginLoader_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPluginLoader_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPluginLoader_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPluginLoader_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPluginLoader_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPluginLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPluginLoader_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPluginLoader_vtable_callback_disconnectNotify
   gen_qpluginloader_types.QPluginLoader(h: fcQPluginLoader_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
@@ -473,25 +480,25 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     let vtbl = cast[ref QPluginLoaderVTable](fcQPluginLoader_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPluginLoader_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPluginLoader_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPluginLoader_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPluginLoader_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPluginLoader_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPluginLoader_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPluginLoader_vtable_callback_event
+    vtbl[].vtbl.event = fcQPluginLoader_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPluginLoader_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPluginLoader_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPluginLoader_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPluginLoader_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPluginLoader_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPluginLoader_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPluginLoader_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPluginLoader_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPluginLoader_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPluginLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPluginLoader_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPluginLoader_vtable_callback_disconnectNotify
   gen_qpluginloader_types.QPluginLoader(h: fcQPluginLoader_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
@@ -503,25 +510,25 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     let vtbl = cast[ref QPluginLoaderVTable](fcQPluginLoader_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQPluginLoader_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQPluginLoader_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQPluginLoader_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQPluginLoader_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQPluginLoader_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQPluginLoader_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQPluginLoader_vtable_callback_event
+    vtbl[].vtbl.event = fcQPluginLoader_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQPluginLoader_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQPluginLoader_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQPluginLoader_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQPluginLoader_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQPluginLoader_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQPluginLoader_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQPluginLoader_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQPluginLoader_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQPluginLoader_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQPluginLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQPluginLoader_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQPluginLoader_vtable_callback_disconnectNotify
   gen_qpluginloader_types.QPluginLoader(h: fcQPluginLoader_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), parent.h), owned: true)
 
 const cQPluginLoader_mvtbl = cQPluginLoaderVTable(
@@ -529,16 +536,17 @@ const cQPluginLoader_mvtbl = cQPluginLoaderVTable(
     let inst = cast[ptr typeof(VirtualQPluginLoader()[])](self.fcQPluginLoader_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQPluginLoader_method_callback_metaObject,
-  metacast: cQPluginLoader_method_callback_metacast,
-  metacall: cQPluginLoader_method_callback_metacall,
-  event: cQPluginLoader_method_callback_event,
-  eventFilter: cQPluginLoader_method_callback_eventFilter,
-  timerEvent: cQPluginLoader_method_callback_timerEvent,
-  childEvent: cQPluginLoader_method_callback_childEvent,
-  customEvent: cQPluginLoader_method_callback_customEvent,
-  connectNotify: cQPluginLoader_method_callback_connectNotify,
-  disconnectNotify: cQPluginLoader_method_callback_disconnectNotify,
+
+  metaObject: fcQPluginLoader_method_callback_metaObject,
+  metacast: fcQPluginLoader_method_callback_metacast,
+  metacall: fcQPluginLoader_method_callback_metacall,
+  event: fcQPluginLoader_method_callback_event,
+  eventFilter: fcQPluginLoader_method_callback_eventFilter,
+  timerEvent: fcQPluginLoader_method_callback_timerEvent,
+  childEvent: fcQPluginLoader_method_callback_childEvent,
+  customEvent: fcQPluginLoader_method_callback_customEvent,
+  connectNotify: fcQPluginLoader_method_callback_connectNotify,
+  disconnectNotify: fcQPluginLoader_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     inst: VirtualQPluginLoader) =

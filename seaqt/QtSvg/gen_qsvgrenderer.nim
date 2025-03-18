@@ -96,6 +96,7 @@ proc fcQSvgRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.i
 proc fcQSvgRenderer_render32(self: pointer, p: pointer, elementId: struct_miqt_string, bounds: pointer): void {.importc: "QSvgRenderer_render32".}
 proc fcQSvgRenderer_vtbl(self: pointer): pointer {.importc: "QSvgRenderer_vtbl".}
 proc fcQSvgRenderer_vdata(self: pointer): pointer {.importc: "QSvgRenderer_vdata".}
+
 type cQSvgRendererVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -220,19 +221,19 @@ proc repaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer): void =
   fcQSvgRenderer_repaintNeeded(self.h)
 
 type QSvgRendererrepaintNeededSlot* = proc()
-proc cQSvgRenderer_slot_callback_repaintNeeded(slot: int) {.cdecl.} =
+proc fcQSvgRenderer_slot_callback_repaintNeeded(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSvgRendererrepaintNeededSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQSvgRenderer_slot_callback_repaintNeeded_release(slot: int) {.cdecl.} =
+proc fcQSvgRenderer_slot_callback_repaintNeeded_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QSvgRendererrepaintNeededSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrepaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRendererrepaintNeededSlot) =
+proc onRepaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRendererrepaintNeededSlot) =
   var tmp = new QSvgRendererrepaintNeededSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSvgRenderer_connect_repaintNeeded(self.h, cast[int](addr tmp[]), cQSvgRenderer_slot_callback_repaintNeeded, cQSvgRenderer_slot_callback_repaintNeeded_release)
+  fcQSvgRenderer_connect_repaintNeeded(self.h, cast[int](addr tmp[]), fcQSvgRenderer_slot_callback_repaintNeeded, fcQSvgRenderer_slot_callback_repaintNeeded_release)
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring): string =
   let v_ms = fcQSvgRenderer_tr2(s, c)
@@ -259,6 +260,7 @@ type QSvgRendererchildEventProc* = proc(self: QSvgRenderer, event: gen_qcoreeven
 type QSvgRenderercustomEventProc* = proc(self: QSvgRenderer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSvgRendererconnectNotifyProc* = proc(self: QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSvgRendererdisconnectNotifyProc* = proc(self: QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QSvgRendererVTable* {.inheritable, pure.} = object
   vtbl: cQSvgRendererVTable
   metaObject*: QSvgRenderermetaObjectProc
@@ -271,10 +273,39 @@ type QSvgRendererVTable* {.inheritable, pure.} = object
   customEvent*: QSvgRenderercustomEventProc
   connectNotify*: QSvgRendererconnectNotifyProc
   disconnectNotify*: QSvgRendererdisconnectNotifyProc
+
 proc QSvgRenderermetaObject*(self: gen_qsvgrenderer_types.QSvgRenderer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSvgRenderer_virtualbase_metaObject(self.h), owned: false)
 
-proc cQSvgRenderer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QSvgRenderermetacast*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cstring): pointer =
+  fcQSvgRenderer_virtualbase_metacast(self.h, param1)
+
+proc QSvgRenderermetacall*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSvgRenderer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSvgRendererevent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSvgRenderer_virtualbase_event(self.h, event.h)
+
+proc QSvgRenderereventFilter*(self: gen_qsvgrenderer_types.QSvgRenderer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSvgRenderer_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSvgRenderertimerEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSvgRenderer_virtualbase_timerEvent(self.h, event.h)
+
+proc QSvgRendererchildEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSvgRenderer_virtualbase_childEvent(self.h, event.h)
+
+proc QSvgRenderercustomEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QEvent): void =
+  fcQSvgRenderer_virtualbase_customEvent(self.h, event.h)
+
+proc QSvgRendererconnectNotify*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSvgRenderer_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSvgRendererdisconnectNotify*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSvgRenderer_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQSvgRenderer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -283,20 +314,14 @@ proc cQSvgRenderer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QSvgRenderermetacast*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cstring): pointer =
-  fcQSvgRenderer_virtualbase_metacast(self.h, param1)
-
-proc cQSvgRenderer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QSvgRenderermetacall*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cint, param2: cint, param3: pointer): cint =
-  fcQSvgRenderer_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQSvgRenderer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = cint(param1)
@@ -305,20 +330,14 @@ proc cQSvgRenderer_vtable_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSvgRendererevent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSvgRenderer_virtualbase_event(self.h, event.h)
-
-proc cQSvgRenderer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QSvgRenderereventFilter*(self: gen_qsvgrenderer_types.QSvgRenderer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQSvgRenderer_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQSvgRenderer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -326,46 +345,31 @@ proc cQSvgRenderer_vtable_callback_eventFilter(self: pointer, watched: pointer, 
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QSvgRenderertimerEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQSvgRenderer_virtualbase_timerEvent(self.h, event.h)
-
-proc cQSvgRenderer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QSvgRendererchildEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQSvgRenderer_virtualbase_childEvent(self.h, event.h)
-
-proc cQSvgRenderer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QSvgRenderercustomEvent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QEvent): void =
-  fcQSvgRenderer_virtualbase_customEvent(self.h, event.h)
-
-proc cQSvgRenderer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QSvgRendererconnectNotify*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSvgRenderer_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQSvgRenderer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QSvgRendererdisconnectNotify*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQSvgRenderer_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQSvgRenderer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSvgRendererVTable](fcQSvgRenderer_vdata(self))
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -373,9 +377,29 @@ proc cQSvgRenderer_vtable_callback_disconnectNotify(self: pointer, signal: point
 
 type VirtualQSvgRenderer* {.inheritable.} = ref object of QSvgRenderer
   vtbl*: cQSvgRendererVTable
+
 method metaObject*(self: VirtualQSvgRenderer): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSvgRenderermetaObject(self[])
-proc cQSvgRenderer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQSvgRenderer, param1: cstring): pointer {.base.} =
+  QSvgRenderermetacast(self[], param1)
+method metacall*(self: VirtualQSvgRenderer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSvgRenderermetacall(self[], param1, param2, param3)
+method event*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSvgRendererevent(self[], event)
+method eventFilter*(self: VirtualQSvgRenderer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSvgRenderereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSvgRenderertimerEvent(self[], event)
+method childEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSvgRendererchildEvent(self[], event)
+method customEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSvgRenderercustomEvent(self[], event)
+method connectNotify*(self: VirtualQSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSvgRendererconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSvgRendererdisconnectNotify(self[], signal)
+
+proc fcQSvgRenderer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -383,17 +407,13 @@ proc cQSvgRenderer_method_callback_metaObject(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQSvgRenderer, param1: cstring): pointer {.base.} =
-  QSvgRenderermetacast(self[], param1)
-proc cQSvgRenderer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQSvgRenderer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQSvgRenderer, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QSvgRenderermetacall(self[], param1, param2, param3)
-proc cQSvgRenderer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQSvgRenderer_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -401,57 +421,44 @@ proc cQSvgRenderer_method_callback_metacall(self: pointer, param1: cint, param2:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSvgRendererevent(self[], event)
-proc cQSvgRenderer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSvgRenderer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQSvgRenderer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QSvgRenderereventFilter(self[], watched, event)
-proc cQSvgRenderer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQSvgRenderer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QSvgRenderertimerEvent(self[], event)
-proc cQSvgRenderer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QSvgRendererchildEvent(self[], event)
-proc cQSvgRenderer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQSvgRenderer, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QSvgRenderercustomEvent(self[], event)
-proc cQSvgRenderer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSvgRendererconnectNotify(self[], signal)
-proc cQSvgRenderer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QSvgRendererdisconnectNotify(self[], signal)
-proc cQSvgRenderer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQSvgRenderer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSvgRenderer](fcQSvgRenderer_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qsvgrenderer_types.QSvgRenderer): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSvgRenderer_protectedbase_sender(self.h), owned: false)
@@ -473,25 +480,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -503,25 +510,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename)))), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -533,25 +540,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: cast[cstring](if len(contents) == 0: nil else: unsafeAddr contents[0]), len: csize_t(len(contents)))), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -563,25 +570,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new4(addr(vtbl[].vtbl), addr(vtbl[]), contents.h), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -593,25 +600,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new5(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -623,25 +630,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new6(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))), parent.h), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -653,25 +660,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new7(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: cast[cstring](if len(contents) == 0: nil else: unsafeAddr contents[0]), len: csize_t(len(contents))), parent.h), owned: true)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
@@ -683,25 +690,25 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     let vtbl = cast[ref QSvgRendererVTable](fcQSvgRenderer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQSvgRenderer_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQSvgRenderer_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQSvgRenderer_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQSvgRenderer_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQSvgRenderer_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQSvgRenderer_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQSvgRenderer_vtable_callback_event
+    vtbl[].vtbl.event = fcQSvgRenderer_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQSvgRenderer_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQSvgRenderer_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQSvgRenderer_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQSvgRenderer_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQSvgRenderer_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQSvgRenderer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQSvgRenderer_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQSvgRenderer_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQSvgRenderer_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQSvgRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQSvgRenderer_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQSvgRenderer_vtable_callback_disconnectNotify
   gen_qsvgrenderer_types.QSvgRenderer(h: fcQSvgRenderer_new8(addr(vtbl[].vtbl), addr(vtbl[]), contents.h, parent.h), owned: true)
 
 const cQSvgRenderer_mvtbl = cQSvgRendererVTable(
@@ -709,16 +716,17 @@ const cQSvgRenderer_mvtbl = cQSvgRendererVTable(
     let inst = cast[ptr typeof(VirtualQSvgRenderer()[])](self.fcQSvgRenderer_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQSvgRenderer_method_callback_metaObject,
-  metacast: cQSvgRenderer_method_callback_metacast,
-  metacall: cQSvgRenderer_method_callback_metacall,
-  event: cQSvgRenderer_method_callback_event,
-  eventFilter: cQSvgRenderer_method_callback_eventFilter,
-  timerEvent: cQSvgRenderer_method_callback_timerEvent,
-  childEvent: cQSvgRenderer_method_callback_childEvent,
-  customEvent: cQSvgRenderer_method_callback_customEvent,
-  connectNotify: cQSvgRenderer_method_callback_connectNotify,
-  disconnectNotify: cQSvgRenderer_method_callback_disconnectNotify,
+
+  metaObject: fcQSvgRenderer_method_callback_metaObject,
+  metacast: fcQSvgRenderer_method_callback_metacast,
+  metacall: fcQSvgRenderer_method_callback_metacall,
+  event: fcQSvgRenderer_method_callback_event,
+  eventFilter: fcQSvgRenderer_method_callback_eventFilter,
+  timerEvent: fcQSvgRenderer_method_callback_timerEvent,
+  childEvent: fcQSvgRenderer_method_callback_childEvent,
+  customEvent: fcQSvgRenderer_method_callback_customEvent,
+  connectNotify: fcQSvgRenderer_method_callback_connectNotify,
+  disconnectNotify: fcQSvgRenderer_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     inst: VirtualQSvgRenderer) =

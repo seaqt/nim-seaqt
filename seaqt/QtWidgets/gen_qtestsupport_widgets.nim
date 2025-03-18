@@ -62,6 +62,7 @@ proc fcQTestQTouchEventWidgetSequence_move3(self: pointer, touchId: cint, pt: po
 proc fcQTestQTouchEventWidgetSequence_release3(self: pointer, touchId: cint, pt: pointer, widget: pointer): pointer {.importc: "QTest__QTouchEventWidgetSequence_release3".}
 proc fcQTestQTouchEventWidgetSequence_vtbl(self: pointer): pointer {.importc: "QTest__QTouchEventWidgetSequence_vtbl".}
 proc fcQTestQTouchEventWidgetSequence_vdata(self: pointer): pointer {.importc: "QTest__QTouchEventWidgetSequence_vdata".}
+
 type cQTestQTouchEventWidgetSequenceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   stationary*: proc(self: pointer, touchId: cint): pointer {.cdecl, raises: [], gcsafe.}
@@ -98,14 +99,20 @@ proc release*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequenc
 
 type QTestQTouchEventWidgetSequencestationaryProc* = proc(self: QTestQTouchEventWidgetSequence, touchId: cint): gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence {.raises: [], gcsafe.}
 type QTestQTouchEventWidgetSequencecommitProc* = proc(self: QTestQTouchEventWidgetSequence, processEvents: bool): bool {.raises: [], gcsafe.}
+
 type QTestQTouchEventWidgetSequenceVTable* {.inheritable, pure.} = object
   vtbl: cQTestQTouchEventWidgetSequenceVTable
   stationary*: QTestQTouchEventWidgetSequencestationaryProc
   commit*: QTestQTouchEventWidgetSequencecommitProc
+
 proc QTestQTouchEventWidgetSequencestationary*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, touchId: cint): gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence =
   gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence(h: fcQTestQTouchEventWidgetSequence_virtualbase_stationary(self.h, touchId), owned: false)
 
-proc cQTestQTouchEventWidgetSequence_vtable_callback_stationary(self: pointer, touchId: cint): pointer {.cdecl.} =
+proc QTestQTouchEventWidgetSequencecommit*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, processEvents: bool): bool =
+  fcQTestQTouchEventWidgetSequence_virtualbase_commit(self.h, processEvents)
+
+
+proc fcQTestQTouchEventWidgetSequence_vtable_callback_stationary(self: pointer, touchId: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTestQTouchEventWidgetSequenceVTable](fcQTestQTouchEventWidgetSequence_vdata(self))
   let self = QTestQTouchEventWidgetSequence(h: self)
   let slotval1 = touchId
@@ -115,10 +122,7 @@ proc cQTestQTouchEventWidgetSequence_vtable_callback_stationary(self: pointer, t
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTestQTouchEventWidgetSequencecommit*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, processEvents: bool): bool =
-  fcQTestQTouchEventWidgetSequence_virtualbase_commit(self.h, processEvents)
-
-proc cQTestQTouchEventWidgetSequence_vtable_callback_commit(self: pointer, processEvents: bool): bool {.cdecl.} =
+proc fcQTestQTouchEventWidgetSequence_vtable_callback_commit(self: pointer, processEvents: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QTestQTouchEventWidgetSequenceVTable](fcQTestQTouchEventWidgetSequence_vdata(self))
   let self = QTestQTouchEventWidgetSequence(h: self)
   let slotval1 = processEvents
@@ -127,9 +131,13 @@ proc cQTestQTouchEventWidgetSequence_vtable_callback_commit(self: pointer, proce
 
 type VirtualQTestQTouchEventWidgetSequence* {.inheritable.} = ref object of QTestQTouchEventWidgetSequence
   vtbl*: cQTestQTouchEventWidgetSequenceVTable
+
 method stationary*(self: VirtualQTestQTouchEventWidgetSequence, touchId: cint): gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence {.base.} =
   QTestQTouchEventWidgetSequencestationary(self[], touchId)
-proc cQTestQTouchEventWidgetSequence_method_callback_stationary(self: pointer, touchId: cint): pointer {.cdecl.} =
+method commit*(self: VirtualQTestQTouchEventWidgetSequence, processEvents: bool): bool {.base.} =
+  QTestQTouchEventWidgetSequencecommit(self[], processEvents)
+
+proc fcQTestQTouchEventWidgetSequence_method_callback_stationary(self: pointer, touchId: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTestQTouchEventWidgetSequence](fcQTestQTouchEventWidgetSequence_vdata(self))
   let slotval1 = touchId
   var virtualReturn = inst.stationary(slotval1)
@@ -138,13 +146,12 @@ proc cQTestQTouchEventWidgetSequence_method_callback_stationary(self: pointer, t
   virtualReturn.h = nil
   virtualReturn_h
 
-method commit*(self: VirtualQTestQTouchEventWidgetSequence, processEvents: bool): bool {.base.} =
-  QTestQTouchEventWidgetSequencecommit(self[], processEvents)
-proc cQTestQTouchEventWidgetSequence_method_callback_commit(self: pointer, processEvents: bool): bool {.cdecl.} =
+proc fcQTestQTouchEventWidgetSequence_method_callback_commit(self: pointer, processEvents: bool): bool {.cdecl.} =
   let inst = cast[VirtualQTestQTouchEventWidgetSequence](fcQTestQTouchEventWidgetSequence_vdata(self))
   let slotval1 = processEvents
   var virtualReturn = inst.commit(slotval1)
   virtualReturn
+
 
 proc point*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, touchId: cint): gen_qeventpoint_types.QEventPoint =
   gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventWidgetSequence_protectedbase_point(self.h, touchId), owned: false)
@@ -161,9 +168,9 @@ proc create*(T: type gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequen
     let vtbl = cast[ref QTestQTouchEventWidgetSequenceVTable](fcQTestQTouchEventWidgetSequence_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].stationary):
-    vtbl[].vtbl.stationary = cQTestQTouchEventWidgetSequence_vtable_callback_stationary
+    vtbl[].vtbl.stationary = fcQTestQTouchEventWidgetSequence_vtable_callback_stationary
   if not isNil(vtbl[].commit):
-    vtbl[].vtbl.commit = cQTestQTouchEventWidgetSequence_vtable_callback_commit
+    vtbl[].vtbl.commit = fcQTestQTouchEventWidgetSequence_vtable_callback_commit
   gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence(h: fcQTestQTouchEventWidgetSequence_new(addr(vtbl[].vtbl), addr(vtbl[]), param1.h), owned: true)
 
 const cQTestQTouchEventWidgetSequence_mvtbl = cQTestQTouchEventWidgetSequenceVTable(
@@ -171,8 +178,9 @@ const cQTestQTouchEventWidgetSequence_mvtbl = cQTestQTouchEventWidgetSequenceVTa
     let inst = cast[ptr typeof(VirtualQTestQTouchEventWidgetSequence()[])](self.fcQTestQTouchEventWidgetSequence_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  stationary: cQTestQTouchEventWidgetSequence_method_callback_stationary,
-  commit: cQTestQTouchEventWidgetSequence_method_callback_commit,
+
+  stationary: fcQTestQTouchEventWidgetSequence_method_callback_stationary,
+  commit: fcQTestQTouchEventWidgetSequence_method_callback_commit,
 )
 proc create*(T: type gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence,
     param1: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence,

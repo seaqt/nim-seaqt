@@ -142,6 +142,7 @@ proc fcQFormLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQFormLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFormLayout_tr3".}
 proc fcQFormLayout_vtbl(self: pointer): pointer {.importc: "QFormLayout_vtbl".}
 proc fcQFormLayout_vdata(self: pointer): pointer {.importc: "QFormLayout_vdata".}
+
 type cQFormLayoutVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -451,6 +452,7 @@ type QFormLayoutdisconnectNotifyProc* = proc(self: QFormLayout, signal: gen_qmet
 type QFormLayoutminimumHeightForWidthProc* = proc(self: QFormLayout, param1: cint): cint {.raises: [], gcsafe.}
 type QFormLayoutwidgetProc* = proc(self: QFormLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QFormLayoutspacerItemProc* = proc(self: QFormLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
+
 type QFormLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQFormLayoutVTable
   metaObject*: QFormLayoutmetaObjectProc
@@ -486,10 +488,108 @@ type QFormLayoutVTable* {.inheritable, pure.} = object
   minimumHeightForWidth*: QFormLayoutminimumHeightForWidthProc
   widget*: QFormLayoutwidgetProc
   spacerItem*: QFormLayoutspacerItemProc
+
 proc QFormLayoutmetaObject*(self: gen_qformlayout_types.QFormLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFormLayout_virtualbase_metaObject(self.h), owned: false)
 
-proc cQFormLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QFormLayoutmetacast*(self: gen_qformlayout_types.QFormLayout, param1: cstring): pointer =
+  fcQFormLayout_virtualbase_metacast(self.h, param1)
+
+proc QFormLayoutmetacall*(self: gen_qformlayout_types.QFormLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFormLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QFormLayoutspacing*(self: gen_qformlayout_types.QFormLayout): cint =
+  fcQFormLayout_virtualbase_spacing(self.h)
+
+proc QFormLayoutsetSpacing*(self: gen_qformlayout_types.QFormLayout, spacing: cint): void =
+  fcQFormLayout_virtualbase_setSpacing(self.h, spacing)
+
+proc QFormLayoutaddItem*(self: gen_qformlayout_types.QFormLayout, item: gen_qlayoutitem_types.QLayoutItem): void =
+  fcQFormLayout_virtualbase_addItem(self.h, item.h)
+
+proc QFormLayoutitemAt*(self: gen_qformlayout_types.QFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
+  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_itemAtWithIndex(self.h, index), owned: false)
+
+proc QFormLayouttakeAt*(self: gen_qformlayout_types.QFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
+  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_takeAt(self.h, index), owned: false)
+
+proc QFormLayoutsetGeometry*(self: gen_qformlayout_types.QFormLayout, rect: gen_qrect_types.QRect): void =
+  fcQFormLayout_virtualbase_setGeometry(self.h, rect.h)
+
+proc QFormLayoutminimumSize*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_minimumSize(self.h), owned: true)
+
+proc QFormLayoutsizeHint*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_sizeHint(self.h), owned: true)
+
+proc QFormLayoutinvalidate*(self: gen_qformlayout_types.QFormLayout): void =
+  fcQFormLayout_virtualbase_invalidate(self.h)
+
+proc QFormLayouthasHeightForWidth*(self: gen_qformlayout_types.QFormLayout): bool =
+  fcQFormLayout_virtualbase_hasHeightForWidth(self.h)
+
+proc QFormLayoutheightForWidth*(self: gen_qformlayout_types.QFormLayout, width: cint): cint =
+  fcQFormLayout_virtualbase_heightForWidth(self.h, width)
+
+proc QFormLayoutexpandingDirections*(self: gen_qformlayout_types.QFormLayout): cint =
+  cint(fcQFormLayout_virtualbase_expandingDirections(self.h))
+
+proc QFormLayoutcount*(self: gen_qformlayout_types.QFormLayout): cint =
+  fcQFormLayout_virtualbase_count(self.h)
+
+proc QFormLayoutgeometry*(self: gen_qformlayout_types.QFormLayout): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQFormLayout_virtualbase_geometry(self.h), owned: true)
+
+proc QFormLayoutmaximumSize*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_maximumSize(self.h), owned: true)
+
+proc QFormLayoutindexOf*(self: gen_qformlayout_types.QFormLayout, param1: gen_qwidget_types.QWidget): cint =
+  fcQFormLayout_virtualbase_indexOf(self.h, param1.h)
+
+proc QFormLayoutisEmpty*(self: gen_qformlayout_types.QFormLayout): bool =
+  fcQFormLayout_virtualbase_isEmpty(self.h)
+
+proc QFormLayoutcontrolTypes*(self: gen_qformlayout_types.QFormLayout): cint =
+  cint(fcQFormLayout_virtualbase_controlTypes(self.h))
+
+proc QFormLayoutreplaceWidget*(self: gen_qformlayout_types.QFormLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem =
+  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_replaceWidget(self.h, fromVal.h, to.h, cint(options)), owned: false)
+
+proc QFormLayoutlayout*(self: gen_qformlayout_types.QFormLayout): gen_qlayout_types.QLayout =
+  gen_qlayout_types.QLayout(h: fcQFormLayout_virtualbase_layout(self.h), owned: false)
+
+proc QFormLayoutchildEvent*(self: gen_qformlayout_types.QFormLayout, e: gen_qcoreevent_types.QChildEvent): void =
+  fcQFormLayout_virtualbase_childEvent(self.h, e.h)
+
+proc QFormLayoutevent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFormLayout_virtualbase_event(self.h, event.h)
+
+proc QFormLayouteventFilter*(self: gen_qformlayout_types.QFormLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQFormLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QFormLayouttimerEvent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQFormLayout_virtualbase_timerEvent(self.h, event.h)
+
+proc QFormLayoutcustomEvent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QEvent): void =
+  fcQFormLayout_virtualbase_customEvent(self.h, event.h)
+
+proc QFormLayoutconnectNotify*(self: gen_qformlayout_types.QFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFormLayout_virtualbase_connectNotify(self.h, signal.h)
+
+proc QFormLayoutdisconnectNotify*(self: gen_qformlayout_types.QFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQFormLayout_virtualbase_disconnectNotify(self.h, signal.h)
+
+proc QFormLayoutminimumHeightForWidth*(self: gen_qformlayout_types.QFormLayout, param1: cint): cint =
+  fcQFormLayout_virtualbase_minimumHeightForWidth(self.h, param1)
+
+proc QFormLayoutwidget*(self: gen_qformlayout_types.QFormLayout): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQFormLayout_virtualbase_widget(self.h), owned: false)
+
+proc QFormLayoutspacerItem*(self: gen_qformlayout_types.QFormLayout): gen_qlayoutitem_types.QSpacerItem =
+  gen_qlayoutitem_types.QSpacerItem(h: fcQFormLayout_virtualbase_spacerItem(self.h), owned: false)
+
+
+proc fcQFormLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -498,20 +598,14 @@ proc cQFormLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutmetacast*(self: gen_qformlayout_types.QFormLayout, param1: cstring): pointer =
-  fcQFormLayout_virtualbase_metacast(self.h, param1)
-
-proc cQFormLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QFormLayoutmetacall*(self: gen_qformlayout_types.QFormLayout, param1: cint, param2: cint, param3: pointer): cint =
-  fcQFormLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQFormLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = cint(param1)
@@ -520,37 +614,25 @@ proc cQFormLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QFormLayoutspacing*(self: gen_qformlayout_types.QFormLayout): cint =
-  fcQFormLayout_virtualbase_spacing(self.h)
-
-proc cQFormLayout_vtable_callback_spacing(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_spacing(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].spacing(self)
   virtualReturn
 
-proc QFormLayoutsetSpacing*(self: gen_qformlayout_types.QFormLayout, spacing: cint): void =
-  fcQFormLayout_virtualbase_setSpacing(self.h, spacing)
-
-proc cQFormLayout_vtable_callback_setSpacing(self: pointer, spacing: cint): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_setSpacing(self: pointer, spacing: cint): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = spacing
   vtbl[].setSpacing(self, slotval1)
 
-proc QFormLayoutaddItem*(self: gen_qformlayout_types.QFormLayout, item: gen_qlayoutitem_types.QLayoutItem): void =
-  fcQFormLayout_virtualbase_addItem(self.h, item.h)
-
-proc cQFormLayout_vtable_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   vtbl[].addItem(self, slotval1)
 
-proc QFormLayoutitemAt*(self: gen_qformlayout_types.QFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_itemAtWithIndex(self.h, index), owned: false)
-
-proc cQFormLayout_vtable_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = index
@@ -560,10 +642,7 @@ proc cQFormLayout_vtable_callback_itemAtWithIndex(self: pointer, index: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayouttakeAt*(self: gen_qformlayout_types.QFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_takeAt(self.h, index), owned: false)
-
-proc cQFormLayout_vtable_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = index
@@ -573,19 +652,13 @@ proc cQFormLayout_vtable_callback_takeAt(self: pointer, index: cint): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutsetGeometry*(self: gen_qformlayout_types.QFormLayout, rect: gen_qrect_types.QRect): void =
-  fcQFormLayout_virtualbase_setGeometry(self.h, rect.h)
-
-proc cQFormLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
-proc QFormLayoutminimumSize*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_minimumSize(self.h), owned: true)
-
-proc cQFormLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
@@ -594,10 +667,7 @@ proc cQFormLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutsizeHint*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQFormLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -606,55 +676,37 @@ proc cQFormLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutinvalidate*(self: gen_qformlayout_types.QFormLayout): void =
-  fcQFormLayout_virtualbase_invalidate(self.h)
-
-proc cQFormLayout_vtable_callback_invalidate(self: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_invalidate(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   vtbl[].invalidate(self)
 
-proc QFormLayouthasHeightForWidth*(self: gen_qformlayout_types.QFormLayout): bool =
-  fcQFormLayout_virtualbase_hasHeightForWidth(self.h)
-
-proc cQFormLayout_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQFormLayout_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QFormLayoutheightForWidth*(self: gen_qformlayout_types.QFormLayout, width: cint): cint =
-  fcQFormLayout_virtualbase_heightForWidth(self.h, width)
-
-proc cQFormLayout_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = width
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QFormLayoutexpandingDirections*(self: gen_qformlayout_types.QFormLayout): cint =
-  cint(fcQFormLayout_virtualbase_expandingDirections(self.h))
-
-proc cQFormLayout_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].expandingDirections(self)
   cint(virtualReturn)
 
-proc QFormLayoutcount*(self: gen_qformlayout_types.QFormLayout): cint =
-  fcQFormLayout_virtualbase_count(self.h)
-
-proc cQFormLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].count(self)
   virtualReturn
 
-proc QFormLayoutgeometry*(self: gen_qformlayout_types.QFormLayout): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQFormLayout_virtualbase_geometry(self.h), owned: true)
-
-proc cQFormLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
@@ -663,10 +715,7 @@ proc cQFormLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutmaximumSize*(self: gen_qformlayout_types.QFormLayout): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQFormLayout_virtualbase_maximumSize(self.h), owned: true)
-
-proc cQFormLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
@@ -675,38 +724,26 @@ proc cQFormLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutindexOf*(self: gen_qformlayout_types.QFormLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQFormLayout_virtualbase_indexOf(self.h, param1.h)
-
-proc cQFormLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
-proc QFormLayoutisEmpty*(self: gen_qformlayout_types.QFormLayout): bool =
-  fcQFormLayout_virtualbase_isEmpty(self.h)
-
-proc cQFormLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
+proc fcQFormLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].isEmpty(self)
   virtualReturn
 
-proc QFormLayoutcontrolTypes*(self: gen_qformlayout_types.QFormLayout): cint =
-  cint(fcQFormLayout_virtualbase_controlTypes(self.h))
-
-proc cQFormLayout_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].controlTypes(self)
   cint(virtualReturn)
 
-proc QFormLayoutreplaceWidget*(self: gen_qformlayout_types.QFormLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQFormLayout_virtualbase_replaceWidget(self.h, fromVal.h, to.h, cint(options)), owned: false)
-
-proc cQFormLayout_vtable_callback_replaceWidget(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_replaceWidget(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: fromVal, owned: false)
@@ -718,10 +755,7 @@ proc cQFormLayout_vtable_callback_replaceWidget(self: pointer, fromVal: pointer,
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutlayout*(self: gen_qformlayout_types.QFormLayout): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQFormLayout_virtualbase_layout(self.h), owned: false)
-
-proc cQFormLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
@@ -730,29 +764,20 @@ proc cQFormLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutchildEvent*(self: gen_qformlayout_types.QFormLayout, e: gen_qcoreevent_types.QChildEvent): void =
-  fcQFormLayout_virtualbase_childEvent(self.h, e.h)
-
-proc cQFormLayout_vtable_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QFormLayoutevent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFormLayout_virtualbase_event(self.h, event.h)
-
-proc cQFormLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFormLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QFormLayouteventFilter*(self: gen_qformlayout_types.QFormLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQFormLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQFormLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFormLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -760,56 +785,38 @@ proc cQFormLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, e
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QFormLayouttimerEvent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQFormLayout_virtualbase_timerEvent(self.h, event.h)
-
-proc cQFormLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QFormLayoutcustomEvent*(self: gen_qformlayout_types.QFormLayout, event: gen_qcoreevent_types.QEvent): void =
-  fcQFormLayout_virtualbase_customEvent(self.h, event.h)
-
-proc cQFormLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QFormLayoutconnectNotify*(self: gen_qformlayout_types.QFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFormLayout_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQFormLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QFormLayoutdisconnectNotify*(self: gen_qformlayout_types.QFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQFormLayout_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQFormLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFormLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
-proc QFormLayoutminimumHeightForWidth*(self: gen_qformlayout_types.QFormLayout, param1: cint): cint =
-  fcQFormLayout_virtualbase_minimumHeightForWidth(self.h, param1)
-
-proc cQFormLayout_vtable_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFormLayout_vtable_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].minimumHeightForWidth(self, slotval1)
   virtualReturn
 
-proc QFormLayoutwidget*(self: gen_qformlayout_types.QFormLayout): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQFormLayout_virtualbase_widget(self.h), owned: false)
-
-proc cQFormLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
@@ -818,10 +825,7 @@ proc cQFormLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QFormLayoutspacerItem*(self: gen_qformlayout_types.QFormLayout): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQFormLayout_virtualbase_spacerItem(self.h), owned: false)
-
-proc cQFormLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormLayoutVTable](fcQFormLayout_vdata(self))
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
@@ -832,9 +836,75 @@ proc cQFormLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
 
 type VirtualQFormLayout* {.inheritable.} = ref object of QFormLayout
   vtbl*: cQFormLayoutVTable
+
 method metaObject*(self: VirtualQFormLayout): gen_qobjectdefs_types.QMetaObject {.base.} =
   QFormLayoutmetaObject(self[])
-proc cQFormLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQFormLayout, param1: cstring): pointer {.base.} =
+  QFormLayoutmetacast(self[], param1)
+method metacall*(self: VirtualQFormLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFormLayoutmetacall(self[], param1, param2, param3)
+method spacing*(self: VirtualQFormLayout): cint {.base.} =
+  QFormLayoutspacing(self[])
+method setSpacing*(self: VirtualQFormLayout, spacing: cint): void {.base.} =
+  QFormLayoutsetSpacing(self[], spacing)
+method addItem*(self: VirtualQFormLayout, item: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QFormLayoutaddItem(self[], item)
+method itemAt*(self: VirtualQFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QFormLayoutitemAt(self[], index)
+method takeAt*(self: VirtualQFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QFormLayouttakeAt(self[], index)
+method setGeometry*(self: VirtualQFormLayout, rect: gen_qrect_types.QRect): void {.base.} =
+  QFormLayoutsetGeometry(self[], rect)
+method minimumSize*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
+  QFormLayoutminimumSize(self[])
+method sizeHint*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
+  QFormLayoutsizeHint(self[])
+method invalidate*(self: VirtualQFormLayout): void {.base.} =
+  QFormLayoutinvalidate(self[])
+method hasHeightForWidth*(self: VirtualQFormLayout): bool {.base.} =
+  QFormLayouthasHeightForWidth(self[])
+method heightForWidth*(self: VirtualQFormLayout, width: cint): cint {.base.} =
+  QFormLayoutheightForWidth(self[], width)
+method expandingDirections*(self: VirtualQFormLayout): cint {.base.} =
+  QFormLayoutexpandingDirections(self[])
+method count*(self: VirtualQFormLayout): cint {.base.} =
+  QFormLayoutcount(self[])
+method geometry*(self: VirtualQFormLayout): gen_qrect_types.QRect {.base.} =
+  QFormLayoutgeometry(self[])
+method maximumSize*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
+  QFormLayoutmaximumSize(self[])
+method indexOf*(self: VirtualQFormLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QFormLayoutindexOf(self[], param1)
+method isEmpty*(self: VirtualQFormLayout): bool {.base.} =
+  QFormLayoutisEmpty(self[])
+method controlTypes*(self: VirtualQFormLayout): cint {.base.} =
+  QFormLayoutcontrolTypes(self[])
+method replaceWidget*(self: VirtualQFormLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QFormLayoutreplaceWidget(self[], fromVal, to, options)
+method layout*(self: VirtualQFormLayout): gen_qlayout_types.QLayout {.base.} =
+  QFormLayoutlayout(self[])
+method childEvent*(self: VirtualQFormLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFormLayoutchildEvent(self[], e)
+method event*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFormLayoutevent(self[], event)
+method eventFilter*(self: VirtualQFormLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFormLayouteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFormLayouttimerEvent(self[], event)
+method customEvent*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFormLayoutcustomEvent(self[], event)
+method connectNotify*(self: VirtualQFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFormLayoutconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFormLayoutdisconnectNotify(self[], signal)
+method minimumHeightForWidth*(self: VirtualQFormLayout, param1: cint): cint {.base.} =
+  QFormLayoutminimumHeightForWidth(self[], param1)
+method widget*(self: VirtualQFormLayout): gen_qwidget_types.QWidget {.base.} =
+  QFormLayoutwidget(self[])
+method spacerItem*(self: VirtualQFormLayout): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QFormLayoutspacerItem(self[])
+
+proc fcQFormLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -842,17 +912,13 @@ proc cQFormLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQFormLayout, param1: cstring): pointer {.base.} =
-  QFormLayoutmetacast(self[], param1)
-proc cQFormLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQFormLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QFormLayoutmetacall(self[], param1, param2, param3)
-proc cQFormLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -860,30 +926,22 @@ proc cQFormLayout_method_callback_metacall(self: pointer, param1: cint, param2: 
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method spacing*(self: VirtualQFormLayout): cint {.base.} =
-  QFormLayoutspacing(self[])
-proc cQFormLayout_method_callback_spacing(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_spacing(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.spacing()
   virtualReturn
 
-method setSpacing*(self: VirtualQFormLayout, spacing: cint): void {.base.} =
-  QFormLayoutsetSpacing(self[], spacing)
-proc cQFormLayout_method_callback_setSpacing(self: pointer, spacing: cint): void {.cdecl.} =
+proc fcQFormLayout_method_callback_setSpacing(self: pointer, spacing: cint): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = spacing
   inst.setSpacing(slotval1)
 
-method addItem*(self: VirtualQFormLayout, item: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
-  QFormLayoutaddItem(self[], item)
-proc cQFormLayout_method_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_addItem(self: pointer, item: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   inst.addItem(slotval1)
 
-method itemAt*(self: VirtualQFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
-  QFormLayoutitemAt(self[], index)
-proc cQFormLayout_method_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_itemAtWithIndex(self: pointer, index: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = index
   var virtualReturn = inst.itemAt(slotval1)
@@ -892,9 +950,7 @@ proc cQFormLayout_method_callback_itemAtWithIndex(self: pointer, index: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-method takeAt*(self: VirtualQFormLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
-  QFormLayouttakeAt(self[], index)
-proc cQFormLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = index
   var virtualReturn = inst.takeAt(slotval1)
@@ -903,16 +959,12 @@ proc cQFormLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method setGeometry*(self: VirtualQFormLayout, rect: gen_qrect_types.QRect): void {.base.} =
-  QFormLayoutsetGeometry(self[], rect)
-proc cQFormLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
-method minimumSize*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
-  QFormLayoutminimumSize(self[])
-proc cQFormLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.minimumSize()
   virtualReturn.owned = false # TODO move?
@@ -920,9 +972,7 @@ proc cQFormLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHint*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
-  QFormLayoutsizeHint(self[])
-proc cQFormLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -930,44 +980,32 @@ proc cQFormLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method invalidate*(self: VirtualQFormLayout): void {.base.} =
-  QFormLayoutinvalidate(self[])
-proc cQFormLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   inst.invalidate()
 
-method hasHeightForWidth*(self: VirtualQFormLayout): bool {.base.} =
-  QFormLayouthasHeightForWidth(self[])
-proc cQFormLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQFormLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method heightForWidth*(self: VirtualQFormLayout, width: cint): cint {.base.} =
-  QFormLayoutheightForWidth(self[], width)
-proc cQFormLayout_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = width
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method expandingDirections*(self: VirtualQFormLayout): cint {.base.} =
-  QFormLayoutexpandingDirections(self[])
-proc cQFormLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.expandingDirections()
   cint(virtualReturn)
 
-method count*(self: VirtualQFormLayout): cint {.base.} =
-  QFormLayoutcount(self[])
-proc cQFormLayout_method_callback_count(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_count(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.count()
   virtualReturn
 
-method geometry*(self: VirtualQFormLayout): gen_qrect_types.QRect {.base.} =
-  QFormLayoutgeometry(self[])
-proc cQFormLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.geometry()
   virtualReturn.owned = false # TODO move?
@@ -975,9 +1013,7 @@ proc cQFormLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method maximumSize*(self: VirtualQFormLayout): gen_qsize_types.QSize {.base.} =
-  QFormLayoutmaximumSize(self[])
-proc cQFormLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.maximumSize()
   virtualReturn.owned = false # TODO move?
@@ -985,31 +1021,23 @@ proc cQFormLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method indexOf*(self: VirtualQFormLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
-  QFormLayoutindexOf(self[], param1)
-proc cQFormLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
-method isEmpty*(self: VirtualQFormLayout): bool {.base.} =
-  QFormLayoutisEmpty(self[])
-proc cQFormLayout_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
+proc fcQFormLayout_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.isEmpty()
   virtualReturn
 
-method controlTypes*(self: VirtualQFormLayout): cint {.base.} =
-  QFormLayoutcontrolTypes(self[])
-proc cQFormLayout_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.controlTypes()
   cint(virtualReturn)
 
-method replaceWidget*(self: VirtualQFormLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
-  QFormLayoutreplaceWidget(self[], fromVal, to, options)
-proc cQFormLayout_method_callback_replaceWidget(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_replaceWidget(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: fromVal, owned: false)
   let slotval2 = gen_qwidget_types.QWidget(h: to, owned: false)
@@ -1020,9 +1048,7 @@ proc cQFormLayout_method_callback_replaceWidget(self: pointer, fromVal: pointer,
   virtualReturn.h = nil
   virtualReturn_h
 
-method layout*(self: VirtualQFormLayout): gen_qlayout_types.QLayout {.base.} =
-  QFormLayoutlayout(self[])
-proc cQFormLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.layout()
   virtualReturn.owned = false # TODO move?
@@ -1030,69 +1056,51 @@ proc cQFormLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method childEvent*(self: VirtualQFormLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QFormLayoutchildEvent(self[], e)
-proc cQFormLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   inst.childEvent(slotval1)
 
-method event*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFormLayoutevent(self[], event)
-proc cQFormLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFormLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQFormLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QFormLayouteventFilter(self[], watched, event)
-proc cQFormLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQFormLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QFormLayouttimerEvent(self[], event)
-proc cQFormLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method customEvent*(self: VirtualQFormLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QFormLayoutcustomEvent(self[], event)
-proc cQFormLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFormLayoutconnectNotify(self[], signal)
-proc cQFormLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQFormLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QFormLayoutdisconnectNotify(self[], signal)
-proc cQFormLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQFormLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
-method minimumHeightForWidth*(self: VirtualQFormLayout, param1: cint): cint {.base.} =
-  QFormLayoutminimumHeightForWidth(self[], param1)
-proc cQFormLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQFormLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.minimumHeightForWidth(slotval1)
   virtualReturn
 
-method widget*(self: VirtualQFormLayout): gen_qwidget_types.QWidget {.base.} =
-  QFormLayoutwidget(self[])
-proc cQFormLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.widget()
   virtualReturn.owned = false # TODO move?
@@ -1100,15 +1108,14 @@ proc cQFormLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method spacerItem*(self: VirtualQFormLayout): gen_qlayoutitem_types.QSpacerItem {.base.} =
-  QFormLayoutspacerItem(self[])
-proc cQFormLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+proc fcQFormLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormLayout](fcQFormLayout_vdata(self))
   var virtualReturn = inst.spacerItem()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
+
 
 proc widgetEvent*(self: gen_qformlayout_types.QFormLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQFormLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -1146,71 +1153,71 @@ proc create*(T: type gen_qformlayout_types.QFormLayout,
     let vtbl = cast[ref QFormLayoutVTable](fcQFormLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFormLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFormLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFormLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFormLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFormLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFormLayout_vtable_callback_metacall
   if not isNil(vtbl[].spacing):
-    vtbl[].vtbl.spacing = cQFormLayout_vtable_callback_spacing
+    vtbl[].vtbl.spacing = fcQFormLayout_vtable_callback_spacing
   if not isNil(vtbl[].setSpacing):
-    vtbl[].vtbl.setSpacing = cQFormLayout_vtable_callback_setSpacing
+    vtbl[].vtbl.setSpacing = fcQFormLayout_vtable_callback_setSpacing
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = cQFormLayout_vtable_callback_addItem
+    vtbl[].vtbl.addItem = fcQFormLayout_vtable_callback_addItem
   if not isNil(vtbl[].itemAtWithIndex):
-    vtbl[].vtbl.itemAtWithIndex = cQFormLayout_vtable_callback_itemAtWithIndex
+    vtbl[].vtbl.itemAtWithIndex = fcQFormLayout_vtable_callback_itemAtWithIndex
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = cQFormLayout_vtable_callback_takeAt
+    vtbl[].vtbl.takeAt = fcQFormLayout_vtable_callback_takeAt
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQFormLayout_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQFormLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = cQFormLayout_vtable_callback_minimumSize
+    vtbl[].vtbl.minimumSize = fcQFormLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQFormLayout_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQFormLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = cQFormLayout_vtable_callback_invalidate
+    vtbl[].vtbl.invalidate = fcQFormLayout_vtable_callback_invalidate
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQFormLayout_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQFormLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQFormLayout_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQFormLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = cQFormLayout_vtable_callback_expandingDirections
+    vtbl[].vtbl.expandingDirections = fcQFormLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = cQFormLayout_vtable_callback_count
+    vtbl[].vtbl.count = fcQFormLayout_vtable_callback_count
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = cQFormLayout_vtable_callback_geometry
+    vtbl[].vtbl.geometry = fcQFormLayout_vtable_callback_geometry
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = cQFormLayout_vtable_callback_maximumSize
+    vtbl[].vtbl.maximumSize = fcQFormLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = cQFormLayout_vtable_callback_indexOf
+    vtbl[].vtbl.indexOf = fcQFormLayout_vtable_callback_indexOf
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = cQFormLayout_vtable_callback_isEmpty
+    vtbl[].vtbl.isEmpty = fcQFormLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = cQFormLayout_vtable_callback_controlTypes
+    vtbl[].vtbl.controlTypes = fcQFormLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].replaceWidget):
-    vtbl[].vtbl.replaceWidget = cQFormLayout_vtable_callback_replaceWidget
+    vtbl[].vtbl.replaceWidget = fcQFormLayout_vtable_callback_replaceWidget
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = cQFormLayout_vtable_callback_layout
+    vtbl[].vtbl.layout = fcQFormLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFormLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFormLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFormLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQFormLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFormLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFormLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFormLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFormLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFormLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFormLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFormLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFormLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFormLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFormLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = cQFormLayout_vtable_callback_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = fcQFormLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = cQFormLayout_vtable_callback_widget
+    vtbl[].vtbl.widget = fcQFormLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = cQFormLayout_vtable_callback_spacerItem
+    vtbl[].vtbl.spacerItem = fcQFormLayout_vtable_callback_spacerItem
   gen_qformlayout_types.QFormLayout(h: fcQFormLayout_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qformlayout_types.QFormLayout,
@@ -1221,71 +1228,71 @@ proc create*(T: type gen_qformlayout_types.QFormLayout,
     let vtbl = cast[ref QFormLayoutVTable](fcQFormLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQFormLayout_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQFormLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQFormLayout_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQFormLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQFormLayout_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQFormLayout_vtable_callback_metacall
   if not isNil(vtbl[].spacing):
-    vtbl[].vtbl.spacing = cQFormLayout_vtable_callback_spacing
+    vtbl[].vtbl.spacing = fcQFormLayout_vtable_callback_spacing
   if not isNil(vtbl[].setSpacing):
-    vtbl[].vtbl.setSpacing = cQFormLayout_vtable_callback_setSpacing
+    vtbl[].vtbl.setSpacing = fcQFormLayout_vtable_callback_setSpacing
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = cQFormLayout_vtable_callback_addItem
+    vtbl[].vtbl.addItem = fcQFormLayout_vtable_callback_addItem
   if not isNil(vtbl[].itemAtWithIndex):
-    vtbl[].vtbl.itemAtWithIndex = cQFormLayout_vtable_callback_itemAtWithIndex
+    vtbl[].vtbl.itemAtWithIndex = fcQFormLayout_vtable_callback_itemAtWithIndex
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = cQFormLayout_vtable_callback_takeAt
+    vtbl[].vtbl.takeAt = fcQFormLayout_vtable_callback_takeAt
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = cQFormLayout_vtable_callback_setGeometry
+    vtbl[].vtbl.setGeometry = fcQFormLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = cQFormLayout_vtable_callback_minimumSize
+    vtbl[].vtbl.minimumSize = fcQFormLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQFormLayout_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQFormLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = cQFormLayout_vtable_callback_invalidate
+    vtbl[].vtbl.invalidate = fcQFormLayout_vtable_callback_invalidate
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQFormLayout_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQFormLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQFormLayout_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQFormLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = cQFormLayout_vtable_callback_expandingDirections
+    vtbl[].vtbl.expandingDirections = fcQFormLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = cQFormLayout_vtable_callback_count
+    vtbl[].vtbl.count = fcQFormLayout_vtable_callback_count
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = cQFormLayout_vtable_callback_geometry
+    vtbl[].vtbl.geometry = fcQFormLayout_vtable_callback_geometry
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = cQFormLayout_vtable_callback_maximumSize
+    vtbl[].vtbl.maximumSize = fcQFormLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = cQFormLayout_vtable_callback_indexOf
+    vtbl[].vtbl.indexOf = fcQFormLayout_vtable_callback_indexOf
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = cQFormLayout_vtable_callback_isEmpty
+    vtbl[].vtbl.isEmpty = fcQFormLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = cQFormLayout_vtable_callback_controlTypes
+    vtbl[].vtbl.controlTypes = fcQFormLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].replaceWidget):
-    vtbl[].vtbl.replaceWidget = cQFormLayout_vtable_callback_replaceWidget
+    vtbl[].vtbl.replaceWidget = fcQFormLayout_vtable_callback_replaceWidget
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = cQFormLayout_vtable_callback_layout
+    vtbl[].vtbl.layout = fcQFormLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQFormLayout_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQFormLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQFormLayout_vtable_callback_event
+    vtbl[].vtbl.event = fcQFormLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQFormLayout_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQFormLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQFormLayout_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQFormLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQFormLayout_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQFormLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQFormLayout_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQFormLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQFormLayout_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQFormLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = cQFormLayout_vtable_callback_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = fcQFormLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = cQFormLayout_vtable_callback_widget
+    vtbl[].vtbl.widget = fcQFormLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = cQFormLayout_vtable_callback_spacerItem
+    vtbl[].vtbl.spacerItem = fcQFormLayout_vtable_callback_spacerItem
   gen_qformlayout_types.QFormLayout(h: fcQFormLayout_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQFormLayout_mvtbl = cQFormLayoutVTable(
@@ -1293,39 +1300,40 @@ const cQFormLayout_mvtbl = cQFormLayoutVTable(
     let inst = cast[ptr typeof(VirtualQFormLayout()[])](self.fcQFormLayout_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQFormLayout_method_callback_metaObject,
-  metacast: cQFormLayout_method_callback_metacast,
-  metacall: cQFormLayout_method_callback_metacall,
-  spacing: cQFormLayout_method_callback_spacing,
-  setSpacing: cQFormLayout_method_callback_setSpacing,
-  addItem: cQFormLayout_method_callback_addItem,
-  itemAtWithIndex: cQFormLayout_method_callback_itemAtWithIndex,
-  takeAt: cQFormLayout_method_callback_takeAt,
-  setGeometry: cQFormLayout_method_callback_setGeometry,
-  minimumSize: cQFormLayout_method_callback_minimumSize,
-  sizeHint: cQFormLayout_method_callback_sizeHint,
-  invalidate: cQFormLayout_method_callback_invalidate,
-  hasHeightForWidth: cQFormLayout_method_callback_hasHeightForWidth,
-  heightForWidth: cQFormLayout_method_callback_heightForWidth,
-  expandingDirections: cQFormLayout_method_callback_expandingDirections,
-  count: cQFormLayout_method_callback_count,
-  geometry: cQFormLayout_method_callback_geometry,
-  maximumSize: cQFormLayout_method_callback_maximumSize,
-  indexOf: cQFormLayout_method_callback_indexOf,
-  isEmpty: cQFormLayout_method_callback_isEmpty,
-  controlTypes: cQFormLayout_method_callback_controlTypes,
-  replaceWidget: cQFormLayout_method_callback_replaceWidget,
-  layout: cQFormLayout_method_callback_layout,
-  childEvent: cQFormLayout_method_callback_childEvent,
-  event: cQFormLayout_method_callback_event,
-  eventFilter: cQFormLayout_method_callback_eventFilter,
-  timerEvent: cQFormLayout_method_callback_timerEvent,
-  customEvent: cQFormLayout_method_callback_customEvent,
-  connectNotify: cQFormLayout_method_callback_connectNotify,
-  disconnectNotify: cQFormLayout_method_callback_disconnectNotify,
-  minimumHeightForWidth: cQFormLayout_method_callback_minimumHeightForWidth,
-  widget: cQFormLayout_method_callback_widget,
-  spacerItem: cQFormLayout_method_callback_spacerItem,
+
+  metaObject: fcQFormLayout_method_callback_metaObject,
+  metacast: fcQFormLayout_method_callback_metacast,
+  metacall: fcQFormLayout_method_callback_metacall,
+  spacing: fcQFormLayout_method_callback_spacing,
+  setSpacing: fcQFormLayout_method_callback_setSpacing,
+  addItem: fcQFormLayout_method_callback_addItem,
+  itemAtWithIndex: fcQFormLayout_method_callback_itemAtWithIndex,
+  takeAt: fcQFormLayout_method_callback_takeAt,
+  setGeometry: fcQFormLayout_method_callback_setGeometry,
+  minimumSize: fcQFormLayout_method_callback_minimumSize,
+  sizeHint: fcQFormLayout_method_callback_sizeHint,
+  invalidate: fcQFormLayout_method_callback_invalidate,
+  hasHeightForWidth: fcQFormLayout_method_callback_hasHeightForWidth,
+  heightForWidth: fcQFormLayout_method_callback_heightForWidth,
+  expandingDirections: fcQFormLayout_method_callback_expandingDirections,
+  count: fcQFormLayout_method_callback_count,
+  geometry: fcQFormLayout_method_callback_geometry,
+  maximumSize: fcQFormLayout_method_callback_maximumSize,
+  indexOf: fcQFormLayout_method_callback_indexOf,
+  isEmpty: fcQFormLayout_method_callback_isEmpty,
+  controlTypes: fcQFormLayout_method_callback_controlTypes,
+  replaceWidget: fcQFormLayout_method_callback_replaceWidget,
+  layout: fcQFormLayout_method_callback_layout,
+  childEvent: fcQFormLayout_method_callback_childEvent,
+  event: fcQFormLayout_method_callback_event,
+  eventFilter: fcQFormLayout_method_callback_eventFilter,
+  timerEvent: fcQFormLayout_method_callback_timerEvent,
+  customEvent: fcQFormLayout_method_callback_customEvent,
+  connectNotify: fcQFormLayout_method_callback_connectNotify,
+  disconnectNotify: fcQFormLayout_method_callback_disconnectNotify,
+  minimumHeightForWidth: fcQFormLayout_method_callback_minimumHeightForWidth,
+  widget: fcQFormLayout_method_callback_widget,
+  spacerItem: fcQFormLayout_method_callback_spacerItem,
 )
 proc create*(T: type gen_qformlayout_types.QFormLayout,
     parent: gen_qwidget_types.QWidget,

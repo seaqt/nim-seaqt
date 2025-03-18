@@ -120,19 +120,19 @@ proc actionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNaviga
   fcQWebEngineNavigationRequest_actionChanged(self.h)
 
 type QWebEngineNavigationRequestactionChangedSlot* = proc()
-proc cQWebEngineNavigationRequest_slot_callback_actionChanged(slot: int) {.cdecl.} =
+proc fcQWebEngineNavigationRequest_slot_callback_actionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQWebEngineNavigationRequest_slot_callback_actionChanged_release(slot: int) {.cdecl.} =
+proc fcQWebEngineNavigationRequest_slot_callback_actionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onactionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, slot: QWebEngineNavigationRequestactionChangedSlot) =
+proc onActionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, slot: QWebEngineNavigationRequestactionChangedSlot) =
   var tmp = new QWebEngineNavigationRequestactionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), cQWebEngineNavigationRequest_slot_callback_actionChanged, cQWebEngineNavigationRequest_slot_callback_actionChanged_release)
+  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), fcQWebEngineNavigationRequest_slot_callback_actionChanged, fcQWebEngineNavigationRequest_slot_callback_actionChanged_release)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineNavigationRequest_tr2(s, c)

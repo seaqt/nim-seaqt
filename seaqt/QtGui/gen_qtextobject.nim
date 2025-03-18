@@ -119,6 +119,7 @@ proc fcQTextFrame_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QT
 proc fcQTextFrame_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextFrame_tr3".}
 proc fcQTextFrame_vtbl(self: pointer): pointer {.importc: "QTextFrame_vtbl".}
 proc fcQTextFrame_vdata(self: pointer): pointer {.importc: "QTextFrame_vdata".}
+
 type cQTextFrameVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -417,6 +418,7 @@ type QTextFramechildEventProc* = proc(self: QTextFrame, event: gen_qcoreevent_ty
 type QTextFramecustomEventProc* = proc(self: QTextFrame, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextFrameconnectNotifyProc* = proc(self: QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextFramedisconnectNotifyProc* = proc(self: QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTextFrameVTable* {.inheritable, pure.} = object
   vtbl: cQTextFrameVTable
   metaObject*: QTextFramemetaObjectProc
@@ -429,10 +431,39 @@ type QTextFrameVTable* {.inheritable, pure.} = object
   customEvent*: QTextFramecustomEventProc
   connectNotify*: QTextFrameconnectNotifyProc
   disconnectNotify*: QTextFramedisconnectNotifyProc
+
 proc QTextFramemetaObject*(self: gen_qtextobject_types.QTextFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextFrame_virtualbase_metaObject(self.h), owned: false)
 
-proc cQTextFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QTextFramemetacast*(self: gen_qtextobject_types.QTextFrame, param1: cstring): pointer =
+  fcQTextFrame_virtualbase_metacast(self.h, param1)
+
+proc QTextFramemetacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTextFrameevent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextFrame_virtualbase_event(self.h, event.h)
+
+proc QTextFrameeventFilter*(self: gen_qtextobject_types.QTextFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextFrame_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTextFrametimerEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTextFrame_virtualbase_timerEvent(self.h, event.h)
+
+proc QTextFramechildEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTextFrame_virtualbase_childEvent(self.h, event.h)
+
+proc QTextFramecustomEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QEvent): void =
+  fcQTextFrame_virtualbase_customEvent(self.h, event.h)
+
+proc QTextFrameconnectNotify*(self: gen_qtextobject_types.QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextFrame_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTextFramedisconnectNotify*(self: gen_qtextobject_types.QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextFrame_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTextFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -441,20 +472,14 @@ proc cQTextFrame_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTextFramemetacast*(self: gen_qtextobject_types.QTextFrame, param1: cstring): pointer =
-  fcQTextFrame_virtualbase_metacast(self.h, param1)
-
-proc cQTextFrame_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTextFrame_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QTextFramemetacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTextFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTextFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTextFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = cint(param1)
@@ -463,20 +488,14 @@ proc cQTextFrame_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTextFrameevent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextFrame_virtualbase_event(self.h, event.h)
-
-proc cQTextFrame_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextFrame_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTextFrameeventFilter*(self: gen_qtextobject_types.QTextFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextFrame_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQTextFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -484,46 +503,31 @@ proc cQTextFrame_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTextFrametimerEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTextFrame_virtualbase_timerEvent(self.h, event.h)
-
-proc cQTextFrame_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTextFramechildEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTextFrame_virtualbase_childEvent(self.h, event.h)
-
-proc cQTextFrame_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTextFramecustomEvent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QEvent): void =
-  fcQTextFrame_virtualbase_customEvent(self.h, event.h)
-
-proc cQTextFrame_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTextFrameconnectNotify*(self: gen_qtextobject_types.QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextFrame_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTextFrame_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextFrame_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTextFramedisconnectNotify*(self: gen_qtextobject_types.QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextFrame_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTextFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextFrameVTable](fcQTextFrame_vdata(self))
   let self = QTextFrame(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -531,9 +535,29 @@ proc cQTextFrame_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQTextFrame* {.inheritable.} = ref object of QTextFrame
   vtbl*: cQTextFrameVTable
+
 method metaObject*(self: VirtualQTextFrame): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTextFramemetaObject(self[])
-proc cQTextFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTextFrame, param1: cstring): pointer {.base.} =
+  QTextFramemetacast(self[], param1)
+method metacall*(self: VirtualQTextFrame, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTextFramemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextFrameevent(self[], event)
+method eventFilter*(self: VirtualQTextFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextFrameeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTextFrametimerEvent(self[], event)
+method childEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTextFramechildEvent(self[], event)
+method customEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTextFramecustomEvent(self[], event)
+method connectNotify*(self: VirtualQTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextFrameconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextFramedisconnectNotify(self[], signal)
+
+proc fcQTextFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -541,17 +565,13 @@ proc cQTextFrame_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTextFrame, param1: cstring): pointer {.base.} =
-  QTextFramemetacast(self[], param1)
-proc cQTextFrame_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTextFrame_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTextFrame, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTextFramemetacall(self[], param1, param2, param3)
-proc cQTextFrame_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTextFrame_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -559,57 +579,44 @@ proc cQTextFrame_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextFrameevent(self[], event)
-proc cQTextFrame_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextFrame_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTextFrame, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextFrameeventFilter(self[], watched, event)
-proc cQTextFrame_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextFrame_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTextFrametimerEvent(self[], event)
-proc cQTextFrame_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTextFramechildEvent(self[], event)
-proc cQTextFrame_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTextFrame, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTextFramecustomEvent(self[], event)
-proc cQTextFrame_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextFrame_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextFrameconnectNotify(self[], signal)
-proc cQTextFrame_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextFrame_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTextFrame, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextFramedisconnectNotify(self[], signal)
-proc cQTextFrame_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextFrame_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextFrame](fcQTextFrame_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setFormat*(self: gen_qtextobject_types.QTextFrame, format: gen_qtextformat_types.QTextFormat): void =
   fcQTextFrame_protectedbase_setFormat(self.h, format.h)
@@ -635,25 +642,25 @@ proc create*(T: type gen_qtextobject_types.QTextFrame,
     let vtbl = cast[ref QTextFrameVTable](fcQTextFrame_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTextFrame_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTextFrame_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTextFrame_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTextFrame_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTextFrame_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTextFrame_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTextFrame_vtable_callback_event
+    vtbl[].vtbl.event = fcQTextFrame_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTextFrame_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTextFrame_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTextFrame_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTextFrame_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTextFrame_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTextFrame_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTextFrame_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTextFrame_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTextFrame_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTextFrame_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTextFrame_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTextFrame_vtable_callback_disconnectNotify
   gen_qtextobject_types.QTextFrame(h: fcQTextFrame_new(addr(vtbl[].vtbl), addr(vtbl[]), doc.h), owned: true)
 
 const cQTextFrame_mvtbl = cQTextFrameVTable(
@@ -661,16 +668,17 @@ const cQTextFrame_mvtbl = cQTextFrameVTable(
     let inst = cast[ptr typeof(VirtualQTextFrame()[])](self.fcQTextFrame_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTextFrame_method_callback_metaObject,
-  metacast: cQTextFrame_method_callback_metacast,
-  metacall: cQTextFrame_method_callback_metacall,
-  event: cQTextFrame_method_callback_event,
-  eventFilter: cQTextFrame_method_callback_eventFilter,
-  timerEvent: cQTextFrame_method_callback_timerEvent,
-  childEvent: cQTextFrame_method_callback_childEvent,
-  customEvent: cQTextFrame_method_callback_customEvent,
-  connectNotify: cQTextFrame_method_callback_connectNotify,
-  disconnectNotify: cQTextFrame_method_callback_disconnectNotify,
+
+  metaObject: fcQTextFrame_method_callback_metaObject,
+  metacast: fcQTextFrame_method_callback_metacast,
+  metacall: fcQTextFrame_method_callback_metacall,
+  event: fcQTextFrame_method_callback_event,
+  eventFilter: fcQTextFrame_method_callback_eventFilter,
+  timerEvent: fcQTextFrame_method_callback_timerEvent,
+  childEvent: fcQTextFrame_method_callback_childEvent,
+  customEvent: fcQTextFrame_method_callback_customEvent,
+  connectNotify: fcQTextFrame_method_callback_connectNotify,
+  disconnectNotify: fcQTextFrame_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtextobject_types.QTextFrame,
     doc: gen_qtextdocument_types.QTextDocument,

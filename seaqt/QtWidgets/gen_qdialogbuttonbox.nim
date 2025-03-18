@@ -149,6 +149,7 @@ proc fcQDialogButtonBox_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQDialogButtonBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDialogButtonBox_tr3".}
 proc fcQDialogButtonBox_vtbl(self: pointer): pointer {.importc: "QDialogButtonBox_vtbl".}
 proc fcQDialogButtonBox_vdata(self: pointer): pointer {.importc: "QDialogButtonBox_vdata".}
+
 type cQDialogButtonBoxVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -340,75 +341,75 @@ proc clicked*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: gen_qab
   fcQDialogButtonBox_clicked(self.h, button.h)
 
 type QDialogButtonBoxclickedSlot* = proc(button: gen_qabstractbutton_types.QAbstractButton)
-proc cQDialogButtonBox_slot_callback_clicked(slot: int, button: pointer) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_clicked(slot: int, button: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDialogButtonBoxclickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQDialogButtonBox_slot_callback_clicked_release(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_clicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDialogButtonBoxclickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onclicked*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxclickedSlot) =
+proc onClicked*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxclickedSlot) =
   var tmp = new QDialogButtonBoxclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialogButtonBox_connect_clicked(self.h, cast[int](addr tmp[]), cQDialogButtonBox_slot_callback_clicked, cQDialogButtonBox_slot_callback_clicked_release)
+  fcQDialogButtonBox_connect_clicked(self.h, cast[int](addr tmp[]), fcQDialogButtonBox_slot_callback_clicked, fcQDialogButtonBox_slot_callback_clicked_release)
 
 proc accepted*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_accepted(self.h)
 
 type QDialogButtonBoxacceptedSlot* = proc()
-proc cQDialogButtonBox_slot_callback_accepted(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_accepted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDialogButtonBoxacceptedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQDialogButtonBox_slot_callback_accepted_release(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_accepted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDialogButtonBoxacceptedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaccepted*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxacceptedSlot) =
+proc onAccepted*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxacceptedSlot) =
   var tmp = new QDialogButtonBoxacceptedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialogButtonBox_connect_accepted(self.h, cast[int](addr tmp[]), cQDialogButtonBox_slot_callback_accepted, cQDialogButtonBox_slot_callback_accepted_release)
+  fcQDialogButtonBox_connect_accepted(self.h, cast[int](addr tmp[]), fcQDialogButtonBox_slot_callback_accepted, fcQDialogButtonBox_slot_callback_accepted_release)
 
 proc helpRequested*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_helpRequested(self.h)
 
 type QDialogButtonBoxhelpRequestedSlot* = proc()
-proc cQDialogButtonBox_slot_callback_helpRequested(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_helpRequested(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDialogButtonBoxhelpRequestedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQDialogButtonBox_slot_callback_helpRequested_release(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_helpRequested_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDialogButtonBoxhelpRequestedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhelpRequested*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxhelpRequestedSlot) =
+proc onHelpRequested*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxhelpRequestedSlot) =
   var tmp = new QDialogButtonBoxhelpRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialogButtonBox_connect_helpRequested(self.h, cast[int](addr tmp[]), cQDialogButtonBox_slot_callback_helpRequested, cQDialogButtonBox_slot_callback_helpRequested_release)
+  fcQDialogButtonBox_connect_helpRequested(self.h, cast[int](addr tmp[]), fcQDialogButtonBox_slot_callback_helpRequested, fcQDialogButtonBox_slot_callback_helpRequested_release)
 
 proc rejected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_rejected(self.h)
 
 type QDialogButtonBoxrejectedSlot* = proc()
-proc cQDialogButtonBox_slot_callback_rejected(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_rejected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDialogButtonBoxrejectedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQDialogButtonBox_slot_callback_rejected_release(slot: int) {.cdecl.} =
+proc fcQDialogButtonBox_slot_callback_rejected_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QDialogButtonBoxrejectedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onrejected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxrejectedSlot) =
+proc onRejected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialogButtonBoxrejectedSlot) =
   var tmp = new QDialogButtonBoxrejectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialogButtonBox_connect_rejected(self.h, cast[int](addr tmp[]), cQDialogButtonBox_slot_callback_rejected, cQDialogButtonBox_slot_callback_rejected_release)
+  fcQDialogButtonBox_connect_rejected(self.h, cast[int](addr tmp[]), fcQDialogButtonBox_slot_callback_rejected, fcQDialogButtonBox_slot_callback_rejected_release)
 
 proc tr*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring, c: cstring): string =
   let v_ms = fcQDialogButtonBox_tr2(s, c)
@@ -472,6 +473,7 @@ type QDialogButtonBoxchildEventProc* = proc(self: QDialogButtonBox, event: gen_q
 type QDialogButtonBoxcustomEventProc* = proc(self: QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDialogButtonBoxconnectNotifyProc* = proc(self: QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDialogButtonBoxdisconnectNotifyProc* = proc(self: QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QDialogButtonBoxVTable* {.inheritable, pure.} = object
   vtbl: cQDialogButtonBoxVTable
   metaObject*: QDialogButtonBoxmetaObjectProc
@@ -524,10 +526,159 @@ type QDialogButtonBoxVTable* {.inheritable, pure.} = object
   customEvent*: QDialogButtonBoxcustomEventProc
   connectNotify*: QDialogButtonBoxconnectNotifyProc
   disconnectNotify*: QDialogButtonBoxdisconnectNotifyProc
+
 proc QDialogButtonBoxmetaObject*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDialogButtonBox_virtualbase_metaObject(self.h), owned: false)
 
-proc cQDialogButtonBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QDialogButtonBoxmetacast*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cstring): pointer =
+  fcQDialogButtonBox_virtualbase_metacast(self.h, param1)
+
+proc QDialogButtonBoxmetacall*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDialogButtonBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDialogButtonBoxchangeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQDialogButtonBox_virtualbase_changeEvent(self.h, event.h)
+
+proc QDialogButtonBoxevent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDialogButtonBox_virtualbase_event(self.h, event.h)
+
+proc QDialogButtonBoxdevType*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): cint =
+  fcQDialogButtonBox_virtualbase_devType(self.h)
+
+proc QDialogButtonBoxsetVisible*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, visible: bool): void =
+  fcQDialogButtonBox_virtualbase_setVisible(self.h, visible)
+
+proc QDialogButtonBoxsizeHint*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDialogButtonBox_virtualbase_sizeHint(self.h), owned: true)
+
+proc QDialogButtonBoxminimumSizeHint*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQDialogButtonBox_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QDialogButtonBoxheightForWidth*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): cint =
+  fcQDialogButtonBox_virtualbase_heightForWidth(self.h, param1)
+
+proc QDialogButtonBoxhasHeightForWidth*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): bool =
+  fcQDialogButtonBox_virtualbase_hasHeightForWidth(self.h)
+
+proc QDialogButtonBoxpaintEngine*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQDialogButtonBox_virtualbase_paintEngine(self.h), owned: false)
+
+proc QDialogButtonBoxmousePressEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQDialogButtonBox_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QDialogButtonBoxmouseReleaseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQDialogButtonBox_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QDialogButtonBoxmouseDoubleClickEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQDialogButtonBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QDialogButtonBoxmouseMoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQDialogButtonBox_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QDialogButtonBoxwheelEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QWheelEvent): void =
+  fcQDialogButtonBox_virtualbase_wheelEvent(self.h, event.h)
+
+proc QDialogButtonBoxkeyPressEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQDialogButtonBox_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QDialogButtonBoxkeyReleaseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQDialogButtonBox_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QDialogButtonBoxfocusInEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQDialogButtonBox_virtualbase_focusInEvent(self.h, event.h)
+
+proc QDialogButtonBoxfocusOutEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQDialogButtonBox_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QDialogButtonBoxenterEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QEnterEvent): void =
+  fcQDialogButtonBox_virtualbase_enterEvent(self.h, event.h)
+
+proc QDialogButtonBoxleaveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQDialogButtonBox_virtualbase_leaveEvent(self.h, event.h)
+
+proc QDialogButtonBoxpaintEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QPaintEvent): void =
+  fcQDialogButtonBox_virtualbase_paintEvent(self.h, event.h)
+
+proc QDialogButtonBoxmoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMoveEvent): void =
+  fcQDialogButtonBox_virtualbase_moveEvent(self.h, event.h)
+
+proc QDialogButtonBoxresizeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QResizeEvent): void =
+  fcQDialogButtonBox_virtualbase_resizeEvent(self.h, event.h)
+
+proc QDialogButtonBoxcloseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QCloseEvent): void =
+  fcQDialogButtonBox_virtualbase_closeEvent(self.h, event.h)
+
+proc QDialogButtonBoxcontextMenuEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQDialogButtonBox_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QDialogButtonBoxtabletEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QTabletEvent): void =
+  fcQDialogButtonBox_virtualbase_tabletEvent(self.h, event.h)
+
+proc QDialogButtonBoxactionEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QActionEvent): void =
+  fcQDialogButtonBox_virtualbase_actionEvent(self.h, event.h)
+
+proc QDialogButtonBoxdragEnterEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQDialogButtonBox_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QDialogButtonBoxdragMoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQDialogButtonBox_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QDialogButtonBoxdragLeaveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQDialogButtonBox_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QDialogButtonBoxdropEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDropEvent): void =
+  fcQDialogButtonBox_virtualbase_dropEvent(self.h, event.h)
+
+proc QDialogButtonBoxshowEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QShowEvent): void =
+  fcQDialogButtonBox_virtualbase_showEvent(self.h, event.h)
+
+proc QDialogButtonBoxhideEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QHideEvent): void =
+  fcQDialogButtonBox_virtualbase_hideEvent(self.h, event.h)
+
+proc QDialogButtonBoxnativeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQDialogButtonBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QDialogButtonBoxmetric*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): cint =
+  fcQDialogButtonBox_virtualbase_metric(self.h, cint(param1))
+
+proc QDialogButtonBoxinitPainter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, painter: gen_qpainter_types.QPainter): void =
+  fcQDialogButtonBox_virtualbase_initPainter(self.h, painter.h)
+
+proc QDialogButtonBoxredirected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDialogButtonBox_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QDialogButtonBoxsharedPainter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQDialogButtonBox_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QDialogButtonBoxinputMethodEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQDialogButtonBox_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QDialogButtonBoxinputMethodQuery*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQDialogButtonBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QDialogButtonBoxfocusNextPrevChild*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, next: bool): bool =
+  fcQDialogButtonBox_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QDialogButtonBoxeventFilter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDialogButtonBox_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDialogButtonBoxtimerEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDialogButtonBox_virtualbase_timerEvent(self.h, event.h)
+
+proc QDialogButtonBoxchildEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDialogButtonBox_virtualbase_childEvent(self.h, event.h)
+
+proc QDialogButtonBoxcustomEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQDialogButtonBox_virtualbase_customEvent(self.h, event.h)
+
+proc QDialogButtonBoxconnectNotify*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDialogButtonBox_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDialogButtonBoxdisconnectNotify*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDialogButtonBox_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQDialogButtonBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -536,20 +687,14 @@ proc cQDialogButtonBox_vtable_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxmetacast*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cstring): pointer =
-  fcQDialogButtonBox_virtualbase_metacast(self.h, param1)
-
-proc cQDialogButtonBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QDialogButtonBoxmetacall*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint, param2: cint, param3: pointer): cint =
-  fcQDialogButtonBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQDialogButtonBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = cint(param1)
@@ -558,47 +703,32 @@ proc cQDialogButtonBox_vtable_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDialogButtonBoxchangeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQDialogButtonBox_virtualbase_changeEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QDialogButtonBoxevent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDialogButtonBox_virtualbase_event(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QDialogButtonBoxdevType*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): cint =
-  fcQDialogButtonBox_virtualbase_devType(self.h)
-
-proc cQDialogButtonBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QDialogButtonBoxsetVisible*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, visible: bool): void =
-  fcQDialogButtonBox_virtualbase_setVisible(self.h, visible)
-
-proc cQDialogButtonBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QDialogButtonBoxsizeHint*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDialogButtonBox_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQDialogButtonBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -607,10 +737,7 @@ proc cQDialogButtonBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxminimumSizeHint*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDialogButtonBox_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQDialogButtonBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -619,29 +746,20 @@ proc cQDialogButtonBox_vtable_callback_minimumSizeHint(self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxheightForWidth*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): cint =
-  fcQDialogButtonBox_virtualbase_heightForWidth(self.h, param1)
-
-proc cQDialogButtonBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QDialogButtonBoxhasHeightForWidth*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): bool =
-  fcQDialogButtonBox_virtualbase_hasHeightForWidth(self.h)
-
-proc cQDialogButtonBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QDialogButtonBoxpaintEngine*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDialogButtonBox_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQDialogButtonBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -650,226 +768,151 @@ proc cQDialogButtonBox_vtable_callback_paintEngine(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxmousePressEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQDialogButtonBox_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QDialogButtonBoxmouseReleaseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQDialogButtonBox_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QDialogButtonBoxmouseDoubleClickEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQDialogButtonBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QDialogButtonBoxmouseMoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQDialogButtonBox_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QDialogButtonBoxwheelEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QWheelEvent): void =
-  fcQDialogButtonBox_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QDialogButtonBoxkeyPressEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQDialogButtonBox_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QDialogButtonBoxkeyReleaseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQDialogButtonBox_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QDialogButtonBoxfocusInEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQDialogButtonBox_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QDialogButtonBoxfocusOutEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQDialogButtonBox_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QDialogButtonBoxenterEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QEnterEvent): void =
-  fcQDialogButtonBox_virtualbase_enterEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QDialogButtonBoxleaveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQDialogButtonBox_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QDialogButtonBoxpaintEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QPaintEvent): void =
-  fcQDialogButtonBox_virtualbase_paintEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QDialogButtonBoxmoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QMoveEvent): void =
-  fcQDialogButtonBox_virtualbase_moveEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QDialogButtonBoxresizeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QResizeEvent): void =
-  fcQDialogButtonBox_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QDialogButtonBoxcloseEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QCloseEvent): void =
-  fcQDialogButtonBox_virtualbase_closeEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QDialogButtonBoxcontextMenuEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQDialogButtonBox_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QDialogButtonBoxtabletEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QTabletEvent): void =
-  fcQDialogButtonBox_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QDialogButtonBoxactionEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QActionEvent): void =
-  fcQDialogButtonBox_virtualbase_actionEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QDialogButtonBoxdragEnterEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQDialogButtonBox_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QDialogButtonBoxdragMoveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQDialogButtonBox_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QDialogButtonBoxdragLeaveEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQDialogButtonBox_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QDialogButtonBoxdropEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QDropEvent): void =
-  fcQDialogButtonBox_virtualbase_dropEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QDialogButtonBoxshowEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QShowEvent): void =
-  fcQDialogButtonBox_virtualbase_showEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QDialogButtonBoxhideEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qevent_types.QHideEvent): void =
-  fcQDialogButtonBox_virtualbase_hideEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QDialogButtonBoxnativeEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQDialogButtonBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQDialogButtonBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var veventType_bytearray = eventType
@@ -881,29 +924,20 @@ proc cQDialogButtonBox_vtable_callback_nativeEvent(self: pointer, eventType: str
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QDialogButtonBoxmetric*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): cint =
-  fcQDialogButtonBox_virtualbase_metric(self.h, cint(param1))
-
-proc cQDialogButtonBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QDialogButtonBoxinitPainter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, painter: gen_qpainter_types.QPainter): void =
-  fcQDialogButtonBox_virtualbase_initPainter(self.h, painter.h)
-
-proc cQDialogButtonBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QDialogButtonBoxredirected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDialogButtonBox_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQDialogButtonBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -913,10 +947,7 @@ proc cQDialogButtonBox_vtable_callback_redirected(self: pointer, offset: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxsharedPainter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDialogButtonBox_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQDialogButtonBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -925,19 +956,13 @@ proc cQDialogButtonBox_vtable_callback_sharedPainter(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxinputMethodEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQDialogButtonBox_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQDialogButtonBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QDialogButtonBoxinputMethodQuery*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDialogButtonBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQDialogButtonBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = cint(param1)
@@ -947,20 +972,14 @@ proc cQDialogButtonBox_vtable_callback_inputMethodQuery(self: pointer, param1: c
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QDialogButtonBoxfocusNextPrevChild*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, next: bool): bool =
-  fcQDialogButtonBox_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQDialogButtonBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QDialogButtonBoxeventFilter*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQDialogButtonBox_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -968,46 +987,31 @@ proc cQDialogButtonBox_vtable_callback_eventFilter(self: pointer, watched: point
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QDialogButtonBoxtimerEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQDialogButtonBox_virtualbase_timerEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QDialogButtonBoxchildEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQDialogButtonBox_virtualbase_childEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QDialogButtonBoxcustomEvent*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQDialogButtonBox_virtualbase_customEvent(self.h, event.h)
-
-proc cQDialogButtonBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QDialogButtonBoxconnectNotify*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDialogButtonBox_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQDialogButtonBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QDialogButtonBoxdisconnectNotify*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQDialogButtonBox_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQDialogButtonBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
   let self = QDialogButtonBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1015,9 +1019,109 @@ proc cQDialogButtonBox_vtable_callback_disconnectNotify(self: pointer, signal: p
 
 type VirtualQDialogButtonBox* {.inheritable.} = ref object of QDialogButtonBox
   vtbl*: cQDialogButtonBoxVTable
+
 method metaObject*(self: VirtualQDialogButtonBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QDialogButtonBoxmetaObject(self[])
-proc cQDialogButtonBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQDialogButtonBox, param1: cstring): pointer {.base.} =
+  QDialogButtonBoxmetacast(self[], param1)
+method metacall*(self: VirtualQDialogButtonBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDialogButtonBoxmetacall(self[], param1, param2, param3)
+method changeEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialogButtonBoxchangeEvent(self[], event)
+method event*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDialogButtonBoxevent(self[], event)
+method devType*(self: VirtualQDialogButtonBox): cint {.base.} =
+  QDialogButtonBoxdevType(self[])
+method setVisible*(self: VirtualQDialogButtonBox, visible: bool): void {.base.} =
+  QDialogButtonBoxsetVisible(self[], visible)
+method sizeHint*(self: VirtualQDialogButtonBox): gen_qsize_types.QSize {.base.} =
+  QDialogButtonBoxsizeHint(self[])
+method minimumSizeHint*(self: VirtualQDialogButtonBox): gen_qsize_types.QSize {.base.} =
+  QDialogButtonBoxminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQDialogButtonBox, param1: cint): cint {.base.} =
+  QDialogButtonBoxheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQDialogButtonBox): bool {.base.} =
+  QDialogButtonBoxhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQDialogButtonBox): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QDialogButtonBoxpaintEngine(self[])
+method mousePressEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialogButtonBoxmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialogButtonBoxmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialogButtonBoxmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDialogButtonBoxmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QDialogButtonBoxwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDialogButtonBoxkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDialogButtonBoxkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDialogButtonBoxfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDialogButtonBoxfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QDialogButtonBoxenterEvent(self[], event)
+method leaveEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialogButtonBoxleaveEvent(self[], event)
+method paintEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QDialogButtonBoxpaintEvent(self[], event)
+method moveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QDialogButtonBoxmoveEvent(self[], event)
+method resizeEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QDialogButtonBoxresizeEvent(self[], event)
+method closeEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QDialogButtonBoxcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QDialogButtonBoxcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QDialogButtonBoxtabletEvent(self[], event)
+method actionEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QDialogButtonBoxactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QDialogButtonBoxdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QDialogButtonBoxdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QDialogButtonBoxdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QDialogButtonBoxdropEvent(self[], event)
+method showEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QDialogButtonBoxshowEvent(self[], event)
+method hideEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QDialogButtonBoxhideEvent(self[], event)
+method nativeEvent*(self: VirtualQDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QDialogButtonBoxnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQDialogButtonBox, param1: cint): cint {.base.} =
+  QDialogButtonBoxmetric(self[], param1)
+method initPainter*(self: VirtualQDialogButtonBox, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QDialogButtonBoxinitPainter(self[], painter)
+method redirected*(self: VirtualQDialogButtonBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QDialogButtonBoxredirected(self[], offset)
+method sharedPainter*(self: VirtualQDialogButtonBox): gen_qpainter_types.QPainter {.base.} =
+  QDialogButtonBoxsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQDialogButtonBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QDialogButtonBoxinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQDialogButtonBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QDialogButtonBoxinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQDialogButtonBox, next: bool): bool {.base.} =
+  QDialogButtonBoxfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQDialogButtonBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDialogButtonBoxeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDialogButtonBoxtimerEvent(self[], event)
+method childEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDialogButtonBoxchildEvent(self[], event)
+method customEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDialogButtonBoxcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDialogButtonBoxconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDialogButtonBoxdisconnectNotify(self[], signal)
+
+proc fcQDialogButtonBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1025,17 +1129,13 @@ proc cQDialogButtonBox_method_callback_metaObject(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQDialogButtonBox, param1: cstring): pointer {.base.} =
-  QDialogButtonBoxmetacast(self[], param1)
-proc cQDialogButtonBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQDialogButtonBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QDialogButtonBoxmetacall(self[], param1, param2, param3)
-proc cQDialogButtonBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1043,38 +1143,28 @@ proc cQDialogButtonBox_method_callback_metacall(self: pointer, param1: cint, par
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method changeEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialogButtonBoxchangeEvent(self[], event)
-proc cQDialogButtonBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method event*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDialogButtonBoxevent(self[], event)
-proc cQDialogButtonBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method devType*(self: VirtualQDialogButtonBox): cint {.base.} =
-  QDialogButtonBoxdevType(self[])
-proc cQDialogButtonBox_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQDialogButtonBox, visible: bool): void {.base.} =
-  QDialogButtonBoxsetVisible(self[], visible)
-proc cQDialogButtonBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQDialogButtonBox): gen_qsize_types.QSize {.base.} =
-  QDialogButtonBoxsizeHint(self[])
-proc cQDialogButtonBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1082,9 +1172,7 @@ proc cQDialogButtonBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method minimumSizeHint*(self: VirtualQDialogButtonBox): gen_qsize_types.QSize {.base.} =
-  QDialogButtonBoxminimumSizeHint(self[])
-proc cQDialogButtonBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1092,24 +1180,18 @@ proc cQDialogButtonBox_method_callback_minimumSizeHint(self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQDialogButtonBox, param1: cint): cint {.base.} =
-  QDialogButtonBoxheightForWidth(self[], param1)
-proc cQDialogButtonBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQDialogButtonBox): bool {.base.} =
-  QDialogButtonBoxhasHeightForWidth(self[])
-proc cQDialogButtonBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQDialogButtonBox): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QDialogButtonBoxpaintEngine(self[])
-proc cQDialogButtonBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1117,177 +1199,127 @@ proc cQDialogButtonBox_method_callback_paintEngine(self: pointer): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-method mousePressEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialogButtonBoxmousePressEvent(self[], event)
-proc cQDialogButtonBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialogButtonBoxmouseReleaseEvent(self[], event)
-proc cQDialogButtonBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialogButtonBoxmouseDoubleClickEvent(self[], event)
-proc cQDialogButtonBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QDialogButtonBoxmouseMoveEvent(self[], event)
-proc cQDialogButtonBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QDialogButtonBoxwheelEvent(self[], event)
-proc cQDialogButtonBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDialogButtonBoxkeyPressEvent(self[], event)
-proc cQDialogButtonBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QDialogButtonBoxkeyReleaseEvent(self[], event)
-proc cQDialogButtonBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDialogButtonBoxfocusInEvent(self[], event)
-proc cQDialogButtonBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QDialogButtonBoxfocusOutEvent(self[], event)
-proc cQDialogButtonBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QDialogButtonBoxenterEvent(self[], event)
-proc cQDialogButtonBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialogButtonBoxleaveEvent(self[], event)
-proc cQDialogButtonBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QDialogButtonBoxpaintEvent(self[], event)
-proc cQDialogButtonBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QDialogButtonBoxmoveEvent(self[], event)
-proc cQDialogButtonBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method resizeEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QDialogButtonBoxresizeEvent(self[], event)
-proc cQDialogButtonBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QDialogButtonBoxcloseEvent(self[], event)
-proc cQDialogButtonBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QDialogButtonBoxcontextMenuEvent(self[], event)
-proc cQDialogButtonBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QDialogButtonBoxtabletEvent(self[], event)
-proc cQDialogButtonBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QDialogButtonBoxactionEvent(self[], event)
-proc cQDialogButtonBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QDialogButtonBoxdragEnterEvent(self[], event)
-proc cQDialogButtonBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QDialogButtonBoxdragMoveEvent(self[], event)
-proc cQDialogButtonBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QDialogButtonBoxdragLeaveEvent(self[], event)
-proc cQDialogButtonBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QDialogButtonBoxdropEvent(self[], event)
-proc cQDialogButtonBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QDialogButtonBoxshowEvent(self[], event)
-proc cQDialogButtonBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQDialogButtonBox, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QDialogButtonBoxhideEvent(self[], event)
-proc cQDialogButtonBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQDialogButtonBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QDialogButtonBoxnativeEvent(self[], eventType, message, resultVal)
-proc cQDialogButtonBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1298,24 +1330,18 @@ proc cQDialogButtonBox_method_callback_nativeEvent(self: pointer, eventType: str
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQDialogButtonBox, param1: cint): cint {.base.} =
-  QDialogButtonBoxmetric(self[], param1)
-proc cQDialogButtonBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQDialogButtonBox, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QDialogButtonBoxinitPainter(self[], painter)
-proc cQDialogButtonBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQDialogButtonBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QDialogButtonBoxredirected(self[], offset)
-proc cQDialogButtonBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1324,9 +1350,7 @@ proc cQDialogButtonBox_method_callback_redirected(self: pointer, offset: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQDialogButtonBox): gen_qpainter_types.QPainter {.base.} =
-  QDialogButtonBoxsharedPainter(self[])
-proc cQDialogButtonBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1334,16 +1358,12 @@ proc cQDialogButtonBox_method_callback_sharedPainter(self: pointer): pointer {.c
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQDialogButtonBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QDialogButtonBoxinputMethodEvent(self[], param1)
-proc cQDialogButtonBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQDialogButtonBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QDialogButtonBoxinputMethodQuery(self[], param1)
-proc cQDialogButtonBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1352,57 +1372,44 @@ proc cQDialogButtonBox_method_callback_inputMethodQuery(self: pointer, param1: c
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQDialogButtonBox, next: bool): bool {.base.} =
-  QDialogButtonBoxfocusNextPrevChild(self[], next)
-proc cQDialogButtonBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQDialogButtonBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QDialogButtonBoxeventFilter(self[], watched, event)
-proc cQDialogButtonBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QDialogButtonBoxtimerEvent(self[], event)
-proc cQDialogButtonBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QDialogButtonBoxchildEvent(self[], event)
-proc cQDialogButtonBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQDialogButtonBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QDialogButtonBoxcustomEvent(self[], event)
-proc cQDialogButtonBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDialogButtonBoxconnectNotify(self[], signal)
-proc cQDialogButtonBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQDialogButtonBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QDialogButtonBoxdisconnectNotify(self[], signal)
-proc cQDialogButtonBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQDialogButtonBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDialogButtonBox](fcQDialogButtonBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): void =
   fcQDialogButtonBox_protectedbase_updateMicroFocus(self.h)
@@ -1440,105 +1447,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -1549,105 +1556,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -1659,105 +1666,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), cint(orientation)), owned: true)
 
 proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -1769,105 +1776,105 @@ proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), cint(buttons)), owned: true)
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -1879,105 +1886,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new5(addr(vtbl[].vtbl), addr(vtbl[]), cint(buttons), cint(orientation)), owned: true)
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -1989,105 +1996,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new6(addr(vtbl[].vtbl), addr(vtbl[]), cint(orientation), parent.h), owned: true)
 
 proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -2099,105 +2106,105 @@ proc create2*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new7(addr(vtbl[].vtbl), addr(vtbl[]), cint(buttons), parent.h), owned: true)
 
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
@@ -2209,105 +2216,105 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     let vtbl = cast[ref QDialogButtonBoxVTable](fcQDialogButtonBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQDialogButtonBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQDialogButtonBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQDialogButtonBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQDialogButtonBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQDialogButtonBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQDialogButtonBox_vtable_callback_metacall
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQDialogButtonBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQDialogButtonBox_vtable_callback_changeEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQDialogButtonBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQDialogButtonBox_vtable_callback_event
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQDialogButtonBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQDialogButtonBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQDialogButtonBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQDialogButtonBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQDialogButtonBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQDialogButtonBox_vtable_callback_sizeHint
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQDialogButtonBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQDialogButtonBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQDialogButtonBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQDialogButtonBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQDialogButtonBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQDialogButtonBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQDialogButtonBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQDialogButtonBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQDialogButtonBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQDialogButtonBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQDialogButtonBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQDialogButtonBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQDialogButtonBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQDialogButtonBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQDialogButtonBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQDialogButtonBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQDialogButtonBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQDialogButtonBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQDialogButtonBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQDialogButtonBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQDialogButtonBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQDialogButtonBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQDialogButtonBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQDialogButtonBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQDialogButtonBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQDialogButtonBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQDialogButtonBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQDialogButtonBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQDialogButtonBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQDialogButtonBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQDialogButtonBox_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQDialogButtonBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQDialogButtonBox_vtable_callback_moveEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQDialogButtonBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQDialogButtonBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQDialogButtonBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQDialogButtonBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQDialogButtonBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQDialogButtonBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQDialogButtonBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQDialogButtonBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQDialogButtonBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQDialogButtonBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQDialogButtonBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQDialogButtonBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQDialogButtonBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQDialogButtonBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQDialogButtonBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQDialogButtonBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQDialogButtonBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQDialogButtonBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQDialogButtonBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQDialogButtonBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQDialogButtonBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQDialogButtonBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQDialogButtonBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQDialogButtonBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQDialogButtonBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQDialogButtonBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQDialogButtonBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQDialogButtonBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQDialogButtonBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQDialogButtonBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQDialogButtonBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQDialogButtonBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQDialogButtonBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQDialogButtonBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQDialogButtonBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQDialogButtonBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQDialogButtonBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQDialogButtonBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQDialogButtonBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQDialogButtonBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQDialogButtonBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQDialogButtonBox_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQDialogButtonBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQDialogButtonBox_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQDialogButtonBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQDialogButtonBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQDialogButtonBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQDialogButtonBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQDialogButtonBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQDialogButtonBox_vtable_callback_disconnectNotify
   gen_qdialogbuttonbox_types.QDialogButtonBox(h: fcQDialogButtonBox_new8(addr(vtbl[].vtbl), addr(vtbl[]), cint(buttons), cint(orientation), parent.h), owned: true)
 
 const cQDialogButtonBox_mvtbl = cQDialogButtonBoxVTable(
@@ -2315,56 +2322,57 @@ const cQDialogButtonBox_mvtbl = cQDialogButtonBoxVTable(
     let inst = cast[ptr typeof(VirtualQDialogButtonBox()[])](self.fcQDialogButtonBox_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQDialogButtonBox_method_callback_metaObject,
-  metacast: cQDialogButtonBox_method_callback_metacast,
-  metacall: cQDialogButtonBox_method_callback_metacall,
-  changeEvent: cQDialogButtonBox_method_callback_changeEvent,
-  event: cQDialogButtonBox_method_callback_event,
-  devType: cQDialogButtonBox_method_callback_devType,
-  setVisible: cQDialogButtonBox_method_callback_setVisible,
-  sizeHint: cQDialogButtonBox_method_callback_sizeHint,
-  minimumSizeHint: cQDialogButtonBox_method_callback_minimumSizeHint,
-  heightForWidth: cQDialogButtonBox_method_callback_heightForWidth,
-  hasHeightForWidth: cQDialogButtonBox_method_callback_hasHeightForWidth,
-  paintEngine: cQDialogButtonBox_method_callback_paintEngine,
-  mousePressEvent: cQDialogButtonBox_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQDialogButtonBox_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQDialogButtonBox_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQDialogButtonBox_method_callback_mouseMoveEvent,
-  wheelEvent: cQDialogButtonBox_method_callback_wheelEvent,
-  keyPressEvent: cQDialogButtonBox_method_callback_keyPressEvent,
-  keyReleaseEvent: cQDialogButtonBox_method_callback_keyReleaseEvent,
-  focusInEvent: cQDialogButtonBox_method_callback_focusInEvent,
-  focusOutEvent: cQDialogButtonBox_method_callback_focusOutEvent,
-  enterEvent: cQDialogButtonBox_method_callback_enterEvent,
-  leaveEvent: cQDialogButtonBox_method_callback_leaveEvent,
-  paintEvent: cQDialogButtonBox_method_callback_paintEvent,
-  moveEvent: cQDialogButtonBox_method_callback_moveEvent,
-  resizeEvent: cQDialogButtonBox_method_callback_resizeEvent,
-  closeEvent: cQDialogButtonBox_method_callback_closeEvent,
-  contextMenuEvent: cQDialogButtonBox_method_callback_contextMenuEvent,
-  tabletEvent: cQDialogButtonBox_method_callback_tabletEvent,
-  actionEvent: cQDialogButtonBox_method_callback_actionEvent,
-  dragEnterEvent: cQDialogButtonBox_method_callback_dragEnterEvent,
-  dragMoveEvent: cQDialogButtonBox_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQDialogButtonBox_method_callback_dragLeaveEvent,
-  dropEvent: cQDialogButtonBox_method_callback_dropEvent,
-  showEvent: cQDialogButtonBox_method_callback_showEvent,
-  hideEvent: cQDialogButtonBox_method_callback_hideEvent,
-  nativeEvent: cQDialogButtonBox_method_callback_nativeEvent,
-  metric: cQDialogButtonBox_method_callback_metric,
-  initPainter: cQDialogButtonBox_method_callback_initPainter,
-  redirected: cQDialogButtonBox_method_callback_redirected,
-  sharedPainter: cQDialogButtonBox_method_callback_sharedPainter,
-  inputMethodEvent: cQDialogButtonBox_method_callback_inputMethodEvent,
-  inputMethodQuery: cQDialogButtonBox_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQDialogButtonBox_method_callback_focusNextPrevChild,
-  eventFilter: cQDialogButtonBox_method_callback_eventFilter,
-  timerEvent: cQDialogButtonBox_method_callback_timerEvent,
-  childEvent: cQDialogButtonBox_method_callback_childEvent,
-  customEvent: cQDialogButtonBox_method_callback_customEvent,
-  connectNotify: cQDialogButtonBox_method_callback_connectNotify,
-  disconnectNotify: cQDialogButtonBox_method_callback_disconnectNotify,
+
+  metaObject: fcQDialogButtonBox_method_callback_metaObject,
+  metacast: fcQDialogButtonBox_method_callback_metacast,
+  metacall: fcQDialogButtonBox_method_callback_metacall,
+  changeEvent: fcQDialogButtonBox_method_callback_changeEvent,
+  event: fcQDialogButtonBox_method_callback_event,
+  devType: fcQDialogButtonBox_method_callback_devType,
+  setVisible: fcQDialogButtonBox_method_callback_setVisible,
+  sizeHint: fcQDialogButtonBox_method_callback_sizeHint,
+  minimumSizeHint: fcQDialogButtonBox_method_callback_minimumSizeHint,
+  heightForWidth: fcQDialogButtonBox_method_callback_heightForWidth,
+  hasHeightForWidth: fcQDialogButtonBox_method_callback_hasHeightForWidth,
+  paintEngine: fcQDialogButtonBox_method_callback_paintEngine,
+  mousePressEvent: fcQDialogButtonBox_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQDialogButtonBox_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQDialogButtonBox_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQDialogButtonBox_method_callback_mouseMoveEvent,
+  wheelEvent: fcQDialogButtonBox_method_callback_wheelEvent,
+  keyPressEvent: fcQDialogButtonBox_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQDialogButtonBox_method_callback_keyReleaseEvent,
+  focusInEvent: fcQDialogButtonBox_method_callback_focusInEvent,
+  focusOutEvent: fcQDialogButtonBox_method_callback_focusOutEvent,
+  enterEvent: fcQDialogButtonBox_method_callback_enterEvent,
+  leaveEvent: fcQDialogButtonBox_method_callback_leaveEvent,
+  paintEvent: fcQDialogButtonBox_method_callback_paintEvent,
+  moveEvent: fcQDialogButtonBox_method_callback_moveEvent,
+  resizeEvent: fcQDialogButtonBox_method_callback_resizeEvent,
+  closeEvent: fcQDialogButtonBox_method_callback_closeEvent,
+  contextMenuEvent: fcQDialogButtonBox_method_callback_contextMenuEvent,
+  tabletEvent: fcQDialogButtonBox_method_callback_tabletEvent,
+  actionEvent: fcQDialogButtonBox_method_callback_actionEvent,
+  dragEnterEvent: fcQDialogButtonBox_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQDialogButtonBox_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQDialogButtonBox_method_callback_dragLeaveEvent,
+  dropEvent: fcQDialogButtonBox_method_callback_dropEvent,
+  showEvent: fcQDialogButtonBox_method_callback_showEvent,
+  hideEvent: fcQDialogButtonBox_method_callback_hideEvent,
+  nativeEvent: fcQDialogButtonBox_method_callback_nativeEvent,
+  metric: fcQDialogButtonBox_method_callback_metric,
+  initPainter: fcQDialogButtonBox_method_callback_initPainter,
+  redirected: fcQDialogButtonBox_method_callback_redirected,
+  sharedPainter: fcQDialogButtonBox_method_callback_sharedPainter,
+  inputMethodEvent: fcQDialogButtonBox_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQDialogButtonBox_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQDialogButtonBox_method_callback_focusNextPrevChild,
+  eventFilter: fcQDialogButtonBox_method_callback_eventFilter,
+  timerEvent: fcQDialogButtonBox_method_callback_timerEvent,
+  childEvent: fcQDialogButtonBox_method_callback_childEvent,
+  customEvent: fcQDialogButtonBox_method_callback_customEvent,
+  connectNotify: fcQDialogButtonBox_method_callback_connectNotify,
+  disconnectNotify: fcQDialogButtonBox_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
     parent: gen_qwidget_types.QWidget,

@@ -47,6 +47,7 @@ proc fcQQmlPropertyValueSource_setTarget(self: pointer, target: pointer): void {
 proc fcQQmlPropertyValueSource_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlPropertyValueSource_operatorAssign".}
 proc fcQQmlPropertyValueSource_vtbl(self: pointer): pointer {.importc: "QQmlPropertyValueSource_vtbl".}
 proc fcQQmlPropertyValueSource_vdata(self: pointer): pointer {.importc: "QQmlPropertyValueSource_vdata".}
+
 type cQQmlPropertyValueSourceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   setTarget*: proc(self: pointer, target: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -59,10 +60,13 @@ proc operatorAssign*(self: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSo
   fcQQmlPropertyValueSource_operatorAssign(self.h, param1.h)
 
 type QQmlPropertyValueSourcesetTargetProc* = proc(self: QQmlPropertyValueSource, target: gen_qqmlproperty_types.QQmlProperty): void {.raises: [], gcsafe.}
+
 type QQmlPropertyValueSourceVTable* {.inheritable, pure.} = object
   vtbl: cQQmlPropertyValueSourceVTable
   setTarget*: QQmlPropertyValueSourcesetTargetProc
-proc cQQmlPropertyValueSource_vtable_callback_setTarget(self: pointer, target: pointer): void {.cdecl.} =
+
+
+proc fcQQmlPropertyValueSource_vtable_callback_setTarget(self: pointer, target: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlPropertyValueSourceVTable](fcQQmlPropertyValueSource_vdata(self))
   let self = QQmlPropertyValueSource(h: self)
   let slotval1 = gen_qqmlproperty_types.QQmlProperty(h: target, owned: false)
@@ -70,12 +74,15 @@ proc cQQmlPropertyValueSource_vtable_callback_setTarget(self: pointer, target: p
 
 type VirtualQQmlPropertyValueSource* {.inheritable.} = ref object of QQmlPropertyValueSource
   vtbl*: cQQmlPropertyValueSourceVTable
+
 method setTarget*(self: VirtualQQmlPropertyValueSource, target: gen_qqmlproperty_types.QQmlProperty): void {.base.} =
-  raiseAssert("missing implementation of QQmlPropertyValueSource_virtualbase_setTarget")
-proc cQQmlPropertyValueSource_method_callback_setTarget(self: pointer, target: pointer): void {.cdecl.} =
+  raiseAssert("missing implementation of QQmlPropertyValueSource.setTarget")
+
+proc fcQQmlPropertyValueSource_method_callback_setTarget(self: pointer, target: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlPropertyValueSource](fcQQmlPropertyValueSource_vdata(self))
   let slotval1 = gen_qqmlproperty_types.QQmlProperty(h: target, owned: false)
   inst.setTarget(slotval1)
+
 
 proc create*(T: type gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource,
     vtbl: ref QQmlPropertyValueSourceVTable = nil): gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource =
@@ -85,7 +92,7 @@ proc create*(T: type gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource,
     let vtbl = cast[ref QQmlPropertyValueSourceVTable](fcQQmlPropertyValueSource_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].setTarget):
-    vtbl[].vtbl.setTarget = cQQmlPropertyValueSource_vtable_callback_setTarget
+    vtbl[].vtbl.setTarget = fcQQmlPropertyValueSource_vtable_callback_setTarget
   gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource(h: fcQQmlPropertyValueSource_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQQmlPropertyValueSource_mvtbl = cQQmlPropertyValueSourceVTable(
@@ -93,7 +100,8 @@ const cQQmlPropertyValueSource_mvtbl = cQQmlPropertyValueSourceVTable(
     let inst = cast[ptr typeof(VirtualQQmlPropertyValueSource()[])](self.fcQQmlPropertyValueSource_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  setTarget: cQQmlPropertyValueSource_method_callback_setTarget,
+
+  setTarget: fcQQmlPropertyValueSource_method_callback_setTarget,
 )
 proc create*(T: type gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource,
     inst: VirtualQQmlPropertyValueSource) =

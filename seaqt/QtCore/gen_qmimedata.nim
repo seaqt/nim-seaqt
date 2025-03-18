@@ -87,6 +87,7 @@ proc fcQMimeData_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMi
 proc fcQMimeData_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMimeData_tr3".}
 proc fcQMimeData_vtbl(self: pointer): pointer {.importc: "QMimeData_vtbl".}
 proc fcQMimeData_vdata(self: pointer): pointer {.importc: "QMimeData_vdata".}
+
 type cQMimeDataVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -253,6 +254,7 @@ type QMimeDatachildEventProc* = proc(self: QMimeData, event: gen_qcoreevent_type
 type QMimeDatacustomEventProc* = proc(self: QMimeData, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMimeDataconnectNotifyProc* = proc(self: QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMimeDatadisconnectNotifyProc* = proc(self: QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QMimeDataVTable* {.inheritable, pure.} = object
   vtbl: cQMimeDataVTable
   metaObject*: QMimeDatametaObjectProc
@@ -268,52 +270,18 @@ type QMimeDataVTable* {.inheritable, pure.} = object
   customEvent*: QMimeDatacustomEventProc
   connectNotify*: QMimeDataconnectNotifyProc
   disconnectNotify*: QMimeDatadisconnectNotifyProc
+
 proc QMimeDatametaObject*(self: gen_qmimedata_types.QMimeData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMimeData_virtualbase_metaObject(self.h), owned: false)
-
-proc cQMimeData_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
-  let self = QMimeData(h: self)
-  var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.owned = false # TODO move?
-  let virtualReturn_h = virtualReturn.h
-  virtualReturn.h = nil
-  virtualReturn_h
 
 proc QMimeDatametacast*(self: gen_qmimedata_types.QMimeData, param1: cstring): pointer =
   fcQMimeData_virtualbase_metacast(self.h, param1)
 
-proc cQMimeData_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
-  let self = QMimeData(h: self)
-  let slotval1 = (param1)
-  var virtualReturn = vtbl[].metacast(self, slotval1)
-  virtualReturn
-
 proc QMimeDatametacall*(self: gen_qmimedata_types.QMimeData, param1: cint, param2: cint, param3: pointer): cint =
   fcQMimeData_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc cQMimeData_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
-  let self = QMimeData(h: self)
-  let slotval1 = cint(param1)
-  let slotval2 = param2
-  let slotval3 = param3
-  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
-  virtualReturn
-
 proc QMimeDatahasFormat*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char]): bool =
   fcQMimeData_virtualbase_hasFormat(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))))
-
-proc cQMimeData_vtable_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
-  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
-  let self = QMimeData(h: self)
-  let vmimetype_ms = mimetype
-  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
-  c_free(vmimetype_ms.data)
-  let slotval1 = vmimetypex_ret
-  var virtualReturn = vtbl[].hasFormat(self, slotval1)
-  virtualReturn
 
 proc QMimeDataformats*(self: gen_qmimedata_types.QMimeData): seq[string] =
   var v_ma = fcQMimeData_virtualbase_formats(self.h)
@@ -327,7 +295,67 @@ proc QMimeDataformats*(self: gen_qmimedata_types.QMimeData): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc cQMimeData_vtable_callback_formats(self: pointer): struct_miqt_array {.cdecl.} =
+proc QMimeDataretrieveData*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQMimeData_virtualbase_retrieveData(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))), preferredType.h), owned: true)
+
+proc QMimeDataevent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMimeData_virtualbase_event(self.h, event.h)
+
+proc QMimeDataeventFilter*(self: gen_qmimedata_types.QMimeData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQMimeData_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QMimeDatatimerEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQMimeData_virtualbase_timerEvent(self.h, event.h)
+
+proc QMimeDatachildEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQMimeData_virtualbase_childEvent(self.h, event.h)
+
+proc QMimeDatacustomEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QEvent): void =
+  fcQMimeData_virtualbase_customEvent(self.h, event.h)
+
+proc QMimeDataconnectNotify*(self: gen_qmimedata_types.QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMimeData_virtualbase_connectNotify(self.h, signal.h)
+
+proc QMimeDatadisconnectNotify*(self: gen_qmimedata_types.QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQMimeData_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQMimeData_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
+  let self = QMimeData(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQMimeData_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
+  let self = QMimeData(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQMimeData_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
+  let self = QMimeData(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQMimeData_vtable_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
+  let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
+  let self = QMimeData(h: self)
+  let vmimetype_ms = mimetype
+  let vmimetypex_ret = string.fromBytes(vmimetype_ms)
+  c_free(vmimetype_ms.data)
+  let slotval1 = vmimetypex_ret
+  var virtualReturn = vtbl[].hasFormat(self, slotval1)
+  virtualReturn
+
+proc fcQMimeData_vtable_callback_formats(self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   var virtualReturn = vtbl[].formats(self)
@@ -339,10 +367,7 @@ proc cQMimeData_vtable_callback_formats(self: pointer): struct_miqt_array {.cdec
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QMimeDataretrieveData*(self: gen_qmimedata_types.QMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMimeData_virtualbase_retrieveData(self.h, struct_miqt_string(data: if len(mimetype) > 0: addr mimetype[0] else: nil, len: csize_t(len(mimetype))), preferredType.h), owned: true)
-
-proc cQMimeData_vtable_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
+proc fcQMimeData_vtable_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let vmimetype_ms = mimetype
@@ -356,20 +381,14 @@ proc cQMimeData_vtable_callback_retrieveData(self: pointer, mimetype: struct_miq
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QMimeDataevent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMimeData_virtualbase_event(self.h, event.h)
-
-proc cQMimeData_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMimeData_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QMimeDataeventFilter*(self: gen_qmimedata_types.QMimeData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQMimeData_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQMimeData_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMimeData_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -377,46 +396,31 @@ proc cQMimeData_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QMimeDatatimerEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQMimeData_virtualbase_timerEvent(self.h, event.h)
-
-proc cQMimeData_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QMimeDatachildEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQMimeData_virtualbase_childEvent(self.h, event.h)
-
-proc cQMimeData_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QMimeDatacustomEvent*(self: gen_qmimedata_types.QMimeData, event: gen_qcoreevent_types.QEvent): void =
-  fcQMimeData_virtualbase_customEvent(self.h, event.h)
-
-proc cQMimeData_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QMimeDataconnectNotify*(self: gen_qmimedata_types.QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMimeData_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQMimeData_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMimeData_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QMimeDatadisconnectNotify*(self: gen_qmimedata_types.QMimeData, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQMimeData_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQMimeData_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMimeData_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMimeDataVTable](fcQMimeData_vdata(self))
   let self = QMimeData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -424,9 +428,35 @@ proc cQMimeData_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQMimeData* {.inheritable.} = ref object of QMimeData
   vtbl*: cQMimeDataVTable
+
 method metaObject*(self: VirtualQMimeData): gen_qobjectdefs_types.QMetaObject {.base.} =
   QMimeDatametaObject(self[])
-proc cQMimeData_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQMimeData, param1: cstring): pointer {.base.} =
+  QMimeDatametacast(self[], param1)
+method metacall*(self: VirtualQMimeData, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QMimeDatametacall(self[], param1, param2, param3)
+method hasFormat*(self: VirtualQMimeData, mimetype: openArray[char]): bool {.base.} =
+  QMimeDatahasFormat(self[], mimetype)
+method formats*(self: VirtualQMimeData): seq[string] {.base.} =
+  QMimeDataformats(self[])
+method retrieveData*(self: VirtualQMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.base.} =
+  QMimeDataretrieveData(self[], mimetype, preferredType)
+method event*(self: VirtualQMimeData, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMimeDataevent(self[], event)
+method eventFilter*(self: VirtualQMimeData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QMimeDataeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QMimeDatatimerEvent(self[], event)
+method childEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QMimeDatachildEvent(self[], event)
+method customEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QMimeDatacustomEvent(self[], event)
+method connectNotify*(self: VirtualQMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMimeDataconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QMimeDatadisconnectNotify(self[], signal)
+
+proc fcQMimeData_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -434,17 +464,13 @@ proc cQMimeData_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQMimeData, param1: cstring): pointer {.base.} =
-  QMimeDatametacast(self[], param1)
-proc cQMimeData_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQMimeData_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQMimeData, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QMimeDatametacall(self[], param1, param2, param3)
-proc cQMimeData_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQMimeData_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -452,9 +478,7 @@ proc cQMimeData_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method hasFormat*(self: VirtualQMimeData, mimetype: openArray[char]): bool {.base.} =
-  QMimeDatahasFormat(self[], mimetype)
-proc cQMimeData_method_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
+proc fcQMimeData_method_callback_hasFormat(self: pointer, mimetype: struct_miqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let vmimetype_ms = mimetype
   let vmimetypex_ret = string.fromBytes(vmimetype_ms)
@@ -463,9 +487,7 @@ proc cQMimeData_method_callback_hasFormat(self: pointer, mimetype: struct_miqt_s
   var virtualReturn = inst.hasFormat(slotval1)
   virtualReturn
 
-method formats*(self: VirtualQMimeData): seq[string] {.base.} =
-  QMimeDataformats(self[])
-proc cQMimeData_method_callback_formats(self: pointer): struct_miqt_array {.cdecl.} =
+proc fcQMimeData_method_callback_formats(self: pointer): struct_miqt_array {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   var virtualReturn = inst.formats()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -476,9 +498,7 @@ proc cQMimeData_method_callback_formats(self: pointer): struct_miqt_array {.cdec
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method retrieveData*(self: VirtualQMimeData, mimetype: openArray[char], preferredType: gen_qmetatype_types.QMetaType): gen_qvariant_types.QVariant {.base.} =
-  QMimeDataretrieveData(self[], mimetype, preferredType)
-proc cQMimeData_method_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
+proc fcQMimeData_method_callback_retrieveData(self: pointer, mimetype: struct_miqt_string, preferredType: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let vmimetype_ms = mimetype
   let vmimetypex_ret = string.fromBytes(vmimetype_ms)
@@ -491,57 +511,44 @@ proc cQMimeData_method_callback_retrieveData(self: pointer, mimetype: struct_miq
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQMimeData, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMimeDataevent(self[], event)
-proc cQMimeData_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMimeData_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQMimeData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QMimeDataeventFilter(self[], watched, event)
-proc cQMimeData_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQMimeData_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QMimeDatatimerEvent(self[], event)
-proc cQMimeData_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QMimeDatachildEvent(self[], event)
-proc cQMimeData_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQMimeData, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QMimeDatacustomEvent(self[], event)
-proc cQMimeData_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQMimeData_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMimeDataconnectNotify(self[], signal)
-proc cQMimeData_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMimeData_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQMimeData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QMimeDatadisconnectNotify(self[], signal)
-proc cQMimeData_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQMimeData_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMimeData](fcQMimeData_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qmimedata_types.QMimeData): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMimeData_protectedbase_sender(self.h), owned: false)
@@ -563,31 +570,31 @@ proc create*(T: type gen_qmimedata_types.QMimeData,
     let vtbl = cast[ref QMimeDataVTable](fcQMimeData_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQMimeData_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQMimeData_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQMimeData_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQMimeData_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQMimeData_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQMimeData_vtable_callback_metacall
   if not isNil(vtbl[].hasFormat):
-    vtbl[].vtbl.hasFormat = cQMimeData_vtable_callback_hasFormat
+    vtbl[].vtbl.hasFormat = fcQMimeData_vtable_callback_hasFormat
   if not isNil(vtbl[].formats):
-    vtbl[].vtbl.formats = cQMimeData_vtable_callback_formats
+    vtbl[].vtbl.formats = fcQMimeData_vtable_callback_formats
   if not isNil(vtbl[].retrieveData):
-    vtbl[].vtbl.retrieveData = cQMimeData_vtable_callback_retrieveData
+    vtbl[].vtbl.retrieveData = fcQMimeData_vtable_callback_retrieveData
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQMimeData_vtable_callback_event
+    vtbl[].vtbl.event = fcQMimeData_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQMimeData_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQMimeData_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQMimeData_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQMimeData_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQMimeData_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQMimeData_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQMimeData_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQMimeData_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQMimeData_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQMimeData_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQMimeData_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQMimeData_vtable_callback_disconnectNotify
   gen_qmimedata_types.QMimeData(h: fcQMimeData_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 const cQMimeData_mvtbl = cQMimeDataVTable(
@@ -595,19 +602,20 @@ const cQMimeData_mvtbl = cQMimeDataVTable(
     let inst = cast[ptr typeof(VirtualQMimeData()[])](self.fcQMimeData_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQMimeData_method_callback_metaObject,
-  metacast: cQMimeData_method_callback_metacast,
-  metacall: cQMimeData_method_callback_metacall,
-  hasFormat: cQMimeData_method_callback_hasFormat,
-  formats: cQMimeData_method_callback_formats,
-  retrieveData: cQMimeData_method_callback_retrieveData,
-  event: cQMimeData_method_callback_event,
-  eventFilter: cQMimeData_method_callback_eventFilter,
-  timerEvent: cQMimeData_method_callback_timerEvent,
-  childEvent: cQMimeData_method_callback_childEvent,
-  customEvent: cQMimeData_method_callback_customEvent,
-  connectNotify: cQMimeData_method_callback_connectNotify,
-  disconnectNotify: cQMimeData_method_callback_disconnectNotify,
+
+  metaObject: fcQMimeData_method_callback_metaObject,
+  metacast: fcQMimeData_method_callback_metacast,
+  metacall: fcQMimeData_method_callback_metacall,
+  hasFormat: fcQMimeData_method_callback_hasFormat,
+  formats: fcQMimeData_method_callback_formats,
+  retrieveData: fcQMimeData_method_callback_retrieveData,
+  event: fcQMimeData_method_callback_event,
+  eventFilter: fcQMimeData_method_callback_eventFilter,
+  timerEvent: fcQMimeData_method_callback_timerEvent,
+  childEvent: fcQMimeData_method_callback_childEvent,
+  customEvent: fcQMimeData_method_callback_customEvent,
+  connectNotify: fcQMimeData_method_callback_connectNotify,
+  disconnectNotify: fcQMimeData_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qmimedata_types.QMimeData,
     inst: VirtualQMimeData) =

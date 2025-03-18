@@ -95,6 +95,7 @@ proc fcQGroupBox_clicked1(self: pointer, checked: bool): void {.importc: "QGroup
 proc fcQGroupBox_connect_clicked1(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGroupBox_connect_clicked1".}
 proc fcQGroupBox_vtbl(self: pointer): pointer {.importc: "QGroupBox_vtbl".}
 proc fcQGroupBox_vdata(self: pointer): pointer {.importc: "QGroupBox_vdata".}
+
 type cQGroupBoxVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -269,39 +270,39 @@ proc clicked*(self: gen_qgroupbox_types.QGroupBox): void =
   fcQGroupBox_clicked(self.h)
 
 type QGroupBoxclickedSlot* = proc()
-proc cQGroupBox_slot_callback_clicked(slot: int) {.cdecl.} =
+proc fcQGroupBox_slot_callback_clicked(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGroupBoxclickedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQGroupBox_slot_callback_clicked_release(slot: int) {.cdecl.} =
+proc fcQGroupBox_slot_callback_clicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGroupBoxclickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onclicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclickedSlot) =
+proc onClicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclickedSlot) =
   var tmp = new QGroupBoxclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGroupBox_connect_clicked(self.h, cast[int](addr tmp[]), cQGroupBox_slot_callback_clicked, cQGroupBox_slot_callback_clicked_release)
+  fcQGroupBox_connect_clicked(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_clicked, fcQGroupBox_slot_callback_clicked_release)
 
 proc toggled*(self: gen_qgroupbox_types.QGroupBox, param1: bool): void =
   fcQGroupBox_toggled(self.h, param1)
 
 type QGroupBoxtoggledSlot* = proc(param1: bool)
-proc cQGroupBox_slot_callback_toggled(slot: int, param1: bool) {.cdecl.} =
+proc fcQGroupBox_slot_callback_toggled(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QGroupBoxtoggledSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQGroupBox_slot_callback_toggled_release(slot: int) {.cdecl.} =
+proc fcQGroupBox_slot_callback_toggled_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGroupBoxtoggledSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ontoggled*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxtoggledSlot) =
+proc onToggled*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxtoggledSlot) =
   var tmp = new QGroupBoxtoggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGroupBox_connect_toggled(self.h, cast[int](addr tmp[]), cQGroupBox_slot_callback_toggled, cQGroupBox_slot_callback_toggled_release)
+  fcQGroupBox_connect_toggled(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_toggled, fcQGroupBox_slot_callback_toggled_release)
 
 proc tr*(_: type gen_qgroupbox_types.QGroupBox, s: cstring, c: cstring): string =
   let v_ms = fcQGroupBox_tr2(s, c)
@@ -319,21 +320,21 @@ proc clicked*(self: gen_qgroupbox_types.QGroupBox, checked: bool): void =
   fcQGroupBox_clicked1(self.h, checked)
 
 type QGroupBoxclicked1Slot* = proc(checked: bool)
-proc cQGroupBox_slot_callback_clicked1(slot: int, checked: bool) {.cdecl.} =
+proc fcQGroupBox_slot_callback_clicked1(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QGroupBoxclicked1Slot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc cQGroupBox_slot_callback_clicked1_release(slot: int) {.cdecl.} =
+proc fcQGroupBox_slot_callback_clicked1_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGroupBoxclicked1Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onclicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclicked1Slot) =
+proc onClicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclicked1Slot) =
   var tmp = new QGroupBoxclicked1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGroupBox_connect_clicked1(self.h, cast[int](addr tmp[]), cQGroupBox_slot_callback_clicked1, cQGroupBox_slot_callback_clicked1_release)
+  fcQGroupBox_connect_clicked1(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_clicked1, fcQGroupBox_slot_callback_clicked1_release)
 
 type QGroupBoxmetaObjectProc* = proc(self: QGroupBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGroupBoxmetacastProc* = proc(self: QGroupBox, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -386,6 +387,7 @@ type QGroupBoxtimerEventProc* = proc(self: QGroupBox, event: gen_qcoreevent_type
 type QGroupBoxcustomEventProc* = proc(self: QGroupBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGroupBoxconnectNotifyProc* = proc(self: QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGroupBoxdisconnectNotifyProc* = proc(self: QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QGroupBoxVTable* {.inheritable, pure.} = object
   vtbl: cQGroupBoxVTable
   metaObject*: QGroupBoxmetaObjectProc
@@ -439,10 +441,162 @@ type QGroupBoxVTable* {.inheritable, pure.} = object
   customEvent*: QGroupBoxcustomEventProc
   connectNotify*: QGroupBoxconnectNotifyProc
   disconnectNotify*: QGroupBoxdisconnectNotifyProc
+
 proc QGroupBoxmetaObject*(self: gen_qgroupbox_types.QGroupBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGroupBox_virtualbase_metaObject(self.h), owned: false)
 
-proc cQGroupBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QGroupBoxmetacast*(self: gen_qgroupbox_types.QGroupBox, param1: cstring): pointer =
+  fcQGroupBox_virtualbase_metacast(self.h, param1)
+
+proc QGroupBoxmetacall*(self: gen_qgroupbox_types.QGroupBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGroupBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QGroupBoxminimumSizeHint*(self: gen_qgroupbox_types.QGroupBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQGroupBox_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QGroupBoxevent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGroupBox_virtualbase_event(self.h, event.h)
+
+proc QGroupBoxchildEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQGroupBox_virtualbase_childEvent(self.h, event.h)
+
+proc QGroupBoxresizeEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QResizeEvent): void =
+  fcQGroupBox_virtualbase_resizeEvent(self.h, event.h)
+
+proc QGroupBoxpaintEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QPaintEvent): void =
+  fcQGroupBox_virtualbase_paintEvent(self.h, event.h)
+
+proc QGroupBoxfocusInEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQGroupBox_virtualbase_focusInEvent(self.h, event.h)
+
+proc QGroupBoxchangeEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQGroupBox_virtualbase_changeEvent(self.h, event.h)
+
+proc QGroupBoxmousePressEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQGroupBox_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QGroupBoxmouseMoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQGroupBox_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QGroupBoxmouseReleaseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQGroupBox_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QGroupBoxinitStyleOption*(self: gen_qgroupbox_types.QGroupBox, option: gen_qstyleoption_types.QStyleOptionGroupBox): void =
+  fcQGroupBox_virtualbase_initStyleOption(self.h, option.h)
+
+proc QGroupBoxdevType*(self: gen_qgroupbox_types.QGroupBox): cint =
+  fcQGroupBox_virtualbase_devType(self.h)
+
+proc QGroupBoxsetVisible*(self: gen_qgroupbox_types.QGroupBox, visible: bool): void =
+  fcQGroupBox_virtualbase_setVisible(self.h, visible)
+
+proc QGroupBoxsizeHint*(self: gen_qgroupbox_types.QGroupBox): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQGroupBox_virtualbase_sizeHint(self.h), owned: true)
+
+proc QGroupBoxheightForWidth*(self: gen_qgroupbox_types.QGroupBox, param1: cint): cint =
+  fcQGroupBox_virtualbase_heightForWidth(self.h, param1)
+
+proc QGroupBoxhasHeightForWidth*(self: gen_qgroupbox_types.QGroupBox): bool =
+  fcQGroupBox_virtualbase_hasHeightForWidth(self.h)
+
+proc QGroupBoxpaintEngine*(self: gen_qgroupbox_types.QGroupBox): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQGroupBox_virtualbase_paintEngine(self.h), owned: false)
+
+proc QGroupBoxmouseDoubleClickEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
+  fcQGroupBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QGroupBoxwheelEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QWheelEvent): void =
+  fcQGroupBox_virtualbase_wheelEvent(self.h, event.h)
+
+proc QGroupBoxkeyPressEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQGroupBox_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QGroupBoxkeyReleaseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QKeyEvent): void =
+  fcQGroupBox_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QGroupBoxfocusOutEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QFocusEvent): void =
+  fcQGroupBox_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QGroupBoxenterEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QEnterEvent): void =
+  fcQGroupBox_virtualbase_enterEvent(self.h, event.h)
+
+proc QGroupBoxleaveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQGroupBox_virtualbase_leaveEvent(self.h, event.h)
+
+proc QGroupBoxmoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMoveEvent): void =
+  fcQGroupBox_virtualbase_moveEvent(self.h, event.h)
+
+proc QGroupBoxcloseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QCloseEvent): void =
+  fcQGroupBox_virtualbase_closeEvent(self.h, event.h)
+
+proc QGroupBoxcontextMenuEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQGroupBox_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QGroupBoxtabletEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QTabletEvent): void =
+  fcQGroupBox_virtualbase_tabletEvent(self.h, event.h)
+
+proc QGroupBoxactionEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QActionEvent): void =
+  fcQGroupBox_virtualbase_actionEvent(self.h, event.h)
+
+proc QGroupBoxdragEnterEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQGroupBox_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QGroupBoxdragMoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQGroupBox_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QGroupBoxdragLeaveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQGroupBox_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QGroupBoxdropEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDropEvent): void =
+  fcQGroupBox_virtualbase_dropEvent(self.h, event.h)
+
+proc QGroupBoxshowEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QShowEvent): void =
+  fcQGroupBox_virtualbase_showEvent(self.h, event.h)
+
+proc QGroupBoxhideEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QHideEvent): void =
+  fcQGroupBox_virtualbase_hideEvent(self.h, event.h)
+
+proc QGroupBoxnativeEvent*(self: gen_qgroupbox_types.QGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQGroupBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QGroupBoxmetric*(self: gen_qgroupbox_types.QGroupBox, param1: cint): cint =
+  fcQGroupBox_virtualbase_metric(self.h, cint(param1))
+
+proc QGroupBoxinitPainter*(self: gen_qgroupbox_types.QGroupBox, painter: gen_qpainter_types.QPainter): void =
+  fcQGroupBox_virtualbase_initPainter(self.h, painter.h)
+
+proc QGroupBoxredirected*(self: gen_qgroupbox_types.QGroupBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQGroupBox_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QGroupBoxsharedPainter*(self: gen_qgroupbox_types.QGroupBox): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQGroupBox_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QGroupBoxinputMethodEvent*(self: gen_qgroupbox_types.QGroupBox, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQGroupBox_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QGroupBoxinputMethodQuery*(self: gen_qgroupbox_types.QGroupBox, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQGroupBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QGroupBoxfocusNextPrevChild*(self: gen_qgroupbox_types.QGroupBox, next: bool): bool =
+  fcQGroupBox_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QGroupBoxeventFilter*(self: gen_qgroupbox_types.QGroupBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQGroupBox_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QGroupBoxtimerEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQGroupBox_virtualbase_timerEvent(self.h, event.h)
+
+proc QGroupBoxcustomEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
+  fcQGroupBox_virtualbase_customEvent(self.h, event.h)
+
+proc QGroupBoxconnectNotify*(self: gen_qgroupbox_types.QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGroupBox_virtualbase_connectNotify(self.h, signal.h)
+
+proc QGroupBoxdisconnectNotify*(self: gen_qgroupbox_types.QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQGroupBox_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQGroupBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -451,20 +605,14 @@ proc cQGroupBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxmetacast*(self: gen_qgroupbox_types.QGroupBox, param1: cstring): pointer =
-  fcQGroupBox_virtualbase_metacast(self.h, param1)
-
-proc cQGroupBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QGroupBoxmetacall*(self: gen_qgroupbox_types.QGroupBox, param1: cint, param2: cint, param3: pointer): cint =
-  fcQGroupBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQGroupBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGroupBox_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = cint(param1)
@@ -473,10 +621,7 @@ proc cQGroupBox_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QGroupBoxminimumSizeHint*(self: gen_qgroupbox_types.QGroupBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGroupBox_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQGroupBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -485,119 +630,80 @@ proc cQGroupBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxevent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGroupBox_virtualbase_event(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGroupBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QGroupBoxchildEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQGroupBox_virtualbase_childEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QGroupBoxresizeEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QResizeEvent): void =
-  fcQGroupBox_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QGroupBoxpaintEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QPaintEvent): void =
-  fcQGroupBox_virtualbase_paintEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QGroupBoxfocusInEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQGroupBox_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QGroupBoxchangeEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQGroupBox_virtualbase_changeEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QGroupBoxmousePressEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQGroupBox_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QGroupBoxmouseMoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQGroupBox_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QGroupBoxmouseReleaseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQGroupBox_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QGroupBoxinitStyleOption*(self: gen_qgroupbox_types.QGroupBox, option: gen_qstyleoption_types.QStyleOptionGroupBox): void =
-  fcQGroupBox_virtualbase_initStyleOption(self.h, option.h)
-
-proc cQGroupBox_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOptionGroupBox(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc QGroupBoxdevType*(self: gen_qgroupbox_types.QGroupBox): cint =
-  fcQGroupBox_virtualbase_devType(self.h)
-
-proc cQGroupBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQGroupBox_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QGroupBoxsetVisible*(self: gen_qgroupbox_types.QGroupBox, visible: bool): void =
-  fcQGroupBox_virtualbase_setVisible(self.h, visible)
-
-proc cQGroupBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QGroupBoxsizeHint*(self: gen_qgroupbox_types.QGroupBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGroupBox_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQGroupBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -606,29 +712,20 @@ proc cQGroupBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxheightForWidth*(self: gen_qgroupbox_types.QGroupBox, param1: cint): cint =
-  fcQGroupBox_virtualbase_heightForWidth(self.h, param1)
-
-proc cQGroupBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQGroupBox_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QGroupBoxhasHeightForWidth*(self: gen_qgroupbox_types.QGroupBox): bool =
-  fcQGroupBox_virtualbase_hasHeightForWidth(self.h)
-
-proc cQGroupBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQGroupBox_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QGroupBoxpaintEngine*(self: gen_qgroupbox_types.QGroupBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQGroupBox_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQGroupBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -637,172 +734,115 @@ proc cQGroupBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxmouseDoubleClickEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMouseEvent): void =
-  fcQGroupBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QGroupBoxwheelEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QWheelEvent): void =
-  fcQGroupBox_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QGroupBoxkeyPressEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQGroupBox_virtualbase_keyPressEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QGroupBoxkeyReleaseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QKeyEvent): void =
-  fcQGroupBox_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QGroupBoxfocusOutEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QFocusEvent): void =
-  fcQGroupBox_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QGroupBoxenterEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QEnterEvent): void =
-  fcQGroupBox_virtualbase_enterEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QGroupBoxleaveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQGroupBox_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QGroupBoxmoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QMoveEvent): void =
-  fcQGroupBox_virtualbase_moveEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QGroupBoxcloseEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QCloseEvent): void =
-  fcQGroupBox_virtualbase_closeEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QGroupBoxcontextMenuEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QContextMenuEvent): void =
-  fcQGroupBox_virtualbase_contextMenuEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QGroupBoxtabletEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QTabletEvent): void =
-  fcQGroupBox_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QGroupBoxactionEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QActionEvent): void =
-  fcQGroupBox_virtualbase_actionEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QGroupBoxdragEnterEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQGroupBox_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QGroupBoxdragMoveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQGroupBox_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QGroupBoxdragLeaveEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQGroupBox_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QGroupBoxdropEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QDropEvent): void =
-  fcQGroupBox_virtualbase_dropEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QGroupBoxshowEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QShowEvent): void =
-  fcQGroupBox_virtualbase_showEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QGroupBoxhideEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qevent_types.QHideEvent): void =
-  fcQGroupBox_virtualbase_hideEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QGroupBoxnativeEvent*(self: gen_qgroupbox_types.QGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQGroupBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQGroupBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQGroupBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var veventType_bytearray = eventType
@@ -814,29 +854,20 @@ proc cQGroupBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QGroupBoxmetric*(self: gen_qgroupbox_types.QGroupBox, param1: cint): cint =
-  fcQGroupBox_virtualbase_metric(self.h, cint(param1))
-
-proc cQGroupBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQGroupBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QGroupBoxinitPainter*(self: gen_qgroupbox_types.QGroupBox, painter: gen_qpainter_types.QPainter): void =
-  fcQGroupBox_virtualbase_initPainter(self.h, painter.h)
-
-proc cQGroupBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QGroupBoxredirected*(self: gen_qgroupbox_types.QGroupBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQGroupBox_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQGroupBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -846,10 +877,7 @@ proc cQGroupBox_vtable_callback_redirected(self: pointer, offset: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxsharedPainter*(self: gen_qgroupbox_types.QGroupBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQGroupBox_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQGroupBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -858,19 +886,13 @@ proc cQGroupBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxinputMethodEvent*(self: gen_qgroupbox_types.QGroupBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQGroupBox_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQGroupBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QGroupBoxinputMethodQuery*(self: gen_qgroupbox_types.QGroupBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGroupBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQGroupBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQGroupBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = cint(param1)
@@ -880,20 +902,14 @@ proc cQGroupBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGroupBoxfocusNextPrevChild*(self: gen_qgroupbox_types.QGroupBox, next: bool): bool =
-  fcQGroupBox_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQGroupBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQGroupBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QGroupBoxeventFilter*(self: gen_qgroupbox_types.QGroupBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQGroupBox_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQGroupBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGroupBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -901,37 +917,25 @@ proc cQGroupBox_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QGroupBoxtimerEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQGroupBox_virtualbase_timerEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QGroupBoxcustomEvent*(self: gen_qgroupbox_types.QGroupBox, event: gen_qcoreevent_types.QEvent): void =
-  fcQGroupBox_virtualbase_customEvent(self.h, event.h)
-
-proc cQGroupBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QGroupBoxconnectNotify*(self: gen_qgroupbox_types.QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGroupBox_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQGroupBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QGroupBoxdisconnectNotify*(self: gen_qgroupbox_types.QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQGroupBox_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQGroupBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGroupBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGroupBoxVTable](fcQGroupBox_vdata(self))
   let self = QGroupBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -939,9 +943,111 @@ proc cQGroupBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQGroupBox* {.inheritable.} = ref object of QGroupBox
   vtbl*: cQGroupBoxVTable
+
 method metaObject*(self: VirtualQGroupBox): gen_qobjectdefs_types.QMetaObject {.base.} =
   QGroupBoxmetaObject(self[])
-proc cQGroupBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQGroupBox, param1: cstring): pointer {.base.} =
+  QGroupBoxmetacast(self[], param1)
+method metacall*(self: VirtualQGroupBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGroupBoxmetacall(self[], param1, param2, param3)
+method minimumSizeHint*(self: VirtualQGroupBox): gen_qsize_types.QSize {.base.} =
+  QGroupBoxminimumSizeHint(self[])
+method event*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGroupBoxevent(self[], event)
+method childEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGroupBoxchildEvent(self[], event)
+method resizeEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QGroupBoxresizeEvent(self[], event)
+method paintEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QGroupBoxpaintEvent(self[], event)
+method focusInEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGroupBoxfocusInEvent(self[], event)
+method changeEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGroupBoxchangeEvent(self[], event)
+method mousePressEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGroupBoxmousePressEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGroupBoxmouseMoveEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGroupBoxmouseReleaseEvent(self[], event)
+method initStyleOption*(self: VirtualQGroupBox, option: gen_qstyleoption_types.QStyleOptionGroupBox): void {.base.} =
+  QGroupBoxinitStyleOption(self[], option)
+method devType*(self: VirtualQGroupBox): cint {.base.} =
+  QGroupBoxdevType(self[])
+method setVisible*(self: VirtualQGroupBox, visible: bool): void {.base.} =
+  QGroupBoxsetVisible(self[], visible)
+method sizeHint*(self: VirtualQGroupBox): gen_qsize_types.QSize {.base.} =
+  QGroupBoxsizeHint(self[])
+method heightForWidth*(self: VirtualQGroupBox, param1: cint): cint {.base.} =
+  QGroupBoxheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQGroupBox): bool {.base.} =
+  QGroupBoxhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQGroupBox): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QGroupBoxpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QGroupBoxmouseDoubleClickEvent(self[], event)
+method wheelEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QGroupBoxwheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGroupBoxkeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGroupBoxkeyReleaseEvent(self[], event)
+method focusOutEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGroupBoxfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QGroupBoxenterEvent(self[], event)
+method leaveEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGroupBoxleaveEvent(self[], event)
+method moveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QGroupBoxmoveEvent(self[], event)
+method closeEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QGroupBoxcloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QGroupBoxcontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QGroupBoxtabletEvent(self[], event)
+method actionEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QGroupBoxactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QGroupBoxdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QGroupBoxdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QGroupBoxdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QGroupBoxdropEvent(self[], event)
+method showEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QGroupBoxshowEvent(self[], event)
+method hideEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QGroupBoxhideEvent(self[], event)
+method nativeEvent*(self: VirtualQGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QGroupBoxnativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQGroupBox, param1: cint): cint {.base.} =
+  QGroupBoxmetric(self[], param1)
+method initPainter*(self: VirtualQGroupBox, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QGroupBoxinitPainter(self[], painter)
+method redirected*(self: VirtualQGroupBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QGroupBoxredirected(self[], offset)
+method sharedPainter*(self: VirtualQGroupBox): gen_qpainter_types.QPainter {.base.} =
+  QGroupBoxsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQGroupBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QGroupBoxinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQGroupBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QGroupBoxinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQGroupBox, next: bool): bool {.base.} =
+  QGroupBoxfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQGroupBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGroupBoxeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGroupBoxtimerEvent(self[], event)
+method customEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGroupBoxcustomEvent(self[], event)
+method connectNotify*(self: VirtualQGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGroupBoxconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGroupBoxdisconnectNotify(self[], signal)
+
+proc fcQGroupBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -949,17 +1055,13 @@ proc cQGroupBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQGroupBox, param1: cstring): pointer {.base.} =
-  QGroupBoxmetacast(self[], param1)
-proc cQGroupBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQGroupBox, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QGroupBoxmetacall(self[], param1, param2, param3)
-proc cQGroupBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQGroupBox_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -967,9 +1069,7 @@ proc cQGroupBox_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method minimumSizeHint*(self: VirtualQGroupBox): gen_qsize_types.QSize {.base.} =
-  QGroupBoxminimumSizeHint(self[])
-proc cQGroupBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -977,94 +1077,68 @@ proc cQGroupBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGroupBoxevent(self[], event)
-proc cQGroupBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGroupBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method childEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QGroupBoxchildEvent(self[], event)
-proc cQGroupBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method resizeEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QGroupBoxresizeEvent(self[], event)
-proc cQGroupBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method paintEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QGroupBoxpaintEvent(self[], event)
-proc cQGroupBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method focusInEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QGroupBoxfocusInEvent(self[], event)
-proc cQGroupBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method changeEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGroupBoxchangeEvent(self[], event)
-proc cQGroupBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method mousePressEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGroupBoxmousePressEvent(self[], event)
-proc cQGroupBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGroupBoxmouseMoveEvent(self[], event)
-proc cQGroupBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGroupBoxmouseReleaseEvent(self[], event)
-proc cQGroupBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method initStyleOption*(self: VirtualQGroupBox, option: gen_qstyleoption_types.QStyleOptionGroupBox): void {.base.} =
-  QGroupBoxinitStyleOption(self[], option)
-proc cQGroupBox_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qstyleoption_types.QStyleOptionGroupBox(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-method devType*(self: VirtualQGroupBox): cint {.base.} =
-  QGroupBoxdevType(self[])
-proc cQGroupBox_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQGroupBox_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method setVisible*(self: VirtualQGroupBox, visible: bool): void {.base.} =
-  QGroupBoxsetVisible(self[], visible)
-proc cQGroupBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQGroupBox_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method sizeHint*(self: VirtualQGroupBox): gen_qsize_types.QSize {.base.} =
-  QGroupBoxsizeHint(self[])
-proc cQGroupBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1072,24 +1146,18 @@ proc cQGroupBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method heightForWidth*(self: VirtualQGroupBox, param1: cint): cint {.base.} =
-  QGroupBoxheightForWidth(self[], param1)
-proc cQGroupBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQGroupBox_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQGroupBox): bool {.base.} =
-  QGroupBoxhasHeightForWidth(self[])
-proc cQGroupBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQGroupBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQGroupBox): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QGroupBoxpaintEngine(self[])
-proc cQGroupBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1097,135 +1165,97 @@ proc cQGroupBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method mouseDoubleClickEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QGroupBoxmouseDoubleClickEvent(self[], event)
-proc cQGroupBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method wheelEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QGroupBoxwheelEvent(self[], event)
-proc cQGroupBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyPressEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QGroupBoxkeyPressEvent(self[], event)
-proc cQGroupBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QGroupBoxkeyReleaseEvent(self[], event)
-proc cQGroupBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QGroupBoxfocusOutEvent(self[], event)
-proc cQGroupBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QGroupBoxenterEvent(self[], event)
-proc cQGroupBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGroupBoxleaveEvent(self[], event)
-proc cQGroupBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method moveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QGroupBoxmoveEvent(self[], event)
-proc cQGroupBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method closeEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QGroupBoxcloseEvent(self[], event)
-proc cQGroupBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QGroupBoxcontextMenuEvent(self[], event)
-proc cQGroupBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method tabletEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QGroupBoxtabletEvent(self[], event)
-proc cQGroupBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QGroupBoxactionEvent(self[], event)
-proc cQGroupBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QGroupBoxdragEnterEvent(self[], event)
-proc cQGroupBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QGroupBoxdragMoveEvent(self[], event)
-proc cQGroupBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QGroupBoxdragLeaveEvent(self[], event)
-proc cQGroupBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QGroupBoxdropEvent(self[], event)
-proc cQGroupBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method showEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QGroupBoxshowEvent(self[], event)
-proc cQGroupBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method hideEvent*(self: VirtualQGroupBox, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QGroupBoxhideEvent(self[], event)
-proc cQGroupBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQGroupBox, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QGroupBoxnativeEvent(self[], eventType, message, resultVal)
-proc cQGroupBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQGroupBox_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1236,24 +1266,18 @@ proc cQGroupBox_method_callback_nativeEvent(self: pointer, eventType: struct_miq
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQGroupBox, param1: cint): cint {.base.} =
-  QGroupBoxmetric(self[], param1)
-proc cQGroupBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQGroupBox_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQGroupBox, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QGroupBoxinitPainter(self[], painter)
-proc cQGroupBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQGroupBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QGroupBoxredirected(self[], offset)
-proc cQGroupBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1262,9 +1286,7 @@ proc cQGroupBox_method_callback_redirected(self: pointer, offset: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQGroupBox): gen_qpainter_types.QPainter {.base.} =
-  QGroupBoxsharedPainter(self[])
-proc cQGroupBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1272,16 +1294,12 @@ proc cQGroupBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} 
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQGroupBox, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QGroupBoxinputMethodEvent(self[], param1)
-proc cQGroupBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQGroupBox, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QGroupBoxinputMethodQuery(self[], param1)
-proc cQGroupBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQGroupBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1290,50 +1308,39 @@ proc cQGroupBox_method_callback_inputMethodQuery(self: pointer, param1: cint): p
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQGroupBox, next: bool): bool {.base.} =
-  QGroupBoxfocusNextPrevChild(self[], next)
-proc cQGroupBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQGroupBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQGroupBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QGroupBoxeventFilter(self[], watched, event)
-proc cQGroupBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQGroupBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QGroupBoxtimerEvent(self[], event)
-proc cQGroupBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method customEvent*(self: VirtualQGroupBox, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QGroupBoxcustomEvent(self[], event)
-proc cQGroupBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGroupBoxconnectNotify(self[], signal)
-proc cQGroupBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQGroupBox, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QGroupBoxdisconnectNotify(self[], signal)
-proc cQGroupBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQGroupBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGroupBox](fcQGroupBox_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc updateMicroFocus*(self: gen_qgroupbox_types.QGroupBox): void =
   fcQGroupBox_protectedbase_updateMicroFocus(self.h)
@@ -1371,107 +1378,107 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
     let vtbl = cast[ref QGroupBoxVTable](fcQGroupBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGroupBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGroupBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGroupBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGroupBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGroupBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGroupBox_vtable_callback_metacall
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQGroupBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQGroupBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGroupBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQGroupBox_vtable_callback_event
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGroupBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGroupBox_vtable_callback_childEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQGroupBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQGroupBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQGroupBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQGroupBox_vtable_callback_paintEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQGroupBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQGroupBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQGroupBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQGroupBox_vtable_callback_changeEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQGroupBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQGroupBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQGroupBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQGroupBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQGroupBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQGroupBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = cQGroupBox_vtable_callback_initStyleOption
+    vtbl[].vtbl.initStyleOption = fcQGroupBox_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQGroupBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQGroupBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQGroupBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQGroupBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGroupBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGroupBox_vtable_callback_sizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQGroupBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQGroupBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQGroupBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQGroupBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQGroupBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQGroupBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQGroupBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQGroupBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQGroupBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQGroupBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQGroupBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQGroupBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQGroupBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQGroupBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQGroupBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQGroupBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQGroupBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQGroupBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQGroupBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQGroupBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQGroupBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQGroupBox_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQGroupBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQGroupBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQGroupBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQGroupBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQGroupBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQGroupBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQGroupBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQGroupBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQGroupBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQGroupBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQGroupBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQGroupBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQGroupBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQGroupBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQGroupBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQGroupBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQGroupBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQGroupBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQGroupBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQGroupBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQGroupBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQGroupBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQGroupBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQGroupBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQGroupBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQGroupBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQGroupBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQGroupBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQGroupBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQGroupBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQGroupBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQGroupBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQGroupBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQGroupBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQGroupBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQGroupBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGroupBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGroupBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGroupBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGroupBox_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGroupBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGroupBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGroupBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGroupBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGroupBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGroupBox_vtable_callback_disconnectNotify
   gen_qgroupbox_types.QGroupBox(h: fcQGroupBox_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
@@ -1482,107 +1489,107 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
     let vtbl = cast[ref QGroupBoxVTable](fcQGroupBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGroupBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGroupBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGroupBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGroupBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGroupBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGroupBox_vtable_callback_metacall
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQGroupBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQGroupBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGroupBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQGroupBox_vtable_callback_event
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGroupBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGroupBox_vtable_callback_childEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQGroupBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQGroupBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQGroupBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQGroupBox_vtable_callback_paintEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQGroupBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQGroupBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQGroupBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQGroupBox_vtable_callback_changeEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQGroupBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQGroupBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQGroupBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQGroupBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQGroupBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQGroupBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = cQGroupBox_vtable_callback_initStyleOption
+    vtbl[].vtbl.initStyleOption = fcQGroupBox_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQGroupBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQGroupBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQGroupBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQGroupBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGroupBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGroupBox_vtable_callback_sizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQGroupBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQGroupBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQGroupBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQGroupBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQGroupBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQGroupBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQGroupBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQGroupBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQGroupBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQGroupBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQGroupBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQGroupBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQGroupBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQGroupBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQGroupBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQGroupBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQGroupBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQGroupBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQGroupBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQGroupBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQGroupBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQGroupBox_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQGroupBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQGroupBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQGroupBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQGroupBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQGroupBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQGroupBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQGroupBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQGroupBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQGroupBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQGroupBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQGroupBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQGroupBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQGroupBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQGroupBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQGroupBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQGroupBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQGroupBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQGroupBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQGroupBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQGroupBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQGroupBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQGroupBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQGroupBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQGroupBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQGroupBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQGroupBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQGroupBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQGroupBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQGroupBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQGroupBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQGroupBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQGroupBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQGroupBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQGroupBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQGroupBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQGroupBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGroupBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGroupBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGroupBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGroupBox_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGroupBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGroupBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGroupBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGroupBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGroupBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGroupBox_vtable_callback_disconnectNotify
   gen_qgroupbox_types.QGroupBox(h: fcQGroupBox_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
@@ -1594,107 +1601,107 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
     let vtbl = cast[ref QGroupBoxVTable](fcQGroupBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGroupBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGroupBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGroupBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGroupBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGroupBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGroupBox_vtable_callback_metacall
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQGroupBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQGroupBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGroupBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQGroupBox_vtable_callback_event
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGroupBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGroupBox_vtable_callback_childEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQGroupBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQGroupBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQGroupBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQGroupBox_vtable_callback_paintEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQGroupBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQGroupBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQGroupBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQGroupBox_vtable_callback_changeEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQGroupBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQGroupBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQGroupBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQGroupBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQGroupBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQGroupBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = cQGroupBox_vtable_callback_initStyleOption
+    vtbl[].vtbl.initStyleOption = fcQGroupBox_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQGroupBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQGroupBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQGroupBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQGroupBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGroupBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGroupBox_vtable_callback_sizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQGroupBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQGroupBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQGroupBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQGroupBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQGroupBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQGroupBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQGroupBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQGroupBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQGroupBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQGroupBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQGroupBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQGroupBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQGroupBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQGroupBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQGroupBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQGroupBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQGroupBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQGroupBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQGroupBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQGroupBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQGroupBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQGroupBox_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQGroupBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQGroupBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQGroupBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQGroupBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQGroupBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQGroupBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQGroupBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQGroupBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQGroupBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQGroupBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQGroupBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQGroupBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQGroupBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQGroupBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQGroupBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQGroupBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQGroupBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQGroupBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQGroupBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQGroupBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQGroupBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQGroupBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQGroupBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQGroupBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQGroupBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQGroupBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQGroupBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQGroupBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQGroupBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQGroupBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQGroupBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQGroupBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQGroupBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQGroupBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQGroupBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQGroupBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGroupBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGroupBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGroupBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGroupBox_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGroupBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGroupBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGroupBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGroupBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGroupBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGroupBox_vtable_callback_disconnectNotify
   gen_qgroupbox_types.QGroupBox(h: fcQGroupBox_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
@@ -1706,107 +1713,107 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
     let vtbl = cast[ref QGroupBoxVTable](fcQGroupBox_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQGroupBox_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQGroupBox_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQGroupBox_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQGroupBox_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQGroupBox_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQGroupBox_vtable_callback_metacall
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQGroupBox_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQGroupBox_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQGroupBox_vtable_callback_event
+    vtbl[].vtbl.event = fcQGroupBox_vtable_callback_event
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQGroupBox_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQGroupBox_vtable_callback_childEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQGroupBox_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQGroupBox_vtable_callback_resizeEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQGroupBox_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQGroupBox_vtable_callback_paintEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQGroupBox_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQGroupBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQGroupBox_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQGroupBox_vtable_callback_changeEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQGroupBox_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQGroupBox_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQGroupBox_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQGroupBox_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQGroupBox_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQGroupBox_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = cQGroupBox_vtable_callback_initStyleOption
+    vtbl[].vtbl.initStyleOption = fcQGroupBox_vtable_callback_initStyleOption
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQGroupBox_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQGroupBox_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQGroupBox_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQGroupBox_vtable_callback_setVisible
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQGroupBox_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQGroupBox_vtable_callback_sizeHint
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQGroupBox_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQGroupBox_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQGroupBox_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQGroupBox_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQGroupBox_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQGroupBox_vtable_callback_paintEngine
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQGroupBox_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQGroupBox_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQGroupBox_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQGroupBox_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQGroupBox_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQGroupBox_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQGroupBox_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQGroupBox_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQGroupBox_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQGroupBox_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQGroupBox_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQGroupBox_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQGroupBox_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQGroupBox_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQGroupBox_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQGroupBox_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQGroupBox_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQGroupBox_vtable_callback_closeEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQGroupBox_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQGroupBox_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQGroupBox_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQGroupBox_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQGroupBox_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQGroupBox_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQGroupBox_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQGroupBox_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQGroupBox_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQGroupBox_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQGroupBox_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQGroupBox_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQGroupBox_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQGroupBox_vtable_callback_dropEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQGroupBox_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQGroupBox_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQGroupBox_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQGroupBox_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQGroupBox_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQGroupBox_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQGroupBox_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQGroupBox_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQGroupBox_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQGroupBox_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQGroupBox_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQGroupBox_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQGroupBox_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQGroupBox_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQGroupBox_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQGroupBox_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQGroupBox_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQGroupBox_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQGroupBox_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQGroupBox_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQGroupBox_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQGroupBox_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQGroupBox_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQGroupBox_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQGroupBox_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQGroupBox_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQGroupBox_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQGroupBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQGroupBox_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQGroupBox_vtable_callback_disconnectNotify
   gen_qgroupbox_types.QGroupBox(h: fcQGroupBox_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h), owned: true)
 
 const cQGroupBox_mvtbl = cQGroupBoxVTable(
@@ -1814,57 +1821,58 @@ const cQGroupBox_mvtbl = cQGroupBoxVTable(
     let inst = cast[ptr typeof(VirtualQGroupBox()[])](self.fcQGroupBox_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQGroupBox_method_callback_metaObject,
-  metacast: cQGroupBox_method_callback_metacast,
-  metacall: cQGroupBox_method_callback_metacall,
-  minimumSizeHint: cQGroupBox_method_callback_minimumSizeHint,
-  event: cQGroupBox_method_callback_event,
-  childEvent: cQGroupBox_method_callback_childEvent,
-  resizeEvent: cQGroupBox_method_callback_resizeEvent,
-  paintEvent: cQGroupBox_method_callback_paintEvent,
-  focusInEvent: cQGroupBox_method_callback_focusInEvent,
-  changeEvent: cQGroupBox_method_callback_changeEvent,
-  mousePressEvent: cQGroupBox_method_callback_mousePressEvent,
-  mouseMoveEvent: cQGroupBox_method_callback_mouseMoveEvent,
-  mouseReleaseEvent: cQGroupBox_method_callback_mouseReleaseEvent,
-  initStyleOption: cQGroupBox_method_callback_initStyleOption,
-  devType: cQGroupBox_method_callback_devType,
-  setVisible: cQGroupBox_method_callback_setVisible,
-  sizeHint: cQGroupBox_method_callback_sizeHint,
-  heightForWidth: cQGroupBox_method_callback_heightForWidth,
-  hasHeightForWidth: cQGroupBox_method_callback_hasHeightForWidth,
-  paintEngine: cQGroupBox_method_callback_paintEngine,
-  mouseDoubleClickEvent: cQGroupBox_method_callback_mouseDoubleClickEvent,
-  wheelEvent: cQGroupBox_method_callback_wheelEvent,
-  keyPressEvent: cQGroupBox_method_callback_keyPressEvent,
-  keyReleaseEvent: cQGroupBox_method_callback_keyReleaseEvent,
-  focusOutEvent: cQGroupBox_method_callback_focusOutEvent,
-  enterEvent: cQGroupBox_method_callback_enterEvent,
-  leaveEvent: cQGroupBox_method_callback_leaveEvent,
-  moveEvent: cQGroupBox_method_callback_moveEvent,
-  closeEvent: cQGroupBox_method_callback_closeEvent,
-  contextMenuEvent: cQGroupBox_method_callback_contextMenuEvent,
-  tabletEvent: cQGroupBox_method_callback_tabletEvent,
-  actionEvent: cQGroupBox_method_callback_actionEvent,
-  dragEnterEvent: cQGroupBox_method_callback_dragEnterEvent,
-  dragMoveEvent: cQGroupBox_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQGroupBox_method_callback_dragLeaveEvent,
-  dropEvent: cQGroupBox_method_callback_dropEvent,
-  showEvent: cQGroupBox_method_callback_showEvent,
-  hideEvent: cQGroupBox_method_callback_hideEvent,
-  nativeEvent: cQGroupBox_method_callback_nativeEvent,
-  metric: cQGroupBox_method_callback_metric,
-  initPainter: cQGroupBox_method_callback_initPainter,
-  redirected: cQGroupBox_method_callback_redirected,
-  sharedPainter: cQGroupBox_method_callback_sharedPainter,
-  inputMethodEvent: cQGroupBox_method_callback_inputMethodEvent,
-  inputMethodQuery: cQGroupBox_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQGroupBox_method_callback_focusNextPrevChild,
-  eventFilter: cQGroupBox_method_callback_eventFilter,
-  timerEvent: cQGroupBox_method_callback_timerEvent,
-  customEvent: cQGroupBox_method_callback_customEvent,
-  connectNotify: cQGroupBox_method_callback_connectNotify,
-  disconnectNotify: cQGroupBox_method_callback_disconnectNotify,
+
+  metaObject: fcQGroupBox_method_callback_metaObject,
+  metacast: fcQGroupBox_method_callback_metacast,
+  metacall: fcQGroupBox_method_callback_metacall,
+  minimumSizeHint: fcQGroupBox_method_callback_minimumSizeHint,
+  event: fcQGroupBox_method_callback_event,
+  childEvent: fcQGroupBox_method_callback_childEvent,
+  resizeEvent: fcQGroupBox_method_callback_resizeEvent,
+  paintEvent: fcQGroupBox_method_callback_paintEvent,
+  focusInEvent: fcQGroupBox_method_callback_focusInEvent,
+  changeEvent: fcQGroupBox_method_callback_changeEvent,
+  mousePressEvent: fcQGroupBox_method_callback_mousePressEvent,
+  mouseMoveEvent: fcQGroupBox_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: fcQGroupBox_method_callback_mouseReleaseEvent,
+  initStyleOption: fcQGroupBox_method_callback_initStyleOption,
+  devType: fcQGroupBox_method_callback_devType,
+  setVisible: fcQGroupBox_method_callback_setVisible,
+  sizeHint: fcQGroupBox_method_callback_sizeHint,
+  heightForWidth: fcQGroupBox_method_callback_heightForWidth,
+  hasHeightForWidth: fcQGroupBox_method_callback_hasHeightForWidth,
+  paintEngine: fcQGroupBox_method_callback_paintEngine,
+  mouseDoubleClickEvent: fcQGroupBox_method_callback_mouseDoubleClickEvent,
+  wheelEvent: fcQGroupBox_method_callback_wheelEvent,
+  keyPressEvent: fcQGroupBox_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQGroupBox_method_callback_keyReleaseEvent,
+  focusOutEvent: fcQGroupBox_method_callback_focusOutEvent,
+  enterEvent: fcQGroupBox_method_callback_enterEvent,
+  leaveEvent: fcQGroupBox_method_callback_leaveEvent,
+  moveEvent: fcQGroupBox_method_callback_moveEvent,
+  closeEvent: fcQGroupBox_method_callback_closeEvent,
+  contextMenuEvent: fcQGroupBox_method_callback_contextMenuEvent,
+  tabletEvent: fcQGroupBox_method_callback_tabletEvent,
+  actionEvent: fcQGroupBox_method_callback_actionEvent,
+  dragEnterEvent: fcQGroupBox_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQGroupBox_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQGroupBox_method_callback_dragLeaveEvent,
+  dropEvent: fcQGroupBox_method_callback_dropEvent,
+  showEvent: fcQGroupBox_method_callback_showEvent,
+  hideEvent: fcQGroupBox_method_callback_hideEvent,
+  nativeEvent: fcQGroupBox_method_callback_nativeEvent,
+  metric: fcQGroupBox_method_callback_metric,
+  initPainter: fcQGroupBox_method_callback_initPainter,
+  redirected: fcQGroupBox_method_callback_redirected,
+  sharedPainter: fcQGroupBox_method_callback_sharedPainter,
+  inputMethodEvent: fcQGroupBox_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQGroupBox_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQGroupBox_method_callback_focusNextPrevChild,
+  eventFilter: fcQGroupBox_method_callback_eventFilter,
+  timerEvent: fcQGroupBox_method_callback_timerEvent,
+  customEvent: fcQGroupBox_method_callback_customEvent,
+  connectNotify: fcQGroupBox_method_callback_connectNotify,
+  disconnectNotify: fcQGroupBox_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
     parent: gen_qwidget_types.QWidget,

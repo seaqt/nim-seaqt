@@ -85,6 +85,7 @@ proc fcQAudioSink_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QA
 proc fcQAudioSink_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioSink_tr3".}
 proc fcQAudioSink_vtbl(self: pointer): pointer {.importc: "QAudioSink_vtbl".}
 proc fcQAudioSink_vdata(self: pointer): pointer {.importc: "QAudioSink_vdata".}
+
 type cQAudioSinkVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -189,21 +190,21 @@ proc stateChanged*(self: gen_qaudiosink_types.QAudioSink, state: cint): void =
   fcQAudioSink_stateChanged(self.h, cint(state))
 
 type QAudioSinkstateChangedSlot* = proc(state: cint)
-proc cQAudioSink_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
+proc fcQAudioSink_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioSinkstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
-proc cQAudioSink_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+proc fcQAudioSink_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAudioSinkstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstateChanged*(self: gen_qaudiosink_types.QAudioSink, slot: QAudioSinkstateChangedSlot) =
+proc onStateChanged*(self: gen_qaudiosink_types.QAudioSink, slot: QAudioSinkstateChangedSlot) =
   var tmp = new QAudioSinkstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioSink_connect_stateChanged(self.h, cast[int](addr tmp[]), cQAudioSink_slot_callback_stateChanged, cQAudioSink_slot_callback_stateChanged_release)
+  fcQAudioSink_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQAudioSink_slot_callback_stateChanged, fcQAudioSink_slot_callback_stateChanged_release)
 
 proc tr*(_: type gen_qaudiosink_types.QAudioSink, s: cstring, c: cstring): string =
   let v_ms = fcQAudioSink_tr2(s, c)
@@ -227,6 +228,7 @@ type QAudioSinkchildEventProc* = proc(self: QAudioSink, event: gen_qcoreevent_ty
 type QAudioSinkcustomEventProc* = proc(self: QAudioSink, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAudioSinkconnectNotifyProc* = proc(self: QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAudioSinkdisconnectNotifyProc* = proc(self: QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QAudioSinkVTable* {.inheritable, pure.} = object
   vtbl: cQAudioSinkVTable
   metaObject*: QAudioSinkmetaObjectProc
@@ -239,10 +241,39 @@ type QAudioSinkVTable* {.inheritable, pure.} = object
   customEvent*: QAudioSinkcustomEventProc
   connectNotify*: QAudioSinkconnectNotifyProc
   disconnectNotify*: QAudioSinkdisconnectNotifyProc
+
 proc QAudioSinkmetaObject*(self: gen_qaudiosink_types.QAudioSink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioSink_virtualbase_metaObject(self.h), owned: false)
 
-proc cQAudioSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QAudioSinkmetacast*(self: gen_qaudiosink_types.QAudioSink, param1: cstring): pointer =
+  fcQAudioSink_virtualbase_metacast(self.h, param1)
+
+proc QAudioSinkmetacall*(self: gen_qaudiosink_types.QAudioSink, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioSink_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QAudioSinkevent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAudioSink_virtualbase_event(self.h, event.h)
+
+proc QAudioSinkeventFilter*(self: gen_qaudiosink_types.QAudioSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQAudioSink_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QAudioSinktimerEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQAudioSink_virtualbase_timerEvent(self.h, event.h)
+
+proc QAudioSinkchildEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQAudioSink_virtualbase_childEvent(self.h, event.h)
+
+proc QAudioSinkcustomEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QEvent): void =
+  fcQAudioSink_virtualbase_customEvent(self.h, event.h)
+
+proc QAudioSinkconnectNotify*(self: gen_qaudiosink_types.QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAudioSink_virtualbase_connectNotify(self.h, signal.h)
+
+proc QAudioSinkdisconnectNotify*(self: gen_qaudiosink_types.QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQAudioSink_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQAudioSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -251,20 +282,14 @@ proc cQAudioSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAudioSinkmetacast*(self: gen_qaudiosink_types.QAudioSink, param1: cstring): pointer =
-  fcQAudioSink_virtualbase_metacast(self.h, param1)
-
-proc cQAudioSink_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAudioSink_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QAudioSinkmetacall*(self: gen_qaudiosink_types.QAudioSink, param1: cint, param2: cint, param3: pointer): cint =
-  fcQAudioSink_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQAudioSink_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAudioSink_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = cint(param1)
@@ -273,20 +298,14 @@ proc cQAudioSink_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAudioSinkevent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAudioSink_virtualbase_event(self.h, event.h)
-
-proc cQAudioSink_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAudioSink_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QAudioSinkeventFilter*(self: gen_qaudiosink_types.QAudioSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAudioSink_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQAudioSink_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAudioSink_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -294,46 +313,31 @@ proc cQAudioSink_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QAudioSinktimerEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQAudioSink_virtualbase_timerEvent(self.h, event.h)
-
-proc cQAudioSink_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QAudioSinkchildEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQAudioSink_virtualbase_childEvent(self.h, event.h)
-
-proc cQAudioSink_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QAudioSinkcustomEvent*(self: gen_qaudiosink_types.QAudioSink, event: gen_qcoreevent_types.QEvent): void =
-  fcQAudioSink_virtualbase_customEvent(self.h, event.h)
-
-proc cQAudioSink_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QAudioSinkconnectNotify*(self: gen_qaudiosink_types.QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAudioSink_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQAudioSink_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAudioSink_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QAudioSinkdisconnectNotify*(self: gen_qaudiosink_types.QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQAudioSink_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQAudioSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAudioSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioSinkVTable](fcQAudioSink_vdata(self))
   let self = QAudioSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -341,9 +345,29 @@ proc cQAudioSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQAudioSink* {.inheritable.} = ref object of QAudioSink
   vtbl*: cQAudioSinkVTable
+
 method metaObject*(self: VirtualQAudioSink): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAudioSinkmetaObject(self[])
-proc cQAudioSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQAudioSink, param1: cstring): pointer {.base.} =
+  QAudioSinkmetacast(self[], param1)
+method metacall*(self: VirtualQAudioSink, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAudioSinkmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioSinkevent(self[], event)
+method eventFilter*(self: VirtualQAudioSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioSinkeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAudioSinktimerEvent(self[], event)
+method childEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAudioSinkchildEvent(self[], event)
+method customEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAudioSinkcustomEvent(self[], event)
+method connectNotify*(self: VirtualQAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioSinkconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioSinkdisconnectNotify(self[], signal)
+
+proc fcQAudioSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -351,17 +375,13 @@ proc cQAudioSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQAudioSink, param1: cstring): pointer {.base.} =
-  QAudioSinkmetacast(self[], param1)
-proc cQAudioSink_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQAudioSink_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQAudioSink, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QAudioSinkmetacall(self[], param1, param2, param3)
-proc cQAudioSink_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQAudioSink_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -369,57 +389,44 @@ proc cQAudioSink_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAudioSinkevent(self[], event)
-proc cQAudioSink_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAudioSink_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQAudioSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QAudioSinkeventFilter(self[], watched, event)
-proc cQAudioSink_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQAudioSink_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QAudioSinktimerEvent(self[], event)
-proc cQAudioSink_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QAudioSinkchildEvent(self[], event)
-proc cQAudioSink_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQAudioSink, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QAudioSinkcustomEvent(self[], event)
-proc cQAudioSink_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQAudioSink_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAudioSinkconnectNotify(self[], signal)
-proc cQAudioSink_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAudioSink_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQAudioSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QAudioSinkdisconnectNotify(self[], signal)
-proc cQAudioSink_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQAudioSink_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioSink](fcQAudioSink_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qaudiosink_types.QAudioSink): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAudioSink_protectedbase_sender(self.h), owned: false)
@@ -441,25 +448,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
@@ -471,25 +478,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new2(addr(vtbl[].vtbl), addr(vtbl[]), audioDeviceInfo.h), owned: true)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
@@ -501,25 +508,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new3(addr(vtbl[].vtbl), addr(vtbl[]), format.h), owned: true)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
@@ -531,25 +538,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new4(addr(vtbl[].vtbl), addr(vtbl[]), format.h, parent.h), owned: true)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
@@ -561,25 +568,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new5(addr(vtbl[].vtbl), addr(vtbl[]), audioDeviceInfo.h, format.h), owned: true)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
@@ -591,25 +598,25 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
     let vtbl = cast[ref QAudioSinkVTable](fcQAudioSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQAudioSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQAudioSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQAudioSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQAudioSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQAudioSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQAudioSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQAudioSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQAudioSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQAudioSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQAudioSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQAudioSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQAudioSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQAudioSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQAudioSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQAudioSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQAudioSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQAudioSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQAudioSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQAudioSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQAudioSink_vtable_callback_disconnectNotify
   gen_qaudiosink_types.QAudioSink(h: fcQAudioSink_new6(addr(vtbl[].vtbl), addr(vtbl[]), audioDeviceInfo.h, format.h, parent.h), owned: true)
 
 const cQAudioSink_mvtbl = cQAudioSinkVTable(
@@ -617,16 +624,17 @@ const cQAudioSink_mvtbl = cQAudioSinkVTable(
     let inst = cast[ptr typeof(VirtualQAudioSink()[])](self.fcQAudioSink_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQAudioSink_method_callback_metaObject,
-  metacast: cQAudioSink_method_callback_metacast,
-  metacall: cQAudioSink_method_callback_metacall,
-  event: cQAudioSink_method_callback_event,
-  eventFilter: cQAudioSink_method_callback_eventFilter,
-  timerEvent: cQAudioSink_method_callback_timerEvent,
-  childEvent: cQAudioSink_method_callback_childEvent,
-  customEvent: cQAudioSink_method_callback_customEvent,
-  connectNotify: cQAudioSink_method_callback_connectNotify,
-  disconnectNotify: cQAudioSink_method_callback_disconnectNotify,
+
+  metaObject: fcQAudioSink_method_callback_metaObject,
+  metacast: fcQAudioSink_method_callback_metacast,
+  metacall: fcQAudioSink_method_callback_metacall,
+  event: fcQAudioSink_method_callback_event,
+  eventFilter: fcQAudioSink_method_callback_eventFilter,
+  timerEvent: fcQAudioSink_method_callback_timerEvent,
+  childEvent: fcQAudioSink_method_callback_childEvent,
+  customEvent: fcQAudioSink_method_callback_customEvent,
+  connectNotify: fcQAudioSink_method_callback_connectNotify,
+  disconnectNotify: fcQAudioSink_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     inst: VirtualQAudioSink) =

@@ -65,6 +65,7 @@ proc fcQWebChannelAbstractTransport_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQWebChannelAbstractTransport_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebChannelAbstractTransport_tr3".}
 proc fcQWebChannelAbstractTransport_vtbl(self: pointer): pointer {.importc: "QWebChannelAbstractTransport_vtbl".}
 proc fcQWebChannelAbstractTransport_vdata(self: pointer): pointer {.importc: "QWebChannelAbstractTransport_vdata".}
+
 type cQWebChannelAbstractTransportVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -118,7 +119,7 @@ proc messageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannelAb
   fcQWebChannelAbstractTransport_messageReceived(self.h, message.h, transport.h)
 
 type QWebChannelAbstractTransportmessageReceivedSlot* = proc(message: gen_qjsonobject_types.QJsonObject, transport: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport)
-proc cQWebChannelAbstractTransport_slot_callback_messageReceived(slot: int, message: pointer, transport: pointer) {.cdecl.} =
+proc fcQWebChannelAbstractTransport_slot_callback_messageReceived(slot: int, message: pointer, transport: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebChannelAbstractTransportmessageReceivedSlot](cast[pointer](slot))
   let slotval1 = gen_qjsonobject_types.QJsonObject(h: message, owned: false)
 
@@ -126,15 +127,15 @@ proc cQWebChannelAbstractTransport_slot_callback_messageReceived(slot: int, mess
 
   nimfunc[](slotval1, slotval2)
 
-proc cQWebChannelAbstractTransport_slot_callback_messageReceived_release(slot: int) {.cdecl.} =
+proc fcQWebChannelAbstractTransport_slot_callback_messageReceived_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebChannelAbstractTransportmessageReceivedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmessageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, slot: QWebChannelAbstractTransportmessageReceivedSlot) =
+proc onMessageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, slot: QWebChannelAbstractTransportmessageReceivedSlot) =
   var tmp = new QWebChannelAbstractTransportmessageReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebChannelAbstractTransport_connect_messageReceived(self.h, cast[int](addr tmp[]), cQWebChannelAbstractTransport_slot_callback_messageReceived, cQWebChannelAbstractTransport_slot_callback_messageReceived_release)
+  fcQWebChannelAbstractTransport_connect_messageReceived(self.h, cast[int](addr tmp[]), fcQWebChannelAbstractTransport_slot_callback_messageReceived, fcQWebChannelAbstractTransport_slot_callback_messageReceived_release)
 
 proc tr*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, s: cstring, c: cstring): string =
   let v_ms = fcQWebChannelAbstractTransport_tr2(s, c)
@@ -159,6 +160,7 @@ type QWebChannelAbstractTransportchildEventProc* = proc(self: QWebChannelAbstrac
 type QWebChannelAbstractTransportcustomEventProc* = proc(self: QWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebChannelAbstractTransportconnectNotifyProc* = proc(self: QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebChannelAbstractTransportdisconnectNotifyProc* = proc(self: QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebChannelAbstractTransportVTable* {.inheritable, pure.} = object
   vtbl: cQWebChannelAbstractTransportVTable
   metaObject*: QWebChannelAbstractTransportmetaObjectProc
@@ -172,10 +174,39 @@ type QWebChannelAbstractTransportVTable* {.inheritable, pure.} = object
   customEvent*: QWebChannelAbstractTransportcustomEventProc
   connectNotify*: QWebChannelAbstractTransportconnectNotifyProc
   disconnectNotify*: QWebChannelAbstractTransportdisconnectNotifyProc
+
 proc QWebChannelAbstractTransportmetaObject*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebChannelAbstractTransport_virtualbase_metaObject(self.h), owned: false)
 
-proc cQWebChannelAbstractTransport_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QWebChannelAbstractTransportmetacast*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, param1: cstring): pointer =
+  fcQWebChannelAbstractTransport_virtualbase_metacast(self.h, param1)
+
+proc QWebChannelAbstractTransportmetacall*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebChannelAbstractTransport_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebChannelAbstractTransportevent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebChannelAbstractTransport_virtualbase_event(self.h, event.h)
+
+proc QWebChannelAbstractTransporteventFilter*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebChannelAbstractTransport_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebChannelAbstractTransporttimerEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebChannelAbstractTransport_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebChannelAbstractTransportchildEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebChannelAbstractTransport_virtualbase_childEvent(self.h, event.h)
+
+proc QWebChannelAbstractTransportcustomEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebChannelAbstractTransport_virtualbase_customEvent(self.h, event.h)
+
+proc QWebChannelAbstractTransportconnectNotify*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebChannelAbstractTransport_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebChannelAbstractTransportdisconnectNotify*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebChannelAbstractTransport_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWebChannelAbstractTransport_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -184,20 +215,14 @@ proc cQWebChannelAbstractTransport_vtable_callback_metaObject(self: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebChannelAbstractTransportmetacast*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, param1: cstring): pointer =
-  fcQWebChannelAbstractTransport_virtualbase_metacast(self.h, param1)
-
-proc cQWebChannelAbstractTransport_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QWebChannelAbstractTransportmetacall*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebChannelAbstractTransport_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQWebChannelAbstractTransport_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = cint(param1)
@@ -206,26 +231,20 @@ proc cQWebChannelAbstractTransport_vtable_callback_metacall(self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQWebChannelAbstractTransport_vtable_callback_sendMessage(self: pointer, message: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_sendMessage(self: pointer, message: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qjsonobject_types.QJsonObject(h: message, owned: false)
   vtbl[].sendMessage(self, slotval1)
 
-proc QWebChannelAbstractTransportevent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebChannelAbstractTransport_virtualbase_event(self.h, event.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QWebChannelAbstractTransporteventFilter*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebChannelAbstractTransport_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -233,46 +252,31 @@ proc cQWebChannelAbstractTransport_vtable_callback_eventFilter(self: pointer, wa
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebChannelAbstractTransporttimerEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebChannelAbstractTransport_virtualbase_timerEvent(self.h, event.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QWebChannelAbstractTransportchildEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebChannelAbstractTransport_virtualbase_childEvent(self.h, event.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebChannelAbstractTransportcustomEvent*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebChannelAbstractTransport_virtualbase_customEvent(self.h, event.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebChannelAbstractTransportconnectNotify*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebChannelAbstractTransport_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QWebChannelAbstractTransportdisconnectNotify*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebChannelAbstractTransport_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQWebChannelAbstractTransport_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -280,9 +284,31 @@ proc cQWebChannelAbstractTransport_vtable_callback_disconnectNotify(self: pointe
 
 type VirtualQWebChannelAbstractTransport* {.inheritable.} = ref object of QWebChannelAbstractTransport
   vtbl*: cQWebChannelAbstractTransportVTable
+
 method metaObject*(self: VirtualQWebChannelAbstractTransport): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebChannelAbstractTransportmetaObject(self[])
-proc cQWebChannelAbstractTransport_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQWebChannelAbstractTransport, param1: cstring): pointer {.base.} =
+  QWebChannelAbstractTransportmetacast(self[], param1)
+method metacall*(self: VirtualQWebChannelAbstractTransport, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebChannelAbstractTransportmetacall(self[], param1, param2, param3)
+method sendMessage*(self: VirtualQWebChannelAbstractTransport, message: gen_qjsonobject_types.QJsonObject): void {.base.} =
+  raiseAssert("missing implementation of QWebChannelAbstractTransport.sendMessage")
+method event*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebChannelAbstractTransportevent(self[], event)
+method eventFilter*(self: VirtualQWebChannelAbstractTransport, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebChannelAbstractTransporteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebChannelAbstractTransporttimerEvent(self[], event)
+method childEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebChannelAbstractTransportchildEvent(self[], event)
+method customEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebChannelAbstractTransportcustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebChannelAbstractTransportconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebChannelAbstractTransportdisconnectNotify(self[], signal)
+
+proc fcQWebChannelAbstractTransport_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -290,17 +316,13 @@ proc cQWebChannelAbstractTransport_method_callback_metaObject(self: pointer): po
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQWebChannelAbstractTransport, param1: cstring): pointer {.base.} =
-  QWebChannelAbstractTransportmetacast(self[], param1)
-proc cQWebChannelAbstractTransport_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebChannelAbstractTransport, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebChannelAbstractTransportmetacall(self[], param1, param2, param3)
-proc cQWebChannelAbstractTransport_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -308,64 +330,49 @@ proc cQWebChannelAbstractTransport_method_callback_metacall(self: pointer, param
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sendMessage*(self: VirtualQWebChannelAbstractTransport, message: gen_qjsonobject_types.QJsonObject): void {.base.} =
-  raiseAssert("missing implementation of QWebChannelAbstractTransport_virtualbase_sendMessage")
-proc cQWebChannelAbstractTransport_method_callback_sendMessage(self: pointer, message: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_sendMessage(self: pointer, message: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qjsonobject_types.QJsonObject(h: message, owned: false)
   inst.sendMessage(slotval1)
 
-method event*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebChannelAbstractTransportevent(self[], event)
-proc cQWebChannelAbstractTransport_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQWebChannelAbstractTransport, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebChannelAbstractTransporteventFilter(self[], watched, event)
-proc cQWebChannelAbstractTransport_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebChannelAbstractTransporttimerEvent(self[], event)
-proc cQWebChannelAbstractTransport_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebChannelAbstractTransportchildEvent(self[], event)
-proc cQWebChannelAbstractTransport_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebChannelAbstractTransport, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebChannelAbstractTransportcustomEvent(self[], event)
-proc cQWebChannelAbstractTransport_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebChannelAbstractTransportconnectNotify(self[], signal)
-proc cQWebChannelAbstractTransport_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebChannelAbstractTransportdisconnectNotify(self[], signal)
-proc cQWebChannelAbstractTransport_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebChannelAbstractTransport_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebChannelAbstractTransport](fcQWebChannelAbstractTransport_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebChannelAbstractTransport_protectedbase_sender(self.h), owned: false)
@@ -387,27 +394,27 @@ proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
     let vtbl = cast[ref QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebChannelAbstractTransport_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebChannelAbstractTransport_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebChannelAbstractTransport_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebChannelAbstractTransport_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebChannelAbstractTransport_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebChannelAbstractTransport_vtable_callback_metacall
   if not isNil(vtbl[].sendMessage):
-    vtbl[].vtbl.sendMessage = cQWebChannelAbstractTransport_vtable_callback_sendMessage
+    vtbl[].vtbl.sendMessage = fcQWebChannelAbstractTransport_vtable_callback_sendMessage
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebChannelAbstractTransport_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebChannelAbstractTransport_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebChannelAbstractTransport_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebChannelAbstractTransport_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebChannelAbstractTransport_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebChannelAbstractTransport_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebChannelAbstractTransport_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebChannelAbstractTransport_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebChannelAbstractTransport_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebChannelAbstractTransport_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebChannelAbstractTransport_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebChannelAbstractTransport_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebChannelAbstractTransport_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebChannelAbstractTransport_vtable_callback_disconnectNotify
   gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport(h: fcQWebChannelAbstractTransport_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport,
@@ -419,27 +426,27 @@ proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
     let vtbl = cast[ref QWebChannelAbstractTransportVTable](fcQWebChannelAbstractTransport_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebChannelAbstractTransport_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebChannelAbstractTransport_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebChannelAbstractTransport_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebChannelAbstractTransport_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebChannelAbstractTransport_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebChannelAbstractTransport_vtable_callback_metacall
   if not isNil(vtbl[].sendMessage):
-    vtbl[].vtbl.sendMessage = cQWebChannelAbstractTransport_vtable_callback_sendMessage
+    vtbl[].vtbl.sendMessage = fcQWebChannelAbstractTransport_vtable_callback_sendMessage
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebChannelAbstractTransport_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebChannelAbstractTransport_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebChannelAbstractTransport_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebChannelAbstractTransport_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebChannelAbstractTransport_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebChannelAbstractTransport_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebChannelAbstractTransport_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebChannelAbstractTransport_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebChannelAbstractTransport_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebChannelAbstractTransport_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebChannelAbstractTransport_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebChannelAbstractTransport_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebChannelAbstractTransport_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebChannelAbstractTransport_vtable_callback_disconnectNotify
   gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport(h: fcQWebChannelAbstractTransport_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQWebChannelAbstractTransport_mvtbl = cQWebChannelAbstractTransportVTable(
@@ -447,17 +454,18 @@ const cQWebChannelAbstractTransport_mvtbl = cQWebChannelAbstractTransportVTable(
     let inst = cast[ptr typeof(VirtualQWebChannelAbstractTransport()[])](self.fcQWebChannelAbstractTransport_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQWebChannelAbstractTransport_method_callback_metaObject,
-  metacast: cQWebChannelAbstractTransport_method_callback_metacast,
-  metacall: cQWebChannelAbstractTransport_method_callback_metacall,
-  sendMessage: cQWebChannelAbstractTransport_method_callback_sendMessage,
-  event: cQWebChannelAbstractTransport_method_callback_event,
-  eventFilter: cQWebChannelAbstractTransport_method_callback_eventFilter,
-  timerEvent: cQWebChannelAbstractTransport_method_callback_timerEvent,
-  childEvent: cQWebChannelAbstractTransport_method_callback_childEvent,
-  customEvent: cQWebChannelAbstractTransport_method_callback_customEvent,
-  connectNotify: cQWebChannelAbstractTransport_method_callback_connectNotify,
-  disconnectNotify: cQWebChannelAbstractTransport_method_callback_disconnectNotify,
+
+  metaObject: fcQWebChannelAbstractTransport_method_callback_metaObject,
+  metacast: fcQWebChannelAbstractTransport_method_callback_metacast,
+  metacall: fcQWebChannelAbstractTransport_method_callback_metacall,
+  sendMessage: fcQWebChannelAbstractTransport_method_callback_sendMessage,
+  event: fcQWebChannelAbstractTransport_method_callback_event,
+  eventFilter: fcQWebChannelAbstractTransport_method_callback_eventFilter,
+  timerEvent: fcQWebChannelAbstractTransport_method_callback_timerEvent,
+  childEvent: fcQWebChannelAbstractTransport_method_callback_childEvent,
+  customEvent: fcQWebChannelAbstractTransport_method_callback_customEvent,
+  connectNotify: fcQWebChannelAbstractTransport_method_callback_connectNotify,
+  disconnectNotify: fcQWebChannelAbstractTransport_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport,
     inst: VirtualQWebChannelAbstractTransport) =

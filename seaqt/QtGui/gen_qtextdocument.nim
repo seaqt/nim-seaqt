@@ -242,6 +242,7 @@ proc fcQTextDocument_clearUndoRedoStacks1(self: pointer, historyToClear: cint): 
 proc fcQTextDocument_setModified1(self: pointer, m: bool): void {.importc: "QTextDocument_setModified1".}
 proc fcQTextDocument_vtbl(self: pointer): pointer {.importc: "QTextDocument_vtbl".}
 proc fcQTextDocument_vdata(self: pointer): pointer {.importc: "QTextDocument_vdata".}
+
 type cQTextDocumentVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -584,7 +585,7 @@ proc contentsChange*(self: gen_qtextdocument_types.QTextDocument, fromVal: cint,
   fcQTextDocument_contentsChange(self.h, fromVal, charsRemoved, charsAdded)
 
 type QTextDocumentcontentsChangeSlot* = proc(fromVal: cint, charsRemoved: cint, charsAdded: cint)
-proc cQTextDocument_slot_callback_contentsChange(slot: int, fromVal: cint, charsRemoved: cint, charsAdded: cint) {.cdecl.} =
+proc fcQTextDocument_slot_callback_contentsChange(slot: int, fromVal: cint, charsRemoved: cint, charsAdded: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcontentsChangeSlot](cast[pointer](slot))
   let slotval1 = fromVal
 
@@ -594,189 +595,189 @@ proc cQTextDocument_slot_callback_contentsChange(slot: int, fromVal: cint, chars
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc cQTextDocument_slot_callback_contentsChange_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_contentsChange_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentcontentsChangeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncontentsChange*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangeSlot) =
+proc onContentsChange*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangeSlot) =
   var tmp = new QTextDocumentcontentsChangeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_contentsChange(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_contentsChange, cQTextDocument_slot_callback_contentsChange_release)
+  fcQTextDocument_connect_contentsChange(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_contentsChange, fcQTextDocument_slot_callback_contentsChange_release)
 
 proc contentsChanged*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_contentsChanged(self.h)
 
 type QTextDocumentcontentsChangedSlot* = proc()
-proc cQTextDocument_slot_callback_contentsChanged(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_contentsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcontentsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQTextDocument_slot_callback_contentsChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_contentsChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentcontentsChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncontentsChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangedSlot) =
+proc onContentsChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangedSlot) =
   var tmp = new QTextDocumentcontentsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_contentsChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_contentsChanged, cQTextDocument_slot_callback_contentsChanged_release)
+  fcQTextDocument_connect_contentsChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_contentsChanged, fcQTextDocument_slot_callback_contentsChanged_release)
 
 proc undoAvailable*(self: gen_qtextdocument_types.QTextDocument, param1: bool): void =
   fcQTextDocument_undoAvailable(self.h, param1)
 
 type QTextDocumentundoAvailableSlot* = proc(param1: bool)
-proc cQTextDocument_slot_callback_undoAvailable(slot: int, param1: bool) {.cdecl.} =
+proc fcQTextDocument_slot_callback_undoAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentundoAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_undoAvailable_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_undoAvailable_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentundoAvailableSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onundoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoAvailableSlot) =
+proc onUndoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoAvailableSlot) =
   var tmp = new QTextDocumentundoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_undoAvailable(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_undoAvailable, cQTextDocument_slot_callback_undoAvailable_release)
+  fcQTextDocument_connect_undoAvailable(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_undoAvailable, fcQTextDocument_slot_callback_undoAvailable_release)
 
 proc redoAvailable*(self: gen_qtextdocument_types.QTextDocument, param1: bool): void =
   fcQTextDocument_redoAvailable(self.h, param1)
 
 type QTextDocumentredoAvailableSlot* = proc(param1: bool)
-proc cQTextDocument_slot_callback_redoAvailable(slot: int, param1: bool) {.cdecl.} =
+proc fcQTextDocument_slot_callback_redoAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentredoAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_redoAvailable_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_redoAvailable_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentredoAvailableSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onredoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentredoAvailableSlot) =
+proc onRedoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentredoAvailableSlot) =
   var tmp = new QTextDocumentredoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_redoAvailable(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_redoAvailable, cQTextDocument_slot_callback_redoAvailable_release)
+  fcQTextDocument_connect_redoAvailable(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_redoAvailable, fcQTextDocument_slot_callback_redoAvailable_release)
 
 proc undoCommandAdded*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_undoCommandAdded(self.h)
 
 type QTextDocumentundoCommandAddedSlot* = proc()
-proc cQTextDocument_slot_callback_undoCommandAdded(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_undoCommandAdded(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentundoCommandAddedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQTextDocument_slot_callback_undoCommandAdded_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_undoCommandAdded_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentundoCommandAddedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onundoCommandAdded*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoCommandAddedSlot) =
+proc onUndoCommandAdded*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoCommandAddedSlot) =
   var tmp = new QTextDocumentundoCommandAddedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_undoCommandAdded(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_undoCommandAdded, cQTextDocument_slot_callback_undoCommandAdded_release)
+  fcQTextDocument_connect_undoCommandAdded(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_undoCommandAdded, fcQTextDocument_slot_callback_undoCommandAdded_release)
 
 proc modificationChanged*(self: gen_qtextdocument_types.QTextDocument, m: bool): void =
   fcQTextDocument_modificationChanged(self.h, m)
 
 type QTextDocumentmodificationChangedSlot* = proc(m: bool)
-proc cQTextDocument_slot_callback_modificationChanged(slot: int, m: bool) {.cdecl.} =
+proc fcQTextDocument_slot_callback_modificationChanged(slot: int, m: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentmodificationChangedSlot](cast[pointer](slot))
   let slotval1 = m
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_modificationChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_modificationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentmodificationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onmodificationChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentmodificationChangedSlot) =
+proc onModificationChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentmodificationChangedSlot) =
   var tmp = new QTextDocumentmodificationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_modificationChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_modificationChanged, cQTextDocument_slot_callback_modificationChanged_release)
+  fcQTextDocument_connect_modificationChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_modificationChanged, fcQTextDocument_slot_callback_modificationChanged_release)
 
 proc cursorPositionChanged*(self: gen_qtextdocument_types.QTextDocument, cursor: gen_qtextcursor_types.QTextCursor): void =
   fcQTextDocument_cursorPositionChanged(self.h, cursor.h)
 
 type QTextDocumentcursorPositionChangedSlot* = proc(cursor: gen_qtextcursor_types.QTextCursor)
-proc cQTextDocument_slot_callback_cursorPositionChanged(slot: int, cursor: pointer) {.cdecl.} =
+proc fcQTextDocument_slot_callback_cursorPositionChanged(slot: int, cursor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcursorPositionChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_cursorPositionChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_cursorPositionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentcursorPositionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncursorPositionChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcursorPositionChangedSlot) =
+proc onCursorPositionChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcursorPositionChangedSlot) =
   var tmp = new QTextDocumentcursorPositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_cursorPositionChanged, cQTextDocument_slot_callback_cursorPositionChanged_release)
+  fcQTextDocument_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_cursorPositionChanged, fcQTextDocument_slot_callback_cursorPositionChanged_release)
 
 proc blockCountChanged*(self: gen_qtextdocument_types.QTextDocument, newBlockCount: cint): void =
   fcQTextDocument_blockCountChanged(self.h, newBlockCount)
 
 type QTextDocumentblockCountChangedSlot* = proc(newBlockCount: cint)
-proc cQTextDocument_slot_callback_blockCountChanged(slot: int, newBlockCount: cint) {.cdecl.} =
+proc fcQTextDocument_slot_callback_blockCountChanged(slot: int, newBlockCount: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentblockCountChangedSlot](cast[pointer](slot))
   let slotval1 = newBlockCount
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_blockCountChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_blockCountChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentblockCountChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onblockCountChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentblockCountChangedSlot) =
+proc onBlockCountChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentblockCountChangedSlot) =
   var tmp = new QTextDocumentblockCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_blockCountChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_blockCountChanged, cQTextDocument_slot_callback_blockCountChanged_release)
+  fcQTextDocument_connect_blockCountChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_blockCountChanged, fcQTextDocument_slot_callback_blockCountChanged_release)
 
 proc baseUrlChanged*(self: gen_qtextdocument_types.QTextDocument, url: gen_qurl_types.QUrl): void =
   fcQTextDocument_baseUrlChanged(self.h, url.h)
 
 type QTextDocumentbaseUrlChangedSlot* = proc(url: gen_qurl_types.QUrl)
-proc cQTextDocument_slot_callback_baseUrlChanged(slot: int, url: pointer) {.cdecl.} =
+proc fcQTextDocument_slot_callback_baseUrlChanged(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentbaseUrlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQTextDocument_slot_callback_baseUrlChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_baseUrlChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentbaseUrlChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbaseUrlChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentbaseUrlChangedSlot) =
+proc onBaseUrlChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentbaseUrlChangedSlot) =
   var tmp = new QTextDocumentbaseUrlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_baseUrlChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_baseUrlChanged, cQTextDocument_slot_callback_baseUrlChanged_release)
+  fcQTextDocument_connect_baseUrlChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_baseUrlChanged, fcQTextDocument_slot_callback_baseUrlChanged_release)
 
 proc documentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_documentLayoutChanged(self.h)
 
 type QTextDocumentdocumentLayoutChangedSlot* = proc()
-proc cQTextDocument_slot_callback_documentLayoutChanged(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_documentLayoutChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentdocumentLayoutChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQTextDocument_slot_callback_documentLayoutChanged_release(slot: int) {.cdecl.} =
+proc fcQTextDocument_slot_callback_documentLayoutChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QTextDocumentdocumentLayoutChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondocumentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentdocumentLayoutChangedSlot) =
+proc onDocumentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentdocumentLayoutChangedSlot) =
   var tmp = new QTextDocumentdocumentLayoutChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_documentLayoutChanged(self.h, cast[int](addr tmp[]), cQTextDocument_slot_callback_documentLayoutChanged, cQTextDocument_slot_callback_documentLayoutChanged_release)
+  fcQTextDocument_connect_documentLayoutChanged(self.h, cast[int](addr tmp[]), fcQTextDocument_slot_callback_documentLayoutChanged, fcQTextDocument_slot_callback_documentLayoutChanged_release)
 
 proc undo*(self: gen_qtextdocument_types.QTextDocument): void =
   fcQTextDocument_undo2(self.h)
@@ -854,6 +855,7 @@ type QTextDocumentchildEventProc* = proc(self: QTextDocument, event: gen_qcoreev
 type QTextDocumentcustomEventProc* = proc(self: QTextDocument, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextDocumentconnectNotifyProc* = proc(self: QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextDocumentdisconnectNotifyProc* = proc(self: QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QTextDocumentVTable* {.inheritable, pure.} = object
   vtbl: cQTextDocumentVTable
   metaObject*: QTextDocumentmetaObjectProc
@@ -869,10 +871,48 @@ type QTextDocumentVTable* {.inheritable, pure.} = object
   customEvent*: QTextDocumentcustomEventProc
   connectNotify*: QTextDocumentconnectNotifyProc
   disconnectNotify*: QTextDocumentdisconnectNotifyProc
+
 proc QTextDocumentmetaObject*(self: gen_qtextdocument_types.QTextDocument): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextDocument_virtualbase_metaObject(self.h), owned: false)
 
-proc cQTextDocument_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QTextDocumentmetacast*(self: gen_qtextdocument_types.QTextDocument, param1: cstring): pointer =
+  fcQTextDocument_virtualbase_metacast(self.h, param1)
+
+proc QTextDocumentmetacall*(self: gen_qtextdocument_types.QTextDocument, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextDocument_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QTextDocumentclear*(self: gen_qtextdocument_types.QTextDocument): void =
+  fcQTextDocument_virtualbase_clear(self.h)
+
+proc QTextDocumentcreateObject*(self: gen_qtextdocument_types.QTextDocument, f: gen_qtextformat_types.QTextFormat): gen_qtextobject_types.QTextObject =
+  gen_qtextobject_types.QTextObject(h: fcQTextDocument_virtualbase_createObject(self.h, f.h), owned: false)
+
+proc QTextDocumentloadResource*(self: gen_qtextdocument_types.QTextDocument, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQTextDocument_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
+
+proc QTextDocumentevent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextDocument_virtualbase_event(self.h, event.h)
+
+proc QTextDocumenteventFilter*(self: gen_qtextdocument_types.QTextDocument, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQTextDocument_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QTextDocumenttimerEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQTextDocument_virtualbase_timerEvent(self.h, event.h)
+
+proc QTextDocumentchildEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQTextDocument_virtualbase_childEvent(self.h, event.h)
+
+proc QTextDocumentcustomEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QEvent): void =
+  fcQTextDocument_virtualbase_customEvent(self.h, event.h)
+
+proc QTextDocumentconnectNotify*(self: gen_qtextdocument_types.QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextDocument_virtualbase_connectNotify(self.h, signal.h)
+
+proc QTextDocumentdisconnectNotify*(self: gen_qtextdocument_types.QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQTextDocument_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQTextDocument_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -881,20 +921,14 @@ proc cQTextDocument_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTextDocumentmetacast*(self: gen_qtextdocument_types.QTextDocument, param1: cstring): pointer =
-  fcQTextDocument_virtualbase_metacast(self.h, param1)
-
-proc cQTextDocument_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTextDocument_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QTextDocumentmetacall*(self: gen_qtextdocument_types.QTextDocument, param1: cint, param2: cint, param3: pointer): cint =
-  fcQTextDocument_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQTextDocument_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTextDocument_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = cint(param1)
@@ -903,18 +937,12 @@ proc cQTextDocument_vtable_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QTextDocumentclear*(self: gen_qtextdocument_types.QTextDocument): void =
-  fcQTextDocument_virtualbase_clear(self.h)
-
-proc cQTextDocument_vtable_callback_clear(self: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_clear(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   vtbl[].clear(self)
 
-proc QTextDocumentcreateObject*(self: gen_qtextdocument_types.QTextDocument, f: gen_qtextformat_types.QTextFormat): gen_qtextobject_types.QTextObject =
-  gen_qtextobject_types.QTextObject(h: fcQTextDocument_virtualbase_createObject(self.h, f.h), owned: false)
-
-proc cQTextDocument_vtable_callback_createObject(self: pointer, f: pointer): pointer {.cdecl.} =
+proc fcQTextDocument_vtable_callback_createObject(self: pointer, f: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qtextformat_types.QTextFormat(h: f, owned: false)
@@ -924,10 +952,7 @@ proc cQTextDocument_vtable_callback_createObject(self: pointer, f: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTextDocumentloadResource*(self: gen_qtextdocument_types.QTextDocument, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextDocument_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
-
-proc cQTextDocument_vtable_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
+proc fcQTextDocument_vtable_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = typeVal
@@ -938,20 +963,14 @@ proc cQTextDocument_vtable_callback_loadResource(self: pointer, typeVal: cint, n
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QTextDocumentevent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextDocument_virtualbase_event(self.h, event.h)
-
-proc cQTextDocument_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextDocument_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QTextDocumenteventFilter*(self: gen_qtextdocument_types.QTextDocument, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTextDocument_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQTextDocument_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextDocument_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -959,46 +978,31 @@ proc cQTextDocument_vtable_callback_eventFilter(self: pointer, watched: pointer,
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QTextDocumenttimerEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQTextDocument_virtualbase_timerEvent(self.h, event.h)
-
-proc cQTextDocument_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QTextDocumentchildEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQTextDocument_virtualbase_childEvent(self.h, event.h)
-
-proc cQTextDocument_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QTextDocumentcustomEvent*(self: gen_qtextdocument_types.QTextDocument, event: gen_qcoreevent_types.QEvent): void =
-  fcQTextDocument_virtualbase_customEvent(self.h, event.h)
-
-proc cQTextDocument_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QTextDocumentconnectNotify*(self: gen_qtextdocument_types.QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextDocument_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQTextDocument_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QTextDocumentdisconnectNotify*(self: gen_qtextdocument_types.QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQTextDocument_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQTextDocument_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextDocument_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextDocumentVTable](fcQTextDocument_vdata(self))
   let self = QTextDocument(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1006,9 +1010,35 @@ proc cQTextDocument_vtable_callback_disconnectNotify(self: pointer, signal: poin
 
 type VirtualQTextDocument* {.inheritable.} = ref object of QTextDocument
   vtbl*: cQTextDocumentVTable
+
 method metaObject*(self: VirtualQTextDocument): gen_qobjectdefs_types.QMetaObject {.base.} =
   QTextDocumentmetaObject(self[])
-proc cQTextDocument_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQTextDocument, param1: cstring): pointer {.base.} =
+  QTextDocumentmetacast(self[], param1)
+method metacall*(self: VirtualQTextDocument, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTextDocumentmetacall(self[], param1, param2, param3)
+method clear*(self: VirtualQTextDocument): void {.base.} =
+  QTextDocumentclear(self[])
+method createObject*(self: VirtualQTextDocument, f: gen_qtextformat_types.QTextFormat): gen_qtextobject_types.QTextObject {.base.} =
+  QTextDocumentcreateObject(self[], f)
+method loadResource*(self: VirtualQTextDocument, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.base.} =
+  QTextDocumentloadResource(self[], typeVal, name)
+method event*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextDocumentevent(self[], event)
+method eventFilter*(self: VirtualQTextDocument, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTextDocumenteventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTextDocumenttimerEvent(self[], event)
+method childEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTextDocumentchildEvent(self[], event)
+method customEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTextDocumentcustomEvent(self[], event)
+method connectNotify*(self: VirtualQTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextDocumentconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTextDocumentdisconnectNotify(self[], signal)
+
+proc fcQTextDocument_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1016,17 +1046,13 @@ proc cQTextDocument_method_callback_metaObject(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQTextDocument, param1: cstring): pointer {.base.} =
-  QTextDocumentmetacast(self[], param1)
-proc cQTextDocument_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQTextDocument_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQTextDocument, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QTextDocumentmetacall(self[], param1, param2, param3)
-proc cQTextDocument_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQTextDocument_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1034,15 +1060,11 @@ proc cQTextDocument_method_callback_metacall(self: pointer, param1: cint, param2
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method clear*(self: VirtualQTextDocument): void {.base.} =
-  QTextDocumentclear(self[])
-proc cQTextDocument_method_callback_clear(self: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   inst.clear()
 
-method createObject*(self: VirtualQTextDocument, f: gen_qtextformat_types.QTextFormat): gen_qtextobject_types.QTextObject {.base.} =
-  QTextDocumentcreateObject(self[], f)
-proc cQTextDocument_method_callback_createObject(self: pointer, f: pointer): pointer {.cdecl.} =
+proc fcQTextDocument_method_callback_createObject(self: pointer, f: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qtextformat_types.QTextFormat(h: f, owned: false)
   var virtualReturn = inst.createObject(slotval1)
@@ -1051,9 +1073,7 @@ proc cQTextDocument_method_callback_createObject(self: pointer, f: pointer): poi
   virtualReturn.h = nil
   virtualReturn_h
 
-method loadResource*(self: VirtualQTextDocument, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.base.} =
-  QTextDocumentloadResource(self[], typeVal, name)
-proc cQTextDocument_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
+proc fcQTextDocument_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = typeVal
   let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
@@ -1063,57 +1083,44 @@ proc cQTextDocument_method_callback_loadResource(self: pointer, typeVal: cint, n
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextDocumentevent(self[], event)
-proc cQTextDocument_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextDocument_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQTextDocument, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QTextDocumenteventFilter(self[], watched, event)
-proc cQTextDocument_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQTextDocument_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QTextDocumenttimerEvent(self[], event)
-proc cQTextDocument_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QTextDocumentchildEvent(self[], event)
-proc cQTextDocument_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQTextDocument, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QTextDocumentcustomEvent(self[], event)
-proc cQTextDocument_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextDocumentconnectNotify(self[], signal)
-proc cQTextDocument_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQTextDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QTextDocumentdisconnectNotify(self[], signal)
-proc cQTextDocument_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQTextDocument_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextDocument](fcQTextDocument_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qtextdocument_types.QTextDocument): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQTextDocument_protectedbase_sender(self.h), owned: false)
@@ -1135,31 +1142,31 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
     let vtbl = cast[ref QTextDocumentVTable](fcQTextDocument_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTextDocument_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTextDocument_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTextDocument_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTextDocument_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTextDocument_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTextDocument_vtable_callback_metacall
   if not isNil(vtbl[].clear):
-    vtbl[].vtbl.clear = cQTextDocument_vtable_callback_clear
+    vtbl[].vtbl.clear = fcQTextDocument_vtable_callback_clear
   if not isNil(vtbl[].createObject):
-    vtbl[].vtbl.createObject = cQTextDocument_vtable_callback_createObject
+    vtbl[].vtbl.createObject = fcQTextDocument_vtable_callback_createObject
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQTextDocument_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQTextDocument_vtable_callback_loadResource
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTextDocument_vtable_callback_event
+    vtbl[].vtbl.event = fcQTextDocument_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTextDocument_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTextDocument_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTextDocument_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTextDocument_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTextDocument_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTextDocument_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTextDocument_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTextDocument_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTextDocument_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTextDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTextDocument_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTextDocument_vtable_callback_disconnectNotify
   gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
@@ -1171,31 +1178,31 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
     let vtbl = cast[ref QTextDocumentVTable](fcQTextDocument_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTextDocument_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTextDocument_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTextDocument_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTextDocument_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTextDocument_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTextDocument_vtable_callback_metacall
   if not isNil(vtbl[].clear):
-    vtbl[].vtbl.clear = cQTextDocument_vtable_callback_clear
+    vtbl[].vtbl.clear = fcQTextDocument_vtable_callback_clear
   if not isNil(vtbl[].createObject):
-    vtbl[].vtbl.createObject = cQTextDocument_vtable_callback_createObject
+    vtbl[].vtbl.createObject = fcQTextDocument_vtable_callback_createObject
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQTextDocument_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQTextDocument_vtable_callback_loadResource
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTextDocument_vtable_callback_event
+    vtbl[].vtbl.event = fcQTextDocument_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTextDocument_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTextDocument_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTextDocument_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTextDocument_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTextDocument_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTextDocument_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTextDocument_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTextDocument_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTextDocument_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTextDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTextDocument_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTextDocument_vtable_callback_disconnectNotify
   gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
@@ -1207,31 +1214,31 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
     let vtbl = cast[ref QTextDocumentVTable](fcQTextDocument_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTextDocument_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTextDocument_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTextDocument_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTextDocument_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTextDocument_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTextDocument_vtable_callback_metacall
   if not isNil(vtbl[].clear):
-    vtbl[].vtbl.clear = cQTextDocument_vtable_callback_clear
+    vtbl[].vtbl.clear = fcQTextDocument_vtable_callback_clear
   if not isNil(vtbl[].createObject):
-    vtbl[].vtbl.createObject = cQTextDocument_vtable_callback_createObject
+    vtbl[].vtbl.createObject = fcQTextDocument_vtable_callback_createObject
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQTextDocument_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQTextDocument_vtable_callback_loadResource
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTextDocument_vtable_callback_event
+    vtbl[].vtbl.event = fcQTextDocument_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTextDocument_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTextDocument_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTextDocument_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTextDocument_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTextDocument_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTextDocument_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTextDocument_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTextDocument_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTextDocument_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTextDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTextDocument_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTextDocument_vtable_callback_disconnectNotify
   gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_new3(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
@@ -1243,31 +1250,31 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
     let vtbl = cast[ref QTextDocumentVTable](fcQTextDocument_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQTextDocument_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQTextDocument_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQTextDocument_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQTextDocument_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQTextDocument_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQTextDocument_vtable_callback_metacall
   if not isNil(vtbl[].clear):
-    vtbl[].vtbl.clear = cQTextDocument_vtable_callback_clear
+    vtbl[].vtbl.clear = fcQTextDocument_vtable_callback_clear
   if not isNil(vtbl[].createObject):
-    vtbl[].vtbl.createObject = cQTextDocument_vtable_callback_createObject
+    vtbl[].vtbl.createObject = fcQTextDocument_vtable_callback_createObject
   if not isNil(vtbl[].loadResource):
-    vtbl[].vtbl.loadResource = cQTextDocument_vtable_callback_loadResource
+    vtbl[].vtbl.loadResource = fcQTextDocument_vtable_callback_loadResource
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQTextDocument_vtable_callback_event
+    vtbl[].vtbl.event = fcQTextDocument_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQTextDocument_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQTextDocument_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQTextDocument_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQTextDocument_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQTextDocument_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQTextDocument_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQTextDocument_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQTextDocument_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQTextDocument_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQTextDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQTextDocument_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQTextDocument_vtable_callback_disconnectNotify
   gen_qtextdocument_types.QTextDocument(h: fcQTextDocument_new4(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
 
 const cQTextDocument_mvtbl = cQTextDocumentVTable(
@@ -1275,19 +1282,20 @@ const cQTextDocument_mvtbl = cQTextDocumentVTable(
     let inst = cast[ptr typeof(VirtualQTextDocument()[])](self.fcQTextDocument_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQTextDocument_method_callback_metaObject,
-  metacast: cQTextDocument_method_callback_metacast,
-  metacall: cQTextDocument_method_callback_metacall,
-  clear: cQTextDocument_method_callback_clear,
-  createObject: cQTextDocument_method_callback_createObject,
-  loadResource: cQTextDocument_method_callback_loadResource,
-  event: cQTextDocument_method_callback_event,
-  eventFilter: cQTextDocument_method_callback_eventFilter,
-  timerEvent: cQTextDocument_method_callback_timerEvent,
-  childEvent: cQTextDocument_method_callback_childEvent,
-  customEvent: cQTextDocument_method_callback_customEvent,
-  connectNotify: cQTextDocument_method_callback_connectNotify,
-  disconnectNotify: cQTextDocument_method_callback_disconnectNotify,
+
+  metaObject: fcQTextDocument_method_callback_metaObject,
+  metacast: fcQTextDocument_method_callback_metacast,
+  metacall: fcQTextDocument_method_callback_metacall,
+  clear: fcQTextDocument_method_callback_clear,
+  createObject: fcQTextDocument_method_callback_createObject,
+  loadResource: fcQTextDocument_method_callback_loadResource,
+  event: fcQTextDocument_method_callback_event,
+  eventFilter: fcQTextDocument_method_callback_eventFilter,
+  timerEvent: fcQTextDocument_method_callback_timerEvent,
+  childEvent: fcQTextDocument_method_callback_childEvent,
+  customEvent: fcQTextDocument_method_callback_customEvent,
+  connectNotify: fcQTextDocument_method_callback_connectNotify,
+  disconnectNotify: fcQTextDocument_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
     inst: VirtualQTextDocument) =

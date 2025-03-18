@@ -63,6 +63,7 @@ proc fcQWebEngineUrlSchemeHandler_tr2(s: cstring, c: cstring): struct_miqt_strin
 proc fcQWebEngineUrlSchemeHandler_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlSchemeHandler_tr3".}
 proc fcQWebEngineUrlSchemeHandler_vtbl(self: pointer): pointer {.importc: "QWebEngineUrlSchemeHandler_vtbl".}
 proc fcQWebEngineUrlSchemeHandler_vdata(self: pointer): pointer {.importc: "QWebEngineUrlSchemeHandler_vdata".}
+
 type cQWebEngineUrlSchemeHandlerVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -135,6 +136,7 @@ type QWebEngineUrlSchemeHandlerchildEventProc* = proc(self: QWebEngineUrlSchemeH
 type QWebEngineUrlSchemeHandlercustomEventProc* = proc(self: QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebEngineUrlSchemeHandlerconnectNotifyProc* = proc(self: QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebEngineUrlSchemeHandlerdisconnectNotifyProc* = proc(self: QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QWebEngineUrlSchemeHandlerVTable* {.inheritable, pure.} = object
   vtbl: cQWebEngineUrlSchemeHandlerVTable
   metaObject*: QWebEngineUrlSchemeHandlermetaObjectProc
@@ -148,10 +150,39 @@ type QWebEngineUrlSchemeHandlerVTable* {.inheritable, pure.} = object
   customEvent*: QWebEngineUrlSchemeHandlercustomEventProc
   connectNotify*: QWebEngineUrlSchemeHandlerconnectNotifyProc
   disconnectNotify*: QWebEngineUrlSchemeHandlerdisconnectNotifyProc
+
 proc QWebEngineUrlSchemeHandlermetaObject*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlSchemeHandler_virtualbase_metaObject(self.h), owned: false)
 
-proc cQWebEngineUrlSchemeHandler_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QWebEngineUrlSchemeHandlermetacast*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, param1: cstring): pointer =
+  fcQWebEngineUrlSchemeHandler_virtualbase_metacast(self.h, param1)
+
+proc QWebEngineUrlSchemeHandlermetacall*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineUrlSchemeHandler_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWebEngineUrlSchemeHandlerevent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineUrlSchemeHandler_virtualbase_event(self.h, event.h)
+
+proc QWebEngineUrlSchemeHandlereventFilter*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWebEngineUrlSchemeHandler_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWebEngineUrlSchemeHandlertimerEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWebEngineUrlSchemeHandler_virtualbase_timerEvent(self.h, event.h)
+
+proc QWebEngineUrlSchemeHandlerchildEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWebEngineUrlSchemeHandler_virtualbase_childEvent(self.h, event.h)
+
+proc QWebEngineUrlSchemeHandlercustomEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): void =
+  fcQWebEngineUrlSchemeHandler_virtualbase_customEvent(self.h, event.h)
+
+proc QWebEngineUrlSchemeHandlerconnectNotify*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineUrlSchemeHandler_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWebEngineUrlSchemeHandlerdisconnectNotify*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -160,20 +191,14 @@ proc cQWebEngineUrlSchemeHandler_vtable_callback_metaObject(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QWebEngineUrlSchemeHandlermetacast*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, param1: cstring): pointer =
-  fcQWebEngineUrlSchemeHandler_virtualbase_metacast(self.h, param1)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QWebEngineUrlSchemeHandlermetacall*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, param1: cint, param2: cint, param3: pointer): cint =
-  fcQWebEngineUrlSchemeHandler_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = cint(param1)
@@ -182,26 +207,20 @@ proc cQWebEngineUrlSchemeHandler_vtable_callback_metacall(self: pointer, param1:
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc cQWebEngineUrlSchemeHandler_vtable_callback_requestStarted(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_requestStarted(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob(h: param1, owned: false)
   vtbl[].requestStarted(self, slotval1)
 
-proc QWebEngineUrlSchemeHandlerevent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineUrlSchemeHandler_virtualbase_event(self.h, event.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QWebEngineUrlSchemeHandlereventFilter*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQWebEngineUrlSchemeHandler_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -209,46 +228,31 @@ proc cQWebEngineUrlSchemeHandler_vtable_callback_eventFilter(self: pointer, watc
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QWebEngineUrlSchemeHandlertimerEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQWebEngineUrlSchemeHandler_virtualbase_timerEvent(self.h, event.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QWebEngineUrlSchemeHandlerchildEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQWebEngineUrlSchemeHandler_virtualbase_childEvent(self.h, event.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QWebEngineUrlSchemeHandlercustomEvent*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): void =
-  fcQWebEngineUrlSchemeHandler_virtualbase_customEvent(self.h, event.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QWebEngineUrlSchemeHandlerconnectNotify*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineUrlSchemeHandler_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QWebEngineUrlSchemeHandlerdisconnectNotify*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -256,9 +260,31 @@ proc cQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify(self: pointer,
 
 type VirtualQWebEngineUrlSchemeHandler* {.inheritable.} = ref object of QWebEngineUrlSchemeHandler
   vtbl*: cQWebEngineUrlSchemeHandlerVTable
+
 method metaObject*(self: VirtualQWebEngineUrlSchemeHandler): gen_qobjectdefs_types.QMetaObject {.base.} =
   QWebEngineUrlSchemeHandlermetaObject(self[])
-proc cQWebEngineUrlSchemeHandler_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQWebEngineUrlSchemeHandler, param1: cstring): pointer {.base.} =
+  QWebEngineUrlSchemeHandlermetacast(self[], param1)
+method metacall*(self: VirtualQWebEngineUrlSchemeHandler, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebEngineUrlSchemeHandlermetacall(self[], param1, param2, param3)
+method requestStarted*(self: VirtualQWebEngineUrlSchemeHandler, param1: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): void {.base.} =
+  raiseAssert("missing implementation of QWebEngineUrlSchemeHandler.requestStarted")
+method event*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineUrlSchemeHandlerevent(self[], event)
+method eventFilter*(self: VirtualQWebEngineUrlSchemeHandler, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebEngineUrlSchemeHandlereventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebEngineUrlSchemeHandlertimerEvent(self[], event)
+method childEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebEngineUrlSchemeHandlerchildEvent(self[], event)
+method customEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebEngineUrlSchemeHandlercustomEvent(self[], event)
+method connectNotify*(self: VirtualQWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineUrlSchemeHandlerconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebEngineUrlSchemeHandlerdisconnectNotify(self[], signal)
+
+proc fcQWebEngineUrlSchemeHandler_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -266,17 +292,13 @@ proc cQWebEngineUrlSchemeHandler_method_callback_metaObject(self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQWebEngineUrlSchemeHandler, param1: cstring): pointer {.base.} =
-  QWebEngineUrlSchemeHandlermetacast(self[], param1)
-proc cQWebEngineUrlSchemeHandler_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQWebEngineUrlSchemeHandler, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QWebEngineUrlSchemeHandlermetacall(self[], param1, param2, param3)
-proc cQWebEngineUrlSchemeHandler_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -284,64 +306,49 @@ proc cQWebEngineUrlSchemeHandler_method_callback_metacall(self: pointer, param1:
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method requestStarted*(self: VirtualQWebEngineUrlSchemeHandler, param1: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): void {.base.} =
-  raiseAssert("missing implementation of QWebEngineUrlSchemeHandler_virtualbase_requestStarted")
-proc cQWebEngineUrlSchemeHandler_method_callback_requestStarted(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_requestStarted(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob(h: param1, owned: false)
   inst.requestStarted(slotval1)
 
-method event*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineUrlSchemeHandlerevent(self[], event)
-proc cQWebEngineUrlSchemeHandler_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQWebEngineUrlSchemeHandler, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QWebEngineUrlSchemeHandlereventFilter(self[], watched, event)
-proc cQWebEngineUrlSchemeHandler_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QWebEngineUrlSchemeHandlertimerEvent(self[], event)
-proc cQWebEngineUrlSchemeHandler_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QWebEngineUrlSchemeHandlerchildEvent(self[], event)
-proc cQWebEngineUrlSchemeHandler_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQWebEngineUrlSchemeHandler, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QWebEngineUrlSchemeHandlercustomEvent(self[], event)
-proc cQWebEngineUrlSchemeHandler_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineUrlSchemeHandlerconnectNotify(self[], signal)
-proc cQWebEngineUrlSchemeHandler_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QWebEngineUrlSchemeHandlerdisconnectNotify(self[], signal)
-proc cQWebEngineUrlSchemeHandler_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQWebEngineUrlSchemeHandler_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebEngineUrlSchemeHandler](fcQWebEngineUrlSchemeHandler_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineUrlSchemeHandler_protectedbase_sender(self.h), owned: false)
@@ -363,27 +370,27 @@ proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
     let vtbl = cast[ref QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebEngineUrlSchemeHandler_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebEngineUrlSchemeHandler_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebEngineUrlSchemeHandler_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebEngineUrlSchemeHandler_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebEngineUrlSchemeHandler_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebEngineUrlSchemeHandler_vtable_callback_metacall
   if not isNil(vtbl[].requestStarted):
-    vtbl[].vtbl.requestStarted = cQWebEngineUrlSchemeHandler_vtable_callback_requestStarted
+    vtbl[].vtbl.requestStarted = fcQWebEngineUrlSchemeHandler_vtable_callback_requestStarted
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebEngineUrlSchemeHandler_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebEngineUrlSchemeHandler_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebEngineUrlSchemeHandler_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebEngineUrlSchemeHandler_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebEngineUrlSchemeHandler_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebEngineUrlSchemeHandler_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebEngineUrlSchemeHandler_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebEngineUrlSchemeHandler_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebEngineUrlSchemeHandler_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify
   gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler(h: fcQWebEngineUrlSchemeHandler_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler,
@@ -395,27 +402,27 @@ proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
     let vtbl = cast[ref QWebEngineUrlSchemeHandlerVTable](fcQWebEngineUrlSchemeHandler_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQWebEngineUrlSchemeHandler_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQWebEngineUrlSchemeHandler_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQWebEngineUrlSchemeHandler_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQWebEngineUrlSchemeHandler_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQWebEngineUrlSchemeHandler_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQWebEngineUrlSchemeHandler_vtable_callback_metacall
   if not isNil(vtbl[].requestStarted):
-    vtbl[].vtbl.requestStarted = cQWebEngineUrlSchemeHandler_vtable_callback_requestStarted
+    vtbl[].vtbl.requestStarted = fcQWebEngineUrlSchemeHandler_vtable_callback_requestStarted
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQWebEngineUrlSchemeHandler_vtable_callback_event
+    vtbl[].vtbl.event = fcQWebEngineUrlSchemeHandler_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQWebEngineUrlSchemeHandler_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQWebEngineUrlSchemeHandler_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQWebEngineUrlSchemeHandler_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQWebEngineUrlSchemeHandler_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQWebEngineUrlSchemeHandler_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQWebEngineUrlSchemeHandler_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQWebEngineUrlSchemeHandler_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQWebEngineUrlSchemeHandler_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQWebEngineUrlSchemeHandler_vtable_callback_disconnectNotify
   gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler(h: fcQWebEngineUrlSchemeHandler_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQWebEngineUrlSchemeHandler_mvtbl = cQWebEngineUrlSchemeHandlerVTable(
@@ -423,17 +430,18 @@ const cQWebEngineUrlSchemeHandler_mvtbl = cQWebEngineUrlSchemeHandlerVTable(
     let inst = cast[ptr typeof(VirtualQWebEngineUrlSchemeHandler()[])](self.fcQWebEngineUrlSchemeHandler_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQWebEngineUrlSchemeHandler_method_callback_metaObject,
-  metacast: cQWebEngineUrlSchemeHandler_method_callback_metacast,
-  metacall: cQWebEngineUrlSchemeHandler_method_callback_metacall,
-  requestStarted: cQWebEngineUrlSchemeHandler_method_callback_requestStarted,
-  event: cQWebEngineUrlSchemeHandler_method_callback_event,
-  eventFilter: cQWebEngineUrlSchemeHandler_method_callback_eventFilter,
-  timerEvent: cQWebEngineUrlSchemeHandler_method_callback_timerEvent,
-  childEvent: cQWebEngineUrlSchemeHandler_method_callback_childEvent,
-  customEvent: cQWebEngineUrlSchemeHandler_method_callback_customEvent,
-  connectNotify: cQWebEngineUrlSchemeHandler_method_callback_connectNotify,
-  disconnectNotify: cQWebEngineUrlSchemeHandler_method_callback_disconnectNotify,
+
+  metaObject: fcQWebEngineUrlSchemeHandler_method_callback_metaObject,
+  metacast: fcQWebEngineUrlSchemeHandler_method_callback_metacast,
+  metacall: fcQWebEngineUrlSchemeHandler_method_callback_metacall,
+  requestStarted: fcQWebEngineUrlSchemeHandler_method_callback_requestStarted,
+  event: fcQWebEngineUrlSchemeHandler_method_callback_event,
+  eventFilter: fcQWebEngineUrlSchemeHandler_method_callback_eventFilter,
+  timerEvent: fcQWebEngineUrlSchemeHandler_method_callback_timerEvent,
+  childEvent: fcQWebEngineUrlSchemeHandler_method_callback_childEvent,
+  customEvent: fcQWebEngineUrlSchemeHandler_method_callback_customEvent,
+  connectNotify: fcQWebEngineUrlSchemeHandler_method_callback_connectNotify,
+  disconnectNotify: fcQWebEngineUrlSchemeHandler_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler,
     inst: VirtualQWebEngineUrlSchemeHandler) =

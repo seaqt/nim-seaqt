@@ -165,37 +165,37 @@ proc aboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispat
   fcQAbstractEventDispatcher_aboutToBlock(self.h)
 
 type QAbstractEventDispatcheraboutToBlockSlot* = proc()
-proc cQAbstractEventDispatcher_slot_callback_aboutToBlock(slot: int) {.cdecl.} =
+proc fcQAbstractEventDispatcher_slot_callback_aboutToBlock(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAbstractEventDispatcher_slot_callback_aboutToBlock_release(slot: int) {.cdecl.} =
+proc fcQAbstractEventDispatcher_slot_callback_aboutToBlock_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcheraboutToBlockSlot) =
+proc onAboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcheraboutToBlockSlot) =
   var tmp = new QAbstractEventDispatcheraboutToBlockSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]), cQAbstractEventDispatcher_slot_callback_aboutToBlock, cQAbstractEventDispatcher_slot_callback_aboutToBlock_release)
+  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]), fcQAbstractEventDispatcher_slot_callback_aboutToBlock, fcQAbstractEventDispatcher_slot_callback_aboutToBlock_release)
 
 proc awake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): void =
   fcQAbstractEventDispatcher_awake(self.h)
 
 type QAbstractEventDispatcherawakeSlot* = proc()
-proc cQAbstractEventDispatcher_slot_callback_awake(slot: int) {.cdecl.} =
+proc fcQAbstractEventDispatcher_slot_callback_awake(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQAbstractEventDispatcher_slot_callback_awake_release(slot: int) {.cdecl.} =
+proc fcQAbstractEventDispatcher_slot_callback_awake_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onawake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcherawakeSlot) =
+proc onAwake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcherawakeSlot) =
   var tmp = new QAbstractEventDispatcherawakeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), cQAbstractEventDispatcher_slot_callback_awake, cQAbstractEventDispatcher_slot_callback_awake_release)
+  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), fcQAbstractEventDispatcher_slot_callback_awake, fcQAbstractEventDispatcher_slot_callback_awake_release)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractEventDispatcher_tr2(s, c)

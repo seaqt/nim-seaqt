@@ -109,6 +109,7 @@ proc fcQProgressDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQProgressDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProgressDialog_tr3".}
 proc fcQProgressDialog_vtbl(self: pointer): pointer {.importc: "QProgressDialog_vtbl".}
 proc fcQProgressDialog_vdata(self: pointer): pointer {.importc: "QProgressDialog_vdata".}
+
 type cQProgressDialogVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -331,19 +332,19 @@ proc canceled*(self: gen_qprogressdialog_types.QProgressDialog): void =
   fcQProgressDialog_canceled(self.h)
 
 type QProgressDialogcanceledSlot* = proc()
-proc cQProgressDialog_slot_callback_canceled(slot: int) {.cdecl.} =
+proc fcQProgressDialog_slot_callback_canceled(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QProgressDialogcanceledSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQProgressDialog_slot_callback_canceled_release(slot: int) {.cdecl.} =
+proc fcQProgressDialog_slot_callback_canceled_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QProgressDialogcanceledSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncanceled*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogcanceledSlot) =
+proc onCanceled*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogcanceledSlot) =
   var tmp = new QProgressDialogcanceledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProgressDialog_connect_canceled(self.h, cast[int](addr tmp[]), cQProgressDialog_slot_callback_canceled, cQProgressDialog_slot_callback_canceled_release)
+  fcQProgressDialog_connect_canceled(self.h, cast[int](addr tmp[]), fcQProgressDialog_slot_callback_canceled, fcQProgressDialog_slot_callback_canceled_release)
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring): string =
   let v_ms = fcQProgressDialog_tr2(s, c)
@@ -412,6 +413,7 @@ type QProgressDialogchildEventProc* = proc(self: QProgressDialog, event: gen_qco
 type QProgressDialogcustomEventProc* = proc(self: QProgressDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProgressDialogconnectNotifyProc* = proc(self: QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QProgressDialogdisconnectNotifyProc* = proc(self: QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QProgressDialogVTable* {.inheritable, pure.} = object
   vtbl: cQProgressDialogVTable
   metaObject*: QProgressDialogmetaObjectProc
@@ -469,10 +471,174 @@ type QProgressDialogVTable* {.inheritable, pure.} = object
   customEvent*: QProgressDialogcustomEventProc
   connectNotify*: QProgressDialogconnectNotifyProc
   disconnectNotify*: QProgressDialogdisconnectNotifyProc
+
 proc QProgressDialogmetaObject*(self: gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_virtualbase_metaObject(self.h), owned: false)
 
-proc cQProgressDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QProgressDialogmetacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
+  fcQProgressDialog_virtualbase_metacast(self.h, param1)
+
+proc QProgressDialogmetacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQProgressDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QProgressDialogsizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_sizeHint(self.h), owned: true)
+
+proc QProgressDialogresizeEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QResizeEvent): void =
+  fcQProgressDialog_virtualbase_resizeEvent(self.h, event.h)
+
+proc QProgressDialogcloseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QCloseEvent): void =
+  fcQProgressDialog_virtualbase_closeEvent(self.h, event.h)
+
+proc QProgressDialogchangeEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQProgressDialog_virtualbase_changeEvent(self.h, event.h)
+
+proc QProgressDialogshowEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QShowEvent): void =
+  fcQProgressDialog_virtualbase_showEvent(self.h, event.h)
+
+proc QProgressDialogsetVisible*(self: gen_qprogressdialog_types.QProgressDialog, visible: bool): void =
+  fcQProgressDialog_virtualbase_setVisible(self.h, visible)
+
+proc QProgressDialogminimumSizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_minimumSizeHint(self.h), owned: true)
+
+proc QProgressDialogopen*(self: gen_qprogressdialog_types.QProgressDialog): void =
+  fcQProgressDialog_virtualbase_open(self.h)
+
+proc QProgressDialogexec*(self: gen_qprogressdialog_types.QProgressDialog): cint =
+  fcQProgressDialog_virtualbase_exec(self.h)
+
+proc QProgressDialogdone*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): void =
+  fcQProgressDialog_virtualbase_done(self.h, param1)
+
+proc QProgressDialogaccept*(self: gen_qprogressdialog_types.QProgressDialog): void =
+  fcQProgressDialog_virtualbase_accept(self.h)
+
+proc QProgressDialogreject*(self: gen_qprogressdialog_types.QProgressDialog): void =
+  fcQProgressDialog_virtualbase_reject(self.h)
+
+proc QProgressDialogkeyPressEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QKeyEvent): void =
+  fcQProgressDialog_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QProgressDialogcontextMenuEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQProgressDialog_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QProgressDialogeventFilter*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQProgressDialog_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QProgressDialogdevType*(self: gen_qprogressdialog_types.QProgressDialog): cint =
+  fcQProgressDialog_virtualbase_devType(self.h)
+
+proc QProgressDialogheightForWidth*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): cint =
+  fcQProgressDialog_virtualbase_heightForWidth(self.h, param1)
+
+proc QProgressDialoghasHeightForWidth*(self: gen_qprogressdialog_types.QProgressDialog): bool =
+  fcQProgressDialog_virtualbase_hasHeightForWidth(self.h)
+
+proc QProgressDialogpaintEngine*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQProgressDialog_virtualbase_paintEngine(self.h), owned: false)
+
+proc QProgressDialogevent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): bool =
+  fcQProgressDialog_virtualbase_event(self.h, event.h)
+
+proc QProgressDialogmousePressEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQProgressDialog_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QProgressDialogmouseReleaseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQProgressDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QProgressDialogmouseDoubleClickEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQProgressDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QProgressDialogmouseMoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
+  fcQProgressDialog_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QProgressDialogwheelEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QWheelEvent): void =
+  fcQProgressDialog_virtualbase_wheelEvent(self.h, event.h)
+
+proc QProgressDialogkeyReleaseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QKeyEvent): void =
+  fcQProgressDialog_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QProgressDialogfocusInEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QFocusEvent): void =
+  fcQProgressDialog_virtualbase_focusInEvent(self.h, event.h)
+
+proc QProgressDialogfocusOutEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QFocusEvent): void =
+  fcQProgressDialog_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QProgressDialogenterEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QEnterEvent): void =
+  fcQProgressDialog_virtualbase_enterEvent(self.h, event.h)
+
+proc QProgressDialogleaveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQProgressDialog_virtualbase_leaveEvent(self.h, event.h)
+
+proc QProgressDialogpaintEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QPaintEvent): void =
+  fcQProgressDialog_virtualbase_paintEvent(self.h, event.h)
+
+proc QProgressDialogmoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMoveEvent): void =
+  fcQProgressDialog_virtualbase_moveEvent(self.h, event.h)
+
+proc QProgressDialogtabletEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QTabletEvent): void =
+  fcQProgressDialog_virtualbase_tabletEvent(self.h, event.h)
+
+proc QProgressDialogactionEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QActionEvent): void =
+  fcQProgressDialog_virtualbase_actionEvent(self.h, event.h)
+
+proc QProgressDialogdragEnterEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQProgressDialog_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QProgressDialogdragMoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQProgressDialog_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QProgressDialogdragLeaveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQProgressDialog_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QProgressDialogdropEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDropEvent): void =
+  fcQProgressDialog_virtualbase_dropEvent(self.h, event.h)
+
+proc QProgressDialoghideEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QHideEvent): void =
+  fcQProgressDialog_virtualbase_hideEvent(self.h, event.h)
+
+proc QProgressDialognativeEvent*(self: gen_qprogressdialog_types.QProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
+  fcQProgressDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+
+proc QProgressDialogmetric*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): cint =
+  fcQProgressDialog_virtualbase_metric(self.h, cint(param1))
+
+proc QProgressDialoginitPainter*(self: gen_qprogressdialog_types.QProgressDialog, painter: gen_qpainter_types.QPainter): void =
+  fcQProgressDialog_virtualbase_initPainter(self.h, painter.h)
+
+proc QProgressDialogredirected*(self: gen_qprogressdialog_types.QProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQProgressDialog_virtualbase_redirected(self.h, offset.h), owned: false)
+
+proc QProgressDialogsharedPainter*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQProgressDialog_virtualbase_sharedPainter(self.h), owned: false)
+
+proc QProgressDialoginputMethodEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQProgressDialog_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QProgressDialoginputMethodQuery*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQProgressDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+
+proc QProgressDialogfocusNextPrevChild*(self: gen_qprogressdialog_types.QProgressDialog, next: bool): bool =
+  fcQProgressDialog_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QProgressDialogtimerEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQProgressDialog_virtualbase_timerEvent(self.h, event.h)
+
+proc QProgressDialogchildEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQProgressDialog_virtualbase_childEvent(self.h, event.h)
+
+proc QProgressDialogcustomEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
+  fcQProgressDialog_virtualbase_customEvent(self.h, event.h)
+
+proc QProgressDialogconnectNotify*(self: gen_qprogressdialog_types.QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQProgressDialog_virtualbase_connectNotify(self.h, signal.h)
+
+proc QProgressDialogdisconnectNotify*(self: gen_qprogressdialog_types.QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQProgressDialog_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQProgressDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -481,20 +647,14 @@ proc cQProgressDialog_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogmetacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
-  fcQProgressDialog_virtualbase_metacast(self.h, param1)
-
-proc cQProgressDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QProgressDialogmetacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, param2: cint, param3: pointer): cint =
-  fcQProgressDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQProgressDialog_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = cint(param1)
@@ -503,10 +663,7 @@ proc cQProgressDialog_vtable_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QProgressDialogsizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_sizeHint(self.h), owned: true)
-
-proc cQProgressDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
@@ -515,55 +672,37 @@ proc cQProgressDialog_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogresizeEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QResizeEvent): void =
-  fcQProgressDialog_virtualbase_resizeEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
-proc QProgressDialogcloseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QCloseEvent): void =
-  fcQProgressDialog_virtualbase_closeEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
-proc QProgressDialogchangeEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQProgressDialog_virtualbase_changeEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QProgressDialogshowEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QShowEvent): void =
-  fcQProgressDialog_virtualbase_showEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
-proc QProgressDialogsetVisible*(self: gen_qprogressdialog_types.QProgressDialog, visible: bool): void =
-  fcQProgressDialog_virtualbase_setVisible(self.h, visible)
-
-proc cQProgressDialog_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
 
-proc QProgressDialogminimumSizeHint*(self: gen_qprogressdialog_types.QProgressDialog): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProgressDialog_virtualbase_minimumSizeHint(self.h), owned: true)
-
-proc cQProgressDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
@@ -572,70 +711,46 @@ proc cQProgressDialog_vtable_callback_minimumSizeHint(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogopen*(self: gen_qprogressdialog_types.QProgressDialog): void =
-  fcQProgressDialog_virtualbase_open(self.h)
-
-proc cQProgressDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_open(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   vtbl[].open(self)
 
-proc QProgressDialogexec*(self: gen_qprogressdialog_types.QProgressDialog): cint =
-  fcQProgressDialog_virtualbase_exec(self.h)
-
-proc cQProgressDialog_vtable_callback_exec(self: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_exec(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].exec(self)
   virtualReturn
 
-proc QProgressDialogdone*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): void =
-  fcQProgressDialog_virtualbase_done(self.h, param1)
-
-proc cQProgressDialog_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = param1
   vtbl[].done(self, slotval1)
 
-proc QProgressDialogaccept*(self: gen_qprogressdialog_types.QProgressDialog): void =
-  fcQProgressDialog_virtualbase_accept(self.h)
-
-proc cQProgressDialog_vtable_callback_accept(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_accept(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   vtbl[].accept(self)
 
-proc QProgressDialogreject*(self: gen_qprogressdialog_types.QProgressDialog): void =
-  fcQProgressDialog_virtualbase_reject(self.h)
-
-proc cQProgressDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_reject(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   vtbl[].reject(self)
 
-proc QProgressDialogkeyPressEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QKeyEvent): void =
-  fcQProgressDialog_virtualbase_keyPressEvent(self.h, param1.h)
-
-proc cQProgressDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
-proc QProgressDialogcontextMenuEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QContextMenuEvent): void =
-  fcQProgressDialog_virtualbase_contextMenuEvent(self.h, param1.h)
-
-proc cQProgressDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
-proc QProgressDialogeventFilter*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fcQProgressDialog_virtualbase_eventFilter(self.h, param1.h, param2.h)
-
-proc cQProgressDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
@@ -643,38 +758,26 @@ proc cQProgressDialog_vtable_callback_eventFilter(self: pointer, param1: pointer
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QProgressDialogdevType*(self: gen_qprogressdialog_types.QProgressDialog): cint =
-  fcQProgressDialog_virtualbase_devType(self.h)
-
-proc cQProgressDialog_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_devType(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
 
-proc QProgressDialogheightForWidth*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): cint =
-  fcQProgressDialog_virtualbase_heightForWidth(self.h, param1)
-
-proc cQProgressDialog_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QProgressDialoghasHeightForWidth*(self: gen_qprogressdialog_types.QProgressDialog): bool =
-  fcQProgressDialog_virtualbase_hasHeightForWidth(self.h)
-
-proc cQProgressDialog_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QProgressDialogpaintEngine*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQProgressDialog_virtualbase_paintEngine(self.h), owned: false)
-
-proc cQProgressDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
@@ -683,191 +786,128 @@ proc cQProgressDialog_vtable_callback_paintEngine(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogevent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): bool =
-  fcQProgressDialog_virtualbase_event(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QProgressDialogmousePressEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQProgressDialog_virtualbase_mousePressEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
-proc QProgressDialogmouseReleaseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQProgressDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
-proc QProgressDialogmouseDoubleClickEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQProgressDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QProgressDialogmouseMoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMouseEvent): void =
-  fcQProgressDialog_virtualbase_mouseMoveEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
-proc QProgressDialogwheelEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QWheelEvent): void =
-  fcQProgressDialog_virtualbase_wheelEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
-proc QProgressDialogkeyReleaseEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QKeyEvent): void =
-  fcQProgressDialog_virtualbase_keyReleaseEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
-proc QProgressDialogfocusInEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QFocusEvent): void =
-  fcQProgressDialog_virtualbase_focusInEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
-proc QProgressDialogfocusOutEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QFocusEvent): void =
-  fcQProgressDialog_virtualbase_focusOutEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
-proc QProgressDialogenterEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QEnterEvent): void =
-  fcQProgressDialog_virtualbase_enterEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
-proc QProgressDialogleaveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQProgressDialog_virtualbase_leaveEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
-proc QProgressDialogpaintEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QPaintEvent): void =
-  fcQProgressDialog_virtualbase_paintEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QProgressDialogmoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QMoveEvent): void =
-  fcQProgressDialog_virtualbase_moveEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QProgressDialogtabletEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QTabletEvent): void =
-  fcQProgressDialog_virtualbase_tabletEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
-proc QProgressDialogactionEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QActionEvent): void =
-  fcQProgressDialog_virtualbase_actionEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
-proc QProgressDialogdragEnterEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragEnterEvent): void =
-  fcQProgressDialog_virtualbase_dragEnterEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
-proc QProgressDialogdragMoveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragMoveEvent): void =
-  fcQProgressDialog_virtualbase_dragMoveEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
-proc QProgressDialogdragLeaveEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDragLeaveEvent): void =
-  fcQProgressDialog_virtualbase_dragLeaveEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
-proc QProgressDialogdropEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QDropEvent): void =
-  fcQProgressDialog_virtualbase_dropEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
-proc QProgressDialoghideEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qevent_types.QHideEvent): void =
-  fcQProgressDialog_virtualbase_hideEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
-proc QProgressDialognativeEvent*(self: gen_qprogressdialog_types.QProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
-  fcQProgressDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
-
-proc cQProgressDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var veventType_bytearray = eventType
@@ -879,29 +919,20 @@ proc cQProgressDialog_vtable_callback_nativeEvent(self: pointer, eventType: stru
   var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QProgressDialogmetric*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): cint =
-  fcQProgressDialog_virtualbase_metric(self.h, cint(param1))
-
-proc cQProgressDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
 
-proc QProgressDialoginitPainter*(self: gen_qprogressdialog_types.QProgressDialog, painter: gen_qpainter_types.QPainter): void =
-  fcQProgressDialog_virtualbase_initPainter(self.h, painter.h)
-
-proc cQProgressDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
-proc QProgressDialogredirected*(self: gen_qprogressdialog_types.QProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQProgressDialog_virtualbase_redirected(self.h, offset.h), owned: false)
-
-proc cQProgressDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
@@ -911,10 +942,7 @@ proc cQProgressDialog_vtable_callback_redirected(self: pointer, offset: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogsharedPainter*(self: gen_qprogressdialog_types.QProgressDialog): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQProgressDialog_virtualbase_sharedPainter(self.h), owned: false)
-
-proc cQProgressDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
@@ -923,19 +951,13 @@ proc cQProgressDialog_vtable_callback_sharedPainter(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialoginputMethodEvent*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qevent_types.QInputMethodEvent): void =
-  fcQProgressDialog_virtualbase_inputMethodEvent(self.h, param1.h)
-
-proc cQProgressDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
-proc QProgressDialoginputMethodQuery*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQProgressDialog_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
-
-proc cQProgressDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = cint(param1)
@@ -945,56 +967,38 @@ proc cQProgressDialog_vtable_callback_inputMethodQuery(self: pointer, param1: ci
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QProgressDialogfocusNextPrevChild*(self: gen_qprogressdialog_types.QProgressDialog, next: bool): bool =
-  fcQProgressDialog_virtualbase_focusNextPrevChild(self.h, next)
-
-proc cQProgressDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
 
-proc QProgressDialogtimerEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQProgressDialog_virtualbase_timerEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QProgressDialogchildEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQProgressDialog_virtualbase_childEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QProgressDialogcustomEvent*(self: gen_qprogressdialog_types.QProgressDialog, event: gen_qcoreevent_types.QEvent): void =
-  fcQProgressDialog_virtualbase_customEvent(self.h, event.h)
-
-proc cQProgressDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QProgressDialogconnectNotify*(self: gen_qprogressdialog_types.QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQProgressDialog_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQProgressDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QProgressDialogdisconnectNotify*(self: gen_qprogressdialog_types.QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQProgressDialog_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQProgressDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQProgressDialog_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProgressDialogVTable](fcQProgressDialog_vdata(self))
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -1002,9 +1006,119 @@ proc cQProgressDialog_vtable_callback_disconnectNotify(self: pointer, signal: po
 
 type VirtualQProgressDialog* {.inheritable.} = ref object of QProgressDialog
   vtbl*: cQProgressDialogVTable
+
 method metaObject*(self: VirtualQProgressDialog): gen_qobjectdefs_types.QMetaObject {.base.} =
   QProgressDialogmetaObject(self[])
-proc cQProgressDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQProgressDialog, param1: cstring): pointer {.base.} =
+  QProgressDialogmetacast(self[], param1)
+method metacall*(self: VirtualQProgressDialog, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QProgressDialogmetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQProgressDialog): gen_qsize_types.QSize {.base.} =
+  QProgressDialogsizeHint(self[])
+method resizeEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QProgressDialogresizeEvent(self[], event)
+method closeEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QProgressDialogcloseEvent(self[], event)
+method changeEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QProgressDialogchangeEvent(self[], event)
+method showEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QProgressDialogshowEvent(self[], event)
+method setVisible*(self: VirtualQProgressDialog, visible: bool): void {.base.} =
+  QProgressDialogsetVisible(self[], visible)
+method minimumSizeHint*(self: VirtualQProgressDialog): gen_qsize_types.QSize {.base.} =
+  QProgressDialogminimumSizeHint(self[])
+method open*(self: VirtualQProgressDialog): void {.base.} =
+  QProgressDialogopen(self[])
+method exec*(self: VirtualQProgressDialog): cint {.base.} =
+  QProgressDialogexec(self[])
+method done*(self: VirtualQProgressDialog, param1: cint): void {.base.} =
+  QProgressDialogdone(self[], param1)
+method accept*(self: VirtualQProgressDialog): void {.base.} =
+  QProgressDialogaccept(self[])
+method reject*(self: VirtualQProgressDialog): void {.base.} =
+  QProgressDialogreject(self[])
+method keyPressEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QProgressDialogkeyPressEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QProgressDialogcontextMenuEvent(self[], param1)
+method eventFilter*(self: VirtualQProgressDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QProgressDialogeventFilter(self[], param1, param2)
+method devType*(self: VirtualQProgressDialog): cint {.base.} =
+  QProgressDialogdevType(self[])
+method heightForWidth*(self: VirtualQProgressDialog, param1: cint): cint {.base.} =
+  QProgressDialogheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQProgressDialog): bool {.base.} =
+  QProgressDialoghasHeightForWidth(self[])
+method paintEngine*(self: VirtualQProgressDialog): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QProgressDialogpaintEngine(self[])
+method event*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QProgressDialogevent(self[], event)
+method mousePressEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QProgressDialogmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QProgressDialogmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QProgressDialogmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QProgressDialogmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QProgressDialogwheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QProgressDialogkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QProgressDialogfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QProgressDialogfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QProgressDialogenterEvent(self[], event)
+method leaveEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QProgressDialogleaveEvent(self[], event)
+method paintEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QProgressDialogpaintEvent(self[], event)
+method moveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QProgressDialogmoveEvent(self[], event)
+method tabletEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QProgressDialogtabletEvent(self[], event)
+method actionEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QProgressDialogactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QProgressDialogdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QProgressDialogdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QProgressDialogdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QProgressDialogdropEvent(self[], event)
+method hideEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QProgressDialoghideEvent(self[], event)
+method nativeEvent*(self: VirtualQProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QProgressDialognativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQProgressDialog, param1: cint): cint {.base.} =
+  QProgressDialogmetric(self[], param1)
+method initPainter*(self: VirtualQProgressDialog, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QProgressDialoginitPainter(self[], painter)
+method redirected*(self: VirtualQProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QProgressDialogredirected(self[], offset)
+method sharedPainter*(self: VirtualQProgressDialog): gen_qpainter_types.QPainter {.base.} =
+  QProgressDialogsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QProgressDialoginputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQProgressDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QProgressDialoginputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQProgressDialog, next: bool): bool {.base.} =
+  QProgressDialogfocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QProgressDialogtimerEvent(self[], event)
+method childEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QProgressDialogchildEvent(self[], event)
+method customEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QProgressDialogcustomEvent(self[], event)
+method connectNotify*(self: VirtualQProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QProgressDialogconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QProgressDialogdisconnectNotify(self[], signal)
+
+proc fcQProgressDialog_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -1012,17 +1126,13 @@ proc cQProgressDialog_method_callback_metaObject(self: pointer): pointer {.cdecl
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQProgressDialog, param1: cstring): pointer {.base.} =
-  QProgressDialogmetacast(self[], param1)
-proc cQProgressDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQProgressDialog, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QProgressDialogmetacall(self[], param1, param2, param3)
-proc cQProgressDialog_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1030,9 +1140,7 @@ proc cQProgressDialog_method_callback_metacall(self: pointer, param1: cint, para
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method sizeHint*(self: VirtualQProgressDialog): gen_qsize_types.QSize {.base.} =
-  QProgressDialogsizeHint(self[])
-proc cQProgressDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1040,44 +1148,32 @@ proc cQProgressDialog_method_callback_sizeHint(self: pointer): pointer {.cdecl.}
   virtualReturn.h = nil
   virtualReturn_h
 
-method resizeEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QResizeEvent): void {.base.} =
-  QProgressDialogresizeEvent(self[], event)
-proc cQProgressDialog_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
-method closeEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QCloseEvent): void {.base.} =
-  QProgressDialogcloseEvent(self[], event)
-proc cQProgressDialog_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
-method changeEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QProgressDialogchangeEvent(self[], event)
-proc cQProgressDialog_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
-method showEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QShowEvent): void {.base.} =
-  QProgressDialogshowEvent(self[], event)
-proc cQProgressDialog_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
-method setVisible*(self: VirtualQProgressDialog, visible: bool): void {.base.} =
-  QProgressDialogsetVisible(self[], visible)
-proc cQProgressDialog_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = visible
   inst.setVisible(slotval1)
 
-method minimumSizeHint*(self: VirtualQProgressDialog): gen_qsize_types.QSize {.base.} =
-  QProgressDialogminimumSizeHint(self[])
-proc cQProgressDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
@@ -1085,86 +1181,62 @@ proc cQProgressDialog_method_callback_minimumSizeHint(self: pointer): pointer {.
   virtualReturn.h = nil
   virtualReturn_h
 
-method open*(self: VirtualQProgressDialog): void {.base.} =
-  QProgressDialogopen(self[])
-proc cQProgressDialog_method_callback_open(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_open(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   inst.open()
 
-method exec*(self: VirtualQProgressDialog): cint {.base.} =
-  QProgressDialogexec(self[])
-proc cQProgressDialog_method_callback_exec(self: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_method_callback_exec(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.exec()
   virtualReturn
 
-method done*(self: VirtualQProgressDialog, param1: cint): void {.base.} =
-  QProgressDialogdone(self[], param1)
-proc cQProgressDialog_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_done(self: pointer, param1: cint): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = param1
   inst.done(slotval1)
 
-method accept*(self: VirtualQProgressDialog): void {.base.} =
-  QProgressDialogaccept(self[])
-proc cQProgressDialog_method_callback_accept(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_accept(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   inst.accept()
 
-method reject*(self: VirtualQProgressDialog): void {.base.} =
-  QProgressDialogreject(self[])
-proc cQProgressDialog_method_callback_reject(self: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_reject(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   inst.reject()
 
-method keyPressEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QKeyEvent): void {.base.} =
-  QProgressDialogkeyPressEvent(self[], param1)
-proc cQProgressDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
-method contextMenuEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
-  QProgressDialogcontextMenuEvent(self[], param1)
-proc cQProgressDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
-method eventFilter*(self: VirtualQProgressDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QProgressDialogeventFilter(self[], param1, param2)
-proc cQProgressDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method devType*(self: VirtualQProgressDialog): cint {.base.} =
-  QProgressDialogdevType(self[])
-proc cQProgressDialog_method_callback_devType(self: pointer): cint {.cdecl.} =
+proc fcQProgressDialog_method_callback_devType(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.devType()
   virtualReturn
 
-method heightForWidth*(self: VirtualQProgressDialog, param1: cint): cint {.base.} =
-  QProgressDialogheightForWidth(self[], param1)
-proc cQProgressDialog_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQProgressDialog_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = param1
   var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQProgressDialog): bool {.base.} =
-  QProgressDialoghasHeightForWidth(self[])
-proc cQProgressDialog_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQProgressDialog): gen_qpaintengine_types.QPaintEngine {.base.} =
-  QProgressDialogpaintEngine(self[])
-proc cQProgressDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
@@ -1172,150 +1244,108 @@ proc cQProgressDialog_method_callback_paintEngine(self: pointer): pointer {.cdec
   virtualReturn.h = nil
   virtualReturn_h
 
-method event*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QProgressDialogevent(self[], event)
-proc cQProgressDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQProgressDialog_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mousePressEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QProgressDialogmousePressEvent(self[], event)
-proc cQProgressDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
-method mouseReleaseEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QProgressDialogmouseReleaseEvent(self[], event)
-proc cQProgressDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
-method mouseDoubleClickEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QProgressDialogmouseDoubleClickEvent(self[], event)
-proc cQProgressDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
-method mouseMoveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMouseEvent): void {.base.} =
-  QProgressDialogmouseMoveEvent(self[], event)
-proc cQProgressDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
-method wheelEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QWheelEvent): void {.base.} =
-  QProgressDialogwheelEvent(self[], event)
-proc cQProgressDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
-method keyReleaseEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QKeyEvent): void {.base.} =
-  QProgressDialogkeyReleaseEvent(self[], event)
-proc cQProgressDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
-method focusInEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QProgressDialogfocusInEvent(self[], event)
-proc cQProgressDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
-method focusOutEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QFocusEvent): void {.base.} =
-  QProgressDialogfocusOutEvent(self[], event)
-proc cQProgressDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
-method enterEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QEnterEvent): void {.base.} =
-  QProgressDialogenterEvent(self[], event)
-proc cQProgressDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
-method leaveEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QProgressDialogleaveEvent(self[], event)
-proc cQProgressDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
-method paintEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QPaintEvent): void {.base.} =
-  QProgressDialogpaintEvent(self[], event)
-proc cQProgressDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
-method moveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QMoveEvent): void {.base.} =
-  QProgressDialogmoveEvent(self[], event)
-proc cQProgressDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
-method tabletEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QTabletEvent): void {.base.} =
-  QProgressDialogtabletEvent(self[], event)
-proc cQProgressDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
-method actionEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QActionEvent): void {.base.} =
-  QProgressDialogactionEvent(self[], event)
-proc cQProgressDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
-method dragEnterEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
-  QProgressDialogdragEnterEvent(self[], event)
-proc cQProgressDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
-method dragMoveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
-  QProgressDialogdragMoveEvent(self[], event)
-proc cQProgressDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
-method dragLeaveEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
-  QProgressDialogdragLeaveEvent(self[], event)
-proc cQProgressDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
-method dropEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QDropEvent): void {.base.} =
-  QProgressDialogdropEvent(self[], event)
-proc cQProgressDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
-method hideEvent*(self: VirtualQProgressDialog, event: gen_qevent_types.QHideEvent): void {.base.} =
-  QProgressDialoghideEvent(self[], event)
-proc cQProgressDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
-method nativeEvent*(self: VirtualQProgressDialog, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
-  QProgressDialognativeEvent(self[], eventType, message, resultVal)
-proc cQProgressDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+proc fcQProgressDialog_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
@@ -1326,24 +1356,18 @@ proc cQProgressDialog_method_callback_nativeEvent(self: pointer, eventType: stru
   var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
-method metric*(self: VirtualQProgressDialog, param1: cint): cint {.base.} =
-  QProgressDialogmetric(self[], param1)
-proc cQProgressDialog_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+proc fcQProgressDialog_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
-method initPainter*(self: VirtualQProgressDialog, painter: gen_qpainter_types.QPainter): void {.base.} =
-  QProgressDialoginitPainter(self[], painter)
-proc cQProgressDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
-method redirected*(self: VirtualQProgressDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
-  QProgressDialogredirected(self[], offset)
-proc cQProgressDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
@@ -1352,9 +1376,7 @@ proc cQProgressDialog_method_callback_redirected(self: pointer, offset: pointer)
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQProgressDialog): gen_qpainter_types.QPainter {.base.} =
-  QProgressDialogsharedPainter(self[])
-proc cQProgressDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
@@ -1362,16 +1384,12 @@ proc cQProgressDialog_method_callback_sharedPainter(self: pointer): pointer {.cd
   virtualReturn.h = nil
   virtualReturn_h
 
-method inputMethodEvent*(self: VirtualQProgressDialog, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
-  QProgressDialoginputMethodEvent(self[], param1)
-proc cQProgressDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
-method inputMethodQuery*(self: VirtualQProgressDialog, param1: cint): gen_qvariant_types.QVariant {.base.} =
-  QProgressDialoginputMethodQuery(self[], param1)
-proc cQProgressDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQProgressDialog_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1380,48 +1398,37 @@ proc cQProgressDialog_method_callback_inputMethodQuery(self: pointer, param1: ci
   virtualReturn.h = nil
   virtualReturn_h
 
-method focusNextPrevChild*(self: VirtualQProgressDialog, next: bool): bool {.base.} =
-  QProgressDialogfocusNextPrevChild(self[], next)
-proc cQProgressDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+proc fcQProgressDialog_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = next
   var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
-method timerEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QProgressDialogtimerEvent(self[], event)
-proc cQProgressDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QProgressDialogchildEvent(self[], event)
-proc cQProgressDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQProgressDialog, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QProgressDialogcustomEvent(self[], event)
-proc cQProgressDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QProgressDialogconnectNotify(self[], signal)
-proc cQProgressDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QProgressDialogdisconnectNotify(self[], signal)
-proc cQProgressDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQProgressDialog_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQProgressDialog](fcQProgressDialog_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc forceShow*(self: gen_qprogressdialog_types.QProgressDialog): void =
   fcQProgressDialog_protectedbase_forceShow(self.h)
@@ -1465,115 +1472,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1584,115 +1591,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1704,115 +1711,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1824,115 +1831,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -1944,115 +1951,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new5(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h), owned: true)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
@@ -2064,115 +2071,115 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     let vtbl = cast[ref QProgressDialogVTable](fcQProgressDialog_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQProgressDialog_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQProgressDialog_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQProgressDialog_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQProgressDialog_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQProgressDialog_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQProgressDialog_vtable_callback_metacall
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = cQProgressDialog_vtable_callback_sizeHint
+    vtbl[].vtbl.sizeHint = fcQProgressDialog_vtable_callback_sizeHint
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = cQProgressDialog_vtable_callback_resizeEvent
+    vtbl[].vtbl.resizeEvent = fcQProgressDialog_vtable_callback_resizeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = cQProgressDialog_vtable_callback_closeEvent
+    vtbl[].vtbl.closeEvent = fcQProgressDialog_vtable_callback_closeEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = cQProgressDialog_vtable_callback_changeEvent
+    vtbl[].vtbl.changeEvent = fcQProgressDialog_vtable_callback_changeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = cQProgressDialog_vtable_callback_showEvent
+    vtbl[].vtbl.showEvent = fcQProgressDialog_vtable_callback_showEvent
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = cQProgressDialog_vtable_callback_setVisible
+    vtbl[].vtbl.setVisible = fcQProgressDialog_vtable_callback_setVisible
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = cQProgressDialog_vtable_callback_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = fcQProgressDialog_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQProgressDialog_vtable_callback_open
+    vtbl[].vtbl.open = fcQProgressDialog_vtable_callback_open
   if not isNil(vtbl[].exec):
-    vtbl[].vtbl.exec = cQProgressDialog_vtable_callback_exec
+    vtbl[].vtbl.exec = fcQProgressDialog_vtable_callback_exec
   if not isNil(vtbl[].done):
-    vtbl[].vtbl.done = cQProgressDialog_vtable_callback_done
+    vtbl[].vtbl.done = fcQProgressDialog_vtable_callback_done
   if not isNil(vtbl[].accept):
-    vtbl[].vtbl.accept = cQProgressDialog_vtable_callback_accept
+    vtbl[].vtbl.accept = fcQProgressDialog_vtable_callback_accept
   if not isNil(vtbl[].reject):
-    vtbl[].vtbl.reject = cQProgressDialog_vtable_callback_reject
+    vtbl[].vtbl.reject = fcQProgressDialog_vtable_callback_reject
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = cQProgressDialog_vtable_callback_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = fcQProgressDialog_vtable_callback_keyPressEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = cQProgressDialog_vtable_callback_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = fcQProgressDialog_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQProgressDialog_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQProgressDialog_vtable_callback_eventFilter
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = cQProgressDialog_vtable_callback_devType
+    vtbl[].vtbl.devType = fcQProgressDialog_vtable_callback_devType
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = cQProgressDialog_vtable_callback_heightForWidth
+    vtbl[].vtbl.heightForWidth = fcQProgressDialog_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = cQProgressDialog_vtable_callback_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = fcQProgressDialog_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = cQProgressDialog_vtable_callback_paintEngine
+    vtbl[].vtbl.paintEngine = fcQProgressDialog_vtable_callback_paintEngine
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQProgressDialog_vtable_callback_event
+    vtbl[].vtbl.event = fcQProgressDialog_vtable_callback_event
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = cQProgressDialog_vtable_callback_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = fcQProgressDialog_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = cQProgressDialog_vtable_callback_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = fcQProgressDialog_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = cQProgressDialog_vtable_callback_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQProgressDialog_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = cQProgressDialog_vtable_callback_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = fcQProgressDialog_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = cQProgressDialog_vtable_callback_wheelEvent
+    vtbl[].vtbl.wheelEvent = fcQProgressDialog_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = cQProgressDialog_vtable_callback_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = fcQProgressDialog_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = cQProgressDialog_vtable_callback_focusInEvent
+    vtbl[].vtbl.focusInEvent = fcQProgressDialog_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = cQProgressDialog_vtable_callback_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = fcQProgressDialog_vtable_callback_focusOutEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = cQProgressDialog_vtable_callback_enterEvent
+    vtbl[].vtbl.enterEvent = fcQProgressDialog_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = cQProgressDialog_vtable_callback_leaveEvent
+    vtbl[].vtbl.leaveEvent = fcQProgressDialog_vtable_callback_leaveEvent
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = cQProgressDialog_vtable_callback_paintEvent
+    vtbl[].vtbl.paintEvent = fcQProgressDialog_vtable_callback_paintEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = cQProgressDialog_vtable_callback_moveEvent
+    vtbl[].vtbl.moveEvent = fcQProgressDialog_vtable_callback_moveEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = cQProgressDialog_vtable_callback_tabletEvent
+    vtbl[].vtbl.tabletEvent = fcQProgressDialog_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = cQProgressDialog_vtable_callback_actionEvent
+    vtbl[].vtbl.actionEvent = fcQProgressDialog_vtable_callback_actionEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = cQProgressDialog_vtable_callback_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = fcQProgressDialog_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = cQProgressDialog_vtable_callback_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = fcQProgressDialog_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = cQProgressDialog_vtable_callback_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = fcQProgressDialog_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = cQProgressDialog_vtable_callback_dropEvent
+    vtbl[].vtbl.dropEvent = fcQProgressDialog_vtable_callback_dropEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = cQProgressDialog_vtable_callback_hideEvent
+    vtbl[].vtbl.hideEvent = fcQProgressDialog_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = cQProgressDialog_vtable_callback_nativeEvent
+    vtbl[].vtbl.nativeEvent = fcQProgressDialog_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = cQProgressDialog_vtable_callback_metric
+    vtbl[].vtbl.metric = fcQProgressDialog_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = cQProgressDialog_vtable_callback_initPainter
+    vtbl[].vtbl.initPainter = fcQProgressDialog_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = cQProgressDialog_vtable_callback_redirected
+    vtbl[].vtbl.redirected = fcQProgressDialog_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = cQProgressDialog_vtable_callback_sharedPainter
+    vtbl[].vtbl.sharedPainter = fcQProgressDialog_vtable_callback_sharedPainter
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = cQProgressDialog_vtable_callback_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = fcQProgressDialog_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = cQProgressDialog_vtable_callback_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = fcQProgressDialog_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = cQProgressDialog_vtable_callback_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = fcQProgressDialog_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQProgressDialog_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQProgressDialog_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQProgressDialog_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQProgressDialog_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQProgressDialog_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQProgressDialog_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQProgressDialog_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQProgressDialog_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQProgressDialog_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQProgressDialog_vtable_callback_disconnectNotify
   gen_qprogressdialog_types.QProgressDialog(h: fcQProgressDialog_new6(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: if len(labelText) > 0: addr labelText[0] else: nil, len: csize_t(len(labelText))), struct_miqt_string(data: if len(cancelButtonText) > 0: addr cancelButtonText[0] else: nil, len: csize_t(len(cancelButtonText))), minimum, maximum, parent.h, cint(flags)), owned: true)
 
 const cQProgressDialog_mvtbl = cQProgressDialogVTable(
@@ -2180,61 +2187,62 @@ const cQProgressDialog_mvtbl = cQProgressDialogVTable(
     let inst = cast[ptr typeof(VirtualQProgressDialog()[])](self.fcQProgressDialog_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQProgressDialog_method_callback_metaObject,
-  metacast: cQProgressDialog_method_callback_metacast,
-  metacall: cQProgressDialog_method_callback_metacall,
-  sizeHint: cQProgressDialog_method_callback_sizeHint,
-  resizeEvent: cQProgressDialog_method_callback_resizeEvent,
-  closeEvent: cQProgressDialog_method_callback_closeEvent,
-  changeEvent: cQProgressDialog_method_callback_changeEvent,
-  showEvent: cQProgressDialog_method_callback_showEvent,
-  setVisible: cQProgressDialog_method_callback_setVisible,
-  minimumSizeHint: cQProgressDialog_method_callback_minimumSizeHint,
-  open: cQProgressDialog_method_callback_open,
-  exec: cQProgressDialog_method_callback_exec,
-  done: cQProgressDialog_method_callback_done,
-  accept: cQProgressDialog_method_callback_accept,
-  reject: cQProgressDialog_method_callback_reject,
-  keyPressEvent: cQProgressDialog_method_callback_keyPressEvent,
-  contextMenuEvent: cQProgressDialog_method_callback_contextMenuEvent,
-  eventFilter: cQProgressDialog_method_callback_eventFilter,
-  devType: cQProgressDialog_method_callback_devType,
-  heightForWidth: cQProgressDialog_method_callback_heightForWidth,
-  hasHeightForWidth: cQProgressDialog_method_callback_hasHeightForWidth,
-  paintEngine: cQProgressDialog_method_callback_paintEngine,
-  event: cQProgressDialog_method_callback_event,
-  mousePressEvent: cQProgressDialog_method_callback_mousePressEvent,
-  mouseReleaseEvent: cQProgressDialog_method_callback_mouseReleaseEvent,
-  mouseDoubleClickEvent: cQProgressDialog_method_callback_mouseDoubleClickEvent,
-  mouseMoveEvent: cQProgressDialog_method_callback_mouseMoveEvent,
-  wheelEvent: cQProgressDialog_method_callback_wheelEvent,
-  keyReleaseEvent: cQProgressDialog_method_callback_keyReleaseEvent,
-  focusInEvent: cQProgressDialog_method_callback_focusInEvent,
-  focusOutEvent: cQProgressDialog_method_callback_focusOutEvent,
-  enterEvent: cQProgressDialog_method_callback_enterEvent,
-  leaveEvent: cQProgressDialog_method_callback_leaveEvent,
-  paintEvent: cQProgressDialog_method_callback_paintEvent,
-  moveEvent: cQProgressDialog_method_callback_moveEvent,
-  tabletEvent: cQProgressDialog_method_callback_tabletEvent,
-  actionEvent: cQProgressDialog_method_callback_actionEvent,
-  dragEnterEvent: cQProgressDialog_method_callback_dragEnterEvent,
-  dragMoveEvent: cQProgressDialog_method_callback_dragMoveEvent,
-  dragLeaveEvent: cQProgressDialog_method_callback_dragLeaveEvent,
-  dropEvent: cQProgressDialog_method_callback_dropEvent,
-  hideEvent: cQProgressDialog_method_callback_hideEvent,
-  nativeEvent: cQProgressDialog_method_callback_nativeEvent,
-  metric: cQProgressDialog_method_callback_metric,
-  initPainter: cQProgressDialog_method_callback_initPainter,
-  redirected: cQProgressDialog_method_callback_redirected,
-  sharedPainter: cQProgressDialog_method_callback_sharedPainter,
-  inputMethodEvent: cQProgressDialog_method_callback_inputMethodEvent,
-  inputMethodQuery: cQProgressDialog_method_callback_inputMethodQuery,
-  focusNextPrevChild: cQProgressDialog_method_callback_focusNextPrevChild,
-  timerEvent: cQProgressDialog_method_callback_timerEvent,
-  childEvent: cQProgressDialog_method_callback_childEvent,
-  customEvent: cQProgressDialog_method_callback_customEvent,
-  connectNotify: cQProgressDialog_method_callback_connectNotify,
-  disconnectNotify: cQProgressDialog_method_callback_disconnectNotify,
+
+  metaObject: fcQProgressDialog_method_callback_metaObject,
+  metacast: fcQProgressDialog_method_callback_metacast,
+  metacall: fcQProgressDialog_method_callback_metacall,
+  sizeHint: fcQProgressDialog_method_callback_sizeHint,
+  resizeEvent: fcQProgressDialog_method_callback_resizeEvent,
+  closeEvent: fcQProgressDialog_method_callback_closeEvent,
+  changeEvent: fcQProgressDialog_method_callback_changeEvent,
+  showEvent: fcQProgressDialog_method_callback_showEvent,
+  setVisible: fcQProgressDialog_method_callback_setVisible,
+  minimumSizeHint: fcQProgressDialog_method_callback_minimumSizeHint,
+  open: fcQProgressDialog_method_callback_open,
+  exec: fcQProgressDialog_method_callback_exec,
+  done: fcQProgressDialog_method_callback_done,
+  accept: fcQProgressDialog_method_callback_accept,
+  reject: fcQProgressDialog_method_callback_reject,
+  keyPressEvent: fcQProgressDialog_method_callback_keyPressEvent,
+  contextMenuEvent: fcQProgressDialog_method_callback_contextMenuEvent,
+  eventFilter: fcQProgressDialog_method_callback_eventFilter,
+  devType: fcQProgressDialog_method_callback_devType,
+  heightForWidth: fcQProgressDialog_method_callback_heightForWidth,
+  hasHeightForWidth: fcQProgressDialog_method_callback_hasHeightForWidth,
+  paintEngine: fcQProgressDialog_method_callback_paintEngine,
+  event: fcQProgressDialog_method_callback_event,
+  mousePressEvent: fcQProgressDialog_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQProgressDialog_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQProgressDialog_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQProgressDialog_method_callback_mouseMoveEvent,
+  wheelEvent: fcQProgressDialog_method_callback_wheelEvent,
+  keyReleaseEvent: fcQProgressDialog_method_callback_keyReleaseEvent,
+  focusInEvent: fcQProgressDialog_method_callback_focusInEvent,
+  focusOutEvent: fcQProgressDialog_method_callback_focusOutEvent,
+  enterEvent: fcQProgressDialog_method_callback_enterEvent,
+  leaveEvent: fcQProgressDialog_method_callback_leaveEvent,
+  paintEvent: fcQProgressDialog_method_callback_paintEvent,
+  moveEvent: fcQProgressDialog_method_callback_moveEvent,
+  tabletEvent: fcQProgressDialog_method_callback_tabletEvent,
+  actionEvent: fcQProgressDialog_method_callback_actionEvent,
+  dragEnterEvent: fcQProgressDialog_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQProgressDialog_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQProgressDialog_method_callback_dragLeaveEvent,
+  dropEvent: fcQProgressDialog_method_callback_dropEvent,
+  hideEvent: fcQProgressDialog_method_callback_hideEvent,
+  nativeEvent: fcQProgressDialog_method_callback_nativeEvent,
+  metric: fcQProgressDialog_method_callback_metric,
+  initPainter: fcQProgressDialog_method_callback_initPainter,
+  redirected: fcQProgressDialog_method_callback_redirected,
+  sharedPainter: fcQProgressDialog_method_callback_sharedPainter,
+  inputMethodEvent: fcQProgressDialog_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQProgressDialog_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQProgressDialog_method_callback_focusNextPrevChild,
+  timerEvent: fcQProgressDialog_method_callback_timerEvent,
+  childEvent: fcQProgressDialog_method_callback_childEvent,
+  customEvent: fcQProgressDialog_method_callback_customEvent,
+  connectNotify: fcQProgressDialog_method_callback_connectNotify,
+  disconnectNotify: fcQProgressDialog_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     parent: gen_qwidget_types.QWidget,

@@ -142,6 +142,7 @@ proc fcQQuickWebEngineProfile_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQQuickWebEngineProfile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickWebEngineProfile_tr3".}
 proc fcQQuickWebEngineProfile_vtbl(self: pointer): pointer {.importc: "QQuickWebEngineProfile_vtbl".}
 proc fcQQuickWebEngineProfile_vdata(self: pointer): pointer {.importc: "QQuickWebEngineProfile_vdata".}
+
 type cQQuickWebEngineProfileVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -324,237 +325,237 @@ proc storageNameChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineP
   fcQQuickWebEngineProfile_storageNameChanged(self.h)
 
 type QQuickWebEngineProfilestorageNameChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_storageNameChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_storageNameChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilestorageNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_storageNameChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_storageNameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilestorageNameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onstorageNameChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilestorageNameChangedSlot) =
+proc onStorageNameChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilestorageNameChangedSlot) =
   var tmp = new QQuickWebEngineProfilestorageNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_storageNameChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_storageNameChanged, cQQuickWebEngineProfile_slot_callback_storageNameChanged_release)
+  fcQQuickWebEngineProfile_connect_storageNameChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_storageNameChanged, fcQQuickWebEngineProfile_slot_callback_storageNameChanged_release)
 
 proc offTheRecordChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_offTheRecordChanged(self.h)
 
 type QQuickWebEngineProfileoffTheRecordChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_offTheRecordChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_offTheRecordChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfileoffTheRecordChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_offTheRecordChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_offTheRecordChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfileoffTheRecordChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onoffTheRecordChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfileoffTheRecordChangedSlot) =
+proc onOffTheRecordChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfileoffTheRecordChangedSlot) =
   var tmp = new QQuickWebEngineProfileoffTheRecordChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_offTheRecordChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_offTheRecordChanged, cQQuickWebEngineProfile_slot_callback_offTheRecordChanged_release)
+  fcQQuickWebEngineProfile_connect_offTheRecordChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_offTheRecordChanged, fcQQuickWebEngineProfile_slot_callback_offTheRecordChanged_release)
 
 proc persistentStoragePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_persistentStoragePathChanged(self.h)
 
 type QQuickWebEngineProfilepersistentStoragePathChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilepersistentStoragePathChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilepersistentStoragePathChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpersistentStoragePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepersistentStoragePathChangedSlot) =
+proc onPersistentStoragePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepersistentStoragePathChangedSlot) =
   var tmp = new QQuickWebEngineProfilepersistentStoragePathChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_persistentStoragePathChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged, cQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged_release)
+  fcQQuickWebEngineProfile_connect_persistentStoragePathChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged, fcQQuickWebEngineProfile_slot_callback_persistentStoragePathChanged_release)
 
 proc cachePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_cachePathChanged(self.h)
 
 type QQuickWebEngineProfilecachePathChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_cachePathChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_cachePathChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilecachePathChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_cachePathChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_cachePathChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilecachePathChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc oncachePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilecachePathChangedSlot) =
+proc onCachePathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilecachePathChangedSlot) =
   var tmp = new QQuickWebEngineProfilecachePathChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_cachePathChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_cachePathChanged, cQQuickWebEngineProfile_slot_callback_cachePathChanged_release)
+  fcQQuickWebEngineProfile_connect_cachePathChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_cachePathChanged, fcQQuickWebEngineProfile_slot_callback_cachePathChanged_release)
 
 proc httpUserAgentChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_httpUserAgentChanged(self.h)
 
 type QQuickWebEngineProfilehttpUserAgentChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_httpUserAgentChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpUserAgentChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilehttpUserAgentChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_httpUserAgentChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpUserAgentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilehttpUserAgentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhttpUserAgentChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpUserAgentChangedSlot) =
+proc onHttpUserAgentChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpUserAgentChangedSlot) =
   var tmp = new QQuickWebEngineProfilehttpUserAgentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_httpUserAgentChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_httpUserAgentChanged, cQQuickWebEngineProfile_slot_callback_httpUserAgentChanged_release)
+  fcQQuickWebEngineProfile_connect_httpUserAgentChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_httpUserAgentChanged, fcQQuickWebEngineProfile_slot_callback_httpUserAgentChanged_release)
 
 proc httpCacheTypeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_httpCacheTypeChanged(self.h)
 
 type QQuickWebEngineProfilehttpCacheTypeChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilehttpCacheTypeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilehttpCacheTypeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhttpCacheTypeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpCacheTypeChangedSlot) =
+proc onHttpCacheTypeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpCacheTypeChangedSlot) =
   var tmp = new QQuickWebEngineProfilehttpCacheTypeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_httpCacheTypeChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged, cQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged_release)
+  fcQQuickWebEngineProfile_connect_httpCacheTypeChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged, fcQQuickWebEngineProfile_slot_callback_httpCacheTypeChanged_release)
 
 proc persistentCookiesPolicyChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_persistentCookiesPolicyChanged(self.h)
 
 type QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpersistentCookiesPolicyChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot) =
+proc onPersistentCookiesPolicyChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot) =
   var tmp = new QQuickWebEngineProfilepersistentCookiesPolicyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged, cQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged_release)
+  fcQQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged, fcQQuickWebEngineProfile_slot_callback_persistentCookiesPolicyChanged_release)
 
 proc httpCacheMaximumSizeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_httpCacheMaximumSizeChanged(self.h)
 
 type QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhttpCacheMaximumSizeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot) =
+proc onHttpCacheMaximumSizeChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot) =
   var tmp = new QQuickWebEngineProfilehttpCacheMaximumSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged, cQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged_release)
+  fcQQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged, fcQQuickWebEngineProfile_slot_callback_httpCacheMaximumSizeChanged_release)
 
 proc httpAcceptLanguageChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_httpAcceptLanguageChanged(self.h)
 
 type QQuickWebEngineProfilehttpAcceptLanguageChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilehttpAcceptLanguageChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilehttpAcceptLanguageChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onhttpAcceptLanguageChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpAcceptLanguageChangedSlot) =
+proc onHttpAcceptLanguageChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilehttpAcceptLanguageChangedSlot) =
   var tmp = new QQuickWebEngineProfilehttpAcceptLanguageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_httpAcceptLanguageChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged, cQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged_release)
+  fcQQuickWebEngineProfile_connect_httpAcceptLanguageChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged, fcQQuickWebEngineProfile_slot_callback_httpAcceptLanguageChanged_release)
 
 proc spellCheckLanguagesChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_spellCheckLanguagesChanged(self.h)
 
 type QQuickWebEngineProfilespellCheckLanguagesChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilespellCheckLanguagesChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilespellCheckLanguagesChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onspellCheckLanguagesChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilespellCheckLanguagesChangedSlot) =
+proc onSpellCheckLanguagesChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilespellCheckLanguagesChangedSlot) =
   var tmp = new QQuickWebEngineProfilespellCheckLanguagesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_spellCheckLanguagesChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged, cQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged_release)
+  fcQQuickWebEngineProfile_connect_spellCheckLanguagesChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged, fcQQuickWebEngineProfile_slot_callback_spellCheckLanguagesChanged_release)
 
 proc spellCheckEnabledChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_spellCheckEnabledChanged(self.h)
 
 type QQuickWebEngineProfilespellCheckEnabledChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilespellCheckEnabledChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilespellCheckEnabledChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onspellCheckEnabledChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilespellCheckEnabledChangedSlot) =
+proc onSpellCheckEnabledChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilespellCheckEnabledChangedSlot) =
   var tmp = new QQuickWebEngineProfilespellCheckEnabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_spellCheckEnabledChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged, cQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged_release)
+  fcQQuickWebEngineProfile_connect_spellCheckEnabledChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged, fcQQuickWebEngineProfile_slot_callback_spellCheckEnabledChanged_release)
 
 proc downloadPathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): void =
   fcQQuickWebEngineProfile_downloadPathChanged(self.h)
 
 type QQuickWebEngineProfiledownloadPathChangedSlot* = proc()
-proc cQQuickWebEngineProfile_slot_callback_downloadPathChanged(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_downloadPathChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfiledownloadPathChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQQuickWebEngineProfile_slot_callback_downloadPathChanged_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_downloadPathChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfiledownloadPathChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc ondownloadPathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfiledownloadPathChangedSlot) =
+proc onDownloadPathChanged*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfiledownloadPathChangedSlot) =
   var tmp = new QQuickWebEngineProfiledownloadPathChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_downloadPathChanged(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_downloadPathChanged, cQQuickWebEngineProfile_slot_callback_downloadPathChanged_release)
+  fcQQuickWebEngineProfile_connect_downloadPathChanged(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_downloadPathChanged, fcQQuickWebEngineProfile_slot_callback_downloadPathChanged_release)
 
 proc presentNotification*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, notification: gen_qwebenginenotification_types.QWebEngineNotification): void =
   fcQQuickWebEngineProfile_presentNotification(self.h, notification.h)
 
 type QQuickWebEngineProfilepresentNotificationSlot* = proc(notification: gen_qwebenginenotification_types.QWebEngineNotification)
-proc cQQuickWebEngineProfile_slot_callback_presentNotification(slot: int, notification: pointer) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_presentNotification(slot: int, notification: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickWebEngineProfilepresentNotificationSlot](cast[pointer](slot))
   let slotval1 = gen_qwebenginenotification_types.QWebEngineNotification(h: notification, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQQuickWebEngineProfile_slot_callback_presentNotification_release(slot: int) {.cdecl.} =
+proc fcQQuickWebEngineProfile_slot_callback_presentNotification_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickWebEngineProfilepresentNotificationSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onpresentNotification*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepresentNotificationSlot) =
+proc onPresentNotification*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, slot: QQuickWebEngineProfilepresentNotificationSlot) =
   var tmp = new QQuickWebEngineProfilepresentNotificationSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickWebEngineProfile_connect_presentNotification(self.h, cast[int](addr tmp[]), cQQuickWebEngineProfile_slot_callback_presentNotification, cQQuickWebEngineProfile_slot_callback_presentNotification_release)
+  fcQQuickWebEngineProfile_connect_presentNotification(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_presentNotification, fcQQuickWebEngineProfile_slot_callback_presentNotification_release)
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring, c: cstring): string =
   let v_ms = fcQQuickWebEngineProfile_tr2(s, c)
@@ -578,6 +579,7 @@ type QQuickWebEngineProfilechildEventProc* = proc(self: QQuickWebEngineProfile, 
 type QQuickWebEngineProfilecustomEventProc* = proc(self: QQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQuickWebEngineProfileconnectNotifyProc* = proc(self: QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQuickWebEngineProfiledisconnectNotifyProc* = proc(self: QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QQuickWebEngineProfileVTable* {.inheritable, pure.} = object
   vtbl: cQQuickWebEngineProfileVTable
   metaObject*: QQuickWebEngineProfilemetaObjectProc
@@ -590,10 +592,39 @@ type QQuickWebEngineProfileVTable* {.inheritable, pure.} = object
   customEvent*: QQuickWebEngineProfilecustomEventProc
   connectNotify*: QQuickWebEngineProfileconnectNotifyProc
   disconnectNotify*: QQuickWebEngineProfiledisconnectNotifyProc
+
 proc QQuickWebEngineProfilemetaObject*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickWebEngineProfile_virtualbase_metaObject(self.h), owned: false)
 
-proc cQQuickWebEngineProfile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QQuickWebEngineProfilemetacast*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: cstring): pointer =
+  fcQQuickWebEngineProfile_virtualbase_metacast(self.h, param1)
+
+proc QQuickWebEngineProfilemetacall*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickWebEngineProfile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QQuickWebEngineProfileevent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQuickWebEngineProfile_virtualbase_event(self.h, event.h)
+
+proc QQuickWebEngineProfileeventFilter*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQQuickWebEngineProfile_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QQuickWebEngineProfiletimerEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQQuickWebEngineProfile_virtualbase_timerEvent(self.h, event.h)
+
+proc QQuickWebEngineProfilechildEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQQuickWebEngineProfile_virtualbase_childEvent(self.h, event.h)
+
+proc QQuickWebEngineProfilecustomEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): void =
+  fcQQuickWebEngineProfile_virtualbase_customEvent(self.h, event.h)
+
+proc QQuickWebEngineProfileconnectNotify*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQuickWebEngineProfile_virtualbase_connectNotify(self.h, signal.h)
+
+proc QQuickWebEngineProfiledisconnectNotify*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQQuickWebEngineProfile_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQQuickWebEngineProfile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -602,20 +633,14 @@ proc cQQuickWebEngineProfile_vtable_callback_metaObject(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickWebEngineProfilemetacast*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: cstring): pointer =
-  fcQQuickWebEngineProfile_virtualbase_metacast(self.h, param1)
-
-proc cQQuickWebEngineProfile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QQuickWebEngineProfilemetacall*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint =
-  fcQQuickWebEngineProfile_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQQuickWebEngineProfile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = cint(param1)
@@ -624,20 +649,14 @@ proc cQQuickWebEngineProfile_vtable_callback_metacall(self: pointer, param1: cin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QQuickWebEngineProfileevent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQuickWebEngineProfile_virtualbase_event(self.h, event.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QQuickWebEngineProfileeventFilter*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQQuickWebEngineProfile_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -645,46 +664,31 @@ proc cQQuickWebEngineProfile_vtable_callback_eventFilter(self: pointer, watched:
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQuickWebEngineProfiletimerEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQQuickWebEngineProfile_virtualbase_timerEvent(self.h, event.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QQuickWebEngineProfilechildEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQQuickWebEngineProfile_virtualbase_childEvent(self.h, event.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QQuickWebEngineProfilecustomEvent*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): void =
-  fcQQuickWebEngineProfile_virtualbase_customEvent(self.h, event.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QQuickWebEngineProfileconnectNotify*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQuickWebEngineProfile_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QQuickWebEngineProfiledisconnectNotify*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQQuickWebEngineProfile_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQQuickWebEngineProfile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -692,9 +696,29 @@ proc cQQuickWebEngineProfile_vtable_callback_disconnectNotify(self: pointer, sig
 
 type VirtualQQuickWebEngineProfile* {.inheritable.} = ref object of QQuickWebEngineProfile
   vtbl*: cQQuickWebEngineProfileVTable
+
 method metaObject*(self: VirtualQQuickWebEngineProfile): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQuickWebEngineProfilemetaObject(self[])
-proc cQQuickWebEngineProfile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQQuickWebEngineProfile, param1: cstring): pointer {.base.} =
+  QQuickWebEngineProfilemetacast(self[], param1)
+method metacall*(self: VirtualQQuickWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQuickWebEngineProfilemetacall(self[], param1, param2, param3)
+method event*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickWebEngineProfileevent(self[], event)
+method eventFilter*(self: VirtualQQuickWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickWebEngineProfileeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQuickWebEngineProfiletimerEvent(self[], event)
+method childEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQuickWebEngineProfilechildEvent(self[], event)
+method customEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQuickWebEngineProfilecustomEvent(self[], event)
+method connectNotify*(self: VirtualQQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickWebEngineProfileconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickWebEngineProfiledisconnectNotify(self[], signal)
+
+proc fcQQuickWebEngineProfile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -702,17 +726,13 @@ proc cQQuickWebEngineProfile_method_callback_metaObject(self: pointer): pointer 
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQQuickWebEngineProfile, param1: cstring): pointer {.base.} =
-  QQuickWebEngineProfilemetacast(self[], param1)
-proc cQQuickWebEngineProfile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQQuickWebEngineProfile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QQuickWebEngineProfilemetacall(self[], param1, param2, param3)
-proc cQQuickWebEngineProfile_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -720,57 +740,44 @@ proc cQQuickWebEngineProfile_method_callback_metacall(self: pointer, param1: cin
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQuickWebEngineProfileevent(self[], event)
-proc cQQuickWebEngineProfile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQQuickWebEngineProfile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QQuickWebEngineProfileeventFilter(self[], watched, event)
-proc cQQuickWebEngineProfile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QQuickWebEngineProfiletimerEvent(self[], event)
-proc cQQuickWebEngineProfile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QQuickWebEngineProfilechildEvent(self[], event)
-proc cQQuickWebEngineProfile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQQuickWebEngineProfile, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QQuickWebEngineProfilecustomEvent(self[], event)
-proc cQQuickWebEngineProfile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQuickWebEngineProfileconnectNotify(self[], signal)
-proc cQQuickWebEngineProfile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QQuickWebEngineProfiledisconnectNotify(self[], signal)
-proc cQQuickWebEngineProfile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQQuickWebEngineProfile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQuickWebEngineProfile](fcQQuickWebEngineProfile_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQuickWebEngineProfile_protectedbase_sender(self.h), owned: false)
@@ -792,25 +799,25 @@ proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
     let vtbl = cast[ref QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQQuickWebEngineProfile_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQQuickWebEngineProfile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQQuickWebEngineProfile_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQQuickWebEngineProfile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQQuickWebEngineProfile_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQQuickWebEngineProfile_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQQuickWebEngineProfile_vtable_callback_event
+    vtbl[].vtbl.event = fcQQuickWebEngineProfile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQQuickWebEngineProfile_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQQuickWebEngineProfile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQQuickWebEngineProfile_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQQuickWebEngineProfile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQQuickWebEngineProfile_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQQuickWebEngineProfile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQQuickWebEngineProfile_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQQuickWebEngineProfile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQQuickWebEngineProfile_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQQuickWebEngineProfile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQQuickWebEngineProfile_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQQuickWebEngineProfile_vtable_callback_disconnectNotify
   gen_qquickwebengineprofile_types.QQuickWebEngineProfile(h: fcQQuickWebEngineProfile_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
@@ -822,25 +829,25 @@ proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
     let vtbl = cast[ref QQuickWebEngineProfileVTable](fcQQuickWebEngineProfile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQQuickWebEngineProfile_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQQuickWebEngineProfile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQQuickWebEngineProfile_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQQuickWebEngineProfile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQQuickWebEngineProfile_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQQuickWebEngineProfile_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQQuickWebEngineProfile_vtable_callback_event
+    vtbl[].vtbl.event = fcQQuickWebEngineProfile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQQuickWebEngineProfile_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQQuickWebEngineProfile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQQuickWebEngineProfile_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQQuickWebEngineProfile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQQuickWebEngineProfile_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQQuickWebEngineProfile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQQuickWebEngineProfile_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQQuickWebEngineProfile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQQuickWebEngineProfile_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQQuickWebEngineProfile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQQuickWebEngineProfile_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQQuickWebEngineProfile_vtable_callback_disconnectNotify
   gen_qquickwebengineprofile_types.QQuickWebEngineProfile(h: fcQQuickWebEngineProfile_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQQuickWebEngineProfile_mvtbl = cQQuickWebEngineProfileVTable(
@@ -848,16 +855,17 @@ const cQQuickWebEngineProfile_mvtbl = cQQuickWebEngineProfileVTable(
     let inst = cast[ptr typeof(VirtualQQuickWebEngineProfile()[])](self.fcQQuickWebEngineProfile_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQQuickWebEngineProfile_method_callback_metaObject,
-  metacast: cQQuickWebEngineProfile_method_callback_metacast,
-  metacall: cQQuickWebEngineProfile_method_callback_metacall,
-  event: cQQuickWebEngineProfile_method_callback_event,
-  eventFilter: cQQuickWebEngineProfile_method_callback_eventFilter,
-  timerEvent: cQQuickWebEngineProfile_method_callback_timerEvent,
-  childEvent: cQQuickWebEngineProfile_method_callback_childEvent,
-  customEvent: cQQuickWebEngineProfile_method_callback_customEvent,
-  connectNotify: cQQuickWebEngineProfile_method_callback_connectNotify,
-  disconnectNotify: cQQuickWebEngineProfile_method_callback_disconnectNotify,
+
+  metaObject: fcQQuickWebEngineProfile_method_callback_metaObject,
+  metacast: fcQQuickWebEngineProfile_method_callback_metacast,
+  metacall: fcQQuickWebEngineProfile_method_callback_metacall,
+  event: fcQQuickWebEngineProfile_method_callback_event,
+  eventFilter: fcQQuickWebEngineProfile_method_callback_eventFilter,
+  timerEvent: fcQQuickWebEngineProfile_method_callback_timerEvent,
+  childEvent: fcQQuickWebEngineProfile_method_callback_childEvent,
+  customEvent: fcQQuickWebEngineProfile_method_callback_customEvent,
+  connectNotify: fcQQuickWebEngineProfile_method_callback_connectNotify,
+  disconnectNotify: fcQQuickWebEngineProfile_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
     inst: VirtualQQuickWebEngineProfile) =

@@ -75,6 +75,7 @@ proc fcQVideoSink_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QV
 proc fcQVideoSink_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoSink_tr3".}
 proc fcQVideoSink_vtbl(self: pointer): pointer {.importc: "QVideoSink_vtbl".}
 proc fcQVideoSink_vdata(self: pointer): pointer {.importc: "QVideoSink_vdata".}
+
 type cQVideoSinkVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -142,27 +143,27 @@ proc videoFrameChanged*(self: gen_qvideosink_types.QVideoSink, frame: gen_qvideo
   fcQVideoSink_videoFrameChanged(self.h, frame.h)
 
 type QVideoSinkvideoFrameChangedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc cQVideoSink_slot_callback_videoFrameChanged(slot: int, frame: pointer) {.cdecl.} =
+proc fcQVideoSink_slot_callback_videoFrameChanged(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinkvideoFrameChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame, owned: false)
 
   nimfunc[](slotval1)
 
-proc cQVideoSink_slot_callback_videoFrameChanged_release(slot: int) {.cdecl.} =
+proc fcQVideoSink_slot_callback_videoFrameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoSinkvideoFrameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvideoFrameChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoFrameChangedSlot) =
+proc onVideoFrameChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoFrameChangedSlot) =
   var tmp = new QVideoSinkvideoFrameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]), cQVideoSink_slot_callback_videoFrameChanged, cQVideoSink_slot_callback_videoFrameChanged_release)
+  fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]), fcQVideoSink_slot_callback_videoFrameChanged, fcQVideoSink_slot_callback_videoFrameChanged_release)
 
 proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: openArray[char]): void =
   fcQVideoSink_subtitleTextChanged(self.h, struct_miqt_string(data: if len(subtitleText) > 0: addr subtitleText[0] else: nil, len: csize_t(len(subtitleText))))
 
 type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: openArray[char])
-proc cQVideoSink_slot_callback_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.cdecl.} =
+proc fcQVideoSink_slot_callback_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
   let vsubtitleText_ms = subtitleText
   let vsubtitleTextx_ret = string.fromBytes(vsubtitleText_ms)
@@ -171,33 +172,33 @@ proc cQVideoSink_slot_callback_subtitleTextChanged(slot: int, subtitleText: stru
 
   nimfunc[](slotval1)
 
-proc cQVideoSink_slot_callback_subtitleTextChanged_release(slot: int) {.cdecl.} =
+proc fcQVideoSink_slot_callback_subtitleTextChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onsubtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinksubtitleTextChangedSlot) =
+proc onSubtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinksubtitleTextChangedSlot) =
   var tmp = new QVideoSinksubtitleTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_subtitleTextChanged(self.h, cast[int](addr tmp[]), cQVideoSink_slot_callback_subtitleTextChanged, cQVideoSink_slot_callback_subtitleTextChanged_release)
+  fcQVideoSink_connect_subtitleTextChanged(self.h, cast[int](addr tmp[]), fcQVideoSink_slot_callback_subtitleTextChanged, fcQVideoSink_slot_callback_subtitleTextChanged_release)
 
 proc videoSizeChanged*(self: gen_qvideosink_types.QVideoSink): void =
   fcQVideoSink_videoSizeChanged(self.h)
 
 type QVideoSinkvideoSizeChangedSlot* = proc()
-proc cQVideoSink_slot_callback_videoSizeChanged(slot: int) {.cdecl.} =
+proc fcQVideoSink_slot_callback_videoSizeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinkvideoSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQVideoSink_slot_callback_videoSizeChanged_release(slot: int) {.cdecl.} =
+proc fcQVideoSink_slot_callback_videoSizeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QVideoSinkvideoSizeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onvideoSizeChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoSizeChangedSlot) =
+proc onVideoSizeChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoSizeChangedSlot) =
   var tmp = new QVideoSinkvideoSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_videoSizeChanged(self.h, cast[int](addr tmp[]), cQVideoSink_slot_callback_videoSizeChanged, cQVideoSink_slot_callback_videoSizeChanged_release)
+  fcQVideoSink_connect_videoSizeChanged(self.h, cast[int](addr tmp[]), fcQVideoSink_slot_callback_videoSizeChanged, fcQVideoSink_slot_callback_videoSizeChanged_release)
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring): string =
   let v_ms = fcQVideoSink_tr2(s, c)
@@ -221,6 +222,7 @@ type QVideoSinkchildEventProc* = proc(self: QVideoSink, event: gen_qcoreevent_ty
 type QVideoSinkcustomEventProc* = proc(self: QVideoSink, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QVideoSinkconnectNotifyProc* = proc(self: QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QVideoSinkdisconnectNotifyProc* = proc(self: QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QVideoSinkVTable* {.inheritable, pure.} = object
   vtbl: cQVideoSinkVTable
   metaObject*: QVideoSinkmetaObjectProc
@@ -233,10 +235,39 @@ type QVideoSinkVTable* {.inheritable, pure.} = object
   customEvent*: QVideoSinkcustomEventProc
   connectNotify*: QVideoSinkconnectNotifyProc
   disconnectNotify*: QVideoSinkdisconnectNotifyProc
+
 proc QVideoSinkmetaObject*(self: gen_qvideosink_types.QVideoSink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoSink_virtualbase_metaObject(self.h), owned: false)
 
-proc cQVideoSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QVideoSinkmetacast*(self: gen_qvideosink_types.QVideoSink, param1: cstring): pointer =
+  fcQVideoSink_virtualbase_metacast(self.h, param1)
+
+proc QVideoSinkmetacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoSink_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QVideoSinkevent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QEvent): bool =
+  fcQVideoSink_virtualbase_event(self.h, event.h)
+
+proc QVideoSinkeventFilter*(self: gen_qvideosink_types.QVideoSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQVideoSink_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QVideoSinktimerEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQVideoSink_virtualbase_timerEvent(self.h, event.h)
+
+proc QVideoSinkchildEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQVideoSink_virtualbase_childEvent(self.h, event.h)
+
+proc QVideoSinkcustomEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QEvent): void =
+  fcQVideoSink_virtualbase_customEvent(self.h, event.h)
+
+proc QVideoSinkconnectNotify*(self: gen_qvideosink_types.QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQVideoSink_virtualbase_connectNotify(self.h, signal.h)
+
+proc QVideoSinkdisconnectNotify*(self: gen_qvideosink_types.QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQVideoSink_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQVideoSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -245,20 +276,14 @@ proc cQVideoSink_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QVideoSinkmetacast*(self: gen_qvideosink_types.QVideoSink, param1: cstring): pointer =
-  fcQVideoSink_virtualbase_metacast(self.h, param1)
-
-proc cQVideoSink_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQVideoSink_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QVideoSinkmetacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint, param3: pointer): cint =
-  fcQVideoSink_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQVideoSink_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQVideoSink_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = cint(param1)
@@ -267,20 +292,14 @@ proc cQVideoSink_vtable_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QVideoSinkevent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QEvent): bool =
-  fcQVideoSink_virtualbase_event(self.h, event.h)
-
-proc cQVideoSink_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQVideoSink_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QVideoSinkeventFilter*(self: gen_qvideosink_types.QVideoSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQVideoSink_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQVideoSink_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQVideoSink_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -288,46 +307,31 @@ proc cQVideoSink_vtable_callback_eventFilter(self: pointer, watched: pointer, ev
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QVideoSinktimerEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQVideoSink_virtualbase_timerEvent(self.h, event.h)
-
-proc cQVideoSink_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QVideoSinkchildEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQVideoSink_virtualbase_childEvent(self.h, event.h)
-
-proc cQVideoSink_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QVideoSinkcustomEvent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QEvent): void =
-  fcQVideoSink_virtualbase_customEvent(self.h, event.h)
-
-proc cQVideoSink_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QVideoSinkconnectNotify*(self: gen_qvideosink_types.QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQVideoSink_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQVideoSink_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQVideoSink_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QVideoSinkdisconnectNotify*(self: gen_qvideosink_types.QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQVideoSink_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQVideoSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQVideoSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoSinkVTable](fcQVideoSink_vdata(self))
   let self = QVideoSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -335,9 +339,29 @@ proc cQVideoSink_vtable_callback_disconnectNotify(self: pointer, signal: pointer
 
 type VirtualQVideoSink* {.inheritable.} = ref object of QVideoSink
   vtbl*: cQVideoSinkVTable
+
 method metaObject*(self: VirtualQVideoSink): gen_qobjectdefs_types.QMetaObject {.base.} =
   QVideoSinkmetaObject(self[])
-proc cQVideoSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQVideoSink, param1: cstring): pointer {.base.} =
+  QVideoSinkmetacast(self[], param1)
+method metacall*(self: VirtualQVideoSink, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QVideoSinkmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVideoSinkevent(self[], event)
+method eventFilter*(self: VirtualQVideoSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVideoSinkeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QVideoSinktimerEvent(self[], event)
+method childEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QVideoSinkchildEvent(self[], event)
+method customEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QVideoSinkcustomEvent(self[], event)
+method connectNotify*(self: VirtualQVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVideoSinkconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVideoSinkdisconnectNotify(self[], signal)
+
+proc fcQVideoSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -345,17 +369,13 @@ proc cQVideoSink_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQVideoSink, param1: cstring): pointer {.base.} =
-  QVideoSinkmetacast(self[], param1)
-proc cQVideoSink_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQVideoSink_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQVideoSink, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QVideoSinkmetacall(self[], param1, param2, param3)
-proc cQVideoSink_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQVideoSink_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -363,57 +383,44 @@ proc cQVideoSink_method_callback_metacall(self: pointer, param1: cint, param2: c
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method event*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QVideoSinkevent(self[], event)
-proc cQVideoSink_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQVideoSink_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQVideoSink, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QVideoSinkeventFilter(self[], watched, event)
-proc cQVideoSink_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQVideoSink_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QVideoSinktimerEvent(self[], event)
-proc cQVideoSink_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QVideoSinkchildEvent(self[], event)
-proc cQVideoSink_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQVideoSink, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QVideoSinkcustomEvent(self[], event)
-proc cQVideoSink_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQVideoSink_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QVideoSinkconnectNotify(self[], signal)
-proc cQVideoSink_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQVideoSink_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQVideoSink, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QVideoSinkdisconnectNotify(self[], signal)
-proc cQVideoSink_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQVideoSink_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQVideoSink](fcQVideoSink_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc sender*(self: gen_qvideosink_types.QVideoSink): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQVideoSink_protectedbase_sender(self.h), owned: false)
@@ -435,25 +442,25 @@ proc create*(T: type gen_qvideosink_types.QVideoSink,
     let vtbl = cast[ref QVideoSinkVTable](fcQVideoSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQVideoSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQVideoSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQVideoSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQVideoSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQVideoSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQVideoSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQVideoSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQVideoSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQVideoSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQVideoSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQVideoSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQVideoSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQVideoSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQVideoSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQVideoSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQVideoSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQVideoSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQVideoSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQVideoSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQVideoSink_vtable_callback_disconnectNotify
   gen_qvideosink_types.QVideoSink(h: fcQVideoSink_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qvideosink_types.QVideoSink,
@@ -465,25 +472,25 @@ proc create*(T: type gen_qvideosink_types.QVideoSink,
     let vtbl = cast[ref QVideoSinkVTable](fcQVideoSink_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQVideoSink_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQVideoSink_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQVideoSink_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQVideoSink_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQVideoSink_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQVideoSink_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQVideoSink_vtable_callback_event
+    vtbl[].vtbl.event = fcQVideoSink_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQVideoSink_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQVideoSink_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQVideoSink_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQVideoSink_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQVideoSink_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQVideoSink_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQVideoSink_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQVideoSink_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQVideoSink_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQVideoSink_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQVideoSink_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQVideoSink_vtable_callback_disconnectNotify
   gen_qvideosink_types.QVideoSink(h: fcQVideoSink_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQVideoSink_mvtbl = cQVideoSinkVTable(
@@ -491,16 +498,17 @@ const cQVideoSink_mvtbl = cQVideoSinkVTable(
     let inst = cast[ptr typeof(VirtualQVideoSink()[])](self.fcQVideoSink_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQVideoSink_method_callback_metaObject,
-  metacast: cQVideoSink_method_callback_metacast,
-  metacall: cQVideoSink_method_callback_metacall,
-  event: cQVideoSink_method_callback_event,
-  eventFilter: cQVideoSink_method_callback_eventFilter,
-  timerEvent: cQVideoSink_method_callback_timerEvent,
-  childEvent: cQVideoSink_method_callback_childEvent,
-  customEvent: cQVideoSink_method_callback_customEvent,
-  connectNotify: cQVideoSink_method_callback_connectNotify,
-  disconnectNotify: cQVideoSink_method_callback_disconnectNotify,
+
+  metaObject: fcQVideoSink_method_callback_metaObject,
+  metacast: fcQVideoSink_method_callback_metacast,
+  metacall: fcQVideoSink_method_callback_metacall,
+  event: fcQVideoSink_method_callback_event,
+  eventFilter: fcQVideoSink_method_callback_eventFilter,
+  timerEvent: fcQVideoSink_method_callback_timerEvent,
+  childEvent: fcQVideoSink_method_callback_childEvent,
+  customEvent: fcQVideoSink_method_callback_customEvent,
+  connectNotify: fcQVideoSink_method_callback_connectNotify,
+  disconnectNotify: fcQVideoSink_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qvideosink_types.QVideoSink,
     inst: VirtualQVideoSink) =

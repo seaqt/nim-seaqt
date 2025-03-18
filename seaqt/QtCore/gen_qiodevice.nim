@@ -117,6 +117,7 @@ proc fcQIODevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQIODevice_readLine1(self: pointer, maxlen: clonglong): struct_miqt_string {.importc: "QIODevice_readLine1".}
 proc fcQIODevice_vtbl(self: pointer): pointer {.importc: "QIODevice_vtbl".}
 proc fcQIODevice_vdata(self: pointer): pointer {.importc: "QIODevice_vdata".}
+
 type cQIODeviceVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -347,65 +348,65 @@ proc readyRead*(self: gen_qiodevice_types.QIODevice): void =
   fcQIODevice_readyRead(self.h)
 
 type QIODevicereadyReadSlot* = proc()
-proc cQIODevice_slot_callback_readyRead(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_readyRead(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicereadyReadSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQIODevice_slot_callback_readyRead_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_readyRead_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODevicereadyReadSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onreadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadyReadSlot) =
+proc onReadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadyReadSlot) =
   var tmp = new QIODevicereadyReadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_readyRead(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_readyRead, cQIODevice_slot_callback_readyRead_release)
+  fcQIODevice_connect_readyRead(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_readyRead, fcQIODevice_slot_callback_readyRead_release)
 
 proc channelReadyRead*(self: gen_qiodevice_types.QIODevice, channel: cint): void =
   fcQIODevice_channelReadyRead(self.h, channel)
 
 type QIODevicechannelReadyReadSlot* = proc(channel: cint)
-proc cQIODevice_slot_callback_channelReadyRead(slot: int, channel: cint) {.cdecl.} =
+proc fcQIODevice_slot_callback_channelReadyRead(slot: int, channel: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicechannelReadyReadSlot](cast[pointer](slot))
   let slotval1 = channel
 
   nimfunc[](slotval1)
 
-proc cQIODevice_slot_callback_channelReadyRead_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_channelReadyRead_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODevicechannelReadyReadSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onchannelReadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelReadyReadSlot) =
+proc onChannelReadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelReadyReadSlot) =
   var tmp = new QIODevicechannelReadyReadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_channelReadyRead(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_channelReadyRead, cQIODevice_slot_callback_channelReadyRead_release)
+  fcQIODevice_connect_channelReadyRead(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_channelReadyRead, fcQIODevice_slot_callback_channelReadyRead_release)
 
 proc bytesWritten*(self: gen_qiodevice_types.QIODevice, bytes: clonglong): void =
   fcQIODevice_bytesWritten(self.h, bytes)
 
 type QIODevicebytesWrittenSlot* = proc(bytes: clonglong)
-proc cQIODevice_slot_callback_bytesWritten(slot: int, bytes: clonglong) {.cdecl.} =
+proc fcQIODevice_slot_callback_bytesWritten(slot: int, bytes: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicebytesWrittenSlot](cast[pointer](slot))
   let slotval1 = bytes
 
   nimfunc[](slotval1)
 
-proc cQIODevice_slot_callback_bytesWritten_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_bytesWritten_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODevicebytesWrittenSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onbytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicebytesWrittenSlot) =
+proc onBytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicebytesWrittenSlot) =
   var tmp = new QIODevicebytesWrittenSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_bytesWritten(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_bytesWritten, cQIODevice_slot_callback_bytesWritten_release)
+  fcQIODevice_connect_bytesWritten(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_bytesWritten, fcQIODevice_slot_callback_bytesWritten_release)
 
 proc channelBytesWritten*(self: gen_qiodevice_types.QIODevice, channel: cint, bytes: clonglong): void =
   fcQIODevice_channelBytesWritten(self.h, channel, bytes)
 
 type QIODevicechannelBytesWrittenSlot* = proc(channel: cint, bytes: clonglong)
-proc cQIODevice_slot_callback_channelBytesWritten(slot: int, channel: cint, bytes: clonglong) {.cdecl.} =
+proc fcQIODevice_slot_callback_channelBytesWritten(slot: int, channel: cint, bytes: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicechannelBytesWrittenSlot](cast[pointer](slot))
   let slotval1 = channel
 
@@ -413,51 +414,51 @@ proc cQIODevice_slot_callback_channelBytesWritten(slot: int, channel: cint, byte
 
   nimfunc[](slotval1, slotval2)
 
-proc cQIODevice_slot_callback_channelBytesWritten_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_channelBytesWritten_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODevicechannelBytesWrittenSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onchannelBytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelBytesWrittenSlot) =
+proc onChannelBytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelBytesWrittenSlot) =
   var tmp = new QIODevicechannelBytesWrittenSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_channelBytesWritten(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_channelBytesWritten, cQIODevice_slot_callback_channelBytesWritten_release)
+  fcQIODevice_connect_channelBytesWritten(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_channelBytesWritten, fcQIODevice_slot_callback_channelBytesWritten_release)
 
 proc aboutToClose*(self: gen_qiodevice_types.QIODevice): void =
   fcQIODevice_aboutToClose(self.h)
 
 type QIODeviceaboutToCloseSlot* = proc()
-proc cQIODevice_slot_callback_aboutToClose(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_aboutToClose(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODeviceaboutToCloseSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQIODevice_slot_callback_aboutToClose_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_aboutToClose_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODeviceaboutToCloseSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onaboutToClose*(self: gen_qiodevice_types.QIODevice, slot: QIODeviceaboutToCloseSlot) =
+proc onAboutToClose*(self: gen_qiodevice_types.QIODevice, slot: QIODeviceaboutToCloseSlot) =
   var tmp = new QIODeviceaboutToCloseSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_aboutToClose(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_aboutToClose, cQIODevice_slot_callback_aboutToClose_release)
+  fcQIODevice_connect_aboutToClose(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_aboutToClose, fcQIODevice_slot_callback_aboutToClose_release)
 
 proc readChannelFinished*(self: gen_qiodevice_types.QIODevice): void =
   fcQIODevice_readChannelFinished(self.h)
 
 type QIODevicereadChannelFinishedSlot* = proc()
-proc cQIODevice_slot_callback_readChannelFinished(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_readChannelFinished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicereadChannelFinishedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc cQIODevice_slot_callback_readChannelFinished_release(slot: int) {.cdecl.} =
+proc fcQIODevice_slot_callback_readChannelFinished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QIODevicereadChannelFinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onreadChannelFinished*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadChannelFinishedSlot) =
+proc onReadChannelFinished*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadChannelFinishedSlot) =
   var tmp = new QIODevicereadChannelFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_readChannelFinished(self.h, cast[int](addr tmp[]), cQIODevice_slot_callback_readChannelFinished, cQIODevice_slot_callback_readChannelFinished_release)
+  fcQIODevice_connect_readChannelFinished(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_readChannelFinished, fcQIODevice_slot_callback_readChannelFinished_release)
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring): string =
   let v_ms = fcQIODevice_tr2(s, c)
@@ -504,6 +505,7 @@ type QIODevicechildEventProc* = proc(self: QIODevice, event: gen_qcoreevent_type
 type QIODevicecustomEventProc* = proc(self: QIODevice, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QIODeviceconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QIODevicedisconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
 type QIODeviceVTable* {.inheritable, pure.} = object
   vtbl: cQIODeviceVTable
   metaObject*: QIODevicemetaObjectProc
@@ -533,10 +535,84 @@ type QIODeviceVTable* {.inheritable, pure.} = object
   customEvent*: QIODevicecustomEventProc
   connectNotify*: QIODeviceconnectNotifyProc
   disconnectNotify*: QIODevicedisconnectNotifyProc
+
 proc QIODevicemetaObject*(self: gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_virtualbase_metaObject(self.h), owned: false)
 
-proc cQIODevice_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+proc QIODevicemetacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
+  fcQIODevice_virtualbase_metacast(self.h, param1)
+
+proc QIODevicemetacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, param3: pointer): cint =
+  fcQIODevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QIODeviceisSequential*(self: gen_qiodevice_types.QIODevice): bool =
+  fcQIODevice_virtualbase_isSequential(self.h)
+
+proc QIODeviceopen*(self: gen_qiodevice_types.QIODevice, mode: cint): bool =
+  fcQIODevice_virtualbase_open(self.h, cint(mode))
+
+proc QIODeviceclose*(self: gen_qiodevice_types.QIODevice): void =
+  fcQIODevice_virtualbase_close(self.h)
+
+proc QIODevicepos*(self: gen_qiodevice_types.QIODevice): clonglong =
+  fcQIODevice_virtualbase_pos(self.h)
+
+proc QIODevicesize*(self: gen_qiodevice_types.QIODevice): clonglong =
+  fcQIODevice_virtualbase_size(self.h)
+
+proc QIODeviceseek*(self: gen_qiodevice_types.QIODevice, pos: clonglong): bool =
+  fcQIODevice_virtualbase_seek(self.h, pos)
+
+proc QIODeviceatEnd*(self: gen_qiodevice_types.QIODevice): bool =
+  fcQIODevice_virtualbase_atEnd(self.h)
+
+proc QIODevicereset*(self: gen_qiodevice_types.QIODevice): bool =
+  fcQIODevice_virtualbase_reset(self.h)
+
+proc QIODevicebytesAvailable*(self: gen_qiodevice_types.QIODevice): clonglong =
+  fcQIODevice_virtualbase_bytesAvailable(self.h)
+
+proc QIODevicebytesToWrite*(self: gen_qiodevice_types.QIODevice): clonglong =
+  fcQIODevice_virtualbase_bytesToWrite(self.h)
+
+proc QIODevicecanReadLine*(self: gen_qiodevice_types.QIODevice): bool =
+  fcQIODevice_virtualbase_canReadLine(self.h)
+
+proc QIODevicewaitForReadyRead*(self: gen_qiodevice_types.QIODevice, msecs: cint): bool =
+  fcQIODevice_virtualbase_waitForReadyRead(self.h, msecs)
+
+proc QIODevicewaitForBytesWritten*(self: gen_qiodevice_types.QIODevice, msecs: cint): bool =
+  fcQIODevice_virtualbase_waitForBytesWritten(self.h, msecs)
+
+proc QIODevicereadLineData*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
+  fcQIODevice_virtualbase_readLineData(self.h, data, maxlen)
+
+proc QIODeviceskipData*(self: gen_qiodevice_types.QIODevice, maxSize: clonglong): clonglong =
+  fcQIODevice_virtualbase_skipData(self.h, maxSize)
+
+proc QIODeviceevent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): bool =
+  fcQIODevice_virtualbase_event(self.h, event.h)
+
+proc QIODeviceeventFilter*(self: gen_qiodevice_types.QIODevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQIODevice_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QIODevicetimerEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQIODevice_virtualbase_timerEvent(self.h, event.h)
+
+proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQIODevice_virtualbase_childEvent(self.h, event.h)
+
+proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): void =
+  fcQIODevice_virtualbase_customEvent(self.h, event.h)
+
+proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQIODevice_virtualbase_connectNotify(self.h, signal.h)
+
+proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQIODevice_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQIODevice_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].metaObject(self)
@@ -545,20 +621,14 @@ proc cQIODevice_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QIODevicemetacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
-  fcQIODevice_virtualbase_metacast(self.h, param1)
-
-proc cQIODevice_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQIODevice_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
 
-proc QIODevicemetacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, param3: pointer): cint =
-  fcQIODevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
-
-proc cQIODevice_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQIODevice_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = cint(param1)
@@ -567,127 +637,88 @@ proc cQIODevice_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QIODeviceisSequential*(self: gen_qiodevice_types.QIODevice): bool =
-  fcQIODevice_virtualbase_isSequential(self.h)
-
-proc cQIODevice_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
 
-proc QIODeviceopen*(self: gen_qiodevice_types.QIODevice, mode: cint): bool =
-  fcQIODevice_virtualbase_open(self.h, cint(mode))
-
-proc cQIODevice_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = cint(mode)
   var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
 
-proc QIODeviceclose*(self: gen_qiodevice_types.QIODevice): void =
-  fcQIODevice_virtualbase_close(self.h)
-
-proc cQIODevice_vtable_callback_close(self: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_close(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   vtbl[].close(self)
 
-proc QIODevicepos*(self: gen_qiodevice_types.QIODevice): clonglong =
-  fcQIODevice_virtualbase_pos(self.h)
-
-proc cQIODevice_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
 
-proc QIODevicesize*(self: gen_qiodevice_types.QIODevice): clonglong =
-  fcQIODevice_virtualbase_size(self.h)
-
-proc cQIODevice_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
 
-proc QIODeviceseek*(self: gen_qiodevice_types.QIODevice, pos: clonglong): bool =
-  fcQIODevice_virtualbase_seek(self.h, pos)
-
-proc cQIODevice_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = pos
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QIODeviceatEnd*(self: gen_qiodevice_types.QIODevice): bool =
-  fcQIODevice_virtualbase_atEnd(self.h)
-
-proc cQIODevice_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
 
-proc QIODevicereset*(self: gen_qiodevice_types.QIODevice): bool =
-  fcQIODevice_virtualbase_reset(self.h)
-
-proc cQIODevice_vtable_callback_reset(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_reset(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
 
-proc QIODevicebytesAvailable*(self: gen_qiodevice_types.QIODevice): clonglong =
-  fcQIODevice_virtualbase_bytesAvailable(self.h)
-
-proc cQIODevice_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
 
-proc QIODevicebytesToWrite*(self: gen_qiodevice_types.QIODevice): clonglong =
-  fcQIODevice_virtualbase_bytesToWrite(self.h)
-
-proc cQIODevice_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QIODevicecanReadLine*(self: gen_qiodevice_types.QIODevice): bool =
-  fcQIODevice_virtualbase_canReadLine(self.h)
-
-proc cQIODevice_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
 
-proc QIODevicewaitForReadyRead*(self: gen_qiodevice_types.QIODevice, msecs: cint): bool =
-  fcQIODevice_virtualbase_waitForReadyRead(self.h, msecs)
-
-proc cQIODevice_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
 
-proc QIODevicewaitForBytesWritten*(self: gen_qiodevice_types.QIODevice, msecs: cint): bool =
-  fcQIODevice_virtualbase_waitForBytesWritten(self.h, msecs)
-
-proc cQIODevice_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
 
-proc cQIODevice_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = (data)
@@ -695,10 +726,7 @@ proc cQIODevice_vtable_callback_readData(self: pointer, data: cstring, maxlen: c
   var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
 
-proc QIODevicereadLineData*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
-  fcQIODevice_virtualbase_readLineData(self.h, data, maxlen)
-
-proc cQIODevice_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = (data)
@@ -706,17 +734,14 @@ proc cQIODevice_vtable_callback_readLineData(self: pointer, data: cstring, maxle
   var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
 
-proc QIODeviceskipData*(self: gen_qiodevice_types.QIODevice, maxSize: clonglong): clonglong =
-  fcQIODevice_virtualbase_skipData(self.h, maxSize)
-
-proc cQIODevice_vtable_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = maxSize
   var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
 
-proc cQIODevice_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = (data)
@@ -724,20 +749,14 @@ proc cQIODevice_vtable_callback_writeData(self: pointer, data: cstring, len: clo
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
 
-proc QIODeviceevent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): bool =
-  fcQIODevice_virtualbase_event(self.h, event.h)
-
-proc cQIODevice_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QIODeviceeventFilter*(self: gen_qiodevice_types.QIODevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fcQIODevice_virtualbase_eventFilter(self.h, watched.h, event.h)
-
-proc cQIODevice_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQIODevice_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
@@ -745,46 +764,31 @@ proc cQIODevice_vtable_callback_eventFilter(self: pointer, watched: pointer, eve
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QIODevicetimerEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QTimerEvent): void =
-  fcQIODevice_virtualbase_timerEvent(self.h, event.h)
-
-proc cQIODevice_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
-proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QChildEvent): void =
-  fcQIODevice_virtualbase_childEvent(self.h, event.h)
-
-proc cQIODevice_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
-proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): void =
-  fcQIODevice_virtualbase_customEvent(self.h, event.h)
-
-proc cQIODevice_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
-proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQIODevice_virtualbase_connectNotify(self.h, signal.h)
-
-proc cQIODevice_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
-proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fcQIODevice_virtualbase_disconnectNotify(self.h, signal.h)
-
-proc cQIODevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQIODevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](fcQIODevice_vdata(self))
   let self = QIODevice(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
@@ -792,9 +796,63 @@ proc cQIODevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer)
 
 type VirtualQIODevice* {.inheritable.} = ref object of QIODevice
   vtbl*: cQIODeviceVTable
+
 method metaObject*(self: VirtualQIODevice): gen_qobjectdefs_types.QMetaObject {.base.} =
   QIODevicemetaObject(self[])
-proc cQIODevice_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+method metacast*(self: VirtualQIODevice, param1: cstring): pointer {.base.} =
+  QIODevicemetacast(self[], param1)
+method metacall*(self: VirtualQIODevice, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QIODevicemetacall(self[], param1, param2, param3)
+method isSequential*(self: VirtualQIODevice): bool {.base.} =
+  QIODeviceisSequential(self[])
+method open*(self: VirtualQIODevice, mode: cint): bool {.base.} =
+  QIODeviceopen(self[], mode)
+method close*(self: VirtualQIODevice): void {.base.} =
+  QIODeviceclose(self[])
+method pos*(self: VirtualQIODevice): clonglong {.base.} =
+  QIODevicepos(self[])
+method size*(self: VirtualQIODevice): clonglong {.base.} =
+  QIODevicesize(self[])
+method seek*(self: VirtualQIODevice, pos: clonglong): bool {.base.} =
+  QIODeviceseek(self[], pos)
+method atEnd*(self: VirtualQIODevice): bool {.base.} =
+  QIODeviceatEnd(self[])
+method reset*(self: VirtualQIODevice): bool {.base.} =
+  QIODevicereset(self[])
+method bytesAvailable*(self: VirtualQIODevice): clonglong {.base.} =
+  QIODevicebytesAvailable(self[])
+method bytesToWrite*(self: VirtualQIODevice): clonglong {.base.} =
+  QIODevicebytesToWrite(self[])
+method canReadLine*(self: VirtualQIODevice): bool {.base.} =
+  QIODevicecanReadLine(self[])
+method waitForReadyRead*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
+  QIODevicewaitForReadyRead(self[], msecs)
+method waitForBytesWritten*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
+  QIODevicewaitForBytesWritten(self[], msecs)
+method readData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  raiseAssert("missing implementation of QIODevice.readData")
+method readLineData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QIODevicereadLineData(self[], data, maxlen)
+method skipData*(self: VirtualQIODevice, maxSize: clonglong): clonglong {.base.} =
+  QIODeviceskipData(self[], maxSize)
+method writeData*(self: VirtualQIODevice, data: cstring, len: clonglong): clonglong {.base.} =
+  raiseAssert("missing implementation of QIODevice.writeData")
+method event*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIODeviceevent(self[], event)
+method eventFilter*(self: VirtualQIODevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIODeviceeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QIODevicetimerEvent(self[], event)
+method childEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QIODevicechildEvent(self[], event)
+method customEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QIODevicecustomEvent(self[], event)
+method connectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIODeviceconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIODevicedisconnectNotify(self[], signal)
+
+proc fcQIODevice_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
@@ -802,17 +860,13 @@ proc cQIODevice_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-method metacast*(self: VirtualQIODevice, param1: cstring): pointer {.base.} =
-  QIODevicemetacast(self[], param1)
-proc cQIODevice_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+proc fcQIODevice_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = (param1)
   var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
-method metacall*(self: VirtualQIODevice, param1: cint, param2: cint, param3: pointer): cint {.base.} =
-  QIODevicemetacall(self[], param1, param2, param3)
-proc cQIODevice_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+proc fcQIODevice_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -820,186 +874,139 @@ proc cQIODevice_method_callback_metacall(self: pointer, param1: cint, param2: ci
   var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method isSequential*(self: VirtualQIODevice): bool {.base.} =
-  QIODeviceisSequential(self[])
-proc cQIODevice_method_callback_isSequential(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_isSequential(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.isSequential()
   virtualReturn
 
-method open*(self: VirtualQIODevice, mode: cint): bool {.base.} =
-  QIODeviceopen(self[], mode)
-proc cQIODevice_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+proc fcQIODevice_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = cint(mode)
   var virtualReturn = inst.open(slotval1)
   virtualReturn
 
-method close*(self: VirtualQIODevice): void {.base.} =
-  QIODeviceclose(self[])
-proc cQIODevice_method_callback_close(self: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   inst.close()
 
-method pos*(self: VirtualQIODevice): clonglong {.base.} =
-  QIODevicepos(self[])
-proc cQIODevice_method_callback_pos(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_pos(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.pos()
   virtualReturn
 
-method size*(self: VirtualQIODevice): clonglong {.base.} =
-  QIODevicesize(self[])
-proc cQIODevice_method_callback_size(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_size(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.size()
   virtualReturn
 
-method seek*(self: VirtualQIODevice, pos: clonglong): bool {.base.} =
-  QIODeviceseek(self[], pos)
-proc cQIODevice_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+proc fcQIODevice_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = pos
   var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method atEnd*(self: VirtualQIODevice): bool {.base.} =
-  QIODeviceatEnd(self[])
-proc cQIODevice_method_callback_atEnd(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_atEnd(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.atEnd()
   virtualReturn
 
-method reset*(self: VirtualQIODevice): bool {.base.} =
-  QIODevicereset(self[])
-proc cQIODevice_method_callback_reset(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_reset(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.reset()
   virtualReturn
 
-method bytesAvailable*(self: VirtualQIODevice): clonglong {.base.} =
-  QIODevicebytesAvailable(self[])
-proc cQIODevice_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQIODevice): clonglong {.base.} =
-  QIODevicebytesToWrite(self[])
-proc cQIODevice_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method canReadLine*(self: VirtualQIODevice): bool {.base.} =
-  QIODevicecanReadLine(self[])
-proc cQIODevice_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   var virtualReturn = inst.canReadLine()
   virtualReturn
 
-method waitForReadyRead*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
-  QIODevicewaitForReadyRead(self[], msecs)
-proc cQIODevice_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQIODevice_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
-method waitForBytesWritten*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
-  QIODevicewaitForBytesWritten(self[], msecs)
-proc cQIODevice_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+proc fcQIODevice_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = msecs
   var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
-method readData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  raiseAssert("missing implementation of QIODevice_virtualbase_readData")
-proc cQIODevice_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
   var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
-method readLineData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
-  QIODevicereadLineData(self[], data, maxlen)
-proc cQIODevice_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
   var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
-method skipData*(self: VirtualQIODevice, maxSize: clonglong): clonglong {.base.} =
-  QIODeviceskipData(self[], maxSize)
-proc cQIODevice_method_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_skipData(self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = maxSize
   var virtualReturn = inst.skipData(slotval1)
   virtualReturn
 
-method writeData*(self: VirtualQIODevice, data: cstring, len: clonglong): clonglong {.base.} =
-  raiseAssert("missing implementation of QIODevice_virtualbase_writeData")
-proc cQIODevice_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+proc fcQIODevice_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = (data)
   let slotval2 = len
   var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method event*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QIODeviceevent(self[], event)
-proc cQIODevice_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method eventFilter*(self: VirtualQIODevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
-  QIODeviceeventFilter(self[], watched, event)
-proc cQIODevice_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+proc fcQIODevice_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method timerEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
-  QIODevicetimerEvent(self[], event)
-proc cQIODevice_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
-method childEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
-  QIODevicechildEvent(self[], event)
-proc cQIODevice_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
-method customEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
-  QIODevicecustomEvent(self[], event)
-proc cQIODevice_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
-method connectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QIODeviceconnectNotify(self[], signal)
-proc cQIODevice_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
-method disconnectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
-  QIODevicedisconnectNotify(self[], signal)
-proc cQIODevice_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+proc fcQIODevice_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQIODevice](fcQIODevice_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
+
 
 proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
   fcQIODevice_protectedbase_setOpenMode(self.h, cint(openMode))
@@ -1027,59 +1034,59 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
     let vtbl = cast[ref QIODeviceVTable](fcQIODevice_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQIODevice_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQIODevice_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQIODevice_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQIODevice_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQIODevice_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQIODevice_vtable_callback_metacall
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = cQIODevice_vtable_callback_isSequential
+    vtbl[].vtbl.isSequential = fcQIODevice_vtable_callback_isSequential
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQIODevice_vtable_callback_open
+    vtbl[].vtbl.open = fcQIODevice_vtable_callback_open
   if not isNil(vtbl[].close):
-    vtbl[].vtbl.close = cQIODevice_vtable_callback_close
+    vtbl[].vtbl.close = fcQIODevice_vtable_callback_close
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = cQIODevice_vtable_callback_pos
+    vtbl[].vtbl.pos = fcQIODevice_vtable_callback_pos
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = cQIODevice_vtable_callback_size
+    vtbl[].vtbl.size = fcQIODevice_vtable_callback_size
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = cQIODevice_vtable_callback_seek
+    vtbl[].vtbl.seek = fcQIODevice_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = cQIODevice_vtable_callback_atEnd
+    vtbl[].vtbl.atEnd = fcQIODevice_vtable_callback_atEnd
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQIODevice_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQIODevice_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = cQIODevice_vtable_callback_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = fcQIODevice_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = cQIODevice_vtable_callback_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = fcQIODevice_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = cQIODevice_vtable_callback_canReadLine
+    vtbl[].vtbl.canReadLine = fcQIODevice_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = cQIODevice_vtable_callback_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = fcQIODevice_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = cQIODevice_vtable_callback_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = fcQIODevice_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = cQIODevice_vtable_callback_readData
+    vtbl[].vtbl.readData = fcQIODevice_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = cQIODevice_vtable_callback_readLineData
+    vtbl[].vtbl.readLineData = fcQIODevice_vtable_callback_readLineData
   if not isNil(vtbl[].skipData):
-    vtbl[].vtbl.skipData = cQIODevice_vtable_callback_skipData
+    vtbl[].vtbl.skipData = fcQIODevice_vtable_callback_skipData
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = cQIODevice_vtable_callback_writeData
+    vtbl[].vtbl.writeData = fcQIODevice_vtable_callback_writeData
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQIODevice_vtable_callback_event
+    vtbl[].vtbl.event = fcQIODevice_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQIODevice_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQIODevice_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQIODevice_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQIODevice_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQIODevice_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQIODevice_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQIODevice_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQIODevice_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQIODevice_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQIODevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQIODevice_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQIODevice_vtable_callback_disconnectNotify
   gen_qiodevice_types.QIODevice(h: fcQIODevice_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qiodevice_types.QIODevice,
@@ -1091,59 +1098,59 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
     let vtbl = cast[ref QIODeviceVTable](fcQIODevice_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = cQIODevice_vtable_callback_metaObject
+    vtbl[].vtbl.metaObject = fcQIODevice_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = cQIODevice_vtable_callback_metacast
+    vtbl[].vtbl.metacast = fcQIODevice_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = cQIODevice_vtable_callback_metacall
+    vtbl[].vtbl.metacall = fcQIODevice_vtable_callback_metacall
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = cQIODevice_vtable_callback_isSequential
+    vtbl[].vtbl.isSequential = fcQIODevice_vtable_callback_isSequential
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = cQIODevice_vtable_callback_open
+    vtbl[].vtbl.open = fcQIODevice_vtable_callback_open
   if not isNil(vtbl[].close):
-    vtbl[].vtbl.close = cQIODevice_vtable_callback_close
+    vtbl[].vtbl.close = fcQIODevice_vtable_callback_close
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = cQIODevice_vtable_callback_pos
+    vtbl[].vtbl.pos = fcQIODevice_vtable_callback_pos
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = cQIODevice_vtable_callback_size
+    vtbl[].vtbl.size = fcQIODevice_vtable_callback_size
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = cQIODevice_vtable_callback_seek
+    vtbl[].vtbl.seek = fcQIODevice_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = cQIODevice_vtable_callback_atEnd
+    vtbl[].vtbl.atEnd = fcQIODevice_vtable_callback_atEnd
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = cQIODevice_vtable_callback_reset
+    vtbl[].vtbl.reset = fcQIODevice_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = cQIODevice_vtable_callback_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = fcQIODevice_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = cQIODevice_vtable_callback_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = fcQIODevice_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = cQIODevice_vtable_callback_canReadLine
+    vtbl[].vtbl.canReadLine = fcQIODevice_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = cQIODevice_vtable_callback_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = fcQIODevice_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = cQIODevice_vtable_callback_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = fcQIODevice_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = cQIODevice_vtable_callback_readData
+    vtbl[].vtbl.readData = fcQIODevice_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = cQIODevice_vtable_callback_readLineData
+    vtbl[].vtbl.readLineData = fcQIODevice_vtable_callback_readLineData
   if not isNil(vtbl[].skipData):
-    vtbl[].vtbl.skipData = cQIODevice_vtable_callback_skipData
+    vtbl[].vtbl.skipData = fcQIODevice_vtable_callback_skipData
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = cQIODevice_vtable_callback_writeData
+    vtbl[].vtbl.writeData = fcQIODevice_vtable_callback_writeData
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = cQIODevice_vtable_callback_event
+    vtbl[].vtbl.event = fcQIODevice_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = cQIODevice_vtable_callback_eventFilter
+    vtbl[].vtbl.eventFilter = fcQIODevice_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = cQIODevice_vtable_callback_timerEvent
+    vtbl[].vtbl.timerEvent = fcQIODevice_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = cQIODevice_vtable_callback_childEvent
+    vtbl[].vtbl.childEvent = fcQIODevice_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = cQIODevice_vtable_callback_customEvent
+    vtbl[].vtbl.customEvent = fcQIODevice_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = cQIODevice_vtable_callback_connectNotify
+    vtbl[].vtbl.connectNotify = fcQIODevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = cQIODevice_vtable_callback_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = fcQIODevice_vtable_callback_disconnectNotify
   gen_qiodevice_types.QIODevice(h: fcQIODevice_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 const cQIODevice_mvtbl = cQIODeviceVTable(
@@ -1151,33 +1158,34 @@ const cQIODevice_mvtbl = cQIODeviceVTable(
     let inst = cast[ptr typeof(VirtualQIODevice()[])](self.fcQIODevice_vtbl())
     inst[].h = nil
     inst[].owned = false,
-  metaObject: cQIODevice_method_callback_metaObject,
-  metacast: cQIODevice_method_callback_metacast,
-  metacall: cQIODevice_method_callback_metacall,
-  isSequential: cQIODevice_method_callback_isSequential,
-  open: cQIODevice_method_callback_open,
-  close: cQIODevice_method_callback_close,
-  pos: cQIODevice_method_callback_pos,
-  size: cQIODevice_method_callback_size,
-  seek: cQIODevice_method_callback_seek,
-  atEnd: cQIODevice_method_callback_atEnd,
-  reset: cQIODevice_method_callback_reset,
-  bytesAvailable: cQIODevice_method_callback_bytesAvailable,
-  bytesToWrite: cQIODevice_method_callback_bytesToWrite,
-  canReadLine: cQIODevice_method_callback_canReadLine,
-  waitForReadyRead: cQIODevice_method_callback_waitForReadyRead,
-  waitForBytesWritten: cQIODevice_method_callback_waitForBytesWritten,
-  readData: cQIODevice_method_callback_readData,
-  readLineData: cQIODevice_method_callback_readLineData,
-  skipData: cQIODevice_method_callback_skipData,
-  writeData: cQIODevice_method_callback_writeData,
-  event: cQIODevice_method_callback_event,
-  eventFilter: cQIODevice_method_callback_eventFilter,
-  timerEvent: cQIODevice_method_callback_timerEvent,
-  childEvent: cQIODevice_method_callback_childEvent,
-  customEvent: cQIODevice_method_callback_customEvent,
-  connectNotify: cQIODevice_method_callback_connectNotify,
-  disconnectNotify: cQIODevice_method_callback_disconnectNotify,
+
+  metaObject: fcQIODevice_method_callback_metaObject,
+  metacast: fcQIODevice_method_callback_metacast,
+  metacall: fcQIODevice_method_callback_metacall,
+  isSequential: fcQIODevice_method_callback_isSequential,
+  open: fcQIODevice_method_callback_open,
+  close: fcQIODevice_method_callback_close,
+  pos: fcQIODevice_method_callback_pos,
+  size: fcQIODevice_method_callback_size,
+  seek: fcQIODevice_method_callback_seek,
+  atEnd: fcQIODevice_method_callback_atEnd,
+  reset: fcQIODevice_method_callback_reset,
+  bytesAvailable: fcQIODevice_method_callback_bytesAvailable,
+  bytesToWrite: fcQIODevice_method_callback_bytesToWrite,
+  canReadLine: fcQIODevice_method_callback_canReadLine,
+  waitForReadyRead: fcQIODevice_method_callback_waitForReadyRead,
+  waitForBytesWritten: fcQIODevice_method_callback_waitForBytesWritten,
+  readData: fcQIODevice_method_callback_readData,
+  readLineData: fcQIODevice_method_callback_readLineData,
+  skipData: fcQIODevice_method_callback_skipData,
+  writeData: fcQIODevice_method_callback_writeData,
+  event: fcQIODevice_method_callback_event,
+  eventFilter: fcQIODevice_method_callback_eventFilter,
+  timerEvent: fcQIODevice_method_callback_timerEvent,
+  childEvent: fcQIODevice_method_callback_childEvent,
+  customEvent: fcQIODevice_method_callback_customEvent,
+  connectNotify: fcQIODevice_method_callback_connectNotify,
+  disconnectNotify: fcQIODevice_method_callback_disconnectNotify,
 )
 proc create*(T: type gen_qiodevice_types.QIODevice,
     inst: VirtualQIODevice) =
