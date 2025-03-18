@@ -628,7 +628,7 @@ proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
 
 const cQQmlApplicationEngine_mvtbl = cQQmlApplicationEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlApplicationEngine()[])](self.fcQQmlApplicationEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlApplicationEngine()[])](self.fcQQmlApplicationEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

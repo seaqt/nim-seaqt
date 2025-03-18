@@ -1005,7 +1005,7 @@ proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
 
 const cQItemSelectionModel_mvtbl = cQItemSelectionModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQItemSelectionModel()[])](self.fcQItemSelectionModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQItemSelectionModel()[])](self.fcQItemSelectionModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

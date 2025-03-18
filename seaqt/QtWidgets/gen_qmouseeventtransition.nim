@@ -572,7 +572,7 @@ proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
 
 const cQMouseEventTransition_mvtbl = cQMouseEventTransitionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMouseEventTransition()[])](self.fcQMouseEventTransition_vtbl())
+    let inst = cast[ptr typeof(VirtualQMouseEventTransition()[])](self.fcQMouseEventTransition_vdata())
     inst[].h = nil
     inst[].owned = false,
 

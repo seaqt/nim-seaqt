@@ -882,7 +882,7 @@ proc create*(T: type gen_qpaintengine_types.QPaintEngine,
 
 const cQPaintEngine_mvtbl = cQPaintEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPaintEngine()[])](self.fcQPaintEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQPaintEngine()[])](self.fcQPaintEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -744,7 +744,7 @@ proc create*(T: type gen_qgesture_types.QGesture,
 
 const cQGesture_mvtbl = cQGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGesture()[])](self.fcQGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQGesture()[])](self.fcQGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1123,7 +1123,7 @@ proc create*(T: type gen_qgesture_types.QPanGesture,
 
 const cQPanGesture_mvtbl = cQPanGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPanGesture()[])](self.fcQPanGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQPanGesture()[])](self.fcQPanGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1547,7 +1547,7 @@ proc create*(T: type gen_qgesture_types.QPinchGesture,
 
 const cQPinchGesture_mvtbl = cQPinchGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPinchGesture()[])](self.fcQPinchGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQPinchGesture()[])](self.fcQPinchGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1917,7 +1917,7 @@ proc create*(T: type gen_qgesture_types.QSwipeGesture,
 
 const cQSwipeGesture_mvtbl = cQSwipeGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSwipeGesture()[])](self.fcQSwipeGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQSwipeGesture()[])](self.fcQSwipeGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2281,7 +2281,7 @@ proc create*(T: type gen_qgesture_types.QTapGesture,
 
 const cQTapGesture_mvtbl = cQTapGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTapGesture()[])](self.fcQTapGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQTapGesture()[])](self.fcQTapGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2651,7 +2651,7 @@ proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
 
 const cQTapAndHoldGesture_mvtbl = cQTapAndHoldGestureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTapAndHoldGesture()[])](self.fcQTapAndHoldGesture_vtbl())
+    let inst = cast[ptr typeof(VirtualQTapAndHoldGesture()[])](self.fcQTapAndHoldGesture_vdata())
     inst[].h = nil
     inst[].owned = false,
 

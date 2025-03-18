@@ -2641,7 +2641,7 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
 
 const cQAbstractItemModel_mvtbl = cQAbstractItemModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractItemModel()[])](self.fcQAbstractItemModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractItemModel()[])](self.fcQAbstractItemModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4166,7 +4166,7 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
 
 const cQAbstractTableModel_mvtbl = cQAbstractTableModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractTableModel()[])](self.fcQAbstractTableModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractTableModel()[])](self.fcQAbstractTableModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5668,7 +5668,7 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
 
 const cQAbstractListModel_mvtbl = cQAbstractListModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractListModel()[])](self.fcQAbstractListModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractListModel()[])](self.fcQAbstractListModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

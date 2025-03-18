@@ -2097,7 +2097,7 @@ proc create*(T: type gen_qdockwidget_types.QDockWidget,
 
 const cQDockWidget_mvtbl = cQDockWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDockWidget()[])](self.fcQDockWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQDockWidget()[])](self.fcQDockWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

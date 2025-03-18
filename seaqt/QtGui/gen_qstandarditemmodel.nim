@@ -979,7 +979,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
 
 const cQStandardItem_mvtbl = cQStandardItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStandardItem()[])](self.fcQStandardItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQStandardItem()[])](self.fcQStandardItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3043,7 +3043,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
 
 const cQStandardItemModel_mvtbl = cQStandardItemModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStandardItemModel()[])](self.fcQStandardItemModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQStandardItemModel()[])](self.fcQStandardItemModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1990,7 +1990,7 @@ proc create*(T: type gen_qtoolbar_types.QToolBar,
 
 const cQToolBar_mvtbl = cQToolBarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQToolBar()[])](self.fcQToolBar_vtbl())
+    let inst = cast[ptr typeof(VirtualQToolBar()[])](self.fcQToolBar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

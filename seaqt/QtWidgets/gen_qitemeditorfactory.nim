@@ -188,7 +188,7 @@ proc create*(T: type gen_qitemeditorfactory_types.QItemEditorFactory,
 
 const cQItemEditorFactory_mvtbl = cQItemEditorFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQItemEditorFactory()[])](self.fcQItemEditorFactory_vtbl())
+    let inst = cast[ptr typeof(VirtualQItemEditorFactory()[])](self.fcQItemEditorFactory_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -182,7 +182,7 @@ proc create*(T: type gen_qsgsimpletexturenode_types.QSGSimpleTextureNode,
 
 const cQSGSimpleTextureNode_mvtbl = cQSGSimpleTextureNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGSimpleTextureNode()[])](self.fcQSGSimpleTextureNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGSimpleTextureNode()[])](self.fcQSGSimpleTextureNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 

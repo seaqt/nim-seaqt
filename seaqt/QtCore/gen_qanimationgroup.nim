@@ -546,7 +546,7 @@ proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
 
 const cQAnimationGroup_mvtbl = cQAnimationGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAnimationGroup()[])](self.fcQAnimationGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQAnimationGroup()[])](self.fcQAnimationGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

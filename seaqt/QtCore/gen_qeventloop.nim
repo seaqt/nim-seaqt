@@ -479,7 +479,7 @@ proc create*(T: type gen_qeventloop_types.QEventLoop,
 
 const cQEventLoop_mvtbl = cQEventLoopVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQEventLoop()[])](self.fcQEventLoop_vtbl())
+    let inst = cast[ptr typeof(VirtualQEventLoop()[])](self.fcQEventLoop_vdata())
     inst[].h = nil
     inst[].owned = false,
 

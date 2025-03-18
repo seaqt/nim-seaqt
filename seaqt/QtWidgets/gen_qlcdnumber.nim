@@ -1823,7 +1823,7 @@ proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
 
 const cQLCDNumber_mvtbl = cQLCDNumberVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLCDNumber()[])](self.fcQLCDNumber_vtbl())
+    let inst = cast[ptr typeof(VirtualQLCDNumber()[])](self.fcQLCDNumber_vdata())
     inst[].h = nil
     inst[].owned = false,
 

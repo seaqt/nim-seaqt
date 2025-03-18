@@ -236,7 +236,7 @@ proc create*(T: type gen_qabstractvideobuffer_types.QAbstractVideoBuffer,
 
 const cQAbstractVideoBuffer_mvtbl = cQAbstractVideoBufferVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractVideoBuffer()[])](self.fcQAbstractVideoBuffer_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractVideoBuffer()[])](self.fcQAbstractVideoBuffer_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -380,7 +380,7 @@ proc create*(T: type gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer,
 
 const cQAbstractPlanarVideoBuffer_mvtbl = cQAbstractPlanarVideoBufferVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractPlanarVideoBuffer()[])](self.fcQAbstractPlanarVideoBuffer_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractPlanarVideoBuffer()[])](self.fcQAbstractPlanarVideoBuffer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

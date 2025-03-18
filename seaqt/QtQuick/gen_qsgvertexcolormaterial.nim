@@ -162,7 +162,7 @@ proc create*(T: type gen_qsgvertexcolormaterial_types.QSGVertexColorMaterial,
 
 const cQSGVertexColorMaterial_mvtbl = cQSGVertexColorMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGVertexColorMaterial()[])](self.fcQSGVertexColorMaterial_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGVertexColorMaterial()[])](self.fcQSGVertexColorMaterial_vdata())
     inst[].h = nil
     inst[].owned = false,
 

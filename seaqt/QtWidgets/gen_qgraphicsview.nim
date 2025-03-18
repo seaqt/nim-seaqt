@@ -2412,7 +2412,7 @@ proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
 
 const cQGraphicsView_mvtbl = cQGraphicsViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsView()[])](self.fcQGraphicsView_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsView()[])](self.fcQGraphicsView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

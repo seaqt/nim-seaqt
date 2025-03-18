@@ -1815,7 +1815,7 @@ proc create*(T: type gen_qgroupbox_types.QGroupBox,
 
 const cQGroupBox_mvtbl = cQGroupBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGroupBox()[])](self.fcQGroupBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQGroupBox()[])](self.fcQGroupBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

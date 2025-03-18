@@ -201,7 +201,7 @@ proc create*(T: type gen_qfileiconprovider_types.QFileIconProvider,
 
 const cQFileIconProvider_mvtbl = cQFileIconProviderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileIconProvider()[])](self.fcQFileIconProvider_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileIconProvider()[])](self.fcQFileIconProvider_vdata())
     inst[].h = nil
     inst[].owned = false,
 

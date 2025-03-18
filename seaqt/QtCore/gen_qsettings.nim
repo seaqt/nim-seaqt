@@ -1049,7 +1049,7 @@ proc create*(T: type gen_qsettings_types.QSettings,
 
 const cQSettings_mvtbl = cQSettingsVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSettings()[])](self.fcQSettings_vtbl())
+    let inst = cast[ptr typeof(VirtualQSettings()[])](self.fcQSettings_vdata())
     inst[].h = nil
     inst[].owned = false,
 

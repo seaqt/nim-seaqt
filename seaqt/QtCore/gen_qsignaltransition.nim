@@ -565,7 +565,7 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
 
 const cQSignalTransition_mvtbl = cQSignalTransitionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSignalTransition()[])](self.fcQSignalTransition_vtbl())
+    let inst = cast[ptr typeof(VirtualQSignalTransition()[])](self.fcQSignalTransition_vdata())
     inst[].h = nil
     inst[].owned = false,
 

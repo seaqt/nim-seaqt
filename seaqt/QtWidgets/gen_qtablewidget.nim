@@ -965,7 +965,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
 
 const cQTableWidgetItem_mvtbl = cQTableWidgetItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTableWidgetItem()[])](self.fcQTableWidgetItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQTableWidgetItem()[])](self.fcQTableWidgetItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4471,7 +4471,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
 
 const cQTableWidget_mvtbl = cQTableWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTableWidget()[])](self.fcQTableWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQTableWidget()[])](self.fcQTableWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1664,7 +1664,7 @@ proc create*(T: type gen_qscrollarea_types.QScrollArea,
 
 const cQScrollArea_mvtbl = cQScrollAreaVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQScrollArea()[])](self.fcQScrollArea_vtbl())
+    let inst = cast[ptr typeof(VirtualQScrollArea()[])](self.fcQScrollArea_vdata())
     inst[].h = nil
     inst[].owned = false,
 

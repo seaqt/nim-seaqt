@@ -400,7 +400,7 @@ proc create*(T: type gen_qquicktextdocument_types.QQuickTextDocument,
 
 const cQQuickTextDocument_mvtbl = cQQuickTextDocumentVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickTextDocument()[])](self.fcQQuickTextDocument_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickTextDocument()[])](self.fcQQuickTextDocument_vdata())
     inst[].h = nil
     inst[].owned = false,
 

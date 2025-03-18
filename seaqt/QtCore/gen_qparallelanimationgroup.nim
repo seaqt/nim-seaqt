@@ -526,7 +526,7 @@ proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
 
 const cQParallelAnimationGroup_mvtbl = cQParallelAnimationGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQParallelAnimationGroup()[])](self.fcQParallelAnimationGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQParallelAnimationGroup()[])](self.fcQParallelAnimationGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

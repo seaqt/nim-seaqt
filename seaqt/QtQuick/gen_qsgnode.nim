@@ -337,7 +337,7 @@ proc create*(T: type gen_qsgnode_types.QSGNode,
 
 const cQSGNode_mvtbl = cQSGNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGNode()[])](self.fcQSGNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGNode()[])](self.fcQSGNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -457,7 +457,7 @@ proc create*(T: type gen_qsgnode_types.QSGGeometryNode,
 
 const cQSGGeometryNode_mvtbl = cQSGGeometryNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGGeometryNode()[])](self.fcQSGGeometryNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGGeometryNode()[])](self.fcQSGGeometryNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -541,7 +541,7 @@ proc create*(T: type gen_qsgnode_types.QSGClipNode,
 
 const cQSGClipNode_mvtbl = cQSGClipNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGClipNode()[])](self.fcQSGClipNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGClipNode()[])](self.fcQSGClipNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -625,7 +625,7 @@ proc create*(T: type gen_qsgnode_types.QSGTransformNode,
 
 const cQSGTransformNode_mvtbl = cQSGTransformNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGTransformNode()[])](self.fcQSGTransformNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGTransformNode()[])](self.fcQSGTransformNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -697,7 +697,7 @@ proc create*(T: type gen_qsgnode_types.QSGRootNode,
 
 const cQSGRootNode_mvtbl = cQSGRootNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGRootNode()[])](self.fcQSGRootNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGRootNode()[])](self.fcQSGRootNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -784,7 +784,7 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
 
 const cQSGOpacityNode_mvtbl = cQSGOpacityNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGOpacityNode()[])](self.fcQSGOpacityNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGOpacityNode()[])](self.fcQSGOpacityNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 

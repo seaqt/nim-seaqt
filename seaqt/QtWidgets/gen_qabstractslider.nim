@@ -1760,7 +1760,7 @@ proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
 
 const cQAbstractSlider_mvtbl = cQAbstractSliderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractSlider()[])](self.fcQAbstractSlider_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractSlider()[])](self.fcQAbstractSlider_vdata())
     inst[].h = nil
     inst[].owned = false,
 

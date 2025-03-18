@@ -560,7 +560,7 @@ proc create*(T: type gen_qdtls_types.QDtlsClientVerifier,
 
 const cQDtlsClientVerifier_mvtbl = cQDtlsClientVerifierVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDtlsClientVerifier()[])](self.fcQDtlsClientVerifier_vtbl())
+    let inst = cast[ptr typeof(VirtualQDtlsClientVerifier()[])](self.fcQDtlsClientVerifier_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1063,7 +1063,7 @@ proc create*(T: type gen_qdtls_types.QDtls,
 
 const cQDtls_mvtbl = cQDtlsVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDtls()[])](self.fcQDtls_vtbl())
+    let inst = cast[ptr typeof(VirtualQDtls()[])](self.fcQDtls_vdata())
     inst[].h = nil
     inst[].owned = false,
 

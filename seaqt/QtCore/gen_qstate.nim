@@ -612,7 +612,7 @@ proc create*(T: type gen_qstate_types.QState,
 
 const cQState_mvtbl = cQStateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQState()[])](self.fcQState_vtbl())
+    let inst = cast[ptr typeof(VirtualQState()[])](self.fcQState_vdata())
     inst[].h = nil
     inst[].owned = false,
 

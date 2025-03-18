@@ -1484,7 +1484,7 @@ proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
 
 const cQAbstractSocket_mvtbl = cQAbstractSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractSocket()[])](self.fcQAbstractSocket_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractSocket()[])](self.fcQAbstractSocket_vdata())
     inst[].h = nil
     inst[].owned = false,
 

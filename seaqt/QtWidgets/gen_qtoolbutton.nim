@@ -1646,7 +1646,7 @@ proc create*(T: type gen_qtoolbutton_types.QToolButton,
 
 const cQToolButton_mvtbl = cQToolButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQToolButton()[])](self.fcQToolButton_vtbl())
+    let inst = cast[ptr typeof(VirtualQToolButton()[])](self.fcQToolButton_vdata())
     inst[].h = nil
     inst[].owned = false,
 

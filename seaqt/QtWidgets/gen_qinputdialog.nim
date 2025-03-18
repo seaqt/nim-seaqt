@@ -2275,7 +2275,7 @@ proc create*(T: type gen_qinputdialog_types.QInputDialog,
 
 const cQInputDialog_mvtbl = cQInputDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQInputDialog()[])](self.fcQInputDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQInputDialog()[])](self.fcQInputDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

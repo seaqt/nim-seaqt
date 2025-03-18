@@ -689,7 +689,7 @@ proc create*(T: type gen_qnetworksession_types.QNetworkSession,
 
 const cQNetworkSession_mvtbl = cQNetworkSessionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkSession()[])](self.fcQNetworkSession_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkSession()[])](self.fcQNetworkSession_vdata())
     inst[].h = nil
     inst[].owned = false,
 

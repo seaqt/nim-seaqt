@@ -553,7 +553,7 @@ proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
 
 const cQHttpMultiPart_mvtbl = cQHttpMultiPartVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHttpMultiPart()[])](self.fcQHttpMultiPart_vtbl())
+    let inst = cast[ptr typeof(VirtualQHttpMultiPart()[])](self.fcQHttpMultiPart_vdata())
     inst[].h = nil
     inst[].owned = false,
 

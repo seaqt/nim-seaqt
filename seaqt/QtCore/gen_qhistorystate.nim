@@ -575,7 +575,7 @@ proc create*(T: type gen_qhistorystate_types.QHistoryState,
 
 const cQHistoryState_mvtbl = cQHistoryStateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHistoryState()[])](self.fcQHistoryState_vtbl())
+    let inst = cast[ptr typeof(VirtualQHistoryState()[])](self.fcQHistoryState_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1494,7 +1494,7 @@ proc create*(T: type gen_qwebinspector_types.QWebInspector,
 
 const cQWebInspector_mvtbl = cQWebInspectorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebInspector()[])](self.fcQWebInspector_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebInspector()[])](self.fcQWebInspector_vdata())
     inst[].h = nil
     inst[].owned = false,
 

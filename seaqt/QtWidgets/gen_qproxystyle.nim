@@ -1367,7 +1367,7 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
 
 const cQProxyStyle_mvtbl = cQProxyStyleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQProxyStyle()[])](self.fcQProxyStyle_vtbl())
+    let inst = cast[ptr typeof(VirtualQProxyStyle()[])](self.fcQProxyStyle_vdata())
     inst[].h = nil
     inst[].owned = false,
 

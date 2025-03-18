@@ -482,7 +482,7 @@ proc create*(T: type gen_qvideoprobe_types.QVideoProbe,
 
 const cQVideoProbe_mvtbl = cQVideoProbeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQVideoProbe()[])](self.fcQVideoProbe_vtbl())
+    let inst = cast[ptr typeof(VirtualQVideoProbe()[])](self.fcQVideoProbe_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -920,7 +920,7 @@ proc create*(T: type gen_qnetworkaccessmanager_types.QNetworkAccessManager,
 
 const cQNetworkAccessManager_mvtbl = cQNetworkAccessManagerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkAccessManager()[])](self.fcQNetworkAccessManager_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkAccessManager()[])](self.fcQNetworkAccessManager_vdata())
     inst[].h = nil
     inst[].owned = false,
 

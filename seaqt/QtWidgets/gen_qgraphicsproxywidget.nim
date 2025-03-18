@@ -2101,7 +2101,7 @@ proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
 
 const cQGraphicsProxyWidget_mvtbl = cQGraphicsProxyWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsProxyWidget()[])](self.fcQGraphicsProxyWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsProxyWidget()[])](self.fcQGraphicsProxyWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

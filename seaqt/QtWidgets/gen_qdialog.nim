@@ -1854,7 +1854,7 @@ proc create*(T: type gen_qdialog_types.QDialog,
 
 const cQDialog_mvtbl = cQDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDialog()[])](self.fcQDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQDialog()[])](self.fcQDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

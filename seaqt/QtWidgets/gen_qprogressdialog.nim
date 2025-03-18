@@ -2205,7 +2205,7 @@ proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
 
 const cQProgressDialog_mvtbl = cQProgressDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQProgressDialog()[])](self.fcQProgressDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQProgressDialog()[])](self.fcQProgressDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

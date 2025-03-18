@@ -2033,7 +2033,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
 
 const cQCommandLinkButton_mvtbl = cQCommandLinkButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCommandLinkButton()[])](self.fcQCommandLinkButton_vtbl())
+    let inst = cast[ptr typeof(VirtualQCommandLinkButton()[])](self.fcQCommandLinkButton_vdata())
     inst[].h = nil
     inst[].owned = false,
 

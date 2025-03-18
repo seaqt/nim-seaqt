@@ -515,7 +515,7 @@ proc create*(T: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter,
 
 const cQSyntaxHighlighter_mvtbl = cQSyntaxHighlighterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSyntaxHighlighter()[])](self.fcQSyntaxHighlighter_vtbl())
+    let inst = cast[ptr typeof(VirtualQSyntaxHighlighter()[])](self.fcQSyntaxHighlighter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

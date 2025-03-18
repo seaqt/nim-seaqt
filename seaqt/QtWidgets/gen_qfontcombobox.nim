@@ -1588,7 +1588,7 @@ proc create*(T: type gen_qfontcombobox_types.QFontComboBox,
 
 const cQFontComboBox_mvtbl = cQFontComboBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFontComboBox()[])](self.fcQFontComboBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQFontComboBox()[])](self.fcQFontComboBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

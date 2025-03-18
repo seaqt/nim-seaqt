@@ -470,7 +470,7 @@ proc create*(T: type gen_qtimer_types.QTimer,
 
 const cQTimer_mvtbl = cQTimerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTimer()[])](self.fcQTimer_vtbl())
+    let inst = cast[ptr typeof(VirtualQTimer()[])](self.fcQTimer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

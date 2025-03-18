@@ -723,7 +723,7 @@ proc create*(T: type gen_qnetworkdiskcache_types.QNetworkDiskCache,
 
 const cQNetworkDiskCache_mvtbl = cQNetworkDiskCacheVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkDiskCache()[])](self.fcQNetworkDiskCache_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkDiskCache()[])](self.fcQNetworkDiskCache_vdata())
     inst[].h = nil
     inst[].owned = false,
 

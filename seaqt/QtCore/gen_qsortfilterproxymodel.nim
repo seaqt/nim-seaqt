@@ -2363,7 +2363,7 @@ proc create*(T: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel,
 
 const cQSortFilterProxyModel_mvtbl = cQSortFilterProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSortFilterProxyModel()[])](self.fcQSortFilterProxyModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQSortFilterProxyModel()[])](self.fcQSortFilterProxyModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

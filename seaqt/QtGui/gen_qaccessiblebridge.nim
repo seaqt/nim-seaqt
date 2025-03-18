@@ -472,7 +472,7 @@ proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
 
 const cQAccessibleBridgePlugin_mvtbl = cQAccessibleBridgePluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleBridgePlugin()[])](self.fcQAccessibleBridgePlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleBridgePlugin()[])](self.fcQAccessibleBridgePlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

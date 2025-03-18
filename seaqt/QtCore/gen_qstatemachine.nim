@@ -809,7 +809,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
 
 const cQStateMachine_mvtbl = cQStateMachineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStateMachine()[])](self.fcQStateMachine_vtbl())
+    let inst = cast[ptr typeof(VirtualQStateMachine()[])](self.fcQStateMachine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

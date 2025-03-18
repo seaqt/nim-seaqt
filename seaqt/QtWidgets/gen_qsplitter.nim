@@ -2034,7 +2034,7 @@ proc create*(T: type gen_qsplitter_types.QSplitter,
 
 const cQSplitter_mvtbl = cQSplitterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSplitter()[])](self.fcQSplitter_vtbl())
+    let inst = cast[ptr typeof(VirtualQSplitter()[])](self.fcQSplitter_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3312,7 +3312,7 @@ proc create*(T: type gen_qsplitter_types.QSplitterHandle,
 
 const cQSplitterHandle_mvtbl = cQSplitterHandleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSplitterHandle()[])](self.fcQSplitterHandle_vtbl())
+    let inst = cast[ptr typeof(VirtualQSplitterHandle()[])](self.fcQSplitterHandle_vdata())
     inst[].h = nil
     inst[].owned = false,
 

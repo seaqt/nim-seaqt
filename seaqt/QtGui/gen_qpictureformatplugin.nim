@@ -548,7 +548,7 @@ proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
 
 const cQPictureFormatPlugin_mvtbl = cQPictureFormatPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPictureFormatPlugin()[])](self.fcQPictureFormatPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQPictureFormatPlugin()[])](self.fcQPictureFormatPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

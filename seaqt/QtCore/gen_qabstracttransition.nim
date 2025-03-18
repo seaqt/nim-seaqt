@@ -537,7 +537,7 @@ proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
 
 const cQAbstractTransition_mvtbl = cQAbstractTransitionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractTransition()[])](self.fcQAbstractTransition_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractTransition()[])](self.fcQAbstractTransition_vdata())
     inst[].h = nil
     inst[].owned = false,
 

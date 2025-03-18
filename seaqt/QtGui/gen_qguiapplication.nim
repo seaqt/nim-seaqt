@@ -1027,7 +1027,7 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
 
 const cQGuiApplication_mvtbl = cQGuiApplicationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGuiApplication()[])](self.fcQGuiApplication_vtbl())
+    let inst = cast[ptr typeof(VirtualQGuiApplication()[])](self.fcQGuiApplication_vdata())
     inst[].h = nil
     inst[].owned = false,
 

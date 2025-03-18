@@ -586,7 +586,7 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
 
 const cQDataWidgetMapper_mvtbl = cQDataWidgetMapperVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDataWidgetMapper()[])](self.fcQDataWidgetMapper_vtbl())
+    let inst = cast[ptr typeof(VirtualQDataWidgetMapper()[])](self.fcQDataWidgetMapper_vdata())
     inst[].h = nil
     inst[].owned = false,
 

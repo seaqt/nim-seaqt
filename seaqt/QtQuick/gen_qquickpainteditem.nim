@@ -1572,7 +1572,7 @@ proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
 
 const cQQuickPaintedItem_mvtbl = cQQuickPaintedItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickPaintedItem()[])](self.fcQQuickPaintedItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickPaintedItem()[])](self.fcQQuickPaintedItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 

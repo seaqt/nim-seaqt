@@ -472,7 +472,7 @@ proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
 
 const cQWebChannelAbstractTransport_mvtbl = cQWebChannelAbstractTransportVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebChannelAbstractTransport()[])](self.fcQWebChannelAbstractTransport_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebChannelAbstractTransport()[])](self.fcQWebChannelAbstractTransport_vdata())
     inst[].h = nil
     inst[].owned = false,
 

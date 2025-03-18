@@ -2064,7 +2064,7 @@ proc create*(T: type gen_qfilesystemmodel_types.QFileSystemModel,
 
 const cQFileSystemModel_mvtbl = cQFileSystemModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileSystemModel()[])](self.fcQFileSystemModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileSystemModel()[])](self.fcQFileSystemModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

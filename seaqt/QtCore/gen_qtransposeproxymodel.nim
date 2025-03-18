@@ -1961,7 +1961,7 @@ proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
 
 const cQTransposeProxyModel_mvtbl = cQTransposeProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTransposeProxyModel()[])](self.fcQTransposeProxyModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQTransposeProxyModel()[])](self.fcQTransposeProxyModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

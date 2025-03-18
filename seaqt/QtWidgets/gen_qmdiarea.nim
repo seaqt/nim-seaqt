@@ -1797,7 +1797,7 @@ proc create*(T: type gen_qmdiarea_types.QMdiArea,
 
 const cQMdiArea_mvtbl = cQMdiAreaVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMdiArea()[])](self.fcQMdiArea_vtbl())
+    let inst = cast[ptr typeof(VirtualQMdiArea()[])](self.fcQMdiArea_vdata())
     inst[].h = nil
     inst[].owned = false,
 

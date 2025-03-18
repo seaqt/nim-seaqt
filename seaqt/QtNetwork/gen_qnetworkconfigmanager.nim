@@ -582,7 +582,7 @@ proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManage
 
 const cQNetworkConfigurationManager_mvtbl = cQNetworkConfigurationManagerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkConfigurationManager()[])](self.fcQNetworkConfigurationManager_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkConfigurationManager()[])](self.fcQNetworkConfigurationManager_vdata())
     inst[].h = nil
     inst[].owned = false,
 

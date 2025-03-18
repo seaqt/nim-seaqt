@@ -2816,7 +2816,7 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
 
 const cQColumnView_mvtbl = cQColumnViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQColumnView()[])](self.fcQColumnView_vtbl())
+    let inst = cast[ptr typeof(VirtualQColumnView()[])](self.fcQColumnView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1718,7 +1718,7 @@ proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
 
 const cQMdiSubWindow_mvtbl = cQMdiSubWindowVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMdiSubWindow()[])](self.fcQMdiSubWindow_vtbl())
+    let inst = cast[ptr typeof(VirtualQMdiSubWindow()[])](self.fcQMdiSubWindow_vdata())
     inst[].h = nil
     inst[].owned = false,
 

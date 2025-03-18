@@ -1163,7 +1163,7 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
 
 const cQIODevice_mvtbl = cQIODeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQIODevice()[])](self.fcQIODevice_vtbl())
+    let inst = cast[ptr typeof(VirtualQIODevice()[])](self.fcQIODevice_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -464,7 +464,7 @@ proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
 
 const cQAccessiblePlugin_mvtbl = cQAccessiblePluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessiblePlugin()[])](self.fcQAccessiblePlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessiblePlugin()[])](self.fcQAccessiblePlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

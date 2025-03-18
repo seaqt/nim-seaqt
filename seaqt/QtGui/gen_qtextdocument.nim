@@ -1296,7 +1296,7 @@ proc create*(T: type gen_qtextdocument_types.QTextDocument,
 
 const cQTextDocument_mvtbl = cQTextDocumentVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTextDocument()[])](self.fcQTextDocument_vtbl())
+    let inst = cast[ptr typeof(VirtualQTextDocument()[])](self.fcQTextDocument_vdata())
     inst[].h = nil
     inst[].owned = false,
 

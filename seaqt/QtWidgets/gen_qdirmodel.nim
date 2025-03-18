@@ -2116,7 +2116,7 @@ proc create*(T: type gen_qdirmodel_types.QDirModel,
 
 const cQDirModel_mvtbl = cQDirModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDirModel()[])](self.fcQDirModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQDirModel()[])](self.fcQDirModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

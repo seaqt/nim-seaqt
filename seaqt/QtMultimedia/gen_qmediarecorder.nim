@@ -1095,7 +1095,7 @@ proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
 
 const cQMediaRecorder_mvtbl = cQMediaRecorderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMediaRecorder()[])](self.fcQMediaRecorder_vtbl())
+    let inst = cast[ptr typeof(VirtualQMediaRecorder()[])](self.fcQMediaRecorder_vdata())
     inst[].h = nil
     inst[].owned = false,
 

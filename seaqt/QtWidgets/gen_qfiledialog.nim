@@ -2976,7 +2976,7 @@ proc create*(T: type gen_qfiledialog_types.QFileDialog,
 
 const cQFileDialog_mvtbl = cQFileDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileDialog()[])](self.fcQFileDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileDialog()[])](self.fcQFileDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

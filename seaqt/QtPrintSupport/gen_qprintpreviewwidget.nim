@@ -2076,7 +2076,7 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
 
 const cQPrintPreviewWidget_mvtbl = cQPrintPreviewWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](self.fcQPrintPreviewWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](self.fcQPrintPreviewWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

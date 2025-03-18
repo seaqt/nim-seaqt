@@ -734,7 +734,7 @@ proc create*(T: type gen_qabstractvideosurface_types.QAbstractVideoSurface,
 
 const cQAbstractVideoSurface_mvtbl = cQAbstractVideoSurfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractVideoSurface()[])](self.fcQAbstractVideoSurface_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractVideoSurface()[])](self.fcQAbstractVideoSurface_vdata())
     inst[].h = nil
     inst[].owned = false,
 

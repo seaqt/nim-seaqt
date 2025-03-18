@@ -565,7 +565,7 @@ proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
 
 const cQAudioRecorder_mvtbl = cQAudioRecorderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioRecorder()[])](self.fcQAudioRecorder_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioRecorder()[])](self.fcQAudioRecorder_vdata())
     inst[].h = nil
     inst[].owned = false,
 

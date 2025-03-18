@@ -101,7 +101,7 @@ proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFi
 
 const cQAbstractNativeEventFilter_mvtbl = cQAbstractNativeEventFilterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractNativeEventFilter()[])](self.fcQAbstractNativeEventFilter_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractNativeEventFilter()[])](self.fcQAbstractNativeEventFilter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

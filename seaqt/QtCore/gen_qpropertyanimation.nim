@@ -689,7 +689,7 @@ proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
 
 const cQPropertyAnimation_mvtbl = cQPropertyAnimationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPropertyAnimation()[])](self.fcQPropertyAnimation_vtbl())
+    let inst = cast[ptr typeof(VirtualQPropertyAnimation()[])](self.fcQPropertyAnimation_vdata())
     inst[].h = nil
     inst[].owned = false,
 

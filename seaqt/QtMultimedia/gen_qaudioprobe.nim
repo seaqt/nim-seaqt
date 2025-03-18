@@ -482,7 +482,7 @@ proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
 
 const cQAudioProbe_mvtbl = cQAudioProbeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioProbe()[])](self.fcQAudioProbe_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioProbe()[])](self.fcQAudioProbe_vdata())
     inst[].h = nil
     inst[].owned = false,
 

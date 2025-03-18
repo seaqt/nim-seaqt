@@ -1297,7 +1297,7 @@ proc create*(T: type gen_qcamera_types.QCamera,
 
 const cQCamera_mvtbl = cQCameraVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCamera()[])](self.fcQCamera_vtbl())
+    let inst = cast[ptr typeof(VirtualQCamera()[])](self.fcQCamera_vdata())
     inst[].h = nil
     inst[].owned = false,
 

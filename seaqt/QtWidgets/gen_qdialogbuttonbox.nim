@@ -2340,7 +2340,7 @@ proc create*(T: type gen_qdialogbuttonbox_types.QDialogButtonBox,
 
 const cQDialogButtonBox_mvtbl = cQDialogButtonBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDialogButtonBox()[])](self.fcQDialogButtonBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQDialogButtonBox()[])](self.fcQDialogButtonBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -492,7 +492,7 @@ proc create*(T: type gen_qwebhistoryinterface_types.QWebHistoryInterface,
 
 const cQWebHistoryInterface_mvtbl = cQWebHistoryInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebHistoryInterface()[])](self.fcQWebHistoryInterface_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebHistoryInterface()[])](self.fcQWebHistoryInterface_vdata())
     inst[].h = nil
     inst[].owned = false,
 

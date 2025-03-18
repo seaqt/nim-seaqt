@@ -703,7 +703,7 @@ proc create*(T: type gen_qqmlengine_types.QQmlEngine,
 
 const cQQmlEngine_mvtbl = cQQmlEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlEngine()[])](self.fcQQmlEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlEngine()[])](self.fcQQmlEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

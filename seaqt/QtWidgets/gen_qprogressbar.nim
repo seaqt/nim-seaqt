@@ -1642,7 +1642,7 @@ proc create*(T: type gen_qprogressbar_types.QProgressBar,
 
 const cQProgressBar_mvtbl = cQProgressBarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQProgressBar()[])](self.fcQProgressBar_vtbl())
+    let inst = cast[ptr typeof(VirtualQProgressBar()[])](self.fcQProgressBar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

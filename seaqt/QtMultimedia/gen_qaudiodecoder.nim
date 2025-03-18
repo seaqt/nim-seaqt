@@ -859,7 +859,7 @@ proc create*(T: type gen_qaudiodecoder_types.QAudioDecoder,
 
 const cQAudioDecoder_mvtbl = cQAudioDecoderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioDecoder()[])](self.fcQAudioDecoder_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioDecoder()[])](self.fcQAudioDecoder_vdata())
     inst[].h = nil
     inst[].owned = false,
 

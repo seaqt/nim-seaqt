@@ -1608,7 +1608,7 @@ proc create*(T: type gen_qerrormessage_types.QErrorMessage,
 
 const cQErrorMessage_mvtbl = cQErrorMessageVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQErrorMessage()[])](self.fcQErrorMessage_vtbl())
+    let inst = cast[ptr typeof(VirtualQErrorMessage()[])](self.fcQErrorMessage_vdata())
     inst[].h = nil
     inst[].owned = false,
 

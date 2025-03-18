@@ -615,7 +615,7 @@ proc create*(T: type gen_qlocalserver_types.QLocalServer,
 
 const cQLocalServer_mvtbl = cQLocalServerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLocalServer()[])](self.fcQLocalServer_vtbl())
+    let inst = cast[ptr typeof(VirtualQLocalServer()[])](self.fcQLocalServer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

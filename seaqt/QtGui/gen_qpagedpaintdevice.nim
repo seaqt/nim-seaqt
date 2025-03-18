@@ -516,7 +516,7 @@ proc create*(T: type gen_qpagedpaintdevice_types.QPagedPaintDevice,
 
 const cQPagedPaintDevice_mvtbl = cQPagedPaintDeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPagedPaintDevice()[])](self.fcQPagedPaintDevice_vtbl())
+    let inst = cast[ptr typeof(VirtualQPagedPaintDevice()[])](self.fcQPagedPaintDevice_vdata())
     inst[].h = nil
     inst[].owned = false,
 

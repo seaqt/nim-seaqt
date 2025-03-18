@@ -764,7 +764,7 @@ proc create*(T: type gen_qradiodata_types.QRadioData,
 
 const cQRadioData_mvtbl = cQRadioDataVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRadioData()[])](self.fcQRadioData_vtbl())
+    let inst = cast[ptr typeof(VirtualQRadioData()[])](self.fcQRadioData_vdata())
     inst[].h = nil
     inst[].owned = false,
 

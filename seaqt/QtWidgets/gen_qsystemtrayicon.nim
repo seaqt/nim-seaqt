@@ -622,7 +622,7 @@ proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
 
 const cQSystemTrayIcon_mvtbl = cQSystemTrayIconVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSystemTrayIcon()[])](self.fcQSystemTrayIcon_vtbl())
+    let inst = cast[ptr typeof(VirtualQSystemTrayIcon()[])](self.fcQSystemTrayIcon_vdata())
     inst[].h = nil
     inst[].owned = false,
 

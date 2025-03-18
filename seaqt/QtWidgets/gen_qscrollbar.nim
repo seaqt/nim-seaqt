@@ -1750,7 +1750,7 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
 
 const cQScrollBar_mvtbl = cQScrollBarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQScrollBar()[])](self.fcQScrollBar_vtbl())
+    let inst = cast[ptr typeof(VirtualQScrollBar()[])](self.fcQScrollBar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

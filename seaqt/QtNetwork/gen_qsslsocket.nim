@@ -1784,7 +1784,7 @@ proc create*(T: type gen_qsslsocket_types.QSslSocket,
 
 const cQSslSocket_mvtbl = cQSslSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSslSocket()[])](self.fcQSslSocket_vtbl())
+    let inst = cast[ptr typeof(VirtualQSslSocket()[])](self.fcQSslSocket_vdata())
     inst[].h = nil
     inst[].owned = false,
 

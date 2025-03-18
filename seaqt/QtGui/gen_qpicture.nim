@@ -477,7 +477,7 @@ proc create*(T: type gen_qpicture_types.QPicture,
 
 const cQPicture_mvtbl = cQPictureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPicture()[])](self.fcQPicture_vtbl())
+    let inst = cast[ptr typeof(VirtualQPicture()[])](self.fcQPicture_vdata())
     inst[].h = nil
     inst[].owned = false,
 

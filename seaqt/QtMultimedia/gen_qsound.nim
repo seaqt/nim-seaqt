@@ -462,7 +462,7 @@ proc create*(T: type gen_qsound_types.QSound,
 
 const cQSound_mvtbl = cQSoundVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSound()[])](self.fcQSound_vtbl())
+    let inst = cast[ptr typeof(VirtualQSound()[])](self.fcQSound_vdata())
     inst[].h = nil
     inst[].owned = false,
 

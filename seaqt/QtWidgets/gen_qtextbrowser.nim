@@ -2131,7 +2131,7 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
 
 const cQTextBrowser_mvtbl = cQTextBrowserVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTextBrowser()[])](self.fcQTextBrowser_vtbl())
+    let inst = cast[ptr typeof(VirtualQTextBrowser()[])](self.fcQTextBrowser_vdata())
     inst[].h = nil
     inst[].owned = false,
 

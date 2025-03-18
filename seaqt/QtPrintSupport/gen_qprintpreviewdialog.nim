@@ -2116,7 +2116,7 @@ proc create*(T: type gen_qprintpreviewdialog_types.QPrintPreviewDialog,
 
 const cQPrintPreviewDialog_mvtbl = cQPrintPreviewDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPrintPreviewDialog()[])](self.fcQPrintPreviewDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQPrintPreviewDialog()[])](self.fcQPrintPreviewDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

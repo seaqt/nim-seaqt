@@ -1625,7 +1625,7 @@ proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
 
 const cQGraphicsSvgItem_mvtbl = cQGraphicsSvgItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSvgItem()[])](self.fcQGraphicsSvgItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSvgItem()[])](self.fcQGraphicsSvgItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 

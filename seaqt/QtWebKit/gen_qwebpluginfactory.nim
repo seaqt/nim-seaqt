@@ -653,7 +653,7 @@ proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
 
 const cQWebPluginFactory_mvtbl = cQWebPluginFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebPluginFactory()[])](self.fcQWebPluginFactory_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebPluginFactory()[])](self.fcQWebPluginFactory_vdata())
     inst[].h = nil
     inst[].owned = false,
 

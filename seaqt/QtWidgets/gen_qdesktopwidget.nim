@@ -1521,7 +1521,7 @@ proc create*(T: type gen_qdesktopwidget_types.QDesktopWidget,
 
 const cQDesktopWidget_mvtbl = cQDesktopWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDesktopWidget()[])](self.fcQDesktopWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQDesktopWidget()[])](self.fcQDesktopWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

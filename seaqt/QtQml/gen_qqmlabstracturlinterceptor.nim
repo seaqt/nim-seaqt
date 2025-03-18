@@ -114,7 +114,7 @@ proc create*(T: type gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterce
 
 const cQQmlAbstractUrlInterceptor_mvtbl = cQQmlAbstractUrlInterceptorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlAbstractUrlInterceptor()[])](self.fcQQmlAbstractUrlInterceptor_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlAbstractUrlInterceptor()[])](self.fcQQmlAbstractUrlInterceptor_vdata())
     inst[].h = nil
     inst[].owned = false,
 

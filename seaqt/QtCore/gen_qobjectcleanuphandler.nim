@@ -407,7 +407,7 @@ proc create*(T: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler,
 
 const cQObjectCleanupHandler_mvtbl = cQObjectCleanupHandlerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQObjectCleanupHandler()[])](self.fcQObjectCleanupHandler_vtbl())
+    let inst = cast[ptr typeof(VirtualQObjectCleanupHandler()[])](self.fcQObjectCleanupHandler_vdata())
     inst[].h = nil
     inst[].owned = false,
 

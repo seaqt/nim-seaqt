@@ -3037,7 +3037,7 @@ proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
 
 const cQDateTimeEdit_mvtbl = cQDateTimeEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDateTimeEdit()[])](self.fcQDateTimeEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQDateTimeEdit()[])](self.fcQDateTimeEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4905,7 +4905,7 @@ proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
 
 const cQTimeEdit_mvtbl = cQTimeEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTimeEdit()[])](self.fcQTimeEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQTimeEdit()[])](self.fcQTimeEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6745,7 +6745,7 @@ proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
 
 const cQDateEdit_mvtbl = cQDateEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDateEdit()[])](self.fcQDateEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQDateEdit()[])](self.fcQDateEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 

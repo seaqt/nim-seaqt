@@ -2340,7 +2340,7 @@ proc create*(T: type gen_qwizard_types.QWizard,
 
 const cQWizard_mvtbl = cQWizardVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWizard()[])](self.fcQWizard_vtbl())
+    let inst = cast[ptr typeof(VirtualQWizard()[])](self.fcQWizard_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3909,7 +3909,7 @@ proc create*(T: type gen_qwizard_types.QWizardPage,
 
 const cQWizardPage_mvtbl = cQWizardPageVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWizardPage()[])](self.fcQWizardPage_vtbl())
+    let inst = cast[ptr typeof(VirtualQWizardPage()[])](self.fcQWizardPage_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -582,7 +582,7 @@ proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
 
 const cQSharedMemory_mvtbl = cQSharedMemoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSharedMemory()[])](self.fcQSharedMemory_vtbl())
+    let inst = cast[ptr typeof(VirtualQSharedMemory()[])](self.fcQSharedMemory_vdata())
     inst[].h = nil
     inst[].owned = false,
 

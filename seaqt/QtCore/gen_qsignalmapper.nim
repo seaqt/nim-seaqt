@@ -596,7 +596,7 @@ proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
 
 const cQSignalMapper_mvtbl = cQSignalMapperVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSignalMapper()[])](self.fcQSignalMapper_vtbl())
+    let inst = cast[ptr typeof(VirtualQSignalMapper()[])](self.fcQSignalMapper_vdata())
     inst[].h = nil
     inst[].owned = false,
 

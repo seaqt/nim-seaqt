@@ -560,7 +560,7 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
 
 const cQFileSystemWatcher_mvtbl = cQFileSystemWatcherVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileSystemWatcher()[])](self.fcQFileSystemWatcher_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileSystemWatcher()[])](self.fcQFileSystemWatcher_vdata())
     inst[].h = nil
     inst[].owned = false,
 

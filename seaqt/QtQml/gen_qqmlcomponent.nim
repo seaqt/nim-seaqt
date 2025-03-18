@@ -1081,7 +1081,7 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
 
 const cQQmlComponent_mvtbl = cQQmlComponentVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlComponent()[])](self.fcQQmlComponent_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlComponent()[])](self.fcQQmlComponent_vdata())
     inst[].h = nil
     inst[].owned = false,
 

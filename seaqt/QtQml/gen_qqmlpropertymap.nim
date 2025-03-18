@@ -540,7 +540,7 @@ proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
 
 const cQQmlPropertyMap_mvtbl = cQQmlPropertyMapVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlPropertyMap()[])](self.fcQQmlPropertyMap_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlPropertyMap()[])](self.fcQQmlPropertyMap_vdata())
     inst[].h = nil
     inst[].owned = false,
 

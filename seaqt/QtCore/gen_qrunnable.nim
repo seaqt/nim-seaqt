@@ -99,7 +99,7 @@ proc create*(T: type gen_qrunnable_types.QRunnable,
 
 const cQRunnable_mvtbl = cQRunnableVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRunnable()[])](self.fcQRunnable_vtbl())
+    let inst = cast[ptr typeof(VirtualQRunnable()[])](self.fcQRunnable_vdata())
     inst[].h = nil
     inst[].owned = false,
 

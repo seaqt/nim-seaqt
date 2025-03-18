@@ -1418,7 +1418,7 @@ proc create*(T: type gen_qquickview_types.QQuickView,
 
 const cQQuickView_mvtbl = cQQuickViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickView()[])](self.fcQQuickView_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickView()[])](self.fcQQuickView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

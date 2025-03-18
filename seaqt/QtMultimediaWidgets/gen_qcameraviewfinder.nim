@@ -1540,7 +1540,7 @@ proc create*(T: type gen_qcameraviewfinder_types.QCameraViewfinder,
 
 const cQCameraViewfinder_mvtbl = cQCameraViewfinderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCameraViewfinder()[])](self.fcQCameraViewfinder_vtbl())
+    let inst = cast[ptr typeof(VirtualQCameraViewfinder()[])](self.fcQCameraViewfinder_vdata())
     inst[].h = nil
     inst[].owned = false,
 

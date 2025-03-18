@@ -448,7 +448,7 @@ proc create*(T: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequ
 
 const cQWebEngineUrlRequestInterceptor_mvtbl = cQWebEngineUrlRequestInterceptorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebEngineUrlRequestInterceptor()[])](self.fcQWebEngineUrlRequestInterceptor_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebEngineUrlRequestInterceptor()[])](self.fcQWebEngineUrlRequestInterceptor_vdata())
     inst[].h = nil
     inst[].owned = false,
 

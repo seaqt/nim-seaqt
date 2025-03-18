@@ -2851,7 +2851,7 @@ proc create*(T: type gen_qwidget_types.QWidget,
 
 const cQWidget_mvtbl = cQWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWidget()[])](self.fcQWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQWidget()[])](self.fcQWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

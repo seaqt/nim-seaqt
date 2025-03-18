@@ -448,7 +448,7 @@ proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
 
 const cQWebEngineUrlSchemeHandler_mvtbl = cQWebEngineUrlSchemeHandlerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebEngineUrlSchemeHandler()[])](self.fcQWebEngineUrlSchemeHandler_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebEngineUrlSchemeHandler()[])](self.fcQWebEngineUrlSchemeHandler_vdata())
     inst[].h = nil
     inst[].owned = false,
 

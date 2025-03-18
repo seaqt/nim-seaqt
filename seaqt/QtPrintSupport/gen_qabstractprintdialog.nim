@@ -1677,7 +1677,7 @@ proc create*(T: type gen_qabstractprintdialog_types.QAbstractPrintDialog,
 
 const cQAbstractPrintDialog_mvtbl = cQAbstractPrintDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractPrintDialog()[])](self.fcQAbstractPrintDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractPrintDialog()[])](self.fcQAbstractPrintDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

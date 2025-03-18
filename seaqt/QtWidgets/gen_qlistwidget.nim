@@ -1002,7 +1002,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
 
 const cQListWidgetItem_mvtbl = cQListWidgetItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQListWidgetItem()[])](self.fcQListWidgetItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQListWidgetItem()[])](self.fcQListWidgetItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3956,7 +3956,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidget,
 
 const cQListWidget_mvtbl = cQListWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQListWidget()[])](self.fcQListWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQListWidget()[])](self.fcQListWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

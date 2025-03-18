@@ -852,7 +852,7 @@ proc create*(T: type gen_qstyleditemdelegate_types.QStyledItemDelegate,
 
 const cQStyledItemDelegate_mvtbl = cQStyledItemDelegateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStyledItemDelegate()[])](self.fcQStyledItemDelegate_vtbl())
+    let inst = cast[ptr typeof(VirtualQStyledItemDelegate()[])](self.fcQStyledItemDelegate_vdata())
     inst[].h = nil
     inst[].owned = false,
 

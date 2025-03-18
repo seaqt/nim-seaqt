@@ -1810,7 +1810,7 @@ proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
 
 const cQCalendarWidget_mvtbl = cQCalendarWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCalendarWidget()[])](self.fcQCalendarWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQCalendarWidget()[])](self.fcQCalendarWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

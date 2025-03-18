@@ -663,7 +663,7 @@ proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
 
 const cQGraphicsItemAnimation_mvtbl = cQGraphicsItemAnimationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsItemAnimation()[])](self.fcQGraphicsItemAnimation_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsItemAnimation()[])](self.fcQGraphicsItemAnimation_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -614,7 +614,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickTextureFactory,
 
 const cQQuickTextureFactory_mvtbl = cQQuickTextureFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickTextureFactory()[])](self.fcQQuickTextureFactory_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickTextureFactory()[])](self.fcQQuickTextureFactory_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1037,7 +1037,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageResponse,
 
 const cQQuickImageResponse_mvtbl = cQQuickImageResponseVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickImageResponse()[])](self.fcQQuickImageResponse_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickImageResponse()[])](self.fcQQuickImageResponse_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1294,7 +1294,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
 
 const cQQuickImageProvider_mvtbl = cQQuickImageProviderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickImageProvider()[])](self.fcQQuickImageProvider_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickImageProvider()[])](self.fcQQuickImageProvider_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1558,7 +1558,7 @@ proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
 
 const cQQuickAsyncImageProvider_mvtbl = cQQuickAsyncImageProviderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickAsyncImageProvider()[])](self.fcQQuickAsyncImageProvider_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickAsyncImageProvider()[])](self.fcQQuickAsyncImageProvider_vdata())
     inst[].h = nil
     inst[].owned = false,
 

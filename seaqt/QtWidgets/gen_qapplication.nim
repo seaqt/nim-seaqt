@@ -757,7 +757,7 @@ proc create*(T: type gen_qapplication_types.QApplication,
 
 const cQApplication_mvtbl = cQApplicationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQApplication()[])](self.fcQApplication_vtbl())
+    let inst = cast[ptr typeof(VirtualQApplication()[])](self.fcQApplication_vdata())
     inst[].h = nil
     inst[].owned = false,
 

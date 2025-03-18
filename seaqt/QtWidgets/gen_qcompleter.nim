@@ -924,7 +924,7 @@ proc create*(T: type gen_qcompleter_types.QCompleter,
 
 const cQCompleter_mvtbl = cQCompleterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCompleter()[])](self.fcQCompleter_vtbl())
+    let inst = cast[ptr typeof(VirtualQCompleter()[])](self.fcQCompleter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

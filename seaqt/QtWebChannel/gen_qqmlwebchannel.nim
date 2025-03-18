@@ -450,7 +450,7 @@ proc create*(T: type gen_qqmlwebchannel_types.QQmlWebChannel,
 
 const cQQmlWebChannel_mvtbl = cQQmlWebChannelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlWebChannel()[])](self.fcQQmlWebChannel_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlWebChannel()[])](self.fcQQmlWebChannel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

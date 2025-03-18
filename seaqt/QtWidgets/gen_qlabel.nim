@@ -2146,7 +2146,7 @@ proc create*(T: type gen_qlabel_types.QLabel,
 
 const cQLabel_mvtbl = cQLabelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLabel()[])](self.fcQLabel_vtbl())
+    let inst = cast[ptr typeof(VirtualQLabel()[])](self.fcQLabel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

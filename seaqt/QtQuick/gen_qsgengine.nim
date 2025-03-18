@@ -485,7 +485,7 @@ proc create*(T: type gen_qsgengine_types.QSGEngine,
 
 const cQSGEngine_mvtbl = cQSGEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGEngine()[])](self.fcQSGEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGEngine()[])](self.fcQSGEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

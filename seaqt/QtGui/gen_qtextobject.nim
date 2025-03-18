@@ -730,7 +730,7 @@ proc create*(T: type gen_qtextobject_types.QTextFrame,
 
 const cQTextFrame_mvtbl = cQTextFrameVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTextFrame()[])](self.fcQTextFrame_vtbl())
+    let inst = cast[ptr typeof(VirtualQTextFrame()[])](self.fcQTextFrame_vdata())
     inst[].h = nil
     inst[].owned = false,
 

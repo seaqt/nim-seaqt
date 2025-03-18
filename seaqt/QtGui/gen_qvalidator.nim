@@ -770,7 +770,7 @@ proc create*(T: type gen_qvalidator_types.QValidator,
 
 const cQValidator_mvtbl = cQValidatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQValidator()[])](self.fcQValidator_vtbl())
+    let inst = cast[ptr typeof(VirtualQValidator()[])](self.fcQValidator_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1347,7 +1347,7 @@ proc create*(T: type gen_qvalidator_types.QIntValidator,
 
 const cQIntValidator_mvtbl = cQIntValidatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQIntValidator()[])](self.fcQIntValidator_vtbl())
+    let inst = cast[ptr typeof(VirtualQIntValidator()[])](self.fcQIntValidator_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1990,7 +1990,7 @@ proc create*(T: type gen_qvalidator_types.QDoubleValidator,
 
 const cQDoubleValidator_mvtbl = cQDoubleValidatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDoubleValidator()[])](self.fcQDoubleValidator_vtbl())
+    let inst = cast[ptr typeof(VirtualQDoubleValidator()[])](self.fcQDoubleValidator_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2522,7 +2522,7 @@ proc create*(T: type gen_qvalidator_types.QRegExpValidator,
 
 const cQRegExpValidator_mvtbl = cQRegExpValidatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRegExpValidator()[])](self.fcQRegExpValidator_vtbl())
+    let inst = cast[ptr typeof(VirtualQRegExpValidator()[])](self.fcQRegExpValidator_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3053,7 +3053,7 @@ proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
 
 const cQRegularExpressionValidator_mvtbl = cQRegularExpressionValidatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](self.fcQRegularExpressionValidator_vtbl())
+    let inst = cast[ptr typeof(VirtualQRegularExpressionValidator()[])](self.fcQRegularExpressionValidator_vdata())
     inst[].h = nil
     inst[].owned = false,
 

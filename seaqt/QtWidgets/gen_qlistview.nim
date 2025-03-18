@@ -2914,7 +2914,7 @@ proc create*(T: type gen_qlistview_types.QListView,
 
 const cQListView_mvtbl = cQListViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQListView()[])](self.fcQListView_vtbl())
+    let inst = cast[ptr typeof(VirtualQListView()[])](self.fcQListView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

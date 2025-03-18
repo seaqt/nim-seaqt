@@ -848,7 +848,7 @@ proc create*(T: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocument
 
 const cQAbstractTextDocumentLayout_mvtbl = cQAbstractTextDocumentLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractTextDocumentLayout()[])](self.fcQAbstractTextDocumentLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractTextDocumentLayout()[])](self.fcQAbstractTextDocumentLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

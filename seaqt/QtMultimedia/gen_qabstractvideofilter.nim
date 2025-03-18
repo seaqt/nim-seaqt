@@ -494,7 +494,7 @@ proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
 
 const cQAbstractVideoFilter_mvtbl = cQAbstractVideoFilterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractVideoFilter()[])](self.fcQAbstractVideoFilter_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractVideoFilter()[])](self.fcQAbstractVideoFilter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

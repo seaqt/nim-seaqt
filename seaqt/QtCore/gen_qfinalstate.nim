@@ -474,7 +474,7 @@ proc create*(T: type gen_qfinalstate_types.QFinalState,
 
 const cQFinalState_mvtbl = cQFinalStateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFinalState()[])](self.fcQFinalState_vtbl())
+    let inst = cast[ptr typeof(VirtualQFinalState()[])](self.fcQFinalState_vdata())
     inst[].h = nil
     inst[].owned = false,
 

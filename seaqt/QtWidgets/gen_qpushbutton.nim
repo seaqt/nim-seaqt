@@ -2070,7 +2070,7 @@ proc create*(T: type gen_qpushbutton_types.QPushButton,
 
 const cQPushButton_mvtbl = cQPushButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPushButton()[])](self.fcQPushButton_vtbl())
+    let inst = cast[ptr typeof(VirtualQPushButton()[])](self.fcQPushButton_vdata())
     inst[].h = nil
     inst[].owned = false,
 

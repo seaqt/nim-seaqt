@@ -619,7 +619,7 @@ proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
 
 const cQOffscreenSurface_mvtbl = cQOffscreenSurfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQOffscreenSurface()[])](self.fcQOffscreenSurface_vtbl())
+    let inst = cast[ptr typeof(VirtualQOffscreenSurface()[])](self.fcQOffscreenSurface_vdata())
     inst[].h = nil
     inst[].owned = false,
 

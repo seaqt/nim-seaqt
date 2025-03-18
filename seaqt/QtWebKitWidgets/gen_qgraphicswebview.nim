@@ -2293,7 +2293,7 @@ proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
 
 const cQGraphicsWebView_mvtbl = cQGraphicsWebViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsWebView()[])](self.fcQGraphicsWebView_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsWebView()[])](self.fcQGraphicsWebView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

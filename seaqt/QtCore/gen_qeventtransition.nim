@@ -562,7 +562,7 @@ proc create*(T: type gen_qeventtransition_types.QEventTransition,
 
 const cQEventTransition_mvtbl = cQEventTransitionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQEventTransition()[])](self.fcQEventTransition_vtbl())
+    let inst = cast[ptr typeof(VirtualQEventTransition()[])](self.fcQEventTransition_vdata())
     inst[].h = nil
     inst[].owned = false,
 

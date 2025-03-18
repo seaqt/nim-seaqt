@@ -1186,7 +1186,7 @@ proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
 
 const cQStackedLayout_mvtbl = cQStackedLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStackedLayout()[])](self.fcQStackedLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQStackedLayout()[])](self.fcQStackedLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

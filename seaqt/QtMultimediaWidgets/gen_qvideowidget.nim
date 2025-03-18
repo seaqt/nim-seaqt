@@ -1702,7 +1702,7 @@ proc create*(T: type gen_qvideowidget_types.QVideoWidget,
 
 const cQVideoWidget_mvtbl = cQVideoWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQVideoWidget()[])](self.fcQVideoWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQVideoWidget()[])](self.fcQVideoWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

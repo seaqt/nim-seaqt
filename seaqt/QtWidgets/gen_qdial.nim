@@ -1552,7 +1552,7 @@ proc create*(T: type gen_qdial_types.QDial,
 
 const cQDial_mvtbl = cQDialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDial()[])](self.fcQDial_vtbl())
+    let inst = cast[ptr typeof(VirtualQDial()[])](self.fcQDial_vdata())
     inst[].h = nil
     inst[].owned = false,
 

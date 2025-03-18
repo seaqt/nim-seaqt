@@ -683,7 +683,7 @@ proc create*(T: type gen_qvariantanimation_types.QVariantAnimation,
 
 const cQVariantAnimation_mvtbl = cQVariantAnimationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQVariantAnimation()[])](self.fcQVariantAnimation_vtbl())
+    let inst = cast[ptr typeof(VirtualQVariantAnimation()[])](self.fcQVariantAnimation_vdata())
     inst[].h = nil
     inst[].owned = false,
 

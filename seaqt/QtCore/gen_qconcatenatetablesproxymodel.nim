@@ -1828,7 +1828,7 @@ proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesPr
 
 const cQConcatenateTablesProxyModel_mvtbl = cQConcatenateTablesProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQConcatenateTablesProxyModel()[])](self.fcQConcatenateTablesProxyModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQConcatenateTablesProxyModel()[])](self.fcQConcatenateTablesProxyModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

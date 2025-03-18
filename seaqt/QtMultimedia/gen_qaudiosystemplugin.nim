@@ -614,7 +614,7 @@ proc create*(T: type gen_qaudiosystemplugin_types.QAudioSystemPlugin,
 
 const cQAudioSystemPlugin_mvtbl = cQAudioSystemPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioSystemPlugin()[])](self.fcQAudioSystemPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioSystemPlugin()[])](self.fcQAudioSystemPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

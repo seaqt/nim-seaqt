@@ -155,7 +155,7 @@ proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
 
 const cQSGSimpleRectNode_mvtbl = cQSGSimpleRectNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](self.fcQSGSimpleRectNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](self.fcQSGSimpleRectNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 

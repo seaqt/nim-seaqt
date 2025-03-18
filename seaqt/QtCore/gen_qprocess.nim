@@ -1413,7 +1413,7 @@ proc create*(T: type gen_qprocess_types.QProcess,
 
 const cQProcess_mvtbl = cQProcessVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQProcess()[])](self.fcQProcess_vtbl())
+    let inst = cast[ptr typeof(VirtualQProcess()[])](self.fcQProcess_vdata())
     inst[].h = nil
     inst[].owned = false,
 

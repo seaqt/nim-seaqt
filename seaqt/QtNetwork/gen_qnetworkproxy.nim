@@ -526,7 +526,7 @@ proc create*(T: type gen_qnetworkproxy_types.QNetworkProxyFactory,
 
 const cQNetworkProxyFactory_mvtbl = cQNetworkProxyFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkProxyFactory()[])](self.fcQNetworkProxyFactory_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkProxyFactory()[])](self.fcQNetworkProxyFactory_vdata())
     inst[].h = nil
     inst[].owned = false,
 

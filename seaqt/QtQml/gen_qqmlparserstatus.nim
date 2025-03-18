@@ -107,7 +107,7 @@ proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
 
 const cQQmlParserStatus_mvtbl = cQQmlParserStatusVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlParserStatus()[])](self.fcQQmlParserStatus_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlParserStatus()[])](self.fcQQmlParserStatus_vdata())
     inst[].h = nil
     inst[].owned = false,
 

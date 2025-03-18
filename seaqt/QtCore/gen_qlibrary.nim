@@ -666,7 +666,7 @@ proc create*(T: type gen_qlibrary_types.QLibrary,
 
 const cQLibrary_mvtbl = cQLibraryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLibrary()[])](self.fcQLibrary_vtbl())
+    let inst = cast[ptr typeof(VirtualQLibrary()[])](self.fcQLibrary_vdata())
     inst[].h = nil
     inst[].owned = false,
 

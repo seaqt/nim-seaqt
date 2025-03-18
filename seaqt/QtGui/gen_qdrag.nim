@@ -514,7 +514,7 @@ proc create*(T: type gen_qdrag_types.QDrag,
 
 const cQDrag_mvtbl = cQDragVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDrag()[])](self.fcQDrag_vtbl())
+    let inst = cast[ptr typeof(VirtualQDrag()[])](self.fcQDrag_vdata())
     inst[].h = nil
     inst[].owned = false,
 

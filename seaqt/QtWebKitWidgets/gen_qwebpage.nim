@@ -2043,7 +2043,7 @@ proc create*(T: type gen_qwebpage_types.QWebPage,
 
 const cQWebPage_mvtbl = cQWebPageVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebPage()[])](self.fcQWebPage_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebPage()[])](self.fcQWebPage_vdata())
     inst[].h = nil
     inst[].owned = false,
 

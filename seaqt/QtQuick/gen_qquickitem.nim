@@ -804,7 +804,7 @@ proc create*(T: type gen_qquickitem_types.QQuickTransform,
 
 const cQQuickTransform_mvtbl = cQQuickTransformVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickTransform()[])](self.fcQQuickTransform_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickTransform()[])](self.fcQQuickTransform_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2848,7 +2848,7 @@ proc create*(T: type gen_qquickitem_types.QQuickItem,
 
 const cQQuickItem_mvtbl = cQQuickItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickItem()[])](self.fcQQuickItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickItem()[])](self.fcQQuickItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 

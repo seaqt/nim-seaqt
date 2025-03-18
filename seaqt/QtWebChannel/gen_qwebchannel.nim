@@ -505,7 +505,7 @@ proc create*(T: type gen_qwebchannel_types.QWebChannel,
 
 const cQWebChannel_mvtbl = cQWebChannelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebChannel()[])](self.fcQWebChannel_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebChannel()[])](self.fcQWebChannel_vdata())
     inst[].h = nil
     inst[].owned = false,
 
