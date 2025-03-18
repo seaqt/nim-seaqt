@@ -1694,7 +1694,7 @@ proc create*(T: type gen_qquickwindow_types.QQuickWindow,
 
 const cQQuickWindow_mvtbl = cQQuickWindowVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickWindow()[])](self.fcQQuickWindow_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickWindow()[])](self.fcQQuickWindow_vdata())
     inst[].h = nil
     inst[].owned = false,
 

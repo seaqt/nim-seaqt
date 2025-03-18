@@ -955,7 +955,7 @@ proc create*(T: type gen_qdnslookup_types.QDnsLookup,
 
 const cQDnsLookup_mvtbl = cQDnsLookupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDnsLookup()[])](self.fcQDnsLookup_vtbl())
+    let inst = cast[ptr typeof(VirtualQDnsLookup()[])](self.fcQDnsLookup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

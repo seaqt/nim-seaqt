@@ -1134,7 +1134,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
 
 const cQTemporaryFile_mvtbl = cQTemporaryFileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTemporaryFile()[])](self.fcQTemporaryFile_vtbl())
+    let inst = cast[ptr typeof(VirtualQTemporaryFile()[])](self.fcQTemporaryFile_vdata())
     inst[].h = nil
     inst[].owned = false,
 

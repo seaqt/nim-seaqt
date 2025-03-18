@@ -1421,7 +1421,7 @@ proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
 
 const cQGraphicsVideoItem_mvtbl = cQGraphicsVideoItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsVideoItem()[])](self.fcQGraphicsVideoItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsVideoItem()[])](self.fcQGraphicsVideoItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 

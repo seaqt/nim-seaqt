@@ -537,7 +537,7 @@ proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
 
 const cQQuickRenderControl_mvtbl = cQQuickRenderControlVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickRenderControl()[])](self.fcQQuickRenderControl_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickRenderControl()[])](self.fcQQuickRenderControl_vdata())
     inst[].h = nil
     inst[].owned = false,
 

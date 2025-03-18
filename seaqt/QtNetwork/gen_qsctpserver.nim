@@ -501,7 +501,7 @@ proc create*(T: type gen_qsctpserver_types.QSctpServer,
 
 const cQSctpServer_mvtbl = cQSctpServerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSctpServer()[])](self.fcQSctpServer_vtbl())
+    let inst = cast[ptr typeof(VirtualQSctpServer()[])](self.fcQSctpServer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

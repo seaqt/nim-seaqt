@@ -797,7 +797,7 @@ proc create*(T: type gen_qprinter_types.QPrinter,
 
 const cQPrinter_mvtbl = cQPrinterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPrinter()[])](self.fcQPrinter_vtbl())
+    let inst = cast[ptr typeof(VirtualQPrinter()[])](self.fcQPrinter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

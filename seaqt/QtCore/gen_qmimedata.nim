@@ -599,7 +599,7 @@ proc create*(T: type gen_qmimedata_types.QMimeData,
 
 const cQMimeData_mvtbl = cQMimeDataVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMimeData()[])](self.fcQMimeData_vtbl())
+    let inst = cast[ptr typeof(VirtualQMimeData()[])](self.fcQMimeData_vdata())
     inst[].h = nil
     inst[].owned = false,
 

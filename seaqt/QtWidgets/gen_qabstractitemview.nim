@@ -3177,7 +3177,7 @@ proc create*(T: type gen_qabstractitemview_types.QAbstractItemView,
 
 const cQAbstractItemView_mvtbl = cQAbstractItemViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractItemView()[])](self.fcQAbstractItemView_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractItemView()[])](self.fcQAbstractItemView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

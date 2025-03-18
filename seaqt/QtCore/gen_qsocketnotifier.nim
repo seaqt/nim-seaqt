@@ -497,7 +497,7 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
 
 const cQSocketNotifier_mvtbl = cQSocketNotifierVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSocketNotifier()[])](self.fcQSocketNotifier_vtbl())
+    let inst = cast[ptr typeof(VirtualQSocketNotifier()[])](self.fcQSocketNotifier_vdata())
     inst[].h = nil
     inst[].owned = false,
 

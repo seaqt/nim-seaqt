@@ -2001,7 +2001,7 @@ proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
 
 const cQSplashScreen_mvtbl = cQSplashScreenVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSplashScreen()[])](self.fcQSplashScreen_vtbl())
+    let inst = cast[ptr typeof(VirtualQSplashScreen()[])](self.fcQSplashScreen_vdata())
     inst[].h = nil
     inst[].owned = false,
 

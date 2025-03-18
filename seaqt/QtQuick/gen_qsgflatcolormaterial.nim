@@ -182,7 +182,7 @@ proc create*(T: type gen_qsgflatcolormaterial_types.QSGFlatColorMaterial,
 
 const cQSGFlatColorMaterial_mvtbl = cQSGFlatColorMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGFlatColorMaterial()[])](self.fcQSGFlatColorMaterial_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGFlatColorMaterial()[])](self.fcQSGFlatColorMaterial_vdata())
     inst[].h = nil
     inst[].owned = false,
 

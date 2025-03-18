@@ -1677,7 +1677,7 @@ proc create*(T: type gen_qframe_types.QFrame,
 
 const cQFrame_mvtbl = cQFrameVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFrame()[])](self.fcQFrame_vtbl())
+    let inst = cast[ptr typeof(VirtualQFrame()[])](self.fcQFrame_vdata())
     inst[].h = nil
     inst[].owned = false,
 

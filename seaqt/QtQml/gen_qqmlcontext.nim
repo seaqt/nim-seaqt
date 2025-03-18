@@ -539,7 +539,7 @@ proc create*(T: type gen_qqmlcontext_types.QQmlContext,
 
 const cQQmlContext_mvtbl = cQQmlContextVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlContext()[])](self.fcQQmlContext_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlContext()[])](self.fcQQmlContext_vdata())
     inst[].h = nil
     inst[].owned = false,
 

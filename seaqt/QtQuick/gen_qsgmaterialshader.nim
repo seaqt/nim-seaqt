@@ -239,7 +239,7 @@ proc create*(T: type gen_qsgmaterialshader_types.QSGMaterialShader,
 
 const cQSGMaterialShader_mvtbl = cQSGMaterialShaderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGMaterialShader()[])](self.fcQSGMaterialShader_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGMaterialShader()[])](self.fcQSGMaterialShader_vdata())
     inst[].h = nil
     inst[].owned = false,
 

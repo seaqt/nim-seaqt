@@ -447,7 +447,7 @@ proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
 
 const cQGenericPlugin_mvtbl = cQGenericPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGenericPlugin()[])](self.fcQGenericPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQGenericPlugin()[])](self.fcQGenericPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

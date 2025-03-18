@@ -633,7 +633,7 @@ proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
 
 const cQButtonGroup_mvtbl = cQButtonGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQButtonGroup()[])](self.fcQButtonGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQButtonGroup()[])](self.fcQButtonGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

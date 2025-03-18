@@ -180,7 +180,7 @@ proc create*(T: type gen_qsgmaterial_types.QSGMaterial,
 
 const cQSGMaterial_mvtbl = cQSGMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGMaterial()[])](self.fcQSGMaterial_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGMaterial()[])](self.fcQSGMaterial_vdata())
     inst[].h = nil
     inst[].owned = false,
 

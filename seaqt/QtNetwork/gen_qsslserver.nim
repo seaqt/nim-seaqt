@@ -725,7 +725,7 @@ proc create*(T: type gen_qsslserver_types.QSslServer,
 
 const cQSslServer_mvtbl = cQSslServerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSslServer()[])](self.fcQSslServer_vtbl())
+    let inst = cast[ptr typeof(VirtualQSslServer()[])](self.fcQSslServer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

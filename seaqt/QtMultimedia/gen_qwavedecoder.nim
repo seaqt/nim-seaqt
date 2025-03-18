@@ -992,7 +992,7 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
 
 const cQWaveDecoder_mvtbl = cQWaveDecoderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWaveDecoder()[])](self.fcQWaveDecoder_vtbl())
+    let inst = cast[ptr typeof(VirtualQWaveDecoder()[])](self.fcQWaveDecoder_vdata())
     inst[].h = nil
     inst[].owned = false,
 

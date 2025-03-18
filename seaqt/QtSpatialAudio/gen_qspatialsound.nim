@@ -798,7 +798,7 @@ proc create*(T: type gen_qspatialsound_types.QSpatialSound,
 
 const cQSpatialSound_mvtbl = cQSpatialSoundVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSpatialSound()[])](self.fcQSpatialSound_vtbl())
+    let inst = cast[ptr typeof(VirtualQSpatialSound()[])](self.fcQSpatialSound_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -112,7 +112,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlTypesExtensionInterfac
 
 const cQQmlTypesExtensionInterface_mvtbl = cQQmlTypesExtensionInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlTypesExtensionInterface()[])](self.fcQQmlTypesExtensionInterface_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlTypesExtensionInterface()[])](self.fcQQmlTypesExtensionInterface_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -189,7 +189,7 @@ proc create*(T: type gen_qqmlextensioninterface_types.QQmlExtensionInterface,
 
 const cQQmlExtensionInterface_mvtbl = cQQmlExtensionInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlExtensionInterface()[])](self.fcQQmlExtensionInterface_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlExtensionInterface()[])](self.fcQQmlExtensionInterface_vdata())
     inst[].h = nil
     inst[].owned = false,
 

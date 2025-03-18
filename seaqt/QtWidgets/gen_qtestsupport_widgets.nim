@@ -175,7 +175,7 @@ proc create*(T: type gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequen
 
 const cQTestQTouchEventWidgetSequence_mvtbl = cQTestQTouchEventWidgetSequenceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTestQTouchEventWidgetSequence()[])](self.fcQTestQTouchEventWidgetSequence_vtbl())
+    let inst = cast[ptr typeof(VirtualQTestQTouchEventWidgetSequence()[])](self.fcQTestQTouchEventWidgetSequence_vdata())
     inst[].h = nil
     inst[].owned = false,
 

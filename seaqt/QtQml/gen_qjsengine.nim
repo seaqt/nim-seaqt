@@ -562,7 +562,7 @@ proc create*(T: type gen_qjsengine_types.QJSEngine,
 
 const cQJSEngine_mvtbl = cQJSEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQJSEngine()[])](self.fcQJSEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQJSEngine()[])](self.fcQJSEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

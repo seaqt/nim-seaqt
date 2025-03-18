@@ -1945,7 +1945,7 @@ proc create*(T: type gen_qcolordialog_types.QColorDialog,
 
 const cQColorDialog_mvtbl = cQColorDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQColorDialog()[])](self.fcQColorDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQColorDialog()[])](self.fcQColorDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

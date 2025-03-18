@@ -1097,7 +1097,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
 
 const cQSaveFile_mvtbl = cQSaveFileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSaveFile()[])](self.fcQSaveFile_vtbl())
+    let inst = cast[ptr typeof(VirtualQSaveFile()[])](self.fcQSaveFile_vdata())
     inst[].h = nil
     inst[].owned = false,
 

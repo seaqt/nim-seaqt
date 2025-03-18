@@ -2011,7 +2011,7 @@ proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
 
 const cQWebEnginePage_mvtbl = cQWebEnginePageVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebEnginePage()[])](self.fcQWebEnginePage_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebEnginePage()[])](self.fcQWebEnginePage_vdata())
     inst[].h = nil
     inst[].owned = false,
 

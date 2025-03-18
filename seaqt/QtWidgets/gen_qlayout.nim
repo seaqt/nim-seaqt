@@ -1248,7 +1248,7 @@ proc create*(T: type gen_qlayout_types.QLayout,
 
 const cQLayout_mvtbl = cQLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLayout()[])](self.fcQLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQLayout()[])](self.fcQLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

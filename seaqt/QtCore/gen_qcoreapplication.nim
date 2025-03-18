@@ -826,7 +826,7 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
 
 const cQCoreApplication_mvtbl = cQCoreApplicationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCoreApplication()[])](self.fcQCoreApplication_vtbl())
+    let inst = cast[ptr typeof(VirtualQCoreApplication()[])](self.fcQCoreApplication_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1799,7 +1799,7 @@ proc create*(T: type gen_qradiobutton_types.QRadioButton,
 
 const cQRadioButton_mvtbl = cQRadioButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRadioButton()[])](self.fcQRadioButton_vtbl())
+    let inst = cast[ptr typeof(VirtualQRadioButton()[])](self.fcQRadioButton_vdata())
     inst[].h = nil
     inst[].owned = false,
 

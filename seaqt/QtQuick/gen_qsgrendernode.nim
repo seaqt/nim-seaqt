@@ -312,7 +312,7 @@ proc create*(T: type gen_qsgrendernode_types.QSGRenderNode,
 
 const cQSGRenderNode_mvtbl = cQSGRenderNodeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGRenderNode()[])](self.fcQSGRenderNode_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGRenderNode()[])](self.fcQSGRenderNode_vdata())
     inst[].h = nil
     inst[].owned = false,
 

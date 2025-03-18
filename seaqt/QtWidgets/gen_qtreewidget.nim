@@ -1260,7 +1260,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
 
 const cQTreeWidgetItem_mvtbl = cQTreeWidgetItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTreeWidgetItem()[])](self.fcQTreeWidgetItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQTreeWidgetItem()[])](self.fcQTreeWidgetItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4393,7 +4393,7 @@ proc create*(T: type gen_qtreewidget_types.QTreeWidget,
 
 const cQTreeWidget_mvtbl = cQTreeWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTreeWidget()[])](self.fcQTreeWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQTreeWidget()[])](self.fcQTreeWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

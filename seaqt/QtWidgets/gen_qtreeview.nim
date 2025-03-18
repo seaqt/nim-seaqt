@@ -3093,7 +3093,7 @@ proc create*(T: type gen_qtreeview_types.QTreeView,
 
 const cQTreeView_mvtbl = cQTreeViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTreeView()[])](self.fcQTreeView_vtbl())
+    let inst = cast[ptr typeof(VirtualQTreeView()[])](self.fcQTreeView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

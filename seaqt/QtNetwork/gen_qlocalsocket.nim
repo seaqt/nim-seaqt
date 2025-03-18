@@ -1087,7 +1087,7 @@ proc create*(T: type gen_qlocalsocket_types.QLocalSocket,
 
 const cQLocalSocket_mvtbl = cQLocalSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLocalSocket()[])](self.fcQLocalSocket_vtbl())
+    let inst = cast[ptr typeof(VirtualQLocalSocket()[])](self.fcQLocalSocket_vdata())
     inst[].h = nil
     inst[].owned = false,
 

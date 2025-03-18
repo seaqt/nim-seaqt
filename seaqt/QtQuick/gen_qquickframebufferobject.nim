@@ -1390,7 +1390,7 @@ proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
 
 const cQQuickFramebufferObject_mvtbl = cQQuickFramebufferObjectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickFramebufferObject()[])](self.fcQQuickFramebufferObject_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickFramebufferObject()[])](self.fcQQuickFramebufferObject_vdata())
     inst[].h = nil
     inst[].owned = false,
 

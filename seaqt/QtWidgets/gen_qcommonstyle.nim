@@ -1162,7 +1162,7 @@ proc create*(T: type gen_qcommonstyle_types.QCommonStyle,
 
 const cQCommonStyle_mvtbl = cQCommonStyleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCommonStyle()[])](self.fcQCommonStyle_vtbl())
+    let inst = cast[ptr typeof(VirtualQCommonStyle()[])](self.fcQCommonStyle_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -550,7 +550,7 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOHandler,
 
 const cQImageIOHandler_mvtbl = cQImageIOHandlerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQImageIOHandler()[])](self.fcQImageIOHandler_vtbl())
+    let inst = cast[ptr typeof(VirtualQImageIOHandler()[])](self.fcQImageIOHandler_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -954,7 +954,7 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
 
 const cQImageIOPlugin_mvtbl = cQImageIOPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQImageIOPlugin()[])](self.fcQImageIOPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQImageIOPlugin()[])](self.fcQImageIOPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

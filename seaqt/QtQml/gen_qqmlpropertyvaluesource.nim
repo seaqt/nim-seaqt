@@ -97,7 +97,7 @@ proc create*(T: type gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource,
 
 const cQQmlPropertyValueSource_mvtbl = cQQmlPropertyValueSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlPropertyValueSource()[])](self.fcQQmlPropertyValueSource_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlPropertyValueSource()[])](self.fcQQmlPropertyValueSource_vdata())
     inst[].h = nil
     inst[].owned = false,
 

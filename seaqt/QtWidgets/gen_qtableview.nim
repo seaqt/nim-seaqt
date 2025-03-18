@@ -2921,7 +2921,7 @@ proc create*(T: type gen_qtableview_types.QTableView,
 
 const cQTableView_mvtbl = cQTableViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTableView()[])](self.fcQTableView_vtbl())
+    let inst = cast[ptr typeof(VirtualQTableView()[])](self.fcQTableView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

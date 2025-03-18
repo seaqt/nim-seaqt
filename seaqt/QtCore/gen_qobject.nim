@@ -639,7 +639,7 @@ proc create*(T: type gen_qobject_types.QObject,
 
 const cQObject_mvtbl = cQObjectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQObject()[])](self.fcQObject_vtbl())
+    let inst = cast[ptr typeof(VirtualQObject()[])](self.fcQObject_vdata())
     inst[].h = nil
     inst[].owned = false,
 

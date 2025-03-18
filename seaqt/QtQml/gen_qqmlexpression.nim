@@ -660,7 +660,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
 
 const cQQmlExpression_mvtbl = cQQmlExpressionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlExpression()[])](self.fcQQmlExpression_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlExpression()[])](self.fcQQmlExpression_vdata())
     inst[].h = nil
     inst[].owned = false,
 

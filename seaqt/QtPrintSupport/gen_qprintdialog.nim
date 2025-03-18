@@ -1877,7 +1877,7 @@ proc create*(T: type gen_qprintdialog_types.QPrintDialog,
 
 const cQPrintDialog_mvtbl = cQPrintDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPrintDialog()[])](self.fcQPrintDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQPrintDialog()[])](self.fcQPrintDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1762,7 +1762,7 @@ proc create*(T: type gen_qtoolbox_types.QToolBox,
 
 const cQToolBox_mvtbl = cQToolBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQToolBox()[])](self.fcQToolBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQToolBox()[])](self.fcQToolBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

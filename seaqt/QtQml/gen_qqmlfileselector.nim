@@ -426,7 +426,7 @@ proc create*(T: type gen_qqmlfileselector_types.QQmlFileSelector,
 
 const cQQmlFileSelector_mvtbl = cQQmlFileSelectorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlFileSelector()[])](self.fcQQmlFileSelector_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlFileSelector()[])](self.fcQQmlFileSelector_vdata())
     inst[].h = nil
     inst[].owned = false,
 

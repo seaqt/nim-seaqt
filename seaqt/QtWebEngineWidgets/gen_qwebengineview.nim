@@ -2379,7 +2379,7 @@ proc create*(T: type gen_qwebengineview_types.QWebEngineView,
 
 const cQWebEngineView_mvtbl = cQWebEngineViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWebEngineView()[])](self.fcQWebEngineView_vtbl())
+    let inst = cast[ptr typeof(VirtualQWebEngineView()[])](self.fcQWebEngineView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

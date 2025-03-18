@@ -1489,7 +1489,7 @@ proc create*(T: type gen_qfocusframe_types.QFocusFrame,
 
 const cQFocusFrame_mvtbl = cQFocusFrameVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFocusFrame()[])](self.fcQFocusFrame_vtbl())
+    let inst = cast[ptr typeof(VirtualQFocusFrame()[])](self.fcQFocusFrame_vdata())
     inst[].h = nil
     inst[].owned = false,
 

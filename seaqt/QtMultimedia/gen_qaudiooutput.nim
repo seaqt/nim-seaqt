@@ -553,7 +553,7 @@ proc create*(T: type gen_qaudiooutput_types.QAudioOutput,
 
 const cQAudioOutput_mvtbl = cQAudioOutputVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioOutput()[])](self.fcQAudioOutput_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioOutput()[])](self.fcQAudioOutput_vdata())
     inst[].h = nil
     inst[].owned = false,
 

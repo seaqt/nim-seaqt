@@ -1551,7 +1551,7 @@ proc create*(T: type gen_qstatusbar_types.QStatusBar,
 
 const cQStatusBar_mvtbl = cQStatusBarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStatusBar()[])](self.fcQStatusBar_vtbl())
+    let inst = cast[ptr typeof(VirtualQStatusBar()[])](self.fcQStatusBar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

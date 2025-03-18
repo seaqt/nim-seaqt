@@ -508,7 +508,7 @@ proc create*(T: type gen_qambientsound_types.QAmbientSound,
 
 const cQAmbientSound_mvtbl = cQAmbientSoundVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAmbientSound()[])](self.fcQAmbientSound_vtbl())
+    let inst = cast[ptr typeof(VirtualQAmbientSound()[])](self.fcQAmbientSound_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -533,7 +533,7 @@ proc create*(T: type gen_qpluginloader_types.QPluginLoader,
 
 const cQPluginLoader_mvtbl = cQPluginLoaderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPluginLoader()[])](self.fcQPluginLoader_vtbl())
+    let inst = cast[ptr typeof(VirtualQPluginLoader()[])](self.fcQPluginLoader_vdata())
     inst[].h = nil
     inst[].owned = false,
 

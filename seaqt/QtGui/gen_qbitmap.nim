@@ -426,7 +426,7 @@ proc create*(T: type gen_qbitmap_types.QBitmap,
 
 const cQBitmap_mvtbl = cQBitmapVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQBitmap()[])](self.fcQBitmap_vtbl())
+    let inst = cast[ptr typeof(VirtualQBitmap()[])](self.fcQBitmap_vdata())
     inst[].h = nil
     inst[].owned = false,
 

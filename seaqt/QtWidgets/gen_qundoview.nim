@@ -3556,7 +3556,7 @@ proc create*(T: type gen_qundoview_types.QUndoView,
 
 const cQUndoView_mvtbl = cQUndoViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQUndoView()[])](self.fcQUndoView_vtbl())
+    let inst = cast[ptr typeof(VirtualQUndoView()[])](self.fcQUndoView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

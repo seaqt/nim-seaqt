@@ -1517,7 +1517,7 @@ proc create*(T: type gen_qrubberband_types.QRubberBand,
 
 const cQRubberBand_mvtbl = cQRubberBandVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRubberBand()[])](self.fcQRubberBand_vtbl())
+    let inst = cast[ptr typeof(VirtualQRubberBand()[])](self.fcQRubberBand_vdata())
     inst[].h = nil
     inst[].owned = false,
 

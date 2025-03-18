@@ -1741,7 +1741,7 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
 
 const cQKeySequenceEdit_mvtbl = cQKeySequenceEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQKeySequenceEdit()[])](self.fcQKeySequenceEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQKeySequenceEdit()[])](self.fcQKeySequenceEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 

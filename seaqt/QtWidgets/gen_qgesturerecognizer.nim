@@ -186,7 +186,7 @@ proc create*(T: type gen_qgesturerecognizer_types.QGestureRecognizer,
 
 const cQGestureRecognizer_mvtbl = cQGestureRecognizerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGestureRecognizer()[])](self.fcQGestureRecognizer_vtbl())
+    let inst = cast[ptr typeof(VirtualQGestureRecognizer()[])](self.fcQGestureRecognizer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

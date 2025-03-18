@@ -717,7 +717,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
 
 const cQLayoutItem_mvtbl = cQLayoutItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLayoutItem()[])](self.fcQLayoutItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQLayoutItem()[])](self.fcQLayoutItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1279,7 +1279,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
 
 const cQSpacerItem_mvtbl = cQSpacerItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSpacerItem()[])](self.fcQSpacerItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQSpacerItem()[])](self.fcQSpacerItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1729,7 +1729,7 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItem,
 
 const cQWidgetItem_mvtbl = cQWidgetItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWidgetItem()[])](self.fcQWidgetItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQWidgetItem()[])](self.fcQWidgetItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2134,7 +2134,7 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItemV2,
 
 const cQWidgetItemV2_mvtbl = cQWidgetItemV2VTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWidgetItemV2()[])](self.fcQWidgetItemV2_vtbl())
+    let inst = cast[ptr typeof(VirtualQWidgetItemV2()[])](self.fcQWidgetItemV2_vdata())
     inst[].h = nil
     inst[].owned = false,
 

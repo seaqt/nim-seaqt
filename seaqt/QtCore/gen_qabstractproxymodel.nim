@@ -2060,7 +2060,7 @@ proc create*(T: type gen_qabstractproxymodel_types.QAbstractProxyModel,
 
 const cQAbstractProxyModel_mvtbl = cQAbstractProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractProxyModel()[])](self.fcQAbstractProxyModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractProxyModel()[])](self.fcQAbstractProxyModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

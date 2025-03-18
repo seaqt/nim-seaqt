@@ -1973,7 +1973,7 @@ proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
 
 const cQStringListModel_mvtbl = cQStringListModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStringListModel()[])](self.fcQStringListModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQStringListModel()[])](self.fcQStringListModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

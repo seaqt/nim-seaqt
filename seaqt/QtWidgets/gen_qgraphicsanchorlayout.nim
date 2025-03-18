@@ -506,7 +506,7 @@ proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
 
 const cQGraphicsAnchorLayout_mvtbl = cQGraphicsAnchorLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsAnchorLayout()[])](self.fcQGraphicsAnchorLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsAnchorLayout()[])](self.fcQGraphicsAnchorLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

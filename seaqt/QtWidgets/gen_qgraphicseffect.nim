@@ -830,7 +830,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
 
 const cQGraphicsEffect_mvtbl = cQGraphicsEffectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsEffect()[])](self.fcQGraphicsEffect_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsEffect()[])](self.fcQGraphicsEffect_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1314,7 +1314,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
 
 const cQGraphicsColorizeEffect_mvtbl = cQGraphicsColorizeEffectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsColorizeEffect()[])](self.fcQGraphicsColorizeEffect_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsColorizeEffect()[])](self.fcQGraphicsColorizeEffect_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1801,7 +1801,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
 
 const cQGraphicsBlurEffect_mvtbl = cQGraphicsBlurEffectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsBlurEffect()[])](self.fcQGraphicsBlurEffect_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsBlurEffect()[])](self.fcQGraphicsBlurEffect_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2332,7 +2332,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
 
 const cQGraphicsDropShadowEffect_mvtbl = cQGraphicsDropShadowEffectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsDropShadowEffect()[])](self.fcQGraphicsDropShadowEffect_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsDropShadowEffect()[])](self.fcQGraphicsDropShadowEffect_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2816,7 +2816,7 @@ proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
 
 const cQGraphicsOpacityEffect_mvtbl = cQGraphicsOpacityEffectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsOpacityEffect()[])](self.fcQGraphicsOpacityEffect_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsOpacityEffect()[])](self.fcQGraphicsOpacityEffect_vdata())
     inst[].h = nil
     inst[].owned = false,
 

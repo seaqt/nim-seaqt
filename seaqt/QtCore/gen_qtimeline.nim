@@ -581,7 +581,7 @@ proc create*(T: type gen_qtimeline_types.QTimeLine,
 
 const cQTimeLine_mvtbl = cQTimeLineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTimeLine()[])](self.fcQTimeLine_vtbl())
+    let inst = cast[ptr typeof(VirtualQTimeLine()[])](self.fcQTimeLine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

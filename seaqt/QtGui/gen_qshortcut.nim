@@ -730,7 +730,7 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
 
 const cQShortcut_mvtbl = cQShortcutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQShortcut()[])](self.fcQShortcut_vtbl())
+    let inst = cast[ptr typeof(VirtualQShortcut()[])](self.fcQShortcut_vdata())
     inst[].h = nil
     inst[].owned = false,
 

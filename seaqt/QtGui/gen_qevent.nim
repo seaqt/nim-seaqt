@@ -1011,7 +1011,7 @@ proc create*(T: type gen_qevent_types.QInputEvent,
 
 const cQInputEvent_mvtbl = cQInputEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQInputEvent()[])](self.fcQInputEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQInputEvent()[])](self.fcQInputEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1292,7 +1292,7 @@ proc create*(T: type gen_qevent_types.QPointerEvent,
 
 const cQPointerEvent_mvtbl = cQPointerEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPointerEvent()[])](self.fcQPointerEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQPointerEvent()[])](self.fcQPointerEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1563,7 +1563,7 @@ proc create*(T: type gen_qevent_types.QEnterEvent,
 
 const cQEnterEvent_mvtbl = cQEnterEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQEnterEvent()[])](self.fcQEnterEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQEnterEvent()[])](self.fcQEnterEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1926,7 +1926,7 @@ proc create*(T: type gen_qevent_types.QMouseEvent,
 
 const cQMouseEvent_mvtbl = cQMouseEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMouseEvent()[])](self.fcQMouseEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQMouseEvent()[])](self.fcQMouseEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2269,7 +2269,7 @@ proc create*(T: type gen_qevent_types.QHoverEvent,
 
 const cQHoverEvent_mvtbl = cQHoverEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHoverEvent()[])](self.fcQHoverEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQHoverEvent()[])](self.fcQHoverEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2547,7 +2547,7 @@ proc create*(T: type gen_qevent_types.QWheelEvent,
 
 const cQWheelEvent_mvtbl = cQWheelEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWheelEvent()[])](self.fcQWheelEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQWheelEvent()[])](self.fcQWheelEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2783,7 +2783,7 @@ proc create*(T: type gen_qevent_types.QTabletEvent,
 
 const cQTabletEvent_mvtbl = cQTabletEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTabletEvent()[])](self.fcQTabletEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQTabletEvent()[])](self.fcQTabletEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3023,7 +3023,7 @@ proc create*(T: type gen_qevent_types.QNativeGestureEvent,
 
 const cQNativeGestureEvent_mvtbl = cQNativeGestureEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNativeGestureEvent()[])](self.fcQNativeGestureEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQNativeGestureEvent()[])](self.fcQNativeGestureEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3307,7 +3307,7 @@ proc create*(T: type gen_qevent_types.QKeyEvent,
 
 const cQKeyEvent_mvtbl = cQKeyEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQKeyEvent()[])](self.fcQKeyEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQKeyEvent()[])](self.fcQKeyEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3472,7 +3472,7 @@ proc create*(T: type gen_qevent_types.QFocusEvent,
 
 const cQFocusEvent_mvtbl = cQFocusEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFocusEvent()[])](self.fcQFocusEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQFocusEvent()[])](self.fcQFocusEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3584,7 +3584,7 @@ proc create*(T: type gen_qevent_types.QPaintEvent,
 
 const cQPaintEvent_mvtbl = cQPaintEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPaintEvent()[])](self.fcQPaintEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQPaintEvent()[])](self.fcQPaintEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3682,7 +3682,7 @@ proc create*(T: type gen_qevent_types.QMoveEvent,
 
 const cQMoveEvent_mvtbl = cQMoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMoveEvent()[])](self.fcQMoveEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQMoveEvent()[])](self.fcQMoveEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3770,7 +3770,7 @@ proc create*(T: type gen_qevent_types.QExposeEvent,
 
 const cQExposeEvent_mvtbl = cQExposeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQExposeEvent()[])](self.fcQExposeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQExposeEvent()[])](self.fcQExposeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3858,7 +3858,7 @@ proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
 
 const cQPlatformSurfaceEvent_mvtbl = cQPlatformSurfaceEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPlatformSurfaceEvent()[])](self.fcQPlatformSurfaceEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQPlatformSurfaceEvent()[])](self.fcQPlatformSurfaceEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3949,7 +3949,7 @@ proc create*(T: type gen_qevent_types.QResizeEvent,
 
 const cQResizeEvent_mvtbl = cQResizeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQResizeEvent()[])](self.fcQResizeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQResizeEvent()[])](self.fcQResizeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4033,7 +4033,7 @@ proc create*(T: type gen_qevent_types.QCloseEvent,
 
 const cQCloseEvent_mvtbl = cQCloseEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCloseEvent()[])](self.fcQCloseEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQCloseEvent()[])](self.fcQCloseEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4116,7 +4116,7 @@ proc create*(T: type gen_qevent_types.QIconDragEvent,
 
 const cQIconDragEvent_mvtbl = cQIconDragEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQIconDragEvent()[])](self.fcQIconDragEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQIconDragEvent()[])](self.fcQIconDragEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4199,7 +4199,7 @@ proc create*(T: type gen_qevent_types.QShowEvent,
 
 const cQShowEvent_mvtbl = cQShowEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQShowEvent()[])](self.fcQShowEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQShowEvent()[])](self.fcQShowEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4282,7 +4282,7 @@ proc create*(T: type gen_qevent_types.QHideEvent,
 
 const cQHideEvent_mvtbl = cQHideEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHideEvent()[])](self.fcQHideEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQHideEvent()[])](self.fcQHideEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4439,7 +4439,7 @@ proc create*(T: type gen_qevent_types.QContextMenuEvent,
 
 const cQContextMenuEvent_mvtbl = cQContextMenuEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQContextMenuEvent()[])](self.fcQContextMenuEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQContextMenuEvent()[])](self.fcQContextMenuEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4592,7 +4592,7 @@ proc create*(T: type gen_qevent_types.QInputMethodEvent,
 
 const cQInputMethodEvent_mvtbl = cQInputMethodEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQInputMethodEvent()[])](self.fcQInputMethodEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQInputMethodEvent()[])](self.fcQInputMethodEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4696,7 +4696,7 @@ proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
 
 const cQInputMethodQueryEvent_mvtbl = cQInputMethodQueryEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQInputMethodQueryEvent()[])](self.fcQInputMethodQueryEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQInputMethodQueryEvent()[])](self.fcQInputMethodQueryEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4837,7 +4837,7 @@ proc create*(T: type gen_qevent_types.QDropEvent,
 
 const cQDropEvent_mvtbl = cQDropEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDropEvent()[])](self.fcQDropEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQDropEvent()[])](self.fcQDropEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4958,7 +4958,7 @@ proc create*(T: type gen_qevent_types.QDragMoveEvent,
 
 const cQDragMoveEvent_mvtbl = cQDragMoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDragMoveEvent()[])](self.fcQDragMoveEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQDragMoveEvent()[])](self.fcQDragMoveEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5050,7 +5050,7 @@ proc create*(T: type gen_qevent_types.QDragEnterEvent,
 
 const cQDragEnterEvent_mvtbl = cQDragEnterEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDragEnterEvent()[])](self.fcQDragEnterEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQDragEnterEvent()[])](self.fcQDragEnterEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5134,7 +5134,7 @@ proc create*(T: type gen_qevent_types.QDragLeaveEvent,
 
 const cQDragLeaveEvent_mvtbl = cQDragLeaveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDragLeaveEvent()[])](self.fcQDragLeaveEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQDragLeaveEvent()[])](self.fcQDragLeaveEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5236,7 +5236,7 @@ proc create*(T: type gen_qevent_types.QHelpEvent,
 
 const cQHelpEvent_mvtbl = cQHelpEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHelpEvent()[])](self.fcQHelpEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQHelpEvent()[])](self.fcQHelpEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5327,7 +5327,7 @@ proc create*(T: type gen_qevent_types.QStatusTipEvent,
 
 const cQStatusTipEvent_mvtbl = cQStatusTipEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStatusTipEvent()[])](self.fcQStatusTipEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQStatusTipEvent()[])](self.fcQStatusTipEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5418,7 +5418,7 @@ proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
 
 const cQWhatsThisClickedEvent_mvtbl = cQWhatsThisClickedEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWhatsThisClickedEvent()[])](self.fcQWhatsThisClickedEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQWhatsThisClickedEvent()[])](self.fcQWhatsThisClickedEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5517,7 +5517,7 @@ proc create*(T: type gen_qevent_types.QActionEvent,
 
 const cQActionEvent_mvtbl = cQActionEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQActionEvent()[])](self.fcQActionEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQActionEvent()[])](self.fcQActionEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5635,7 +5635,7 @@ proc create*(T: type gen_qevent_types.QFileOpenEvent,
 
 const cQFileOpenEvent_mvtbl = cQFileOpenEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileOpenEvent()[])](self.fcQFileOpenEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileOpenEvent()[])](self.fcQFileOpenEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5730,7 +5730,7 @@ proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
 
 const cQToolBarChangeEvent_mvtbl = cQToolBarChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQToolBarChangeEvent()[])](self.fcQToolBarChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQToolBarChangeEvent()[])](self.fcQToolBarChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5838,7 +5838,7 @@ proc create*(T: type gen_qevent_types.QShortcutEvent,
 
 const cQShortcutEvent_mvtbl = cQShortcutEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQShortcutEvent()[])](self.fcQShortcutEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQShortcutEvent()[])](self.fcQShortcutEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5950,7 +5950,7 @@ proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
 
 const cQWindowStateChangeEvent_mvtbl = cQWindowStateChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWindowStateChangeEvent()[])](self.fcQWindowStateChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQWindowStateChangeEvent()[])](self.fcQWindowStateChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6264,7 +6264,7 @@ proc create*(T: type gen_qevent_types.QTouchEvent,
 
 const cQTouchEvent_mvtbl = cQTouchEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTouchEvent()[])](self.fcQTouchEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQTouchEvent()[])](self.fcQTouchEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6417,7 +6417,7 @@ proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
 
 const cQScrollPrepareEvent_mvtbl = cQScrollPrepareEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQScrollPrepareEvent()[])](self.fcQScrollPrepareEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQScrollPrepareEvent()[])](self.fcQScrollPrepareEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6511,7 +6511,7 @@ proc create*(T: type gen_qevent_types.QScrollEvent,
 
 const cQScrollEvent_mvtbl = cQScrollEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQScrollEvent()[])](self.fcQScrollEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQScrollEvent()[])](self.fcQScrollEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6602,7 +6602,7 @@ proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
 
 const cQScreenOrientationChangeEvent_mvtbl = cQScreenOrientationChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQScreenOrientationChangeEvent()[])](self.fcQScreenOrientationChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQScreenOrientationChangeEvent()[])](self.fcQScreenOrientationChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6690,7 +6690,7 @@ proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
 
 const cQApplicationStateChangeEvent_mvtbl = cQApplicationStateChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQApplicationStateChangeEvent()[])](self.fcQApplicationStateChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQApplicationStateChangeEvent()[])](self.fcQApplicationStateChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -618,7 +618,7 @@ proc create*(T: type gen_qinputdevice_types.QInputDevice,
 
 const cQInputDevice_mvtbl = cQInputDeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQInputDevice()[])](self.fcQInputDevice_vtbl())
+    let inst = cast[ptr typeof(VirtualQInputDevice()[])](self.fcQInputDevice_vdata())
     inst[].h = nil
     inst[].owned = false,
 

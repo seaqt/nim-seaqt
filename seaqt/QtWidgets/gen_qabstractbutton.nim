@@ -1738,7 +1738,7 @@ proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
 
 const cQAbstractButton_mvtbl = cQAbstractButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractButton()[])](self.fcQAbstractButton_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractButton()[])](self.fcQAbstractButton_vdata())
     inst[].h = nil
     inst[].owned = false,
 

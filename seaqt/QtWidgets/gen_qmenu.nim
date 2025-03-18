@@ -1994,7 +1994,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
 
 const cQMenu_mvtbl = cQMenuVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMenu()[])](self.fcQMenu_vtbl())
+    let inst = cast[ptr typeof(VirtualQMenu()[])](self.fcQMenu_vdata())
     inst[].h = nil
     inst[].owned = false,
 

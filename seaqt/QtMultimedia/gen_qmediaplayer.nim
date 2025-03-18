@@ -1015,7 +1015,7 @@ proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
 
 const cQMediaPlayer_mvtbl = cQMediaPlayerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMediaPlayer()[])](self.fcQMediaPlayer_vtbl())
+    let inst = cast[ptr typeof(VirtualQMediaPlayer()[])](self.fcQMediaPlayer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

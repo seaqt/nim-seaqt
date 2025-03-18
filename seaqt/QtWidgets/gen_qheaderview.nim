@@ -3361,7 +3361,7 @@ proc create*(T: type gen_qheaderview_types.QHeaderView,
 
 const cQHeaderView_mvtbl = cQHeaderViewVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHeaderView()[])](self.fcQHeaderView_vtbl())
+    let inst = cast[ptr typeof(VirtualQHeaderView()[])](self.fcQHeaderView_vdata())
     inst[].h = nil
     inst[].owned = false,
 

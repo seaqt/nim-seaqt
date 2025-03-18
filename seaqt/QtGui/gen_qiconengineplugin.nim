@@ -441,7 +441,7 @@ proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
 
 const cQIconEnginePlugin_mvtbl = cQIconEnginePluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQIconEnginePlugin()[])](self.fcQIconEnginePlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQIconEnginePlugin()[])](self.fcQIconEnginePlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

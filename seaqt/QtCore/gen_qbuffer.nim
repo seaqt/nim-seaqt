@@ -896,7 +896,7 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
 
 const cQBuffer_mvtbl = cQBufferVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQBuffer()[])](self.fcQBuffer_vtbl())
+    let inst = cast[ptr typeof(VirtualQBuffer()[])](self.fcQBuffer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

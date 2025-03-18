@@ -630,7 +630,7 @@ proc create*(T: type gen_qtcpserver_types.QTcpServer,
 
 const cQTcpServer_mvtbl = cQTcpServerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTcpServer()[])](self.fcQTcpServer_vtbl())
+    let inst = cast[ptr typeof(VirtualQTcpServer()[])](self.fcQTcpServer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

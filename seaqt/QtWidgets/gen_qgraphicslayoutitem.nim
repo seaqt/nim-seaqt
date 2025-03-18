@@ -399,7 +399,7 @@ proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
 
 const cQGraphicsLayoutItem_mvtbl = cQGraphicsLayoutItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsLayoutItem()[])](self.fcQGraphicsLayoutItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsLayoutItem()[])](self.fcQGraphicsLayoutItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 

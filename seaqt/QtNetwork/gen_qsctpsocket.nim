@@ -1199,7 +1199,7 @@ proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
 
 const cQSctpSocket_mvtbl = cQSctpSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSctpSocket()[])](self.fcQSctpSocket_vtbl())
+    let inst = cast[ptr typeof(VirtualQSctpSocket()[])](self.fcQSctpSocket_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1695,7 +1695,7 @@ proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
 
 const cQSvgWidget_mvtbl = cQSvgWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSvgWidget()[])](self.fcQSvgWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQSvgWidget()[])](self.fcQSvgWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

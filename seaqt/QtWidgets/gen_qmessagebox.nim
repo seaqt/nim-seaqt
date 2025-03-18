@@ -2874,7 +2874,7 @@ proc create*(T: type gen_qmessagebox_types.QMessageBox,
 
 const cQMessageBox_mvtbl = cQMessageBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMessageBox()[])](self.fcQMessageBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQMessageBox()[])](self.fcQMessageBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

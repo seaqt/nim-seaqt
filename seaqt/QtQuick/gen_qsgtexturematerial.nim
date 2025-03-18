@@ -225,7 +225,7 @@ proc create*(T: type gen_qsgtexturematerial_types.QSGOpaqueTextureMaterial,
 
 const cQSGOpaqueTextureMaterial_mvtbl = cQSGOpaqueTextureMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGOpaqueTextureMaterial()[])](self.fcQSGOpaqueTextureMaterial_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGOpaqueTextureMaterial()[])](self.fcQSGOpaqueTextureMaterial_vdata())
     inst[].h = nil
     inst[].owned = false,
 

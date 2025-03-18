@@ -1353,7 +1353,7 @@ proc create*(T: type gen_qsizegrip_types.QSizeGrip,
 
 const cQSizeGrip_mvtbl = cQSizeGripVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSizeGrip()[])](self.fcQSizeGrip_vtbl())
+    let inst = cast[ptr typeof(VirtualQSizeGrip()[])](self.fcQSizeGrip_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -543,7 +543,7 @@ proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGro
 
 const cQSequentialAnimationGroup_mvtbl = cQSequentialAnimationGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSequentialAnimationGroup()[])](self.fcQSequentialAnimationGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQSequentialAnimationGroup()[])](self.fcQSequentialAnimationGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

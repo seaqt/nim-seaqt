@@ -589,7 +589,7 @@ proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
 
 const cQMediaCaptureSession_mvtbl = cQMediaCaptureSessionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMediaCaptureSession()[])](self.fcQMediaCaptureSession_vtbl())
+    let inst = cast[ptr typeof(VirtualQMediaCaptureSession()[])](self.fcQMediaCaptureSession_vdata())
     inst[].h = nil
     inst[].owned = false,
 

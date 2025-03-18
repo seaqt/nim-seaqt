@@ -531,7 +531,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
 
 const cQQmlExtensionPlugin_mvtbl = cQQmlExtensionPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlExtensionPlugin()[])](self.fcQQmlExtensionPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlExtensionPlugin()[])](self.fcQQmlExtensionPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -901,7 +901,7 @@ proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
 
 const cQQmlEngineExtensionPlugin_mvtbl = cQQmlEngineExtensionPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlEngineExtensionPlugin()[])](self.fcQQmlEngineExtensionPlugin_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlEngineExtensionPlugin()[])](self.fcQQmlEngineExtensionPlugin_vdata())
     inst[].h = nil
     inst[].owned = false,
 

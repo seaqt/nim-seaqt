@@ -859,7 +859,7 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
 
 const cQAbstractItemDelegate_mvtbl = cQAbstractItemDelegateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractItemDelegate()[])](self.fcQAbstractItemDelegate_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractItemDelegate()[])](self.fcQAbstractItemDelegate_vdata())
     inst[].h = nil
     inst[].owned = false,
 

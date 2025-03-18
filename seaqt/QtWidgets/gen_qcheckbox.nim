@@ -1841,7 +1841,7 @@ proc create*(T: type gen_qcheckbox_types.QCheckBox,
 
 const cQCheckBox_mvtbl = cQCheckBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQCheckBox()[])](self.fcQCheckBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQCheckBox()[])](self.fcQCheckBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

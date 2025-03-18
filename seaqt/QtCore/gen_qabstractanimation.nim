@@ -726,7 +726,7 @@ proc create*(T: type gen_qabstractanimation_types.QAbstractAnimation,
 
 const cQAbstractAnimation_mvtbl = cQAbstractAnimationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractAnimation()[])](self.fcQAbstractAnimation_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractAnimation()[])](self.fcQAbstractAnimation_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1206,7 +1206,7 @@ proc create*(T: type gen_qabstractanimation_types.QAnimationDriver,
 
 const cQAnimationDriver_mvtbl = cQAnimationDriverVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAnimationDriver()[])](self.fcQAnimationDriver_vtbl())
+    let inst = cast[ptr typeof(VirtualQAnimationDriver()[])](self.fcQAnimationDriver_vdata())
     inst[].h = nil
     inst[].owned = false,
 

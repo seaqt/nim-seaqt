@@ -877,7 +877,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleEvent,
 
 const cQAccessibleEvent_mvtbl = cQAccessibleEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleEvent()[])](self.fcQAccessibleEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleEvent()[])](self.fcQAccessibleEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -960,7 +960,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent,
 
 const cQAccessibleStateChangeEvent_mvtbl = cQAccessibleStateChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleStateChangeEvent()[])](self.fcQAccessibleStateChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleStateChangeEvent()[])](self.fcQAccessibleStateChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1046,7 +1046,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent,
 
 const cQAccessibleTextCursorEvent_mvtbl = cQAccessibleTextCursorEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTextCursorEvent()[])](self.fcQAccessibleTextCursorEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTextCursorEvent()[])](self.fcQAccessibleTextCursorEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1135,7 +1135,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
 
 const cQAccessibleTextSelectionEvent_mvtbl = cQAccessibleTextSelectionEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTextSelectionEvent()[])](self.fcQAccessibleTextSelectionEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTextSelectionEvent()[])](self.fcQAccessibleTextSelectionEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1224,7 +1224,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
 
 const cQAccessibleTextInsertEvent_mvtbl = cQAccessibleTextInsertEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTextInsertEvent()[])](self.fcQAccessibleTextInsertEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTextInsertEvent()[])](self.fcQAccessibleTextInsertEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1313,7 +1313,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
 
 const cQAccessibleTextRemoveEvent_mvtbl = cQAccessibleTextRemoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTextRemoveEvent()[])](self.fcQAccessibleTextRemoveEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTextRemoveEvent()[])](self.fcQAccessibleTextRemoveEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1408,7 +1408,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
 
 const cQAccessibleTextUpdateEvent_mvtbl = cQAccessibleTextUpdateEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTextUpdateEvent()[])](self.fcQAccessibleTextUpdateEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTextUpdateEvent()[])](self.fcQAccessibleTextUpdateEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1494,7 +1494,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent,
 
 const cQAccessibleValueChangeEvent_mvtbl = cQAccessibleValueChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleValueChangeEvent()[])](self.fcQAccessibleValueChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleValueChangeEvent()[])](self.fcQAccessibleValueChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1604,7 +1604,7 @@ proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent,
 
 const cQAccessibleTableModelChangeEvent_mvtbl = cQAccessibleTableModelChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAccessibleTableModelChangeEvent()[])](self.fcQAccessibleTableModelChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQAccessibleTableModelChangeEvent()[])](self.fcQAccessibleTableModelChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 

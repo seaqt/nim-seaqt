@@ -554,7 +554,7 @@ proc create*(T: type gen_qthread_types.QThread,
 
 const cQThread_mvtbl = cQThreadVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQThread()[])](self.fcQThread_vtbl())
+    let inst = cast[ptr typeof(VirtualQThread()[])](self.fcQThread_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -223,7 +223,7 @@ proc create*(T: type gen_qqmlincubator_types.QQmlIncubator,
 
 const cQQmlIncubator_mvtbl = cQQmlIncubatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlIncubator()[])](self.fcQQmlIncubator_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlIncubator()[])](self.fcQQmlIncubator_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -293,7 +293,7 @@ proc create*(T: type gen_qqmlincubator_types.QQmlIncubationController,
 
 const cQQmlIncubationController_mvtbl = cQQmlIncubationControllerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQmlIncubationController()[])](self.fcQQmlIncubationController_vtbl())
+    let inst = cast[ptr typeof(VirtualQQmlIncubationController()[])](self.fcQQmlIncubationController_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -3042,7 +3042,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
 
 const cQGraphicsItem_mvtbl = cQGraphicsItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsItem()[])](self.fcQGraphicsItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsItem()[])](self.fcQGraphicsItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -4476,7 +4476,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
 
 const cQGraphicsObject_mvtbl = cQGraphicsObjectVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsObject()[])](self.fcQGraphicsObject_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsObject()[])](self.fcQGraphicsObject_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -5436,7 +5436,7 @@ proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
 
 const cQAbstractGraphicsShapeItem_mvtbl = cQAbstractGraphicsShapeItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractGraphicsShapeItem()[])](self.fcQAbstractGraphicsShapeItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractGraphicsShapeItem()[])](self.fcQAbstractGraphicsShapeItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -6559,7 +6559,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
 
 const cQGraphicsPathItem_mvtbl = cQGraphicsPathItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsPathItem()[])](self.fcQGraphicsPathItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsPathItem()[])](self.fcQGraphicsPathItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -7859,7 +7859,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
 
 const cQGraphicsRectItem_mvtbl = cQGraphicsRectItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsRectItem()[])](self.fcQGraphicsRectItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsRectItem()[])](self.fcQGraphicsRectItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -9185,7 +9185,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
 
 const cQGraphicsEllipseItem_mvtbl = cQGraphicsEllipseItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsEllipseItem()[])](self.fcQGraphicsEllipseItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsEllipseItem()[])](self.fcQGraphicsEllipseItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -10176,7 +10176,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
 
 const cQGraphicsPolygonItem_mvtbl = cQGraphicsPolygonItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsPolygonItem()[])](self.fcQGraphicsPolygonItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsPolygonItem()[])](self.fcQGraphicsPolygonItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -11468,7 +11468,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
 
 const cQGraphicsLineItem_mvtbl = cQGraphicsLineItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsLineItem()[])](self.fcQGraphicsLineItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsLineItem()[])](self.fcQGraphicsLineItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -12640,7 +12640,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
 
 const cQGraphicsPixmapItem_mvtbl = cQGraphicsPixmapItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsPixmapItem()[])](self.fcQGraphicsPixmapItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsPixmapItem()[])](self.fcQGraphicsPixmapItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -14205,7 +14205,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
 
 const cQGraphicsTextItem_mvtbl = cQGraphicsTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsTextItem()[])](self.fcQGraphicsTextItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsTextItem()[])](self.fcQGraphicsTextItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -15363,7 +15363,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
 
 const cQGraphicsSimpleTextItem_mvtbl = cQGraphicsSimpleTextItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSimpleTextItem()[])](self.fcQGraphicsSimpleTextItem_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSimpleTextItem()[])](self.fcQGraphicsSimpleTextItem_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -16334,7 +16334,7 @@ proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
 
 const cQGraphicsItemGroup_mvtbl = cQGraphicsItemGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsItemGroup()[])](self.fcQGraphicsItemGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsItemGroup()[])](self.fcQGraphicsItemGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

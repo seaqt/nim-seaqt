@@ -643,7 +643,7 @@ proc create*(T: type gen_qsgtexture_types.QSGTexture,
 
 const cQSGTexture_mvtbl = cQSGTextureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGTexture()[])](self.fcQSGTexture_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGTexture()[])](self.fcQSGTexture_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1095,7 +1095,7 @@ proc create*(T: type gen_qsgtexture_types.QSGDynamicTexture,
 
 const cQSGDynamicTexture_mvtbl = cQSGDynamicTextureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSGDynamicTexture()[])](self.fcQSGDynamicTexture_vtbl())
+    let inst = cast[ptr typeof(VirtualQSGDynamicTexture()[])](self.fcQSGDynamicTexture_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -713,7 +713,7 @@ proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
 
 const cQSvgRenderer_mvtbl = cQSvgRendererVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSvgRenderer()[])](self.fcQSvgRenderer_vtbl())
+    let inst = cast[ptr typeof(VirtualQSvgRenderer()[])](self.fcQSvgRenderer_vdata())
     inst[].h = nil
     inst[].owned = false,
 

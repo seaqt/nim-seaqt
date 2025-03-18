@@ -453,7 +453,7 @@ proc create*(T: type gen_qwidgetaction_types.QWidgetAction,
 
 const cQWidgetAction_mvtbl = cQWidgetActionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWidgetAction()[])](self.fcQWidgetAction_vtbl())
+    let inst = cast[ptr typeof(VirtualQWidgetAction()[])](self.fcQWidgetAction_vdata())
     inst[].h = nil
     inst[].owned = false,
 

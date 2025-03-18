@@ -555,7 +555,7 @@ proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
 
 const cQGraphicsGridLayout_mvtbl = cQGraphicsGridLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsGridLayout()[])](self.fcQGraphicsGridLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsGridLayout()[])](self.fcQGraphicsGridLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

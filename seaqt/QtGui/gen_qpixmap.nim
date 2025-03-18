@@ -680,7 +680,7 @@ proc create*(T: type gen_qpixmap_types.QPixmap,
 
 const cQPixmap_mvtbl = cQPixmapVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPixmap()[])](self.fcQPixmap_vtbl())
+    let inst = cast[ptr typeof(VirtualQPixmap()[])](self.fcQPixmap_vdata())
     inst[].h = nil
     inst[].owned = false,
 

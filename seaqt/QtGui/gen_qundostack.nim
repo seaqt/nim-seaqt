@@ -351,7 +351,7 @@ proc create*(T: type gen_qundostack_types.QUndoCommand,
 
 const cQUndoCommand_mvtbl = cQUndoCommandVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQUndoCommand()[])](self.fcQUndoCommand_vtbl())
+    let inst = cast[ptr typeof(VirtualQUndoCommand()[])](self.fcQUndoCommand_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -916,7 +916,7 @@ proc create*(T: type gen_qundostack_types.QUndoStack,
 
 const cQUndoStack_mvtbl = cQUndoStackVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQUndoStack()[])](self.fcQUndoStack_vtbl())
+    let inst = cast[ptr typeof(VirtualQUndoStack()[])](self.fcQUndoStack_vdata())
     inst[].h = nil
     inst[].owned = false,
 

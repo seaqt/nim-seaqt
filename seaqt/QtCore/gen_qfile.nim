@@ -1230,7 +1230,7 @@ proc create*(T: type gen_qfile_types.QFile,
 
 const cQFile_mvtbl = cQFileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFile()[])](self.fcQFile_vtbl())
+    let inst = cast[ptr typeof(VirtualQFile()[])](self.fcQFile_vdata())
     inst[].h = nil
     inst[].owned = false,
 

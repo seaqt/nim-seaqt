@@ -491,7 +491,7 @@ proc create*(T: type gen_qactiongroup_types.QActionGroup,
 
 const cQActionGroup_mvtbl = cQActionGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQActionGroup()[])](self.fcQActionGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQActionGroup()[])](self.fcQActionGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

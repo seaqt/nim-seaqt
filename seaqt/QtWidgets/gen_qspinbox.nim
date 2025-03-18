@@ -1988,7 +1988,7 @@ proc create*(T: type gen_qspinbox_types.QSpinBox,
 
 const cQSpinBox_mvtbl = cQSpinBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSpinBox()[])](self.fcQSpinBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQSpinBox()[])](self.fcQSpinBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3663,7 +3663,7 @@ proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
 
 const cQDoubleSpinBox_mvtbl = cQDoubleSpinBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDoubleSpinBox()[])](self.fcQDoubleSpinBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQDoubleSpinBox()[])](self.fcQDoubleSpinBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

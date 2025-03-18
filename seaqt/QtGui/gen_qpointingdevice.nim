@@ -641,7 +641,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
 
 const cQPointingDevice_mvtbl = cQPointingDeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPointingDevice()[])](self.fcQPointingDevice_vtbl())
+    let inst = cast[ptr typeof(VirtualQPointingDevice()[])](self.fcQPointingDevice_vdata())
     inst[].h = nil
     inst[].owned = false,
 

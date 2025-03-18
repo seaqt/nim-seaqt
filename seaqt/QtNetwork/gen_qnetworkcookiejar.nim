@@ -649,7 +649,7 @@ proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
 
 const cQNetworkCookieJar_mvtbl = cQNetworkCookieJarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQNetworkCookieJar()[])](self.fcQNetworkCookieJar_vtbl())
+    let inst = cast[ptr typeof(VirtualQNetworkCookieJar()[])](self.fcQNetworkCookieJar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

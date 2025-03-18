@@ -639,7 +639,7 @@ proc create*(T: type gen_qaudioengine_types.QAudioEngine,
 
 const cQAudioEngine_mvtbl = cQAudioEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioEngine()[])](self.fcQAudioEngine_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioEngine()[])](self.fcQAudioEngine_vdata())
     inst[].h = nil
     inst[].owned = false,
 

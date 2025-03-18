@@ -587,7 +587,7 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
 
 const cQPauseAnimation_mvtbl = cQPauseAnimationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPauseAnimation()[])](self.fcQPauseAnimation_vtbl())
+    let inst = cast[ptr typeof(VirtualQPauseAnimation()[])](self.fcQPauseAnimation_vdata())
     inst[].h = nil
     inst[].owned = false,
 

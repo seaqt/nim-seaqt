@@ -448,7 +448,7 @@ proc create*(T: type gen_qfileselector_types.QFileSelector,
 
 const cQFileSelector_mvtbl = cQFileSelectorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFileSelector()[])](self.fcQFileSelector_vtbl())
+    let inst = cast[ptr typeof(VirtualQFileSelector()[])](self.fcQFileSelector_vdata())
     inst[].h = nil
     inst[].owned = false,
 

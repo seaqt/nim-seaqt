@@ -2194,7 +2194,7 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
 
 const cQLineEdit_mvtbl = cQLineEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQLineEdit()[])](self.fcQLineEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQLineEdit()[])](self.fcQLineEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 

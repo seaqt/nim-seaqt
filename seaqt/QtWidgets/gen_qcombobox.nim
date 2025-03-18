@@ -2074,7 +2074,7 @@ proc create*(T: type gen_qcombobox_types.QComboBox,
 
 const cQComboBox_mvtbl = cQComboBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQComboBox()[])](self.fcQComboBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQComboBox()[])](self.fcQComboBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

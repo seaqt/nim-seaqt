@@ -550,7 +550,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
 
 const cQGraphicsTransform_mvtbl = cQGraphicsTransformVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsTransform()[])](self.fcQGraphicsTransform_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsTransform()[])](self.fcQGraphicsTransform_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1033,7 +1033,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
 
 const cQGraphicsScale_mvtbl = cQGraphicsScaleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsScale()[])](self.fcQGraphicsScale_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsScale()[])](self.fcQGraphicsScale_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1477,7 +1477,7 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
 
 const cQGraphicsRotation_mvtbl = cQGraphicsRotationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsRotation()[])](self.fcQGraphicsRotation_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsRotation()[])](self.fcQGraphicsRotation_vdata())
     inst[].h = nil
     inst[].owned = false,
 

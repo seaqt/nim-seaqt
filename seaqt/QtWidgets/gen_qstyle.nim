@@ -1780,7 +1780,7 @@ proc create*(T: type gen_qstyle_types.QStyle,
 
 const cQStyle_mvtbl = cQStyleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStyle()[])](self.fcQStyle_vtbl())
+    let inst = cast[ptr typeof(VirtualQStyle()[])](self.fcQStyle_vdata())
     inst[].h = nil
     inst[].owned = false,
 

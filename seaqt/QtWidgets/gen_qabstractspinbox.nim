@@ -1809,7 +1809,7 @@ proc create*(T: type gen_qabstractspinbox_types.QAbstractSpinBox,
 
 const cQAbstractSpinBox_mvtbl = cQAbstractSpinBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractSpinBox()[])](self.fcQAbstractSpinBox_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractSpinBox()[])](self.fcQAbstractSpinBox_vdata())
     inst[].h = nil
     inst[].owned = false,
 

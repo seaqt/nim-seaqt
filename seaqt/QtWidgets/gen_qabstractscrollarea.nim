@@ -1701,7 +1701,7 @@ proc create*(T: type gen_qabstractscrollarea_types.QAbstractScrollArea,
 
 const cQAbstractScrollArea_mvtbl = cQAbstractScrollAreaVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractScrollArea()[])](self.fcQAbstractScrollArea_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractScrollArea()[])](self.fcQAbstractScrollArea_vdata())
     inst[].h = nil
     inst[].owned = false,
 

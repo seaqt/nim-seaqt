@@ -801,7 +801,7 @@ proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
 
 const cQPdfWriter_mvtbl = cQPdfWriterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPdfWriter()[])](self.fcQPdfWriter_vtbl())
+    let inst = cast[ptr typeof(VirtualQPdfWriter()[])](self.fcQPdfWriter_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -641,7 +641,7 @@ proc create*(T: type gen_qundogroup_types.QUndoGroup,
 
 const cQUndoGroup_mvtbl = cQUndoGroupVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQUndoGroup()[])](self.fcQUndoGroup_vtbl())
+    let inst = cast[ptr typeof(VirtualQUndoGroup()[])](self.fcQUndoGroup_vdata())
     inst[].h = nil
     inst[].owned = false,
 

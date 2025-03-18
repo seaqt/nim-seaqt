@@ -1831,7 +1831,7 @@ proc create*(T: type gen_qpagesetupdialog_types.QPageSetupDialog,
 
 const cQPageSetupDialog_mvtbl = cQPageSetupDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPageSetupDialog()[])](self.fcQPageSetupDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQPageSetupDialog()[])](self.fcQPageSetupDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

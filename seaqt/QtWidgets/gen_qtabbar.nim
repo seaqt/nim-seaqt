@@ -1997,7 +1997,7 @@ proc create*(T: type gen_qtabbar_types.QTabBar,
 
 const cQTabBar_mvtbl = cQTabBarVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTabBar()[])](self.fcQTabBar_vtbl())
+    let inst = cast[ptr typeof(VirtualQTabBar()[])](self.fcQTabBar_vdata())
     inst[].h = nil
     inst[].owned = false,
 

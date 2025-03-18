@@ -1411,7 +1411,7 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
 
 const cQBoxLayout_mvtbl = cQBoxLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQBoxLayout()[])](self.fcQBoxLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQBoxLayout()[])](self.fcQBoxLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -2370,7 +2370,7 @@ proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
 
 const cQHBoxLayout_mvtbl = cQHBoxLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQHBoxLayout()[])](self.fcQHBoxLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQHBoxLayout()[])](self.fcQHBoxLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3328,7 +3328,7 @@ proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
 
 const cQVBoxLayout_mvtbl = cQVBoxLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQVBoxLayout()[])](self.fcQVBoxLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQVBoxLayout()[])](self.fcQVBoxLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

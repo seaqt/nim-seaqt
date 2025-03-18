@@ -1932,7 +1932,7 @@ proc create*(T: type gen_qfontdialog_types.QFontDialog,
 
 const cQFontDialog_mvtbl = cQFontDialogVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQFontDialog()[])](self.fcQFontDialog_vtbl())
+    let inst = cast[ptr typeof(VirtualQFontDialog()[])](self.fcQFontDialog_vdata())
     inst[].h = nil
     inst[].owned = false,
 

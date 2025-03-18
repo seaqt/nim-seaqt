@@ -902,7 +902,7 @@ proc create*(T: type gen_qmovie_types.QMovie,
 
 const cQMovie_mvtbl = cQMovieVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQMovie()[])](self.fcQMovie_vtbl())
+    let inst = cast[ptr typeof(VirtualQMovie()[])](self.fcQMovie_vdata())
     inst[].h = nil
     inst[].owned = false,
 

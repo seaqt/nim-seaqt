@@ -489,7 +489,7 @@ proc create*(T: type gen_qthreadpool_types.QThreadPool,
 
 const cQThreadPool_mvtbl = cQThreadPoolVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQThreadPool()[])](self.fcQThreadPool_vtbl())
+    let inst = cast[ptr typeof(VirtualQThreadPool()[])](self.fcQThreadPool_vdata())
     inst[].h = nil
     inst[].owned = false,
 

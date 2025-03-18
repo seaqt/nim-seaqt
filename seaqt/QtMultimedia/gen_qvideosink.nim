@@ -495,7 +495,7 @@ proc create*(T: type gen_qvideosink_types.QVideoSink,
 
 const cQVideoSink_mvtbl = cQVideoSinkVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQVideoSink()[])](self.fcQVideoSink_vtbl())
+    let inst = cast[ptr typeof(VirtualQVideoSink()[])](self.fcQVideoSink_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1571,7 +1571,7 @@ proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
 
 const cQStackedWidget_mvtbl = cQStackedWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQStackedWidget()[])](self.fcQStackedWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQStackedWidget()[])](self.fcQStackedWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

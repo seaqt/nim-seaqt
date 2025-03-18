@@ -1997,7 +1997,7 @@ proc create*(T: type gen_qidentityproxymodel_types.QIdentityProxyModel,
 
 const cQIdentityProxyModel_mvtbl = cQIdentityProxyModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQIdentityProxyModel()[])](self.fcQIdentityProxyModel_vtbl())
+    let inst = cast[ptr typeof(VirtualQIdentityProxyModel()[])](self.fcQIdentityProxyModel_vdata())
     inst[].h = nil
     inst[].owned = false,
 

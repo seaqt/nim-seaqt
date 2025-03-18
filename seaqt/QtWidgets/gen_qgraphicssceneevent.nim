@@ -354,7 +354,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent,
 
 const cQGraphicsSceneEvent_mvtbl = cQGraphicsSceneEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneEvent()[])](self.fcQGraphicsSceneEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneEvent()[])](self.fcQGraphicsSceneEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -533,7 +533,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
 
 const cQGraphicsSceneMouseEvent_mvtbl = cQGraphicsSceneMouseEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneMouseEvent()[])](self.fcQGraphicsSceneMouseEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneMouseEvent()[])](self.fcQGraphicsSceneMouseEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -694,7 +694,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
 
 const cQGraphicsSceneWheelEvent_mvtbl = cQGraphicsSceneWheelEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneWheelEvent()[])](self.fcQGraphicsSceneWheelEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneWheelEvent()[])](self.fcQGraphicsSceneWheelEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -825,7 +825,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEven
 
 const cQGraphicsSceneContextMenuEvent_mvtbl = cQGraphicsSceneContextMenuEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneContextMenuEvent()[])](self.fcQGraphicsSceneContextMenuEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneContextMenuEvent()[])](self.fcQGraphicsSceneContextMenuEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -968,7 +968,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
 
 const cQGraphicsSceneHoverEvent_mvtbl = cQGraphicsSceneHoverEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneHoverEvent()[])](self.fcQGraphicsSceneHoverEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneHoverEvent()[])](self.fcQGraphicsSceneHoverEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1081,7 +1081,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
 
 const cQGraphicsSceneHelpEvent_mvtbl = cQGraphicsSceneHelpEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneHelpEvent()[])](self.fcQGraphicsSceneHelpEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneHelpEvent()[])](self.fcQGraphicsSceneHelpEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1245,7 +1245,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
 
 const cQGraphicsSceneDragDropEvent_mvtbl = cQGraphicsSceneDragDropEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneDragDropEvent()[])](self.fcQGraphicsSceneDragDropEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneDragDropEvent()[])](self.fcQGraphicsSceneDragDropEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1344,7 +1344,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent,
 
 const cQGraphicsSceneResizeEvent_mvtbl = cQGraphicsSceneResizeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneResizeEvent()[])](self.fcQGraphicsSceneResizeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneResizeEvent()[])](self.fcQGraphicsSceneResizeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -1436,7 +1436,7 @@ proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent,
 
 const cQGraphicsSceneMoveEvent_mvtbl = cQGraphicsSceneMoveEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsSceneMoveEvent()[])](self.fcQGraphicsSceneMoveEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsSceneMoveEvent()[])](self.fcQGraphicsSceneMoveEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 

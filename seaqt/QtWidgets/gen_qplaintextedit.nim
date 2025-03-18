@@ -2636,7 +2636,7 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
 
 const cQPlainTextEdit_mvtbl = cQPlainTextEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPlainTextEdit()[])](self.fcQPlainTextEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQPlainTextEdit()[])](self.fcQPlainTextEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -3295,7 +3295,7 @@ proc create*(T: type gen_qplaintextedit_types.QPlainTextDocumentLayout,
 
 const cQPlainTextDocumentLayout_mvtbl = cQPlainTextDocumentLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQPlainTextDocumentLayout()[])](self.fcQPlainTextDocumentLayout_vtbl())
+    let inst = cast[ptr typeof(VirtualQPlainTextDocumentLayout()[])](self.fcQPlainTextDocumentLayout_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -2005,7 +2005,7 @@ proc create*(T: type gen_qwindow_types.QWindow,
 
 const cQWindow_mvtbl = cQWindowVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQWindow()[])](self.fcQWindow_vtbl())
+    let inst = cast[ptr typeof(VirtualQWindow()[])](self.fcQWindow_vdata())
     inst[].h = nil
     inst[].owned = false,
 

@@ -1854,7 +1854,7 @@ proc create*(T: type gen_qtabwidget_types.QTabWidget,
 
 const cQTabWidget_mvtbl = cQTabWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTabWidget()[])](self.fcQTabWidget_vtbl())
+    let inst = cast[ptr typeof(VirtualQTabWidget()[])](self.fcQTabWidget_vdata())
     inst[].h = nil
     inst[].owned = false,
 

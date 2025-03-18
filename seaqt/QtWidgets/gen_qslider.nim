@@ -1782,7 +1782,7 @@ proc create*(T: type gen_qslider_types.QSlider,
 
 const cQSlider_mvtbl = cQSliderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQSlider()[])](self.fcQSlider_vtbl())
+    let inst = cast[ptr typeof(VirtualQSlider()[])](self.fcQSlider_vdata())
     inst[].h = nil
     inst[].owned = false,
 

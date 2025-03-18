@@ -1911,7 +1911,7 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
 
 const cQGraphicsScene_mvtbl = cQGraphicsSceneVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQGraphicsScene()[])](self.fcQGraphicsScene_vtbl())
+    let inst = cast[ptr typeof(VirtualQGraphicsScene()[])](self.fcQGraphicsScene_vdata())
     inst[].h = nil
     inst[].owned = false,
 

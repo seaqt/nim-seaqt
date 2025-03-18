@@ -245,7 +245,7 @@ proc create*(T: type gen_qabstractfileiconprovider_types.QAbstractFileIconProvid
 
 const cQAbstractFileIconProvider_mvtbl = cQAbstractFileIconProviderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAbstractFileIconProvider()[])](self.fcQAbstractFileIconProvider_vtbl())
+    let inst = cast[ptr typeof(VirtualQAbstractFileIconProvider()[])](self.fcQAbstractFileIconProvider_vdata())
     inst[].h = nil
     inst[].owned = false,
 

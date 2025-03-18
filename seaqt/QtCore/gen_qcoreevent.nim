@@ -391,7 +391,7 @@ proc create*(T: type gen_qcoreevent_types.QEvent,
 
 const cQEvent_mvtbl = cQEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQEvent()[])](self.fcQEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQEvent()[])](self.fcQEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -481,7 +481,7 @@ proc create*(T: type gen_qcoreevent_types.QTimerEvent,
 
 const cQTimerEvent_mvtbl = cQTimerEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTimerEvent()[])](self.fcQTimerEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQTimerEvent()[])](self.fcQTimerEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -578,7 +578,7 @@ proc create*(T: type gen_qcoreevent_types.QChildEvent,
 
 const cQChildEvent_mvtbl = cQChildEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQChildEvent()[])](self.fcQChildEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQChildEvent()[])](self.fcQChildEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 
@@ -669,7 +669,7 @@ proc create*(T: type gen_qcoreevent_types.QDynamicPropertyChangeEvent,
 
 const cQDynamicPropertyChangeEvent_mvtbl = cQDynamicPropertyChangeEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQDynamicPropertyChangeEvent()[])](self.fcQDynamicPropertyChangeEvent_vtbl())
+    let inst = cast[ptr typeof(VirtualQDynamicPropertyChangeEvent()[])](self.fcQDynamicPropertyChangeEvent_vdata())
     inst[].h = nil
     inst[].owned = false,
 

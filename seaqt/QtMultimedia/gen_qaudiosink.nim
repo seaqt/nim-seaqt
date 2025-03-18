@@ -621,7 +621,7 @@ proc create*(T: type gen_qaudiosink_types.QAudioSink,
 
 const cQAudioSink_mvtbl = cQAudioSinkVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQAudioSink()[])](self.fcQAudioSink_vtbl())
+    let inst = cast[ptr typeof(VirtualQAudioSink()[])](self.fcQAudioSink_vdata())
     inst[].h = nil
     inst[].owned = false,
 

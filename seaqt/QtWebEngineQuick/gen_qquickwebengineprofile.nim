@@ -852,7 +852,7 @@ proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
 
 const cQQuickWebEngineProfile_mvtbl = cQQuickWebEngineProfileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQQuickWebEngineProfile()[])](self.fcQQuickWebEngineProfile_vtbl())
+    let inst = cast[ptr typeof(VirtualQQuickWebEngineProfile()[])](self.fcQQuickWebEngineProfile_vdata())
     inst[].h = nil
     inst[].owned = false,
 

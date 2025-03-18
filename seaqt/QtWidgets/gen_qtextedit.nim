@@ -2608,7 +2608,7 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
 
 const cQTextEdit_mvtbl = cQTextEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQTextEdit()[])](self.fcQTextEdit_vtbl())
+    let inst = cast[ptr typeof(VirtualQTextEdit()[])](self.fcQTextEdit_vdata())
     inst[].h = nil
     inst[].owned = false,
 

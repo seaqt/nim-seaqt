@@ -1171,7 +1171,7 @@ proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
 
 const cQRasterWindow_mvtbl = cQRasterWindowVTable(
   destructor: proc(self: pointer) {.cdecl.} =
-    let inst = cast[ptr typeof(VirtualQRasterWindow()[])](self.fcQRasterWindow_vtbl())
+    let inst = cast[ptr typeof(VirtualQRasterWindow()[])](self.fcQRasterWindow_vdata())
     inst[].h = nil
     inst[].owned = false,
 
