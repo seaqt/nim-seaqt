@@ -37,9 +37,11 @@ import ./gen_qjsonarray_types
 export gen_qjsonarray_types
 
 import
-  ./gen_qjsonvalue_types
+  ./gen_qjsonvalue_types,
+  ./gen_qvariant_types
 export
-  gen_qjsonvalue_types
+  gen_qjsonvalue_types,
+  gen_qvariant_types
 
 type cQJsonArray*{.exportc: "QJsonArray", incompleteStruct.} = object
 type cQJsonArrayiterator*{.exportc: "QJsonArray__iterator", incompleteStruct.} = object
@@ -47,6 +49,8 @@ type cQJsonArrayconst_iterator*{.exportc: "QJsonArray__const_iterator", incomple
 
 proc fcQJsonArray_operatorAssign(self: pointer, other: pointer): void {.importc: "QJsonArray_operatorAssign".}
 proc fcQJsonArray_fromStringList(list: struct_miqt_array): pointer {.importc: "QJsonArray_fromStringList".}
+proc fcQJsonArray_fromVariantList(list: struct_miqt_array): pointer {.importc: "QJsonArray_fromVariantList".}
+proc fcQJsonArray_toVariantList(self: pointer): struct_miqt_array {.importc: "QJsonArray_toVariantList".}
 proc fcQJsonArray_size(self: pointer): int64 {.importc: "QJsonArray_size".}
 proc fcQJsonArray_count(self: pointer): int64 {.importc: "QJsonArray_count".}
 proc fcQJsonArray_isEmpty(self: pointer): bool {.importc: "QJsonArray_isEmpty".}
@@ -149,6 +153,22 @@ proc fromStringList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[st
     list_CArray[i] = struct_miqt_string(data: if len(list[i]) > 0: addr list[i][0] else: nil, len: csize_t(len(list[i])))
 
   gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromStringList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
+
+proc fromVariantList*(_: type gen_qjsonarray_types.QJsonArray, list: openArray[gen_qvariant_types.QVariant]): gen_qjsonarray_types.QJsonArray =
+  var list_CArray = newSeq[pointer](len(list))
+  for i in 0..<len(list):
+    list_CArray[i] = list[i].h
+
+  gen_qjsonarray_types.QJsonArray(h: fcQJsonArray_fromVariantList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
+
+proc toVariantList*(self: gen_qjsonarray_types.QJsonArray): seq[gen_qvariant_types.QVariant] =
+  var v_ma = fcQJsonArray_toVariantList(self.h)
+  var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
 
 proc size*(self: gen_qjsonarray_types.QJsonArray): int64 =
   fcQJsonArray_size(self.h)

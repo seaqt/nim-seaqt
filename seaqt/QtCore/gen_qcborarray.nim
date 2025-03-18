@@ -38,10 +38,12 @@ export gen_qcborarray_types
 
 import
   ./gen_qcborvalue_types,
-  ./gen_qjsonarray_types
+  ./gen_qjsonarray_types,
+  ./gen_qvariant_types
 export
   gen_qcborvalue_types,
-  gen_qjsonarray_types
+  gen_qjsonarray_types,
+  gen_qvariant_types
 
 type cQCborArray*{.exportc: "QCborArray", incompleteStruct.} = object
 type cQCborArrayIterator*{.exportc: "QCborArray__Iterator", incompleteStruct.} = object
@@ -97,7 +99,9 @@ proc fcQCborArray_operatorPlus(self: pointer, v: pointer): pointer {.importc: "Q
 proc fcQCborArray_operatorPlusAssign(self: pointer, v: pointer): pointer {.importc: "QCborArray_operatorPlusAssign".}
 proc fcQCborArray_operatorShiftLeft(self: pointer, v: pointer): pointer {.importc: "QCborArray_operatorShiftLeft".}
 proc fcQCborArray_fromStringList(list: struct_miqt_array): pointer {.importc: "QCborArray_fromStringList".}
+proc fcQCborArray_fromVariantList(list: struct_miqt_array): pointer {.importc: "QCborArray_fromVariantList".}
 proc fcQCborArray_fromJsonArray(array: pointer): pointer {.importc: "QCborArray_fromJsonArray".}
+proc fcQCborArray_toVariantList(self: pointer): struct_miqt_array {.importc: "QCborArray_toVariantList".}
 proc fcQCborArray_toJsonArray(self: pointer): pointer {.importc: "QCborArray_toJsonArray".}
 proc fcQCborArray_new(): ptr cQCborArray {.importc: "QCborArray_new".}
 proc fcQCborArray_new2(other: pointer): ptr cQCborArray {.importc: "QCborArray_new2".}
@@ -311,8 +315,24 @@ proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: openArray[st
 
   gen_qcborarray_types.QCborArray(h: fcQCborArray_fromStringList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
 
+proc fromVariantList*(_: type gen_qcborarray_types.QCborArray, list: openArray[gen_qvariant_types.QVariant]): gen_qcborarray_types.QCborArray =
+  var list_CArray = newSeq[pointer](len(list))
+  for i in 0..<len(list):
+    list_CArray[i] = list[i].h
+
+  gen_qcborarray_types.QCborArray(h: fcQCborArray_fromVariantList(struct_miqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0]))), owned: true)
+
 proc fromJsonArray*(_: type gen_qcborarray_types.QCborArray, array: gen_qjsonarray_types.QJsonArray): gen_qcborarray_types.QCborArray =
   gen_qcborarray_types.QCborArray(h: fcQCborArray_fromJsonArray(array.h), owned: true)
+
+proc toVariantList*(self: gen_qcborarray_types.QCborArray): seq[gen_qvariant_types.QVariant] =
+  var v_ma = fcQCborArray_toVariantList(self.h)
+  var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
 
 proc toJsonArray*(self: gen_qcborarray_types.QCborArray): gen_qjsonarray_types.QJsonArray =
   gen_qjsonarray_types.QJsonArray(h: fcQCborArray_toJsonArray(self.h), owned: true)

@@ -121,7 +121,17 @@ QVariant* QVariant_new19(QDateTime* datetime) {
 	return new QVariant(*datetime);
 }
 
-QVariant* QVariant_new20(struct miqt_map /* of struct miqt_string to QVariant* */  map) {
+QVariant* QVariant_new20(struct miqt_array /* of QVariant* */  list) {
+	QList<QVariant> list_QList;
+	list_QList.reserve(list.len);
+	QVariant** list_arr = static_cast<QVariant**>(list.data);
+	for(size_t i = 0; i < list.len; ++i) {
+		list_QList.push_back(*(list_arr[i]));
+	}
+	return new QVariant(list_QList);
+}
+
+QVariant* QVariant_new21(struct miqt_map /* of struct miqt_string to QVariant* */  map) {
 	QMap<QString, QVariant> map_QMap;
 	struct miqt_string* map_karr = static_cast<struct miqt_string*>(map.keys);
 	QVariant** map_varr = static_cast<QVariant**>(map.values);
@@ -132,7 +142,7 @@ QVariant* QVariant_new20(struct miqt_map /* of struct miqt_string to QVariant* *
 	return new QVariant(map_QMap);
 }
 
-QVariant* QVariant_new21(struct miqt_map /* of struct miqt_string to QVariant* */  hash) {
+QVariant* QVariant_new22(struct miqt_map /* of struct miqt_string to QVariant* */  hash) {
 	QHash<QString, QVariant> hash_QMap;
 	hash_QMap.reserve(hash.len);
 	struct miqt_string* hash_karr = static_cast<struct miqt_string*>(hash.keys);
@@ -144,87 +154,87 @@ QVariant* QVariant_new21(struct miqt_map /* of struct miqt_string to QVariant* *
 	return new QVariant(hash_QMap);
 }
 
-QVariant* QVariant_new22(QSize* size) {
+QVariant* QVariant_new23(QSize* size) {
 	return new QVariant(*size);
 }
 
-QVariant* QVariant_new23(QSizeF* size) {
+QVariant* QVariant_new24(QSizeF* size) {
 	return new QVariant(*size);
 }
 
-QVariant* QVariant_new24(QPoint* pt) {
+QVariant* QVariant_new25(QPoint* pt) {
 	return new QVariant(*pt);
 }
 
-QVariant* QVariant_new25(QPointF* pt) {
+QVariant* QVariant_new26(QPointF* pt) {
 	return new QVariant(*pt);
 }
 
-QVariant* QVariant_new26(QLine* line) {
+QVariant* QVariant_new27(QLine* line) {
 	return new QVariant(*line);
 }
 
-QVariant* QVariant_new27(QLineF* line) {
+QVariant* QVariant_new28(QLineF* line) {
 	return new QVariant(*line);
 }
 
-QVariant* QVariant_new28(QRect* rect) {
+QVariant* QVariant_new29(QRect* rect) {
 	return new QVariant(*rect);
 }
 
-QVariant* QVariant_new29(QRectF* rect) {
+QVariant* QVariant_new30(QRectF* rect) {
 	return new QVariant(*rect);
 }
 
-QVariant* QVariant_new30(QLocale* locale) {
+QVariant* QVariant_new31(QLocale* locale) {
 	return new QVariant(*locale);
 }
 
-QVariant* QVariant_new31(QRegularExpression* re) {
+QVariant* QVariant_new32(QRegularExpression* re) {
 	return new QVariant(*re);
 }
 
-QVariant* QVariant_new32(QEasingCurve* easing) {
+QVariant* QVariant_new33(QEasingCurve* easing) {
 	return new QVariant(*easing);
 }
 
-QVariant* QVariant_new33(QUuid* uuid) {
+QVariant* QVariant_new34(QUuid* uuid) {
 	return new QVariant(*uuid);
 }
 
-QVariant* QVariant_new34(QUrl* url) {
+QVariant* QVariant_new35(QUrl* url) {
 	return new QVariant(*url);
 }
 
-QVariant* QVariant_new35(QJsonValue* jsonValue) {
+QVariant* QVariant_new36(QJsonValue* jsonValue) {
 	return new QVariant(*jsonValue);
 }
 
-QVariant* QVariant_new36(QJsonObject* jsonObject) {
+QVariant* QVariant_new37(QJsonObject* jsonObject) {
 	return new QVariant(*jsonObject);
 }
 
-QVariant* QVariant_new37(QJsonArray* jsonArray) {
+QVariant* QVariant_new38(QJsonArray* jsonArray) {
 	return new QVariant(*jsonArray);
 }
 
-QVariant* QVariant_new38(QJsonDocument* jsonDocument) {
+QVariant* QVariant_new39(QJsonDocument* jsonDocument) {
 	return new QVariant(*jsonDocument);
 }
 
-QVariant* QVariant_new39(QModelIndex* modelIndex) {
+QVariant* QVariant_new40(QModelIndex* modelIndex) {
 	return new QVariant(*modelIndex);
 }
 
-QVariant* QVariant_new40(QPersistentModelIndex* modelIndex) {
+QVariant* QVariant_new41(QPersistentModelIndex* modelIndex) {
 	return new QVariant(*modelIndex);
 }
 
-QVariant* QVariant_new41(int type) {
+QVariant* QVariant_new42(int type) {
 	return new QVariant(static_cast<QVariant::Type>(type));
 }
 
-QVariant* QVariant_new42(QMetaType* type, const void* copy) {
+QVariant* QVariant_new43(QMetaType* type, const void* copy) {
 	return new QVariant(*type, copy);
 }
 
@@ -386,6 +396,19 @@ QTime* QVariant_toTime(const QVariant* self) {
 
 QDateTime* QVariant_toDateTime(const QVariant* self) {
 	return new QDateTime(self->toDateTime());
+}
+
+struct miqt_array /* of QVariant* */  QVariant_toList(const QVariant* self) {
+	QList<QVariant> _ret = self->toList();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QVariant** _arr = static_cast<QVariant**>(malloc(sizeof(QVariant*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = new QVariant(_ret[i]);
+	}
+	struct miqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
 }
 
 struct miqt_map /* of struct miqt_string to QVariant* */  QVariant_toMap(const QVariant* self) {
