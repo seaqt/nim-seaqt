@@ -74,6 +74,7 @@ proc fcQCameraExposureControl_metacall(self: pointer, param1: cint, param2: cint
 proc fcQCameraExposureControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraExposureControl_tr".}
 proc fcQCameraExposureControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraExposureControl_trUtf8".}
 proc fcQCameraExposureControl_isParameterSupported(self: pointer, parameter: cint): bool {.importc: "QCameraExposureControl_isParameterSupported".}
+proc fcQCameraExposureControl_supportedParameterRange(self: pointer, parameter: cint, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposureControl_supportedParameterRange".}
 proc fcQCameraExposureControl_requestedValue(self: pointer, parameter: cint): pointer {.importc: "QCameraExposureControl_requestedValue".}
 proc fcQCameraExposureControl_actualValue(self: pointer, parameter: cint): pointer {.importc: "QCameraExposureControl_actualValue".}
 proc fcQCameraExposureControl_setValue(self: pointer, parameter: cint, value: pointer): bool {.importc: "QCameraExposureControl_setValue".}
@@ -116,6 +117,15 @@ proc trUtf8*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s:
 
 proc isParameterSupported*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint): bool =
   fcQCameraExposureControl_isParameterSupported(self.h, cint(parameter))
+
+proc supportedParameterRange*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint, continuous: ptr bool): seq[gen_qvariant_types.QVariant] =
+  var v_ma = fcQCameraExposureControl_supportedParameterRange(self.h, cint(parameter), continuous)
+  var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
 
 proc requestedValue*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQCameraExposureControl_requestedValue(self.h, cint(parameter)), owned: true)

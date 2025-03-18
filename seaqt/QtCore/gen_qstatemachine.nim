@@ -60,6 +60,7 @@ import
   ./gen_qobject_types,
   ./gen_qobjectdefs_types,
   ./gen_qstate,
+  ./gen_qvariant_types,
   std/sets
 export
   gen_qabstractanimation_types,
@@ -68,7 +69,8 @@ export
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
-  gen_qstate
+  gen_qstate,
+  gen_qvariant_types
 
 type cQStateMachine*{.exportc: "QStateMachine", incompleteStruct.} = object
 type cQStateMachineSignalEvent*{.exportc: "QStateMachine__SignalEvent", incompleteStruct.} = object
@@ -155,7 +157,9 @@ proc fcQStateMachine_new4(vtbl, vdata: pointer, childMode: cint, parent: pointer
 proc fcQStateMachine_staticMetaObject(): pointer {.importc: "QStateMachine_staticMetaObject".}
 proc fcQStateMachineSignalEvent_sender(self: pointer): pointer {.importc: "QStateMachine__SignalEvent_sender".}
 proc fcQStateMachineSignalEvent_signalIndex(self: pointer): cint {.importc: "QStateMachine__SignalEvent_signalIndex".}
-proc fcQStateMachineSignalEvent_new(param1: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new".}
+proc fcQStateMachineSignalEvent_arguments(self: pointer): struct_miqt_array {.importc: "QStateMachine__SignalEvent_arguments".}
+proc fcQStateMachineSignalEvent_new(sender: pointer, signalIndex: cint, arguments: struct_miqt_array): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new".}
+proc fcQStateMachineSignalEvent_new2(param1: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new2".}
 proc fcQStateMachineWrappedEvent_objectX(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_object".}
 proc fcQStateMachineWrappedEvent_event(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_event".}
 proc fcQStateMachineWrappedEvent_new(objectVal: pointer, event: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new".}
@@ -861,9 +865,26 @@ proc sender*(self: gen_qstatemachine_types.QStateMachineSignalEvent): gen_qobjec
 proc signalIndex*(self: gen_qstatemachine_types.QStateMachineSignalEvent): cint =
   fcQStateMachineSignalEvent_signalIndex(self.h)
 
+proc arguments*(self: gen_qstatemachine_types.QStateMachineSignalEvent): seq[gen_qvariant_types.QVariant] =
+  var v_ma = fcQStateMachineSignalEvent_arguments(self.h)
+  var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
+    sender: gen_qobject_types.QObject, signalIndex: cint, arguments: openArray[gen_qvariant_types.QVariant]): gen_qstatemachine_types.QStateMachineSignalEvent =
+  var arguments_CArray = newSeq[pointer](len(arguments))
+  for i in 0..<len(arguments):
+    arguments_CArray[i] = arguments[i].h
+
+  gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(sender.h, signalIndex, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
+
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
     param1: gen_qstatemachine_types.QStateMachineSignalEvent): gen_qstatemachine_types.QStateMachineSignalEvent =
-  gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(param1.h), owned: true)
+  gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new2(param1.h), owned: true)
 
 proc objectX*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQStateMachineWrappedEvent_objectX(self.h), owned: false)
